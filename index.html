@@ -1611,6 +1611,32 @@
                 margin-top: 550px;
             }
 
+            /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 1024px (Original: 1920×1080) */
+            .responsive-wrapper {
+                position: absolute;
+                width: 100%;
+                max-width: 1024px;
+                font-size: 16px;
+                margin-top: -90px;
+                /* Basiswert für rem */
+            }
+
+            /* Das Pseudo‑Element erzwingt das Seitenverhältnis 1080/1920 = 56.25% */
+            .responsive-wrapper::before {
+                content: "";
+                display: block;
+                padding-top: 56.25%;
+            }
+
+            /* ABSOLUT POSITIONIERTER CONTAINER, DER DEN WRAPPER FÜLLT */
+            .content-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
 
 
 
@@ -2805,18 +2831,43 @@
                 background: transparent;
             }
 
-            /* Navbar */
+            /* Skalierungsfaktor: 0,5 (statt 320/1920 = 0,1667) für bessere Lesbarkeit */
             .navbar {
-                padding: 0 3%;
-                margin-top: 5%;
-                align-items: center;
+                /* Ursprünglich 50px → 50px * 0,5 = 25px */
+                height: calc(50px * 0.5);
+                /* Padding: 3vw – bei 320px ca. 9.6px, mal 0,5 → ca. 4.8px (hier gerundet 5px) */
+                padding: 0 5px;
+                /* Margin-top: 2% von 320px ≈ 6.4px, mal 0,5 → ca. 3px */
+                margin-top: 23px;
+            }
+
+            .logo {
+                /* Ursprünglich ca. 4.6rem ≈ 73.6px → ca. 37px */
+                width: calc(73.6px * 0.5);
+                /* Ursprünglich ca. 3.1rem ≈ 50px → 25px */
+                height: calc(50px * 0.5);
+            }
+
+            .logo div {
+                /* Ursprünglich ca. 3.25rem ≈ 52px → ca. 26px */
+                width: calc(52px * 0.5);
+                /* Ursprünglich ca. 3.1rem ≈ 50px → 25px */
+                height: calc(50px * 0.5);
+                /* Ursprünglich ca. 1.7px → 0.85px, hier auf 1px gerundet */
+                border: 1px solid white;
+            }
+
+            .nav-links {
+                /* Gap: 5% von 320px = 16px, mal 0,5 → ca. 8px */
+                gap: 8px;
             }
 
             .nav-links a {
-                font-size: 12px;
-                padding: 5px 10px;
+                /* Für die Schrift verwenden wir clamp, um einen Mindestwert (10px) sicherzustellen */
+                font-size: clamp(10px, calc(18px * 0.5), 18px);
+                /* Padding: 0.5rem ≈ 8px → 4px; 1.5rem ≈ 24px → 12px */
+                padding: 4px 12px;
             }
-
 
             /* Headline-Bereich */
             .headline-container {
