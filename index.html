@@ -3031,48 +3031,39 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Statt getElementById verwenden wir querySelector zur Auswahl des ersten Elements mit der Klasse video-background.
       const video = document.querySelector('.video-background');
       const scrubber = document.querySelector('.scrubber');
 
-      // Falls kein Video gefunden wird, wird hier eine Fehlermeldung ausgegeben.
       if (!video) {
         console.error("Kein Video-Element mit der Klasse 'video-background' gefunden.");
         return;
       }
 
       let isDragging = false;
-      let startX = 0, startY = 0;
+      let lastX = 0;
+      // Sensitivitätsfaktor: passe diesen Wert an, um die Geschwindigkeit des Spulens zu justieren
+      const sensitivity = 0.1;
 
       scrubber.addEventListener('touchstart', function(e) {
-        console.log("touchstart", e.touches[0].clientX, e.touches[0].clientY);
         isDragging = true;
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
+        lastX = e.touches[0].clientX;
       });
 
       scrubber.addEventListener('touchmove', function(e) {
         if (!isDragging) return;
         const currentX = e.touches[0].clientX;
-        const currentY = e.touches[0].clientY;
-        const deltaX = currentX - startX;
-        const deltaY = currentY - startY;
-        console.log("touchmove", deltaX, deltaY);
-        // Summe der Bewegungen in X- und Y-Richtung (positive Werte spulen vorwärts, negative rückwärts)
-        const totalDelta = deltaX + deltaY;
-        video.currentTime += totalDelta * 0.05; // Empfindlichkeit anpassen
-        startX = currentX;
-        startY = currentY;
-        e.preventDefault(); // Verhindert das native Scrollen während des Spulens
+        const deltaX = currentX - lastX;
+        // Bei einem positiven deltaX (Finger bewegt sich nach rechts) wird vorgespult,
+        // bei einem negativen deltaX (Finger bewegt sich nach links) wird zurückgespult.
+        video.currentTime += deltaX * sensitivity;
+        lastX = currentX;
+        e.preventDefault();
       });
 
       scrubber.addEventListener('touchend', function() {
-        console.log("touchend");
         isDragging = false;
       });
-
       scrubber.addEventListener('touchcancel', function() {
-        console.log("touchcancel");
         isDragging = false;
       });
     });
