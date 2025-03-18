@@ -3030,39 +3030,50 @@
 </script>
 
 <script>
-    const scrubber = document.querySelector('.scrubber');
-    const video = document.getElementById('myVideo');
-    let isDragging = false;
-    let startX = 0, startY = 0;
+    document.addEventListener('DOMContentLoaded', function() {
+      // Statt getElementById verwenden wir querySelector zur Auswahl des ersten Elements mit der Klasse video-background.
+      const video = document.querySelector('.video-background');
+      const scrubber = document.querySelector('.scrubber');
 
-    scrubber.addEventListener('touchstart', function(e) {
-      console.log("touchstart", e.touches[0].clientX, e.touches[0].clientY);
-      isDragging = true;
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-    });
+      // Falls kein Video gefunden wird, wird hier eine Fehlermeldung ausgegeben.
+      if (!video) {
+        console.error("Kein Video-Element mit der Klasse 'video-background' gefunden.");
+        return;
+      }
 
-    scrubber.addEventListener('touchmove', function(e) {
-      if (!isDragging) return;
-      const currentX = e.touches[0].clientX;
-      const currentY = e.touches[0].clientY;
-      const deltaX = currentX - startX;
-      const deltaY = currentY - startY;
-      console.log("touchmove", deltaX, deltaY);
-      const totalDelta = deltaX + deltaY;
-      video.currentTime += totalDelta * 0.05;
-      startX = currentX;
-      startY = currentY;
-      e.preventDefault();
-    });
+      let isDragging = false;
+      let startX = 0, startY = 0;
 
-    scrubber.addEventListener('touchend', function(e) {
-      console.log("touchend");
-      isDragging = false;
-    });
+      scrubber.addEventListener('touchstart', function(e) {
+        console.log("touchstart", e.touches[0].clientX, e.touches[0].clientY);
+        isDragging = true;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      });
 
-    scrubber.addEventListener('touchcancel', function(e) {
-      console.log("touchcancel");
-      isDragging = false;
+      scrubber.addEventListener('touchmove', function(e) {
+        if (!isDragging) return;
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
+        const deltaX = currentX - startX;
+        const deltaY = currentY - startY;
+        console.log("touchmove", deltaX, deltaY);
+        // Summe der Bewegungen in X- und Y-Richtung (positive Werte spulen vorwärts, negative rückwärts)
+        const totalDelta = deltaX + deltaY;
+        video.currentTime += totalDelta * 0.05; // Empfindlichkeit anpassen
+        startX = currentX;
+        startY = currentY;
+        e.preventDefault(); // Verhindert das native Scrollen während des Spulens
+      });
+
+      scrubber.addEventListener('touchend', function() {
+        console.log("touchend");
+        isDragging = false;
+      });
+
+      scrubber.addEventListener('touchcancel', function() {
+        console.log("touchcancel");
+        isDragging = false;
+      });
     });
   </script>
