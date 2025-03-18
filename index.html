@@ -818,30 +818,132 @@
         }
 
         @media (min-width: 1281px) and (max-width: 1440px) {
-            .video-container {
-                position: absolute;
-                margin-top: -50px;
-                width: 1440px;
-                /* Feste Breite */
-                height: 500vh;
-                /* oder gewünschte Höhe */
-                overflow: hidden;
+
+             .video-background {
+                /* 18% von 375px: 0.18 × 375 = 67.5px (negativ) */
+                margin-top: -57.5px;
+                right: 200px;
             }
 
-            .video-background {
+            .like-prompt {
                 position: absolute;
-                top: 400px;
-                left: 50px;
-                /* Passe den Wert ggf. an */
+                top: 750px;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-size: 14px;
+                text-align: center;
+                display: block;
+                background: transparent;
+            }
+
+
+            /* Allgemeine Anpassungen */
+            body {
+                font-size: 14px;
+            }
+
+            /* Navbar */
+            .navbar {
+                padding: 0 10px;
+                margin-top: 5%;
+                transform: scale(0.86);
+
+            }
+
+            .nav-links a {
+                font-size: 22px;
+                padding: 5px 10px;
+            }
+
+            /* Headline-Bereich */
+            .headline-container {
+                top: 200px;
+
+                /* Etwas Innenabstand vom linken Rand */
+                width: 90%;
+                text-align: center;
+                left: 5%;
+                right: 5%;
+            }
+
+            .headline {
+                font-size: 40px;
+                /* Deutlich verkleinerte Schriftgröße */
+                line-height: 44px;
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            .subheadline {
+                font-size: 18px;
+                line-height: 28px;
+                margin-top: 10px;
+                text-align: center;
+
+            }
+
+            /* Anpassungen für weitere Textbereiche */
+            .einzigartige3dText {
+                margin-left: -195px;
+                top: 650px;
                 width: 100%;
-                height: auto;
-                object-fit: contain;
-                transform: scale(1);
-                transform-origin: left top;
-                /* Skaliert vom linken oberen Eck */
-                z-index: -1;
+                font-size: 20px;
+                line-height: 1.2;
+                transform: scale(0.6);
             }
 
+            .einzigartige3dText .text-small {
+                font-family: 'Inter', sans-serif;
+                color: #ffffff;
+                font-size: clamp(12px, 6vw, 32px);
+                font-family: 'Inter';
+                font-weight: 500;
+                line-height: 42.40px;
+                word-wrap: break-word;
+            }
+
+            .einzigartige3dText .text-large {
+                font-family: 'Inter', sans-serif;
+                color: #ffffff;
+                font-size: 48px;
+                font-family: 'Inter';
+                font-weight: 600;
+                line-height: clamp(12px, 5vw, 57);
+                word-wrap: break-word;
+            }
+
+
+            .wasWirFuerSieTun {
+                margin-left: 50%;
+                width: 90%;
+                font-size: 34px;
+                line-height: 30px;
+                margin-top: 180px;
+            }
+
+            .konzeptText {
+                margin-left: 50%;
+                width: 39%;
+                font-size: 20px;
+                line-height: 28px;
+                /* Bei 768px wird der Wert 25px, bei 468px 80px – dazwischen erfolgt eine 
+                 lineare Interpolation.
+                 Für Viewports schmaler als 468px wird der Wert auf 80px begrenzt,
+                 und für Viewports breiter als 768px bleibt er bei 25px. */
+                margin-top: clamp(50px, calc(20px + 5 * ((1024px - 100vw) / 300)), 80px);
+
+            }
+
+            /* Slider-Anpassungen */
+            .slider-container {
+                width: 400px;
+                justify-content: left;
+                margin-top: -205px;
+                left: -50px;
+       
+            }
             /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 1440px (Original: 1920×1080) */
             .responsive-wrapper {
                 position: relative;
@@ -1013,7 +1115,7 @@
 
             .like-prompt {
                 position: absolute;
-                top: 750px;
+                top: 820px;
                 left: 50%;
                 transform: translate(-50%, -50%);
                 padding: 4px 8px;
@@ -1110,15 +1212,13 @@
             }
 
             .konzeptText {
-                margin-left: 50%;
+                margin-left: 50.3%;
                 width: 39%;
                 font-size: 20px;
-                line-height: 28px;
-                /* Bei 768px wird der Wert 25px, bei 468px 80px – dazwischen erfolgt eine 
-                 lineare Interpolation.
-                 Für Viewports schmaler als 468px wird der Wert auf 80px begrenzt,
-                 und für Viewports breiter als 768px bleibt er bei 25px. */
-                margin-top: clamp(50px, calc(20px + 5 * ((1024px - 100vw) / 300)), 80px);
+                line-height: 32px;
+                margin-top: clamp(55px, calc(30px + 5 * ((1280px - 100vw) / 255)), 20px);
+
+                
 
             }
 
@@ -1232,7 +1332,7 @@
                 /* ca. 34.79% */
                 height: calc(172.80 / 1080 * 100%);
                 /* ca. 16.00% */
-                background: rgba(255, 255, 255, 0.10);
+                background:transparent;
             }
 
             /* .overlay-content */
@@ -1256,21 +1356,10 @@
 
             /* .product-design-title (Overlay-Titel) */
             .content-container .product-design-title {
-                font-size: 2rem;
+                font-size: 2.5rem;
                 /* Beispiel: ca. 32px, anpassbar */
-                line-height: 1.2;
-            }
-
-            /* .coming-soon-button */
-            .content-container .coming-soon-button {
-                position: relative;
-                width: calc(126 / 1920 * 100%);
-                /* ca. 6.56% */
-                height: calc(36 / 1080 * 100%);
-                /* ca. 3.33% */
-                background: black;
-                border-radius: 50px;
-                /* ggf. weiter anpassen */
+                line-height: 1.4;
+                width: 90%;
             }
 
             /* .coming-soon-text */
@@ -1280,7 +1369,7 @@
                 /* ca. 0.73% */
                 top: calc(10 / 1080 * 100%);
                 /* ca. 0.93% */
-                width: calc(98.04 / 1920 * 100%);
+                width: calc(9.04 / 1920 * 100%);
                 /* ca. 5.11% */
                 height: calc(16 / 1080 * 100%);
                 /* ca. 1.48% */
