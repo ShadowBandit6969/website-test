@@ -1,0 +1,2737 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    font-family: 'Inter', sans-serif;
+    color: white;
+    overflow-x: hidden;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10%;
+    padding: 0 3vw; /* ursprünglich 50px */
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.9);
+    margin-top: 2%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    width: 4.6rem; /* ca. 74px */
+    height: 3.1rem; /* ca. 50px */
+}
+
+.logo div {
+    width: 3.25rem; /* ca. 52px */
+    height: 3.1rem;  /* ca. 50px */
+    position: relative;
+    border: 0.1rem solid white; /* ca. 1.7px */
+}
+
+.nav-links {
+    display: flex;
+    gap: 5%;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: clamp(0.625rem, 13vw, 1.125rem); /* 10px bis 18px */
+    font-weight: 500;
+    padding: 0.5rem 1.5rem; /* 8px 24px */
+}
+
+.video-background {
+    position: absolute;
+    margin-top: -18%;
+    left: 0;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.like-prompt {
+    position: absolute;
+    top: 3.2rem; /* ca. 51px */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 0.625rem 1.25rem; /* 10px 20px */
+    border-radius: 0.625rem; /* 10px */
+    font-size: 1.125rem; /* 18px */
+    opacity: 1;
+}
+
+.video-container {
+    cursor: grab;
+    user-select: none;
+    width: 100vw;
+    height: 100vh;
+}
+
+.video-container.dragging {
+    cursor: grabbing;
+}
+
+.headline-container {
+    position: absolute;
+    left: 6vw;  /* annähernd statt 90px */
+    top: 30vh;  /* annähernd statt 280px */
+    color: white;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.25rem; /* ca. 4px */
+}
+
+.headline {
+    font-size: 5rem; /* ca. 80px */
+    font-weight: 900;
+    line-height: 6rem; /* ca. 96px */
+    max-width: 90vw; /* ersetzt 2748px */
+    letter-spacing: 0.25rem; /* ca. 4px */
+}
+
+.subheadline {
+    font-size: 2.5rem; /* ca. 40px */
+    font-weight: 200;
+    line-height: 3.5rem; /* ca. 55px */
+    max-width: 90vw; /* ersetzt 2578px */
+    margin-top: 1rem; /* ca. 15px */
+}
+
+.einzigartige3dText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0;
+    gap: 0.5rem; /* ca. 8px */
+    position: absolute;
+    height: 6.3rem; /* ca. 101px */
+    left: 64.84%;
+    right: 13.96%;
+    top: 65vh; /* annähernd statt 707.82px */
+    width: 28.6rem; /* ca. 457px */
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 2rem; /* ca. 32px */
+    line-height: 120%;
+    color: #FFFFFF;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.einzigartige3dText .text-small {
+    font-family: 'Inter', sans-serif;
+    color: #ffffff;
+    font-size: 2rem; /* ca. 32px */
+    font-weight: 300;
+    line-height: 2.4rem; /* ca. 38.4px */
+    word-wrap: break-word;
+}
+
+.einzigartige3dText .text-large {
+    font-family: 'Inter', sans-serif;
+    color: #ffffff;
+    font-size: 3rem; /* ca. 48px */
+    font-weight: 600;
+    line-height: 3.6rem; /* ca. 57.6px */
+    word-wrap: break-word;
+}
+
+.wasWirFuerSieTun {
+    width: 40vw; /* ersetzt 625px */
+    color: #ffffff;
+    font-size: 2.5rem; /* ca. 40px */
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    line-height: 3.75rem; /* ca. 60px */
+    word-wrap: break-word;
+    letter-spacing: 0.05em;
+    margin-left: 35%;
+    margin-top: 12.5rem; /* ca. 200px */
+}
+
+.konzeptText {
+    width: 70vw; /* ersetzt 1155px */
+    height: 9rem; /* ca. 143px */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #c0c0c0;
+    font-size: 1.5rem; /* ca. 24px */
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    line-height: 2.25rem; /* ca. 36px */
+    word-wrap: break-word;
+    letter-spacing: 0.03em;
+    margin-left: 35%;
+    margin-top: 0.625rem; /* ca. 10px */
+}
+
+/* Slider Styles */
+.slider-container {
+    position: relative;
+    margin-top: -13.1rem; /* ca. -210px */
+    width: 25rem; /* ca. 400px */
+    margin-left: 5.6rem; /* ca. 90px */
+    float: left;
+}
+
+.slider {
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+.slider a {
+    display: none;
+    width: 100%;
+}
+
+.slider a.active {
+    display: block;
+}
+
+.slider video {
+    width: 100%;
+    display: block;
+}
+
+/* Navigation Buttons */
+.slider-container button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 0.625rem; /* ca. 10px */
+    cursor: pointer;
+    font-size: 1.125rem; /* ca. 18px */
+    z-index: 10;
+}
+
+.slider-container .prev {
+    left: 0.625rem; /* ca. 10px */
+}
+
+.slider-container .next {
+    right: 0.625rem; /* ca. 10px */
+}
+
+.hidden {
+    opacity: 0;
+    transform: translateY(1.25rem); /* ca. 20px */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Elemente zunächst unsichtbar machen */
+.hidden {
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+}
+
+/* Eingeblendete Elemente */
+.revealed {
+    opacity: 1;
+}
+
+/* Content-Container, skaliert und zentriert */
+.content-container {
+    position: relative;
+    margin-top: 12.5rem; /* ca. 200px */
+    width: 90vw; /* responsive Breite */
+    aspect-ratio: 1807 / 1224; /* Seitenverhältnis beibehalten */
+    transform: scale(0.90);
+    transform-origin: top center;
+}
+
+/* Bilder */
+.image-case1 {
+    position: absolute;
+    top: 10.25rem; /* ca. 164px */
+    left: 0;
+    width: 41.75rem; /* ca. 668px */
+    height: 26.87rem; /* ca. 429.89px */
+}
+
+.image-case3 {
+    position: absolute;
+    top: 38.62rem; /* ca. 617.89px */
+    left: 0;
+    width: 41.75rem; /* ca. 668px */
+    height: 25.58rem; /* ca. 409.31px */
+}
+
+.image-case2 {
+    position: absolute;
+    top: 10.25rem; /* ca. 164px */
+    left: 43.25rem; /* ca. 692px */
+    width: 69.7rem; /* ca. 1115px */
+    height: 42.38rem; /* ca. 678px */
+}
+
+.image-case4 {
+    position: absolute;
+    top: 54.1rem; /* ca. 865.55px */
+    left: 43.25rem; /* ca. 692px */
+    width: 41.75rem; /* ca. 668px */
+    height: 22.05rem; /* ca. 352.73px */
+}
+
+.image-case5 {
+    position: absolute;
+    top: 54.125rem; /* ca. 866px */
+    left: 85rem; /* ca. 1360px */
+    width: 30.44rem; /* ca. 487px */
+    height: 22rem; /* ca. 352px */
+}
+
+/* Overlay-Container */
+.overlay-container {
+    position: absolute;
+    top: 65.7rem; /* ca. 1051.20px */
+    left: 0;
+    width: 41.75rem; /* ca. 668px */
+    height: 10.8rem; /* ca. 172.80px */
+    background: rgba(255, 255, 255, 0.10);
+}
+
+/* Inhalt im Overlay */
+.overlay-content {
+    position: absolute;
+    left: 1.5rem; /* ca. 24px */
+    top: 2.5rem; /* ca. 39.80px */
+    padding-right: 6.44rem; /* ca. 103px */
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.76rem; /* ca. 12.19px */
+}
+
+/* Titel im Overlay */
+.product-design-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    font-size: 2.2rem; /* ca. 35px */
+    font-family: Inter;
+    font-weight: 500;
+    line-height: 2.7rem; /* ca. 43.20px */
+    word-wrap: break-word;
+}
+
+/* Coming soon Button */
+.coming-soon-button {
+    position: relative;
+    width: 7.88rem; /* ca. 126px */
+    height: 2.25rem; /* ca. 36px */
+    background: black;
+    border-radius: 3.125rem; /* ca. 50px */
+}
+
+/* Coming soon Text */
+.coming-soon-text {
+    position: absolute;
+    left: 0.88rem; /* ca. 14.08px */
+    top: 0.625rem; /* ca. 10px */
+    width: 6.13rem; /* ca. 98.04px */
+    height: 1rem; /* ca. 16px */
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    font-size: 1rem; /* ca. 16px */
+    font-family: Inter;
+    font-weight: 400;
+    line-height: 1.5rem; /* ca. 24px */
+    word-wrap: break-word;
+}
+
+
+
+        @media (min-width: 1921px) and (max-width: 2560px) {
+            .headline-container {
+                position: absolute;
+                left: 390px;
+                top: 320px;
+                color: white;
+                font-family: 'Inter', sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 1.6px;
+                scale: 1.5;
+            }
+            /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 2560px (Referenz: 1920x1080) */
+.responsive-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 2560px;
+  font-size: 16px; /* Basiswert für rem */
+}
+
+/* Pseudo‑Element erzwingt das Seitenverhältnis (1080/1920 = 56.25%) */
+.responsive-wrapper::before {
+  content: "";
+  display: block;
+  padding-top: 56.25%;
+}
+
+/* ABSOLUT POSITIONIERTER CONTAINER, DER DEN WRAPPER FÜLLT */
+.content-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ELEMENTE IM CONTAINER – Werte bezogen auf die Referenz 1920 (Breite) und 1080 (Höhe) */
+
+/* .image-case1 */
+.content-container .image-case1 {
+  position: absolute;
+  top: calc(164 / 1080 * 100%);          /* ca. 15.19% */
+  left: 0;
+  width: calc(668 / 1920 * 100%);          /* ca. 34.79% */
+  height: calc(429.89 / 1080 * 100%);      /* ca. 39.81% */
+}
+
+/* .image-case2 */
+.content-container .image-case2 {
+  position: absolute;
+  top: calc(164 / 1080 * 100%);          /* ca. 15.19% */
+  left: calc(692 / 1920 * 100%);          /* ca. 36.04% */
+  width: calc(1115 / 1920 * 100%);         /* ca. 58.16% */
+  height: calc(678 / 1080 * 100%);         /* ca. 62.78% */
+}
+
+/* .image-case3 */
+.content-container .image-case3 {
+  position: absolute;
+  top: calc(617.89 / 1080 * 100%);        /* ca. 57.20% */
+  left: 0;
+  width: calc(668 / 1920 * 100%);          /* ca. 34.79% */
+  height: calc(409.31 / 1080 * 100%);      /* ca. 37.91% */
+}
+
+/* .image-case4 */
+.content-container .image-case4 {
+  position: absolute;
+  top: calc(865.55 / 1080 * 100%);        /* ca. 80.16% */
+  left: calc(692 / 1920 * 100%);          /* ca. 36.04% */
+  width: calc(668 / 1920 * 100%);          /* ca. 34.79% */
+  height: calc(352.73 / 1080 * 100%);      /* ca. 32.64% */
+}
+
+/* .image-case5 */
+.content-container .image-case5 {
+  position: absolute;
+  top: calc(866 / 1080 * 100%);           /* ca. 80.19% */
+  left: calc(1360 / 1920 * 100%);         /* ca. 70.83% */
+  width: calc(487 / 1920 * 100%);          /* ca. 25.36% */
+  height: calc(352 / 1080 * 100%);         /* ca. 32.59% */
+}
+
+/* .overlay-container */
+.content-container .overlay-container {
+  position: absolute;
+  top: calc(1051.20 / 1080 * 100%);       /* ca. 97.33% */
+  left: 0;
+  width: calc(668 / 1920 * 100%);          /* ca. 34.79% */
+  height: calc(172.80 / 1080 * 100%);      /* ca. 16.00% */
+  background: rgba(255, 255, 255, 0.10);
+}
+
+/* .overlay-content */
+.content-container .overlay-content {
+  position: absolute;
+  left: calc(24 / 1920 * 100%);           /* ca. 1.25% */
+  top: calc(39.80 / 1080 * 100%);          /* ca. 3.69% */
+  padding-right: calc(103 / 1920 * 100%);   /* ca. 5.36% */
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: calc(12.19 / 1080 * 100%);         /* ca. 1.13% */
+}
+
+/* TEXTSTILE – Verwendung von rem‑Einheiten für gute Lesbarkeit */
+
+/* .product-design-title (Overlay-Titel) */
+.content-container .product-design-title {
+  font-size: 2rem;  /* z. B. ca. 32px; anpassbar */
+  line-height: 1.2;
+}
+
+/* .coming-soon-button */
+.content-container .coming-soon-button {
+  position: relative;
+  width: calc(126 / 1920 * 100%);         /* ca. 6.56% */
+  height: calc(36 / 1080 * 100%);          /* ca. 3.33% */
+  background: black;
+  border-radius: 50px;
+}
+
+/* .coming-soon-text */
+.content-container .coming-soon-text {
+  position: absolute;
+  left: calc(14.08 / 1920 * 100%);        /* ca. 0.73% */
+  top: calc(10 / 1080 * 100%);            /* ca. 0.93% */
+  width: calc(98.04 / 1920 * 100%);        /* ca. 5.11% */
+  height: calc(16 / 1080 * 100%);           /* ca. 1.48% */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  font-size: 1.5rem;  /* z. B. ca. 24px; anpassbar */
+  line-height: 1.2;
+}
+
+            
+
+        }
+
+        @media (min-width: 1441px) and (max-width: 1920px) {
+            /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 1920px (Referenz: 1920x1080) */
+.responsive-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  font-size: 16px; /* Basiswert für rem */
+}
+
+/* Das Pseudo‑Element erzwingt das Seitenverhältnis 1080/1920 = 56.25% */
+.responsive-wrapper::before {
+  content: "";
+  display: block;
+  padding-top: 56.25%;
+}
+
+/* ABSOLUT POSITIONIERTER CONTAINER, DER DEN WRAPPER FÜLLT */
+.content-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ELEMENTE IM CONTAINER – Berechnungen basierend auf 1920 (Breite) und 1080 (Höhe) */
+
+/* .image-case1 */
+.content-container .image-case1 {
+  position: absolute;
+  top: calc(164 / 1080 * 100%);          /* ca. 15.19% */
+  left: 0;
+  width: calc(668 / 1920 * 100%);          /* ca. 34.79% */
+  height: calc(429.89 / 1080 * 100%);      /* ca. 39.81% */
+}
+
+/* .image-case2 */
+.content-container .image-case2 {
+  position: absolute;
+  top: calc(164 / 1080 * 100%);          /* ca. 15.19% */
+  left: calc(692 / 1920 * 100%);          /* ca. 36.04% */
+  width: calc(1115 / 1920 * 100%);         /* ca. 58.16% */
+  height: calc(678 / 1080 * 100%);         /* ca. 62.78% */
+}
+
+/* .image-case3 */
+.content-container .image-case3 {
+  position: absolute;
+  top: calc(617.89 / 1080 * 100%);        /* ca. 57.20% */
+  left: 0;
+  width: calc(668 / 1920 * 100%);          /* ca. 34.79% */
+  height: calc(409.31 / 1080 * 100%);      /* ca. 37.91% */
+}
+
+/* .image-case4 */
+.content-container .image-case4 {
+  position: absolute;
+  top: calc(865.55 / 1080 * 100%);        /* ca. 80.16% */
+  left: calc(692 / 1920 * 100%);          /* ca. 36.04% */
+  width: calc(668 / 1920 * 100%);          /* ca. 34.79% */
+  height: calc(352.73 / 1080 * 100%);      /* ca. 32.64% */
+}
+
+/* .image-case5 */
+.content-container .image-case5 {
+  position: absolute;
+  top: calc(866 / 1080 * 100%);           /* ca. 80.19% */
+  left: calc(1360 / 1920 * 100%);         /* ca. 70.83% */
+  width: calc(487 / 1920 * 100%);          /* ca. 25.36% */
+  height: calc(352 / 1080 * 100%);         /* ca. 32.59% */
+}
+
+/* .overlay-container */
+.content-container .overlay-container {
+  position: absolute;
+  top: calc(1051.20 / 1080 * 100%);       /* ca. 97.33% */
+  left: 0;
+  width: calc(668 / 1920 * 100%);          /* ca. 34.79% */
+  height: calc(172.80 / 1080 * 100%);      /* ca. 16.00% */
+  background: rgba(255, 255, 255, 0.10);
+}
+
+/* .overlay-content */
+.content-container .overlay-content {
+  position: absolute;
+  left: calc(24 / 1920 * 100%);           /* ca. 1.25% */
+  top: calc(39.80 / 1080 * 100%);          /* ca. 3.69% */
+  padding-right: calc(103 / 1920 * 100%);   /* ca. 5.36% */
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: calc(12.19 / 1080 * 100%);         /* ca. 1.13% */
+}
+
+/* TEXTSTILE – Für gute Lesbarkeit bleiben die Schriftgrößen in rem */
+
+/* .product-design-title (Overlay-Titel) */
+.content-container .product-design-title {
+  font-size: 2rem;  /* Beispiel: ca. 32px, anpassbar */
+  line-height: 1.2;
+}
+
+/* .coming-soon-button */
+.content-container .coming-soon-button {
+  position: relative;
+  width: calc(126 / 1920 * 100%);         /* ca. 6.56% */
+  height: calc(36 / 1080 * 100%);          /* ca. 3.33% */
+  background: black;
+  border-radius: 50px;
+}
+
+/* .coming-soon-text */
+.content-container .coming-soon-text {
+  position: absolute;
+  left: calc(14.08 / 1920 * 100%);        /* ca. 0.73% */
+  top: calc(10 / 1080 * 100%);            /* ca. 0.93% */
+  width: calc(98.04 / 1920 * 100%);        /* ca. 5.11% */
+  height: calc(16 / 1080 * 100%);           /* ca. 1.48% */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  font-size: 1.5rem;  /* Beispiel: ca. 24px, anpassbar */
+  line-height: 1.2;
+}
+
+        }
+        @media (min-width: 1281px) and (max-width: 1440px) {
+            .video-container {
+                position: absolute;
+                margin-top: -50px;
+                width: 1440px;
+                /* Feste Breite */
+                height: 500vh;
+                /* oder gewünschte Höhe */
+                overflow: hidden;
+            }
+
+            .video-background {
+                position: absolute;
+                top: 400px;
+                left: 50px;
+                /* Passe den Wert ggf. an */
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                transform: scale(1);
+                transform-origin: left top;
+                /* Skaliert vom linken oberen Eck */
+                z-index: -1;
+            }
+
+            /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 1440px (Original: 1920×1080) */
+            .responsive-wrapper {
+                position: relative;
+                width: 100%;
+                max-width: 1440px;
+                font-size: 16px;
+                /* Basiswert für rem */
+            }
+
+            /* Das Pseudo‑Element erzwingt das Seitenverhältnis 1080/1920 = 56.25% */
+            .responsive-wrapper::before {
+                content: "";
+                display: block;
+                padding-top: 56.25%;
+            }
+
+            /* ABSOLUT POSITIONIERTER CONTAINER, DER DEN WRAPPER FÜLLT */
+            .content-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* ELEMENTE IM CONTAINER – Umrechnung basierend auf 1920 (Breite) und 1080 (Höhe) */
+
+            /* .image-case1 */
+            .content-container .image-case1 {
+                position: absolute;
+                top: calc(164 / 1080 * 100%);
+                /* ca. 15.19% */
+                left: 0;
+                width: calc(668 / 1920 * 100%);
+                /* ca. 34.79% */
+                height: calc(429.89 / 1080 * 100%);
+                /* ca. 39.81% */
+            }
+
+            /* .image-case2 */
+            .content-container .image-case2 {
+                position: absolute;
+                top: calc(164 / 1080 * 100%);
+                /* ca. 15.19% */
+                left: calc(692 / 1920 * 100%);
+                /* ca. 36.04% */
+                width: calc(1115 / 1920 * 100%);
+                /* ca. 58.16% */
+                height: calc(678 / 1080 * 100%);
+                /* ca. 62.78% */
+            }
+
+            /* .image-case3 */
+            .content-container .image-case3 {
+                position: absolute;
+                top: calc(617.89 / 1080 * 100%);
+                /* ca. 57.20% */
+                left: 0;
+                width: calc(668 / 1920 * 100%);
+                /* ca. 34.79% */
+                height: calc(409.31 / 1080 * 100%);
+                /* ca. 37.91% */
+            }
+
+            /* .image-case4 */
+            .content-container .image-case4 {
+                position: absolute;
+                top: calc(865.55 / 1080 * 100%);
+                /* ca. 80.16% */
+                left: calc(692 / 1920 * 100%);
+                /* ca. 36.04% */
+                width: calc(668 / 1920 * 100%);
+                /* ca. 34.79% */
+                height: calc(352.73 / 1080 * 100%);
+                /* ca. 32.64% */
+            }
+
+            /* .image-case5 */
+            .content-container .image-case5 {
+                position: absolute;
+                top: calc(866 / 1080 * 100%);
+                /* ca. 80.19% */
+                left: calc(1360 / 1920 * 100%);
+                /* ca. 70.83% */
+                width: calc(487 / 1920 * 100%);
+                /* ca. 25.36% */
+                height: calc(352 / 1080 * 100%);
+                /* ca. 32.59% */
+            }
+
+            /* .overlay-container */
+            .content-container .overlay-container {
+                position: absolute;
+                top: calc(1051.20 / 1080 * 100%);
+                /* ca. 97.33% */
+                left: 0;
+                width: calc(668 / 1920 * 100%);
+                /* ca. 34.79% */
+                height: calc(172.80 / 1080 * 100%);
+                /* ca. 16.00% */
+                background: rgba(255, 255, 255, 0.10);
+            }
+
+            /* .overlay-content */
+            .content-container .overlay-content {
+                position: absolute;
+                left: calc(24 / 1920 * 100%);
+                /* ca. 1.25% */
+                top: calc(39.80 / 1080 * 100%);
+                /* ca. 3.69% */
+                padding-right: calc(103 / 1920 * 100%);
+                /* ca. 5.36% */
+                display: inline-flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: calc(12.19 / 1080 * 100%);
+                /* ca. 1.13% */
+            }
+
+            /* TEXTSTILE – Verwendung von rem für eine gute Lesbarkeit */
+
+            /* .product-design-title (Overlay-Titel) */
+            .content-container .product-design-title {
+                font-size: 2rem;
+                /* ca. 32px, anpassbar */
+                line-height: 1.2;
+            }
+
+            /* .coming-soon-button */
+            .content-container .coming-soon-button {
+                position: relative;
+                width: calc(126 / 1920 * 100%);
+                /* ca. 6.56% */
+                height: calc(36 / 1080 * 100%);
+                /* ca. 3.33% */
+                background: black;
+                border-radius: 50px;
+            }
+
+            /* .coming-soon-text */
+            .content-container .coming-soon-text {
+                position: absolute;
+                left: calc(14.08 / 1920 * 100%);
+                /* ca. 0.73% */
+                top: calc(10 / 1080 * 100%);
+                /* ca. 0.93% */
+                width: calc(98.04 / 1920 * 100%);
+                /* ca. 5.11% */
+                height: calc(16 / 1080 * 100%);
+                /* ca. 1.48% */
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                color: white;
+                font-size: 1.5rem;
+                /* ca. 24px, anpassbar */
+                line-height: 1.2;
+            }
+        }
+
+        @media (min-width: 1025px) and (max-width: 1280px) {
+            .headline-container {
+                position: absolute;
+                left: 90px;
+                top: 320px;
+                color: white;
+                font-family: 'Inter', sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 1.6px;
+                scale: 1;
+            }
+            /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 1280px (Original: 1920x1080) */
+.responsive-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  font-size: 16px; /* Basiswert für rem */
+}
+
+/* Das Pseudo‑Element erzwingt das Seitenverhältnis von 1080/1920 = 56.25% */
+.responsive-wrapper::before {
+  content: "";
+  display: block;
+  padding-top: 56.25%;
+}
+
+/* ABSOLUT POSITIONIERTER CONTAINER, DER DEN WRAPPER FÜLLT */
+.content-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ELEMENTE IM CONTAINER – Werte bezogen auf 1920 (Breite) und 1080 (Höhe) */
+
+/* .image-case1 */
+.content-container .image-case1 {
+  position: absolute;
+  top: calc(164 / 1080 * 100%);          /* ca. 15.19% */
+  left: 0;
+  width: calc(668 / 1920 * 100%);          /* ca. 34.79% */
+  height: calc(429.89 / 1080 * 100%);      /* ca. 39.81% */
+}
+
+/* .image-case2 */
+.content-container .image-case2 {
+  position: absolute;
+  top: calc(164 / 1080 * 100%);          /* ca. 15.19% */
+  left: calc(692 / 1920 * 100%);          /* ca. 36.04% */
+  width: calc(1115 / 1920 * 100%);         /* ca. 58.16% */
+  height: calc(678 / 1080 * 100%);         /* ca. 62.78% */
+}
+
+/* .image-case3 */
+.content-container .image-case3 {
+  position: absolute;
+  top: calc(617.89 / 1080 * 100%);        /* ca. 57.20% */
+  left: 0;
+  width: calc(668 / 1920 * 100%);          /* ca. 34.79% */
+  height: calc(409.31 / 1080 * 100%);      /* ca. 37.91% */
+}
+
+/* .image-case4 */
+.content-container .image-case4 {
+  position: absolute;
+  top: calc(865.55 / 1080 * 100%);        /* ca. 80.16% */
+  left: calc(692 / 1920 * 100%);          /* ca. 36.04% */
+  width: calc(668 / 1920 * 100%);          /* ca. 34.79% */
+  height: calc(352.73 / 1080 * 100%);      /* ca. 32.64% */
+}
+
+/* .image-case5 */
+.content-container .image-case5 {
+  position: absolute;
+  top: calc(866 / 1080 * 100%);           /* ca. 80.19% */
+  left: calc(1360 / 1920 * 100%);         /* ca. 70.83% */
+  width: calc(487 / 1920 * 100%);          /* ca. 25.36% */
+  height: calc(352 / 1080 * 100%);         /* ca. 32.59% */
+}
+
+/* .overlay-container */
+.content-container .overlay-container {
+  position: absolute;
+  top: calc(1051.20 / 1080 * 100%);       /* ca. 97.33% */
+  left: 0;
+  width: calc(668 / 1920 * 100%);          /* ca. 34.79% */
+  height: calc(172.80 / 1080 * 100%);      /* ca. 16.00% */
+  background: rgba(255, 255, 255, 0.10);
+}
+
+/* .overlay-content */
+.content-container .overlay-content {
+  position: absolute;
+  left: calc(24 / 1920 * 100%);           /* ca. 1.25% */
+  top: calc(39.80 / 1080 * 100%);          /* ca. 3.69% */
+  padding-right: calc(103 / 1920 * 100%);   /* ca. 5.36% */
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: calc(12.19 / 1080 * 100%);         /* ca. 1.13% */
+}
+
+/* TEXTSTILE – Für gute Lesbarkeit in Overlays nutzen wir rem‑Einheiten */
+
+/* .product-design-title (Overlay-Titel) */
+.content-container .product-design-title {
+  font-size: 2rem;  /* Beispiel: ca. 32px, anpassbar */
+  line-height: 1.2;
+}
+
+/* .coming-soon-button */
+.content-container .coming-soon-button {
+  position: relative;
+  width: calc(126 / 1920 * 100%);         /* ca. 6.56% */
+  height: calc(36 / 1080 * 100%);          /* ca. 3.33% */
+  background: black;
+  border-radius: 50px; /* ggf. weiter anpassen */
+}
+
+/* .coming-soon-text */
+.content-container .coming-soon-text {
+  position: absolute;
+  left: calc(14.08 / 1920 * 100%);        /* ca. 0.73% */
+  top: calc(10 / 1080 * 100%);            /* ca. 0.93% */
+  width: calc(98.04 / 1920 * 100%);        /* ca. 5.11% */
+  height: calc(16 / 1080 * 100%);           /* ca. 1.48% */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  font-size: 1.5rem;  /* Beispiel: ca. 24px, anpassbar */
+  line-height: 1.2;
+}
+
+
+
+
+        }
+
+        @media (max-width: 1024px) {
+            .video-container {
+                position: absolute;
+                margin-top: -50px;
+                width: 1024px;
+                /* Feste Breite */
+                height: 500vh;
+                /* oder gewünschte Höhe */
+                overflow: hidden;
+            }
+
+            .video-background {
+                position: absolute;
+                top: 600px;
+                left: 50px;
+                /* Passe den Wert ggf. an */
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                transform: scale(1);
+                transform-origin: left top;
+                /* Skaliert vom linken oberen Eck */
+                z-index: -1;
+            }
+
+            /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 1024px (Original: 1920×1080) */
+            .responsive-wrapper {
+                position: relative;
+                width: 100%;
+                max-width: 1024px;
+                font-size: 16px;
+                /* Basiswert für rem */
+            }
+
+            /* Das Pseudo‑Element erzwingt das Seitenverhältnis 1080/1920 = 56.25% */
+            .responsive-wrapper::before {
+                content: "";
+                display: block;
+                padding-top: 56.25%;
+            }
+
+            /* ABSOLUT POSITIONIERTER CONTAINER, DER DEN WRAPPER FÜLLT */
+            .content-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* ELEMENTE IM CONTAINER – Berechnungen basierend auf 1920 (Breite) und 1080 (Höhe) */
+
+            /* .image-case1 */
+            .content-container .image-case1 {
+                position: absolute;
+                top: calc(164 / 1080 * 100%);
+                /* ca. 15.19% */
+                left: 0;
+                width: calc(668 / 1920 * 100%);
+                /* ca. 34.79% */
+                height: calc(429.89 / 1080 * 100%);
+                /* ca. 39.81% */
+            }
+
+            /* .image-case2 */
+            .content-container .image-case2 {
+                position: absolute;
+                top: calc(164 / 1080 * 100%);
+                /* ca. 15.19% */
+                left: calc(692 / 1920 * 100%);
+                /* ca. 36.04% */
+                width: calc(1115 / 1920 * 100%);
+                /* ca. 58.16% */
+                height: calc(678 / 1080 * 100%);
+                /* ca. 62.78% */
+            }
+
+            /* .image-case3 */
+            .content-container .image-case3 {
+                position: absolute;
+                top: calc(617.89 / 1080 * 100%);
+                /* ca. 57.20% */
+                left: 0;
+                width: calc(668 / 1920 * 100%);
+                /* ca. 34.79% */
+                height: calc(409.31 / 1080 * 100%);
+                /* ca. 37.91% */
+            }
+
+            /* .image-case4 */
+            .content-container .image-case4 {
+                position: absolute;
+                top: calc(865.55 / 1080 * 100%);
+                /* ca. 80.16% */
+                left: calc(692 / 1920 * 100%);
+                /* ca. 36.04% */
+                width: calc(668 / 1920 * 100%);
+                /* ca. 34.79% */
+                height: calc(352.73 / 1080 * 100%);
+                /* ca. 32.64% */
+            }
+
+            /* .image-case5 */
+            .content-container .image-case5 {
+                position: absolute;
+                top: calc(866 / 1080 * 100%);
+                /* ca. 80.19% */
+                left: calc(1360 / 1920 * 100%);
+                /* ca. 70.83% */
+                width: calc(487 / 1920 * 100%);
+                /* ca. 25.36% */
+                height: calc(352 / 1080 * 100%);
+                /* ca. 32.59% */
+            }
+
+            /* .overlay-container */
+            .content-container .overlay-container {
+                position: absolute;
+                top: calc(1051.20 / 1080 * 100%);
+                /* ca. 97.33% */
+                left: 0;
+                width: calc(668 / 1920 * 100%);
+                /* ca. 34.79% */
+                height: calc(172.80 / 1080 * 100%);
+                /* ca. 16.00% */
+                background: rgba(255, 255, 255, 0.10);
+            }
+
+            /* .overlay-content */
+            .content-container .overlay-content {
+                position: absolute;
+                left: calc(24 / 1920 * 100%);
+                /* ca. 1.25% */
+                top: calc(39.80 / 1080 * 100%);
+                /* ca. 3.69% */
+                padding-right: calc(103 / 1920 * 100%);
+                /* ca. 5.36% */
+                display: inline-flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: calc(12.19 / 1080 * 100%);
+                /* ca. 1.13% */
+            }
+
+            /* TEXTSTILE – Für Overlays und Buttons verwenden wir rem‑Einheiten für die Schrift */
+
+            /* .product-design-title (Overlay-Titel) */
+            .content-container .product-design-title {
+                font-size: 2rem;
+                /* Beispielwert, ca. 32px; anpassbar */
+                line-height: 1.2;
+            }
+
+            /* .coming-soon-button */
+            .content-container .coming-soon-button {
+                position: relative;
+                width: calc(126 / 1920 * 100%);
+                /* ca. 6.56% */
+                height: calc(36 / 1080 * 100%);
+                /* ca. 3.33% */
+                background: black;
+                border-radius: 50px;
+            }
+
+            /* .coming-soon-text */
+            .content-container .coming-soon-text {
+                position: absolute;
+                left: calc(14.08 / 1920 * 100%);
+                /* ca. 0.73% */
+                top: calc(10 / 1080 * 100%);
+                /* ca. 0.93% */
+                width: calc(98.04 / 1920 * 100%);
+                /* ca. 5.11% */
+                height: calc(16 / 1080 * 100%);
+                /* ca. 1.48% */
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                color: white;
+                font-size: 1.5rem;
+                /* Beispielwert, ca. 24px; anpassbar */
+                line-height: 1.2;
+            }
+
+
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+
+            /* Allgemeine Anpassungen */
+            body {
+                font-size: 14px;
+            }
+
+            .video-container {
+                position: relative;
+                width: 100%;
+                overflow: hidden;
+            }
+
+            .video-background {
+                position: relative;
+                /* Passe den Wert ggf. an */
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                transform: scale(2.2);
+                transform-origin: left top;
+                /* Skaliert vom linken oberen Eck */
+                z-index: -1;
+            }
+
+            /* Navbar */
+            .navbar {
+                padding: 0 3%;
+                margin-top: 5%;
+                align-items: center;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+
+            .like-prompt {
+                position: absolute;
+                top: 0.61%;
+                transform: translateX(-50%);
+                background-color: transparent;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 10px;
+                font-size: clamp(2px, 5vw, 8px);
+                line-height: 1.3;
+                opacity: 1;
+            }
+
+            /* Headline-Bereich */
+            .headline-container {
+                top: 12%;
+                /* Etwas Innenabstand vom linken Rand */
+                width: 90%;
+                text-align: center;
+                left: 5%;
+                right: 5%;
+            }
+
+            .headline {
+                font-size: clamp(16px, 5vw, 20px);
+                line-height: 1.3;
+                /* 1.3-faches der Schriftgröße */
+                margin: 0 auto;
+                left: 5%;
+                right: 5%;
+            }
+
+
+            .subheadline {
+                font-size: clamp(6px, 5vw, 12px);
+                line-height: 1.3;
+                margin-top: 3%;
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+
+            /* Anpassungen für weitere Textbereiche */
+            .einzigartige3dText {
+                margin-left: -85%;
+                top: 40%;
+                width: 100%;
+                font-size: 20px;
+                line-height: 1.2;
+                transform: scale(0.5);
+            }
+
+            .einzigartige3dText .text-small {
+                font-family: 'Inter', sans-serif;
+                color: #ffffff;
+                font-size: clamp(14px, 10vw, 26px);
+                line-height: 1.3;
+                font-family: 'Inter';
+                font-weight: 300;
+                line-height: clamp(3px, 15vw, 38.40px);
+                word-wrap: break-word;
+            }
+
+            .einzigartige3dText .text-large {
+                font-family: 'Inter', sans-serif;
+
+                color: #ffffff;
+                font-size: 48px;
+                font-size: clamp(20px, 15vw, 48px);
+                font-family: 'Inter';
+                font-weight: 600;
+                line-height: clamp(20px, 20vw, 57.6px);
+                word-wrap: break-word;
+            }
+
+            /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 768px (Original: 1920x1080) */
+            .responsive-wrapper {
+                position: relative;
+                width: 100%;
+                max-width: 768px;
+                font-size: 16px;
+                /* Basiswert für rem */
+            }
+
+            /* Das Pseudo‑Element erzwingt das Seitenverhältnis 1080/1920 = 56.25% */
+            .responsive-wrapper::before {
+                content: "";
+                display: block;
+                padding-top: 56.25%;
+            }
+
+            /* ABSOLUT POSITIONIERTER CONTAINER, DER DEN WRAPPER FÜLLT */
+            .content-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* ELEMENTE IM CONTAINER – Berechnungen bezogen auf 1920 (Breite) und 1080 (Höhe) */
+
+            /* .image-case1 */
+            .content-container .image-case1 {
+                position: absolute;
+                top: calc(164 / 1080 * 100%);
+                /* ca. 15.19% */
+                left: 0;
+                width: calc(668 / 1920 * 100%);
+                /* ca. 34.79% */
+                height: calc(429.89 / 1080 * 100%);
+                /* ca. 39.81% */
+            }
+
+            /* .image-case2 */
+            .content-container .image-case2 {
+                position: absolute;
+                top: calc(164 / 1080 * 100%);
+                /* ca. 15.19% */
+                left: calc(692 / 1920 * 100%);
+                /* ca. 36.04% */
+                width: calc(1115 / 1920 * 100%);
+                /* ca. 58.16% */
+                height: calc(678 / 1080 * 100%);
+                /* ca. 62.78% */
+            }
+
+            /* .image-case3 */
+            .content-container .image-case3 {
+                position: absolute;
+                top: calc(617.89 / 1080 * 100%);
+                /* ca. 57.20% */
+                left: 0;
+                width: calc(668 / 1920 * 100%);
+                /* ca. 34.79% */
+                height: calc(409.31 / 1080 * 100%);
+                /* ca. 37.91% */
+            }
+
+            /* .image-case4 */
+            .content-container .image-case4 {
+                position: absolute;
+                top: calc(865.55 / 1080 * 100%);
+                /* ca. 80.16% */
+                left: calc(692 / 1920 * 100%);
+                /* ca. 36.04% */
+                width: calc(668 / 1920 * 100%);
+                /* ca. 34.79% */
+                height: calc(352.73 / 1080 * 100%);
+                /* ca. 32.64% */
+            }
+
+            /* .image-case5 */
+            .content-container .image-case5 {
+                position: absolute;
+                top: calc(866 / 1080 * 100%);
+                /* ca. 80.19% */
+                left: calc(1360 / 1920 * 100%);
+                /* ca. 70.83% */
+                width: calc(487 / 1920 * 100%);
+                /* ca. 25.36% */
+                height: calc(352 / 1080 * 100%);
+                /* ca. 32.59% */
+            }
+
+            /* .overlay-container */
+            .content-container .overlay-container {
+                position: absolute;
+                top: calc(1051.20 / 1080 * 100%);
+                /* ca. 97.33% */
+                left: 0;
+                width: calc(668 / 1920 * 100%);
+                /* ca. 34.79% */
+                height: calc(172.80 / 1080 * 100%);
+                /* ca. 16.00% */
+                background: rgba(255, 255, 255, 0.10);
+            }
+
+            /* .overlay-content */
+            .content-container .overlay-content {
+                position: absolute;
+                left: calc(24 / 1920 * 100%);
+                /* ca. 1.25% */
+                top: calc(39.80 / 1080 * 100%);
+                /* ca. 3.69% */
+                padding-right: calc(103 / 1920 * 100%);
+                /* ca. 5.36% */
+                display: inline-flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: calc(12.19 / 1080 * 100%);
+                /* ca. 1.13% */
+            }
+
+            /* TEXTSTILE – Für gute Lesbarkeit in Overlays nutzen wir rem‑Einheiten */
+
+            /* .product-design-title (Overlay-Titel) */
+            .content-container .product-design-title {
+                font-size: 2rem;
+                /* z. B. ca. 32px; anpassbar */
+                line-height: 1.2;
+            }
+
+            /* .coming-soon-button */
+            .content-container .coming-soon-button {
+                position: relative;
+                width: calc(126 / 1920 * 100%);
+                /* ca. 6.56% */
+                height: calc(36 / 1080 * 100%);
+                /* ca. 3.33% */
+                background: black;
+                border-radius: 50px;
+                /* ggf. weiter anpassen */
+            }
+
+            /* .coming-soon-text */
+            .content-container .coming-soon-text {
+                position: absolute;
+                left: calc(14.08 / 1920 * 100%);
+                /* ca. 0.73% */
+                top: calc(10 / 1080 * 100%);
+                /* ca. 0.93% */
+                width: calc(98.04 / 1920 * 100%);
+                /* ca. 5.11% */
+                height: calc(16 / 1080 * 100%);
+                /* ca. 1.48% */
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                color: white;
+                font-size: 1.5rem;
+                /* z. B. ca. 24px; anpassbar */
+                line-height: 1.2;
+            }
+
+        }
+
+        @media (min-width: 426px) and (max-width: 480px) {
+
+            /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 480px */
+            .responsive-wrapper {
+                position: relative;
+                width: 100%;
+                max-width: 480px;
+                /* Container auf 480px begrenzt */
+                font-size: 16px;
+                /* Basiswert für rem, falls benötigt */
+            }
+
+            /* Pseudo-Element erhält das originale Seitenverhältnis (1224/1807 ≈ 67,76%) */
+            .responsive-wrapper::before {
+                content: "";
+                display: block;
+                padding-top: calc(1224 / 1807 * 100%);
+            }
+
+            /* ABSOLUT POSITIONIERTER CONTAINER, DER DEN WRAPPER FÜLLT */
+            .content-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* ELEMENTE IM CONTAINER (Positionierung in Prozentwerten basierend auf Originalmaßen) */
+
+            /* .image-case1 */
+            .content-container .image-case1 {
+                position: absolute;
+                top: calc(164 / 1224 * 100%);
+                /* ca. 13,39% */
+                left: 0;
+                width: calc(668 / 1807 * 100%);
+                /* ca. 36,97% */
+                height: calc(429.89 / 1224 * 100%);
+                /* ca. 35,09% */
+            }
+
+            /* .image-case2 */
+            .content-container .image-case2 {
+                position: absolute;
+                top: calc(164 / 1224 * 100%);
+                /* ca. 13,39% */
+                left: calc(692 / 1807 * 100%);
+                /* ca. 38,29% */
+                width: calc(1115 / 1807 * 100%);
+                /* ca. 61,67% */
+                height: calc(678 / 1224 * 100%);
+                /* ca. 55,36% */
+            }
+
+            /* .image-case3 */
+            .content-container .image-case3 {
+                position: absolute;
+                top: calc(617.89 / 1224 * 100%);
+                /* ca. 50,44% */
+                left: 0;
+                width: calc(668 / 1807 * 100%);
+                /* ca. 36,97% */
+                height: calc(409.31 / 1224 * 100%);
+                /* ca. 33,43% */
+            }
+
+            /* .image-case4 */
+            .content-container .image-case4 {
+                position: absolute;
+                top: calc(865.55 / 1224 * 100%);
+                /* ca. 70,69% */
+                left: calc(692 / 1807 * 100%);
+                /* ca. 38,29% */
+                width: calc(668 / 1807 * 100%);
+                /* ca. 36,97% */
+                height: calc(352.73 / 1224 * 100%);
+                /* ca. 28,82% */
+            }
+
+            /* .image-case5 */
+            .content-container .image-case5 {
+                position: absolute;
+                top: calc(866 / 1224 * 100%);
+                /* ca. 70,73% */
+                left: calc(1360 / 1807 * 100%);
+                /* ca. 75,24% */
+                width: calc(487 / 1807 * 100%);
+                /* ca. 26,97% */
+                height: calc(352 / 1224 * 100%);
+                /* ca. 28,74% */
+            }
+
+            /* .overlay-container */
+            .content-container .overlay-container {
+                position: absolute;
+                top: calc(1051.20 / 1224 * 100%);
+                /* ca. 85,85% */
+                left: 0;
+                width: calc(668 / 1807 * 100%);
+                /* ca. 36,97% */
+                height: calc(172.80 / 1224 * 100%);
+                /* ca. 14,12% */
+                background: rgba(255, 255, 255, 0.10);
+            }
+
+            /* .overlay-content */
+            .content-container .overlay-content {
+                position: absolute;
+                left: calc(24 / 1807 * 100%);
+                /* ca. 1,33% */
+                top: calc(39.80 / 1224 * 100%);
+                /* ca. 3,25% */
+                padding-right: calc(103 / 1807 * 100%);
+                /* ca. 5,70% */
+                display: inline-flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: calc(12.19 / 1224 * 100%);
+                /* ca. 1% */
+            }
+
+            /* TEXTSTILE FÜR OVERLAY – REM‑EINHEITEN FÜR GUTE LESBARKEIT */
+
+            /* .product-design-title (Overlay-Titel) */
+            .content-container .product-design-title {
+                font-size: 2rem;
+                /* Beispielsweise 32px; anpassbar */
+                line-height: 1.2;
+            }
+
+            /* .coming-soon-button */
+            .content-container .coming-soon-button {
+                position: relative;
+                width: calc(126 / 1807 * 100%);
+                /* ca. 6,98% */
+                height: calc(36 / 1224 * 100%);
+                /* ca. 2,94% */
+                background: black;
+                border-radius: 50px;
+                /* ggf. responsiv anpassen */
+            }
+
+            /* .coming-soon-text */
+            .content-container .coming-soon-text {
+                position: absolute;
+                left: calc(14.08 / 1807 * 100%);
+                /* ca. 0,78% */
+                top: calc(10 / 1224 * 100%);
+                /* ca. 0,82% */
+                width: calc(98.04 / 1807 * 100%);
+                /* ca. 5,42% */
+                height: calc(16 / 1224 * 100%);
+                /* ca. 1,31% */
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                color: white;
+                font-size: 1.5rem;
+                /* Beispielsweise 24px; anpassbar */
+                line-height: 1.2;
+            }
+
+
+        }
+
+        /* Anpassung für sehr kleine Bildschirme */
+        @media (min-width: 376px) and (max-width: 425px) {
+
+            .video-container {
+                position: absolute;
+                margin-top: -140%;
+                width: 100%;
+                /* Feste Breite */
+                height: 100%;
+                /* oder gewünschte Höhe */
+                overflow: hidden;
+            }
+
+            .video-background {
+                position: absolute;
+                margin-top: -50px;
+                /* Passe den Wert ggf. an */
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                transform: scale();
+                transform-origin: left top;
+                /* Skaliert vom linken oberen Eck */
+                z-index: -1;
+            }
+
+            /* Allgemeine Anpassungen */
+            body {
+                font-size: 14px;
+            }
+
+            /* Navbar */
+            .navbar {
+                padding: 0 10px;
+                margin-top: 5%;
+                transform: scale(0.86);
+
+            }
+
+            .nav-links a {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+
+            /* Headline-Bereich */
+            .headline-container {
+                top: 120px;
+                /* Nach unten verschoben */
+                left: 3%;
+                /* Etwas Innenabstand vom linken Rand */
+                width: 90%;
+                text-align: center;
+                left: 5%;
+                right: 5%;
+            }
+
+            .headline {
+                font-size: 20px;
+                /* Deutlich verkleinerte Schriftgröße */
+                line-height: 24px;
+                margin: 0 auto;
+            }
+
+            .subheadline {
+                font-size: 12px;
+                line-height: 18px;
+                margin-top: 10px;
+                text-align: center;
+                margin-left: 5%;
+                right: 5%;
+            }
+
+            /* Anpassungen für weitere Textbereiche */
+            .einzigartige3dText {
+                margin-left: -85%;
+                top: 44%;
+                width: 100%;
+                font-size: 20px;
+                line-height: 1.2;
+                transform: scale(0.5);
+            }
+
+
+
+            .einzigartige3dText .text-small {
+                font-family: 'Inter', sans-serif;
+                color: #ffffff;
+                font-size: 26px;
+                font-family: 'Inter';
+                font-weight: 500;
+                line-height: 38.40px;
+                word-wrap: break-word;
+            }
+
+            .einzigartige3dText .text-large {
+                font-family: 'Inter', sans-serif;
+
+                color: #ffffff;
+                font-size: 48px;
+                font-family: 'Inter';
+                font-weight: 600;
+                line-height: 57.60px;
+                word-wrap: break-word;
+            }
+
+
+            .wasWirFuerSieTun {
+                margin-left: 5%;
+                width: 90%;
+                font-size: 24px;
+                line-height: 30px;
+                margin-top: 550px;
+            }
+
+            .konzeptText {
+                margin-left: 5%;
+                width: 90%;
+                font-size: 16px;
+                line-height: 24px;
+                margin-top: 65px;
+            }
+
+            /* Slider-Anpassungen */
+            .slider-container {
+                width: 320px;
+                margin-left: 0;
+                margin-top: 550px;
+            }
+
+            /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 425px */
+            .responsive-wrapper {
+                position: relative;
+                width: 100%;
+                max-width: 425px;
+                /* Container auf 425px begrenzt */
+                font-size: 16px;
+                /* Basiswert für rem, falls benötigt */
+            }
+
+            /* Pseudo-Element erhält das originale Seitenverhältnis (1224/1807 ≈ 67,76%) */
+            .responsive-wrapper::before {
+                content: "";
+                display: block;
+                padding-top: calc(1224 / 1807 * 100%);
+            }
+
+            /* ABSOLUT POSITIONIERTER CONTAINER, DER DEN WRAPPER FÜLLT */
+            .content-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* ELEMENTE IM CONTAINER (Positionierung in Prozentwerten basierend auf Originalmaßen) */
+
+            /* .image-case1 */
+            .content-container .image-case1 {
+                position: absolute;
+                top: calc(164 / 1224 * 100%);
+                /* ca. 13,39% */
+                left: 0;
+                width: calc(668 / 1807 * 100%);
+                /* ca. 36,97% */
+                height: calc(429.89 / 1224 * 100%);
+                /* ca. 35,09% */
+            }
+
+            /* .image-case2 */
+            .content-container .image-case2 {
+                position: absolute;
+                top: calc(164 / 1224 * 100%);
+                /* ca. 13,39% */
+                left: calc(692 / 1807 * 100%);
+                /* ca. 38,29% */
+                width: calc(1115 / 1807 * 100%);
+                /* ca. 61,67% */
+                height: calc(678 / 1224 * 100%);
+                /* ca. 55,36% */
+            }
+
+            /* .image-case3 */
+            .content-container .image-case3 {
+                position: absolute;
+                top: calc(617.89 / 1224 * 100%);
+                /* ca. 50,44% */
+                left: 0;
+                width: calc(668 / 1807 * 100%);
+                /* ca. 36,97% */
+                height: calc(409.31 / 1224 * 100%);
+                /* ca. 33,43% */
+            }
+
+            /* .image-case4 */
+            .content-container .image-case4 {
+                position: absolute;
+                top: calc(865.55 / 1224 * 100%);
+                /* ca. 70,69% */
+                left: calc(692 / 1807 * 100%);
+                /* ca. 38,29% */
+                width: calc(668 / 1807 * 100%);
+                /* ca. 36,97% */
+                height: calc(352.73 / 1224 * 100%);
+                /* ca. 28,82% */
+            }
+
+            /* .image-case5 */
+            .content-container .image-case5 {
+                position: absolute;
+                top: calc(866 / 1224 * 100%);
+                /* ca. 70,73% */
+                left: calc(1360 / 1807 * 100%);
+                /* ca. 75,24% */
+                width: calc(487 / 1807 * 100%);
+                /* ca. 26,97% */
+                height: calc(352 / 1224 * 100%);
+                /* ca. 28,74% */
+            }
+
+            /* .overlay-container */
+            .content-container .overlay-container {
+                position: absolute;
+                top: calc(1051.20 / 1224 * 100%);
+                /* ca. 85,85% */
+                left: 0;
+                width: calc(668 / 1807 * 100%);
+                /* ca. 36,97% */
+                height: calc(172.80 / 1224 * 100%);
+                /* ca. 14,12% */
+                background: rgba(255, 255, 255, 0.10);
+            }
+
+            /* .overlay-content */
+            .content-container .overlay-content {
+                position: absolute;
+                left: calc(24 / 1807 * 100%);
+                /* ca. 1,33% */
+                top: calc(39.80 / 1224 * 100%);
+                /* ca. 3,25% */
+                padding-right: calc(103 / 1807 * 100%);
+                /* ca. 5,70% */
+                display: inline-flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: calc(12.19 / 1224 * 100%);
+                /* ca. 1% */
+            }
+
+            /* TEXTSTILE FÜR OVERLAY – REM‑EINHEITEN FÜR GUTE LESBARKEIT */
+
+            /* .product-design-title (Overlay-Titel) */
+            .content-container .product-design-title {
+                font-size: 2rem;
+                /* Beispielsweise 32px; anpassbar */
+                line-height: 1.2;
+            }
+
+            /* .coming-soon-button */
+            .content-container .coming-soon-button {
+                position: relative;
+                width: calc(126 / 1807 * 100%);
+                /* ca. 6,98% */
+                height: calc(36 / 1224 * 100%);
+                /* ca. 2,94% */
+                background: black;
+                border-radius: 50px;
+                /* ggf. responsiv anpassen */
+            }
+
+            /* .coming-soon-text */
+            .content-container .coming-soon-text {
+                position: absolute;
+                left: calc(14.08 / 1807 * 100%);
+                /* ca. 0,78% */
+                top: calc(10 / 1224 * 100%);
+                /* ca. 0,82% */
+                width: calc(98.04 / 1807 * 100%);
+                /* ca. 5,42% */
+                height: calc(16 / 1224 * 100%);
+                /* ca. 1,31% */
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                color: white;
+                font-size: 1.5rem;
+                /* Beispielsweise 24px; anpassbar */
+                line-height: 1.2;
+            }
+
+
+
+
+        }
+
+        /* Anpassung für sehr schmale Bildschirme (z. B. iPhone SE, ältere Geräte) */
+        @media (min-width: 321px) and (max-width: 375px) {
+            /* Deine CSS-Regeln hier */
+
+
+            .video-container {
+                position: absolute;
+                margin-top: -500px;
+                width: 100%;
+                /* Feste Breite */
+                height: 100%;
+                /* oder gewünschte Höhe */
+                overflow: hidden;
+            }
+
+            .video-background {
+                position: absolute;
+                margin-top: -50px;
+                /* Passe den Wert ggf. an */
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                transform: scale();
+                transform-origin: left top;
+                /* Skaliert vom linken oberen Eck */
+                z-index: -1;
+            }
+
+            /* Allgemeine Anpassungen */
+            body {
+                font-size: 14px;
+            }
+
+            /* Navbar */
+            .navbar {
+                padding: 0 10px;
+                margin-top: 5%;
+                transform: scale(0.86);
+
+            }
+
+            .nav-links a {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+
+            /* Headline-Bereich */
+            .headline-container {
+                top: 120px;
+                /* Nach unten verschoben */
+                left: 3%;
+                /* Etwas Innenabstand vom linken Rand */
+                width: 90%;
+                text-align: center;
+                left: 6%;
+                right: 6%;
+            }
+
+            .headline {
+                font-size: 20px;
+                /* Deutlich verkleinerte Schriftgröße */
+                line-height: 24px;
+                margin: 0 auto;
+                left: 5%;
+                right: 5%;
+            }
+
+            .subheadline {
+                font-size: 12px;
+                line-height: 18px;
+                margin-top: 10px;
+                margin-left: 5%;
+                margin-right: 5%;
+                text-align: center;
+            }
+
+            /* Anpassungen für weitere Textbereiche */
+            .einzigartige3dText {
+                margin-left: -85%;
+                top: 43%;
+                width: 100%;
+                font-size: 20px;
+                line-height: 1.2;
+                transform: scale(0.5);
+            }
+
+            .einzigartige3dText .text-small {
+                font-family: 'Inter', sans-serif;
+                color: #ffffff;
+                font-size: 26px;
+                font-family: 'Inter';
+                font-weight: 500;
+                line-height: 38.40px;
+                word-wrap: break-word;
+            }
+
+            .einzigartige3dText .text-large {
+                font-family: 'Inter', sans-serif;
+
+                color: #ffffff;
+                font-size: 48px;
+                font-family: 'Inter';
+                font-weight: 600;
+                line-height: 57.60px;
+                word-wrap: break-word;
+            }
+
+
+            .wasWirFuerSieTun {
+                margin-left: 5%;
+                width: 90%;
+                font-size: 24px;
+                line-height: 30px;
+                margin-top: 550px;
+            }
+
+            .konzeptText {
+                margin-left: 5%;
+                width: 90%;
+                font-size: 16px;
+                line-height: 24px;
+                margin-top: 65px;
+            }
+
+            /* Slider-Anpassungen */
+            .slider-container {
+                width: 320px;
+                margin-left: 0;
+                margin-top: 550px;
+            }
+
+            /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 375px */
+            .responsive-wrapper {
+                position: relative;
+                width: 100%;
+                max-width: 375px;
+                /* Hier wird der Container auf 375px begrenzt */
+                font-size: 16px;
+                /* Basiswert für rem, falls nötig */
+            }
+
+            /* Pseudo-Element erhält das originale Seitenverhältnis (1224/1807 ≈ 67,76%) */
+            .responsive-wrapper::before {
+                content: "";
+                display: block;
+                padding-top: calc(1224 / 1807 * 100%);
+            }
+
+            /* ABSOLUT POSITIONIERTER CONTAINER, DER DEN WRAPPER FÜLLT */
+            .content-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* ELEMENTE IM CONTAINER (alle Werte in Prozent, basierend auf Originalmaßen) */
+
+            /* .image-case1 */
+            .content-container .image-case1 {
+                position: absolute;
+                top: calc(164 / 1224 * 100%);
+                /* ca. 13,39% */
+                left: 0;
+                width: calc(668 / 1807 * 100%);
+                /* ca. 36,97% */
+                height: calc(429.89 / 1224 * 100%);
+                /* ca. 35,09% */
+            }
+
+            /* .image-case2 */
+            .content-container .image-case2 {
+                position: absolute;
+                top: calc(164 / 1224 * 100%);
+                /* ca. 13,39% */
+                left: calc(692 / 1807 * 100%);
+                /* ca. 38,29% */
+                width: calc(1115 / 1807 * 100%);
+                /* ca. 61,67% */
+                height: calc(678 / 1224 * 100%);
+                /* ca. 55,36% */
+            }
+
+            /* .image-case3 */
+            .content-container .image-case3 {
+                position: absolute;
+                top: calc(617.89 / 1224 * 100%);
+                /* ca. 50,44% */
+                left: 0;
+                width: calc(668 / 1807 * 100%);
+                /* ca. 36,97% */
+                height: calc(409.31 / 1224 * 100%);
+                /* ca. 33,43% */
+            }
+
+            /* .image-case4 */
+            .content-container .image-case4 {
+                position: absolute;
+                top: calc(865.55 / 1224 * 100%);
+                /* ca. 70,69% */
+                left: calc(692 / 1807 * 100%);
+                /* ca. 38,29% */
+                width: calc(668 / 1807 * 100%);
+                /* ca. 36,97% */
+                height: calc(352.73 / 1224 * 100%);
+                /* ca. 28,82% */
+            }
+
+            /* .image-case5 */
+            .content-container .image-case5 {
+                position: absolute;
+                top: calc(866 / 1224 * 100%);
+                /* ca. 70,73% */
+                left: calc(1360 / 1807 * 100%);
+                /* ca. 75,24% */
+                width: calc(487 / 1807 * 100%);
+                /* ca. 26,97% */
+                height: calc(352 / 1224 * 100%);
+                /* ca. 28,74% */
+            }
+
+            /* .overlay-container */
+            .content-container .overlay-container {
+                position: absolute;
+                top: calc(1051.20 / 1224 * 100%);
+                /* ca. 85,85% */
+                left: 0;
+                width: calc(668 / 1807 * 100%);
+                /* ca. 36,97% */
+                height: calc(172.80 / 1224 * 100%);
+                /* ca. 14,12% */
+                background: rgba(255, 255, 255, 0.10);
+            }
+
+            /* .overlay-content */
+            .content-container .overlay-content {
+                position: absolute;
+                left: calc(24 / 1807 * 100%);
+                /* ca. 1,33% */
+                top: calc(39.80 / 1224 * 100%);
+                /* ca. 3,25% */
+                padding-right: calc(103 / 1807 * 100%);
+                /* ca. 5,70% */
+                display: inline-flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: calc(12.19 / 1224 * 100%);
+                /* ca. 1% */
+            }
+
+            /* TEXTSTILE FÜR OVERLAY – NUTZE REM‑EINHEITEN FÜR GUTE LESBARKEIT */
+
+            /* .product-design-title (Overlay-Titel) */
+            .content-container .product-design-title {
+                font-size: 2rem;
+                /* Beispielsweise 32px; anpassbar */
+                line-height: 1.2;
+            }
+
+            /* .coming-soon-button */
+            .content-container .coming-soon-button {
+                position: relative;
+                width: calc(126 / 1807 * 100%);
+                /* ca. 6,98% */
+                height: calc(36 / 1224 * 100%);
+                /* ca. 2,94% */
+                background: black;
+                border-radius: 50px;
+                /* ggf. responsiv anpassen */
+            }
+
+            /* .coming-soon-text */
+            .content-container .coming-soon-text {
+                position: absolute;
+                left: calc(14.08 / 1807 * 100%);
+                /* ca. 0,78% */
+                top: calc(10 / 1224 * 100%);
+                /* ca. 0,82% */
+                width: calc(98.04 / 1807 * 100%);
+                /* ca. 5,42% */
+                height: calc(16 / 1224 * 100%);
+                /* ca. 1,31% */
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                color: white;
+                font-size: 1.5rem;
+                /* Beispielsweise 24px; anpassbar */
+                line-height: 1.2;
+            }
+
+
+        }
+
+        @media (max-width: 320px) {
+
+            /* Allgemeine Anpassungen */
+            body {
+                font-size: 14px;
+            }
+
+            .video-container {
+                position: absolute;
+                width: 100%;
+                overflow: hidden;
+                margin-top: -230%;
+            }
+
+            .video-background {
+                position: relative;
+                /* Passe den Wert ggf. an */
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                transform: scale(2.2);
+                transform-origin: left top;
+                /* Skaliert vom linken oberen Eck */
+                z-index: -1;
+            }
+
+            /* Navbar */
+            .navbar {
+                padding: 0 3%;
+                margin-top: 5%;
+                align-items: center;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+
+            .like-prompt {
+                position: absolute;
+                top: 0.61%;
+                transform: translateX(-50%);
+                background-color: transparent;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 10px;
+                font-size: clamp(2px, 5vw, 8px);
+                line-height: 1.3;
+                opacity: 1;
+            }
+
+            /* Headline-Bereich */
+            .headline-container {
+                top: 12%;
+                /* Etwas Innenabstand vom linken Rand */
+                width: 90%;
+                text-align: center;
+                left: 5%;
+                right: 5%;
+            }
+
+            .headline {
+                font-size: clamp(16px, 5vw, 20px);
+                line-height: 1.3;
+                /* 1.3-faches der Schriftgröße */
+                margin: 0 auto;
+                left: 5%;
+                right: 5%;
+            }
+
+
+            .subheadline {
+                font-size: clamp(6px, 5vw, 12px);
+                line-height: 1.3;
+                margin-top: 3%;
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+
+            /* Anpassungen für weitere Textbereiche */
+            .einzigartige3dText {
+                margin-left: -85%;
+                top: 40%;
+                width: 100%;
+                font-size: 20px;
+                line-height: 1.2;
+                transform: scale(0.5);
+            }
+
+            .einzigartige3dText .text-small {
+                font-family: 'Inter', sans-serif;
+                color: #ffffff;
+                font-size: clamp(14px, 10vw, 26px);
+                line-height: 1.3;
+                font-family: 'Inter';
+                font-weight: 300;
+                line-height: clamp(3px, 15vw, 38.40px);
+                word-wrap: break-word;
+            }
+
+            .einzigartige3dText .text-large {
+                font-family: 'Inter', sans-serif;
+
+                color: #ffffff;
+                font-size: 48px;
+                font-size: clamp(20px, 15vw, 48px);
+                font-family: 'Inter';
+                font-weight: 600;
+                line-height: clamp(20px, 20vw, 57.6px);
+                word-wrap: break-word;
+            }
+
+
+            .wasWirFuerSieTun {
+                margin-left: 5%;
+                width: 90%;
+                font-size: 24px;
+                line-height: 95%;
+                margin-top: 550px;
+            }
+
+            .konzeptText {
+                margin-left: 5%;
+                width: 90%;
+                font-size: 16px;
+                line-height: 136%;
+                margin-top: 20%;
+            }
+
+            /* Slider-Anpassungen */
+            .slider-container {
+                width: 320px;
+                margin-left: 0;
+                margin-top: 550px;
+            }
+
+            /* RESPONSIVER WRAPPER MIT FESTEM SEITENVERHÄLTNIS */
+
+            /* RESPONSIVER WRAPPER MIT FESTEM SEITENVERHÄLTNIS und Basis-Schriftgröße */
+            .responsive-wrapper {
+                position: relative;
+                width: 100%;
+                max-width: 1807px;
+                /* Originalbreite als Obergrenze */
+                font-size: 16px;
+                /* Basiswert für rem */
+            }
+
+            .responsive-wrapper::before {
+                content: "";
+                display: block;
+                /* Höhe entspricht (1224/1807)*100% der Breite */
+                padding-top: calc(1224 / 1807 * 100%);
+            }
+
+            /* ABSOLUT POSITIONIERTER CONTAINER, DER DEN WRAPPER FÜLLT */
+            .content-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* ELEMENTE IM CONTAINER (Umrechnung in Prozentwerte) */
+
+            /* .image-case1 */
+            .content-container .image-case1 {
+                position: absolute;
+                top: calc(164 / 1224 * 100%);
+                /* ca. 13.39% */
+                left: 0;
+                width: calc(668 / 1807 * 100%);
+                /* ca. 36.97% */
+                height: calc(429.89 / 1224 * 100%);
+                /* ca. 35.09% */
+            }
+
+            /* .image-case2 */
+            .content-container .image-case2 {
+                position: absolute;
+                top: calc(164 / 1224 * 100%);
+                /* ca. 13.39% */
+                left: calc(692 / 1807 * 100%);
+                /* ca. 38.29% */
+                width: calc(1115 / 1807 * 100%);
+                /* ca. 61.67% */
+                height: calc(678 / 1224 * 100%);
+                /* ca. 55.36% */
+            }
+
+            /* .image-case3 */
+            .content-container .image-case3 {
+                position: absolute;
+                top: calc(617.89 / 1224 * 100%);
+                /* ca. 50.44% */
+                left: 0;
+                width: calc(668 / 1807 * 100%);
+                /* ca. 36.97% */
+                height: calc(409.31 / 1224 * 100%);
+                /* ca. 33.43% */
+            }
+
+            /* .image-case4 */
+            .content-container .image-case4 {
+                position: absolute;
+                top: calc(865.55 / 1224 * 100%);
+                /* ca. 70.69% */
+                left: calc(692 / 1807 * 100%);
+                /* ca. 38.29% */
+                width: calc(668 / 1807 * 100%);
+                /* ca. 36.97% */
+                height: calc(352.73 / 1224 * 100%);
+                /* ca. 28.82% */
+            }
+
+            /* .image-case5 */
+            .content-container .image-case5 {
+                position: absolute;
+                top: calc(866 / 1224 * 100%);
+                /* ca. 70.73% */
+                left: calc(1360 / 1807 * 100%);
+                /* ca. 75.24% */
+                width: calc(487 / 1807 * 100%);
+                /* ca. 26.97% */
+                height: calc(352 / 1224 * 100%);
+                /* ca. 28.74% */
+            }
+
+            /* .overlay-container */
+            .content-container .overlay-container {
+                position: absolute;
+                top: calc(1051.20 / 1224 * 100%);
+                /* ca. 85.85% */
+                left: 0;
+                width: calc(668 / 1807 * 100%);
+                /* ca. 36.97% */
+                height: calc(172.80 / 1224 * 100%);
+                /* ca. 14.12% */
+                background: rgba(255, 255, 255, 0.10);
+            }
+
+            /* .overlay-content */
+            .content-container .overlay-content {
+                position: absolute;
+                left: calc(24 / 1807 * 100%);
+                /* ca. 1.33% */
+                top: calc(39.80 / 1224 * 100%);
+                /* ca. 3.25% */
+                padding-right: calc(103 / 1807 * 100%);
+                /* ca. 5.70% */
+                display: inline-flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: calc(12.19 / 1224 * 100%);
+                /* ca. 1% */
+            }
+
+            /* TEXTSTILE FÜR OVERLAY */
+            /* Statt Prozentwerten für die Schriftgröße (die zu klein waren)
+   nutzen wir rem-Werte, die sich an der Basis-Schriftgröße des Wrappers orientieren. */
+
+            /* .product-design-title (Overlay-Titel) */
+            .content-container .product-design-title {
+                font-size: 2rem;
+                /* z. B. 32px, anpassbar */
+                line-height: 1.2;
+            }
+
+            /* .coming-soon-button */
+            .content-container .coming-soon-button {
+                position: relative;
+                width: calc(126 / 1807 * 100%);
+                /* ca. 6.98% */
+                height: calc(36 / 1224 * 100%);
+                /* ca. 2.94% */
+                background: black;
+                border-radius: 50px;
+                /* ggf. auch responsiv anpassen */
+            }
+
+            /* .coming-soon-text */
+            .content-container .coming-soon-text {
+                position: absolute;
+                left: calc(14.08 / 1807 * 100%);
+                /* ca. 0.78% */
+                top: calc(10 / 1224 * 100%);
+                /* ca. 0.82% */
+                width: calc(98.04 / 1807 * 100%);
+                /* ca. 5.42% */
+                height: calc(16 / 1224 * 100%);
+                /* ca. 1.31% */
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                color: white;
+                font-size: 1.5rem;
+                /* z. B. 24px, anpassbar */
+                line-height: 1.2;
+            }
+
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <div></div>
+        </div>
+        <div class="nav-links" id="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Lösungen</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <div class="video-container">
+        <video class="video-background" autoplay loop playsinline id="main-video" muted>
+            <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
+            Dein Browser unterstützt kein HTML5-Video.
+        </video>
+        <div id="like-prompt" class="like-prompt">Klicke und ziehe, um zu spulen!</div>
+    </div>
+
+    <div class="headline-container">
+        <h1 class="headline">Code trifft <br> auf Kreativität</h1>
+        <h2 class="subheadline">Ihr Partner für 3D, Web, <br> Grafik & Branding</h2>
+    </div>
+
+    <div data-layer="Einzigartige 3D Welten. Nun auch im Web!" class="einzigartige3dText hidden">
+        <span class="text-small">
+            Einzigartige 3D Welten.<br />
+        </span>
+        <span class="text-large">
+            Nun auch im Web!
+        </span>
+    </div>
+
+    <div data-layer="Was wir für Sie tun:" class="wasWirFuerSieTun hidden">
+        Was wir für Sie tun:
+    </div>
+    <div data-layer="Wir entwickeln individuelle Konzepte, ..." class="konzeptText hidden">
+        Wir entwickeln individuelle Konzepte, die deine Marke nachhaltig stärken und dein Unternehmen voranbringen. Ob
+        innovative Videoproduktion, modernes Webdesign oder strategische Markenführung inklusive Corporate Identity –
+        wir realisieren Ihre Vision mit höchster Professionalität und klaren Zielen.
+    </div>
+
+    <div class="slider-container hidden">
+        <div class="slider">
+            <a href="https://example.com/link2">
+                <video src="./Fotos/done0001-0250.mp4" muted loop></video>
+            </a>
+            <a href="https://example.com/link2">
+                <video src="./Fotos/onlyHandy0001-0016.mp4" muted loop></video>
+            </a>
+            <a href="https://example.com/link2">
+                <video src="./Fotos/done0001-0250.mp4" muted loop></video>
+            </a>
+            <a href="https://example.com/link2">
+                <video src="./Fotos/onlyHandy0001-0016.mp4" muted loop></video>
+            </a>
+
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+    </div>
+
+    <div class="responsive-wrapper">
+        <div data-layer="Group 25" class="content-container hidden">
+
+            <img data-layer="casestudy-01.jpg" class="image-case1" src="https://placehold.co/668x430"
+                alt="Case Study 1" />
+            <img data-layer="casestudy-03.jpg" class="image-case3" src="https://placehold.co/668x409"
+                alt="Case Study 3" />
+            <div data-layer="Overlay" class="overlay-container">
+                <div data-layer="Overlay Content" class="overlay-content">
+                    <div data-layer="How we design web3 products" class="product-design-title">
+                        How we design web3 products
+                    </div>
+                    <div data-layer="Coming Soon Button" class="coming-soon-button">
+                        <div data-layer="coming soon" class="coming-soon-text">
+                            coming soon
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img data-layer="casestudy-02.jpg" class="image-case2" src="https://placehold.co/1115x678"
+                alt="Case Study 2" />
+            <img data-layer="casestudy-04.jpg" class="image-case4" src="https://placehold.co/668x353"
+                alt="Case Study 4" />
+            <img data-layer="casestudy-04.jpg" class="image-case5" src="https://placehold.co/407x352"
+                alt="Case Study 5" />
+        </div>
+    </div>
+
+
+
+
+</body>
+
+</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const slides = document.querySelectorAll(".slider a");
+        let currentSlide = 0;
+        let slideInterval = setInterval(nextSlide, 5000); // Automatischer Wechsel alle 5 Sekunden
+
+        // Zeige den ersten Slide initial
+        slides[currentSlide].classList.add("active");
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove("active");
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add("active");
+        }
+
+        function prevSlide() {
+            slides[currentSlide].classList.remove("active");
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            slides[currentSlide].classList.add("active");
+        }
+
+        // Event-Listener für manuelle Navigation
+        document.querySelector(".next").addEventListener("click", function () {
+            clearInterval(slideInterval);
+            nextSlide();
+        });
+
+        document.querySelector(".prev").addEventListener("click", function () {
+            clearInterval(slideInterval);
+            prevSlide();
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const video = document.getElementById("main-video");
+        const likePrompt = document.getElementById("like-prompt");
+        const videoContainer = document.querySelector(".video-container");
+        let isDragging = false;
+        let startX = 0;
+        let startTime = 0;
+
+        if (!video) {
+            console.error("Video-Element nicht gefunden!");
+            return;
+        }
+
+
+
+        videoContainer.addEventListener("mousedown", (event) => {
+            if (event.button === 0) { // Nur linke Maustaste
+                isDragging = true;
+                startX = event.clientX;
+                startTime = video.currentTime;
+                video.pause();
+                videoContainer.classList.add("dragging");
+                document.body.style.overflow = "hidden"; // Scrollen verhindern
+            }
+        });
+
+        document.addEventListener("mousemove", (event) => {
+            if (isDragging) {
+                let diff = event.clientX - startX;
+                if (Math.abs(diff) > 2) { // Weniger strenge Bewegungserkennung
+                    let seekTime = startTime + diff * 0.02; // Feinere Steuerung
+                    video.currentTime = Math.max(0, Math.min(video.duration, seekTime));
+                }
+            }
+        });
+
+        document.addEventListener("mouseup", () => {
+            if (isDragging) {
+                isDragging = false;
+                video.play();
+                videoContainer.classList.remove("dragging");
+                document.body.style.overflow = ""; // Scrollen wieder aktivieren
+            }
+        });
+
+        // Sicherstellen, dass das Video nach Ende immer im Loop bleibt
+        video.addEventListener("ended", () => {
+            video.currentTime = 0;
+            video.play();
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('gesturestart', function (e) {
+        e.preventDefault();
+    });
+
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const revealElements = document.querySelectorAll('.hidden');
+
+        const revealOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: "0px 0px -300px 0px"  // Verzögert das Erscheinen um 100 Scroll-Pixel
+        });
+
+        revealElements.forEach(el => {
+            revealOnScroll.observe(el);
+        });
+    });
+</script>
