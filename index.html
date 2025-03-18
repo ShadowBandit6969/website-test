@@ -472,7 +472,7 @@
             /* ca. 24px */
             word-wrap: break-word;
         }
-        /* Scrubber-Element – nur in mobilen Ansichten anzeigen (z. B. bis 425px) */
+        /* Scrubber-Element – nur in mobilen Ansichten anzeigen (bis 425px) */
     .scrubber {
       display: none;
       position: fixed;
@@ -481,7 +481,7 @@
       transform: translateX(-50%);
       width: 80%;
       height: 50px;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0,0,0,0.5);
       border-radius: 8px;
       color: white;
       font-family: sans-serif;
@@ -490,8 +490,7 @@
       justify-content: center;
       z-index: 1000;
       touch-action: none;
-      pointer-events: auto;
-      cursor: pointer;
+      cursor: grabbing;
     }
         @media (min-width: 1921px) and (max-width: 2560px) {
             .headline-container {
@@ -3030,42 +3029,40 @@
 
 </script>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const video = document.querySelector('.video-background');
-    const scrubber = document.querySelector('.scrubber');
+    document.addEventListener('DOMContentLoaded', () => {
+      const video = document.querySelector('.video-background');
+      const scrubber = document.querySelector('.scrubber');
 
-    if (!video) {
-      console.error("Kein Video-Element mit der Klasse 'video-background' gefunden.");
-      return;
-    }
+      if (!video) {
+        console.error("Kein Video-Element mit der Klasse 'video-background' gefunden.");
+        return;
+      }
 
-    let isDragging = false;
-    let lastX = 0;
-    // Passe den Sensitivitätsfaktor nach Bedarf an (Sekunden pro Pixel)
-    const sensitivity = 0.05;
+      // Funktion, die basierend auf dem Fingerort die Videozeit setzt
+      function updateVideoTime(touchX) {
+        const rect = scrubber.getBoundingClientRect();
+        // Berechne einen Wert zwischen 0 (linke Seite) und 1 (rechte Seite)
+        let fraction = (touchX - rect.left) / rect.width;
+        fraction = Math.max(0, Math.min(1, fraction));
+        // Mapping: ganz rechts (fraction = 1) → currentTime = 0 (Video-Anfang)
+        // und ganz links (fraction = 0) → currentTime = video.duration (Video-Ende)
+        if (video.duration) {
+          video.currentTime = (1 - fraction) * video.duration;
+          console.log("Fingerposition:", fraction, "=> currentTime:", video.currentTime);
+        }
+      }
 
-    scrubber.addEventListener('touchstart', (e) => {
-      isDragging = true;
-      lastX = e.touches[0].clientX;
+      // Bei jedem Touch-Event wird die aktuelle Fingerposition genutzt
+      scrubber.addEventListener('touchmove', (e) => {
+        const touchX = e.touches[0].clientX;
+        updateVideoTime(touchX);
+        e.preventDefault();
+      });
+
+      // Optional: beim Touchstart direkt die Zeit setzen
+      scrubber.addEventListener('touchstart', (e) => {
+        const touchX = e.touches[0].clientX;
+        updateVideoTime(touchX);
+      });
     });
-
-    scrubber.addEventListener('touchmove', (e) => {
-      if (!isDragging) return;
-      const currentX = e.touches[0].clientX;
-      const deltaX = currentX - lastX;
-      // Wir nehmen hier an: Swipe nach links (deltaX negativ) soll das Video vorwärts spulen,
-      // Swipe nach rechts (deltaX positiv) spult zurück.
-      video.currentTime -= deltaX * sensitivity;
-      lastX = currentX;
-      // Verhindert natives Scrollen
-      e.preventDefault();
-    });
-
-    scrubber.addEventListener('touchend', () => {
-      isDragging = false;
-    });
-    scrubber.addEventListener('touchcancel', () => {
-      isDragging = false;
-    });
-  });
-</script>
+  </script>
