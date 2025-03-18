@@ -3016,3 +3016,54 @@
         });
     });
 </script>
+
+<script>
+    // Selektiere den Container, der die Interaktion steuert
+    const videoContainer = document.querySelector('.video-container');
+    // Hier muss das Video-Element referenziert werden, z.B.:
+    const video = document.querySelector('video');
+    
+    let isDragging = false;
+    let startX = 0;
+    
+    function startDrag(e) {
+      isDragging = true;
+      // Touch-Events: e.touches[0].clientX, Maus-Events: e.clientX
+      startX = e.touches ? e.touches[0].clientX : e.clientX;
+    }
+    
+    function onDrag(e) {
+      if (!isDragging) return;
+      
+      // Bestimme den aktuellen X-Wert
+      const currentX = e.touches ? e.touches[0].clientX : e.clientX;
+      const deltaX = currentX - startX;
+      
+      // Beispiel: Ändere die aktuelle Videoposition basierend auf deltaX
+      // Hier kann der Multiplikator angepasst werden, um die Sensitivität zu steuern.
+      video.currentTime += deltaX * 0.1;
+      
+      // Aktualisiere startX für kontinuierliche Berechnungen
+      startX = currentX;
+      
+      // Standardverhalten verhindern (z.B. Scrollen)
+      e.preventDefault();
+    }
+    
+    function endDrag() {
+      isDragging = false;
+    }
+    
+    // Maus-Events
+    videoContainer.addEventListener('mousedown', startDrag);
+    videoContainer.addEventListener('mousemove', onDrag);
+    videoContainer.addEventListener('mouseup', endDrag);
+    videoContainer.addEventListener('mouseleave', endDrag);
+    
+    // Touch-Events
+    videoContainer.addEventListener('touchstart', startDrag);
+    videoContainer.addEventListener('touchmove', onDrag);
+    videoContainer.addEventListener('touchend', endDrag);
+    videoContainer.addEventListener('touchcancel', endDrag);
+    </script>
+    
