@@ -1438,11 +1438,10 @@
                 margin-left: 5%;
                 right: 5%;
             }
-
             /* Anpassungen für weitere Textbereiche */
             .einzigartige3dText {
-                margin-left: -25%;
-                top: 400px;
+                margin-left: -85%;
+                top: 450px;
                 width: 100%;
                 font-size: 20px;
                 line-height: 1.2;
@@ -1480,10 +1479,14 @@
 
             .konzeptText {
                 margin-left: 5%;
-                width: 90%;
+                width: 80%;
                 font-size: 20px;
                 line-height: 28px;
-                margin-top: 25px;
+                 /* Bei 768px wird der Wert 25px, bei 468px 80px – dazwischen erfolgt eine lineare Interpolation.
+       Für Viewports schmaler als 468px wird der Wert auf 80px begrenzt,
+       und für Viewports breiter als 768px bleibt er bei 25px. */
+    margin-top: clamp(25px, calc(25px + 55 * ((768px - 100vw) / 300)), 80px);
+
             }
 
             /* Slider-Anpassungen */
@@ -1657,7 +1660,6 @@
             }
 
         }
-
         @media (min-width: 426px) and (max-width: 480px) {
             .video-background {
                 /* 18% von 375px: 0.18 × 375 = 67.5px (negativ) */
