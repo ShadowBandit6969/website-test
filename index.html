@@ -472,8 +472,7 @@
             /* ca. 24px */
             word-wrap: break-word;
         }
-        /* Scrubber-Element standardmäßig ausblenden */
-    .scrubber {
+        .scrubber {
       display: none;
       position: fixed;
       bottom: 20px;
@@ -489,10 +488,10 @@
       align-items: center;
       justify-content: center;
       z-index: 1000;
-      /* Eigene Touch-Events erlauben */
       touch-action: none;
+      pointer-events: auto;
+      cursor: pointer;
     }
-
         @media (min-width: 1921px) and (max-width: 2560px) {
             .headline-container {
                 position: absolute;
@@ -3036,10 +3035,9 @@
     let isDragging = false;
     let startX = 0, startY = 0;
 
-    // Touch-Events für den Scrubber
     scrubber.addEventListener('touchstart', function(e) {
+      console.log("touchstart", e.touches[0].clientX, e.touches[0].clientY);
       isDragging = true;
-      // Initiale Touch-Koordinaten erfassen
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
     });
@@ -3048,31 +3046,23 @@
       if (!isDragging) return;
       const currentX = e.touches[0].clientX;
       const currentY = e.touches[0].clientY;
-      
-      // Differenzen in X- und Y-Richtung berechnen
       const deltaX = currentX - startX;
       const deltaY = currentY - startY;
-      
-      // Summe der Bewegungen: Positive Werte spulen vorwärts, negative rückwärts
+      console.log("touchmove", deltaX, deltaY);
       const totalDelta = deltaX + deltaY;
-      
-      // Empfindlichkeit anpassen (Multiplikator)
       video.currentTime += totalDelta * 0.05;
-      
-      // Startkoordinaten aktualisieren
       startX = currentX;
       startY = currentY;
-      
-      // Standard-Scrollverhalten unterdrücken
       e.preventDefault();
     });
 
-    scrubber.addEventListener('touchend', function() {
+    scrubber.addEventListener('touchend', function(e) {
+      console.log("touchend");
       isDragging = false;
     });
 
-    scrubber.addEventListener('touchcancel', function() {
+    scrubber.addEventListener('touchcancel', function(e) {
+      console.log("touchcancel");
       isDragging = false;
     });
   </script>
-
