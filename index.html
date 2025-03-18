@@ -472,26 +472,9 @@
             /* ca. 24px */
             word-wrap: break-word;
         }
-        /* Scrubber-Element – nur in mobilen Ansichten anzeigen (bis 425px) */
-    .scrubber {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 50px;
-      background: rgba(255, 0, 0, 0.5);
-      border-radius: 8px;
-      color: white;
-      font-family: sans-serif;
-      font-size: 14px;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      touch-action: none;
-      cursor: grabbing;
-    }
+
+
+
         @media (min-width: 1921px) and (max-width: 2560px) {
             .headline-container {
                 position: absolute;
@@ -1414,9 +1397,6 @@
                 z-index: -1;
             }
 
-            .scrubber {
-        display: flex;
-      }
             /* Navbar */
             .navbar {
                 padding: 0 3%;
@@ -1686,9 +1666,6 @@
                 display: block;
                 background: transparent;
             }
-            .scrubber {
-        display: flex;
-      }
 
 
             /* Allgemeine Anpassungen */
@@ -1981,9 +1958,6 @@
                 display: block;
                 background: transparent;
             }
-            .scrubber {
-        display: flex;
-      }
 
 
             /* Allgemeine Anpassungen */
@@ -2278,9 +2252,6 @@
                 display: block;
                 background: transparent;
             }
-            .scrubber {
-        display: flex;
-      }
 
             /* Allgemeine Anpassungen */
             body {
@@ -2575,9 +2546,6 @@
     display: block;
     background: transparent;
   }
-  .scrubber {
-        display: flex;
-      }
             /* Navbar */
             .navbar {
                 padding: 0 3%;
@@ -2856,8 +2824,6 @@
             Dein Browser unterstützt kein HTML5-Video.
         </video>
     </div>
-      <!-- Scrubber-Element nur für mobile Version sichtbar -->
-  <div class="scrubber">Video spulen</div>
     <div id="like-prompt" class="like-prompt">Klicke und ziehe, um zu spulen!</div>
 
 
@@ -3028,41 +2994,26 @@
     });
 
 </script>
+
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const video = document.querySelector('.video-background');
-      const scrubber = document.querySelector('.scrubber');
+    document.addEventListener('DOMContentLoaded', function () {
+        const revealElements = document.querySelectorAll('.hidden');
 
-      if (!video) {
-        console.error("Kein Video-Element mit der Klasse 'video-background' gefunden.");
-        return;
-      }
+        const revealOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: "0px 0px -300px 0px"  // Verzögert das Erscheinen um 100 Scroll-Pixel
+        });
 
-      // Funktion, die basierend auf dem Fingerort die Videozeit setzt
-      function updateVideoTime(touchX) {
-        const rect = scrubber.getBoundingClientRect();
-        // Berechne einen Wert zwischen 0 (linke Seite) und 1 (rechte Seite)
-        let fraction = (touchX - rect.left) / rect.width;
-        fraction = Math.max(0, Math.min(1, fraction));
-        // Mapping: ganz rechts (fraction = 1) → currentTime = 0 (Video-Anfang)
-        // und ganz links (fraction = 0) → currentTime = video.duration (Video-Ende)
-        if (video.duration) {
-          video.currentTime = (1 - fraction) * video.duration;
-          console.log("Fingerposition:", fraction, "=> currentTime:", video.currentTime);
-        }
-      }
-
-      // Bei jedem Touch-Event wird die aktuelle Fingerposition genutzt
-      scrubber.addEventListener('touchmove', (e) => {
-        const touchX = e.touches[0].clientX;
-        updateVideoTime(touchX);
-        e.preventDefault();
-      });
-
-      // Optional: beim Touchstart direkt die Zeit setzen
-      scrubber.addEventListener('touchstart', (e) => {
-        const touchX = e.touches[0].clientX;
-        updateVideoTime(touchX);
-      });
+        revealElements.forEach(el => {
+            revealOnScroll.observe(el);
+        });
     });
-  </script>
+</script>
+
