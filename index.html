@@ -472,6 +472,24 @@
             /* ca. 24px */
             word-wrap: break-word;
         }
+            /* Scrubber-Element standardmäßig ausblenden */
+    .scrubber {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 50px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      color: white;
+      font-family: sans-serif;
+      font-size: 14px;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
 
 
 
@@ -1397,6 +1415,9 @@
                 z-index: -1;
             }
 
+            .scrubber {
+        display: flex;
+      }
             /* Navbar */
             .navbar {
                 padding: 0 3%;
@@ -1666,6 +1687,9 @@
                 display: block;
                 background: transparent;
             }
+            .scrubber {
+        display: flex;
+      }
 
 
             /* Allgemeine Anpassungen */
@@ -1958,6 +1982,9 @@
                 display: block;
                 background: transparent;
             }
+            .scrubber {
+        display: flex;
+      }
 
 
             /* Allgemeine Anpassungen */
@@ -2252,6 +2279,9 @@
                 display: block;
                 background: transparent;
             }
+            .scrubber {
+        display: flex;
+      }
 
             /* Allgemeine Anpassungen */
             body {
@@ -2546,6 +2576,9 @@
     display: block;
     background: transparent;
   }
+  .scrubber {
+        display: flex;
+      }
             /* Navbar */
             .navbar {
                 padding: 0 3%;
@@ -2824,6 +2857,8 @@
             Dein Browser unterstützt kein HTML5-Video.
         </video>
     </div>
+      <!-- Scrubber-Element nur für mobile Version sichtbar -->
+  <div class="scrubber">Video spulen</div>
     <div id="like-prompt" class="like-prompt">Klicke und ziehe, um zu spulen!</div>
 
 
@@ -3018,52 +3053,33 @@
 </script>
 
 <script>
-    // Selektiere den Container, der die Interaktion steuert
-    const videoContainer = document.querySelector('.video-container');
-    // Hier muss das Video-Element referenziert werden, z.B.:
-    const video = document.querySelector('video');
-    
+    const scrubber = document.querySelector('.scrubber');
+    const video = document.getElementById('myVideo');
     let isDragging = false;
     let startX = 0;
-    
-    function startDrag(e) {
+
+    // Touch-Events für das Scrubber-Element
+    scrubber.addEventListener('touchstart', function(e) {
       isDragging = true;
-      // Touch-Events: e.touches[0].clientX, Maus-Events: e.clientX
-      startX = e.touches ? e.touches[0].clientX : e.clientX;
-    }
-    
-    function onDrag(e) {
+      startX = e.touches[0].clientX;
+    });
+
+    scrubber.addEventListener('touchmove', function(e) {
       if (!isDragging) return;
-      
-      // Bestimme den aktuellen X-Wert
-      const currentX = e.touches ? e.touches[0].clientX : e.clientX;
+      const currentX = e.touches[0].clientX;
       const deltaX = currentX - startX;
       
-      // Beispiel: Ändere die aktuelle Videoposition basierend auf deltaX
-      // Hier kann der Multiplikator angepasst werden, um die Sensitivität zu steuern.
+      // Multiplikator anpassen, um die Sensitivität des Spulens zu steuern
       video.currentTime += deltaX * 0.1;
-      
-      // Aktualisiere startX für kontinuierliche Berechnungen
       startX = currentX;
-      
-      // Standardverhalten verhindern (z.B. Scrollen)
-      e.preventDefault();
-    }
-    
-    function endDrag() {
+      e.preventDefault(); // Verhindert Scrollen während des Spulens
+    });
+
+    scrubber.addEventListener('touchend', function() {
       isDragging = false;
-    }
-    
-    // Maus-Events
-    videoContainer.addEventListener('mousedown', startDrag);
-    videoContainer.addEventListener('mousemove', onDrag);
-    videoContainer.addEventListener('mouseup', endDrag);
-    videoContainer.addEventListener('mouseleave', endDrag);
-    
-    // Touch-Events
-    videoContainer.addEventListener('touchstart', startDrag);
-    videoContainer.addEventListener('touchmove', onDrag);
-    videoContainer.addEventListener('touchend', endDrag);
-    videoContainer.addEventListener('touchcancel', endDrag);
-    </script>
-    
+    });
+
+    scrubber.addEventListener('touchcancel', function() {
+      isDragging = false;
+    });
+  </script>
