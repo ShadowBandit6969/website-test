@@ -472,7 +472,8 @@
             /* ca. 24px */
             word-wrap: break-word;
         }
-        .scrubber {
+        /* Scrubber-Element – nur in mobilen Ansichten anzeigen (z. B. bis 425px) */
+    .scrubber {
       display: none;
       position: fixed;
       bottom: 20px;
@@ -3029,42 +3030,42 @@
 
 </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const video = document.querySelector('.video-background');
-      const scrubber = document.querySelector('.scrubber');
+document.addEventListener('DOMContentLoaded', () => {
+    const video = document.querySelector('.video-background');
+    const scrubber = document.querySelector('.scrubber');
 
-      if (!video) {
-        console.error("Kein Video-Element mit der Klasse 'video-background' gefunden.");
-        return;
-      }
+    if (!video) {
+      console.error("Kein Video-Element mit der Klasse 'video-background' gefunden.");
+      return;
+    }
 
-      let isDragging = false;
-      let lastX = 0;
-      // Sensitivitätsfaktor: passe diesen Wert an, um die Geschwindigkeit des Spulens zu justieren
-      const sensitivity = 0.1;
+    let isDragging = false;
+    let lastX = 0;
+    // Passe den Sensitivitätsfaktor nach Bedarf an (Sekunden pro Pixel)
+    const sensitivity = 0.05;
 
-      scrubber.addEventListener('touchstart', function(e) {
-        isDragging = true;
-        lastX = e.touches[0].clientX;
-      });
-
-      scrubber.addEventListener('touchmove', function(e) {
-        if (!isDragging) return;
-        const currentX = e.touches[0].clientX;
-        const deltaX = currentX - lastX;
-        // Bei einem positiven deltaX (Finger bewegt sich nach rechts) wird vorgespult,
-        // bei einem negativen deltaX (Finger bewegt sich nach links) wird zurückgespult.
-        video.currentTime += deltaX * sensitivity;
-        lastX = currentX;
-        e.preventDefault();
-      });
-
-      scrubber.addEventListener('touchend', function() {
-        isDragging = false;
-      });
-      scrubber.addEventListener('touchcancel', function() {
-        isDragging = false;
-      });
+    scrubber.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      lastX = e.touches[0].clientX;
     });
-  </script>
+
+    scrubber.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const currentX = e.touches[0].clientX;
+      const deltaX = currentX - lastX;
+      // Wir nehmen hier an: Swipe nach links (deltaX negativ) soll das Video vorwärts spulen,
+      // Swipe nach rechts (deltaX positiv) spult zurück.
+      video.currentTime -= deltaX * sensitivity;
+      lastX = currentX;
+      // Verhindert natives Scrollen
+      e.preventDefault();
+    });
+
+    scrubber.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+    scrubber.addEventListener('touchcancel', () => {
+      isDragging = false;
+    });
+  });
+</script>
