@@ -472,7 +472,7 @@
             /* ca. 24px */
             word-wrap: break-word;
         }
-       /* Scrubber-Element standardmäßig ausblenden */
+        /* Scrubber-Element standardmäßig ausblenden */
     .scrubber {
       display: none;
       position: fixed;
@@ -489,8 +489,9 @@
       align-items: center;
       justify-content: center;
       z-index: 1000;
+      /* Eigene Touch-Events erlauben */
+      touch-action: none;
     }
-
 
         @media (min-width: 1921px) and (max-width: 2560px) {
             .headline-container {
@@ -3030,28 +3031,6 @@
 </script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const revealElements = document.querySelectorAll('.hidden');
-
-        const revealOnScroll = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: "0px 0px -300px 0px"  // Verzögert das Erscheinen um 100 Scroll-Pixel
-        });
-
-        revealElements.forEach(el => {
-            revealOnScroll.observe(el);
-        });
-    });
-</script>
-
-<script>
     const scrubber = document.querySelector('.scrubber');
     const video = document.getElementById('myVideo');
     let isDragging = false;
@@ -3060,39 +3039,40 @@
     // Touch-Events für den Scrubber
     scrubber.addEventListener('touchstart', function(e) {
       isDragging = true;
-      // Starte bei den initialen Touch-Koordinaten
+      // Initiale Touch-Koordinaten erfassen
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
     });
 
     scrubber.addEventListener('touchmove', function(e) {
       if (!isDragging) return;
-      // Erfassung der aktuellen Touch-Koordinaten
       const currentX = e.touches[0].clientX;
       const currentY = e.touches[0].clientY;
       
-      // Berechne die Differenzen in X- und Y-Richtung
+      // Differenzen in X- und Y-Richtung berechnen
       const deltaX = currentX - startX;
       const deltaY = currentY - startY;
       
-      // Gesamtbewegung: Bei rechts/unten (positive Werte) wird vorgespult, bei links/oben (negative Werte) zurückgespult.
+      // Summe der Bewegungen: Positive Werte spulen vorwärts, negative rückwärts
       const totalDelta = deltaX + deltaY;
       
-      // Sensitivitätsfaktor anpassen, um das Spulen feiner oder gröber zu steuern
+      // Empfindlichkeit anpassen (Multiplikator)
       video.currentTime += totalDelta * 0.05;
       
-      // Aktualisiere Startpositionen für den nächsten Move
+      // Startkoordinaten aktualisieren
       startX = currentX;
       startY = currentY;
       
-      // Verhindere das Scrollen während des Spulens
+      // Standard-Scrollverhalten unterdrücken
       e.preventDefault();
     });
 
     scrubber.addEventListener('touchend', function() {
       isDragging = false;
     });
+
     scrubber.addEventListener('touchcancel', function() {
       isDragging = false;
     });
   </script>
+
