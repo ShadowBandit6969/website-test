@@ -1374,34 +1374,37 @@
 
         @media (min-width: 481px) and (max-width: 768px) {
 
+            .video-background {
+                /* 18% von 375px: 0.18 × 375 = 67.5px (negativ) */
+                margin-top: -907.5px;
+                right: 200px;
+            }
+
+            .like-prompt {
+                position: absolute;
+                top: 600px;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-size: 8px;
+                text-align: center;
+                display: block;
+                background: transparent;
+            }
+
+
             /* Allgemeine Anpassungen */
             body {
                 font-size: 14px;
             }
 
-            .video-container {
-                position: relative;
-                width: 100%;
-                overflow: hidden;
-            }
-
-            .video-background {
-                position: relative;
-                /* Passe den Wert ggf. an */
-                width: 100%;
-                height: auto;
-                object-fit: contain;
-                transform: scale(2.2);
-                transform-origin: left top;
-                /* Skaliert vom linken oberen Eck */
-                z-index: -1;
-            }
-
             /* Navbar */
             .navbar {
-                padding: 0 3%;
+                padding: 0 10px;
                 margin-top: 5%;
-                align-items: center;
+                transform: scale(0.86);
+
             }
 
             .nav-links a {
@@ -1409,22 +1412,10 @@
                 padding: 5px 10px;
             }
 
-            .like-prompt {
-                position: absolute;
-                top: 0.61%;
-                transform: translateX(-50%);
-                background-color: transparent;
-                color: white;
-                padding: 10px 20px;
-                border-radius: 10px;
-                font-size: clamp(2px, 5vw, 8px);
-                line-height: 1.3;
-                opacity: 1;
-            }
-
             /* Headline-Bereich */
             .headline-container {
-                top: 12%;
+                top: 120px;
+
                 /* Etwas Innenabstand vom linken Rand */
                 width: 90%;
                 text-align: center;
@@ -1433,27 +1424,25 @@
             }
 
             .headline {
-                font-size: clamp(16px, 5vw, 20px);
-                line-height: 1.3;
-                /* 1.3-faches der Schriftgröße */
+                font-size: 20px;
+                /* Deutlich verkleinerte Schriftgröße */
+                line-height: 24px;
                 margin: 0 auto;
-                left: 5%;
-                right: 5%;
             }
 
-
             .subheadline {
-                font-size: clamp(6px, 5vw, 12px);
-                line-height: 1.3;
-                margin-top: 3%;
+                font-size: 12px;
+                line-height: 18px;
+                margin-top: 10px;
+                text-align: center;
                 margin-left: 5%;
-                margin-right: 5%;
+                right: 5%;
             }
 
             /* Anpassungen für weitere Textbereiche */
             .einzigartige3dText {
-                margin-left: -85%;
-                top: 40%;
+                margin-left: -25%;
+                top: 400px;
                 width: 100%;
                 font-size: 20px;
                 line-height: 1.2;
@@ -1463,25 +1452,47 @@
             .einzigartige3dText .text-small {
                 font-family: 'Inter', sans-serif;
                 color: #ffffff;
-                font-size: clamp(14px, 10vw, 26px);
-                line-height: 1.3;
+                font-size: clamp(12px, 5vw, 26px);
                 font-family: 'Inter';
-                font-weight: 300;
-                line-height: clamp(3px, 15vw, 38.40px);
+                font-weight: 500;
+                line-height: 38.40px;
                 word-wrap: break-word;
             }
 
             .einzigartige3dText .text-large {
                 font-family: 'Inter', sans-serif;
-
                 color: #ffffff;
                 font-size: 48px;
-                font-size: clamp(20px, 15vw, 48px);
                 font-family: 'Inter';
                 font-weight: 600;
-                line-height: clamp(20px, 20vw, 57.6px);
+                line-height: clamp(12px, 5vw, 57);
                 word-wrap: break-word;
             }
+
+
+            .wasWirFuerSieTun {
+                margin-left: 5%;
+                width: 90%;
+                font-size: 24px;
+                line-height: 30px;
+                margin-top: 790px;
+            }
+
+            .konzeptText {
+                margin-left: 5%;
+                width: 90%;
+                font-size: 20px;
+                line-height: 28px;
+                margin-top: 25px;
+            }
+
+            /* Slider-Anpassungen */
+            .slider-container {
+                width: 320px;
+                margin-left: 0;
+                margin-top: 550px;
+            }
+
 
             /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 768px (Original: 1920x1080) */
             .responsive-wrapper {
