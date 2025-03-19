@@ -113,6 +113,7 @@
   z-index: -1;
 }
 
+
         .video-container {
             cursor: grab;
             user-select: none;
@@ -3356,14 +3357,13 @@
             Dein Browser unterstützt kein HTML5-Video.
         </video>
     </div>
-    <div class="drag-container"></div>
-    <div id="like-prompt" class="like-prompt">
-        Klicke und ziehe!
-        <div class="scrub-rect">
+    <div class="drag-container">
+        <div class="like-prompt">
+          Like Prompt Text
+          <div class="scrub-rect"></div>
         </div>
-    </div>
-</div>
-
+      </div>
+      
 
     <div class="headline-container">
         <h1 class="headline">Code trifft <br> auf Kreativität</h1>
@@ -3555,43 +3555,30 @@
     });
 </script>
 <script>
-  const video = document.getElementById('main-video');
+ // Wähle den Container aus, der bewegt werden soll:
 const dragContainer = document.querySelector('.drag-container');
 
-let startX = 0;
-let startTime = 0;
+let startX = 0;      // Ausgangsposition beim Touchstart
+let currentDelta = 0; // Aktuelle horizontale Verschiebung
 
-// Maximale Sekunden, die das Video beim vollständigen Swipe (über die gesamte Bildschirmbreite) springt
-const maxSkipSeconds = 10;
-dragContainer.addEventListener('touchstart', (e) => { … }, { passive: false });
-dragContainer.addEventListener('touchmove', (e) => { … }, { passive: false });
-dragContainer.addEventListener('touchend', (e) => { … }, { passive: false });
-
-
+// Beim Touchstart: Speichere die Startposition und deaktiviere die Transition
 dragContainer.addEventListener('touchstart', (e) => {
   startX = e.touches[0].clientX;
-  startTime = video.currentTime;
-  // Übergang während des Dragging deaktivieren
   dragContainer.style.transition = "none";
   e.preventDefault();
 });
 
+// Beim Touchmove: Berechne die Verschiebung und passe den transform-Wert an
 dragContainer.addEventListener('touchmove', (e) => {
   const currentX = e.touches[0].clientX;
-  const deltaX = currentX - startX;
-  // Aktualisiere die horizontale Position relativ zur Standardposition (-50%)
-  dragContainer.style.transform = `translateX(calc(-50% + ${deltaX}px))`;
-
-  // Berechne den Anteil der Verschiebung an der Bildschirmbreite
-  const swipeRatio = deltaX / window.innerWidth;
-  const timeChange = swipeRatio * maxSkipSeconds;
-  video.currentTime = Math.min(Math.max(startTime + timeChange, 0), video.duration);
-  
+  currentDelta = currentX - startX;
+  // Der Button ist initial mit translateX(-50%) zentriert – addiere nun die Verschiebung:
+  dragContainer.style.transform = `translateX(calc(-50% + ${currentDelta}px))`;
   e.preventDefault();
 });
 
+// Beim Touchend: Aktiviere die Transition und setze den Button wieder in die Mitte zurück
 dragContainer.addEventListener('touchend', (e) => {
-  // Füge eine Transition hinzu, damit der Container sanft zurück zur Mitte springt
   dragContainer.style.transition = "transform 0.3s ease";
   dragContainer.style.transform = "translateX(-50%)";
   e.preventDefault();
