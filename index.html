@@ -417,7 +417,7 @@
             /* ca. 668px */
             height: 10.8rem;
             /* ca. 172.80px */
-            background: rgba(255, 255, 255, 0.10);
+            background: rgba(0, 0, 0, 0.1);
         }
 
         /* Inhalt im Overlay */
@@ -459,7 +459,7 @@
             /* ca. 126px */
             height: 2.25rem;
             /* ca. 36px */
-            background: black;
+            background: rgba(0, 0, 0, 0);
             border-radius: 3.125rem;
             /* ca. 50px */
         }
@@ -3022,19 +3022,40 @@
                 margin-top: -857.5px;
             }
 
-            .like-prompt {
-                position: absolute;
-                top: 120px;
-                /* Erhöht den vertikalen Abstand; passe den Wert nach Bedarf an */
-                left: 50%;
-                transform: translate(-50%, -50%);
-                padding: 4px 8px;
-                border-radius: 4px;
-                font-size: 8px;
-                text-align: center;
-                display: block;
-                background: transparent;
-            }
+            .drag-container {
+  position: absolute;
+  top: 3.2rem;  /* wie bisher */
+  left: 50%;
+  transform: translateX(-50%);
+  /* Für die Animation beim Zurücksetzen */
+  transition: transform 0.3s ease;
+  touch-action: none; /* Damit nur horizontale Gesten verarbeitet werden */
+  top: 570px;
+}
+
+.like-prompt {
+  position: relative;
+  color: white;
+  padding: 0.625rem 1.25rem;
+  border-radius: 10.625rem;
+  font-size: 1.125rem;
+  z-index: 1;
+}
+
+/* Das weiße Rechteck, das hinter dem Text liegt */
+.like-prompt .scrub-rect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  background-color: rgb(255, 0, 0);
+  padding: 0.625rem 1.25rem;
+  border-radius: 10.625rem;
+  opacity: 0.5;
+  z-index: -1;
+}
+
             .like-prompt .scrub-rect {
     display: block;
   }
@@ -3111,7 +3132,7 @@
             /* Anpassungen für weitere Textbereiche */
             .einzigartige3dText {
                 margin-left: -85%;
-                top: 430px;
+                top: 450px;
                 width: 100%;
                 font-size: 20px;
                 line-height: 1.2;
@@ -3147,7 +3168,7 @@
                 width: 90%;
                 font-size: 24px;
                 line-height: 95%;
-                margin-top: 550px;
+                margin-top: 650px;
                 gap: 200px;
             }
 
@@ -3359,7 +3380,7 @@
     </div>
     <div class="drag-container">
         <div class="like-prompt">
-          Like Prompt Text
+          Zieh mich!
           <div class="scrub-rect"></div>
         </div>
       </div>
