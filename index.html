@@ -3557,40 +3557,38 @@
 <script>
     // Wähle den Container, der bewegt werden soll:
     const dragContainer = document.querySelector('.drag-container');
-    
+
     let startX = 0;       // Ausgangsposition beim Touchstart
     let currentDelta = 0; // Aktuelle horizontale Verschiebung
-    let maxSlide = window.innerWidth * 0.45; // Maximal 45% der Fensterbreite
-    
-    // Aktualisiere maxSlide bei Fenster-Resize:
+    let maxSlide = window.Width * 0.25; // maximal 45% der Fensterbreite
+
+    // Aktualisiere maxSlide bei Fenster-Resize
     window.addEventListener('resize', () => {
-      maxSlide = window.innerWidth * 0.45;
+      maxSlide = window.innerWidth * 0.25;
     });
-    
-    // Beim Touchstart: Ausgangsposition merken und Transition deaktivieren
+
+    // Touchstart: Ausgangsposition speichern, Transition ausschalten
     dragContainer.addEventListener('touchstart', (e) => {
       startX = e.touches[0].clientX;
       dragContainer.style.transition = "none";
       e.preventDefault();
-    });
-    
-    // Beim Touchmove: Verschiebung berechnen und anwenden
+    }, { passive: false });
+
+    // Touchmove: Berechne die Verschiebung und begrenze sie
     dragContainer.addEventListener('touchmove', (e) => {
       const currentX = e.touches[0].clientX;
       let deltaX = currentX - startX;
-      
-      // Begrenze die Verschiebung auf den erlaubten Bereich (-maxSlide bis maxSlide)
+      // Clamp: deltaX darf nicht kleiner als -maxSlide und nicht größer als +maxSlide sein
       deltaX = Math.max(-maxSlide, Math.min(deltaX, maxSlide));
-      
-      // Ursprünglich zentriert (translateX(-50%)) – addiere die Verschiebung:
+      // Ausgangszustand ist translateX(-50%); addiere nun deltaX:
       dragContainer.style.transform = `translateX(calc(-50% + ${deltaX}px))`;
       e.preventDefault();
-    });
-    
-    // Beim Touchend: Transition aktivieren und den Button zurück in die Mitte animieren
+    }, { passive: false });
+
+    // Touchend: Transition wieder aktivieren und Button in die Mitte zurücksetzen
     dragContainer.addEventListener('touchend', (e) => {
       dragContainer.style.transition = "transform 0.3s ease";
       dragContainer.style.transform = "translateX(-50%)";
       e.preventDefault();
-    });
+    }, { passive: false });
   </script>
