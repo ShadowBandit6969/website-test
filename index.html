@@ -82,36 +82,38 @@
         }
 
         .drag-container {
-  position: absolute;
-  top: 3.2rem;  /* wie bisher */
-  left: 50%;
-  transform: translateX(-50%);
-  /* Für die Animation beim Zurücksetzen */
-  transition: transform 0.3s ease;
-  touch-action: none; /* Damit nur horizontale Gesten verarbeitet werden */
-}
+            position: absolute;
+            top: 3.2rem;
+            /* wie bisher */
+            left: 50%;
+            transform: translateX(-50%);
+            /* Für die Animation beim Zurücksetzen */
+            transition: transform 0.3s ease;
+            touch-action: none;
+            /* Damit nur horizontale Gesten verarbeitet werden */
+        }
 
-.like-prompt {
-  position: relative;
-  background-color: rgba(0,0,0,0.7);
-  color: white;
-  padding: 0.625rem 1.25rem;
-  border-radius: 0.625rem;
-  font-size: 1.125rem;
-  z-index: 1;
-}
+        .like-prompt {
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.625rem 1.25rem;
+            border-radius: 0.625rem;
+            font-size: 1.125rem;
+            z-index: 1;
+        }
 
-/* Das weiße Rechteck, das hinter dem Text liegt */
-.like-prompt .scrub-rect {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgb(0, 247, 255);
-  opacity: 0.5;
-  z-index: -1;
-}
+        /* Das weiße Rechteck, das hinter dem Text liegt */
+        .like-prompt .scrub-rect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(0, 247, 255);
+            opacity: 0.5;
+            z-index: -1;
+        }
 
 
         .video-container {
@@ -488,11 +490,52 @@
             /* ca. 24px */
             word-wrap: break-word;
         }
+
         /* Das weiße Rechteck hinter dem Text */
 
 
 
         @media (min-width: 1921px) and (max-width: 2560px) {
+            .drag-container {
+                position: absolute;
+                top: 4.2rem;
+                /* wie bisher */
+                left: 50%;
+                transform: translateX(-50%);
+                /* Für die Animation beim Zurücksetzen */
+                transition: transform 0.3s ease;
+                touch-action: none;
+                /* Damit nur horizontale Gesten verarbeitet werden */
+                top: 1590px;
+            }
+
+            .like-prompt {
+                position: relative;
+                color: white;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                font-size: 1.125rem;
+                z-index: 1;
+            }
+
+            /* Das weiße Rechteck, das hinter dem Text liegt */
+            .like-prompt .scrub-rect {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 90%;
+                background-color: transparent;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                opacity: 0.5;
+                z-index: -1;
+            }
+
+            .like-prompt .scrub-rect {
+                display: block;
+            }
+
             .headline-container {
                 position: absolute;
                 left: 390px;
@@ -504,11 +547,41 @@
                 scale: 1.5;
             }
 
+            .einzigartige3dText {
+                display: absolute;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 0;
+                gap: 0.5rem;
+                /* ca. 8px */
+                position: absolute;
+                height: 6.3rem;
+                /* ca. 101px */
+                left: 64.84%;
+                right: 13.96%;
+                top: 1000px;
+                /* annähernd statt 707.82px */
+                width: 28.6rem;
+                /* ca. 457px */
+                font-family: 'Inter', sans-serif;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 2rem;
+                /* ca. 32px */
+                line-height: 120%;
+                color: #FFFFFF;
+                flex: none;
+                order: 0;
+                align-self: stretch;
+                flex-grow: 0;
+            }
+
             .wasWirFuerSieTun {
                 position: absolute;
                 margin-left: 50%;
                 width: 90%;
-                font-size: 34px;
+                font-size: 66px;
                 line-height: 30px;
                 top: 2090px;
             }
@@ -517,13 +590,13 @@
                 position: absolute;
                 margin-left: 50%;
                 width: 39%;
-                font-size: 20px;
-                line-height: 28px;
+                font-size: 40px;
+                line-height: 48px;
                 /* Bei 768px wird der Wert 25px, bei 468px 80px – dazwischen erfolgt eine 
                  lineare Interpolation.
                  Für Viewports schmaler als 468px wird der Wert auf 80px begrenzt,
                  und für Viewports breiter als 768px bleibt er bei 25px. */
-                top: 2370px;
+                top: 2460px;
 
 
             }
@@ -531,24 +604,26 @@
             /* Slider-Anpassungen */
             .slider-container {
                 position: absolute;
-                width: 400px;
+                width: 680px;
                 justify-content: left;
                 top: 2520px;
-                left: -80px;
+                left: 60px;
 
             }
 
-
-            /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 2560px (Referenz: 1920x1080) */
+            /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 2560px (Referenz: 2560x1440) */
             .responsive-wrapper {
-                position: relative;
+                position: absolute;
+                scale: 1.3;
                 width: 100%;
                 max-width: 2560px;
                 font-size: 16px;
                 /* Basiswert für rem */
+                left: 450px;
+                top: 3000px;
             }
 
-            /* Pseudo‑Element erzwingt das Seitenverhältnis (1080/1920 = 56.25%) */
+            /* Das Pseudo‑Element erzwingt das Seitenverhältnis 1440/2560 = 56.25% */
             .responsive-wrapper::before {
                 content: "";
                 display: block;
@@ -564,117 +639,118 @@
                 height: 100%;
             }
 
-            /* ELEMENTE IM CONTAINER – Werte bezogen auf die Referenz 1920 (Breite) und 1080 (Höhe) */
+            /* ELEMENTE IM CONTAINER – Werte basierend auf Referenz 2560 (Breite) und 1440 (Höhe) */
 
             /* .image-case1 */
             .content-container .image-case1 {
                 position: absolute;
-                top: calc(164 / 1080 * 100%);
-                /* ca. 15.19% */
+                top: calc(164 / 1440 * 100%);
+                /* ca. 11.39% */
                 left: 0;
-                width: calc(668 / 1920 * 100%);
-                /* ca. 34.79% */
-                height: calc(429.89 / 1080 * 100%);
-                /* ca. 39.81% */
+                width: calc(668 / 2560 * 100%);
+                /* ca. 26.09% */
+                height: calc(429.89 / 1440 * 100%);
+                /* ca. 29.82% */
             }
 
             /* .image-case2 */
             .content-container .image-case2 {
                 position: absolute;
-                top: calc(164 / 1080 * 100%);
-                /* ca. 15.19% */
-                left: calc(692 / 1920 * 100%);
-                /* ca. 36.04% */
-                width: calc(1115 / 1920 * 100%);
-                /* ca. 58.16% */
-                height: calc(678 / 1080 * 100%);
-                /* ca. 62.78% */
+                top: calc(164 / 1440 * 100%);
+                /* ca. 11.39% */
+                left: calc(692 / 2560 * 100%);
+                /* ca. 27.03% */
+                width: calc(1115 / 2560 * 100%);
+                /* ca. 43.55% */
+                height: calc(678 / 1440 * 100%);
+                /* ca. 47.08% */
             }
 
             /* .image-case3 */
             .content-container .image-case3 {
                 position: absolute;
-                top: calc(617.89 / 1080 * 100%);
-                /* ca. 57.20% */
+                top: calc(617.89 / 1440 * 100%);
+                /* ca. 42.90% */
                 left: 0;
-                width: calc(668 / 1920 * 100%);
-                /* ca. 34.79% */
-                height: calc(409.31 / 1080 * 100%);
-                /* ca. 37.91% */
+                width: calc(668 / 2560 * 100%);
+                /* ca. 26.09% */
+                height: calc(409.31 / 1440 * 100%);
+                /* ca. 28.44% */
             }
 
             /* .image-case4 */
             .content-container .image-case4 {
                 position: absolute;
-                top: calc(865.55 / 1080 * 100%);
-                /* ca. 80.16% */
-                left: calc(692 / 1920 * 100%);
-                /* ca. 36.04% */
-                width: calc(668 / 1920 * 100%);
-                /* ca. 34.79% */
-                height: calc(352.73 / 1080 * 100%);
-                /* ca. 32.64% */
+                top: calc(865.55 / 1440 * 100%);
+                /* ca. 60.11% */
+                left: calc(692 / 2560 * 100%);
+                /* ca. 27.03% */
+                width: calc(668 / 2560 * 100%);
+                /* ca. 26.09% */
+                height: calc(352.73 / 1440 * 100%);
+                /* ca. 24.52% */
             }
 
             /* .image-case5 */
             .content-container .image-case5 {
                 position: absolute;
-                top: calc(866 / 1080 * 100%);
-                /* ca. 80.19% */
-                left: calc(1360 / 1920 * 100%);
-                /* ca. 70.83% */
-                width: calc(487 / 1920 * 100%);
-                /* ca. 25.36% */
-                height: calc(352 / 1080 * 100%);
-                /* ca. 32.59% */
+                top: calc(866 / 1440 * 100%);
+                /* ca. 60.14% */
+                left: calc(1360 / 2560 * 100%);
+                /* ca. 53.13% */
+                width: calc(487 / 2560 * 100%);
+                /* ca. 19.02% */
+                height: calc(352 / 1440 * 100%);
+                /* ca. 24.44% */
             }
 
             /* .overlay-container */
             .content-container .overlay-container {
                 position: absolute;
-                top: calc(1051.20 / 1080 * 100%);
-                /* ca. 97.33% */
+                top: calc(1051.20 / 1440 * 100%);
+                /* ca. 73.00% */
                 left: 0;
-                width: calc(668 / 1920 * 100%);
-                /* ca. 34.79% */
-                height: calc(172.80 / 1080 * 100%);
-                /* ca. 16.00% */
+                width: calc(668 / 2560 * 100%);
+                /* ca. 26.09% */
+                height: calc(172.80 / 1440 * 100%);
+                /* ca. 12.00% */
                 background: rgba(255, 255, 255, 0.10);
             }
 
             /* .overlay-content */
             .content-container .overlay-content {
                 position: absolute;
-                left: calc(24 / 1920 * 100%);
-                /* ca. 1.25% */
-                top: calc(39.80 / 1080 * 100%);
-                /* ca. 3.69% */
-                padding-right: calc(103 / 1920 * 100%);
-                /* ca. 5.36% */
+                left: calc(24 / 2560 * 100%);
+                /* ca. 0.94% */
+                top: calc(39.80 / 1440 * 100%);
+                /* ca. 2.76% */
+                padding-right: calc(103 / 2560 * 100%);
+                /* ca. 4.02% */
                 display: inline-flex;
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: flex-start;
-                gap: calc(12.19 / 1080 * 100%);
-                /* ca. 1.13% */
+                gap: calc(12.19 / 1440 * 100%);
+                /* ca. 0.85% */
             }
 
-            /* TEXTSTILE – Verwendung von rem‑Einheiten für gute Lesbarkeit */
+            /* TEXTSTILE – Für gute Lesbarkeit werden rem‑Einheiten genutzt */
 
             /* .product-design-title (Overlay-Titel) */
             .content-container .product-design-title {
-                font-size: 2rem;
-                /* z. B. ca. 32px; anpassbar */
-                line-height: 1.2;
+                font-size: 2.9rem;
+                /* ca. 46.67px, skaliert von 35px */
+                line-height: 3.6rem;
+                /* ca. 57.6px, skaliert von 43.20px */
             }
 
             /* .coming-soon-button */
             .content-container .coming-soon-button {
                 position: relative;
-                width: calc(126 / 1920 * 100%);
-                /* ca. 6.56% */
-                height: calc(36 / 1080 * 100%);
-                /* ca. 3.33% */
+                width: calc(126 / 2560 * 100%);
+                /* ca. 4.92% */
+                height: calc(36 / 1440 * 100%);
+                /* ca. 2.50% */
                 background: black;
                 border-radius: 50px;
             }
@@ -682,36 +758,199 @@
             /* .coming-soon-text */
             .content-container .coming-soon-text {
                 position: absolute;
-                left: calc(14.08 / 1920 * 100%);
-                /* ca. 0.73% */
-                top: calc(10 / 1080 * 100%);
-                /* ca. 0.93% */
-                width: calc(98.04 / 1920 * 100%);
-                /* ca. 5.11% */
-                height: calc(16 / 1080 * 100%);
-                /* ca. 1.48% */
+                left: calc(14.08 / 2560 * 100%);
+                /* ca. 0.55% */
+                top: calc(10 / 1440 * 100%);
+                /* ca. 0.69% */
+                width: calc(98.04 / 2560 * 100%);
+                /* ca. 3.83% */
+                height: calc(16 / 1440 * 100%);
+                /* ca. 1.11% */
                 text-align: center;
                 display: flex;
                 justify-content: center;
                 flex-direction: column;
                 color: white;
-                font-size: 1.5rem;
-                /* z. B. ca. 24px; anpassbar */
-                line-height: 1.2;
+                font-size: 1.33rem;
+                /* ca. 21.33px, skaliert von 16px */
+                line-height: 2rem;
+                /* ca. 32px, skaliert von 24px */
             }
-
-
-
         }
 
         @media (min-width: 1441px) and (max-width: 1920px) {
+            .headline-container {
+                position: absolute;
+                left: 6vw;
+                /* annähernd statt 90px */
+                top: 300px;
+                /* annähernd statt 280px */
+                color: white;
+                font-family: 'Inter', sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 0.25rem;
+                /* ca. 4px */
+            }
+
+            .headline {
+                font-size: 5rem;
+                /* ca. 80px */
+                font-weight: 900;
+                line-height: 6rem;
+                /* ca. 96px */
+                max-width: 90vw;
+                /* ersetzt 2748px */
+                letter-spacing: 0.25rem;
+                /* ca. 4px */
+            }
+
+            .subheadline {
+                font-size: 2.5rem;
+                /* ca. 40px */
+                font-weight: 200;
+                line-height: 3.5rem;
+                /* ca. 55px */
+                max-width: 90vw;
+                /* ersetzt 2578px */
+                margin-top: 1rem;
+                /* ca. 15px */
+            }
+
+            .einzigartige3dText {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 0;
+                gap: 0.5rem;
+                /* ca. 8px */
+                position: absolute;
+                height: 6.3rem;
+                /* ca. 101px */
+                left: 64.84%;
+                right: 13.96%;
+                top: 800px;
+                /* annähernd statt 707.82px */
+                width: 28.6rem;
+                /* ca. 457px */
+                font-family: 'Inter', sans-serif;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 2rem;
+                /* ca. 32px */
+                line-height: 120%;
+                color: #FFFFFF;
+                flex: none;
+                order: 0;
+                align-self: stretch;
+                flex-grow: 0;
+            }
+
+            .einzigartige3dText .text-small {
+                font-family: 'Inter', sans-serif;
+                color: #ffffff;
+                font-size: 2rem;
+                /* ca. 32px */
+                font-weight: 300;
+                line-height: 2.4rem;
+                /* ca. 38.4px */
+                word-wrap: break-word;
+            }
+
+            .einzigartige3dText .text-large {
+                font-family: 'Inter', sans-serif;
+                color: #ffffff;
+                font-size: 3rem;
+                /* ca. 48px */
+                font-weight: 600;
+                line-height: 3.6rem;
+                /* ca. 57.6px */
+                word-wrap: break-word;
+            }
+
+
+            .drag-container {
+                position: absolute;
+                top: 4.2rem;
+                /* wie bisher */
+                left: 50%;
+                transform: translateX(-50%);
+                /* Für die Animation beim Zurücksetzen */
+                transition: transform 0.3s ease;
+                touch-action: none;
+                /* Damit nur horizontale Gesten verarbeitet werden */
+                top: 1090px;
+            }
+
+            .like-prompt {
+                position: relative;
+                color: white;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                font-size: 1.125rem;
+                z-index: 1;
+            }
+
+            /* Das weiße Rechteck, das hinter dem Text liegt */
+            .like-prompt .scrub-rect {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 90%;
+                background-color: transparent;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                opacity: 0.5;
+                z-index: -1;
+            }
+
+            .like-prompt .scrub-rect {
+                display: block;
+            }
+
+            .wasWirFuerSieTun {
+                position: absolute;
+                margin-left: 50%;
+                width: 90%;
+                font-size: 34px;
+                line-height: 30px;
+                top: 1190px;
+            }
+
+            .konzeptText {
+                position: absolute;
+                margin-left: 50%;
+                width: 39%;
+                font-size: 20px;
+                line-height: 28px;
+                /* Bei 768px wird der Wert 25px, bei 468px 80px – dazwischen erfolgt eine 
+                 lineare Interpolation.
+                 Für Viewports schmaler als 468px wird der Wert auf 80px begrenzt,
+                 und für Viewports breiter als 768px bleibt er bei 25px. */
+                top: 1440px;
+
+
+            }
+
+            /* Slider-Anpassungen */
+            .slider-container {
+                position: absolute;
+                width: 550px;
+                justify-content: left;
+                top: 1555px;
+                left: -58px;
+
+            }
+
 
             /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 1920px (Referenz: 1920x1080) */
             .responsive-wrapper {
-                position: relative;
+                position: absolute;
                 width: 100%;
                 max-width: 1920px;
                 font-size: 16px;
+                top: 1900px;
                 /* Basiswert für rem */
             }
 
@@ -830,7 +1069,7 @@
 
             /* .product-design-title (Overlay-Titel) */
             .content-container .product-design-title {
-                font-size: 2rem;
+                font-size: 4.7rem;
                 /* Beispiel: ca. 32px, anpassbar */
                 line-height: 1.2;
             }
@@ -877,17 +1116,45 @@
                 right: 200px;
             }
 
-            .like-prompt {
+
+            .drag-container {
                 position: absolute;
-                top: 550px;
+                top: 4.2rem;
+                /* wie bisher */
                 left: 50%;
-                transform: translate(-50%, -50%);
-                padding: 4px 8px;
-                border-radius: 4px;
-                font-size: 14px;
-                text-align: center;
+                transform: translateX(-50%);
+                /* Für die Animation beim Zurücksetzen */
+                transition: transform 0.3s ease;
+                touch-action: none;
+                /* Damit nur horizontale Gesten verarbeitet werden */
+                top: 930px;
+            }
+
+            .like-prompt {
+                position: relative;
+                color: white;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                font-size: 1.125rem;
+                z-index: 1;
+            }
+
+            /* Das weiße Rechteck, das hinter dem Text liegt */
+            .like-prompt .scrub-rect {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 90%;
+                background-color: transparent;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                opacity: 0.5;
+                z-index: -1;
+            }
+
+            .like-prompt .scrub-rect {
                 display: block;
-                background: transparent;
             }
 
 
@@ -1171,17 +1438,44 @@
                 right: 200px;
             }
 
-            .like-prompt {
+            .drag-container {
                 position: absolute;
-                top: 820px;
+                top: 4.2rem;
+                /* wie bisher */
                 left: 50%;
-                transform: translate(-50%, -50%);
-                padding: 4px 8px;
-                border-radius: 4px;
-                font-size: 14px;
-                text-align: center;
+                transform: translateX(-50%);
+                /* Für die Animation beim Zurücksetzen */
+                transition: transform 0.3s ease;
+                touch-action: none;
+                /* Damit nur horizontale Gesten verarbeitet werden */
+                top: 900px;
+            }
+
+            .like-prompt {
+                position: relative;
+                color: white;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                font-size: 1.125rem;
+                z-index: 1;
+            }
+
+            /* Das weiße Rechteck, das hinter dem Text liegt */
+            .like-prompt .scrub-rect {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 90%;
+                background-color: transparent;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                opacity: 0.5;
+                z-index: -1;
+            }
+
+            .like-prompt .scrub-rect {
                 display: block;
-                background: transparent;
             }
 
 
@@ -1649,17 +1943,44 @@
                 right: 200px;
             }
 
-            .like-prompt {
+            .drag-container {
                 position: absolute;
-                top: 750px;
+                top: 4.2rem;
+                /* wie bisher */
                 left: 50%;
-                transform: translate(-50%, -50%);
-                padding: 4px 8px;
-                border-radius: 4px;
-                font-size: 14px;
-                text-align: center;
+                transform: translateX(-50%);
+                /* Für die Animation beim Zurücksetzen */
+                transition: transform 0.3s ease;
+                touch-action: none;
+                /* Damit nur horizontale Gesten verarbeitet werden */
+                top: 700px;
+            }
+
+            .like-prompt {
+                position: relative;
+                color: white;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                font-size: 1.125rem;
+                z-index: 1;
+            }
+
+            /* Das weiße Rechteck, das hinter dem Text liegt */
+            .like-prompt .scrub-rect {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 90%;
+                background-color: #ff0000;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                opacity: 0.5;
+                z-index: -1;
+            }
+
+            .like-prompt .scrub-rect {
                 display: block;
-                background: transparent;
             }
 
 
@@ -1806,22 +2127,46 @@
                 left: -100px;
             }
 
-   
-            .like-prompt {
+
+            .drag-container {
                 position: absolute;
-                top: 900px;
+                top: 4.2rem;
+                /* wie bisher */
                 left: 50%;
-                transform: translate(-50%, -50%);
-                padding: 4px 8px;
-                border-radius: 4px;
-                font-size: 12px;
-                text-align: center;
-                display: block;
-                background: transparent;
+                transform: translateX(-50%);
+                /* Für die Animation beim Zurücksetzen */
+                transition: transform 0.3s ease;
+                touch-action: none;
+                /* Damit nur horizontale Gesten verarbeitet werden */
+                top: 900px;
             }
-              .like-prompt .scrub-rect {
-    display: block;
-  }
+
+            .like-prompt {
+                position: relative;
+                color: white;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                font-size: 1.125rem;
+                z-index: 1;
+            }
+
+            /* Das weiße Rechteck, das hinter dem Text liegt */
+            .like-prompt .scrub-rect {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 90%;
+                background-color: #ff0000;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                opacity: 0.5;
+                z-index: -1;
+            }
+
+            .like-prompt .scrub-rect {
+                display: block;
+            }
 
 
             /* Allgemeine Anpassungen */
@@ -1883,18 +2228,18 @@
                 font-size: 20px;
                 line-height: 1.2;
                 transform: scale(0.5);
-                
+
             }
 
             .einzigartige3dText .text-small {
                 font-family: 'Inter', sans-serif;
                 color: #ffffff;
-                font-size: 16,8px;
-                line-height: 25,2px;
+                font-size: 16, 8px;
+                line-height: 25, 2px;
                 font-family: 'Inter';
                 font-weight: 200;
                 word-wrap: break-word;
-                
+
             }
 
             .einzigartige3dText .text-large {
@@ -1929,27 +2274,31 @@
             }
 
             .slider-container {
-    width: 100%;
-    max-width: 768px;
-    margin: 400px auto 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 400px;
-}
+                width: 100%;
+                max-width: 768px;
+                margin: 400px auto 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                top: 400px;
+            }
 
-.slider {
-    width: 80%;        /* Passt den Slider relativ an den Container an */
-    max-width: 500px;   /* Begrenzung der maximalen Breite */
-}
+            .slider {
+                width: 80%;
+                /* Passt den Slider relativ an den Container an */
+                max-width: 500px;
+                /* Begrenzung der maximalen Breite */
+            }
 
-.slider-container .prev {
-    left: 0.2rem; /* vorher: 0.625rem */
-}
+            .slider-container .prev {
+                left: 0.2rem;
+                /* vorher: 0.625rem */
+            }
 
-.slider-container .next {
-    right: 0.2rem; /* vorher: 0.625rem */
-}
+            .slider-container .next {
+                right: 0.2rem;
+                /* vorher: 0.625rem */
+            }
 
 
             /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 768px (Original: 1920x1080) */
@@ -2124,18 +2473,46 @@
                 right: 200px;
             }
 
-            .like-prompt {
+            .drag-container {
                 position: absolute;
-                top: 800px;
+                top: 4.2rem;
+                /* wie bisher */
                 left: 50%;
-                transform: translate(-50%, -50%);
-                padding: 4px 8px;
-                border-radius: 4px;
-                font-size: 8px;
-                text-align: center;
-                display: block;
-                background: transparent;
+                transform: translateX(-50%);
+                /* Für die Animation beim Zurücksetzen */
+                transition: transform 0.3s ease;
+                touch-action: none;
+                /* Damit nur horizontale Gesten verarbeitet werden */
+                top: 720px;
             }
+
+            .like-prompt {
+                position: relative;
+                color: white;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                font-size: 1.125rem;
+                z-index: 1;
+            }
+
+            /* Das weiße Rechteck, das hinter dem Text liegt */
+            .like-prompt .scrub-rect {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 90%;
+                background-color: #ff0000;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                opacity: 0.5;
+                z-index: -1;
+            }
+
+            .like-prompt .scrub-rect {
+                display: block;
+            }
+
 
 
             /* Allgemeine Anpassungen */
@@ -2232,14 +2609,18 @@
             }
 
             .slider-container {
-    width: 100%;         /* Nutzt die volle Breite des Elternelements */
-    max-width: 480px;    /* Überschreitet nicht 480px */
-    margin: 400px auto 0; /* Zentriert horizontal, mit 400px Abstand oben */
-    display: flex;       /* Nutzt Flexbox für die Ausrichtung */
-    justify-content: center;
-    align-items: center;
-    top: 300px;
-}
+                width: 100%;
+                /* Nutzt die volle Breite des Elternelements */
+                max-width: 480px;
+                /* Überschreitet nicht 480px */
+                margin: 400px auto 0;
+                /* Zentriert horizontal, mit 400px Abstand oben */
+                display: flex;
+                /* Nutzt Flexbox für die Ausrichtung */
+                justify-content: center;
+                align-items: center;
+                top: 300px;
+            }
 
 
             /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 480px */
@@ -2417,22 +2798,45 @@
                 left: -17px;
             }
 
-            .like-prompt {
+            .drag-container {
                 position: absolute;
-                top: 670px;
+                top: 4.2rem;
+                /* wie bisher */
                 left: 50%;
-                transform: translate(-50%, -50%);
-                padding: 4px 8px;
-                border-radius: 4px;
-                font-size: 8px;
-                text-align: center;
-                display: block;
-                background: transparent;
+                transform: translateX(-50%);
+                /* Für die Animation beim Zurücksetzen */
+                transition: transform 0.3s ease;
+                touch-action: none;
+                /* Damit nur horizontale Gesten verarbeitet werden */
+                top: 650px;
             }
-            .like-prompt .scrub-rect {
-    display: block;
-  }
 
+            .like-prompt {
+                position: relative;
+                color: white;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                font-size: 1.125rem;
+                z-index: 1;
+            }
+
+            /* Das weiße Rechteck, das hinter dem Text liegt */
+            .like-prompt .scrub-rect {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 90%;
+                background-color: #ff0000;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                opacity: 0.5;
+                z-index: -1;
+            }
+
+            .like-prompt .scrub-rect {
+                display: block;
+            }
 
             /* Allgemeine Anpassungen */
             body {
@@ -2531,14 +2935,18 @@
             }
 
             .slider-container {
-    width: 100%;         /* Nutzt die volle Breite des Elternelements */
-    max-width: 425px;    /* Überschreitet nicht 425px */
-    margin: 400px auto 0; /* Zentriert horizontal mit 400px Abstand oben */
-    display: flex;       /* Nutzt Flexbox für die Ausrichtung */
-    justify-content: center;
-    align-items: center;
-    top: 240px;
-}
+                width: 100%;
+                /* Nutzt die volle Breite des Elternelements */
+                max-width: 425px;
+                /* Überschreitet nicht 425px */
+                margin: 400px auto 0;
+                /* Zentriert horizontal mit 400px Abstand oben */
+                display: flex;
+                /* Nutzt Flexbox für die Ausrichtung */
+                justify-content: center;
+                align-items: center;
+                top: 240px;
+            }
 
 
 
@@ -2721,44 +3129,46 @@
                 left: -600px;
             }
 
-            
+
             .drag-container {
-  position: absolute;
-  top: 3.2rem;  /* wie bisher */
-  left: 50%;
-  transform: translateX(-50%);
-  /* Für die Animation beim Zurücksetzen */
-  transition: transform 0.3s ease;
-  touch-action: none; /* Damit nur horizontale Gesten verarbeitet werden */
-  top: 570px;
-}
+                position: absolute;
+                top: 3.2rem;
+                /* wie bisher */
+                left: 50%;
+                transform: translateX(-50%);
+                /* Für die Animation beim Zurücksetzen */
+                transition: transform 0.3s ease;
+                touch-action: none;
+                /* Damit nur horizontale Gesten verarbeitet werden */
+                top: 570px;
+            }
 
-.like-prompt {
-  position: relative;
-  color: white;
-  padding: 0.625rem 1.25rem;
-  border-radius: 10.625rem;
-  font-size: 1.125rem;
-  z-index: 1;
-}
+            .like-prompt {
+                position: relative;
+                color: white;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                font-size: 1.125rem;
+                z-index: 1;
+            }
 
-/* Das weiße Rechteck, das hinter dem Text liegt */
-.like-prompt .scrub-rect {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 90%;
-  background-color:#ff0000;
-  padding: 0.625rem 1.25rem;
-  border-radius: 10.625rem;
-  opacity: 0.5;
-  z-index: -1;
-}
+            /* Das weiße Rechteck, das hinter dem Text liegt */
+            .like-prompt .scrub-rect {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 90%;
+                background-color: #ff0000;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                opacity: 0.5;
+                z-index: -1;
+            }
 
             .like-prompt .scrub-rect {
-    display: block;
-  }
+                display: block;
+            }
 
 
             /* Allgemeine Anpassungen */
@@ -3051,42 +3461,44 @@
             }
 
             .drag-container {
-  position: absolute;
-  top: 3.2rem;  /* wie bisher */
-  left: 50%;
-  transform: translateX(-50%);
-  /* Für die Animation beim Zurücksetzen */
-  transition: transform 0.3s ease;
-  touch-action: none; /* Damit nur horizontale Gesten verarbeitet werden */
-  top: 570px;
-}
+                position: absolute;
+                top: 3.2rem;
+                /* wie bisher */
+                left: 50%;
+                transform: translateX(-50%);
+                /* Für die Animation beim Zurücksetzen */
+                transition: transform 0.3s ease;
+                touch-action: none;
+                /* Damit nur horizontale Gesten verarbeitet werden */
+                top: 570px;
+            }
 
-.like-prompt {
-  position: relative;
-  color: white;
-  padding: 0.625rem 1.25rem;
-  border-radius: 10.625rem;
-  font-size: 1.125rem;
-  z-index: 1;
-}
+            .like-prompt {
+                position: relative;
+                color: white;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                font-size: 1.125rem;
+                z-index: 1;
+            }
 
-/* Das weiße Rechteck, das hinter dem Text liegt */
-.like-prompt .scrub-rect {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 90%;
-  background-color: rgb(255, 0, 0);
-  padding: 0.625rem 1.25rem;
-  border-radius: 10.625rem;
-  opacity: 0.5;
-  z-index: -1;
-}
+            /* Das weiße Rechteck, das hinter dem Text liegt */
+            .like-prompt .scrub-rect {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 90%;
+                background-color: rgb(255, 0, 0);
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                opacity: 0.5;
+                z-index: -1;
+            }
 
             .like-prompt .scrub-rect {
-    display: block;
-  }
+                display: block;
+            }
 
             /* Skalierungsfaktor: 0,5 (statt 320/1920 = 0,1667) für bessere Lesbarkeit */
             .navbar {
@@ -3408,11 +3820,11 @@
     </div>
     <div class="drag-container">
         <div class="like-prompt">
-          Zieh mich!
-          <div class="scrub-rect"></div>
+            Zieh mich!
+            <div class="scrub-rect"></div>
         </div>
-      </div>
-      
+    </div>
+
 
     <div class="headline-container">
         <h1 class="headline">Code trifft <br> auf Kreativität</h1>
@@ -3613,73 +4025,73 @@
 
     // Aktualisiere maxSlide bei Fenster-Resize
     window.addEventListener('resize', () => {
-      maxSlide = window.innerWidth * 0.25;
+        maxSlide = window.innerWidth * 0.25;
     });
 
     // Touchstart: Ausgangsposition speichern, Transition ausschalten
     dragContainer.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-      dragContainer.style.transition = "none";
-      e.preventDefault();
+        startX = e.touches[0].clientX;
+        dragContainer.style.transition = "none";
+        e.preventDefault();
     }, { passive: false });
 
     // Touchmove: Berechne die Verschiebung und begrenze sie
     dragContainer.addEventListener('touchmove', (e) => {
-      const currentX = e.touches[0].clientX;
-      let deltaX = currentX - startX;
-      // Clamp: deltaX darf nicht kleiner als -maxSlide und nicht größer als +maxSlide sein
-      deltaX = Math.max(-maxSlide, Math.min(deltaX, maxSlide));
-      // Ausgangszustand ist translateX(-50%); addiere nun deltaX:
-      dragContainer.style.transform = `translateX(calc(-50% + ${deltaX}px))`;
-      e.preventDefault();
+        const currentX = e.touches[0].clientX;
+        let deltaX = currentX - startX;
+        // Clamp: deltaX darf nicht kleiner als -maxSlide und nicht größer als +maxSlide sein
+        deltaX = Math.max(-maxSlide, Math.min(deltaX, maxSlide));
+        // Ausgangszustand ist translateX(-50%); addiere nun deltaX:
+        dragContainer.style.transform = `translateX(calc(-50% + ${deltaX}px))`;
+        e.preventDefault();
     }, { passive: false });
 
     // Touchend: Transition wieder aktivieren und Button in die Mitte zurücksetzen
     dragContainer.addEventListener('touchend', (e) => {
-      dragContainer.style.transition = "transform 0.3s ease";
-      dragContainer.style.transform = "translateX(-50%)";
-      e.preventDefault();
+        dragContainer.style.transition = "transform 0.3s ease";
+        dragContainer.style.transform = "translateX(-50%)";
+        e.preventDefault();
     }, { passive: false });
 
-const video = document.getElementById('main-video');
+    const video = document.getElementById('main-video');
 
-// Maximale Sprungzeit (in Sekunden), die erreicht wird, wenn der Button ganz verschoben wird:
-const maxSkipSeconds = 10;
+    // Maximale Sprungzeit (in Sekunden), die erreicht wird, wenn der Button ganz verschoben wird:
+    const maxSkipSeconds = 10;
 
-dragContainer.addEventListener('touchstart', (e) => {
-  startX = e.touches[0].clientX;
-  startTime = video.currentTime;
-  dragContainer.style.transition = "none";
-  e.preventDefault();
-});
+    dragContainer.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startTime = video.currentTime;
+        dragContainer.style.transition = "none";
+        e.preventDefault();
+    });
 
-dragContainer.addEventListener('touchmove', (e) => {
-  const currentX = e.touches[0].clientX;
-  let deltaX = currentX - startX;
-  
-  // Begrenze deltaX auf den Bereich [-maxSlide, maxSlide]
-  deltaX = Math.max(-maxSlide, Math.min(deltaX, maxSlide));
-  
-  // Setze die Verschiebung des Containers (Button):
-  dragContainer.style.transform = `translateX(calc(-50% + ${deltaX}px))`;
-  
-  // Berechne den prozentualen Wert der Verschiebung:
-  const percentage = deltaX / maxSlide; // -1 bis 1
-  
-  // Umkehren: Bei Linksschieben (negative deltaX) soll das Video vorwärts (currentTime erhöhen)
-  // Bei Rechtsschieben (positive deltaX) soll das Video rückwärts (currentTime verringert) werden.
-  const timeChange = -percentage * maxSkipSeconds;
-  
-  // Aktualisiere die Videoposition (sicherstellen, dass sie im gültigen Bereich liegt)
-  video.currentTime = Math.min(Math.max(startTime + timeChange, 0), video.duration);
-  
-  e.preventDefault();
-});
+    dragContainer.addEventListener('touchmove', (e) => {
+        const currentX = e.touches[0].clientX;
+        let deltaX = currentX - startX;
 
-dragContainer.addEventListener('touchend', (e) => {
-  dragContainer.style.transition = "transform 0.3s ease";
-  dragContainer.style.transform = "translateX(-50%)";
-  e.preventDefault();
-});
+        // Begrenze deltaX auf den Bereich [-maxSlide, maxSlide]
+        deltaX = Math.max(-maxSlide, Math.min(deltaX, maxSlide));
 
-  </script>
+        // Setze die Verschiebung des Containers (Button):
+        dragContainer.style.transform = `translateX(calc(-50% + ${deltaX}px))`;
+
+        // Berechne den prozentualen Wert der Verschiebung:
+        const percentage = deltaX / maxSlide; // -1 bis 1
+
+        // Umkehren: Bei Linksschieben (negative deltaX) soll das Video vorwärts (currentTime erhöhen)
+        // Bei Rechtsschieben (positive deltaX) soll das Video rückwärts (currentTime verringert) werden.
+        const timeChange = -percentage * maxSkipSeconds;
+
+        // Aktualisiere die Videoposition (sicherstellen, dass sie im gültigen Bereich liegt)
+        video.currentTime = Math.min(Math.max(startTime + timeChange, 0), video.duration);
+
+        e.preventDefault();
+    });
+
+    dragContainer.addEventListener('touchend', (e) => {
+        dragContainer.style.transition = "transform 0.3s ease";
+        dragContainer.style.transform = "translateX(-50%)";
+        e.preventDefault();
+    });
+
+</script>
