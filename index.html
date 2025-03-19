@@ -494,6 +494,400 @@
         /* Das weiße Rechteck hinter dem Text */
 
 
+        @media (min-width: 2561px) and (max-width: 9999px) {
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10%;
+  /* Ursprünglich 50px – skaliert: 50px × 5.2083 ≈ 260.42px, was ca. 2.60vw entspricht (260.42/9999×100) */
+  padding: 0 2.60vw;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.9);
+  margin-top: 2%;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  /* Ursprünglich 4.6rem (ca. 74px) → 74px × 5.2083 ≈ 383.5px; 383.5/16 ≈ 23.97rem */
+  width: 24rem;
+  /* Ursprünglich 3.1rem (ca. 50px) → 50px × 5.2083 ≈ 260.42px; 260.42/16 ≈ 16.28rem */
+  height: 16.3rem;
+}
+
+.logo div {
+  /* Ursprünglich 3.25rem (ca. 52px) → 52px × 5.2083 ≈ 270.8px; 270.8/16 ≈ 16.93rem */
+  width: 16.9rem;
+  /* Höhe gleich wie im Logo (16.3rem) */
+  height: 16.3rem;
+  position: relative;
+  /* Ursprünglich 0.1rem (ca. 1.7px) → 1.7px × 5.2083 ≈ 8.86px; 8.86/16 ≈ 0.55rem */
+  border: 0.55rem solid white;
+}
+
+/* Nav-Links */
+.nav-links {
+  display: flex;
+  gap: 5%;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  /* Ursprünglich clamp(0.625rem, 13vw, 1.125rem) – dabei entsprechen 0.625rem und 1.125rem ca. 10px bzw. 18px.
+     Skalieren: 
+       min: 10px × 5.2083 = 52.08px → 52.08/16 ≈ 3.26rem,
+       max: 18px × 5.2083 = 93.75px → 93.75/16 ≈ 5.86rem,
+       als bevorzugter Wert nehmen wir 13px × 5.2083 = 67.71px → 67.71/16 ≈ 4.23rem.
+  */
+  font-size: clamp(3.26rem, 4.23rem, 5.86rem);
+  font-weight: 500;
+  /* Ursprünglich Padding: 0.5rem (8px) und 1.5rem (24px) – skaliert:
+     0.5rem × 5.2083 ≈ 2.60rem und 1.5rem × 5.2083 ≈ 7.81rem */
+  padding: 2.60rem 7.81rem;
+}
+
+.video-container {
+  position: relative;
+  width: 100vw;
+  /* Falls du eine höhere Höhe als 100vh wünschst, z. B. 120vh, kannst du dies hier anpassen */
+  height: 100vh;
+  overflow: hidden;
+}
+
+.video-background {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Drag-Container */
+.drag-container {
+  position: absolute;
+  /* Ursprünglich top: 3.2rem → 3.2rem × 5.2083 ≈ 16.67rem */
+  top: 16.67rem;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: transform 0.3s ease;
+  touch-action: none;
+}
+
+/* Like-Prompt */
+.like-prompt {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  /* Padding: ursprünglich 0.625rem 1.25rem → skaliert: 0.625×5.2083 ≈ 3.26rem und 1.25×5.2083 ≈ 6.51rem */
+  padding: 3.26rem 6.51rem;
+  /* Border-Radius: ursprünglich 0.625rem → ca. 3.26rem */
+  border-radius: 3.26rem;
+  /* Font-Size: ursprünglich 1.125rem → 1.125×5.2083 ≈ 5.86rem */
+  font-size: 5.86rem;
+  z-index: 1;
+}
+
+/* Scrub-Rect (Hintergrund-Rechteck) */
+.like-prompt .scrub-rect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 247, 255);
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.video-container.dragging {
+  cursor: grabbing;
+}
+
+            /* HEADLINE-CONTAINER */
+            .headline-container {
+                position: absolute;
+                /* Ursprünglich 90px → 468.75px; 468.75/9999*100 ≈ 4.69vw */
+                left: 4.69vw;
+                /* Ursprünglich 280px → 1458.33px; 1458.33/5625*100 ≈ 25.96vh */
+                top: 25.96vh;
+                color: white;
+                font-family: 'Inter', sans-serif;
+                text-transform: uppercase;
+                /* Ursprünglich 0.25rem (ca. 4px) → ca. 20.83px, also 20.83/16 ≈ 1.30rem */
+                letter-spacing: 1.30rem;
+            }
+
+            /* HEADLINE */
+            .headline {
+                /* Ursprünglich 5rem (ca. 80px) → 80×5.2083 ≈ 416.67px, also 416.67/16 ≈ 26.04rem */
+                font-size: 26rem;
+                font-weight: 900;
+                /* Ursprünglich 6rem (96px) → 96×5.2083 ≈ 500px, also 500/16 ≈ 31.25rem */
+                line-height: 31.25rem;
+                /* Für max-width empfiehlt sich ein Wert in vw – hier belassen wir 90vw (kann ggf. angepasst werden) */
+                max-width: 90vw;
+                /* Gleiche Letter-Spacing wie im Container */
+                letter-spacing: 1.30rem;
+            }
+
+            /* SUBHEADLINE */
+            .subheadline {
+                /* Ursprünglich 2.5rem (40px) → 40×5.2083 ≈ 208.33px, also ca. 13.02rem */
+                font-size: 13rem;
+                font-weight: 200;
+                /* Ursprünglich 3.5rem (ca. 55px) → 55×5.2083 ≈ 286.46px, also 286.46/16 ≈ 17.90rem (rund 17.9rem bzw. 18rem) */
+                line-height: 18rem;
+                max-width: 90vw;
+                /* Ursprünglich 1rem (ca. 15px) → 15×5.2083 ≈ 78.12px, also 78.12/16 ≈ 4.88rem */
+                margin-top: 4.88rem;
+            }
+
+            /* EINZIGARTIGE 3D TEXT */
+            .einzigartige3dText {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 0;
+                /* Ursprünglich gap: 0.5rem → 0.5×5.2083 ≈ 2.60rem */
+                gap: 2.60rem;
+                position: absolute;
+                /* Ursprünglich Höhe: 6.3rem (101px) → 101×5.2083 ≈ 525px, also 525/16 ≈ 32.81rem */
+                height: 32.81rem;
+                /* Prozentwerte bleiben unverändert */
+                left: 64.84%;
+                right: 13.96%;
+                /* Ursprünglich top: 707.82px → 707.82×5.2083 ≈ 3690.67px; 3690.67/5625×100 ≈ 65.62vh */
+                top: 65.62vh;
+                /* Ursprünglich Breite: 28.6rem (457px) → 457×5.2083 ≈ 2380.83px, also 2380.83/16 ≈ 148.80rem */
+                width: 148.80rem;
+                font-family: 'Inter', sans-serif;
+                font-style: normal;
+                font-weight: 300;
+                /* Ursprünglich 2rem → 2×5.2083 = 10.42rem */
+                font-size: 10.42rem;
+                line-height: 120%;
+                color: #FFFFFF;
+                flex: none;
+                order: 0;
+                align-self: stretch;
+                flex-grow: 0;
+            }
+
+            /* EINZIGARTIGE 3D TEXT – TEXT SMALL */
+            .einzigartige3dText .text-small {
+                font-family: 'Inter', sans-serif;
+                color: #ffffff;
+                /* Ursprünglich 2rem → ca. 10.42rem */
+                font-size: 10.42rem;
+                font-weight: 300;
+                /* Ursprünglich 2.4rem (ca. 38.4px) → 38.4×5.2083 ≈ 200px, also 200/16 = 12.5rem */
+                line-height: 12.5rem;
+                word-wrap: break-word;
+            }
+
+            /* EINZIGARTIGE 3D TEXT – TEXT LARGE */
+            .einzigartige3dText .text-large {
+                font-family: 'Inter', sans-serif;
+                color: #ffffff;
+                /* Ursprünglich 3rem → 3×5.2083 = 15.63rem */
+                font-size: 15.63rem;
+                font-weight: 600;
+                /* Ursprünglich 3.6rem → 3.6×5.2083 ≈ 18.75rem */
+                line-height: 18.75rem;
+                word-wrap: break-word;
+            }
+
+            /* WAS WIR FÜR SIE TUN */
+            .wasWirFuerSieTun {
+                /* Ursprünglich 625px → 625×5.2083 ≈ 3255.21px; in vw: (3255.21/9999)*100 ≈ 32.55vw */
+                width: 32.55vw;
+                color: #ffffff;
+                /* Ursprünglich 2.5rem → ca. 13.02rem */
+                font-size: 13rem;
+                font-family: 'Inter', sans-serif;
+                font-weight: 600;
+                /* Ursprünglich 3.75rem → ca. 19.53rem */
+                line-height: 19.53rem;
+                word-wrap: break-word;
+                letter-spacing: 0.05em;
+                margin-left: 35%;
+                /* Ursprünglich 12.5rem (200px) → 12.5×5.2083 ≈ 65.10rem */
+                margin-top: 65.10rem;
+            }
+
+            /* KONZEPT TEXT */
+            .konzeptText {
+                /* Ursprünglich 1155px → 1155×5.2083 ≈ 6020.21px; in vw: (6020.21/9999)*100 ≈ 60.20vw */
+                width: 60.20vw;
+                /* Ursprünglich 9rem (ca. 143px) → 9×5.2083 ≈ 46.88rem */
+                height: 46.88rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                color: #c0c0c0;
+                /* Ursprünglich 1.5rem → 1.5×5.2083 ≈ 7.81rem */
+                font-size: 7.81rem;
+                font-family: 'Inter', sans-serif;
+                font-weight: 600;
+                /* Ursprünglich 2.25rem → 2.25×5.2083 ≈ 11.73rem */
+                line-height: 11.73rem;
+                word-wrap: break-word;
+                letter-spacing: 0.03em;
+                margin-left: 35%;
+                /* Ursprünglich 0.625rem (10px) → 0.625×5.2083 ≈ 3.255rem */
+                margin-top: 3.26rem;
+            }
+
+            /* SLIDER CONTAINER */
+            .slider-container {
+                position: relative;
+                /* Ursprünglich -13.1rem (ca. -210px) → -13.1×5.2083 ≈ -68.22rem (gerundet -68.36rem) */
+                margin-top: -68.36rem;
+                /* Ursprünglich 25rem (ca. 400px) → 25×5.2083 ≈ 130.21rem */
+                width: 130.21rem;
+                /* Ursprünglich 9.6rem (ca. 90px) → 9.6×5.2083 ≈ 50.00rem */
+                margin-left: 50.00rem;
+                float: left;
+            }
+
+
+  /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 9999px (Referenz: 1920×1080) */
+.responsive-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 9999px;
+  font-size: 16px; /* Basiswert für rem */
+}
+
+/* Pseudo‑Element erzwingt das Seitenverhältnis von 1080/1920 = 56.25% */
+.responsive-wrapper::before {
+  content: "";
+  display: block;
+  padding-top: 56.25%;
+}
+
+/* ABSOLUT POSITIONIERTER CONTAINER, DER DEN WRAPPER FÜLLT */
+.content-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ELEMENTE IM CONTAINER – Berechnungen basierend auf 1920 (Breite) und 1080 (Höhe) */
+
+/* .image-case1 */
+.content-container .image-case1 {
+  position: absolute;
+  top: calc(164 / 1080 * 100%);          /* ca. 15.19% */
+  left: 0;
+  width: calc(668 / 1920 * 100%);          /* ca. 34.79% */
+  height: calc(429.89 / 1080 * 100%);      /* ca. 39.81% */
+}
+
+/* .image-case2 */
+.content-container .image-case2 {
+  position: absolute;
+  top: calc(164 / 1080 * 100%);          /* ca. 15.19% */
+  left: calc(692 / 1920 * 100%);          /* ca. 36.04% */
+  width: calc(1115 / 1920 * 100%);         /* ca. 58.16% */
+  height: calc(678 / 1080 * 100%);         /* ca. 62.78% */
+}
+
+/* .image-case3 */
+.content-container .image-case3 {
+  position: absolute;
+  top: calc(617.89 / 1080 * 100%);        /* ca. 57.20% */
+  left: 0;
+  width: calc(668 / 1920 * 100%);          /* ca. 34.79% */
+  height: calc(409.31 / 1080 * 100%);      /* ca. 37.91% */
+}
+
+/* .image-case4 */
+.content-container .image-case4 {
+  position: absolute;
+  top: calc(865.55 / 1080 * 100%);        /* ca. 80.16% */
+  left: calc(692 / 1920 * 100%);          /* ca. 36.04% */
+  width: calc(668 / 1920 * 100%);          /* ca. 34.79% */
+  height: calc(352.73 / 1080 * 100%);      /* ca. 32.64% */
+}
+
+/* .image-case5 */
+.content-container .image-case5 {
+  position: absolute;
+  top: calc(866 / 1080 * 100%);           /* ca. 80.19% */
+  left: calc(1360 / 1920 * 100%);         /* ca. 70.83% */
+  width: calc(487 / 1920 * 100%);          /* ca. 25.36% */
+  height: calc(352 / 1080 * 100%);         /* ca. 32.59% */
+}
+
+/* .overlay-container */
+.content-container .overlay-container {
+  position: absolute;
+  top: calc(1051.20 / 1080 * 100%);       /* ca. 97.33% */
+  left: 0;
+  width: calc(668 / 1920 * 100%);          /* ca. 34.79% */
+  height: calc(172.80 / 1080 * 100%);      /* ca. 16.00% */
+  background: rgba(255, 255, 255, 0.10);
+}
+
+/* .overlay-content */
+.content-container .overlay-content {
+  position: absolute;
+  left: calc(24 / 1920 * 100%);           /* ca. 1.25% */
+  top: calc(39.80 / 1080 * 100%);          /* ca. 3.69% */
+  padding-right: calc(103 / 1920 * 100%);   /* ca. 5.36% */
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: calc(12.19 / 1080 * 100%);         /* ca. 1.13% */
+}
+
+/* TEXTSTILE – Für gute Lesbarkeit in Overlays werden rem‑Einheiten verwendet */
+
+/* .product-design-title (Overlay-Titel) */
+.content-container .product-design-title {
+  font-size: 2rem;  /* Beispiel: ca. 32px; anpassbar */
+  line-height: 1.2;
+}
+
+/* .coming-soon-button */
+.content-container .coming-soon-button {
+  position: relative;
+  width: calc(126 / 1920 * 100%);         /* ca. 6.56% */
+  height: calc(36 / 1080 * 100%);          /* ca. 3.33% */
+  background: black;
+  border-radius: 50px; /* Ggf. weiter anpassen */
+}
+
+/* .coming-soon-text */
+.content-container .coming-soon-text {
+  position: absolute;
+  left: calc(14.08 / 1920 * 100%);        /* ca. 0.73% */
+  top: calc(10 / 1080 * 100%);            /* ca. 0.93% */
+  width: calc(98.04 / 1920 * 100%);        /* ca. 5.11% */
+  height: calc(16 / 1080 * 100%);           /* ca. 1.48% */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  font-size: 1.5rem;  /* Beispiel: ca. 24px; anpassbar */
+  line-height: 1.2;
+}
+
+
+
+        }
 
         @media (min-width: 1921px) and (max-width: 2560px) {
             .drag-container {
