@@ -472,6 +472,19 @@
             /* ca. 24px */
             word-wrap: break-word;
         }
+        /* Das weiße Rechteck hinter dem Text */
+.like-prompt .scrub-rect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  opacity: 0.5; /* halbtransparent – anpassbar */
+  z-index: -1;  /* hinter dem eigentlichen .like-prompt Inhalt */
+  touch-action: none; /* Verhindert z. B. versehentliche Seitenscrolls */
+  cursor: pointer;
+}
 
 
 
@@ -1802,6 +1815,9 @@
                 display: block;
                 background: transparent;
             }
+              .like-prompt .scrub-rect {
+    display: block;
+  }
 
 
             /* Allgemeine Anpassungen */
@@ -2409,6 +2425,9 @@
                 display: block;
                 background: transparent;
             }
+            .like-prompt .scrub-rect {
+    display: block;
+  }
 
 
             /* Allgemeine Anpassungen */
@@ -3012,6 +3031,9 @@
                 display: block;
                 background: transparent;
             }
+            .like-prompt .scrub-rect {
+    display: block;
+  }
 
             /* Skalierungsfaktor: 0,5 (statt 320/1920 = 0,1667) für bessere Lesbarkeit */
             .navbar {
@@ -3331,7 +3353,11 @@
             Dein Browser unterstützt kein HTML5-Video.
         </video>
     </div>
-    <div id="like-prompt" class="like-prompt">Klicke und ziehe!</div>
+    <div id="like-prompt" class="like-prompt">
+        Klicke und ziehe!
+        <div class="scrub-rect">
+        </div>
+    </div>
 
 
     <div class="headline-container">
@@ -3522,4 +3548,44 @@
             revealOnScroll.observe(el);
         });
     });
+</script>
+<script>
+    // Annahme: Dein Video-Element hat beispielsweise die ID "myVideo"
+const video = document.getElementById('main-video');
+// Das Schieberechteck hinter .like-prompt
+const scrubRect = document.querySelector('.like-prompt .scrub-rect');
+
+let startX = 0;
+let startTime = 0;
+
+// Optional: Ein Faktor, der bestimmt, wie stark der Swipe das Video spult.
+// Beispiel: Wenn der gesamte Bildschirm (window.innerWidth) geswipe wird,
+// soll das Video um (maxSkipSeconds) gesprungen werden.
+const maxSkipSeconds = 3;
+
+scrubRect.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].clientX;
+  startTime = video.currentTime;
+  // Verhindern, dass der Touch als Scroll interpretiert wird
+  e.preventDefault();
+});
+
+scrubRect.addEventListener('touchmove', (e) => {
+  const currentX = e.touches[0].clientX;
+  const deltaX = currentX - startX;
+  // Berechne den Anteil der Verschiebung relativ zur Bildschirmbreite
+  const swipeRatio = deltaX / window.innerWidth;
+  // Bestimme, um wie viele Sekunden gesprungen werden soll:
+  // (Hier: maximal maxSkipSeconds, wenn der Swipe 100% der Bildschirmbreite ausmacht)
+  const timeChange = swipeRatio * maxSkipSeconds;
+  // Setze die neue aktuelle Zeit – begrenze sie innerhalb der Videolänge
+  video.currentTime = Math.min(Math.max(startTime + timeChange, 0), video.duration);
+  e.preventDefault();
+});
+
+scrubRect.addEventListener('touchend', (e) => {
+  // Hier könntest du noch Endanimationen oder Feedback einbauen
+  e.preventDefault();
+});
+
 </script>
