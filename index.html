@@ -108,7 +108,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: white;
+  background-color: rgb(0, 247, 255);
   opacity: 0.5;
   z-index: -1;
 }
@@ -2720,18 +2720,45 @@
                 margin-top: -847.5px;
             }
 
-            .like-prompt {
-                position: absolute;
-                top: 622px;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                padding: 4px 8px;
-                border-radius: 4px;
-                font-size: 8px;
-                text-align: center;
-                display: block;
-                background: transparent;
-            }
+            
+            .drag-container {
+  position: absolute;
+  top: 3.2rem;  /* wie bisher */
+  left: 50%;
+  transform: translateX(-50%);
+  /* Für die Animation beim Zurücksetzen */
+  transition: transform 0.3s ease;
+  touch-action: none; /* Damit nur horizontale Gesten verarbeitet werden */
+  top: 570px;
+}
+
+.like-prompt {
+  position: relative;
+  color: white;
+  padding: 0.625rem 1.25rem;
+  border-radius: 10.625rem;
+  font-size: 1.125rem;
+  z-index: 1;
+}
+
+/* Das weiße Rechteck, das hinter dem Text liegt */
+.like-prompt .scrub-rect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  background-color:#ff0000;
+  padding: 0.625rem 1.25rem;
+  border-radius: 10.625rem;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+            .like-prompt .scrub-rect {
+    display: block;
+  }
+
 
             /* Allgemeine Anpassungen */
             body {
