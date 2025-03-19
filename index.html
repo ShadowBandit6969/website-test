@@ -3592,3 +3592,53 @@
       e.preventDefault();
     }, { passive: false });
   </script>
+
+  <script>
+const dragContainer = document.querySelector('.drag-container');
+const video = document.getElementById('myVideo');
+
+let startX = 0;
+let startTime = 0;
+
+// Maximale Verschiebung: 45% der Fensterbreite (links oder rechts von der Mitte)
+const maxSlide = window.innerWidth * 0.45;
+// Maximale Sprungzeit (in Sekunden), die erreicht wird, wenn der Button ganz verschoben wird:
+const maxSkipSeconds = 10;
+
+dragContainer.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].clientX;
+  startTime = video.currentTime;
+  dragContainer.style.transition = "none";
+  e.preventDefault();
+});
+
+dragContainer.addEventListener('touchmove', (e) => {
+  const currentX = e.touches[0].clientX;
+  let deltaX = currentX - startX;
+  
+  // Begrenze deltaX auf den Bereich [-maxSlide, maxSlide]
+  deltaX = Math.max(-maxSlide, Math.min(deltaX, maxSlide));
+  
+  // Setze die Verschiebung des Containers (Button):
+  dragContainer.style.transform = `translateX(calc(-50% + ${deltaX}px))`;
+  
+  // Berechne den prozentualen Wert der Verschiebung:
+  const percentage = deltaX / maxSlide; // -1 bis 1
+  
+  // Umkehren: Bei Linksschieben (negative deltaX) soll das Video vorwärts (currentTime erhöhen)
+  // Bei Rechtsschieben (positive deltaX) soll das Video rückwärts (currentTime verringert) werden.
+  const timeChange = -percentage * maxSkipSeconds;
+  
+  // Aktualisiere die Videoposition (sicherstellen, dass sie im gültigen Bereich liegt)
+  video.currentTime = Math.min(Math.max(startTime + timeChange, 0), video.duration);
+  
+  e.preventDefault();
+});
+
+dragContainer.addEventListener('touchend', (e) => {
+  dragContainer.style.transition = "transform 0.3s ease";
+  dragContainer.style.transform = "translateX(-50%)";
+  e.preventDefault();
+});
+
+  </script>
