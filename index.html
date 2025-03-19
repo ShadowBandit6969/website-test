@@ -81,22 +81,37 @@
             z-index: -1;
         }
 
-        .like-prompt {
-            position: absolute;
-            /* 3.2rem ≙ ca. 51.2px (bei 16px = 1rem) */
-            top: 3.2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            /* 0.625rem ≙ ca. 10px und 1.25rem ≙ ca. 20px */
-            padding: 0.625rem 1.25rem;
-            /* 0.625rem ≙ ca. 10px */
-            border-radius: 0.625rem;
-            /* 1.125rem ≙ ca. 18px */
-            font-size: 1.125rem;
-            opacity: 1;
-        }
+        .drag-container {
+  position: absolute;
+  top: 3.2rem;  /* wie bisher */
+  left: 50%;
+  transform: translateX(-50%);
+  /* Für die Animation beim Zurücksetzen */
+  transition: transform 0.3s ease;
+  touch-action: none; /* Damit nur horizontale Gesten verarbeitet werden */
+}
+
+.like-prompt {
+  position: relative;
+  background-color: rgba(0,0,0,0.7);
+  color: white;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.625rem;
+  font-size: 1.125rem;
+  z-index: 1;
+}
+
+/* Das weiße Rechteck, das hinter dem Text liegt */
+.like-prompt .scrub-rect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  opacity: 0.5;
+  z-index: -1;
+}
 
         .video-container {
             cursor: grab;
@@ -473,18 +488,6 @@
             word-wrap: break-word;
         }
         /* Das weiße Rechteck hinter dem Text */
-.like-prompt .scrub-rect {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  opacity: 0.5; /* halbtransparent – anpassbar */
-  z-index: -1;  /* hinter dem eigentlichen .like-prompt Inhalt */
-  touch-action: none; /* Verhindert z. B. versehentliche Seitenscrolls */
-  cursor: pointer;
-}
 
 
 
@@ -3353,11 +3356,13 @@
             Dein Browser unterstützt kein HTML5-Video.
         </video>
     </div>
+    <div class="drag-container"></div>
     <div id="like-prompt" class="like-prompt">
         Klicke und ziehe!
         <div class="scrub-rect">
         </div>
     </div>
+</div>
 
 
     <div class="headline-container">
@@ -3550,42 +3555,43 @@
     });
 </script>
 <script>
-    // Annahme: Dein Video-Element hat beispielsweise die ID "myVideo"
-const video = document.getElementById('main-video');
-// Das Schieberechteck hinter .like-prompt
-const scrubRect = document.querySelector('.like-prompt .scrub-rect');
+  const video = document.getElementById('main-video');
+const dragContainer = document.querySelector('.drag-container');
 
 let startX = 0;
 let startTime = 0;
 
-// Optional: Ein Faktor, der bestimmt, wie stark der Swipe das Video spult.
-// Beispiel: Wenn der gesamte Bildschirm (window.innerWidth) geswipe wird,
-// soll das Video um (maxSkipSeconds) gesprungen werden.
-const maxSkipSeconds = 3;
+// Maximale Sekunden, die das Video beim vollständigen Swipe (über die gesamte Bildschirmbreite) springt
+const maxSkipSeconds = 10;
 
-scrubRect.addEventListener('touchstart', (e) => {
+dragContainer.addEventListener('touchstart', (e) => {
   startX = e.touches[0].clientX;
   startTime = video.currentTime;
-  // Verhindern, dass der Touch als Scroll interpretiert wird
+  // Übergang während des Dragging deaktivieren
+  dragContainer.style.transition = "none";
   e.preventDefault();
 });
 
-scrubRect.addEventListener('touchmove', (e) => {
+dragContainer.addEventListener('touchmove', (e) => {
   const currentX = e.touches[0].clientX;
   const deltaX = currentX - startX;
-  // Berechne den Anteil der Verschiebung relativ zur Bildschirmbreite
+  // Aktualisiere die horizontale Position relativ zur Standardposition (-50%)
+  dragContainer.style.transform = `translateX(calc(-50% + ${deltaX}px))`;
+
+  // Berechne den Anteil der Verschiebung an der Bildschirmbreite
   const swipeRatio = deltaX / window.innerWidth;
-  // Bestimme, um wie viele Sekunden gesprungen werden soll:
-  // (Hier: maximal maxSkipSeconds, wenn der Swipe 100% der Bildschirmbreite ausmacht)
   const timeChange = swipeRatio * maxSkipSeconds;
-  // Setze die neue aktuelle Zeit – begrenze sie innerhalb der Videolänge
   video.currentTime = Math.min(Math.max(startTime + timeChange, 0), video.duration);
+  
   e.preventDefault();
 });
 
-scrubRect.addEventListener('touchend', (e) => {
-  // Hier könntest du noch Endanimationen oder Feedback einbauen
+dragContainer.addEventListener('touchend', (e) => {
+  // Füge eine Transition hinzu, damit der Container sanft zurück zur Mitte springt
+  dragContainer.style.transition = "transform 0.3s ease";
+  dragContainer.style.transform = "translateX(-50%)";
   e.preventDefault();
 });
+
 
 </script>
