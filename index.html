@@ -3560,6 +3560,8 @@ const dragContainer = document.querySelector('.drag-container');
 
 let startX = 0;      // Ausgangsposition beim Touchstart
 let currentDelta = 0; // Aktuelle horizontale Verschiebung
+const maxSlide = window.innerWidth * 0.45;
+
 
 // Beim Touchstart: Speichere die Startposition und deaktiviere die Transition
 dragContainer.addEventListener('touchstart', (e) => {
@@ -3568,14 +3570,19 @@ dragContainer.addEventListener('touchstart', (e) => {
   e.preventDefault();
 });
 
-// Beim Touchmove: Berechne die Verschiebung und passe den transform-Wert an
 dragContainer.addEventListener('touchmove', (e) => {
   const currentX = e.touches[0].clientX;
-  currentDelta = currentX - startX;
-  // Der Button ist initial mit translateX(-50%) zentriert – addiere nun die Verschiebung:
-  dragContainer.style.transform = `translateX(calc(-50% + ${currentDelta}px))`;
+  let deltaX = currentX - startX;
+  const maxSlide = window.innerWidth * 0.45; // maximal 45% der Displaybreite (links oder rechts)
+
+  // Sicherstellen, dass deltaX nicht über den erlaubten Bereich hinausgeht:
+  deltaX = Math.max(-maxSlide, Math.min(deltaX, maxSlide));
+
+  // Den Container verschieben: Ursprünglich zentriert (translateX(-50%)), plus die Verschiebung:
+  dragContainer.style.transform = `translateX(calc(-50% + ${deltaX}px))`;
   e.preventDefault();
 });
+
 
 // Beim Touchend: Aktiviere die Transition und setze den Button wieder in die Mitte zurück
 dragContainer.addEventListener('touchend', (e) => {
