@@ -408,7 +408,7 @@
             /* ca. 1360px */
             width: 30.44rem;
             /* ca. 487px */
-            height: 22rem;
+            height: 27.4rem;
             /* ca. 352px */
         }
 
@@ -457,18 +457,6 @@
             word-wrap: break-word;
         }
 
-        /* Coming soon Button */
-        .coming-soon-button {
-            position: relative;
-            width: 7.88rem;
-            /* ca. 126px */
-            height: 2.25rem;
-            /* ca. 36px */
-            background: rgba(0, 0, 0, 0);
-            border-radius: 3.125rem;
-            /* ca. 50px */
-        }
-
         /* Coming soon Text */
         .coming-soon-text {
             position: absolute;
@@ -493,6 +481,8 @@
             /* ca. 24px */
             word-wrap: break-word;
         }
+
+
 
         /* Das weiße Rechteck hinter dem Text */
 
@@ -1829,10 +1819,16 @@
         }
 
         @media (min-width: 1025px) and (max-width: 1280px) {
+            .video-container { 
+                cursor: grab; 
+                user-select: none; 
+                width: 100%; /* statt 100vw, um zu vermeiden, dass die Breite den Viewport überschreitet / height: 100vh; overflow: hidden; / stellt sicher, dass nichts übersteht */ }
+
             .video-background {
                 /* 18% von 375px: 0.18 × 375 = 67.5px (negativ) */
-                margin-top: -57.5px;
-                right: 200px;
+                transform: translateY(-50%);
+                top: 69vh;
+                scale: 1;
             }
 
             .drag-container {
@@ -1845,7 +1841,7 @@
                 transition: transform 0.3s ease;
                 touch-action: none;
                 /* Damit nur horizontale Gesten verarbeitet werden */
-                top: 900px;
+                top: 90vh;
             }
 
             .like-prompt {
@@ -1864,7 +1860,7 @@
                 left: 0;
                 width: 100%;
                 height: 90%;
-                background-color: transparent;
+                background-color: #ff0000;
                 padding: 0.625rem 1.25rem;
                 border-radius: 10.625rem;
                 opacity: 0.5;
@@ -1896,8 +1892,7 @@
 
             /* Headline-Bereich */
             .headline-container {
-                top: 200px;
-
+                top: 25vh;
                 /* Etwas Innenabstand vom linken Rand */
                 width: 90%;
                 text-align: center;
@@ -1906,7 +1901,7 @@
             }
 
             .headline {
-                font-size: 40px;
+                font-size: 48px;
                 /* Deutlich verkleinerte Schriftgröße */
                 line-height: 44px;
                 text-align: center;
@@ -1914,7 +1909,7 @@
             }
 
             .subheadline {
-                font-size: 18px;
+                font-size: 22px;
                 line-height: 28px;
                 margin-top: 10px;
                 text-align: center;
@@ -1924,7 +1919,7 @@
             /* Anpassungen für weitere Textbereiche */
             .einzigartige3dText {
                 margin-left: -195px;
-                top: 650px;
+                top: 70vh;
                 width: 100%;
                 font-size: 20px;
                 line-height: 1.2;
@@ -1952,39 +1947,37 @@
             }
 
 
-            .wasWirFuerSieTun {
-                position: absolute;
-                margin-left: 50%;
-                width: 90%;
-                font-size: 34px;
-                line-height: 30px;
-                top: 1090px;
-            }
+           /* Zentriert mit left:50% und translateX(-50%) statt margin-left */
+  .wasWirFuerSieTun {
+    position: absolute;
+    left: 55%;
+    transform: translateX(-50%);
+    width: 90vw;         /* Breite als vw */
+    font-size: 2.5vw;     /* Schriftgröße relativ zur Breite */
+    line-height: 3vw;     /* Zeilenhöhe relativ zur Breite */
+    top: 90vh;          /* Oberkante bei 100vh */
+  }
+  
+  .konzeptText {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;         /* etwas breiter, um den Inhalt aufzunehmen */
+    font-size: 1.8vw;
+    line-height: 2.2vw;
+    /* Hier wird ein Abstand unter .wasWirFuerSieTun eingehalten */
+    top: calc(100vh + 8vw);
+  }
+  
+  /* Falls auch der Slider angepasst werden soll */
+  .slider-container {
+    position: absolute;
+    width: 40vw;
+    top: calc(100vh + 20vw);
+    left: 10%;
+    transform: translateX(-50%);
+  }
 
-            .konzeptText {
-                position: absolute;
-                margin-left: 50%;
-                width: 39%;
-                font-size: 20px;
-                line-height: 28px;
-                /* Bei 768px wird der Wert 25px, bei 468px 80px – dazwischen erfolgt eine 
-                 lineare Interpolation.
-                 Für Viewports schmaler als 468px wird der Wert auf 80px begrenzt,
-                 und für Viewports breiter als 768px bleibt er bei 25px. */
-                top: 1370px;
-
-
-            }
-
-            /* Slider-Anpassungen */
-            .slider-container {
-                position: absolute;
-                width: 400px;
-                justify-content: left;
-                top: 1520px;
-                left: -80px;
-
-            }
 
 
             /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 1280px (Original: 1920x1080) */
@@ -1994,7 +1987,7 @@
                 max-width: 1280px;
                 font-size: 16px;
                 /* Basiswert für rem */
-                top: 1700px;
+                top: 160vh;
             }
 
             /* Das Pseudo‑Element erzwingt das Seitenverhältnis von 1080/1920 = 56.25% */
@@ -2194,6 +2187,8 @@
                 height: 100%;
             }
 
+            
+
             /* ELEMENTE IM CONTAINER – Berechnungen basierend auf 1920 (Breite) und 1080 (Höhe) */
 
             /* .image-case1 */
@@ -2334,10 +2329,16 @@
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {
+            .video-container { 
+                cursor: grab; 
+                user-select: none; 
+                width: 100%; /* statt 100vw, um zu vermeiden, dass die Breite den Viewport überschreitet / height: 100vh; overflow: hidden; / stellt sicher, dass nichts übersteht */ }
+
             .video-background {
                 /* 18% von 375px: 0.18 × 375 = 67.5px (negativ) */
-                margin-top: -707.5px;
-                right: 200px;
+                transform: translateY(-50%);
+                top: 69vh;
+                scale: 1;
             }
 
             .drag-container {
@@ -2350,7 +2351,7 @@
                 transition: transform 0.3s ease;
                 touch-action: none;
                 /* Damit nur horizontale Gesten verarbeitet werden */
-                top: 700px;
+                top: 90vh;
             }
 
             .like-prompt {
@@ -2401,8 +2402,7 @@
 
             /* Headline-Bereich */
             .headline-container {
-                top: 200px;
-
+                top: 25vh;
                 /* Etwas Innenabstand vom linken Rand */
                 width: 90%;
                 text-align: center;
@@ -2429,7 +2429,7 @@
             /* Anpassungen für weitere Textbereiche */
             .einzigartige3dText {
                 margin-left: -195px;
-                top: 480px;
+                top: 70vh;
                 width: 100%;
                 font-size: 20px;
                 line-height: 1.2;
@@ -2462,7 +2462,7 @@
                 width: 90%;
                 font-size: 24px;
                 line-height: 30px;
-                margin-top: 790px;
+                margin-top: 120vh;
             }
 
             .konzeptText {
@@ -2879,14 +2879,16 @@
         }
 
         @media (min-width: 426px) and (max-width: 480px) {
-            .video-container { cursor: grab; 
+            .video-container { 
+                cursor: grab; 
                 user-select: none; 
                 width: 100%; /* statt 100vw, um zu vermeiden, dass die Breite den Viewport überschreitet / height: 100vh; overflow: hidden; / stellt sicher, dass nichts übersteht */ }
-                
-                .video-background {
+
+            .video-background {
                 /* 18% von 375px: 0.18 × 375 = 67.5px (negativ) */
-                margin-top: -700px;
-                scale: 1.72;
+                transform: translateY(-50%);
+                top: 40vh;
+                scale: 2;
             }
 
             .drag-container {
@@ -2899,7 +2901,7 @@
                 transition: transform 0.3s ease;
                 touch-action: none;
                 /* Damit nur horizontale Gesten verarbeitet werden */
-                top: 720px;
+                top: 90vh;
             }
 
             .like-prompt {
@@ -2951,7 +2953,7 @@
 
             /* Headline-Bereich */
             .headline-container {
-                top: 120px;
+                top: 20vh;
                 /* Nach unten verschoben */
                 left: 3%;
                 /* Etwas Innenabstand vom linken Rand */
@@ -2962,25 +2964,23 @@
             }
 
             .headline {
-                font-size: 20px;
+                font-size: 26px;
                 /* Deutlich verkleinerte Schriftgröße */
-                line-height: 24px;
+                line-height: 28px;
                 margin: 0 auto;
             }
 
             .subheadline {
-                font-size: 12px;
+                font-size: 16px;
                 line-height: 18px;
                 margin-top: 10px;
                 text-align: center;
-                margin-left: 5%;
-                right: 5%;
             }
 
             /* Anpassungen für weitere Textbereiche */
             .einzigartige3dText {
                 margin-left: -85%;
-                top: 570px;
+                top: 75vh;
                 width: 100%;
                 font-size: 20px;
                 line-height: 1.2;
@@ -2990,7 +2990,7 @@
             .einzigartige3dText .text-small {
                 font-family: 'Inter', sans-serif;
                 color: #ffffff;
-                font-size: clamp(12px, 5vw, 26px);
+                font-size: clamp(16px, 8vw, 26px);
                 font-family: 'Inter';
                 font-weight: 500;
                 line-height: 38.40px;
@@ -3013,7 +3013,7 @@
                 width: 90%;
                 font-size: 24px;
                 line-height: 30px;
-                margin-top: 885px;
+                margin-top: 120vh;
             }
 
             .konzeptText {
@@ -3207,16 +3207,17 @@
 
         /* Anpassung für sehr kleine Bildschirme */
         @media (min-width: 376px) and (max-width: 425px) {
-            .video-container { cursor: grab; 
+            .video-container { 
+                cursor: grab; 
                 user-select: none; 
                 width: 100%; /* statt 100vw, um zu vermeiden, dass die Breite den Viewport überschreitet / height: 100vh; overflow: hidden; / stellt sicher, dass nichts übersteht */ }
 
-                .video-background {
+            .video-background {
                 /* 18% von 375px: 0.18 × 375 = 67.5px (negativ) */
-                margin-top: -770px;
+                transform: translateY(-50%);
+                top: 40vh;
                 scale: 2;
             }
-
             .drag-container {
                 position: absolute;
                 top: 4.2rem;
@@ -3227,7 +3228,7 @@
                 transition: transform 0.3s ease;
                 touch-action: none;
                 /* Damit nur horizontale Gesten verarbeitet werden */
-                top: 650px;
+                top: 90vh;
             }
 
             .like-prompt {
@@ -3277,7 +3278,7 @@
 
             /* Headline-Bereich */
             .headline-container {
-                top: 120px;
+                top: 20vh;
                 /* Nach unten verschoben */
                 left: 3%;
                 /* Etwas Innenabstand vom linken Rand */
@@ -3306,7 +3307,7 @@
             /* Anpassungen für weitere Textbereiche */
             .einzigartige3dText {
                 margin-left: -85%;
-                top: 480px;
+                top: 70vh;
                 width: 100%;
                 font-size: 20px;
                 line-height: 1.2;
@@ -3342,7 +3343,7 @@
                 width: 90%;
                 font-size: 24px;
                 line-height: 30px;
-                margin-top: 720px;
+                margin-top: 120vh;
             }
 
             .konzeptText {
@@ -3542,15 +3543,16 @@
         @media (min-width: 321px) and (max-width: 375px) {
             /* Deine CSS-Regeln hier */
 
-            .video-container { cursor: grab; 
+            .video-container { 
+                cursor: grab; 
                 user-select: none; 
                 width: 100%; /* statt 100vw, um zu vermeiden, dass die Breite den Viewport überschreitet / height: 100vh; overflow: hidden; / stellt sicher, dass nichts übersteht */ }
 
-                .video-background {
+            .video-background {
                 /* 18% von 375px: 0.18 × 375 = 67.5px (negativ) */
                 transform: translateY(-50%);
-                top: 55vh;
-                scale: 1;
+                top: 45vh;
+                scale: 2;
             }
 
 
@@ -3887,8 +3889,8 @@
             .video-background {
                 /* 18% von 375px: 0.18 × 375 = 67.5px (negativ) */
                 transform: translateY(-50%);
-                top: 55vh;
-                scale: 1;
+                top: 45vh;
+                scale: 2;
             }
 
             .drag-container {
@@ -4160,6 +4162,8 @@
                 /* ca. 28.74% */
             }
 
+
+
             /* .overlay-container */
             .content-container .overlay-container {
                 position: absolute;
@@ -4271,16 +4275,16 @@
         </span>
     </div>
 
-    <div data-layer="Was wir für Sie tun:" class="wasWirFuerSieTun hidden">
+    <div data-layer="Was wir für Sie tun:" class="wasWirFuerSieTun">
         Was wir für Sie tun:
     </div>
-    <div data-layer="Wir entwickeln individuelle Konzepte, ..." class="konzeptText hidden">
+    <div data-layer="Wir entwickeln individuelle Konzepte, ..." class="konzeptText">
         Wir entwickeln individuelle Konzepte, die deine Marke nachhaltig stärken und dein Unternehmen voranbringen. Ob
         innovative Videoproduktion, modernes Webdesign oder strategische Markenführung inklusive Corporate Identity –
         wir realisieren Ihre Vision mit höchster Professionalität und klaren Zielen.
     </div>
 
-    <div class="slider-container hidden">
+    <div class="slider-container">
         <div class="slider">
             <a href="https://example.com/link2">
                 <video src="./Fotos/done0001-0250.mp4" muted loop></video>
@@ -4322,6 +4326,29 @@
                 alt="Case Study 5" />
         </div>
     </div>
+
+
+    <div class="responsive-wrapper">
+        <div data-layer="Group 25" class="content-container hidden">
+
+            <video data-layer="casestudy-01.mp4" class="image-case1" src="./Fotos/onlyHandy0001-0016.mp4" autoplay muted loop playsinline></video>
+            <video data-layer="casestudy-03.mp4" class="image-case3" src="./Fotos/onlyHandy0001-0016.mp4" autoplay muted loop playsinline></video>
+            <div data-layer="Overlay" class="overlay-container">
+              <div data-layer="Overlay Content" class="overlay-content">
+                <div data-layer="How we design web3 products" class="product-design-title">
+                  Entdecken Sie unsere Produkte
+                </div>
+              </div>
+            </div>
+            <video data-layer="casestudy-02.mp4" class="image-case2" src="./Fotos/onlyHandy0001-0016.mp4" autoplay muted loop playsinline></video>
+            <video data-layer="casestudy-04.mp4" class="image-case4" src="./Fotos/668x3530001-0154.mp4" autoplay muted loop playsinline></video>
+            <video data-layer="casestudy-04.mp4" class="image-case5" src="./Fotos/407x3520001-0154.mp4" autoplay muted loop playsinline></video>
+            
+        </div>
+    </div>
+
+
+    
 
 
 
