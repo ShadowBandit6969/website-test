@@ -430,254 +430,175 @@
 
 
         @media (min-width: 2561px) and (max-width: 9999px) {
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 10%;
-  /* Ursprünglich 50px – skaliert: 50px × 5.2083 ≈ 260.42px, was ca. 2.60vw entspricht (260.42/9999×100) */
-  padding: 0 2.60vw;
-  position: relative;
-  background-color: rgba(0, 0, 0, 0.9);
-  margin-top: 2%;
-}
+            .video-container { 
+                cursor: grab; 
+                user-select: none; 
+                width: 100%; /* statt 100vw, um zu vermeiden, dass die Breite den Viewport überschreitet / height: 100vh; overflow: hidden; / stellt sicher, dass nichts übersteht */ }
 
-/* Logo */
-.logo {
-  display: flex;
-  align-items: center;
-  /* Ursprünglich 4.6rem (ca. 74px) → 74px × 5.2083 ≈ 383.5px; 383.5/16 ≈ 23.97rem */
-  width: 24rem;
-  /* Ursprünglich 3.1rem (ca. 50px) → 50px × 5.2083 ≈ 260.42px; 260.42/16 ≈ 16.28rem */
-  height: 16.3rem;
-}
+            .video-background {
+                /* 18% von 375px: 0.18 × 375 = 67.5px (negativ) */
+                transform: translateY(-50%);
+                top: 72vh;
+                scale: 0.9;
+                left: 5vw;
+            }
 
-.logo div {
-  /* Ursprünglich 3.25rem (ca. 52px) → 52px × 5.2083 ≈ 270.8px; 270.8/16 ≈ 16.93rem */
-  width: 16.9rem;
-  /* Höhe gleich wie im Logo (16.3rem) */
-  height: 16.3rem;
-  position: relative;
-  /* Ursprünglich 0.1rem (ca. 1.7px) → 1.7px × 5.2083 ≈ 8.86px; 8.86/16 ≈ 0.55rem */
-  border: 0.55rem solid white;
-}
-
-/* Nav-Links */
-.nav-links {
-  display: flex;
-  gap: 5%;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: white;
-  /* Ursprünglich clamp(0.625rem, 13vw, 1.125rem) – dabei entsprechen 0.625rem und 1.125rem ca. 10px bzw. 18px.
-     Skalieren: 
-       min: 10px × 5.2083 = 52.08px → 52.08/16 ≈ 3.26rem,
-       max: 18px × 5.2083 = 93.75px → 93.75/16 ≈ 5.86rem,
-       als bevorzugter Wert nehmen wir 13px × 5.2083 = 67.71px → 67.71/16 ≈ 4.23rem.
-  */
-  font-size: clamp(3.26rem, 4.23rem, 5.86rem);
-  font-weight: 500;
-  /* Ursprünglich Padding: 0.5rem (8px) und 1.5rem (24px) – skaliert:
-     0.5rem × 5.2083 ≈ 2.60rem und 1.5rem × 5.2083 ≈ 7.81rem */
-  padding: 2.60rem 7.81rem;
-}
-
-.video-container {
-  position: relative;
-  width: 100vw;
-  /* Falls du eine höhere Höhe als 100vh wünschst, z. B. 120vh, kannst du dies hier anpassen */
-  height: 100vh;
-  overflow: hidden;
-}
-
-.video-background {
-  position: absolute;
-  top: 10%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
-
-/* Drag-Container */
-.drag-container {
-  position: absolute;
-  /* Ursprünglich top: 3.2rem → 3.2rem × 5.2083 ≈ 16.67rem */
-  top: 16.67rem;
-  left: 50%;
-  transform: translateX(-50%);
-  transition: transform 0.3s ease;
-  touch-action: none;
-}
-
-/* Like-Prompt */
-.like-prompt {
-  position: relative;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  /* Padding: ursprünglich 0.625rem 1.25rem → skaliert: 0.625×5.2083 ≈ 3.26rem und 1.25×5.2083 ≈ 6.51rem */
-  padding: 3.26rem 6.51rem;
-  /* Border-Radius: ursprünglich 0.625rem → ca. 3.26rem */
-  border-radius: 3.26rem;
-  /* Font-Size: ursprünglich 1.125rem → 1.125×5.2083 ≈ 5.86rem */
-  font-size: 5.86rem;
-  z-index: 1;
-}
-
-/* Scrub-Rect (Hintergrund-Rechteck) */
-.like-prompt .scrub-rect {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgb(0, 247, 255);
-  opacity: 0.5;
-  z-index: -1;
-}
-
-.video-container.dragging {
-  cursor: grabbing;
-}
-
-            /* HEADLINE-CONTAINER */
-            .headline-container {
+            .drag-container {
                 position: absolute;
-                /* Ursprünglich 90px → 468.75px; 468.75/9999*100 ≈ 4.69vw */
-                left: 4.69vw;
-                /* Ursprünglich 280px → 1458.33px; 1458.33/5625*100 ≈ 25.96vh */
-                top: 25.96vh;
+                top: 4.2rem;
+                /* wie bisher */
+                left: 50%;
+                transform: translateX(-50%);
+                /* Für die Animation beim Zurücksetzen */
+                transition: transform 0.3s ease;
+                touch-action: none;
+                /* Damit nur horizontale Gesten verarbeitet werden */
+                top: 90vh;
+            }
+
+            .like-prompt {
+                position: relative;
                 color: white;
-                font-family: 'Inter', sans-serif;
-                text-transform: uppercase;
-                /* Ursprünglich 0.25rem (ca. 4px) → ca. 20.83px, also 20.83/16 ≈ 1.30rem */
-                letter-spacing: 1.30rem;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                font-size: 2.125rem;
+                z-index: 1;
             }
 
-            /* HEADLINE */
-            .headline {
-                /* Ursprünglich 5rem (ca. 80px) → 80×5.2083 ≈ 416.67px, also 416.67/16 ≈ 26.04rem */
-                font-size: 26rem;
-                font-weight: 900;
-                /* Ursprünglich 6rem (96px) → 96×5.2083 ≈ 500px, also 500/16 ≈ 31.25rem */
-                line-height: 31.25rem;
-                /* Für max-width empfiehlt sich ein Wert in vw – hier belassen wir 90vw (kann ggf. angepasst werden) */
-                max-width: 90vw;
-                /* Gleiche Letter-Spacing wie im Container */
-                letter-spacing: 1.30rem;
-            }
-
-            /* SUBHEADLINE */
-            .subheadline {
-                /* Ursprünglich 2.5rem (40px) → 40×5.2083 ≈ 208.33px, also ca. 13.02rem */
-                font-size: 13rem;
-                font-weight: 200;
-                /* Ursprünglich 3.5rem (ca. 55px) → 55×5.2083 ≈ 286.46px, also 286.46/16 ≈ 17.90rem (rund 17.9rem bzw. 18rem) */
-                line-height: 18rem;
-                max-width: 90vw;
-                /* Ursprünglich 1rem (ca. 15px) → 15×5.2083 ≈ 78.12px, also 78.12/16 ≈ 4.88rem */
-                margin-top: 4.88rem;
-            }
-
-            /* EINZIGARTIGE 3D TEXT */
-            .einzigartige3dText {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: flex-start;
-                padding: 0;
-                /* Ursprünglich gap: 0.5rem → 0.5×5.2083 ≈ 2.60rem */
-                gap: 2.60rem;
+            /* Das weiße Rechteck, das hinter dem Text liegt */
+            .like-prompt .scrub-rect {
                 position: absolute;
-                /* Ursprünglich Höhe: 6.3rem (101px) → 101×5.2083 ≈ 525px, also 525/16 ≈ 32.81rem */
-                height: 32.81rem;
-                /* Prozentwerte bleiben unverändert */
-                left: 64.84%;
-                right: 13.96%;
-                /* Ursprünglich top: 707.82px → 707.82×5.2083 ≈ 3690.67px; 3690.67/5625×100 ≈ 65.62vh */
-                top: 65.62vh;
-                /* Ursprünglich Breite: 28.6rem (457px) → 457×5.2083 ≈ 2380.83px, also 2380.83/16 ≈ 148.80rem */
-                width: 148.80rem;
-                font-family: 'Inter', sans-serif;
-                font-style: normal;
-                font-weight: 300;
-                /* Ursprünglich 2rem → 2×5.2083 = 10.42rem */
-                font-size: 10.42rem;
-                line-height: 120%;
-                color: #FFFFFF;
-                flex: none;
-                order: 0;
-                align-self: stretch;
-                flex-grow: 0;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 90%;
+                background-color: #ff0000;
+                padding: 0.625rem 1.25rem;
+                border-radius: 10.625rem;
+                opacity: 0.5;
+                z-index: -1;
             }
 
-            /* EINZIGARTIGE 3D TEXT – TEXT SMALL */
+            .like-prompt .scrub-rect {
+                display: block;
+            }
+
+
+            /* Allgemeine Anpassungen */
+            body {
+                font-size: 14px;
+            }
+
+            /* Navbar */
+            .navbar {
+                padding: 0 10px;
+                margin-top: 5%;
+                transform: scale(0.86);
+
+            }
+
+            .nav-links a {
+                font-size: 52px;
+                padding: 2rem;
+            }
+
+            .logo {
+            display: flex;
+            align-items: center;
+            width: 4.6rem;
+            /* ca. 74px */
+            height: 3.1rem;
+            /* ca. 50px */
+        }
+
+        .logo div {
+            width: 5.25rem;
+            /* ca. 52px */
+            height: 5.1rem;
+            /* ca. 50px */
+            position: relative;
+            border: 0.1rem solid white;
+            /* ca. 1.7px */
+        }
+
+              /* Headline-Bereich */
+              .headline-container {
+                top: 28vh;
+                /* Etwas Innenabstand vom linken Rand */
+                width: 90%;
+                text-align: left;
+                justify-content: left;
+                left: 22.5vw;
+                right: 5%;
+                scale: 1.4;
+            }
+
+            .headline {
+                font-size: 62px;
+                /* Deutlich verkleinerte Schriftgröße */
+                line-height: 64px;
+                margin: 0 auto;
+                justify-content: left;
+            }
+
+            .subheadline {
+                font-size: 32px;
+                line-height: 36px;
+                margin-top: 10px;
+                text-align: left;
+                font-weight: 200;
+                justify-content: left;
+
+            }
+            /* Anpassungen für weitere Textbereiche */
+            .einzigartige3dText {
+                left: 80vw;
+                top: 75vh;
+                width: 100%;
+                font-size: 20px;
+                line-height: 1.2;
+                transform: scale(1.2);
+            }
+
             .einzigartige3dText .text-small {
                 font-family: 'Inter', sans-serif;
                 color: #ffffff;
-                /* Ursprünglich 2rem → ca. 10.42rem */
-                font-size: 10.42rem;
-                font-weight: 300;
-                /* Ursprünglich 2.4rem (ca. 38.4px) → 38.4×5.2083 ≈ 200px, also 200/16 = 12.5rem */
-                line-height: 12.5rem;
+                font-size: clamp(12px, 6vw, 32px);
+                font-family: 'Inter';
+                font-weight: 500;
+                line-height: 42.40px;
                 word-wrap: break-word;
             }
 
-            /* EINZIGARTIGE 3D TEXT – TEXT LARGE */
             .einzigartige3dText .text-large {
                 font-family: 'Inter', sans-serif;
                 color: #ffffff;
-                /* Ursprünglich 3rem → 3×5.2083 = 15.63rem */
-                font-size: 15.63rem;
+                font-size: 48px;
+                font-family: 'Inter';
                 font-weight: 600;
-                /* Ursprünglich 3.6rem → 3.6×5.2083 ≈ 18.75rem */
-                line-height: 18.75rem;
+                line-height: clamp(12px, 5vw, 57);
                 word-wrap: break-word;
             }
 
-            /* WAS WIR FÜR SIE TUN */
+
             .wasWirFuerSieTun {
-                /* Ursprünglich 625px → 625×5.2083 ≈ 3255.21px; in vw: (3255.21/9999)*100 ≈ 32.55vw */
-                width: 32.55vw;
-                color: #ffffff;
-                /* Ursprünglich 2.5rem → ca. 13.02rem */
-                font-size: 13rem;
-                font-family: 'Inter', sans-serif;
-                font-weight: 600;
-                /* Ursprünglich 3.75rem → ca. 19.53rem */
-                line-height: 19.53rem;
-                word-wrap: break-word;
-                letter-spacing: 0.05em;
-                margin-left: 35%;
-                /* Ursprünglich 12.5rem (200px) → 12.5×5.2083 ≈ 65.10rem */
-                margin-top: 65.10rem;
+                margin-left: 5%;
+                width: 90%;
+                font-size: 68px;
+                line-height: 30px;
+                margin-top: 13vh;
             }
-
-            /* KONZEPT TEXT */
+            
             .konzeptText {
-                /* Ursprünglich 1155px → 1155×5.2083 ≈ 6020.21px; in vw: (6020.21/9999)*100 ≈ 60.20vw */
-                width: 60.20vw;
-                /* Ursprünglich 9rem (ca. 143px) → 9×5.2083 ≈ 46.88rem */
-                height: 46.88rem;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                color: #c0c0c0;
-                /* Ursprünglich 1.5rem → 1.5×5.2083 ≈ 7.81rem */
-                font-size: 7.81rem;
-                font-family: 'Inter', sans-serif;
-                font-weight: 600;
-                /* Ursprünglich 2.25rem → 2.25×5.2083 ≈ 11.73rem */
-                line-height: 11.73rem;
-                word-wrap: break-word;
-                letter-spacing: 0.03em;
-                margin-left: 35%;
-                /* Ursprünglich 0.625rem (10px) → 0.625×5.2083 ≈ 3.255rem */
-                margin-top: 3.26rem;
+                margin-left: 5%;
+                width: 68%;
+                height: 100%;
+                font-size: 48px;
+                line-height: 50px;
+                font-style: normal;
+                font-weight: 300;
+                margin-top: 2vh;
+
             }
 
 
@@ -809,11 +730,22 @@
   line-height: 1.2;
 }
 
-
-
-        }
+ }
 
         @media (min-width: 1921px) and (max-width: 2560px) {
+            .video-container { 
+                cursor: grab; 
+                user-select: none; 
+                width: 100%; /* statt 100vw, um zu vermeiden, dass die Breite den Viewport überschreitet / height: 100vh; overflow: hidden; / stellt sicher, dass nichts übersteht */ }
+
+            .video-background {
+                /* 18% von 375px: 0.18 × 375 = 67.5px (negativ) */
+                transform: translateY(-50%);
+                top: 72vh;
+                scale: 0.9;
+                left: 5vw;
+            }
+
             .drag-container {
                 position: absolute;
                 top: 4.2rem;
@@ -824,7 +756,7 @@
                 transition: transform 0.3s ease;
                 touch-action: none;
                 /* Damit nur horizontale Gesten verarbeitet werden */
-                top: 1590px;
+                top: 90vh;
             }
 
             .like-prompt {
@@ -832,7 +764,7 @@
                 color: white;
                 padding: 0.625rem 1.25rem;
                 border-radius: 10.625rem;
-                font-size: 1.125rem;
+                font-size: 2.125rem;
                 z-index: 1;
             }
 
@@ -843,7 +775,7 @@
                 left: 0;
                 width: 100%;
                 height: 90%;
-                background-color: transparent;
+                background-color: #ff0000;
                 padding: 0.625rem 1.25rem;
                 border-radius: 10.625rem;
                 opacity: 0.5;
@@ -854,70 +786,124 @@
                 display: block;
             }
 
-            .headline-container {
-                position: absolute;
-                left: 390px;
-                top: 320px;
-                color: white;
-                font-family: 'Inter', sans-serif;
-                text-transform: uppercase;
-                letter-spacing: 1.6px;
-                scale: 1.5;
+
+            /* Allgemeine Anpassungen */
+            body {
+                font-size: 14px;
             }
 
-            .einzigartige3dText {
-                display: absolute;
-                flex-direction: column;
-                justify-content: center;
-                align-items: flex-start;
-                padding: 0;
-                gap: 0.5rem;
-                /* ca. 8px */
-                position: absolute;
-                height: 6.3rem;
-                /* ca. 101px */
-                left: 64.84%;
-                right: 13.96%;
-                top: 1000px;
-                /* annähernd statt 707.82px */
-                width: 28.6rem;
-                /* ca. 457px */
-                font-family: 'Inter', sans-serif;
-                font-style: normal;
-                font-weight: 300;
-                font-size: 2rem;
-                /* ca. 32px */
-                line-height: 120%;
-                color: #FFFFFF;
-                flex: none;
-                order: 0;
-                align-self: stretch;
-                flex-grow: 0;
+            /* Navbar */
+            .navbar {
+                padding: 0 10px;
+                margin-top: 5%;
+                transform: scale(0.86);
+
             }
+
+            .nav-links a {
+                font-size: 52px;
+                padding: 2rem;
+            }
+
+            .logo {
+            display: flex;
+            align-items: center;
+            width: 4.6rem;
+            /* ca. 74px */
+            height: 3.1rem;
+            /* ca. 50px */
+        }
+
+        .logo div {
+            width: 5.25rem;
+            /* ca. 52px */
+            height: 5.1rem;
+            /* ca. 50px */
+            position: relative;
+            border: 0.1rem solid white;
+            /* ca. 1.7px */
+        }
+
+              /* Headline-Bereich */
+              .headline-container {
+                top: 28vh;
+                /* Etwas Innenabstand vom linken Rand */
+                width: 90%;
+                text-align: left;
+                justify-content: left;
+                left: 22.5vw;
+                right: 5%;
+                scale: 1.4;
+            }
+
+            .headline {
+                font-size: 62px;
+                /* Deutlich verkleinerte Schriftgröße */
+                line-height: 64px;
+                margin: 0 auto;
+                justify-content: left;
+            }
+
+            .subheadline {
+                font-size: 32px;
+                line-height: 36px;
+                margin-top: 10px;
+                text-align: left;
+                font-weight: 200;
+                justify-content: left;
+
+            }
+            /* Anpassungen für weitere Textbereiche */
+            .einzigartige3dText {
+                left: 80vw;
+                top: 75vh;
+                width: 100%;
+                font-size: 20px;
+                line-height: 1.2;
+                transform: scale(1.2);
+            }
+
+            .einzigartige3dText .text-small {
+                font-family: 'Inter', sans-serif;
+                color: #ffffff;
+                font-size: clamp(12px, 6vw, 32px);
+                font-family: 'Inter';
+                font-weight: 500;
+                line-height: 42.40px;
+                word-wrap: break-word;
+            }
+
+            .einzigartige3dText .text-large {
+                font-family: 'Inter', sans-serif;
+                color: #ffffff;
+                font-size: 48px;
+                font-family: 'Inter';
+                font-weight: 600;
+                line-height: clamp(12px, 5vw, 57);
+                word-wrap: break-word;
+            }
+
 
             .wasWirFuerSieTun {
-                position: absolute;
-                margin-left: 50%;
+                margin-left: 5%;
                 width: 90%;
-                font-size: 66px;
+                font-size: 68px;
                 line-height: 30px;
-                top: 2090px;
+                margin-top: 13vh;
             }
-
+            
             .konzeptText {
-                position: absolute;
-                margin-left: 50%;
-                width: 39%;
-                font-size: 40px;
-                line-height: 48px;
-                /* Bei 768px wird der Wert 25px, bei 468px 80px – dazwischen erfolgt eine 
-                 lineare Interpolation.
-                 Für Viewports schmaler als 468px wird der Wert auf 80px begrenzt,
-                 und für Viewports breiter als 768px bleibt er bei 25px. */
-                top: 2460px;
-
+                margin-left: 5%;
+                width: 68%;
+                height: 100%;
+                font-size: 48px;
+                line-height: 50px;
+                font-style: normal;
+                font-weight: 300;
+                margin-top: 2vh;
 
             }
+
 
 
 
@@ -930,7 +916,7 @@
                 font-size: 16px;
                 /* Basiswert für rem */
                 left: 450px;
-                top: 3000px;
+                top: 140vh;
             }
 
             /* Das Pseudo‑Element erzwingt das Seitenverhältnis 1440/2560 = 56.25% */
@@ -1089,95 +1075,18 @@
         }
 
         @media (min-width: 1441px) and (max-width: 1920px) {
-            .headline-container {
-                position: absolute;
-                left: 6vw;
-                /* annähernd statt 90px */
-                top: 300px;
-                /* annähernd statt 280px */
-                color: white;
-                font-family: 'Inter', sans-serif;
-                text-transform: uppercase;
-                letter-spacing: 0.25rem;
-                /* ca. 4px */
-            }
+            .video-container { 
+                cursor: grab; 
+                user-select: none; 
+                width: 100%; /* statt 100vw, um zu vermeiden, dass die Breite den Viewport überschreitet / height: 100vh; overflow: hidden; / stellt sicher, dass nichts übersteht */ }
 
-            .headline {
-                font-size: 5rem;
-                /* ca. 80px */
-                font-weight: 900;
-                line-height: 6rem;
-                /* ca. 96px */
-                max-width: 90vw;
-                /* ersetzt 2748px */
-                letter-spacing: 0.25rem;
-                /* ca. 4px */
+            .video-background {
+                /* 18% von 375px: 0.18 × 375 = 67.5px (negativ) */
+                transform: translateY(-50%);
+                top: 72vh;
+                scale: 0.9;
+                left: 5vw;
             }
-
-            .subheadline {
-                font-size: 2.5rem;
-                /* ca. 40px */
-                font-weight: 200;
-                line-height: 3.5rem;
-                /* ca. 55px */
-                max-width: 90vw;
-                /* ersetzt 2578px */
-                margin-top: 1rem;
-                /* ca. 15px */
-            }
-
-            .einzigartige3dText {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: flex-start;
-                padding: 0;
-                gap: 0.5rem;
-                /* ca. 8px */
-                position: absolute;
-                height: 6.3rem;
-                /* ca. 101px */
-                left: 64.84%;
-                right: 13.96%;
-                top: 800px;
-                /* annähernd statt 707.82px */
-                width: 28.6rem;
-                /* ca. 457px */
-                font-family: 'Inter', sans-serif;
-                font-style: normal;
-                font-weight: 300;
-                font-size: 2rem;
-                /* ca. 32px */
-                line-height: 120%;
-                color: #FFFFFF;
-                flex: none;
-                order: 0;
-                align-self: stretch;
-                flex-grow: 0;
-            }
-
-            .einzigartige3dText .text-small {
-                font-family: 'Inter', sans-serif;
-                color: #ffffff;
-                font-size: 2rem;
-                /* ca. 32px */
-                font-weight: 300;
-                line-height: 2.4rem;
-                /* ca. 38.4px */
-                word-wrap: break-word;
-            }
-
-            .einzigartige3dText .text-large {
-                font-family: 'Inter', sans-serif;
-                color: #ffffff;
-                font-size: 3rem;
-                /* ca. 48px */
-                font-weight: 600;
-                line-height: 3.6rem;
-                /* ca. 57.6px */
-                word-wrap: break-word;
-            }
-
 
             .drag-container {
                 position: absolute;
@@ -1189,7 +1098,7 @@
                 transition: transform 0.3s ease;
                 touch-action: none;
                 /* Damit nur horizontale Gesten verarbeitet werden */
-                top: 1090px;
+                top: 90vh;
             }
 
             .like-prompt {
@@ -1208,7 +1117,7 @@
                 left: 0;
                 width: 100%;
                 height: 90%;
-                background-color: transparent;
+                background-color: #ff0000;
                 padding: 0.625rem 1.25rem;
                 border-radius: 10.625rem;
                 opacity: 0.5;
@@ -1219,29 +1128,107 @@
                 display: block;
             }
 
-            .wasWirFuerSieTun {
-                position: absolute;
-                margin-left: 50%;
+
+            /* Allgemeine Anpassungen */
+            body {
+                font-size: 14px;
+            }
+
+            /* Navbar */
+            .navbar {
+                padding: 0 10px;
+                margin-top: 5%;
+                transform: scale(0.86);
+
+            }
+
+            .nav-links a {
+                font-size: 22px;
+                padding: 5px 10px;
+            }
+
+              /* Headline-Bereich */
+              .headline-container {
+                top: 28vh;
+                /* Etwas Innenabstand vom linken Rand */
                 width: 90%;
-                font-size: 34px;
-                line-height: 30px;
-                top: 1190px;
+                text-align: left;
+                justify-content: left;
+                left: 22.5vw;
+                right: 5%;
+                scale: 1.4;
             }
 
-            .konzeptText {
-                position: absolute;
-                margin-left: 50%;
-                width: 39%;
+            .headline {
+                font-size: 52px;
+                /* Deutlich verkleinerte Schriftgröße */
+                line-height: 54px;
+                margin: 0 auto;
+                justify-content: left;
+            }
+
+            .subheadline {
+                font-size: 32px;
+                line-height: 34px;
+                margin-top: 10px;
+                text-align: left;
+                font-weight: 200;
+                justify-content: left;
+
+            }
+            /* Anpassungen für weitere Textbereiche */
+            .einzigartige3dText {
+                left: 70vw;
+                top: 70vh;
+                width: 100%;
                 font-size: 20px;
-                line-height: 28px;
-                /* Bei 768px wird der Wert 25px, bei 468px 80px – dazwischen erfolgt eine 
-                 lineare Interpolation.
-                 Für Viewports schmaler als 468px wird der Wert auf 80px begrenzt,
-                 und für Viewports breiter als 768px bleibt er bei 25px. */
-                top: 1440px;
+                line-height: 1.2;
+                transform: scale(1);
+            }
 
+            .einzigartige3dText .text-small {
+                font-family: 'Inter', sans-serif;
+                color: #ffffff;
+                font-size: clamp(12px, 6vw, 32px);
+                font-family: 'Inter';
+                font-weight: 500;
+                line-height: 42.40px;
+                word-wrap: break-word;
+            }
+
+            .einzigartige3dText .text-large {
+                font-family: 'Inter', sans-serif;
+                color: #ffffff;
+                font-size: 48px;
+                font-family: 'Inter';
+                font-weight: 600;
+                line-height: clamp(12px, 5vw, 57);
+                word-wrap: break-word;
+            }
+
+
+            .wasWirFuerSieTun {
+                margin-left: 5%;
+                width: 90%;
+                font-size: 48px;
+                line-height: 30px;
+                margin-top: 13vh;
+            }
+            
+            .konzeptText {
+                margin-left: 5%;
+                width: 78%;
+                height: 100%;
+                font-size: 34px;
+                line-height: 42px;
+                font-style: normal;
+                font-weight: 300;
+                margin-top: 2vh;
 
             }
+
+
+
 
 
 
@@ -1252,7 +1239,7 @@
                 width: 100%;
                 max-width: 1920px;
                 font-size: 16px;
-                top: 1900px;
+                top: 140vh;
                 /* Basiswert für rem */
             }
 
@@ -1347,7 +1334,7 @@
                 /* ca. 34.79% */
                 height: calc(172.80 / 1080 * 100%);
                 /* ca. 16.00% */
-                background: rgba(255, 255, 255, 0.10);
+                background: rgba(0, 0, 0, 0.1);
             }
 
             /* .overlay-content */
@@ -1412,12 +1399,18 @@
 
         @media (min-width: 1281px) and (max-width: 1440px) {
 
+            .video-container { 
+                cursor: grab; 
+                user-select: none; 
+                width: 100%; /* statt 100vw, um zu vermeiden, dass die Breite den Viewport überschreitet / height: 100vh; overflow: hidden; / stellt sicher, dass nichts übersteht */ }
+
             .video-background {
                 /* 18% von 375px: 0.18 × 375 = 67.5px (negativ) */
-                margin-top: -57.5px;
-                right: 200px;
+                transform: translateY(-50%);
+                top: 72vh;
+                scale: 0.9;
+                left: 5vw;
             }
-
 
             .drag-container {
                 position: absolute;
@@ -1429,7 +1422,7 @@
                 transition: transform 0.3s ease;
                 touch-action: none;
                 /* Damit nur horizontale Gesten verarbeitet werden */
-                top: 930px;
+                top: 90vh;
             }
 
             .like-prompt {
@@ -1448,7 +1441,7 @@
                 left: 0;
                 width: 100%;
                 height: 90%;
-                background-color: transparent;
+                background-color: #ff0000;
                 padding: 0.625rem 1.25rem;
                 border-radius: 10.625rem;
                 opacity: 0.5;
@@ -1478,37 +1471,40 @@
                 padding: 5px 10px;
             }
 
-            /* Headline-Bereich */
-            .headline-container {
-                top: 200px;
-
+              /* Headline-Bereich */
+              .headline-container {
+                top: 28vh;
                 /* Etwas Innenabstand vom linken Rand */
                 width: 90%;
-                text-align: center;
-                left: 5%;
+                text-align: left;
+                justify-content: left;
+                left: 25%;
                 right: 5%;
+                scale: 1.4;
             }
 
             .headline {
-                font-size: 40px;
+                font-size: 34px;
                 /* Deutlich verkleinerte Schriftgröße */
-                line-height: 44px;
-                text-align: center;
+                line-height: 34px;
                 margin: 0 auto;
+                justify-content: left;
             }
 
             .subheadline {
-                font-size: 18px;
-                line-height: 28px;
+                font-size: 16px;
+                line-height: 18px;
                 margin-top: 10px;
-                text-align: center;
+                text-align: left;
+                font-weight: 200;
+
+                justify-content: left;
 
             }
-
             /* Anpassungen für weitere Textbereiche */
             .einzigartige3dText {
                 margin-left: -195px;
-                top: 750px;
+                top: 70vh;
                 width: 100%;
                 font-size: 20px;
                 line-height: 1.2;
@@ -1537,28 +1533,26 @@
 
 
             .wasWirFuerSieTun {
-                position: absolute;
-                margin-left: 50%;
+                margin-left: 5%;
                 width: 90%;
-                font-size: 34px;
+                font-size: 32px;
                 line-height: 30px;
-                top: 1090px;
+                margin-top: 13vh;
             }
-
+            
             .konzeptText {
-                position: absolute;
-                margin-left: 50%;
-                width: 39%;
-                font-size: 20px;
+                margin-left: 5%;
+                width: 78%;
+                font-size: 22px;
                 line-height: 28px;
-                /* Bei 768px wird der Wert 25px, bei 468px 80px – dazwischen erfolgt eine 
-                 lineare Interpolation.
-                 Für Viewports schmaler als 468px wird der Wert auf 80px begrenzt,
-                 und für Viewports breiter als 768px bleibt er bei 25px. */
-                top: 1360px;
-
+                /* Bei 768px wird der Wert 25px, bei 468px 80px – dazwischen erfolgt eine lineare Interpolation.
+       Für Viewports schmaler als 468px wird der Wert auf 80px begrenzt,
+       und für Viewports breiter als 768px bleibt er bei 25px. */
+                margin-top: 2vh;
 
             }
+
+
 
 
 
@@ -1568,7 +1562,7 @@
                 width: 100%;
                 max-width: 1440px;
                 font-size: 16px;
-                top: 1600px;
+                top: 130vh;
                 /* Basiswert für rem */
             }
 
@@ -1861,7 +1855,7 @@
             .wasWirFuerSieTun {
                 margin-left: 5%;
                 width: 90%;
-                font-size: 24px;
+                font-size: 32px;
                 line-height: 30px;
                 margin-top: 13vh;
             }
@@ -1869,7 +1863,7 @@
             .konzeptText {
                 margin-left: 5%;
                 width: 78%;
-                font-size: 20px;
+                font-size: 22px;
                 line-height: 28px;
                 /* Bei 768px wird der Wert 25px, bei 468px 80px – dazwischen erfolgt eine lineare Interpolation.
        Für Viewports schmaler als 468px wird der Wert auf 80px begrenzt,
@@ -2585,19 +2579,17 @@
                 width: 80%;
                 font-size: 20px;
                 line-height: 28px;
-                /* Bei 768px wird der Wert 25px, bei 468px 80px – dazwischen erfolgt eine lineare Interpolation.
-       Für Viewports schmaler als 468px wird der Wert auf 80px begrenzt,
-       und für Viewports breiter als 768px bleibt er bei 25px. */
+                height: 100%;
                 margin-top: clamp(25px, calc(25px + 55 * ((768px - 100vw) / 300)), 80px);
 
             }
 
         .responsive-wrapper {
-    position: relative; /* statt absolute */
+    position: absolute; 
     width: 100%;
     max-width: 768px;
     font-size: 16px;
-    margin-top: 0; /* oder ein passender positiver Wert */
+    top: 140vh;
 }
 
 
@@ -2896,6 +2888,7 @@
             .konzeptText {
                 margin-left: 5%;
                 width: 90%;
+                height: 100%;
                 font-size: 16px;
                 line-height: 24px;
                 margin-top: 35px;
@@ -2905,12 +2898,13 @@
 
             /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 480px */
             .responsive-wrapper {
-                position: relative;
+                position: absolute;
                 width: 100%;
                 max-width: 480px;
                 /* Container auf 480px begrenzt */
                 font-size: 16px;
                 /* Basiswert für rem, falls benötigt */
+                top: 140vh;
             }
 
             /* Pseudo-Element erhält das originale Seitenverhältnis (1224/1807 ≈ 67,76%) */
