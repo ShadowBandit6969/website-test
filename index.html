@@ -3180,8 +3180,7 @@
             /* Wrapper: alle Längen relativ zur Breite (Referenz: 1920px) */
             #slider .wrapper {
                 position: relative;
-                top: calc(290 / 1920 * 100vw);
-                /* 290px als vw */
+
                 left: 0vw;
                 /* 6px als vw */
                 width: 100vw;
@@ -3203,7 +3202,6 @@
                 display: flex;
                 flex-wrap: nowrap;
                 justify-content: flex-start;
-                position: relative;
             }
 
             #slider .card>.row>.icon {
@@ -3253,6 +3251,7 @@
                 cursor: grab;
                 user-select: none;
                 width: 100%;
+                height: 100%;
                 /* statt 100vw, um zu vermeiden, dass die Breite den Viewport überschreitet / height: 100vh; overflow: hidden; / stellt sicher, dass nichts übersteht */
             }
 
@@ -3401,13 +3400,13 @@
 
             /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 480px */
             .responsive-wrapper {
-                position: absolute;
+                position: relative;
                 width: 100%;
                 max-width: 480px;
                 /* Container auf 480px begrenzt */
                 font-size: 16px;
                 /* Basiswert für rem, falls benötigt */
-                top: 140vh;
+                top: -10rem;
             }
 
             /* Pseudo-Element erhält das originale Seitenverhältnis (1224/1807 ≈ 67,76%) */
@@ -3565,7 +3564,7 @@
 
             /* Wrapper: alle Längen relativ zur Breite (Referenz: 1920px) */
             #slider .wrapper {
-                position: absolute;
+                position: relative;
                 top: calc(290 / 1920 * 100vw);
                 /* 290px als vw */
                 left: calc(6 / 1920 * 100vw);
@@ -3580,7 +3579,7 @@
                 /* Verschiebung und Skalierung ebenfalls in vw */
                 transform: translateX(-calc(5 / 1920 * 100vw));
                 scale: 1.7;
-                top: 220vh;
+                margin-top: 10rem;
             }
 
             #slider .container {
@@ -3619,6 +3618,17 @@
                 margin-top: 5px;
                 margin-left: -3px;
             }
+            .site-footer {
+                position: relative;
+                background-color: #111;
+                padding: 2rem 5vw;
+                color: #fff;
+                font-family: 'Inter', sans-serif;
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                margin-top: 15rem;
+            }
         }
 
 
@@ -3630,6 +3640,7 @@
                 user-select: none;
                 width: 100%;
                 height: 100%;
+                overflow: hidden;
                 /* statt 100vw, um zu vermeiden, dass die Breite den Viewport überschreitet / height: 100vh; overflow: hidden; / stellt sicher, dass nichts übersteht */
             }
 
@@ -3781,13 +3792,13 @@
 
             /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 425px */
             .responsive-wrapper {
-                position: absolute;
+                position: relative;
                 width: 95%;
                 max-width: 425px;
                 /* Container auf 425px begrenzt */
                 font-size: 16px;
                 /* Basiswert für rem, falls benötigt */
-                top: 150vh;
+                margin-top: -5rem;
             }
 
             /* Pseudo-Element erhält das originale Seitenverhältnis (1224/1807 ≈ 67,76%) */
@@ -3947,7 +3958,7 @@
 
             /* Wrapper: alle Längen relativ zur Breite (Referenz: 1920px) */
             #slider .wrapper {
-                position: absolute;
+                position: relative;
                 left: calc(6 / 1920 * 100vw);
                 /* 6px als vw */
                 width: 100vw;
@@ -3960,7 +3971,7 @@
                 /* Verschiebung und Skalierung ebenfalls in vw */
                 transform: translateX(-calc(5 / 1920 * 100vw));
                 scale: 1.7;
-                left: -0.6vw;
+                margin-top: 20rem;
             }
 
             #slider .container {
@@ -3969,8 +3980,6 @@
                 display: flex;
                 flex-wrap: nowrap;
                 justify-content: flex-start;
-                position: absolute;
-                margin-top: 260vh;
             }
 
             /* Icon innerhalb der Karte */
@@ -4003,6 +4012,7 @@
             }
 
             .site-footer {
+                position: relative;
                 background-color: #111;
                 padding: 2rem 5vw;
                 color: #fff;
@@ -4010,7 +4020,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 1.5rem;
-                margin-top: 120vh;
+                margin-top: 15rem;
             }
         }
 
@@ -4179,13 +4189,13 @@
 
             /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 375px */
             .responsive-wrapper {
-                position: absolute;
+                position: relative;
                 width: 100%;
                 max-width: 375px;
                 /* Hier wird der Container auf 375px begrenzt */
                 font-size: 16px;
                 /* Basiswert für rem, falls nötig */
-                top: 150vh;
+                margin-top: -8rem;
             }
 
             /* Pseudo-Element erhält das originale Seitenverhältnis (1224/1807 ≈ 67,76%) */
@@ -4334,7 +4344,7 @@
 
             /* Wrapper: alle Längen relativ zur Breite (Referenz: 1920px) */
             #slider .wrapper {
-                position: absolute;
+                position: relative;
                 /* 290px als vw */
                 left: calc(6 / 1920 * 100vw);
                 /* 6px als vw */
@@ -4344,8 +4354,7 @@
                 align-items: center;
                 justify-content: center;
                 scale: 1.7;
-                margin-top: clamp(200vh, calc(245vh - ((100vw - 440px) * (45 / 460))), 245vh);
-
+                margin-top: 15rem;
             }
 
             #slider .container {
@@ -4388,6 +4397,7 @@
             }
 
             .site-footer {
+                position: relative;
                 background-color: #111;
                 padding: 2rem 5vw;
                 color: #fff;
@@ -4395,7 +4405,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 1.5rem;
-                margin-top: 160vh;
+                margin-top: 10rem;
             }
 
         }
@@ -4589,13 +4599,13 @@
 
             /* RESPONSIVER WRAPPER MIT FESTEM SEITENVERHÄLTNIS und Basis-Schriftgröße */
             .responsive-wrapper {
-                position: absolute;
+                position: relative;
                 width: 100%;
                 max-width: 1807px;
                 /* Originalbreite als Obergrenze */
                 font-size: 16px;
                 /* Basiswert für rem */
-                top: 140vh;
+                margin-top: -4rem;
             }
 
             .responsive-wrapper::before {
@@ -4750,7 +4760,7 @@
 
             /* Wrapper: alle Längen relativ zur Breite (Referenz: 1920px) */
             #slider .wrapper {
-                position: absolute;
+                position: relative;
                 /* 290px als vw */
                 left: calc(6 / 1920 * 100vw);
                 /* 6px als vw */
@@ -4764,7 +4774,7 @@
                 /* Verschiebung und Skalierung ebenfalls in vw */
                 transform: translateX(-calc(5 / 1920 * 100vw));
                 scale: 1.7;
-                margin-top: 200vh;
+                margin-top: 20rem;
 
             }
 
@@ -4799,6 +4809,7 @@
             }
 
             .site-footer {
+                position: relative;
                 background-color: #111;
                 padding: 2rem 5vw;
                 color: #fff;
@@ -4806,7 +4817,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 1.5rem;
-                margin-top: 100vh;
+                margin-top: 6rem;
             }
 
 
