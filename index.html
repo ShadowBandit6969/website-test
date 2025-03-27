@@ -2577,15 +2577,22 @@
                 cursor: grab;
                 user-select: none;
                 width: 100%;
+                height: 100%;
                 /* statt 100vw, um zu vermeiden, dass die Breite den Viewport überschreitet / height: 100vh; overflow: hidden; / stellt sicher, dass nichts übersteht */
+                overflow: hidden;
             }
 
             .video-background {
-                /* 18% von 375px: 0.18 × 375 = 67.5px (negativ) */
+                position: absolute;
+                left: 0;
+                width: 100%;
+                height: auto;
+                object-fit: cover;
                 transform: translateY(-50%);
-                top: 69vh;
-                scale: 1;
+                top: 65vh;
+                z-index: -1;
             }
+
 
             .drag-container {
                 position: absolute;
@@ -2759,6 +2766,72 @@
                 width: 100%;
                 height: 100%;
             }
+
+                  /* Wrapper: alle Längen relativ zur Breite (Referenz: 1920px) */
+                  #slider .wrapper {
+                position: absolute;
+                top: calc(290 / 1920 * 100vw);
+                /* 290px als vw */
+                left: calc(2 / 1920 * 100vw);
+                /* 6px als vw */
+                width: 100vw;
+                /* Volle Breite */
+                /* Höhe wird über ein festes Seitenverhältnis bestimmt, hier z. B. 1080/1920 ≈ 56.25vw */
+                height: calc(1080 / 1920 * 100vw);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                /* Verschiebung und Skalierung ebenfalls in vw */
+                transform: translateX(-calc(5 / 1920 * 100vw));
+                scale: 1.62;
+                top: 260vh;
+            }
+
+            #slider .container {
+                height: calc(420 / 1920 * 100vw);
+                /* 400px als vw */
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                position: relative;
+            }
+
+            #slider .card>.row>.icon {
+                background: #223;
+                color: rgb(255, 0, 0);
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: calc(15 / 1920 * 100vw) auto;
+                /* Vertikaler Abstand wird beibehalten, horizontale Zentrierung */
+                scale: 0.5;
+            }
+
+
+            /* Slider-Karten */
+            #slider .card {
+                border-radius: 3.4vw;
+            }
+
+            #slider .card>.row>.description {
+                font-size: 0.6rem;
+                /* oder passe den Wert so an, dass der Text kleiner erscheint */
+                margin-top: 1px;
+                margin-left: -3px;
+            }
+
+            .site-footer {
+                background-color: #111;
+                padding: 2rem 5vw;
+                color: #fff;
+                font-family: 'Inter', sans-serif;
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                margin-top: 200vh;
 
         }
 
@@ -3111,7 +3184,7 @@
                 position: absolute;
                 top: calc(290 / 1920 * 100vw);
                 /* 290px als vw */
-                left: calc(6 / 1920 * 100vw);
+                left: calc(2 / 1920 * 100vw);
                 /* 6px als vw */
                 width: 100vw;
                 /* Volle Breite */
@@ -3122,8 +3195,8 @@
                 justify-content: center;
                 /* Verschiebung und Skalierung ebenfalls in vw */
                 transform: translateX(-calc(5 / 1920 * 100vw));
-                scale: 1.7;
-                top: 250vh;
+                scale: 1.62;
+                top: 235vh;
             }
 
             #slider .container {
