@@ -1637,111 +1637,85 @@
                 line-height: 1.2;
             }
 
-
-            /* Slider-spezifische Styles */
-            /* Kapselung in #slider, damit nur der Slider betroffen ist */
-
-            #slider * {
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-                font-family: 'Inter', sans-serif;
+  
+            .KlickenSieaufIhreBranche {
+                margin-left: 5%;
+                width: 90%;
+                font-size: 32px;
+                line-height: 34px;
+                margin-top: 50rem;
             }
 
-            #slider .wrapper {
-                position: absolute;
-                top: 290vh;
-                transform: translateX(-5%) scale(calc(1.4 + ((0.3 / 479) * (100vw - 1441px))));
-                left: 6%;
+
+
+                  /* Wrapper: alle Längen relativ zur Breite (Referenz: 1920px) */
+                  #slider .wrapper {
+                position: relative;
+                left:-1.9rem;
+                /* 6px als vw */
+                width: 100vw;
+                /* Volle Breite */
+                /* Höhe wird über ein festes Seitenverhältnis bestimmt, hier z. B. 1080/1920 ≈ 56.25vw */
+                height: calc(1080 / 1920 * 100vw);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                /* Verschiebung und Skalierung ebenfalls in vw */
+                transform: translateX(-calc(5 / 1920 * 100vw));
+                scale: 1.62;
+                margin-top:-12rem;
             }
 
             #slider .container {
-                height: 400px;
+                height: calc(420 / 1920 * 100vw);
+                /* 400px als vw */
                 display: flex;
                 flex-wrap: nowrap;
-                justify-content: start;
+                justify-content: flex-start;
                 position: relative;
-            }
-
-            #slider .card {
-                width: 80px;
-                border-radius: 2rem;
-                cursor: pointer;
-                overflow: hidden;
-                margin: 0 10px;
-                display: flex;
-                align-items: flex-end;
-                transition: 0.6s cubic-bezier(0.28, -0.03, 0, 0.99);
-                box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.8);
-                position: relative;
-            }
-
-            /* Videoelement in der Card */
-            #slider .card video {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                z-index: -1;
-            }
-
-            #slider .card>.row {
-                color: rgb(0, 255, 115);
-                display: flex;
-                flex-wrap: nowrap;
-                position: relative;
-                z-index: 1;
             }
 
             #slider .card>.row>.icon {
                 background: #223;
                 color: rgb(255, 0, 0);
                 border-radius: 50%;
-                width: 50px;
+                width: 30px;
+                height: 30px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin: 15px;
+                margin: calc(15 / 1920 * 100vw) auto;
+                /* Vertikaler Abstand wird beibehalten, horizontale Zentrierung */
+                scale: 0.5;
+            }
+
+
+            /* Slider-Karten */
+            #slider .card {
+                border-radius: 3.4vw;
             }
 
             #slider .card>.row>.description {
+                font-size: 0.6rem;
+                /* oder passe den Wert so an, dass der Text kleiner erscheint */
+                margin-top: 1px;
+                margin-left: -3px;
+            }
+
+            .site-footer {
+                background-color: #111;
+                padding: 2rem 5vw;
+                color: #fff;
+                font-family: 'Inter', sans-serif;
                 display: flex;
-                justify-content: center;
                 flex-direction: column;
-                overflow: hidden;
-                height: 80px;
-                width: 520px;
-                opacity: 0;
-                transform: translateY(30px);
-                transition-delay: 0.3s;
-                transition: all 0.3s ease;
-            }
+                gap: 1.5rem;
+                margin-top: 20rem;
 
-            #slider .description p {
-                color: #0000fa;
-                padding-top: 5px;
-            }
+        }
 
-            #slider .description h4 {
-                text-transform: uppercase;
-            }
 
-            #slider input {
-                display: none;
-            }
-
-            #slider input:checked+label {
-                width: 600px;
-            }
-
-            #slider input:checked+label .description {
-                opacity: 1 !important;
-                transform: translateY(0) !important;
-            }
-
-            /* ---------------------------- */
+        
 
         }
 
@@ -2058,6 +2032,85 @@
                 /* ca. 24px, anpassbar */
                 line-height: 1.2;
             }
+
+              
+            .KlickenSieaufIhreBranche {
+                margin-left: 5%;
+                width: 90%;
+                font-size: 32px;
+                line-height: 34px;
+                margin-top: 50rem;
+            }
+
+
+
+                  /* Wrapper: alle Längen relativ zur Breite (Referenz: 1920px) */
+                  #slider .wrapper {
+                position: relative;
+                left:-1.9rem;
+                /* 6px als vw */
+                width: 100vw;
+                /* Volle Breite */
+                /* Höhe wird über ein festes Seitenverhältnis bestimmt, hier z. B. 1080/1920 ≈ 56.25vw */
+                height: calc(1080 / 1920 * 100vw);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                /* Verschiebung und Skalierung ebenfalls in vw */
+                transform: translateX(-calc(5 / 1920 * 100vw));
+                scale: 1.62;
+                margin-top:-12rem;
+            }
+
+            #slider .container {
+                height: calc(420 / 1920 * 100vw);
+                /* 400px als vw */
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                position: relative;
+            }
+
+            #slider .card>.row>.icon {
+                background: #223;
+                color: rgb(255, 0, 0);
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: calc(15 / 1920 * 100vw) auto;
+                /* Vertikaler Abstand wird beibehalten, horizontale Zentrierung */
+                scale: 0.5;
+            }
+
+
+            /* Slider-Karten */
+            #slider .card {
+                border-radius: 3.4vw;
+            }
+
+            #slider .card>.row>.description {
+                font-size: 0.6rem;
+                /* oder passe den Wert so an, dass der Text kleiner erscheint */
+                margin-top: 1px;
+                margin-left: -3px;
+            }
+
+            .site-footer {
+                background-color: #111;
+                padding: 2rem 5vw;
+                color: #fff;
+                font-family: 'Inter', sans-serif;
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                margin-top: 20rem;
+
+        }
+
+
         }
 
         @media (min-width: 1025px) and (max-width: 1280px) {
@@ -2206,9 +2259,9 @@
 
             .konzeptText {
                 margin-left: 5%;
-                width: 78%;
+                width: 74%;
                 font-size: 22px;
-                line-height: 28px;
+                line-height: 32px;
                 /* Bei 768px wird der Wert 25px, bei 468px 80px – dazwischen erfolgt eine lineare Interpolation.
        Für Viewports schmaler als 468px wird der Wert auf 80px begrenzt,
        und für Viewports breiter als 768px bleibt er bei 25px. */
@@ -2221,12 +2274,12 @@
 
             /* RESPONSIVER WRAPPER MIT MAX‑WIDTH 1280px (Original: 1920x1080) */
             .responsive-wrapper {
-                position: absolute;
+                position: relative;
                 width: 100%;
                 max-width: 1280px;
                 font-size: 16px;
                 /* Basiswert für rem */
-                top: 140vh;
+                margin-top:-5rem;
                 scale: 1.05;
                 left: 2.4%;
             }
@@ -2373,8 +2426,82 @@
                 line-height: 1.2;
             }
 
+            
+            .KlickenSieaufIhreBranche {
+                margin-left: 5%;
+                width: 90%;
+                font-size: 32px;
+                line-height: 34px;
+                margin-top: 50rem;
+            }
 
 
+
+                  /* Wrapper: alle Längen relativ zur Breite (Referenz: 1920px) */
+                  #slider .wrapper {
+                position: relative;
+                left:-1.9rem;
+                /* 6px als vw */
+                width: 100vw;
+                /* Volle Breite */
+                /* Höhe wird über ein festes Seitenverhältnis bestimmt, hier z. B. 1080/1920 ≈ 56.25vw */
+                height: calc(1080 / 1920 * 100vw);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                /* Verschiebung und Skalierung ebenfalls in vw */
+                transform: translateX(-calc(5 / 1920 * 100vw));
+                scale: 1.62;
+                margin-top:-12rem;
+            }
+
+            #slider .container {
+                height: calc(420 / 1920 * 100vw);
+                /* 400px als vw */
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                position: relative;
+            }
+
+            #slider .card>.row>.icon {
+                background: #223;
+                color: rgb(255, 0, 0);
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: calc(15 / 1920 * 100vw) auto;
+                /* Vertikaler Abstand wird beibehalten, horizontale Zentrierung */
+                scale: 0.5;
+            }
+
+
+            /* Slider-Karten */
+            #slider .card {
+                border-radius: 3.4vw;
+            }
+
+            #slider .card>.row>.description {
+                font-size: 0.6rem;
+                /* oder passe den Wert so an, dass der Text kleiner erscheint */
+                margin-top: 1px;
+                margin-left: -3px;
+            }
+
+            .site-footer {
+                background-color: #111;
+                padding: 2rem 5vw;
+                color: #fff;
+                font-family: 'Inter', sans-serif;
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                margin-top: 20rem;
+
+        }
 
         }
 
@@ -2779,7 +2906,7 @@
                 /* Verschiebung und Skalierung ebenfalls in vw */
                 transform: translateX(-calc(5 / 1920 * 100vw));
                 scale: 1.62;
-                margin-top:-14rem;
+                margin-top:-12rem;
             }
 
             #slider .container {
