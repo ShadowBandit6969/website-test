@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Navbar Perfekt</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg: #121212;
+      --text: #ffffff;
+      --accent: #1e88e5;
+      --hover: #2c2c2c;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    nav {
+      background: var(--bg);
+      padding: 1rem 2rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .menu-toggle {
+      font-size: 1.8rem;
+      color: var(--text);
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: none;
+    }
+
+    .logo a {
+      color: var(--text);
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links li {
+      position: relative;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 0.5rem;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.3s;
+    }
+
+    .nav-links a:hover {
+      background: var(--hover);
+    }
+
+    .mega-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #1a1a1a;
+      padding: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      border-radius: 6px;
+      min-width: 300px;
+      z-index: 999;
+    }
+
+    .nav-links li:hover .mega-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .mega-menu h4 {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    .mega-menu a {
+      font-size: 0.9rem;
+      color: #ccc;
+      display: block;
+      padding: 0.25rem 0;
+      text-decoration: none;
+    }
+
+    .mega-menu a:hover {
+      color: var(--text);
+      background-color: #333;
+      padding-left: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .menu-toggle {
+        display: block;
+        margin-right: 1rem;
+      }
+
+      .nav-container {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 90%;
+        margin: 0 auto;
+        background: #1a1a1a;
+        flex-direction: column;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-in-out;
+        border-top: 1px solid #2c2c2c;
+        border-radius: 0 0 8px 8px;
+      }
+
+      .nav-links.open {
+        max-height: 1000px;
+      }
+
+      .nav-links li {
+        width: 100%;
+        border-bottom: 1px solid #333;
+      }
+
+      .nav-links a {
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+        color: #ffffff !important;
+        gap: 0.4rem;
+      }
+
+      .mega-menu {
+        display: none;
+        grid-template-columns: 1fr;
+        position: static;
+        transform: none;
+        opacity: 1 !important;
+        visibility: visible !important;
+        background: #262626;
+        margin: 0.5rem 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        padding: 0.5rem 1rem 1rem;
+      }
+
+      .mega-menu.active {
+        display: grid;
+        max-height: 300px;
+        overflow-y: auto;
+        padding: 1rem;
+        gap: 1rem;
+        scrollbar-width: thin;
+      }
+
+      .mega-menu.active::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .mega-menu.active::-webkit-scrollbar-thumb {
+        background-color: #444;
+        border-radius: 10px;
+      }
+
+      .has-mega > a::after {
+        content: '\f107';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        margin-left: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-container">
+      <!-- Burger-Menü links -->
+      <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+
+      <!-- Logo -->
+      <div class="logo"><a href="#">Agentur</a></div>
+
+      <!-- Navigation -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+        <li class="has-mega">
+          <a href="#" id="loesungenToggle"><i class="fas fa-lightbulb"></i> Lösungen</a>
+          <div class="mega-menu" id="megaMenu">
+            <div>
+              <h4>3D Design</h4>
+              <a href="#">Animationen</a>
+              <a href="#">Produktrendering</a>
+              <a href="#">Prototypen</a>
+            </div>
+            <div>
+              <h4>Webdesign</h4>
+              <a href="#">UI/UX</a>
+              <a href="#">Responsive</a>
+              <a href="#">SEO</a>
+            </div>
+            <div>
+              <h4>Grafik</h4>
+              <a href="#">Logos</a>
+              <a href="#">Print</a>
+              <a href="#">Branding</a>
+            </div>
+            <div>
+              <h4>Social Media</h4>
+              <a href="#">Content</a>
+              <a href="#">Strategie</a>
+            </div>
+          </div>
+        </li>
+        <li><a href="#"><i class="fas fa-users"></i> About Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    const loesungenToggle = document.getElementById("loesungenToggle");
+    const megaMenu = document.getElementById("megaMenu");
+
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    loesungenToggle.addEventListener("click", (e) => {
+      if (window.innerWidth <= 1024) {
+        e.preventDefault();
+        megaMenu.classList.toggle("active");
+      }
+    });
+  </script>
+
+</body>
+</html>
