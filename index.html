@@ -105,7 +105,7 @@
             padding: 2rem;
             max-width: 800px;
             color: #fff;
-            background: rgba(0, 0, 0, 0.4);
+            background: none;
             border-radius: 10px;
             box-sizing: border-box;
             margin-top: -25vh;
@@ -383,6 +383,7 @@
             justify-content: center;
             cursor: pointer;
             z-index: 10;
+            margin-top: -500px;
         }
 
         .center-circle {
@@ -466,7 +467,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, #ffffff 0%, #f4f4f4 100%);
+            background: radial-gradient(circle at center, #f4f4f4 0%, #f4f4f4 100%);
             opacity: 0;
             pointer-events: none;
             z-index: 5;
@@ -493,11 +494,12 @@
         }
 
         .white-content h2 {
-            font-size: 3rem;
+            font-size: 2.8rem;
             color: #111;
             margin-bottom: 3rem;
             font-weight: 900;
         }
+
 
         .project-white-steps {
             display: flex;
@@ -662,7 +664,7 @@
         .branch-selection {
             background: #0b0b0b;
             /* Schwarz zu Beginn */
-            color: #fff;
+            color: #f4f4f4;
             padding: 6rem 2rem;
             transition: background 0.6s ease, color 0.6s ease;
         }
@@ -681,7 +683,7 @@
 
         /* Nach Klick auf Kugel: Helles Theme */
         .branch-selection.visible {
-            background: #fff;
+            background: #f4f4f4;
             color: #111;
         }
 
@@ -696,7 +698,7 @@
         }
 
         .branch-selection.visible .branch-card:hover {
-            background: #fff;
+            background: #f4f4f4;
             box-shadow: 0 14px 34px rgba(0, 0, 0, 0.06);
             border-color: rgba(255, 102, 0, 0.2);
         }
@@ -716,7 +718,7 @@
 
 
         .branch-selection.visible .branch-card {
-            background: #f7f7f7;
+            background: #f4f4f4;
             border: 1px solid #ddd;
             color: #111;
         }
@@ -809,157 +811,168 @@
             }
         }
 
-      
-      
+
+
         .testimonial-card {
-  position: relative;
-  min-width: 400px;
+            position: relative;
+            min-width: 400px;
 
-  background: rgba(26, 26, 26, 0.6);
-  border: 2px solid rgba(255, 102, 0, 0.2);
-  border-left: 4px solid var(--primary);
-  padding: 2rem;
-  border-radius: 16px;
+            background: rgba(26, 26, 26, 0.6);
+            border: 2px solid rgba(255, 102, 0, 0.2);
+            border-left: 4px solid var(--primary);
+            padding: 2rem;
+            border-radius: 16px;
 
-  backdrop-filter: blur(14px);
-  
-  transition: transform 0.6s ease, box-shadow 0.6s ease;
-  opacity: 0.95;
-  overflow: hidden;
-  transform-style: preserve-3d;
-  will-change: transform;
-  perspective: 800px;
-}
+            backdrop-filter: blur(14px);
 
-.testimonial-card::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
-  animation: rotateLight 25s linear infinite;
-  pointer-events: none;
-  z-index: 0;
-  filter: blur(10px); /* <--- Weicher Übergang */
-  opacity: 1;
-}
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+            opacity: 0.95;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            will-change: transform;
+            perspective: 800px;
+        }
+
+        .testimonial-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+            animation: rotateLight 25s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(10px);
+            /* <--- Weicher Übergang */
+            opacity: 1;
+        }
 
 
-@keyframes rotateLight {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+        @keyframes rotateLight {
+            0% {
+                transform: rotate(0deg);
+            }
 
-/* ✨ Hover effect mit 3D Shine */
-.testimonial-card:hover {
-  transform: rotateY(6deg) rotateX(2deg) scale(1.03);
-  box-shadow: 0 5px 18px rgba(119, 119, 119, 0.596);
-  opacity: 1;
-}
+            100% {
+                transform: rotate(360deg);
+            }
+        }
 
-/* 🔥 Edge glow */
-.testimonial-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    120deg,
-    rgba(255, 102, 0, 0.15),
-    transparent,
-    rgba(255, 102, 0, 0.15)
-  );
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  z-index: 1;
-}
+        /* ✨ Hover effect mit 3D Shine */
+        .testimonial-card:hover {
+            transform: rotateY(6deg) rotateX(2deg) scale(1.03);
+            box-shadow: 0 5px 18px rgba(119, 119, 119, 0.596);
+            opacity: 1;
+        }
 
-.testimonial-card:hover::after {
-  opacity: 1;
-}
+        /* 🔥 Edge glow */
+        .testimonial-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(120deg,
+                    rgba(255, 102, 0, 0.15),
+                    transparent,
+                    rgba(255, 102, 0, 0.15));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-.testimonial-card p {
-  font-size: 1.15rem;
-  color: #f3f3f3;
-  margin-bottom: 1rem;
-  position: relative;
-  z-index: 2;
-}
-.epic-testimonials {
-  padding-top: 140px;
-}
+        .testimonial-card:hover::after {
+            opacity: 1;
+        }
 
-.testimonial-card span {
-  color: var(--muted);
-  font-style: italic;
-  position: relative;
-  z-index: 2;
-}
-.testimonial-slider-wrapper {
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-}
+        .testimonial-card p {
+            font-size: 1.15rem;
+            color: #f3f3f3;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
 
-.testimonial-slider {
-  display: flex;
-  gap: 2rem;
-  animation: slideTestimonial 45s linear infinite;
-  will-change: transform;
-}
+        .epic-testimonials {
+            padding-top: 140px;
+        }
 
-.testimonial-slider:hover {
-  animation-play-state: paused;
-}
+        .testimonial-card span {
+            color: var(--muted);
+            font-style: italic;
+            position: relative;
+            z-index: 2;
+        }
 
-@keyframes slideTestimonial {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-.testimonial-waves {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
-  pointer-events: none;
-  z-index: 10;
-  opacity: 0;
-  transition: opacity 1s ease;
-  mask-image: linear-gradient(to bottom, white 100%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, white 100%, transparent 100%);
-}
+        .testimonial-slider-wrapper {
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+        }
 
-.wave-wrapper {
-  width: 200%;
-  height: 100%;
-  animation: smoothWave 40s linear infinite;
-  transform: scaleX(-1); /* Spiegelung */
-}
+        .testimonial-slider {
+            display: flex;
+            gap: 2rem;
+            animation: slideTestimonial 45s linear infinite;
+            will-change: transform;
+        }
 
-.wave-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
+        .testimonial-slider:hover {
+            animation-play-state: paused;
+        }
 
-@keyframes smoothWave {
-  0% { transform: translateX(0%) scaleX(-1); }
-  100% { transform: translateX(-50%) scaleX(-1); }
-}
+        @keyframes slideTestimonial {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .testimonial-waves {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 1s ease;
+            mask-image: linear-gradient(to bottom, white 100%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, white 100%, transparent 100%);
+        }
+
+
+        .wave-wrapper {
+            width: 200%;
+            height: 100%;
+            animation: smoothWave 40s linear infinite;
+            transform: scaleX(-1);
+            /* Spiegelung */
+        }
+
+        .wave-svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        @keyframes smoothWave {
+            0% {
+                transform: translateX(0%) scaleX(-1);
+            }
+
+            100% {
+                transform: translateX(-50%) scaleX(-1);
+            }
+        }
 
 
 
@@ -977,33 +990,88 @@
         }
 
 
-        .portfolio-item {
+
+        .video-focus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            padding: 4rem 0;
+        }
+
+        .video-focus-item {
             position: relative;
             overflow: hidden;
-            border-radius: 8px;
+            border-radius: 20px;
+            height: 320px;
+            background-color: #000;
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.06), 0 0 60px rgba(255, 102, 0, 0.05);
+            isolation: isolate;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            backdrop-filter: blur(10px);
         }
 
-        .portfolio-item img {
-            transition: transform 0.5s ease;
+        .video-focus-item:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 0 30px rgba(255, 102, 0, 0.15), 0 0 80px rgba(255, 102, 0, 0.1);
         }
 
-        .portfolio-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .portfolio-item .overlay {
+        .video-focus-item::after {
+            content: "";
             position: absolute;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            width: 100%;
-            padding: 1rem;
-            transform: translateY(100%);
-            transition: transform 0.4s ease;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(circle, rgba(255, 102, 0, 0.05), transparent 80%);
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .portfolio-item:hover .overlay {
-            transform: translateY(0);
+        .video-focus-item video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(10px);
+            transition: filter 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+            transform: scale(1.04);
+        }
+
+        .video-mask {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            mask-image: radial-gradient(circle at var(--x, 50%) var(--y, 50%), black 0%, transparent 140px);
+            -webkit-mask-image: radial-gradient(circle at var(--x, 50%) var(--y, 50%), black 0%, transparent 140px);
+            mask-repeat: no-repeat;
+            -webkit-mask-repeat: no-repeat;
+            pointer-events: none;
+        }
+
+        .video-mask video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: none !important;
+        }
+
+        .video-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 3;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            pointer-events: none;
+            letter-spacing: 0.5px;
         }
 
 
@@ -1090,22 +1158,57 @@
             align-items: center;
         }
 
+        .persona-grid .persona-card:last-child:nth-child(odd) {
+            grid-column: span 2;
+            max-width: 100%;
+            text-align: center;
+        }
 
-        @media (max-width: 768px) {
-            .hero-video-content h1 {
-                font-size: 2.2rem;
+        .tech-showcase .tech-card:last-child:nth-child(odd) {
+            grid-column: span 2;
+            max-width: 100%;
+            text-align: center;
+        }
+
+        .video-focus-grid .video-focus-item:last-child:nth-child(odd) {
+            grid-column: span 2;
+            max-width: 100%;
+            text-align: center;
+        }
+
+
+        @media (min-width: 1024px) {
+            .branch-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             }
 
-            .features {
-                flex-direction: column;
-                align-items: center;
+            .branch-grid .branch-card:last-child:nth-child(odd) {
+                grid-column: span 2;
+            }
+        }
+
+
+        @media (min-width: 768px) {
+            .branch-grid {
+                grid-template-columns: repeat(3, 1fr);
+                /* exakt 3 Spalten auf großen Screens */
             }
 
-            .hero-video-content {
-                padding: 1rem;
-                font-size: 0.95rem;
+            .branch-grid .branch-card:last-child:nth-child(odd) {
+                grid-column: span 2;
+                max-width: 100%;
+                text-align: center;
             }
 
+            .tech-showcase {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .tech-showcase .tech-card:last-child:nth-child(odd) {
+                grid-column: span 2;
+                max-width: 100%;
+                text-align: center;
+            }
         }
 
         @media (max-width: 1024px) and (min-width: 600px) {
@@ -1345,61 +1448,84 @@
         <div class="testimonial-bg"></div>
         <div class="testimonial-waves" id="testimonialWaves">
             <div class="wave-wrapper wave1">
-              <svg class="wave-svg" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                <path fill="#ffffff" d="M0,80 C320,140 1120,0 1440,60 L1440,0 L0,0 Z"></path>
-              </svg>
+                <svg class="wave-svg" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg"
+                    preserveAspectRatio="none">
+                    <path fill="#f4f4f4" d="M0,80 C320,140 1120,0 1440,60 L1440,0 L0,0 Z"></path>
+                </svg>
             </div>
-            <div class="wave-wrapper wave2">
-              <svg class="wave-svg" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                <path fill="#ffffff" d="M0,80 C320,140 1120,0 1440,60 L1440,0 L0,0 Z"></path>
-              </svg>
-            </div>
-            <div class="wave-wrapper wave3">
-              <svg class="wave-svg" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                <path fill="#ffffff" d="M0,80 C320,140 1120,0 1440,60 L1440,0 L0,0 Z"></path>
-              </svg>
-            </div>
-          </div>
-          
-          
-          
-        <div class="testimonial-slider-wrapper">
-          <div class="testimonial-slider">
-            <div class="testimonial-card">
-              <p>"Fusion³ liefert Design mit Substanz. Technik trifft Kreativität. Mega!"</p>
-              <span>– Agentur X</span>
-            </div>
-            <div class="testimonial-card">
-              <p>"Wir waren überrascht, wie viel Wirkung die Animation erzeugt hat."</p>
-              <span>– Startup Y</span>
-            </div>
-            <div class="testimonial-card">
-              <p>"Fusion³ hat unseren Markenauftritt auf ein neues Level gehoben."</p>
-              <span>– Brand Z</span>
-            </div>
-            <!-- Clone for infinite loop -->
-            <div class="testimonial-card">
-              <p>"Fusion³ liefert Design mit Substanz. Technik trifft Kreativität. Mega!"</p>
-              <span>– Agentur X</span>
-            </div>
-            <div class="testimonial-card">
-              <p>"Wir waren überrascht, wie viel Wirkung die Animation erzeugt hat."</p>
-              <span>– Startup Y</span>
-            </div>
-          </div>
+
         </div>
-      </section>
-      
+        <div class="testimonial-slider-wrapper">
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <p>"Fusion³ liefert Design mit Substanz. Technik trifft Kreativität. Mega!"</p>
+                    <span>– Agentur X</span>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Wir waren überrascht, wie viel Wirkung die Animation erzeugt hat."</p>
+                    <span>– Startup Y</span>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Fusion³ hat unseren Markenauftritt auf ein neues Level gehoben."</p>
+                    <span>– Brand Z</span>
+                </div>
+                <!-- Clone for infinite loop -->
+                <div class="testimonial-card">
+                    <p>"Fusion³ liefert Design mit Substanz. Technik trifft Kreativität. Mega!"</p>
+                    <span>– Agentur X</span>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Wir waren überrascht, wie viel Wirkung die Animation erzeugt hat."</p>
+                    <span>– Startup Y</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
 
     <section class="container" id="portfolio">
         <h2>Portfolio</h2>
-        <div class="portfolio-grid">
-            <img src="https://placehold.co/600x400/ff6600/fff?text=Web+Showcase" alt="Projekt 1" />
-            <img src="https://placehold.co/600x400/ff944d/000?text=3D+Render" alt="Projekt 2" />
-            <img src="https://placehold.co/600x400/333/ff6600?text=Interactive+Prototype" alt="Projekt 3" />
+        <div class="video-focus-grid">
+
+            <div class="video-focus-item">
+                <video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
+                <div class="video-mask"><video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
+                </div>
+                <div class="video-title">WebDesign</div>
+            </div>
+
+            <div class="video-focus-item">
+                <video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
+                <div class="video-mask"><video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
+                </div>
+                <div class="video-title">3D Design</div>
+            </div>
+
+            <div class="video-focus-item">
+                <video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
+                <div class="video-mask"><video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
+                </div>
+                <div class="video-title">3D Rendering</div>
+            </div>
+
+            <div class="video-focus-item">
+                <video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
+                <div class="video-mask"><video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
+                </div>
+                <div class="video-title">Videoschnitt</div>
+            </div>
+
+            <div class="video-focus-item">
+                <video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
+                <div class="video-mask"><video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
+                </div>
+                <div class="video-title">Branding</div>
+            </div>
+
         </div>
     </section>
+
 
     <section class="container" id="kontakt">
         <h2>Kontakt</h2>
@@ -1412,6 +1538,8 @@
             <button type="submit">Nachricht senden</button>
         </form>
     </section>
+
+
 
     <footer>
         <div class="socials">
@@ -1516,16 +1644,16 @@
             });
 
             setTimeout(() => {
-    whiteWorld.classList.add('visible');
-    document.getElementById('branchSelection').classList.add('visible');
-    trigger.style.display = 'none';
+                whiteWorld.classList.add('visible');
+                document.getElementById('branchSelection').classList.add('visible');
+                trigger.style.display = 'none';
 
-    const waveContainer = document.getElementById('testimonialWaves');
-if (waveContainer) {
-    waveContainer.style.opacity = '1';
-}
+                const waveContainer = document.getElementById('testimonialWaves');
+                if (waveContainer) {
+                    waveContainer.style.opacity = '1';
+                }
 
-}, 500);
+            }, 500);
 
         });
 
@@ -1559,6 +1687,28 @@ if (waveContainer) {
 
                 // Füge "selected" zur aktuellen Card hinzu
                 card.classList.add('selected');
+            });
+        });
+    </script>´
+
+    <script>
+        const items = document.querySelectorAll('.video-focus-item');
+
+        items.forEach(item => {
+            const mask = item.querySelector('.video-mask');
+
+            item.addEventListener('mousemove', e => {
+                const rect = item.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                mask.style.setProperty('--x', `${x}px`);
+                mask.style.setProperty('--y', `${y}px`);
+            });
+
+            item.addEventListener('mouseleave', () => {
+                mask.style.setProperty('--x', `50%`);
+                mask.style.setProperty('--y', `50%`);
             });
         });
     </script>
