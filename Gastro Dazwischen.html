@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no;">
+  <title>Home</title>
+  <!-- Bestehende Fonts und Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- Für die Cards wird zusätzlich Poppins geladen -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Neue Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Borel&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Exo&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+
+  <style>
+    /* Bestehende globale Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: black;
+      font-family: 'Inter', sans-serif;
+      color: white;
+      overflow-x: hidden;
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 10%;
+      padding: 0 3vw;
+      position: relative;
+      margin-top: 2%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      width: 4.6rem;
+      height: 3.1rem;
+    }
+
+    .logo div {
+      width: 3.25rem;
+      height: 3.1rem;
+      position: relative;
+      border: 0.1rem solid white;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 5%;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-size: clamp(0.625rem, 13vw, 1.125rem);
+      font-weight: 500;
+      padding: 0.5rem 1.5rem;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: #111;
+      padding: 2rem 5vw;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .footer-links a {
+      margin-right: 1.5rem;
+      text-decoration: none;
+      color: #ccc;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #0ff;
+    }
+
+    .social-icons a {
+      margin-right: 1rem;
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #aaa;
+      border-top: 1px solid #333;
+      padding-top: 1rem;
+    }
+
+    /* Glassmorphism Cards – Styles nur für diesen Bereich */
+    .glass-cards {
+      padding: 2rem 0;
+    }
+
+    .glass-cards .container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 40px 0;
+    }
+
+    .glass-cards .container .card {
+      position: relative;
+      width: 40%;
+      height: 300px;
+      margin: 20px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .glass-cards .container .card .imgBx img {
+      width: 100%;
+      height: 100%;
+      scale: 2;
+      transform-origin: center;
+      object-fit: cover;
+    }
+
+    .glass-cards .container .card .content {
+      position: absolute;
+      bottom: -160px;
+      width: 100%;
+      height: 160px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      flex-direction: column;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 -10px 10px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: bottom 0.5s;
+      transition-delay: 0.8s;
+    }
+
+    .glass-cards .container .card:hover .content {
+      bottom: 0px;
+      transition-delay: 0s;
+    }
+
+    .glass-cards .container .card .content .contentBx h3 {
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      font-size: 48px;
+      line-height: 1.1em;
+      text-align: center;
+      margin: 5px 0 15px;
+      transition: 0.5s;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition-delay: 0.6s;
+    }
+
+    .glass-cards .container .card:hover .content .contentBx h3 {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <div></div>
+    </div>
+    <div class="nav-links" id="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Lösungen</a>
+      <a href="#">Contact</a>
+    </div>
+  </nav>
+
+  <section class="glass-cards">
+    <div class="container">
+      <!-- Vorhandene Karten können beibehalten oder entfernt werden -->
+
+      <!-- Neue Karten mit individuellen Schriften und Inhalten -->
+      <div class="card">
+        <div class="imgBx">
+          <img src="./FotosGastroZ/Cafe.jpeg" alt="Café">
+        </div>
+        <div class="content">
+          <div class="contentBx">
+            <h3 style="font-family: 'Yellowtail', sans-serif;">Café</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="imgBx">
+          <img src="./FotosGastroZ/Döner.jpeg" alt="Döner">
+        </div>
+        <div class="content">
+          <div class="contentBx">
+            <h3 style="font-family: 'Anton', sans-serif;">Döner</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="imgBx">
+          <img src="./FotosGastroZ/Pizza.jpeg" alt="Pizzaria">
+        </div>
+        <div class="content">
+          <div class="contentBx">
+            <h3 style="font-family: 'Permanent Marker', cursive;">Pizzaria</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="imgBx">
+          <img src="./FotosGastroZ/Asia.jpeg" alt="Burger">
+        </div>
+        <div class="content">
+          <div class="contentBx">
+            <h3 style="font-family: 'Exo', sans-serif;">Anderes</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-logo">LOGO</div>
+      <nav class="footer-links">
+        <a href="#">Startseite</a>
+        <a href="#">Über uns</a>
+        <a href="#">Leistungen</a>
+        <a href="#">Kontakt</a>
+        <a href="#">Impressum</a>
+      </nav>
+      <div class="social-icons">
+        <a href="#" title="Instagram">📸</a>
+        <a href="#" title="LinkedIn">💼</a>
+        <a href="#" title="YouTube">▶️</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Deine Firma. Alle Rechte vorbehalten.
+    </div>
+  </footer>
+</body>
+
+</html>
