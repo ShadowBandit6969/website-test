@@ -892,6 +892,9 @@
   position: relative;
   z-index: 2;
 }
+.epic-testimonials {
+  padding-top: 140px;
+}
 
 .testimonial-card span {
   color: var(--muted);
@@ -925,6 +928,37 @@
   100% {
     transform: translateX(-50%);
   }
+}
+.testimonial-waves {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 1s ease;
+  mask-image: linear-gradient(to bottom, white 100%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, white 100%, transparent 100%);
+}
+
+.wave-wrapper {
+  width: 200%;
+  height: 100%;
+  animation: smoothWave 40s linear infinite;
+  transform: scaleX(-1); /* Spiegelung */
+}
+
+.wave-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@keyframes smoothWave {
+  0% { transform: translateX(0%) scaleX(-1); }
+  100% { transform: translateX(-50%) scaleX(-1); }
 }
 
 
@@ -1309,6 +1343,26 @@
     <section class="container epic-testimonials" id="kundenstimmen">
         <h2>Was Kunden sagen</h2>
         <div class="testimonial-bg"></div>
+        <div class="testimonial-waves" id="testimonialWaves">
+            <div class="wave-wrapper wave1">
+              <svg class="wave-svg" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <path fill="#ffffff" d="M0,80 C320,140 1120,0 1440,60 L1440,0 L0,0 Z"></path>
+              </svg>
+            </div>
+            <div class="wave-wrapper wave2">
+              <svg class="wave-svg" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <path fill="#ffffff" d="M0,80 C320,140 1120,0 1440,60 L1440,0 L0,0 Z"></path>
+              </svg>
+            </div>
+            <div class="wave-wrapper wave3">
+              <svg class="wave-svg" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <path fill="#ffffff" d="M0,80 C320,140 1120,0 1440,60 L1440,0 L0,0 Z"></path>
+              </svg>
+            </div>
+          </div>
+          
+          
+          
         <div class="testimonial-slider-wrapper">
           <div class="testimonial-slider">
             <div class="testimonial-card">
@@ -1461,12 +1515,18 @@
                 c.style.transform = 'scale(3)';
             });
 
-            // Zeige weiße Welt und Branchenauswahl
             setTimeout(() => {
-                whiteWorld.classList.add('visible');
-                document.getElementById('branchSelection').classList.add('visible');
-                trigger.style.display = 'none';
-            }, 500);
+    whiteWorld.classList.add('visible');
+    document.getElementById('branchSelection').classList.add('visible');
+    trigger.style.display = 'none';
+
+    const waveContainer = document.getElementById('testimonialWaves');
+if (waveContainer) {
+    waveContainer.style.opacity = '1';
+}
+
+}, 500);
+
         });
 
     </script>
