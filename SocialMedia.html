@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Fusion³ – Immersive Hero</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <style>
+    :root {
+      --primary: #ff6600;
+      --secondary: #ff944d;
+      --bg: #0b0b0b;
+      --text: #ffffff;
+      --muted: #999;
+      --container-width: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: var(--bg);
+      font-family: 'Space Grotesk', sans-serif;
+      height: 100%;
+      color: var(--text);
+    }
+
+    header {
+      width: 100%;
+      padding: 2rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #222;
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    nav a {
+      margin-left: 2rem;
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      filter: brightness(0.4);
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255,102,0,0.04), transparent 70%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    canvas#particles {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-content h1 {
+      font-size: 4.5rem;
+      font-weight: 900;
+      text-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
+      margin-bottom: 2rem;
+    }
+
+    .hero-content h1 span {
+      color: var(--primary);
+    }
+
+    .glow-button {
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.4s;
+      box-shadow: 0 0 20px rgba(255, 102, 0, 0.6);
+      text-decoration: none;
+    }
+
+    .glow-button:hover {
+      box-shadow: 0 0 30px rgba(255, 102, 0, 0.8), 0 0 60px rgba(255, 102, 0, 0.4);
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Fusion³</div>
+    <nav>
+      <a href="#tools">Leistungen</a>
+      <a href="#prozess">So läuft´s</a>
+      <a href="#branchSelection">Portfolio</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <video autoplay muted loop playsinline id="bg-video">
+      <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay"></div>
+    <canvas id="particles"></canvas>
+
+    <div class="hero-content">
+      <h1><span>Design,</span> das bewegt.</h1>
+      <a href="#start" class="glow-button">Jetzt entdecken</a>
+    </div>
+  </div>
+
+  <script>
+    // GSAP Animation (nur Titel, Button ist dauerhaft sichtbar)
+    gsap.from(".hero-content h1", {
+      y: 80,
+      opacity: 0,
+      duration: 1.5,
+      ease: "power4.out"
+    });
+
+    // Partikel-Canvas
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+
+    for (let i = 0; i < 120; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.5 + 1,
+        dx: (Math.random() - 0.5) * 0.3,
+        dy: (Math.random() - 0.5) * 0.3,
+        alpha: Math.random() * 0.5 + 0.3
+      });
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 102, 0, ${p.alpha})`;
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = "rgba(255, 102, 0, 0.6)";
+        ctx.fill();
+
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+
+      requestAnimationFrame(drawParticles);
+    }
+
+    drawParticles();
+  </script>
+</body>
+</html>
