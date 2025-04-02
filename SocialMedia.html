@@ -1,226 +1,2513 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Fusion³ – Immersive Hero</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <style>
-    :root {
-      --primary: #ff6600;
-      --secondary: #ff944d;
-      --bg: #0b0b0b;
-      --text: #ffffff;
-      --muted: #999;
-      --container-width: 1200px;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Social Media Angebot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff6600;
+            --secondary: #ff944d;
+            --bg: #0b0b0b;
+            --text: #ffffff;
+            --muted: #999;
+            --container-width: 1200px;
+        }
 
-    * {
-      box-sizing: border-box;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body, html {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: var(--bg);
-      font-family: 'Space Grotesk', sans-serif;
-      height: 100%;
-      color: var(--text);
-    }
+        html,
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            scroll-behavior: smooth;
+        }
 
-    header {
-      width: 100%;
-      padding: 2rem 5vw;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #222;
-      position: relative;
-      z-index: 10;
-    }
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: 0.3s;
+        }
 
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: var(--primary);
-      letter-spacing: 1px;
-    }
+        header {
+            width: 100%;
+            padding: 2rem 5vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+            position: relative;
+            z-index: 10;
+        }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-      transition: 0.3s;
-    }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
 
-    nav a {
-      margin-left: 2rem;
-      font-weight: 500;
-      font-size: 1rem;
-      color: var(--muted);
-    }
+        nav a {
+            margin-left: 2rem;
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--muted);
+        }
 
-    nav a:hover {
-      color: var(--primary);
-    }
+        nav a:hover {
+            color: var(--primary);
+        }
 
-    .hero {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-    }
+        .hero-video-wrapper {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: transparent;
+            background: linear-gradient(to bottom, #0b0b0b, #000);
+        }
 
-    #bg-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-      filter: brightness(0.4);
-    }
+        .video-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 1;
+            opacity: 1;
+            pointer-events: none;
+            background-color: transparent;
 
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(255,102,0,0.04), transparent 70%);
-      z-index: 1;
-      pointer-events: none;
-    }
+            /* Sanfter Verlauf oben UND unten */
+            mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+        }
 
-    canvas#particles {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-    }
 
-    .hero-content {
-      position: relative;
-      z-index: 3;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      backdrop-filter: blur(10px);
-    }
 
-    .hero-content h1 {
-      font-size: 4.5rem;
-      font-weight: 900;
-      text-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
-      margin-bottom: 2rem;
-    }
+        .hero-video-content {
+            position: relative;
+            z-index: 2;
+            width: 90%;
+            padding: 2rem;
+            max-width: 800px;
+            color: #fff;
+            background: none;
+            border-radius: 10px;
+            box-sizing: border-box;
+            margin-top: -25vh;
+            /* <-- Überschrift weiter nach oben */
+        }
 
-    .hero-content h1 span {
-      color: var(--primary);
-    }
 
-    .glow-button {
-      padding: 1rem 2rem;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: #000;
-      border: none;
-      border-radius: 50px;
-      font-weight: bold;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.4s;
-      box-shadow: 0 0 20px rgba(255, 102, 0, 0.6);
-      text-decoration: none;
-    }
 
-    .glow-button:hover {
-      box-shadow: 0 0 30px rgba(255, 102, 0, 0.8), 0 0 60px rgba(255, 102, 0, 0.4);
-      transform: scale(1.05);
-    }
+        .hero-video-content h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+        .hero-video-content p {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin: 1rem 0;
+        }
+
+        .neon-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            color: #fff;
+            padding: 1rem 2.2rem;
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgba(255, 102, 0, 0.4),
+                0 0 24px rgba(255, 102, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .neon-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 16px rgba(255, 102, 0, 0.6),
+                0 0 36px rgba(255, 102, 0, 0.4);
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+        }
+
+        .neon-btn span::after {
+            content: "";
+            position: absolute;
+            top: -120%;
+            left: -120%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 40%);
+            opacity: 0;
+            animation: pulseEffect 4s infinite ease-in-out;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes pulseEffect {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 0.3;
+                transform: scale(1.4);
+            }
+        }
+
+        .neon-btn.sent {
+            background: linear-gradient(135deg, #00c851, #007e33);
+            box-shadow: 0 0 14px rgba(0, 200, 81, 0.6);
+            transform: scale(1.02);
+        }
+
+        @keyframes buttonShake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-4px);
+            }
+
+            50% {
+                transform: translateX(4px);
+            }
+
+            75% {
+                transform: translateX(-2px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .neon-btn.shake {
+            animation: buttonShake 0.3s ease;
+        }
+
+
+        .cta-btn {
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            background: var(--primary);
+            color: #000;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        section h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+
+        .features {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .feature {
+            background: #161616;
+            border-radius: 10px;
+            padding: 2rem;
+            width: 320px;
+            text-align: left;
+        }
+
+        .feature h3 {
+            color: var(--secondary);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-grid img {
+            width: 100%;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-grid img:hover {
+            transform: scale(1.03);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            /* max-width: 600px; ❌ entfernen */
+            width: 100%;
+            /* ✅ volle Breite im Container nutzen */
+            margin: 0 auto;
+        }
+
+        .form-wrapper {
+            max-width: 100%;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+
+        input,
+        textarea {
+            background: #111;
+            border: 1px solid #333;
+            padding: 1rem;
+            color: var(--text);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 5px;
+        }
+
+        button {
+            background: var(--primary);
+            color: #000;
+            padding: 1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+
+
+        .socials img {
+            width: 24px;
+            margin: 0 8px;
+            opacity: 0.7;
+            transition: 0.2s;
+        }
+
+        .socials img:hover {
+            opacity: 1;
+        }
+
+
+        .tech-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    grid-auto-rows: 1fr; /* 🔥 Hier passiert die Magie */
+}
+
+
+
+        .tech-showcase .tech-card .inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* <-- Macht den Trick */
+    height: 100%;
+}
+
+
+        /* Nur wenn gestapelt UND die Karte zentriert dargestellt wird */
+        .tech-showcase.stacked-tech-cards .tech-card.centered-card .inner {
+            text-align: left;
+            align-items: flex-start;
+        }
+
+
+        .tech-card {
+            position: relative;
+            background: rgba(15, 15, 15, 0.6);
+            border-radius: 18px;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 0 transparent;
+        }
+
+        .tech-card.centered-card .inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+
+        .tech-card:hover {
+            transform: rotateY(8deg) rotateX(4deg);
+        }
+
+        .tech-card .inner {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+        }
+        .tech-card .inner {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+        .tech-card h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .tech-card ul {
+            list-style: none;
+            padding: 0;
+            color: #ccc;
+        }
+
+
+        /* Aktualisierte Listeneinträge */
+        .tech-card li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.6rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.4;
+            color: #e6e6e6;
+        }
+
+        .tech-card li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.45rem;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            transform: rotate(45deg);
+            box-shadow: 0 0 8px rgba(255, 102, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tech-card li:hover::before {
+            transform: rotate(135deg) scale(1.2);
+            background: var(--secondary);
+        }
+
+        .bg-icon {
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.04;
+            top: 20%;
+            right: 10%;
+            transform: rotate(-20deg);
+            pointer-events: none;
+        }
+
+        .shimmer-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 18px;
+            background: linear-gradient(130deg, transparent, var(--primary), transparent);
+            opacity: 0.05;
+            mix-blend-mode: screen;
+            animation: pulse 4s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.05;
+            }
+
+            50% {
+                opacity: 0.15;
+            }
+        }
+
+        .white-transition-section {
+            position: relative;
+            background: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow: visible;
+            /* 🔁 damit animationen nicht abgeschnitten werden */
+        }
+
+
+        .white-world {
+            position: relative;
+            height: auto;
+            min-height: 100vh;
+            clip-path: circle(150% at 50% 50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: radial-gradient(circle at center, #f4f4f4 0%, #f4f4f4 100%);
+            opacity: 1;
+            pointer-events: all;
+            z-index: 5;
+            width: 100vw;
+            transition: none;
+        }
+
+
+        .white-world.visible {
+            clip-path: circle(150% at 50% 50%);
+            opacity: 1;
+            pointer-events: all;
+            width: 100vw;
+        }
+
+
+        .white-world.visible {
+            opacity: 1;
+            pointer-events: all;
+            clip-path: circle(150% at center);
+            transform: translateX(0);
+            /* zurück zur Mitte */
+        }
+
+        /* Inhalt im weißen Bereich */
+        .white-content {
+            text-align: center;
+            max-width: 900px;
+            padding: 2rem;
+            animation: fadeIn 1.2s ease forwards;
+        }
+
+        .white-content h2 {
+            font-size: 2.8rem;
+            color: #111;
+            margin-bottom: 3rem;
+            font-weight: 900;
+        }
+
+
+        .project-white-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+                  /* 2.5rem? */
+            justify-content: center;
+        }
+
+        .white-step {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid #eee;
+            border-radius: 20px;
+            padding: 2rem;
+            width: 260px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .white-step:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .white-step span {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .white-step h3 {
+            color: #111;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .white-step p {
+            color: #444;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+  
+
+
+        .epic-step {
+            position: relative;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 2.5rem;
+            width: 300px;
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            backdrop-filter: blur(20px);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            transform: translateY(40px);
+            opacity: 0;
+        }
+
+        .epic-step::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, #fff 0%, transparent 60%);
+            opacity: 0.04;
+            animation: lightMotion 8s linear infinite;
+        }
+
+        @keyframes lightMotion {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .epic-step:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+            border-color: rgba(255, 102, 0, 0.2);
+        }
+
+        .step-inner {
+            position: relative;
+            z-index: 2;
+            text-align: left;
+        }
+
+        .step-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .epic-step h3 {
+            font-size: 1.4rem;
+            color: #111;
+            font-weight: 700;
+            margin-bottom: 0.7rem;
+        }
+
+        .epic-step p {
+            color: #333;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .epic-step::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(130deg, rgba(255, 102, 0, 0.08), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .epic-step:hover::after {
+            opacity: 1;
+        }
+
+        .tech-card .price {
+    margin-top: auto; /* damit springt er ganz nach unten */
+    padding-top: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--secondary);
+    text-align: center;
+}
+
+
+
+.branch-card {
+  position: relative;
+  width: 100%;
+  height: auto; /* auto statt aspect-ratio */
+  overflow: hidden;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  z-index: 4;
+}
+
+.branch-card img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* oder sogar komplett weglassen */
+  display: block;
+}
+
+
+.branch-card img,
+.branch-card video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+
+
+        .branch-selection {
+            background: #f4f4f4;
+            margin-top: -20px;
+            color: #111;
+            padding: 6rem 2rem;
+            transition: none;
+        }
+
+        .branch-selection h2 {
+            color: inherit;
+            transition: color 0.6s ease;
+        }
+
+
+        .branch-card:hover {
+            background: #2a2a2a;
+            transform: translateY(-6px) scale(1.02);
+            border-color: var(--primary);
+        }
+
+        /* Nach Klick auf Kugel: Helles Theme */
+        .branch-selection.visible {
+            background: #f4f4f4;
+            color: #111;
+        }
+
+        .branch-selection.visible h2 {
+            color: #111;
+        }
+
+        .branch-selection.visible .branch-card {
+            background: #f7f7f7;
+            color: #111;
+            border-color: #ddd;
+        }
+
+        .branch-selection.visible .branch-card:hover {
+            background: #f4f4f4;
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.06);
+            border-color: rgba(255, 102, 0, 0.2);
+        }
+
+        .branch-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .branch-inner h2 {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            font-weight: 900;
+        }
+
+
+
+        .branch-selection.visible .branch-card {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            color: #111;
+        }
+
+        .branch-selection.visible .branch-card:hover {
+            background: #fff;
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
+        }
+
+        .branch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            align-items: stretch;
+        }
+
+        /* Klasse, die einer Karte erlaubt, sich über zwei Spalten zu erstrecken */
+        .branch-card.span2 {
+            grid-column: span 2;
+        }
+
+
+        .branch-card video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            filter: brightness(1.07);
+            transition: filter 0.4s ease;
+        }
+
+        .branch-card:hover video {
+            filter: brightness(1.1);
+        }
+
+        .branch-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+        .branch-card:hover .branch-overlay h3 {
+            transform: translateY(-6px);
+        }
+
+
+        .branch-selection.visible .branch-overlay h3 {
+            color: #111;
+            text-shadow: none;
+        }
+
+        .branch-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .branch-card.selected {
+            outline: 4px solid var(--primary);
+            outline-offset: -8px;
+            box-shadow: 0 0 40px rgba(255, 102, 0, 0.3);
+            transform: scale(1.04);
+            z-index: 5;
+        }
+
+        .branch-card.selected .branch-overlay h3 {
+            animation: glowText 1.5s ease-in-out infinite alternate;
+        }
+
+
+        @keyframes glowText {
+            from {
+                text-shadow: 0 0 6px rgba(255, 102, 0, 0.3);
+            }
+
+            to {
+                text-shadow: 0 0 16px rgba(255, 102, 0, 0.6);
+            }
+        }
+
+
+
+
+
+
+        .testimonial-card {
+            position: relative;
+            flex-shrink: 0;
+            max-width: 400px;
+            /* Oder 420px, je nach Look */
+            /* wichtig für Slider */
+            background: rgba(26, 26, 26, 0.6);
+            border: 2px solid rgba(255, 102, 0, 0.2);
+            border-left: 4px solid var(--primary);
+            padding: 2rem;
+            border-radius: 16px;
+            backdrop-filter: blur(14px);
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+            opacity: 0.95;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            will-change: transform;
+            perspective: 800px;
+        }
+
+        .testimonial-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+            animation: rotateLight 25s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(10px);
+            /* <--- Weicher Übergang */
+            opacity: 1;
+        }
+
+
+        @keyframes rotateLight {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ✨ Hover effect mit 3D Shine */
+        .testimonial-card:hover {
+            transform: rotateY(6deg) rotateX(2deg) scale(1.03);
+            box-shadow: 0 5px 18px rgba(119, 119, 119, 0.596);
+            opacity: 1;
+        }
+
+        /* 🔥 Edge glow */
+        .testimonial-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(120deg,
+                    rgba(255, 102, 0, 0.15),
+                    transparent,
+                    rgba(255, 102, 0, 0.15));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .testimonial-card:hover::after {
+            opacity: 1;
+        }
+
+        .testimonial-card p {
+            font-size: 1.15rem;
+            color: #f3f3f3;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .epic-testimonials {
+            padding-top: 140px;
+        }
+
+        .testimonial-card span {
+            color: var(--muted);
+            font-style: italic;
+            position: relative;
+            z-index: 2;
+        }
+
+        .testimonial-slider-wrapper {
+            overflow: hidden;
+            position: relative;
+            max-width: 90vw;
+            margin: 0 auto;
+            z-index: 1;
+            mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+        }
+
+        .testimonial-slider {
+            display: flex;
+            gap: 2rem;
+            animation: slideTestimonial 20s linear infinite;
+            will-change: transform;
+            justify-content: center;
+        }
+
+        .testimonial-slider:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes slideTestimonial {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+
+
+        .wave-wrapper {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: translateY(-1px);
+            /* Optional: für einen nahtloseren Übergang */
+        }
+
+        .wave-wrapper svg {
+            display: block;
+            width: 100%;
+            height: 100px;
+            /* Passe die Höhe nach Bedarf an */
+        }
+
+
+
+
+        @keyframes smoothWave {
+            0% {
+                transform: translateX(0%) scaleX(-1);
+            }
+
+            100% {
+                transform: translateX(-50%) scaleX(-1);
+            }
+        }
+
+
+
+
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+
+        .video-focus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            padding: 4rem 0;
+        }
+
+        .video-focus-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            height: 320px;
+            background-color: #000;
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.06), 0 0 60px rgba(255, 102, 0, 0.05);
+            isolation: isolate;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .video-focus-item:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 0 30px rgba(255, 102, 0, 0.15), 0 0 80px rgba(255, 102, 0, 0.1);
+        }
+
+        .video-focus-item::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(circle, rgba(255, 102, 0, 0.05), transparent 80%);
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .video-focus-item video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(10px);
+            transition: filter 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+            transform: scale(1.04);
+        }
+
+        .video-mask {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            mask-image: radial-gradient(circle at var(--x, 50%) var(--y, 50%), black 0%, transparent 140px);
+            -webkit-mask-image: radial-gradient(circle at var(--x, 50%) var(--y, 50%), black 0%, transparent 140px);
+            mask-repeat: no-repeat;
+            -webkit-mask-repeat: no-repeat;
+            pointer-events: none;
+        }
+
+        .video-mask video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: none !important;
+        }
+
+        .video-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 3;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            pointer-events: none;
+            letter-spacing: 0.5px;
+        }
+
+
+        .cta-btn::before {
+            content: "";
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.4s ease;
+            z-index: 0;
+        }
+
+        .cta-btn:hover::before {
+            left: 0;
+        }
+
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            perspective: 1000px;
+            margin-top: 3rem;
+        }
+
+        .persona-card {
+            position: relative;
+            background: rgba(20, 20, 20, 0.6);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(14px);
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+            box-shadow: 0 0 0 transparent;
+        }
+
+        .persona-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 35px rgba(255, 102, 0, 0.12);
+        }
+
+        .persona-card .inner {
+            position: relative;
+            z-index: 2;
+            padding: 2.5rem;
+            min-height: 220px;
+        }
+
+        .persona-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .persona-card p {
+            color: #ccc;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .persona-card .bg-icon {
+            position: absolute;
+            font-size: 6rem;
+            opacity: 0.04;
+            bottom: -10px;
+            right: 10px;
+            transform: rotate(-15deg);
+            pointer-events: none;
+        }
+
+        .project-white-steps .epic-step:last-child:nth-child(3) {
+            flex: 0 0 calc(600px + 2.5rem);
+            /* zwei Kartenbreiten + Gap */
+            max-width: 100%;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .project-white-steps .epic-step:last-child:nth-child(3) .step-inner {
+            align-items: center;
+        }
+
+        .persona-grid .persona-card:last-child:nth-child(odd) {
+            grid-column: span 2;
+            max-width: 100%;
+            text-align: center;
+        }
+
+        .tech-showcase>.tech-card:nth-last-child(1):nth-child(odd):only-child,
+        .tech-showcase>.tech-card:last-child:nth-child(odd) {
+            grid-column: span 2;
+            max-width: 100%;
+            text-align: center;
+        }
+
+
+        .video-focus-grid .video-focus-item:last-child:nth-child(odd) {
+            grid-column: span 2;
+            max-width: 100%;
+            text-align: center;
+        }
+
+        footer {
+            background: #0d0d0d;
+            color: #aaa;
+            padding: 4rem 5vw 2rem;
+            font-size: 0.9rem;
+            border-top: 1px solid #222;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+        }
+
+        .footer-logo span {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .footer-logo p {
+            margin-top: 0.5rem;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .footer-links h4,
+        .footer-contact h4,
+        .footer-socials h4 {
+            margin-bottom: 0.8rem;
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .footer-links ul,
+        .footer-contact ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li,
+        .footer-contact li {
+            margin-bottom: 0.4rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-socials {
+            display: flex;
+            flex-direction: column;
+            /* Überschrift oben, Icons darunter */
+            align-items: flex-start;
+        }
+
+        .footer-socials-icons {
+            display: flex;
+            gap: 12px;
+            /* Abstand zwischen Icons */
+            margin-top: 0.5rem;
+        }
+
+
+
+        .footer-socials img {
+            width: 26px;
+            height: 26px;
+            margin-right: 12px;
+            opacity: 1;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            vertical-align: middle;
+        }
+
+        .footer-socials img:hover {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+
+        .footer-bottom {
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+
+
+        @media (min-width: 1024px) {
+            .branch-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+
+            .branch-grid .branch-card:last-child:nth-child(odd) {
+                grid-column: span 2;
+            }
+
+        }
+
+
+        @media (min-width: 984px) {
+  .branch-grid .branch-card:last-child:nth-child(odd) {
+    grid-column: auto !important;
+    max-width: 100% !important;
+    text-align: left !important;
+  }
+}
+
+
+
+        @media (max-width: 768px) {
+            .branch-grid {
+                grid-template-columns: repeat(3, 1fr);
+                /* exakt 3 Spalten auf großen Screens */
+            }
+
+            .branch-grid .branch-card:last-child:nth-child(odd) {
+                grid-column: span 2;
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .tech-showcase {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .tech-showcase .tech-card:last-child:nth-child(odd) {
+                grid-column: span 2;
+                max-width: 100%;
+                text-align: center;
+            }
+
+
+
+            .branch-grid .branch-card:last-child:nth-child(odd) {
+                grid-column: span 2;
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .tech-showcase {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+
+            .tech-showcase .tech-card:last-child:nth-child(odd) {
+                grid-column: span 2;
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .project-white-steps .epic-step:last-child:nth-child(3) {
+                flex: unset !important;
+                max-width: 100% !important;
+                text-align: left !important;
+            }
+            .branch-grid .branch-card:last-child:nth-child(odd) {
+    grid-column: auto !important;
+    max-width: 100% !important;
+    text-align: left !important;
+  }
+        }
+
+        @media (max-width: 692px) {
+            .persona-grid .persona-card:last-child:nth-child(odd) {
+                grid-column: unset;
+                max-width: 100%;
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 720px) and (min-width: 481px) {
+            .tech-showcase {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+            }
+
+            .tech-card {
+                width: 90%;
+                max-width: 420px;
+            }
+
+            .video-focus-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .video-focus-item {
+                height: 220px;
+                /* Einheitlich */
+                width: 100%;
+            }
+
+            .video-focus-grid .video-focus-item:last-child:nth-child(odd) {
+                grid-column: unset;
+                max-width: 100%;
+                text-align: left;
+            }
+
+        }
+
+        /* === Medien-Spezifisch: 320px Mobile Fix === */
+        @media (max-width: 480px) {
+
+            /* HERO: Inhalt zentriert + responsive */
+            .hero-video-content {
+                text-align: center;
+                padding: 1rem;
+                margin-top: -10vh;
+            }
+
+            .hero-video-content h1 {
+                font-size: 1.5rem;
+                line-height: 1.3;
+            }
+
+            .hero-video-content p {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+
+            .cta-btn {
+                font-size: 0.8rem;
+                padding: 0.6rem 1.2rem;
+            }
+
+            /* "Für wen ist Fusion³?" Karten untereinander */
+            .persona-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .persona-card {
+                width: 100%;
+            }
+
+            /* Technologien & Tools: Karten untereinander */
+            .tech-showcase {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 2rem 1rem;
+            }
+
+            .tech-card {
+                width: 100%;
+            }
+
+            /* Prozessüberschrift richtig anzeigen */
+            .white-content h2 {
+                font-size: 1.5rem;
+                padding: 0 1rem;
+                line-height: 1.3;
+            }
+
+            /* Kundenstimmen – kleinere Karten, kein Overflow */
+            .testimonial-slider-wrapper {
+                overflow-x: auto;
+                padding-bottom: 1rem;
+            }
+
+
+
+            .testimonial-card p {
+                font-size: 1rem;
+            }
+
+            .testimonial-card span {
+                font-size: 0.85rem;
+            }
+
+            /* Welle ohne Stroke */
+            .testimonial-waves svg path {
+                stroke: none !important;
+            }
+
+            .testimonial-waves {
+                overflow: hidden;
+            }
+
+            /* Portfolio: untereinander, keine Grid-Spalten */
+            .video-focus-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+
+            .video-title {
+                font-size: 1rem;
+            }
+
+            /* Videos responsiv */
+            video,
+            img,
+            svg {
+                max-width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            /* Branchen: Untereinander + ohne Stretch */
+            .branch-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .branch-card img {
+  max-height: 100%;
+  width: 100%;
+  height: auto;
+}
+
+
+  .branch-card img,
+.branch-card video {
+  position: relative;
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* oder 'cover' wenn du willst, dass es gefüllt wird */
+  display: block;
+}
+
+            .branch-overlay h3 {
+                font-size: 1.3rem;
+            }
+
+        }
+
+        @media (max-width: 320px) {
+
+            /* HERO: Text & Button mittig */
+            .hero-video-content {
+                margin-top: -15vh;
+                padding: 1rem;
+                text-align: center;
+            }
+
+            .hero-video-content h1 {
+                font-size: 1.5rem;
+                line-height: 1.2;
+            }
+
+            .hero-video-content p {
+                font-size: 0.9rem;
+                margin: 0.8rem 0;
+            }
+
+            .cta-btn {
+                display: inline-block;
+                margin-top: 1rem;
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
+            }
+
+            /* Für wen ist Fusion: Karten untereinander */
+            .persona-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            /* Technologien & Tools: Karten untereinander */
+            .tech-showcase {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 2rem 1rem;
+            }
+
+            /* Prozess-Überschrift nicht abgeschnitten */
+            .white-content h2 {
+                font-size: 1.5rem;
+                padding: 0 1rem;
+                line-height: 1.3;
+            }
+
+            /* Kundenwelle – Stroke entfernen */
+            .testimonial-waves svg path {
+                stroke: none !important;
+            }
+
+            .testimonial-card p {
+                font-size: 1rem;
+            }
+
+            .testimonial-card span {
+                font-size: 0.85rem;
+            }
+
+            /* Portfolio: Container untereinander */
+            .video-focus-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .video-focus-item {
+                height: 240px;
+            }
+
+            .video-title {
+                font-size: 1.1rem;
+            }
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+        }
+
+        .testimonial-card,
+        .video-focus-item,
+        .tech-card,
+        .persona-card {
+            min-width: auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        img,
+        video,
+        svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .branch-grid .branch-card:last-child:nth-child(odd) {
+            grid-column: span 2;
+            max-width: 100%;
+            text-align: center;
+        }
+    </style>
 </head>
+
 <body>
 
-  <header>
-    <div class="logo">Fusion³</div>
-    <nav>
-      <a href="#tools">Leistungen</a>
-      <a href="#prozess">So läuft´s</a>
-      <a href="#branchSelection">Portfolio</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
-  </header>
+    <header>
+        <div class="logo">Fusion³</div>
+        <nav>
+            <a href="#tools">Leistungen</a>
+            <a href="#prozess">So läuft´s</a>
+            <a href="#branchSelection">Portfolio</a>
+            <a href="#kontakt">Kontakt</a>
+        </nav>
+    </header>
 
-  <div class="hero">
-    <video autoplay muted loop playsinline id="bg-video">
-      <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
-    </video>
 
-    <div class="overlay"></div>
-    <canvas id="particles"></canvas>
+    <section class="hero-video-wrapper">
+        <video class="video-background" autoplay loop muted playsinline>
+            <source src="./Fotos/Hintergrund.mp4" type="video/mp4" />
+            Dein Browser unterstützt dieses Video nicht.
+        </video>
 
-    <div class="hero-content">
-      <h1><span>Design,</span> das bewegt.</h1>
-      <a href="#start" class="glow-button">Jetzt entdecken</a>
-    </div>
-  </div>
+        <div class="hero-video-content">
+            <h1>Individuelle Social <br>
+                Media Posts</h1>
+            <p>100% maßgeschneidert für dein Business</p>
+            <a class="cta-btn neon-btn" href="#kontakt">
+                <span>🚀 Projekt starten</span>
+            </a>
 
-  <script>
-    // GSAP Animation (nur Titel, Button ist dauerhaft sichtbar)
-    gsap.from(".hero-content h1", {
-      y: 80,
-      opacity: 0,
-      duration: 1.5,
-      ease: "power4.out"
+        </div>
+    </section>
+
+
+
+    <section class="container" id="tools">
+        <h2>Unsere Leistungen</h2>
+        <h3> Jeder Post ist maßgeschneidert – keine Templates von der Stange.</h3>
+        <div class="tech-showcase">
+
+
+            <div class="tech-card" data-title="Probierpaket">
+                <div class="inner">
+                    <h3>Probierpaket</h3>
+                    <ul>
+                        <li>1 Monat lang</li>
+                        <li>2 Social-Media Posts pro Woche</li>
+                        <li>Interaktive Animationen & Micro-Interactions</li>
+                        <li>CMS-Integration & SEO-Optimierung</li>
+                    </ul>
+                    <p class="price">einmalig <br>
+                        49.00€ / Monat</p>
+                    <span class="bg-icon">🌐</span>
+                </div>
+                <div class="shimmer-border"></div>
+            </div>
+
+            <!-- 3D Design -->
+            <div class="tech-card" data-title="3D Design">
+                <div class="inner">
+                    <h3>Monatsabbo</h3>
+                    <ul>
+                        <li>Maßgeschneiderte 3D-Modelle & Visualisierungen</li>
+                        <li>Produktanimationen & Architektur-Renderings</li>
+                        <li>Virtual Reality (VR) Ready Assets</li>
+                        <li>3D-Druck Vorbereitung & Optimierung</li>
+                    </ul>
+                    <p class="price">120.00€ / Monat</p>
+                    <span class="bg-icon">🧊</span>
+                </div>
+                <div class="shimmer-border"></div>
+            </div>
+
+            <!-- Grafikdesign -->
+            <div class="tech-card" data-title="Grafikdesign">
+                <div class="inner">
+                    <h3>3 Monatsabbo</h3>
+                    <ul>
+                        <li>Corporate Identity & Markenentwicklung</li>
+                        <li>Logo-Design mit Unique Branding</li>
+                        <li>Druckprodukte mit Farbprofil-Management</li>
+                        <li>Infografiken & Data Visualization</li>
+                    </ul>
+                    <p class="price">300.00 € / alle 3 Monate</p>
+                    <span class="bg-icon">🖌️</span>
+                </div>
+                <div class="shimmer-border"></div>
+            </div>
+
+            <!-- Social Media -->
+            <div class="tech-card" data-title="Social Media">
+                <div class="inner">
+                    <h3>Jahresabbo</h3>
+                    <ul>
+                        <li>Platformspezifische Content-Strategien</li>
+                        <li>Animierte Postings & Story Designs</li>
+                        <li>Werbekampagnen & Ad-Designs</li>
+                        <li>Template-Systeme für Brand-Konsistenz</li>
+                    </ul>
+                    <p class="price">1300.00€ / Jahr</p>
+                    <span class="bg-icon">🚀</span>
+                </div>
+                <div class="shimmer-border"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="white-transition-section" id="prozess">
+        <div class="white-world visible" id="whiteWorld">
+            <!-- Wave Container -->
+            <div class="wave-container">
+                <svg class="wave wave1" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                    <path fill="#f4f4f4" d="M0,192L1440,96L1440,320L0,320Z"></path>
+                </svg>
+                <svg class="wave wave2" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                    <path fill="#eaeaea" d="M0,256L1440,160L1440,320L0,320Z"></path>
+                </svg>
+                <svg class="wave wave3" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                    <path fill="#f4f4f4" d="M0,128L1440,224L1440,320L0,320Z"></path>
+                </svg>
+            </div>
+
+            <div class="white-content">
+                <h2>So läuft ein Projekt mit Fusion³</h2>
+                <div class="project-white-steps">
+
+                    <div class="epic-step" data-step="01">
+                        <div class="step-inner">
+                            <span class="step-number">01</span>
+                            <h3>Erstgespräch</h3>
+                            <p>Alles beginnt mit einem Gespräch – mit offenen Fragen, klarer Kommunikation und einem
+                                Kaffee. Wir sprechen über Ziele, Zielgruppen und Wirkung.</p>
+                        </div>
+                    </div>
+
+                    <div class="epic-step" data-step="02">
+                        <div class="step-inner">
+                            <span class="step-number">02</span>
+                            <h3>Konzeption & Design</h3>
+                            <p>Jetzt wird’s konkret. Gemeinsam entwickeln wir Konzepte, Wireframes, Styleframes und
+                                Interaktionen, die deinem Brand gerecht werden – visuell und funktional.</p>
+                        </div>
+                    </div>
+
+                    <div class="epic-step" data-step="03">
+                        <div class="step-inner">
+                            <span class="step-number">03</span>
+                            <h3>Feedbackschleife</h3>
+                            <p>Ihre Vision wird Realität. Am Ende steht ein
+                                durchdachtes digitales Erlebnis, das performt – mit Stil, Funktion und Wirkung.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="branch-selection visible" id="branchSelection">
+        <div class="branch-inner">
+            <h2>So könnte Ihr Social Media aussehen:</h2>
+            <div class="branch-grid">
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                    <div class="branch-overlay">
+                        <h3>🍽️ Gastronomie</h3>
+                    </div>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                    <div class="branch-overlay">
+                        <h3>🏛️ Architektur</h3>
+                    </div>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                    <div class="branch-overlay">
+
+                    </div>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                    <div class="branch-overlay">
+        
+                    </div>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                    <div class="branch-overlay">
+    
+                    </div>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                    <div class="branch-overlay">
+
+                    </div>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                    <div class="branch-overlay">
+
+                    </div>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="branch-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+    <section class="container" id="kontakt">
+        <h2>Kontakt</h2>
+        <div class="form-wrapper">
+            <form action="https://formspree.io/f/xqapdvaq" method="POST">
+                <input type="text" name="name" placeholder="Dein Name" required />
+                <input type="email" name="email" placeholder="Deine E-Mail" required />
+                <textarea name="message" rows="6" placeholder="Worum geht’s?" required></textarea>
+                <input type="text" name="_gotcha" style="display:none">
+
+                <button type="submit" class="neon-btn" id="sendButton">
+                    <span>✉️ Nachricht senden</span>
+                </button>
+
+            </form>
+    </section>
+
+
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-logo">
+                <span>Fusion³</span>
+                <p>Web & 3D Design mit Wirkung.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="/impressum.html">Impressum</a></li>
+                    <li><a href="/datenschutz.html">Datenschutz</a></li>
+                    <li><a href="/agb.html">AGB</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Kontakt</h4>
+                <ul>
+                    <li><a href="mailto:hello@fusion3.de">hello@fusion3.de</a></li>
+                    <li>+49 123 4567890</li>
+                    <li>Berlin, Deutschland</li>
+                </ul>
+            </div>
+
+            <div class="footer-socials">
+                <h4>Social</h4>
+                <div class="footer-socials-icons">
+                    <a href="mailto:hello@fusion3.de" title="E-Mail">
+                        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="E-Mail Icon" />
+                    </a>
+                    <a href="https://github.com/" title="GitHub" target="_blank">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub Logo" />
+                    </a>
+                    <a href="https://www.linkedin.com/" title="LinkedIn" target="_blank">
+                        <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn Blau" />
+                    </a>
+                    <a href="https://wa.me/491234567890" title="WhatsApp schreiben" target="_blank">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon" />
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <p class="footer-bottom">© 2025 Fusion³ – Alle Rechte vorbehalten.</p>
+    </footer>
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            gsap.from(".hero-video-content h1", {
+                duration: 1.5,
+                y: 50,
+                opacity: 0,
+                delay: 0.5,
+                ease: "power4.out"
+            });
+            gsap.from(".hero-video-content p", {
+                duration: 1.2,
+                y: 30,
+                opacity: 0,
+                delay: 0.8,
+                ease: "power3.out"
+            });
+            gsap.fromTo(".cta-btn", {
+                opacity: 0,
+                scale: 0.95
+            }, {
+                duration: 1,
+                opacity: 1,
+                scale: 1,
+                delay: 1.2,
+                ease: "back.out(1.7)"
+            });
+
+        });
+    </script>
+
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const video = document.querySelector('.video-background');
+            if (video) {
+                video.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.2}px))`;
+            }
+        });
+
+    </script>
+
+    <script>
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.container, .feature, .step').forEach(el => {
+            el.classList.add('fade-in');
+            observer.observe(el);
+        });
+    </script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('.persona-card').forEach(card => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                },
+                opacity: 0,
+                y: 40,
+                duration: 1,
+                ease: 'power4.out'
+            });
+        });
+    </script>
+
+
+
+    <script>
+        gsap.utils.toArray(".epic-step").forEach((card, i) => {
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power4.out",
+                delay: i * 0.2
+            });
+        });
+    </script>
+
+
+    <script>
+        const branchCards = document.querySelectorAll('.branch-card');
+
+        branchCards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Entferne alle vorherigen Auswahl-Zustände
+                branchCards.forEach(c => c.classList.remove('selected'));
+
+                // Füge "selected" zur aktuellen Card hinzu
+                card.classList.add('selected');
+            });
+        });
+    </script>´
+
+    <script>
+        const items = document.querySelectorAll('.video-focus-item');
+
+        items.forEach(item => {
+            const mask = item.querySelector('.video-mask');
+
+            item.addEventListener('mousemove', e => {
+                const rect = item.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                mask.style.setProperty('--x', `${x}px`);
+                mask.style.setProperty('--y', `${y}px`);
+            });
+
+            item.addEventListener('mouseleave', () => {
+                mask.style.setProperty('--x', `50%`);
+                mask.style.setProperty('--y', `50%`);
+            });
+        });
+    </script>
+
+    <script>
+        window.addEventListener('load', adjustTechCards);
+        window.addEventListener('resize', adjustTechCards);
+
+        function adjustTechCards() {
+            const container = document.querySelector('.tech-showcase');
+            const cards = Array.from(container.querySelectorAll('.tech-card'));
+
+            // Skip adjustment if layout is flex (mobile)
+            const computedStyle = window.getComputedStyle(container);
+            if (computedStyle.display === 'flex') {
+                cards.forEach(card => {
+                    card.style.gridColumn = '';
+                    card.classList.remove('centered-card');
+                });
+                container.classList.remove('stacked-tech-cards');
+                return;
+            }
+
+            // Reset
+            cards.forEach(card => {
+                card.style.gridColumn = '';
+                card.classList.remove('centered-card');
+            });
+
+            if (cards.length < 2) return;
+
+            const last = cards[cards.length - 1];
+            const secondLast = cards[cards.length - 2];
+
+            const lastTop = last.getBoundingClientRect().top;
+            const secondTop = secondLast.getBoundingClientRect().top;
+
+            const allStacked = cards.every((card, i, arr) => {
+                if (i === 0) return true;
+                return card.getBoundingClientRect().top > arr[i - 1].getBoundingClientRect().top + 10;
+            });
+
+            container.classList.remove('stacked-tech-cards');
+
+            if (lastTop > secondTop) {
+                last.style.gridColumn = 'span 3';
+                last.classList.add('centered-card');
+
+                if (allStacked) {
+                    container.classList.add('stacked-tech-cards');
+                }
+            }
+        }
+
+
+    </script>
+
+    <script>
+        const form = document.querySelector("form");
+        const sendButton = document.getElementById("sendButton");
+
+        form.addEventListener("submit", function (e) {
+            sendButton.classList.add("shake");
+
+            setTimeout(() => {
+                sendButton.classList.remove("shake");
+                sendButton.classList.add("sent");
+                sendButton.innerHTML = "<span>✅ Gesendet!</span>";
+            }, 300);
+
+            // Button reset nach 4s (optional)
+            setTimeout(() => {
+                sendButton.classList.remove("sent");
+                sendButton.innerHTML = "<span>✉️ Nachricht senden</span>";
+            }, 4000);
+        });
+    </script>
+   <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Alle Branch-Cards in ein Array umwandeln
+      const branchCards = Array.from(document.querySelectorAll('.branch-grid .branch-card'));
+      
+      // Bestimme zufällig, welche Cards ersetzt werden sollen (30%-Wahrscheinlichkeit)
+      let replaceIndices = [];
+      branchCards.forEach((card, i) => {
+        if (Math.random() < 0.3) {
+          replaceIndices.push(i);
+        }
+      });
+      // Falls mehr als 10 Karten ausgewählt wurden, wähle zufällig maximal 10 davon aus
+      if (replaceIndices.length > 10) {
+        for (let i = replaceIndices.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [replaceIndices[i], replaceIndices[j]] = [replaceIndices[j], replaceIndices[i]];
+        }
+        replaceIndices = replaceIndices.slice(0, 10);
+      }
+      
+      // Erstelle ein Array mit Bildnummern 1 bis 10 und mische es
+      let imageNumbers = [1,2,3,4,5,6,7,8,9,10];
+      for (let i = imageNumbers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [imageNumbers[i], imageNumbers[j]] = [imageNumbers[j], imageNumbers[i]];
+      }
+      
+      // Ersetze die ausgewählten Cards mit Bildern und markiere sie als dynamisch
+      replaceIndices.forEach((index, i) => {
+        const card = branchCards[index];
+        card.innerHTML = '';
+        
+        // Erstelle das <img>-Element
+        const img = document.createElement('img');
+        const imgNum = imageNumbers[i];
+        img.src = `./SocialMediaPic/post${imgNum}.jpg`;
+        img.alt = `Post ${imgNum}`;
+        card.appendChild(img);
+        
+        // Füge ein Overlay hinzu (optional)
+        const overlay = document.createElement('div');
+        overlay.className = 'branch-overlay';
+        const h3 = document.createElement('h3');
+        h3.textContent = `Post ${imgNum}`;
+        overlay.appendChild(h3);
+        card.appendChild(overlay);
+        
+        // Markiere die Card als dynamisch und speichere die aktuelle Bildnummer
+        card.classList.add('dynamic-image');
+        card.dataset.currentImg = imgNum;
+      });
+      
+      // Alle 5 Sekunden: Aktualisiere die dynamischen Cards mit einem neuen Bild (nicht gleich wie zuvor)
+      setInterval(() => {
+        const dynamicCards = document.querySelectorAll('.branch-card.dynamic-image');
+        dynamicCards.forEach(card => {
+          const img = card.querySelector('img');
+          let currentImg = parseInt(card.dataset.currentImg, 10);
+          
+          let newImg;
+do {
+  newImg = Math.floor(Math.random() * 50) + 1;
+} while (newImg === currentImg);
+
+          
+          // Aktualisiere das Bild und den Datenwert
+          img.src = `./SocialMediaPic/post${newImg}.jpg`;
+          card.dataset.currentImg = newImg;
+          
+          // Optional: Aktualisiere auch den Overlay-Text
+          const h3 = card.querySelector('.branch-overlay h3');
+          if (h3) {
+            h3.textContent = `Post ${newImg}`;
+          }
+        });
+      }, 5000); // 5000 Millisekunden = 5 Sekunden
     });
+    </script>
+    
 
-    // Partikel-Canvas
-    const canvas = document.getElementById("particles");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    <script>
+        window.addEventListener("load", adjustTechCards);
+        window.addEventListener("resize", adjustTechCards);
+        function adjustTechCards() {
+          const container = document.querySelector(".tech-showcase");
+          const cards = Array.from(container.querySelectorAll(".tech-card"));
+          const computedStyle = window.getComputedStyle(container);
+          if (computedStyle.display === "flex") {
+            cards.forEach(card => {
+              card.style.gridColumn = "";
+              card.classList.remove("centered-card");
+            });
+            container.classList.remove("stacked-tech-cards");
+            return;
+          }
+          cards.forEach(card => {
+            card.style.gridColumn = "";
+            card.classList.remove("centered-card");
+          });
+          if (cards.length < 2) return;
+          const last = cards[cards.length - 1];
+          const secondLast = cards[cards.length - 2];
+          const lastTop = last.getBoundingClientRect().top;
+          const secondTop = secondLast.getBoundingClientRect().top;
+          const allStacked = cards.every((card, i, arr) => {
+            if (i === 0) return true;
+            return (
+              card.getBoundingClientRect().top >
+              arr[i - 1].getBoundingClientRect().top + 10
+            );
+          });
+          container.classList.remove("stacked-tech-cards");
+          if (lastTop > secondTop) {
+            last.style.gridColumn = "span 3";
+            last.classList.add("centered-card");
+            if (allStacked) {
+              container.classList.add("stacked-tech-cards");
+            }
+          }
+        }
+      </script>
 
-    let particles = [];
-
-    for (let i = 0; i < 120; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 1.5 + 1,
-        dx: (Math.random() - 0.5) * 0.3,
-        dy: (Math.random() - 0.5) * 0.3,
-        alpha: Math.random() * 0.5 + 0.3
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const branchCards = Array.from(document.querySelectorAll('.branch-grid .branch-card'));
+  
+      // Karten aufteilen: 50% Bild, 50% Video
+      branchCards.forEach(card => {
+        card.dataset.cardType = (Math.random() < 0.5) ? "image" : "video";
       });
-    }
+  
+      // ----------- IMAGE CARDS LOGIK -------------
+      const imageCards = branchCards.filter(card => card.dataset.cardType === "image");
+      let imageQueue = [];
+  
+      function shuffleImageQueue() {
+  imageQueue = Array.from({ length: 50 }, (_, i) => i + 1).sort(() => Math.random() - 0.5);
+}
 
-    function drawParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 102, 0, ${p.alpha})`;
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = "rgba(255, 102, 0, 0.6)";
-        ctx.fill();
-
-        p.x += p.dx;
-        p.y += p.dy;
-
-        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+  
+      shuffleImageQueue();
+  
+      imageCards.forEach(card => {
+        card.classList.add('dynamic-image');
+        card.innerHTML = '';
+  
+        const imgNum = imageQueue.pop();
+        const img = document.createElement('img');
+        img.src = `./SocialMediaPic/post${imgNum}.jpg`;
+        img.alt = `Post ${imgNum}`;
+        card.appendChild(img);
+  
+        const overlay = document.createElement('div');
+        overlay.className = 'branch-overlay';
+        // Kein h3 mehr → stattdessen leerer oder neutraler Overlay
+        card.appendChild(overlay);
+  
+        card.dataset.currentImg = imgNum;
       });
-
-      requestAnimationFrame(drawParticles);
-    }
-
-    drawParticles();
+  
+      setInterval(() => {
+        if (imageQueue.length < imageCards.length) {
+          shuffleImageQueue();
+        }
+  
+        imageCards.forEach(card => {
+          const imgNum = imageQueue.pop();
+          const img = card.querySelector('img');
+          img.src = `./SocialMediaPic/post${imgNum}.jpg`;
+          card.dataset.currentImg = imgNum;
+          // Keine h3-Updates mehr
+        });
+      }, 5000);
+  
+      // ----------- VIDEO CARDS LOGIK -------------
+      const videoCards = branchCards.filter(card => card.dataset.cardType === "video");
+      let videoQueue = [];
+  
+      function shuffleVideoQueue() {
+        videoQueue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].sort(() => Math.random() - 0.5);
+      }
+  
+      shuffleVideoQueue();
+  
+      videoCards.forEach(card => {
+        card.classList.add('dynamic-video');
+        card.innerHTML = '';
+  
+        const vidNum = videoQueue.pop();
+        const video = document.createElement('video');
+        video.autoplay = true;
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+  
+        const source = document.createElement('source');
+        source.src = `./SocialMediaPic/VideoPost${vidNum}.mp4`;
+        source.type = "video/mp4";
+        video.appendChild(source);
+        card.appendChild(video);
+  
+        const overlay = document.createElement('div');
+        overlay.className = 'branch-overlay';
+        // Kein h3 mehr im Overlay
+        card.appendChild(overlay);
+  
+        card.dataset.currentVideo = vidNum;
+      });
+  
+      setInterval(() => {
+        if (videoQueue.length < videoCards.length) {
+          shuffleVideoQueue();
+        }
+  
+        videoCards.forEach(card => {
+          const vidNum = videoQueue.pop();
+          const video = card.querySelector('video');
+          const source = video.querySelector('source');
+          source.src = `./SocialMediaPic/VideoPost${vidNum}.mp4`;
+          video.load();
+          card.dataset.currentVideo = vidNum;
+          // Keine h3-Updates mehr
+        });
+      }, 5000);
+    });
   </script>
+  
+    
 </body>
+
 </html>
