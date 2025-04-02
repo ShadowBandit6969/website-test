@@ -286,18 +286,19 @@
         }
 
         form {
-    display: flex;
-    flex-direction: column;
-    /* max-width: 600px; ❌ entfernen */
-    width: 100%; /* ✅ volle Breite im Container nutzen */
-    margin: 0 auto;
-}
+            display: flex;
+            flex-direction: column;
+            /* max-width: 600px; ❌ entfernen */
+            width: 100%;
+            /* ✅ volle Breite im Container nutzen */
+            margin: 0 auto;
+        }
 
-.form-wrapper {
-    max-width: 100%;
-    margin: 0 auto;
-    width: 100%;
-}
+        .form-wrapper {
+            max-width: 100%;
+            margin: 0 auto;
+            width: 100%;
+        }
 
 
         input,
@@ -348,10 +349,10 @@
         }
 
         /* Nur wenn gestapelt UND die Karte zentriert dargestellt wird */
-.tech-showcase.stacked-tech-cards .tech-card.centered-card .inner {
-    text-align: left;
-    align-items: flex-start;
-}
+        .tech-showcase.stacked-tech-cards .tech-card.centered-card .inner {
+            text-align: left;
+            align-items: flex-start;
+        }
 
 
         .tech-card {
@@ -400,35 +401,35 @@
         }
 
 
-/* Aktualisierte Listeneinträge */
-.tech-card li {
-    margin-bottom: 0.8rem;
-    position: relative;
-    padding-left: 1.6rem;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 500;
-    line-height: 1.4;
-    color: #e6e6e6;
-}
+        /* Aktualisierte Listeneinträge */
+        .tech-card li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.6rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.4;
+            color: #e6e6e6;
+        }
 
-.tech-card li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.45rem;
-    width: 8px;
-    height: 8px;
-    background: var(--primary);
-    transform: rotate(45deg);
-    box-shadow: 0 0 8px rgba(255,102,0,0.3);
-    transition: all 0.3s ease;
-}
+        .tech-card li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.45rem;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            transform: rotate(45deg);
+            box-shadow: 0 0 8px rgba(255, 102, 0, 0.3);
+            transition: all 0.3s ease;
+        }
 
-.tech-card li:hover::before {
-    transform: rotate(135deg) scale(1.2);
-    background: var(--secondary);
-}
+        .tech-card li:hover::before {
+            transform: rotate(135deg) scale(1.2);
+            background: var(--secondary);
+        }
 
         .bg-icon {
             position: absolute;
@@ -467,160 +468,49 @@
         }
 
         .white-transition-section {
-  position: relative;
-  background: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  overflow: visible; /* 🔁 damit animationen nicht abgeschnitten werden */
-}
-
-        /* Pulsierender Kreis */
-        .white-trigger {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: white;
-            animation: pulseCircle 2s infinite;
-            cursor: pointer;
-            z-index: 10;
-            position: absolute;
-        }
-
-        @keyframes pulseCircle {
-            0% {
-                transform: scale(1);
-                opacity: 0.7;
-            }
-
-            50% {
-                transform: scale(1.2);
-                opacity: 1;
-            }
-
-            100% {
-                transform: scale(1);
-                opacity: 0.7;
-            }
-        }
-
-        .multi-circle-wrapper {
             position: relative;
-            width: 140px;
-            height: 140px;
+            background: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-
+            flex-direction: column;
+            overflow: visible;
+            /* 🔁 damit animationen nicht abgeschnitten werden */
         }
 
-        .center-circle {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 50%;
-            z-index: 2;
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
 
-        /* Pulsierende Kreise */
-        .pulse-circle {
-            position: absolute;
-            width: 10vw;
-            height: 10vw;
-            border-radius: 50%;
-            background: white;
-            opacity: 0.3;
-            animation: sunPulse 2.5s infinite ease-out;
-            z-index: 1;
-        }
-
-        .delay1 {
-            animation-delay: 0.5s;
-        }
-
-        .delay2 {
-            animation-delay: 1s;
-        }
-
-        @keyframes sunPulse {
-            0% {
-                transform: scale(1);
-                opacity: 0.3;
-            }
-
-            70% {
-                transform: scale(2.5);
-                opacity: 0.05;
-            }
-
-            100% {
-                transform: scale(3);
-                opacity: 0;
-            }
-        }
-
-        /* Klick mich */
-        .click-hint {
-            position: absolute;
-            bottom: -2.5rem;
-            color: white;
-            font-weight: 600;
-            font-size: 1rem;
-            text-align: center;
-            animation: hintPulse 1.6s ease-in-out infinite;
-            z-index: 3;
-            pointer-events: none;
-            top: 8rem;
-        }
-
-        @keyframes hintPulse {
-
-            0%,
-            100% {
-                opacity: 0.6;
-                transform: translateY(0);
-            }
-
-            50% {
-                opacity: 1;
-                transform: translateY(-4px);
-            }
-        }
         .white-world {
-  position: relative; /* ✅ statt absolute */
-  height: auto;        /* ❗️wichtig */
-  min-height: 100vh;   /* garantiert volle Höhe auf großen Screens */
-  clip-path: circle(0% at 50% 50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background: radial-gradient(circle at center, #f4f4f4 0%, #f4f4f4 100%);
-    opacity: 0;
-    pointer-events: none;
-    z-index: 5;
-    clip-path: circle(0% at 50% 50%);
-    transition: clip-path 1.2s ease-out, opacity 0.6s ease;
-}
+            position: relative;
+            height: auto;
+            min-height: 100vh;
+            clip-path: circle(150% at 50% 50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: radial-gradient(circle at center, #f4f4f4 0%, #f4f4f4 100%);
+            opacity: 1;
+            pointer-events: all;
+            z-index: 5;
+            width: 100vw;
+            transition: none;
+        }
 
-.white-world.visible {
-    clip-path: circle(150% at 50% 50%);
-    opacity: 1;
-    pointer-events: all;
-    width: 100vw;
-}
+
+        .white-world.visible {
+            clip-path: circle(150% at 50% 50%);
+            opacity: 1;
+            pointer-events: all;
+            width: 100vw;
+        }
 
 
         .white-world.visible {
             opacity: 1;
             pointer-events: all;
             clip-path: circle(150% at center);
-            transform: translateX(0); /* zurück zur Mitte */
+            transform: translateX(0);
+            /* zurück zur Mitte */
         }
 
         /* Inhalt im weißen Bereich */
@@ -701,9 +591,9 @@
         }
 
 
-        
 
-        
+
+
         .epic-step {
             position: relative;
             background: rgba(255, 255, 255, 0.12);
@@ -792,7 +682,7 @@
 
 
 
-        
+
         .branch-card {
             position: relative;
             height: 340px;
@@ -805,12 +695,11 @@
         }
 
         .branch-selection {
-            background: none;
-            /* Schwarz zu Beginn */
+            background: #f4f4f4;
             margin-top: -20px;
-            color: #f4f4f4;
+            color: #111;
             padding: 6rem 2rem;
-            transition: background 0.6s ease, color 0.6s ease;
+            transition: none;
         }
 
         .branch-selection h2 {
@@ -876,6 +765,11 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2.5rem;
+        }
+
+        /* Klasse, die einer Karte erlaubt, sich über zwei Spalten zu erstrecken */
+        .branch-card.span2 {
+            grid-column: span 2;
         }
 
 
@@ -945,6 +839,7 @@
             animation: glowText 1.5s ease-in-out infinite alternate;
         }
 
+
         @keyframes glowText {
             from {
                 text-shadow: 0 0 6px rgba(255, 102, 0, 0.3);
@@ -960,7 +855,8 @@
         .testimonial-card {
             position: relative;
             flex-shrink: 0;
-            max-width: 400px; /* Oder 420px, je nach Look */
+            max-width: 400px;
+            /* Oder 420px, je nach Look */
             /* wichtig für Slider */
             background: rgba(26, 26, 26, 0.6);
             border: 2px solid rgba(255, 102, 0, 0.2);
@@ -1097,20 +993,24 @@
             margin-top: -2px;
         }
 
-
         .wave-wrapper {
-            width: 200vw;
-            height: 100%;
-            transform: scaleX(-1);
-            /* Spiegelung */
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: translateY(-1px);
+            /* Optional: für einen nahtloseren Übergang */
         }
 
-        .wave-svg {
-    width: 100vw;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-}
+        .wave-wrapper svg {
+            display: block;
+            width: 100%;
+            height: 100px;
+            /* Passe die Höhe nach Bedarf an */
+        }
+
 
 
 
@@ -1385,16 +1285,18 @@
         }
 
         .footer-socials {
-    display: flex;
-    flex-direction: column; /* Überschrift oben, Icons darunter */
-    align-items: flex-start;
-}
+            display: flex;
+            flex-direction: column;
+            /* Überschrift oben, Icons darunter */
+            align-items: flex-start;
+        }
 
-.footer-socials-icons {
-    display: flex;
-    gap: 12px; /* Abstand zwischen Icons */
-    margin-top: 0.5rem;
-}
+        .footer-socials-icons {
+            display: flex;
+            gap: 12px;
+            /* Abstand zwischen Icons */
+            margin-top: 0.5rem;
+        }
 
 
 
@@ -1430,6 +1332,7 @@
             .branch-grid .branch-card:last-child:nth-child(odd) {
                 grid-column: span 2;
             }
+
         }
 
 
@@ -1440,8 +1343,6 @@
             }
 
         }
-
-
 
 
         @media (max-width: 768px) {
@@ -1465,18 +1366,9 @@
                 max-width: 100%;
                 text-align: center;
             }
-            
 
-            .branch-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
 
-  .branch-card {
-    width: 100%;
-    height: 200px;
-  }
+
             .branch-grid .branch-card:last-child:nth-child(odd) {
                 grid-column: span 2;
                 max-width: 100%;
@@ -1484,28 +1376,29 @@
             }
 
             .tech-showcase {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  }
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+
             .tech-showcase .tech-card:last-child:nth-child(odd) {
                 grid-column: span 2;
                 max-width: 100%;
                 text-align: center;
             }
 
-  .project-white-steps .epic-step:last-child:nth-child(3) {
-    flex: unset !important;
-    max-width: 100% !important;
-    text-align: left !important;
-  }
+            .project-white-steps .epic-step:last-child:nth-child(3) {
+                flex: unset !important;
+                max-width: 100% !important;
+                text-align: left !important;
+            }
         }
 
         @media (max-width: 692px) {
-  .persona-grid .persona-card:last-child:nth-child(odd) {
-    grid-column: unset;
-    max-width: 100%;
-    text-align: left;
-  }
-}
+            .persona-grid .persona-card:last-child:nth-child(odd) {
+                grid-column: unset;
+                max-width: 100%;
+                text-align: left;
+            }
+        }
 
         @media (max-width: 720px) and (min-width: 481px) {
             .tech-showcase {
@@ -1521,21 +1414,22 @@
             }
 
             .video-focus-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
 
-  .video-focus-item {
-    height: 220px; /* Einheitlich */
-    width: 100%;
-  }
+            .video-focus-item {
+                height: 220px;
+                /* Einheitlich */
+                width: 100%;
+            }
 
-  .video-focus-grid .video-focus-item:last-child:nth-child(odd) {
-    grid-column: unset;
-    max-width: 100%;
-    text-align: left;
-  }
+            .video-focus-grid .video-focus-item:last-child:nth-child(odd) {
+                grid-column: unset;
+                max-width: 100%;
+                text-align: left;
+            }
 
         }
 
@@ -1756,12 +1650,12 @@
             height: auto;
             display: block;
         }
-        .branch-grid .branch-card:last-child:nth-child(odd) {
-  grid-column: span 2;
-  max-width: 100%;
-  text-align: center;
-}
 
+        .branch-grid .branch-card:last-child:nth-child(odd) {
+            grid-column: span 2;
+            max-width: 100%;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -1815,7 +1709,7 @@
                 </div>
                 <div class="shimmer-border"></div>
             </div>
-    
+
             <!-- 3D Design -->
             <div class="tech-card" data-title="3D Design">
                 <div class="inner">
@@ -1830,7 +1724,7 @@
                 </div>
                 <div class="shimmer-border"></div>
             </div>
-    
+
             <!-- Grafikdesign -->
             <div class="tech-card" data-title="Grafikdesign">
                 <div class="inner">
@@ -1845,7 +1739,7 @@
                 </div>
                 <div class="shimmer-border"></div>
             </div>
-    
+
             <!-- Social Media -->
             <div class="tech-card" data-title="Social Media">
                 <div class="inner">
@@ -1865,15 +1759,20 @@
 
 
     <section class="white-transition-section" id="prozess">
-        <div class="multi-circle-wrapper" id="triggerCircle">
-            <span class="click-hint" id="clickHint">Klick mich</span>
-            <div class="pulse-circle"></div>
-            <div class="pulse-circle delay1"></div>
-            <div class="pulse-circle delay2"></div>
-            <div class="pulse-circle center-circle"></div>
-        </div>
+        <div class="white-world visible" id="whiteWorld">
+            <!-- Wave Container -->
+            <div class="wave-container">
+                <svg class="wave wave1" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                    <path fill="#f4f4f4" d="M0,192L1440,96L1440,320L0,320Z"></path>
+                </svg>
+                <svg class="wave wave2" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                    <path fill="#eaeaea" d="M0,256L1440,160L1440,320L0,320Z"></path>
+                </svg>
+                <svg class="wave wave3" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                    <path fill="#f4f4f4" d="M0,128L1440,224L1440,320L0,320Z"></path>
+                </svg>
+            </div>
 
-        <div class="white-world hidden" id="whiteWorld">
             <div class="white-content">
                 <h2>So läuft ein Projekt mit Fusion³</h2>
                 <div class="project-white-steps">
@@ -1911,7 +1810,8 @@
         </div>
     </section>
 
-    <section class="branch-selection" id="branchSelection">
+
+    <section class="branch-selection visible" id="branchSelection">
         <div class="branch-inner">
             <h2>So könnte Ihr Social Media aussehen:</h2>
             <div class="branch-grid">
@@ -2105,35 +2005,29 @@
                         <h3>💪 Fitness & Gesundheit</h3>
                     </div>
                 </div>
-                
 
-                <div class="branch-card">
-                    <video autoplay muted loop playsinline>
-                        <source src="./Fotos/gastronomie.mp4" type="video/mp4">
-                    </video>
-                    <div class="branch-overlay">
-                        <h3>🏭 Industrie</h3>
-                    </div>
-                </div>
             </div>
 
         </div>
     </section>
 
+
+
+
     <section class="container" id="kontakt">
         <h2>Kontakt</h2>
         <div class="form-wrapper">
-        <form action="https://formspree.io/f/xqapdvaq" method="POST">
-            <input type="text" name="name" placeholder="Dein Name" required />
-            <input type="email" name="email" placeholder="Deine E-Mail" required />
-            <textarea name="message" rows="6" placeholder="Worum geht’s?" required></textarea>
-            <input type="text" name="_gotcha" style="display:none">
+            <form action="https://formspree.io/f/xqapdvaq" method="POST">
+                <input type="text" name="name" placeholder="Dein Name" required />
+                <input type="email" name="email" placeholder="Deine E-Mail" required />
+                <textarea name="message" rows="6" placeholder="Worum geht’s?" required></textarea>
+                <input type="text" name="_gotcha" style="display:none">
 
-            <button type="submit" class="neon-btn" id="sendButton">
-                <span>✉️ Nachricht senden</span>
-            </button>
+                <button type="submit" class="neon-btn" id="sendButton">
+                    <span>✉️ Nachricht senden</span>
+                </button>
 
-        </form>
+            </form>
     </section>
 
 
@@ -2180,7 +2074,7 @@
                     </a>
                 </div>
             </div>
-            
+
         </div>
         <p class="footer-bottom">© 2025 Fusion³ – Alle Rechte vorbehalten.</p>
     </footer>
@@ -2265,35 +2159,7 @@
         });
     </script>
 
-    <script>
-        const trigger = document.getElementById('triggerCircle');
-        const whiteWorld = document.getElementById('whiteWorld');
-        const branchSelection = document.getElementById('branchSelection');
-        const clickHint = document.getElementById('clickHint');
-        const waveContainer = document.getElementById('testimonialWaves');
 
-        trigger.addEventListener('click', () => {
-            clickHint.style.display = 'none';
-
-            trigger.querySelectorAll('.pulse-circle, .center-circle').forEach(c => {
-                c.style.transition = 'all 0.8s ease';
-                c.style.opacity = '0';
-                c.style.transform = 'scale(3)';
-            });
-
-            whiteWorld.classList.add('visible');
-
-            // Sichtbar machen von branchSelection leicht verzögern
-            setTimeout(() => {
-                branchSelection.classList.add('visible');
-                trigger.style.display = 'none';
-                if (waveContainer) {
-                    waveContainer.style.opacity = '1';
-                }
-            }, 500);
-        });
-
-    </script>
 
     <script>
         gsap.utils.toArray(".epic-step").forEach((card, i) => {
@@ -2354,50 +2220,50 @@
         window.addEventListener('resize', adjustTechCards);
 
         function adjustTechCards() {
-    const container = document.querySelector('.tech-showcase');
-    const cards = Array.from(container.querySelectorAll('.tech-card'));
+            const container = document.querySelector('.tech-showcase');
+            const cards = Array.from(container.querySelectorAll('.tech-card'));
 
-    // Skip adjustment if layout is flex (mobile)
-    const computedStyle = window.getComputedStyle(container);
-    if (computedStyle.display === 'flex') {
-        cards.forEach(card => {
-            card.style.gridColumn = '';
-            card.classList.remove('centered-card');
-        });
-        container.classList.remove('stacked-tech-cards');
-        return;
-    }
+            // Skip adjustment if layout is flex (mobile)
+            const computedStyle = window.getComputedStyle(container);
+            if (computedStyle.display === 'flex') {
+                cards.forEach(card => {
+                    card.style.gridColumn = '';
+                    card.classList.remove('centered-card');
+                });
+                container.classList.remove('stacked-tech-cards');
+                return;
+            }
 
-    // Reset
-    cards.forEach(card => {
-        card.style.gridColumn = '';
-        card.classList.remove('centered-card');
-    });
+            // Reset
+            cards.forEach(card => {
+                card.style.gridColumn = '';
+                card.classList.remove('centered-card');
+            });
 
-    if (cards.length < 2) return;
+            if (cards.length < 2) return;
 
-    const last = cards[cards.length - 1];
-    const secondLast = cards[cards.length - 2];
+            const last = cards[cards.length - 1];
+            const secondLast = cards[cards.length - 2];
 
-    const lastTop = last.getBoundingClientRect().top;
-    const secondTop = secondLast.getBoundingClientRect().top;
+            const lastTop = last.getBoundingClientRect().top;
+            const secondTop = secondLast.getBoundingClientRect().top;
 
-    const allStacked = cards.every((card, i, arr) => {
-        if (i === 0) return true;
-        return card.getBoundingClientRect().top > arr[i - 1].getBoundingClientRect().top + 10;
-    });
+            const allStacked = cards.every((card, i, arr) => {
+                if (i === 0) return true;
+                return card.getBoundingClientRect().top > arr[i - 1].getBoundingClientRect().top + 10;
+            });
 
-    container.classList.remove('stacked-tech-cards');
+            container.classList.remove('stacked-tech-cards');
 
-    if (lastTop > secondTop) {
-        last.style.gridColumn = 'span 3';
-        last.classList.add('centered-card');
+            if (lastTop > secondTop) {
+                last.style.gridColumn = 'span 3';
+                last.classList.add('centered-card');
 
-        if (allStacked) {
-            container.classList.add('stacked-tech-cards');
+                if (allStacked) {
+                    container.classList.add('stacked-tech-cards');
+                }
+            }
         }
-    }
-}
 
 
     </script>
@@ -2422,8 +2288,176 @@
             }, 4000);
         });
     </script>
-
-
+   <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Alle Branch-Cards in ein Array umwandeln
+      const branchCards = Array.from(document.querySelectorAll('.branch-grid .branch-card'));
+      
+      // Bestimme zufällig, welche Cards ersetzt werden sollen (30%-Wahrscheinlichkeit)
+      let replaceIndices = [];
+      branchCards.forEach((card, i) => {
+        if (Math.random() < 0.3) {
+          replaceIndices.push(i);
+        }
+      });
+      // Falls mehr als 10 Karten ausgewählt wurden, wähle zufällig maximal 10 davon aus
+      if (replaceIndices.length > 10) {
+        for (let i = replaceIndices.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [replaceIndices[i], replaceIndices[j]] = [replaceIndices[j], replaceIndices[i]];
+        }
+        replaceIndices = replaceIndices.slice(0, 10);
+      }
+      
+      // Erstelle ein Array mit Bildnummern 1 bis 10 und mische es
+      let imageNumbers = [1,2,3,4,5,6,7,8,9,10];
+      for (let i = imageNumbers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [imageNumbers[i], imageNumbers[j]] = [imageNumbers[j], imageNumbers[i]];
+      }
+      
+      // Ersetze die ausgewählten Cards mit Bildern und markiere sie als dynamisch
+      replaceIndices.forEach((index, i) => {
+        const card = branchCards[index];
+        card.innerHTML = '';
+        
+        // Erstelle das <img>-Element
+        const img = document.createElement('img');
+        const imgNum = imageNumbers[i];
+        img.src = `./SocialMediaPic/post${imgNum}.jpg`;
+        img.alt = `Post ${imgNum}`;
+        card.appendChild(img);
+        
+        // Füge ein Overlay hinzu (optional)
+        const overlay = document.createElement('div');
+        overlay.className = 'branch-overlay';
+        const h3 = document.createElement('h3');
+        h3.textContent = `Post ${imgNum}`;
+        overlay.appendChild(h3);
+        card.appendChild(overlay);
+        
+        // Markiere die Card als dynamisch und speichere die aktuelle Bildnummer
+        card.classList.add('dynamic-image');
+        card.dataset.currentImg = imgNum;
+      });
+      
+      // Alle 5 Sekunden: Aktualisiere die dynamischen Cards mit einem neuen Bild (nicht gleich wie zuvor)
+      setInterval(() => {
+        const dynamicCards = document.querySelectorAll('.branch-card.dynamic-image');
+        dynamicCards.forEach(card => {
+          const img = card.querySelector('img');
+          let currentImg = parseInt(card.dataset.currentImg, 10);
+          
+          let newImg;
+          // Wähle solange zufällig, bis ein anderes Bild als das aktuelle gefunden wurde
+          do {
+            newImg = Math.floor(Math.random() * 10) + 1;
+          } while (newImg === currentImg);
+          
+          // Aktualisiere das Bild und den Datenwert
+          img.src = `./SocialMediaPic/post${newImg}.jpg`;
+          card.dataset.currentImg = newImg;
+          
+          // Optional: Aktualisiere auch den Overlay-Text
+          const h3 = card.querySelector('.branch-overlay h3');
+          if (h3) {
+            h3.textContent = `Post ${newImg}`;
+          }
+        });
+      }, 5000); // 5000 Millisekunden = 5 Sekunden
+    });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          // Alle Branch-Cards in ein Array umwandeln
+          const branchCards = Array.from(document.querySelectorAll('.branch-grid .branch-card'));
+          
+          // Bestimme zufällig, welche Cards durch dynamische Videos ersetzt werden sollen (z.B. 30% Wahrscheinlichkeit)
+          let replaceIndices = [];
+          branchCards.forEach((card, i) => {
+            if (Math.random() < 0.3) {
+              replaceIndices.push(i);
+            }
+          });
+          // Falls mehr als 10 Karten ausgewählt wurden, wähle zufällig maximal 10 davon aus
+          if (replaceIndices.length > 10) {
+            for (let i = replaceIndices.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [replaceIndices[i], replaceIndices[j]] = [replaceIndices[j], replaceIndices[i]];
+            }
+            replaceIndices = replaceIndices.slice(0, 10);
+          }
+          
+          // Erstelle ein Array mit Video-Nummern 1 bis 10 und mische es
+          let videoNumbers = [1,2,3,4,5,6,7,8,9,10];
+          for (let i = videoNumbers.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [videoNumbers[i], videoNumbers[j]] = [videoNumbers[j], videoNumbers[i]];
+          }
+          
+          // Ersetze die ausgewählten Cards durch Videos und markiere sie als dynamisch
+          replaceIndices.forEach((index, i) => {
+            const card = branchCards[index];
+            card.innerHTML = ''; // Inhalt löschen
+        
+            // Erstelle ein Video-Element
+            const video = document.createElement('video');
+            video.autoplay = true;
+            video.muted = true;
+            video.loop = true;
+            video.playsInline = true;
+            
+            // Erstelle das <source>-Element und weise ein zufälliges Video zu
+            const source = document.createElement('source');
+            const vidNum = videoNumbers[i];
+            source.src = `./VideoPost/VideoPost${vidNum}.mp4`;
+            source.type = "video/mp4";
+            video.appendChild(source);
+            
+            card.appendChild(video);
+            
+            // Optional: Overlay mit Text hinzufügen
+            const overlay = document.createElement('div');
+            overlay.className = 'branch-overlay';
+            const h3 = document.createElement('h3');
+            h3.textContent = `Video ${vidNum}`;
+            overlay.appendChild(h3);
+            card.appendChild(overlay);
+            
+            // Markiere die Card als dynamisch und speichere die aktuelle Video-Nummer
+            card.classList.add('dynamic-video');
+            card.dataset.currentVideo = vidNum;
+          });
+          
+          // Alle 5 Sekunden: Aktualisiere den Inhalt der dynamischen Video-Cards
+          setInterval(() => {
+            const dynamicCards = document.querySelectorAll('.branch-card.dynamic-video');
+            dynamicCards.forEach(card => {
+              const video = card.querySelector('video');
+              let currentVideo = parseInt(card.dataset.currentVideo, 10);
+              let newVideo;
+              // Wähle solange zufällig, bis ein anderes Video gefunden wurde
+              do {
+                newVideo = Math.floor(Math.random() * 10) + 1;
+              } while (newVideo === currentVideo);
+              
+              // Aktualisiere den Source-Pfad und lade das neue Video
+              const source = video.querySelector('source');
+              source.src = `./VideoPost/VideoPost${newVideo}.mp4`;
+              video.load();
+              
+              // Aktualisiere den Data-Wert und optional den Overlay-Text
+              card.dataset.currentVideo = newVideo;
+              const h3 = card.querySelector('.branch-overlay h3');
+              if (h3) {
+                h3.textContent = `Video ${newVideo}`;
+              }
+            });
+          }, 5000); // alle 5000 Millisekunden = 5 Sekunden
+        });
+        </script>
+        
+    
 </body>
 
 </html>
