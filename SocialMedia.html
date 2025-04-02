@@ -75,27 +75,27 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background-color: transparent;
-            background: linear-gradient(to bottom, #0b0b0b, #000);
+            background-color: black;
+               -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 100%);
+
         }
 
         .video-background {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: auto;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-            z-index: 1;
-            opacity: 1;
-            pointer-events: none;
-            background-color: transparent;
-
-            /* Sanfter Verlauf oben UND unten */
-            mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-        }
+    position: absolute;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    top: 60%;
+    object-fit: contain;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    pointer-events: none;
+    background-color: transparent;
+    /* Masking: Von transparent (0%) zu undurchsichtig (ab 20%) */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 100%);
+}
 
 
 
@@ -1050,89 +1050,7 @@
         }
 
 
-
-        .video-focus-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-            padding: 4rem 0;
-        }
-
-        .video-focus-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-            height: 320px;
-            background-color: #000;
-            box-shadow: 0 0 20px rgba(255, 102, 0, 0.06), 0 0 60px rgba(255, 102, 0, 0.05);
-            isolation: isolate;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .video-focus-item:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 0 30px rgba(255, 102, 0, 0.15), 0 0 80px rgba(255, 102, 0, 0.1);
-        }
-
-        .video-focus-item::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: radial-gradient(circle, rgba(255, 102, 0, 0.05), transparent 80%);
-            opacity: 0.5;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .video-focus-item video {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: blur(10px);
-            transition: filter 0.3s ease;
-            pointer-events: none;
-            z-index: 1;
-            transform: scale(1.04);
-        }
-
-        .video-mask {
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            mask-image: radial-gradient(circle at var(--x, 50%) var(--y, 50%), black 0%, transparent 140px);
-            -webkit-mask-image: radial-gradient(circle at var(--x, 50%) var(--y, 50%), black 0%, transparent 140px);
-            mask-repeat: no-repeat;
-            -webkit-mask-repeat: no-repeat;
-            pointer-events: none;
-        }
-
-        .video-mask video {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: none !important;
-        }
-
-        .video-title {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            z-index: 3;
-            transform: translate(-50%, -50%);
-            color: #fff;
-            font-size: 1.5rem;
-            font-weight: 800;
-            text-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            pointer-events: none;
-            letter-spacing: 0.5px;
-        }
+       
 
 
         .cta-btn::before {

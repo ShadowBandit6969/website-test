@@ -75,28 +75,27 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background-color: transparent;
-            background: linear-gradient(to bottom, #0b0b0b, #000);
+            background-color: black;
+               -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 100%);
+
         }
 
         .video-background {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: auto;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-            z-index: 1;
-            opacity: 1;
-            pointer-events: none;
-            background-color: transparent;
-
-            /* Sanfter Verlauf oben UND unten */
-            mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-        }
-
+    position: absolute;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    top: 60%;
+    object-fit: contain;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    pointer-events: none;
+    background-color: transparent;
+    /* Masking: Von transparent (0%) zu undurchsichtig (ab 20%) */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 100%);
+}
 
 
         .hero-video-content {
@@ -878,18 +877,18 @@
             height: 100%;
             object-fit: cover;
             z-index: 1;
-            filter: brightness(0.7);
+            filter: brightness(1);
             transition: filter 0.4s ease;
         }
 
         .branch-card:hover video {
-            filter: brightness(1);
+            filter: brightness(1.1);
         }
 
         .branch-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 60%);
+
             z-index: 2;
             display: flex;
             align-items: flex-end;
@@ -910,13 +909,10 @@
             transform: translateY(-6px);
         }
 
-        /* Helles Design aktiv */
-        .branch-selection.visible .branch-overlay {
-            background: linear-gradient(to top, rgba(255, 255, 255, 0.6), transparent 60%);
-        }
+ 
 
         .branch-selection.visible .branch-overlay h3 {
-            color: #111;
+            color: #ffffff;
             text-shadow: none;
         }
 
@@ -928,24 +924,14 @@
         .branch-card.selected {
             outline: 4px solid var(--primary);
             outline-offset: -8px;
-            box-shadow: 0 0 40px rgba(255, 102, 0, 0.3);
-            transform: scale(1.04);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 0 10px rgb(255, 102, 0), 0 0 5px rgb(255, 255, 255);
+            box-shadow: 0 0 3px rrgb(255, 255, 255);
+          
             z-index: 5;
         }
 
-        .branch-card.selected .branch-overlay h3 {
-            animation: glowText 1.5s ease-in-out infinite alternate;
-        }
 
-        @keyframes glowText {
-            from {
-                text-shadow: 0 0 6px rgba(255, 102, 0, 0.3);
-            }
-
-            to {
-                text-shadow: 0 0 16px rgba(255, 102, 0, 0.6);
-            }
-        }
 
 
 
@@ -1152,10 +1138,32 @@
             backdrop-filter: blur(10px);
         }
 
+
         .video-focus-item:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 0 30px rgba(255, 102, 0, 0.15), 0 0 80px rgba(255, 102, 0, 0.1);
-        }
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 0 10px rgb(255, 102, 0), 0 0 5px rgb(255, 255, 255);
+}
+
+.glow-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255, 102, 0, 0.15), transparent 60%);
+    opacity: 0.7;
+    animation: glowPulse 3s infinite ease-in-out;
+    pointer-events: none;
+    z-index: 2;
+    border-radius: 20px;
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
 
         .video-focus-item::after {
             content: "";
@@ -1816,6 +1824,7 @@
         </div>
     </section>
 
+
     <section class="container" id="tools">
         <h2>Unsere Leistungen</h2>
         <div class="tech-showcase">
@@ -1852,6 +1861,7 @@
     
             
             <!-- Grafikdesign -->
+            <a href="Grafikdesign.html" class="tech-card" data-title="Grafikdesign">
             <div class="tech-card" data-title="Grafikdesign">
                 <div class="inner">
                     <h3>Grafikdesign</h3>
@@ -1944,7 +1954,7 @@
                         <source src="./Fotos/gastronomie.mp4" type="video/mp4">
                     </video>
                     <div class="branch-overlay">
-                        <h3>🍽️ Gastronomie</h3>
+                        <h3>Gastronomie</h3>
                     </div>
                 </div>
 
@@ -1953,7 +1963,7 @@
                         <source src="./Fotos/gastronomie.mp4" type="video/mp4">
                     </video>
                     <div class="branch-overlay">
-                        <h3>🏛️ Architektur</h3>
+                        <h3>Architektur</h3>
                     </div>
                 </div>
 
@@ -1962,7 +1972,7 @@
                         <source src="./Fotos/gastronomie.mp4" type="video/mp4">
                     </video>
                     <div class="branch-overlay">
-                        <h3>🧰 Dienstleistungen</h3>
+                        <h3>Dienstleistungen</h3>
                     </div>
                 </div>
 
@@ -1971,7 +1981,7 @@
                         <source src="./Fotos/gastronomie.mp4" type="video/mp4">
                     </video>
                     <div class="branch-overlay">
-                        <h3>💪 Fitness & Gesundheit</h3>
+                        <h3>Fitness & Gesundheit</h3>
                     </div>
                 </div>
 
@@ -1980,7 +1990,7 @@
                         <source src="./Fotos/gastronomie.mp4" type="video/mp4">
                     </video>
                     <div class="branch-overlay">
-                        <h3>🏭 Industrie</h3>
+                        <h3>Industrie</h3>
                     </div>
                 </div>
             </div>
@@ -2031,13 +2041,16 @@
 
 
     <section class="container" id="portfolio">
+
         <h2>Portfolio</h2>
         <div class="video-focus-grid">
+            
 
             <div class="video-focus-item">
                 <video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
                 <div class="video-mask"><video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
                 </div>
+                
                 <div class="video-title">WebDesign</div>
             </div>
 
@@ -2278,7 +2291,7 @@
                 card.classList.add('selected');
             });
         });
-    </script>´
+    </script>
 
     <script>
         const items = document.querySelectorAll('.video-focus-item');

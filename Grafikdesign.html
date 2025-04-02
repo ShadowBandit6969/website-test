@@ -2,10 +2,11 @@
 <html lang="de">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Fusion³ – Immersive Hero</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SGrafikdesign</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #ff6600;
@@ -17,18 +18,23 @@
     }
 
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
-    body,
-    html {
-      margin: 0;
-      padding: 0;
-
+    html,
+    body {
+      font-family: 'Inter', sans-serif;
       background: var(--bg);
-      font-family: 'Space Grotesk', sans-serif;
-      height: 100%;
       color: var(--text);
+      scroll-behavior: smooth;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: 0.3s;
     }
 
     header {
@@ -49,12 +55,6 @@
       letter-spacing: 1px;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
     nav a {
       margin-left: 2rem;
       font-weight: 500;
@@ -65,108 +65,293 @@
     nav a:hover {
       color: var(--primary);
     }
+    .hero-video-wrapper {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: black;
+               -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 100%);
 
-    .hero {
+        }
+
+        .video-background {
+    position: absolute;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    top: 60%;
+    object-fit: contain;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    pointer-events: none;
+    background-color: transparent;
+    /* Masking: Von transparent (0%) zu undurchsichtig (ab 20%) */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 100%);
+}
+
+
+    .hero-video-content {
       position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    #bg-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-      filter: brightness(0.4);
-    }
-
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(255, 102, 0, 0.04), transparent 70%);
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    canvas#particles {
-      position: absolute;
-      inset: 0;
       z-index: 2;
-      pointer-events: none;
+      width: 90%;
+      padding: 2rem;
+      max-width: 800px;
+      color: #fff;
+      background: none;
+      border-radius: 10px;
+      box-sizing: border-box;
+      margin-top: -25vh;
+      /* <-- Überschrift weiter nach oben */
     }
 
-    .hero-content {
-      position: relative;
-      z-index: 3;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      backdrop-filter: blur(10px);
-    }
 
-    .hero-content h1 {
-      font-size: 4.5rem;
+
+    .hero-video-content h1 {
+      font-size: 3.5rem;
       font-weight: 900;
-      text-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
-      margin-bottom: 2rem;
     }
 
-    .hero-content h1 span {
-      color: var(--primary);
+    .hero-video-content p {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin: 1rem 0;
     }
 
-    .glow-button {
-      padding: 1rem 2rem;
+    .neon-btn {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: #000;
       border: none;
-      border-radius: 50px;
-      font-weight: bold;
+      color: #fff;
+      padding: 1rem 2.2rem;
       font-size: 1rem;
-      cursor: pointer;
-      transition: 0.4s;
-      box-shadow: 0 0 20px rgba(255, 102, 0, 0.6);
-      text-decoration: none;
+      font-weight: 800;
+      text-transform: uppercase;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(255, 102, 0, 0.4),
+        0 0 24px rgba(255, 102, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      transition: all 0.3s ease;
     }
 
-    .glow-button:hover {
-      box-shadow: 0 0 30px rgba(255, 102, 0, 0.8), 0 0 60px rgba(255, 102, 0, 0.4);
+    .neon-btn:hover {
       transform: scale(1.05);
+      box-shadow: 0 0 16px rgba(255, 102, 0, 0.6),
+        0 0 36px rgba(255, 102, 0, 0.4);
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
     }
 
-    @keyframes fadeIn {
-      from {
+    .neon-btn span::after {
+      content: "";
+      position: absolute;
+      top: -120%;
+      left: -120%;
+      width: 300%;
+      height: 300%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 40%);
+      opacity: 0;
+      animation: pulseEffect 4s infinite ease-in-out;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @keyframes pulseEffect {
+
+      0%,
+      100% {
         opacity: 0;
-        transform: translateY(20px);
+        transform: scale(0.8);
       }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      50% {
+        opacity: 0.3;
+        transform: scale(1.4);
       }
+    }
+
+    .neon-btn.sent {
+      background: linear-gradient(135deg, #00c851, #007e33);
+      box-shadow: 0 0 14px rgba(0, 200, 81, 0.6);
+      transform: scale(1.02);
+    }
+
+    @keyframes buttonShake {
+      0% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-4px);
+      }
+
+      50% {
+        transform: translateX(4px);
+      }
+
+      75% {
+        transform: translateX(-2px);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    .neon-btn.shake {
+      animation: buttonShake 0.3s ease;
+    }
+
+
+    .cta-btn {
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+      background: var(--primary);
+      color: #000;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 1rem;
     }
 
     section h2 {
       font-size: 2.5rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
       text-align: center;
       font-weight: 800;
     }
+
+    section h3 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+
+    .features {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .feature {
+      background: #161616;
+      border-radius: 10px;
+      padding: 2rem;
+      width: 320px;
+      text-align: left;
+    }
+
+    .feature h3 {
+      color: var(--secondary);
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .portfolio-grid img {
+      width: 100%;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .portfolio-grid img:hover {
+      transform: scale(1.03);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      /* max-width: 600px; ❌ entfernen */
+      width: 100%;
+      /* ✅ volle Breite im Container nutzen */
+      margin: 0 auto;
+    }
+
+    .form-wrapper {
+      max-width: 100%;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+
+    input,
+    textarea {
+      background: #111;
+      border: 1px solid #333;
+      padding: 1rem;
+      color: var(--text);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 5px;
+    }
+
+    button {
+      background: var(--primary);
+      color: #000;
+      padding: 1rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+
+
+    .socials img {
+      width: 24px;
+      margin: 0 8px;
+      opacity: 0.7;
+      transition: 0.2s;
+    }
+
+    .socials img:hover {
+      opacity: 1;
+    }
+
 
     .tech-showcase {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
-      padding: 5rem 2rem;
-      perspective: 1200px;
+      grid-auto-rows: 1fr;
+      /* 🔥 Hier passiert die Magie */
     }
+
+
+
+    .tech-showcase .tech-card .inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      /* <-- Macht den Trick */
+      height: 100%;
+    }
+
 
     /* Nur wenn gestapelt UND die Karte zentriert dargestellt wird */
     .tech-showcase.stacked-tech-cards .tech-card.centered-card .inner {
@@ -208,6 +393,14 @@
       border-radius: 16px;
     }
 
+    .tech-card .inner {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+
     .tech-card h3 {
       font-size: 1.4rem;
       color: var(--primary);
@@ -222,161 +415,1165 @@
 
 
     /* Aktualisierte Listeneinträge */
-
-    .tech-showcase>.tech-card:nth-last-child(1):nth-child(odd):only-child,
-    .tech-showcase>.tech-card:last-child:nth-child(odd) {
-      grid-column: span 2;
-      max-width: 100%;
-      text-align: center;
+    .tech-card li {
+      margin-bottom: 0.8rem;
+      position: relative;
+      padding-left: 1.6rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.4;
+      color: #e6e6e6;
     }
 
-    h2 {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-      text-align: center;
-      font-weight: 800;
+    .tech-card li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.45rem;
+      width: 8px;
+      height: 8px;
+      background: var(--primary);
+      transform: rotate(45deg);
+      box-shadow: 0 0 8px rgba(255, 102, 0, 0.3);
+      transition: all 0.3s ease;
     }
 
-    .tech-card::before {
-      content: "";
+    .tech-card li:hover::before {
+      transform: rotate(135deg) scale(1.2);
+      background: var(--secondary);
+    }
+
+    .bg-icon {
+      position: absolute;
+      font-size: 4rem;
+      opacity: 0.04;
+      top: 20%;
+      right: 10%;
+      transform: rotate(-20deg);
+      pointer-events: none;
+    }
+
+    .shimmer-border {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(120deg, rgba(255, 255, 255, 0.03), transparent 60%);
-      pointer-events: none;
+      border-radius: 18px;
+      background: linear-gradient(130deg, transparent, var(--primary), transparent);
+      opacity: 0.05;
+      mix-blend-mode: screen;
+      animation: pulse 4s infinite ease-in-out;
       z-index: 1;
-      animation: shineGlare 8s infinite linear;
     }
 
-    @keyframes shineGlare {
-      0% {
-        transform: translateX(-100%);
-      }
-
-      100% {
-        transform: translateX(100%);
-      }
-    }
-
-    .tech-card .inner {
-      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.3));
-    }
-
-    body {
-      cursor: url('./cursor-fusion3.svg'), auto;
-    }
-
-    .tech-card:hover .inner {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(20px);
-      box-shadow: 0 0 40px rgba(255, 102, 0, 0.2);
-    }
-
-    .bg-icon {
-      display: inline-block;
-      animation: pulseIcon 3s infinite ease-in-out;
-    }
-
-    @keyframes pulseIcon {
+    @keyframes pulse {
 
       0%,
       100% {
-        transform: translateY(0);
+        opacity: 0.05;
       }
 
       50% {
-        transform: translateY(-4px);
+        opacity: 0.15;
       }
     }
 
-    .hero-content h1 {
-      font-size: clamp(2.8rem, 5vw, 5rem);
+    .white-transition-section {
+      position: relative;
+      background: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: visible;
+      /* 🔁 damit animationen nicht abgeschnitten werden */
     }
 
-    .intro-screen {
-      position: fixed;
-      inset: 0;
-      background: #0b0b0b;
-      z-index: 9999;
-      animation: fadeOut 1s ease forwards 1.5s;
+
+    .white-world {
+      position: relative;
+      height: auto;
+      min-height: 100vh;
+      clip-path: circle(150% at 50% 50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: radial-gradient(circle at center, #f4f4f4 0%, #f4f4f4 100%);
+      opacity: 1;
+      pointer-events: all;
+      z-index: 5;
+      width: 100vw;
+      transition: none;
     }
 
-    @keyframes fadeOut {
-      to {
+
+    .white-world.visible {
+      clip-path: circle(150% at 50% 50%);
+      opacity: 1;
+      pointer-events: all;
+      width: 100vw;
+    }
+
+
+    .white-world.visible {
+      opacity: 1;
+      pointer-events: all;
+      clip-path: circle(150% at center);
+      transform: translateX(0);
+      /* zurück zur Mitte */
+    }
+
+    /* Inhalt im weißen Bereich */
+    .white-content {
+      text-align: center;
+      max-width: 900px;
+      padding: 2rem;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    .white-content h2 {
+      font-size: 2.8rem;
+      color: #111;
+      margin-bottom: 3rem;
+      font-weight: 900;
+    }
+
+
+    .project-white-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      /* 2.5rem? */
+      justify-content: center;
+    }
+
+    .white-step {
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid #eee;
+      border-radius: 20px;
+      padding: 2rem;
+      width: 260px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .white-step:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .white-step span {
+      display: block;
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .white-step h3 {
+      color: #111;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .white-step p {
+      color: #444;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    @keyframes fadeIn {
+      0% {
         opacity: 0;
-        visibility: hidden;
+        transform: translateY(30px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
-.tech-card {
-  position: relative;
-  background: rgba(15, 15, 15, 0.6);
-  border-radius: 18px;
-  overflow: hidden;
-  transform-style: preserve-3d;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 10px rgb(255, 255, 255); /* orange glow */
-}
-
-.tech-card:hover {
-  transform: rotateY(8deg) rotateX(4deg);
-  box-shadow: 0 0 20px rgb(255, 102, 0); /* intensiverer Glow */
-}
 
 
 
 
-.tech-card:nth-child(1):hover {
-  transform: rotateY(8deg) rotateX(4deg);
-}
+    .epic-step {
+      position: relative;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 2.5rem;
+      width: 300px;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      backdrop-filter: blur(20px);
+      overflow: hidden;
+      transition: all 0.4s ease;
+      transform: translateY(40px);
+      opacity: 0;
+    }
 
-.tech-card:nth-child(2):hover {
-  transform: rotateY(-8deg) rotateX(2deg);
-}
+    .epic-step::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(ellipse at center, #fff 0%, transparent 60%);
+      opacity: 0.04;
+      animation: lightMotion 8s linear infinite;
+    }
 
-.tech-card:nth-child(3):hover {
-  transform: rotateY(6deg) rotateX(-4deg);
-}
+    @keyframes lightMotion {
+      0% {
+        transform: rotate(0deg);
+      }
 
-.tech-card:nth-child(4):hover {
-  transform: rotateY(-6deg) rotateX(6deg);
-}
+      100% {
+        transform: rotate(360deg);
+      }
+    }
 
-.tech-card:nth-child(5):hover {
-  transform: rotateY(5deg) rotateX(-5deg);
-}
+    .epic-step:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+      border-color: rgba(255, 102, 0, 0.2);
+    }
+
+    .step-inner {
+      position: relative;
+      z-index: 2;
+      text-align: left;
+    }
+
+    .step-number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .epic-step h3 {
+      font-size: 1.4rem;
+      color: #111;
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+    }
+
+    .epic-step p {
+      color: #333;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .epic-step::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(130deg, rgba(255, 102, 0, 0.08), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .epic-step:hover::after {
+      opacity: 1;
+    }
+
+    .tech-card .price {
+      margin-top: auto;
+      /* damit springt er ganz nach unten */
+      padding-top: 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--secondary);
+      text-align: center;
+    }
 
 
 
-.tech-card:nth-child(1)::before {
-  animation-delay: 0s;
-}
-
-.tech-card:nth-child(2)::before {
-  animation-delay: s;
-}
-
-.tech-card:nth-child(3)::before {
-  animation-delay: 12s;
-}
-
-.tech-card:nth-child(4)::before {
-  animation-delay: 3s;
-}
-
-.tech-card:nth-child(5)::before {
-  animation-delay: 14s;
-}
 
 
+    footer {
+      background: #0d0d0d;
+      color: #aaa;
+      padding: 4rem 5vw 2rem;
+      font-size: 0.9rem;
+      border-top: 1px solid #222;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+    }
+
+    .footer-logo span {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    .footer-logo p {
+      margin-top: 0.5rem;
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    .footer-links h4,
+    .footer-contact h4,
+    .footer-socials h4 {
+      margin-bottom: 0.8rem;
+      color: var(--secondary);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .footer-links ul,
+    .footer-contact ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li,
+    .footer-contact li {
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-links a {
+      color: #ccc;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-socials {
+      display: flex;
+      flex-direction: column;
+      /* Überschrift oben, Icons darunter */
+      align-items: flex-start;
+    }
+
+    .footer-socials-icons {
+      display: flex;
+      gap: 12px;
+      /* Abstand zwischen Icons */
+      margin-top: 0.5rem;
+    }
+
+
+
+    .footer-socials img {
+      width: 26px;
+      height: 26px;
+      margin-right: 12px;
+      opacity: 1;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      vertical-align: middle;
+    }
+
+    .footer-socials img:hover {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+
+    .footer-bottom {
+      text-align: center;
+      color: #666;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    .design-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .design-card {
+      background: rgba(20, 20, 20, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 2rem;
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .design-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(255, 102, 0, 0.15);
+    }
+
+    .design-card.flyer {
+      transform: rotate(-1.5deg);
+      background: linear-gradient(135deg, #1a1a1a, #202020);
+    }
+
+    .design-card.poster {
+      background: linear-gradient(120deg, #222, #2b2b2b);
+      border-left: 5px solid var(--primary);
+    }
+
+    .design-card.logo {
+      text-align: center;
+      background: linear-gradient(to right, #111, #1e1e1e);
+    }
+
+    .design-card.digital {
+      background: linear-gradient(to top left, #191919, #232323);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 0 20px rgba(255, 102, 0, 0.1);
+    }
+
+    .design-card .card-inner h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .design-card .card-inner p {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #ddd;
+    }
+
+    .design-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      background: #121212;
+      border-radius: 16px;
+      overflow: hidden;
+      text-align: center;
+      padding-bottom: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-6px);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+    }
+
+    .gallery-item.poster img {
+      aspect-ratio: 3/4;
+      object-fit: cover;
+    }
+
+    .gallery-item.logo img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 1rem auto;
+      border: 4px solid var(--primary);
+    }
+
+    .gallery-item.flyer .flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+    }
+
+    .gallery-item.flyer {
+      perspective: 1000px;
+    }
+
+    .gallery-item.flyer:hover .flip-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card .flip-front,
+    .flip-card .flip-back {
+      position: absolute;
+      width: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+    }
+
+    .flip-front img,
+    .flip-back img {
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .flip-front {
+      z-index: 2;
+    }
+
+    .flip-back {
+      transform: rotateY(180deg);
+    }
+
+    .gallery-item .caption {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+
+
+    .gallery-item {
+      animation: slideFadeIn 1s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @keyframes slideFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo-wrap {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .gallery-item.logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+      background: transparent;
+    }
+
+    .gallery-item.logo:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+
+    .gallery-item.flyer .flip-inner.flyer-format {
+      aspect-ratio: 1.41 / 1;
+      /* DIN A4 quer */
+      max-height: 300px;
+      position: relative;
+    }
+
+    .gallery-item.poster img {
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+    }
+
+    .gallery-item .caption {
+      display: block;
+      margin-top: 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      opacity: 0.85;
+      transition: all 0.3s ease;
+    }
+
+
+    .gallery-item.logo {
+      background: transparent;
+      box-shadow: none;
+      padding-bottom: 1rem;
+      /* etwas Platz nach unten */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gallery-item.logo .caption {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #fff;
+      opacity: 0.85;
+      font-family: 'Space Grotesk', sans-serif;
+      text-align: center;
+    }
+
+
+
+    .gallery-item.flyer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 1rem;
+      /* weniger Abstand */
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .gallery-item.flyer .caption {
+      margin-top: 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      text-align: center;
+    }
+
+    .lightbox {
+      position: fixed;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 15, 15, 0.9);
+      z-index: 9999;
+      backdrop-filter: blur(5px);
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .close-lightbox {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 3rem;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      z-index: 10000;
+      transition: 0.2s;
+    }
+
+    .close-lightbox:hover {
+      color: var(--primary);
+    }
+
+    .flyer-lightbox,
+    .lightbox {
+      position: fixed;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background: rgba(15, 15, 15, 0.95);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      backdrop-filter: blur(6px);
+      flex-direction: column;
+    }
+
+    .flyer-lightbox img,
+    .lightbox img {
+      max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+      transition: transform 0.6s;
+    }
+
+    .flyer-lightbox .flyer-flip {
+      position: relative;
+      width: 90vw;
+      max-width: 600px;
+      aspect-ratio: 1.41 / 1;
+      perspective: 1000px;
+    }
+
+    #flyer-front,
+    #flyer-back {
+      position: absolute;
+      width: 100%;
+      backface-visibility: hidden;
+      object-fit: contain;
+    }
+
+    #flyer-back {
+      transform: rotateY(180deg);
+    }
+
+    .flyer-lightbox.flip-active #flyer-front {
+      transform: rotateY(180deg);
+    }
+
+    .flyer-lightbox.flip-active #flyer-back {
+      transform: rotateY(0deg);
+    }
+
+    .close-lightbox {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 3rem;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    .flyer-toggle {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      padding: 1rem 2.2rem;
+      font-size: 1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      border-radius: 8px;
+      border: none;
+      box-shadow: 0 0 12px rgba(255, 102, 0, 0.4),
+        0 0 14px rgba(255, 102, 0, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .flyer-toggle:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 16px rgba(255, 102, 0, 0.6),
+        0 0 36px rgba(255, 102, 0, 0.4);
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+    }
+
+
+    .gallery-item.logo .logo-wrap {
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      /* vorher 0.5rem – sorgt für Ausgleich */
+    }
+
+    .gallery-item.logo.logo-long .logo-wrap {
+      margin-bottom: 0.8rem;
+      /* ebenfalls anpassen */
+    }
+
+    .gallery-item.logo.logo-long img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      border: none;
+      background: none;
+      padding: 0.5rem;
+    }
+
+
+    .gallery-item.digital {
+      background: transparent !important;
+      box-shadow: none !important;
+      padding-bottom: 1rem;
+      /* Optional: Abstand nach unten beibehalten */
+    }
+
+    .gallery-item.logo.logo-long .caption {
+      margin-top: 0.2rem;
+      /* vorher 0.5rem oder mehr */
+    }
+
+    .gallery-item.logo.logo-long .logo-wrap {
+      margin-top: -0.605rem;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @media (min-width: 1024px) {
+      .branch-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      .branch-grid .branch-card:last-child:nth-child(odd) {
+        grid-column: span 2;
+      }
+
+    }
+
+
+    @media (min-width: 984px) {
+      .branch-grid .branch-card:last-child:nth-child(odd) {
+        grid-column: auto !important;
+        max-width: 100% !important;
+        text-align: left !important;
+      }
+    }
+
+
+
+    @media (max-width: 768px) {
+      .branch-grid {
+        grid-template-columns: repeat(3, 1fr);
+        /* exakt 3 Spalten auf großen Screens */
+      }
+
+      .branch-grid .branch-card:last-child:nth-child(odd) {
+        grid-column: span 2;
+        max-width: 100%;
+        text-align: center;
+      }
+
+      .tech-showcase {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .tech-showcase .tech-card:last-child:nth-child(odd) {
+        grid-column: span 2;
+        max-width: 100%;
+        text-align: center;
+      }
+
+
+
+      .branch-grid .branch-card:last-child:nth-child(odd) {
+        grid-column: span 2;
+        max-width: 100%;
+        text-align: center;
+      }
+
+      .tech-showcase {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      .tech-showcase .tech-card:last-child:nth-child(odd) {
+        grid-column: span 2;
+        max-width: 100%;
+        text-align: center;
+      }
+
+      .project-white-steps .epic-step:last-child:nth-child(3) {
+        flex: unset !important;
+        max-width: 100% !important;
+        text-align: left !important;
+      }
+
+      .branch-grid .branch-card:last-child:nth-child(odd) {
+        grid-column: auto !important;
+        max-width: 100% !important;
+        text-align: left !important;
+      }
+    }
+
+    @media (max-width: 692px) {
+      .persona-grid .persona-card:last-child:nth-child(odd) {
+        grid-column: unset;
+        max-width: 100%;
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 720px) and (min-width: 481px) {
+      .tech-showcase {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .tech-card {
+        width: 90%;
+        max-width: 420px;
+      }
+
+      .video-focus-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .video-focus-item {
+        height: 220px;
+        /* Einheitlich */
+        width: 100%;
+      }
+
+      .video-focus-grid .video-focus-item:last-child:nth-child(odd) {
+        grid-column: unset;
+        max-width: 100%;
+        text-align: left;
+      }
+
+    }
+
+    /* === Medien-Spezifisch: 320px Mobile Fix === */
+    @media (max-width: 480px) {
+
+      /* HERO: Inhalt zentriert + responsive */
+      .hero-video-content {
+        text-align: center;
+        padding: 1rem;
+        margin-top: -10vh;
+      }
+
+      .hero-video-content h1 {
+        font-size: 1.5rem;
+        line-height: 1.3;
+      }
+
+      .hero-video-content p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .cta-btn {
+        font-size: 0.8rem;
+        padding: 0.6rem 1.2rem;
+      }
+
+      /* "Für wen ist Fusion³?" Karten untereinander */
+      .persona-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .persona-card {
+        width: 100%;
+      }
+
+      /* Technologien & Tools: Karten untereinander */
+      .tech-showcase {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 2rem 1rem;
+      }
+
+      .tech-card {
+        width: 100%;
+      }
+
+      /* Prozessüberschrift richtig anzeigen */
+      .white-content h2 {
+        font-size: 1.5rem;
+        padding: 0 1rem;
+        line-height: 1.3;
+      }
+
+      /* Kundenstimmen – kleinere Karten, kein Overflow */
+      .testimonial-slider-wrapper {
+        overflow-x: auto;
+        padding-bottom: 1rem;
+      }
+
+
+
+      .testimonial-card p {
+        font-size: 1rem;
+      }
+
+      .testimonial-card span {
+        font-size: 0.85rem;
+      }
+
+      /* Welle ohne Stroke */
+      .testimonial-waves svg path {
+        stroke: none !important;
+      }
+
+      .testimonial-waves {
+        overflow: hidden;
+      }
+
+      /* Portfolio: untereinander, keine Grid-Spalten */
+      .video-focus-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+
+      .video-title {
+        font-size: 1rem;
+      }
+
+      /* Videos responsiv */
+      video,
+      img,
+      svg {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Branchen: Untereinander + ohne Stretch */
+      .branch-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .branch-card img {
+        max-height: 100%;
+        width: 100%;
+        height: auto;
+      }
+
+
+      .branch-card img,
+      .branch-card video {
+        position: relative;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        /* oder 'cover' wenn du willst, dass es gefüllt wird */
+        display: block;
+      }
+
+      .branch-overlay h3 {
+        font-size: 1.3rem;
+      }
+
+    }
+
+    @media (max-width: 320px) {
+
+      /* HERO: Text & Button mittig */
+      .hero-video-content {
+        margin-top: -15vh;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      .hero-video-content h1 {
+        font-size: 1.5rem;
+        line-height: 1.2;
+      }
+
+      .hero-video-content p {
+        font-size: 0.9rem;
+        margin: 0.8rem 0;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.8rem;
+      }
+
+      /* Für wen ist Fusion: Karten untereinander */
+      .persona-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      /* Technologien & Tools: Karten untereinander */
+      .tech-showcase {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 2rem 1rem;
+      }
+
+      /* Prozess-Überschrift nicht abgeschnitten */
+      .white-content h2 {
+        font-size: 1.5rem;
+        padding: 0 1rem;
+        line-height: 1.3;
+      }
+
+      /* Kundenwelle – Stroke entfernen */
+      .testimonial-waves svg path {
+        stroke: none !important;
+      }
+
+      .testimonial-card p {
+        font-size: 1rem;
+      }
+
+      .testimonial-card span {
+        font-size: 0.85rem;
+      }
+
+      /* Portfolio: Container untereinander */
+      .video-focus-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .video-focus-item {
+        height: 240px;
+      }
+
+      .video-title {
+        font-size: 1.1rem;
+      }
+    }
+
+    html,
+    body {
+      overflow-x: hidden;
+    }
+
+    .testimonial-card,
+    .video-focus-item,
+    .tech-card,
+    .persona-card {
+      min-width: auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    img,
+    video,
+    svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .branch-grid .branch-card:last-child:nth-child(odd) {
+      grid-column: span 2;
+      max-width: 100%;
+      text-align: center;
+    }
   </style>
 </head>
 
 <body>
-
-
-
 
   <header>
     <div class="logo">Fusion³</div>
@@ -388,140 +1585,833 @@
     </nav>
   </header>
 
-  <div class="hero">
-    <video autoplay muted loop playsinline id="bg-video">
-      <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
+
+  <section class="hero-video-wrapper">
+    <video class="video-background" autoplay loop muted playsinline>
+      <source src="./Fotos/Hintergrund.mp4" type="video/mp4" />
+      Dein Browser unterstützt dieses Video nicht.
     </video>
 
-    <div class="overlay"></div>
-    <canvas id="particles"></canvas>
+    <div class="hero-video-content">
+      <h1>Einzigartiges Grafikdesign für starke Marken<br>
+        Media Posts</h1>
+      <p>Logos, Poster, Print & digitale Designs – individuell für dich gestaltet</p>
+      <a class="cta-btn neon-btn" href="#kontakt">
+        <span>🚀 Projekt starten</span>
+      </a>
 
-    <div class="hero-content">
-      <h1><span>Design,</span> das bewegt.</h1>
-      <a href="#start" class="glow-button">Jetzt entdecken</a>
     </div>
-  </div>
+  </section>
 
-  <div class="intro-screen"></div>
 
-  <s<section class="container" id="tools">
+  <section class="container" id="tools">
     <h2>Unsere Leistungen</h2>
+    <h3>Individuelles Grafikdesign – maßgeschneidert für deinen Auftritt.</h3>
     <div class="tech-showcase">
 
-      <!-- Grafikdesign -->
-      <div class="tech-card" data-title="Grafikdesign">
+      <div class="tech-card" data-title="Logo Starter">
         <div class="inner">
-          <h3>Individuelles Grafikdesign</h3>
+          <h3>Logo Starter Paket</h3>
           <ul>
-            <li>Maßgeschneiderte Layouts für Print & Digital</li>
-            <li>Einzigartige Gestaltung mit visuellem Storytelling</li>
-            <li>Designs mit Charakter, abgestimmt auf deine Zielgruppe</li>
-            <li>Vielfältige Medienformate & flexible Nutzung</li>
+            <li>2 individuelle Entwürfe</li>
+            <li>1 Korrekturschleife</li>
+            <li>Dateien für Web & Print (PNG, SVG, PDF)</li>
+            <li>Social Media Profilgrafiken</li>
           </ul>
+          <p class="price">ab 149 €</p>
+          <span class="bg-icon">🔰</span>
+        </div>
+        <div class="shimmer-border"></div>
+      </div>
+
+      <div class="tech-card" data-title="Branding">
+        <div class="inner">
+          <h3>Brand Identity Paket</h3>
+          <ul>
+            <li>Logo, Farbwelt & Typografie</li>
+            <li>Mini-Styleguide für konsistente Nutzung</li>
+            <li>Visitenkarte & Briefpapierdesign</li>
+            <li>Digitale & druckfähige Dateien</li>
+          </ul>
+          <p class="price">ab 499 €</p>
           <span class="bg-icon">🎨</span>
         </div>
         <div class="shimmer-border"></div>
       </div>
 
-      <!-- Templates -->
-      <div class="tech-card" data-title="Templates">
+      <div class="tech-card" data-title="Printmedien">
         <div class="inner">
-          <h3>Corporate Templates</h3>
+          <h3>Print & Poster</h3>
           <ul>
-            <li>Individuelle PowerPoint & Keynote Vorlagen</li>
-            <li>Pitchdecks mit Impact – visuell & strukturell</li>
-            <li>Modulare Systeme für einfache Pflege</li>
-            <li>Formatgerecht für Print & Screen</li>
+            <li>Flyer, Plakate & Visitenkarten</li>
+            <li>Druckvorbereitung inkl. Beschnitt & Farbprofil</li>
+            <li>Individuelle Gestaltung nach Zielgruppe</li>
+            <li>Druckfertige PDF-Dateien</li>
           </ul>
-          <span class="bg-icon">📊</span>
+          <p class="price">ab 89 €</p>
+          <span class="bg-icon">🖨️</span>
         </div>
         <div class="shimmer-border"></div>
       </div>
 
-      <!-- Branding -->
-      <div class="tech-card" data-title="Branding">
+      <div class="tech-card" data-title="Digital">
         <div class="inner">
-          <h3>Logo & Branding</h3>
+          <h3>Digital Media Bundle</h3>
           <ul>
-            <li>Logos mit hohem Wiedererkennungswert</li>
-            <li>Flexible Einsatzformate & Responsive Design</li>
-            <li>Brand Guidelines & visuelle Systeme</li>
-            <li>Minimal bis expressiv – dein Stil, dein Statement</li>
+            <li>Social Media Templates & Werbegrafiken</li>
+            <li>Grafiken für Website, Newsletter & Ads</li>
+            <li>Responsives Design für alle Devices</li>
+            <li>Formatoptimierung für Plattformen</li>
           </ul>
-          <span class="bg-icon">🌀</span>
-        </div>
-        <div class="shimmer-border"></div>
-      </div>
-
-      <!-- Printdesign -->
-      <div class="tech-card" data-title="Printdesign">
-        <div class="inner">
-          <h3>Printdesign</h3>
-          <ul>
-            <li>Poster, Flyer & Visitenkarten mit Impact</li>
-            <li>Druckdaten mit Farbmanagement & CMYK</li>
-            <li>Veredelung, Formate, kreative Drucklösungen</li>
-            <li>Bereit für Agentur oder DIY-Druckerei</li>
-          </ul>
-          <span class="bg-icon">🖼️</span>
-        </div>
-        <div class="shimmer-border"></div>
-      </div>
-
-      <!-- Kampagnen -->
-      <div class="tech-card" data-title="Kampagnen">
-        <div class="inner">
-          <h3>Digitale Kampagnenmotive</h3>
-          <ul>
-            <li>Social-Media Ads & organische Visuals</li>
-            <li>Animierte Storys, Carousel-Designs & mehr</li>
-            <li>Formatoptimierung für alle Plattformen</li>
-            <li>Designsysteme für Wiedererkennung & Tempo</li>
-          </ul>
-          <span class="bg-icon">📣</span>
+          <p class="price">ab 199 €</p>
+          <span class="bg-icon">💻</span>
         </div>
         <div class="shimmer-border"></div>
       </div>
 
     </div>
-    </section>
+  </section>
+
+
+  <section class="white-transition-section" id="prozess">
+    <div class="white-world visible" id="whiteWorld">
+      <!-- Wave Container -->
+      <div class="wave-container">
+        <svg class="wave wave1" viewBox="0 0 1440 320" preserveAspectRatio="none">
+          <path fill="#f4f4f4" d="M0,192L1440,96L1440,320L0,320Z"></path>
+        </svg>
+        <svg class="wave wave2" viewBox="0 0 1440 320" preserveAspectRatio="none">
+          <path fill="#eaeaea" d="M0,256L1440,160L1440,320L0,320Z"></path>
+        </svg>
+        <svg class="wave wave3" viewBox="0 0 1440 320" preserveAspectRatio="none">
+          <path fill="#f4f4f4" d="M0,128L1440,224L1440,320L0,320Z"></path>
+        </svg>
+      </div>
+
+      <div class="white-content">
+        <h2>So entsteht dein Designprojekt</h2>
+        <div class="project-white-steps">
+
+          <div class="epic-step" data-step="01">
+            <div class="step-inner">
+              <span class="step-number">01</span>
+              <h3>Briefing & Zielklärung</h3>
+              <p>Im Erstgespräch klären wir, was du brauchst: Logo, Print oder digital. Wir definieren Stil, Zielgruppe
+                und Ziele deines Projekts.</p>
+            </div>
+          </div>
+
+          <div class="epic-step" data-step="02">
+            <div class="step-inner">
+              <span class="step-number">02</span>
+              <h3>Entwurfsphase</h3>
+              <p>Ich entwickle erste Designvorschläge, abgestimmt auf deine Vorgaben – klar, kreativ und individuell. Du
+                bekommst Varianten zur Auswahl.</p>
+            </div>
+          </div>
+
+          <div class="epic-step" data-step="03">
+            <div class="step-inner">
+              <span class="step-number">03</span>
+              <h3>Finalisierung & Übergabe</h3>
+              <p>Nach deinem Feedback wird das finale Design ausgearbeitet und in allen nötigen Formaten geliefert – für
+                Web, Print oder Social Media.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="container" id="designgallery">
+    <h2>Design-Galerie</h2>
+    <h3>Individuell gestaltet – abgestimmt auf das Medium</h3>
+
+    <div class="design-gallery-grid">
+
+
+      
+      <!-- Logos -->
+      <div class="gallery-item logo slide-in">
+        <div class="logo-wrap">
+          <img src="./GrafikdesignPic/LogoRund.png " alt="Logo 2" />
+        </div>
+        <span class="caption">Logo – Typografisch</span>
+      </div>
+            <!-- Logos -->
+            <div class="gallery-item logo slide-in">
+              <div class="logo-wrap">
+                <img src="./GrafikdesignPic/LogoRund.png " alt="Logo 2" />
+              </div>
+              <span class="caption">Logo – Typografisch</span>
+            </div>
+
+                  <!-- Logos -->
+      <div class="gallery-item logo slide-in">
+        <div class="logo-wrap">
+          <img src="./GrafikdesignPic/LogoRund.png " alt="Logo 2" />
+        </div>
+        <span class="caption">Logo – Typografisch</span>
+      </div>
+
+            <!-- Logos -->
+            <div class="gallery-item logo slide-in">
+              <div class="logo-wrap">
+                <img src="./GrafikdesignPic/LogoRund.png " alt="Logo 2" />
+              </div>
+              <span class="caption">Logo – Typografisch</span>
+            </div>
+
+  
+
+       <!-- Digital -->
+       <div class="gallery-item digital slide-in">
+        <img src="./GrafikdesignPic/testH.jpg" alt="Social Design" />
+        <span class="caption">Social Template</span>
+      </div>
+
+
+      <!-- Digital -->
+      <div class="gallery-item digital slide-in">
+        <img src="./GrafikdesignPic/testH.jpg" alt="Social Design" />
+        <span class="caption">Social Template</span>
+      </div>
+
+
+  
 
 
 
-    <script>
-      // GSAP Animation (nur für Titel und Button)
-      gsap.from(".hero-content h1", {
-        y: 80,
-        opacity: 0,
+      <!-- Flyer -->
+      <div class="gallery-item flyer flip-card slide-in">
+        <div class="flip-inner flyer-format">
+          <div class="flip-front">
+            <img src="./GrafikdesignPic/testH.jpg" alt="Flyer Front" />
+          </div>
+          <div class="flip-back">
+            <img src="./GrafikdesignPic/testH.jpg" alt="Flyer Rückseite" />
+          </div>
+        </div>
+        <span class="caption">Flyer – Eröffnung</span>
+      </div>
+
+
+            <!-- Flyer -->
+            <div class="gallery-item flyer flip-card slide-in">
+              <div class="flip-inner flyer-format">
+                <div class="flip-front">
+                  <img src="./GrafikdesignPic/testH.jpg" alt="Flyer Front" />
+                </div>
+                <div class="flip-back">
+                  <img src="./GrafikdesignPic/testH.jpg" alt="Flyer Rückseite" />
+                </div>
+              </div>
+              <span class="caption">Flyer – Eröffnung</span>
+            </div>
+
+            <div class="gallery-item digital slide-in">
+              <img src="./GrafikdesignPic/testH.jpg" alt="Ad Banner" />
+              <span class="caption">Ad-Banner – Web</span>
+            </div>
+      
+         
+      
+            
+      <!-- Poster -->
+      <div class="gallery-item poster slide-in">
+        <img src="./GrafikdesignPic/testV.jpg" alt="Poster 2" />
+        <span class="caption">Poster – Produktlaunch</span>
+      </div>
+         <!-- Poster -->
+         <div class="gallery-item poster slide-in">
+          <img src="./GrafikdesignPic/testV.jpg" alt="Poster 2" />
+          <span class="caption">Poster – Produktlaunch</span>
+        </div>
+           <!-- Poster -->
+      <div class="gallery-item poster slide-in">
+        <img src="./GrafikdesignPic/testV.jpg" alt="Poster 2" />
+        <span class="caption">Poster – Produktlaunch</span>
+      </div>
+      
+      <!-- Poster -->
+      <div class="gallery-item poster slide-in">
+        <img src="./GrafikdesignPic/testV.jpg" alt="Poster 2" />
+        <span class="caption">Poster – Produktlaunch</span>
+      </div>
+      
+         <!-- Poster -->
+         <div class="gallery-item poster slide-in">
+          <img src="./GrafikdesignPic/testV.jpg" alt="Poster 2" />
+          <span class="caption">Poster – Produktlaunch</span>
+        </div>
+  
+
+
+
+      <!-- Digital -->
+      <div class="gallery-item digital slide-in">
+        <img src="./GrafikdesignPic/testH.jpg" alt="Social Design" />
+        <span class="caption">Social Template</span>
+      </div>
+      <div class="gallery-item digital slide-in">
+        <img src="./GrafikdesignPic/testH.jpg" alt="Ad Banner" />
+        <span class="caption">Ad-Banner – Web</span>
+      </div>
+
+      <!-- Logos -->
+      <div class="gallery-item logo slide-in">
+        <div class="logo-wrap">
+          <img src="./GrafikdesignPic/LogoRund.png " alt="Logo 2" />
+        </div>
+        <span class="caption">Logo – Typografisch</span>
+      </div>
+
+
+
+
+
+
+      <div class="gallery-item logo logo-long slide-in">
+        <div class="logo-wrap">
+          <img src="./GrafikdesignPic/LogoLang.png" alt="Logo Horizontal" />
+        </div>
+        <span class="caption">Logo – Horizontal</span>
+      </div>
+
+      <div class="gallery-item logo logo-long slide-in">
+        <div class="logo-wrap">
+          <img src="./GrafikdesignPic/LogoLang.png" alt="Logo Horizontal" />
+        </div>
+        <span class="caption">Logo – Horizontal</span>
+      </div>
+
+      <div class="gallery-item logo logo-long slide-in">
+        <div class="logo-wrap">
+          <img src="./GrafikdesignPic/LogoLang.png" alt="Logo Horizontal" />
+        </div>
+        <span class="caption">Logo – Horizontal</span>
+      </div>
+
+       <!-- Digital -->
+       <div class="gallery-item digital slide-in">
+        <img src="./GrafikdesignPic/testH.jpg" alt="Social Design" />
+        <span class="caption">Social Template</span>
+      </div>
+
+
+      <!-- Digital -->
+      <div class="gallery-item digital slide-in">
+        <img src="./GrafikdesignPic/testH.jpg" alt="Social Design" />
+        <span class="caption">Social Template</span>
+      </div>
+
+
+         <!-- Digital -->
+         <div class="gallery-item digital slide-in">
+          <img src="./GrafikdesignPic/testH.jpg" alt="Social Design" />
+          <span class="caption">Social Template</span>
+        </div>
+  
+  
+        <!-- Digital -->
+        <div class="gallery-item digital slide-in">
+          <img src="./GrafikdesignPic/testH.jpg" alt="Social Design" />
+          <span class="caption">Social Template</span>
+        </div>
+  
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+  <!-- Lightbox für normale Bilder -->
+  <div class="lightbox" id="lightbox">
+    <span class="close-lightbox" onclick="closeLightbox()">×</span>
+    <img id="lightbox-img" src="" alt="Großansicht" />
+  </div>
+
+  <!-- Lightbox für Flyer (Flip) -->
+  <div class="flyer-lightbox" id="flyerLightbox">
+    <span class="close-lightbox" onclick="closeFlyerLightbox()">×</span>
+    <div class="flyer-flip">
+      <img id="flyer-front" src="" alt="Flyer Front" />
+      <img id="flyer-back" src="" alt="Flyer Rückseite" />
+    </div>
+    <div class="flyer-toggle" onclick="toggleFlyer()">↻ Wenden</div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <section class="container" id="kontakt">
+    <h2>Kontakt</h2>
+    <div class="form-wrapper">
+      <form action="https://formspree.io/f/xqapdvaq" method="POST">
+        <input type="text" name="name" placeholder="Dein Name" required />
+        <input type="email" name="email" placeholder="Deine E-Mail" required />
+        <textarea name="message" rows="6" placeholder="Worum geht’s?" required></textarea>
+        <input type="text" name="_gotcha" style="display:none">
+
+        <button type="submit" class="neon-btn" id="sendButton">
+          <span>✉️ Nachricht senden</span>
+        </button>
+
+      </form>
+  </section>
+
+
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-logo">
+        <span>Fusion³</span>
+        <p>Web & 3D Design mit Wirkung.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="/impressum.html">Impressum</a></li>
+          <li><a href="/datenschutz.html">Datenschutz</a></li>
+          <li><a href="/agb.html">AGB</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="mailto:hello@fusion3.de">hello@fusion3.de</a></li>
+          <li>+49 123 4567890</li>
+          <li>Berlin, Deutschland</li>
+        </ul>
+      </div>
+
+      <div class="footer-socials">
+        <h4>Social</h4>
+        <div class="footer-socials-icons">
+          <a href="mailto:hello@fusion3.de" title="E-Mail">
+            <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="E-Mail Icon" />
+          </a>
+          <a href="https://github.com/" title="GitHub" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub Logo" />
+          </a>
+          <a href="https://www.linkedin.com/" title="LinkedIn" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn Blau" />
+          </a>
+          <a href="https://wa.me/491234567890" title="WhatsApp schreiben" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon" />
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <p class="footer-bottom">© 2025 Fusion³ – Alle Rechte vorbehalten.</p>
+  </footer>
+
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      gsap.from(".hero-video-content h1", {
         duration: 1.5,
+        y: 50,
+        opacity: 0,
+        delay: 0.5,
         ease: "power4.out"
       });
-
-      gsap.from(".glow-button", {
-        scale: 0.7,
+      gsap.from(".hero-video-content p", {
+        duration: 1.2,
+        y: 30,
         opacity: 0,
+        delay: 0.8,
+        ease: "power3.out"
+      });
+      gsap.fromTo(".cta-btn", {
+        opacity: 0,
+        scale: 0.95
+      }, {
         duration: 1,
-        delay: 1,
+        opacity: 1,
+        scale: 1,
+        delay: 1.2,
         ease: "back.out(1.7)"
       });
 
-    </script>
-    <script>
-      gsap.utils.toArray('.tech-card').forEach((card, i) => {
-        gsap.from(card, {
-          opacity: 0,
-          y: 60,
-          duration: 1,
-          delay: i * 0.1,
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%"
-          }
-        });
+    });
+  </script>
+
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const video = document.querySelector('.video-background');
+      if (video) {
+        video.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.2}px))`;
+      }
+    });
+
+  </script>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.container, .feature, .step').forEach(el => {
+      el.classList.add('fade-in');
+      observer.observe(el);
+    });
+  </script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray('.persona-card').forEach(card => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        y: 40,
+        duration: 1,
+        ease: 'power4.out'
+      });
+    });
+  </script>
+
+
+
+  <script>
+    gsap.utils.toArray(".epic-step").forEach((card, i) => {
+      gsap.to(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        },
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        ease: "power4.out",
+        delay: i * 0.2
+      });
+    });
+  </script>
+
+
+  <script>
+    const branchCards = document.querySelectorAll('.branch-card');
+
+    branchCards.forEach(card => {
+      card.addEventListener('click', () => {
+        // Entferne alle vorherigen Auswahl-Zustände
+        branchCards.forEach(c => c.classList.remove('selected'));
+
+        // Füge "selected" zur aktuellen Card hinzu
+        card.classList.add('selected');
+      });
+    });
+  </script>´
+
+  <script>
+    const items = document.querySelectorAll('.video-focus-item');
+
+    items.forEach(item => {
+      const mask = item.querySelector('.video-mask');
+
+      item.addEventListener('mousemove', e => {
+        const rect = item.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        mask.style.setProperty('--x', `${x}px`);
+        mask.style.setProperty('--y', `${y}px`);
       });
 
-    </script>
+      item.addEventListener('mouseleave', () => {
+        mask.style.setProperty('--x', `50%`);
+        mask.style.setProperty('--y', `50%`);
+      });
+    });
+  </script>
+
+  <script>
+    window.addEventListener('load', adjustTechCards);
+    window.addEventListener('resize', adjustTechCards);
+
+    function adjustTechCards() {
+      const container = document.querySelector('.tech-showcase');
+      const cards = Array.from(container.querySelectorAll('.tech-card'));
+
+      // Skip adjustment if layout is flex (mobile)
+      const computedStyle = window.getComputedStyle(container);
+      if (computedStyle.display === 'flex') {
+        cards.forEach(card => {
+          card.style.gridColumn = '';
+          card.classList.remove('centered-card');
+        });
+        container.classList.remove('stacked-tech-cards');
+        return;
+      }
+
+      // Reset
+      cards.forEach(card => {
+        card.style.gridColumn = '';
+        card.classList.remove('centered-card');
+      });
+
+      if (cards.length < 2) return;
+
+      const last = cards[cards.length - 1];
+      const secondLast = cards[cards.length - 2];
+
+      const lastTop = last.getBoundingClientRect().top;
+      const secondTop = secondLast.getBoundingClientRect().top;
+
+      const allStacked = cards.every((card, i, arr) => {
+        if (i === 0) return true;
+        return card.getBoundingClientRect().top > arr[i - 1].getBoundingClientRect().top + 10;
+      });
+
+      container.classList.remove('stacked-tech-cards');
+
+      if (lastTop > secondTop) {
+        last.style.gridColumn = 'span 3';
+        last.classList.add('centered-card');
+
+        if (allStacked) {
+          container.classList.add('stacked-tech-cards');
+        }
+      }
+    }
+
+
+  </script>
+
+  <script>
+    const form = document.querySelector("form");
+    const sendButton = document.getElementById("sendButton");
+
+    form.addEventListener("submit", function (e) {
+      sendButton.classList.add("shake");
+
+      setTimeout(() => {
+        sendButton.classList.remove("shake");
+        sendButton.classList.add("sent");
+        sendButton.innerHTML = "<span>✅ Gesendet!</span>";
+      }, 300);
+
+      // Button reset nach 4s (optional)
+      setTimeout(() => {
+        sendButton.classList.remove("sent");
+        sendButton.innerHTML = "<span>✉️ Nachricht senden</span>";
+      }, 4000);
+    });
+  </script>
+
+  <script>
+    document.querySelectorAll('.gallery-item img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.style.display = 'flex';
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+      lightboxImg.src = '';
+    }
+
+    // Optional: Schließen bei Klick außerhalb des Bildes
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+
+  </script>
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const flyerLightbox = document.getElementById('flyerLightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const flyerFront = document.getElementById('flyer-front');
+    const flyerBack = document.getElementById('flyer-back');
+
+    // Klick auf normale Bilder
+    document.querySelectorAll('.gallery-item:not(.flyer) img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.style.display = 'flex';
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+      lightboxImg.src = '';
+    }
+
+    // Klick auf Flyer (beide Seiten)
+    document.querySelectorAll('.gallery-item.flyer .flip-inner').forEach(flyer => {
+      flyer.addEventListener('click', () => {
+        const front = flyer.querySelector('.flip-front img')?.src;
+        const back = flyer.querySelector('.flip-back img')?.src;
+        flyerFront.src = front;
+        flyerBack.src = back;
+        flyerLightbox.classList.remove('flip-active');
+        flyerLightbox.style.display = 'flex';
+      });
+    });
+
+    function closeFlyerLightbox() {
+      flyerLightbox.style.display = 'none';
+      flyerFront.src = '';
+      flyerBack.src = '';
+    }
+
+    function toggleFlyer() {
+      flyerLightbox.classList.toggle('flip-active');
+    }
+
+    // ESC zum Schließen
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeFlyerLightbox();
+      }
+    });
+
+    // Klick außerhalb
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    flyerLightbox.addEventListener('click', e => {
+      if (e.target === flyerLightbox) closeFlyerLightbox();
+    });
+  </script>
+  <script>
+
+    document.querySelectorAll('.gallery-item img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.style.display = 'flex';
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+      lightboxImg.src = '';
+    }
+
+    // Optional: Schließen bei Klick außerhalb des Bildes
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+  </script>
+
+<script>
+  // --- Konfiguration ---
+  const posterCount = 20;
+  const logoRundCount = 10;
+  const logoEckigCount = 10;
+  const adBannerCount = 20;
+  const socialCount = 10;
+  const flyerCount = 10;
+
+  function getRandomImage(type, count) {
+    const index = Math.floor(Math.random() * count) + 1;
+    if (type === 'logoRund') return `./GrafikdesignPic/LogoRund${index}.png`;
+    if (type === 'logoEckig') return `./GrafikdesignPic/LogoEckig${index}.png`;
+    if (type === 'poster') return `./GrafikdesignPic/Poster${index}.jpg`;
+    if (type === 'ad') return `./GrafikdesignPic/AdBanner${index}.jpg`;
+    if (type === 'social') return `./GrafikdesignPic/SocialTemplate${index}.jpg`;
+    if (type === 'flyer') return `./GrafikdesignPic/Flyer${index}.jpg`;
+    return '';
+  }
+
+  function rotateImages(type, selector, count, interval) {
+    const elements = document.querySelectorAll(selector);
+    setInterval(() => {
+      elements.forEach(img => {
+        img.src = getRandomImage(type, count);
+      });
+    }, interval);
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    // Logos rund
+    rotateImages('logoRund', '.gallery-item.logo:not(.logo-long) .logo-wrap img', logoRundCount, 20000);
+
+    // Logos lang (eckig)
+    rotateImages('logoEckig', '.gallery-item.logo.logo-long .logo-wrap img', logoEckigCount, 20000);
+
+    // Poster
+    rotateImages('poster', '.gallery-item.poster img', posterCount, 20000);
+
+    // Ad Banner
+    rotateImages('ad', '.gallery-item.digital img[alt*="Ad"]', adBannerCount, 20000);
+
+    // Social Templates
+    rotateImages('social', '.gallery-item.digital img[alt*="Social"]', socialCount, 10000);
+
+    // Flyer – Front + Back
+    const flyerFronts = document.querySelectorAll('.gallery-item.flyer .flip-front img');
+    const flyerBacks = document.querySelectorAll('.gallery-item.flyer .flip-back img');
+    setInterval(() => {
+      flyerFronts.forEach(img => img.src = getRandomImage('flyer', flyerCount));
+      flyerBacks.forEach(img => img.src = getRandomImage('flyer', flyerCount));
+    }, 20000);
+  });
+</script>
+
 </body>
 
 </html>
