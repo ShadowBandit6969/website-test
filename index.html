@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fusion³ – Web & 3D Design</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #ff6600;
@@ -277,11 +278,19 @@
         }
 
         form {
-            display: flex;
-            flex-direction: column;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+    display: flex;
+    flex-direction: column;
+    /* max-width: 600px; ❌ entfernen */
+    width: 100%; /* ✅ volle Breite im Container nutzen */
+    margin: 0 auto;
+}
+
+.form-wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+    width: 100%;
+}
+
 
         input,
         textarea {
@@ -330,6 +339,13 @@
             perspective: 1200px;
         }
 
+        /* Nur wenn gestapelt UND die Karte zentriert dargestellt wird */
+.tech-showcase.stacked-tech-cards .tech-card.centered-card .inner {
+    text-align: left;
+    align-items: flex-start;
+}
+
+
         .tech-card {
             position: relative;
             background: rgba(15, 15, 15, 0.6);
@@ -356,6 +372,7 @@
             position: relative;
             z-index: 2;
             padding: 2rem;
+            height: 100%;
             backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -374,12 +391,36 @@
             color: #ccc;
         }
 
-        .tech-card li {
-            margin-bottom: 0.6rem;
-            position: relative;
-            padding-left: 1.2rem;
-        }
 
+/* Aktualisierte Listeneinträge */
+.tech-card li {
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 1.6rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #e6e6e6;
+}
+
+.tech-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.45rem;
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    transform: rotate(45deg);
+    box-shadow: 0 0 8px rgba(255,102,0,0.3);
+    transition: all 0.3s ease;
+}
+
+.tech-card li:hover::before {
+    transform: rotate(135deg) scale(1.2);
+    background: var(--secondary);
+}
 
         .bg-icon {
             position: absolute;
@@ -418,15 +459,14 @@
         }
 
         .white-transition-section {
-            position: relative;
-            min-height: auto;
-            background: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-
-        }
+  position: relative;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: visible; /* 🔁 damit animationen nicht abgeschnitten werden */
+}
 
         /* Pulsierender Kreis */
         .white-trigger {
@@ -459,9 +499,6 @@
 
         .multi-circle-wrapper {
             position: relative;
-            left: 50%;
-            margin-top: 20rem;
-            transform: translate(-50%, -50%);
             width: 140px;
             height: 140px;
             display: flex;
@@ -530,6 +567,7 @@
             animation: hintPulse 1.6s ease-in-out infinite;
             z-index: 3;
             pointer-events: none;
+            top: 8rem;
         }
 
         @keyframes hintPulse {
@@ -545,27 +583,36 @@
                 transform: translateY(-4px);
             }
         }
-
         .white-world {
-            position: relative;
-            width: 100%;
-            background: radial-gradient(circle at center, #f4f4f4 0%, #f4f4f4 100%);
-            opacity: 0;
-            pointer-events: none;
-            z-index: 5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            clip-path: circle(0% at center);
-            transition: clip-path 1.2s ease-out, opacity 0.6s ease;
-        }
+  position: relative; /* ✅ statt absolute */
+  height: auto;        /* ❗️wichtig */
+  min-height: 100vh;   /* garantiert volle Höhe auf großen Screens */
+  clip-path: circle(0% at 50% 50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: radial-gradient(circle at center, #f4f4f4 0%, #f4f4f4 100%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 5;
+    clip-path: circle(0% at 50% 50%);
+    transition: clip-path 1.2s ease-out, opacity 0.6s ease;
+}
+
+.white-world.visible {
+    clip-path: circle(150% at 50% 50%);
+    opacity: 1;
+    pointer-events: all;
+    width: 100vw;
+}
 
 
         .white-world.visible {
             opacity: 1;
             pointer-events: all;
             clip-path: circle(150% at center);
+            transform: translateX(0); /* zurück zur Mitte */
         }
 
         /* Inhalt im weißen Bereich */
@@ -645,6 +692,10 @@
             justify-content: center;
         }
 
+
+        
+
+        
         .epic-step {
             position: relative;
             background: rgba(255, 255, 255, 0.12);
@@ -733,6 +784,7 @@
 
 
 
+        
         .branch-card {
             position: relative;
             height: 340px;
@@ -1324,6 +1376,20 @@
             color: var(--primary);
         }
 
+        .footer-socials {
+    display: flex;
+    flex-direction: column; /* Überschrift oben, Icons darunter */
+    align-items: flex-start;
+}
+
+.footer-socials-icons {
+    display: flex;
+    gap: 12px; /* Abstand zwischen Icons */
+    margin-top: 0.5rem;
+}
+
+
+
         .footer-socials img {
             width: 26px;
             height: 26px;
@@ -1367,43 +1433,8 @@
 
         }
 
-        @media (max-width: 768px) {
-            .branch-grid {
-                grid-template-columns: repeat(3, 1fr);
-                /* exakt 3 Spalten auf großen Screens */
-            }
 
-            .branch-grid .branch-card:last-child:nth-child(odd) {
-                grid-column: span 2;
-                max-width: 100%;
-                text-align: center;
-            }
 
-            .tech-showcase {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .tech-showcase .tech-card:last-child:nth-child(odd) {
-                grid-column: span 2;
-                max-width: 100%;
-                text-align: center;
-            }
-
-            .multi-circle-wrapper {
-                position: relative;
-                left: 50%;
-                margin-top: -50rem;
-                transform: translate(-50%, -50%);
-                width: 140px;
-                height: 140px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                z-index: 10;
-
-            }
-        }
 
         @media (max-width: 768px) {
             .branch-grid {
@@ -1426,22 +1457,47 @@
                 max-width: 100%;
                 text-align: center;
             }
+            
 
-            .multi-circle-wrapper {
-                position: relative;
-                left: 50%;
-                margin-top: -60rem;
-                transform: translate(-50%, -50%);
-                width: 140px;
-                height: 140px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                z-index: 10;
+            .branch-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
 
+  .branch-card {
+    width: 100%;
+    height: 200px;
+  }
+            .branch-grid .branch-card:last-child:nth-child(odd) {
+                grid-column: span 2;
+                max-width: 100%;
+                text-align: center;
             }
+
+            .tech-showcase {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+            .tech-showcase .tech-card:last-child:nth-child(odd) {
+                grid-column: span 2;
+                max-width: 100%;
+                text-align: center;
+            }
+
+  .project-white-steps .epic-step:last-child:nth-child(3) {
+    flex: unset !important;
+    max-width: 100% !important;
+    text-align: left !important;
+  }
         }
+
+        @media (max-width: 692px) {
+  .persona-grid .persona-card:last-child:nth-child(odd) {
+    grid-column: unset;
+    max-width: 100%;
+    text-align: left;
+  }
+}
 
         @media (max-width: 720px) and (min-width: 481px) {
             .tech-showcase {
@@ -1455,6 +1511,23 @@
                 width: 90%;
                 max-width: 420px;
             }
+
+            .video-focus-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .video-focus-item {
+    height: 220px; /* Einheitlich */
+    width: 100%;
+  }
+
+  .video-focus-grid .video-focus-item:last-child:nth-child(odd) {
+    grid-column: unset;
+    max-width: 100%;
+    text-align: left;
+  }
 
         }
 
@@ -1545,9 +1618,6 @@
                 gap: 1.5rem;
             }
 
-            .video-focus-item {
-                height: 220px;
-            }
 
             .video-title {
                 font-size: 1rem;
@@ -1678,6 +1748,12 @@
             height: auto;
             display: block;
         }
+        .branch-grid .branch-card:last-child:nth-child(odd) {
+  grid-column: span 2;
+  max-width: 100%;
+  text-align: center;
+}
+
     </style>
 </head>
 
@@ -1739,59 +1815,68 @@
         </div>
     </section>
 
-
     <section class="container" id="tools">
-        <h2>Technologien & Tools</h2>
+        <h2>Unsere Leistungen</h2>
         <div class="tech-showcase">
+            <!-- Webdesign -->
             <div class="tech-card" data-title="Webdesign">
                 <div class="inner">
                     <h3>Webdesign</h3>
                     <ul>
-                        <li>HTML5, CSS3, JS</li>
-                        <li>GSAP, Webflow, Tailwind</li>
+                        <li>Individuelle Websites mit Premium-Design</li>
+                        <li>Mobile Optimierung & Performance-Tuning</li>
+                        <li>Interaktive Animationen & Micro-Interactions</li>
+                        <li>CMS-Integration & SEO-Optimierung</li>
                     </ul>
                     <span class="bg-icon">🌐</span>
                 </div>
                 <div class="shimmer-border"></div>
             </div>
-
+    
+            <!-- 3D Design -->
             <div class="tech-card" data-title="3D Design">
                 <div class="inner">
                     <h3>3D Design</h3>
                     <ul>
-                        <li>Blender, Cinema 4D, Unreal</li>
-                        <li>V-Ray, Redshift</li>
+                        <li>Maßgeschneiderte 3D-Modelle & Visualisierungen</li>
+                        <li>Produktanimationen & Architektur-Renderings</li>
+                        <li>Virtual Reality (VR) Ready Assets</li>
+                        <li>3D-Druck Vorbereitung & Optimierung</li>
                     </ul>
                     <span class="bg-icon">🧊</span>
                 </div>
                 <div class="shimmer-border"></div>
             </div>
-
-            <div class="tech-card" data-title="3D Design">
+    
+            <!-- Grafikdesign -->
+            <div class="tech-card" data-title="Grafikdesign">
                 <div class="inner">
-                    <h3>Printdesign</h3>
+                    <h3>Grafikdesign</h3>
                     <ul>
-                        <li>Blender, Cinema 4D, Unreal</li>
-                        <li>V-Ray, Redshift</li>
+                        <li>Corporate Identity & Markenentwicklung</li>
+                        <li>Logo-Design mit Unique Branding</li>
+                        <li>Druckprodukte mit Farbprofil-Management</li>
+                        <li>Infografiken & Data Visualization</li>
                     </ul>
-                    <span class="bg-icon">🖨️</span>
+                    <span class="bg-icon">🖌️</span>
                 </div>
                 <div class="shimmer-border"></div>
             </div>
-
-            <div class="tech-card" data-title="3D Design">
+    
+            <!-- Social Media -->
+            <div class="tech-card" data-title="Social Media">
                 <div class="inner">
-                    <h3>Branding</h3>
+                    <h3>Social Media</h3>
                     <ul>
-                        <li>Blender, Cinema 4D, Unreal</li>
-                        <li>V-Ray, Redshift</li>
+                        <li>Platformspezifische Content-Strategien</li>
+                        <li>Animierte Postings & Story Designs</li>
+                        <li>Werbekampagnen & Ad-Designs</li>
+                        <li>Template-Systeme für Brand-Konsistenz</li>
                     </ul>
-                    <span class="bg-icon">🔥</span>
+                    <span class="bg-icon">🚀</span>
                 </div>
                 <div class="shimmer-border"></div>
             </div>
-        </div>
-
         </div>
     </section>
 
@@ -1984,6 +2069,7 @@
 
     <section class="container" id="kontakt">
         <h2>Kontakt</h2>
+        <div class="form-wrapper">
         <form action="https://formspree.io/f/xqapdvaq" method="POST">
             <input type="text" name="name" placeholder="Dein Name" required />
             <input type="email" name="email" placeholder="Deine E-Mail" required />
@@ -2026,19 +2112,22 @@
 
             <div class="footer-socials">
                 <h4>Social</h4>
-                <a href="mailto:hello@fusion3.de" title="E-Mail">
-                    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="E-Mail Icon" />
-                </a>
-                <a href="https://github.com/" title="GitHub" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub Logo" />
-                </a>
-                <a href="https://www.linkedin.com/" title="LinkedIn" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn Blau" />
-                </a>
-                <a href="https://wa.me/491234567890" title="WhatsApp schreiben" target="_blank">
-                    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon" />
-                </a>
+                <div class="footer-socials-icons">
+                    <a href="mailto:hello@fusion3.de" title="E-Mail">
+                        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="E-Mail Icon" />
+                    </a>
+                    <a href="https://github.com/" title="GitHub" target="_blank">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub Logo" />
+                    </a>
+                    <a href="https://www.linkedin.com/" title="LinkedIn" target="_blank">
+                        <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn Blau" />
+                    </a>
+                    <a href="https://wa.me/491234567890" title="WhatsApp schreiben" target="_blank">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon" />
+                    </a>
+                </div>
             </div>
+            
         </div>
         <p class="footer-bottom">© 2025 Fusion³ – Alle Rechte vorbehalten.</p>
     </footer>
@@ -2212,28 +2301,51 @@
         window.addEventListener('resize', adjustTechCards);
 
         function adjustTechCards() {
-            const container = document.querySelector('.tech-showcase');
-            const cards = Array.from(container.querySelectorAll('.tech-card'));
+    const container = document.querySelector('.tech-showcase');
+    const cards = Array.from(container.querySelectorAll('.tech-card'));
 
-            // Reset
-            cards.forEach(card => {
-                card.style.gridColumn = '';
-                card.classList.remove('centered-card');
-            });
+    // Skip adjustment if layout is flex (mobile)
+    const computedStyle = window.getComputedStyle(container);
+    if (computedStyle.display === 'flex') {
+        cards.forEach(card => {
+            card.style.gridColumn = '';
+            card.classList.remove('centered-card');
+        });
+        container.classList.remove('stacked-tech-cards');
+        return;
+    }
 
-            if (cards.length < 2) return;
+    // Reset
+    cards.forEach(card => {
+        card.style.gridColumn = '';
+        card.classList.remove('centered-card');
+    });
 
-            const last = cards[cards.length - 1];
-            const secondLast = cards[cards.length - 2];
+    if (cards.length < 2) return;
 
-            const lastTop = last.getBoundingClientRect().top;
-            const secondTop = secondLast.getBoundingClientRect().top;
+    const last = cards[cards.length - 1];
+    const secondLast = cards[cards.length - 2];
 
-            if (lastTop > secondTop) {
-                last.style.gridColumn = 'span 3';
-                last.classList.add('centered-card');
-            }
+    const lastTop = last.getBoundingClientRect().top;
+    const secondTop = secondLast.getBoundingClientRect().top;
+
+    const allStacked = cards.every((card, i, arr) => {
+        if (i === 0) return true;
+        return card.getBoundingClientRect().top > arr[i - 1].getBoundingClientRect().top + 10;
+    });
+
+    container.classList.remove('stacked-tech-cards');
+
+    if (lastTop > secondTop) {
+        last.style.gridColumn = 'span 3';
+        last.classList.add('centered-card');
+
+        if (allStacked) {
+            container.classList.add('stacked-tech-cards');
         }
+    }
+}
+
 
     </script>
 
