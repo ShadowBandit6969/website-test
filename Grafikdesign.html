@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8">
   <title>Fusion³ – Immersive Hero</title>
@@ -19,10 +20,11 @@
       box-sizing: border-box;
     }
 
-    body, html {
+    body,
+    html {
       margin: 0;
       padding: 0;
-      overflow: hidden;
+
       background: var(--bg);
       font-family: 'Space Grotesk', sans-serif;
       height: 100%;
@@ -85,7 +87,7 @@
     .overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at center, rgba(255,102,0,0.04), transparent 70%);
+      background: radial-gradient(circle at center, rgba(255, 102, 0, 0.04), transparent 70%);
       z-index: 1;
       pointer-events: none;
     }
@@ -140,12 +142,241 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
+    section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .tech-showcase {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 5rem 2rem;
+      perspective: 1200px;
+    }
+
+    /* Nur wenn gestapelt UND die Karte zentriert dargestellt wird */
+    .tech-showcase.stacked-tech-cards .tech-card.centered-card .inner {
+      text-align: left;
+      align-items: flex-start;
+    }
+
+
+    .tech-card {
+      position: relative;
+      background: rgba(15, 15, 15, 0.6);
+      border-radius: 18px;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 0 transparent;
+    }
+
+    .tech-card.centered-card .inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+
+    .tech-card:hover {
+      transform: rotateY(8deg) rotateX(4deg);
+    }
+
+    .tech-card .inner {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+      height: 100%;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+    }
+
+    .tech-card h3 {
+      font-size: 1.4rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .tech-card ul {
+      list-style: none;
+      padding: 0;
+      color: #ccc;
+    }
+
+
+    /* Aktualisierte Listeneinträge */
+
+    .tech-showcase>.tech-card:nth-last-child(1):nth-child(odd):only-child,
+    .tech-showcase>.tech-card:last-child:nth-child(odd) {
+      grid-column: span 2;
+      max-width: 100%;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .tech-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.03), transparent 60%);
+      pointer-events: none;
+      z-index: 1;
+      animation: shineGlare 8s infinite linear;
+    }
+
+    @keyframes shineGlare {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    .tech-card .inner {
+      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.3));
+    }
+
+    body {
+      cursor: url('./cursor-fusion3.svg'), auto;
+    }
+
+    .tech-card:hover .inner {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 0 40px rgba(255, 102, 0, 0.2);
+    }
+
+    .bg-icon {
+      display: inline-block;
+      animation: pulseIcon 3s infinite ease-in-out;
+    }
+
+    @keyframes pulseIcon {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.8rem, 5vw, 5rem);
+    }
+
+    .intro-screen {
+      position: fixed;
+      inset: 0;
+      background: #0b0b0b;
+      z-index: 9999;
+      animation: fadeOut 1s ease forwards 1.5s;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+.tech-card {
+  position: relative;
+  background: rgba(15, 15, 15, 0.6);
+  border-radius: 18px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgb(255, 255, 255); /* orange glow */
+}
+
+.tech-card:hover {
+  transform: rotateY(8deg) rotateX(4deg);
+  box-shadow: 0 0 20px rgb(255, 102, 0); /* intensiverer Glow */
+}
+
+
+
+
+.tech-card:nth-child(1):hover {
+  transform: rotateY(8deg) rotateX(4deg);
+}
+
+.tech-card:nth-child(2):hover {
+  transform: rotateY(-8deg) rotateX(2deg);
+}
+
+.tech-card:nth-child(3):hover {
+  transform: rotateY(6deg) rotateX(-4deg);
+}
+
+.tech-card:nth-child(4):hover {
+  transform: rotateY(-6deg) rotateX(6deg);
+}
+
+.tech-card:nth-child(5):hover {
+  transform: rotateY(5deg) rotateX(-5deg);
+}
+
+
+
+.tech-card:nth-child(1)::before {
+  animation-delay: 0s;
+}
+
+.tech-card:nth-child(2)::before {
+  animation-delay: s;
+}
+
+.tech-card:nth-child(3)::before {
+  animation-delay: 12s;
+}
+
+.tech-card:nth-child(4)::before {
+  animation-delay: 3s;
+}
+
+.tech-card:nth-child(5)::before {
+  animation-delay: 14s;
+}
+
+
   </style>
 </head>
+
 <body>
+
+
+
 
   <header>
     <div class="logo">Fusion³</div>
@@ -171,63 +402,126 @@
     </div>
   </div>
 
-  <script>
-    // GSAP Animation (nur für Titel und Button)
-    gsap.from(".hero-content h1", {
-      y: 80,
-      opacity: 0,
-      duration: 1.5,
-      ease: "power4.out"
-    });
+  <div class="intro-screen"></div>
 
-    gsap.from(".glow-button", {
-      scale: 0.7,
-      opacity: 0,
-      duration: 1,
-      delay: 1,
-      ease: "back.out(1.7)"
-    });
+  <s<section class="container" id="tools">
+    <h2>Unsere Leistungen</h2>
+    <div class="tech-showcase">
 
-    // Partikel-Canvas
-    const canvas = document.getElementById("particles");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+      <!-- Grafikdesign -->
+      <div class="tech-card" data-title="Grafikdesign">
+        <div class="inner">
+          <h3>Individuelles Grafikdesign</h3>
+          <ul>
+            <li>Maßgeschneiderte Layouts für Print & Digital</li>
+            <li>Einzigartige Gestaltung mit visuellem Storytelling</li>
+            <li>Designs mit Charakter, abgestimmt auf deine Zielgruppe</li>
+            <li>Vielfältige Medienformate & flexible Nutzung</li>
+          </ul>
+          <span class="bg-icon">🎨</span>
+        </div>
+        <div class="shimmer-border"></div>
+      </div>
 
-    let particles = [];
+      <!-- Templates -->
+      <div class="tech-card" data-title="Templates">
+        <div class="inner">
+          <h3>Corporate Templates</h3>
+          <ul>
+            <li>Individuelle PowerPoint & Keynote Vorlagen</li>
+            <li>Pitchdecks mit Impact – visuell & strukturell</li>
+            <li>Modulare Systeme für einfache Pflege</li>
+            <li>Formatgerecht für Print & Screen</li>
+          </ul>
+          <span class="bg-icon">📊</span>
+        </div>
+        <div class="shimmer-border"></div>
+      </div>
 
-    for (let i = 0; i < 120; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 1.5 + 1,
-        dx: (Math.random() - 0.5) * 0.3,
-        dy: (Math.random() - 0.5) * 0.3,
-        alpha: Math.random() * 0.5 + 0.3
+      <!-- Branding -->
+      <div class="tech-card" data-title="Branding">
+        <div class="inner">
+          <h3>Logo & Branding</h3>
+          <ul>
+            <li>Logos mit hohem Wiedererkennungswert</li>
+            <li>Flexible Einsatzformate & Responsive Design</li>
+            <li>Brand Guidelines & visuelle Systeme</li>
+            <li>Minimal bis expressiv – dein Stil, dein Statement</li>
+          </ul>
+          <span class="bg-icon">🌀</span>
+        </div>
+        <div class="shimmer-border"></div>
+      </div>
+
+      <!-- Printdesign -->
+      <div class="tech-card" data-title="Printdesign">
+        <div class="inner">
+          <h3>Printdesign</h3>
+          <ul>
+            <li>Poster, Flyer & Visitenkarten mit Impact</li>
+            <li>Druckdaten mit Farbmanagement & CMYK</li>
+            <li>Veredelung, Formate, kreative Drucklösungen</li>
+            <li>Bereit für Agentur oder DIY-Druckerei</li>
+          </ul>
+          <span class="bg-icon">🖼️</span>
+        </div>
+        <div class="shimmer-border"></div>
+      </div>
+
+      <!-- Kampagnen -->
+      <div class="tech-card" data-title="Kampagnen">
+        <div class="inner">
+          <h3>Digitale Kampagnenmotive</h3>
+          <ul>
+            <li>Social-Media Ads & organische Visuals</li>
+            <li>Animierte Storys, Carousel-Designs & mehr</li>
+            <li>Formatoptimierung für alle Plattformen</li>
+            <li>Designsysteme für Wiedererkennung & Tempo</li>
+          </ul>
+          <span class="bg-icon">📣</span>
+        </div>
+        <div class="shimmer-border"></div>
+      </div>
+
+    </div>
+    </section>
+
+
+
+    <script>
+      // GSAP Animation (nur für Titel und Button)
+      gsap.from(".hero-content h1", {
+        y: 80,
+        opacity: 0,
+        duration: 1.5,
+        ease: "power4.out"
       });
-    }
 
-    function drawParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 102, 0, ${p.alpha})`;
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = "rgba(255, 102, 0, 0.6)";
-        ctx.fill();
-
-        p.x += p.dx;
-        p.y += p.dy;
-
-        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      gsap.from(".glow-button", {
+        scale: 0.7,
+        opacity: 0,
+        duration: 1,
+        delay: 1,
+        ease: "back.out(1.7)"
       });
 
-      requestAnimationFrame(drawParticles);
-    }
+    </script>
+    <script>
+      gsap.utils.toArray('.tech-card').forEach((card, i) => {
+        gsap.from(card, {
+          opacity: 0,
+          y: 60,
+          duration: 1,
+          delay: i * 0.1,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%"
+          }
+        });
+      });
 
-    drawParticles();
-  </script>
+    </script>
 </body>
+
 </html>
