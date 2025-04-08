@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Friseur am Brunnenhof</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0a0a;
+      --text-light: #f2f2f2;
+      --accent: #d6b36a;
+      --glass: rgba(255,255,255,0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      overflow-x: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 30px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--text-light);
+      letter-spacing: 2px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      position: relative;
+      font-weight: 300;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0%;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.4s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      height: 100vh;
+      width: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 0;
+      filter: brightness(0.65) contrast(1.1);
+    }
+
+    .texture {
+      position: absolute;
+      inset: 0;
+      background: url('https://grainy-gradients.vercel.app/noise.svg');
+      opacity: 0.08;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      animation: fadeIn 1.4s ease-in-out both;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.2rem;
+      color: var(--accent);
+      letter-spacing: 1.5px;
+      margin-bottom: 20px;
+      animation: slideIn 1.6s ease forwards;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #d6d6d6;
+      margin-bottom: 40px;
+      font-weight: 300;
+      animation: fadeIn 2s ease-in-out both;
+      animation-delay: 0.8s;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: 14px 36px;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-light);
+      border-radius: 40px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .cta:hover {
+      background: rgba(255,255,255,0.1);
+      transform: scale(1.04);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      0% { opacity: 0; transform: translateY(60px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 30px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 10px;
+      }
+
+      .hero h1 {
+        font-size: 2.6rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Friseur am Brunnenhof</div>
+    <nav>
+      <ul>
+        <li><a href="#">Start</a></li>
+        <li><a href="#">Leistungen</a></li>
+        <li><a href="#">Über uns</a></li>
+        <li><a href="#">Galerie</a></li>
+        <li><a href="#">Preise</a></li>
+        <li><a href="#">Kontakt</a></li>
+        <li><a href="#">Buchen</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <video autoplay muted loop playsinline>
+      <source src="./Fotos/1.mp4" type="video/mp4">
+      Dein Browser unterstützt kein HTML5-Video.
+    </video>
+    <div class="texture"></div>
+    <div class="hero-content">
+      <h1>Cut. Color. Culture.</h1>
+      <p>Mehr als ein Friseursalon. Eine Ästhetik. Ein Raum für Stil & Substanz.</p>
+      <a href="#" class="cta">Termin buchen</a>
+    </div>
+  </section>
+
+</body>
+</html>

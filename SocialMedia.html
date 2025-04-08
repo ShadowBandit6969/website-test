@@ -106,16 +106,15 @@
              background-color: transparent;
              background: linear-gradient(to bottom, #0b0b0b, #000);
          }
- 
          .video-background {
              position: absolute;
-             top: 50%;
+             top: 60%;
              left: 50%;
              width: 100%;
              height: auto;
              transform: translate(-50%, -50%);
              object-fit: cover;
-             z-index: 1;
+             z-index: 0;
              opacity: 1;
              pointer-events: none;
              background-color: transparent;
@@ -1405,7 +1404,9 @@
     right: 0;
     background: #111;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
+text-align: center;
+
     padding: 1rem;
     display: none;
     gap: 1rem;
@@ -1809,6 +1810,8 @@
             max-width: 100%;
             text-align: center;
         }
+
+
     </style>
 </head>
 
@@ -1830,13 +1833,7 @@
         </nav>
       </header>
       
-
     <section class="hero-video-wrapper">
-        <video class="video-background" autoplay loop muted playsinline>
-            <source src="./Fotos/Hintergrund.mp4" type="video/mp4" />
-            Dein Browser unterstützt dieses Video nicht.
-        </video>
-
         <div class="hero-video-content">
             <h1>Individuelle Social <br>
                 Media Posts</h1>
@@ -1847,6 +1844,12 @@
 
         </div>
     </section>
+
+
+        <video class="video-background" autoplay loop muted playsinline>
+            <source src="./Fotos/Hintergrund.mp4" type="video/mp4" />
+            Dein Browser unterstützt dieses Video nicht.
+        </video>
 
 
 
@@ -2316,6 +2319,8 @@
         });
     </script>´
 
+
+
     <script>
         const items = document.querySelectorAll('.video-focus-item');
 
@@ -2646,6 +2651,15 @@ do {
     burger.addEventListener("click", () => {
       burger.classList.toggle("active");
       nav.classList.toggle("open");
+    });
+  </script>
+  <script>
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const video = document.querySelector('.video-background');
+      if (video) {
+        video.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.2}px))`;
+      }
     });
   </script>
   
