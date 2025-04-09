@@ -4,217 +4,892 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Friseur am Brunnenhof</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-dark: #0a0a0a;
-      --text-light: #f2f2f2;
-      --accent: #d6b36a;
-      --glass: rgba(255,255,255,0.05);
-    }
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Lalezar&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
 
+  <style>
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
-    html, body {
-      height: 100%;
+    body {
+      margin: 0;
       font-family: 'Inter', sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-light);
-      overflow-x: hidden;
+      background: #030202;
+      color: white;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
 
     header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 30px 60px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 1000;
-      background: var(--glass);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 40px 20px;
     }
 
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: var(--text-light);
+    nav {
+      font-size: 12px;
       letter-spacing: 2px;
-    }
-
-    nav ul {
       display: flex;
-      list-style: none;
-      gap: 32px;
+      gap: 30px;
     }
 
     nav a {
-      color: var(--text-light);
       text-decoration: none;
-      position: relative;
-      font-weight: 300;
-      font-size: 0.95rem;
-      letter-spacing: 1px;
+      color: white;
+      font-weight: 700;
     }
 
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0%;
-      height: 1px;
-      background: var(--accent);
-      transition: width 0.4s ease;
-    }
-
-    nav a:hover::after {
-      width: 100%;
+    .btn-primary {
+      background: #FF1E1E;
+      border-radius: 26px;
+      padding: 14px 26px;
+      font-weight: bold;
+      color: white;
+      text-transform: uppercase;
+      font-size: 12px;
+      border: none;
+      cursor: pointer;
     }
 
     .hero {
-      height: 100vh;
-      width: 100%;
-      position: relative;
+      padding: 80px 0;
+    }
+
+    .hero .container {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      overflow: hidden;
+      gap: 60px;
     }
 
-    .hero video {
-      position: absolute;
+    .hero img {
+      width: 400px;
+      border-radius: 10px;
+    }
+
+    .hero-text {
+      max-width: 500px;
+    }
+
+    .hero-text h1 {
+      font-family: 'Lalezar', cursive;
+      font-size: 40px;
+      text-transform: uppercase;
+    }
+
+    .hero-text p {
+      font-size: 13px;
+      margin: 20px 0;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .hero-buttons button {
+      background: #E30613;
+      padding: 12px 24px;
+      border: none;
+      font-family: 'Lalezar';
+      text-transform: uppercase;
+      font-size: 18px;
+      cursor: pointer;
+      color: white;
+    }
+  
+
+.hero-gradient-title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 42px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #ff1e1e, #ff8a00, #f1e4c4);
+  background-size: 300% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: textGradientFlow 6s ease-in-out infinite;
+  text-transform: uppercase;
+  font-weight: 800;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.hero-gradient-title:hover {
+  transform: scale(1.015);
+}
+
+@keyframes textGradientFlow {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+    .section-title {
+      text-align: center;
+      font-family: 'Lalezar';
+      font-size: 36px;
+      margin: 80px 0 20px;
+      text-transform: uppercase;
+    }
+
+    .gallery {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      padding-bottom: 60px;
+    }
+
+    .gallery img {
+      width: 270px;
+      height: 277px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .meet-section {
+      background: #111;
+      padding: 60px 20px;
+    }
+
+    .team-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .team-member {
+      max-width: 220px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .team-member:hover {
+      transform: scale(1.05);
+    }
+
+    .team-member img {
+      border-radius: 6px;
+      transition: box-shadow 0.3s;
+    }
+
+    .team-member:hover img {
+      box-shadow: 0 0 15px #e30613;
+    }
+
+    .instagram-block {
+      background: black;
+      padding: 80px 20px 40px;
+      text-align: center;
+    }
+
+    .instagram-block h2 {
+      font-size: 64px;
+      font-family: 'Lalezar';
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .instagram-images {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .instagram-images img {
+      width: 180px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .product-section {
+      background: #0f0f0f;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .product-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .product {
+      background: #1c1c1c;
+      border: 1px solid #3e3e3e;
+      padding: 20px;
+      width: 250px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 8px 16px rgba(241, 228, 196, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(241, 228, 196, 0.2);
+    }
+
+    .product img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+
+    .product h3 {
+      color: #F1E4C4;
+      font-size: 18px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .product .desc {
+      font-size: 14px;
+      color: #bbb;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+
+    .product .price {
+      color: #D4AF37;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .product-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .product-buttons button {
+      padding: 8px;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .cart-btn {
+      background: #D4AF37;
+      color: #141414;
+    }
+
+    .more-btn {
+      background: transparent;
+      border: 1px solid #D4AF37;
+      color: #D4AF37;
+    }
+
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .filter-buttons button {
+      padding: 10px 18px;
+      background: #1c1c1c;
+      border: 1px solid #444;
+      color: #F1E4C4;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-buttons button:hover {
+      background: #e30613;
+      color: white;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: 0;
-      filter: brightness(0.65) contrast(1.1);
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
     }
 
-    .texture {
-      position: absolute;
-      inset: 0;
-      background: url('https://grainy-gradients.vercel.app/noise.svg');
-      opacity: 0.08;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .hero-content {
+    .modal-content {
+      background: #222;
+      margin: 10% auto;
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 8px;
+      text-align: center;
+      color: white;
       position: relative;
-      z-index: 2;
-      max-width: 800px;
-      animation: fadeIn 1.4s ease-in-out both;
     }
 
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 4.2rem;
-      color: var(--accent);
-      letter-spacing: 1.5px;
+    .modal-content img {
+      width: 200px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 26px;
+      color: white;
+      cursor: pointer;
+    }
+
+    footer {
+      background: #141414;
+      color: #C1C1C1;
+      padding: 60px 40px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+
+    .footer-block {
+      max-width: 200px;
       margin-bottom: 20px;
-      animation: slideIn 1.6s ease forwards;
     }
 
-    .hero p {
-      font-size: 1.2rem;
-      color: #d6d6d6;
-      margin-bottom: 40px;
-      font-weight: 300;
-      animation: fadeIn 2s ease-in-out both;
-      animation-delay: 0.8s;
+    .footer-bottom {
+      text-align: center;
+      font-size: 12px;
+      color: #767676;
+      margin-top: 30px;
     }
 
-    .cta {
-      display: inline-block;
-      padding: 14px 36px;
-      background: var(--glass);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: var(--text-light);
-      border-radius: 40px;
-      font-weight: 400;
-      text-decoration: none;
-      transition: all 0.3s ease;
+    .partners {
+      background: #090909;
+      padding: 30px 20px;
+      text-align: center;
     }
 
-    .cta:hover {
-      background: rgba(255,255,255,0.1);
-      transform: scale(1.04);
+    .partners img {
+      height: 30px;
+      margin: 0 20px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .googlemap iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
     }
+    .business-hours {
+  background: radial-gradient(circle at top, #1c1c1c, #0a0a0a);
+  padding: 100px 20px;
+  color: white;
+  text-align: center;
+}
 
-    @keyframes slideIn {
-      0% { opacity: 0; transform: translateY(60px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
+.hours-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
 
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 20px 30px;
-      }
+.business-hours h2 {
+  font-family: 'Lalezar', sans-serif;
+  font-size: 44px;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #d4af37, #fff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
 
-      nav ul {
-        flex-direction: column;
-        gap: 16px;
-        margin-top: 10px;
-      }
+.business-hours .subtitle {
+  font-size: 16px;
+  color: #ccc;
+  margin-bottom: 40px;
+  font-style: italic;
+}
 
-      .hero h1 {
-        font-size: 2.6rem;
-      }
+.hours-table {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 40px;
+}
 
-      .hero p {
-        font-size: 1rem;
-      }
-    }
+.day-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 17px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.day-row:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.day-row span:first-child {
+  text-align: left;
+}
+
+.day-row span:last-child {
+  font-weight: 600;
+  color: #f1e4c4;
+}
+
+.day-row.closed {
+  opacity: 0.5;
+}
+
+.business-hours .btn-primary {
+  background: #e30613;
+  padding: 12px 28px;
+  font-size: 15px;
+  color: white;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.business-hours .btn-primary:hover {
+  background: #ff1e1e;
+}
+.day-row.today {
+  border: 1px solid #e30613;
+  background: rgba(227, 6, 19, 0.05);
+}
+
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">Friseur am Brunnenhof</div>
+  <header class="container">
+    <img src="https://placehold.co/45x55" alt="Logo">
     <nav>
-      <ul>
-        <li><a href="#">Start</a></li>
-        <li><a href="#">Leistungen</a></li>
-        <li><a href="#">Über uns</a></li>
-        <li><a href="#">Galerie</a></li>
-        <li><a href="#">Preise</a></li>
-        <li><a href="#">Kontakt</a></li>
-        <li><a href="#">Buchen</a></li>
-      </ul>
+      <a href="#">Start</a>
+      <a href="#">Kontakt</a>
+      <a href="#">Über uns</a>
+      <a href="#">Portfolio</a>
     </nav>
+    <button class="btn-primary">Termin buchen</button>
   </header>
 
   <section class="hero">
-    <video autoplay muted loop playsinline>
-      <source src="./Fotos/1.mp4" type="video/mp4">
-      Dein Browser unterstützt kein HTML5-Video.
-    </video>
-    <div class="texture"></div>
-    <div class="hero-content">
-      <h1>Cut. Color. Culture.</h1>
-      <p>Mehr als ein Friseursalon. Eine Ästhetik. Ein Raum für Stil & Substanz.</p>
-      <a href="#" class="cta">Termin buchen</a>
+    <div class="container">
+      <div class="hero-text">
+        <div class="animated-title-container">
+          <h1 class="hero-gradient-title">Friseur am Brunnenhof</h1>
+        </div>        
+        <p>Professionelles Friseurhandwerk | Scharfe Schnitte, glatter Stil</p>
+        <div class="hero-buttons">
+          <button>Termin</button>
+          <button>Mehr erfahren</button>
+        </div>
+      </div>
+      <img src="https://placehold.co/400x500" alt="Friseur Bild">
     </div>
   </section>
 
-</body>
-</html>
+  <h2 class="section-title">Die neuesten Haarstyles</h2>
+  <div class="container">
+    <div class="gallery">
+      <img src="https://placehold.co/270x277" />
+      <img src="https://placehold.co/270x277" />
+      <img src="https://placehold.co/270x277" />
+    </div>
+  </div>
+  
+
+  
+<!-- TEAM SECTION -->
+<section class="meet-section">
+  <div class="container">
+    <h2 class="section-title">Lerne unser Team kennen</h2>
+    <div class="team-grid">
+
+      <div class="team-member" data-name="Max" data-bio="Max ist Experte für moderne Herrenhaarschnitte und Bartdesigns. Seit über 10 Jahren begeistert er mit Präzision und Stil." data-img="https://placehold.co/200x250">
+        <img src="https://placehold.co/200x250" alt="Max">
+        <h3>Max</h3>
+        <p>Herrenhaarschnitte & Bartdesign</p>
+      </div>
+
+      <div class="team-member" data-name="Lisa" data-bio="Lisa liebt Farbverläufe und typgerechtes Styling. Ihr Markenzeichen: Kreativität und persönliche Beratung." data-img="https://placehold.co/200x250">
+        <img src="https://placehold.co/200x250" alt="Lisa">
+        <h3>Lisa</h3>
+        <p>Farbtechniken & Damenstylings</p>
+      </div>
+
+      <div class="team-member" data-name="Amir" data-bio="Amir ist unser Spezialist für klassische Schnitte, Nassrasur und Herrenpflege. Immer top gestylt." data-img="https://placehold.co/200x250">
+        <img src="https://placehold.co/200x250" alt="Amir">
+        <h3>Amir</h3>
+        <p>Barber- & Rasurspezialist</p>
+      </div>
+
+      <div class="team-member" data-name="Anna" data-bio="Anna sorgt für moderne Frauenfrisuren, Trendfarben und Balayage – mit viel Liebe zum Detail." data-img="https://placehold.co/200x250">
+        <img src="https://placehold.co/200x250" alt="Anna">
+        <h3>Anna</h3>
+        <p>Damenhaarschnitte & Farbberatung</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TEAM MODAL -->
+<div id="teamModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <img id="modalImg" src="" alt="Friseur/in" />
+    <h3 id="modalName"></h3>
+    <p id="modalBio"></p>
+  </div>
+</div>
+
+<!-- PRODUKTE SECTION -->
+<section class="product-section">
+  <div class="container">
+    <h2 style="color: #F1E4C4; font-size: 52px; margin-bottom: 10px;">Redken Signature Linie</h2>
+    <p style="color: #C0B283; font-size: 18px; margin-bottom: 40px;">Exklusive Haarpflegeprodukte – für ein luxuriöses Pflegeerlebnis</p>
+
+    <div class="filter-buttons">
+      <button data-type="alle">Alle</button>
+      <button data-type="trocken">Trockenes Haar</button>
+      <button data-type="strapaziert">Strapaziertes Haar</button>
+      <button data-type="fettig">Fettiges Haar</button>
+    </div>
+
+    <div class="product-grid">
+
+      <div class="product" data-type="strapaziert">
+        <img src="https://placehold.co/200x250?text=Shampoo" alt="Redken Shampoo">
+        <h3>Redken Extreme Shampoo</h3>
+        <p class="desc">Kräftigt geschädigtes Haar sichtbar.</p>
+        <p class="price">34,90 €</p>
+        <div class="product-buttons">
+          <button class="cart-btn">In den Warenkorb</button>
+          <button class="more-btn" data-inci="Aqua, Sodium Laureth Sulfate, Cocamidopropyl Betaine, Hydrolyzed Soy Protein...">Mehr erfahren</button>
+        </div>
+      </div>
+
+      <div class="product" data-type="trocken">
+        <img src="https://placehold.co/200x250?text=Conditioner" alt="Redken Conditioner">
+        <h3>Redken All Soft Conditioner</h3>
+        <p class="desc">Für seidigen Glanz & Geschmeidigkeit.</p>
+        <p class="price">32,50 €</p>
+        <div class="product-buttons">
+          <button class="cart-btn">In den Warenkorb</button>
+          <button class="more-btn" data-inci="Aqua, Cetearyl Alcohol, Argan Oil, Behentrimonium Chloride...">Mehr erfahren</button>
+        </div>
+      </div>
+
+      <div class="product" data-type="fettig">
+        <img src="https://placehold.co/200x250?text=Oil" alt="Redken Oil">
+        <h3>Redken Oil for All</h3>
+        <p class="desc">Leichtes Finish-Öl mit Hitzeschutz.</p>
+        <p class="price">39,00 €</p>
+        <div class="product-buttons">
+          <button class="cart-btn">In den Warenkorb</button>
+          <button class="more-btn" data-inci="Cyclopentasiloxane, Dimethiconol, Parfum, Argania Spinosa Kernel Oil...">Mehr erfahren</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- INCI MODAL -->
+<div id="inciModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h3>Inhaltsstoffe</h3>
+    <p id="inciText" style="color:#eee; font-size: 14px;"></p>
+  </div>
+</div>
+
+<!-- PARTNER-LOGOS -->
+<div class="partners">
+  <img src="https://placehold.co/100x30?text=Marke1" />
+  <img src="https://placehold.co/100x30?text=Marke2" />
+  <img src="https://placehold.co/100x30?text=Marke3" />
+  <img src="https://placehold.co/100x30?text=Marke4" />
+</div>
+
+<!-- INSTAGRAM SECTION -->
+<section class="instagram-block" style="background: #0d0d0d; padding: 80px 40px;">
+  <div class="container" style="text-align: center;">
+    <h2 style="font-family: 'Lalezar'; font-size: 60px; color: #F1E4C4; text-transform: uppercase; margin-bottom: 20px;">
+      @friseur.brunnenhof
+    </h2>
+    <p style="color: #bda27a; font-size: 18px; margin-bottom: 40px;">
+      Folge uns auf Instagram für Inspirationen, neue Styles und Einblicke hinter die Kulissen.
+    </p>
+
+    <div class="instagram-images" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+      <img src="https://placehold.co/180x200" alt="Style 1" style="border-radius: 8px; border: 2px solid #D4AF37;">
+      <img src="https://placehold.co/180x200" alt="Style 2" style="border-radius: 8px; border: 2px solid #D4AF37;">
+      <img src="https://placehold.co/180x200" alt="Style 3" style="border-radius: 8px; border: 2px solid #D4AF37;">
+      <img src="https://placehold.co/180x200" alt="Style 4" style="border-radius: 8px; border: 2px solid #D4AF37;">
+    </div>
+
+    <a href="https://www.instagram.com/friseur.brunnenhof" target="_blank" style="display: inline-block; margin-top: 30px; padding: 12px 24px; background: #D4AF37; color: #141414; border-radius: 30px; font-weight: bold; text-decoration: none; transition: all 0.3s ease;">
+      Jetzt folgen
+    </a>
+  </div>
+</section>
+
+<section id="chat-contact" style="background: #0f0f0f; padding: 60px 40px; color: white;">
+  <h2 style="text-align: center; font-family: 'Lalezar'; font-size: 36px; margin-bottom: 40px;">Kontaktiere unser Team</h2>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; max-width: 1200px; margin: 0 auto;">
+
+    <!-- Öffnungszeiten (linke Spalte) -->
+    <div class="hours-wrapper" style="flex: 1; min-width: 280px; max-width: 500px; padding: 30px; border-radius: 12px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 30px rgba(0,0,0,0.3);">
+      <h3 style="font-size: 28px; background: linear-gradient(90deg, #d4af37, #fff); -webkit-background-clip: text; color: transparent; font-family: 'Lalezar'; margin-bottom: 10px;">Unsere Öffnungszeiten</h3>
+      <p style="font-size: 15px; color: #bbb; margin-bottom: 25px;">Vereinbaren Sie Ihren Termin und erleben Sie unsere Expertise.</p>
+
+      <div class="hours-table" style="display: flex; flex-direction: column; gap: 10px;">
+        <div class="day-row"><span>Dienstag</span><span>09:00 – 18:00 Uhr</span></div>
+        <div class="day-row"><span>Mittwoch</span><span>09:00 – 18:00 Uhr</span></div>
+        <div class="day-row"><span>Donnerstag</span><span>09:00 – 18:00 Uhr</span></div>
+        <div class="day-row"><span>Freitag</span><span>09:00 – 18:00 Uhr</span></div>
+        <div class="day-row"><span>Samstag</span><span>09:00 – 13:00 Uhr</span></div>
+        <div class="day-row closed"><span>Montag</span><span>geschlossen</span></div>
+        <div class="day-row closed"><span>Sonntag</span><span>geschlossen</span></div>
+      </div>
+
+      <button class="btn-primary" style="margin-top: 30px; background: #e30613; padding: 12px 28px; font-size: 14px; color: white; border-radius: 30px; border: none; cursor: pointer;">
+        Jetzt Termin vereinbaren
+      </button>
+    </div>
+
+    <!-- Chat-Kontaktformular (rechte Spalte) -->
+    <div style="flex: 1; min-width: 280px; max-width: 600px; background: #1c1c1c; border-radius: 12px; padding: 30px; box-shadow: 0 0 20px rgba(0,0,0,0.3);">
+
+      <!-- Auswahlfeld -->
+      <label for="barberSelect" style="font-weight: bold; margin-bottom: 10px; display: block;">Wähle deinen Friseur:</label>
+      <select id="barberSelect" style="padding: 10px; border-radius: 6px; background: #2c2c2c; color: white; border: none; margin-bottom: 20px;">
+        <option value="max">Max – Barber</option>
+        <option value="lisa">Lisa – Farbexpertin</option>
+        <option value="amir">Amir – Rasurspezialist</option>
+        <option value="anna">Anna – Damenstylings</option>
+      </select>
+
+      <!-- Friseur-Infos -->
+      <div id="barberInfo" style="display: flex; gap: 20px; align-items: center; margin-bottom: 30px;">
+        <img id="barberImg" src="https://placehold.co/60x60?text=Max" alt="Max" style="border-radius: 50%; border: 2px solid #D4AF37;">
+        <div>
+          <strong id="barberName" style="font-size: 18px;">Max – Barber</strong><br>
+          <span id="barberStatus" style="font-size: 14px; color: #bbb;">Antwortet meist innerhalb weniger Minuten</span>
+        </div>
+      </div>
+
+      <!-- Formular -->
+      <form id="chatForm" style="display: flex; flex-direction: column; gap: 10px;">
+        <input type="text" id="username" placeholder="Dein Name" required style="padding: 10px; border-radius: 6px; border: none; background: #2c2c2c; color: white;">
+        <input type="email" id="useremail" placeholder="Deine E-Mail" required style="padding: 10px; border-radius: 6px; border: none; background: #2c2c2c; color: white;">
+        <textarea id="usermessage" placeholder="Deine Nachricht" rows="4" required style="padding: 10px; border-radius: 6px; border: none; background: #2c2c2c; color: white;"></textarea>
+        <button type="submit" style="background: #D4AF37; border: none; padding: 12px 20px; border-radius: 30px; color: #141414; font-weight: bold; cursor: pointer;">
+          Nachricht senden
+        </button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- GOOGLE MAP -->
+<section class="googlemap">
+  <iframe src="https://maps.google.com/maps?q=Brunnenhofstraße+7,+Augsburg&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"></iframe>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-block">
+    <h4>Leistungen</h4>
+    <p>Haarschnitt<br>Bartpflege<br>Kopfmassage</p>
+  </div>
+  <div class="footer-block">
+    <h4>Kontakt</h4>
+    <p>info@friseur-brunnenhof.de<br>Brunnenhofstraße 7<br>86150 Augsburg<br>0821 123456</p>
+  </div>
+  <div class="footer-block">
+    <h4>Öffnungszeiten</h4>
+    <p>Mo–Fr: 9–19 Uhr<br>Sa: 10–16 Uhr<br>So: geschlossen</p>
+  </div>
+</footer>
+<div class="footer-bottom">
+  © 2024 Friseur am Brunnenhof – Erstellt mit 💈 von LA-Studio • AGB • Datenschutz
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+  // Team Modal
+  const modal = document.getElementById('teamModal');
+  const modalImg = document.getElementById('modalImg');
+  const modalName = document.getElementById('modalName');
+  const modalBio = document.getElementById('modalBio');
+  const closeBtns = document.querySelectorAll('.close-btn');
+
+  document.querySelectorAll('.team-member').forEach(member => {
+    member.addEventListener('click', () => {
+      modal.style.display = "block";
+      modalImg.src = member.dataset.img;
+      modalName.textContent = member.dataset.name;
+      modalBio.textContent = member.dataset.bio;
+    });
+  });
+
+  closeBtns.forEach(btn => btn.onclick = () => {
+    modal.style.display = "none";
+    document.getElementById('inciModal').style.display = "none";
+  });
+
+  window.onclick = function(event) {
+    if (event.target === modal || event.target === document.getElementById('inciModal')) {
+      modal.style.display = "none";
+      document.getElementById('inciModal').style.display = "none";
+    }
+  };
+
+  // Produktfilter
+  document.querySelectorAll('.filter-buttons button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const type = btn.dataset.type;
+      document.querySelectorAll('.product').forEach(prod => {
+        prod.style.display = (type === 'alle' || prod.dataset.type === type) ? 'block' : 'none';
+      });
+    });
+  });
+
+  // INCI Modal
+  const inciModal = document.getElementById('inciModal');
+  const inciText = document.getElementById('inciText');
+  document.querySelectorAll('.more-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      inciText.textContent = btn.dataset.inci;
+      inciModal.style.display = 'block';
+    });
+  });
+</script>
+
+<script>
+  // Friseur-Datenbank
+  const barbers = {
+    max: {
+      name: "Max – Barber",
+      status: "Antwortet meist innerhalb weniger Minuten",
+      img: "https://placehold.co/60x60?text=Max"
+    },
+    lisa: {
+      name: "Lisa – Farbexpertin",
+      status: "Bringt Farbe in deinen Look",
+      img: "https://placehold.co/60x60?text=Lisa"
+    },
+    amir: {
+      name: "Amir – Rasurspezialist",
+      status: "Meistert die klassische Nassrasur",
+      img: "https://placehold.co/60x60?text=Amir"
+    },
+    anna: {
+      name: "Anna – Damenstylings",
+      status: "Spezialistin für moderne Trendfrisuren",
+      img: "https://placehold.co/60x60?text=Anna"
+    }
+  };
+  
+  // Elemente
+  const barberSelect = document.getElementById("barberSelect");
+  const barberName = document.getElementById("barberName");
+  const barberStatus = document.getElementById("barberStatus");
+  const barberImg = document.getElementById("barberImg");
+  const chatWindow = document.getElementById("chat-window");
+  
+  // Initialwert
+  let currentBarberKey = "max";
+  
+  // Aktualisiere Anzeige bei Auswahl
+  barberSelect.addEventListener("change", function () {
+    currentBarberKey = this.value;
+    const barber = barbers[currentBarberKey];
+    barberName.textContent = barber.name;
+    barberStatus.textContent = barber.status;
+    barberImg.src = barber.img;
+  });
+  
+  // Formular absenden
+  document.getElementById("chatForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+  
+    const name = document.getElementById("username").value.trim();
+    const email = document.getElementById("useremail").value.trim();
+    const message = document.getElementById("usermessage").value.trim();
+  
+    if (!name || !email || !message) return;
+  
+    const now = new Date();
+    const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const barber = barbers[currentBarberKey];
+  
+    const userMessage = document.createElement("div");
+    userMessage.classList.add("chat-message");
+    userMessage.style.marginBottom = "12px";
+    userMessage.innerHTML = `
+      <div style="background: #D4AF37; color: #141414; padding: 12px 16px; border-radius: 10px; display: inline-block; max-width: 80%;">
+        <p style="margin: 0; font-size: 14px;">${message}</p>
+      </div>
+      <div style="font-size: 12px; color: #777; margin-top: 4px;">${barber.name} · ${time}</div>
+    `;
+  
+    chatWindow.appendChild(userMessage);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  
+    this.reset();
+  });
+  </script>
+  
+  <script>
+    document.getElementById("coolTitle").addEventListener("click", () => {
+      const el = document.querySelector(".animated-title-container");
+      el.style.animation = "none";
+      void el.offsetWidth; // Trigger reflow
+      el.style.animation = "morphGlow 0.5s ease forwards";
+    });
+    </script>
+    <script>
+      const days = document.querySelectorAll(".day-row");
+      const today = new Date().getDay(); // Sonntag = 0, Montag = 1, etc.
+      const dayIndexMap = {1:5, 2:0, 3:1, 4:2, 5:3, 6:4, 0:6}; 
+      const currentRow = days[dayIndexMap[today]];
+      if (currentRow) currentRow.classList.add("today");
+    
+      // CSS für .today
+    </script>
+    
+    
+    

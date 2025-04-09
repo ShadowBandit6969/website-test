@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AGB & Datenschutz – Fusion³</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #ff6600;
+      --secondary: #ff944d;
+      --bg: #0b0b0b;
+      --text: #fff;
+      --muted: #aaa;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+    }
+
+    header, footer {
+      background: #0d0d0d;
+      color: var(--muted);
+      padding: 2rem 5vw;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    header {
+            width: 100%;
+            padding: 2rem 5vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            margin-left: 2rem;
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--muted);
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+        .burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.burger span {
+  display: block;
+  height: 3px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.burger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.burger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    h1, h2, h3 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2rem;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.5rem;
+      margin-top: 3rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #ddd;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+      color: #ccc;
+    }
+
+    footer {
+            background: #0d0d0d;
+            color: #aaa;
+            padding: 4rem 5vw 2rem;
+            font-size: 0.9rem;
+            border-top: 1px solid #222;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+        }
+
+        .footer-logo span {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .footer-logo p {
+            margin-top: 0.5rem;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .footer-links h4,
+        .footer-contact h4,
+        .footer-socials h4 {
+            margin-bottom: 0.8rem;
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .footer-links ul,
+        .footer-contact ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li,
+        .footer-contact li {
+            margin-bottom: 0.4rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-socials {
+    display: flex;
+    flex-direction: column; /* Überschrift oben, Icons darunter */
+    align-items: flex-start;
+}
+
+.footer-socials-icons {
+    display: flex;
+    gap: 12px; /* Abstand zwischen Icons */
+    margin-top: 0.5rem;
+}
+
+
+
+        .footer-socials img {
+            width: 26px;
+            height: 26px;
+            margin-right: 12px;
+            opacity: 1;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            vertical-align: middle;
+        }
+
+        .footer-socials img:hover {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+
+        .footer-bottom {
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      nav {
+        display: none;
+      }}
+
+      @media (max-width: 480px) {
+            .burger {
+    display: flex;
+  }
+
+  nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #111;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 1rem;
+    display: none;
+    gap: 1rem;
+    border-left: 1px solid #222;
+    border-bottom: 1px solid #222;
+  }
+
+  nav.open {
+    display: flex;
+  }
+
+  nav a {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text);
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+    /* ✅ Header (Logo + Nav nebeneinander) */
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 3vw;
+        gap: 0;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+    }
+
+    nav a {
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }}
+
+    @media (orientation: landscape) and (max-height: 300px) {
+    header {
+        padding: 0.5rem 3vw;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    nav a {
+        font-size: 0.75rem;
+        padding: 0.2rem;
+    }}
+
+    @media (orientation: landscape) and (max-height: 200px) {
+    header {
+        padding: 0.3rem 2vw;
+    }
+
+    .logo {
+        font-size: 1rem;
+    }
+
+    nav a {
+        font-size: 0.65rem;
+        padding: 0.1rem;
+    }
+    }
+    .burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.burger span {
+  display: block;
+  height: 3px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.burger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.burger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+nav {
+  display: flex;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .burger {
+    display: flex;
+  }
+
+  nav {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    background: #111;
+    padding: 1rem;
+    border: 1px solid #222;
+    margin-top: 1rem;
+  }
+
+  nav.open {
+    display: flex;
+  }
+}
+
+    
+  </style>
+</head>
+<body>
+
+    <header>
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+          <div class="logo">Fusion³</div>
+      
+          <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      
+        <nav id="nav">
+          <a href="/">Home</a>
+          <a href="/3d.html">3D Design</a>
+          <a href="/kontakt.html">Kontakt</a>
+        </nav>
+      </header>
+      
+      
+
+  <main class="container">
+    <h1>AGB & Datenschutz</h1>
+
+    <h2>Allgemeine Geschäftsbedingungen</h2>
+    <p><strong>Muster-AGB für [Ihr Unternehmensname] – Testversion</strong></p>
+    
+    <h3>1. Geltungsbereich</h3>
+    <p>1.1. Diese AGB gelten für alle Verträge, die zwischen [Ihr Unternehmensname] („Anbieter“) und seinen Kunden abgeschlossen werden.</p>
+    <p>1.2. Gültig für Grafikdesign, 3D-Design, Webdesign und Social Media Content.</p>
+
+    <h3>2. Vertragsschluss & Leistungen</h3>
+    <p>2.1. Vertrag entsteht durch schriftliche Auftragsbestätigung oder Online-Zustimmung.</p>
+    <p>2.2. Leistungen:</p>
+    <ul>
+      <li><strong>Grafikdesign</strong> – Corporate Design, Logos etc.</li>
+      <li><strong>3D-Design</strong> – Visualisierungen, Animationen</li>
+      <li><strong>Webdesign</strong> – Entwicklung & Pflege</li>
+      <li><strong>Social Media</strong> – Content Creation</li>
+    </ul>
+    <p>2.3. Änderungen nur mit schriftlicher Zustimmung.</p>
+
+    <h3>3. Preise & Zahlung</h3>
+    <p>3.1. Preise gemäß Vereinbarung.</p>
+    <p>3.2. Zahlbar innerhalb von 14 Tagen ab Rechnung.</p>
+    <p>3.3. Bei Verzug: gesetzl. Zinsen + Leistungsverzögerung möglich.</p>
+
+    <h3>4. Urheberrecht & Nutzung</h3>
+    <p>4.1. Urheberrechte bleiben beim Anbieter bis zur vollständigen Bezahlung.</p>
+    <p>4.2. Danach: einfaches, nicht übertragbares Nutzungsrecht.</p>
+    <p>4.3. Vorlagen bleiben Eigentum des Anbieters.</p>
+
+    <h3>5. Haftung & Gewährleistung</h3>
+    <p>5.1. Haftung nur bei Vorsatz oder grober Fahrlässigkeit.</p>
+    <p>5.2. Mängel → Nachbesserung oder Ersatz. Frist: 12 Monate.</p>
+
+    <h3>6. Widerruf & Rücktritt</h3>
+    <p>6.1. Kein Widerruf bei personalisierten digitalen Leistungen nach Zustimmung.</p>
+    <p>6.2. Kündigung aus wichtigem Grund möglich.</p>
+
+    <h3>7. Datenschutz & Vertraulichkeit</h3>
+    <p>7.1. Alle Infos vertraulich.</p>
+    <p>7.2. Datenverarbeitung laut DSGVO & Datenschutzerklärung.</p>
+
+    <h3>8. Schlussbestimmungen</h3>
+    <p>8.1. Deutsches Recht, Gerichtsstand: Sitz des Anbieters.</p>
+    <p>8.2. Salvatorische Klausel.</p>
+    <p>8.3. Änderungen nur schriftlich gültig.</p>
+
+    <h2>Datenschutzerklärung</h2>
+
+    <h3>1. Einleitung</h3>
+    <p>Wir schützen Ihre Daten. Nachfolgend erfahren Sie, welche Daten erfasst und verarbeitet werden.</p>
+
+    <h3>2. Verantwortlicher</h3>
+    <p>[Unternehmensname] · [Adresse] · [Telefon] · [E-Mail]</p>
+
+    <h3>3. Datenverarbeitung</h3>
+    <ul>
+      <li>Server-Logs (IP, Browser, Datum)</li>
+      <li>Cookies (essenziell / Analyse nur mit Einwilligung)</li>
+      <li>Kontaktformular-Daten</li>
+    </ul>
+
+    <h3>4. Weitergabe an Dritte</h3>
+    <p>Nur bei gesetzlicher Pflicht oder Ihrer Zustimmung.</p>
+
+    <h3>5. Drittanbieter</h3>
+    <ul>
+      <li>Google Analytics (Analyse)</li>
+      <li>Social Media Plugins</li>
+    </ul>
+
+    <h3>6. Ihre Rechte</h3>
+    <ul>
+      <li>Auskunft, Berichtigung, Löschung</li>
+      <li>Datenübertragbarkeit</li>
+      <li>Widerspruch & Widerruf</li>
+    </ul>
+
+    <h3>7. Sicherheit</h3>
+    <p>Technisch & organisatorisch geschützt – stets aktuell.</p>
+
+    <h3>8. Änderungen</h3>
+    <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen.</p>
+
+    <h3>9. Kontakt</h3>
+    <p>Fragen an: [Unternehmensname], [Adresse], [E-Mail]</p>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+        <div class="footer-logo">
+            <span>Fusion³</span>
+            <p>Web & 3D Design mit Wirkung.</p>
+        </div>
+
+        <div class="footer-links">
+            <h4>Rechtliches</h4>
+            <ul>
+                <li><a href="/impressum.html">Impressum</a></li>
+                <li><a href="/datenschutz.html">Datenschutz</a></li>
+                <li><a href="/agb.html">AGB</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-contact">
+            <h4>Kontakt</h4>
+            <ul>
+                <li><a href="mailto:hello@fusion3.de">hello@fusion3.de</a></li>
+                <li>+49 123 4567890</li>
+                <li>Berlin, Deutschland</li>
+            </ul>
+        </div>
+
+        <div class="footer-socials">
+            <h4>Social</h4>
+            <div class="footer-socials-icons">
+                <a href="mailto:hello@fusion3.de" title="E-Mail">
+                    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="E-Mail Icon" />
+                </a>
+                <a href="https://github.com/" title="GitHub" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub Logo" />
+                </a>
+                <a href="https://www.linkedin.com/" title="LinkedIn" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn Blau" />
+                </a>
+                <a href="https://wa.me/491234567890" title="WhatsApp schreiben" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon" />
+                </a>
+            </div>
+        </div>
+        
+    </div>
+    <p class="footer-bottom">© 2025 Fusion³ – Alle Rechte vorbehalten.</p>
+</footer>
+<script>
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('nav');
+  
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      nav.classList.toggle('open');
+    });
+  </script>
+  
+
+
+</body>
+</html>
