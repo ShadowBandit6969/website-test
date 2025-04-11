@@ -275,6 +275,7 @@
             max-width: var(--container-width);
             margin: 0 auto;
             padding: 5rem 2rem;
+            
         }
 
 
@@ -1688,6 +1689,103 @@ text-align: center;
 }
 
 
+.hero-image-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  gap: 10px;
+  z-index: 0;
+  pointer-events: none;
+  padding: 2rem;
+}
+
+
+.grid-box {
+  overflow: hidden;
+  border-radius: 14px;
+  pointer-events: auto;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.grid-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.8);
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.grid-box:hover img {
+  transform: scale(1.08);
+  filter: brightness(1);
+}
+
+.grid-box:hover {
+  box-shadow: 0 0 26px rgba(255, 102, 0, 0.3);
+  transform: scale(1.02);
+}
+
+/* 🎯 Neue perfekte Anordnung */
+.box1 {
+  grid-column: 1 / span 5;
+  grid-row: 1 / span 4;
+}
+
+.box2 {
+  grid-column: 6 / span 4;
+  grid-row: 1 / span 3;
+}
+
+.box3 {
+  grid-column: 10 / span 5;
+  grid-row: 1 / span 3; /* previously: 2 / span 5 */
+}
+
+.box4 {
+  grid-column: 1 / span 5;
+  grid-row: 5 / span 3;
+}
+
+.box5 {
+  grid-column: 6 / span 9;
+  grid-row: 4 / span 2;
+}
+.box6 {
+  grid-column: 1 / span 5;
+  grid-row: 8 / span 5;
+}
+
+.box7 {
+  grid-column: 6 / span 9;
+  grid-row: 6 / span 7;
+}
+
+.grid-box video,
+.grid-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.grid-box video,
+.grid-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+
+
+
+
+
 
     </style>
 
@@ -1710,7 +1808,57 @@ text-align: center;
   </header>
   
 
-  <section class="hero-video-wrapper">
+<section class="hero-video-wrapper">
+  <div class="hero-image-grid">
+    <!-- Box 1: Video-Platzhalter -->
+    <div class="grid-box box1">
+      <video autoplay muted loop playsinline>
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+        Dein Browser unterstützt keine Videos.
+      </video>
+    </div>
+
+    <!-- Box 2: Bild-Platzhalter -->
+    <div class="grid-box box2">
+      <img src="https://placehold.co/600x800?text=Bild+2" alt="Bild 2">
+    </div>
+
+    <!-- Box 3: Bild-Platzhalter -->
+    <div class="grid-box box3">
+      <img src="https://placehold.co/600x800?text=Bild+3" alt="Bild 3">
+    </div>
+
+    <!-- Box 4: Video-Platzhalter -->
+    <div class="grid-box box4">
+      <video autoplay muted loop playsinline>
+        <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" type="video/mp4">
+        Dein Browser unterstützt keine Videos.
+      </video>
+    </div>
+
+    <!-- Box 5: Video-Platzhalter -->
+    <div class="grid-box box5">
+      <video autoplay muted loop playsinline>
+        <source src="https://samplelib.com/lib/preview/mp4/sample-10s.mp4" type="video/mp4">
+        Dein Browser unterstützt keine Videos.
+      </video>
+    </div>
+
+    <!-- Box 6: Bild-Platzhalter -->
+    <div class="grid-box box6">
+      <img src="https://placehold.co/600x800?text=Bild+6" alt="Bild 6">
+    </div>
+
+    <!-- Box 7: Video-Platzhalter -->
+    <div class="grid-box box7">
+      <video autoplay muted loop playsinline>
+        <source src="https://samplelib.com/lib/preview/mp4/sample-10s.mp4" type="video/mp4">
+        Dein Browser unterstützt keine Videos.
+      </video>
+    </div>
+  </div>
+
+  
     <div class="hero-video-content">
       <h1>Faszinier mit<br>3D Design & Motion</h1>
       <p>High-End Visuals, Virtual Reality & produktionsreife Modelle.</p>
@@ -1719,9 +1867,6 @@ text-align: center;
       </a>
     </div>
   </section>
-  <video class="video-background" autoplay muted loop playsinline>
-    <source src="./3DPic/1.mp4" type="video/mp4" />
-  </video>
 
   <section class="container epic-leistungen" id="leistungen">
     <h2>Unsere 3D Leistungen</h2>
@@ -1888,7 +2033,15 @@ text-align: center;
         <div class="fusion-glow"></div>
         <div class="fusion-caption">
           <h4>Getränke Commercial</h4>
-          <span>Motion Branding</span>
+          <span>Produktanimation</span>
+        </div>
+      </div>
+      <div class="fusion-case" onclick="openLightbox(2)">
+        <img src="./3DPic/1.jpg" alt="VR">
+        <div class="fusion-glow"></div>
+        <div class="fusion-caption">
+          <h4>Creme Commercial</h4>
+          <span>Produktrender</span>
         </div>
       </div>
       <div class="fusion-case" onclick="openLightbox(2)">
