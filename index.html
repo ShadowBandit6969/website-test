@@ -2257,44 +2257,220 @@
     </section>
 
 
-    <section class="container epic-testimonials" id="kundenstimmen">
-        <h2>Was Kunden sagen</h2>
-        <div class="testimonial-bg"></div>
-        <div class="testimonial-waves" id="testimonialWaves">
-            <div class="wave-wrapper wave1">
-                <svg class="wave-svg" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg"
-                    preserveAspectRatio="none">
-                    <path fill="#f4f4f4" d="M0,80 C320,140 1120,0 1440,60 L1440,0 L0,0 Z"></path>
-                </svg>
-            </div>
+  
+    <testimonial-slider></testimonial-slider>
 
-        </div>
-        <div class="testimonial-slider-wrapper">
-            <div class="testimonial-slider">
-                <div class="testimonial-card">
-                    <p>"Fusion³ liefert Design mit Substanz. Technik trifft Kreativität. Mega!"</p>
-                    <span>– Agentur X</span>
+    <script>
+      class TestimonialSlider extends HTMLElement {
+        constructor() {
+          super();
+          this.attachShadow({ mode: "open" });
+        }
+    
+        connectedCallback() {
+          const testimonials = [
+            {
+              image: "https://randomuser.me/api/portraits/women/44.jpg",
+              name: "Sophie M., Creative Director",
+              quote: "Das 3D-Design hat unsere Produktpräsentation revolutioniert – professionell, kreativ, zuverlässig!",
+              stars: 5,
+              logo: ""
+            },
+            {
+              image: "https://randomuser.me/api/portraits/men/32.jpg",
+              name: "Mark T., Marketing Manager",
+              quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
+              stars: 5,
+              logo: ""
+            },
+            {
+              image: "https://randomuser.me/api/portraits/men/41.jpg",
+              name: "Daniel R., Startup-Gründer",
+              quote: "Schnell, hochwertig, visuell auf Top-Niveau. Gerne wieder für kommende Projekte!",
+              stars: 4,
+              logo: ""
+            }
+          ];
+    
+          const style = `
+            <style>
+              :host {
+                display: block;
+                padding: 5rem 1.5rem;
+                background: transparent;
+                color: #f5f5f5;
+              }
+    
+              h2 {
+                text-align: center;
+                font-size: 2rem;
+                font-weight: 800;
+                margin-bottom: 0.5rem;
+                color: #ffffff;
+              }
+    
+              .intro {
+                text-align: center;
+                font-size: 1.05rem;
+                color: #aaa;
+                margin: 0 auto 2.5rem;
+                max-width: 680px;
+                padding: 0 2.1rem;
+                line-height: 1.6;
+              }
+    
+              .carousel {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 1.5rem;
+                padding-block: 1.5rem;
+                scroll-behavior: smooth;
+                align-items: stretch;
+              }
+    
+              .carousel::before,
+              .carousel::after {
+                content: "";
+                flex: 0 0 calc(50% - 180px);
+              }
+    
+              .carousel::-webkit-scrollbar {
+                display: none;
+              }
+    
+              .card {
+                flex: 0 0 auto;
+                width: clamp(280px, 80vw, 360px);
+                background: #1e1e1e;
+                border-radius: 14px;
+                padding: 2rem;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+                scroll-snap-align: center;
+                text-align: center;
+                transition: opacity 0.5s ease, transform 0.5s ease;
+                opacity: 0.5;
+                transform: scale(0.95);
+              }
+    
+              .avatar {
+                width: 64px;
+                height: 64px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-bottom: 1rem;
+                border: 2px solid #ff6600;
+              }
+    
+              .stars {
+                color: #ffcc00;
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+              }
+    
+              .quote {
+                font-style: italic;
+                color: #ccc;
+                margin: 1rem 0;
+                line-height: 1.5;
+              }
+    
+              .author {
+                font-weight: 600;
+                color: #ffffff;
+                font-size: 1rem;
+              }
+    
+              .logo {
+                margin-top: 1rem;
+                height: 22px;
+                opacity: 0.6;
+                transition: 0.3s ease;
+                filter: brightness(0) invert(1); /* weiß auf dunkel */
+              }
+    
+              .logo:hover {
+                opacity: 1;
+              }
+            </style>
+          `;
+    
+          const stars = (count) => "★".repeat(count) + "☆".repeat(5 - count);
+    
+          const html = `
+            ${style}
+            <h2>Kundenstimmen</h2>
+            <p class="intro">Was unsere Kunden über die Zusammenarbeit sagen.</p>
+            <div class="carousel">
+              ${testimonials.map((t) => `
+                <div class="card">
+                  <img src="${t.image}" class="avatar" alt="${t.name}">
+                  <div class="stars">${stars(t.stars)}</div>
+                  <p class="quote">„${t.quote}“</p>
+                  <p class="author">${t.name}</p>
+                  <img src="${t.logo}" class="logo" alt="Logo von Kunde">
                 </div>
-                <div class="testimonial-card">
-                    <p>"Wir waren überrascht, wie viel Wirkung die Animation erzeugt hat."</p>
-                    <span>– Startup Y</span>
-                </div>
-                <div class="testimonial-card">
-                    <p>"Fusion³ hat unseren Markenauftritt auf ein neues Level gehoben."</p>
-                    <span>– Brand Z</span>
-                </div>
-                <!-- Clone for infinite loop -->
-                <div class="testimonial-card">
-                    <p>"Fusion³ liefert Design mit Substanz. Technik trifft Kreativität. Mega!"</p>
-                    <span>– Agentur X</span>
-                </div>
-                <div class="testimonial-card">
-                    <p>"Wir waren überrascht, wie viel Wirkung die Animation erzeugt hat."</p>
-                    <span>– Startup Y</span>
-                </div>
+              `).join("")}
             </div>
-        </div>
-    </section>
+          `;
+    
+          this.shadowRoot.innerHTML = html;
+    
+          const carousel = this.shadowRoot.querySelector('.carousel');
+          const cards = this.shadowRoot.querySelectorAll('.card');
+    
+          const updateFade = () => {
+            const rect = carousel.getBoundingClientRect();
+            const center = rect.left + rect.width / 2;
+    
+            cards.forEach(card => {
+              const cardRect = card.getBoundingClientRect();
+              const cardCenter = cardRect.left + cardRect.width / 2;
+              const distance = Math.abs(center - cardCenter);
+              const maxDistance = rect.width / 2;
+    
+              const opacity = 1 - Math.min(distance / maxDistance, 1);
+              const scale = 1 + (0.05 * (1 - Math.min(distance / maxDistance, 1)));
+    
+              card.style.opacity = opacity.toFixed(2);
+              card.style.transform = `scale(${scale.toFixed(2)})`;
+            });
+          };
+    
+          function scrollToCard(index) {
+            const card = cards[index];
+            const carouselCenter = carousel.offsetWidth / 2;
+            const cardCenterOffset = card.offsetLeft + card.offsetWidth / 2;
+            const targetScrollLeft = cardCenterOffset - carouselCenter;
+    
+            carousel.scrollTo({
+              left: targetScrollLeft,
+              behavior: "smooth"
+            });
+    
+            updateFade();
+          }
+    
+          let currentIndex = 0;
+    
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              scrollToCard(0); // Erste Karte zentrieren
+              setInterval(() => {
+                currentIndex = (currentIndex + 1) % cards.length;
+                scrollToCard(currentIndex);
+              }, 4000);
+            });
+          });
+    
+          carousel.addEventListener("scroll", updateFade);
+        }
+      }
+    
+      customElements.define("testimonial-slider", TestimonialSlider);
+    </script>
+    
 
 
 <!--
