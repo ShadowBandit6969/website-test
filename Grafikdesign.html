@@ -648,13 +648,15 @@
       border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.15);
       padding: 2.5rem;
-      width: 300px;
-      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      width: 400px;
       backdrop-filter: blur(20px);
       overflow: hidden;
       transition: all 0.4s ease;
       transform: translateY(40px);
       opacity: 0;
+      transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+  border-color: rgba(255, 102, 0, 0.2);
     }
 
     .epic-step::before {
@@ -2265,7 +2267,214 @@
       <form action="https://formspree.io/f/xqapdvaq" method="POST">
         <input type="text" name="name" placeholder="Dein Name" required />
         <input type="email" name="email" placeholder="Deine E-Mail" required />
-        <textarea name="message" rows="6" placeholder="Worum geht’s?" required></textarea>
+        <textarea name="message" rows="6" placeholder="Worum geht’s?" <testimonial-slider></testimonial-slider>
+
+<script>
+  class TestimonialSlider extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+    }
+
+    connectedCallback() {
+      const testimonials = [
+        {
+          image: "https://randomuser.me/api/portraits/women/44.jpg",
+          name: "Sophie M., Creative Director",
+          quote: "Das 3D-Design hat unsere Produktpräsentation revolutioniert – professionell, kreativ, zuverlässig!",
+          stars: 5,
+          logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Googleplex-Logo.svg"
+        },
+        {
+          image: "https://randomuser.me/api/portraits/men/32.jpg",
+          name: "Mark T., Marketing Manager",
+          quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
+          stars: 5,
+          logo: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png"
+        },
+        {
+          image: "https://randomuser.me/api/portraits/men/41.jpg",
+          name: "Daniel R., Startup-Gründer",
+          quote: "Schnell, hochwertig, visuell auf Top-Niveau. Gerne wieder für kommende Projekte!",
+          stars: 4,
+          logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
+        }
+      ];
+
+      const style = `
+        <style>
+          :host {
+            display: block;
+            padding: 5rem 1.5rem;
+            background: transparent;
+            color: #f5f5f5;
+          }
+
+          h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+          }
+
+          .intro {
+            text-align: center;
+            font-size: 1.05rem;
+            color: #aaa;
+            margin: 0 auto 2.5rem;
+            max-width: 680px;
+            padding: 0 2.1rem;
+            line-height: 1.6;
+          }
+
+          .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 1.5rem;
+            padding-block: 1.5rem;
+            scroll-behavior: smooth;
+            align-items: stretch;
+            scroll-padding-inline: 50%;
+          }
+
+          .carousel::-webkit-scrollbar {
+            display: none;
+          }
+
+          .card {
+            flex: 0 0 auto;
+            width: clamp(280px, 85vw, 360px);
+            background: #1e1e1e;
+            border-radius: 14px;
+            padding: 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            scroll-snap-align: center;
+            text-align: center;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            opacity: 0.5;
+            transform: scale(0.95);
+          }
+
+          .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 2px solid #ff6600;
+          }
+
+          .stars {
+            color: #ffcc00;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+          }
+
+          .quote {
+            font-style: italic;
+            color: #ccc;
+            margin: 1rem 0;
+            line-height: 1.5;
+          }
+
+          .author {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 1rem;
+          }
+
+          .logo {
+            margin-top: 1rem;
+            height: 22px;
+            opacity: 0.6;
+            transition: 0.3s ease;
+            filter: brightness(0) invert(1);
+          }
+
+          .logo:hover {
+            opacity: 1;
+          }
+        </style>
+      `;
+
+      const stars = (count) => "★".repeat(count) + "☆".repeat(5 - count);
+
+      const html = `
+        ${style}
+        <h2>Kundenstimmen</h2>
+        <p class="intro">Was unsere Kunden über die Zusammenarbeit sagen.</p>
+        <div class="carousel">
+          ${testimonials.map((t) => `
+            <div class="card">
+              <img src="${t.image}" class="avatar" alt="${t.name}">
+              <div class="stars">${stars(t.stars)}</div>
+              <p class="quote">„${t.quote}“</p>
+              <p class="author">${t.name}</p>
+              <img src="${t.logo}" class="logo" alt="Logo von Kunde">
+            </div>
+          `).join("")}
+        </div>
+      `;
+
+      this.shadowRoot.innerHTML = html;
+
+      const carousel = this.shadowRoot.querySelector('.carousel');
+      const cards = this.shadowRoot.querySelectorAll('.card');
+
+      const updateFade = () => {
+        const rect = carousel.getBoundingClientRect();
+        const center = rect.left + rect.width / 2;
+
+        cards.forEach(card => {
+          const cardRect = card.getBoundingClientRect();
+          const cardCenter = cardRect.left + cardRect.width / 2;
+          const distance = Math.abs(center - cardCenter);
+          const maxDistance = rect.width / 2;
+
+          const opacity = 1 - Math.min(distance / maxDistance, 1);
+          const scale = 1 + (0.05 * (1 - Math.min(distance / maxDistance, 1)));
+
+          card.style.opacity = opacity.toFixed(2);
+          card.style.transform = `scale(${scale.toFixed(2)})`;
+        });
+      };
+
+      function scrollToCard(index) {
+        const card = cards[index];
+        const carouselCenter = carousel.offsetWidth / 2;
+        const cardCenterOffset = card.offsetLeft + card.offsetWidth / 2;
+        const targetScrollLeft = cardCenterOffset - carouselCenter;
+
+        carousel.scrollTo({
+          left: targetScrollLeft,
+          behavior: "smooth"
+        });
+
+        updateFade();
+      }
+
+      let currentIndex = 0;
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          scrollToCard(0); // Erste Karte zentrieren
+          setInterval(() => {
+            currentIndex = (currentIndex + 1) % cards.length;
+            scrollToCard(currentIndex);
+          }, 4000);
+        });
+      });
+
+      carousel.addEventListener("scroll", updateFade);
+    }
+  }
+
+  customElements.define("testimonial-slider", TestimonialSlider);
+</script>
+required></textarea>
         <input type="text" name="_gotcha" style="display:none">
 
         <button type="submit" class="neon-btn" id="sendButton">

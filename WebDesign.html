@@ -8,1232 +8,136 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
-  <!-- Hier folgt dein bestehendes <style>... -->
-    <style>
-        :root {
-            --primary: #ff6600;
-            --secondary: #ff944d;
-            --bg: #0b0b0b;
-            --text: #ffffff;
-            --muted: #999;
-            --container-width: 1200px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html,
-        body {
-            font-family: 'Inter', sans-serif;
-            background: white;
-            color: var(--text);
-            scroll-behavior: smooth;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        header {
-            width: 100%;
-            padding: 2rem 5vw;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #222;
-            position: relative;
-            z-index: 10;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--primary);
-            letter-spacing: 1px;
-        }
-
-        nav a {
-            margin-left: 2rem;
-            font-weight: 500;
-            font-size: 1rem;
-            color: var(--muted);
-        }
-
-        nav a:hover {
-            color: var(--primary);
-        }
-        .burger {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 24px;
-  height: 18px;
-  cursor: pointer;
-  z-index: 20;
-}
-
-.burger span {
-  display: block;
-  height: 3px;
-  background: var(--text);
-  border-radius: 2px;
-  transition: 0.3s;
-}
-
-.burger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.burger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.burger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
-
-
-
-
-        .hero-video-wrapper {
-             position: relative;
-             height: 100vh;
-             width: 100%;
-             overflow: hidden;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             text-align: center;
-             background-color: transparent;
-         }
-
-         .video-background {
-             position: absolute;
-             top: 60%;
-             left: 50%;
-             width: 100%;
-             height: auto;
-             transform: translate(-50%, -50%);
-             object-fit: cover;
-             z-index: 0;
-             opacity: 1;
-             pointer-events: none;
-             background-color: transparent;   }
-
-        .hero-video-content {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            padding: 2rem;
-            max-width: 800px;
-            color: #000000;
-            background: none;
-            border-radius: 10px;
-            box-sizing: border-box;
-            margin-top: -25vh;
-            /* <-- Überschrift weiter nach oben */
-        }
-
-
-
-        .hero-video-content h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-        }
-
-        .hero-video-content p {
-            font-size: 1.2rem;
-            color: #ccc;
-            margin: 1rem 0;
-        }
-
-        .neon-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none;
-            color: #fff;
-            padding: 1rem 2.2rem;
-            font-size: 1rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            border-radius: 8px;
-            box-shadow: 0 0 12px rgba(255, 102, 0, 0.4),
-                0 0 24px rgba(255, 102, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            transition: all 0.3s ease;
-        }
-
-        .neon-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 16px rgba(255, 102, 0, 0.6),
-                0 0 36px rgba(255, 102, 0, 0.4);
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-        }
-
-        .neon-btn span::after {
-            content: "";
-            position: absolute;
-            top: -120%;
-            left: -120%;
-            width: 300%;
-            height: 300%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 40%);
-            opacity: 0;
-            animation: pulseEffect 4s infinite ease-in-out;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        @keyframes pulseEffect {
-
-            0%,
-            100% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-
-            50% {
-                opacity: 0.3;
-                transform: scale(1.4);
-            }
-        }
-
-        .neon-btn.sent {
-            background: linear-gradient(135deg, #00c851, #007e33);
-            box-shadow: 0 0 14px rgba(0, 200, 81, 0.6);
-            transform: scale(1.02);
-        }
-
-        @keyframes buttonShake {
-            0% {
-                transform: translateX(0);
-            }
-
-            25% {
-                transform: translateX(-4px);
-            }
-
-            50% {
-                transform: translateX(4px);
-            }
-
-            75% {
-                transform: translateX(-2px);
-            }
-
-            100% {
-                transform: translateX(0);
-            }
-        }
-
-        .neon-btn.shake {
-            animation: buttonShake 0.3s ease;
-        }
-
-
-        .cta-btn {
-            position: relative;
-            overflow: hidden;
-            z-index: 2;
-            background: var(--primary);
-            color: #000;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 1rem 2rem;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 1rem;
-        }
-
-        section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            font-weight: 800;
-        }
-
-        section h3 {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            font-weight: 600;
-        }
-
-
-        .container {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 5rem 2rem;
-        }
-
-
-
-
-
-       
-
-        form {
-            display: flex;
-            flex-direction: column;
-            /* max-width: 600px; ❌ entfernen */
-            width: 100%;
-            /* ✅ volle Breite im Container nutzen */
-            margin: 0 auto;
-        }
-
-        .form-wrapper {
-            max-width: 100%;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-
-        input,
-        textarea {
-            background: #111;
-            border: 1px solid #333;
-            padding: 1rem;
-            color: var(--text);
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            border-radius: 5px;
-        }
-
-        button {
-            background: var(--primary);
-            color: #000;
-            padding: 1rem;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-
-
-        .socials img {
-            width: 24px;
-            margin: 0 8px;
-            opacity: 0.7;
-            transition: 0.2s;
-        }
-
-        .socials img:hover {
-            opacity: 1;
-        }
-
-
-
-
-     
-        @keyframes lightMotion {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .step-inner {
-            position: relative;
-            z-index: 2;
-            text-align: left;
-        }
-
-        .step-number {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--primary);
-            display: block;
-            margin-bottom: 1rem;
-        }
-
-  
-
-        footer {
-            background: #0d0d0d;
-            color: #aaa;
-            padding: 4rem 5vw 2rem;
-            font-size: 0.9rem;
-            border-top: 1px solid #222;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto 2rem;
-        }
-
-        .footer-logo span {
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: var(--primary);
-        }
-
-        .footer-logo p {
-            margin-top: 0.5rem;
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        .footer-links h4,
-        .footer-contact h4,
-        .footer-socials h4 {
-            margin-bottom: 0.8rem;
-            color: var(--secondary);
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .footer-links ul,
-        .footer-contact ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-links li,
-        .footer-contact li {
-            margin-bottom: 0.4rem;
-        }
-
-        .footer-links a {
-            color: #ccc;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-
-        .footer-socials {
-            display: flex;
-            flex-direction: column;
-            /* Überschrift oben, Icons darunter */
-            align-items: flex-start;
-        }
-
-        .footer-socials-icons {
-            display: flex;
-            gap: 12px;
-            /* Abstand zwischen Icons */
-            margin-top: 0.5rem;
-        }
-
-
-
-        .footer-socials img {
-            width: 26px;
-            height: 26px;
-            margin-right: 12px;
-            opacity: 1;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-            vertical-align: middle;
-        }
-
-        .footer-socials img:hover {
-            transform: scale(1.1);
-            opacity: 1;
-        }
-
-
-        .footer-bottom {
-            text-align: center;
-            color: #666;
-            font-size: 0.85rem;
-            margin-top: 1rem;
-        }
-
-
-
-        /* === Medien-Spezifisch: 320px Mobile Fix === */
-        @media (max-width: 480px) {
-            .burger {
-    display: flex;
-  }
-
-  nav {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: #111;
-    flex-direction: column;
-    align-items: center;
-text-align: center;
-
-    padding: 1rem;
-    display: none;
-    gap: 1rem;
-    border-left: 1px solid #222;
-    border-bottom: 1px solid #222;
-  }
-
-  nav.open {
-    display: flex;
-  }
-
-  nav a {
-    margin: 0;
-    font-size: 1rem;
-    color: var(--text);
-  }      /* HERO: Inhalt zentriert + responsive */
-            .hero-video-content {
-                text-align: center;
-                padding: 1rem;
-                margin-top: -40vh;
-            }
-
-            .hero-video-content h1 {
-                font-size: 1.5rem;
-                line-height: 1.3;
-            }
-
-            .hero-video-content p {
-                font-size: 0.9rem;
-                margin-bottom: 1rem;
-            }
-
-
-  
-
-            .cta-btn {
-                font-size: 0.8rem;
-                padding: 0.6rem 1.2rem;
-            }
-
-
-        }
-
-
-        @media (max-width: 320px) {
-
-            /* HERO: Text & Button mittig */
-            .hero-video-content {
-                margin-top: -15vh;
-                padding: 1rem;
-                text-align: center;
-            }
-
-            .hero-video-content h1 {
-                font-size: 1.5rem;
-                line-height: 1.2;
-            }
-
-            .hero-video-content p {
-                font-size: 0.9rem;
-                margin: 0.8rem 0;
-            }
-
-            .cta-btn {
-                display: inline-block;
-                margin-top: 1rem;
-                padding: 0.6rem 1.2rem;
-                font-size: 0.8rem;
-            }
-
-        }
-
-
-        @media (orientation: landscape) and (max-height: 500px) {
-    /* ✅ Header (Logo + Nav nebeneinander) */
-    header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 3vw;
-        gap: 0;
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <style>
+    :root {
+      --primary: #ff6600;
+      --secondary: #ff944d;
+      --bg: #0b0b0b;
+      --text: #ffffff;
+      --muted: #999;
+      --container-width: 1200px;
     }
 
-    .logo {
-        font-size: 1.4rem;
-    }
-
-    nav {
-        display: flex;
-        flex-direction: row;
-        gap: 1rem;
-        flex-wrap: nowrap;
-        justify-content: flex-end;
-    }
-
-    nav a {
-        font-size: 0.9rem;
-        white-space: nowrap;
-    }
-
-    /* ✅ Hero Content darunter – kompakter */
-    .hero-video-content {
-        margin-top: -25vh;
-        padding: 1rem 2rem;
-        max-width: 90%;
-        text-align: center;
-    }
-
-    .hero-video-content h1 {
-        font-size: 2rem;
-        line-height: 1.2;
-    }
-
-    .hero-video-content p {
-        font-size: 1rem;
-        margin: 0.8rem 0;
-    }
-
-    .cta-btn {
-        font-size: 0.85rem;
-        padding: 0.6rem 1.2rem;
-    }
-
-    /* ✅ Video bleibt Hintergrund */
-    .video-background {
-        top: 50%;
-        transform: translate(-50%, -40%);
-        height: auto;
-        min-height: 100%;
-    }
-}
-   
-@media (orientation: landscape) and (max-height: 300px) {
-    header {
-        padding: 0.5rem 3vw;
-    }
-
-    .logo {
-        font-size: 1.2rem;
-    }
-
-    nav a {
-        font-size: 0.75rem;
-        padding: 0.2rem;
-    }
-
-    .hero-video-content {
-        margin-top: -15vh;
-        padding: 0.5rem 1rem;
-        max-width: 100%;
-    }
-
-    .hero-video-content h1 {
-        font-size: 1.2rem;
-        line-height: 1.1;
-    }
-
-    .hero-video-content p {
-        font-size: 0.75rem;
-        margin: 0.5rem 0;
-    }
-
-    .cta-btn {
-        font-size: 0.7rem;
-        padding: 0.4rem 0.8rem;
-    }
-
-    .video-background {
-        top: 50%;
-        transform: translate(-50%, -40%);
-        height: auto;
-        min-height: 100%;
-    }
-}
-
-@media (orientation: landscape) and (max-height: 200px) {
-    header {
-        padding: 0.3rem 2vw;
-    }
-
-    .logo {
-        font-size: 1rem;
-    }
-
-    nav a {
-        font-size: 0.65rem;
-        padding: 0.1rem;
-    }
-
-    .hero-video-content {
-        margin-top: -10vh;
-        padding: 0.3rem 0.8rem;
-        max-width: 100%;
-    }
-
-    .hero-video-content h1 {
-        font-size: 1rem;
-        line-height: 1.1;
-    }
-
-    .hero-video-content p {
-        font-size: 0.65rem;
-        margin: 0.4rem 0;
-    }
-
-    .cta-btn {
-        font-size: 0.6rem;
-        padding: 0.3rem 0.6rem;
-    }
-
-    .video-background {
-        top: 50%;
-        transform: translate(-50%, -40%);
-        height: auto;
-        min-height: 100%;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     html, body {
-        min-height: 100vh;
-        overflow-y: auto;
+      font-family: 'Inter', sans-serif;
+      background: white;
+      color: var(--text);
+      scroll-behavior: smooth;
     }
-}
 
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: 0.3s;
+    }
 
+    /* Typo und Titel */
+    h1, h2, h3, h4 {
+      font-weight: 900;
+    }
 
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
 
-  
+    /* Navigation */
+    header {
+      width: 100%;
+      padding: 2rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #222;
+      position: relative;
+      z-index: 10;
+    }
 
-.card-glow {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(130deg, rgba(255, 102, 0, 0.2), transparent);
-  animation: pulseCard 5s infinite ease-in-out;
-  z-index: 0;
-  pointer-events: none;
-}
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
 
-@keyframes pulseCard {
-  0%, 100% { opacity: 0.1; }
-  50% { opacity: 0.3; }
-}
+    nav a {
+      margin-left: 2rem;
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--muted);
+    }
 
-.card-content {
-  position: relative;
-  z-index: 2;
-}
+    nav a:hover {
+      color: var(--primary);
+    }
 
-.card-content h3 {
-  color: var(--primary);
-  margin-top: 4rem;
-}
+    .burger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 18px;
+      cursor: pointer;
+      z-index: 20;
+    }
 
-.price {
-  display: block;
-  margin-top: 1.5rem;
-  color: var(--secondary);
-  font-weight: bold;
-}
-.card-content .price {
-  margin-top: 1.2rem;
-  padding: 0.4rem 0.8rem;
-  background: var(--secondary);
-  color: #111;
-  font-weight: 700;
-  font-size: 0.9rem;
-  border-radius: 6px;
-  display: inline-block;
-  box-shadow: 0 0 6px rgba(255, 102, 0, 0.2);
-}
+    .burger span {
+      display: block;
+      height: 3px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
 
+    .burger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
 
-.tab-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
-}
+    .burger.active span:nth-child(2) {
+      opacity: 0;
+    }
 
-.tab-btn {
+    .burger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+    .burger-icon {
   background: none;
-  border: 2px solid var(--primary);
-  color: var(--primary);
-  padding: 0.7rem 1.5rem;
-  border-radius: 8px;
+  border: none;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  display: none; /* wird via Media Query eingeblendet */
+  z-index: 20;
 }
 
-.tab-btn.active,
-.tab-btn:hover {
-  background: var(--primary);
-  color: #000;
+.burger-icon i {
+  width: 32px;
+  height: 32px;
+  stroke: #000;
 }
-
-.tab-content {
-  display: none;
-  animation: fadeIn 0.6s ease-in-out;
-}
-
-.tab-content.active {
-  display: block;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-
-
-
-
-.glow-btn {
-  background: transparent;
-  border: 2px solid var(--primary, #ff6600);
-  color: var(--primary, #ff6600);
-  font-size: 1.8rem;
-  padding: 0.7rem 1.1rem;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 0 8px rgba(255, 102, 0, 0.4);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.glow-btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle, rgba(255, 102, 0, 0.3), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: -1;
-  border-radius: 50%;
-}
-
-.glow-btn:hover {
-  background: var(--primary, #ff6600);
-  color: #000;
-  box-shadow: 0 0 18px rgba(255, 102, 0, 0.6);
-}
-
-.glow-btn:hover::after {
-  opacity: 1;
-}
-
-
-/* Weicher Übergang */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-
-.fusion-cases {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 3rem;
-}
-
-.fusion-case {
-  position: relative;
-  width: 320px;
-  overflow: hidden;
-  border-radius: 16px;
-  cursor: pointer;
-  transition: transform 0.4s ease;
-  background: #111;
-  box-shadow: 0 0 20px rgba(255, 102, 0, 0.2);
-}
-
-.fusion-case:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 40px rgba(255, 102, 0, 0.3);
-}
-
-.fusion-case video,
-.fusion-case img {
-  width: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.fusion-caption {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0,0,0,0.65);
-  backdrop-filter: blur(6px);
-  padding: 1rem;
-  text-align: center;
-}
-
-.fusion-caption h4 {
-  font-size: 1.1rem;
-  color: var(--primary);
-  margin-bottom: 0.3rem;
-  font-weight: 800;
-}
-
-.fusion-caption span {
-  font-size: 0.9rem;
-  color: #aaa;
-}
-
-/* 🔥 Glow Effect */
-.fusion-glow {
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  background: radial-gradient(ellipse at center, rgba(255,102,0,0.12), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  z-index: 1;
-}
-.fusion-case:hover .fusion-glow {
-  opacity: 1;
-}
-
-/* 📦 Lightbox */
-.fusion-lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(10,10,10,0.95);
-  backdrop-filter: blur(8px);
-  z-index: 999;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-}
-
-.fusion-lightbox-content {
-  max-width: 900px;
-  width: 100%;
-  background: #111;
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 0 32px rgba(255,102,0,0.3);
-  position: relative;
-  animation: fadeIn 0.5s ease;
-}
-
-.fusion-lightbox-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1.8rem;
-  cursor: pointer;
-  color: var(--secondary);
-  font-weight: bold;
-}
-
-.fusion-lightbox-media video,
-.fusion-lightbox-media img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-}
-
-.fusion-lightbox-text {
-  text-align: center;
-}
-
-.fusion-lightbox-text h3 {
-  color: var(--primary);
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
-  font-weight: 900;
-  text-shadow: 0 0 8px rgba(255, 102, 0, 0.3);
-}
-
-.fusion-lightbox-text p {
-  color: #ccc;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.96); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-@media (min-width: 1920px) {
-  .container {
-    max-width: 1600px;
-    padding: 6rem 4rem;
-  }
-
-  .hero-video-content h1 {
-    font-size: 4.5rem;
-  }
-
-  .hero-video-content p {
-    font-size: 1.5rem;
-  }
-
-  .cta-btn,
-  .neon-btn {
-    font-size: 1.2rem;
-    padding: 1.2rem 2.8rem;
-  }
-
-
-
-  .card-content h3 {
-    font-size: 2rem;
-  }
-
-  .card-content p {
-    font-size: 1.2rem;
-  }
-
-  .split-left .feature {
-    padding: 2.5rem;
-  }
-
-  .text-card {
-    padding: 4rem;
-  }
-
-  .text-card h3 {
-    font-size: 2.4rem;
-  }
-
-  .fusion-case {
-    width: 360px;
-  }
-
-  .footer-grid {
-    max-width: 1600px;
-    gap: 3rem;
-  }
-
-  .footer-bottom {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 1024px) {
-  .container {
-    padding: 3rem 1.5rem;
-  }
-
-  header {
-    padding: 1.5rem 4vw;
-  }
-
-  nav a {
-    font-size: 0.95rem;
-    margin-left: 1.2rem;
-  }
-
-  .hero-video-content h1 {
-    font-size: 2.5rem;
-  }
-
-  .hero-video-content p {
-    font-size: 1rem;
-  }
-
-
-  .card-content h3 {
-    font-size: 1.3rem;
-  }
-
-  .card-content p {
-    font-size: 1rem;
-  }
-
-  .split-wrapper {
-    flex-direction: column;
-  }
-
-  .split-left, .split-right {
-    width: 100%;
-    position: relative;
-    top: auto;
-  }
-
-  .fusion-case {
-    width: 48%;
-  }
-
-  .text-card {
-    padding: 2rem;
-    text-align: center;
-  }
-
-  .text-card h3 {
-    font-size: 1.6rem;
-  }
-
-  .video-side {
-    justify-content: center;
-  }
-
-  .video-side video {
-    max-width: 90%;
-  }
-}
-
 @media (max-width: 768px) {
-
-  .split-wrapper {
-    flex-direction: column;
+  .burger-icon {
+    display: block;
   }
 
-  .stack-img {
-    max-width: 90%;
-    margin: 0 auto;
-    margin-top: -21rem;
-    opacity: 1;
-  }
-
-  .stack-img.active {
-    transform: scale(1.03);
-  }
-
-  .fusion-case {
-    width: 90%;
-  }
-
-  .tab-buttons {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .text-card {
-    width: 100%;
-    padding: 2rem 1rem;
-  }
-
-  .video-side {
-    display: none; /* Optional: für kleine Geräte nur Text zeigen */
-  }
-
-  .tab-btn {
-    width: 100%;
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-
-  .stack-img {
-    max-width: 90%;
-    margin: 0 auto;
-    margin-top: -10rem;
-    opacity: 1;
-  }
-
-
-
-  .card-content .price {
-    font-size: 0.85rem;
-  }
-
-  .fusion-caption h4 {
-    font-size: 1rem;
-  }
-
-  .fusion-caption span {
-    font-size: 0.85rem;
-  }
-
-
-  .feature h3 {
-    font-size: 1.2rem;
-  }
-
-  .feature p {
-    font-size: 1rem;
-  }
-
-  .tab-buttons {
-    gap: 0.6rem;
-  }
-}
-
-
-@media (max-width: 320px) {
-  .stack-img {
-    max-width: 90%;
-    margin: 0 auto;
-    margin-top: -7rem;
-    opacity: 1;
-  }
-}
-
-@media screen and (orientation: landscape) and (max-width: 812px) and (max-height: 500px) {
-  .hero-video-content h1 {
-    font-size: 1.6rem;
-    line-height: 1.2;
-  }
-
-  .hero-video-content p {
-    font-size: 0.9rem;
-    margin-bottom: 0.8rem;
-  }
-
-  .cta-btn {
-    font-size: 0.75rem;
-    padding: 0.5rem 1rem;
-  }
-
-
-  .card-content h3 {
-    font-size: 1.2rem;
-  }
-
-  .card-content p {
-    font-size: 0.9rem;
-  }
-
-  .tab-buttons {
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .stacked-image-wrapper {
-    display: none;
-  }
-
-  .text-card {
-    width: 100%;
-    padding: 2rem 1rem;
-    text-align: center;
-  }
-
-  .video-side {
-    display: none;
-  }
-
-  header {
-    padding: 0.8rem 4vw;
-  }
-
-  .logo {
-    font-size: 1.3rem;
-  }
-
- nav {
+  nav {
     display: none;
     position: absolute;
     top: 100%;
     right: 0;
-    background: #111;
+    background: #fff;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
     padding: 1rem;
-    gap: 1rem;
-    border-left: 1px solid #222;
-    border-bottom: 1px solid #222;
-    z-index: 9;
+    width: 100%;
+    border-top: 1px solid #ddd;
+    z-index: 10;
   }
 
   nav.open {
@@ -1241,312 +145,606 @@ text-align: center;
   }
 
   nav a {
-    font-size: 0.9rem;
-    white-space: nowrap;
-    margin: 0;
-    color: var(--text);
-  }
-  .fusion-case {
-    width: 48%;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  .footer-socials-icons {
-    gap: 0.5rem;
-  }
-
-  .footer-socials img {
-    width: 22px;
-    height: 22px;
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    color: #111;
   }
 }
 
-.pricing-clean {
-  padding: 6rem 2rem;
-  background: #ffffff;
-  text-align: center;
-  color: #111;
-}
 
-.pricing-title {
-  font-size: 2.4rem;
-  font-weight: 900;
-  margin-bottom: 0.8rem;
-}
+    @media (max-width: 480px) {
+      .burger {
+        display: flex;
+      }
 
-.pricing-subline {
-  font-size: 1.1rem;
-  color: #666;
-  margin-bottom: 4rem;
-}
+      nav {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #ffffffe1;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        display: none;
+        gap: 1rem;
+        border-left: 1px solid #222;
+        border-bottom: 1px solid #222;
+      }
 
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem;
+      nav.open {
+        display: flex;
+      }
+
+      nav a {
+        margin: 0;
+        font-size: 1rem;
+        color: black;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Fusion³</div>
+    <button class="burger-icon" id="burgerToggle" aria-label="Menü öffnen">
+      <i data-feather="menu"></i>
+    </button>
+    
+    <nav>
+      <a href="#leistungen">Leistungen</a>
+      <a href="#ueber-uns">Über uns</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <section class="hero-video-wrapper">
+    <div class="hero-video-content">
+      <h1>UX & Webdesign,<br>das Nutzer begeistert</h1>
+      <p>Wir konzipieren digitale Erlebnisse. <br>maßgeschneidert und klickbar.</p>
+      <a class="cta-btn neon-btn" href="#kontakt"><span>🚀 Projekt anfragen</span></a>
+    </div>
+    <video class="video-background" autoplay muted loop playsinline>
+      <source src="./WebdesignPic/1.mkv" type="video/mp4" />
+    </video>
+  </section>
+
+  <style>
+   
+   .hero-video-wrapper {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
-.pricing-card {
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 16px;
-  padding: 2.5rem 1.8rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
-  transition: all 0.3s ease;
-  text-align: left;
-}
-
-.pricing-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
-}
-
-.pricing-card h3 {
-  font-size: 1.6rem;
-  font-weight: 800;
-  margin-bottom: 0.4rem;
-}
-
-.pricing-card .tagline {
-  font-size: 1rem;
-  color: #888;
-  margin-bottom: 1rem;
-  font-weight: 500;
-}
-
-.pricing-card ul {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 1.5rem;
-}
-
-.pricing-card ul li {
-  margin-bottom: 0.5rem;
-  font-size: 0.95rem;
-  color: #333;
-}
-
-.pricing-card .vorteil {
-  font-size: 0.95rem;
-  color: #555;
-  margin-bottom: 1.5rem;
-  font-style: italic;
-}
-
-.preis {
-  font-size: 1.1rem;
-  font-weight: 700;
+.hero-video-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  max-width: 800px;
+  width: 100%;
   color: #000;
-  background: #f2f2f2;
-  display: inline-block;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
+  background: none;
+  border-radius: 10px;
+  text-align: center;
+  top: 10vh;
 }
 
-.highlight {
-  border: 2px solid #111;
-  background: #f9f9f9;
-}
-/* Preis-Toggle Button */
-.preis-toggle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 2rem;
-  gap: 1rem;
-  font-weight: 600;
-  color: var(--primary);
-}
-
-#preisModus {
-  background: var(--secondary);
-  border: none;
-  color: #111;
-  font-weight: bold;
-  padding: 0.5rem 1.2rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-#preisModus:hover {
-  background: var(--primary);
-  color: #fff;
-}
-
-/* Feather Icons */
-.icon-wrap {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-
-.icon-wrap i {
-  stroke: #fff;
-  width: 24px;
-  height: 24px;
-}
-
-.pricing-card:hover .icon-wrap {
-  transform: scale(1.1);
-  box-shadow: 0 0 12px rgba(255, 102, 0, 0.3);
-}
-
-/* Preise stilvoller */
-.preis {
-  background: var(--secondary);
-  color: #111;
-  font-weight: bold;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  display: inline-block;
-  font-size: 1rem;
-  margin-top: 1rem;
-  box-shadow: 0 0 12px rgba(255, 148, 77, 0.3);
+    .video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 1;
+  pointer-events: none;
 }
 
 
-@media (max-width: 768px) {
-  .pricing-card {
-    padding: 2rem 1.2rem;
+    
+
+    .hero-video-content h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+    }
+
+    .hero-video-content p {
+      font-size: 1.2rem;
+      color: #000000;
+      margin: 0.5rem 0;
+      font-weight: 600;
+    }
+
+    .cta-btn {
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+      background: var(--primary);
+      color: #000;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 1rem;
+    }
+
+    .neon-btn {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: none;
+      color: #fff;
+      padding: 1rem 2.2rem;
+      font-size: 1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(255, 102, 0, 0.4),
+                  0 0 24px rgba(255, 102, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .neon-btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      box-shadow: 0 0 16px rgba(255, 102, 0, 0.6),
+                  0 0 36px rgba(255, 102, 0, 0.4);
+    }
+  </style>
+<script>
+  feather.replace();
+
+  const burgerToggle = document.getElementById('burgerToggle');
+  const nav = document.querySelector('nav');
+
+  burgerToggle.addEventListener('click', () => {
+    nav.classList.toggle('open');
+  });
+</script>
+
+
+<section class="pricing-clean container" id="pakete">
+  <h2 class="pricing-title">Unsere Pakete – Klar. Skalierbar. Auf den Punkt.</h2>
+  <p class="pricing-subline">Von der Onepager-Visitenkarte bis zur vollumfänglichen Business-Website.</p>
+
+  <!-- Toggle: Netto / Brutto -->
+  <div class="preis-toggle">
+    <label for="preisModus">Preis anzeigen in:</label>
+    <button id="preisModus" onclick="togglePreise()">Netto</button>
+  </div>
+
+  <div class="pricing-grid">
+    <!-- Starter -->
+    <div class="pricing-card">
+      <div class="icon-wrap"><i data-feather="zap"></i></div>
+      <h3>Starter-Paket</h3>
+      <p class="tagline">Ein klarer erster Eindruck</p>
+      <ul>
+        <li>✓ Einzigartige Titelseite</li>
+        <li>✓ Responsive Design</li>
+        <li>✓ 1 Korrekturschleife</li>
+      </ul>
+      <p class="vorteil">Schnelle Umsetzung mit Fokus auf den ersten Online-Auftritt</p>
+      <div class="preis" data-netto="699" data-brutto="831.81">ab 699 € <span>zzgl. MwSt.</span></div>
+    </div>
+
+    <!-- Business -->
+    <div class="pricing-card">
+      <div class="icon-wrap"><i data-feather="layers"></i></div>
+      <h3>Business-Paket</h3>
+      <p class="tagline">Mehrseitige Online-Präsenz</p>
+      <ul>
+        <li>✓ Titelseite + bis zu 4 Unterseiten</li>
+        <li>✓ Kontaktformular & Basis-SEO</li>
+        <li>✓ 2 Korrekturschleifen</li>
+      </ul>
+      <p class="vorteil">Professionelle Darstellung für mehrere Inhalte</p>
+      <div class="preis" data-netto="1290" data-brutto="1535.10">ab 1.290 € <span>zzgl. MwSt.</span></div>
+    </div>
+
+    <!-- Professional -->
+    <div class="pricing-card">
+      <div class="icon-wrap"><i data-feather="briefcase"></i></div>
+      <h3>Professional-Paket</h3>
+      <p class="tagline">Komplettlösung für den Business-Auftritt</p>
+      <ul>
+        <li>✓ Bis zu 10 Seiten</li>
+        <li>✓ Individuelles UX-Design</li>
+        <li>✓ 3 Korrekturschleifen</li>
+        <li>✓ Erweiterte SEO & CMS</li>
+      </ul>
+      <p class="vorteil">Design & Funktionalität perfekt abgestimmt</p>
+      <div class="preis" data-netto="2290" data-brutto="2725.10">ab 2.290 € <span>zzgl. MwSt.</span></div>
+    </div>
+
+    <!-- Premium -->
+    <div class="pricing-card highlight">
+      <div class="icon-wrap"><i data-feather="star"></i></div>
+      <h3>Premium-Paket</h3>
+      <p class="tagline">Rundum-sorglos für den Großauftritt</p>
+      <ul>
+        <li>✓ Unbegrenzte Seitenzahl</li>
+        <li>✓ Premium-Design & Animationen</li>
+        <li>✓ ≥ 5 Korrekturschleifen</li>
+        <li>✓ SEO, CMS & E-Commerce</li>
+        <li>✓ Persönlicher Support & Wartung</li>
+      </ul>
+      <p class="vorteil">Maximale Flexibilität & Performance</p>
+      <div class="preis" data-netto="3990" data-brutto="4748.10">ab 3.990 € <span>zzgl. MwSt.</span></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing-clean {
+    background: #ffffff;
+    text-align: center;
+    color: #111;
   }
-}
+
+  .pricing-title {
+    font-size: 2.4rem;
+    font-weight: 900;
+    margin-bottom: 0.8rem;
+  }
+
+  .pricing-subline {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 4rem;
+  }
+
+  .preis-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  #preisModus {
+    background: var(--secondary);
+    border: none;
+    color: #111;
+    font-weight: bold;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #preisModus:hover {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  .pricing-card {
+    background: linear-gradient(135deg, #ffffff, #e6f0ff);
+    border: 1px solid #eee;
+    border-radius: 16px;
+    padding: 2.5rem 1.8rem;
+    text-align: left;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+  }
+
+  .pricing-card h3 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+  }
+
+  .pricing-card .tagline {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .pricing-card ul li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    color: #333;
+  }
+
+  .pricing-card .vorteil {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .preis {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000;
+    background: #f2f2f2;
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    background: var(--secondary);
+    color: #111;
+    box-shadow: 0 0 12px rgba(255, 148, 77, 0.3);
+  }
+
+  .highlight {
+    border: 2px solid #111;
+    background: linear-gradient(135deg, #ffffff, #ffe2bd);
+  }
+
+  .icon-wrap {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .icon-wrap i {
+    stroke: #fff;
+    width: 24px;
+    height: 24px;
+  }
+</style>
+
+<script>
+  let bruttoAktiv = false;
+  function togglePreise() {
+    bruttoAktiv = !bruttoAktiv;
+    const prices = document.querySelectorAll('.preis');
+    prices.forEach(p => {
+      const netto = parseFloat(p.dataset.netto);
+      const brutto = parseFloat(p.dataset.brutto);
+      p.innerHTML = bruttoAktiv
+        ? `ab ${brutto.toLocaleString("de-DE")} € <span>inkl. MwSt.</span>`
+        : `ab ${netto.toLocaleString("de-DE")} € <span>zzgl. MwSt.</span>`;
+    });
+    document.getElementById('preisModus').textContent = bruttoAktiv ? '🧾 Brutto' : '💼 Netto';
+  }
+</script>
 
 
-.about-agency {
-  background: #fff;
-  color: #111;
-  padding: 6rem 2rem;
+<section class="about-agency container" id="ueber-uns">
+  <h2 class="about-title">Über uns</h2>
+  <p class="about-subline">Digitale Exzellenz mit Strategie, Herz & Verstand.</p>
+
+  <div class="about-grid">
+    <!-- Vision -->
+    <div class="about-block">
+      <div class="about-icon"><i data-feather="target"></i></div>
+      <h3>Klare Vision, <br> messbare Resultate</h3>
+      <p>Wir verwandeln Ihre Ideen in digitale Erlebnisse, die nicht nur ästhetisch überzeugen, sondern auch echten Business-Mehrwert liefern. Mit einer Arbeitsweise, die von Empathie zur zielgerichteten Strategie führt, sorgen wir dafür, dass Ihr Online-Auftritt präzise, skalierbar und erfolgsorientiert umgesetzt wird – genau wie unsere flexiblen Pakete.</p>
+    </div>
+
+    <!-- Team -->
+    <div class="about-block">
+      <div class="about-icon"><i data-feather="users"></i></div>
+      <h3>Das Herz unseres Erfolgs: Unser Team</h3>
+      <p>Unser interdisziplinäres Team aus UX-Designern, Entwicklern und Strategen arbeitet lean, innovativ und mit ungebrochener Leidenschaft. Gemeinsam gestalten wir digitale Erlebnisse, die Ihre Marke nachhaltig stärken und Ihre Zielgruppe fesseln.</p>
+    </div>
+
+    <!-- Prozess -->
+    <div class="about-block">
+      <div class="about-icon"><i data-feather="repeat"></i></div>
+      <h3>Unser erprobter Prozess <br> Schritt für Schritt zum Erfolg</h3>
+      <p>Von der ersten Recherche über Konzeption und Prototyping bis hin zu Testing und Rollout: Unser iterativer, datenbasierter Prozess stellt sicher, dass jedes Projekt passgenau auf Ihre Bedürfnisse zugeschnitten wird. So garantieren wir kontinuierlichen Fortschritt und messbare Wirkung.</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="about-block highlight-cta">
+      <div class="about-icon"><i data-feather="send"></i></div>
+      <h3>Bereit, durchzustarten?</h3>
+      <p><strong>Lassen Sie uns gemeinsam Ihre digitale Erfolgsgeschichte schreiben.</strong><br>Mit unseren strukturierten Lösungen und flexiblen Paketen holen Sie das Maximum aus Ihrem Online-Auftritt heraus – für mehr Sichtbarkeit, begeisterte Nutzer und messbare Ergebnisse.</p>
+      <a href="#kontakt" class="cta-btn neon-btn">Jetzt Kontakt aufnehmen</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-agency {
+    background: #fff;
+    color: #111;
+    text-align: center;
+  }
+
+  .about-title {
+    font-size: 2.6rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+  }
+
+  .about-subline {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 4rem;
+    font-weight: 400;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+  }
+
+  .about-block {
+    background: linear-gradient(135deg, #ffffff, #e0e0e0);
+    border-radius: 16px;
+    padding: 2.5rem;
+    border: 1px solid #eee;
+    text-align: left;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 transparent;
+  }
+
+  .about-block:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+    border-color: var(--primary);
+  }
+
+  .about-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+  }
+
+  .about-icon i {
+    width: 24px;
+    height: 24px;
+    stroke: #fff;
+  }
+
+  .about-block h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #222;
+    margin-bottom: 0.8rem;
+  }
+
+  .about-block p {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
+  }
+
+  .highlight-cta {
+    background: #fef6f0;
+    box-shadow: 0 0 12px rgba(255, 148, 77, 0.1);
+  }
+</style>
+
+<section class="case-studies container" id="case-studies">
+  <!-- Hintergrundvideo -->
+  <video class="cs-video-bg" autoplay muted loop playsinline>
+    <source src="./WebdesignPic/1.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Verlauf über dem Video -->
+  <div class="cs-overlay-gradient"></div>
+
+  <!-- Content -->
+  <h2 class="cs-title">Case Studies</h2>
+  <p class="cs-subline">UX-Projekte mit Impact – visuell & funktional überzeugend.</p>
+
+  <div class="cs-grid">
+    <!-- Case 1 -->
+    <div class="cs-card" data-aos>
+      <div class="cs-icon"><i data-feather="monitor"></i></div>
+      <h3>Website Relaunch: TechStartup</h3>
+      <p>UX-Analyse, Re-Design, SEO-Boost</p>
+      <div class="cs-overlay">
+        <p><strong>Ergebnis:</strong> +65% Verweildauer · Mobile Optimierung · Performance Boost</p>
+      </div>
+    </div>
+
+    <!-- Case 2 -->
+    <div class="cs-card" data-aos>
+      <div class="cs-icon"><i data-feather="trending-up"></i></div>
+      <h3>E-Commerce Optimierung</h3>
+      <p>Conversion-Rate +37 % nach Redesign</p>
+      <div class="cs-overlay">
+        <p><strong>Strategie:</strong> UX-Audit · Redesign Checkout · A/B Testing</p>
+      </div>
+    </div>
+  </div>
+</section>
+<style>.case-studies {
+  position: relative;
   text-align: center;
+  color: #000;
+  overflow: hidden;
+  z-index: 1;
 }
 
-.about-title {
-  font-size: 2.6rem;
-  font-weight: 900;
-  margin-bottom: 0.5rem;
+.cs-video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.25;
+  pointer-events: none;
 }
 
-.about-subline {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 4rem;
-  font-weight: 400;
-  text-align: center;
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 3rem;
-  margin-bottom: 3rem;
-}
-
-.about-block {
-  background: #f9f9f9;
-  border-radius: 16px;
-  padding: 2.5rem;
-  border: 1px solid #eee;
-  text-align: left;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 0 transparent;
-}
-
-.about-block:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
-  border-color: var(--primary);
-}
-
-.about-icon {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.2rem;
-}
-
-.about-icon i {
-  width: 24px;
-  height: 24px;
-  stroke: #fff;
-}
-
-.about-block h3 {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: #222;
-  text-align: left;
-  margin-bottom: 0.8rem;
-}
-
-.about-block p {
-  font-size: 1rem;
-  color: #444;
-  line-height: 1.6;
-}
-
-.about-cta {
-  background: #fef6f0;
-  padding: 3rem 2rem;
-  border-radius: 16px;
-  box-shadow: 0 0 12px rgba(255, 148, 77, 0.1);
-}
-
-.about-cta p {
-  font-size: 1.1rem;
-  margin-bottom: 1.2rem;
-  color: #222;
-}
-
-.about-cta .cta-btn {
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-}
-
-.case-studies {
-  padding: 6rem 2rem;
-  background: #fff;
-  text-align: center;
+.cs-overlay-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), #fff);
+  z-index: 1;
 }
 
 .cs-title {
   font-size: 2.5rem;
   font-weight: 900;
   margin-bottom: 0.5rem;
-  color: #000000;
+  position: relative;
+  z-index: 2;
 }
 
 .cs-subline {
   font-size: 1.2rem;
   color: #666;
   margin-bottom: 3.5rem;
+  position: relative;
+  z-index: 2;
 }
 
 .cs-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+  position: relative;
+  z-index: 2;
 }
 
 .cs-card {
   position: relative;
   padding: 2.5rem 2rem;
-  background: #f9f9f9;
+  background: linear-gradient(135deg, #ffffff, #e6f0ff);
   border-radius: 18px;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
   border: 1px solid #eee;
@@ -1563,7 +761,7 @@ text-align: center;
 }
 
 .cs-icon {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: linear-gradient(135deg, white, #6fa9ff);
   width: 48px;
   height: 48px;
   border-radius: 12px;
@@ -1582,7 +780,7 @@ text-align: center;
 .cs-card h3 {
   font-size: 1.3rem;
   font-weight: 700;
-  color: var(--primary);
+  color: black;
   margin-bottom: 0.6rem;
 }
 
@@ -1590,6 +788,7 @@ text-align: center;
   font-size: 1rem;
   color: #444;
   line-height: 1.5;
+  text-align: center;
 }
 
 .cs-overlay {
@@ -1597,7 +796,7 @@ text-align: center;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(255, 102, 0, 0.92);
+  background: #c3d8ff;
   color: white;
   padding: 1.2rem;
   transform: translateY(100%);
@@ -1610,7 +809,6 @@ text-align: center;
   transform: translateY(0%);
 }
 
-/* AOS Animation Placeholders */
 [data-aos] {
   opacity: 0;
   transform: translateY(40px);
@@ -1622,694 +820,11 @@ text-align: center;
   transform: translateY(0);
 }
 
-.cta-section {
-  position: relative;
-  padding: 6rem 2rem;
-  background: #ffffff;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.cta-container {
-  max-width: 900px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 20px;
-  padding: 4rem 2rem;
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.06);
-  text-align: center;
-  position: relative;
-  transition: transform 0.6s ease, box-shadow 0.6s ease;
-  animation: fadeInCta 1.4s ease-out forwards;
-}
-
-@keyframes fadeInCta {
-  0% { opacity: 0; transform: translateY(50px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-.cta-container:hover {
-  transform: scale(1.01);
-  box-shadow: 0 8px 14px rgba(255, 102, 0, 0.12);
-  background: linear-gradient(135deg, #ffffff, #fff5ef);
-}
-
-.cta-heading {
-  font-size: 2.2rem;
-  font-weight: 900;
-  color: #111;
-  margin-bottom: 1rem;
-}
-
-.cta-subline {
-  font-size: 1.1rem;
-  color: #444;
-  margin-bottom: 2.5rem;
-  line-height: 1.6;
-}
-
-.cta-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: var(--primary);
-  color: #fff;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 0.95rem;
-  padding: 1rem 2rem;
-  border-radius: 10px;
-  box-shadow: 0 6px 10px rgba(255, 124, 37, 0.4);
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.cta-button:hover {
-  background: var(--secondary);
-  transform: scale(1.05);
-  color: #111;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-}
-
-.cta-button i {
-  transition: transform 0.3s ease, stroke 0.3s ease;
-}
-.cta-button:hover i {
-  transform: translateX(4px) scale(1.1);
-}
-
-
-
-.cta-button:hover i {
-  stroke: #111;
-}
-
-@media (max-width: 768px) {
-  .cta-heading {
-    font-size: 1.8rem;
-  }
-
-  .cta-subline {
-    font-size: 1rem;
-  }
-}
-
-.clean-process-guide {
-  background: #fff;
-  color: #111;
-  padding: 6rem 2rem;
-  font-family: 'Inter', sans-serif;
-}
-
-.process-timeline {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 2.5rem;
-  margin-top: 3rem;
-  justify-content: center;
-}
-
-.process-step {
-  background: #f9f9f9;
-  border-radius: 16px;
-  padding: 2.5rem 1.8rem;
-  position: relative;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
-  transition: all 0.3s ease;
-  text-align: center;
-  border: 1px solid #eee;
-  cursor: pointer;
-}
-
-.process-step:hover {
-  box-shadow: 0 10px 28px rgba(255,102,0,0.15);
-  transform: translateY(-5px);
-}
-
-.process-step i {
-  stroke: #ff6600;
-  width: 36px;
-  height: 36px;
-  margin-bottom: 1rem;
-}
-
-.process-step h4 {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: #222;
-  margin-bottom: 0.5rem;
-}
-
-.process-step p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.5;
-  min-height: 60px;
-}
-
-/* CTA */
-.cta-button {
-  background: #ff6600;
-  color: white;
-  padding: 1rem 2rem;
-  font-weight: 800;
-  font-size: 1rem;
-  border-radius: 10px;
-  display: inline-block;
-  margin-top: 1rem;
-  transition: 0.3s ease;
-}
-
-.cta-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 18px rgba(255, 102, 0, 0.3);
-  background: #ff944d;
-}
-
-.kontakt-clean {
-  background: #ffffff;
-  padding: 6rem 2rem;
-  text-align: center;
-  font-family: 'Inter', sans-serif;
-}
-
-.kontakt-title {
-  font-size: 2.6rem;
-  font-weight: 900;
-  color: #000000;
-  margin-bottom: 1rem;
-}
-
-.kontakt-subline {
-  font-size: 1.2rem;
-  color: #666;
-  line-height: 1.6;
-  max-width: 700px;
-  margin: 0 auto 3rem;
-}
-
-.kontakt-wrapper {
-  max-width: 80vw;
-  margin: 0 auto;
-}
-
-.kontakt-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-.kontakt-form input,
-.kontakt-form textarea {
-  padding: 1rem;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.8);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  transition: all 0.3s ease;
-}
-
-.kontakt-form input:focus,
-.kontakt-form textarea:focus {
-  border-color: #ff6600;
-  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
-  outline: none;
-  background: #fff;
-}
-
-.kontakt-btn {
-  background: #ff6600;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 700;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 14px rgba(255, 102, 0, 0.3);
-}
-
-.kontakt-btn:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
-  background: #ff944d;
-}
-
-.cta-modern {
-  position: relative;
-  width: 100%;
-  padding: 10vh 5vw;
-  background: #ffffff;
-  text-align: center;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.cta-modern .cta-bg {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 30%, rgba(0, 122, 255, 0.05), transparent 70%);
-  z-index: 0;
-}
-
-.cta-modern .cta-inner {
-  position: relative;
-  z-index: 2;
-  max-width: 70ch;
-  margin: 0 auto;
-  animation: fadeInCta 1.2s ease-out both;
-}
-
-.cta-headline {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 800;
-  color: #111;
-  margin-bottom: 1.2rem;
-  letter-spacing: -0.5px;
-}
-
-.cta-text {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #555;
-  margin-bottom: 2.2rem;
-  font-weight: 400;
-}
-
-.cta-action {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: #ffffff;
-  color: var(--secondary);
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 18px rgba(255, 115, 0, 0.2);
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-}
-
-.cta-action:hover {
-  transform: scale(1.05);
-  background: var(--secondary);
-  box-shadow: 0 6px 16px rgb(255, 151, 65);
-  color: #fff;
-}
-
-.cta-action i {
-  width: 20px;
-  height: 20px;
-  stroke: #fff;
-  transition: stroke 0.3s, transform 0.3s;
-}
-
-.cta-action:hover i {
-  transform: scale(1.1);
-  stroke: #eaf3ff;
-}
-
-@keyframes fadeInCta {
-  from {
-    opacity: 0;
-    transform: translateY(60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
 </style>
-
-<header>
-    <div class="logo">Fusion³</div>
-    <div class="burger" id="burger">
-      <span></span><span></span><span></span>
-    </div>
-    <nav>
-      <a href="#leistungen">Leistungen</a>
-      <a href="#ueber-uns">Über uns</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
-  </header>
-  
-  <section class="hero-video-wrapper">
-    <div class="hero-video-content">
-      <h1>UX & Webdesign,<br>das Nutzer begeistert</h1>
-      <p>Wir konzipieren digitale Erlebnisse – von der Idee bis zum klickbaren Prototyp.</p>
-      <a class="cta-btn neon-btn" href="#kontakt"><span>🚀 Projekt anfragen</span></a>
-    </div>
-  </section>
-  <video class="video-background" autoplay muted loop playsinline>
-    <source src="./WebdesignPic/1.mp4" type="video/mp4" />
-  </video>
-
-
-
-  <section class="pricing-clean container" id="pakete">
-    <h2 class="pricing-title">Unsere Pakete – Klar. Skalierbar. Auf den Punkt.</h2>
-    <p class="pricing-subline">Von der Onepager-Visitenkarte bis zur vollumfänglichen Business-Website.</p>
-  
-    <!-- Toggle: Netto / Brutto -->
-    <div class="preis-toggle">
-      <label for="preisModus">Preis anzeigen in:</label>
-      <button id="preisModus" onclick="togglePreise()">Netto</button>
-    </div>
-  
-    <div class="pricing-grid">
-  
-      <!-- Starter -->
-      <div class="pricing-card">
-        <div class="icon-wrap"><i data-feather="zap"></i></div>
-        <h3>Starter-Paket</h3>
-        <p class="tagline">Ein klarer erster Eindruck</p>
-        <ul>
-          <li>✓ Einzigartige Titelseite</li>
-          <li>✓ Responsive Design</li>
-          <li>✓ 1 Korrekturschleife</li>
-        </ul>
-        <p class="vorteil">Schnelle Umsetzung mit Fokus auf den ersten Online-Auftritt</p>
-        <div class="preis" data-netto="699" data-brutto="831.81">ab 699 € <span>zzgl. MwSt.</span></div>
-      </div>
-  
-      <!-- Business -->
-      <div class="pricing-card">
-        <div class="icon-wrap"><i data-feather="layers"></i></div>
-        <h3>Business-Paket</h3>
-        <p class="tagline">Mehrseitige Online-Präsenz</p>
-        <ul>
-          <li>✓ Titelseite + bis zu 4 Unterseiten</li>
-          <li>✓ Kontaktformular & Basis-SEO</li>
-          <li>✓ 2 Korrekturschleifen</li>
-        </ul>
-        <p class="vorteil">Professionelle Darstellung für mehrere Inhalte</p>
-        <div class="preis" data-netto="1290" data-brutto="1535.10">ab 1.290 € <span>zzgl. MwSt.</span></div>
-      </div>
-  
-      <!-- Professional -->
-      <div class="pricing-card">
-        <div class="icon-wrap"><i data-feather="briefcase"></i></div>
-        <h3>Professional-Paket</h3>
-        <p class="tagline">Komplettlösung für den Business-Auftritt</p>
-        <ul>
-          <li>✓ Bis zu 10 Seiten</li>
-          <li>✓ Individuelles UX-Design</li>
-          <li>✓ 3 Korrekturschleifen</li>
-          <li>✓ Erweiterte SEO & CMS</li>
-        </ul>
-        <p class="vorteil">Design & Funktionalität perfekt abgestimmt</p>
-        <div class="preis" data-netto="2290" data-brutto="2725.10">ab 2.290 € <span>zzgl. MwSt.</span></div>
-      </div>
-  
-      <!-- Premium -->
-      <div class="pricing-card highlight">
-        <div class="icon-wrap"><i data-feather="star"></i></div>
-        <h3>Premium-Paket</h3>
-        <p class="tagline">Rundum-sorglos für den Großauftritt</p>
-        <ul>
-          <li>✓ Unbegrenzte Seitenzahl</li>
-          <li>✓ Premium-Design & Animationen</li>
-          <li>✓ ≥ 5 Korrekturschleifen</li>
-          <li>✓ SEO, CMS & E-Commerce</li>
-          <li>✓ Persönlicher Support & Wartung</li>
-        </ul>
-        <p class="vorteil">Maximale Flexibilität & Performance</p>
-        <div class="preis" data-netto="3990" data-brutto="4748.10">ab 3.990 € <span>zzgl. MwSt.</span></div>
-      </div>
-  
-    </div>
-  </section>
-  
-  
-  
-
-  <section class="about-agency container" id="ueber-uns">
-    <h2 class="about-title">Über uns</h2>
-    <p class="about-subline">Digitale Exzellenz mit Strategie, Herz & Verstand.</p>
-  
-    <div class="about-grid">
-  
-      <!-- Vision -->
-      <div class="about-block">
-        <div class="about-icon"><i data-feather="target"></i></div>
-        <h3>Klare Vision, <br> messbare Resultate</h3>
-        <p>Wir verwandeln Ihre Ideen in digitale Erlebnisse, die nicht nur ästhetisch überzeugen, sondern auch echten Business-Mehrwert liefern. Mit einer Arbeitsweise, die von Empathie zur zielgerichteten Strategie führt, sorgen wir dafür, dass Ihr Online-Auftritt präzise, skalierbar und erfolgsorientiert umgesetzt wird – genau wie unsere flexiblen Pakete.</p>
-      </div>
-  
-      <!-- Team -->
-      <div class="about-block">
-        <div class="about-icon"><i data-feather="users"></i></div>
-        <h3>Das Herz unseres Erfolgs: Unser Team</h3>
-        <p>Unser interdisziplinäres Team aus UX-Designern, Entwicklern und Strategen arbeitet lean, innovativ und mit ungebrochener Leidenschaft. Gemeinsam gestalten wir digitale Erlebnisse, die Ihre Marke nachhaltig stärken und Ihre Zielgruppe fesseln.</p>
-      </div>
-  
-      <!-- Prozess -->
-      <div class="about-block">
-        <div class="about-icon"><i data-feather="repeat"></i></div>
-        <h3>Unser erprobter Prozess <br> Schritt für Schritt zum Erfolg</h3>
-        <p>Von der ersten Recherche über Konzeption und Prototyping bis hin zu Testing und Rollout: Unser iterativer, datenbasierter Prozess stellt sicher, dass jedes Projekt passgenau auf Ihre Bedürfnisse zugeschnitten wird. So garantieren wir kontinuierlichen Fortschritt und messbare Wirkung.</p>
-      </div>
-  
-   
-
-           
-      <div class="about-block highlight-cta">
-        <div class="about-icon"><i data-feather="send"></i></div>
-        <h3 style: text-align: left;>Bereit, durchzustarten?</h3>
-        <p><strong>Lassen Sie uns gemeinsam Ihre digitale Erfolgsgeschichte schreiben.</strong><br>Mit unseren strukturierten Lösungen und flexiblen Paketen holen Sie das Maximum aus Ihrem Online-Auftritt heraus – für mehr Sichtbarkeit, begeisterte Nutzer und messbare Ergebnisse.</p>
-        <a href="#kontakt" class="cta-btn neon-btn">Jetzt Kontakt aufnehmen</a>
-      </div>
-
-  </section>
-  
-  
-  <section class="case-studies container" id="case-studies">
-    <h2 class="cs-title">Case Studies</h2>
-    <p class="cs-subline">UX-Projekte mit Impact – visuell & funktional überzeugend.</p>
-  
-    <div class="cs-grid">
-      
-      <!-- Case 1 -->
-      <div class="cs-card" data-aos>
-        <div class="cs-icon"><i data-feather="monitor"></i></div>
-        <h3>Website Relaunch: TechStartup</h3>
-        <p>UX-Analyse, Re-Design, SEO-Boost</p>
-        <div class="cs-overlay">
-          <p><strong>Ergebnis:</strong> +65% Verweildauer · Mobile Optimierung · Performance Boost</p>
-        </div>
-      </div>
-  
-      <!-- Case 2 -->
-      <div class="cs-card" data-aos>
-        <div class="cs-icon"><i data-feather="trending-up"></i></div>
-        <h3>E-Commerce Optimierung</h3>
-        <p>Conversion-Rate +37 % nach Redesign</p>
-        <div class="cs-overlay">
-          <p><strong>Strategie:</strong> UX-Audit · Redesign Checkout · A/B Testing</p>
-        </div>
-      </div>
-  
-    </div>
-  </section>
-  
-
-  <section class="cta-modern" id="cta-modern">
-    <div class="cta-bg"></div>
-    <div class="cta-inner" data-aos="fade-up">
-      <h2 class="cta-headline">Jetzt durchstarten<br>Ihre digitale Zukunft beginnt hier.</h2>
-      <p class="cta-text">
-        Vereinbaren Sie eine kostenlose Erstberatung und erleben Sie, wie Ihre Marke digital glänzen kann.
-      </p>
-      <a href="#kontakt" class="cta-action">
-        <i data-feather="calendar"></i>
-        Termin vereinbaren
-      </a>
-    </div>
-  </section>
-  
-  <section class="clean-process-guide" id="prozess">
-    <div class="container">
-      <h2 class="about-title">Ihr Weg zum Online-Erfolg</h2>
-      <p class="about-subline">Ein intuitiver, animierter Zeitstrahl – angepasst an Ihr Wunschpaket.</p>
-  
-      <!-- Paketfilter -->
-      <div class="tab-buttons" id="paketTabs">
-        <button class="tab-btn active" data-paket="starter">Starter</button>
-        <button class="tab-btn" data-paket="business">Business</button>
-        <button class="tab-btn" data-paket="professional">Professional</button>
-        <button class="tab-btn" data-paket="premium">Premium</button>
-      </div>
-  
-      <!-- Zeitstrahl/Phasen -->
-      <div class="process-timeline">
-        <!-- Phase 1 -->
-        <div class="process-step" data-icon="calendar" data-title="Ideenfindung & Erstgespräch" data-starter="Ein schneller Kick-off, der den Grundstein legt." data-premium="Strategie-Session inkl. Markt- und Wettbewerbsanalyse." data-default="Unverbindliches Gespräch über Ziele & Wünsche."></div>
-        <!-- Phase 2 -->
-        <div class="process-step" data-icon="activity" data-title="Research & Konzept" data-business="Workshops & Zielgruppenabgleich." data-professional="Maßgeschneidertes UX-Konzept von Beginn an." data-default="Analyse & Wireframes auf Basis von Recherche."></div>
-        <!-- Phase 3 -->
-        <div class="process-step" data-icon="monitor" data-title="Design & Prototyping" data-starter="Schlichtes, wirkungsvolles Design." data.professional="Individuelles UX-Design mit interaktiven Elementen." data-premium="High-End Visuals mit Motion & Animation." data-default="Visuelle Umsetzung mit klickbarem Prototyp."></div>
-        <!-- Phase 4 -->
-        <div class="process-step" data-icon="repeat" data-title="Feedback & Korrekturen" data-starter="1 Korrekturschleife für den Feinschliff." data-premium="Iterationen + gezielte Optimierung." data-default="Feedback-Schleifen zur Verbesserung."></div>
-        <!-- Phase 5 -->
-        <div class="process-step" data-icon="globe" data-title="Finalisierung & Launch" data-premium="After-Launch-Support & Performancepflege." data-default="SEO, CMS & finaler Go-Live."></div>
-      </div>
-  
-      <!-- CTA 
-      <div class="cta-section white" style="margin-top:4rem;">
-        <div class="cta-container">
-          <h2 class="cta-heading">Bereit für den nächsten Schritt?</h2>
-          <p class="cta-subline">Vereinbare dein unverbindliches Erstgespräch.</p>
-          <a class="cta-button" onclick="openModal()">🚀 Kostenlose Erstberatung</a>
-        </div>
-      </div>
-    </div>
-  -->
-    
-    <!-- Modal: Paketinhalte -->
-    <div id="paketModal" class="fusion-lightbox">
-      <div class="fusion-lightbox-content">
-        <span class="fusion-lightbox-close" onclick="closeModal()">&times;</span>
-        <div class="fusion-lightbox-text">
-          <h3>Paketdetails im Überblick</h3>
-          <p><strong>Starter:</strong> 1 Seite, responsiv, 1 Korrekturschleife<br>
-            <strong>Business:</strong> 5 Seiten, Basis-SEO, 2 Korrekturen<br>
-            <strong>Professional:</strong> UX-Konzept, CMS, 10 Seiten<br>
-            <strong>Premium:</strong> Unbegrenzt, Animationen, E-Commerce & Support</p>
-        </div>
-      </div>
-    </div>
-
-  
-    <!-- Downloadbereich 
-    <div class="cta-section" style="margin-top:4rem;">
-      <div class="cta-container">
-        <h2 class="cta-heading">Noch mehr Einblick gefällig?</h2>
-        <p class="cta-subline">Lade unsere Infografiken oder Case-Studien zur Projektstruktur herunter.</p>
-        <a href="./assets/downloads/prozess-guide.pdf" class="cta-button" download>
-          <i data-feather="download"></i> Jetzt herunterladen
-        </a>
-      </div>
-    </div>  -->
-  </section>
-
-  
-
-
-
-  <section class="kontakt-clean" id="kontakt">
-    <div class="kontakt-wrapper">
-      <h2 class="kontakt-title">Lass uns loslegen!</h2>
-      <p class="kontakt-subline">
-        Eine starke Idee verdient ein starkes digitales Erlebnis. <br />
-        Erzähle uns von Deinem Projekt – wir bringen es gemeinsam auf das nächste Level.
-      </p>
-      
-      <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm">
-        <input type="text" name="name" placeholder="Name" required />
-        <input type="email" name="email" placeholder="E-Mail-Adresse" required />
-        <input type="text" name="subject" placeholder="Betreff" />
-        <textarea name="message" placeholder="Nachricht" rows="5" required></textarea>
-        <button type="submit" class="kontakt-btn">🚀 Jetzt Anfrage senden!</button>
-      </form>
-    </div>
-  </section>
-  
-  
-  
-  
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-logo">
-        <span>Fusion³</span>
-        <p>UX & Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
-      </div>
-  
-      <div class="footer-links">
-        <h4>Rechtliches</h4>
-        <ul>
-          <li><a href="/impressum.html">Impressum</a></li>
-          <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
-          <li><a href="/cookies.html">Cookie-Hinweis</a></li>
-        </ul>
-      </div>
-  
-      <div class="footer-contact">
-        <h4>Kontakt</h4>
-        <ul>
-          <li><a href="mailto:hello@fusion3.de">hello@fusion3.de</a></li>
-          <li>+49 123 4567890</li>
-          <li>Berlin, Deutschland</li>
-        </ul>
-      </div>
-  
-      <div class="footer-socials">
-        <h4>Social Media</h4>
-        <div class="footer-socials-icons">
-          <a href="mailto:hello@fusion3.de" title="E-Mail">
-            <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="E-Mail Icon" />
-          </a>
-          <a href="https://www.linkedin.com/" title="LinkedIn" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn Icon" />
-          </a>
-          <a href="https://wa.me/491234567890" title="WhatsApp schreiben" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon" />
-          </a>
-        </div>
-      </div>
-    </div>
-    <p class="footer-bottom">© 2025 Fusion³ – Alle Rechte vorbehalten. DSGVO-konform & barrierearm entwickelt.</p>
-  </footer>
-  
-  
-  <script src="https://unpkg.com/feather-icons"></script>
 <script>
   feather.replace();
 
-  let bruttoAktiv = false;
-  function togglePreise() {
-    bruttoAktiv = !bruttoAktiv;
-    const prices = document.querySelectorAll('.preis');
-    prices.forEach(p => {
-      const netto = parseFloat(p.dataset.netto);
-      const brutto = parseFloat(p.dataset.brutto);
-      p.innerHTML = bruttoAktiv
-        ? `ab ${brutto.toLocaleString("de-DE")} € <span>inkl. MwSt.</span>`
-        : `ab ${netto.toLocaleString("de-DE")} € <span>zzgl. MwSt.</span>`;
-    });
-    document.getElementById('preisModus').textContent = bruttoAktiv ? '🧾 Brutto' : '💼 Netto';
-  }
-</script>
-<script src="https://unpkg.com/feather-icons"></script>
-<script>
-  feather.replace();
-</script>
-<script src="https://unpkg.com/feather-icons"></script>
-<script>
-  feather.replace();
-
-  // Scroll-in animation (simpler AOS)
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('aos-animate');
-    });
-  });
-
-  document.querySelectorAll('[data-aos]').forEach(el => {
-    observer.observe(el);
-  });
-</script>
-<script src="https://unpkg.com/feather-icons"></script>
-<script>
-  feather.replace();
-
-  // Animate on Scroll
+  // Animate on scroll
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -2323,75 +838,427 @@ text-align: center;
   });
 </script>
 
+
+
+<section class="cta-modern" id="cta-modern">
+  <div class="cta-bg"></div>
+  <div class="cta-inner" data-aos="fade-up">
+    <h2 class="cta-headline">Jetzt durchstarten<br>Ihre digitale Zukunft beginnt hier.</h2>
+    <p class="cta-text">
+      Vereinbaren Sie eine kostenlose Erstberatung und erleben Sie, wie Ihre Marke digital glänzen kann.
+    </p>
+    <a href="#kontakt" class="cta-action">
+      <i data-feather="calendar"></i>
+      Termin vereinbaren
+    </a>
+  </div>
+</section>
+
 <style>
-  [data-aos] {
-    opacity: 0;
-    transform: translateY(60px);
-    transition: all 0.9s cubic-bezier(0.6, 0.05, 0.01, 0.99);
+  .cta-modern {
+    position: relative;
+    width: 100%;
+    padding: 10vh 5vw;
+    background: #ffffff;
+    text-align: center;
+    overflow: hidden;
+    isolation: isolate;
   }
-  [data-aos].aos-animate {
-    opacity: 1;
-    transform: translateY(0);
+
+  .cta-modern .cta-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, #f0f0f0, transparent 80%);
+    z-index: 0;
+  }
+
+  .cta-modern .cta-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 70ch;
+    margin: 0 auto;
+    animation: fadeInCta 1.2s ease-out both;
+  }
+
+  .cta-headline {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    color: #111;
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.5px;
+  }
+
+  .cta-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 2.2rem;
+    font-weight: 400;
+  }
+
+  .cta-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #ffffff;
+    color: var(--secondary);
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 18px rgba(255, 115, 0, 0.2);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .cta-action:hover {
+    transform: scale(1.05);
+    background: var(--secondary);
+    box-shadow: 0 6px 16px rgb(255, 151, 65);
+    color: #fff;
+  }
+
+  .cta-action i {
+    width: 20px;
+    height: 20px;
+    stroke: #fff;
+    transition: stroke 0.3s, transform 0.3s;
+  }
+
+  .cta-action:hover i {
+    transform: scale(1.1);
+    stroke: #eaf3ff;
+  }
+
+  @keyframes fadeInCta {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>
 
+
+
+<testimonial-slider></testimonial-slider>
+
 <script>
-  const paketBtns = document.querySelectorAll('.tab-btn');
-  const paketTexte = document.querySelectorAll('.paket-text');
+  class TestimonialSlider extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+    }
 
-  paketBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const selected = btn.dataset.paket;
-      paketBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      paketTexte.forEach(el => {
-        el.style.display = 'none';
-        if (el.classList.contains(selected)) {
-          el.style.display = 'inline';
+    connectedCallback() {
+      const testimonials = [
+        {
+          image: "https://randomuser.me/api/portraits/women/44.jpg",
+          name: "Sophie M., Creative Director",
+          quote: "Das 3D-Design hat unsere Produktpräsentation revolutioniert – professionell, kreativ, zuverlässig!",
+          stars: 5,
+          logo: ""
+        },
+        {
+          image: "https://randomuser.me/api/portraits/men/32.jpg",
+          name: "Mark T., Marketing Manager",
+          quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
+          stars: 5,
+          logo: ""
+        },
+        {
+          image: "https://randomuser.me/api/portraits/men/41.jpg",
+          name: "Daniel R., Startup-Gründer",
+          quote: "Schnell, hochwertig, visuell auf Top-Niveau. Gerne wieder für kommende Projekte!",
+          stars: 4,
+          logo: ""
         }
+      ];
+
+      const style = `
+        <style>
+          :host {
+            display: block;
+            padding: 5rem 1.5rem;
+            background: #fff;
+          }
+
+          h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #111;
+          }
+
+          .intro {
+            text-align: center;
+            font-size: 1.05rem;
+            color: #666;
+            margin: 0 auto 2.5rem;
+            max-width: 680px;
+            padding: 0 2.1rem;
+            line-height: 1.6;
+          }
+
+          .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 1.5rem;
+            padding-block: 1.5rem;
+            scroll-behavior: smooth;
+            align-items: stretch;
+          }
+
+          .carousel::before,
+          .carousel::after {
+            content: "";
+            flex: 0 0 calc(50% - 180px); /* entspricht Hälfte der Max-Kartenbreite */
+          }
+
+          .carousel::-webkit-scrollbar {
+            display: none;
+          }
+
+.card {
+  flex: 0 0 auto;
+  width: clamp(280px, 80vw, 360px);
+  background: linear-gradient(to bottom, #e6f0ff, #ffffff);
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  scroll-snap-align: center;
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.9);
+  animation: fadeInScale 0.8s ease forwards;
+  animation-delay: 0.2s;
+}
+
+
+
+
+          .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 2px solid #ff6600;
+          }
+
+          .stars {
+            color: #ffc107;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+          }
+
+          .quote {
+            font-style: italic;
+            color: #333;
+            margin: 1rem 0;
+            line-height: 1.5;
+          }
+
+          .author {
+            font-weight: 600;
+            color: #111;
+            font-size: 1rem;
+          }
+
+          .logo {
+            margin-top: 1rem;
+            height: 22px;
+            opacity: 0.6;
+            transition: 0.3s ease;
+          }
+
+          .logo:hover {
+            opacity: 1;
+          }
+        </style>
+      `;
+
+      const stars = (count) => "★".repeat(count) + "☆".repeat(5 - count);
+
+      const html = `
+        ${style}
+        <h2>Kundenstimmen</h2>
+        <p class="intro">Was unsere Kunden über die Zusammenarbeit sagen.</p>
+        <div class="carousel">
+          ${testimonials.map((t) => `
+            <div class="card">
+              <img src="${t.image}" class="avatar" alt="${t.name}">
+              <div class="stars">${stars(t.stars)}</div>
+              <p class="quote">„${t.quote}“</p>
+              <p class="author">${t.name}</p>
+              <img src="${t.logo}" class="logo" alt="Logo von Kunde">
+            </div>
+          `).join("")}
+        </div>
+      `;
+
+      this.shadowRoot.innerHTML = html;
+
+      const carousel = this.shadowRoot.querySelector('.carousel');
+      const cards = this.shadowRoot.querySelectorAll('.card');
+
+      const updateFade = () => {
+        const rect = carousel.getBoundingClientRect();
+        const center = rect.left + rect.width / 2;
+
+        cards.forEach(card => {
+          const cardRect = card.getBoundingClientRect();
+          const cardCenter = cardRect.left + cardRect.width / 2;
+          const distance = Math.abs(center - cardCenter);
+          const maxDistance = rect.width / 2;
+
+          const opacity = 1 - Math.min(distance / maxDistance, 1);
+          const scale = 1 + (0.05 * (1 - Math.min(distance / maxDistance, 1)));
+
+          card.style.opacity = opacity.toFixed(2);
+          card.style.transform = `scale(${scale.toFixed(2)})`;
+        });
+      };
+
+      function scrollToCard(index) {
+        const card = cards[index];
+        const carouselCenter = carousel.offsetWidth / 2;
+        const cardCenterOffset = card.offsetLeft + card.offsetWidth / 2;
+        const targetScrollLeft = cardCenterOffset - carouselCenter;
+
+        carousel.scrollTo({
+          left: targetScrollLeft,
+          behavior: "smooth"
+        });
+
+        updateFade();
+      }
+
+      let currentIndex = 0;
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          scrollToCard(0); // Erste Karte zentrieren
+          setInterval(() => {
+            currentIndex = (currentIndex + 1) % cards.length;
+            scrollToCard(currentIndex);
+          }, 4000);
+        });
       });
 
-      // Default fallback, wenn keine spezifische Variante gefunden wird
-      document.querySelectorAll('.paket-text.default').forEach(el => el.style.display = 'inline');
-    });
-  });
-</script>
-<script>
-  feather.replace();
-
-
-  const steps = document.querySelectorAll('.process-step');
-
-  paketBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const paket = btn.dataset.paket;
-
-      paketBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      steps.forEach(step => {
-        const content = step.dataset[paket] || step.dataset.default;
-        step.innerHTML = `
-          <i data-feather="${step.dataset.icon}"></i>
-          <h4>${step.dataset.title}</h4>
-          <p>${content}</p>
-        `;
-        feather.replace();
-      });
-    });
-  });
-
-  function openModal() {
-    document.getElementById('paketModal').style.display = 'flex';
-  }
-  function closeModal() {
-    document.getElementById('paketModal').style.display = 'none';
+      carousel.addEventListener("scroll", updateFade);
+    }
   }
 
-  // Initial trigger to fill content on load
-  paketBtns[0].click();
+  customElements.define("testimonial-slider", TestimonialSlider);
 </script>
+
+
+
+<section class="kontakt-clean" id="kontakt">
+  <div class="kontakt-wrapper">
+    <h2 class="kontakt-title">Lass uns loslegen!</h2>
+    <p class="kontakt-subline">
+      Eine starke Idee verdient ein starkes digitales Erlebnis. <br />
+      Erzähle uns von Deinem Projekt – wir bringen es gemeinsam auf das nächste Level.
+    </p>
+
+    <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm">
+      <input type="text" name="name" placeholder="Name" required />
+      <input type="email" name="email" placeholder="E-Mail-Adresse" required />
+      <input type="text" name="subject" placeholder="Betreff" />
+      <textarea name="message" placeholder="Nachricht" rows="5" required></textarea>
+      <button type="submit" class="kontakt-btn">🚀 Jetzt Anfrage senden!</button>
+    </form>
+  </div>
+</section>
+
+<style>
+  .kontakt-clean {
+    background: #ffffff;
+    padding: 6rem 2rem;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .kontakt-title {
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: #000000;
+    margin-bottom: 1rem;
+  }
+
+  .kontakt-subline {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+  }
+
+  .kontakt-wrapper {
+    max-width: 80vw;
+    margin: 0 auto;
+  }
+
+  .kontakt-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .kontakt-form input,
+  .kontakt-form textarea {
+    padding: 1rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+  }
+
+  .kontakt-form input:focus,
+  .kontakt-form textarea:focus {
+    border-color: #ff6600;
+    box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
+    outline: none;
+    background: #fff;
+  }
+
+  .kontakt-btn {
+    background: #ff6600;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(255, 102, 0, 0.3);
+  }
+
+  .kontakt-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
+    background: #ff944d;
+  }
+
+  .kontakt-btn.sent {
+    background: linear-gradient(135deg, #00c851, #007e33);
+    box-shadow: 0 0 14px rgba(0, 200, 81, 0.6);
+    transform: scale(1.02);
+  }
+</style>
 
 <script>
   const form = document.getElementById("kontaktForm");
@@ -2408,3 +1275,299 @@ text-align: center;
     }, 4000);
   });
 </script>
+
+
+
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-logo">
+      <span>Fusion³</span>
+      <p>UX & Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
+    </div>
+
+    <div class="footer-links">
+      <h4>Rechtliches</h4>
+      <ul>
+        <li><a href="/impressum.html">Impressum</a></li>
+        <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
+        <li><a href="/cookies.html">Cookie-Hinweis</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-contact">
+      <h4>Kontakt</h4>
+      <ul>
+        <li><a href="mailto:hello@fusion3.de">hello@fusion3.de</a></li>
+        <li>+49 123 4567890</li>
+        <li>Berlin, Deutschland</li>
+      </ul>
+    </div>
+
+    <div class="footer-socials">
+      <h4>Social Media</h4>
+      <div class="footer-socials-icons">
+        <a href="mailto:hello@fusion3.de" title="E-Mail">
+          <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="E-Mail Icon" />
+        </a>
+        <a href="https://www.linkedin.com/" title="LinkedIn" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn Icon" />
+        </a>
+        <a href="https://wa.me/491234567890" title="WhatsApp schreiben" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <p class="footer-bottom">© 2025 Fusion³ – Alle Rechte vorbehalten. DSGVO-konform & barrierearm entwickelt.</p>
+</footer>
+
+<style>
+  footer {
+    background: #0d0d0d;
+    color: #aaa;
+    padding: 4rem 5vw 2rem;
+    font-size: 0.9rem;
+    border-top: 1px solid #222;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+  }
+
+  .footer-logo span {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--primary);
+  }
+
+  .footer-logo p {
+    margin-top: 0.5rem;
+    color: #666;
+    font-size: 0.95rem;
+  }
+
+  .footer-links h4,
+  .footer-contact h4,
+  .footer-socials h4 {
+    margin-bottom: 0.8rem;
+    color: var(--secondary);
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .footer-links ul,
+  .footer-contact ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-links li,
+  .footer-contact li {
+    margin-bottom: 0.4rem;
+  }
+
+  .footer-links a {
+    color: #ccc;
+  }
+
+  .footer-links a:hover {
+    color: var(--primary);
+  }
+
+  .footer-socials {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-socials-icons {
+    display: flex;
+    gap: 12px;
+    margin-top: 0.5rem;
+  }
+
+  .footer-socials img {
+    width: 26px;
+    height: 26px;
+    opacity: 1;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    vertical-align: middle;
+  }
+
+  .footer-socials img:hover {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    color: #666;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+  }
+</style>
+<style>
+  /* === Responsive Styles === */
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 3rem 1.5rem;
+    }
+
+    .hero-video-content {
+      margin-top: -35vh;
+    }
+
+    .hero-video-content h1 {
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+
+    .hero-video-content p {
+      font-size: 1rem;
+    }
+
+    .cta-btn, .neon-btn {
+      font-size: 0.9rem;
+      padding: 0.8rem 1.6rem;
+    }
+
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cs-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-grid {
+      grid-template-columns: 2fr;
+      text-align:left;
+    }
+
+    .footer-socials-icons {
+      justify-content: center;
+    }
+
+    .cta-modern .cta-headline {
+      font-size: 1.8rem;
+    }
+
+    .cta-modern .cta-text {
+      font-size: 1rem;
+    }
+
+    .cta-action {
+      flex-direction: column;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .kontakt-form {
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .hero-video-content h1 {
+      font-size: 1.5rem;
+    }
+
+    .hero-video-content p {
+      font-size: 0.9rem;
+    }
+
+    .cta-btn, .neon-btn {
+      font-size: 0.8rem;
+      padding: 0.7rem 1.2rem;
+    }
+
+    .pricing-title {
+      font-size: 1.8rem;
+    }
+
+    .pricing-subline {
+      font-size: 1rem;
+    }
+
+    .cs-title {
+      font-size: 1.8rem;
+    }
+
+    .cs-subline {
+      font-size: 1rem;
+    }
+
+    .about-title,
+    .kontakt-title {
+      font-size: 2rem;
+    }
+
+    .about-subline,
+    .kontakt-subline {
+      font-size: 1rem;
+    }
+
+    .cta-headline {
+      font-size: 1.6rem;
+    }
+
+    .cta-text {
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .hero-video-content {
+      padding: 1rem;
+      margin-top: -20vh;
+    }
+
+    .hero-video-content h1 {
+      font-size: 1.3rem;
+      line-height: 1.2;
+    }
+
+    .hero-video-content p {
+      font-size: 0.85rem;
+    }
+
+    .cta-btn, .neon-btn {
+      font-size: 0.75rem;
+      padding: 0.6rem 1rem;
+    }
+
+    .kontakt-form input,
+    .kontakt-form textarea {
+      font-size: 0.9rem;
+    }
+
+    .kontakt-btn {
+      font-size: 0.9rem;
+      padding: 0.8rem 1.2rem;
+    }
+
+    .cta-headline {
+      font-size: 1.4rem;
+    }
+
+    .cta-action {
+      font-size: 0.85rem;
+      padding: 0.8rem 1.4rem;
+    }
+
+    .footer-bottom {
+      font-size: 0.75rem;
+    }
+  }
+</style>
