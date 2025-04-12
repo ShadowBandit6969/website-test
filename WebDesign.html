@@ -28,7 +28,7 @@
         html,
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg);
+            background: white;
             color: var(--text);
             scroll-behavior: smooth;
         }
@@ -110,8 +110,8 @@
              justify-content: center;
              text-align: center;
              background-color: transparent;
-             background: linear-gradient(to bottom, #0b0b0b, #000);
          }
+
          .video-background {
              position: absolute;
              top: 60%;
@@ -123,20 +123,15 @@
              z-index: 0;
              opacity: 1;
              pointer-events: none;
-             background-color: transparent;
- 
-             /* Sanfter Verlauf oben UND unten */
-             mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-             -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-         }
+             background-color: transparent;   }
 
         .hero-video-content {
             position: relative;
             z-index: 2;
-            width: 90%;
+            width: 100%;
             padding: 2rem;
             max-width: 800px;
-            color: #fff;
+            color: #000000;
             background: none;
             border-radius: 10px;
             box-sizing: border-box;
@@ -281,22 +276,7 @@
 
 
 
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .portfolio-grid img {
-            width: 100%;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .portfolio-grid img:hover {
-            transform: scale(1.03);
-        }
+       
 
         form {
             display: flex;
@@ -351,33 +331,7 @@
 
 
 
-        .epic-step {
-            position: relative;
-            background: rgba(255, 255, 255, 0.12);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 2.5rem;
-            width: 300px;
-            box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-            backdrop-filter: blur(20px);
-            overflow: hidden;
-            transition: all 0.4s ease;
-            transform: translateY(40px);
-            opacity: 0;
-        }
-
-        .epic-step::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(ellipse at center, #fff 0%, transparent 60%);
-            opacity: 0.04;
-            animation: lightMotion 8s linear infinite;
-        }
-
+     
         @keyframes lightMotion {
             0% {
                 transform: rotate(0deg);
@@ -386,12 +340,6 @@
             100% {
                 transform: rotate(360deg);
             }
-        }
-
-        .epic-step:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
-            border-color: rgba(255, 102, 0, 0.2);
         }
 
         .step-inner {
@@ -406,35 +354,6 @@
             color: var(--primary);
             display: block;
             margin-bottom: 1rem;
-        }
-
-        .epic-step h3 {
-            font-size: 1.4rem;
-            color: #111;
-            font-weight: 700;
-            margin-bottom: 0.7rem;
-        }
-
-        .epic-step p {
-            color: #333;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        .epic-step::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: linear-gradient(130deg, rgba(255, 102, 0, 0.08), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .epic-step:hover::after {
-            opacity: 1;
         }
 
   
@@ -776,76 +695,7 @@ text-align: center;
 
 
 
-        .epic-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5rem;
-  margin-top: 2rem;
-  justify-content: center;
-}
-
-.epic-card {
-  position: relative;
-  background: #111;
-  border-radius: 20px;
-  padding: 2rem;
-  width: 28vw; /* vorher 300px */
-  height: 20vw;
-  text-align: center;
-  transition: transform 0.4s ease;
-  overflow: hidden;
-  box-shadow: 0 0 0 transparent;
-  z-index: 3;
-}
-
-.epic-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3rem; /* vorher 2rem */
-  margin-top: 2rem;
-  justify-content: center;
-}
-
-.epic-card:hover {
-  transform: scale(1.04); /* etwas größer als vorher */
-  box-shadow: 0 0 10px rgb(255, 255, 255);
-  box-shadow: 0 0 20px rgb(255, 136, 0);
-}
-
-
-.epic-card .video-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.epic-card .video-bg video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  opacity: 1; /* Optional: für subtilen Hintergrund */
-  pointer-events: none;
-}
-
-.epic-card .card-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;       /* Zentriert den Inhalt horizontal */
-  justify-content: center;   /* Zentriert den Inhalt vertikal */
-  padding-top: 30%; /* verschiebt den Inhalt weiter nach unten – passe den Wert an */
-  text-align: center;        /* Stellt sicher, dass der Text zentriert ist */
-}
-
-.epic-card .card-content p {
-  font-size: 1.05rem;
-  line-height: 1.6;
-  letter-spacing: 0.4px;
-  color: #ddd;
-  margin-top: 0rem;
-}
-
+  
 
 .card-glow {
   position: absolute;
@@ -871,15 +721,6 @@ text-align: center;
   color: var(--primary);
   margin-top: 4rem;
 }
-
-.epic-card .card-content h3 {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--primary);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-  margin-bottom: 0.6rem;
-}
-
 
 .price {
   display: block;
@@ -938,210 +779,9 @@ text-align: center;
   to { opacity: 1; transform: translateY(0); }
 }
 
-.split-section {
-  background-color: #0d0d0d;
-  padding: 6rem 5vw;
-  color: #fff;
-}
-
-.split-wrapper {
-  display: flex;
-  gap: 1rem; /* Reduzierter Abstand */
-  align-items: stretch; /* wichtig */
-}
-
-.split-left {
-  flex: 1 1 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 2rem;
-}
-
-.feature {
-  padding: 2rem 1rem;
-  min-height: 200px; /* länger */
-  border-left: 4px solid var(--primary);
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.split-right {
-  flex: 1 1 500px;
-  position: sticky;
-  top: 100px;
-  align-self: flex-start;
-  height: auto;
-  max-height: 80vh;
-  overflow: visible;
-}
-
-
-#feature-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Damit das Bild die ganze Box füllt */
-  border-radius: 16px;
-  box-shadow: 0 0 32px rgba(255, 102, 0, 0.3);
-  transition: all 0.4s ease;
-
-  /* NEU HINZUFÜGEN */
-  max-height: none;  /* Falls begrenzt */
-}
 
 
 
-.feature {
-  padding-left: 1rem;
-  border-left: 4px solid var(--primary);
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.feature h3 {
-  font-size: 1.6rem;
-  color: var(--primary);
-  margin-bottom: 0.5rem;
-}
-
-.feature p {
-  color: #aaa;
-  font-size: 1.05rem;
-  line-height: 1.5;
-}
-
-.feature:hover {
-  background: rgba(255, 102, 0, 0.05);
-}
-
-.split-right {
-  flex: 1 1 500px;
-  position: sticky;
-  top: 100px;
-  align-self: flex-start;
-}
-
-
-@media (max-width: 768px) {
-  .split-wrapper {
-    flex-direction: column;
-  }
-
-  .split-right {
-    position: relative;
-    top: auto;
-  }
-}
-
-.vertical-slider {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  padding-top: 0; /* 🔼 Direkt oben */
-  margin-top: -40px; /* 🔥 Noch näher an vorherigem Block */
-}
-
-.slider-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  transition: transform 2.9s ease-in-out;
-}
-
-.slide {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* statt space-between */
-  gap: 1rem; /* Abstand zwischen Text & Video */
-  flex: 0 0 100vh;
-  padding: 0 5vw;
-  position: relative;
-  overflow: hidden;
-}
-
-
-/* Linke Seite: Textcard */
-.text-card {
-  flex: 0 0 50%;
-  z-index: 2;
-  max-width: 560px;
-  align-self: center;
-  text-align: left;
-  margin-right: auto;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 3rem 2rem;
-  border-radius: 20px;
-  color: #fff;
-  animation: fadeIn 1s ease forwards;
-  box-shadow: 0 0 24px rgba(255, 102, 0, 0.2);
-}
-
-.text-card h3 {
-  font-size: 2rem;
-  color: var(--primary, #ff6600);
-  margin-bottom: 1rem;
-  font-weight: 800;
-}
-
-.text-card p {
-  font-size: 1.1rem;
-  color: #eee;
-  line-height: 1.6;
-}
-
-/* Rechte Seite: Video */
-.video-side {
-  flex: 0 0 50%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  z-index: 1;
-  position: relative;
-}
-
-.video-side video {
-  width: 90%;
-  max-width: 600px;
-  height: auto;
-  object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0 0 32px rgba(255, 102, 0, 0.2);
-  opacity: 1;
-}
-
-/* Rest wie gehabt */
-.slider-container {
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.9s ease-in-out;
-  height: 100%;
-  z-index: 3;
-}
-
-.vertical-slider {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  margin-top: -60px;
-}
-
-/* Fancy Glow Buttons */
-.slider-controls {
-  position: absolute;
-  top: 50%;
-  right: 2rem;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  z-index: 10;
-}
 
 .glow-btn {
   background: transparent;
@@ -1321,38 +961,6 @@ text-align: center;
   to { opacity: 1; transform: scale(1); }
 }
 
-.stacked-image-wrapper {
-  position: sticky;
-  top: 0;
-  padding-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: auto;
-  z-index: 0;
-}
-
-.stack-img {
-  width: 100%;
-  max-width: 460px;
-  border-radius: 16px;
-  box-shadow: 0 0 32px rgba(255, 102, 0, 0.2);
-  position: relative;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  z-index: 1;
-  opacity: 0.4;
-  margin-top: -303px; /* kleiner Abstand – vorher -180px */
-}
-
-.stack-img:first-child {
-  margin-top: 0; /* Bild 1 soll ganz normal oben beginnen */
-}
-
-.stack-img.active {
-  transform: scale(1.05);
-  z-index: 10;
-  opacity: 1;
-}
 @media (min-width: 1920px) {
   .container {
     max-width: 1600px;
@@ -1373,11 +981,7 @@ text-align: center;
     padding: 1.2rem 2.8rem;
   }
 
-  .epic-card {
-    width: 25vw;
-    height: auto;
-    padding: 3rem 2rem;
-  }
+
 
   .card-content h3 {
     font-size: 2rem;
@@ -1435,11 +1039,6 @@ text-align: center;
     font-size: 1rem;
   }
 
-  .epic-card {
-    width: 42vw;
-    height: auto;
-    padding: 2rem 1rem;
-  }
 
   .card-content h3 {
     font-size: 1.3rem;
@@ -1482,14 +1081,6 @@ text-align: center;
 }
 
 @media (max-width: 768px) {
-  .epic-card {
-    width: 90%;
-    height: auto;
-  }
-
-  .epic-cards {
-    gap: 2rem;
-  }
 
   .split-wrapper {
     flex-direction: column;
@@ -1531,9 +1122,7 @@ text-align: center;
 }
 
 @media (max-width: 480px) {
-  .epic-card .card-content h3 {
-    font-size: 1.2rem;
-  }
+
   .stack-img {
     max-width: 90%;
     margin: 0 auto;
@@ -1541,9 +1130,7 @@ text-align: center;
     opacity: 1;
   }
 
-  .epic-card .card-content p {
-    font-size: 0.9rem;
-  }
+
 
   .card-content .price {
     font-size: 0.85rem;
@@ -1557,9 +1144,6 @@ text-align: center;
     font-size: 0.85rem;
   }
 
-  .split-section {
-    padding: 3rem 2vw;
-  }
 
   .feature h3 {
     font-size: 1.2rem;
@@ -1600,11 +1184,6 @@ text-align: center;
     padding: 0.5rem 1rem;
   }
 
-  .epic-card {
-    width: 90%;
-    height: auto;
-    padding: 1.5rem 1rem;
-  }
 
   .card-content h3 {
     font-size: 1.2rem;
@@ -1686,90 +1265,9 @@ text-align: center;
   }
 }
 
-.leistungen-clean {
-  padding: 6rem 2rem;
-  background-color: #fff;
-  color: #111;
-  text-align: center;
-}
-
-.leistungen-title {
-  font-size: 2.4rem;
-  font-weight: 900;
-  margin-bottom: 1rem;
-}
-
-.leistungen-subline {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 4rem;
-  font-weight: 400;
-}
-
-.leistungen-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 3rem;
-  justify-items: center;
-}
-
-.leistung-card {
-  background: #f9f9f9;
-  border-radius: 16px;
-  padding: 2rem;
-  max-width: 400px;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 0 transparent;
-  text-align: center;
-  border: 1px solid #eee;
-}
-
-.leistung-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
-}
-
-.leistung-icon {
-  width: 64px;
-  height: 64px;
-  margin-bottom: 1rem;
-  filter: grayscale(100%);
-  opacity: 0.8;
-  transition: all 0.3s ease;
-}
-
-.leistung-card:hover .leistung-icon {
-  filter: grayscale(0%);
-  opacity: 1;
-}
-
-.leistung-card h3 {
-  font-size: 1.4rem;
-  margin: 1rem 0 0.8rem;
-  color: #111;
-  font-weight: 700;
-}
-
-.leistung-card p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.6;
-}
-
-.badge {
-  display: inline-block;
-  margin-top: 1.5rem;
-  padding: 0.4rem 0.8rem;
-  background: #e0e0e0;
-  color: #333;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
 .pricing-clean {
   padding: 6rem 2rem;
-  background: #fefefe;
+  background: #ffffff;
   text-align: center;
   color: #111;
 }
@@ -1943,6 +1441,7 @@ text-align: center;
   color: #666;
   margin-bottom: 4rem;
   font-weight: 400;
+  text-align: center;
 }
 
 .about-grid {
@@ -2126,7 +1625,7 @@ text-align: center;
 .cta-section {
   position: relative;
   padding: 6rem 2rem;
-  background: #f7f7f7;
+  background: #ffffff;
   overflow: hidden;
   z-index: 1;
 }
@@ -2141,6 +1640,12 @@ text-align: center;
   text-align: center;
   position: relative;
   transition: transform 0.6s ease, box-shadow 0.6s ease;
+  animation: fadeInCta 1.4s ease-out forwards;
+}
+
+@keyframes fadeInCta {
+  0% { opacity: 0; transform: translateY(50px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 .cta-container:hover {
@@ -2187,11 +1692,13 @@ text-align: center;
 }
 
 .cta-button i {
-  stroke: #fff;
-  width: 20px;
-  height: 20px;
-  transition: stroke 0.3s;
+  transition: transform 0.3s ease, stroke 0.3s ease;
 }
+.cta-button:hover i {
+  transform: translateX(4px) scale(1.1);
+}
+
+
 
 .cta-button:hover i {
   stroke: #111;
@@ -2260,38 +1767,6 @@ text-align: center;
   min-height: 60px;
 }
 
-/* Modal */
-.fusion-lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(10,10,10,0.95);
-  backdrop-filter: blur(8px);
-  z-index: 999;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-}
-
-.fusion-lightbox-content {
-  background: #fff;
-  padding: 3rem;
-  border-radius: 18px;
-  text-align: center;
-  max-width: 640px;
-  box-shadow: 0 0 32px rgba(255,102,0,0.2);
-}
-
-.fusion-lightbox-close {
-  position: absolute;
-  top: 1rem;
-  right: 2rem;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #ff6600;
-  cursor: pointer;
-}
-
 /* CTA */
 .cta-button {
   background: #ff6600;
@@ -2311,6 +1786,163 @@ text-align: center;
   background: #ff944d;
 }
 
+.kontakt-clean {
+  background: #ffffff;
+  padding: 6rem 2rem;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.kontakt-title {
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.kontakt-subline {
+  font-size: 1.2rem;
+  color: #666;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+}
+
+.kontakt-wrapper {
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+.kontakt-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.kontakt-form input,
+.kontakt-form textarea {
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: all 0.3s ease;
+}
+
+.kontakt-form input:focus,
+.kontakt-form textarea:focus {
+  border-color: #ff6600;
+  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
+  outline: none;
+  background: #fff;
+}
+
+.kontakt-btn {
+  background: #ff6600;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(255, 102, 0, 0.3);
+}
+
+.kontakt-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
+  background: #ff944d;
+}
+
+.cta-modern {
+  position: relative;
+  width: 100%;
+  padding: 10vh 5vw;
+  background: #ffffff;
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cta-modern .cta-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(0, 122, 255, 0.05), transparent 70%);
+  z-index: 0;
+}
+
+.cta-modern .cta-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 70ch;
+  margin: 0 auto;
+  animation: fadeInCta 1.2s ease-out both;
+}
+
+.cta-headline {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.5px;
+}
+
+.cta-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 2.2rem;
+  font-weight: 400;
+}
+
+.cta-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #ffffff;
+  color: var(--secondary);
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(255, 115, 0, 0.2);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.cta-action:hover {
+  transform: scale(1.05);
+  background: var(--secondary);
+  box-shadow: 0 6px 16px rgb(255, 151, 65);
+  color: #fff;
+}
+
+.cta-action i {
+  width: 20px;
+  height: 20px;
+  stroke: #fff;
+  transition: stroke 0.3s, transform 0.3s;
+}
+
+.cta-action:hover i {
+  transform: scale(1.1);
+  stroke: #eaf3ff;
+}
+
+@keyframes fadeInCta {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 
 </style>
@@ -2488,22 +2120,19 @@ text-align: center;
   </section>
   
 
-  <section class="cta-section" id="cta-contact">
-    <div class="cta-container" data-aos>
-      <div class="cta-content">
-        <h2 class="cta-heading">Jetzt durchstarten – Ihre digitale Zukunft beginnt hier!</h2>
-        <p class="cta-subline">
-          Buchen Sie noch heute einen unverbindlichen Beratungstermin oder eine Live-Demo und erfahren Sie,
-          wie wir Ihre digitale Strategie aufs nächste Level heben.
-        </p>
-        <a href="#kontakt" class="cta-button">
-          <i data-feather="calendar"></i>
-          Kostenlose Erstberatung / Terminvereinbarung
-        </a>
-      </div>
+  <section class="cta-modern" id="cta-modern">
+    <div class="cta-bg"></div>
+    <div class="cta-inner" data-aos="fade-up">
+      <h2 class="cta-headline">Jetzt durchstarten<br>Ihre digitale Zukunft beginnt hier.</h2>
+      <p class="cta-text">
+        Vereinbaren Sie eine kostenlose Erstberatung und erleben Sie, wie Ihre Marke digital glänzen kann.
+      </p>
+      <a href="#kontakt" class="cta-action">
+        <i data-feather="calendar"></i>
+        Termin vereinbaren
+      </a>
     </div>
   </section>
-
   
   <section class="clean-process-guide" id="prozess">
     <div class="container">
@@ -2529,10 +2158,10 @@ text-align: center;
         <!-- Phase 4 -->
         <div class="process-step" data-icon="repeat" data-title="Feedback & Korrekturen" data-starter="1 Korrekturschleife für den Feinschliff." data-premium="Iterationen + gezielte Optimierung." data-default="Feedback-Schleifen zur Verbesserung."></div>
         <!-- Phase 5 -->
-        <div class="process-step" data-icon="rocket" data-title="Finalisierung & Launch" data-premium="After-Launch-Support & Performancepflege." data-default="SEO, CMS & finaler Go-Live."></div>
+        <div class="process-step" data-icon="globe" data-title="Finalisierung & Launch" data-premium="After-Launch-Support & Performancepflege." data-default="SEO, CMS & finaler Go-Live."></div>
       </div>
   
-      <!-- CTA -->
+      <!-- CTA 
       <div class="cta-section white" style="margin-top:4rem;">
         <div class="cta-container">
           <h2 class="cta-heading">Bereit für den nächsten Schritt?</h2>
@@ -2541,7 +2170,8 @@ text-align: center;
         </div>
       </div>
     </div>
-  
+  -->
+    
     <!-- Modal: Paketinhalte -->
     <div id="paketModal" class="fusion-lightbox">
       <div class="fusion-lightbox-content">
@@ -2566,27 +2196,33 @@ text-align: center;
           <i data-feather="download"></i> Jetzt herunterladen
         </a>
       </div>
-    </div>
+    </div>  -->
   </section>
-  -->
+
   
 
 
 
-  <section class="container" id="kontakt">
-    <h2>Kontakt aufnehmen</h2>
-    <div class="form-wrapper">
-      <form action="https://formspree.io/f/xqapdvaq" method="POST">
-        <input type="text" name="name" placeholder="Dein Name" required />
-        <input type="email" name="email" placeholder="Deine E-Mail" required />
-        <textarea name="message" rows="6" placeholder="Worum geht’s?" required></textarea>
-        <input type="text" name="_gotcha" style="display:none">
-        <button type="submit" class="neon-btn" id="sendButton">
-          <span>✉️ Nachricht senden</span>
-        </button>
+  <section class="kontakt-clean" id="kontakt">
+    <div class="kontakt-wrapper">
+      <h2 class="kontakt-title">Lass uns loslegen!</h2>
+      <p class="kontakt-subline">
+        Eine starke Idee verdient ein starkes digitales Erlebnis. <br />
+        Erzähle uns von Deinem Projekt – wir bringen es gemeinsam auf das nächste Level.
+      </p>
+      
+      <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm">
+        <input type="text" name="name" placeholder="Name" required />
+        <input type="email" name="email" placeholder="E-Mail-Adresse" required />
+        <input type="text" name="subject" placeholder="Betreff" />
+        <textarea name="message" placeholder="Nachricht" rows="5" required></textarea>
+        <button type="submit" class="kontakt-btn">🚀 Jetzt Anfrage senden!</button>
       </form>
     </div>
   </section>
+  
+  
+  
   
   <footer>
     <div class="footer-grid">
@@ -2755,4 +2391,20 @@ text-align: center;
 
   // Initial trigger to fill content on load
   paketBtns[0].click();
+</script>
+
+<script>
+  const form = document.getElementById("kontaktForm");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    form.classList.add("submitted");
+    const button = form.querySelector(".kontakt-btn");
+    button.innerText = "✅ Anfrage gesendet!";
+    button.classList.add("sent");
+    setTimeout(() => {
+      form.reset();
+      button.innerText = "🚀 Jetzt Anfrage senden!";
+      button.classList.remove("sent");
+    }, 4000);
+  });
 </script>

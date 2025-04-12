@@ -1,1693 +1,272 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3D und Motion</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
-
-    <style>
-        :root {
-            --primary: #ff6600;
-            --secondary: #ff944d;
-            --bg: #0b0b0b;
-            --text: #ffffff;
-            --muted: #999;
-            --container-width: 1200px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html,
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            scroll-behavior: smooth;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        header {
-            width: 100%;
-            padding: 2rem 5vw;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #222;
-            position: relative;
-            z-index: 10;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--primary);
-            letter-spacing: 1px;
-        }
-
-        nav a {
-            margin-left: 2rem;
-            font-weight: 500;
-            font-size: 1rem;
-            color: var(--muted);
-        }
-
-        nav a:hover {
-            color: var(--primary);
-        }
-        .burger {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 24px;
-  height: 18px;
-  cursor: pointer;
-  z-index: 20;
-}
-
-.burger span {
-  display: block;
-  height: 3px;
-  background: var(--text);
-  border-radius: 2px;
-  transition: 0.3s;
-}
-
-.burger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.burger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.burger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
-
-
-
-
-        .hero-video-wrapper {
-             position: relative;
-             height: 100vh;
-             width: 100%;
-             overflow: hidden;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             text-align: center;
-             background-color: transparent;
-             background: linear-gradient(to bottom, #0b0b0b, #000);
-         }
-         .video-background {
-             position: absolute;
-             top: 60%;
-             left: 50%;
-             width: 100%;
-             height: auto;
-             transform: translate(-50%, -50%);
-             object-fit: cover;
-             z-index: 0;
-             opacity: 1;
-             pointer-events: none;
-             background-color: transparent;
- 
-             /* Sanfter Verlauf oben UND unten */
-             mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-             -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-         }
-
-        .hero-video-content {
-            position: relative;
-            z-index: 2;
-            width: 90%;
-            padding: 2rem;
-            max-width: 800px;
-            color: #fff;
-            background: none;
-            border-radius: 10px;
-            box-sizing: border-box;
-            margin-top: -25vh;
-            /* <-- Überschrift weiter nach oben */
-        }
-
-
-
-        .hero-video-content h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-        }
-
-        .hero-video-content p {
-            font-size: 1.2rem;
-            color: #ccc;
-            margin: 1rem 0;
-        }
-
-        .neon-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none;
-            color: #fff;
-            padding: 1rem 2.2rem;
-            font-size: 1rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            border-radius: 8px;
-            box-shadow: 0 0 12px rgba(255, 102, 0, 0.4),
-                0 0 24px rgba(255, 102, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            transition: all 0.3s ease;
-        }
-
-        .neon-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 16px rgba(255, 102, 0, 0.6),
-                0 0 36px rgba(255, 102, 0, 0.4);
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-        }
-
-        .neon-btn span::after {
-            content: "";
-            position: absolute;
-            top: -120%;
-            left: -120%;
-            width: 300%;
-            height: 300%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 40%);
-            opacity: 0;
-            animation: pulseEffect 4s infinite ease-in-out;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        @keyframes pulseEffect {
-
-            0%,
-            100% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-
-            50% {
-                opacity: 0.3;
-                transform: scale(1.4);
-            }
-        }
-
-        .neon-btn.sent {
-            background: linear-gradient(135deg, #00c851, #007e33);
-            box-shadow: 0 0 14px rgba(0, 200, 81, 0.6);
-            transform: scale(1.02);
-        }
-
-        @keyframes buttonShake {
-            0% {
-                transform: translateX(0);
-            }
-
-            25% {
-                transform: translateX(-4px);
-            }
-
-            50% {
-                transform: translateX(4px);
-            }
-
-            75% {
-                transform: translateX(-2px);
-            }
-
-            100% {
-                transform: translateX(0);
-            }
-        }
-
-        .neon-btn.shake {
-            animation: buttonShake 0.3s ease;
-        }
-
-
-        .cta-btn {
-            position: relative;
-            overflow: hidden;
-            z-index: 2;
-            background: var(--primary);
-            color: #000;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 1rem 2rem;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 1rem;
-        }
-
-        section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            font-weight: 800;
-        }
-
-        section h3 {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            font-weight: 600;
-        }
-
-
-        .container {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 5rem 2rem;
-            
-        }
-
-
-
-
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .portfolio-grid img {
-            width: 100%;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .portfolio-grid img:hover {
-            transform: scale(1.03);
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            /* max-width: 600px; ❌ entfernen */
-            width: 100%;
-            /* ✅ volle Breite im Container nutzen */
-            margin: 0 auto;
-        }
-
-        .form-wrapper {
-            max-width: 100%;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-
-        input,
-        textarea {
-            background: #111;
-            border: 1px solid #333;
-            padding: 1rem;
-            color: var(--text);
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            border-radius: 5px;
-        }
-
-        button {
-            background: var(--primary);
-            color: #000;
-            padding: 1rem;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-
-
-        .socials img {
-            width: 24px;
-            margin: 0 8px;
-            opacity: 0.7;
-            transition: 0.2s;
-        }
-
-        .socials img:hover {
-            opacity: 1;
-        }
-
-
-
-
-        .epic-step {
-            position: relative;
-            background: rgba(255, 255, 255, 0.12);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 2.5rem;
-            width: 300px;
-            box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-            backdrop-filter: blur(20px);
-            overflow: hidden;
-            transition: all 0.4s ease;
-            transform: translateY(40px);
-            opacity: 0;
-        }
-
-        .epic-step::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(ellipse at center, #fff 0%, transparent 60%);
-            opacity: 0.04;
-            animation: lightMotion 8s linear infinite;
-        }
-
-        @keyframes lightMotion {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .epic-step:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
-            border-color: rgba(255, 102, 0, 0.2);
-        }
-
-        .step-inner {
-            position: relative;
-            z-index: 2;
-            text-align: left;
-        }
-
-        .step-number {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--primary);
-            display: block;
-            margin-bottom: 1rem;
-        }
-
-        .epic-step h3 {
-            font-size: 1.4rem;
-            color: #111;
-            font-weight: 700;
-            margin-bottom: 0.7rem;
-        }
-
-        .epic-step p {
-            color: #333;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        .epic-step::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: linear-gradient(130deg, rgba(255, 102, 0, 0.08), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .epic-step:hover::after {
-            opacity: 1;
-        }
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D und Motion</title>
   
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
 
-        footer {
-            background: #0d0d0d;
-            color: #aaa;
-            padding: 4rem 5vw 2rem;
-            font-size: 0.9rem;
-            border-top: 1px solid #222;
-        }
+  <!-- Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto 2rem;
-        }
-
-        .footer-logo span {
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: var(--primary);
-        }
-
-        .footer-logo p {
-            margin-top: 0.5rem;
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        .footer-links h4,
-        .footer-contact h4,
-        .footer-socials h4 {
-            margin-bottom: 0.8rem;
-            color: var(--secondary);
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .footer-links ul,
-        .footer-contact ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-links li,
-        .footer-contact li {
-            margin-bottom: 0.4rem;
-        }
-
-        .footer-links a {
-            color: #ccc;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-
-        .footer-socials {
-            display: flex;
-            flex-direction: column;
-            /* Überschrift oben, Icons darunter */
-            align-items: flex-start;
-        }
-
-        .footer-socials-icons {
-            display: flex;
-            gap: 12px;
-            /* Abstand zwischen Icons */
-            margin-top: 0.5rem;
-        }
-
-
-
-        .footer-socials img {
-            width: 26px;
-            height: 26px;
-            margin-right: 12px;
-            opacity: 1;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-            vertical-align: middle;
-        }
-
-        .footer-socials img:hover {
-            transform: scale(1.1);
-            opacity: 1;
-        }
-
-
-        .footer-bottom {
-            text-align: center;
-            color: #666;
-            font-size: 0.85rem;
-            margin-top: 1rem;
-        }
-
-
-
-        /* === Medien-Spezifisch: 320px Mobile Fix === */
-        @media (max-width: 480px) {
-            .burger {
-    display: flex;
-  }
-
-  nav {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: #111;
-    flex-direction: column;
-    align-items: center;
-text-align: center;
-
-    padding: 1rem;
-    display: none;
-    gap: 1rem;
-    border-left: 1px solid #222;
-    border-bottom: 1px solid #222;
-  }
-
-  nav.open {
-    display: flex;
-  }
-
-  nav a {
-    margin: 0;
-    font-size: 1rem;
-    color: var(--text);
-  }      /* HERO: Inhalt zentriert + responsive */
-            .hero-video-content {
-                text-align: center;
-                padding: 1rem;
-                margin-top: -40vh;
-            }
-
-            .hero-video-content h1 {
-                font-size: 1.5rem;
-                line-height: 1.3;
-            }
-
-            .hero-video-content p {
-                font-size: 0.9rem;
-                margin-bottom: 1rem;
-            }
-
-
-  
-
-            .cta-btn {
-                font-size: 0.8rem;
-                padding: 0.6rem 1.2rem;
-            }
-
-
-        }
-
-
-        @media (max-width: 320px) {
-
-            /* HERO: Text & Button mittig */
-            .hero-video-content {
-                margin-top: -15vh;
-                padding: 1rem;
-                text-align: center;
-            }
-
-            .hero-video-content h1 {
-                font-size: 1.5rem;
-                line-height: 1.2;
-            }
-
-            .hero-video-content p {
-                font-size: 0.9rem;
-                margin: 0.8rem 0;
-            }
-
-            .cta-btn {
-                display: inline-block;
-                margin-top: 1rem;
-                padding: 0.6rem 1.2rem;
-                font-size: 0.8rem;
-            }
-
-        }
-
-
-        @media (orientation: landscape) and (max-height: 500px) {
-    /* ✅ Header (Logo + Nav nebeneinander) */
-    header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 3vw;
-        gap: 0;
+  <style>
+    :root {
+      --primary: #ff6600;
+      --secondary: #ff944d;
+      --bg: #0b0b0b;
+      --text: #ffffff;
+      --muted: #999;
+      --container-width: 1200px;
     }
 
-    .logo {
-        font-size: 1.4rem;
-    }
-
-    nav {
-        display: flex;
-        flex-direction: row;
-        gap: 1rem;
-        flex-wrap: nowrap;
-        justify-content: flex-end;
-    }
-
-    nav a {
-        font-size: 0.9rem;
-        white-space: nowrap;
-    }
-
-    /* ✅ Hero Content darunter – kompakter */
-    .hero-video-content {
-        margin-top: -25vh;
-        padding: 1rem 2rem;
-        max-width: 90%;
-        text-align: center;
-    }
-
-    .hero-video-content h1 {
-        font-size: 2rem;
-        line-height: 1.2;
-    }
-
-    .hero-video-content p {
-        font-size: 1rem;
-        margin: 0.8rem 0;
-    }
-
-    .cta-btn {
-        font-size: 0.85rem;
-        padding: 0.6rem 1.2rem;
-    }
-
-    /* ✅ Video bleibt Hintergrund */
-    .video-background {
-        top: 50%;
-        transform: translate(-50%, -40%);
-        height: auto;
-        min-height: 100%;
-    }
-}
-   
-@media (orientation: landscape) and (max-height: 300px) {
-    header {
-        padding: 0.5rem 3vw;
-    }
-
-    .logo {
-        font-size: 1.2rem;
-    }
-
-    nav a {
-        font-size: 0.75rem;
-        padding: 0.2rem;
-    }
-
-    .hero-video-content {
-        margin-top: -15vh;
-        padding: 0.5rem 1rem;
-        max-width: 100%;
-    }
-
-    .hero-video-content h1 {
-        font-size: 1.2rem;
-        line-height: 1.1;
-    }
-
-    .hero-video-content p {
-        font-size: 0.75rem;
-        margin: 0.5rem 0;
-    }
-
-    .cta-btn {
-        font-size: 0.7rem;
-        padding: 0.4rem 0.8rem;
-    }
-
-    .video-background {
-        top: 50%;
-        transform: translate(-50%, -40%);
-        height: auto;
-        min-height: 100%;
-    }
-}
-
-@media (orientation: landscape) and (max-height: 200px) {
-    header {
-        padding: 0.3rem 2vw;
-    }
-
-    .logo {
-        font-size: 1rem;
-    }
-
-    nav a {
-        font-size: 0.65rem;
-        padding: 0.1rem;
-    }
-
-    .hero-video-content {
-        margin-top: -10vh;
-        padding: 0.3rem 0.8rem;
-        max-width: 100%;
-    }
-
-    .hero-video-content h1 {
-        font-size: 1rem;
-        line-height: 1.1;
-    }
-
-    .hero-video-content p {
-        font-size: 0.65rem;
-        margin: 0.4rem 0;
-    }
-
-    .cta-btn {
-        font-size: 0.6rem;
-        padding: 0.3rem 0.6rem;
-    }
-
-    .video-background {
-        top: 50%;
-        transform: translate(-50%, -40%);
-        height: auto;
-        min-height: 100%;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     html, body {
-        min-height: 100vh;
-        overflow-y: auto;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      scroll-behavior: smooth;
     }
-}
 
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: 0.3s;
+    }
 
+    a:hover {
+      color: var(--primary);
+    }
 
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
 
-        .epic-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5rem;
-  margin-top: 2rem;
-  justify-content: center;
-}
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
 
-.epic-card {
-  position: relative;
-  background: #111;
-  border-radius: 20px;
-  padding: 2rem;
-  width: 28vw; /* vorher 300px */
-  height: 20vw;
-  text-align: center;
-  transition: transform 0.4s ease;
-  overflow: hidden;
-  box-shadow: 0 0 0 transparent;
-  z-index: 3;
-}
+    h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
 
-.epic-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3rem; /* vorher 2rem */
-  margin-top: 2rem;
-  justify-content: center;
-}
+    button {
+      background: var(--primary);
+      color: #000;
+      padding: 1rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
 
-.epic-card:hover {
-  transform: scale(1.04); /* etwas größer als vorher */
-  box-shadow: 0 0 10px rgb(255, 255, 255);
-  box-shadow: 0 0 20px rgb(255, 136, 0);
-}
+    input, textarea {
+      background: #111;
+      border: 1px solid #333;
+      padding: 1rem;
+      color: var(--text);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 5px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
 
+  <header>
+    <div class="logo">Fusion³</div>
+    <div class="burger" id="burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav id="mainNav">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#einsatz">Einsatzbereiche</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
 
-.epic-card .video-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-}
+  <style>
+    header {
+      width: 100%;
+      padding: 2rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #222;
+      position: relative;
+      z-index: 10;
+    }
 
-.epic-card .video-bg video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  opacity: 1; /* Optional: für subtilen Hintergrund */
-  pointer-events: none;
-}
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
 
-.epic-card .card-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;       /* Zentriert den Inhalt horizontal */
-  justify-content: center;   /* Zentriert den Inhalt vertikal */
-  padding-top: 30%; /* verschiebt den Inhalt weiter nach unten – passe den Wert an */
-  text-align: center;        /* Stellt sicher, dass der Text zentriert ist */
-}
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
 
-.epic-card .card-content p {
-  font-size: 1.05rem;
-  line-height: 1.6;
-  letter-spacing: 0.4px;
-  color: #ddd;
-  margin-top: 0rem;
-}
+    nav a {
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--muted);
+    }
 
+    nav a:hover {
+      color: var(--primary);
+    }
 
-.card-glow {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(130deg, rgba(255, 102, 0, 0.2), transparent);
-  animation: pulseCard 5s infinite ease-in-out;
-  z-index: 0;
-  pointer-events: none;
-}
+    .burger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 18px;
+      cursor: pointer;
+      z-index: 20;
+    }
 
-@keyframes pulseCard {
-  0%, 100% { opacity: 0.1; }
-  50% { opacity: 0.3; }
-}
+    .burger span {
+      display: block;
+      height: 3px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
 
-.card-content {
-  position: relative;
-  z-index: 2;
-}
+    .burger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
 
-.card-content h3 {
-  color: var(--primary);
-  margin-top: 4rem;
-}
+    .burger.active span:nth-child(2) {
+      opacity: 0;
+    }
 
-.epic-card .card-content h3 {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--primary);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-  margin-bottom: 0.6rem;
-}
+    .burger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
 
+    @media (max-width: 768px) {
+      .burger {
+        display: flex;
+      }
 
-.price {
-  display: block;
-  margin-top: 1.5rem;
-  color: var(--secondary);
-  font-weight: bold;
-}
-.card-content .price {
-  margin-top: 1.2rem;
-  padding: 0.4rem 0.8rem;
-  background: var(--secondary);
-  color: #111;
-  font-weight: 700;
-  font-size: 0.9rem;
-  border-radius: 6px;
-  display: inline-block;
-  box-shadow: 0 0 6px rgba(255, 102, 0, 0.2);
-}
+      nav {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #111;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1rem;
+        display: none;
+        gap: 1rem;
+        border-left: 1px solid #222;
+        border-bottom: 1px solid #222;
+        z-index: 9;
+      }
 
+      nav.open {
+        display: flex;
+      }
 
-.tab-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
-}
+      nav a {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--text);
+      }
+    }
+  </style>
 
-.tab-btn {
-  background: none;
-  border: 2px solid var(--primary);
-  color: var(--primary);
-  padding: 0.7rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
+  <script>
+    const burger = document.getElementById("burger");
+    const nav = document.getElementById("mainNav");
 
-.tab-btn.active,
-.tab-btn:hover {
-  background: var(--primary);
-  color: #000;
-}
+    burger.addEventListener("click", () => {
+      burger.classList.toggle("active");
+      nav.classList.toggle("open");
+    });
+  </script>
+<section class="hero-video-wrapper">
+  <div class="hero-image-grid">
+    <div class="grid-box box1">
+      <video autoplay muted loop playsinline>
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="grid-box box2">
+      <img src="https://placehold.co/600x800?text=Bild+2" alt="Bild 2">
+    </div>
+    <div class="grid-box box3">
+      <img src="https://placehold.co/600x800?text=Bild+3" alt="Bild 3">
+    </div>
+    <div class="grid-box box4">
+      <video autoplay muted loop playsinline>
+        <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="grid-box box5">
+      <video autoplay muted loop playsinline>
+        <source src="https://samplelib.com/lib/preview/mp4/sample-10s.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="grid-box box6">
+      <img src="https://placehold.co/600x800?text=Bild+6" alt="Bild 6">
+    </div>
+    <div class="grid-box box7">
+      <video autoplay muted loop playsinline>
+        <source src="https://samplelib.com/lib/preview/mp4/sample-10s.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
 
-.tab-content {
-  display: none;
-  animation: fadeIn 0.6s ease-in-out;
-}
+  <div class="hero-video-content">
+    <h1>Faszinier mit<br>3D Design & Motion</h1>
+    <p>High-End Visuals, Virtual Reality & produktionsreife Modelle.</p>
+    <a class="cta-btn neon-btn" href="#kontakt">
+      <span>🚀 Projekt starten</span>
+    </a>
+  </div>
+</section>
 
-.tab-content.active {
-  display: block;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.split-section {
-  background-color: #0d0d0d;
-  padding: 6rem 5vw;
-  color: #fff;
-}
-
-.split-wrapper {
-  display: flex;
-  gap: 6rem; /* Reduzierter Abstand */
-  align-items: stretch; /* wichtig */
-}
-
-.split-left {
-  flex: 1 1 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 2rem;
-}
-
-.feature {
-  padding: 2rem 1rem;
-  min-height: 200px; /* länger */
-  border-left: 4px solid var(--primary);
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.split-right {
-  flex: 1 1 500px;
-  position: sticky;
-  top: 100px;
-  align-self: flex-start;
-  height: auto;
-  max-height: 80vh;
-  overflow: visible;
-}
-
-
-#feature-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Damit das Bild die ganze Box füllt */
-  border-radius: 16px;
-  box-shadow: 0 0 32px rgba(255, 102, 0, 0.3);
-  transition: all 0.4s ease;
-
-  /* NEU HINZUFÜGEN */
-  max-height: none;  /* Falls begrenzt */
-}
-
-
-
-.feature {
-  padding-left: 1rem;
-  border-left: 4px solid var(--primary);
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.feature h3 {
-  font-size: 1.6rem;
-  color: var(--primary);
-  margin-bottom: 0.5rem;
-}
-
-.feature p {
-  color: #aaa;
-  font-size: 1.05rem;
-  line-height: 1.5;
-}
-
-.feature:hover {
-  background: rgba(255, 102, 0, 0.05);
-}
-
-.split-right {
-  flex: 1 1 500px;
-  position: sticky;
-  top: 100px;
-  align-self: flex-start;
-}
-
-
-@media (max-width: 768px) {
-  .split-wrapper {
-    flex-direction: column;
-  }
-
-  .split-right {
-    position: relative;
-    top: auto;
-  }
-}
-
-.vertical-slider {
+<style>
+.hero-video-wrapper {
   position: relative;
   height: 100vh;
+  width: 100%;
   overflow: hidden;
-  padding-top: 0; /* 🔼 Direkt oben */
-  margin-top: -40px; /* 🔥 Noch näher an vorherigem Block */
-}
-
-.slider-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  transition: transform 2.9s ease-in-out;
-}
-
-.slide {
   display: flex;
   align-items: center;
-  justify-content: center; /* statt space-between */
-  gap: 1rem; /* Abstand zwischen Text & Video */
-  flex: 0 0 100vh;
-  padding: 0 5vw;
-  position: relative;
-  overflow: hidden;
-}
-
-
-/* Linke Seite: Textcard */
-.text-card {
-  flex: 0 0 50%;
-  z-index: 2;
-  max-width: 560px;
-  align-self: center;
-  text-align: left;
-  margin-right: auto;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 3rem 2rem;
-  border-radius: 20px;
-  color: #fff;
-  animation: fadeIn 1s ease forwards;
-  box-shadow: 0 0 24px rgba(255, 102, 0, 0.2);
-}
-
-.text-card h3 {
-  font-size: 2rem;
-  color: var(--primary, #ff6600);
-  margin-bottom: 1rem;
-  font-weight: 800;
-}
-
-.text-card p {
-  font-size: 1.1rem;
-  color: #eee;
-  line-height: 1.6;
-}
-
-/* Rechte Seite: Video */
-.video-side {
-  flex: 0 0 50%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  z-index: 1;
-  position: relative;
-}
-
-.video-side video {
-  width: 90%;
-  max-width: 600px;
-  height: auto;
-  object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0 0 32px rgba(255, 102, 0, 0.2);
-  opacity: 1;
-}
-
-/* Rest wie gehabt */
-.slider-container {
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.9s ease-in-out;
-  height: 100%;
-  z-index: 3;
-}
-
-.vertical-slider {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  margin-top: -60px;
-}
-
-/* Fancy Glow Buttons */
-.slider-controls {
-  position: absolute;
-  top: 50%;
-  right: 2rem;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  z-index: 10;
-}
-
-.glow-btn {
-  background: transparent;
-  border: 2px solid var(--primary, #ff6600);
-  color: var(--primary, #ff6600);
-  font-size: 1.8rem;
-  padding: 0.7rem 1.1rem;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 0 8px rgba(255, 102, 0, 0.4);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.glow-btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle, rgba(255, 102, 0, 0.3), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: -1;
-  border-radius: 50%;
-}
-
-.glow-btn:hover {
-  background: var(--primary, #ff6600);
-  color: #000;
-  box-shadow: 0 0 18px rgba(255, 102, 0, 0.6);
-}
-
-.glow-btn:hover::after {
-  opacity: 1;
-}
-
-
-/* Weicher Übergang */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-
-.fusion-cases {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
   justify-content: center;
-  margin-top: 3rem;
-}
-
-.fusion-case {
-  position: relative;
-  width: 320px;
-  overflow: hidden;
-  border-radius: 16px;
-  cursor: pointer;
-  transition: transform 0.4s ease;
-  background: #111;
-  box-shadow: 0 0 20px rgba(255, 102, 0, 0.2);
-}
-
-.fusion-case:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 40px rgba(255, 102, 0, 0.3);
-}
-
-.fusion-case video,
-.fusion-case img {
-  width: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.fusion-caption {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0,0,0,0.65);
-  backdrop-filter: blur(6px);
-  padding: 1rem;
   text-align: center;
+  background: linear-gradient(to bottom, #0b0b0b, #000);
 }
-
-.fusion-caption h4 {
-  font-size: 1.1rem;
-  color: var(--primary);
-  margin-bottom: 0.3rem;
-  font-weight: 800;
-}
-
-.fusion-caption span {
-  font-size: 0.9rem;
-  color: #aaa;
-}
-
-/* 🔥 Glow Effect */
-.fusion-glow {
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  background: radial-gradient(ellipse at center, rgba(255,102,0,0.12), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-  z-index: 1;
-}
-.fusion-case:hover .fusion-glow {
-  opacity: 1;
-}
-
-/* 📦 Lightbox */
-.fusion-lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(10,10,10,0.95);
-  backdrop-filter: blur(8px);
-  z-index: 999;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-}
-
-.fusion-lightbox-content {
-  max-width: 900px;
-  width: 100%;
-  background: #111;
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 0 32px rgba(255,102,0,0.3);
-  position: relative;
-  animation: fadeIn 0.5s ease;
-}
-
-.fusion-lightbox-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1.8rem;
-  cursor: pointer;
-  color: var(--secondary);
-  font-weight: bold;
-}
-
-.fusion-lightbox-media video,
-.fusion-lightbox-media img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-}
-
-.fusion-lightbox-text {
-  text-align: center;
-}
-
-.fusion-lightbox-text h3 {
-  color: var(--primary);
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
-  font-weight: 900;
-  text-shadow: 0 0 8px rgba(255, 102, 0, 0.3);
-}
-
-.fusion-lightbox-text p {
-  color: #ccc;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.96); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.stacked-image-wrapper {
-  position: sticky;
-  top: 0;
-  padding-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: auto;
-  z-index: 0;
-}
-
-.stack-img {
-  width: 100%;
-  max-width: 460px;
-  border-radius: 16px;
-  box-shadow: 0 0 32px rgba(255, 102, 0, 0.2);
-  position: relative;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  z-index: 1;
-  opacity: 0.4;
-  margin-top: -303px; /* kleiner Abstand – vorher -180px */
-}
-
-.stack-img:first-child {
-  margin-top: 0; /* Bild 1 soll ganz normal oben beginnen */
-}
-
-.stack-img.active {
-  transform: scale(1.05);
-  z-index: 10;
-  opacity: 1;
-}
-@media (min-width: 1920px) {
-  .container {
-    max-width: 1600px;
-    padding: 6rem 4rem;
-  }
-
-  .hero-video-content h1 {
-    font-size: 4.5rem;
-  }
-
-  .hero-video-content p {
-    font-size: 1.5rem;
-  }
-
-  .cta-btn,
-  .neon-btn {
-    font-size: 1.2rem;
-    padding: 1.2rem 2.8rem;
-  }
-
-  .epic-card {
-    width: 25vw;
-    height: auto;
-    padding: 3rem 2rem;
-  }
-
-  .card-content h3 {
-    font-size: 2rem;
-  }
-
-  .card-content p {
-    font-size: 1.2rem;
-  }
-
-  .split-left .feature {
-    padding: 2.5rem;
-  }
-
-  .text-card {
-    padding: 4rem;
-  }
-
-  .text-card h3 {
-    font-size: 2.4rem;
-  }
-
-  .fusion-case {
-    width: 360px;
-  }
-
-  .footer-grid {
-    max-width: 1600px;
-    gap: 3rem;
-  }
-
-  .footer-bottom {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 1024px) {
-  .container {
-    padding: 3rem 1.5rem;
-  }
-
-  header {
-    padding: 1.5rem 4vw;
-  }
-
-  nav a {
-    font-size: 0.95rem;
-    margin-left: 1.2rem;
-  }
-
-  .hero-video-content h1 {
-    font-size: 2.5rem;
-  }
-
-  .hero-video-content p {
-    font-size: 1rem;
-  }
-
-  .epic-card {
-    width: 42vw;
-    height: auto;
-    padding: 2rem 1rem;
-  }
-
-  .card-content h3 {
-    font-size: 1.3rem;
-  }
-
-  .card-content p {
-    font-size: 1rem;
-  }
-
-  .split-wrapper {
-    flex-direction: column;
-  }
-
-  .split-left, .split-right {
-    width: 100%;
-    position: relative;
-    top: auto;
-  }
-
-  .fusion-case {
-    width: 48%;
-  }
-
-  .text-card {
-    padding: 2rem;
-    text-align: center;
-  }
-
-  .text-card h3 {
-    font-size: 1.6rem;
-  }
-
-  .video-side {
-    justify-content: center;
-  }
-
-
-  .video-side video {
-    max-width: 90%;
-  }
-}
-
-@media (max-width: 768px) {
-  .epic-card {
-    width: 90%;
-    height: auto;
-  }
-
-  .epic-cards {
-    gap: 2rem;
-  }
-
-  .split-wrapper {
-    flex-direction: column;
-  }
-
-  .stack-img {
-    max-width: 90%;
-    margin: 0 auto;
-    margin-top: -21rem;
-    opacity: 1;
-  }
-
-  .stack-img.active {
-    transform: scale(1.03);
-  }
-
-  .fusion-case {
-    width: 90%;
-  }
-
-  .tab-buttons {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .text-card {
-    width: 100%;
-    padding: 2rem 1rem;
-  }
-
-  .video-side {
-    display: none; /* Optional: für kleine Geräte nur Text zeigen */
-  }
-
-  .tab-btn {
-    width: 100%;
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .epic-card .card-content h3 {
-    font-size: 1.2rem;
-  }
-  .stack-img {
-    max-width: 90%;
-    margin: 0 auto;
-    margin-top: -10rem;
-    opacity: 1;
-  }
-
-  .epic-card .card-content p {
-    font-size: 0.9rem;
-  }
-
-  .card-content .price {
-    font-size: 0.85rem;
-  }
-
-  .fusion-caption h4 {
-    font-size: 1rem;
-  }
-
-  .fusion-caption span {
-    font-size: 0.85rem;
-  }
-
-  .split-section {
-    padding: 3rem 2vw;
-  }
-
-  .feature h3 {
-    font-size: 1.2rem;
-  }
-
-  .feature p {
-    font-size: 1rem;
-  }
-
-  .tab-buttons {
-    gap: 0.6rem;
-  }
-}
-
-
-@media (max-width: 320px) {
-  .stack-img {
-    max-width: 90%;
-    margin: 0 auto;
-    margin-top: -7rem;
-    opacity: 1;
-  }
-}
-
-@media screen and (orientation: landscape) and (max-width: 812px) and (max-height: 500px) {
-  .hero-video-content h1 {
-    font-size: 1.6rem;
-    line-height: 1.2;
-  }
-
-  .hero-video-content p {
-    font-size: 0.9rem;
-    margin-bottom: 0.8rem;
-  }
-
-  .cta-btn {
-    font-size: 0.75rem;
-    padding: 0.5rem 1rem;
-  }
-
-  .epic-card {
-    width: 90%;
-    height: auto;
-    padding: 1.5rem 1rem;
-  }
-
-  .card-content h3 {
-    font-size: 1.2rem;
-  }
-
-  .card-content p {
-    font-size: 0.9rem;
-  }
-
-  .tab-buttons {
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .stacked-image-wrapper {
-    display: none;
-  }
-
-  .text-card {
-    width: 100%;
-    padding: 2rem 1rem;
-    text-align: center;
-  }
-
-  .video-side {
-    display: none;
-  }
-
-  header {
-    padding: 0.8rem 4vw;
-  }
-
-  .logo {
-    font-size: 1.3rem;
-  }
-
- nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: #111;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 1rem;
-    gap: 1rem;
-    border-left: 1px solid #222;
-    border-bottom: 1px solid #222;
-    z-index: 9;
-  }
-
-  nav.open {
-    display: flex;
-  }
-
-  nav a {
-    font-size: 0.9rem;
-    white-space: nowrap;
-    margin: 0;
-    color: var(--text);
-  }
-  .fusion-case {
-    width: 48%;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  .footer-socials-icons {
-    gap: 0.5rem;
-  }
-
-  .footer-socials img {
-    width: 22px;
-    height: 22px;
-  }
-}
-
 
 .hero-image-grid {
   position: absolute;
@@ -1699,28 +278,29 @@ text-align: center;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(8, 1fr);
   gap: 10px;
+  padding: 2rem;
   z-index: 0;
   pointer-events: none;
-  padding: 2rem;
 }
-
 
 .grid-box {
   overflow: hidden;
   border-radius: 14px;
-  pointer-events: auto;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.grid-box img {
+.grid-box img,
+.grid-box video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   filter: brightness(0.8);
   transition: transform 0.4s ease, filter 0.4s ease;
+  display: block;
 }
 
-.grid-box:hover img {
+.grid-box:hover img,
+.grid-box:hover video {
   transform: scale(1.08);
   filter: brightness(1);
 }
@@ -1730,690 +310,1534 @@ text-align: center;
   transform: scale(1.02);
 }
 
-/* 🎯 Neue perfekte Anordnung */
-.box1 {
-  grid-column: 1 / span 5;
-  grid-row: 1 / span 4;
+/* Layout-Box-Zuweisung */
+.box1 { grid-column: 1 / span 5; grid-row: 1 / span 4; }
+.box2 { grid-column: 6 / span 4; grid-row: 1 / span 3; }
+.box3 { grid-column: 10 / span 5; grid-row: 1 / span 3; }
+.box4 { grid-column: 1 / span 5; grid-row: 5 / span 3; }
+.box5 { grid-column: 6 / span 9; grid-row: 4 / span 2; }
+.box6 { grid-column: 1 / span 5; grid-row: 8 / span 5; }
+.box7 { grid-column: 6 / span 9; grid-row: 6 / span 7; }
+
+.hero-video-content {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 800px;
+  padding: 2rem;
+  margin-top: -25vh;
+  color: #fff;
 }
 
-.box2 {
-  grid-column: 6 / span 4;
-  grid-row: 1 / span 3;
+.hero-video-content h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
 }
 
-.box3 {
-  grid-column: 10 / span 5;
-  grid-row: 1 / span 3; /* previously: 2 / span 5 */
+.hero-video-content p {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin: 1rem 0;
 }
 
-.box4 {
-  grid-column: 1 / span 5;
-  grid-row: 5 / span 3;
+.cta-btn {
+  position: relative;
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 1rem 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: var(--primary);
+  color: #000;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
-.box5 {
-  grid-column: 6 / span 9;
-  grid-row: 4 / span 2;
-}
-.box6 {
-  grid-column: 1 / span 5;
-  grid-row: 8 / span 5;
-}
-
-.box7 {
-  grid-column: 6 / span 9;
-  grid-row: 6 / span 7;
+/* Neon Effekt */
+.neon-btn {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  font-weight: 800;
+  box-shadow: 0 0 12px rgba(255, 102, 0, 0.4),
+              0 0 24px rgba(255, 102, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
-.grid-box video,
-.grid-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+.neon-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+  box-shadow: 0 0 16px rgba(255, 102, 0, 0.6),
+              0 0 36px rgba(255, 102, 0, 0.4);
 }
-.grid-box video,
-.grid-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+</style>
 
+<div class="white-bg-wrapper">
+<section class="services-section" id="leistungen">
+  <div class="parallax-bg"></div>
+  <div class="container">
+    <h2 class="section-title scroll-fade">Unsere Leistungen</h2>
+    <div class="services-grid">
 
+      <!-- CARD 1 -->
+      <div class="service-card scroll-fade">
+        <div class="icon-circle"><i data-feather="layers"></i></div>
+        <h3>Visual Start</h3>
+        <button class="accordion-toggle">Details anzeigen</button>
+        <div class="accordion-content">
+          <ul class="feature-list">
+            <li><span class="check">✓</span> Optimiertes 3D-Modell in hoher Qualität</li>
+            <li><span class="check">✓</span> Fotorealistische Renderings</li>
+            <li><span class="check">✓</span> 2 Korrekturschleifen inklusive</li>
+            <li><span class="check">✓</span> Ideal für starke Produktpräsentationen</li>
+          </ul>
+          <div class="price-box">Preisrahmen: <br><strong>500–1.000 €</strong></div>
+        </div>
+      </div>
 
+      <!-- CARD 2 -->
+      <div class="service-card scroll-fade">
+        <div class="icon-circle"><i data-feather="film"></i></div>
+        <h3>Motion Impact</h3>
+        <button class="accordion-toggle">Details anzeigen</button>
+        <div class="accordion-content">
+          <ul class="feature-list">
+            <li><span class="check">✓</span> Produktvideo (5–10 Sek.) in hoher Qualität</li>
+            <li><span class="check">✓</span> Modellanpassung nach individuellen Anforderungen</li>
+            <li><span class="check">✓</span> Bis zu 3 Feedbackrunden inklusive</li>
+            <li><span class="check">✓</span> Ideal für Social Media & Präsentationen</li>
+          </ul>
+          <div class="price-box">Preisrahmen: <br><strong>1.000–2.500 €</strong></div>
+        </div>
+      </div>
 
+      <!-- CARD 3 -->
+      <div class="service-card scroll-fade">
+        <div class="icon-circle"><i data-feather="eye"></i></div>
+        <h3>Immersive Vision</h3>
+        <button class="accordion-toggle">Details anzeigen</button>
+        <div class="accordion-content">
+          <ul class="feature-list">
+            <li><span class="check">✓</span> Erweiterung für Virtual Reality (VR)</li>
+            <li><span class="check">✓</span> Längere, immersive Animationen</li>
+            <li><span class="check">✓</span> Individuelles Showroom-Design</li>
+            <li><span class="check">✓</span> Präsentationen auf Events und Messen</li>
+          </ul>
+          <div class="price-box">Preisrahmen: <br><strong>3.000–6.000 €</strong></div>
+        </div>
+      </div>
 
+      <!-- CARD 4 -->
+      <div class="service-card scroll-fade">
+        <div class="icon-circle"><i data-feather="settings"></i></div>
+        <h3>Enterprise+</h3>
+        <button class="accordion-toggle">Details anzeigen</button>
+        <div class="accordion-content">
+          <ul class="feature-list">
+            <li><span class="check">✓</span> Individuelle Komplettlösungen</li>
+            <li><span class="check">✓</span> Integration von AR & interaktiven Modulen</li>
+            <li><span class="check">✓</span> Strategische Beratung & Projektsteuerung</li>
+            <li><span class="check">✓</span> Maßgeschneidert für höchste Ansprüche</li>
+          </ul>
+          <div class="price-box">Preis: <br><strong>auf Anfrage</strong></div>
+        </div>
+      </div>
 
-
-
-    </style>
-
-
-  </head>
-  <body>
-  
-  <header>
-    <div class="logo">Fusion³</div>
-    <div class="burger" id="burger">
-      <span></span>
-      <span></span>
-      <span></span>
     </div>
-    <nav>
-      <a href="#leistungen">Leistungen</a>
-      <a href="#einsatz">Einsatzbereiche</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
-  </header>
-  
-
-<section class="hero-video-wrapper">
-  <div class="hero-image-grid">
-    <!-- Box 1: Video-Platzhalter -->
-    <div class="grid-box box1">
-      <video autoplay muted loop playsinline>
-        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
-        Dein Browser unterstützt keine Videos.
-      </video>
-    </div>
-
-    <!-- Box 2: Bild-Platzhalter -->
-    <div class="grid-box box2">
-      <img src="https://placehold.co/600x800?text=Bild+2" alt="Bild 2">
-    </div>
-
-    <!-- Box 3: Bild-Platzhalter -->
-    <div class="grid-box box3">
-      <img src="https://placehold.co/600x800?text=Bild+3" alt="Bild 3">
-    </div>
-
-    <!-- Box 4: Video-Platzhalter -->
-    <div class="grid-box box4">
-      <video autoplay muted loop playsinline>
-        <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" type="video/mp4">
-        Dein Browser unterstützt keine Videos.
-      </video>
-    </div>
-
-    <!-- Box 5: Video-Platzhalter -->
-    <div class="grid-box box5">
-      <video autoplay muted loop playsinline>
-        <source src="https://samplelib.com/lib/preview/mp4/sample-10s.mp4" type="video/mp4">
-        Dein Browser unterstützt keine Videos.
-      </video>
-    </div>
-
-    <!-- Box 6: Bild-Platzhalter -->
-    <div class="grid-box box6">
-      <img src="https://placehold.co/600x800?text=Bild+6" alt="Bild 6">
-    </div>
-
-    <!-- Box 7: Video-Platzhalter -->
-    <div class="grid-box box7">
-      <video autoplay muted loop playsinline>
-        <source src="https://samplelib.com/lib/preview/mp4/sample-10s.mp4" type="video/mp4">
-        Dein Browser unterstützt keine Videos.
-      </video>
-    </div>
+    <p class="services-hint scroll-fade">Alle Preise sind Richtwerte. Für jedes Projekt erstellen wir ein passendes Angebot.</p>
   </div>
-
-  
-    <div class="hero-video-content">
-      <h1>Faszinier mit<br>3D Design & Motion</h1>
-      <p>High-End Visuals, Virtual Reality & produktionsreife Modelle.</p>
-      <a class="cta-btn neon-btn" href="#kontakt">
-        <span>🚀 Projekt starten</span>
-      </a>
-    </div>
-  </section>
-
-  <section class="container epic-leistungen" id="leistungen">
-    <h2>Unsere 3D Leistungen</h2>
-    <h3>Visualisierung, Motion & Virtual Reality – alles aus einer Hand.</h3>
-  
-    <div class="tab-buttons">
-      <button class="tab-btn active" data-tab="vis">🎨 Visualisierung</button>
-      <button class="tab-btn" data-tab="motion">🎬 Motion</button>
-      <button class="tab-btn" data-tab="vr">🌐 Virtual Reality</button>
-    </div>
-  
-    <div class="tab-content active" id="tab-vis">
-      <div class="epic-cards">
-
-        <div class="epic-card" data-tilt>
-            <div class="video-bg">
-                <video autoplay muted loop playsinline>
-                  <source src="./3DPic/1.mp4" type="video/mp4" />
-                </video>
-              </div>              
-          <div class="card-glow"></div>
-          <div class="card-content">
-            <h3>3D Produktvisualisierung</h3>
-            <p>Detailreiche Renderings für dein Produktportfolio.</p>
-            <span class="price">ab 490 €</span>
-          </div>
-        </div>
-
-        <div class="epic-card" data-tilt>
-            <div class="video-bg">
-                <video autoplay muted loop playsinline>
-                  <source src="./3DPic/1.mp4" type="video/mp4" />
-                </video>
-              </div>    
-          <div class="card-glow"></div>
-          <div class="card-content">
-            <div class="lottie-icon" data-lottie="archviz.json"></div>
-            <h3>ArchViz Pro</h3>
-            <p>Immersive Innen- & Außenansichten mit Lichtsimulation.</p>
-            <span class="price">ab 890 €</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="tab-content" id="tab-motion">
-      <div class="epic-cards">
-        <div class="epic-card" data-tilt>
-            <div class="video-bg">
-                <video autoplay muted loop playsinline>
-                  <source src="./3DPic/1.mp4" type="video/mp4" />
-                </video>
-              </div>              
-          <div class="card-glow"></div>
-          <div class="card-content">
-            <div class="lottie-icon" data-lottie="motion1.json"></div>
-            <h3>Motion Teaser</h3>
-            <p>Kurze Produktanimationen für Ads & Social.</p>
-            <span class="price">ab 390 €</span>
-          </div>
-        </div>
-        <div class="epic-card" data-tilt>
-            <div class="video-bg">
-                <video autoplay muted loop playsinline>
-                  <source src="./3DPic/1.mp4" type="video/mp4" />
-                </video>
-              </div>              
-          <div class="card-glow"></div>
-          <div class="card-content">
-            <div class="lottie-icon" data-lottie="showreel.json"></div>
-            <h3>Showreel Paket</h3>
-            <p>Motion Branding in dynamischer 3D Inszenierung.</p>
-            <span class="price">ab 790 €</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="tab-content" id="tab-vr">
-      <div class="epic-cards">
-        <div class="epic-card" data-tilt>
-            <div class="video-bg">
-                <video autoplay muted loop playsinline>
-                  <source src="./3DPic/1.mp4" type="video/mp4" />
-                </video>
-              </div>              
-          <div class="card-glow"></div>
-          <div class="card-content">
-            <div class="lottie-icon" data-lottie="vrshop.json"></div>
-            <h3>VR Showroom</h3>
-            <p>Begehbare Produktwelten für WebXR & Oculus.</p>
-            <span class="price">ab 1.990 €</span>
-          </div>
-        </div>
-        <div class="epic-card" data-tilt>
-            <div class="video-bg">
-  <video autoplay muted loop playsinline>
-    <source src="./3DPic/1.mp4" type="video/mp4" />
-  </video>
-</div>
-
-          <div class="card-glow"></div>
-          <div class="card-content">
-            <h3>Metaverse Ready</h3>
-            <p>Optimierte Assets für Unreal, Unity & Co.</p>
-            <span class="price">ab 690 €</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="container" id="about">
-    <h2>Wer wir sind</h2>
-    <div class="split-wrapper">
-      
-      <div class="split-left">
-  
-        <div class="feature" data-img="1.jpg">
-          <h3>👋 Wer seid ihr?</h3>
-          <p>Wir sind ein kreatives 3D Studio mit Fokus auf Design, Technologie und Emotion. Unser Team besteht aus Designern, Entwicklern und Motion Artists, die eines verbindet: Leidenschaft für visuelle Exzellenz.</p>
-        </div>
-  
-        <div class="feature" data-img="1.jpg">
-          <h3>💡 Warum 3D?</h3>
-          <p>3D ermöglicht maximale Flexibilität in Darstellung und Emotion. Von fotorealistischen Produktdarstellungen bis zu immersiven VR-Erlebnissen – 3D schafft neue Wege der Markenkommunikation.</p>
-        </div>
-  
-        <div class="feature" data-img="1.jpg">
-          <h3>⚙️ Philosophie: Design trifft Technik</h3>
-          <p>Ästhetik allein reicht nicht – bei uns verschmilzt gutes Design mit durchdachter Technologie. Wir denken von der Idee bis zum fertigen Asset und setzen alles in Szene, was bewegt.</p>
-        </div>
-  
-      </div>
-  
-      <div class="stacked-image-wrapper">
-        <img src="./3DPic/1.jpg" class="stack-img" />
-        <img src="./3DPic/1.jpg" class="stack-img" />
-        <img src="./3DPic/1.jpg" class="stack-img" />
-        <img src="./3DPic/1.jpg" class="stack-img" />
-        <img src="./3DPic/1.jpg" class="stack-img" />
-        <img src="./3DPic/1.jpg" class="stack-img" />
-      </div>
-      
-  
-    </div>
-  </section>
-  
-  <section class="container" id="case-studies">
-    <h2>Case Studies</h2>
-    <h3>High-End Visuals mit Wirkung</h3>
-  
-    <div class="fusion-cases">
-      <div class="fusion-case" onclick="openLightbox(0)">
-        <video src="./3DPic/1.mp4" muted loop playsinline></video>
-        <div class="fusion-glow"></div>
-        <div class="fusion-caption">
-          <h4>Neolog Produktkampagnen</h4>
-          <span>3D Produkt & Technik</span>
-        </div>
-      </div>
-      <div class="fusion-case" onclick="openLightbox(1)">
-        <video src="./3DPic/1.mp4" muted loop playsinline></video>
-        <div class="fusion-glow"></div>
-        <div class="fusion-caption">
-          <h4>Getränke Commercial</h4>
-          <span>Produktanimation</span>
-        </div>
-      </div>
-      <div class="fusion-case" onclick="openLightbox(2)">
-        <img src="./3DPic/1.jpg" alt="VR">
-        <div class="fusion-glow"></div>
-        <div class="fusion-caption">
-          <h4>Creme Commercial</h4>
-          <span>Produktrender</span>
-        </div>
-      </div>
-      <div class="fusion-case" onclick="openLightbox(2)">
-        <img src="./3DPic/1.jpg" alt="VR">
-        <div class="fusion-glow"></div>
-        <div class="fusion-caption">
-          <h4>VR Raumstation</h4>
-          <span>Virtuelle Bildung</span>
-        </div>
-      </div>
-    </div>
-  
-    <!-- Lightbox -->
-    <div id="lightbox" class="fusion-lightbox">
-      <div class="fusion-lightbox-content">
-        <span class="fusion-lightbox-close" onclick="closeLightbox()">✕</span>
-        <div class="fusion-lightbox-media" id="lightbox-media"></div>
-        <div class="fusion-lightbox-text" id="lightbox-text"></div>
-      </div>
-    </div>
-  </section>
-  
-  
-
-    <section class="container" id="kontakt">
-      <h2>Kontakt aufnehmen</h2>
-      <div class="form-wrapper">
-        <form action="https://formspree.io/f/xqapdvaq" method="POST">
-          <input type="text" name="name" placeholder="Dein Name" required />
-          <input type="email" name="email" placeholder="Deine E-Mail" required />
-          <textarea name="message" rows="6" placeholder="Worum geht’s?" required></textarea>
-          <input type="text" name="_gotcha" style="display:none">
-          <button type="submit" class="neon-btn" id="sendButton">
-            <span>✉️ Nachricht senden</span>
-          </button>
-        </form>
-      </div>
-    </section>
-    
-    <footer>
-      <div class="footer-grid">
-        <div class="footer-logo">
-          <span>Fusion³</span>
-          <p>3D Design. Visualisierung. Emotion.</p>
-        </div>
-    
-        <div class="footer-links">
-          <h4>Rechtliches</h4>
-          <ul>
-            <li><a href="/impressum.html">Impressum</a></li>
-            <li><a href="/datenschutz.html">Datenschutz</a></li>
-            <li><a href="/agb.html">AGB</a></li>
-          </ul>
-        </div>
-    
-        <div class="footer-contact">
-          <h4>Kontakt</h4>
-          <ul>
-            <li><a href="mailto:hello@fusion3.de">hello@fusion3.de</a></li>
-            <li>+49 123 4567890</li>
-            <li>Berlin, Deutschland</li>
-          </ul>
-        </div>
-    
-        <div class="footer-socials">
-          <h4>Social</h4>
-          <div class="footer-socials-icons">
-            <a href="mailto:hello@fusion3.de" title="E-Mail">
-              <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="E-Mail Icon" />
-            </a>
-            <a href="https://github.com/" title="GitHub" target="_blank">
-              <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub Logo" />
-            </a>
-            <a href="https://www.linkedin.com/" title="LinkedIn" target="_blank">
-              <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn Blau" />
-            </a>
-            <a href="https://wa.me/491234567890" title="WhatsApp schreiben" target="_blank">
-              <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon" />
-            </a>
-          </div>
-        </div>
-      </div>
-      <p class="footer-bottom">© 2025 Fusion³ – Alle Rechte vorbehalten.</p>
-    </footer>
+</section>
 
 
+<style>
+/* Grundlayout */
+.services-section {
+  padding: 6rem 2rem;
+  background: #fff;
+  text-align: center;
+  color: #111;
+  position: relative;
+}
 
+.parallax-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, #fff, #f2f2f2);
+  z-index: -1;
+}
 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-  <!-- Scroll, Animation & GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  
-  <script>
-    gsap.registerPlugin(ScrollTrigger);
-  
-    gsap.from(".hero-video-content h1", {
-      duration: 1.5,
-      y: 50,
-      opacity: 0,
-      delay: 0.5,
-      ease: "power4.out"
-    });
-  
-    gsap.from(".hero-video-content p", {
-      duration: 1.2,
-      y: 30,
-      opacity: 0,
-      delay: 0.8,
-      ease: "power3.out"
-    });
-  
-    gsap.fromTo(".cta-btn", {
-      opacity: 0,
-      scale: 0.95
-    }, {
-      duration: 1,
-      opacity: 1,
-      scale: 1,
-      delay: 1.2,
-      ease: "back.out(1.7)"
-    });
-  
-    gsap.utils.toArray('.tech-card, .epic-step, .persona-card').forEach(card => {
-      gsap.from(card, {
-        scrollTrigger: {
-          trigger: card,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse'
-        },
-        opacity: 0,
-        y: 40,
-        duration: 1,
-        ease: 'power4.out'
-      });
-    });
-  </script>
-  
-  <!-- Burger Menü -->
-  <script>
-    const burger = document.getElementById("burger");
-    const nav = document.querySelector("nav");
-  
-    burger.addEventListener("click", () => {
-      burger.classList.toggle("active");
-      nav.classList.toggle("open");
-    });
-  </script>
-  
-  <!-- Kontakt-Button Interaktion -->
-  <script>
-    const form = document.querySelector("form");
-    const sendButton = document.getElementById("sendButton");
-  
-    form.addEventListener("submit", function (e) {
-      sendButton.classList.add("shake");
-  
-      setTimeout(() => {
-        sendButton.classList.remove("shake");
-        sendButton.classList.add("sent");
-        sendButton.innerHTML = "<span>✅ Gesendet!</span>";
-      }, 300);
-  
-      setTimeout(() => {
-        sendButton.classList.remove("sent");
-        sendButton.innerHTML = "<span>✉️ Nachricht senden</span>";
-      }, 4000);
-    });
-  </script>
-  
-  
+.section-title {
+  font-size: 2.4rem;
+  font-weight: 900;
+  margin-bottom: 3rem;
+}
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
-  
-  <script>
-    // Tabs wechseln
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-  
-        btn.classList.add('active');
-        document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
-      });
-    });
-  
-  
-  </script>
-  <script>
-    var animation = lottie.loadAnimation({
-      container: document.getElementById('lottie-animation'), // das div oben
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      path: 'visual.json' // Stelle sicher, dass der Pfad korrekt ist
-    });
-  </script>
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+.service-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  text-align: left;
+  transition: 0.3s ease;
+  position: relative;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.icon-circle {
+  width: 48px;
+  height: 48px;
+  background: #ffa94d;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.icon-circle i {
+  width: 24px;
+  height: 24px;
+  stroke: #fff;
+}
+
+.accordion-toggle {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.accordion-toggle:hover {
+  background: #f2f2f2;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  opacity: 0;
+}
+
+.accordion-content.open {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 1rem;
+}
+
+.services-hint {
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* Scroll Fade */
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.scroll-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.feature-list li {
+  font-size: 1rem;
+  padding: 0.4rem 0;
+  color: #333;
+  display: flex;
+  align-items: flex-start;
+}
+
+.feature-list .check {
+  color: #28a745;
+  font-weight: bold;
+  margin-right: 0.6rem;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+/* Preisbox schön abgesetzt */
+.price-box {
+  background: #f9f9f9;
+  border-left: 4px solid #ffa94d;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #111;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+</style>
 
 <script>
-    const featureBoxes = document.querySelectorAll('.feature');
-    const img = document.getElementById('feature-image');
-  
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const newSrc = './3DPic/' + entry.target.dataset.img;
-            img.src = newSrc;
-          }
-        });
-      },
-      {
-        rootMargin: '0px',
-        threshold: 0.5
-      }
-    );
-  
-    featureBoxes.forEach(box => observer.observe(box));
-  </script>
-  
+  document.addEventListener("DOMContentLoaded", () => {
+    feather.replace();
 
+    // Accordion Toggle
+    document.querySelectorAll(".accordion-toggle").forEach(button => {
+      button.addEventListener("click", () => {
+        const content = button.nextElementSibling;
+        const isOpen = content.classList.contains("open");
 
-  <script>
-    const slides = document.querySelectorAll('.slide');
-    const container = document.querySelector('.slider-container');
-    const videoElement = document.getElementById('sliderBackgroundVideo');
-    const videoSource = videoElement.querySelector('source');
-    let currentIndex = 0;
-  
-    const showSlide = (index) => {
-      if (index < 0 || index >= slides.length) return;
-  
-      // Slide scrollen
-      container.style.transform = `translateY(-${index * 100}vh)`;
-      currentIndex = index;
-  
-      // Video-Switch
-      const videoPath = slides[index].dataset.video;
-      if (videoSource.src !== window.location.origin + videoPath) {
-        videoSource.src = videoPath;
-        videoElement.load();
-        videoElement.play();
-      }
-    };
-  
-    document.getElementById('next').addEventListener('click', () => {
-      showSlide((currentIndex + 1) % slides.length);
-    });
-  
-    document.getElementById('prev').addEventListener('click', () => {
-      showSlide((currentIndex - 1 + slides.length) % slides.length);
-    });
-  
-    // Auto scroll
-    setInterval(() => {
-      showSlide((currentIndex + 1) % slides.length);
-    }, 10000);
-  </script>
-  
+        // Close all
+        document.querySelectorAll(".accordion-content").forEach(c => c.classList.remove("open"));
+        document.querySelectorAll(".accordion-toggle").forEach(b => b.textContent = "Details anzeigen");
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script>
-    const lightboxData = [
-      {
-        type: "video",
-        src: "./3DPic/1.mp4",
-        title: "Neolog Produktkampagnen",
-        text: "Für Neolog wurden diverse 3D-Kampagnen umgesetzt – von technischen Bauteilen bis hin zu vollanimierten Produktwelten."
-      },
-      {
-        type: "video",
-        src: "./3DPic/1.mp4",
-        title: "Getränke Commercial",
-        text: "Ein 3D Commercial für eine junge Getränkemarke: Flüssigkeitseffekte, Partikel und animierte Typografie schaffen ein dynamisches Motion Branding."
-      },
-      {
-        type: "image",
-        src: "./3DPic/1.jpg",
-        title: "VR Showroom für Kinder",
-        text: "Virtueller Raumstations-Showroom für Schulklassen. Kinder erleben gemeinsam ein immersives Lernerlebnis in VR."
-      }
-    ];
-  
-    function openLightbox(index) {
-      const data = lightboxData[index];
-      const media = data.type === "video"
-        ? `<video src="${data.src}" autoplay muted loop playsinline></video>`
-        : `<img src="${data.src}" alt="${data.title}" />`;
-  
-      document.getElementById("lightbox-media").innerHTML = media;
-      document.getElementById("lightbox-text").innerHTML = `
-        <h3>${data.title}</h3>
-        <p>${data.text}</p>
-      `;
-  
-      const lightbox = document.getElementById("lightbox");
-      lightbox.style.display = "flex";
-  
-      // GSAP Animation
-      gsap.fromTo(".fusion-lightbox-content", 
-        { y: 60, opacity: 0, scale: 0.92 },
-        { duration: 0.6, y: 0, opacity: 1, scale: 1, ease: "power3.out" }
-      );
-    }
-  
-    function closeLightbox() {
-      const lightbox = document.getElementById("lightbox");
-      gsap.to(".fusion-lightbox-content", {
-        duration: 0.4,
-        y: 40,
-        opacity: 0,
-        scale: 0.94,
-        ease: "power2.in",
-        onComplete: () => {
-          lightbox.style.display = "none";
+        // Open if was closed
+        if (!isOpen) {
+          content.classList.add("open");
+          button.textContent = "Details ausblenden";
         }
       });
+    });
+
+    // Scroll fade-in
+    const scrollElements = document.querySelectorAll(".scroll-fade");
+
+    const elementInView = (el, offset = 100) => {
+      const elementTop = el.getBoundingClientRect().top;
+      return elementTop <= (window.innerHeight - offset);
+    };
+
+    const displayScrollElement = (el) => {
+      el.classList.add('visible');
+    };
+
+    const handleScrollAnimation = () => {
+      scrollElements.forEach(el => {
+        if (elementInView(el)) {
+          displayScrollElement(el);
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScrollAnimation);
+    handleScrollAnimation();
+  });
+</script>
+<script src="https://unpkg.com/feather-icons"></script>
+
+
+<section class="workflow-section container" id="workflow" aria-label="Ablauf unseres 3D-Prozesses">
+  <h2 class="workflow-title">Unser Workflow</h2>
+  <p class="workflow-intro">
+    So läuft ein typisches 3D-Projekt bei uns ab – transparent, interaktiv und auf Augenhöhe.
+  </p>
+
+  <div class="workflow-timeline">
+    <div class="timeline-line">
+      <div class="timeline-fill"></div>
+      <div class="timeline-dot"></div>
+    </div>
+
+    <div class="workflow-steps">
+
+      <div class="workflow-step">
+        <span class="step-number">01</span>
+        <div class="icon"><i data-feather="message-circle" aria-hidden="true"></i></div>
+        <div class="step-content">
+          <h3>Erstkontakt & Projektbriefing</h3>
+          <p>Kick-off mit Zieldefinition, Kundenverständnis und Vertrauensaufbau.</p>
+        </div>
+      </div>
+
+      <div class="workflow-step">
+        <span class="step-number">02</span>
+        <div class="icon"><i data-feather="edit-3" aria-hidden="true"></i></div>
+        <div class="step-content">
+          <h3>Konzeptentwicklung & Angebot</h3>
+          <p>Skizzen, Storyboards, transparente Kosten und visuelle Kundeneinbindung.</p>
+        </div>
+      </div>
+
+      <div class="workflow-step">
+        <span class="step-number">03</span>
+        <div class="icon"><i data-feather="layers" aria-hidden="true"></i></div>
+        <div class="step-content">
+          <h3>Modellübernahme & Vorbereitung</h3>
+          <p>Modelloptimierung, Materialwahl und visuelle Fortschrittsupdates.</p>
+        </div>
+      </div>
+
+      <div class="workflow-step">
+        <span class="step-number">04</span>
+        <div class="icon"><i data-feather="film" aria-hidden="true"></i></div>
+        <div class="step-content">
+          <h3>Rendering & Animation</h3>
+          <p>Erste Visuals, Live-Reviews & Interaktion in Echtzeit.</p>
+        </div>
+      </div>
+
+      <div class="workflow-step">
+        <span class="step-number">05</span>
+        <div class="icon"><i data-feather="refresh-ccw" aria-hidden="true"></i></div>
+        <div class="step-content">
+          <h3>Feedback & Überarbeitung</h3>
+          <p>Gezielte Korrekturen mit klarer Kommunikation & Abstimmung.</p>
+        </div>
+      </div>
+
+      <div class="workflow-step">
+        <span class="step-number">06</span>
+        <div class="icon"><i data-feather="check-circle" aria-hidden="true"></i></div>
+        <div class="step-content">
+          <h3>Finalisierung & Übergabe</h3>
+          <p>Lieferung der finalen Assets und persönlicher Projektabschluss.</p>
+        </div>
+      </div>
+
+      <div class="workflow-step">
+        <span class="step-number">07</span>
+        <div class="icon"><i data-feather="heart" aria-hidden="true"></i></div>
+        <div class="step-content">
+          <h3>Nachbetreuung & Weiterentwicklung</h3>
+          <p>Support, Updates, Feedback-Schleifen & nachhaltige Betreuung.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.workflow-section {
+  padding: 6rem 2rem;
+  background: #fff;
+  color: #111;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.workflow-title {
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.workflow-intro {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto 4rem;
+  line-height: 1.6;
+}
+
+.workflow-timeline {
+  position: relative;
+  padding-left: 3rem;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 32px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #eee;
+  border-radius: 2px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.timeline-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background: #FF6600;
+  border-radius: 2px;
+  z-index: 1;
+  height: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 14px;
+  height: 14px;
+  background: #FF6600;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.workflow-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.workflow-step {
+  position: relative;
+  padding-left: 80px;
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  transition: transform 0.8s ease, opacity 0.8s ease;
+  will-change: transform, opacity;
+}
+
+.workflow-step.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.workflow-step:hover {
+  background: transparent;
+  transform: translateY(-2px) scale(1.01);
+}
+
+.workflow-step.active {
+  z-index: 1;
+}
+
+.step-number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #FF6600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 102, 0, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.icon i {
+  width: 22px;
+  height: 22px;
+  stroke: #FF6600;
+  transition: stroke 0.3s ease;
+}
+
+.workflow-step.active .icon {
+  background: #FF6600;
+}
+.workflow-step.active .icon i {
+  stroke: #fff;
+}
+
+/* Staggered Sub-Anims */
+.step-content h3,
+.step-content p,
+.icon {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+.workflow-step.visible .icon {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
+}
+.workflow-step.visible h3 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+.workflow-step.visible p {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+}
+
+.step-content h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: #222;
+  text-align: left;
+}
+
+.step-content p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  text-align: left;
+}
+@media (max-width: 768px) {
+  .workflow-timeline {
+    padding-left: 0;
+  }
+
+  .timeline-line,
+  .timeline-fill,
+  .timeline-dot {
+    display: none !important;
+  }
+
+  .workflow-step {
+    padding-left: 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .icon {
+    margin: 0 auto 1rem;
+  }
+
+  .step-number {
+  position: absolute;
+  top: 0.2rem;
+  right: 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: -5;
+}
+
+  .step-content h3,
+  .step-content p {
+    text-align: center;
+  }
+}
+
+</style>
+
+<script src="https://unpkg.com/feather-icons"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  feather.replace();
+
+  const steps = document.querySelectorAll(".workflow-step");
+  const fill = document.querySelector(".timeline-fill");
+  const dot = document.querySelector(".timeline-dot");
+  const section = document.querySelector(".workflow-section");
+
+  let currentHeight = 0;
+  let targetHeight = 0;
+  let animationRunning = false;
+
+  const getScrollTop = () => window.scrollY || window.pageYOffset;
+
+  const updateTarget = () => {
+    const timelineTop = section.offsetTop;
+    const timelineHeight = section.offsetHeight;
+    const scrollY = getScrollTop();
+    const scrollPos = scrollY + window.innerHeight / 2 - timelineTop;
+    targetHeight = Math.min(Math.max(scrollPos, 0), timelineHeight);
+    if (!animationRunning) {
+      animationRunning = true;
+      animateFill();
     }
-  
-    // ESC schließt Lightbox
-    document.addEventListener("keydown", function(e) {
-      if (e.key === "Escape") {
-        closeLightbox();
+  };
+
+  const animateFill = () => {
+    currentHeight += (targetHeight - currentHeight) * 0.1;
+    fill.style.height = currentHeight + "px";
+    dot.style.transform = `translate(-50%, ${currentHeight - 7}px)`;
+
+    let activeIndex = 0;
+    steps.forEach((step, index) => {
+      const middle = step.offsetTop + step.offsetHeight / 2;
+      if (currentHeight >= middle) {
+        activeIndex = index;
       }
     });
-  </script>
 
-<script>
-const features = document.querySelectorAll(".feature");
-const stackImages = document.querySelectorAll(".stack-img");
-
-const totalImages = stackImages.length;
-const imagesPerFeature = Math.floor(totalImages / features.length);
-
-// Vorher: alle deaktivieren
-function deactivateAllImages() {
-  stackImages.forEach(img => img.classList.remove("active"));
-}
-
-// ScrollTrigger für jedes Feature
-features.forEach((feature, featureIndex) => {
-  const startIdx = featureIndex * imagesPerFeature;
-  const endIdx = startIdx + imagesPerFeature;
-
-  for (let i = 0; i < imagesPerFeature; i++) {
-    const imageIndex = startIdx + i;
-
-    ScrollTrigger.create({
-      trigger: feature,
-      start: `top+=${i * 30}% center`, // Je Bild ein eigener Startpunkt
-      end: `top+=${(i + 1) * 30}% center`,
-      scrub: true,
-      onEnter: () => activateImage(imageIndex),
-      onEnterBack: () => activateImage(imageIndex),
+    steps.forEach((step, index) => {
+      step.classList.toggle("active", index === activeIndex);
+      step.classList.add("visible");
     });
-  }
+
+    if (Math.abs(currentHeight - targetHeight) > 0.5) {
+      requestAnimationFrame(animateFill);
+    } else {
+      animationRunning = false;
+    }
+  };
+
+  window.addEventListener("scroll", updateTarget);
+  window.addEventListener("resize", updateTarget);
+  updateTarget();
+
+  // Smooth icon parallax
+  let ticking = false;
+  const updateParallax = () => {
+    document.querySelectorAll(".workflow-step .icon").forEach(icon => {
+      const rect = icon.getBoundingClientRect();
+      const offset = rect.top / window.innerHeight;
+      icon.style.transform = `translateY(${offset * -5}px)`;
+    });
+    ticking = false;
+  };
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  });
 });
-
-// Aktiviert ein einzelnes Bild
-function activateImage(index) {
-  if (!stackImages[index]) return;
-  deactivateAllImages();
-  stackImages[index].classList.add("active");
-}
-
-// Initialstatus setzen
-activateImage(0);
-
 </script>
 
 
-  </body>
-  </html>
-    
+<section class="portfolio-section container" id="portfolio">
+  <h2 class="portfolio-title">Projekte & Fallstudien</h2>
+  <p class="portfolio-intro">
+    Entdecke unsere erfolgreich umgesetzten Visualisierungen, Animationen und XR-Projekte.
+  </p>
+
+  <div class="portfolio-filter">
+    <button class="filter-btn active" data-filter="all">Alle</button>
+    <button class="filter-btn" data-filter="3d">3D</button>
+    <button class="filter-btn" data-filter="animation">Animation</button>
+    <button class="filter-btn" data-filter="vr">VR</button>
+  </div>
+
+  <div class="portfolio-grid">
+    <!-- Beispielbilder -->
+    <div class="portfolio-item" data-category="3d">
+      <img src="https://placehold.co/600x400?text=3D+Sneaker" alt="3D Sneaker">
+      <div class="item-info">
+        <h3>Sneaker Visualisierung</h3>
+        <span class="tag">3D</span>
+      </div>
+    </div>
+
+    <div class="portfolio-item" data-category="vr">
+      <img src="https://placehold.co/600x400?text=VR+Showroom" alt="VR Möbel">
+      <div class="item-info">
+        <h3>VR Showroom</h3>
+        <span class="tag">VR</span>
+      </div>
+    </div>
+
+    <div class="portfolio-item" data-category="ar">
+      <img src="https://placehold.co/600x400?text=AR+Makeup" alt="AR Kosmetik">
+      <div class="item-info">
+        <h3>VR Makeup-Demo</h3>
+        <span class="tag">VR</span>
+      </div>
+    </div>
+
+    <div class="portfolio-item" data-category="animation">
+      <video autoplay muted loop>
+        <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" type="video/mp4">
+      </video>
+      <div class="item-info">
+        <h3>Automotive Animation</h3>
+        <span class="tag">Animation</span>
+      </div>
+    </div>
+
+    <!-- 10+4 Einträge... -->
+    <!-- Weitere Items einfach kopieren mit jeweiligem `data-category` -->
+  </div>
+</section>
+
+<style>
+  .portfolio-section {
+  padding: 6rem 2rem;
+  background: #fff;
+  color: #111;
+  text-align: center;
+}
+
+.portfolio-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.portfolio-intro {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+}
+
+.portfolio-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.filter-btn {
+  background: #eee;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: #ff6600;
+  color: #fff;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.portfolio-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 18px rgba(255, 102, 0, 0.2);
+}
+
+.portfolio-item img,
+.portfolio-item video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.item-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.8rem 1rem;
+  text-align: left;
+}
+
+.item-info h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  color: #111;
+}
+
+.tag {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  color: #ff6600;
+  background: #ffe8d9;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const items = document.querySelectorAll(".portfolio-item");
+  
+    filterButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        filterButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+  
+        const filter = btn.getAttribute("data-filter");
+        items.forEach(item => {
+          const category = item.getAttribute("data-category");
+          if (filter === "all" || filter === category) {
+            item.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      });
+    });
+  });
+  </script>
+  
+
+  <testimonial-slider></testimonial-slider>
+
+<script>
+  class TestimonialSlider extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+    }
+
+    connectedCallback() {
+      const testimonials = [
+        {
+          image: "https://randomuser.me/api/portraits/women/44.jpg",
+          name: "Sophie M., Creative Director",
+          quote: "Das 3D-Design hat unsere Produktpräsentation revolutioniert – professionell, kreativ, zuverlässig!",
+          stars: 5,
+          logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Googleplex-Logo.svg"
+        },
+        {
+          image: "https://randomuser.me/api/portraits/men/32.jpg",
+          name: "Mark T., Marketing Manager",
+          quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
+          stars: 5,
+          logo: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png"
+        },
+        {
+          image: "https://randomuser.me/api/portraits/men/41.jpg",
+          name: "Daniel R., Startup-Gründer",
+          quote: "Schnell, hochwertig, visuell auf Top-Niveau. Gerne wieder für kommende Projekte!",
+          stars: 4,
+          logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
+        }
+      ];
+
+      // Dupliziere Testimonials für Loop-Effekt
+      const loopedTestimonials = [...testimonials, ...testimonials];
+
+      const style = `
+        <style>
+          :host {
+            display: block;
+            padding: 5rem 1.5rem;
+            background: #fff;
+          }
+
+          h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #111;
+          }
+
+          .intro {
+            text-align: center;
+            font-size: 1.05rem;
+            color: #666;
+            margin: 0 auto 2.5rem;
+            max-width: 680px;
+            padding: 0 2.1rem;
+            line-height: 1.6;
+          }
+
+          .carousel {
+            display: flex;
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 1.5rem;
+            padding-block: 1.5rem;
+            padding-inline: max(calc(50vw - 180px), 1rem);
+            scroll-padding-inline: max(calc(50vw - 180px), 1rem);
+            scroll-behavior: smooth;
+          }
+
+          .carousel::-webkit-scrollbar {
+            display: none;
+          }
+
+          .card {
+            flex: 0 0 auto;
+            width: clamp(280px, 80vw, 360px);
+            background: #fff;
+            border-radius: 14px;
+            padding: 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            scroll-snap-align: center;
+            text-align: center;
+            transition: opacity 0.8s ease;
+            opacity: 1;
+          }
+
+          .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 2px solid #ff6600;
+          }
+
+          .stars {
+            color: #ffc107;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+          }
+
+          .quote {
+            font-style: italic;
+            color: #333;
+            margin: 1rem 0;
+            line-height: 1.5;
+          }
+
+          .author {
+            font-weight: 600;
+            color: #111;
+            font-size: 1rem;
+          }
+
+          .logo {
+            margin-top: 1rem;
+            height: 22px;
+            opacity: 0.6;
+            transition: 0.3s ease;
+          }
+
+          .logo:hover {
+            opacity: 1;
+          }
+
+          @media (min-width: 600px) {
+            .card {
+              flex: 0 0 320px;
+            }
+          }
+
+          @media (min-width: 900px) {
+            .carousel {
+              justify-content: center;
+            }
+
+            .card {
+              flex: 0 0 300px;
+            }
+          }
+        </style>
+      `;
+
+      const stars = (count) => "★".repeat(count) + "☆".repeat(5 - count);
+
+      const html = `
+        ${style}
+        <h2>Kundenstimmen</h2>
+        <p class="intro">Was unsere Kunden über die Zusammenarbeit sagen.</p>
+        <div class="carousel">
+          ${loopedTestimonials.map((t) => `
+            <div class="card">
+              <img src="${t.image}" class="avatar" alt="${t.name}">
+              <div class="stars">${stars(t.stars)}</div>
+              <p class="quote">„${t.quote}“</p>
+              <p class="author">${t.name}</p>
+              <img src="${t.logo}" class="logo" alt="Logo von Kunde">
+            </div>
+          `).join("")}
+        </div>
+      `;
+
+      this.shadowRoot.innerHTML = html;
+
+      const carousel = this.shadowRoot.querySelector('.carousel');
+      const cards = this.shadowRoot.querySelectorAll('.card');
+
+      // Initial opacity update
+      const updateFade = () => {
+        const rect = carousel.getBoundingClientRect();
+        const center = rect.left + rect.width / 2;
+        cards.forEach(card => {
+          const cardRect = card.getBoundingClientRect();
+          const cardCenter = cardRect.left + cardRect.width / 2;
+          const distance = Math.abs(center - cardCenter);
+          const maxDistance = rect.width / 2;
+          const opacity = 1 - Math.min(distance / maxDistance, 1);
+          card.style.opacity = opacity;
+        });
+      };
+
+      let scrollAmount = 0;
+const cardWidth = cards[0].offsetWidth + 24;
+const visibleCards = Math.floor(carousel.offsetWidth / cardWidth);
+const totalCards = cards.length;
+
+function smoothScrollTo(target) {
+  const start = carousel.scrollLeft;
+  const change = target - start;
+  const duration = 1000;
+  let startTime = null;
+
+  function animateScroll(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const progress = timestamp - startTime;
+    const percent = Math.min(progress / duration, 1);
+    const ease = 0.5 - Math.cos(percent * Math.PI) / 2;
+    carousel.scrollLeft = start + change * ease;
+
+    if (percent < 1) {
+      requestAnimationFrame(animateScroll);
+    }
+  }
+
+  requestAnimationFrame(animateScroll);
+}
+
+// Loop
+setInterval(() => {
+  scrollAmount += cardWidth;
+
+  smoothScrollTo(scrollAmount);
+  updateFade();
+
+  // Reset trick: Wenn wir die Hälfte der duplizierten Karten erreichen (also am Ende der Originalkarten),
+  // dann springen wir zurück, aber so, dass der Benutzer nichts merkt
+  if (scrollAmount >= cardWidth * (totalCards / 2)) {
+    // Nach der Animation zurücksetzen
+    setTimeout(() => {
+      scrollAmount = 0;
+      carousel.scrollLeft = 0;
+    }, 1050); // nach dem smoothScroll durch ist
+  }
+}, 4000);
+
+
+      carousel.addEventListener('scroll', updateFade);
+      updateFade(); // initial
+    }
+  }
+
+  customElements.define("testimonial-slider", TestimonialSlider);
+</script>
+
+<!-- STEP 5 
+<section class="bts-section" id="behind-the-scenes">
+  <div class="container">
+    <h2 class="bts-title">Behind the Scenes – Unser kreativer Blender-Workflow</h2>
+    <p class="bts-intro">
+      Diese Sektion gibt Einblicke in unseren täglichen Produktionsablauf und zeigt, wie aus einer Idee ein fertiges 3D-Projekt entsteht.
+      Besucher können unseren Arbeitsvlog Schritt für Schritt mitverfolgen – von der Modellierung bis zum finalen Rendering.
+    </p>
+
+    <div class="bts-steps">
+
+     
+      <div class="bts-step">
+        <div class="bts-header">
+          <span class="bts-step-number">01</span>
+          <h3>Concept & Modelling</h3>
+        </div>
+        <p>
+          <strong>Ideenfindung und Block Out:</strong> Zu Beginn steht die Konzeptphase. Wir skizzieren grob die Idee und erstellen erste Block Out-Modelle in Blender.
+        </p>
+        <p>
+          <strong>Detailausarbeitung:</strong> High- und Low-Poly-Modelle für fotorealistische Darstellung und Performance.
+        </p>
+        <ul class="bts-elements">
+          <li>📽️ Zeitraffer-Video vom Block Out</li>
+          <li>🎤 Voice-Over-Kommentar zur Modelllogik</li>
+        </ul>
+      </div>
+
+  
+      <div class="bts-step">
+        <div class="bts-header">
+          <span class="bts-step-number">02</span>
+          <h3>Shading & Texturing</h3>
+        </div>
+        <p>
+          <strong>Materialerstellung:</strong> Shader mit dem Node Editor in Blender, kombiniert mit Texturen und Spekularmaps.
+        </p>
+        <p>
+          <strong>UV-Unwrapping & Texturen:</strong> Projektion präziser Texturen mit handgefertigten & prozeduralen Materialien.
+        </p>
+        <ul class="bts-elements">
+          <li>🖥️ Split-Screen: Modell + Node Editor</li>
+          <li>🧠 Textur-Erklärungen: Roughness, Bump-Maps etc.</li>
+        </ul>
+      </div>
+
+
+      <div class="bts-step">
+        <div class="bts-header">
+          <span class="bts-step-number">03</span>
+          <h3>Animation mit Geometry Nodes</h3>
+        </div>
+        <p>
+          <strong>Prozedurale Animation:</strong> Mit Nodes erzeugen wir dynamische, wiederholbare Bewegungen ohne Keyframes.
+        </p>
+        <p>
+          <strong>Komplexe Effekte:</strong> Wachsen, Zersplittern, Zufallsbewegung – durch Node-Logik steuerbar.
+        </p>
+        <ul class="bts-elements">
+          <li>🔧 Detailaufnahmen des Setups</li>
+          <li>🌀 Vorher/Nachher-Vergleich</li>
+        </ul>
+      </div>
+
+
+      <div class="bts-step">
+        <div class="bts-header">
+          <span class="bts-step-number">04</span>
+          <h3>Lighting, Rendering & Post-Processing</h3>
+        </div>
+        <p>
+          <strong>Beleuchtung:</strong> HDRIs, Spotlights, gezielte Lichtsetzung für Stimmung und Tiefe.
+        </p>
+        <p>
+          <strong>Post-Processing:</strong> Nachbearbeitung mit Color Grading, Tiefenschärfe & Glows direkt in Blender.
+        </p>
+        <ul class="bts-elements">
+          <li>🌅 Renderprozess als Zeitraffer</li>
+          <li>📝 Kommentar zu Render Engine Entscheidungen</li>
+        </ul>
+      </div>
+
+      
+      <div class="bts-step">
+        <div class="bts-header">
+          <span class="bts-step-number">05</span>
+          <h3>Interaktive Timeline & Vlog-Integration</h3>
+        </div>
+        <p>
+          <strong>Schritt-für-Schritt-Erlebnis:</strong> Die Schritte werden visuell und chronologisch interaktiv erfahrbar.
+        </p>
+        <p>
+          <strong>Engagement & Extras:</strong> Hover-Popups, Kommentare, Notizen und Tipps von Designern.
+        </p>
+        <ul class="bts-elements">
+          <li>🧭 Timeline mit Popups</li>
+          <li>📒 Persönliche Notizen & Tipps</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+<style>.bts-section {
+  background: #fafafa;
+  padding: 6rem 2rem;
+}
+
+.bts-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.bts-intro {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  font-size: 1.05rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.bts-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.bts-step {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.bts-step:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+}
+
+.bts-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.bts-step-number {
+  background: #ff6600;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+}
+
+.bts-step h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #111;
+}
+
+.bts-step p {
+  color: #555;
+  font-size: 0.96rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.6;
+}
+
+.bts-elements {
+  margin-top: 1rem;
+  padding-left: 1rem;
+  list-style: none;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.bts-elements li {
+  margin-bottom: 0.4rem;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.bts-elements li::before {
+  content: '✔';
+  color: #28a745;
+  position: absolute;
+  left: 0;
+  font-size: 0.9rem;
+}
+</style>
+-->
+
+<section class="container" id="kontakt">
+  <h2>Kontakt aufnehmen</h2>
+  <div class="form-wrapper">
+    <form action="https://formspree.io/f/xqapdvaq" method="POST">
+      <input type="text" name="name" placeholder="Dein Name" required />
+      <input type="email" name="email" placeholder="Deine E-Mail" required />
+      <textarea name="message" rows="6" placeholder="Worum geht’s?" required></textarea>
+      <input type="text" name="_gotcha" style="display:none">
+      <button type="submit" class="neon-btn" id="sendButton">
+        <span>✉️ Nachricht senden</span>
+      </button>
+    </form>
+  </div>
+</section>
+
+</div>
+
+<style>
+  .white-bg-wrapper {
+  background: #fff;
+  color: #111;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.white-bg-wrapper section,
+.white-bg-wrapper testimonial-slider {
+  background: transparent !important;
+}
+
+</style>
+
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-logo">
+      <span>Fusion³</span>
+      <p>3D Design. Visualisierung. Emotion.</p>
+    </div>
+
+    <div class="footer-links">
+      <h4>Rechtliches</h4>
+      <ul>
+        <li><a href="/impressum.html">Impressum</a></li>
+        <li><a href="/datenschutz.html">Datenschutz</a></li>
+        <li><a href="/agb.html">AGB</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-contact">
+      <h4>Kontakt</h4>
+      <ul>
+        <li><a href="mailto:hello@fusion3.de">hello@fusion3.de</a></li>
+        <li>+49 123 4567890</li>
+        <li>Berlin, Deutschland</li>
+      </ul>
+    </div>
+
+    <div class="footer-socials">
+      <h4>Social</h4>
+      <div class="footer-socials-icons">
+        <a href="mailto:hello@fusion3.de" title="E-Mail">
+          <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="E-Mail Icon" />
+        </a>
+        <a href="https://github.com/" target="_blank" title="GitHub">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub" />
+        </a>
+        <a href="https://www.linkedin.com/" target="_blank" title="LinkedIn">
+          <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn" />
+        </a>
+        <a href="https://wa.me/491234567890" target="_blank" title="WhatsApp">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <p class="footer-bottom">© 2025 Fusion³ – Alle Rechte vorbehalten.</p>
+</footer>
+<style>
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+}
+
+input,
+textarea {
+  background: #111;
+  border: 1px solid #333;
+  padding: 1rem;
+  color: var(--text);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 5px;
+}
+
+button {
+  background: var(--primary);
+  color: #000;
+  padding: 1rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+}
+
+.footer-logo span {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--primary);
+}
+
+.footer-logo p {
+  margin-top: 0.5rem;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.footer-links h4,
+.footer-contact h4,
+.footer-socials h4 {
+  margin-bottom: 0.8rem;
+  color: var(--secondary);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.footer-links ul,
+.footer-contact ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li,
+.footer-contact li {
+  margin-bottom: 0.4rem;
+}
+
+.footer-links a {
+  color: #ccc;
+}
+
+.footer-links a:hover {
+  color: var(--primary);
+}
+
+.footer-socials-icons {
+  display: flex;
+  gap: 12px;
+  margin-top: 0.5rem;
+}
+
+.footer-socials img {
+  width: 26px;
+  height: 26px;
+  opacity: 0.8;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.footer-socials img:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.footer-bottom {
+  text-align: center;
+  color: #666;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+</style>
+
+<script>
+  const form = document.querySelector("form");
+  const sendButton = document.getElementById("sendButton");
+  
+  form.addEventListener("submit", function (e) {
+    sendButton.classList.add("shake");
+  
+    setTimeout(() => {
+      sendButton.classList.remove("shake");
+      sendButton.classList.add("sent");
+      sendButton.innerHTML = "<span>✅ Gesendet!</span>";
+    }, 300);
+  
+    setTimeout(() => {
+      sendButton.classList.remove("sent");
+      sendButton.innerHTML = "<span>✉️ Nachricht senden</span>";
+    }, 4000);
+  });
+  </script>
+      
