@@ -20,6 +20,7 @@
       --text: #ffffff;
       --muted: #999;
       --container-width: 1200px;
+      
     }
 
     * {
@@ -35,6 +36,15 @@
       scroll-behavior: smooth;
       
     }
+    .section-title {
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: var(--text-main, #1c1c1e);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
 
     a {
       color: inherit;
@@ -335,6 +345,11 @@
   border: none;
 }
 
+.hero-video-content a.cta-btn {
+  display: inline-block;
+  margin: 2rem auto 0 auto; /* zentriert */
+}
+
 .cta-btn:hover {
   background: var(--primary);
   color: #000;
@@ -417,10 +432,18 @@
   }
 
   .cta-btn {
-    font-size: 0.9rem;
-    padding: 0.7rem 1.2rem;
+    font-size: 1rem; /* etwas größer für bessere Lesbarkeit */
+    padding: 1rem 2rem; /* größere Touchfläche */
+    width: 100%; /* zentriert & vollbreit auf kleinsten Devices */
+    max-width: 300px;
+    margin: 2rem auto 0;
+    text-align: center;
   }
 }
+
+
+
+
 
   </style>
 <script>
@@ -445,7 +468,7 @@
 </script>
 
 <section id="branchen" class="persona-clean container">
-    <h2 class="persona-title">Für wen ist Fusion³?</h2>
+    <h2 class="section-title">Für wen ist Fusion3?</h2>
     <p class="persona-subline">Individuelle Lösungen für jede Zielgruppe – mit Fokus auf Wirkung, Technik und Tempo.</p>
   
     <div class="persona-grid">
@@ -491,19 +514,22 @@
   </section>
   
   <style>
-    .persona-clean {
-      background: #fff;
-      text-align: center;
-      color: #111;
-      padding: 6rem 2rem;
-    }
-  
-    .persona-title {
-      font-size: 2.4rem;
-      font-weight: 900;
-      margin-bottom: 0.8rem;
-    }
-  
+.persona-clean {
+  background: #fff;
+  text-align: center;
+  color: #111;
+  padding: 6rem 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.persona-title {
+  font-size: 2.4rem;
+  font-weight: 900;
+  margin-bottom: 0.8rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+
     .persona-subline {
       font-size: 1.1rem;
       color: #666;
@@ -518,7 +544,7 @@
     }
   
     .persona-card {
-      background: linear-gradient(135deg, #fcf6ff, #f6f9ff);
+      background: linear-gradient(135deg, #ffffff, #dbe7ff);
       border: 1px solid #eee;
       border-radius: 16px;
       padding: 2.5rem 1.8rem;
@@ -606,7 +632,6 @@
   </script>
   
   
-  <section class="container apple-services" id="tools">
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
   
     <style>
@@ -643,7 +668,8 @@
   
       .service-card {
         position: relative;
-        background: radial-gradient(circle at center, rgb(255, 255, 255), transparent 70%);
+        background: linear-gradient(190deg, #ffffff 0%, #b9b9b9 70%);
+
         border-radius: 20px;
         padding: 3rem 2rem;
         box-shadow:  8px var(--secondary);
@@ -721,9 +747,9 @@
         margin-top: 2rem;
         font-size: 0.95rem;
         font-weight: 500;
-        color: var(--primary);
+        color: white;
         text-decoration: none;
-        border: 1px solid var(--primary);
+        border: 1px solid white;
         padding: 0.6rem 1.3rem;
         border-radius: 8px;
         transition: all 0.3s ease;
@@ -733,8 +759,54 @@
         background-color: rgba(255, 102, 0, 0.08);
         box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.15);
       }
+
+      @media (max-width: 375px) {
+  .service-grid {
+    grid-template-columns: 1fr; /* Nur eine Karte pro Zeile */
+    gap: 2rem; /* Weniger Abstand */
+  }
+
+  .service-card {
+    padding: 2rem 1.2rem; /* Weniger Padding */
+    border-radius: 16px;
+  }
+
+  .service-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .service-card ul {
+    font-size: 0.95rem;
+  }
+
+  .cta {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 0.95rem;
+    padding: 0.8rem 1rem;
+  }
+
+  lord-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1.5rem;
+  }
+}
+@media (max-width: 320px) {
+  .service-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .cta {
+    font-size: 0.9rem;
+    padding: 0.7rem 1rem;
+  }
+}
+
+
     </style>
-  
+    <section class="container apple-services" id="tools">
     <h2>Unsere Leistungen</h2>
   
     <div class="service-grid">
@@ -754,7 +826,7 @@
             <li>Moderne Animationen & Microinteractions</li>
             <li>CMS-Integration & SEO Ready</li>
           </ul>
-          <a href="/services/webdesign" class="cta">Mehr erfahren</a>
+          <a href="./WebDesign.html" class="cta">Mehr erfahren</a>
         </div>
       </div>
   
@@ -773,7 +845,7 @@
             <li>VR/AR-kompatible Modelle</li>
             <li>Optimiert für Web & Druck</li>
           </ul>
-          <a href="/services/3d" class="cta">Mehr erfahren</a>
+          <a href="./3DDesign.html" class="cta">Mehr erfahren</a>
         </div>
       </div>
   
@@ -792,7 +864,7 @@
             <li>Druck- & Digitalmedien</li>
             <li>Infografiken & visuelle Systeme</li>
           </ul>
-          <a href="/services/design" class="cta">Mehr erfahren</a>
+          <a href="./Grafikdesign.html" class="cta">Mehr erfahren</a>
         </div>
       </div>
   
@@ -811,644 +883,1058 @@
             <li>Werbekampagnen-Design</li>
             <li>CI-konforme Templates</li>
           </ul>
-          <a href="/services/social-media" class="cta">Mehr erfahren</a>
+          <a href="./SocialMedia.html" class="cta">Mehr erfahren</a>
         </div>
       </div>
   
     </div>
   </section>
 
+
+
+  
+  <style>
+    .white-transition-section {
+        position: relative;
+        background: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        overflow: visible;
+    }
+    
+    .white-world {
+        position: relative;
+        height: auto;
+        min-height: 100vh;
+        clip-path: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background: radial-gradient(circle at center, #f4f4f4 0%, #f4f4f4 100%);
+        opacity: 1;
+        pointer-events: all;
+        z-index: 5;
+        width: 100vw;
+        transition: none;
+    }
+    
+    .white-world.visible {
+        clip-path: circle(150% at 50% 50%);
+        opacity: 1;
+        pointer-events: all;
+        width: 100vw;
+        transform: translateX(0);
+    }
+    
+    .white-content {
+  text-align: center;
+  max-width: 90vw;
+  padding: 2rem 1rem;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+.epic-step h3 {
+  font-size: 1.25rem;
+  color: #111;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  line-height: 1.4;
+}
+
+.epic-step p {
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* RESPONSIVE OPTIMIERUNG */
+@media (max-width: 768px) {
+  .project-white-steps {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .epic-step {
+    width: 100%;
+    max-width: 95vw;
+    padding: 1.5rem;
+  }
+
+  .epic-step h3 {
+    font-size: 1.1rem;
+  }
+
+  .epic-step p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .step-number {
+    font-size: 1.8rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .white-content {
+    padding: 1.5rem 1rem;
+  }
+}
+    
+    .project-white-steps {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+    }
+    
+    .epic-step {
+        position: relative;
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        padding: 2.5rem;
+        width: 400px;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+        backdrop-filter: blur(20px);
+        overflow: hidden;
+        transition: all 0.4s ease;
+        transform: translateY(40px);
+        opacity: 0;
+    }
+    
+    .epic-step:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+        border-color: rgba(255, 102, 0, 0.2);
+    }
+    
+    .epic-step::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(ellipse at center, #fff 0%, transparent 60%);
+        opacity: 0.04;
+        animation: lightMotion 8s linear infinite;
+    }
+    
+    .epic-step::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(130deg, rgba(255, 102, 0, 0.08), transparent);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        pointer-events: none;
+        z-index: 1;
+    }
+    
+    .epic-step:hover::after {
+        opacity: 1;
+    }
+    
+    @keyframes lightMotion {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    
+    .step-inner {
+        position: relative;
+        z-index: 2;
+        text-align: left;
+    }
+    
+    .step-number {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--primary);
+        display: block;
+        margin-bottom: 1rem;
+    }
+    
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+      }
+      
+  @media (max-width: 768px) {
+  .project-white-steps {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .epic-step {
+    width: 100%;
+    max-width: 90vw;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .epic-step {
+    width: calc(50% - 2rem);
+  }
+}
+
+@media (min-width: 1201px) {
+  .epic-step {
+    width: calc(33.333% - 2rem);
+  }
+}
+
+/* RESPONSIVE OPTIMIERUNG */
+@media (max-width: 768px) {
+  .project-white-steps {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .epic-step {
+    width: 100%;
+    max-width: 95vw;
+    padding: 1.5rem;
+  }
+
+  .epic-step h3 {
+    font-size: 1.1rem;
+  }
+
+  .epic-step p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .step-number {
+    font-size: 1.8rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .white-content {
+    padding: 1.5rem 1rem;
+  }
+}
+
+    
+    </style>
+    <section class="white-transition-section" id="prozess">
+      <div class="white-world visible" id="whiteWorld">
+
+  
+          <div class="white-content">
+            <h2 class="section-title">So läuft ein Projekt mit Fusion³</h2>
+              <div class="project-white-steps">
+                  <div class="epic-step" data-step="00">
+                      <div class="step-inner">
+                          <span class="step-number">00</span>
+                          <h3>Unser Ansatz:</h3>
+                          <p>Sobald Sie sich für eine Zusammenarbeit mit Fusion³ entscheiden, startet unser strukturiertes Onboarding. Wir beginnen mit einem ausführlichen Erstgespräch, in dem wir alle Rahmenbedingungen, Ziele und individuellen Wünsche besprechen. In den weiteren Phasen – von der Konzeption bis zur finalen Abstimmung – beziehen wir Sie aktiv in den kreativen Prozess mit ein. Damit stellen wir sicher, dass Ihr Projekt nicht nur Ihre Erwartungen erfüllt, sondern sie übertrifft.
+                          </p>
+                      </div>
+                  </div>
+  
+                  <div class="epic-step" data-step="01">
+                      <div class="step-inner">
+                          <span class="step-number">01</span>
+                          <h3>Erstgespräch: Der Grundstein für Ihren Erfolg</h3>
+                          <p>Alles beginnt mit einem offenen, inspirierenden Gespräch. Wir hören Ihnen aufmerksam zu,
+                              besprechen Ihre Ziele, Zielgruppen und die gewünschten Wirkungen – bei einem Kaffee und
+                              mit viel persönlichem Engagement. So legen wir gemeinsam den Grundstein für Ihr Projekt.
+                          </p>
+                      </div>
+                  </div>
+  
+                  <div class="epic-step" data-step="02">
+                      <div class="step-inner">
+                          <span class="step-number">02</span>
+                          <h3>Konzeption & Design: Kreativität trifft Strategie</h3>
+                          <p>Auf Basis unseres Gesprächs entwickeln wir ein individuelles Konzept, das perfekt zu
+                              Ihrer Marke passt. Mit präzisen Wireframes, stilvollen Styleframes und cleveren
+                              Interaktionsideen schaffen wir ein visuelles und funktionales Konzept – maßgeschneidert,
+                              um Ihre Zielgruppe zu begeistern.
+                          </p>
+                      </div>
+                  </div>
+  
+                  <div class="epic-step" data-step="03">
+                      <div class="step-inner">
+                          <span class="step-number">03</span>
+                          <h3>Feedback & Feinschliff: Gemeinsam zur Perfektion</h3>
+                          <p>Ihre Meinung ist uns wichtig. In einer Feedbackschleife passen wir das Konzept an Ihre
+                              Vorstellungen an, optimieren Details und sorgen dafür, dass Ihr digitales Erlebnis nicht
+                              nur beeindruckt, sondern auch nachhaltig performt.
+                          </p>
+                      </div>
+                  </div>
+  
+              </div>
+          </div>
+      </div>
+  </section>
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>
+      gsap.registerPlugin(ScrollTrigger);
+  
+      gsap.utils.toArray(".epic-step").forEach((card, i) => {
+          gsap.to(card, {
+              scrollTrigger: {
+                  trigger: card,
+                  start: "top 85%",
+                  toggleActions: "play none none reverse"
+              },
+              opacity: 1,
+              y: 0,
+              duration: 1.2,
+              ease: "power4.out",
+              delay: i * 0.2
+          });
+      });
+  </script>
+  
 
   
 <section class="cta-modern">
-    <style>
-      .cta-modern {
-        position: relative;
-        padding: 10rem 2rem;
-        background: linear-gradient(145deg, #ffffff, #f4f8ff);
-        overflow: hidden;
-        text-align: center;
-        z-index: 1;
-      }
-  
-      .cta-modern::before {
-        content: '';
-        position: absolute;
-        top: -100px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 1800px;
-        height: 1800px;
-        background: radial-gradient(circle, rgba(255,102,0,0.08), transparent 60%);
-        z-index: 0;
-        pointer-events: none;
-        animation: glowShift 12s ease-in-out infinite alternate;
-      }
-  
-      .cta-headline {
-        font-size: clamp(2.5rem, 6vw, 4.2rem);
-        font-weight: 900;
-        font-family: 'Inter', sans-serif;
-        color: #000;
-        margin-bottom: 1rem;
-        line-height: 1.15;
-        letter-spacing: -0.5px;
-        position: relative;
-        z-index: 2;
-        animation: fadeUp 1s ease-out both;
-      }
-  
-      .cta-headline span {
-        color: var(--primary);
-        background: linear-gradient(90deg, var(--primary), var(--secondary));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-  
-      .cta-text {
-        font-size: 1.3rem;
-        font-weight: 400;
-        color: #444;
-        max-width: 680px;
-        margin: 0 auto 3rem;
-        line-height: 1.7;
-        position: relative;
-        z-index: 2;
-        animation: fadeUp 1s ease-out 0.2s both;
-      }
-  
-      .cta-btn {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: #fff;
-        font-weight: 600;
-        padding: 1rem 2.4rem;
-        font-size: 1rem;
-        border-radius: 12px;
-        text-decoration: none;
-        box-shadow: 0 6px 20px rgba(255, 102, 0, 0.25);
-        transition: all 0.3s ease;
-        position: relative;
-        z-index: 2;
-        animation: fadeUp 1s ease-out 0.4s both;
-      }
-  
-      .cta-btn:hover {
-        transform: scale(1.03);
-        box-shadow: 0 10px 30px rgba(255, 102, 0, 0.35);
-      }
-  
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(40px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-  
-      @keyframes glowShift {
-        0% { transform: translateX(-50%) rotate(0deg); }
-        100% { transform: translateX(-50%) rotate(3deg); }
-      }
-  
-      @media (prefers-reduced-motion: reduce) {
-        * {
-          animation: none !important;
-          transition: none !important;
-        }
-      }
-  
-      @media (max-width: 600px) {
-        .cta-text {
-          font-size: 1.1rem;
-        }
-  
-        .cta-btn {
-          padding: 0.9rem 1.8rem;
-          font-size: 0.95rem;
-        }
-      }
-    </style>
-  
-    <h2 class="cta-headline">
-      Bereit für <span>deinen digitalen Auftritt?</span>
-    </h2>
-  
-    <p class="cta-text">
-      Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.  
-      Starte jetzt – unverbindlich und inspiriert.
-    </p>
-  
-    <a href="#kontakt" class="cta-btn">🚀 Gespräch vereinbaren</a>
-  </section>
-
-  
-  <section class="white-transition-section" id="prozess">
   <style>
-    .white-transition-section {
+    .cta-modern {
       position: relative;
-      background: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      overflow: visible;
-    }
-
-    .white-world {
-      position: relative;
-      min-height: 100vh;
-      opacity: 1;
-      pointer-events: all;
-      background: radial-gradient(circle at center, #f4f4f4 0%, #f4f4f4 100%);
-      z-index: 5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      width: 100vw;
-    }
-
-    .white-content {
+      padding: 7rem 1.5rem;
+      background: linear-gradient(180deg, #f4f4f4, #ffffff);
+      overflow: hidden;
       text-align: center;
-      max-width: 900px;
-      padding: 2rem;
+      z-index: 1;
     }
+    .cta-modern::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1800px;
+  max-width: 100vw;
+  height: 1800px;
+  z-index: 0;
+  pointer-events: none;
+  animation: glowShift 12s ease-in-out infinite alternate;
+}
 
-    .white-content h2 {
-      font-size: 2.8rem;
-      color: #111;
-      margin-bottom: 3rem;
-      font-weight: 900;
-    }
 
-    .project-white-steps {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2.5rem;
-      justify-content: center;
-    }
-
-    .epic-step {
-      background: rgba(255, 255, 255, 0.6);
-      border: 1px solid #eee;
-      border-radius: 20px;
-      padding: 2rem;
-      width: 260px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      backdrop-filter: blur(10px);
-      opacity: 0; /* für Animation */
-      transform: translateY(40px); /* für Animation */
-    }
-
-    .epic-step:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
-    }
-
-    .step-number {
-      font-size: 2.2rem;
+    .cta-headline {
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
       font-weight: 800;
-      color: var(--primary, #ff6600);
+      font-family: 'Inter', sans-serif;
+      color: #000;
       margin-bottom: 1rem;
+      line-height: 1.25;
+      letter-spacing: -0.3px;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 1s ease-out both;
     }
+    
+    .cta-small {
+  font-size: 0.6em;
+  font-weight: 500;
+  color: #000000 !important;
+  font-family: 'Inter', sans-serif;
+  display: inline-block;
+  margin-right: 0.3em;
+  background: none !important;
+  background-clip: initial !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+}
 
-    .epic-step h3 {
-      font-size: 1.4rem;
-      color: #111;
-      font-weight: 700;
-      margin-bottom: 0.7rem;
-    }
 
-    .epic-step p {
-      color: #333;
-      font-size: 1rem;
+    .cta-headline span {
+  font-family: 'VT323', monospace;
+  font-size: 1.3em;
+  line-height: 1;
+  display: inline-block;
+  color: var(--primary); /* Fallback-Farbe */
+  background: linear-gradient(90deg, #9abdff, var(--primary));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border: 5px;
+  border-color: black;
+}
+
+
+    .cta-text {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 400;
+      color: #444;
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
       line-height: 1.6;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 1s ease-out 0.2s both;
+    }
+
+    .cta-btn {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      font-weight: 600;
+      padding: 0.8rem 2rem;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 1s ease-out 0.4s both;
+    }
+
+    .cta-btn:hover {
+      transform: scale(1.03);
+      box-shadow: 0 10px 25px rgba(255, 102, 0, 0.3);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes glowShift {
+      0% { transform: translateX(-50%) rotate(0deg); }
+      100% { transform: translateX(-50%) rotate(3deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cta-modern {
+        padding: 5rem 1rem;
+      }
+
+      .cta-text {
+        margin-bottom: 2rem;
+        line-height: 1.5;
+      }
+
+      .cta-btn {
+        width: 100%;
+        padding: 0.9rem;
+      }
     }
   </style>
 
-  <div class="white-world visible">
-    <div class="white-content">
-      <h2>So läuft ein Projekt mit Fusion³</h2>
-      <div class="project-white-steps">
-        <div class="epic-step" data-step="01">
-          <span class="step-number">01</span>
-          <h3>Erstgespräch</h3>
-          <p>Alles beginnt mit einem Gespräch – mit offenen Fragen, klarer Kommunikation und einem Kaffee.</p>
-        </div>
+<h2 class="cta-headline">
+  <span class="cta-small">Bereit für</span> <span>deinen digitalen Auftritt?</span>
+</h2>
 
-        <div class="epic-step" data-step="02">
-          <span class="step-number">02</span>
-          <h3>Konzeption & Design</h3>
-          <p>Gemeinsam entwickeln wir Konzepte, Wireframes, Styleframes und Interaktionen für dein Brand.</p>
-        </div>
 
-        <div class="epic-step" data-step="03">
-          <span class="step-number">03</span>
-          <h3>Umsetzung & Launch</h3>
-          <p>Am Ende steht ein durchdachtes digitales Erlebnis, das performt – mit Stil, Funktion und Wirkung.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <p class="cta-text">
+    Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.  
+    Starte jetzt – unverbindlich und inspiriert.
+  </p>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script>
-    // Ladeanimation beim Page Load (einmalige Animation)
-    window.addEventListener('DOMContentLoaded', () => {
-      gsap.to(".epic-step", {
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-        ease: "power4.out",
-        stagger: 0.2
-      });
-    });
-  </script>
+  <a href="#kontakt" class="cta-btn">Gespräch vereinbaren</a>
 </section>
 
 
-
-  <section class="branch-selection" id="branchSelection">
-    <style>
-      .branch-selection {
-        background: radial-gradient(circle at center, #f4f4f4 0%, #f4f4f4 100%);
-        color: #f4f4f4;
-        padding: 6rem 2rem;
-        transition: background 0.6s ease, color 0.6s ease;
-      }
   
-      .branch-selection h2 {
-        font-size: 2.8rem;
-        margin-bottom: 3rem;
-        font-weight: 900;
-        text-align: center;
-        transition: color 0.6s ease;
-      }
+  <section class="interactive-portfolio" id="portfolio">
+    <h2 class="portfolio-headline">Unser Portfolio</h2>
   
-      .branch-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 2.5rem;
-      }
-  
-      .branch-card {
-        position: relative;
-        height: 340px;
-        border-radius: 20px;
-        overflow: hidden;
-        cursor: pointer;
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
-        z-index: 4;
-      }
-  
-      .branch-card video {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 1;
-        filter: brightness(1);
-        transition: filter 0.4s ease;
-      }
-  
-      .branch-card:hover video {
-        filter: brightness(1.1);
-      }
-  
-      .branch-overlay {
-        position: absolute;
-        inset: 0;
-        z-index: 2;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        padding: 2rem;
-        text-align: center;
-      }
-  
-      .branch-overlay h3 {
-        color: #fff;
-        font-size: 1.6rem;
-        font-weight: 800;
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-        transition: transform 0.4s ease;
-      }
-  
-      .branch-card:hover .branch-overlay h3 {
-        transform: translateY(-6px);
-      }
-  
-      .branch-card:hover {
-        transform: scale(1.03);
-        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.15);
-      }
-  
-      .branch-card.selected {
-        outline: 4px solid var(--primary);
-        outline-offset: -8px;
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 0 10px rgb(255, 102, 0), 0 0 5px rgb(255, 255, 255);
-        z-index: 5;
-      }
-  
-      .branch-selection.visible {
-        background: #f4f4f4;
-        color: #111;
-      }
-  
-      .branch-selection.visible .branch-overlay h3 {
-        color: #ffffff;
-        text-shadow: none;
-      }
-    </style>
-  
-    <div class="branch-inner">
-      <h2>Portfolio</h2>
-      <div class="branch-grid">
-  
-        <div class="branch-card">
-          <video autoplay muted loop playsinline>
-            <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
-          </video>
-          <div class="branch-overlay">
-            <h3>WebDesign</h3>
-          </div>
-        </div>
-  
-        <div class="branch-card">
-          <video autoplay muted loop playsinline>
-            <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
-          </video>
-          <div class="branch-overlay">
-            <h3>3D Design<br>Rendering</h3>
-          </div>
-        </div>
-  
-        <div class="branch-card">
-          <video autoplay muted loop playsinline>
-            <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
-          </video>
-          <div class="branch-overlay">
-            <h3>Grafikdesign</h3>
-          </div>
-        </div>
-  
-        <div class="branch-card">
-          <video autoplay muted loop playsinline>
-            <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
-          </video>
-          <div class="branch-overlay">
-            <h3>Videoschnitt</h3>
-          </div>
-        </div>
-  
-        <div class="branch-card">
-          <video autoplay muted loop playsinline>
-            <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
-          </video>
-          <div class="branch-overlay">
-            <h3>Social Media</h3>
-          </div>
-        </div>
-  
-      </div>
+    <!-- Tab Navigation -->
+    <div class="tab-buttons">
+      <button class="tab active" data-tab="web"><i data-feather="monitor"></i> WebDesign</button>
+      <button class="tab" data-tab="3d"><i data-feather="box"></i> 3D Design</button>
+      <button class="tab" data-tab="graphic"><i data-feather="image"></i> Grafikdesign</button>
+      <button class="tab" data-tab="social"><i data-feather="share-2"></i> Social Media</button>
     </div>
   
-    <script>
-      const branchCards = document.querySelectorAll('.branch-card');
-  
-      branchCards.forEach(card => {
-        card.addEventListener('click', () => {
-          branchCards.forEach(c => c.classList.remove('selected'));
-          card.classList.add('selected');
-        });
-      });
-    </script>
+    <div class="tab-contents">
+      <!-- WebDesign -->
+      <div class="tab-content active" id="tab-web">
+        <div class="gallery">
+          <div class="gallery-item reveal">
+            <div class="media-wrapper">
+              <img src="./GallerieGesamt/1.jpg" loading="lazy" alt="WebDesign" />
+            </div>
+            <div class="overlay">
+              <p>Modernes Webprojekt mit Fokus auf Interaktion.</p>
+              <ul>
+                <li>Responsives Layout</li>
+                <li>Dark/Light Mode</li>
+                <li>SEO optimiert</li>
+              </ul>
+              <a href="#kontakt" class="cta-btn">Mehr davon?</a>
+            </div>
+          </div>
+          <div class="gallery-item reveal">
+            <div class="media-wrapper">
+              <video src="./GallerieGesamt/1.mp4" muted autoplay loop playsinline loading="lazy"></video>
+            </div>
+            <div class="overlay">
+              <p>Responsive Landingpage mit 3D-Effekt</p>
+              <ul>
+                <li>Video Integration</li>
+                <li>Scroll-basierte Effekte</li>
+              </ul>
+              <a href="#kontakt" class="cta-btn">Live erleben</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  <!-- 3D Design -->
+<div class="tab-content" id="tab-3d">
+  <div class="gallery">
+    <div class="gallery-item reveal">
+      <div class="media-wrapper">
+        <img src="./GallerieGesamt/1.jpg" loading="lazy" alt="3D Design" />
+      </div>
+      <div class="overlay">
+        <p>Produktvisualisierung mit realistischer Texturierung:</p>
+        <ul>
+          <li>Physikbasiertes Shading</li>
+          <li>HDRI Lighting</li>
+          <li>Export für Web & AR</li>
+        </ul>
+        <a href="#kontakt" class="cta-btn">Jetzt ansehen</a>
+      </div>
+    </div>
+    <div class="gallery-item reveal">
+      <div class="media-wrapper">
+        <video src="./GallerieGesamt/1.mp4" muted autoplay loop playsinline loading="lazy"></video>
+      </div>
+      <div class="overlay">
+        <p>Interaktive 3D-Animation im Browser:</p>
+        <ul>
+          <li>Scrollgesteuerte Sequenzen</li>
+          <li>Optimiert für Mobilgeräte</li>
+          <li>Three.js Integration</li>
+        </ul>
+        <a href="#kontakt" class="cta-btn">Demo starten</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Grafikdesign -->
+<div class="tab-content" id="tab-graphic">
+  <div class="gallery">
+    <div class="gallery-item reveal">
+      <div class="media-wrapper">
+        <img src="./GallerieGesamt/1.jpg" loading="lazy" alt="Grafikdesign" />
+      </div>
+      <div class="overlay">
+        <p>Markenidentität im Flat Design Stil:</p>
+        <ul>
+          <li>Logoentwicklung</li>
+          <li>Farbwelt & Typografie</li>
+          <li>Styleguide als PDF</li>
+        </ul>
+        <a href="#kontakt" class="cta-btn">Mehr sehen</a>
+      </div>
+    </div>
+    <div class="gallery-item reveal">
+      <div class="media-wrapper">
+        <video src="./GallerieGesamt/1.mp4" muted autoplay loop playsinline loading="lazy"></video>
+      </div>
+      <div class="overlay">
+        <p>Illustrationen & UI-Kits für Web & App:</p>
+        <ul>
+          <li>Custom Icons</li>
+          <li>Vektor-basierte Assets</li>
+          <li>Figma/Adobe Übergabe</li>
+        </ul>
+        <a href="#kontakt" class="cta-btn">Design sichern</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Social Media -->
+<div class="tab-content" id="tab-social">
+  <div class="gallery">
+    <div class="gallery-item reveal">
+      <div class="media-wrapper">
+        <img src="./GallerieGesamt/1.jpg" loading="lazy" alt="Social Media" />
+      </div>
+      <div class="overlay">
+        <p>Contentstrategie & visuelles Storytelling:</p>
+        <ul>
+          <li>Redaktionsplan</li>
+          <li>Canva-Vorlagen</li>
+          <li>Hashtag-Recherche</li>
+        </ul>
+        <a href="#kontakt" class="cta-btn">Mehr erfahren</a>
+      </div>
+    </div>
+    <div class="gallery-item reveal">
+      <div class="media-wrapper">
+        <video src="./GallerieGesamt/1.mp4" muted autoplay loop playsinline loading="lazy"></video>
+      </div>
+      <div class="overlay">
+        <p>Reels & Stories im Hochformat:</p>
+        <ul>
+          <li>Textanimation & Musik</li>
+          <li>Subtitles & Branding</li>
+          <li>Plattformoptimiert</li>
+        </ul>
+        <a href="#kontakt" class="cta-btn">Zum Kanal</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <!-- Weitere Tabs (3D, Grafik, Video, Social Media) → GLEICHE STRUKTUR -->
+      <!-- Du kannst bei Bedarf pro Karte eigene <ul> ergänzen -->
+    </div>
   </section>
   
-  
-  
-  
-  <testimonial-slider></testimonial-slider>
-  
-  <script>
-    class TestimonialSlider extends HTMLElement {
-      constructor() {
-        super();
-        this.attachShadow({ mode: "open" });
-      }
-  
-      connectedCallback() {
-        const testimonials = [
-          {
-            image: "https://randomuser.me/api/portraits/women/44.jpg",
-            name: "Sophie M., Creative Director",
-            quote: "Das 3D-Design hat unsere Produktpräsentation revolutioniert – professionell, kreativ, zuverlässig!",
-            stars: 5,
-            logo: ""
-          },
-          {
-            image: "https://randomuser.me/api/portraits/men/32.jpg",
-            name: "Mark T., Marketing Manager",
-            quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
-            stars: 5,
-            logo: ""
-          },
-          {
-            image: "https://randomuser.me/api/portraits/men/41.jpg",
-            name: "Daniel R., Startup-Gründer",
-            quote: "Schnell, hochwertig, visuell auf Top-Niveau. Gerne wieder für kommende Projekte!",
-            stars: 4,
-            logo: ""
-          }
-        ];
-  
-        const style = `
-          <style>
-            :host {
-              display: block;
-              padding: 5rem 1.5rem;
-              background: #fff;
-            }
-  
-            h2 {
-              text-align: center;
-              font-size: 2rem;
-              font-weight: 800;
-              margin-bottom: 0.5rem;
-              color: #111;
-            }
-  
-            .intro {
-              text-align: center;
-              font-size: 1.05rem;
-              color: #666;
-              margin: 0 auto 2.5rem;
-              max-width: 680px;
-              padding: 0 2.1rem;
-              line-height: 1.6;
-            }
-  
-            .carousel {
-              display: flex;
-              overflow-x: auto;
-              scroll-snap-type: x mandatory;
-              -webkit-overflow-scrolling: touch;
-              gap: 1.5rem;
-              padding-block: 1.5rem;
-              scroll-behavior: smooth;
-              align-items: stretch;
-            }
-  
-            .carousel::before,
-            .carousel::after {
-              content: "";
-              flex: 0 0 calc(50% - 180px); /* entspricht Hälfte der Max-Kartenbreite */
-            }
-  
-            .carousel::-webkit-scrollbar {
-              display: none;
-            }
-  
-  .card {
-    flex: 0 0 auto;
-    width: clamp(280px, 80vw, 360px);
-    background: linear-gradient(to bottom, #e6f0ff, #ffffff);
-    border-radius: 14px;
-    padding: 2rem;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-    scroll-snap-align: center;
+  <style>
+  .interactive-portfolio {
+    padding: 6rem 2rem;
+    background: linear-gradient(180deg, #ffffff, #ffffff);
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    color: #1a1a1a;
     text-align: center;
-    opacity: 0;
-    transform: scale(0.9);
-    animation: fadeInScale 0.8s ease forwards;
-    animation-delay: 0.2s;
   }
   
+  .portfolio-headline {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: #111;
+  }
   
+  .tab-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
   
+  .tab {
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    color: #222;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.25s ease-in-out;
+  }
   
-            .avatar {
-              width: 64px;
-              height: 64px;
-              border-radius: 50%;
-              object-fit: cover;
-              margin-bottom: 1rem;
-              border: 2px solid #ff6600;
-            }
+  .tab:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
   
-            .stars {
-              color: #ffc107;
-              font-size: 1.1rem;
-              margin-bottom: 0.5rem;
-            }
+  .tab.active {
+    background: var(--primary, #f97316);
+    color: #fff;
+    border-color: var(--primary, #f97316);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  }
   
-            .quote {
-              font-style: italic;
-              color: #333;
-              margin: 1rem 0;
-              line-height: 1.5;
-            }
+  .tab-content {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+  }
   
-            .author {
-              font-weight: 600;
-              color: #111;
-              font-size: 1rem;
-            }
+  .tab-content.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
   
-            .logo {
-              margin-top: 1rem;
-              height: 22px;
-              opacity: 0.6;
-              transition: 0.3s ease;
-            }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
   
-            .logo:hover {
-              opacity: 1;
-            }
-          </style>
-        `;
+  .gallery-item {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease;
+  }
   
-        const stars = (count) => "★".repeat(count) + "☆".repeat(5 - count);
+  .gallery-item:hover {
+    transform: translateY(-6px);
+  }
   
-        const html = `
-          ${style}
-          <h2>Kundenstimmen</h2>
-          <p class="intro">Was unsere Kunden über die Zusammenarbeit sagen.</p>
-          <div class="carousel">
-            ${testimonials.map((t) => `
-              <div class="card">
-                <img src="${t.image}" class="avatar" alt="${t.name}">
-                <div class="stars">${stars(t.stars)}</div>
-                <p class="quote">„${t.quote}“</p>
-                <p class="author">${t.name}</p>
-                <img src="${t.logo}" class="logo" alt="Logo von Kunde">
-              </div>
-            `).join("")}
-          </div>
-        `;
+  .media-wrapper {
+    max-height: 240px;
+    overflow: hidden;
+  }
   
-        this.shadowRoot.innerHTML = html;
+  .media-wrapper img,
+  .media-wrapper video {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    border-radius: 18px 18px 0 0;
+  }
   
-        const carousel = this.shadowRoot.querySelector('.carousel');
-        const cards = this.shadowRoot.querySelectorAll('.card');
+  .gallery-item:hover img,
+  .gallery-item:hover video {
+    transform: scale(1.05);
+  }
   
-        const updateFade = () => {
-          const rect = carousel.getBoundingClientRect();
-          const center = rect.left + rect.width / 2;
+ 
+  .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 18px;
+  backdrop-filter: blur(20px);
+  color: #1c1c1c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.96);
+  transition: all 0.4s ease-in-out;
+  text-align: left;
+}
+
+.gallery-item:hover .overlay {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.overlay p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #111;
+}
+
+.overlay ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+.overlay ul li {
+  list-style-type: disc;
+  margin-bottom: 0.3rem;
+}
+
+.cta-btn {
+  margin-top: auto;
+  align-self: flex-start;
+  background: var(--primary, #f97316);
+  color: #fff;
+  padding: 0.5rem 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.cta-btn:hover {
+  background-color: #fff;
+  color: var(--primary, #f97316);
+  transform: scale(1.05);
+}
+
+
   
-          cards.forEach(card => {
-            const cardRect = card.getBoundingClientRect();
-            const cardCenter = cardRect.left + cardRect.width / 2;
-            const distance = Math.abs(center - cardCenter);
-            const maxDistance = rect.width / 2;
-  
-            const opacity = 1 - Math.min(distance / maxDistance, 1);
-            const scale = 1 + (0.05 * (1 - Math.min(distance / maxDistance, 1)));
-  
-            card.style.opacity = opacity.toFixed(2);
-            card.style.transform = `scale(${scale.toFixed(2)})`;
-          });
-        };
-  
-        function scrollToCard(index) {
-          const card = cards[index];
-          const carouselCenter = carousel.offsetWidth / 2;
-          const cardCenterOffset = card.offsetLeft + card.offsetWidth / 2;
-          const targetScrollLeft = cardCenterOffset - carouselCenter;
-  
-          carousel.scrollTo({
-            left: targetScrollLeft,
-            behavior: "smooth"
-          });
-  
-          updateFade();
-        }
-  
-        let currentIndex = 0;
-  
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            scrollToCard(0); // Erste Karte zentrieren
-            setInterval(() => {
-              currentIndex = (currentIndex + 1) % cards.length;
-              scrollToCard(currentIndex);
-            }, 4000);
-          });
-        });
-  
-        carousel.addEventListener("scroll", updateFade);
-      }
+  @media (max-width: 768px) {
+    .gallery {
+      grid-template-columns: 1fr;
     }
+  }
+  </style>
   
-    customElements.define("testimonial-slider", TestimonialSlider);
+  <script>
+    feather.replace();
+  
+    document.querySelectorAll('.tab').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+  
+        button.classList.add('active');
+        const tabId = button.dataset.tab;
+        document.querySelector(`#tab-${tabId}`).classList.add('active');
+      });
+    });
+  
+    ScrollReveal().reveal('.reveal', {
+      distance: '40px',
+      duration: 1000,
+      easing: 'ease-out',
+      origin: 'bottom',
+      interval: 200
+    });
   </script>
   
   
+  <testimonial-slider></testimonial-slider>
+
+<script>
+  class TestimonialSlider extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+    }
+
+    connectedCallback() {
+      const testimonials = [
+        {
+          image: "https://randomuser.me/api/portraits/women/44.jpg",
+          name: "Sophie M., Creative Director",
+          quote: "Das 3D-Design hat unsere Produktpräsentation revolutioniert – professionell, kreativ, zuverlässig!",
+          logo: "./TestemonialSlider/Logo1.png"
+        },
+        {
+          image: "https://randomuser.me/api/portraits/men/32.jpg",
+          name: "Christian Schulz",
+          quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
+          logo: "./TestemonialSlider/NeoLog.png"
+        },
+        {
+          image: "https://randomuser.me/api/portraits/men/41.jpg",
+          name: "Daniel R., Startup-Gründer",
+          quote: "Schnell, hochwertig, visuell auf Top-Niveau. Gerne wieder für kommende Projekte!",
+          logo: "./TestemonialSlider/Logo2.png"
+        }
+      ];
+
+      const style = `
+        <style>
+          :host {
+            display: block;
+            padding: 5rem 1.5rem;
+            background: #fff;
+          }
+
+h2 {
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: var(--text-main, #1c1c1e);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+          .intro {
+            text-align: center;
+            font-size: 1.05rem;
+            color: #666;
+            margin: 0 auto 2.5rem;
+            max-width: 680px;
+            padding: 0 2.1rem;
+            line-height: 1.6;
+          }
+
+          .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 1.5rem;
+            padding-block: 1.5rem;
+            scroll-behavior: smooth;
+            align-items: stretch;
+          }
+
+          .carousel::before,
+          .carousel::after {
+            content: "";
+            flex: 0 0 calc(50% - 180px);
+          }
+
+          .carousel::-webkit-scrollbar {
+            display: none;
+          }
+
+          .card {
+            flex: 0 0 auto;
+            width: clamp(280px, 80vw, 360px);
+            background: linear-gradient(to bottom, #e6f0ff, #ffffff);
+            border-radius: 14px;
+            padding: 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            scroll-snap-align: center;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: fadeInScale 0.8s ease forwards;
+            animation-delay: 0.2s;
+          }
+
+          .avatar-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+          }
+
+          .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ff6600;
+          }
+
+          .logo {
+            height: 28px;
+            max-width: 100px;
+            opacity: 0.7;
+            transition: 0.3s ease;
+            object-fit: contain;
+          }
+
+          .logo:hover {
+            opacity: 1;
+          }
+
+          .quote {
+            font-style: italic;
+            color: #333;
+            margin: 1rem 0;
+            line-height: 1.5;
+          }
+
+          .author {
+            font-weight: 600;
+            color: #111;
+            font-size: 1rem;
+          }
+        </style>
+      `;
+
+      const html = `
+        ${style}
+        <h2>Kundenstimmen</h2>
+        <p class="intro">Was unsere Kunden über die Zusammenarbeit sagen.</p>
+        <div class="carousel">
+          ${testimonials.map((t) => `
+            <div class="card">
+              <div class="avatar-logo">
+                <img src="${t.image}" class="avatar" alt="${t.name}">
+                ${t.logo ? `<img src="${t.logo}" class="logo" alt="Logo von Kunde">` : ""}
+              </div>
+              <p class="quote">„${t.quote}“</p>
+              <p class="author">${t.name}</p>
+            </div>
+          `).join("")}
+        </div>
+      `;
+
+      this.shadowRoot.innerHTML = html;
+
+      const carousel = this.shadowRoot.querySelector('.carousel');
+      const cards = this.shadowRoot.querySelectorAll('.card');
+
+      const updateFade = () => {
+        const rect = carousel.getBoundingClientRect();
+        const center = rect.left + rect.width / 2;
+
+        cards.forEach(card => {
+          const cardRect = card.getBoundingClientRect();
+          const cardCenter = cardRect.left + cardRect.width / 2;
+          const distance = Math.abs(center - cardCenter);
+          const maxDistance = rect.width / 2;
+
+          const opacity = 1 - Math.min(distance / maxDistance, 1);
+          const scale = 1 + (0.05 * (1 - Math.min(distance / maxDistance, 1)));
+
+          card.style.opacity = opacity.toFixed(2);
+          card.style.transform = `scale(${scale.toFixed(2)})`;
+        });
+      };
+
+      function scrollToCard(index) {
+        const card = cards[index];
+        const carouselCenter = carousel.offsetWidth / 2;
+        const cardCenterOffset = card.offsetLeft + card.offsetWidth / 2;
+        const targetScrollLeft = cardCenterOffset - carouselCenter;
+
+        carousel.scrollTo({
+          left: targetScrollLeft,
+          behavior: "smooth"
+        });
+
+        updateFade();
+      }
+
+      let currentIndex = 0;
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          scrollToCard(0);
+          setInterval(() => {
+            currentIndex = (currentIndex + 1) % cards.length;
+            scrollToCard(currentIndex);
+          }, 4000);
+        });
+      });
+
+      carousel.addEventListener("scroll", updateFade);
+    }
+  }
+
+  customElements.define("testimonial-slider", TestimonialSlider);
+</script>
+
+
   
   <section class="kontakt-clean" id="kontakt">
     <div class="kontakt-wrapper">
@@ -1564,8 +2050,6 @@
   </script>
   
   
-  
-  
   <footer>
     <div class="footer-grid">
       <div class="footer-logo">
@@ -1612,11 +2096,22 @@
   
   <style>
     footer {
-      background: #0d0d0d;
-      color: #aaa;
+      position: relative;
+      background: white;
+      background-size: 600% 600%;
+      animation: animatedGradient 20s ease infinite;
+      color: #222;
       padding: 4rem 5vw 2rem;
       font-size: 0.9rem;
-      border-top: 1px solid #222;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      z-index: 1;
+    }
+  
+    @keyframes animatedGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
   
     .footer-grid {
@@ -1625,6 +2120,8 @@
       gap: 2rem;
       max-width: 1200px;
       margin: 0 auto 2rem;
+      position: relative;
+      z-index: 2;
     }
   
     .footer-logo span {
@@ -1635,7 +2132,7 @@
   
     .footer-logo p {
       margin-top: 0.5rem;
-      color: #666;
+      color: #555;
       font-size: 0.95rem;
     }
   
@@ -1643,7 +2140,7 @@
     .footer-contact h4,
     .footer-socials h4 {
       margin-bottom: 0.8rem;
-      color: var(--secondary);
+      color: rgb(65, 64, 64);
       font-weight: 600;
       font-size: 1rem;
     }
@@ -1660,11 +2157,15 @@
     }
   
     .footer-links a {
-      color: #ccc;
+      color: #444;
+      text-decoration: none;
+      transition: all 0.3s ease;
     }
   
     .footer-links a:hover {
-      color: var(--primary);
+      color: black;
+      transform: translateX(4px);
+      filter: brightness(1.2) drop-shadow(0 0 6px white);
     }
   
     .footer-socials {
@@ -1683,22 +2184,33 @@
       width: 26px;
       height: 26px;
       opacity: 1;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-      vertical-align: middle;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      filter: grayscale(20%);
     }
   
     .footer-socials img:hover {
-      transform: scale(1.1);
-      opacity: 1;
+      transform: scale(1.2);
+      filter: brightness(1.2) drop-shadow(0 0 6px white);
     }
   
     .footer-bottom {
       text-align: center;
-      color: #666;
+      color: #555;
       font-size: 0.85rem;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+  
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
+  
+  
   <style>
     /* === Responsive Styles === */
   
@@ -1719,7 +2231,8 @@
       .hero-video-content p {
         font-size: 1rem;
       }
-  
+
+
       .cta-btn, .neon-btn {
         font-size: 0.9rem;
         padding: 0.8rem 1.6rem;
