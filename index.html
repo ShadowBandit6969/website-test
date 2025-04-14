@@ -1,1621 +1,148 @@
+
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fusion³ – Web & 3D Design</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #ff6600;
-            --secondary: #ff944d;
-            --bg: #0b0b0b;
-            --text: #ffffff;
-            --muted: #999;
-            --container-width: 1200px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fusion³ – UX & Webdesign Studio</title>
+  <meta name="description" content="Fusion³ ist dein Partner für UX-Design, Webdesign & Prototyping. Wir gestalten digitale Erlebnisse mit Substanz." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons"></script>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <style>
+    :root {
+      --primary: #ff6600;
+      --secondary: #ff944d;
+      --bg: #0b0b0b;
+      --text: #ffffff;
+      --muted: #999;
+      --container-width: 1200px;
+    }
 
-        html,
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            scroll-behavior: smooth;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-            transition: 0.3s;
-        }
+    html, body {
+      font-family: 'Inter', sans-serif;
+      background: white;
+      color: var(--text);
+      scroll-behavior: smooth;
+      
+    }
 
-        header {
-            width: 100%;
-            padding: 2rem 5vw;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #222;
-            position: relative;
-            z-index: 10;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: 0.3s;
+    }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--primary);
-            letter-spacing: 1px;
-        }
+    /* Typo und Titel */
+    h1, h2, h3, h4 {
+      font-weight: 900;
+    }
 
-        nav a {
-            margin-left: 2rem;
-            font-weight: 500;
-            font-size: 1rem;
-            color: var(--muted);
-        }
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
 
-        nav a:hover {
-            color: var(--primary);
-        }
-        .burger {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 24px;
-  height: 18px;
+    /* Navigation */
+    header {
+      width: 100%;
+      padding: 2rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #222;
+      position: relative;
+      z-index: 10;
+      
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      margin-left: 2rem;
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    nav a:hover {
+      color: var(--primary);
+      
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 18px;
+      cursor: pointer;
+      z-index: 20;
+    }
+
+    .burger span {
+      display: block;
+      height: 3px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    .burger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .burger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .burger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+    .burger-icon {
+  background: none;
+  border: none;
   cursor: pointer;
+  display: none; /* wird via Media Query eingeblendet */
   z-index: 20;
 }
 
-.burger span {
-  display: block;
-  height: 3px;
-  background: var(--text);
-  border-radius: 2px;
-  transition: 0.3s;
+.burger-icon i {
+  width: 32px;
+  height: 32px;
+  stroke: #000;
 }
-
-.burger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.burger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.burger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
-        .hero-video-wrapper {
-             position: relative;
-             height: 100vh;
-             width: 100%;
-             overflow: hidden;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             text-align: center;
-             background-color: transparent;
-             background: linear-gradient(to bottom, #0b0b0b, #000);
-         }
- 
-         .video-background {
-             position: absolute;
-             top: 60%;
-             left: 50%;
-             width: 100%;
-             height: auto;
-             transform: translate(-50%, -50%);
-             object-fit: cover;
-             z-index: 0;
-             opacity: 1;
-             pointer-events: none;
-             background-color: transparent;
- 
-             /* Sanfter Verlauf oben UND unten */
-             mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-             -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-         }
-
-
-
-        .hero-video-content {
-            position: relative;
-            z-index: 2;
-            width: 90%;
-            padding: 2rem;
-            max-width: 800px;
-            color: #fff;
-            background: none;
-            border-radius: 10px;
-            box-sizing: border-box;
-            margin-top: -25vh;
-            /* <-- Überschrift weiter nach oben */
-        }
-
-
-
-        .hero-video-content h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-        }
-
-        .hero-video-content p {
-            font-size: 1.2rem;
-            color: #ccc;
-            margin: 1rem 0;
-        }
-
-        .neon-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none;
-            color: #fff;
-            padding: 1rem 2.2rem;
-            font-size: 1rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            border-radius: 8px;
-            box-shadow: 0 0 12px rgba(255, 102, 0, 0.4),
-                0 0 24px rgba(255, 102, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            transition: all 0.3s ease;
-        }
-
-        .neon-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 16px rgba(255, 102, 0, 0.6),
-                0 0 36px rgba(255, 102, 0, 0.4);
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-        }
-
-        .neon-btn span::after {
-            content: "";
-            position: absolute;
-            top: -120%;
-            left: -120%;
-            width: 300%;
-            height: 300%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 40%);
-            opacity: 0;
-            animation: pulseEffect 4s infinite ease-in-out;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        @keyframes pulseEffect {
-
-            0%,
-            100% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-
-            50% {
-                opacity: 0.3;
-                transform: scale(1.4);
-            }
-        }
-
-        .neon-btn.sent {
-            background: linear-gradient(135deg, #00c851, #007e33);
-            box-shadow: 0 0 14px rgba(0, 200, 81, 0.6);
-            transform: scale(1.02);
-        }
-
-        @keyframes buttonShake {
-            0% {
-                transform: translateX(0);
-            }
-
-            25% {
-                transform: translateX(-4px);
-            }
-
-            50% {
-                transform: translateX(4px);
-            }
-
-            75% {
-                transform: translateX(-2px);
-            }
-
-            100% {
-                transform: translateX(0);
-            }
-        }
-
-        .neon-btn.shake {
-            animation: buttonShake 0.3s ease;
-        }
-
-
-        .cta-btn {
-            position: relative;
-            overflow: hidden;
-            z-index: 2;
-            background: var(--primary);
-            color: #000;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 1rem 2rem;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 1rem;
-        }
-
-        section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            font-weight: 800;
-        }
-
-        .container {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 5rem 2rem;
-        }
-
-
-        .features {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .feature {
-            background: #161616;
-            border-radius: 10px;
-            padding: 2rem;
-            width: 320px;
-            text-align: left;
-        }
-
-        .feature h3 {
-            color: var(--secondary);
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .portfolio-grid img {
-            width: 100%;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .portfolio-grid img:hover {
-            transform: scale(1.03);
-        }
-
-        form {
-    display: flex;
-    flex-direction: column;
-    /* max-width: 600px; ❌ entfernen */
-    width: 100%; /* ✅ volle Breite im Container nutzen */
-    margin: 0 auto;
-}
-
-.form-wrapper {
-    max-width: 100%;
-    margin: 0 auto;
-    width: 100%;
-}
-
-
-        input,
-        textarea {
-            background: #111;
-            border: 1px solid #333;
-            padding: 1rem;
-            color: var(--text);
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            border-radius: 5px;
-        }
-
-        button {
-            background: var(--primary);
-            color: #000;
-            padding: 1rem;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-
-
-        .socials img {
-            width: 24px;
-            margin: 0 8px;
-            opacity: 0.7;
-            transition: 0.2s;
-        }
-
-        .socials img:hover {
-            opacity: 1;
-        }
-
-        .features.branchen .feature h3 {
-            font-size: 1.3rem;
-            color: var(--primary);
-        }
-
-        .tech-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            padding: 5rem 2rem;
-            perspective: 1200px;
-        }
-
-        /* Nur wenn gestapelt UND die Karte zentriert dargestellt wird */
-.tech-showcase.stacked-tech-cards .tech-card.centered-card .inner {
-    text-align: left;
-    align-items: flex-start;
-}
-
-
-        .tech-card {
-            position: relative;
-            background: rgba(15, 15, 15, 0.6);
-            border-radius: 18px;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            transition: transform 0.3s ease;
-            box-shadow: 0 0 0 transparent;
-        }
-
-        .tech-card.centered-card .inner {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-
-        .tech-card:hover {
-            transform: rotateY(8deg) rotateX(4deg);
-        }
-
-        .tech-card .inner {
-            position: relative;
-            z-index: 2;
-            padding: 2rem;
-            height: 100%;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-        }
-
-        .tech-card h3 {
-            font-size: 1.4rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .tech-card ul {
-            list-style: none;
-            padding: 0;
-            color: #ccc;
-        }
-
-
-/* Aktualisierte Listeneinträge */
-.tech-card li {
-    margin-bottom: 0.8rem;
-    position: relative;
-    padding-left: 1.6rem;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 500;
-    line-height: 1.4;
-    color: #e6e6e6;
-}
-
-.tech-card li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.45rem;
-    width: 8px;
-    height: 8px;
-    background: var(--primary);
-    transform: rotate(45deg);
-    box-shadow: 0 0 8px rgba(255,102,0,0.3);
-    transition: all 0.3s ease;
-}
-
-.tech-card li:hover::before {
-    transform: rotate(135deg) scale(1.2);
-    background: var(--secondary);
-}
-
-        .bg-icon {
-            position: absolute;
-            font-size: 4rem;
-            opacity: 0.04;
-            top: 20%;
-            right: 10%;
-            transform: rotate(-20deg);
-            pointer-events: none;
-        }
-
-        .shimmer-border {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 18px;
-            background: linear-gradient(130deg, transparent, var(--primary), transparent);
-            opacity: 0.05;
-            mix-blend-mode: screen;
-            animation: pulse 4s infinite ease-in-out;
-            z-index: 1;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 0.05;
-            }
-
-            50% {
-                opacity: 0.15;
-            }
-        }
-
-        .white-transition-section {
-  position: relative;
-  background: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  overflow: visible; /* 🔁 damit animationen nicht abgeschnitten werden */
-}
-
-        /* Pulsierender Kreis */
-        .white-trigger {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: white;
-            animation: pulseCircle 2s infinite;
-            cursor: pointer;
-            z-index: 10;
-            position: absolute;
-        }
-
-        @keyframes pulseCircle {
-            0% {
-                transform: scale(1);
-                opacity: 0.7;
-            }
-
-            50% {
-                transform: scale(1.2);
-                opacity: 1;
-            }
-
-            100% {
-                transform: scale(1);
-                opacity: 0.7;
-            }
-        }
-
-        .multi-circle-wrapper {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-
-        }
-
-        .center-circle {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 50%;
-            z-index: 2;
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
-
-        /* Pulsierende Kreise */
-        .pulse-circle {
-            position: absolute;
-            width: 10vw;
-            height: 10vw;
-            border-radius: 50%;
-            background: white;
-            opacity: 0.3;
-            animation: sunPulse 2.5s infinite ease-out;
-            z-index: 1;
-        }
-
-        .delay1 {
-            animation-delay: 0.5s;
-        }
-
-        .delay2 {
-            animation-delay: 1s;
-        }
-
-        @keyframes sunPulse {
-            0% {
-                transform: scale(1);
-                opacity: 0.3;
-            }
-
-            70% {
-                transform: scale(2.5);
-                opacity: 0.05;
-            }
-
-            100% {
-                transform: scale(3);
-                opacity: 0;
-            }
-        }
-
-        /* Klick mich */
-        .click-hint {
-            position: absolute;
-            bottom: -2.5rem;
-            color: white;
-            font-weight: 600;
-            font-size: 1rem;
-            text-align: center;
-            animation: hintPulse 1.6s ease-in-out infinite;
-            z-index: 3;
-            pointer-events: none;
-            top: 8rem;
-        }
-
-        @keyframes hintPulse {
-
-            0%,
-            100% {
-                opacity: 0.6;
-                transform: translateY(0);
-            }
-
-            50% {
-                opacity: 1;
-                transform: translateY(-4px);
-            }
-        }
-        .white-world {
-  position: relative; /* ✅ statt absolute */
-  height: auto;        /* ❗️wichtig */
-  min-height: 100vh;   /* garantiert volle Höhe auf großen Screens */
-  clip-path: circle(0% at 50% 50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background: radial-gradient(circle at center, #f4f4f4 0%, #f4f4f4 100%);
-    opacity: 0;
-    pointer-events: none;
-    z-index: 5;
-    clip-path: circle(0% at 50% 50%);
-    transition: clip-path 1.2s ease-out, opacity 0.6s ease;
-}
-
-.white-world.visible {
-    clip-path: circle(150% at 50% 50%);
-    opacity: 1;
-    pointer-events: all;
-    width: 100vw;
-}
-
-
-        .white-world.visible {
-            opacity: 1;
-            pointer-events: all;
-            clip-path: circle(150% at center);
-            transform: translateX(0); /* zurück zur Mitte */
-        }
-
-        /* Inhalt im weißen Bereich */
-        .white-content {
-            text-align: center;
-            max-width: 900px;
-            padding: 2rem;
-            animation: fadeIn 1.2s ease forwards;
-        }
-
-        .white-content h2 {
-            font-size: 2.8rem;
-            color: #111;
-            margin-bottom: 3rem;
-            font-weight: 900;
-        }
-
-
-        .project-white-steps {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-        }
-
-        .white-step {
-            background: rgba(255, 255, 255, 0.5);
-            border: 1px solid #eee;
-            border-radius: 20px;
-            padding: 2rem;
-            width: 260px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .white-step:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
-        }
-
-        .white-step span {
-            display: block;
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .white-step h3 {
-            color: #111;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .white-step p {
-            color: #444;
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .project-white-steps {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2.5rem;
-            justify-content: center;
-        }
-
-
-        
-
-        
-        .epic-step {
-            position: relative;
-            background: rgba(255, 255, 255, 0.12);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 2.5rem;
-            width: 300px;
-            box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-            backdrop-filter: blur(20px);
-            overflow: hidden;
-            transition: all 0.4s ease;
-            transform: translateY(40px);
-            opacity: 0;
-        }
-
-        .epic-step::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(ellipse at center, #fff 0%, transparent 60%);
-            opacity: 0.04;
-            animation: lightMotion 8s linear infinite;
-        }
-
-        @keyframes lightMotion {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .epic-step:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
-            border-color: rgba(255, 102, 0, 0.2);
-        }
-
-        .step-inner {
-            position: relative;
-            z-index: 2;
-            text-align: left;
-        }
-
-        .step-number {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--primary);
-            display: block;
-            margin-bottom: 1rem;
-        }
-
-        .epic-step h3 {
-            font-size: 1.4rem;
-            color: #111;
-            font-weight: 700;
-            margin-bottom: 0.7rem;
-        }
-
-        .epic-step p {
-            color: #333;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        .epic-step::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: linear-gradient(130deg, rgba(255, 102, 0, 0.08), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .epic-step:hover::after {
-            opacity: 1;
-        }
-
-
-
-        
-        .branch-card {
-            position: relative;
-            height: 340px;
-            border-radius: 20px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-            z-index: 4;
-        }
-
-        .branch-selection {
-            background: none;
-            /* Schwarz zu Beginn */
-            margin-top: -20px;
-            color: #f4f4f4;
-            padding: 6rem 2rem;
-            transition: background 0.6s ease, color 0.6s ease;
-        }
-
-        .branch-selection h2 {
-            color: inherit;
-            transition: color 0.6s ease;
-        }
-
-
-        .branch-card:hover {
-            background: #2a2a2a;
-            transform: translateY(-6px) scale(1.02);
-            border-color: var(--primary);
-        }
-
-        /* Nach Klick auf Kugel: Helles Theme */
-        .branch-selection.visible {
-            background: #f4f4f4;
-            color: #111;
-        }
-
-        .branch-selection.visible h2 {
-            color: #111;
-        }
-
-        .branch-selection.visible .branch-card {
-            background: #f7f7f7;
-            color: #111;
-            border-color: #ddd;
-        }
-
-        .branch-selection.visible .branch-card:hover {
-            background: #f4f4f4;
-            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.06);
-            border-color: rgba(255, 102, 0, 0.2);
-        }
-
-        .branch-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .branch-inner h2 {
-            font-size: 2.8rem;
-            margin-bottom: 3rem;
-            font-weight: 900;
-        }
-
-
-
-        .branch-selection.visible .branch-card {
-            background: #f4f4f4;
-            border: 1px solid #ddd;
-            color: #111;
-        }
-
-        .branch-selection.visible .branch-card:hover {
-            background: #fff;
-            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
-        }
-
-        .branch-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-        }
-
-
-        .branch-card video {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-            filter: brightness(1);
-            transition: filter 0.4s ease;
-        }
-
-        .branch-card:hover video {
-            filter: brightness(1.1);
-        }
-
-        .branch-overlay {
-            position: absolute;
-            inset: 0;
-
-            z-index: 2;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .branch-overlay h3 {
-            color: #fff;
-            font-size: 1.6rem;
-            font-weight: 800;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-            transition: transform 0.4s ease;
-        }
-
-        .branch-card:hover .branch-overlay h3 {
-            transform: translateY(-6px);
-        }
-
- 
-
-        .branch-selection.visible .branch-overlay h3 {
-            color: #ffffff;
-            text-shadow: none;
-        }
-
-        .branch-card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .branch-card.selected {
-            outline: 4px solid var(--primary);
-            outline-offset: -8px;
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 0 10px rgb(255, 102, 0), 0 0 5px rgb(255, 255, 255);
-            box-shadow: 0 0 3px rrgb(255, 255, 255);
-          
-            z-index: 5;
-        }
-
-
-
-
-
-        .testimonial-card {
-            position: relative;
-            flex-shrink: 0;
-            max-width: 400px; /* Oder 420px, je nach Look */
-            /* wichtig für Slider */
-            background: rgba(26, 26, 26, 0.6);
-            border: 2px solid rgba(255, 102, 0, 0.2);
-            border-left: 4px solid var(--primary);
-            padding: 2rem;
-            border-radius: 16px;
-            backdrop-filter: blur(14px);
-            transition: transform 0.6s ease, box-shadow 0.6s ease;
-            opacity: 0.95;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            will-change: transform;
-            perspective: 800px;
-        }
-
-        .testimonial-card::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
-            animation: rotateLight 25s linear infinite;
-            pointer-events: none;
-            z-index: 0;
-            filter: blur(10px);
-            /* <--- Weicher Übergang */
-            opacity: 1;
-        }
-
-
-        @keyframes rotateLight {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* ✨ Hover effect mit 3D Shine */
-        .testimonial-card:hover {
-            transform: rotateY(6deg) rotateX(2deg) scale(1.03);
-            box-shadow: 0 5px 18px rgba(119, 119, 119, 0.596);
-            opacity: 1;
-        }
-
-        /* 🔥 Edge glow */
-        .testimonial-card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: linear-gradient(120deg,
-                    rgba(255, 102, 0, 0.15),
-                    transparent,
-                    rgba(255, 102, 0, 0.15));
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .testimonial-card:hover::after {
-            opacity: 1;
-        }
-
-        .testimonial-card p {
-            font-size: 1.15rem;
-            color: #f3f3f3;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .epic-testimonials {
-            padding-top: 140px;
-        }
-
-        .testimonial-card span {
-            color: var(--muted);
-            font-style: italic;
-            position: relative;
-            z-index: 2;
-        }
-
-        .testimonial-slider-wrapper {
-            overflow: hidden;
-            position: relative;
-            max-width: 90vw;
-            margin: 0 auto;
-            z-index: 1;
-            mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-        }
-
-        .testimonial-slider {
-            display: flex;
-            gap: 2rem;
-            animation: slideTestimonial 20s linear infinite;
-            will-change: transform;
-            justify-content: center;
-        }
-
-        .testimonial-slider:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes slideTestimonial {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .testimonial-waves {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 80px;
-            pointer-events: none;
-            z-index: 10;
-            opacity: 0;
-            transition: opacity 1s ease;
-            mask-image: linear-gradient(to bottom, white 100%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, white 100%, transparent 100%);
-
-            margin-top: -2px;
-        }
-
-
-        .wave-wrapper {
-            width: 200vw;
-            height: 100%;
-            transform: scaleX(-1);
-            /* Spiegelung */
-        }
-
-        .wave-svg {
-    width: 100vw;
-    height: 100%;
+@media (max-width: 768px) {
+  .burger-icon {
     display: block;
-    object-fit: cover;
-}
-
-
-
-        @keyframes smoothWave {
-            0% {
-                transform: translateX(0%) scaleX(-1);
-            }
-
-            100% {
-                transform: translateX(-50%) scaleX(-1);
-            }
-        }
-
-
-
-
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-
-
-        .video-focus-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-            padding: 4rem 0;
-        }
-
-        .video-focus-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-            height: 320px;
-            background-color: #000;
-            box-shadow: 0 0 20px rgba(255, 102, 0, 0.06), 0 0 60px rgba(255, 102, 0, 0.05);
-            isolation: isolate;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            backdrop-filter: blur(10px);
-        }
-
-
-        .video-focus-item:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 0 10px rgb(255, 102, 0), 0 0 5px rgb(255, 255, 255);
-}
-
-.glow-overlay {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(255, 102, 0, 0.15), transparent 60%);
-    opacity: 0.7;
-    animation: glowPulse 3s infinite ease-in-out;
-    pointer-events: none;
-    z-index: 2;
-    border-radius: 20px;
-}
-
-@keyframes glowPulse {
-    0%, 100% {
-        opacity: 0.7;
-    }
-    50% {
-        opacity: 1;
-    }
-}
-
-
-        .video-focus-item::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: radial-gradient(circle, rgba(255, 102, 0, 0.05), transparent 80%);
-            opacity: 0.5;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .video-focus-item video {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: blur(10px);
-            transition: filter 0.3s ease;
-            pointer-events: none;
-            z-index: 1;
-            transform: scale(1.04);
-        }
-
-        .video-mask {
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            mask-image: radial-gradient(circle at var(--x, 50%) var(--y, 50%), black 0%, transparent 140px);
-            -webkit-mask-image: radial-gradient(circle at var(--x, 50%) var(--y, 50%), black 0%, transparent 140px);
-            mask-repeat: no-repeat;
-            -webkit-mask-repeat: no-repeat;
-            pointer-events: none;
-        }
-
-        .video-mask video {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: none !important;
-        }
-
-        .video-title {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            z-index: 3;
-            transform: translate(-50%, -50%);
-            color: #fff;
-            font-size: 1.5rem;
-            font-weight: 800;
-            text-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            pointer-events: none;
-            letter-spacing: 0.5px;
-        }
-
-
-        .cta-btn::before {
-            content: "";
-            position: absolute;
-            left: -100%;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.4s ease;
-            z-index: 0;
-        }
-
-        .cta-btn:hover::before {
-            left: 0;
-        }
-
-        .persona-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            perspective: 1000px;
-            margin-top: 3rem;
-        }
-
-        .persona-card {
-            position: relative;
-            background: rgba(20, 20, 20, 0.6);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(14px);
-            overflow: hidden;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            cursor: pointer;
-            box-shadow: 0 0 0 transparent;
-        }
-
-        .persona-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 35px rgba(255, 102, 0, 0.12);
-        }
-
-        .persona-card .inner {
-            position: relative;
-            z-index: 2;
-            padding: 2.5rem;
-            min-height: 220px;
-        }
-
-        .persona-card h3 {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .persona-card p {
-            color: #ccc;
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-
-        .persona-card .bg-icon {
-            position: absolute;
-            font-size: 6rem;
-            opacity: 0.04;
-            bottom: -10px;
-            right: 10px;
-            transform: rotate(-15deg);
-            pointer-events: none;
-        }
-
-        .project-white-steps .epic-step:last-child:nth-child(3) {
-            flex: 0 0 calc(600px + 2.5rem);
-            /* zwei Kartenbreiten + Gap */
-            max-width: 100%;
-            text-align: center;
-            margin-top: 1rem;
-        }
-
-        .project-white-steps .epic-step:last-child:nth-child(3) .step-inner {
-            align-items: center;
-        }
-
-        .persona-grid .persona-card:last-child:nth-child(odd) {
-            grid-column: span 2;
-            max-width: 100%;
-            text-align: center;
-        }
-
-        .tech-showcase>.tech-card:nth-last-child(1):nth-child(odd):only-child,
-        .tech-showcase>.tech-card:last-child:nth-child(odd) {
-            grid-column: span 2;
-            max-width: 100%;
-            text-align: center;
-        }
-
-
-        .video-focus-grid .video-focus-item:last-child:nth-child(odd) {
-            grid-column: span 2;
-            max-width: 100%;
-            text-align: center;
-        }
-
-        footer {
-            background: #0d0d0d;
-            color: #aaa;
-            padding: 4rem 5vw 2rem;
-            font-size: 0.9rem;
-            border-top: 1px solid #222;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto 2rem;
-        }
-
-        .footer-logo span {
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: var(--primary);
-        }
-
-        .footer-logo p {
-            margin-top: 0.5rem;
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        .footer-links h4,
-        .footer-contact h4,
-        .footer-socials h4 {
-            margin-bottom: 0.8rem;
-            color: var(--secondary);
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .footer-links ul,
-        .footer-contact ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-links li,
-        .footer-contact li {
-            margin-bottom: 0.4rem;
-        }
-
-        .footer-links a {
-            color: #ccc;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-
-        .footer-socials {
-    display: flex;
-    flex-direction: column; /* Überschrift oben, Icons darunter */
-    align-items: flex-start;
-}
-
-.footer-socials-icons {
-    display: flex;
-    gap: 12px; /* Abstand zwischen Icons */
-    margin-top: 0.5rem;
-}
-
-
-
-        .footer-socials img {
-            width: 26px;
-            height: 26px;
-            margin-right: 12px;
-            opacity: 1;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-            vertical-align: middle;
-        }
-
-        .footer-socials img:hover {
-            transform: scale(1.1);
-            opacity: 1;
-        }
-
-
-        .footer-bottom {
-            text-align: center;
-            color: #666;
-            font-size: 0.85rem;
-            margin-top: 1rem;
-        }
-
-
-
-        @media (min-width: 1024px) {
-            .video-background {
-        top: 55%; /* vorher 50% */
-        transform: translate(-50%, -40%); /* vorher -50%, -50% */
-    }
-            .branch-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
-
-            .branch-grid .branch-card:last-child:nth-child(odd) {
-                grid-column: span 2;
-            }
-            .pulse-circle {
-        width: 100px;
-        height: 100px;
-    }
-
-    .center-circle {
-        width: 60px;
-        height: 60px;
-    }
-
-    .click-hint {
-        font-size: 0.9rem;
-        top: 6rem;
-    }
-        }
-
-        @media (min-width: 768px) {
-  .click-hint {
-    top: 10rem; /* vorher 8rem */
-  }
-}
-
-
-
-        @media (max-width: 1024px) and (min-width: 600px) {
-            .features.branchen .feature:nth-child(3) {
-                flex-basis: calc(320px * 2 + 2rem);
-                /* doppelte Breite + Gap */
-            }
-
-        }
-
-
-
-
-        @media (max-width: 768px) {
-
-            .video-background {
-        top: 55%; /* vorher 50% */
-        transform: translate(-50%, -40%); /* vorher -50%, -50% */
-    }
-            .branch-grid {
-                grid-template-columns: repeat(3, 1fr);
-                /* exakt 3 Spalten auf großen Screens */
-            }
-
-            .branch-grid .branch-card:last-child:nth-child(odd) {
-                grid-column: span 2;
-                max-width: 100%;
-                text-align: center;
-            }
-
-            .tech-showcase {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .tech-showcase .tech-card:last-child:nth-child(odd) {
-                grid-column: span 2;
-                max-width: 100%;
-                text-align: center;
-            }
-            
-
-            .branch-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .branch-card {
-    width: 100%;
-    height: 200px;
-  }
-            .branch-grid .branch-card:last-child:nth-child(odd) {
-                grid-column: span 2;
-                max-width: 100%;
-                text-align: center;
-            }
-
-            .tech-showcase {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  }
-            .tech-showcase .tech-card:last-child:nth-child(odd) {
-                grid-column: span 2;
-                max-width: 100%;
-                text-align: center;
-            }
-
-  .project-white-steps .epic-step:last-child:nth-child(3) {
-    flex: unset !important;
-    max-width: 100% !important;
-    text-align: left !important;
-  }
-        }
-
-        @media (max-width: 692px) {
-  .persona-grid .persona-card:last-child:nth-child(odd) {
-    grid-column: unset;
-    max-width: 100%;
-    text-align: left;
-  }
-}
-
-        @media (max-width: 720px) and (min-width: 481px) {
-            .tech-showcase {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 2rem;
-            }
-
-            .tech-card {
-                width: 90%;
-                max-width: 420px;
-            }
-
-            .video-focus-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .video-focus-item {
-    height: 220px; /* Einheitlich */
-    width: 100%;
-  }
-
-  .video-focus-grid .video-focus-item:last-child:nth-child(odd) {
-    grid-column: unset;
-    max-width: 100%;
-    text-align: left;
-  }
-
-        }
-
-        /* === Medien-Spezifisch: 320px Mobile Fix === */
-        @media (max-width: 480px) {
-            .burger {
-    display: flex;
   }
 
   nav {
+    display: none;
     position: absolute;
     top: 100%;
     right: 0;
-    background: #111;
+    background: #fff;
     flex-direction: column;
-    align-items: flex-end;
     padding: 1rem;
-    display: none;
-    gap: 1rem;
-    border-left: 1px solid #222;
-    border-bottom: 1px solid #222;
+    width: 100%;
+    border-top: 1px solid #ddd;
+    z-index: 10;
   }
 
   nav.open {
@@ -1623,1217 +150,1793 @@
   }
 
   nav a {
-    margin: 0;
     font-size: 1rem;
-    color: var(--text);
+    padding: 0.8rem 1rem;
+    color: #111;
   }
-                /* HERO: Inhalt zentriert + responsive */
-                .hero-video-content {
-                text-align: center;
-                padding: 1rem;
-                margin-top: -40vh;
-            }
-
-            .hero-video-content h1 {
-                font-size: 1.5rem;
-                line-height: 1.3;
-            }
-
-            .hero-video-content p {
-                font-size: 0.9rem;
-                margin-bottom: 1rem;
-            }
-
-            .cta-btn {
-                font-size: 0.8rem;
-                padding: 0.6rem 1.2rem;
-            }
-            .video-background {
-
-             top: 65%;
-   }
-
-            /* "Für wen ist Fusion³?" Karten untereinander */
-            .persona-grid {
-                display: flex;
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-
-            .persona-card {
-                width: 100%;
-            }
-
-            /* Technologien & Tools: Karten untereinander */
-            .tech-showcase {
-                display: flex;
-                flex-direction: column;
-                gap: 1.5rem;
-                padding: 2rem 1rem;
-            }
-
-            .tech-card {
-                width: 100%;
-            }
-
-            /* Prozessüberschrift richtig anzeigen */
-            .white-content h2 {
-                font-size: 1.5rem;
-                padding: 0 1rem;
-                line-height: 1.3;
-            }
-
-            /* Kundenstimmen – kleinere Karten, kein Overflow */
-            .testimonial-slider-wrapper {
-                overflow-x: auto;
-                padding-bottom: 1rem;
-            }
+}
 
 
-
-            .testimonial-card p {
-                font-size: 1rem;
-            }
-
-            .testimonial-card span {
-                font-size: 0.85rem;
-            }
-
-            /* Welle ohne Stroke */
-            .testimonial-waves svg path {
-                stroke: none !important;
-            }
-
-            .testimonial-waves {
-                overflow: hidden;
-            }
-
-            /* Portfolio: untereinander, keine Grid-Spalten */
-            .video-focus-grid {
-                display: flex;
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-
-
-            .video-title {
-                font-size: 1rem;
-            }
-
-            /* Videos responsiv */
-            video,
-            img,
-            svg {
-                max-width: 100%;
-                height: auto;
-                display: block;
-            }
-
-            /* Branchen: Untereinander + ohne Stretch */
-            .branch-grid {
-                display: flex;
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-
-            .branch-card {
-                width: 100%;
-                height: 200px;
-            }
-
-            .branch-overlay h3 {
-                font-size: 1.3rem;
-            }
-
-        }
-
-        @media (max-width: 320px) {
-                /* HERO: Inhalt zentriert + responsive */
-                .hero-video-content {
-                text-align: center;
-                padding: 1rem;
-             top: -15vh;
-            }
-            /* HERO: Text & Button mittig */
-            .hero-video-content {
-                margin-top: -15vh;
-                padding: 1rem;
-                text-align: center;
-            }
-
-            .hero-video-content h1 {
-                font-size: 1.5rem;
-                line-height: 1.2;
-            }
-
-            .hero-video-content p {
-                font-size: 0.9rem;
-                margin: 0.8rem 0;
-            }
-
-            .cta-btn {
-                display: inline-block;
-                margin-top: 1rem;
-                padding: 0.6rem 1.2rem;
-                font-size: 0.8rem;
-            }
-
-            /* Für wen ist Fusion: Karten untereinander */
-            .persona-grid {
-                display: flex;
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-
-            /* Technologien & Tools: Karten untereinander */
-            .tech-showcase {
-                display: flex;
-                flex-direction: column;
-                gap: 1.5rem;
-                padding: 2rem 1rem;
-            }
-
-            /* Prozess-Überschrift nicht abgeschnitten */
-            .white-content h2 {
-                font-size: 1.5rem;
-                padding: 0 1rem;
-                line-height: 1.3;
-            }
-
-            /* Kundenwelle – Stroke entfernen */
-            .testimonial-waves svg path {
-                stroke: none !important;
-            }
-
-            .testimonial-card p {
-                font-size: 1rem;
-            }
-
-            .testimonial-card span {
-                font-size: 0.85rem;
-            }
-
-            /* Portfolio: Container untereinander */
-            .video-focus-grid {
-                display: flex;
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-
-            .video-focus-item {
-                height: 240px;
-            }
-
-            .video-title {
-                font-size: 1.1rem;
-            }
-        }
-
-
-     @media (orientation: landscape) and (max-height: 500px) {
-    /* ✅ Header (Logo + Nav nebeneinander) */
-    header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 3vw;
-        gap: 0;
-    }
-
-    .logo {
-        font-size: 1.4rem;
-    }
-
-    nav {
+    @media (max-width: 480px) {
+      .burger {
         display: flex;
-        flex-direction: row;
-        gap: 1rem;
-        flex-wrap: nowrap;
-        justify-content: flex-end;
-    }
-
-    nav a {
-        font-size: 0.9rem;
-        white-space: nowrap;
-    }
-
-    /* ✅ Hero Content darunter – kompakter */
-    .hero-video-content {
-        margin-top: -25vh;
-        padding: 1rem 2rem;
-        max-width: 90%;
-        text-align: center;
-    }
-
-    .hero-video-content h1 {
-        font-size: 2rem;
-        line-height: 1.2;
-    }
-
-    .hero-video-content p {
-        font-size: 1rem;
-        margin: 0.8rem 0;
-    }
-
-    .cta-btn {
-        font-size: 0.85rem;
-        padding: 0.6rem 1.2rem;
-    }
-
-    /* ✅ Video bleibt Hintergrund */
-    .video-background {
-        top: 50%;
-        transform: translate(-50%, -40%);
-        height: auto;
-        min-height: 100%;
-    }
-}
-   
-@media (orientation: landscape) and (max-height: 300px) {
-    header {
-        padding: 0.5rem 3vw;
-    }
-
-    .logo {
-        font-size: 1.2rem;
-    }
-
-    nav a {
-        font-size: 0.75rem;
-        padding: 0.2rem;
-    }
-
-    .hero-video-content {
-        margin-top: -15vh;
-        padding: 0.5rem 1rem;
-        max-width: 100%;
-    }
-
-    .hero-video-content h1 {
-        font-size: 1.2rem;
-        line-height: 1.1;
-    }
-
-    .hero-video-content p {
-        font-size: 0.75rem;
-        margin: 0.5rem 0;
-    }
-
-    .cta-btn {
-        font-size: 0.7rem;
-        padding: 0.4rem 0.8rem;
-    }
-
-    .video-background {
-        top: 50%;
-        transform: translate(-50%, -40%);
-        height: auto;
-        min-height: 100%;
-    }
-}
-
-@media (orientation: landscape) and (max-height: 200px) {
-    header {
-        padding: 0.3rem 2vw;
-    }
-
-    .logo {
-        font-size: 1rem;
-    }
-
-    nav a {
-        font-size: 0.65rem;
-        padding: 0.1rem;
-    }
-
-    .hero-video-content {
-        margin-top: -10vh;
-        padding: 0.3rem 0.8rem;
-        max-width: 100%;
-    }
-
-    .hero-video-content h1 {
-        font-size: 1rem;
-        line-height: 1.1;
-    }
-
-    .hero-video-content p {
-        font-size: 0.65rem;
-        margin: 0.4rem 0;
-    }
-
-    .cta-btn {
-        font-size: 0.6rem;
-        padding: 0.3rem 0.6rem;
-    }
-
-    .video-background {
-        top: 50%;
-        transform: translate(-50%, -40%);
-        height: auto;
-        min-height: 100%;
-    }
-
-    html, body {
-        min-height: 100vh;
-        overflow-y: auto;
-        
-    }
-}
-
-
-
-        html,
-        body {
-            overflow-x: hidden;
-        }
-
-        .testimonial-card,
-        .video-focus-item,
-        .tech-card,
-        .persona-card {
-            min-width: auto;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        img,
-        video,
-        svg {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-        .branch-grid .branch-card:last-child:nth-child(odd) {
-  grid-column: span 2;
-  max-width: 100%;
-  text-align: center;
-}
-
-    </style>
-</head>
-
-<body>
-    <header>
-        <div class="logo">Fusion³</div>
-      
-        <div class="burger" id="burger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      
-        <nav>
-          <a href="#tools">Leistungen</a>
-          <a href="#portfolio">Portfolio</a>
-          <a href="#kontakt">Kontakt</a>
-        </nav>
-      </header>
-      
-
-
-    <section class="hero-video-wrapper">
-       
-        <div class="hero-video-content">
-            <h1>Web & 3D Design <br> für starke Marken</h1>
-            <p>Technologie trifft Design – für Erlebnisse, die wirken und bleiben.</p>
-
-            <a class="cta-btn neon-btn" href="#kontakt">
-                <span>🚀 Projekt starten</span>
-            </a>
-
-        </div>
-    </section>
-
- <video class="video-background" autoplay loop muted playsinline>
-            <source src="./Fotos/Hintergrund.mp4" type="video/mp4" />
-            Dein Browser unterstützt dieses Video nicht.
-        </video>
-
-
-
-    <section class="container" id="branchen">
-        <h2>Für wen ist Fusion³?</h2>
-        <div class="persona-grid">
-            <div class="persona-card" data-type="startup">
-                <div class="inner">
-                    <h3>🚀 Startups & Gründer</h3>
-                    <p>Schnelle MVPs, starke Visuals & Launch-Power – ideal für neue Ideen mit Impact.</p>
-                    <span class="bg-icon">💡</span>
-                </div>
-            </div>
-            <div class="persona-card" data-type="creative">
-                <div class="inner">
-                    <h3>🎨 Kreative & Agenturen</h3>
-                    <p>3D, Motion & Web aus einer Hand – auf Wunsch als Partner oder im White Label.</p>
-                    <span class="bg-icon">🖌️</span>
-                </div>
-            </div>
-            <div class="persona-card" data-type="brand">
-                <div class="inner">
-                    <h3>🏢 Unternehmen & Brands</h3>
-                    <p>Starke Brand Stories, Microsites & interaktive Experiences für bleibenden Eindruck.</p>
-                    <span class="bg-icon">🏁</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="container" id="tools">
-        <h2>Unsere Leistungen</h2>
-        <div class="tech-showcase">
-            <!-- Webdesign -->
-            <a href="WebDesign.html" class="tech-card" data-title="WebDesign">
-                <div class="inner">
-                    <h3>Webdesign</h3>
-                    <ul>
-                        <li>Individuelle Websites mit Premium-Design</li>
-                        <li>Mobile Optimierung & Performance-Tuning</li>
-                        <li>Interaktive Animationen & Micro-Interactions</li>
-                        <li>CMS-Integration & SEO-Optimierung</li>
-                    </ul>
-                    <span class="bg-icon">🌐</span>
-                </div>
-                <div class="shimmer-border"></div>
-            </a>
-    
-
-            <!-- 3D Design -->
-            <a href="3DDesign.html" class="tech-card" data-title="3D Design">
-                <div class="inner">
-                    <h3>3D Design</h3>
-                    <ul>
-                        <li>Maßgeschneiderte 3D-Modelle & Visualisierungen</li>
-                        <li>Produktanimationen & Architektur-Renderings</li>
-                        <li>Virtual Reality (VR) Ready Assets</li>
-                        <li>3D-Druck Vorbereitung & Optimierung</li>
-                    </ul>
-                    <span class="bg-icon">🧊</span>
-                </div>
-                <div class="shimmer-border"></div>
-                
-            </a>
-            
-            
-            <!-- Grafikdesign -->
-            <a href="Grafikdesign.html" class="tech-card" data-title="Grafikdesign">
-           
-                <div class="inner">
-                    <h3>Grafikdesign</h3>
-                    <ul>
-                        <li>Corporate Identity & Markenentwicklung</li>
-                        <li>Logo-Design mit Unique Branding</li>
-                        <li>Druckprodukte mit Farbprofil-Management</li>
-                        <li>Infografiken & Data Visualization</li>
-                    </ul>
-                    <span class="bg-icon">🖌️</span>
-                </div>
-                <div class="shimmer-border"></div>
-          
-            </a>
-    
-            <!-- Social Media -->
-
-
-        <a href="SocialMedia.html" class="tech-card" data-title="Social Media">
-            <div class="inner">
-              <h3>Social Media</h3>
-              <ul>
-                <li>Platformspezifische Content-Strategien</li>
-                <li>Animierte Postings & Story Designs</li>
-                <li>Werbekampagnen & Ad-Designs</li>
-                <li>Template-Systeme für Brand-Konsistenz</li>
-            </ul>
-              <span class="bg-icon">🚀</span>
-            </div>
-            <div class="shimmer-border"></div>
-          </a>
-          
-       
-    </section>
-
-
-    <section class="white-transition-section" id="prozess">
-        <div class="multi-circle-wrapper" id="triggerCircle">
-            <span class="click-hint" id="clickHint">Klick mich</span>
-            <div class="pulse-circle"></div>
-            <div class="pulse-circle delay1"></div>
-            <div class="pulse-circle delay2"></div>
-            <div class="pulse-circle center-circle"></div>
-        </div>
-        
-
-        <div class="white-world hidden" id="whiteWorld">
-            <div class="white-content">
-                <h2>So läuft ein Projekt mit Fusion³</h2>
-                <div class="project-white-steps">
-
-                    <div class="epic-step" data-step="01">
-                        <div class="step-inner">
-                            <span class="step-number">01</span>
-                            <h3>Erstgespräch</h3>
-                            <p>Alles beginnt mit einem Gespräch – mit offenen Fragen, klarer Kommunikation und einem
-                                Kaffee. Wir sprechen über Ziele, Zielgruppen und Wirkung.</p>
-                        </div>
-                    </div>
-
-                    <div class="epic-step" data-step="02">
-                        <div class="step-inner">
-                            <span class="step-number">02</span>
-                            <h3>Konzeption & Design</h3>
-                            <p>Jetzt wird’s konkret. Gemeinsam entwickeln wir Konzepte, Wireframes, Styleframes und
-                                Interaktionen, die deinem Brand gerecht werden – visuell und funktional.</p>
-                        </div>
-                    </div>
-
-                    <div class="epic-step" data-step="03">
-                        <div class="step-inner">
-                            <span class="step-number">03</span>
-                            <h3>Umsetzung & Launch</h3>
-                            <p>Jetzt fließt der Code. 3D wird lebendig. Deine Vision wird Realität. Am Ende steht ein
-                                durchdachtes digitales Erlebnis, das performt – mit Stil, Funktion und Wirkung.</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section class="branch-selection" id="branchSelection">
-        <div class="branch-inner">
-            <h2>Portfolio</h2>
-            <div class="branch-grid">
-
-                <div class="branch-card">
-                    <video autoplay muted loop playsinline>
-                        <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
-                    </video>
-                    <div class="branch-overlay">
-                        <h3>WebDesign</h3>
-                    </div>
-                </div>
-
-                <div class="branch-card">
-                    <video autoplay muted loop playsinline>
-                        <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
-                    </video>
-                    <div class="branch-overlay">
-                        <h3>3D Design/ <br> 3D Rendering</h3>
-                    </div>
-                </div>
-
-                <div class="branch-card">
-                    <video autoplay muted loop playsinline>
-                        <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
-                    </video>
-                    <div class="branch-overlay">
-                        <h3>Grafikdesign</h3>
-                    </div>
-                </div>
-
-                <div class="branch-card">
-                    <video autoplay muted loop playsinline>
-                        <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
-                    </video>
-                    <div class="branch-overlay">
-                        <h3>Videoschnitt</h3>
-                    </div>
-                </div>
-
-                <div class="branch-card">
-                    <video autoplay muted loop playsinline>
-                        <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
-                    </video>
-                    <div class="branch-overlay">
-                        <h3>Social Media</h3>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-
-  
-    <testimonial-slider></testimonial-slider>
-
-    <script>
-      class TestimonialSlider extends HTMLElement {
-        constructor() {
-          super();
-          this.attachShadow({ mode: "open" });
-        }
-    
-        connectedCallback() {
-          const testimonials = [
-            {
-              image: "https://randomuser.me/api/portraits/women/44.jpg",
-              name: "Sophie M., Creative Director",
-              quote: "Das 3D-Design hat unsere Produktpräsentation revolutioniert – professionell, kreativ, zuverlässig!",
-              stars: 5,
-              logo: ""
-            },
-            {
-              image: "https://randomuser.me/api/portraits/men/32.jpg",
-              name: "Mark T., Marketing Manager",
-              quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
-              stars: 5,
-              logo: ""
-            },
-            {
-              image: "https://randomuser.me/api/portraits/men/41.jpg",
-              name: "Daniel R., Startup-Gründer",
-              quote: "Schnell, hochwertig, visuell auf Top-Niveau. Gerne wieder für kommende Projekte!",
-              stars: 4,
-              logo: ""
-            }
-          ];
-    
-          const style = `
-            <style>
-              :host {
-                display: block;
-                padding: 5rem 1.5rem;
-                background: transparent;
-                color: #f5f5f5;
-              }
-    
-              h2 {
-                text-align: center;
-                font-size: 2rem;
-                font-weight: 800;
-                margin-bottom: 0.5rem;
-                color: #ffffff;
-              }
-    
-              .intro {
-                text-align: center;
-                font-size: 1.05rem;
-                color: #aaa;
-                margin: 0 auto 2.5rem;
-                max-width: 680px;
-                padding: 0 2.1rem;
-                line-height: 1.6;
-              }
-    
-              .carousel {
-                display: flex;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-                gap: 1.5rem;
-                padding-block: 1.5rem;
-                scroll-behavior: smooth;
-                align-items: stretch;
-              }
-    
-              .carousel::before,
-              .carousel::after {
-                content: "";
-                flex: 0 0 calc(50% - 180px);
-              }
-    
-              .carousel::-webkit-scrollbar {
-                display: none;
-              }
-    
-              .card {
-                flex: 0 0 auto;
-                width: clamp(280px, 80vw, 360px);
-                background: #1e1e1e;
-                border-radius: 14px;
-                padding: 2rem;
-                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-                scroll-snap-align: center;
-                text-align: center;
-                transition: opacity 0.5s ease, transform 0.5s ease;
-                opacity: 0.5;
-                transform: scale(0.95);
-              }
-    
-              .avatar {
-                width: 64px;
-                height: 64px;
-                border-radius: 50%;
-                object-fit: cover;
-                margin-bottom: 1rem;
-                border: 2px solid #ff6600;
-              }
-    
-              .stars {
-                color: #ffcc00;
-                font-size: 1.1rem;
-                margin-bottom: 0.5rem;
-              }
-    
-              .quote {
-                font-style: italic;
-                color: #ccc;
-                margin: 1rem 0;
-                line-height: 1.5;
-              }
-    
-              .author {
-                font-weight: 600;
-                color: #ffffff;
-                font-size: 1rem;
-              }
-    
-              .logo {
-                margin-top: 1rem;
-                height: 22px;
-                opacity: 0.6;
-                transition: 0.3s ease;
-                filter: brightness(0) invert(1); /* weiß auf dunkel */
-              }
-    
-              .logo:hover {
-                opacity: 1;
-              }
-            </style>
-          `;
-    
-          const stars = (count) => "★".repeat(count) + "☆".repeat(5 - count);
-    
-          const html = `
-            ${style}
-            <h2>Kundenstimmen</h2>
-            <p class="intro">Was unsere Kunden über die Zusammenarbeit sagen.</p>
-            <div class="carousel">
-              ${testimonials.map((t) => `
-                <div class="card">
-                  <img src="${t.image}" class="avatar" alt="${t.name}">
-                  <div class="stars">${stars(t.stars)}</div>
-                  <p class="quote">„${t.quote}“</p>
-                  <p class="author">${t.name}</p>
-                  <img src="${t.logo}" class="logo" alt="Logo von Kunde">
-                </div>
-              `).join("")}
-            </div>
-          `;
-    
-          this.shadowRoot.innerHTML = html;
-    
-          const carousel = this.shadowRoot.querySelector('.carousel');
-          const cards = this.shadowRoot.querySelectorAll('.card');
-    
-          const updateFade = () => {
-            const rect = carousel.getBoundingClientRect();
-            const center = rect.left + rect.width / 2;
-    
-            cards.forEach(card => {
-              const cardRect = card.getBoundingClientRect();
-              const cardCenter = cardRect.left + cardRect.width / 2;
-              const distance = Math.abs(center - cardCenter);
-              const maxDistance = rect.width / 2;
-    
-              const opacity = 1 - Math.min(distance / maxDistance, 1);
-              const scale = 1 + (0.05 * (1 - Math.min(distance / maxDistance, 1)));
-    
-              card.style.opacity = opacity.toFixed(2);
-              card.style.transform = `scale(${scale.toFixed(2)})`;
-            });
-          };
-    
-          function scrollToCard(index) {
-            const card = cards[index];
-            const carouselCenter = carousel.offsetWidth / 2;
-            const cardCenterOffset = card.offsetLeft + card.offsetWidth / 2;
-            const targetScrollLeft = cardCenterOffset - carouselCenter;
-    
-            carousel.scrollTo({
-              left: targetScrollLeft,
-              behavior: "smooth"
-            });
-    
-            updateFade();
-          }
-    
-          let currentIndex = 0;
-    
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              scrollToCard(0); // Erste Karte zentrieren
-              setInterval(() => {
-                currentIndex = (currentIndex + 1) % cards.length;
-                scrollToCard(currentIndex);
-              }, 4000);
-            });
-          });
-    
-          carousel.addEventListener("scroll", updateFade);
-        }
       }
-    
-      customElements.define("testimonial-slider", TestimonialSlider);
-    </script>
-    
 
+      nav {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #ffffffe1;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        display: none;
+        gap: 1rem;
+        border-left: 1px solid #222;
+        border-bottom: 1px solid #222;
+      }
 
-<!--
-    <section class="container" id="portfolio">
+      nav.open {
+        display: flex;
+      }
 
-        <h2>Portfolio</h2>
-        <div class="video-focus-grid">
-            
-
-            <div class="video-focus-item">
-                <video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
-                <div class="video-mask"><video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
-                </div>
-                
-                <div class="video-title">WebDesign</div>
-            </div>
-
-            <div class="video-focus-item">
-                <video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
-                <div class="video-mask"><video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
-                </div>
-                <div class="video-title">3D Design/ <br> 3D Rendering</div>
-                
-            </div>
-
-            <div class="video-focus-item">
-                <video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
-                <div class="video-mask"><video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
-                </div>
-                <div class="video-title">Grafikdesign</div>
-            </div>
-
-            <div class="video-focus-item">
-                <video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
-                <div class="video-mask"><video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
-                </div>
-                <div class="video-title">Videoschnitt</div>
-            </div>
-
-            <div class="video-focus-item">
-                <video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
-                <div class="video-mask"><video src="./Fotos/Hintergrund.mp4" autoplay muted loop playsinline></video>
-                </div>
-                <div class="video-title">Social Media</div>
-            </div>
-
-        </div>
-    </section>
--->
-    <section class="container" id="kontakt">
-        <h2>Kontakt</h2>
-        <div class="form-wrapper">
-        <form action="https://formspree.io/f/xqapdvaq" method="POST">
-            <input type="text" name="name" placeholder="Dein Name" required />
-            <input type="email" name="email" placeholder="Deine E-Mail" required />
-            <textarea name="message" rows="6" placeholder="Worum geht’s?" required></textarea>
-            <input type="text" name="_gotcha" style="display:none">
-
-            <button type="submit" class="neon-btn" id="sendButton">
-                <span>✉️ Nachricht senden</span>
-            </button>
-
-        </form>
-    </section>
-
-
-
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-logo">
-                <span>Fusion³</span>
-                <p>Web & 3D Design mit Wirkung.</p>
-            </div>
-
-            <div class="footer-links">
-                <h4>Rechtliches</h4>
-                <ul>
-                    <li><a href="/impressum.html">Impressum</a></li>
-                    <li><a href="/datenschutz.html">Datenschutz</a></li>
-                    <li><a href="/agb.html">AGB</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-contact">
-                <h4>Kontakt</h4>
-                <ul>
-                    <li><a href="mailto:hello@fusion3.de">hello@fusion3.de</a></li>
-                    <li>+49 123 4567890</li>
-                    <li>Berlin, Deutschland</li>
-                </ul>
-            </div>
-
-            <div class="footer-socials">
-                <h4>Social</h4>
-                <div class="footer-socials-icons">
-                    <a href="mailto:hello@fusion3.de" title="E-Mail">
-                        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="E-Mail Icon" />
-                    </a>
-                    <a href="https://github.com/" title="GitHub" target="_blank">
-                        <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub Logo" />
-                    </a>
-                    <a href="https://www.linkedin.com/" title="LinkedIn" target="_blank">
-                        <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn Blau" />
-                    </a>
-                    <a href="https://wa.me/491234567890" title="WhatsApp schreiben" target="_blank">
-                        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon" />
-                    </a>
-                </div>
-            </div>
-            
-        </div>
-        <p class="footer-bottom">© 2025 Fusion³ – Alle Rechte vorbehalten.</p>
-    </footer>
-
-
-
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            gsap.from(".hero-video-content h1", {
-                duration: 1.5,
-                y: 50,
-                opacity: 0,
-                delay: 0.5,
-                ease: "power4.out"
-            });
-            gsap.from(".hero-video-content p", {
-                duration: 1.2,
-                y: 30,
-                opacity: 0,
-                delay: 0.8,
-                ease: "power3.out"
-            });
-            gsap.fromTo(".cta-btn", {
-                opacity: 0,
-                scale: 0.95
-            }, {
-                duration: 1,
-                opacity: 1,
-                scale: 1,
-                delay: 1.2,
-                ease: "back.out(1.7)"
-            });
-
-        });
-    </script>
-
-
-    <script>
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            const video = document.querySelector('.video-background');
-            if (video) {
-                video.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.2}px))`;
-            }
-        });
-
-    </script>
-
-    <script>
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15 });
-
-        document.querySelectorAll('.container, .feature, .step').forEach(el => {
-            el.classList.add('fade-in');
-            observer.observe(el);
-        });
-    </script>
-
-    <script>
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.utils.toArray('.persona-card').forEach(card => {
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top 80%',
-                    toggleActions: 'play none none reverse'
-                },
-                opacity: 0,
-                y: 40,
-                duration: 1,
-                ease: 'power4.out'
-            });
-        });
-    </script>
-
-    <script>
-        const trigger = document.getElementById('triggerCircle');
-        const whiteWorld = document.getElementById('whiteWorld');
-        const branchSelection = document.getElementById('branchSelection');
-        const clickHint = document.getElementById('clickHint');
-        const waveContainer = document.getElementById('testimonialWaves');
-
-        trigger.addEventListener('click', () => {
-            clickHint.style.display = 'none';
-
-            trigger.querySelectorAll('.pulse-circle, .center-circle').forEach(c => {
-                c.style.transition = 'all 0.8s ease';
-                c.style.opacity = '0';
-                c.style.transform = 'scale(3)';
-            });
-
-            whiteWorld.classList.add('visible');
-
-            // Sichtbar machen von branchSelection leicht verzögern
-            setTimeout(() => {
-                branchSelection.classList.add('visible');
-                trigger.style.display = 'none';
-                if (waveContainer) {
-                    waveContainer.style.opacity = '1';
-                }
-            }, 500);
-        });
-
-    </script>
-
-    <script>
-        gsap.utils.toArray(".epic-step").forEach((card, i) => {
-            gsap.to(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top 85%",
-                    toggleActions: "play none none reverse"
-                },
-                opacity: 1,
-                y: 0,
-                duration: 1.2,
-                ease: "power4.out",
-                delay: i * 0.2
-            });
-        });
-    </script>
-
-
-    <script>
-        const branchCards = document.querySelectorAll('.branch-card');
-
-        branchCards.forEach(card => {
-            card.addEventListener('click', () => {
-                // Entferne alle vorherigen Auswahl-Zustände
-                branchCards.forEach(c => c.classList.remove('selected'));
-
-                // Füge "selected" zur aktuellen Card hinzu
-                card.classList.add('selected');
-            });
-        });
-    </script>
-
-    <script>
-        const items = document.querySelectorAll('.video-focus-item');
-
-        items.forEach(item => {
-            const mask = item.querySelector('.video-mask');
-
-            item.addEventListener('mousemove', e => {
-                const rect = item.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                mask.style.setProperty('--x', `${x}px`);
-                mask.style.setProperty('--y', `${y}px`);
-            });
-
-            item.addEventListener('mouseleave', () => {
-                mask.style.setProperty('--x', `50%`);
-                mask.style.setProperty('--y', `50%`);
-            });
-        });
-    </script>
-
-    <script>
-        window.addEventListener('load', adjustTechCards);
-        window.addEventListener('resize', adjustTechCards);
-
-        function adjustTechCards() {
-    const container = document.querySelector('.tech-showcase');
-    const cards = Array.from(container.querySelectorAll('.tech-card'));
-
-    // Skip adjustment if layout is flex (mobile)
-    const computedStyle = window.getComputedStyle(container);
-    if (computedStyle.display === 'flex') {
-        cards.forEach(card => {
-            card.style.gridColumn = '';
-            card.classList.remove('centered-card');
-        });
-        container.classList.remove('stacked-tech-cards');
-        return;
+      nav a {
+        margin: 0;
+        font-size: 1rem;
+        color: black;
+      }
     }
+  </style>
+</head>
+<body>
 
-    // Reset
-    cards.forEach(card => {
-        card.style.gridColumn = '';
-        card.classList.remove('centered-card');
-    });
+  <header>
+    <div class="logo">Fusion³</div>
+    <button class="burger-icon" id="burgerToggle" aria-label="Menü öffnen">
+      <i data-feather="menu"></i>
+    </button>
+    
+    <nav>
+      <a href="#leistungen">Leistungen</a>
+      <a href="#ueber-uns">Über uns</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
 
-    if (cards.length < 2) return;
+  <section class="hero-video-wrapper">
+    <div class="hero-video-content">
+      <h1>UX & Webdesign<br>das Nutzer begeistert</h1>
+      <p>Wir konzipieren digitale Erlebnisse. <br>maßgeschneidert und klickbar.</p>
+      <a class="cta-btn neon-btn" href="#kontakt"><span>Projekt anfragen</span></a>
+    </div>
+    <video class="video-background" autoplay muted loop playsinline>
+      <source src="./WebdesignPic/1.mp4" type="video/mp4" />
+    </video>
+  </section>
 
-    const last = cards[cards.length - 1];
-    const secondLast = cards[cards.length - 2];
+  <style>
+  .hero-video-wrapper {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'VT323', monospace;
+  background-color: #000;
+}
 
-    const lastTop = last.getBoundingClientRect().top;
-    const secondTop = secondLast.getBoundingClientRect().top;
+@keyframes blurPulse {
+  0%, 100% {
+    backdrop-filter: blur(2px);
+  }
+  50% {
+    backdrop-filter: blur(6px);
+  }
+}
 
-    const allStacked = cards.every((card, i, arr) => {
-        if (i === 0) return true;
-        return card.getBoundingClientRect().top > arr[i - 1].getBoundingClientRect().top + 10;
-    });
+.hero-video-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  max-width: 800px;
+  width: 100%;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  margin-top: -10rem;
+}
 
-    container.classList.remove('stacked-tech-cards');
+/* Welliger animierter Blur */
+.hero-video-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.15), transparent 60%);
+  animation: waveBlur 8s infinite ease-in-out alternate;
+  z-index: -1;
+  pointer-events: none;
+}
 
-    if (lastTop > secondTop) {
-        last.style.gridColumn = 'span 3';
-        last.classList.add('centered-card');
-
-        if (allStacked) {
-            container.classList.add('stacked-tech-cards');
-        }
-    }
+/* Animation bewegt die Lichtwelle */
+@keyframes waveBlur {
+  0% {
+    --x: 20%;
+    --y: 30%;
+  }
+  25% {
+    --x: 80%;
+    --y: 20%;
+  }
+  50% {
+    --x: 60%;
+    --y: 70%;
+  }
+  75% {
+    --x: 30%;
+    --y: 80%;
+  }
+  100% {
+    --x: 50%;
+    --y: 50%;
+  }
 }
 
 
-    </script>
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 1;
+  pointer-events: none;
+}
 
-    <script>
-        const form = document.querySelector("form");
-        const sendButton = document.getElementById("sendButton");
+.hero-video-content h1 {
+  font-size: 4.2rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  line-height: 1.0;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
 
-        form.addEventListener("submit", function (e) {
-            sendButton.classList.add("shake");
+.hero-video-content p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #e0e0e0;
+  max-width: 90%;
+  line-height: 1.6;
+}
 
-            setTimeout(() => {
-                sendButton.classList.remove("shake");
-                sendButton.classList.add("sent");
-                sendButton.innerHTML = "<span>✅ Gesendet!</span>";
-            }, 300);
+.cta-btn {
+  background: #ffffff;
+  color: #000000;
+  font-weight: 600;
+  padding: 0.9rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  text-transform: none;
+  margin-top: 2rem;
+  transition: all 0.3s ease;
+  border: none;
+}
 
-            // Button reset nach 4s (optional)
-            setTimeout(() => {
-                sendButton.classList.remove("sent");
-                sendButton.innerHTML = "<span>✉️ Nachricht senden</span>";
-            }, 4000);
-        });
-    </script>
+.cta-btn:hover {
+  background: var(--primary);
+  color: #000;
+  transform: scale(1.03);
+  cursor: pointer;
+}
 
+
+    .neon-btn {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: none;
+      color: #fff;
+      padding: 1rem 2.2rem;
+      font-size: 1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(255, 102, 0, 0.4),
+                  0 0 24px rgba(255, 102, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .hero-video-content h1,
+.hero-video-content p {
+  mix-blend-mode: exclusion;
+
+  color: #000; /* oder #000 für etwas mehr Kontrastwirkung */
+  z-index: 3;
+}
+
+@media (max-width: 1024px) {
+  .hero-video-content {
+    padding: 1.5rem;
+    top: 8vh;
+  }
+
+  .hero-video-content h1 {
+    font-size: 3.2rem;
+  }
+
+  .hero-video-content p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-video-content {
+    padding: 1.5rem;
+    top: 6vh;
+  }
+
+  .hero-video-content h1 {
+    font-size: 2.4rem;
+    letter-spacing: 0.05rem;
+  }
+
+  .hero-video-content p {
+    font-size: 1rem;
+  }
+
+  .cta-btn {
+    font-size: 0.95rem;
+    padding: 0.8rem 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-video-content {
+    padding: 1rem;
+    top: 4vh;
+  }
+
+  .hero-video-content h1 {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+
+  .hero-video-content p {
+    font-size: 0.95rem;
+  }
+
+  .cta-btn {
+    font-size: 0.9rem;
+    padding: 0.7rem 1.2rem;
+  }
+}
+
+  </style>
 <script>
-    const burger = document.getElementById("burger");
-    const nav = document.querySelector("nav");
+  feather.replace();
+
+  const burgerToggle = document.getElementById('burgerToggle');
+  const nav = document.querySelector('nav');
+
+  burgerToggle.addEventListener('click', () => {
+    nav.classList.toggle('open');
+  });
+
+  // BLUR ANIMATION
+  const heroContent = document.querySelector('.hero-video-content');
+  function animateRandomBlur() {
+    const blurAmount = Math.random() * 6 + 2;
+    heroContent.style.backdropFilter = `blur(${blurAmount.toFixed(1)}px)`;
+    const nextInterval = Math.random() * 2000 + 1000;
+    setTimeout(animateRandomBlur, nextInterval);
+  }
+  animateRandomBlur();
+</script>
+
+<section id="branchen" class="persona-clean container">
+    <h2 class="persona-title">Für wen ist Fusion³?</h2>
+    <p class="persona-subline">Individuelle Lösungen für jede Zielgruppe – mit Fokus auf Wirkung, Technik und Tempo.</p>
   
-    burger.addEventListener("click", () => {
-      burger.classList.toggle("active");
-      nav.classList.toggle("open");
+    <div class="persona-grid">
+      <!-- Startups -->
+      <div class="persona-card">
+        <div class="icon-wrap lottie-icon" data-icon="startup"></div>
+        <h3>Startups & Gründer</h3>
+        <p class="tagline">Schnelle MVPs, starke Visuals & Launch-Power</p>
+        <ul>
+          <li>✓ Fokus auf Time-to-Market</li>
+          <li>✓ Pitch-ready Branding</li>
+          <li>✓ Performance-First</li>
+        </ul>
+        <p class="vorteil">Ideal für neue Ideen mit Impact</p>
+      </div>
+  
+      <!-- Kreative -->
+      <div class="persona-card">
+        <div class="icon-wrap lottie-icon" data-icon="creatives"></div>
+        <h3>Kreative & Agenturen</h3>
+        <p class="tagline">3D, Motion & Web aus einer Hand</p>
+        <ul>
+          <li>✓ White Label auf Wunsch</li>
+          <li>✓ Hochwertige Visuals</li>
+          <li>✓ Flexible Partnerschaft</li>
+        </ul>
+        <p class="vorteil">Gemeinsam außergewöhnlich erschaffen</p>
+      </div>
+  
+      <!-- Unternehmen -->
+      <div class="persona-card">
+        <div class="icon-wrap lottie-icon" data-icon="business"></div>
+        <h3>Unternehmen & Brands</h3>
+        <p class="tagline">Starke Brand Stories & Erlebnisse</p>
+        <ul>
+          <li>✓ Interaktive Microsites</li>
+          <li>✓ Skalierbar & wartbar</li>
+          <li>✓ Conversion-getriebenes Design</li>
+        </ul>
+        <p class="vorteil">Für bleibenden Eindruck und Reichweite</p>
+      </div>
+    </div>
+  </section>
+  
+  <style>
+    .persona-clean {
+      background: #fff;
+      text-align: center;
+      color: #111;
+      padding: 6rem 2rem;
+    }
+  
+    .persona-title {
+      font-size: 2.4rem;
+      font-weight: 900;
+      margin-bottom: 0.8rem;
+    }
+  
+    .persona-subline {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 4rem;
+    }
+  
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      justify-content: center;
+    }
+  
+    .persona-card {
+      background: linear-gradient(135deg, #fcf6ff, #f6f9ff);
+      border: 1px solid #eee;
+      border-radius: 16px;
+      padding: 2.5rem 1.8rem;
+      text-align: left;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+  
+    .persona-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+    }
+  
+    .persona-card h3 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+      margin-top: 1.2rem;
+    }
+  
+    .persona-card .tagline {
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+  
+    .persona-card ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1.5rem;
+    }
+  
+    .persona-card ul li {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      color: #333;
+    }
+  
+    .persona-card .vorteil {
+      font-size: 0.95rem;
+      color: #555;
+      font-style: italic;
+    }
+  
+    .icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+  
+    .icon-wrap lord-icon {
+      width: 40px;
+      height: 40px;
+    }
+  
+    @media (max-width: 768px) {
+      .persona-clean {
+        padding: 4rem 1rem;
+      }
+    }
+  </style>
+  
+  <!-- SCRIPTS -->
+  <script src="https://cdn.lordicon.com/lordicon.js"></script>
+  <script>
+    const icons = {
+      startup: "https://cdn.lordicon.com/etqbfrgp.json",      // Rocket Launch
+      creatives: "https://cdn.lordicon.com/diihvcfp.json",    // Palette
+      business: "https://cdn.lordicon.com/qhgmphtg.json"      // Presentation / Brand
+    };
+  
+    document.querySelectorAll('.lottie-icon').forEach(el => {
+      const name = el.dataset.icon;
+      if (icons[name]) {
+        el.innerHTML = `<lord-icon src="${icons[name]}" trigger="hover" colors="primary:#111,secondary:#ff7f50" style="width:40px;height:40px"></lord-icon>`;
+      }
     });
   </script>
   
-</body>
+  
+  <section class="container apple-services" id="tools">
+    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+  
+    <style>
+      :root {
+        --primary: #ff6600;
+        --text-main: #1c1c1e;
+        --text-subtle: #555;
+        --bg-card: #ffffff;
+        --grain-url: url("https://grainy-gradients.vercel.app/noise.svg");
+      }
+  
+      .apple-services {
+        padding: 6rem 2rem;
+        background: #ffffff;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      }
+  
+      .apple-services h2 {
+        font-size: 2.8rem;
+        text-align: center;
+        margin-bottom: 5rem;
+        color: var(--text-main);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+  
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 4rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+  
+      .service-card {
+        position: relative;
+        background: radial-gradient(circle at center, rgb(255, 255, 255), transparent 70%);
+        border-radius: 20px;
+        padding: 3rem 2rem;
+        box-shadow:  8px var(--secondary);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+  
+      .service-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: var(--grain-url);
+        opacity: 0.05;
+        z-index: 1;
+        pointer-events: none;
+      }
+  
+      .service-card::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at center, rgb(255, 255, 255), transparent 70%);
+        opacity: 0;
+        transition: opacity 0.6s ease;
+        z-index: 0;
+        pointer-events: none;
+      }
+  
+      .service-card:hover::after {
+        opacity: 1;
+      }
+  
+      .service-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      }
+  
+      .service-card .inner {
+        position: relative;
+        z-index: 2;
+      }
+  
+      lord-icon {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 2rem;
+      }
+  
+      .service-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1.2rem;
+        font-weight: 600;
+        color: var(--text-main);
+        letter-spacing: -0.01em;
+      }
+  
+      .service-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        color: var(--text-subtle);
+        font-size: 1rem;
+        line-height: 1.75;
+      }
+  
+      .service-card ul li {
+        margin-bottom: 0.75rem;
+      }
+  
+      .cta {
+        display: inline-block;
+        margin-top: 2rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--primary);
+        text-decoration: none;
+        border: 1px solid var(--primary);
+        padding: 0.6rem 1.3rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+  
+      .cta:hover {
+        background-color: rgba(255, 102, 0, 0.08);
+        box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.15);
+      }
+    </style>
+  
+    <h2>Unsere Leistungen</h2>
+  
+    <div class="service-grid">
+  
+      <!-- Webdesign -->
+      <div class="service-card">
+        <div class="inner">
+          <lord-icon
+            src="https://cdn.lordicon.com/tyounuzx.json"
+            trigger="hover"
+            colors="primary:#000000,secondary:#ff6600">
+          </lord-icon>
+          <h3>Webdesign</h3>
+          <ul>
+            <li>Responsive & performanceoptimierte Websites</li>
+            <li>Visuell ansprechende User Interfaces</li>
+            <li>Moderne Animationen & Microinteractions</li>
+            <li>CMS-Integration & SEO Ready</li>
+          </ul>
+          <a href="/services/webdesign" class="cta">Mehr erfahren</a>
+        </div>
+      </div>
+  
+      <!-- 3D Design -->
+      <div class="service-card">
+        <div class="inner">
+          <lord-icon
+            src="https://cdn.lordicon.com/bzrhdlij.json"
+            trigger="hover"
+            colors="primary:#000000,secondary:#ff6600">
+          </lord-icon>
+          <h3>3D Design</h3>
+          <ul>
+            <li>Fotorealistische 3D-Visualisierungen</li>
+            <li>Produkt & Architektur-Renderings</li>
+            <li>VR/AR-kompatible Modelle</li>
+            <li>Optimiert für Web & Druck</li>
+          </ul>
+          <a href="/services/3d" class="cta">Mehr erfahren</a>
+        </div>
+      </div>
+  
+      <!-- Grafikdesign -->
+      <div class="service-card">
+        <div class="inner">
+          <lord-icon
+            src="https://cdn.lordicon.com/kipaqhoz.json"
+            trigger="hover"
+            colors="primary:#000000,secondary:#ff6600">
+          </lord-icon>
+          <h3>Grafikdesign</h3>
+          <ul>
+            <li>Corporate Design & Markenauftritt</li>
+            <li>Professionelles Logo-Design</li>
+            <li>Druck- & Digitalmedien</li>
+            <li>Infografiken & visuelle Systeme</li>
+          </ul>
+          <a href="/services/design" class="cta">Mehr erfahren</a>
+        </div>
+      </div>
+  
+      <!-- Social Media -->
+      <div class="service-card">
+        <div class="inner">
+          <lord-icon
+            src="https://cdn.lordicon.com/svbmmyue.json"
+            trigger="hover"
+            colors="primary:#000000,secondary:#ff6600">
+          </lord-icon>
+          <h3>Social Media</h3>
+          <ul>
+            <li>Kanalübergreifende Content-Konzepte</li>
+            <li>Motion Design für Reels & Stories</li>
+            <li>Werbekampagnen-Design</li>
+            <li>CI-konforme Templates</li>
+          </ul>
+          <a href="/services/social-media" class="cta">Mehr erfahren</a>
+        </div>
+      </div>
+  
+    </div>
+  </section>
 
-</html>
+
+  
+<section class="cta-modern">
+    <style>
+      .cta-modern {
+        position: relative;
+        padding: 10rem 2rem;
+        background: linear-gradient(145deg, #ffffff, #f4f8ff);
+        overflow: hidden;
+        text-align: center;
+        z-index: 1;
+      }
+  
+      .cta-modern::before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1800px;
+        height: 1800px;
+        background: radial-gradient(circle, rgba(255,102,0,0.08), transparent 60%);
+        z-index: 0;
+        pointer-events: none;
+        animation: glowShift 12s ease-in-out infinite alternate;
+      }
+  
+      .cta-headline {
+        font-size: clamp(2.5rem, 6vw, 4.2rem);
+        font-weight: 900;
+        font-family: 'Inter', sans-serif;
+        color: #000;
+        margin-bottom: 1rem;
+        line-height: 1.15;
+        letter-spacing: -0.5px;
+        position: relative;
+        z-index: 2;
+        animation: fadeUp 1s ease-out both;
+      }
+  
+      .cta-headline span {
+        color: var(--primary);
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+  
+      .cta-text {
+        font-size: 1.3rem;
+        font-weight: 400;
+        color: #444;
+        max-width: 680px;
+        margin: 0 auto 3rem;
+        line-height: 1.7;
+        position: relative;
+        z-index: 2;
+        animation: fadeUp 1s ease-out 0.2s both;
+      }
+  
+      .cta-btn {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: #fff;
+        font-weight: 600;
+        padding: 1rem 2.4rem;
+        font-size: 1rem;
+        border-radius: 12px;
+        text-decoration: none;
+        box-shadow: 0 6px 20px rgba(255, 102, 0, 0.25);
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 2;
+        animation: fadeUp 1s ease-out 0.4s both;
+      }
+  
+      .cta-btn:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 30px rgba(255, 102, 0, 0.35);
+      }
+  
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+  
+      @keyframes glowShift {
+        0% { transform: translateX(-50%) rotate(0deg); }
+        100% { transform: translateX(-50%) rotate(3deg); }
+      }
+  
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+  
+      @media (max-width: 600px) {
+        .cta-text {
+          font-size: 1.1rem;
+        }
+  
+        .cta-btn {
+          padding: 0.9rem 1.8rem;
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  
+    <h2 class="cta-headline">
+      Bereit für <span>deinen digitalen Auftritt?</span>
+    </h2>
+  
+    <p class="cta-text">
+      Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.  
+      Starte jetzt – unverbindlich und inspiriert.
+    </p>
+  
+    <a href="#kontakt" class="cta-btn">🚀 Gespräch vereinbaren</a>
+  </section>
+
+  
+  <section class="white-transition-section" id="prozess">
+  <style>
+    .white-transition-section {
+      position: relative;
+      background: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: visible;
+    }
+
+    .white-world {
+      position: relative;
+      min-height: 100vh;
+      opacity: 1;
+      pointer-events: all;
+      background: radial-gradient(circle at center, #f4f4f4 0%, #f4f4f4 100%);
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 100vw;
+    }
+
+    .white-content {
+      text-align: center;
+      max-width: 900px;
+      padding: 2rem;
+    }
+
+    .white-content h2 {
+      font-size: 2.8rem;
+      color: #111;
+      margin-bottom: 3rem;
+      font-weight: 900;
+    }
+
+    .project-white-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      justify-content: center;
+    }
+
+    .epic-step {
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid #eee;
+      border-radius: 20px;
+      padding: 2rem;
+      width: 260px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(10px);
+      opacity: 0; /* für Animation */
+      transform: translateY(40px); /* für Animation */
+    }
+
+    .epic-step:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .step-number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary, #ff6600);
+      margin-bottom: 1rem;
+    }
+
+    .epic-step h3 {
+      font-size: 1.4rem;
+      color: #111;
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+    }
+
+    .epic-step p {
+      color: #333;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+  </style>
+
+  <div class="white-world visible">
+    <div class="white-content">
+      <h2>So läuft ein Projekt mit Fusion³</h2>
+      <div class="project-white-steps">
+        <div class="epic-step" data-step="01">
+          <span class="step-number">01</span>
+          <h3>Erstgespräch</h3>
+          <p>Alles beginnt mit einem Gespräch – mit offenen Fragen, klarer Kommunikation und einem Kaffee.</p>
+        </div>
+
+        <div class="epic-step" data-step="02">
+          <span class="step-number">02</span>
+          <h3>Konzeption & Design</h3>
+          <p>Gemeinsam entwickeln wir Konzepte, Wireframes, Styleframes und Interaktionen für dein Brand.</p>
+        </div>
+
+        <div class="epic-step" data-step="03">
+          <span class="step-number">03</span>
+          <h3>Umsetzung & Launch</h3>
+          <p>Am Ende steht ein durchdachtes digitales Erlebnis, das performt – mit Stil, Funktion und Wirkung.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script>
+    // Ladeanimation beim Page Load (einmalige Animation)
+    window.addEventListener('DOMContentLoaded', () => {
+      gsap.to(".epic-step", {
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        ease: "power4.out",
+        stagger: 0.2
+      });
+    });
+  </script>
+</section>
+
+
+
+  <section class="branch-selection" id="branchSelection">
+    <style>
+      .branch-selection {
+        background: radial-gradient(circle at center, #f4f4f4 0%, #f4f4f4 100%);
+        color: #f4f4f4;
+        padding: 6rem 2rem;
+        transition: background 0.6s ease, color 0.6s ease;
+      }
+  
+      .branch-selection h2 {
+        font-size: 2.8rem;
+        margin-bottom: 3rem;
+        font-weight: 900;
+        text-align: center;
+        transition: color 0.6s ease;
+      }
+  
+      .branch-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2.5rem;
+      }
+  
+      .branch-card {
+        position: relative;
+        height: 340px;
+        border-radius: 20px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        z-index: 4;
+      }
+  
+      .branch-card video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        filter: brightness(1);
+        transition: filter 0.4s ease;
+      }
+  
+      .branch-card:hover video {
+        filter: brightness(1.1);
+      }
+  
+      .branch-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 2rem;
+        text-align: center;
+      }
+  
+      .branch-overlay h3 {
+        color: #fff;
+        font-size: 1.6rem;
+        font-weight: 800;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        transition: transform 0.4s ease;
+      }
+  
+      .branch-card:hover .branch-overlay h3 {
+        transform: translateY(-6px);
+      }
+  
+      .branch-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.15);
+      }
+  
+      .branch-card.selected {
+        outline: 4px solid var(--primary);
+        outline-offset: -8px;
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 0 10px rgb(255, 102, 0), 0 0 5px rgb(255, 255, 255);
+        z-index: 5;
+      }
+  
+      .branch-selection.visible {
+        background: #f4f4f4;
+        color: #111;
+      }
+  
+      .branch-selection.visible .branch-overlay h3 {
+        color: #ffffff;
+        text-shadow: none;
+      }
+    </style>
+  
+    <div class="branch-inner">
+      <h2>Portfolio</h2>
+      <div class="branch-grid">
+  
+        <div class="branch-card">
+          <video autoplay muted loop playsinline>
+            <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
+          </video>
+          <div class="branch-overlay">
+            <h3>WebDesign</h3>
+          </div>
+        </div>
+  
+        <div class="branch-card">
+          <video autoplay muted loop playsinline>
+            <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
+          </video>
+          <div class="branch-overlay">
+            <h3>3D Design<br>Rendering</h3>
+          </div>
+        </div>
+  
+        <div class="branch-card">
+          <video autoplay muted loop playsinline>
+            <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
+          </video>
+          <div class="branch-overlay">
+            <h3>Grafikdesign</h3>
+          </div>
+        </div>
+  
+        <div class="branch-card">
+          <video autoplay muted loop playsinline>
+            <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
+          </video>
+          <div class="branch-overlay">
+            <h3>Videoschnitt</h3>
+          </div>
+        </div>
+  
+        <div class="branch-card">
+          <video autoplay muted loop playsinline>
+            <source src="./Fotos/Hintergrund.mp4" type="video/mp4">
+          </video>
+          <div class="branch-overlay">
+            <h3>Social Media</h3>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  
+    <script>
+      const branchCards = document.querySelectorAll('.branch-card');
+  
+      branchCards.forEach(card => {
+        card.addEventListener('click', () => {
+          branchCards.forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+        });
+      });
+    </script>
+  </section>
+  
+  
+  
+  
+  <testimonial-slider></testimonial-slider>
+  
+  <script>
+    class TestimonialSlider extends HTMLElement {
+      constructor() {
+        super();
+        this.attachShadow({ mode: "open" });
+      }
+  
+      connectedCallback() {
+        const testimonials = [
+          {
+            image: "https://randomuser.me/api/portraits/women/44.jpg",
+            name: "Sophie M., Creative Director",
+            quote: "Das 3D-Design hat unsere Produktpräsentation revolutioniert – professionell, kreativ, zuverlässig!",
+            stars: 5,
+            logo: ""
+          },
+          {
+            image: "https://randomuser.me/api/portraits/men/32.jpg",
+            name: "Mark T., Marketing Manager",
+            quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
+            stars: 5,
+            logo: ""
+          },
+          {
+            image: "https://randomuser.me/api/portraits/men/41.jpg",
+            name: "Daniel R., Startup-Gründer",
+            quote: "Schnell, hochwertig, visuell auf Top-Niveau. Gerne wieder für kommende Projekte!",
+            stars: 4,
+            logo: ""
+          }
+        ];
+  
+        const style = `
+          <style>
+            :host {
+              display: block;
+              padding: 5rem 1.5rem;
+              background: #fff;
+            }
+  
+            h2 {
+              text-align: center;
+              font-size: 2rem;
+              font-weight: 800;
+              margin-bottom: 0.5rem;
+              color: #111;
+            }
+  
+            .intro {
+              text-align: center;
+              font-size: 1.05rem;
+              color: #666;
+              margin: 0 auto 2.5rem;
+              max-width: 680px;
+              padding: 0 2.1rem;
+              line-height: 1.6;
+            }
+  
+            .carousel {
+              display: flex;
+              overflow-x: auto;
+              scroll-snap-type: x mandatory;
+              -webkit-overflow-scrolling: touch;
+              gap: 1.5rem;
+              padding-block: 1.5rem;
+              scroll-behavior: smooth;
+              align-items: stretch;
+            }
+  
+            .carousel::before,
+            .carousel::after {
+              content: "";
+              flex: 0 0 calc(50% - 180px); /* entspricht Hälfte der Max-Kartenbreite */
+            }
+  
+            .carousel::-webkit-scrollbar {
+              display: none;
+            }
+  
+  .card {
+    flex: 0 0 auto;
+    width: clamp(280px, 80vw, 360px);
+    background: linear-gradient(to bottom, #e6f0ff, #ffffff);
+    border-radius: 14px;
+    padding: 2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    scroll-snap-align: center;
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.9);
+    animation: fadeInScale 0.8s ease forwards;
+    animation-delay: 0.2s;
+  }
+  
+  
+  
+  
+            .avatar {
+              width: 64px;
+              height: 64px;
+              border-radius: 50%;
+              object-fit: cover;
+              margin-bottom: 1rem;
+              border: 2px solid #ff6600;
+            }
+  
+            .stars {
+              color: #ffc107;
+              font-size: 1.1rem;
+              margin-bottom: 0.5rem;
+            }
+  
+            .quote {
+              font-style: italic;
+              color: #333;
+              margin: 1rem 0;
+              line-height: 1.5;
+            }
+  
+            .author {
+              font-weight: 600;
+              color: #111;
+              font-size: 1rem;
+            }
+  
+            .logo {
+              margin-top: 1rem;
+              height: 22px;
+              opacity: 0.6;
+              transition: 0.3s ease;
+            }
+  
+            .logo:hover {
+              opacity: 1;
+            }
+          </style>
+        `;
+  
+        const stars = (count) => "★".repeat(count) + "☆".repeat(5 - count);
+  
+        const html = `
+          ${style}
+          <h2>Kundenstimmen</h2>
+          <p class="intro">Was unsere Kunden über die Zusammenarbeit sagen.</p>
+          <div class="carousel">
+            ${testimonials.map((t) => `
+              <div class="card">
+                <img src="${t.image}" class="avatar" alt="${t.name}">
+                <div class="stars">${stars(t.stars)}</div>
+                <p class="quote">„${t.quote}“</p>
+                <p class="author">${t.name}</p>
+                <img src="${t.logo}" class="logo" alt="Logo von Kunde">
+              </div>
+            `).join("")}
+          </div>
+        `;
+  
+        this.shadowRoot.innerHTML = html;
+  
+        const carousel = this.shadowRoot.querySelector('.carousel');
+        const cards = this.shadowRoot.querySelectorAll('.card');
+  
+        const updateFade = () => {
+          const rect = carousel.getBoundingClientRect();
+          const center = rect.left + rect.width / 2;
+  
+          cards.forEach(card => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const distance = Math.abs(center - cardCenter);
+            const maxDistance = rect.width / 2;
+  
+            const opacity = 1 - Math.min(distance / maxDistance, 1);
+            const scale = 1 + (0.05 * (1 - Math.min(distance / maxDistance, 1)));
+  
+            card.style.opacity = opacity.toFixed(2);
+            card.style.transform = `scale(${scale.toFixed(2)})`;
+          });
+        };
+  
+        function scrollToCard(index) {
+          const card = cards[index];
+          const carouselCenter = carousel.offsetWidth / 2;
+          const cardCenterOffset = card.offsetLeft + card.offsetWidth / 2;
+          const targetScrollLeft = cardCenterOffset - carouselCenter;
+  
+          carousel.scrollTo({
+            left: targetScrollLeft,
+            behavior: "smooth"
+          });
+  
+          updateFade();
+        }
+  
+        let currentIndex = 0;
+  
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            scrollToCard(0); // Erste Karte zentrieren
+            setInterval(() => {
+              currentIndex = (currentIndex + 1) % cards.length;
+              scrollToCard(currentIndex);
+            }, 4000);
+          });
+        });
+  
+        carousel.addEventListener("scroll", updateFade);
+      }
+    }
+  
+    customElements.define("testimonial-slider", TestimonialSlider);
+  </script>
+  
+  
+  
+  <section class="kontakt-clean" id="kontakt">
+    <div class="kontakt-wrapper">
+      <h2 class="kontakt-title">Lass uns loslegen!</h2>
+      <p class="kontakt-subline">
+        Eine starke Idee verdient ein starkes digitales Erlebnis. <br />
+        Erzähle uns von Deinem Projekt – wir bringen es gemeinsam auf das nächste Level.
+      </p>
+  
+      <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm">
+        <input type="text" name="name" placeholder="Name" required />
+        <input type="email" name="email" placeholder="E-Mail-Adresse" required />
+        <input type="text" name="subject" placeholder="Betreff" />
+        <textarea name="message" placeholder="Nachricht" rows="5" required></textarea>
+        <button type="submit" class="kontakt-btn">🚀 Jetzt Anfrage senden!</button>
+      </form>
+    </div>
+  </section>
+  
+  <style>
+    .kontakt-clean {
+      background: #ffffff;
+      padding: 6rem 2rem;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+    }
+  
+    .kontakt-title {
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: #000000;
+      margin-bottom: 1rem;
+    }
+  
+    .kontakt-subline {
+      font-size: 1.2rem;
+      color: #666;
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+  
+    .kontakt-wrapper {
+      max-width: 80vw;
+      margin: 0 auto;
+    }
+  
+    .kontakt-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+  
+    .kontakt-form input,
+    .kontakt-form textarea {
+      padding: 1rem;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.8);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: all 0.3s ease;
+    }
+  
+    .kontakt-form input:focus,
+    .kontakt-form textarea:focus {
+      border-color: #ff6600;
+      box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
+      outline: none;
+      background: #fff;
+    }
+  
+    .kontakt-btn {
+      background: #ff6600;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(255, 102, 0, 0.3);
+    }
+  
+    .kontakt-btn:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
+      background: #ff944d;
+    }
+  
+    .kontakt-btn.sent {
+      background: linear-gradient(135deg, #00c851, #007e33);
+      box-shadow: 0 0 14px rgba(0, 200, 81, 0.6);
+      transform: scale(1.02);
+    }
+  </style>
+  
+  <script>
+    const form = document.getElementById("kontaktForm");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      form.classList.add("submitted");
+      const button = form.querySelector(".kontakt-btn");
+      button.innerText = "✅ Anfrage gesendet!";
+      button.classList.add("sent");
+      setTimeout(() => {
+        form.reset();
+        button.innerText = "🚀 Jetzt Anfrage senden!";
+        button.classList.remove("sent");
+      }, 4000);
+    });
+  </script>
+  
+  
+  
+  
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-logo">
+        <span>Fusion³</span>
+        <p>UX & Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
+      </div>
+  
+      <div class="footer-links">
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="/impressum.html">Impressum</a></li>
+          <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
+          <li><a href="/cookies.html">Cookie-Hinweis</a></li>
+        </ul>
+      </div>
+  
+      <div class="footer-contact">
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="mailto:hello@fusion3.de">hello@fusion3.de</a></li>
+          <li>+49 123 4567890</li>
+          <li>Berlin, Deutschland</li>
+        </ul>
+      </div>
+  
+      <div class="footer-socials">
+        <h4>Social Media</h4>
+        <div class="footer-socials-icons">
+          <a href="mailto:hello@fusion3.de" title="E-Mail">
+            <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="E-Mail Icon" />
+          </a>
+          <a href="https://www.linkedin.com/" title="LinkedIn" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn Icon" />
+          </a>
+          <a href="https://wa.me/491234567890" title="WhatsApp schreiben" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon" />
+          </a>
+        </div>
+      </div>
+    </div>
+  
+    <p class="footer-bottom">© 2025 Fusion³ – Alle Rechte vorbehalten. DSGVO-konform & barrierearm entwickelt.</p>
+  </footer>
+  
+  <style>
+    footer {
+      background: #0d0d0d;
+      color: #aaa;
+      padding: 4rem 5vw 2rem;
+      font-size: 0.9rem;
+      border-top: 1px solid #222;
+    }
+  
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+    }
+  
+    .footer-logo span {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--primary);
+    }
+  
+    .footer-logo p {
+      margin-top: 0.5rem;
+      color: #666;
+      font-size: 0.95rem;
+    }
+  
+    .footer-links h4,
+    .footer-contact h4,
+    .footer-socials h4 {
+      margin-bottom: 0.8rem;
+      color: var(--secondary);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+  
+    .footer-links ul,
+    .footer-contact ul {
+      list-style: none;
+      padding: 0;
+    }
+  
+    .footer-links li,
+    .footer-contact li {
+      margin-bottom: 0.4rem;
+    }
+  
+    .footer-links a {
+      color: #ccc;
+    }
+  
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+  
+    .footer-socials {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .footer-socials-icons {
+      display: flex;
+      gap: 12px;
+      margin-top: 0.5rem;
+    }
+  
+    .footer-socials img {
+      width: 26px;
+      height: 26px;
+      opacity: 1;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      vertical-align: middle;
+    }
+  
+    .footer-socials img:hover {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+  
+    .footer-bottom {
+      text-align: center;
+      color: #666;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+    }
+  </style>
+  <style>
+    /* === Responsive Styles === */
+  
+    @media (max-width: 768px) {
+      .container {
+        padding: 3rem 1.5rem;
+      }
+  
+      .hero-video-content {
+        margin-top: -35vh;
+      }
+  
+      .hero-video-content h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+      }
+  
+      .hero-video-content p {
+        font-size: 1rem;
+      }
+  
+      .cta-btn, .neon-btn {
+        font-size: 0.9rem;
+        padding: 0.8rem 1.6rem;
+      }
+  
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+  
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+  
+      .cs-grid {
+        grid-template-columns: 1fr;
+      }
+  
+      .footer-grid {
+        grid-template-columns: 2fr;
+        text-align:left;
+      }
+  
+      .footer-socials-icons {
+        justify-content: center;
+      }
+  
+      .cta-modern .cta-headline {
+        font-size: 1.8rem;
+      }
+  
+      .cta-modern .cta-text {
+        font-size: 1rem;
+      }
+  
+      .cta-action {
+        flex-direction: column;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+  
+      .kontakt-form {
+        gap: 1rem;
+      }
+    }
+  
+    @media (max-width: 375px) {
+      .hero-video-content h1 {
+        font-size: 1.5rem;
+      }
+  
+      .hero-video-content p {
+        font-size: 0.9rem;
+      }
+  
+      .cta-btn, .neon-btn {
+        font-size: 0.8rem;
+        padding: 0.7rem 1.2rem;
+      }
+  
+      .pricing-title {
+        font-size: 1.8rem;
+      }
+  
+      .pricing-subline {
+        font-size: 1rem;
+      }
+  
+      .cs-title {
+        font-size: 1.8rem;
+      }
+  
+      .cs-subline {
+        font-size: 1rem;
+      }
+  
+      .about-title,
+      .kontakt-title {
+        font-size: 2rem;
+      }
+  
+      .about-subline,
+      .kontakt-subline {
+        font-size: 1rem;
+      }
+  
+      .cta-headline {
+        font-size: 1.6rem;
+      }
+  
+      .cta-text {
+        font-size: 0.95rem;
+      }
+    }
+  
+    @media (max-width: 320px) {
+      .hero-video-content {
+        padding: 1rem;
+        margin-top: -20vh;
+      }
+  
+      .hero-video-content h1 {
+        font-size: 1.3rem;
+        line-height: 1.2;
+      }
+  
+      .hero-video-content p {
+        font-size: 0.85rem;
+      }
+  
+      .cta-btn, .neon-btn {
+        font-size: 0.75rem;
+        padding: 0.6rem 1rem;
+      }
+  
+      .kontakt-form input,
+      .kontakt-form textarea {
+        font-size: 0.9rem;
+      }
+  
+      .kontakt-btn {
+        font-size: 0.9rem;
+        padding: 0.8rem 1.2rem;
+      }
+  
+      .cta-headline {
+        font-size: 1.4rem;
+      }
+  
+      .cta-action {
+        font-size: 0.85rem;
+        padding: 0.8rem 1.4rem;
+      }
+  
+      .footer-bottom {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+  
+  
+  <style>
+  
+  @media screen and (max-height: 480px) and (orientation: landscape) {
+    header {
+      padding: 0.4rem 3vw;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 40px;
+    }
+  
+    .logo {
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      font-weight: 800;
+      line-height: 1;
+    }
+  
+    .burger-icon {
+      display: block !important;
+    }
+  
+    .burger-icon i {
+      width: clamp(22px, 4vw, 26px);
+      height: clamp(22px, 4vw, 26px);
+      stroke: #000;
+    }
+  
+    nav {
+      position: absolute;
+      bottom: 42px; /* Platz für Fixierung unten */
+      left: 0;
+      right: 0;
+      background: #fff;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      display: none;
+      z-index: 999;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+  
+    nav.open {
+      display: flex;
+    }
+  
+    nav a {
+      font-size: clamp(0.65rem, 1.8vw, 0.9rem);
+      font-weight: 500;
+      padding: 0.4rem 0.6rem;
+      color: #000;
+      white-space: nowrap;
+    }
+  
+    .hero-video-content h1 {
+      font-size: clamp(1rem, 4vw + 0.3rem, 1.4rem);
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.02rem;
+      text-align: center;
+    }
+  
+    .hero-video-content p {
+      font-size: clamp(0.7rem, 2vw + 0.2rem, 0.9rem);
+      line-height: 1.4;
+      text-align: center;
+    }
+  
+    .cta-btn,
+    .neon-btn {
+      font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+      padding: 0.5rem 1rem;
+      margin-top: 0.8rem;
+    }
+  }
+  
+  
+  
+  </style>

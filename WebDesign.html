@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/feather-icons"></script>
 
   <style>
@@ -31,6 +32,7 @@
       background: white;
       color: var(--text);
       scroll-behavior: smooth;
+      
     }
 
     a {
@@ -60,6 +62,7 @@
       border-bottom: 1px solid #222;
       position: relative;
       z-index: 10;
+      
     }
 
     .logo {
@@ -78,6 +81,7 @@
 
     nav a:hover {
       color: var(--primary);
+      
     }
 
     .burger {
@@ -201,26 +205,36 @@
 
   <section class="hero-video-wrapper">
     <div class="hero-video-content">
-      <h1>UX & Webdesign,<br>das Nutzer begeistert</h1>
+      <h1>UX & Webdesign<br>das Nutzer begeistert</h1>
       <p>Wir konzipieren digitale Erlebnisse. <br>maßgeschneidert und klickbar.</p>
-      <a class="cta-btn neon-btn" href="#kontakt"><span>🚀 Projekt anfragen</span></a>
+      <a class="cta-btn neon-btn" href="#kontakt"><span>Projekt anfragen</span></a>
     </div>
     <video class="video-background" autoplay muted loop playsinline>
-      <source src="./WebdesignPic/1.mkv" type="video/mp4" />
+      <source src="./WebdesignPic/1.mp4" type="video/mp4" />
     </video>
   </section>
 
   <style>
-   
-   .hero-video-wrapper {
+  .hero-video-wrapper {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-family: 'VT323', monospace;
+  background-color: #000;
+}
+
+@keyframes blurPulse {
+  0%, 100% {
+    backdrop-filter: blur(2px);
+  }
+  50% {
+    backdrop-filter: blur(6px);
+  }
 }
 
 .hero-video-content {
@@ -233,14 +247,52 @@
   padding: 2rem;
   max-width: 800px;
   width: 100%;
-  color: #000;
-  background: none;
-  border-radius: 10px;
+  color: #ffffff;
   text-align: center;
-  top: 10vh;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  margin-top: -10rem;
 }
 
-    .video-background {
+/* Welliger animierter Blur */
+.hero-video-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.15), transparent 60%);
+  animation: waveBlur 8s infinite ease-in-out alternate;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Animation bewegt die Lichtwelle */
+@keyframes waveBlur {
+  0% {
+    --x: 20%;
+    --y: 30%;
+  }
+  25% {
+    --x: 80%;
+    --y: 20%;
+  }
+  50% {
+    --x: 60%;
+    --y: 70%;
+  }
+  75% {
+    --x: 30%;
+    --y: 80%;
+  }
+  100% {
+    --x: 50%;
+    --y: 50%;
+  }
+}
+
+
+.video-background {
   position: absolute;
   top: 0;
   left: 0;
@@ -252,34 +304,43 @@
   pointer-events: none;
 }
 
+.hero-video-content h1 {
+  font-size: 4.2rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  line-height: 1.0;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
 
-    
+.hero-video-content p {
+  font-size: 2rem;
+  font-weight: 400;
+  color: #e0e0e0;
+  max-width: 90%;
+  line-height: 1.6;
+}
 
-    .hero-video-content h1 {
-      font-size: 3.5rem;
-      font-weight: 900;
-    }
+.cta-btn {
+  background: #ffffff;
+  color: #000000;
+  font-weight: 600;
+  padding: 0.9rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  text-transform: none;
+  margin-top: 2rem;
+  transition: all 0.3s ease;
+  border: none;
+}
 
-    .hero-video-content p {
-      font-size: 1.2rem;
-      color: #000000;
-      margin: 0.5rem 0;
-      font-weight: 600;
-    }
+.cta-btn:hover {
+  background: var(--primary);
+  color: #000;
+  transform: scale(1.03);
+  cursor: pointer;
+}
 
-    .cta-btn {
-      position: relative;
-      overflow: hidden;
-      z-index: 2;
-      background: var(--primary);
-      color: #000;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 1rem 2rem;
-      border-radius: 5px;
-      display: inline-block;
-      margin-top: 1rem;
-    }
 
     .neon-btn {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -295,12 +356,71 @@
       transition: all 0.3s ease;
     }
 
-    .neon-btn:hover {
-      transform: scale(1.05);
-      background: linear-gradient(135deg, var(--secondary), var(--primary));
-      box-shadow: 0 0 16px rgba(255, 102, 0, 0.6),
-                  0 0 36px rgba(255, 102, 0, 0.4);
-    }
+    .hero-video-content h1,
+.hero-video-content p {
+  mix-blend-mode: exclusion;
+
+  color: #000; /* oder #000 für etwas mehr Kontrastwirkung */
+  z-index: 3;
+}
+
+@media (max-width: 1024px) {
+  .hero-video-content {
+    padding: 1.5rem;
+    top: 8vh;
+  }
+
+  .hero-video-content h1 {
+    font-size: 3.2rem;
+  }
+
+  .hero-video-content p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-video-content {
+    padding: 1.5rem;
+    top: 6vh;
+  }
+
+  .hero-video-content h1 {
+    font-size: 2.4rem;
+    letter-spacing: 0.05rem;
+  }
+
+  .hero-video-content p {
+    font-size: 1rem;
+  }
+
+  .cta-btn {
+    font-size: 0.95rem;
+    padding: 0.8rem 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-video-content {
+    padding: 1rem;
+    top: 4vh;
+  }
+
+  .hero-video-content h1 {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+
+  .hero-video-content p {
+    font-size: 0.95rem;
+  }
+
+  .cta-btn {
+    font-size: 0.9rem;
+    padding: 0.7rem 1.2rem;
+  }
+}
+
   </style>
 <script>
   feather.replace();
@@ -311,7 +431,18 @@
   burgerToggle.addEventListener('click', () => {
     nav.classList.toggle('open');
   });
+
+  // BLUR ANIMATION
+  const heroContent = document.querySelector('.hero-video-content');
+  function animateRandomBlur() {
+    const blurAmount = Math.random() * 6 + 2;
+    heroContent.style.backdropFilter = `blur(${blurAmount.toFixed(1)}px)`;
+    const nextInterval = Math.random() * 2000 + 1000;
+    setTimeout(animateRandomBlur, nextInterval);
+  }
+  animateRandomBlur();
 </script>
+
 
 
 <section class="pricing-clean container" id="pakete">
@@ -1570,4 +1701,86 @@
       font-size: 0.75rem;
     }
   }
+</style>
+
+
+<style>
+
+@media screen and (max-height: 480px) and (orientation: landscape) {
+  header {
+    padding: 0.4rem 3vw;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 40px;
+  }
+
+  .logo {
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .burger-icon {
+    display: block !important;
+  }
+
+  .burger-icon i {
+    width: clamp(22px, 4vw, 26px);
+    height: clamp(22px, 4vw, 26px);
+    stroke: #000;
+  }
+
+  nav {
+    position: absolute;
+    bottom: 42px; /* Platz für Fixierung unten */
+    left: 0;
+    right: 0;
+    background: #fff;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    display: none;
+    z-index: 999;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  nav.open {
+    display: flex;
+  }
+
+  nav a {
+    font-size: clamp(0.65rem, 1.8vw, 0.9rem);
+    font-weight: 500;
+    padding: 0.4rem 0.6rem;
+    color: #000;
+    white-space: nowrap;
+  }
+
+  .hero-video-content h1 {
+    font-size: clamp(1rem, 4vw + 0.3rem, 1.4rem);
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.02rem;
+    text-align: center;
+  }
+
+  .hero-video-content p {
+    font-size: clamp(0.7rem, 2vw + 0.2rem, 0.9rem);
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .cta-btn,
+  .neon-btn {
+    font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+    padding: 0.5rem 1rem;
+    margin-top: 0.8rem;
+  }
+}
+
+
+
 </style>
