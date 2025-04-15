@@ -2376,21 +2376,24 @@ const startAutoSlide = () => {
     }
   
     .lottie-footer-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 0;
-      pointer-events: none;
-    }
-  
-    .lottie-footer-bg lottie-player {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-end;
+}
+
+.lottie-footer-bg lottie-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
   
     .glass-card {
   background: rgba(255, 255, 255, 0.1);
@@ -2428,6 +2431,76 @@ const startAutoSlide = () => {
         transition: none !important;
       }
     }
+
+    @media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .glass-card {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .footer-logo span {
+    font-size: 1.2rem;
+  }
+
+  .footer-logo p {
+    font-size: 0.85rem;
+  }
+
+  .footer-links h4,
+  .footer-contact h4,
+  .footer-socials h4 {
+    font-size: 0.95rem;
+  }
+
+  .footer-links li,
+  .footer-contact li {
+    font-size: 0.85rem;
+  }
+
+  .footer-bottom {
+    font-size: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .footer-socials-icons {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .footer-socials img {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  footer {
+    padding: 2.5rem 4vw 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .footer-logo p,
+  .footer-links li,
+  .footer-contact li {
+    font-size: 0.8rem;
+  }
+
+  .footer-bottom {
+    font-size: 0.7rem;
+  }
+}
+
   </style>
   
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
@@ -2589,10 +2662,6 @@ const startAutoSlide = () => {
       .cta-action {
         font-size: 0.85rem;
         padding: 0.8rem 1.4rem;
-      }
-
-      .footer-bottom {
-        font-size: 0.75rem;
       }
     }
   </style>
