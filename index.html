@@ -2206,15 +2206,14 @@ const startAutoSlide = () => {
     });
   </script>
   
-  
   <footer>
     <div class="footer-grid">
-      <div class="footer-logo">
+      <div class="footer-logo glass-card">
         <span>Fusion³</span>
         <p>UX & Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
       </div>
-
-      <div class="footer-links">
+  
+      <div class="footer-links glass-card">
         <h4>Rechtliches</h4>
         <ul>
           <li><a href="/impressum.html">Impressum</a></li>
@@ -2222,8 +2221,8 @@ const startAutoSlide = () => {
           <li><a href="/cookies.html">Cookie-Hinweis</a></li>
         </ul>
       </div>
-
-      <div class="footer-contact">
+  
+      <div class="footer-contact glass-card">
         <h4>Kontakt</h4>
         <ul>
           <li><a href="mailto:hello@fusion3.de">hello@fusion3.de</a></li>
@@ -2231,8 +2230,8 @@ const startAutoSlide = () => {
           <li>Berlin, Deutschland</li>
         </ul>
       </div>
-
-      <div class="footer-socials">
+  
+      <div class="footer-socials glass-card">
         <h4>Social Media</h4>
         <div class="footer-socials-icons">
           <a href="mailto:hello@fusion3.de" title="E-Mail">
@@ -2247,21 +2246,21 @@ const startAutoSlide = () => {
         </div>
       </div>
     </div>
-
+  
     <p class="footer-bottom">© 2025 Fusion³ – Alle Rechte vorbehalten. DSGVO-konform & barrierearm entwickelt.</p>
+  
     <!-- Lottie Animation Hintergrund -->
-<div class="lottie-footer-bg">
-  <lottie-player
-    src="./Lottiefiles/KP.json"
-    background="transparent"
-    speed="1"
-    loop
-    autoplay
-  ></lottie-player>
-</div>
-
+    <div class="lottie-footer-bg">
+      <lottie-player
+        src="./Lottiefiles/KP.json"
+        background="transparent"
+        speed="1"
+        loop
+        autoplay
+      ></lottie-player>
+    </div>
   </footer>
-
+  
   <style>
     footer {
       position: relative;
@@ -2275,21 +2274,19 @@ const startAutoSlide = () => {
       overflow: hidden;
       z-index: 1;
     }
-
+  
     @keyframes animatedGradient {
       0% {
         background-position: 0% 50%;
       }
-
       50% {
         background-position: 100% 50%;
       }
-
       100% {
         background-position: 0% 50%;
       }
     }
-
+  
     .footer-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -2299,19 +2296,19 @@ const startAutoSlide = () => {
       position: relative;
       z-index: 2;
     }
-
+  
     .footer-logo span {
       font-size: 1.6rem;
       font-weight: 900;
       color: var(--primary);
     }
-
+  
     .footer-logo p {
       margin-top: 0.5rem;
       color: #555;
       font-size: 0.95rem;
     }
-
+  
     .footer-links h4,
     .footer-contact h4,
     .footer-socials h4 {
@@ -2320,42 +2317,42 @@ const startAutoSlide = () => {
       font-weight: 600;
       font-size: 1rem;
     }
-
+  
     .footer-links ul,
     .footer-contact ul {
       list-style: none;
       padding: 0;
     }
-
+  
     .footer-links li,
     .footer-contact li {
       margin-bottom: 0.4rem;
     }
-
+  
     .footer-links a {
       color: #444;
       text-decoration: none;
       transition: all 0.3s ease;
     }
-
+  
     .footer-links a:hover {
       color: black;
       transform: translateX(4px);
       filter: brightness(1.2) drop-shadow(0 0 6px white);
     }
-
+  
     .footer-socials {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
     }
-
+  
     .footer-socials-icons {
       display: flex;
       gap: 12px;
       margin-top: 0.5rem;
     }
-
+  
     .footer-socials img {
       width: 26px;
       height: 26px;
@@ -2363,12 +2360,12 @@ const startAutoSlide = () => {
       transition: transform 0.3s ease, filter 0.3s ease;
       filter: grayscale(20%);
     }
-
+  
     .footer-socials img:hover {
       transform: scale(1.2);
       filter: brightness(1.2) drop-shadow(0 0 6px white);
     }
-
+  
     .footer-bottom {
       text-align: center;
       color: #555;
@@ -2377,25 +2374,34 @@ const startAutoSlide = () => {
       position: relative;
       z-index: 2;
     }
+  
     .lottie-footer-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.lottie-footer-bg lottie-player {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-
-
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+  
+    .lottie-footer-bg lottie-player {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+  
     @media (prefers-reduced-motion: reduce) {
       * {
         animation: none !important;
@@ -2403,8 +2409,9 @@ const startAutoSlide = () => {
       }
     }
   </style>
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-
+  
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  
 
   <style>
     /* === Responsive Styles === */
