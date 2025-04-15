@@ -660,258 +660,284 @@
   </script>
 
 
-  <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
 
-  <style>
-    :root {
-      --primary: #ff6600;
-      --text-main: #1c1c1e;
-      --text-subtle: #555;
-      --bg-card: #ffffff;
-      --grain-url: url("https://grainy-gradients.vercel.app/noise.svg");
-    }
+<!-- Lottie Player Script einbinden -->
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
-    .apple-services {
-      padding: 6rem 2rem;
-      background: #ffffff;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    }
+<style>
+  :root {
+    --primary: #ff6600;
+    --text-main: #1c1c1e;
+    --text-subtle: #555;
+    --bg-card: #ffffff;
+    --grain-url: url("https://grainy-gradients.vercel.app/noise.svg");
+  }
 
-    .apple-services h2 {
-      font-size: 2.8rem;
-      text-align: center;
-      margin-bottom: 5rem;
-      color: var(--text-main);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
+  .apple-services {
+    padding: 6rem 2rem;
+    background: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
 
+  .apple-services h2 {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 5rem;
+    color: var(--text-main);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    position: relative;
+    background: #fff; /* Klare, weiße Basis für ein modernes Erscheinungsbild */
+    border: 1px solid rgba(0, 0, 0, 0.05); /* Sehr dezente Umrandung */
+    border-radius: 16px; /* Modern abgerundete Ecken */
+    padding: 2.5rem; /* Großzügiger Innenabstand für ein luftiges Layout */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Weicher Schatten für einen feinen Tiefeneffekt */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .service-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain-url);
+    opacity: 0.05;
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .service-card::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(190deg, #ffffff 0%, #e7e7e7 70%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .service-card:hover::after {
+    opacity: 1;
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  }
+
+  .service-card .inner {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Die Animationen werden nun als lottie-player eingebunden */
+  lottie-player {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 2rem;
+  }
+
+  .service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    color: var(--text-main);
+    letter-spacing: -0.01em;
+  }
+
+  .service-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: var(--text-subtle);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .service-card ul li {
+    margin-bottom: 0.75rem;
+  }
+
+  .cta {
+    display: inline-block;
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: rgb(75, 75, 75);
+    text-decoration: none;
+    border: 1px solid rgb(68, 68, 68);
+    padding: 0.6rem 1.3rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .cta:hover {
+    background-color: hwb(327 82% 0%);
+    box-shadow: 0 0 0 2px rgba(118, 138, 180, 0.15);
+  }
+
+  @media (max-width: 375px) {
     .service-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 4rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      grid-template-columns: 1fr;
+      gap: 2rem;
     }
 
     .service-card {
-      position: relative;
-      background: linear-gradient(190deg, #ffffff 0%, #e9e9f8 70%);
-
-      border-radius: 20px;
-      padding: 3rem 2rem;
-      box-shadow: 8px var(--secondary);
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .service-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: var(--grain-url);
-      opacity: 0.05;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .service-card::after {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at center, rgba(255, 223, 253, 0.678), transparent 70%);
-      opacity: 0;
-      transition: opacity 0.6s ease;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .service-card:hover::after {
-      opacity: 1;
-    }
-
-    .service-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-    }
-
-    .service-card .inner {
-      position: relative;
-      z-index: 2;
-    }
-
-    lord-icon {
-      width: 56px;
-      height: 56px;
-      margin-bottom: 2rem;
+      padding: 2rem 1.2rem;
+      border-radius: 16px;
     }
 
     .service-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1.2rem;
-      font-weight: 600;
-      color: var(--text-main);
-      letter-spacing: -0.01em;
+      font-size: 1.2rem;
     }
 
     .service-card ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      color: var(--text-subtle);
-      font-size: 1rem;
-      line-height: 1.75;
-    }
-
-    .service-card ul li {
-      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
     }
 
     .cta {
-      display: inline-block;
-      margin-top: 2rem;
+      display: block;
+      width: 100%;
+      text-align: center;
       font-size: 0.95rem;
-      font-weight: 500;
-      color: rgb(75, 75, 75);
-      text-decoration: none;
-      border: 1px solid rgb(68, 68, 68);
-      padding: 0.6rem 1.3rem;
-      border-radius: 8px;
-      transition: all 0.3s ease;
+      padding: 0.8rem 1rem;
     }
 
-    .cta:hover {
-      background-color: hwb(327 82% 0%);
-      box-shadow: 0 0 0 2px rgba(118, 138, 180, 0.15);
+    lottie-player {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .service-card {
+      padding: 1.5rem 1rem;
     }
 
-    @media (max-width: 375px) {
-      .service-grid {
-        grid-template-columns: 1fr;
-        /* Nur eine Karte pro Zeile */
-        gap: 2rem;
-        /* Weniger Abstand */
-      }
-
-      .service-card {
-        padding: 2rem 1.2rem;
-        /* Weniger Padding */
-        border-radius: 16px;
-      }
-
-      .service-card h3 {
-        font-size: 1.2rem;
-      }
-
-      .service-card ul {
-        font-size: 0.95rem;
-      }
-
-      .cta {
-        display: block;
-        width: 100%;
-        text-align: center;
-        font-size: 0.95rem;
-        padding: 0.8rem 1rem;
-      }
-
-      lord-icon {
-        width: 48px;
-        height: 48px;
-        margin-bottom: 1.5rem;
-      }
+    .cta {
+      font-size: 0.9rem;
+      padding: 0.7rem 1rem;
     }
+  }
+</style>
 
-    @media (max-width: 320px) {
-      .service-card {
-        padding: 1.5rem 1rem;
-      }
+<section class="container apple-services" id="tools">
+  <h2>Unsere Leistungen</h2>
 
-      .cta {
-        font-size: 0.9rem;
-        padding: 0.7rem 1rem;
-      }
-    }
-  </style>
-  <section class="container apple-services" id="tools">
-    <h2>Unsere Leistungen</h2>
+  <div class="service-grid">
 
-    <div class="service-grid">
-
-      <!-- Webdesign -->
-      <div class="service-card">
-        <div class="inner">
-          <lord-icon src="https://cdn.lordicon.com/tyounuzx.json" trigger="hover"
-            colors="primary:#000000,secondary:#ff6600">
-          </lord-icon>
-          <h3>Webdesign</h3>
-          <ul>
-            <li>Responsive & performanceoptimierte Websites</li>
-            <li>Visuell ansprechende User Interfaces</li>
-            <li>Moderne Animationen & Microinteractions</li>
-            <li>CMS-Integration & SEO Ready</li>
-          </ul>
-          <a href="./WebDesign.html" class="cta">Mehr erfahren</a>
-        </div>
+    <!-- Webdesign -->
+    <div class="service-card">
+      <div class="inner">
+        <lottie-player
+          src="https://assets2.lottiefiles.com/packages/lf20_wd0zvf.json"
+          background="transparent"  
+          speed="1"
+          style="width:56px; height:56px;" 
+          loop 
+          hover
+          autoplay>
+        </lottie-player>
+        <h3>Webdesign</h3>
+        <ul>
+          <li>Responsive & performanceoptimierte Websites</li>
+          <li>Visuell ansprechende User Interfaces</li>
+          <li>Moderne Animationen & Microinteractions</li>
+          <li>CMS-Integration & SEO Ready</li>
+        </ul>
+        <a href="./WebDesign.html" class="cta">Mehr erfahren</a>
       </div>
-
-      <!-- 3D Design -->
-      <div class="service-card">
-        <div class="inner">
-          <lord-icon src="https://cdn.lordicon.com/bzrhdlij.json" trigger="hover"
-            colors="primary:#000000,secondary:#ff6600">
-          </lord-icon>
-          <h3>3D Design</h3>
-          <ul>
-            <li>Fotorealistische 3D-Visualisierungen</li>
-            <li>Produkt & Architektur-Renderings</li>
-            <li>VR/AR-kompatible Modelle</li>
-            <li>Optimiert für Web & Druck</li>
-          </ul>
-          <a href="./3DDesign.html" class="cta">Mehr erfahren</a>
-        </div>
-      </div>
-
-      <!-- Grafikdesign -->
-      <div class="service-card">
-        <div class="inner">
-          <lord-icon src="https://cdn.lordicon.com/kipaqhoz.json" trigger="hover"
-            colors="primary:#000000,secondary:#ff6600">
-          </lord-icon>
-          <h3>Grafikdesign</h3>
-          <ul>
-            <li>Corporate Design & Markenauftritt</li>
-            <li>Professionelles Logo-Design</li>
-            <li>Druck- & Digitalmedien</li>
-            <li>Infografiken & visuelle Systeme</li>
-          </ul>
-          <a href="./Grafikdesign.html" class="cta">Mehr erfahren</a>
-        </div>
-      </div>
-
-      <!-- Social Media -->
-      <div class="service-card">
-        <div class="inner">
-          <lord-icon src="https://cdn.lordicon.com/svbmmyue.json" trigger="hover"
-            colors="primary:#000000,secondary:#ff6600">
-          </lord-icon>
-          <h3>Social Media</h3>
-          <ul>
-            <li>Kanalübergreifende Content-Konzepte</li>
-            <li>Motion Design für Reels & Stories</li>
-            <li>Werbekampagnen-Design</li>
-            <li>CI-konforme Templates</li>
-          </ul>
-          <a href="./SocialMedia.html" class="cta">Mehr erfahren</a>
-        </div>
-      </div>
-
     </div>
-  </section>
 
+    <!-- 3D Design -->
+    <div class="service-card">
+      <div class="inner">
+        <lottie-player
+          src="https://assets2.lottiefiles.com/packages/lf20_3d-design.json"
+          background="transparent"  
+          speed="1"
+          style="width:56px; height:56px;" 
+          loop 
+          hover
+          autoplay>
+        </lottie-player>
+        <h3>3D Design</h3>
+        <ul>
+          <li>Fotorealistische 3D-Visualisierungen</li>
+          <li>Produkt & Architektur-Renderings</li>
+          <li>VR/AR-kompatible Modelle</li>
+          <li>Optimiert für Web & Druck</li>
+        </ul>
+        <a href="./3DDesign.html" class="cta">Mehr erfahren</a>
+      </div>
+    </div>
+
+    <!-- Grafikdesign -->
+    <div class="service-card">
+      <div class="inner">
+        <lottie-player
+          src="https://assets2.lottiefiles.com/packages/lf20_graphic-design.json"
+          background="transparent"  
+          speed="1"
+          style="width:56px; height:56px;" 
+          loop 
+          hover
+          autoplay>
+        </lottie-player>
+        <h3>Grafikdesign</h3>
+        <ul>
+          <li>Corporate Design & Markenauftritt</li>
+          <li>Professionelles Logo-Design</li>
+          <li>Druck- & Digitalmedien</li>
+          <li>Infografiken & visuelle Systeme</li>
+        </ul>
+        <a href="./Grafikdesign.html" class="cta">Mehr erfahren</a>
+      </div>
+    </div>
+
+    <!-- Social Media -->
+    <div class="service-card">
+      <div class="inner">
+        <lottie-player
+          src="./Lottiefiles/Computer.json"
+          background="transparent"  
+          speed="1"
+          style="width:56px; height:56px;" 
+          loop 
+          hover
+          autoplay>
+        </lottie-player>
+        <h3>Social Media</h3>
+        <ul>
+          <li>Kanalübergreifende Content-Konzepte</li>
+          <li>Motion Design für Reels & Stories</li>
+          <li>Werbekampagnen-Design</li>
+          <li>CI-konforme Templates</li>
+        </ul>
+        <a href="./SocialMedia.html" class="cta">Mehr erfahren</a>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 
 
