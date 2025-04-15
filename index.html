@@ -2252,17 +2252,15 @@ const startAutoSlide = () => {
     <!-- Lottie Animation Hintergrund -->
 
   </footer>
-<!-- Lottie ganz unten auf der Seite -->
-<div class="lottie-page-end">
-  <lottie-player
-    src="./Lottiefiles/KP.json"
-    background="transparent"
-    speed="1"
-    loop
-    autoplay
-  ></lottie-player>
-</div>
-
+      <div class="lottie-footer-bg">
+      <lottie-player
+        src="./Lottiefiles/KP.json"
+        background="transparent"
+        speed="1"
+        loop
+        autoplay
+      ></lottie-player>
+    </div>
   <style>
 footer {
   position: relative;
@@ -2377,6 +2375,27 @@ footer {
       z-index: 2;
     }
   
+    .lottie-footer-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* 👈 Höhe auf fixen Footer-Abschluss setzen */
+  z-index: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: transparent;
+}
+
+.lottie-footer-bg lottie-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
   
     .glass-card {
   background: rgba(255, 255, 255, 0.1);
@@ -2414,32 +2433,6 @@ footer {
         transition: none !important;
       }
     }
-
-    .lottie-page-end {
-  width: 100%;
-  height: 100px; /* oder mehr, je nach gewünschter Wirkung */
-  position: relative;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  background: transparent;
-  margin-top: -2rem; /* optional: optische Nähe zum Footer */
-}
-
-.lottie-page-end lottie-player {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-@media (max-width: 600px) {
-  .lottie-page-end {
-    height: 80px;
-  }
-}
 
 
 
