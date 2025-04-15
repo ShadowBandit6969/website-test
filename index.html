@@ -2095,7 +2095,7 @@ const startAutoSlide = () => {
   
   <section class="kontakt-clean" id="kontakt">
     <div class="kontakt-wrapper">
-      <h2 class="kontakt-title">Lass uns loslegen!</h2>
+      <h2 class="section-title">Lass uns loslegen!</h2>
       <p class="kontakt-subline">
         Eine starke Idee verdient ein starkes digitales Erlebnis. <br />
         Erzähle uns von Deinem Projekt – wir bringen es gemeinsam auf das nächste Level.
@@ -2112,13 +2112,14 @@ const startAutoSlide = () => {
   </section>
   
   <style>
-    .kontakt-clean {
-      background: #ffffff;
-      padding: 6rem 2rem;
-      text-align: center;
-      font-family: 'Inter', sans-serif;
-    }
-  
+.kontakt-clean {
+  background: #ffffff;
+  padding: 6rem 2rem;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  margin-top: 5rem; /* <-- das ist neu */
+}
+
     .kontakt-title {
       font-size: 2.6rem;
       font-weight: 900;
@@ -2248,11 +2249,7 @@ const startAutoSlide = () => {
     </div>
   
     <p class="footer-bottom glass-card">© 2025 Fusion³ – Alle Rechte vorbehalten. DSGVO-konform & barrierearm entwickelt.</p>
-  
-    <!-- Lottie Animation Hintergrund -->
-
-  </footer>
-      <div class="lottie-footer-bg">
+    <div class="lottie-footer-bg">
       <lottie-player
         src="./Lottiefiles/KP.json"
         background="transparent"
@@ -2261,6 +2258,10 @@ const startAutoSlide = () => {
         autoplay
       ></lottie-player>
     </div>
+    <!-- Lottie Animation Hintergrund -->
+
+  </footer>
+    
   <style>
 footer {
   position: relative;
@@ -2380,7 +2381,8 @@ footer {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%; /* 👈 Höhe auf fixen Footer-Abschluss setzen */
+  height: auto;
+  max-height: 300px; /* oder 100% je nach gewünschter Höhe */
   z-index: 0;
   pointer-events: none;
   display: flex;
@@ -2391,9 +2393,11 @@ footer {
 
 .lottie-footer-bg lottie-player {
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-height: 300px; /* passt sich responsiv an */
   object-fit: cover;
 }
+
 
 
   
