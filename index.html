@@ -2271,10 +2271,7 @@ const startAutoSlide = () => {
   
     <p class="footer-bottom glass-card">© 2025 Fusion³ – Alle Rechte vorbehalten. DSGVO-konform & barrierearm entwickelt.</p>
 
-    <!-- Lottie Animation Hintergrund -->
-
-  </footer>
-        <div class="lottie-footer-bg">
+    <div class="lottie-footer-bg">
       <lottie-player
         src="./Lottiefiles/KP.json"
         background="transparent"
@@ -2283,6 +2280,8 @@ const startAutoSlide = () => {
         autoplay
       ></lottie-player>
     </div>
+  </footer>
+
   <style>
 footer {
   position: relative;
@@ -2397,34 +2396,7 @@ footer {
       z-index: 2;
     }
   
-/* Fixierung und grundlegende Einstellungen der Lottie Animation */
-.lottie-footer-bg {
-    position: fixed;      /* Fixiert an der Viewport-Position */
-    bottom: 0;            /* Immer am unteren Rand */
-    left: 0;
-    width: 100%;
-    height: 400px;        /* Basis-Höhe, passt die Animation an */
-    z-index: 0;           /* Hinter dem Footer */
-    pointer-events: none; /* Keine Mausinteraktion */
-    display: flex;
-    align-items: flex-end;  /* Ausrichtung am unteren Rand des Containers */
-    justify-content: center;
-    background: transparent;
-  }
 
-  /* Lottie Player passt sich dem Container an */
-  .lottie-footer-bg lottie-player {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;    /* Sorgt dafür, dass die Animation den Container gut füllt */
-  }
-
-  /* Media Query für kleinere Bildschirmgrößen */
-  @media (max-width: 768px) {
-    .lottie-footer-bg {
-      height: 200px;      /* Reduzierte Höhe bei kleinen Displays */
-    }
-  }
 
     .glass-card {
   background: rgba(255, 255, 255, 0.1);
@@ -2462,7 +2434,30 @@ footer {
         transition: none !important;
       }
     }
+/* Lottie Animation Container hinter den Footer-Inhalten */
+.lottie-footer-bg {
+  position: absolute; /* Absolut innerhalb des Footers */
+  bottom: 0;          /* Immer am unteren Ende des Footers */
+  left: 0;
+  width: 100%;
+  height: 400px;      /* Basis-Höhe – kann angepasst werden */
+  z-index: 0;         /* Niedriger z‑Index, damit der Footer-Inhalt darüber liegt */
+  pointer-events: none;
+}
 
+/* Der Lottie Player füllt seinen Container */
+.lottie-footer-bg lottie-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Optional: Anpassungen bei kleineren Bildschirmgrößen */
+@media (max-width: 768px) {
+  .lottie-footer-bg {
+    height: 200px;  /* Reduzierte Höhe für mobile Geräte */
+  }
+}
 
 
   </style>
