@@ -236,8 +236,8 @@
     <div class="above-text-image"></div>
 
     <div class="hero-video-content">
-      <h1>UX & Webdesign<br>das Nutzer begeistert</h1>
-      <p>Wir konzipieren digitale Erlebnisse. <br>maßgeschneidert und klickbar.</p>
+      <h1>UX & Webdesign</h1>
+      <p> Innovativ. Benutzerzentriert. Erfolgreich</p>
       <a class="cta-btn neon-btn" href="#kontakt"><span>Projekt anfragen</span></a>
      </div>
   </section>
@@ -354,23 +354,32 @@
     mix-blend-mode: exclusion;
     z-index: 3;
   }
-  
-
-  /* CTA BUTTON – EPIC VERSION */
-.cta-btn {
+  .cta-btn {
   background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
   background-size: 300% 300%;
   color: #fff;
   font-weight: 600;
-  padding: 0.8rem 2rem;
-  font-size: clamp(0.9rem, 2vw, 1rem);
-  border-radius: 10px;
+
+  /* Weniger vertikales Padding für flacheren Button */
+  padding: 0.4em 2.5vw;
+
+  /* Responsive Font-Größe */
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+
+  border-radius: 0.75em;
   text-decoration: none;
-  box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
+  box-shadow: 0 0.4em 1.4em rgba(255, 102, 0, 0.22);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   z-index: 2;
+
   animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
+
+  /* Breitensteuerung */
+  width: fit-content;
+  min-width: 12vw;
+  max-width: 90%;
+  height: auto;
 }
 
 /* Hover Glow & Lift */
@@ -427,11 +436,43 @@
   }
   
 
+/* RESPONSIVE MEDIA QUERIES */
+@media (max-width: 768px) {
+  .cta-btn {
+    padding: 0.6em 4vw;
+    font-size: 1rem;
+    border-radius: 0.6em;
+  }
+}
+@media (max-width: 480px) {
+  .cta-btn {
+    padding: 0.25em 0.2vw;
+    font-size: 0.7rem;
+    border-radius: 0.4em;
+    max-width: 70%;
+    min-width: unset;
+    width: auto;
+    box-shadow: 0 0.2em 0.6em rgba(255, 102, 0, 0.2);
+    scale: 0.7;
+  }
+}
+@media (max-width: 320px) {
+  .cta-btn {
+    padding: 0.25em 0.2vw;
+    font-size: 0.7rem;
+    border-radius: 0.4em;
+    max-width: 70%;
+    min-width: unset;
+    width: auto;
+    box-shadow: 0 0.2em 0.6em rgba(255, 102, 0, 0.2);
+    scale: 0.7;
+  }
+}
+
+
 @media (max-width: 768px) {
   .hero-video-content h1 { font-size: 2.4rem; letter-spacing: 0.05rem; }
   .hero-video-content p  { font-size: 1rem; }
-  .cta-btn               { font-size: 0.95rem; padding: 0.8rem 1.6rem; }
-  
 
 }
 
@@ -449,7 +490,118 @@ width: 170vw;
   }
 }
 
-@media (max-width: 480px) {
+
+
+
+
+@media (max-width: 768px) and (min-height: 1280px) and (max-height: 2000px) {
+  .hero-overlay-image {
+    left: -110vw;
+    width: 250vw;
+    top: 4vh;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -70vw;
+    width: 310vw; /* <– erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+  }
+}
+
+@media (max-width: 768px) and (min-height: 1024px) and (max-height: 1280px) {
+  .hero-overlay-image {
+    left: -70vw;
+    width: 200vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -60vw;
+    width: 250vw;
+  }
+}
+
+@media (max-width: 768px) and (min-height: 900px) and (max-height: 1024px) {
+  .hero-overlay-image {
+    left: -50vw;
+    width: 185vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -45vw;
+    width: 210vw;
+  }
+}
+
+@media (max-width: 768px) and (min-height: 768px) and (max-height: 900px) {
+  .hero-overlay-image {
+    left: -45vw;
+    width: 170vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -34vw;
+    width: 185vw;
+  }
+}
+
+@media (max-width: 768px) and (min-height: 625px) and (max-height: 768px) {
+  .hero-overlay-image {
+    left: -35vw;
+    width: 165vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -30vw;
+    width: 175vw;
+  }
+}
+
+@media (max-width: 768px) and (min-height: 300px) and (max-height: 625px) {
+  .hero-overlay-image {
+    left: -30vw;
+    width: 160vw;
+  }
+
+  .above-text-image {
+    top: 5vh;
+    left: -25vw;
+    width: 160vw;
+  }
+}
+
+
+@media (max-width: 480px) and (min-height: 1530px)  and (max-height: 2000px){
+  .hero-overlay-image{
+left: -190vw;
+width: 320vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -40vw;
+    width: 400vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+  }
+}
+
+@media (max-width: 480px) and (min-height: 1060px)  and (max-height: 1530px){
+  .hero-overlay-image{
+left: -120vw;
+width: 220vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -5vw;
+    width: 250vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+  }
+}
+
+
+@media (max-width: 480px) and (min-height: 950px)  and (max-height: 1060px){
   .hero-overlay-image{
 left: -60vw;
 width: 170vw;
@@ -461,6 +613,249 @@ width: 170vw;
     width: 190vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
   }
 }
+
+@media (max-width: 480px) and (min-height: 768px)  and (max-height: 950px){
+  .hero-overlay-image{
+left: -60vw;
+width: 170vw;
+
+  }
+
+  .above-text-image {
+    left: -2vw;
+    width: 160vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+  }
+}
+
+@media (max-width: 480px) and (min-height: 625px)  and (max-height: 768px){
+  .hero-overlay-image{
+left: -50vw;
+width: 170vw;
+
+  }
+
+  .above-text-image {
+    left: -15vw;
+    width: 160vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+  }
+}
+
+@media (max-width: 480px) and (min-height: 25px)  and (max-height: 625px){
+  .hero-overlay-image{
+left: -40vw;
+width: 170vw;
+
+  }
+
+  .above-text-image {
+    left: -25vw;
+    width: 160vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+  }
+}
+
+
+
+
+@media (max-width: 425px) and (min-height: 1530px) and (max-height: 2000px) {
+  .hero-overlay-image {
+    left: -165vw;
+    width: 285vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -35vw;
+    width: 360vw;
+  }
+}
+
+@media (max-width: 425px) and (min-height: 1060px) and (max-height: 1530px) {
+  .hero-overlay-image {
+    left: -100vw;
+    width: 200vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -4vw;
+    width: 230vw;
+  }
+}
+
+@media (max-width: 425px) and (min-height: 950px) and (max-height: 1060px) {
+  .hero-overlay-image {
+    left: -50vw;
+    width: 160vw;
+  }
+
+  .above-text-image {
+    left: -4vw;
+    width: 180vw;
+  }
+}
+
+@media (max-width: 425px) and (min-height: 768px) and (max-height: 950px) {
+  .hero-overlay-image {
+    left: -48vw;
+    width: 160vw;
+  }
+
+  .above-text-image {
+    left: -1vw;
+    width: 155vw;
+  }
+}
+
+@media (max-width: 425px) and (min-height: 625px) and (max-height: 768px) {
+  .hero-overlay-image {
+    left: -40vw;
+    width: 155vw;
+  }
+
+  .above-text-image {
+    left: -10vw;
+    width: 150vw;
+  }
+}
+
+@media (max-width: 425px) and (min-height: 25px) and (max-height: 625px) {
+  .hero-overlay-image {
+    left: -30vw;
+    width: 150vw;
+  }
+
+  .above-text-image {
+    left: -20vw;
+    width: 145vw;
+  }
+}
+
+
+
+
+
+@media (max-width: 375px) and (min-height: 1530px) and (max-height: 1680px) {
+  .hero-overlay-image {
+    left: -188vw;
+    width: 290vw;
+    top: 6vh;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -15vw;
+    width: 370vw;
+    top: 12vh;
+  }
+}
+
+
+@media (max-width: 375px) and (min-height: 1060px) and (max-height: 1530px) {
+  .hero-overlay-image {
+    left: -140vw;
+    width: 260vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -5vw;
+    width: 260vw;
+  }
+}
+
+@media (max-width: 375px) and (min-height: 840px) and (max-height: 1060px) {
+  .hero-overlay-image {
+    left: -90vw;
+    width: 195vw;
+  }
+
+  .above-text-image {
+    left: 5vw;
+    width: 195vw;
+    top: 10vh;
+  }
+}
+
+
+@media (max-width: 375px) and (min-height: 768px) and (max-height: 840px) {
+  .hero-overlay-image {
+    left: -70vw;
+    width: 195vw;
+  }
+
+  .above-text-image {
+    left: -5vw;
+    width: 195vw;
+  }
+}
+
+@media (max-width: 375px) and (min-height: 8px) and (max-height: 768px) {
+  .hero-overlay-image {
+    left: -70vw;
+    width: 195vw;
+  }
+
+  .above-text-image {
+    left: -25vw;
+    width: 195vw;
+  }
+}
+
+@media (max-width: 320px) and (min-height: 1024px) and (max-height: 1300px) {
+  .hero-overlay-image {
+    left: -180vw;
+    width: 300vw;
+    top: 10vh;
+  }
+
+  .above-text-image {
+    left: -5vw;
+    width: 285vw;
+  }
+}
+
+
+@media (max-width: 320px) and (min-height: 768px) and (max-height: 1024px) {
+  .hero-overlay-image {
+    left: -110vw;
+    width: 220vw;
+  }
+
+  .above-text-image {
+    left: -25vw;
+    width: 285vw;
+  }
+}
+
+
+@media (max-width: 320px) and (min-height: 600px) and (max-height: 768px) {
+  .hero-overlay-image {
+    left: -80vw;
+    width: 195vw;
+  }
+
+  .above-text-image {
+    left: -5vw;
+    width: 195vw;
+  }
+}
+
+@media (max-width: 320px) and (min-height: 200px) and (max-height: 600px) {
+  .hero-overlay-image {
+    left: -60vw;
+    width: 195vw;
+  }
+
+  .above-text-image {
+    left: -25vw;
+    width: 195vw;
+  }
+}
+
+
+
+
+
 
 
 
@@ -1855,7 +2250,9 @@ const startAutoSlide = () => {
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
           <span>Projektmanagement und Kommunikation</span>
-          <i class="arrow"></i>
+          <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
+            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </button>
         <div class="faq-answer">
           <p>
@@ -1901,8 +2298,10 @@ const startAutoSlide = () => {
       </div>
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
-          <span>Technische Umsetzung und Wartung</span>
-          <i class="arrow"></i>
+          <span>Projektmanagement und Kommunikation</span>
+          <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
+            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </button>
         <div class="faq-answer">
           <p>
@@ -1929,8 +2328,10 @@ const startAutoSlide = () => {
       </div>
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
-          <span>Design, UX und Anpassungsfähigkeit</span>
-          <i class="arrow"></i>
+          <span>Projektmanagement und Kommunikation</span>
+          <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
+            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </button>
         <div class="faq-answer">
           <p>
@@ -1957,8 +2358,10 @@ const startAutoSlide = () => {
       </div>
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
-          <span>Kosten, Verträge und Erfolgsmessung</span>
-          <i class="arrow"></i>
+          <span>Projektmanagement und Kommunikation</span>
+          <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
+            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </button>
         <div class="faq-answer">
           <p>
@@ -1985,8 +2388,10 @@ const startAutoSlide = () => {
       </div>
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
-          <span>Datenschutz und rechtliche Aspekte</span>
-          <i class="arrow"></i>
+          <span>Projektmanagement und Kommunikation</span>
+          <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
+            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </button>
         <div class="faq-answer">
           <p>
@@ -2013,8 +2418,10 @@ const startAutoSlide = () => {
       </div>
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
-          <span>Zusätzliche Leistungen und Langzeitbetreuung</span>
-          <i class="arrow"></i>
+          <span>Projektmanagement und Kommunikation</span>
+          <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
+            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </button>
         <div class="faq-answer">
           <p>
@@ -2037,112 +2444,104 @@ const startAutoSlide = () => {
   
   
 <style>
-.faq-section {
-  padding: 5rem 2rem;
-  background: #fefefe;
-  color: #111;
-  font-family: 'Inter', sans-serif;
-}
-
-.faq-title {
-  text-align: center;
-  font-size: clamp(2rem, 5vw, 2.8rem);
-  font-weight: 800;
-  margin-bottom: 3rem;
-}
-
-.faq-accordion {
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  padding: 0 1rem;
-}
-
-.faq-item {
-  border: 1px solid #ddd;
-  border-radius: 14px;
-  overflow: hidden;
-  background: linear-gradient(135deg, #ffffff, #f8f8f8);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.03);
-  transition: all 0.3s ease;
-}
-
-.faq-item:hover {
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
-}
-
-.faq-question {
-  background: none;
-  border: none;
-  width: 100%;
-  padding: 1.5rem 2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  text-align: left;
-  color: #222;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.faq-question:hover {
-  background: #f2f2f2;
-}
-
-.faq-question .arrow {
-  width: 12px;
-  height: 12px;
-  border-right: 2px solid #666;
-  border-bottom: 2px solid #666;
-  transform: rotate(45deg);
-  transition: transform 0.3s ease;
-}
-
-.faq-question[aria-expanded="true"] .arrow {
-  transform: rotate(-135deg);
-}
-
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-  padding: 0 2rem;
-}
-
-.faq-answer p {
-  margin: 1rem 0 1.5rem;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #444;
-}
-
-</style>  
-<script>
-  const faqButtons = document.querySelectorAll('.faq-question');
-
-  faqButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const expanded = button.getAttribute('aria-expanded') === 'true';
-      const answer = button.nextElementSibling;
-
-      // Collapse all
-      faqButtons.forEach(btn => {
-        btn.setAttribute('aria-expanded', 'false');
-        btn.nextElementSibling.style.maxHeight = null;
+  .faq-section {
+    padding: 5rem 2rem;
+    background: #fefefe;
+    color: #111;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .faq-title {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 800;
+    margin-bottom: 3rem;
+  }
+  
+  .faq-accordion {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 0 1rem;
+  }
+  
+  .faq-item {
+    border: 1px solid #ddd;
+    border-radius: 14px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffffff, #f8f8f8);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+  }
+  
+  .faq-item:hover {
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
+  }
+  
+  .faq-question {
+    background: none;
+    border: none;
+    width: 100%;
+    padding: 1.5rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: left;
+    color: #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .faq-question:hover {
+    background: #f2f2f2;
+  }
+  
+  .arrow-icon {
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+  }
+  
+  .faq-question[aria-expanded="true"] .arrow-icon {
+    transform: rotate(180deg);
+  }
+  
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 2rem;
+  }
+  
+  .faq-answer p {
+    margin: 1rem 0 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #444;
+  }
+  </style>
+  
+  <script>
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        const answer = button.nextElementSibling;
+  
+        document.querySelectorAll('.faq-question').forEach(btn => {
+          btn.setAttribute('aria-expanded', 'false');
+          btn.nextElementSibling.style.maxHeight = null;
+        });
+  
+        if (!expanded) {
+          button.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
       });
-
-      // Toggle current
-      if (!expanded) {
-        button.setAttribute('aria-expanded', 'true');
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-      }
     });
-  });
-</script>
+  </script>
 
 
 
@@ -2415,11 +2814,6 @@ const startAutoSlide = () => {
       font-size: 1rem;
     }
 
-    .cta-btn, .neon-btn {
-      font-size: 0.9rem;
-      padding: 0.8rem 1.6rem;
-    }
-
     .pricing-grid {
       grid-template-columns: 1fr;
     }
@@ -2463,11 +2857,6 @@ const startAutoSlide = () => {
 
     .hero-video-content p {
       font-size: 0.9rem;
-    }
-
-    .cta-btn, .neon-btn {
-      font-size: 0.8rem;
-      padding: 0.7rem 1.2rem;
     }
 
     .pricing-title {
@@ -2520,10 +2909,6 @@ const startAutoSlide = () => {
       font-size: 0.85rem;
     }
 
-    .cta-btn, .neon-btn {
-      font-size: 0.75rem;
-      padding: 0.6rem 1rem;
-    }
 
     .kontakt-form input,
     .kontakt-form textarea {
@@ -2620,14 +3005,26 @@ const startAutoSlide = () => {
     text-align: center;
   }
 
-  .cta-btn,
-  .neon-btn {
-    font-size: clamp(0.65rem, 1.5vw, 0.8rem);
-    padding: 0.5rem 1rem;
-    margin-top: 0.8rem;
+}
+
+@media (max-width: 480px) {
+  .about-block .cta-btn {
+    font-size: 0.8rem;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .about-block .cta-btn {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.8rem;
   }
 }
 
 
-
 </style>
+
