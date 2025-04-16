@@ -288,7 +288,6 @@
       backdrop-filter: blur(6px);
       background: rgba(255, 255, 255, 0.05);
       overflow: hidden;
-      transform: translateY(-10rem);
     }
 
     /* Welliger animierter Blur */
@@ -1267,187 +1266,226 @@
 
 
 
-  <section class="cta-modern">
-    <style>
-      .cta-modern {
-        position: relative;
-        padding: 7rem 1.5rem;
-        background: linear-gradient(180deg, #f4f4f4, #ffffff);
-        overflow: hidden;
-        text-align: center;
-        z-index: 1;
-      }
-
-      .cta-modern::before {
-        content: '';
-        position: absolute;
-        top: -100px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 1800px;
-        max-width: 100vw;
-        height: 1800px;
-        z-index: 0;
-        pointer-events: none;
-        animation: glowShift 12s ease-in-out infinite alternate;
-      }
 
 
-      .cta-headline {
-        font-size: clamp(1.8rem, 4.5vw, 3rem);
-        font-weight: 800;
-        font-family: 'Inter', sans-serif;
-        color: #000;
-        margin-bottom: 1rem;
-        line-height: 1.25;
-        letter-spacing: -0.3px;
-        position: relative;
-        z-index: 2;
-        animation: fadeUp 1s ease-out both;
-      }
+<section class="cta-modern">
+  <style>
+    .cta-modern {
+      position: relative;
+      padding: 7rem 1.5rem;
+      background: linear-gradient(180deg, #f4f4f4, #ffffff);
+      overflow: hidden;
+      text-align: center;
+      z-index: 1;
+    }
 
-      .cta-small {
-        font-size: 0.6em;
-        font-weight: 500;
-        color: #000000 !important;
-        font-family: 'Inter', sans-serif;
-        display: inline-block;
-        margin-right: 0.3em;
-        background: none !important;
-        background-clip: initial !important;
-        -webkit-background-clip: initial !important;
-        -webkit-text-fill-color: initial !important;
-      }
-
-
-      .cta-headline span {
-        font-family: 'VT323', monospace;
-        font-size: 1.3em;
-        line-height: 1;
-        display: inline-block;
-        color: var(--primary);
-        /* Fallback-Farbe */
-        background: linear-gradient(90deg, #9abdff, var(--primary));
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        border: 5px;
-        border-color: black;
-      }
+    .cta-modern::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1800px;
+      max-width: 100vw;
+      height: 1800px;
+      z-index: 0;
+      pointer-events: none;
+      animation: glowShift 12s ease-in-out infinite alternate;
+    }
 
 
-      .cta-text {
-        font-size: clamp(1rem, 2.5vw, 1.2rem);
-        font-weight: 400;
-        color: #444;
-        max-width: 640px;
-        margin: 0 auto 2.5rem;
-        line-height: 1.6;
-        position: relative;
-        z-index: 2;
-        animation: fadeUp 1s ease-out 0.2s both;
-      }
+    .cta-headline {
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      font-weight: 800;
+      font-family: 'Inter', sans-serif;
+      color: #000;
+      margin-bottom: 1rem;
+      line-height: 1.25;
+      letter-spacing: -0.3px;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 1s ease-out both;
+    }
 
-      .cta-btn {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: #fff;
-        font-weight: 600;
-        padding: 0.8rem 2rem;
-        font-size: clamp(0.9rem, 2vw, 1rem);
-        border-radius: 10px;
-        text-decoration: none;
-        box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
-        transition: all 0.3s ease;
-        position: relative;
-        z-index: 2;
-        animation: fadeUp 1s ease-out 0.4s both;
-      }
+    .cta-small {
+      font-size: 0.6em;
+      font-weight: 500;
+      color: #000000 !important;
+      font-family: 'Inter', sans-serif;
+      display: inline-block;
+      margin-right: 0.3em;
+      background: none !important;
+      background-clip: initial !important;
+      -webkit-background-clip: initial !important;
+      -webkit-text-fill-color: initial !important;
+    }
 
-      .cta-btn:hover {
-        transform: scale(1.03);
-        box-shadow: 0 10px 25px rgba(255, 102, 0, 0.3);
-      }
+    .cta-headline span {
+  font-family: 'VT323', monospace;
+  font-size: 1.3em;
+  line-height: 1;
+  display: inline-block;
 
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
 
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+  background: linear-gradient(
+    220deg,
+    hwb(219 17% 0%) 0%,
+    hwb(219 18% 0%) 40%,
+    #e1e2ff 46%,
+    hwb(34 27% 0%) 52%,
+    hwb(29 0% 0%) 100%
+  );
 
-      @keyframes glowShift {
-        0% {
-          transform: translateX(-50%) rotate(0deg);
-        }
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 
-        100% {
-          transform: translateX(-50%) rotate(3deg);
-        }
-      }
+  animation: gradientShift 16s ease-in-out infinite;
+}
 
-      @media (prefers-reduced-motion: reduce) {
-        * {
-          animation: none !important;
-          transition: none !important;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .cta-modern {
-          padding: 5rem 1rem;
-        }
-
-        .cta-text {
-          margin-bottom: 2rem;
-          line-height: 1.5;
-        }
-
-        .cta-btn {
-          width: 100%;
-          padding: 0.9rem;
-        }
-      }
-
-      @media (max-width: 375px) {
-  .cta-headline {
-    font-size: 1.5rem;
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
   }
-
-  .cta-headline span {
-    font-size: 1.1em;
+  50% {
+    background-position: 100% 50%;
   }
-
-  .cta-text {
-    font-size: 0.95rem;
-  }
-
-  .cta-btn {
-    font-size: 0.9rem;
-    padding: 0.75rem 1.2rem;
+  100% {
+    background-position: 0% 50%;
   }
 }
 
 
-    </style>
+    .cta-text {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 400;
+      color: #272727;
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 1s ease-out 0.2s both;
+    }
 
-    <h2 class="cta-headline">
-      <span class="cta-small">Bereit für</span> <span>deinen digitalen Auftritt?</span>
-    </h2>
+    .cta-btn {
+  background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
+  background-size: 300% 300%;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
+}
+
+/* Hover Glow & Lift */
+.cta-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
+}
+
+/* Entrance Animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animated Gradient */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+    @keyframes glowShift {
+      0% {
+        transform: translateX(-50%) rotate(0deg);
+      }
+
+      100% {
+        transform: translateX(-50%) rotate(3deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cta-modern {
+        padding: 5rem 1rem;
+      }
+
+      .cta-text {
+        margin-bottom: 2rem;
+        line-height: 1.5;
+      }
+
+      .cta-btn {
+        width: 100%;
+        padding: 0.9rem;
+      }
+    }
+
+    @media (max-width: 375px) {
+.cta-headline {
+  font-size: 1.5rem;
+}
+
+.cta-headline span {
+  font-size: 1.1em;
+}
+
+.cta-text {
+  font-size: 0.95rem;
+}
+
+.cta-btn {
+  font-size: 0.9rem;
+  padding: 0.75rem 1.2rem;
+}
+}
 
 
-    <p class="cta-text">
-      Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.
-      Starte jetzt – unverbindlich und inspiriert.
-    </p>
+  </style>
 
-    <a href="#kontakt" class="cta-btn">Gespräch vereinbaren</a>
-  </section>
+  <h2 class="cta-headline">
+    <span class="cta-small">Bereit für</span> <span>deinen digitalen Auftritt?</span>
+  </h2>
 
+
+  <p class="cta-text">
+    Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.
+    Starte jetzt – unverbindlich und inspiriert.
+  </p>
+
+  <a href="#kontakt" class="cta-btn">Gespräch vereinbaren</a>
+</section>
 
 
   <section class="interactive-portfolio" id="portfolio">

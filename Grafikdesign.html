@@ -204,243 +204,695 @@
   </header>
 
   <section class="hero-video-wrapper">
-    <div class="hero-video-content">
-      <h1>Maßgeschneiderte Grafiklösungen</h1>
-      <p>Design, das auffällt und im Kopf bleibt.</p>
-      <a class="cta-btn neon-btn" href="#kontakt"><span>Projekt anfragen</span></a>
-    </div>
-    <video class="video-background" autoplay muted loop playsinline>
-      <source src="./WebdesignPic/1.mp4" type="video/mp4" />
+    <video autoplay muted loop playsinline class="hero-bg-video">
+      <source src="./WebdesignPic/HintergrundHimmel.mp4" type="video/mp4">
+      Your browser does not support the video tag.
     </video>
+
+  <!-- PNG über dem Video – als eigene Ebene -->
+<div class="hero-bg-image"></div>
+    <!-- 2. PNG – über dem Hintergrund -->
+    <div class="hero-overlay-image"></div>   
+    <!-- TEXT + 3. PNG über dem Text -->
+    <div class="above-text-image"></div>
+
+    <div class="hero-video-content">
+      <h1>Grafikdesign</h1>
+      <p> Innovativ. Benutzerzentriert. Erfolgreich</p>
+      <a class="cta-btn neon-btn" href="#kontakt"><span>Projekt anfragen</span></a>
+     </div>
   </section>
+<style>/* 1. PNG – als Hintergrund */
 
-  <style>
   .hero-video-wrapper {
-  position: relative;
-  min-height: 100vh;
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-family: 'VT323', monospace;
-  background-color: #000;
-}
-
-@keyframes blurPulse {
-  0%, 100% {
-    backdrop-filter: blur(2px);
+    position: relative;
+    min-height: 100vh;
+    width: 100vw;
+    min-height: 100vh;
+    max-width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: transparent;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: 'VT323', monospace;
+    z-index: 2;
   }
-  50% {
-    backdrop-filter: blur(6px);
-  }
-}
-
-.hero-video-content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  max-width: 800px;
-  width: 100%;
-  color: #ffffff;
-  text-align: center;
-  border-radius: 12px;
-  backdrop-filter: blur(6px);
-  background: rgba(255, 255, 255, 0.05);
-  overflow: hidden;
-  margin-top: -10rem;
-}
-
-/* Welliger animierter Blur */
-.hero-video-content::before {
-  content: '';
+.hero-bg-image {
   position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.15), transparent 60%);
-  animation: waveBlur 8s infinite ease-in-out alternate;
-  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./GrafikdesignPic/HintergrundLaptop.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0.5; /* Zwischen Video (0) und Overlay (1) */
   pointer-events: none;
 }
 
-/* Animation bewegt die Lichtwelle */
-@keyframes waveBlur {
-  0% {
-    --x: 20%;
-    --y: 30%;
-  }
-  25% {
-    --x: 80%;
-    --y: 20%;
-  }
-  50% {
-    --x: 60%;
-    --y: 70%;
-  }
-  75% {
-    --x: 30%;
-    --y: 80%;
-  }
-  100% {
-    --x: 50%;
-    --y: 50%;
-  }
-}
 
-
-.video-background {
+  .hero-bg-video {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0;
-  opacity: 1;
+  z-index: 0; /* GANZ HINTEN */
   pointer-events: none;
 }
 
-.hero-video-content h1 {
-  font-size: 4.2rem;
-  font-weight: 600;
-  letter-spacing: 0.1rem;
-  line-height: 1.0;
-  margin-bottom: 1rem;
-  color: #ffffff;
-}
-
-.hero-video-content p {
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: #e0e0e0;
-  max-width: 90%;
-  line-height: 1.6;
-}
-
-.cta-btn {
-  background: #ffffff;
-  color: #000000;
-  font-weight: 600;
-  padding: 0.9rem 2rem;
-  border-radius: 12px;
-  font-size: 1rem;
-  text-transform: none;
-  margin-top: 2rem;
-  transition: all 0.3s ease;
-  border: none;
-}
-
-.cta-btn:hover {
-  background: var(--primary);
-  color: #000;
-  transform: scale(1.03);
-  cursor: pointer;
-}
-
-
-    .neon-btn {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      border: none;
-      color: #fff;
-      padding: 1rem 2.2rem;
-      font-size: 1rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      border-radius: 8px;
-      box-shadow: 0 0 12px rgba(255, 102, 0, 0.4),
-                  0 0 24px rgba(255, 102, 0, 0.3);
-      transition: all 0.3s ease;
-    }
-
-    .hero-video-content h1,
-.hero-video-content p {
-  mix-blend-mode: exclusion;
-
-  color: #000; /* oder #000 für etwas mehr Kontrastwirkung */
-  z-index: 3;
-}
-
-@media (max-width: 1024px) {
+  
+  /* 2. PNG – über dem Hintergrund */
+  .hero-overlay-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./GrafikdesignPic/HintergrundTabletp.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  /* TEXT-INHALT */
   .hero-video-content {
-    padding: 1.5rem;
-    top: 8vh;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+    background: rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    margin-top: -10rem;
   }
+  /* 3. PNG – über dem Text */
+.above-text-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('./GrafikdesignPic/HintergrundHandy.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+}
 
+  /* TEXT-Stile */
   .hero-video-content h1 {
-    font-size: 3.2rem;
+    font-size: 4.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    line-height: 1.0;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    mix-blend-mode: exclusion;
+    z-index: 3;
   }
-
+  
   .hero-video-content p {
-    font-size: 1.1rem;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #ffffff;
+    max-width: 90%;
+    line-height: 1.6;
+    mix-blend-mode: exclusion;
+    z-index: 3;
+  }
+  .cta-btn {
+  background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
+  background-size: 300% 300%;
+  color: #fff;
+  font-weight: 600;
+
+  /* Weniger vertikales Padding für flacheren Button */
+  padding: 0.4em 2.5vw;
+
+  /* Responsive Font-Größe */
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+
+  border-radius: 0.75em;
+  text-decoration: none;
+  box-shadow: 0 0.4em 1.4em rgba(255, 102, 0, 0.22);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 2;
+
+  animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
+
+  /* Breitensteuerung */
+  width: fit-content;
+  min-width: 12vw;
+  max-width: 90%;
+  height: auto;
+}
+
+/* Hover Glow & Lift */
+.cta-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
+}
+
+/* Text style (falls du .cta-text verwendest) */
+.cta-text {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 400;
+  color: #272727;
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 1s ease-out 0.2s both;
+}
+
+/* Entrance Animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
+
+/* Animated Gradient */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+  /* Keyframes für animierte Lichtwelle */
+  @keyframes waveBlur {
+    0%   { --x: 20%; --y: 30%; }
+    25%  { --x: 80%; --y: 20%; }
+    50%  { --x: 60%; --y: 70%; }
+    75%  { --x: 30%; --y: 80%; }
+    100% { --x: 50%; --y: 50%; }
+  }
+  
+
+/* RESPONSIVE MEDIA QUERIES */
+@media (max-width: 768px) {
+  .cta-btn {
+    padding: 0.6em 4vw;
+    font-size: 1rem;
+    border-radius: 0.6em;
+  }
+}
+@media (max-width: 480px) {
+  .cta-btn {
+    padding: 0.25em 0.2vw;
+    font-size: 0.7rem;
+    border-radius: 0.4em;
+    max-width: 70%;
+    min-width: unset;
+    width: auto;
+    box-shadow: 0 0.2em 0.6em rgba(255, 102, 0, 0.2);
+    scale: 0.7;
+  }
+}
+@media (max-width: 320px) {
+  .cta-btn {
+    padding: 0.25em 0.2vw;
+    font-size: 0.7rem;
+    border-radius: 0.4em;
+    max-width: 70%;
+    min-width: unset;
+    width: auto;
+    box-shadow: 0 0.2em 0.6em rgba(255, 102, 0, 0.2);
+    scale: 0.7;
+  }
+}
+
 
 @media (max-width: 768px) {
-  .hero-video-content {
-    padding: 1.5rem;
-    top: 6vh;
+  .hero-video-content h1 { font-size: 2.4rem; letter-spacing: 0.05rem; }
+  .hero-video-content p  { font-size: 1rem; }
+
+}
+
+
+@media (max-width: 768px) {
+  .hero-overlay-image{
+left: -50vw;
+width: 170vw;
+
   }
 
-  .hero-video-content h1 {
-    font-size: 2.4rem;
-    letter-spacing: 0.05rem;
-  }
-
-  .hero-video-content p {
-    font-size: 1rem;
-  }
-
-  .cta-btn {
-    font-size: 0.95rem;
-    padding: 0.8rem 1.6rem;
+  .above-text-image {
+    left: -35vw;
+    width: 190vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
   }
 }
 
-@media (max-width: 480px) {
-  .hero-video-content {
-    padding: 1rem;
+
+
+
+
+@media (max-width: 768px) and (min-height: 1280px) and (max-height: 2000px) {
+  .hero-overlay-image {
+    left: -110vw;
+    width: 250vw;
     top: 4vh;
   }
 
-  .hero-video-content h1 {
-    font-size: 1.8rem;
-    line-height: 1.3;
-  }
-
-  .hero-video-content p {
-    font-size: 0.95rem;
-  }
-
-  .cta-btn {
-    font-size: 0.9rem;
-    padding: 0.7rem 1.2rem;
+  .above-text-image {
+    top: 10vh;
+    left: -70vw;
+    width: 310vw; /* <– erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
   }
 }
 
-  </style>
-<script>
-  feather.replace();
-
-  const burgerToggle = document.getElementById('burgerToggle');
-  const nav = document.querySelector('nav');
-
-  burgerToggle.addEventListener('click', () => {
-    nav.classList.toggle('open');
-  });
-
-  // BLUR ANIMATION
-  const heroContent = document.querySelector('.hero-video-content');
-  function animateRandomBlur() {
-    const blurAmount = Math.random() * 6 + 2;
-    heroContent.style.backdropFilter = `blur(${blurAmount.toFixed(1)}px)`;
-    const nextInterval = Math.random() * 2000 + 1000;
-    setTimeout(animateRandomBlur, nextInterval);
+@media (max-width: 768px) and (min-height: 1024px) and (max-height: 1280px) {
+  .hero-overlay-image {
+    left: -70vw;
+    width: 200vw;
   }
-  animateRandomBlur();
+
+  .above-text-image {
+    top: 10vh;
+    left: -60vw;
+    width: 250vw;
+  }
+}
+
+@media (max-width: 768px) and (min-height: 900px) and (max-height: 1024px) {
+  .hero-overlay-image {
+    left: -50vw;
+    width: 185vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -45vw;
+    width: 210vw;
+  }
+}
+
+@media (max-width: 768px) and (min-height: 768px) and (max-height: 900px) {
+  .hero-overlay-image {
+    left: -45vw;
+    width: 170vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -34vw;
+    width: 185vw;
+  }
+}
+
+@media (max-width: 768px) and (min-height: 625px) and (max-height: 768px) {
+  .hero-overlay-image {
+    left: -35vw;
+    width: 165vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -30vw;
+    width: 175vw;
+  }
+}
+
+@media (max-width: 768px) and (min-height: 300px) and (max-height: 625px) {
+  .hero-overlay-image {
+    left: -30vw;
+    width: 160vw;
+  }
+
+  .above-text-image {
+    top: 5vh;
+    left: -25vw;
+    width: 160vw;
+  }
+}
+
+
+@media (max-width: 480px) and (min-height: 1530px)  and (max-height: 2000px){
+  .hero-overlay-image{
+left: -190vw;
+width: 320vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -40vw;
+    width: 400vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+  }
+}
+
+@media (max-width: 480px) and (min-height: 1060px)  and (max-height: 1530px){
+  .hero-overlay-image{
+left: -120vw;
+width: 220vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -5vw;
+    width: 250vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+  }
+}
+
+
+@media (max-width: 480px) and (min-height: 950px)  and (max-height: 1060px){
+  .hero-overlay-image{
+left: -60vw;
+width: 170vw;
+
+  }
+
+  .above-text-image {
+    left: -5vw;
+    width: 190vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+  }
+}
+
+@media (max-width: 480px) and (min-height: 768px)  and (max-height: 950px){
+  .hero-overlay-image{
+left: -60vw;
+width: 170vw;
+
+  }
+
+  .above-text-image {
+    left: -2vw;
+    width: 160vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+  }
+}
+
+@media (max-width: 480px) and (min-height: 625px)  and (max-height: 768px){
+  .hero-overlay-image{
+left: -50vw;
+width: 170vw;
+
+  }
+
+  .above-text-image {
+    left: -15vw;
+    width: 160vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+  }
+}
+
+@media (max-width: 480px) and (min-height: 25px)  and (max-height: 625px){
+  .hero-overlay-image{
+left: -40vw;
+width: 170vw;
+
+  }
+
+  .above-text-image {
+    left: -25vw;
+    width: 160vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+  }
+}
+
+
+
+
+@media (max-width: 425px) and (min-height: 1530px) and (max-height: 2000px) {
+  .hero-overlay-image {
+    left: -165vw;
+    width: 285vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -35vw;
+    width: 360vw;
+  }
+}
+
+@media (max-width: 425px) and (min-height: 1060px) and (max-height: 1530px) {
+  .hero-overlay-image {
+    left: -100vw;
+    width: 200vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -4vw;
+    width: 230vw;
+  }
+}
+
+@media (max-width: 425px) and (min-height: 950px) and (max-height: 1060px) {
+  .hero-overlay-image {
+    left: -50vw;
+    width: 160vw;
+  }
+
+  .above-text-image {
+    left: -4vw;
+    width: 180vw;
+  }
+}
+
+@media (max-width: 425px) and (min-height: 768px) and (max-height: 950px) {
+  .hero-overlay-image {
+    left: -48vw;
+    width: 160vw;
+  }
+
+  .above-text-image {
+    left: -1vw;
+    width: 155vw;
+  }
+}
+
+@media (max-width: 425px) and (min-height: 625px) and (max-height: 768px) {
+  .hero-overlay-image {
+    left: -40vw;
+    width: 155vw;
+  }
+
+  .above-text-image {
+    left: -10vw;
+    width: 150vw;
+  }
+}
+
+@media (max-width: 425px) and (min-height: 25px) and (max-height: 625px) {
+  .hero-overlay-image {
+    left: -30vw;
+    width: 150vw;
+  }
+
+  .above-text-image {
+    left: -20vw;
+    width: 145vw;
+  }
+}
+
+
+
+
+
+@media (max-width: 375px) and (min-height: 1530px) and (max-height: 1680px) {
+  .hero-overlay-image {
+    left: -188vw;
+    width: 290vw;
+    top: 6vh;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -15vw;
+    width: 370vw;
+    top: 12vh;
+  }
+}
+
+
+@media (max-width: 375px) and (min-height: 1060px) and (max-height: 1530px) {
+  .hero-overlay-image {
+    left: -140vw;
+    width: 260vw;
+  }
+
+  .above-text-image {
+    top: 10vh;
+    left: -5vw;
+    width: 260vw;
+  }
+}
+
+@media (max-width: 375px) and (min-height: 840px) and (max-height: 1060px) {
+  .hero-overlay-image {
+    left: -90vw;
+    width: 195vw;
+  }
+
+  .above-text-image {
+    left: 5vw;
+    width: 195vw;
+    top: 10vh;
+  }
+}
+
+
+@media (max-width: 375px) and (min-height: 768px) and (max-height: 840px) {
+  .hero-overlay-image {
+    left: -70vw;
+    width: 195vw;
+  }
+
+  .above-text-image {
+    left: -5vw;
+    width: 195vw;
+  }
+}
+
+@media (max-width: 375px) and (min-height: 8px) and (max-height: 768px) {
+  .hero-overlay-image {
+    left: -70vw;
+    width: 195vw;
+  }
+
+  .above-text-image {
+    left: -25vw;
+    width: 195vw;
+  }
+}
+
+@media (max-width: 320px) and (min-height: 1024px) and (max-height: 1300px) {
+  .hero-overlay-image {
+    left: -180vw;
+    width: 300vw;
+    top: 10vh;
+  }
+
+  .above-text-image {
+    left: -5vw;
+    width: 285vw;
+  }
+}
+
+
+@media (max-width: 320px) and (min-height: 768px) and (max-height: 1024px) {
+  .hero-overlay-image {
+    left: -110vw;
+    width: 220vw;
+  }
+
+  .above-text-image {
+    left: -25vw;
+    width: 285vw;
+  }
+}
+
+
+@media (max-width: 320px) and (min-height: 600px) and (max-height: 768px) {
+  .hero-overlay-image {
+    left: -80vw;
+    width: 195vw;
+  }
+
+  .above-text-image {
+    left: -5vw;
+    width: 195vw;
+  }
+}
+
+@media (max-width: 320px) and (min-height: 200px) and (max-height: 600px) {
+  .hero-overlay-image {
+    left: -60vw;
+    width: 195vw;
+  }
+
+  .above-text-image {
+    left: -25vw;
+    width: 195vw;
+  }
+}
+
+
+
+
+
+
+
+
+.hero-overlay-image,
+.above-text-image {
+  opacity: 0;
+  transform: translateY(60px) scale(0.95); /* Mehr Bewegung */
+  transition: all 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.hero-overlay-image.animate,
+.above-text-image.animate {
+  opacity: 1;
+  transform: translateY(0px) scale(1.05); /* Leicht größer für Tiefe */
+}
+
+
+  </style>  
+
+<script>
+  // FADE-IN via IntersectionObserver
+  const animatedEls = document.querySelectorAll('.hero-overlay-image, .above-text-image');
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  animatedEls.forEach(el => observer.observe(el));
+
+  // SCROLL-BASIERTE TRANSFORMATION
+  const overlay = document.querySelector('.hero-overlay-image');
+  const above = document.querySelector('.above-text-image');
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const maxScroll = window.innerHeight;
+    const progress = Math.min(scrollTop / maxScroll, 1); // Wert zwischen 0 und 1
+
+    const translateX = 20 * progress; // max 20px rechts
+    const translateY = 20 * progress; // max 20px runter
+    const scale = 1.05 + progress * 0.1; // von 1.05 auf 1.15
+
+    if (overlay.classList.contains('animate')) {
+      overlay.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    }
+
+    if (above.classList.contains('animate')) {
+      above.style.transform = `translate(${translateX * 1.1}px, ${translateY * 1.1}px) scale(${scale})`;
+    }
+  });
 </script>
 
 <script src="https://unpkg.com/feather-icons"></script>
@@ -659,12 +1111,12 @@
   <h2>Unsere Leistungen</h2>
   <h3>Minimalistisch. Beweglich. Visionär.</h3>
 
-  <!-- 🔄 Preis-Toggle -->
+  <!-- 🔄 Preis-Toggle 
   <div class="preis-toggle">
     <label for="preisModus">Preis anzeigen in:</label>
     <button id="preisModus" onclick="togglePreise()">💼 Netto</button>
   </div>
-
+-->
   <div class="tech-showcase">
 
     <div class="tech-card">
@@ -738,8 +1190,8 @@
   <style>
     .cta-modern {
       position: relative;
-      padding: 10rem 2rem;
-      background: linear-gradient(145deg, #ffffff, #f4f8ff);
+      padding: 7rem 1.5rem;
+      background: linear-gradient(180deg, #f4f4f4, #ffffff);
       overflow: hidden;
       text-align: center;
       z-index: 1;
@@ -752,79 +1204,146 @@
       left: 50%;
       transform: translateX(-50%);
       width: 1800px;
+      max-width: 100vw;
       height: 1800px;
-      background: radial-gradient(circle, rgba(255,102,0,0.08), transparent 60%);
       z-index: 0;
       pointer-events: none;
       animation: glowShift 12s ease-in-out infinite alternate;
     }
 
+
     .cta-headline {
-      font-size: clamp(2.5rem, 6vw, 4.2rem);
-      font-weight: 900;
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      font-weight: 800;
       font-family: 'Inter', sans-serif;
       color: #000;
       margin-bottom: 1rem;
-      line-height: 1.15;
-      letter-spacing: -0.5px;
+      line-height: 1.25;
+      letter-spacing: -0.3px;
       position: relative;
       z-index: 2;
       animation: fadeUp 1s ease-out both;
     }
 
-    .cta-headline span {
-      color: var(--primary);
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .cta-small {
+      font-size: 0.6em;
+      font-weight: 500;
+      color: #000000 !important;
+      font-family: 'Inter', sans-serif;
+      display: inline-block;
+      margin-right: 0.3em;
+      background: none !important;
+      background-clip: initial !important;
+      -webkit-background-clip: initial !important;
+      -webkit-text-fill-color: initial !important;
     }
 
+    .cta-headline span {
+  font-family: 'VT323', monospace;
+  font-size: 1.3em;
+  line-height: 1;
+  display: inline-block;
+
+  background: linear-gradient(
+    220deg,
+    hwb(219 17% 0%) 0%,
+    hwb(219 18% 0%) 40%,
+    #e1e2ff 46%,
+    hwb(34 27% 0%) 52%,
+    hwb(29 0% 0%) 100%
+  );
+
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: gradientShift 16s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
     .cta-text {
-      font-size: 1.3rem;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
       font-weight: 400;
-      color: #444;
-      max-width: 680px;
-      margin: 0 auto 3rem;
-      line-height: 1.7;
+      color: #272727;
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
       position: relative;
       z-index: 2;
       animation: fadeUp 1s ease-out 0.2s both;
     }
 
     .cta-btn {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: #fff;
-      font-weight: 600;
-      padding: 1rem 2.4rem;
-      font-size: 1rem;
-      border-radius: 12px;
-      text-decoration: none;
-      box-shadow: 0 6px 20px rgba(255, 102, 0, 0.25);
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 2;
-      animation: fadeUp 1s ease-out 0.4s both;
-    }
+  background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
+  background-size: 300% 300%;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
+}
 
-    .cta-btn:hover {
-      transform: scale(1.03);
-      box-shadow: 0 10px 30px rgba(255, 102, 0, 0.35);
-    }
+/* Hover Glow & Lift */
+.cta-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
+}
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+/* Entrance Animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animated Gradient */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
     @keyframes glowShift {
-      0% { transform: translateX(-50%) rotate(0deg); }
-      100% { transform: translateX(-50%) rotate(3deg); }
+      0% {
+        transform: translateX(-50%) rotate(0deg);
+      }
+
+      100% {
+        transform: translateX(-50%) rotate(3deg);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -834,29 +1353,57 @@
       }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 480px) {
+      .cta-modern {
+        padding: 5rem 1rem;
+      }
+
       .cta-text {
-        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        line-height: 1.5;
       }
 
       .cta-btn {
-        padding: 0.9rem 1.8rem;
-        font-size: 0.95rem;
+        width: 100%;
+        padding: 0.9rem;
       }
     }
+
+    @media (max-width: 375px) {
+.cta-headline {
+  font-size: 1.5rem;
+}
+
+.cta-headline span {
+  font-size: 1.1em;
+}
+
+.cta-text {
+  font-size: 0.95rem;
+}
+
+.cta-btn {
+  font-size: 0.9rem;
+  padding: 0.75rem 1.2rem;
+}
+}
+
+
   </style>
 
   <h2 class="cta-headline">
-    Bereit für <span>deinen digitalen Auftritt?</span>
+    <span class="cta-small">Bereit für</span> <span>deinen digitalen Auftritt?</span>
   </h2>
 
+
   <p class="cta-text">
-    Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.  
+    Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.
     Starte jetzt – unverbindlich und inspiriert.
   </p>
 
-  <a href="#kontakt" class="cta-btn">🚀 Gespräch vereinbaren</a>
+  <a href="#kontakt" class="cta-btn">Gespräch vereinbaren</a>
 </section>
+
 
 
 <section class="apple-gallery" id="portfolio">
