@@ -221,459 +221,568 @@
     </nav>
   </header>
 
+
   <section class="hero-video-wrapper">
+    <video autoplay muted loop playsinline class="hero-bg-video">
+      <source src="./WebdesignPic/HintergrundHimmel.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+  <!-- PNG über dem Video – als eigene Ebene -->
+<div class="hero-bg-image"></div>
+    <!-- 2. PNG – über dem Hintergrund -->
+    <div class="hero-overlay-image"></div>   
+    <!-- TEXT + 3. PNG über dem Text -->
+    <div class="above-text-image"></div>
+
     <div class="hero-video-content">
       <h1>UX & Webdesign<br>das Nutzer begeistert</h1>
       <p>Wir konzipieren digitale Erlebnisse. <br>maßgeschneidert und klickbar.</p>
       <a class="cta-btn neon-btn" href="#kontakt"><span>Projekt anfragen</span></a>
-    </div>
-    <video class="video-background" autoplay muted loop playsinline>
-      <source src="./WebdesignPic/1.mp4" type="video/mp4" />
-    </video>
+     </div>
   </section>
+<style>/* 1. PNG – als Hintergrund */
 
-  <style>
   .hero-video-wrapper {
-  position: relative;
-  min-height: 100vh;
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-family: 'VT323', monospace;
-  background-color: #000;
-}
-
-@keyframes blurPulse {
-  0%, 100% {
-    backdrop-filter: blur(2px);
+    position: relative;
+    min-height: 100vh;
+    width: 100vw;
+    min-height: 100vh;
+    max-width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: transparent;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: 'VT323', monospace;
+    z-index: 2;
   }
-  50% {
-    backdrop-filter: blur(6px);
-  }
-}
-
-.hero-video-content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  max-width: 800px;
-  width: 100%;
-  color: #ffffff;
-  text-align: center;
-  border-radius: 12px;
-  backdrop-filter: blur(6px);
-  background: rgba(255, 255, 255, 0.05);
-  overflow: hidden;
-  margin-top: -10rem;
-}
-
-/* Welliger animierter Blur */
-.hero-video-content::before {
-  content: '';
+.hero-bg-image {
   position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.15), transparent 60%);
-  animation: waveBlur 8s infinite ease-in-out alternate;
-  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./WebdesignPic/HintergrundLaptop.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0.5; /* Zwischen Video (0) und Overlay (1) */
   pointer-events: none;
 }
 
-/* Animation bewegt die Lichtwelle */
-@keyframes waveBlur {
-  0% {
-    --x: 20%;
-    --y: 30%;
-  }
-  25% {
-    --x: 80%;
-    --y: 20%;
-  }
-  50% {
-    --x: 60%;
-    --y: 70%;
-  }
-  75% {
-    --x: 30%;
-    --y: 80%;
-  }
-  100% {
-    --x: 50%;
-    --y: 50%;
-  }
-}
 
-
-.video-background {
+  .hero-bg-video {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0;
-  opacity: 1;
+  z-index: 0; /* GANZ HINTEN */
   pointer-events: none;
 }
 
-.hero-video-content h1 {
-  font-size: 4.2rem;
-  font-weight: 600;
-  letter-spacing: 0.1rem;
-  line-height: 1.0;
-  margin-bottom: 1rem;
-  color: #ffffff;
-}
-
-.hero-video-content p {
-  font-size: 2rem;
-  font-weight: 400;
-  color: #e0e0e0;
-  max-width: 90%;
-  line-height: 1.6;
-}
-
-.cta-btn {
-  background: #ffffff;
-  color: #000000;
-  font-weight: 600;
-  padding: 0.9rem 2rem;
-  border-radius: 12px;
-  font-size: 1rem;
-  text-transform: none;
-  margin-top: 2rem;
-  transition: all 0.3s ease;
-  border: none;
-}
-
-.cta-btn:hover {
-  background: var(--primary);
-  color: #000;
-  transform: scale(1.03);
-  cursor: pointer;
-}
-
-
-    .neon-btn {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      border: none;
-      color: #fff;
-      padding: 1rem 2.2rem;
-      font-size: 1rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      border-radius: 8px;
-      box-shadow: 0 0 12px rgba(255, 102, 0, 0.4),
-                  0 0 24px rgba(255, 102, 0, 0.3);
-      transition: all 0.3s ease;
-    }
-
-    .hero-video-content h1,
-.hero-video-content p {
-  mix-blend-mode: exclusion;
-
-  color: #000; /* oder #000 für etwas mehr Kontrastwirkung */
-  z-index: 3;
-}
-
-@media (max-width: 1024px) {
+  
+  /* 2. PNG – über dem Hintergrund */
+  .hero-overlay-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./WebdesignPic/HintergrundTabletp.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  /* TEXT-INHALT */
   .hero-video-content {
-    padding: 1.5rem;
-    top: 8vh;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+    background: rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    margin-top: -10rem;
   }
+  /* 3. PNG – über dem Text */
+.above-text-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('./WebdesignPic/HintergrundHandy.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+}
 
+  /* TEXT-Stile */
   .hero-video-content h1 {
-    font-size: 3.2rem;
+    font-size: 4.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    line-height: 1.0;
+    margin-bottom: 1rem;
+    color: #000;
+    mix-blend-mode: exclusion;
+    z-index: 3;
   }
-
+  
   .hero-video-content p {
-    font-size: 1.1rem;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #000000;
+    max-width: 90%;
+    line-height: 1.6;
+    mix-blend-mode: exclusion;
+    z-index: 3;
+  }
+  
+
+  /* CTA BUTTON – EPIC VERSION */
+.cta-btn {
+  background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
+  background-size: 300% 300%;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
+}
+
+/* Hover Glow & Lift */
+.cta-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
+}
+
+/* Text style (falls du .cta-text verwendest) */
+.cta-text {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 400;
+  color: #272727;
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 1s ease-out 0.2s both;
+}
+
+/* Entrance Animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
+
+/* Animated Gradient */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+  /* Keyframes für animierte Lichtwelle */
+  @keyframes waveBlur {
+    0%   { --x: 20%; --y: 30%; }
+    25%  { --x: 80%; --y: 20%; }
+    50%  { --x: 60%; --y: 70%; }
+    75%  { --x: 30%; --y: 80%; }
+    100% { --x: 50%; --y: 50%; }
+  }
+  
 
 @media (max-width: 768px) {
-  .hero-video-content {
-    padding: 1.5rem;
-    top: 6vh;
+  .hero-video-content h1 { font-size: 2.4rem; letter-spacing: 0.05rem; }
+  .hero-video-content p  { font-size: 1rem; }
+  .cta-btn               { font-size: 0.95rem; padding: 0.8rem 1.6rem; }
+  
+
+}
+
+
+@media (max-width: 768px) {
+  .hero-overlay-image{
+left: -50vw;
+width: 170vw;
+
   }
 
-  .hero-video-content h1 {
-    font-size: 2.4rem;
-    letter-spacing: 0.05rem;
-  }
-
-  .hero-video-content p {
-    font-size: 1rem;
-  }
-
-  .cta-btn {
-    font-size: 0.95rem;
-    padding: 0.8rem 1.6rem;
+  .above-text-image {
+    left: -35vw;
+    width: 190vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
   }
 }
 
 @media (max-width: 480px) {
-  .hero-video-content {
-    padding: 1rem;
-    top: 4vh;
+  .hero-overlay-image{
+left: -60vw;
+width: 170vw;
+
   }
 
-  .hero-video-content h1 {
-    font-size: 1.8rem;
-    line-height: 1.3;
-  }
-
-  .hero-video-content p {
-    font-size: 0.95rem;
-  }
-
-  .cta-btn {
-    font-size: 0.9rem;
-    padding: 0.7rem 1.2rem;
+  .above-text-image {
+    left: -5vw;
+    width: 190vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
   }
 }
 
-  </style>
+
+
+.hero-overlay-image,
+.above-text-image {
+  opacity: 0;
+  transform: translateY(60px) scale(0.95); /* Mehr Bewegung */
+  transition: all 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.hero-overlay-image.animate,
+.above-text-image.animate {
+  opacity: 1;
+  transform: translateY(0px) scale(1.05); /* Leicht größer für Tiefe */
+}
+
+
+  </style>  
+
 <script>
-  feather.replace();
+  // FADE-IN via IntersectionObserver
+  const animatedEls = document.querySelectorAll('.hero-overlay-image, .above-text-image');
 
-  const burgerToggle = document.getElementById('burgerToggle');
-  const nav = document.querySelector('nav');
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
 
-  burgerToggle.addEventListener('click', () => {
-    nav.classList.toggle('open');
+  animatedEls.forEach(el => observer.observe(el));
+
+  // SCROLL-BASIERTE TRANSFORMATION
+  const overlay = document.querySelector('.hero-overlay-image');
+  const above = document.querySelector('.above-text-image');
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const maxScroll = window.innerHeight;
+    const progress = Math.min(scrollTop / maxScroll, 1); // Wert zwischen 0 und 1
+
+    const translateX = 20 * progress; // max 20px rechts
+    const translateY = 20 * progress; // max 20px runter
+    const scale = 1.05 + progress * 0.1; // von 1.05 auf 1.15
+
+    if (overlay.classList.contains('animate')) {
+      overlay.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    }
+
+    if (above.classList.contains('animate')) {
+      above.style.transform = `translate(${translateX * 1.1}px, ${translateY * 1.1}px) scale(${scale})`;
+    }
   });
-
-  // BLUR ANIMATION
-  const heroContent = document.querySelector('.hero-video-content');
-  function animateRandomBlur() {
-    const blurAmount = Math.random() * 6 + 2;
-    heroContent.style.backdropFilter = `blur(${blurAmount.toFixed(1)}px)`;
-    const nextInterval = Math.random() * 2000 + 1000;
-    setTimeout(animateRandomBlur, nextInterval);
-  }
-  animateRandomBlur();
 </script>
 
 
+<section class="pricing-clean container" id="pakete" aria-label="Website-Pakete und Preise">
+  <h1 class="visually-hidden">Preise für Webdesign-Pakete</h1>
+  <h2 class="pricing-title">Webdesign-Pakete <br>Transparent, Skalierbar, Effektiv</h2>
+  <p class="pricing-subline">
+    Von der einfachen Onepager-Website bis zur professionellen Business-Webseite – maßgeschneiderte Lösungen für Ihr Unternehmen.
+  </p>
 
-<section class="pricing-clean container" id="pakete">
-  <h2 class="pricing-title">Unsere Pakete – Klar. Skalierbar. Auf den Punkt.</h2>
-  <p class="pricing-subline">Von der Onepager-Visitenkarte bis zur vollumfänglichen Business-Website.</p>
-
-  <!-- Toggle: Netto / Brutto -->
+  <!-- Toggle: Netto / Brutto 
   <div class="preis-toggle">
     <label for="preisModus">Preis anzeigen in:</label>
-    <button id="preisModus" onclick="togglePreise()">Netto</button>
+    <button id="preisModus" onclick="togglePreise()" aria-pressed="false">💼 Netto</button>
   </div>
-
+-->
   <div class="pricing-grid">
+
     <!-- Starter -->
-    <div class="pricing-card">
+    <article class="pricing-card">
       <div class="icon-wrap"><i data-feather="zap"></i></div>
       <h3>Starter-Paket</h3>
       <p class="tagline">Ein klarer erster Eindruck</p>
       <ul>
         <li>✓ Einzigartige Titelseite</li>
-        <li>✓ Responsive Design</li>
+        <li>✓ Responsive Design für alle Endgeräte</li>
         <li>✓ 1 Korrekturschleife</li>
+        <li>✓ DSGVO-konform</li>
       </ul>
-      <p class="vorteil">Schnelle Umsetzung mit Fokus auf den ersten Online-Auftritt</p>
+      <p class="vorteil">Ideal für kleine Unternehmen, die mit einem professionellen Onepager online durchstarten möchten – mobilfreundlich und DSGVO-konform.</p>
       <div class="preis" data-netto="699" data-brutto="831.81">ab 699 € <span>zzgl. MwSt.</span></div>
-    </div>
+    </article>
 
     <!-- Business -->
-    <div class="pricing-card">
+    <article class="pricing-card">
       <div class="icon-wrap"><i data-feather="layers"></i></div>
       <h3>Business-Paket</h3>
       <p class="tagline">Mehrseitige Online-Präsenz</p>
       <ul>
         <li>✓ Titelseite + bis zu 4 Unterseiten</li>
+        <li>✓ Responsive Design</li>
         <li>✓ Kontaktformular & Basis-SEO</li>
         <li>✓ 2 Korrekturschleifen</li>
+        <li>✓ DSGVO-konform</li>
       </ul>
-      <p class="vorteil">Professionelle Darstellung für mehrere Inhalte</p>
+      <p class="vorteil">Mehrseitige Business-Webseite mit klarer Struktur, Kontaktformular und grundlegender SEO für bessere Sichtbarkeit.</p>
       <div class="preis" data-netto="1290" data-brutto="1535.10">ab 1.290 € <span>zzgl. MwSt.</span></div>
-    </div>
+    </article>
 
     <!-- Professional -->
-    <div class="pricing-card">
+    <article class="pricing-card">
       <div class="icon-wrap"><i data-feather="briefcase"></i></div>
       <h3>Professional-Paket</h3>
       <p class="tagline">Komplettlösung für den Business-Auftritt</p>
       <ul>
         <li>✓ Bis zu 10 Seiten</li>
+        <li>✓ Responsive Design</li>
         <li>✓ Individuelles UX-Design</li>
         <li>✓ 3 Korrekturschleifen</li>
         <li>✓ Erweiterte SEO & CMS</li>
+        <li>✓ DSGVO-konform</li>
       </ul>
-      <p class="vorteil">Design & Funktionalität perfekt abgestimmt</p>
+      <p class="vorteil">SEO-optimiertes Webdesign mit individuellem UX, CMS-Anbindung und ideal für mittlere Unternehmen.</p>
       <div class="preis" data-netto="2290" data-brutto="2725.10">ab 2.290 € <span>zzgl. MwSt.</span></div>
-    </div>
+    </article>
 
     <!-- Premium -->
-    <div class="pricing-card highlight">
+    <article class="pricing-card highlight">
       <div class="icon-wrap"><i data-feather="star"></i></div>
       <h3>Premium-Paket</h3>
       <p class="tagline">Rundum-sorglos für den Großauftritt</p>
       <ul>
-        <li>✓ Unbegrenzte Seitenzahl</li>
+        <li>✓ Unbegrenzte Seitenanzahl</li>
+        <li>✓ Responsive Design</li>
         <li>✓ Premium-Design & Animationen</li>
-        <li>✓ ≥ 5 Korrekturschleifen</li>
+        <li>✓ Bis zu 5 Korrekturschleifen</li>
         <li>✓ SEO, CMS & E-Commerce</li>
-        <li>✓ Persönlicher Support & Wartung</li>
+        <li>✓ DSGVO-konform</li>
       </ul>
-      <p class="vorteil">Maximale Flexibilität & Performance</p>
+      <p class="vorteil">Komplettlösung mit Webshop (E-Commerce), Top-Performance, SEO und maßgeschneidertem Premium-Design.</p>
       <div class="preis" data-netto="3990" data-brutto="4748.10">ab 3.990 € <span>zzgl. MwSt.</span></div>
-    </div>
+    </article>
+
   </div>
 </section>
 
+<!-- Styles -->
 <style>
-  .pricing-clean {
-    background: #ffffff;
-    text-align: center;
-    color: #111;
-  }
+:root {
+  --primary: #ff6600;
+  --secondary: #ffb266;
+  --text-color: #111;
+  --bg-light: #ffffff;
+  --highlight: #ffe2bd;
+}
 
-  .pricing-title {
-    font-size: 2.4rem;
-    font-weight: 900;
-    margin-bottom: 0.8rem;
-  }
+.visually-hidden {
+  position: absolute;
+  left: -9999px;
+}
 
-  .pricing-subline {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 4rem;
-  }
+.pricing-clean {
+  background: var(--bg-light);
+  text-align: center;
+  color: var(--text-color);
+}
 
-  .preis-toggle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2rem;
-    gap: 1rem;
-    font-weight: 600;
-    color: var(--primary);
-  }
+.pricing-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 900;
+  margin-bottom: 0.8rem;
+}
 
-  #preisModus {
-    background: var(--secondary);
-    border: none;
-    color: #111;
-    font-weight: bold;
-    padding: 0.5rem 1.2rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
+.pricing-subline {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 4rem;
+}
 
-  #preisModus:hover {
-    background: var(--primary);
-    color: #fff;
-  }
+.preis-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  font-weight: 600;
+  color: var(--primary);
+}
 
+#preisModus {
+  background: var(--secondary);
+  border: none;
+  color: #111;
+  font-weight: bold;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+#preisModus:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 768px) {
   .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 2rem;
-    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
   }
+}
+@media (min-width: 1200px) {
+  .pricing-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 
-  .pricing-card {
-    background: linear-gradient(135deg, #ffffff, #e6f0ff);
-    border: 1px solid #eee;
-    border-radius: 16px;
-    padding: 2.5rem 1.8rem;
-    text-align: left;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
-    transition: all 0.3s ease;
-  }
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #ffffff, #e6f0ff);
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 2.5rem 1.8rem;
+  text-align: left;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+.pricing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+}
 
-  .pricing-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
-  }
+.pricing-card h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+}
 
-  .pricing-card h3 {
-    font-size: 1.6rem;
-    font-weight: 800;
-    margin-bottom: 0.4rem;
-  }
+.tagline {
+  font-size: 1rem;
+  color: #888;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
 
-  .pricing-card .tagline {
-    font-size: 1rem;
-    color: #888;
-    margin-bottom: 1rem;
-    font-weight: 500;
-  }
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+.pricing-card ul li {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: #333;
+}
 
-  .pricing-card ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 1.5rem;
-  }
+.vorteil {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
 
-  .pricing-card ul li {
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-    color: #333;
-  }
+.preis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111;
+  background: var(--secondary);
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(255, 148, 77, 0.3);
+  text-align: center;
+  width: 100%;
+}
+.preis span {
+  font-weight: 400;
+  font-size: 0.95rem;
+  margin-left: 0.4rem;
+}
 
-  .pricing-card .vorteil {
-    font-size: 0.95rem;
-    color: #555;
-    margin-bottom: 1.5rem;
-    font-style: italic;
-  }
+.highlight {
+  border: 2px solid #111;
+  background: linear-gradient(135deg, #ffffff, var(--highlight));
+}
 
-  .preis {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #000;
-    background: #f2f2f2;
-    display: inline-block;
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    background: var(--secondary);
-    color: #111;
-    box-shadow: 0 0 12px rgba(255, 148, 77, 0.3);
-  }
-
-  .highlight {
-    border: 2px solid #111;
-    background: linear-gradient(135deg, #ffffff, #ffe2bd);
-  }
-
-  .icon-wrap {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-  }
-
-  .icon-wrap i {
-    stroke: #fff;
-    width: 24px;
-    height: 24px;
-  }
+.icon-wrap {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.icon-wrap i {
+  stroke: #fff;
+  width: 24px;
+  height: 24px;
+}
 </style>
 
+<!-- JavaScript -->
+<script src="https://unpkg.com/feather-icons"></script>
 <script>
+  feather.replace();
+
   let bruttoAktiv = false;
+
   function togglePreise() {
     bruttoAktiv = !bruttoAktiv;
+    localStorage.setItem('bruttoAktiv', bruttoAktiv);
+    updatePreise();
+    document.getElementById('preisModus').setAttribute('aria-pressed', bruttoAktiv);
+  }
+
+  function updatePreise() {
     const prices = document.querySelectorAll('.preis');
     prices.forEach(p => {
       const netto = parseFloat(p.dataset.netto);
@@ -684,42 +793,60 @@
     });
     document.getElementById('preisModus').textContent = bruttoAktiv ? '🧾 Brutto' : '💼 Netto';
   }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    bruttoAktiv = localStorage.getItem('bruttoAktiv') === 'true';
+    updatePreise();
+  });
 </script>
 
 
-<section class="about-agency container" id="ueber-uns">
-  <h2 class="about-title">Über uns</h2>
-  <p class="about-subline">Digitale Exzellenz mit Strategie, Herz & Verstand.</p>
+<section class="about-agency container" id="ueber-uns" aria-label="Über unsere Digitalagentur für Webdesign und Online-Marketing">
+  <h2 class="about-title">Über unsere Digitalagentur</h2>
+  <p class="about-subline">
+    Digitale Exzellenz mit Strategie, UX-Design, Webentwicklung & Online-Marketing für messbare Ergebnisse.
+  </p>
 
   <div class="about-grid">
+
     <!-- Vision -->
-    <div class="about-block">
-      <div class="about-icon"><i data-feather="target"></i></div>
-      <h3>Klare Vision, <br> messbare Resultate</h3>
-      <p>Wir verwandeln Ihre Ideen in digitale Erlebnisse, die nicht nur ästhetisch überzeugen, sondern auch echten Business-Mehrwert liefern. Mit einer Arbeitsweise, die von Empathie zur zielgerichteten Strategie führt, sorgen wir dafür, dass Ihr Online-Auftritt präzise, skalierbar und erfolgsorientiert umgesetzt wird – genau wie unsere flexiblen Pakete.</p>
-    </div>
+    <article class="about-block" itemscope itemtype="https://schema.org/CreativeWork">
+      <div class="about-icon" aria-hidden="true"><i data-feather="target"></i></div>
+      <h3 itemprop="headline">Klare Vision & digitale Ergebnisse</h3>
+      <p itemprop="text">
+        Als spezialisierte Digitalagentur verwandeln wir Ideen in moderne Webseiten, E-Commerce-Lösungen und digitale Erlebnisse. Unsere Leistungen vereinen strategisches UX-Design, Conversion-Optimierung und Online-Marketing zu einem ganzheitlichen Erfolgskonzept.
+      </p>
+    </article>
 
     <!-- Team -->
-    <div class="about-block">
-      <div class="about-icon"><i data-feather="users"></i></div>
-      <h3>Das Herz unseres Erfolgs: Unser Team</h3>
-      <p>Unser interdisziplinäres Team aus UX-Designern, Entwicklern und Strategen arbeitet lean, innovativ und mit ungebrochener Leidenschaft. Gemeinsam gestalten wir digitale Erlebnisse, die Ihre Marke nachhaltig stärken und Ihre Zielgruppe fesseln.</p>
-    </div>
+    <article class="about-block" itemscope itemtype="https://schema.org/Organization">
+      <div class="about-icon" aria-hidden="true"><i data-feather="users"></i></div>
+      <h3 itemprop="name">Interdisziplinäres Team für Webdesign & Strategie</h3>
+      <p itemprop="description">
+        Unser Team besteht aus erfahrenen UX/UI-Designern, Webentwicklern und Online-Marketing-Strategen. Gemeinsam entwickeln wir responsive Websites, digitale Markenführung und SEO-optimierte Content-Strategien für Ihre Zielgruppe.
+      </p>
+    </article>
 
     <!-- Prozess -->
-    <div class="about-block">
-      <div class="about-icon"><i data-feather="repeat"></i></div>
-      <h3>Unser erprobter Prozess <br> Schritt für Schritt zum Erfolg</h3>
-      <p>Von der ersten Recherche über Konzeption und Prototyping bis hin zu Testing und Rollout: Unser iterativer, datenbasierter Prozess stellt sicher, dass jedes Projekt passgenau auf Ihre Bedürfnisse zugeschnitten wird. So garantieren wir kontinuierlichen Fortschritt und messbare Wirkung.</p>
-    </div>
+    <article class="about-block" itemscope itemtype="https://schema.org/HowTo">
+      <div class="about-icon" aria-hidden="true"><i data-feather="repeat"></i></div>
+      <h3 itemprop="name">Effizienter Projektprozess für digitale Transformation</h3>
+      <p itemprop="step">
+        Von der ersten UX-Analyse über Wireframes, Prototyping und agiler Webentwicklung bis zum Livegang begleiten wir Ihren digitalen Wandel. Unser datengetriebener Ansatz garantiert nachhaltige Sichtbarkeit und Nutzerbindung.
+      </p>
+    </article>
 
     <!-- CTA -->
-    <div class="about-block highlight-cta">
-      <div class="about-icon"><i data-feather="send"></i></div>
-      <h3>Bereit, durchzustarten?</h3>
-      <p><strong>Lassen Sie uns gemeinsam Ihre digitale Erfolgsgeschichte schreiben.</strong><br>Mit unseren strukturierten Lösungen und flexiblen Paketen holen Sie das Maximum aus Ihrem Online-Auftritt heraus – für mehr Sichtbarkeit, begeisterte Nutzer und messbare Ergebnisse.</p>
-      <a href="#kontakt" class="cta-btn neon-btn">Jetzt Kontakt aufnehmen</a>
-    </div>
+    <article class="about-block highlight-cta">
+      <div class="about-icon" aria-hidden="true"><i data-feather="send"></i></div>
+      <h3>Starten Sie Ihre digitale Erfolgsgeschichte</h3>
+      <p>
+        <strong>Jetzt Website erstellen lassen, Nutzer begeistern und digital wachsen.</strong><br>
+        Unsere Digitalagentur bietet maßgeschneiderte Lösungen für Webdesign, SEO, UX und Online-Marketing – perfekt abgestimmt auf Ihre Ziele.
+      </p>
+      <a href="#kontakt" class="cta-btn neon-btn" title="Jetzt unverbindlich Kontakt aufnehmen">Jetzt Kontakt aufnehmen</a>
+    </article>
+
   </div>
 </section>
 
@@ -728,52 +855,69 @@
     background: #fff;
     color: #111;
     text-align: center;
+    padding: 4rem 1rem;
   }
 
   .about-title {
-    font-size: 2.6rem;
+    font-size: clamp(2rem, 5vw, 2.6rem);
     font-weight: 900;
     margin-bottom: 0.5rem;
   }
 
   .about-subline {
     font-size: 1.2rem;
-    color: #666;
+    color: #444;
     margin-bottom: 4rem;
     font-weight: 400;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .about-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* IMMER 2 SPALTEN */
+  gap: 3rem;
+}
+
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr; /* MOBIL: 1 SPALTE */
   }
+}
+
 
   .about-block {
-    background: linear-gradient(135deg, #ffffff, #e0e0e0);
+    background: linear-gradient(135deg, #ffffff, #eaeaea);
     border-radius: 16px;
     padding: 2.5rem;
     border: 1px solid #eee;
     text-align: left;
     transition: all 0.3s ease;
     box-shadow: 0 0 0 transparent;
+    scroll-margin-top: 80px;
   }
 
   .about-block:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
-    border-color: var(--primary);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    border-color: var(--primary, #ff944d);
   }
 
   .about-icon {
     width: 48px;
     height: 48px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: linear-gradient(135deg, var(--primary, #ff944d), var(--secondary, #ffbb77));
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1.2rem;
+    transition: transform 0.3s ease;
+  }
+
+  .about-block:hover .about-icon {
+    transform: scale(1.1) rotate(2deg);
   }
 
   .about-icon i {
@@ -795,198 +939,222 @@
     line-height: 1.6;
   }
 
+  .about-block .cta-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.9rem 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    background: var(--primary, #ff944d);
+    color: #fff;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+    text-decoration: none;
+  }
+
+  .about-block .cta-btn:hover {
+    background: var(--secondary, #ffbb77);
+  }
+
   .highlight-cta {
     background: #fef6f0;
     box-shadow: 0 0 12px rgba(255, 148, 77, 0.1);
   }
 </style>
 
+<!-- Feather Icons Script -->
+<script src="https://unpkg.com/feather-icons" defer></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => feather.replace());
+</script>
+
+
+<!-- Apple-Style CASE STUDIES Section -->
 <section class="case-studies container" id="case-studies">
-  <!-- Hintergrundvideo -->
-  <video class="cs-video-bg" autoplay muted loop playsinline>
-    <source src="./WebdesignPic/1.mp4" type="video/mp4" />
-  </video>
-
-  <!-- Verlauf über dem Video -->
-  <div class="cs-overlay-gradient"></div>
-
-  <!-- Content -->
   <h2 class="cs-title">Case Studies</h2>
   <p class="cs-subline">UX-Projekte mit Impact – visuell & funktional überzeugend.</p>
 
   <div class="cs-grid">
-    <!-- Case 1 -->
-    <div class="cs-card" data-aos>
-      <div class="cs-icon"><i data-feather="monitor"></i></div>
-      <h3>Website Relaunch: TechStartup</h3>
-      <p>UX-Analyse, Re-Design, SEO-Boost</p>
-      <div class="cs-overlay">
-        <p><strong>Ergebnis:</strong> +65% Verweildauer · Mobile Optimierung · Performance Boost</p>
+    <article class="cs-card" style="--delay: 0s; background-image: url('./WebdesignPic/1.jpg');">
+      <div class="cs-content">
+        <h3>Website Relaunch: TechStartup</h3>
+        <p>UX-Analyse, Re-Design, SEO-Boost</p>
+        <p class="cs-result">+65% Verweildauer · Mobile Optimierung · Performance Boost</p>
       </div>
-    </div>
+    </article>
 
-    <!-- Case 2 -->
-    <div class="cs-card" data-aos>
-      <div class="cs-icon"><i data-feather="trending-up"></i></div>
-      <h3>E-Commerce Optimierung</h3>
-      <p>Conversion-Rate +37 % nach Redesign</p>
-      <div class="cs-overlay">
-        <p><strong>Strategie:</strong> UX-Audit · Redesign Checkout · A/B Testing</p>
+    <article class="cs-card" style="--delay: 2s; background-image: url('./WebdesignPic/1.jpg');">
+      <div class="cs-content">
+        <h3>E-Commerce Optimierung</h3>
+        <p>Conversion-Rate +37 % nach Redesign</p>
+        <p class="cs-result">UX-Audit · Redesign Checkout · A/B Testing</p>
       </div>
-    </div>
+    </article>
+
+    <article class="cs-card" style="--delay: 4s; background-image: url('./WebdesignPic/1.jpg');">
+      <div class="cs-content">
+        <h3>Fintech Dashboard Redesign</h3>
+        <p>Simplified Interface · User Retention</p>
+        <p class="cs-result">+90% Nutzerfeedback · Intuitive Navigation</p>
+      </div>
+    </article>
+
+    <article class="cs-card" style="--delay: 6s; background-image: url('./WebdesignPic/1.jpg');">
+      <div class="cs-content">
+        <h3>Internationales NGO-Portal</h3>
+        <p>Barrierefreiheit & Multilingual UX</p>
+        <p class="cs-result">42% mehr Engagement · SEO verbessert</p>
+      </div>
+    </article>
   </div>
 </section>
-<style>.case-studies {
-  position: relative;
+
+<!-- Apple-Style CSS -->
+<style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.case-studies {
+  padding: 6rem 1.5rem;
   text-align: center;
-  color: #000;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.cs-video-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-  opacity: 0.25;
-  pointer-events: none;
-}
-
-.cs-overlay-gradient {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), #fff);
-  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .cs-title {
-  font-size: 2.5rem;
-  font-weight: 900;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #111;
   margin-bottom: 0.5rem;
-  position: relative;
-  z-index: 2;
 }
 
 .cs-subline {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: #666;
-  margin-bottom: 3.5rem;
-  position: relative;
-  z-index: 2;
+  margin-bottom: 4rem;
+  font-weight: 400;
 }
 
 .cs-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  position: relative;
-  z-index: 2;
 }
 
 .cs-card {
+  background-size: cover;
+  background-position: center;
+  animation: gradientShift 14s ease infinite;
+  animation-delay: var(--delay);
+  border-radius: 20px;
+  padding: 2rem;
+  color: #111;
   position: relative;
-  padding: 2.5rem 2rem;
-  background: linear-gradient(135deg, #ffffff, #e6f0ff);
-  border-radius: 18px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
-  border: 1px solid #eee;
-  transition: all 0.4s ease;
   overflow: hidden;
-  cursor: pointer;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  min-height: 300px;
+  display: flex;
+  align-items: flex-end;
+}
+.cs-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background: linear-gradient(
+    220deg,
+    hwb(219 26% 0% / 0) 0%,
+    hwb(219 18% 0% / 0) 40%,
+    #e1e2ff 46%,
+    hwb(219 18% 0% / 0) 52%,
+    hwb(219 26% 0% / 0) 100%
+  );
+  background-size: 400% 400%;
+
+  animation: overlayGradientShift 16s ease-in-out infinite;
+  animation-delay: var(--delay); /* ⬅️ Jetzt kommt der Schein versetzt */
+
+  mix-blend-mode: overlay;
+  opacity: 0.35;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(2px);
+}
+
+.cs-card:hover::after {
+  opacity: 0.15;
+}
+
+
+@keyframes overlayGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+.cs-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+}
+
+.cs-content {
+  z-index: 2;
+  position: relative;
   text-align: left;
 }
 
-.cs-card:hover {
-  transform: scale(1.03) rotateX(1deg);
-  box-shadow: 0 16px 32px rgba(255, 102, 0, 0.1);
-  border-color: var(--primary);
-}
-
-.cs-icon {
-  background: linear-gradient(135deg, white, #6fa9ff);
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.2rem;
-}
-
-.cs-icon i {
-  stroke: #fff;
-  width: 24px;
-  height: 24px;
-}
-
 .cs-card h3 {
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  color: black;
   margin-bottom: 0.6rem;
+  color: #111;
+  line-height: 1.4;
 }
 
 .cs-card p {
   font-size: 1rem;
   color: #444;
   line-height: 1.5;
-  text-align: center;
+  margin: 0.4rem 0;
 }
 
-.cs-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #c3d8ff;
-  color: white;
-  padding: 1.2rem;
-  transform: translateY(100%);
-  transition: transform 0.4s ease;
-  font-size: 0.95rem;
-  line-height: 1.5;
+.cs-result {
+  font-weight: 600;
+  color: #0070f3;
+  margin-top: 0.6rem;
+  font-size: 1.05rem;
 }
 
-.cs-card:hover .cs-overlay {
-  transform: translateY(0%);
-}
+@media screen and (max-width: 768px) {
+  .cs-title {
+    font-size: 2rem;
+  }
 
-[data-aos] {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
-}
+  .cs-subline {
+    font-size: 1rem;
+  }
 
-[data-aos].aos-animate {
-  opacity: 1;
-  transform: translateY(0);
-}
+  .cs-card h3 {
+    font-size: 1.3rem;
+  }
 
+  .cs-card p {
+    font-size: 0.95rem;
+  }
+}
 </style>
-<script>
-  feather.replace();
-
-  // Animate on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('aos-animate');
-      }
-    });
-  });
-
-  document.querySelectorAll('[data-aos]').forEach(el => {
-    observer.observe(el);
-  });
-</script>
-
 
 
 
@@ -1042,27 +1210,46 @@
       -webkit-text-fill-color: initial !important;
     }
 
-
     .cta-headline span {
-      font-family: 'VT323', monospace;
-      font-size: 1.3em;
-      line-height: 1;
-      display: inline-block;
-      color: var(--primary);
-      /* Fallback-Farbe */
-      background: linear-gradient(90deg, #9abdff, var(--primary));
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      border: 5px;
-      border-color: black;
-    }
+  font-family: 'VT323', monospace;
+  font-size: 1.3em;
+  line-height: 1;
+  display: inline-block;
+
+  background: linear-gradient(
+    220deg,
+    hwb(219 17% 0%) 0%,
+    hwb(219 18% 0%) 40%,
+    #e1e2ff 46%,
+    hwb(219 9% 0%) 52%,
+    hwb(219 26% 0%) 100%
+  );
+
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: gradientShift 16s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
 
     .cta-text {
       font-size: clamp(1rem, 2.5vw, 1.2rem);
       font-weight: 400;
-      color: #444;
+      color: #272727;
       max-width: 640px;
       margin: 0 auto 2.5rem;
       line-height: 1.6;
@@ -1072,36 +1259,54 @@
     }
 
     .cta-btn {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: #fff;
-      font-weight: 600;
-      padding: 0.8rem 2rem;
-      font-size: clamp(0.9rem, 2vw, 1rem);
-      border-radius: 10px;
-      text-decoration: none;
-      box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 2;
-      animation: fadeUp 1s ease-out 0.4s both;
-    }
+  background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
+  background-size: 300% 300%;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
+}
 
-    .cta-btn:hover {
-      transform: scale(1.03);
-      box-shadow: 0 10px 25px rgba(255, 102, 0, 0.3);
-    }
+/* Hover Glow & Lift */
+.cta-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
+}
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
+/* Entrance Animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animated Gradient */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
     @keyframes glowShift {
       0% {
@@ -1643,7 +1848,303 @@ const startAutoSlide = () => {
     });
   </script>
   
+  <section class="faq-section" id="faq">
+    <h2 class="faq-title">Häufige Fragen – Klarheit vor Projektstart</h2>
+    <div class="faq-accordion">
   
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Projektmanagement und Kommunikation</span>
+          <i class="arrow"></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            <strong>Wie erfolgt die Abstimmung während des gesamten Projektverlaufs?</strong><br>
+            Während des gesamten Projektverlaufs steht Ihnen ein fester Projektmanager als zentrale Ansprechperson zur Verfügung.
+            Es finden regelmäßige Status-Updates, geplante Meetings (sowohl digital als auch persönlich) und umfassende Kommunikation via E-Mail oder Telefon statt.
+            Unser Ziel ist es, Sie kontinuierlich und transparent über alle Fortschritte zu informieren, sodass Sie jederzeit aktiv Feedback geben und in den kreativen und technischen Prozess eingebunden werden.
+          </p>
+  
+          <p>
+            <strong>Gibt es einen detaillierten Meilensteinplan, in den ich Einblick erhalte?</strong><br>
+            Vor Beginn des Projekts erstellen wir gemeinsam einen detaillierten Meilensteinplan, der alle relevanten Phasen, Zeiträume und Abnahmepunkte umfasst.
+            Dieser Plan dient als verlässliche Roadmap, die Ihnen jederzeit einen klaren Überblick über den Projektfortschritt ermöglicht.
+            Änderungen im Projektablauf werden offen kommuniziert und in enger Abstimmung angepasst.
+          </p>
+  
+          <p>
+            <strong>Was passiert, wenn während des Projekts unerwartete Änderungen oder Zusatzwünsche auftreten?</strong><br>
+            Unerwartete Änderungen und Zusatzwünsche werden über ein strukturiertes Änderungsmanagement aufgenommen.
+            Kleinere Anpassungen fließen unmittelbar in den bestehenden Ablauf ein, während umfangreichere Wünsche separat besprochen, kalkuliert und dokumentiert werden.
+            So behalten Sie stets den Überblick, und der Projektplan bleibt transparent.
+          </p>
+  
+          <p>
+            <strong>Wie werden komplexe Anforderungen in den Projektplan integriert?</strong><br>
+            Für komplexe Anforderungen setzen wir auf einen iterativen Entwicklungsprozess, bei dem das Projekt in überschaubare Teilschritte unterteilt wird.
+            Diese ermöglichen es uns, auch anspruchsvolle Funktionen schrittweise umzusetzen, regelmäßig zu evaluieren und flexibel anzupassen.
+            Dadurch garantieren wir, dass alle komplexen Anforderungen optimal in den Gesamtplan eingebunden werden.
+          </p>
+  
+          <p>
+            <strong>Welche Tools werden für die Zusammenarbeit genutzt?</strong><br>
+            Wir nutzen moderne Kollaborations-Tools wie Trello, Asana oder Slack, um Aufgaben effektiv zu koordinieren und den Informationsfluss zu gewährleisten.
+            Diese Plattformen bieten Ihnen jederzeit einen transparenten Einblick in den Projektfortschritt und erlauben eine reibungslose Abstimmung zwischen allen Beteiligten.
+          </p>
+  
+          <p>
+            <strong>Was passiert, wenn das Projekt länger dauert als ursprünglich geplant?</strong><br>
+            Sollte es zu Verzögerungen kommen, informieren wir Sie frühzeitig und transparent über den neuen Zeitplan.
+            Gemeinsam werden die Ursachen besprochen und der Projektplan entsprechend angepasst, ohne dass dabei Ihre Wünsche und Prioritäten aus den Augen verloren werden.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Technische Umsetzung und Wartung</span>
+          <i class="arrow"></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            <strong>Wie stellen Sie die Sicherheit meiner Daten während der Entwicklung und danach sicher?</strong><br>
+            Die Datensicherheit hat für uns höchste Priorität. Wir arbeiten mit aktuellen Sicherheitsstandards wie SSL-Verschlüsselung, regelmäßigen Backups, Firewalls und strengen Zugriffsbeschränkungen. Alle sensiblen Informationen werden ausschließlich von autorisierten Personen bearbeitet, sodass Ihre Daten jederzeit bestens geschützt sind.
+          </p>
+          <p>
+            <strong>Bieten Sie nach dem Launch auch Support, Wartung oder Updates an?</strong><br>
+            Ja, unser Service endet nicht mit dem Livegang Ihrer Website. Wir bieten umfassenden Support sowie regelmäßige Wartungen und Updates an, um sicherzustellen, dass Ihre Website langfristig optimal funktioniert. Zusätzlich erhalten Sie Schulungen im Umgang mit dem Content-Management-System, sodass Sie Ihre Inhalte auch eigenständig pflegen können.
+          </p>
+          <p>
+            <strong>Wie gewährleisten Sie, dass die Website auch in Zukunft technisch und optisch aktuell bleibt?</strong><br>
+            Durch regelmäßige Reviews und Performance-Analysen prüfen wir kontinuierlich, ob Ihre Website den neuesten technischen Standards und Designtrends entspricht. Proaktive Upgrades, Erweiterungen und Anpassungen werden bei Bedarf empfohlen und umgesetzt, um langfristig ein modernes und leistungsstarkes Nutzererlebnis zu garantieren.
+          </p>
+          <p>
+            <strong>Wie wird die Qualitätssicherung während des Projekts umgesetzt?</strong><br>
+            Über den gesamten Entwicklungsprozess hinweg führen wir umfangreiche Tests durch – von Funktionstests über Usability-Checks bis hin zu Beta-Tests. Jede Phase wird detailliert dokumentiert und auf mögliche Fehler überprüft, um sicherzustellen, dass die Endlösung Ihren höchsten Ansprüchen genügt.
+          </p>
+          <p>
+            <strong>Was passiert, wenn es nach dem Launch technische Probleme gibt?</strong><br>
+            Sollte es nach dem Launch zu technischen Problemen kommen, steht unser Support-Team bereit, um diese schnellstmöglich zu beheben. Wir bieten verschiedene Support-Pakete an, die je nach Dringlichkeit und Umfang eine rasche Problemlösung garantieren, sodass Ihre Website stets reibungslos funktioniert.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Design, UX und Anpassungsfähigkeit</span>
+          <i class="arrow"></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            <strong>Wie binden Sie den Kunden während der Designphase aktiv ein?</strong><br>
+            Unser Designprozess ist stark kundenorientiert: Wir präsentieren Ihnen regelmäßig Wireframes, Prototypen und erste Design-Entwürfe, um Ihr Feedback frühzeitig und kontinuierlich einfließen zu lassen.
+          </p>
+          <p>
+            <strong>Gibt es Möglichkeiten, spezifische Designwünsche oder Funktionen individuell anzupassen?</strong><br>
+            Absolut – jedes Projekt ist einzigartig, und wir passen unser Angebot individuell an Ihre Anforderungen an. Ob besondere Design-Elemente, individuelle Funktionalitäten oder spezielle Schnittstellen – gemeinsam erarbeiten wir maßgeschneiderte Lösungen.
+          </p>
+          <p>
+            <strong>Wie gehen Sie mit Feedback um und wie sind die Korrekturschleifen strukturiert?</strong><br>
+            Feedback ist ein wesentlicher Bestandteil unseres Entwicklungsprozesses. Wir definieren klare Feedback-Phasen, die in mehrere Korrekturschleifen eingebettet sind.
+          </p>
+          <p>
+            <strong>Wie garantieren Sie, dass das Design auch für weniger technikaffine Nutzer intuitiv ist?</strong><br>
+            Wir orientieren uns an bewährten UX-Prinzipien und führen Nutzertests durch, um sicherzustellen, dass Ihre Website für alle Zielgruppen leicht verständlich und intuitiv navigierbar ist.
+          </p>
+          <p>
+            <strong>Können spezifische Funktionen und Integrationen auch später ergänzt werden?</strong><br>
+            Ja, unsere Lösungen sind flexibel und skalierbar. Selbst nach dem Launch können zusätzliche Funktionen oder Integrationen problemlos implementiert werden.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Kosten, Verträge und Erfolgsmessung</span>
+          <i class="arrow"></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            <strong>Gibt es eine transparente Aufschlüsselung der Kosten?</strong><br>
+            Unsere Angebote basieren auf einer klaren und nachvollziehbaren Kostenstruktur. Versteckte Kosten gibt es bei uns nicht.
+          </p>
+          <p>
+            <strong>Wie wird der Erfolg des neuen Webdesigns gemessen?</strong><br>
+            Der Erfolg wird anhand spezifischer Kennzahlen wie verbesserter Verweildauer, Conversion-Rate und SEO-Ranking gemessen.
+          </p>
+          <p>
+            <strong>Was passiert, wenn ich mit dem Endergebnis nicht zufrieden bin?</strong><br>
+            Wir bieten zusätzliche Korrekturschleifen und Anpassungen an, bis Ihre Anforderungen vollständig erfüllt sind.
+          </p>
+          <p>
+            <strong>Gibt es versteckte Gebühren während des Projekts?</strong><br>
+            Nein. Zusatzwünsche, die den Leistungsumfang erweitern, werden separat besprochen und mit Ihrer Zustimmung kalkuliert.
+          </p>
+          <p>
+            <strong>Welche vertraglichen Sicherheiten bieten Sie?</strong><br>
+            Unsere Verträge halten alle Leistungen, Zeitpläne und Änderungsprozesse transparent fest und bieten Ihnen rechtliche Sicherheit.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Datenschutz und rechtliche Aspekte</span>
+          <i class="arrow"></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            <strong>Welche Maßnahmen garantieren DSGVO-Konformität?</strong><br>
+            Wir integrieren Cookie-Management, SSL, Anonymisierungstools und aktuelle rechtliche Vorgaben in all unsere Projekte.
+          </p>
+          <p>
+            <strong>Werden meine Daten vertraulich behandelt?</strong><br>
+            Ja, und auf Wunsch bieten wir zusätzliche NDAs. Zugriff erfolgt ausschließlich durch autorisierte Personen.
+          </p>
+          <p>
+            <strong>Werden rechtliche Änderungen auch nach dem Launch berücksichtigt?</strong><br>
+            Wir informieren proaktiv über Gesetzesänderungen und passen Ihre Website im Rahmen von Wartungsverträgen entsprechend an.
+          </p>
+          <p>
+            <strong>Wie sichern Sie meine Geschäftsdaten?</strong><br>
+            Verschlüsselte Übertragung, Zugriffsbeschränkungen und regelmäßige Sicherheitsprüfungen sorgen für maximalen Schutz.
+          </p>
+          <p>
+            <strong>Gibt es Nachweise für Ihre Datenschutzmaßnahmen?</strong><br>
+            Auf Wunsch stellen wir Ihnen gerne Zertifikate oder externe Prüfberichte zur Verfügung.
+          </p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Zusätzliche Leistungen und Langzeitbetreuung</span>
+          <i class="arrow"></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            <strong>Bieten Sie auch SEO, Marketing oder Content an?</strong><br>
+            Ja! Wir bieten SEO, Social Media Management und professionelle Content-Erstellung als zusätzliche Leistungen.
+          </p>
+          <p>
+            <strong>Wie schnell sehe ich Ergebnisse?</strong><br>
+            Erste messbare Effekte zeigen sich oft innerhalb von 4–8 Wochen – nachhaltige Ergebnisse meist nach einigen Monaten.
+          </p>
+          <p>
+            <strong>Können Ihre Leistungen international skaliert werden?</strong><br>
+            Absolut. Wir bieten Mehrsprachigkeit, länderspezifisches Design und globale SEO-Strategien für Ihren internationalen Erfolg.
+          </p>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+  
+  
+<style>
+.faq-section {
+  padding: 5rem 2rem;
+  background: #fefefe;
+  color: #111;
+  font-family: 'Inter', sans-serif;
+}
+
+.faq-title {
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 800;
+  margin-bottom: 3rem;
+}
+
+.faq-accordion {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 0 1rem;
+}
+
+.faq-item {
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffffff, #f8f8f8);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
+}
+
+.faq-question {
+  background: none;
+  border: none;
+  width: 100%;
+  padding: 1.5rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: left;
+  color: #222;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.faq-question:hover {
+  background: #f2f2f2;
+}
+
+.faq-question .arrow {
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid #666;
+  border-bottom: 2px solid #666;
+  transform: rotate(45deg);
+  transition: transform 0.3s ease;
+}
+
+.faq-question[aria-expanded="true"] .arrow {
+  transform: rotate(-135deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  padding: 0 2rem;
+}
+
+.faq-answer p {
+  margin: 1rem 0 1.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+</style>  
+<script>
+  const faqButtons = document.querySelectorAll('.faq-question');
+
+  faqButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      const answer = button.nextElementSibling;
+
+      // Collapse all
+      faqButtons.forEach(btn => {
+        btn.setAttribute('aria-expanded', 'false');
+        btn.nextElementSibling.style.maxHeight = null;
+      });
+
+      // Toggle current
+      if (!expanded) {
+        button.setAttribute('aria-expanded', 'true');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+
+
 
   <!-- ⬇️ Footer mit ARIA, SEO, Lazyload, optimiertem CSS, Barrierefreiheit -->
 <footer role="contentinfo" itemscope itemtype="https://schema.org/Organization">
@@ -1780,10 +2281,12 @@ const startAutoSlide = () => {
   }
 
   .footer-socials-icons {
-    display: flex;
-    gap: 12px;
-    margin-top: 0.5rem;
-  }
+  display: flex;
+  gap: 12px;
+  margin-top: 0.5rem;
+  justify-content: flex-start; /* ← Icons nach links schieben */
+}
+
 
   .footer-socials img {
     width: clamp(24px, 4vw, 30px);
@@ -1921,10 +2424,6 @@ const startAutoSlide = () => {
       grid-template-columns: 1fr;
     }
 
-    .about-grid {
-      grid-template-columns: 1fr;
-    }
-
     .cs-grid {
       grid-template-columns: 1fr;
     }
@@ -1935,7 +2434,7 @@ const startAutoSlide = () => {
     }
 
     .footer-socials-icons {
-      justify-content: center;
+      justify-content: flex-start;
     }
 
     .cta-modern .cta-headline {
