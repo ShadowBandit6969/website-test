@@ -1,0 +1,225 @@
+.hero-video-wrapper {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'VT323', monospace;
+    background-color: #000;
+  }
+
+  @keyframes blurPulse {
+
+    0%,
+    100% {
+      backdrop-filter: blur(2px);
+    }
+
+    50% {
+      backdrop-filter: blur(6px);
+    }
+  }
+
+  .hero-video-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    max-width: 800px;
+    width: 100%;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+    background: rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+  }
+
+  /* Welliger animierter Blur */
+  .hero-video-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.15), transparent 60%);
+    animation: waveBlur 8s infinite ease-in-out alternate;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* Animation bewegt die Lichtwelle */
+  @keyframes waveBlur {
+    0% {
+      --x: 20%;
+      --y: 30%;
+    }
+
+    25% {
+      --x: 80%;
+      --y: 20%;
+    }
+
+    50% {
+      --x: 60%;
+      --y: 70%;
+    }
+
+    75% {
+      --x: 30%;
+      --y: 80%;
+    }
+
+    100% {
+      --x: 50%;
+      --y: 50%;
+    }
+  }
+
+
+  .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 1;
+    pointer-events: none;
+  }
+
+  .hero-video-content h1 {
+    font-size: 4.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    line-height: 1.0;
+    margin-bottom: 1rem;
+    color: #ffffff;
+  }
+
+  .hero-video-content p {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #e0e0e0;
+    max-width: 90%;
+    line-height: 1.6;
+  }
+
+  .cta-btn {
+    background: #ffffff;
+    color: #000000;
+    font-weight: 600;
+    padding: 0.9rem 2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    text-transform: none;
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+    border: none;
+  }
+
+  .hero-video-content a.cta-btn {
+    display: inline-block;
+    margin: 2rem auto 0 auto;
+    /* zentriert */
+  }
+
+  .cta-btn:hover {
+    background: var(--primary);
+    color: #000;
+    transform: scale(1.03);
+    cursor: pointer;
+  }
+
+
+  .neon-btn {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    color: #fff;
+    padding: 1rem 2.2rem;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(255, 102, 0, 0.4),
+      0 0 24px rgba(255, 102, 0, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .hero-video-content h1,
+  .hero-video-content p {
+    mix-blend-mode: exclusion;
+
+    color: #000;
+    /* oder #000 für etwas mehr Kontrastwirkung */
+    z-index: 3;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-video-content {
+      padding: 1.5rem;
+      top: 8vh;
+    }
+
+    .hero-video-content h1 {
+      font-size: 3.2rem;
+    }
+
+    .hero-video-content p {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-video-content {
+      padding: 1.5rem;
+      top: 6vh;
+    }
+
+    .hero-video-content h1 {
+      font-size: 2.4rem;
+      letter-spacing: 0.05rem;
+    }
+
+    .hero-video-content p {
+      font-size: 1rem;
+    }
+
+    .cta-btn {
+      font-size: 0.95rem;
+      padding: 0.8rem 1.6rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-video-content {
+      padding: 1rem;
+      top: 4vh;
+    }
+
+    .hero-video-content h1 {
+      font-size: 1.8rem;
+      line-height: 1.3;
+    }
+
+    .hero-video-content p {
+      font-size: 0.95rem;
+    }
+
+    .cta-btn {
+      font-size: 1rem;
+      /* etwas größer für bessere Lesbarkeit */
+      padding: 1rem 2rem;
+      /* größere Touchfläche */
+      width: 100%;
+      /* zentriert & vollbreit auf kleinsten Devices */
+      max-width: 300px;
+      margin: 2rem auto 0;
+      text-align: center;
+    }
+  }
