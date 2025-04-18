@@ -246,6 +246,207 @@ nav a:hover {
   }
 }
 
+.hero-video-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  max-width: 800px;
+  width: 100%;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+/* Welliger animierter Blur */
+.hero-video-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.15), transparent 60%);
+  animation: waveBlur 8s infinite ease-in-out alternate;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Animation bewegt die Lichtwelle */
+@keyframes waveBlur {
+  0% {
+    --x: 20%;
+    --y: 30%;
+  }
+
+  25% {
+    --x: 80%;
+    --y: 20%;
+  }
+
+  50% {
+    --x: 60%;
+    --y: 70%;
+  }
+
+  75% {
+    --x: 30%;
+    --y: 80%;
+  }
+
+  100% {
+    --x: 50%;
+    --y: 50%;
+  }
+}
+
+
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 1;
+  pointer-events: none;
+}
+
+.hero-video-content h1 {
+  font-size: 4.2rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  line-height: 1.0;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.hero-video-content p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #e0e0e0;
+  max-width: 90%;
+  line-height: 1.6;
+}
+
+.cta-btn {
+  background: #ffffff;
+  color: #000000;
+  font-weight: 600;
+  padding: 0.9rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  text-transform: none;
+  margin-top: 2rem;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.hero-video-content a.cta-btn {
+  display: inline-block;
+  margin: 2rem auto 0 auto;
+  /* zentriert */
+}
+
+.cta-btn:hover {
+  background: var(--primary);
+  color: #000;
+  transform: scale(1.03);
+  cursor: pointer;
+}
+
+
+.neon-btn {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border: none;
+  color: #fff;
+  padding: 1rem 2.2rem;
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(255, 102, 0, 0.4),
+    0 0 24px rgba(255, 102, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.hero-video-content h1,
+.hero-video-content p {
+  mix-blend-mode: exclusion;
+
+  color: #000;
+  /* oder #000 für etwas mehr Kontrastwirkung */
+  z-index: 3;
+}
+
+@media (max-width: 1024px) {
+  .hero-video-content {
+    padding: 1.5rem;
+    top: 8vh;
+  }
+
+  .hero-video-content h1 {
+    font-size: 3.2rem;
+  }
+
+  .hero-video-content p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-video-content {
+    padding: 1.5rem;
+    top: 6vh;
+  }
+
+  .hero-video-content h1 {
+    font-size: 2.4rem;
+    letter-spacing: 0.05rem;
+  }
+
+  .hero-video-content p {
+    font-size: 1rem;
+  }
+
+  .cta-btn {
+    font-size: 0.95rem;
+    padding: 0.8rem 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-video-content {
+    padding: 1rem;
+    top: 4vh;
+  }
+
+  .hero-video-content h1 {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+
+  .hero-video-content p {
+    font-size: 0.95rem;
+  }
+
+  .cta-btn {
+    font-size: 1rem;
+    /* etwas größer für bessere Lesbarkeit */
+    padding: 1rem 2rem;
+    /* größere Touchfläche */
+    width: 100%;
+    /* zentriert & vollbreit auf kleinsten Devices */
+    max-width: 300px;
+    margin: 2rem auto 0;
+    text-align: center;
+  }
+}
+
 
 .persona-clean {
   background: #fff;
@@ -362,732 +563,16 @@ nav a:hover {
     </nav>
   </header>
 
-
   <section class="hero-video-wrapper">
-    <video autoplay muted loop playsinline class="hero-bg-video" poster="./WebdesignPic/Poster.jpg">
-      <source data-src="./WebdesignPic/HintergrundHimmel.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  
-    <div class="hero-bg-image lazy-bg" data-bg="./WebdesignPic/HintergrundLaptop.png"></div>
-    <div class="hero-overlay-image lazy-bg" data-bg="./WebdesignPic/HintergrundTabletp.png"></div>
-    <div class="above-text-image lazy-bg" data-bg="./WebdesignPic/HintergrundHandy.png"></div>
-  
     <div class="hero-video-content">
-      <h1>UX & Webdesign</h1>
-      <p>Innovativ. Benutzerzentriert. Erfolgreich</p>
+      <h1>UX & Webdesign<br>das Nutzer begeistert</h1>
+      <p>Wir konzipieren digitale Erlebnisse. <br>maßgeschneidert und klickbar.</p>
       <a class="cta-btn neon-btn" href="#kontakt"><span>Projekt anfragen</span></a>
     </div>
+    <video preload="none" class="video-background" autoplay muted loop playsinline>
+      <source src="./WebdesignPic/1.mp4" type="video/mp4" />
+    </video>
   </section>
-  
-<style>/* 1. PNG – als Hintergrund */
-
-  .hero-video-wrapper {
-    position: relative;
-    min-height: 100vh;
-    width: 100vw;
-    min-height: 100vh;
-    max-width: 100%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: transparent;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: 'VT323', monospace;
-    z-index: 2;
-  }
-.hero-bg-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('./WebdesignPic/HintergrundLaptop.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: 0.5; /* Zwischen Video (0) und Overlay (1) */
-  pointer-events: none;
-}
-
-
-  .hero-bg-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0; /* GANZ HINTEN */
-  pointer-events: none;
-}
-
-  
-  /* 2. PNG – über dem Hintergrund */
-  .hero-overlay-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('./WebdesignPic/HintergrundTabletp.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    pointer-events: none;
-    z-index: 1;
-  }
-  
-  /* TEXT-INHALT */
-  .hero-video-content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    max-width: 800px;
-    width: 100%;
-    text-align: center;
-    border-radius: 12px;
-    backdrop-filter: blur(6px);
-    background: rgba(255, 255, 255, 0.05);
-    overflow: hidden;
-    margin-top: -10rem;
-  }
-  /* 3. PNG – über dem Text */
-.above-text-image {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: url('./WebdesignPic/HintergrundHandy.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  pointer-events: none;
-}
-
-  /* TEXT-Stile */
-  .hero-video-content h1 {
-    font-size: 4.2rem;
-    font-weight: 600;
-    letter-spacing: 0.1rem;
-    line-height: 1.0;
-    margin-bottom: 1rem;
-    color: #000;
-    mix-blend-mode: exclusion;
-    z-index: 3;
-  }
-  
-  .hero-video-content p {
-    font-size: 2rem;
-    font-weight: 400;
-    color: #000000;
-    max-width: 90%;
-    line-height: 1.6;
-    mix-blend-mode: exclusion;
-    z-index: 3;
-  }
-  .cta-btn {
-  background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
-  background-size: 300% 300%;
-  color: #fff;
-  font-weight: 600;
-
-  /* Weniger vertikales Padding für flacheren Button */
-  padding: 0.4em 2.5vw;
-
-  /* Responsive Font-Größe */
-  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-
-  border-radius: 0.75em;
-  text-decoration: none;
-  box-shadow: 0 0.4em 1.4em rgba(255, 102, 0, 0.22);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  z-index: 2;
-
-  animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
-
-  /* Breitensteuerung */
-  width: fit-content;
-  min-width: 12vw;
-  max-width: 90%;
-  height: auto;
-}
-
-/* Hover Glow & Lift */
-.cta-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
-}
-
-/* Text style (falls du .cta-text verwendest) */
-.cta-text {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  font-weight: 400;
-  color: #272727;
-  max-width: 640px;
-  margin: 0 auto 2.5rem;
-  line-height: 1.6;
-  position: relative;
-  z-index: 2;
-  animation: fadeUp 1s ease-out 0.2s both;
-}
-
-/* Entrance Animation */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Animated Gradient */
-@keyframes gradientFlow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-  /* Keyframes für animierte Lichtwelle */
-  @keyframes waveBlur {
-    0%   { --x: 20%; --y: 30%; }
-    25%  { --x: 80%; --y: 20%; }
-    50%  { --x: 60%; --y: 70%; }
-    75%  { --x: 30%; --y: 80%; }
-    100% { --x: 50%; --y: 50%; }
-  }
-  
-
-/* RESPONSIVE MEDIA QUERIES */
-@media (max-width: 768px) {
-  .cta-btn {
-    padding: 0.6em 4vw;
-    font-size: 1rem;
-    border-radius: 0.6em;
-  }
-}
-@media (max-width: 480px) {
-  .cta-btn {
-    padding: 0.25em 0.2vw;
-    font-size: 0.7rem;
-    border-radius: 0.4em;
-    max-width: 70%;
-    min-width: unset;
-    width: auto;
-    box-shadow: 0 0.2em 0.6em rgba(255, 102, 0, 0.2);
-    scale: 0.7;
-  }
-}
-@media (max-width: 320px) {
-  .cta-btn {
-    padding: 0.25em 0.2vw;
-    font-size: 0.7rem;
-    border-radius: 0.4em;
-    max-width: 70%;
-    min-width: unset;
-    width: auto;
-    box-shadow: 0 0.2em 0.6em rgba(255, 102, 0, 0.2);
-    scale: 0.7;
-  }
-}
-
-
-@media (max-width: 768px) {
-  .hero-video-content h1 { font-size: 2.4rem; letter-spacing: 0.05rem; }
-  .hero-video-content p  { font-size: 1rem; }
-
-}
-
-
-@media (max-width: 768px) {
-  .hero-overlay-image{
-left: -50vw;
-width: 170vw;
-
-  }
-
-  .above-text-image {
-    left: -35vw;
-    width: 190vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-  }
-}
-
-
-
-
-
-@media (max-width: 768px) and (min-height: 1280px) and (max-height: 2000px) {
-  .hero-overlay-image {
-    left: -110vw;
-    width: 250vw;
-    top: 4vh;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -70vw;
-    width: 310vw; /* <– erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-  }
-}
-
-@media (max-width: 768px) and (min-height: 1024px) and (max-height: 1280px) {
-  .hero-overlay-image {
-    left: -70vw;
-    width: 200vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -60vw;
-    width: 250vw;
-  }
-}
-
-@media (max-width: 768px) and (min-height: 900px) and (max-height: 1024px) {
-  .hero-overlay-image {
-    left: -50vw;
-    width: 185vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -45vw;
-    width: 210vw;
-  }
-}
-
-@media (max-width: 768px) and (min-height: 768px) and (max-height: 900px) {
-  .hero-overlay-image {
-    left: -45vw;
-    width: 170vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -34vw;
-    width: 185vw;
-  }
-}
-
-@media (max-width: 768px) and (min-height: 625px) and (max-height: 768px) {
-  .hero-overlay-image {
-    left: -35vw;
-    width: 165vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -30vw;
-    width: 175vw;
-  }
-}
-
-@media (max-width: 768px) and (min-height: 300px) and (max-height: 625px) {
-  .hero-overlay-image {
-    left: -30vw;
-    width: 160vw;
-  }
-
-  .above-text-image {
-    top: 5vh;
-    left: -25vw;
-    width: 160vw;
-  }
-}
-
-
-@media (max-width: 480px) and (min-height: 1530px)  and (max-height: 2000px){
-  .hero-overlay-image{
-left: -190vw;
-width: 320vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -40vw;
-    width: 400vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-  }
-}
-
-@media (max-width: 480px) and (min-height: 1060px)  and (max-height: 1530px){
-  .hero-overlay-image{
-left: -120vw;
-width: 220vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -5vw;
-    width: 250vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-  }
-}
-
-
-@media (max-width: 480px) and (min-height: 950px)  and (max-height: 1060px){
-  .hero-overlay-image{
-left: -60vw;
-width: 170vw;
-
-  }
-
-  .above-text-image {
-    left: -5vw;
-    width: 190vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-  }
-}
-
-@media (max-width: 480px) and (min-height: 768px)  and (max-height: 950px){
-  .hero-overlay-image{
-left: -60vw;
-width: 170vw;
-
-  }
-
-  .above-text-image {
-    left: -2vw;
-    width: 160vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-  }
-}
-
-@media (max-width: 480px) and (min-height: 625px)  and (max-height: 768px){
-  .hero-overlay-image{
-left: -50vw;
-width: 170vw;
-
-  }
-
-  .above-text-image {
-    left: -15vw;
-    width: 160vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-  }
-}
-
-@media (max-width: 480px) and (min-height: 25px)  and (max-height: 625px){
-  .hero-overlay-image{
-left: -40vw;
-width: 170vw;
-
-  }
-
-  .above-text-image {
-    left: -25vw;
-    width: 160vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-  }
-}
-
-
-
-
-@media (max-width: 425px) and (min-height: 1530px) and (max-height: 2000px) {
-  .hero-overlay-image {
-    left: -165vw;
-    width: 285vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -35vw;
-    width: 360vw;
-  }
-}
-
-@media (max-width: 425px) and (min-height: 1060px) and (max-height: 1530px) {
-  .hero-overlay-image {
-    left: -100vw;
-    width: 200vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -4vw;
-    width: 230vw;
-  }
-}
-
-@media (max-width: 425px) and (min-height: 950px) and (max-height: 1060px) {
-  .hero-overlay-image {
-    left: -50vw;
-    width: 160vw;
-  }
-
-  .above-text-image {
-    left: -4vw;
-    width: 180vw;
-  }
-}
-
-@media (max-width: 425px) and (min-height: 768px) and (max-height: 950px) {
-  .hero-overlay-image {
-    left: -48vw;
-    width: 160vw;
-  }
-
-  .above-text-image {
-    left: -1vw;
-    width: 155vw;
-  }
-}
-
-@media (max-width: 425px) and (min-height: 625px) and (max-height: 768px) {
-  .hero-overlay-image {
-    left: -40vw;
-    width: 155vw;
-  }
-
-  .above-text-image {
-    left: -10vw;
-    width: 150vw;
-  }
-}
-
-@media (max-width: 425px) and (min-height: 25px) and (max-height: 625px) {
-  .hero-overlay-image {
-    left: -30vw;
-    width: 150vw;
-  }
-
-  .above-text-image {
-    left: -20vw;
-    width: 145vw;
-  }
-}
-
-
-
-
-
-@media (max-width: 375px) and (min-height: 1530px) and (max-height: 1680px) {
-  .hero-overlay-image {
-    left: -188vw;
-    width: 290vw;
-    top: 6vh;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -15vw;
-    width: 370vw;
-    top: 12vh;
-  }
-}
-
-
-@media (max-width: 375px) and (min-height: 1060px) and (max-height: 1530px) {
-  .hero-overlay-image {
-    left: -140vw;
-    width: 260vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -5vw;
-    width: 260vw;
-  }
-}
-
-@media (max-width: 375px) and (min-height: 840px) and (max-height: 1060px) {
-  .hero-overlay-image {
-    left: -90vw;
-    width: 195vw;
-  }
-
-  .above-text-image {
-    left: 5vw;
-    width: 195vw;
-    top: 10vh;
-  }
-}
-
-
-@media (max-width: 375px) and (min-height: 768px) and (max-height: 840px) {
-  .hero-overlay-image {
-    left: -70vw;
-    width: 195vw;
-  }
-
-  .above-text-image {
-    left: -5vw;
-    width: 195vw;
-  }
-}
-
-@media (max-width: 375px) and (min-height: 8px) and (max-height: 768px) {
-  .hero-overlay-image {
-    left: -70vw;
-    width: 195vw;
-  }
-
-  .above-text-image {
-    left: -25vw;
-    width: 195vw;
-  }
-}
-
-@media (max-width: 320px) and (min-height: 1024px) and (max-height: 1300px) {
-  .hero-overlay-image {
-    left: -180vw;
-    width: 300vw;
-    top: 10vh;
-  }
-
-  .above-text-image {
-    left: -5vw;
-    width: 285vw;
-  }
-}
-
-
-@media (max-width: 320px) and (min-height: 768px) and (max-height: 1024px) {
-  .hero-overlay-image {
-    left: -110vw;
-    width: 220vw;
-  }
-
-  .above-text-image {
-    left: -25vw;
-    width: 285vw;
-  }
-}
-
-
-@media (max-width: 320px) and (min-height: 600px) and (max-height: 768px) {
-  .hero-overlay-image {
-    left: -80vw;
-    width: 195vw;
-  }
-
-  .above-text-image {
-    left: -5vw;
-    width: 195vw;
-  }
-}
-
-@media (max-width: 320px) and (min-height: 200px) and (max-height: 600px) {
-  .hero-overlay-image {
-    left: -60vw;
-    width: 195vw;
-  }
-
-  .above-text-image {
-    left: -25vw;
-    width: 195vw;
-  }
-}
-
-
-
-
-
-
-
-
-.hero-overlay-image,
-.above-text-image {
-  opacity: 0;
-  transform: translateY(60px) scale(0.95); /* Mehr Bewegung */
-  transition: all 1.4s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-}
-
-.hero-overlay-image.animate,
-.above-text-image.animate {
-  opacity: 1;
-  transform: translateY(0px) scale(1.05); /* Leicht größer für Tiefe */
-}
-
-
-  </style>  
-
-<script>
-  // FADE-IN via IntersectionObserver
-  const animatedEls = document.querySelectorAll('.hero-overlay-image, .above-text-image');
-
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
-
-  animatedEls.forEach(el => observer.observe(el));
-
-  // SCROLL-BASIERTE TRANSFORMATION
-  const overlay = document.querySelector('.hero-overlay-image');
-  const above = document.querySelector('.above-text-image');
-
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY;
-    const maxScroll = window.innerHeight;
-    const progress = Math.min(scrollTop / maxScroll, 1); // Wert zwischen 0 und 1
-
-    const translateX = 20 * progress; // max 20px rechts
-    const translateY = 20 * progress; // max 20px runter
-    const scale = 1.05 + progress * 0.1; // von 1.05 auf 1.15
-
-    if (overlay.classList.contains('animate')) {
-      overlay.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-    }
-
-    if (above.classList.contains('animate')) {
-      above.style.transform = `translate(${translateX * 1.1}px, ${translateY * 1.1}px) scale(${scale})`;
-    }
-  });
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const lazyBackgrounds = document.querySelectorAll('.lazy-bg');
-    const videoSource = document.querySelector('.hero-bg-video source');
-    const videoEl = document.querySelector('.hero-bg-video');
-
-    const options = {
-      rootMargin: "0px 0px 200px 0px",
-      threshold: 0.1
-    };
-
-    const lazyObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-
-          // 1. Lazy load background images
-          if (el.dataset.bg) {
-            el.style.backgroundImage = `url('${el.dataset.bg}')`;
-            observer.unobserve(el);
-          }
-
-          // 2. Lazy load video
-          if (videoSource && videoSource.dataset.src) {
-            videoSource.src = videoSource.dataset.src;
-            videoEl.load();
-            observer.unobserve(videoEl);
-          }
-        }
-      });
-    }, options);
-
-    lazyBackgrounds.forEach(el => lazyObserver.observe(el));
-    if (videoEl) lazyObserver.observe(videoEl);
-  });
-</script>
 
 
   <script>
@@ -2969,9 +2454,6 @@ const startAutoSlide = () => {
     50% { background: rgba(255, 255, 255, 0.18); backdrop-filter: blur(14px); }
     100% { background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(6px); }
   }
-  .hero-video-content .cta-btn {
-  align-self: center;
-}
 
 
   @media (prefers-reduced-motion: reduce) {
