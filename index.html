@@ -363,26 +363,23 @@ nav a:hover {
   </header>
 
 
-
   <section class="hero-video-wrapper">
-    <video autoplay muted loop playsinline class="hero-bg-video">
-      <source src="./WebdesignPic/HintergrundHimmel.mp4" type="video/mp4">
+    <video autoplay muted loop playsinline class="hero-bg-video" poster="./WebdesignPic/Poster.jpg">
+      <source data-src="./WebdesignPic/HintergrundHimmel.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
-
-  <!-- PNG über dem Video – als eigene Ebene -->
-<div class="hero-bg-image"></div>
-    <!-- 2. PNG – über dem Hintergrund -->
-    <div class="hero-overlay-image"></div>   
-    <!-- TEXT + 3. PNG über dem Text -->
-    <div class="above-text-image"></div>
-
+  
+    <div class="hero-bg-image lazy-bg" data-bg="./WebdesignPic/HintergrundLaptop.png"></div>
+    <div class="hero-overlay-image lazy-bg" data-bg="./WebdesignPic/HintergrundTabletp.png"></div>
+    <div class="above-text-image lazy-bg" data-bg="./WebdesignPic/HintergrundHandy.png"></div>
+  
     <div class="hero-video-content">
       <h1>UX & Webdesign</h1>
-      <p> Innovativ. Benutzerzentriert. Erfolgreich</p>
+      <p>Innovativ. Benutzerzentriert. Erfolgreich</p>
       <a class="cta-btn neon-btn" href="#kontakt"><span>Projekt anfragen</span></a>
-     </div>
+    </div>
   </section>
+  
 <style>/* 1. PNG – als Hintergrund */
 
   .hero-video-wrapper {
@@ -1053,6 +1050,42 @@ width: 170vw;
     if (above.classList.contains('animate')) {
       above.style.transform = `translate(${translateX * 1.1}px, ${translateY * 1.1}px) scale(${scale})`;
     }
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const lazyBackgrounds = document.querySelectorAll('.lazy-bg');
+    const videoSource = document.querySelector('.hero-bg-video source');
+    const videoEl = document.querySelector('.hero-bg-video');
+
+    const options = {
+      rootMargin: "0px 0px 200px 0px",
+      threshold: 0.1
+    };
+
+    const lazyObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+
+          // 1. Lazy load background images
+          if (el.dataset.bg) {
+            el.style.backgroundImage = `url('${el.dataset.bg}')`;
+            observer.unobserve(el);
+          }
+
+          // 2. Lazy load video
+          if (videoSource && videoSource.dataset.src) {
+            videoSource.src = videoSource.dataset.src;
+            videoEl.load();
+            observer.unobserve(videoEl);
+          }
+        }
+      });
+    }, options);
+
+    lazyBackgrounds.forEach(el => lazyObserver.observe(el));
+    if (videoEl) lazyObserver.observe(videoEl);
   });
 </script>
 
