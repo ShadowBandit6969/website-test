@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fusion³ – UX & Webdesign Studio</title>
-  <meta name="description" content="Fusion³ ist dein Partner für UX-Design, Webdesign & Prototyping. Wir gestalten digitale Erlebnisse mit Substanz." />
+  <meta name="description"
+    content="Fusion³ ist dein Partner für UX-Design, Webdesign & Prototyping. Wir gestalten digitale Erlebnisse mit Substanz." />
 
-  <!-- Optimiert: Fonts zusammengeführt -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Space+Grotesk:wght@400;500&family=VT323&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./fonts/fonts.css">
 
 
-  <script src="https://unpkg.com/feather-icons"></script>
+  <script type="module" src="https://unpkg.com/feather-icons" defer></script>
+  <script nomodule src="feather-icons.legacy.js"></script>
 
   <link rel="stylesheet" href="./IndexCSS/Indexall.css">
-  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="https://unpkg.com/scrollreveal" defer></script>
+
 
 </head>
-<style>:root {
+<style>
+  :root {
     --primary: #ff6600;
     --secondary: #ff944d;
     --bg: #0b0b0b;
@@ -51,15 +55,15 @@
   }
 
   testimonial-slider {
-display: block;
-margin-top: 6rem;
-}
+    display: block;
+    margin-top: 6rem;
+  }
 
-@media (max-width: 768px) {
-testimonial-slider {
-  margin-top: 4rem;
-}
-}
+  @media (max-width: 768px) {
+    testimonial-slider {
+      margin-top: 4rem;
+    }
+  }
 
 
   a {
@@ -83,8 +87,8 @@ testimonial-slider {
   }
 
 
-   /* Navigation */
- header {
+  /* Navigation */
+  header {
     width: 100%;
     padding: 2rem 5vw;
     display: flex;
@@ -547,6 +551,7 @@ testimonial-slider {
     }
   }
 </style>
+
 <body>
 
   <header>
@@ -570,7 +575,7 @@ testimonial-slider {
       <a class="cta-btn neon-btn" href="#kontakt"><span>Projekt anfragen</span></a>
     </div>
     <video preload="none" class="video-background" autoplay muted loop playsinline>
-      <source src="./WebdesignPic/1.mp4" type="video/mp4" />
+      <source src="./IndexM/Background.webm" type="video/mp4" />
     </video>
   </section>
 
@@ -642,234 +647,239 @@ testimonial-slider {
 
 
 
-<style>
-  :root {
-    --primary: #ff6600;
-    --text-main: #1c1c1e;
-    --text-subtle: #555;
-    --bg-card: #ffffff;
-    --grain-url: url("https://grainy-gradients.vercel.app/noise.svg");
-  }
+  <style>
+    :root {
+      --primary: #ff6600;
+      --text-main: #1c1c1e;
+      --text-subtle: #555;
+      --bg-card: #ffffff;
+      --grain-url: url("https://grainy-gradients.vercel.app/noise.svg");
+    }
 
-  .apple-services {
-    padding: 6rem 2rem;
-    background: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  }
+    .apple-services {
+      padding: 6rem 2rem;
+      background: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
 
-  .apple-services h2 {
-    font-size: 2.8rem;
-    text-align: center;
-    margin-bottom: 5rem;
-    color: var(--text-main);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-  }
+    .apple-services h2 {
+      font-size: 2.8rem;
+      text-align: center;
+      margin-bottom: 5rem;
+      color: var(--text-main);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
 
-  .service-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 4rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .service-card {
-    position: relative;
-    background: #fff; /* Klare, weiße Basis für ein modernes Erscheinungsbild */
-    border: 1px solid rgba(0, 0, 0, 0.05); /* Sehr dezente Umrandung */
-    border-radius: 16px; /* Modern abgerundete Ecken */
-    padding: 2.5rem; /* Großzügiger Innenabstand für ein luftiges Layout */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Weicher Schatten für einen feinen Tiefeneffekt */
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  }
-
-  .service-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: var(--grain-url);
-    opacity: 0.05;
-    z-index: 1;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-
-  .service-card::after {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(190deg, #ffffff 0%, #e7e7e7 70%);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .service-card:hover::after {
-    opacity: 1;
-  }
-
-  .service-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-  }
-
-  .service-card .inner {
-    position: relative;
-    z-index: 2;
-  }
-
-
-  .service-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1.2rem;
-    font-weight: 600;
-    color: var(--text-main);
-    letter-spacing: -0.01em;
-  }
-
-  .service-card ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    color: var(--text-subtle);
-    font-size: 1rem;
-    line-height: 1.75;
-  }
-
-  .service-card ul li {
-    margin-bottom: 0.75rem;
-  }
-
-  .cta {
-    display: inline-block;
-    margin-top: 2rem;
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: rgb(75, 75, 75);
-    text-decoration: none;
-    border: 1px solid rgb(68, 68, 68);
-    padding: 0.6rem 1.3rem;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-  }
-
-  .cta:hover {
-    background-color: hwb(327 82% 0%);
-    box-shadow: 0 0 0 2px rgba(118, 138, 180, 0.15);
-  }
-
-  @media (max-width: 375px) {
     .service-grid {
-      grid-template-columns: 1fr;
-      gap: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .service-card {
-      padding: 2rem 1.2rem;
+      position: relative;
+      background: #fff;
+      /* Klare, weiße Basis für ein modernes Erscheinungsbild */
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      /* Sehr dezente Umrandung */
       border-radius: 16px;
+      /* Modern abgerundete Ecken */
+      padding: 2.5rem;
+      /* Großzügiger Innenabstand für ein luftiges Layout */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      /* Weicher Schatten für einen feinen Tiefeneffekt */
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--grain-url);
+      opacity: 0.05;
+      z-index: 1;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .service-card::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(190deg, #ffffff 0%, #e7e7e7 70%);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .service-card:hover::after {
+      opacity: 1;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    }
+
+    .service-card .inner {
+      position: relative;
+      z-index: 2;
+    }
+
+
     .service-card h3 {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
+      font-weight: 600;
+      color: var(--text-main);
+      letter-spacing: -0.01em;
     }
 
     .service-card ul {
-      font-size: 0.95rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: var(--text-subtle);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .service-card ul li {
+      margin-bottom: 0.75rem;
     }
 
     .cta {
-      display: block;
-      width: 100%;
-      text-align: center;
+      display: inline-block;
+      margin-top: 2rem;
       font-size: 0.95rem;
-      padding: 0.8rem 1rem;
+      font-weight: 500;
+      color: rgb(75, 75, 75);
+      text-decoration: none;
+      border: 1px solid rgb(68, 68, 68);
+      padding: 0.6rem 1.3rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
     }
 
-  }
-
-  @media (max-width: 320px) {
-    .service-card {
-      padding: 1.5rem 1rem;
+    .cta:hover {
+      background-color: hwb(327 82% 0%);
+      box-shadow: 0 0 0 2px rgba(118, 138, 180, 0.15);
     }
 
-    .cta {
-      font-size: 0.9rem;
-      padding: 0.7rem 1rem;
+    @media (max-width: 375px) {
+      .service-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .service-card {
+        padding: 2rem 1.2rem;
+        border-radius: 16px;
+      }
+
+      .service-card h3 {
+        font-size: 1.2rem;
+      }
+
+      .service-card ul {
+        font-size: 0.95rem;
+      }
+
+      .cta {
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 0.95rem;
+        padding: 0.8rem 1rem;
+      }
+
     }
-  }
-</style>
 
-<section class="container apple-services" id="tools">
-  <h2>Unsere Leistungen</h2>
+    @media (max-width: 320px) {
+      .service-card {
+        padding: 1.5rem 1rem;
+      }
 
-  <div class="service-grid">
+      .cta {
+        font-size: 0.9rem;
+        padding: 0.7rem 1rem;
+      }
+    }
+  </style>
 
-    <!-- Webdesign -->
-    <div class="service-card">
-      <div class="inner">
-        <h3>Webdesign</h3>
-        <ul>
-          <li>Responsive & performanceoptimierte Websites</li>
-          <li>Visuell ansprechende User Interfaces</li>
-          <li>Moderne Animationen & Microinteractions</li>
-          <li>CMS-Integration & SEO Ready</li>
-        </ul>
-        <a href="./WebDesign.html" class="cta">Mehr erfahren</a>
+  <section class="container apple-services" id="tools">
+    <h2>Unsere Leistungen</h2>
+
+    <div class="service-grid">
+
+      <!-- Webdesign -->
+      <div class="service-card">
+        <div class="inner">
+          <h3>Webdesign</h3>
+          <ul>
+            <li>Responsive & performanceoptimierte Websites</li>
+            <li>Visuell ansprechende User Interfaces</li>
+            <li>Moderne Animationen & Microinteractions</li>
+            <li>CMS-Integration & SEO Ready</li>
+          </ul>
+          <a href="./WebDesign.html" class="cta">Mehr erfahren</a>
+        </div>
       </div>
-    </div>
 
-    <!-- 3D Design -->
-    <div class="service-card">
-      <div class="inner">
-        <h3>3D Design</h3>
-        <ul>
-          <li>Fotorealistische 3D-Visualisierungen</li>
-          <li>Produkt & Architektur-Renderings</li>
-          <li>VR/AR-kompatible Modelle</li>
-          <li>Optimiert für Web & Druck</li>
-        </ul>
-        <a href="./3DDesign.html" class="cta">Mehr erfahren</a>
+      <!-- 3D Design -->
+      <div class="service-card">
+        <div class="inner">
+          <h3>3D Design</h3>
+          <ul>
+            <li>Fotorealistische 3D-Visualisierungen</li>
+            <li>Produkt & Architektur-Renderings</li>
+            <li>VR/AR-kompatible Modelle</li>
+            <li>Optimiert für Web & Druck</li>
+          </ul>
+          <a href="./3DDesign.html" class="cta">Mehr erfahren</a>
+        </div>
       </div>
-    </div>
 
-    <!-- Grafikdesign -->
-    <div class="service-card">
-      <div class="inner">
-        <h3>Grafikdesign</h3>
-        <ul>
-          <li>Corporate Design & Markenauftritt</li>
-          <li>Professionelles Logo-Design</li>
-          <li>Druck- & Digitalmedien</li>
-          <li>Infografiken & visuelle Systeme</li>
-        </ul>
-        <a href="./Grafikdesign.html" class="cta">Mehr erfahren</a>
+      <!-- Grafikdesign -->
+      <div class="service-card">
+        <div class="inner">
+          <h3>Grafikdesign</h3>
+          <ul>
+            <li>Corporate Design & Markenauftritt</li>
+            <li>Professionelles Logo-Design</li>
+            <li>Druck- & Digitalmedien</li>
+            <li>Infografiken & visuelle Systeme</li>
+          </ul>
+          <a href="./Grafikdesign.html" class="cta">Mehr erfahren</a>
+        </div>
       </div>
-    </div>
 
-    <!-- Social Media -->
-    <div class="service-card">
-      <div class="inner">
-       
-        <h3>Social Media</h3>
-        <ul>
-          <li>Kanalübergreifende Content-Konzepte</li>
-          <li>Motion Design für Reels & Stories</li>
-          <li>Werbekampagnen-Design</li>
-          <li>CI-konforme Templates</li>
-        </ul>
-        <a href="./SocialMedia.html" class="cta">Mehr erfahren</a>
+      <!-- Social Media -->
+      <div class="service-card">
+        <div class="inner">
+
+          <h3>Social Media</h3>
+          <ul>
+            <li>Kanalübergreifende Content-Konzepte</li>
+            <li>Motion Design für Reels & Stories</li>
+            <li>Werbekampagnen-Design</li>
+            <li>CI-konforme Templates</li>
+          </ul>
+          <a href="./SocialMedia.html" class="cta">Mehr erfahren</a>
+        </div>
       </div>
-    </div>
 
-  </div>
-</section>
+    </div>
+  </section>
 
 
 
@@ -900,9 +910,11 @@ testimonial-slider {
       width: 100vw;
       transition: none;
     }
+
     .white-content h2 {
-  margin-bottom: 3rem; /* Standard ist 1-2rem – du kannst auch 4rem probieren */
-}
+      margin-bottom: 3rem;
+      /* Standard ist 1-2rem – du kannst auch 4rem probieren */
+    }
 
     .white-world.visible {
       clip-path: circle(150% at 50% 50%);
@@ -1201,224 +1213,222 @@ testimonial-slider {
 
 
 
-<section class="cta-modern">
-  <style>
-    .cta-modern {
-      position: relative;
-      padding: 7rem 1.5rem;
-      background: linear-gradient(180deg, #f4f4f4, #ffffff);
-      overflow: hidden;
-      text-align: center;
-      z-index: 1;
-    }
-
-    .cta-modern::before {
-      content: '';
-      position: absolute;
-      top: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1800px;
-      max-width: 100vw;
-      height: 1800px;
-      z-index: 0;
-      pointer-events: none;
-      animation: glowShift 12s ease-in-out infinite alternate;
-    }
-
-
-    .cta-headline {
-      font-size: clamp(1.8rem, 4.5vw, 3rem);
-      font-weight: 800;
-      font-family: 'Inter', sans-serif;
-      color: #000;
-      margin-bottom: 1rem;
-      line-height: 1.25;
-      letter-spacing: -0.3px;
-      position: relative;
-      z-index: 2;
-      animation: fadeUp 1s ease-out both;
-    }
-
-    .cta-small {
-      font-size: 0.6em;
-      font-weight: 500;
-      color: #000000 !important;
-      font-family: 'Inter', sans-serif;
-      display: inline-block;
-      margin-right: 0.3em;
-      background: none !important;
-      background-clip: initial !important;
-      -webkit-background-clip: initial !important;
-      -webkit-text-fill-color: initial !important;
-    }
-
-    .cta-headline span {
-  font-family: 'VT323', monospace;
-  font-size: 1.3em;
-  line-height: 1;
-  display: inline-block;
-
-
-  background: linear-gradient(
-    220deg,
-    hwb(219 17% 0%) 0%,
-    hwb(219 18% 0%) 40%,
-    #e1e2ff 46%,
-    hwb(34 27% 0%) 52%,
-    hwb(29 0% 0%) 100%
-  );
-
-  background-size: 400% 400%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  animation: gradientShift 16s ease-in-out infinite;
-}
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-
-    .cta-text {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
-      font-weight: 400;
-      color: #272727;
-      max-width: 640px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.6;
-      position: relative;
-      z-index: 2;
-      animation: fadeUp 1s ease-out 0.2s both;
-    }
-
-    .cta-btn {
-  background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
-  background-size: 300% 300%;
-  color: #fff;
-  font-weight: 600;
-  padding: 0.8rem 2rem;
-  font-size: clamp(0.9rem, 2vw, 1rem);
-  border-radius: 10px;
-  text-decoration: none;
-  box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  z-index: 2;
-  animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
-}
-
-/* Hover Glow & Lift */
-.cta-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
-}
-
-/* Entrance Animation */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Animated Gradient */
-@keyframes gradientFlow {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-    @keyframes glowShift {
-      0% {
-        transform: translateX(-50%) rotate(0deg);
-      }
-
-      100% {
-        transform: translateX(-50%) rotate(3deg);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
-
-    @media (max-width: 480px) {
+  <section class="cta-modern">
+    <style>
       .cta-modern {
-        padding: 5rem 1rem;
+        position: relative;
+        padding: 7rem 1.5rem;
+        background: linear-gradient(180deg, #f4f4f4, #ffffff);
+        overflow: hidden;
+        text-align: center;
+        z-index: 1;
       }
+
+      .cta-modern::before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1800px;
+        max-width: 100vw;
+        height: 1800px;
+        z-index: 0;
+        pointer-events: none;
+        animation: glowShift 12s ease-in-out infinite alternate;
+      }
+
+
+      .cta-headline {
+        font-size: clamp(1.8rem, 4.5vw, 3rem);
+        font-weight: 800;
+        font-family: 'Inter', sans-serif;
+        color: #000;
+        margin-bottom: 1rem;
+        line-height: 1.25;
+        letter-spacing: -0.3px;
+        position: relative;
+        z-index: 2;
+        animation: fadeUp 1s ease-out both;
+      }
+
+      .cta-small {
+        font-size: 0.6em;
+        font-weight: 500;
+        color: #000000 !important;
+        font-family: 'Inter', sans-serif;
+        display: inline-block;
+        margin-right: 0.3em;
+        background: none !important;
+        background-clip: initial !important;
+        -webkit-background-clip: initial !important;
+        -webkit-text-fill-color: initial !important;
+      }
+
+      .cta-headline span {
+        font-family: 'VT323', monospace;
+        font-size: 1.3em;
+        line-height: 1;
+        display: inline-block;
+
+
+        background: linear-gradient(220deg,
+            hwb(219 17% 0%) 0%,
+            hwb(219 18% 0%) 40%,
+            #e1e2ff 46%,
+            hwb(34 27% 0%) 52%,
+            hwb(29 0% 0%) 100%);
+
+        background-size: 400% 400%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        animation: gradientShift 16s ease-in-out infinite;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
 
       .cta-text {
-        margin-bottom: 2rem;
-        line-height: 1.5;
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        font-weight: 400;
+        color: #272727;
+        max-width: 640px;
+        margin: 0 auto 2.5rem;
+        line-height: 1.6;
+        position: relative;
+        z-index: 2;
+        animation: fadeUp 1s ease-out 0.2s both;
       }
 
       .cta-btn {
-        width: 100%;
-        padding: 0.9rem;
+        background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
+        background-size: 300% 300%;
+        color: #fff;
+        font-weight: 600;
+        padding: 0.8rem 2rem;
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        border-radius: 10px;
+        text-decoration: none;
+        box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        z-index: 2;
+        animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
       }
-    }
 
-    @media (max-width: 375px) {
-.cta-headline {
-  font-size: 1.5rem;
-}
+      /* Hover Glow & Lift */
+      .cta-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
+      }
 
-.cta-headline span {
-  font-size: 1.1em;
-}
+      /* Entrance Animation */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
 
-.cta-text {
-  font-size: 0.95rem;
-}
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-.cta-btn {
-  font-size: 0.9rem;
-  padding: 0.75rem 1.2rem;
-}
-}
+      /* Animated Gradient */
+      @keyframes gradientFlow {
+        0% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes glowShift {
+        0% {
+          transform: translateX(-50%) rotate(0deg);
+        }
+
+        100% {
+          transform: translateX(-50%) rotate(3deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .cta-modern {
+          padding: 5rem 1rem;
+        }
+
+        .cta-text {
+          margin-bottom: 2rem;
+          line-height: 1.5;
+        }
+
+        .cta-btn {
+          width: 100%;
+          padding: 0.9rem;
+        }
+      }
+
+      @media (max-width: 375px) {
+        .cta-headline {
+          font-size: 1.5rem;
+        }
+
+        .cta-headline span {
+          font-size: 1.1em;
+        }
+
+        .cta-text {
+          font-size: 0.95rem;
+        }
+
+        .cta-btn {
+          font-size: 0.9rem;
+          padding: 0.75rem 1.2rem;
+        }
+      }
+    </style>
+
+    <h2 class="cta-headline">
+      <span class="cta-small">Bereit für</span> <span>deinen digitalen Auftritt?</span>
+    </h2>
 
 
-  </style>
+    <p class="cta-text">
+      Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.
+      Starte jetzt – unverbindlich und inspiriert.
+    </p>
 
-  <h2 class="cta-headline">
-    <span class="cta-small">Bereit für</span> <span>deinen digitalen Auftritt?</span>
-  </h2>
-
-
-  <p class="cta-text">
-    Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.
-    Starte jetzt – unverbindlich und inspiriert.
-  </p>
-
-  <a href="#kontakt" class="cta-btn">Gespräch vereinbaren</a>
-</section>
+    <a href="#kontakt" class="cta-btn">Gespräch vereinbaren</a>
+  </section>
 
 
   <section class="interactive-portfolio" id="portfolio">
@@ -1438,7 +1448,8 @@ testimonial-slider {
         <div class="gallery">
           <div class="gallery-item reveal">
             <div class="media-wrapper">
-              <img src="./GallerieGesamt/WebDesign1.webp" width="1671px" height="1294px" loading="lazy" alt="WebDesign" />
+              <img src="./GallerieGesamt/WebDesign1.webp" width="1671px" height="1294px" loading="lazy"
+                alt="WebDesign" />
             </div>
             <div class="overlay">
               <p>Modernes Webprojekt mit Fokus auf Interaktion.</p>
@@ -1453,7 +1464,8 @@ testimonial-slider {
 
           <div class="gallery-item reveal">
             <div class="media-wrapper">
-              <img src="./GallerieGesamt/WebDesign2.webp" width="1671px" height="1294px" loading="lazy" alt="WebDesign" />
+              <img src="./GallerieGesamt/WebDesign2.webp" width="1671px" height="1294px" loading="lazy"
+                alt="WebDesign" />
             </div>
             <div class="overlay">
               <p>Modernes Webprojekt mit Fokus auf Interaktion.</p>
@@ -1500,7 +1512,7 @@ testimonial-slider {
             </div>
           </div>
 
-      
+
         </div>
       </div>
 
@@ -1509,7 +1521,8 @@ testimonial-slider {
         <div class="gallery">
           <div class="gallery-item reveal">
             <div class="media-wrapper">
-              <img src="./GallerieGesamt/Gradikdesign1.webp" width="1671px" height="1294px" loading="lazy" alt="Grafikdesign" />
+              <img src="./GallerieGesamt/Gradikdesign1.webp" width="1671px" height="1294px" loading="lazy"
+                alt="Grafikdesign" />
             </div>
             <div class="overlay">
               <p>Markenidentität im Flat Design Stil:</p>
@@ -1524,7 +1537,8 @@ testimonial-slider {
 
           <div class="gallery-item reveal">
             <div class="media-wrapper">
-              <img src="./GallerieGesamt/Gradikdesign2.webp" width="1671px" height="1294px" loading="lazy" alt="Grafikdesign" />
+              <img src="./GallerieGesamt/Gradikdesign2.webp" width="1671px" height="1294px" loading="lazy"
+                alt="Grafikdesign" />
             </div>
             <div class="overlay">
               <p>Markenidentität im Flat Design Stil:</p>
@@ -1537,7 +1551,7 @@ testimonial-slider {
             </div>
           </div>
 
-          
+
         </div>
       </div>
 
@@ -1547,7 +1561,8 @@ testimonial-slider {
         <div class="gallery">
           <div class="gallery-item reveal">
             <div class="media-wrapper">
-              <img src="./GallerieGesamt/SocialMedia1.webp" width="1671px" height="1294px" loading="lazy" alt="Social Media" />
+              <img src="./GallerieGesamt/SocialMedia1.webp" width="1671px" height="1294px" loading="lazy"
+                alt="Social Media" />
             </div>
             <div class="overlay">
               <p>Contentstrategie & visuelles Storytelling:</p>
@@ -1562,7 +1577,8 @@ testimonial-slider {
 
           <div class="gallery-item reveal">
             <div class="media-wrapper">
-              <img src="./GallerieGesamt/SocialMedia2.webp" width="1671px" height="1294px" loading="lazy" alt="Social Media" />
+              <img src="./GallerieGesamt/SocialMedia2.webp" width="1671px" height="1294px" loading="lazy"
+                alt="Social Media" />
             </div>
             <div class="overlay">
               <p>Contentstrategie & visuelles Storytelling:</p>
@@ -1575,7 +1591,7 @@ testimonial-slider {
             </div>
           </div>
 
-          
+
         </div>
       </div>
 
@@ -1601,14 +1617,14 @@ testimonial-slider {
     }
 
     .tab-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
-  text-align: center;
-}
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
 
 
     .tab {
@@ -1759,29 +1775,28 @@ testimonial-slider {
     }
 
     @media (max-width: 425px) {
-  .tab-buttons {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(140px, 1fr));
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0 1rem;
-  }
+      .tab-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(140px, 1fr));
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 1rem;
+      }
 
-  .tab {
-    justify-content: center;
-    text-align: center;
-    width: 100%;
-  }
-  .reveal {
-  opacity: 1 !important;
-  transform: none !important;
-}
+      .tab {
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+      }
 
-}
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
 
-
+    }
   </style>
 
   <script>
@@ -1799,43 +1814,43 @@ testimonial-slider {
     });
   </script>
   .reveal {
-    opacity: 1 !important;
-    transform: none !important;
+  opacity: 1 !important;
+  transform: none !important;
   }
-  
 
-<testimonial-slider></testimonial-slider>
 
-<script>
-  class TestimonialSlider extends HTMLElement {
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-      this.currentIndex = 0;
-      this.testimonials = [
-        {
-          image: "./TestemonialSlider/CS.webp",
-          name: "Christian Schulz",
-          quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
-          logo: "./TestemonialSlider/NeoLog.webp"
-        },
-        {
-          image: "./TestemonialSlider/CS.webp",
-          name: "Christian Schulz",
-          quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
-          logo: "./TestemonialSlider/NeoLog.webp"
-        },
-        {
-          image: "./TestemonialSlider/CS.webp",
-          name: "Christian Schulz",
-          quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
-          logo: "./TestemonialSlider/NeoLog.webp"
-        }
-      ];
-    }
+  <testimonial-slider></testimonial-slider>
 
-    connectedCallback() {
-      const style = `
+  <script>
+    class TestimonialSlider extends HTMLElement {
+      constructor() {
+        super();
+        this.attachShadow({ mode: "open" });
+        this.currentIndex = 0;
+        this.testimonials = [
+          {
+            image: "./TestemonialSlider/CS.webp",
+            name: "Christian Schulz",
+            quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
+            logo: "./TestemonialSlider/NeoLog.webp"
+          },
+          {
+            image: "./TestemonialSlider/CS.webp",
+            name: "Christian Schulz",
+            quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
+            logo: "./TestemonialSlider/NeoLog.webp"
+          },
+          {
+            image: "./TestemonialSlider/CS.webp",
+            name: "Christian Schulz",
+            quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
+            logo: "./TestemonialSlider/NeoLog.webp"
+          }
+        ];
+      }
+
+      connectedCallback() {
+        const style = `
         <style>
           :host {
             display: block;
@@ -1993,10 +2008,10 @@ testimonial-slider {
         </style>
       `;
 
-      const slidesHTML = this.testimonials
-        .concat([this.testimonials[0]]) // für fake-infinite loop
-        .map(
-          (t, i) => `
+        const slidesHTML = this.testimonials
+          .concat([this.testimonials[0]]) // für fake-infinite loop
+          .map(
+            (t, i) => `
           <div class="card" role="listitem">
             <div class="inner-card">
               <div class="avatar-logo">
@@ -2007,16 +2022,16 @@ testimonial-slider {
               <p class="author">${t.name}</p>
             </div>
           </div>`
-        )
-        .join("");
+          )
+          .join("");
 
-      const dotsHTML = `
+        const dotsHTML = `
         <div class="dots">
           ${this.testimonials.map((_, i) => `<div class="dot" data-index="${i}" aria-label="Testimonial ${i + 1}"></div>`).join("")}
         </div>
       `;
 
-      const html = `
+        const html = `
         ${style}
         <h2>Kundenstimmen</h2>
         <p class="intro">Was unsere Kunden über die Zusammenarbeit sagen.</p>
@@ -2028,91 +2043,91 @@ testimonial-slider {
         ${dotsHTML}
       `;
 
-      this.shadowRoot.innerHTML = html;
+        this.shadowRoot.innerHTML = html;
 
-      const track = this.shadowRoot.querySelector('.track');
-      const cards = this.shadowRoot.querySelectorAll('.card');
-      const dots = this.shadowRoot.querySelectorAll('.dot');
+        const track = this.shadowRoot.querySelector('.track');
+        const cards = this.shadowRoot.querySelectorAll('.card');
+        const dots = this.shadowRoot.querySelectorAll('.dot');
 
-      let currentIndex = 0;
-      let interval;
+        let currentIndex = 0;
+        let interval;
 
-      const goToSlide = (index, instant = false) => {
-  // Special case: wenn wir in der geklonten ersten Karte sind (letzter Slide)
-  const isCloneSlide = index === cards.length - 1;
+        const goToSlide = (index, instant = false) => {
+          // Special case: wenn wir in der geklonten ersten Karte sind (letzter Slide)
+          const isCloneSlide = index === cards.length - 1;
 
-  // Transform Slide
-  track.style.transition = instant ? 'none' : 'transform 0.6s ease';
-  track.style.transform = `translateX(-${index * 100}%)`;
+          // Transform Slide
+          track.style.transition = instant ? 'none' : 'transform 0.6s ease';
+          track.style.transform = `translateX(-${index * 100}%)`;
 
-  // Aktiviere nur die echte Karten, keine für Klon
-  cards.forEach((card, i) => {
-    card.classList.toggle('active', i === index);
-  });
+          // Aktiviere nur die echte Karten, keine für Klon
+          cards.forEach((card, i) => {
+            card.classList.toggle('active', i === index);
+          });
 
-  // Dots korrekt setzen
-  dots.forEach(dot => dot.classList.remove('active'));
+          // Dots korrekt setzen
+          dots.forEach(dot => dot.classList.remove('active'));
 
-  if (isCloneSlide) {
-    dots[0].classList.add('active');
-  } else {
-    if (dots[index]) dots[index].classList.add('active');
-  }
-};
+          if (isCloneSlide) {
+            dots[0].classList.add('active');
+          } else {
+            if (dots[index]) dots[index].classList.add('active');
+          }
+        };
 
-const startAutoSlide = () => {
-  interval = setInterval(() => {
-    currentIndex++;
-    if (currentIndex === cards.length) {
-      goToSlide(currentIndex, true); // springe zu geklonter Karte ohne Animation
-      currentIndex = 1;
-      setTimeout(() => goToSlide(currentIndex), 20); // spring weich zu echter 1. Karte
-    } else {
-      goToSlide(currentIndex);
-    }
-  }, 3000);
-};
+        const startAutoSlide = () => {
+          interval = setInterval(() => {
+            currentIndex++;
+            if (currentIndex === cards.length) {
+              goToSlide(currentIndex, true); // springe zu geklonter Karte ohne Animation
+              currentIndex = 1;
+              setTimeout(() => goToSlide(currentIndex), 20); // spring weich zu echter 1. Karte
+            } else {
+              goToSlide(currentIndex);
+            }
+          }, 3000);
+        };
 
-      // Touch swipe
-      let startX = 0;
-      track.addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX;
-        clearInterval(interval);
-      });
+        // Touch swipe
+        let startX = 0;
+        track.addEventListener('touchstart', e => {
+          startX = e.touches[0].clientX;
+          clearInterval(interval);
+        }, { passive: true });
 
-      track.addEventListener('touchend', e => {
-        const diff = e.changedTouches[0].clientX - startX;
-        if (Math.abs(diff) > 50) {
-          if (diff < 0 && currentIndex < cards.length - 1) currentIndex++;
-          else if (diff > 0 && currentIndex > 0) currentIndex--;
-        }
-        goToSlide(currentIndex);
-        startAutoSlide();
-      });
+        track.addEventListener('touchend', e => {
+          const diff = e.changedTouches[0].clientX - startX;
+          if (Math.abs(diff) > 50) {
+            if (diff < 0 && currentIndex < cards.length - 1) currentIndex++;
+            else if (diff > 0 && currentIndex > 0) currentIndex--;
+          }
+          goToSlide(currentIndex);
+          startAutoSlide();
+        }, { passive: true });
 
-      // Pause on hover
-      track.addEventListener("mouseenter", () => clearInterval(interval));
-      track.addEventListener("mouseleave", startAutoSlide);
+        // Pause on hover
+        track.addEventListener("mouseenter", () => clearInterval(interval));
+        track.addEventListener("mouseleave", startAutoSlide);
 
-      // Dots click
-      dots.forEach(dot => {
-        dot.addEventListener("click", e => {
-          const i = parseInt(e.target.dataset.index, 10);
-          goToSlide(i);
+        // Dots click
+        dots.forEach(dot => {
+          dot.addEventListener("click", e => {
+            const i = parseInt(e.target.dataset.index, 10);
+            goToSlide(i);
+          });
         });
-      });
 
-      // Init
-      goToSlide(0);
-      startAutoSlide();
+        // Init
+        goToSlide(0);
+        startAutoSlide();
+      }
     }
-  }
 
-  customElements.define("testimonial-slider", TestimonialSlider);
-</script>
+    customElements.define("testimonial-slider", TestimonialSlider);
+  </script>
 
 
-  
+
   <section class="kontakt-clean" id="kontakt">
     <div class="kontakt-wrapper">
       <h2 class="section-title">Lass uns loslegen!</h2>
@@ -2120,7 +2135,7 @@ const startAutoSlide = () => {
         Eine starke Idee verdient ein starkes digitales Erlebnis. <br />
         Erzähle uns von Deinem Projekt – wir bringen es gemeinsam auf das nächste Level.
       </p>
-  
+
       <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm">
         <input type="text" name="name" placeholder="Name" required />
         <input type="email" name="email" placeholder="E-Mail-Adresse" required />
@@ -2130,15 +2145,16 @@ const startAutoSlide = () => {
       </form>
     </div>
   </section>
-  
+
   <style>
-.kontakt-clean {
-  background: #ffffff;
-  padding: 6rem 2rem;
-  text-align: center;
-  font-family: 'Inter', sans-serif;
-  margin-top: 5rem; /* <-- das ist neu */
-}
+    .kontakt-clean {
+      background: #ffffff;
+      padding: 6rem 2rem;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      margin-top: 5rem;
+      /* <-- das ist neu */
+    }
 
     .kontakt-title {
       font-size: 2.6rem;
@@ -2146,7 +2162,7 @@ const startAutoSlide = () => {
       color: #000000;
       margin-bottom: 1rem;
     }
-  
+
     .kontakt-subline {
       font-size: 1.2rem;
       color: #666;
@@ -2154,29 +2170,29 @@ const startAutoSlide = () => {
       max-width: 700px;
       margin: 0 auto 3rem;
     }
-  
+
     .kontakt-wrapper {
       max-width: 80vw;
       margin: 0 auto;
     }
-  
+
     .kontakt-form {
       display: flex;
       flex-direction: column;
       gap: 1.2rem;
     }
-  
+
     .kontakt-form input,
     .kontakt-form textarea {
       padding: 1rem;
       font-size: 1rem;
       border: 1px solid #ddd;
       border-radius: 10px;
-      background: rgba(255,255,255,0.8);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
       transition: all 0.3s ease;
     }
-  
+
     .kontakt-form input:focus,
     .kontakt-form textarea:focus {
       border-color: #ff6600;
@@ -2187,66 +2203,67 @@ const startAutoSlide = () => {
 
 
     .kontakt-btn {
-  background: linear-gradient(135deg, #ff6a00, hsl(24, 100%, 93%),  #ff6a00);
-  background-size: 300% 300%;
-  animation: gradientShift 18s ease infinite;
-  color: #252525;
-  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
-  font-weight: 700;
-  border: none;
-  padding: clamp(0.8rem, 2.5vw, 1rem) clamp(1.8rem, 4vw, 2.2rem);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-}
+      background: linear-gradient(135deg, #ff6a00, hsl(24, 100%, 93%), #ff6a00);
+      background-size: 300% 300%;
+      animation: gradientShift 18s ease infinite;
+      color: #252525;
+      font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+      font-weight: 700;
+      border: none;
+      padding: clamp(0.8rem, 2.5vw, 1rem) clamp(1.8rem, 4vw, 2.2rem);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+    }
 
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
 
-.kontakt-btn:hover,
-.kontakt-btn:focus-visible {
-  transform: scale(1.04);
-  box-shadow: 0 6px 20px #ffb07366;
-  outline: none;
-}
+      50% {
+        background-position: 100% 50%;
+      }
 
-.kontakt-btn:focus-visible {
-  outline: 2px dashed #ff6600;
-  outline-offset: 4px;
-}
+      100% {
+        background-position: 0% 50%;
+      }
+    }
 
-.kontakt-btn.sent {
-  background: linear-gradient(135deg, #00c851, #007e33);
-  background-size: 200%;
-  animation: none;
-  box-shadow: 0 0 14px rgba(0, 200, 81, 0.6);
-  transform: scale(1.02);
-  color: #fff;
-}
+    .kontakt-btn:hover,
+    .kontakt-btn:focus-visible {
+      transform: scale(1.04);
+      box-shadow: 0 6px 20px #ffb07366;
+      outline: none;
+    }
 
+    .kontakt-btn:focus-visible {
+      outline: 2px dashed #ff6600;
+      outline-offset: 4px;
+    }
+
+    .kontakt-btn.sent {
+      background: linear-gradient(135deg, #00c851, #007e33);
+      background-size: 200%;
+      animation: none;
+      box-shadow: 0 0 14px rgba(0, 200, 81, 0.6);
+      transform: scale(1.02);
+      color: #fff;
+    }
   </style>
   <script>
     const form = document.getElementById("kontaktForm");
-  
+
     form.addEventListener("submit", async function (e) {
       e.preventDefault(); // Nur um fetch zu nutzen statt normalem submit
-  
+
       const formData = new FormData(form);
       const button = form.querySelector(".kontakt-btn");
-      
+
       try {
         const response = await fetch("https://formspree.io/f/xqapdvaq", {
           method: "POST",
@@ -2255,7 +2272,7 @@ const startAutoSlide = () => {
             'Accept': 'application/json'
           }
         });
-  
+
         if (response.ok) {
           button.innerText = "✅ Anfrage gesendet!";
           button.classList.add("sent");
@@ -2263,233 +2280,255 @@ const startAutoSlide = () => {
         } else {
           button.innerText = "⚠️ Fehler beim Senden";
         }
-  
+
       } catch (error) {
         button.innerText = "❌ Netzwerkfehler";
       }
-  
+
       setTimeout(() => {
         button.innerText = "🚀 Jetzt Anfrage senden!";
         button.classList.remove("sent");
       }, 4000);
     });
   </script>
-  
-  
+
+
 
   <!-- ⬇️ Footer mit ARIA, SEO, Lazyload, optimiertem CSS, Barrierefreiheit -->
-<footer role="contentinfo" itemscope itemtype="https://schema.org/Organization">
-  <div class="footer-grid">
-    <div class="footer-logo glass-card">
-      <span itemprop="name">Fusion³</span>
-      <p>UX & Webdesign<br>Nutzerzentriert.<br>Visuell stark.<br>Technisch fundiert.</p>
-    </div>
-
-    <div class="footer-links glass-card">
-      <h4>Rechtliches</h4>
-      <ul>
-        <li><a href="/impressum.html">Impressum</a></li>
-        <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
-        <li><a href="/cookies.html">Cookie-Hinweis</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-contact glass-card">
-      <h4>Kontakt</h4>
-      <ul>
-        <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
-        <li><a href="tel:+491234567890" itemprop="telephone">+49 123 4567890</a></li>
-        <li itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-          <span itemprop="addressLocality">Berlin</span>, <span itemprop="addressCountry">Deutschland</span>
-        </li>
-      </ul>
-    </div>
-
-    <div class="footer-socials glass-card">
-      <h4>Social Media</h4>
-      <div class="footer-socials-icons">
-        <!-- Gmail -->
-        <a href="mailto:hello@fusion3.de" title="E-Mail schreiben" aria-label="E-Mail schreiben">
-          <img src="./FooterIcons/Gmail.png" alt="Gmail Icon" width="28" height="28" loading="lazy" />
-        </a>
-    
-        <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/" title="LinkedIn" target="_blank" rel="noopener" aria-label="LinkedIn besuchen">
-          <img src="./FooterIcons/LinkedIn.png" alt="LinkedIn Icon" width="28" height="28" loading="lazy" />
-        </a>
-    
-        <!-- WhatsApp -->
-        <a href="https://wa.me/491234567890" title="WhatsApp schreiben" target="_blank" rel="noopener" aria-label="WhatsApp schreiben">
-          <img src="./FooterIcons/Whatsapp.svg" alt="WhatsApp Icon" width="28" height="28" loading="lazy" />
-        </a>
+  <footer role="contentinfo" itemscope itemtype="https://schema.org/Organization">
+    <div class="footer-grid">
+      <div class="footer-logo glass-card">
+        <span itemprop="name">Fusion³</span>
+        <p>UX & Webdesign<br>Nutzerzentriert.<br>Visuell stark.<br>Technisch fundiert.</p>
       </div>
+
+      <div class="footer-links glass-card">
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="/impressum.html">Impressum</a></li>
+          <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
+          <li><a href="/cookies.html">Cookie-Hinweis</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact glass-card">
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
+          <li><a href="tel:+491234567890" itemprop="telephone">+49 123 4567890</a></li>
+          <li itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <span itemprop="addressLocality">Berlin</span>, <span itemprop="addressCountry">Deutschland</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-socials glass-card">
+        <h4>Social Media</h4>
+        <div class="footer-socials-icons">
+          <!-- Gmail -->
+          <a href="mailto:hello@fusion3.de" title="E-Mail schreiben" aria-label="E-Mail schreiben">
+            <img src="./FooterIcons/Gmail.png" alt="Gmail Icon" width="28" height="28" loading="lazy" />
+          </a>
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/" title="LinkedIn" target="_blank" rel="noopener"
+            aria-label="LinkedIn besuchen">
+            <img src="./FooterIcons/LinkedIn.png" alt="LinkedIn Icon" width="28" height="28" loading="lazy" />
+          </a>
+
+          <!-- WhatsApp -->
+          <a href="https://wa.me/491234567890" title="WhatsApp schreiben" target="_blank" rel="noopener"
+            aria-label="WhatsApp schreiben">
+            <img src="./FooterIcons/Whatsapp.svg" alt="WhatsApp Icon" width="28" height="28" loading="lazy" />
+          </a>
+        </div>
+      </div>
+
     </div>
-    
-  </div>
 
-  <p class="footer-bottom glass-card">
-    © <span id="currentYear"></span> Fusion³ – Alle Rechte vorbehalten. DSGVO-konform & barrierearm entwickelt.
-  </p>
-  </div>
-</footer>
+    <p class="footer-bottom glass-card">
+      © <span id="currentYear"></span> Fusion³ – Alle Rechte vorbehalten. DSGVO-konform & barrierearm entwickelt.
+    </p>
+    </div>
+  </footer>
 
-<style>
-  footer {
-    position: relative;
-    background: white;
-    background-size: 600% 600%;
-    animation: animatedGradient 20s ease infinite;
-    color: #222;
-    padding: 4rem 5vw 6rem;
-    font-size: 0.9rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    z-index: 1;
-  }
-
-  @keyframes animatedGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  .footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto 2rem;
-    position: relative;
-    z-index: 2;
-  }
-
-  .footer-logo span {
-    font-size: 1.6rem;
-    font-weight: 900;
-    color: var(--primary, darkorange);
-  }
-
-  .footer-logo p {
-    margin-top: 0.5rem;
-    color: #555;
-    font-size: 0.95rem;
-  }
-
-  .footer-links h4,
-  .footer-contact h4,
-  .footer-socials h4 {
-    margin-bottom: 0.8rem;
-    color: rgb(65, 64, 64);
-    font-weight: 600;
-    font-size: 1rem;
-  }
-
-  .footer-links ul,
-  .footer-contact ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .footer-links li,
-  .footer-contact li {
-    margin-bottom: 0.4rem;
-  }
-
-  .footer-links a {
-    color: #444;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-
-  .footer-links a:hover {
-    color: black;
-    transform: translateX(4px);
-    filter: brightness(1.2) drop-shadow(0 0 6px white);
-  }
-  
-    .footer-socials-icons {
-  display: flex;
-  gap: 12px;
-  margin-top: 0.5rem;
-  justify-content: flex-start; /* ← Icons nach links schieben */
-}
-
-  
-
-  .footer-socials img {
-    width: clamp(24px, 4vw, 30px);
-    height: auto;
-    opacity: 1;
-    transition: transform 0.3s ease, filter 0.3s ease;
-    filter: grayscale(20%);
-  }
-
-  .footer-socials img:hover {
-    transform: scale(1.2);
-    filter: brightness(1.2) drop-shadow(0 0 6px white);
-  }
-
-  .footer-bottom {
-    text-align: center;
-    color: #555;
-    font-size: 0.85rem;
-    margin-top: 1.5rem;
-    position: relative;
-    z-index: 2;
-  }
-
-  .glass-card {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 1.5rem;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    animation: glassPulse 6s ease-in-out infinite;
-  }
-
-  @keyframes glassPulse {
-    0% { background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(6px); }
-    50% { background: rgba(255, 255, 255, 0.18); backdrop-filter: blur(14px); }
-    100% { background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(6px); }
-  }
-
-
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      animation: none !important;
-      transition: none !important;
-    }
-  }
-
-  @media (max-width: 768px) {
+  <style>
     footer {
-      font-size: 0.85rem;
-      padding: 3rem 1.5rem 5rem;
+      position: relative;
+      background: white;
+      background-size: 600% 600%;
+      animation: animatedGradient 20s ease infinite;
+      color: #222;
+      padding: 4rem 5vw 6rem;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    @keyframes animatedGradient {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     .footer-grid {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 2rem;
-    }
-
-    .glass-card {
-      padding: 1.2rem;
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+      position: relative;
+      z-index: 2;
     }
 
     .footer-logo span {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--primary, darkorange);
+    }
+
+    .footer-logo p {
+      margin-top: 0.5rem;
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .footer-links h4,
+    .footer-contact h4,
+    .footer-socials h4 {
+      margin-bottom: 0.8rem;
+      color: rgb(65, 64, 64);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .footer-links ul,
+    .footer-contact ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li,
+    .footer-contact li {
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-links a {
+      color: #444;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: black;
+      transform: translateX(4px);
+      filter: brightness(1.2) drop-shadow(0 0 6px white);
+    }
+
+    .footer-socials-icons {
+      display: flex;
+      gap: 12px;
+      margin-top: 0.5rem;
+      justify-content: flex-start;
+      /* ← Icons nach links schieben */
+    }
+
+
+
+    .footer-socials img {
+      width: clamp(24px, 4vw, 30px);
+      height: auto;
+      opacity: 1;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      filter: grayscale(20%);
+    }
+
+    .footer-socials img:hover {
+      transform: scale(1.2);
+      filter: brightness(1.2) drop-shadow(0 0 6px white);
     }
 
     .footer-bottom {
-      font-size: 0.75rem;
-      margin-top: 2rem;
+      text-align: center;
+      color: #555;
+      font-size: 0.85rem;
+      margin-top: 1.5rem;
+      position: relative;
+      z-index: 2;
     }
 
-  }
-</style>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      animation: glassPulse 6s ease-in-out infinite;
+    }
+
+    @keyframes glassPulse {
+      0% {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(6px);
+      }
+
+      50% {
+        background: rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(14px);
+      }
+
+      100% {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(6px);
+      }
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      footer {
+        font-size: 0.85rem;
+        padding: 3rem 1.5rem 5rem;
+      }
+
+      .footer-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .glass-card {
+        padding: 1.2rem;
+      }
+
+      .footer-logo span {
+        font-size: 1.4rem;
+      }
+
+      .footer-bottom {
+        font-size: 0.75rem;
+        margin-top: 2rem;
+      }
+
+    }
+  </style>
 
 
   <style>
