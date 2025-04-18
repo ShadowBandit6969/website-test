@@ -1662,12 +1662,14 @@
       opacity: 1;
       transform: translateY(0);
     }
-
     .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px; /* ❗ maximale Breite */
+  margin: 0 auto;     /* ❗ zentriert die Gallery */
+}
+
 
     .gallery-item {
       position: relative;
@@ -1773,6 +1775,17 @@
     }
 
     @media (max-width: 425px) {
+      .gallery {
+    padding: 0 1rem;
+    max-width: 100%;
+    justify-items: center;
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-item {
+    max-width: 100%;
+    margin: 0 auto;
+  }
       .tab-buttons {
         display: grid;
         grid-template-columns: repeat(2, minmax(140px, 1fr));
