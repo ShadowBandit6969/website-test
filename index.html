@@ -112,9 +112,6 @@
 
 
 
-<!-- Lottie Player Script einbinden -->
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-
 <style>
   :root {
     --primary: #ff6600;
@@ -1803,16 +1800,6 @@ const startAutoSlide = () => {
   <p class="footer-bottom glass-card">
     © <span id="currentYear"></span> Fusion³ – Alle Rechte vorbehalten. DSGVO-konform & barrierearm entwickelt.
   </p>
-
-  <div class="lottie-footer-bg">
-    <lottie-player
-      id="lottieFooter"
-      src="./Lottiefiles/KP.json"
-      background="transparent"
-      speed="1"
-      loop
-      autoplay
-    ></lottie-player>
   </div>
 </footer>
 
@@ -1938,21 +1925,6 @@ const startAutoSlide = () => {
     100% { background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(6px); }
   }
 
-  .lottie-footer-bg {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 400px;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .lottie-footer-bg lottie-player {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
 
   @media (prefers-reduced-motion: reduce) {
     * {
@@ -1986,24 +1958,8 @@ const startAutoSlide = () => {
       margin-top: 2rem;
     }
 
-    .lottie-footer-bg {
-      height: 180px;
-    }
   }
 </style>
-
-<!-- JS: Jahr automatisch setzen + Lottie deaktivieren bei reduced motion -->
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-<script>
-  // Jahr dynamisch setzen
-  document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-  // Lottie deaktivieren bei "prefers-reduced-motion"
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const lottie = document.getElementById('lottieFooter');
-    if (lottie) lottie.remove();
-  }
-</script>
 
 
   <style>
