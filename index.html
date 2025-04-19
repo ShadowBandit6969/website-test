@@ -650,9 +650,7 @@
 
     .service-card {
       position: relative;
-      background: #fff;
-      /* Klare, weiße Basis für ein modernes Erscheinungsbild */
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      background: linear-gradient(135deg, #ffffff 0%, #ffffff 20%, #9e9e9e80 100%);
       /* Sehr dezente Umrandung */
       border-radius: 16px;
       /* Modern abgerundete Ecken */
@@ -725,6 +723,16 @@
     .service-card ul li {
       margin-bottom: 0.75rem;
     }
+    .service-card {
+  display: flex;
+  flex-direction: column;
+}
+.service-card .inner {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
 
     .cta {
       display: inline-block;
@@ -734,13 +742,19 @@
       color: rgb(75, 75, 75);
       text-decoration: none;
       border: 1px solid rgb(68, 68, 68);
+      background-color: hwb(0 87% 13%);
       padding: 0.6rem 1.3rem;
       border-radius: 8px;
       transition: all 0.3s ease;
     }
+    .cta {
+  margin-top: 2rem;       /* Abstand zum vorherigen Text */
+  margin-bottom: 1rem;    /* Luft zum unteren Kartenrand */
+  align-self: flex-start; /* Optional: links ausrichten, oder center für mittig */
+}
 
     .cta:hover {
-      background-color: hwb(327 82% 0%);
+      background-color: hwb(0 95% 5%);
       box-shadow: 0 0 0 2px rgba(118, 138, 180, 0.15);
     }
 
@@ -1097,6 +1111,7 @@
       }
     }
   </style>
+  
   <section class="white-transition-section" id="prozess">
     <div class="white-world visible" id="whiteWorld">
 
@@ -1657,15 +1672,15 @@
     }
 
     .media-wrapper {
-      max-height: 240px;
       overflow: hidden;
+      aspect-ratio: 4 / 3; /* gleichmäßiges Verhältnis */
     }
 
     .media-wrapper img,
     .media-wrapper video {
       width: 100%;
-      height: auto;
-      object-fit: cover;
+      height: 100%;
+      object-fit: contain;
       transition: transform 0.4s ease;
       border-radius: 18px 18px 0 0;
     }
@@ -1739,11 +1754,93 @@
       transition: all 0.3s ease;
     }
 
+
+
     .cta-btn:hover {
       background-color: #fff;
       color: var(--primary, #f97316);
       transform: scale(1.05);
     }
+    @media (max-width: 768px) {
+  .tab-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+    padding: 0 1rem;
+  }
+
+  .tab {
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .tab i {
+    display: none; /* Optional: Icons ausblenden, wenn zu eng */
+  }
+}
+@media (max-width: 480px) {
+  .tab-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+    gap: 0.6rem;
+    padding: 0 1rem;
+  }
+
+  .tab {
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 0.5rem 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }  .tab.active {
+    background: #e5e5e5; /* Hellgrau */
+    color: #111;
+    border-color: #ccc;
+    box-shadow: none;
+  }
+
+  .tab i {
+    display: none; /* Optional: Versteckt Icons bei sehr schmalen Screens */
+  }
+}
+@media (max-width: 360px) {
+  .tab-buttons {
+    grid-template-columns: repeat(2, minmax(70px, 1fr)); /* Noch schmaler */
+    gap: 0.4rem;
+    padding: 0 0.5rem;
+  }
+
+  .tab {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.5rem;
+    max-width: 140px;
+    margin: 0 auto;
+    border-radius: 25px;
+  }
+
+  .tab.active {
+    background: #e0e0e0;
+    color: #111;
+    border-color: #bbb;
+  }
+  .tab:active {
+  background-color: #d6d6d6 !important;
+  transform: scale(0.98);
+}
+
+  .tab i {
+    display: none;
+  }
+}
 
     @media (max-width: 425px) {
       .gallery {
@@ -1895,14 +1992,15 @@
              opacity: 1;
             pointer-events: auto;
           }
-
-          .inner-card {
-            width: clamp(280px, 80vw, 360px);
-            background: linear-gradient(to bottom, #e6f0ff, #ffffff);
-            border-radius: 14px;
-            padding: 2rem;
-            text-align: center;
-          }
+.inner-card {
+  width: clamp(280px, 80vw, 360px);
+  max-width: 100%;
+  background: linear-gradient(to bottom, #ffffff, #f0f0f0); /* Weiß zu sehr hellem Grau */
+  border-radius: 14px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Leichte Tiefe */
+}
 
           .avatar-logo {
             display: flex;
