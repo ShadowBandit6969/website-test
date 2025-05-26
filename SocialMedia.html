@@ -176,7 +176,7 @@
 
         .tech-card {
             position: relative;
-            background: rgba(15, 15, 15, 0.6);
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 18px;
             overflow: hidden;
             transform-style: preserve-3d;
@@ -202,7 +202,7 @@
             padding: 2rem;
             height: 100%;
             backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(0, 0, 0, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
         }
@@ -228,35 +228,38 @@
         }
 
 
-        /* Aktualisierte Listeneinträge */
-        .tech-card li {
-            margin-bottom: 0.8rem;
-            position: relative;
-            padding-left: 1.6rem;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 500;
-            line-height: 1.4;
-            color: #e6e6e6;
-        }
+.tech-card li {
+    margin-bottom: 0.9rem;
+    position: relative;
+    padding-left: 1.6rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: #1c1c1e;
+    line-height: 1.75;
+    letter-spacing: -0.015em;
+    transition: color 0.3s ease;
+}
 
-        .tech-card li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0.45rem;
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            transform: rotate(45deg);
-            box-shadow: 0 0 8px rgba(255, 102, 0, 0.3);
-            transition: all 0.3s ease;
-        }
 
-        .tech-card li:hover::before {
-            transform: rotate(135deg) scale(1.2);
-            background: var(--secondary);
-        }
+.tech-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.75rem;
+    width: 6px;
+    height: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+    opacity: 0.4;
+    transition: all 0.3s ease;
+}
+.tech-card li:hover::before {
+    opacity: 1;
+    transform: scale(1.2);
+    background: var(--secondary);
+}
+
 
         .bg-icon {
             position: absolute;
@@ -275,7 +278,7 @@
             width: 100%;
             height: 100%;
             border-radius: 18px;
-            background: linear-gradient(130deg, transparent, var(--primary), transparent);
+            background: linear-gradient(130deg, transparent, #c3d8ff, transparent);
             opacity: 0.05;
             mix-blend-mode: screen;
             animation: pulse 4s infinite ease-in-out;
@@ -1557,101 +1560,308 @@
       </script>
 
 
-    <section class="container" id="tools">
-        <h2>Unsere Leistungen</h2>
-        <h3> Jeder Post ist individuell maßgeschneidert – keine Templates von der Stange.</h3>
-        <div class="tech-showcase">
+<section class="pricing-clean container" id="pakete" aria-label="Social-Media-Pakete und Preise">
+  <h1 class="visually-hidden">Preise für Social Media Content Pakete</h1>
+  <h2 class="pricing-title">Social Media Pakete<br>Effektiv, Kreativ, Wiedererkennbar</h2>
+  <p class="pricing-subline">
+    Jeder Post ist individuell maßgeschneidert – keine Templates von der Stange. Perfekt für Marken mit Anspruch.
+  </p>
 
+  <div class="pricing-grid">
 
-            <div class="tech-card" data-title="Probierpaket">
-                <div class="inner">
-                    <h3>Probierpaket</h3>
-                    <ul>
-                        <li>1 Monat lang</li>
-                        <li>1 Social-Media Post pro Woche</li>
-                        <li>1 maßgeschneidertes 3D-Modell</li>
-                        <li>1 Video-Produktanimation & 2 Renderings</li>
-                        <li>SEO-Optimierung</li>
-                    </ul>
-                    <p class="price">
-                        199.00€ (einmalig)</p>
-                    <span class="bg-icon">🌐</span>
-                </div>
-                <div class="shimmer-border"></div>
-            </div>
+    <!-- Probierpaket -->
+    <article class="pricing-card">
+      <div class="icon-wrap"><i data-feather="zap"></i></div>
+      <h3>Probierpaket</h3>
+      <p class="tagline">Der Einstieg zum Testen</p>
+      <ul>
+        <li>✓ 1 Monat lang</li>
+        <li>✓ 1 Social-Media Post pro Woche</li>
+        <li>✓ 1 maßgeschneidertes 3D-Modell</li>
+        <li>✓ 1 Video-Produktanimation & 2 Renderings</li>
+        <li>✓ SEO-Optimierung</li>
+      </ul>
+      <p class="vorteil">Perfekt zum Reinschnuppern. Erstklassige Inhalte für einen Monat.</p>
+      <div class="preis">199.00 € <span>(einmalig)</span></div>
+    </article>
 
-            <div class="tech-card" data-title="Monatsabbo">
-                <div class="inner">
-                    <h3>Monatsabbo</h3>
-                    <ul>
-                        <li>2 Social-Media Posts pro Woche</li>
-                        <li>1 maßgeschneidertes 3D-Modell</li>
-                        <li>1 Video-Produktanimation & zahlreiche Renderings</li>
-                        <li>Werbekampagnen & Ad-Designs</li>
-                        <li>SEO-Optimierung</li>
-                    </ul>
-                    <p class="price">399.00€ / Monat*</p>
-                    <span class="bg-icon">🧊</span>
-                </div>
-                <div class="shimmer-border"></div>
-            </div>
+    <!-- Monatsabbo -->
+    <article class="pricing-card">
+      <div class="icon-wrap"><i data-feather="repeat"></i></div>
+      <h3>Monatsabbo</h3>
+      <p class="tagline">Regelmäßig präsent sein</p>
+      <ul>
+        <li>✓ 2 Social-Media Posts pro Woche</li>
+        <li>✓ 1 maßgeschneidertes 3D-Modell</li>
+        <li>✓ 1 Video-Produktanimation & zahlreiche Renderings</li>
+        <li>✓ Werbekampagnen & Ad-Designs</li>
+        <li>✓ SEO-Optimierung</li>
+      </ul>
+      <p class="vorteil">Ideal für wachsende Marken, die konstant sichtbar bleiben wollen.</p>
+      <div class="preis">399.00 € <span>/ Monat*</span></div>
+    </article>
 
-            <div class="tech-card" data-title="3 Monatsabbo">
-                <div class="inner">
-                    <h3>3 Monatsabbo</h3>
-                    <ul>
-                        <li>3 Social-Media Posts pro Woche</li>
-                        <li>2 maßgeschneiderte 3D-Modelle</li>
-                        <li>2 Video-Produktanimationen & zahlreiche Renderings</li>
-                        <li>platformspezifische Content-Strategien</li>
-                        <li>Werbekampagnen & Ad-Designs</li>
-                        <li>SEO-Optimierung</li>
-                    </ul>
-                    <p class="price">1099.00 € / alle 3 Monate*</p>
-                    <span class="bg-icon">🖌️</span>
-                </div>
-                <div class="shimmer-border"></div>
-            </div>
+    <!-- 3 Monatsabbo -->
+    <article class="pricing-card">
+      <div class="icon-wrap"><i data-feather="calendar"></i></div>
+      <h3>3 Monatsabbo</h3>
+      <p class="tagline">Effizienz im Quartal</p>
+      <ul>
+        <li>✓ 3 Social-Media Posts pro Woche</li>
+        <li>✓ 2 maßgeschneiderte 3D-Modelle</li>
+        <li>✓ 2 Video-Produktanimationen & zahlreiche Renderings</li>
+        <li>✓ platformspezifische Content-Strategien</li>
+        <li>✓ Werbekampagnen & Ad-Designs</li>
+        <li>✓ SEO-Optimierung</li>
+      </ul>
+      <p class="vorteil">Mehr Content. Mehr Strategie. Mehr Sichtbarkeit – über 3 Monate hinweg.</p>
+      <div class="preis">1.099.00 € <span>/ 3 Monate*</span></div>
+    </article>
 
-            <div class="tech-card" data-title="Templates für Brand-Konsistenz">
-                <div class="inner">
-                    <h3>Templates für Brand-Konsistenz</h3>
-                    <h4 style="margin-top: -0.9rem; margin-bottom: 1.5rem; font-weight: 400; color: #ff9f68; text-align: center;">
-                        Nur noch Bilder & Text tauschen <br> fertig ist Ihr Post!
-                    </h4>
-                    <ul>
-                        <li>Template-Systeme für Brand-Konsistenz</li>
-                        <li>25 Photoshop/InDesign oder Canva Templates</li>
-                        <li>4 maßgeschneiderte 3D-Modelle</li>
-                        <li>4 Video-Produktanimationen & zahlreiche Renderings</li>
-                        <li>platformspezifische Content-Strategien</li>
-                        <li>Werbekampagnen & Ad-Designs</li>
-                        <li>SEO-Optimierung</li>
-                    </ul>
-                    <p class="price">2999.00€ (einmalig)</p>
-                    <span class="bg-icon">🚀</span>
-                </div>
-                <div class="shimmer-border"></div>
-            </div>
-         </div>
-         <h3 class="tools-note">*Die Abonnements verlängern sich automatisch, sofern sie nicht fristgerecht gekündigt werden. Das Abbonement kann jederzeit gekündigt werden.</h3>
-    </section>
+    <!-- Templates -->
+    <article class="pricing-card highlight">
+      <div class="icon-wrap"><i data-feather="layout"></i></div>
+      <h3>Templates für Brand-Konsistenz</h3>
+      <p class="tagline">Skalierbar & markenkonform</p>
+      <ul>
+        <li>✓ 25 Photoshop/InDesign oder Canva Templates</li>
+        <li>✓ 4 maßgeschneiderte 3D-Modelle</li>
+        <li>✓ 4 Video-Produktanimationen & zahlreiche Renderings</li>
+        <li>✓ platformspezifische Content-Strategien</li>
+        <li>✓ Werbekampagnen & Ad-Designs</li>
+        <li>✓ SEO-Optimierung</li>
+      </ul>
+      <p class="vorteil">Einmal erstellt, vielfach verwendet. Ideal für Teams mit Markenrichtlinien.</p>
+      <div class="preis">2.999.00 € <span>(einmalig)</span></div>
+    </article>
 
+  </div>
+
+  <h3 class="tools-note">*Die Abonnements verlängern sich automatisch, sofern sie nicht fristgerecht gekündigt werden. Das Abonnement kann jederzeit gekündigt werden.</h3>
+</section>
+
+<!-- Styles -->
+<style>
+:root {
+  --primary: #ff6600;
+  --secondary: #ffb266;
+  --text-color: #111;
+  --bg-light: #ffffff;
+  --highlight: #ffe2bd;
+}
+
+.visually-hidden {
+  position: absolute;
+  left: -9999px;
+}
+
+.pricing-clean {
+  background: var(--bg-light);
+  text-align: center;
+  color: var(--text-color);
+}
+
+.pricing-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 900;
+  margin-bottom: 0.8rem;
+}
+
+.pricing-subline {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 4rem;
+}
+
+.preis-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+#preisModus {
+  background: var(--secondary);
+  border: none;
+  color: #111;
+  font-weight: bold;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+#preisModus:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1200px) {
+  .pricing-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #ffffff, #e6f0ff);
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 2.5rem 1.8rem;
+  text-align: left;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+.pricing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+}
+
+.pricing-card h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+}
+
+.tagline {
+  font-size: 1rem;
+  color: #888;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+.pricing-card ul li {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.vorteil {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.preis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111;
+  background: var(--secondary);
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(255, 148, 77, 0.3);
+  text-align: center;
+  width: 100%;
+}
+.preis span {
+  font-weight: 400;
+  font-size: 0.95rem;
+  margin-left: 0.4rem;
+}
+
+.highlight {
+  border: 2px solid #111;
+  background: linear-gradient(135deg, #ffffff, var(--highlight));
+}
+
+.icon-wrap {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.icon-wrap i {
+  stroke: #fff;
+  width: 24px;
+  height: 24px;
+}
+
+/* Ergänzende Styles für bessere Responsivität der Prozess-Sektion */
+
+@media (max-width: 992px) {
+  .epic-step h3 {
+    font-size: 1.2rem;
+  }
+
+  .epic-step p {
+    font-size: 0.95rem;
+  }
+
+  .step-number {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .epic-step {
+    width: 100% !important;
+  }
+
+  .project-white-steps {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .epic-step h3 {
+    font-size: 1.1rem;
+  }
+
+  .epic-step p {
+    font-size: 0.9rem;
+  }
+
+  .white-content h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Zweispaltige Anordnung ab 768px */
+@media (min-width: 768px) {
+  .project-white-steps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    justify-items: center;
+  }
+
+  .epic-step {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+</style>
 
     <section class="white-transition-section" id="prozess">
         <div class="white-world visible" id="whiteWorld">
-            <!-- Wave Container -->
-            <div class="wave-container">
-                <svg class="wave wave1" viewBox="0 0 1440 320" preserveAspectRatio="none">
-                    <path fill="#f4f4f4" d="M0,192L1440,96L1440,320L0,320Z"></path>
-                </svg>
-                <svg class="wave wave2" viewBox="0 0 1440 320" preserveAspectRatio="none">
-                    <path fill="#eaeaea" d="M0,256L1440,160L1440,320L0,320Z"></path>
-                </svg>
-                <svg class="wave wave3" viewBox="0 0 1440 320" preserveAspectRatio="none">
-                    <path fill="#f4f4f4" d="M0,128L1440,224L1440,320L0,320Z"></path>
-                </svg>
-            </div>
 
             <div class="white-content">
                 <h2>So läuft ein Projekt mit Fusion³</h2>
