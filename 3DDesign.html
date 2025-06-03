@@ -43,7 +43,7 @@
       font-size: 2.8rem;
       text-align: center;
       margin-bottom: 0.5rem;
-      color: var(--text-main, #1c1c1e);
+      color: var(--text-main, #282828);
       font-weight: 600;
       letter-spacing: -0.02em;
     }
@@ -345,7 +345,7 @@
     letter-spacing: 0.1rem;
     line-height: 1.0;
     margin-bottom: 1rem;
-    color: #ffffff;
+    color: #151515;
     mix-blend-mode: exclusion;
     z-index: 3;
   }
@@ -353,7 +353,7 @@
   .hero-video-content p {
     font-size: 2rem;
     font-weight: 400;
-    color: #ffffff;
+    color: #181818;
     max-width: 90%;
     line-height: 1.6;
     mix-blend-mode: exclusion;
@@ -995,9 +995,8 @@ width: 170vw;
   </div>
 </section>
 
-
 <style>
-/* Grundlayout */
+/* ===== Allgemeines Layout ===== */
 .services-section {
   padding: 6rem 2rem;
   background: #fff;
@@ -1028,26 +1027,55 @@ width: 170vw;
 }
 
 .services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
+  justify-content: center;
+  align-items: flex-start; /* <--- DER ENTSCHEIDENDE FIX */
 }
 
 .service-card {
+  flex: 1 1 calc(33.333% - 2rem);
+  min-width: 260px;
+  box-sizing: border-box;
   background: #fff;
   border-radius: 16px;
   padding: 2rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   text-align: left;
   transition: 0.3s ease;
-  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .service-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
+/* RESPONSIVE: Tablet */
+@media (max-width: 992px) {
+  .service-card {
+    flex: 1 1 calc(50% - 2rem);
+  }
+}
+
+/* RESPONSIVE: Mobile */
+@media (max-width: 767px) {
+  .service-card {
+    flex: 1 1 100%;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* ===== Inhalte der Karte ===== */
 .icon-circle {
   width: 48px;
   height: 48px;
@@ -1083,32 +1111,17 @@ width: 170vw;
 .accordion-content {
   max-height: 0;
   overflow: hidden;
-  transition: all 0.4s ease;
   opacity: 0;
+  margin-top: 0;
+  pointer-events: none;
+  transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.3s ease;
 }
 
 .accordion-content.open {
-  max-height: 500px;
   opacity: 1;
+  pointer-events: auto;
   margin-top: 1rem;
-}
-
-.services-hint {
-  margin-top: 2rem;
-  font-size: 0.95rem;
-  color: #666;
-}
-
-/* Scroll Fade */
-.scroll-fade {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease-out;
-}
-
-.scroll-fade.visible {
-  opacity: 1;
-  transform: translateY(0);
+  /* max-height wird über JavaScript gesetzt */
 }
 
 .feature-list {
@@ -1133,7 +1146,6 @@ width: 170vw;
   line-height: 1.4;
 }
 
-/* Preisbox schön abgesetzt */
 .price-box {
   background: #f9f9f9;
   border-left: 4px solid #ffa94d;
@@ -1141,29 +1153,55 @@ width: 170vw;
   border-radius: 6px;
   font-weight: 600;
   color: #111;
-  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
 }
 
+.services-hint {
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* Scroll Fade Effekt */
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.scroll-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 </style>
+
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     feather.replace();
 
-    // Accordion Toggle
-    document.querySelectorAll(".accordion-toggle").forEach(button => {
-      button.addEventListener("click", () => {
-        const content = button.nextElementSibling;
-        const isOpen = content.classList.contains("open");
+    const toggles = document.querySelectorAll(".accordion-toggle");
 
-        // Close all
-        document.querySelectorAll(".accordion-content").forEach(c => c.classList.remove("open"));
-        document.querySelectorAll(".accordion-toggle").forEach(b => b.textContent = "Details anzeigen");
+    toggles.forEach(toggle => {
+      toggle.addEventListener("click", () => {
+        const currentContent = toggle.nextElementSibling;
+        const isOpen = currentContent.classList.contains("open");
 
-        // Open if was closed
+        // Alle schließen
+        document.querySelectorAll(".accordion-content").forEach(content => {
+          content.classList.remove("open");
+          content.style.maxHeight = null;
+        });
+
+        document.querySelectorAll(".accordion-toggle").forEach(btn => {
+          btn.textContent = "Details anzeigen";
+        });
+
+        // Falls geschlossen – öffnen
         if (!isOpen) {
-          content.classList.add("open");
-          button.textContent = "Details ausblenden";
+          currentContent.classList.add("open");
+          currentContent.style.maxHeight = currentContent.scrollHeight + "px";
+          toggle.textContent = "Details ausblenden";
         }
       });
     });
@@ -1192,7 +1230,7 @@ width: 170vw;
     handleScrollAnimation();
   });
 </script>
-<script src="https://unpkg.com/feather-icons"></script>
+
 
 
 <section class="workflow-section container" id="workflow" aria-label="Ablauf unseres 3D-Prozesses">

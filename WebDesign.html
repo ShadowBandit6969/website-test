@@ -2451,34 +2451,50 @@ const startAutoSlide = () => {
   padding: 0 3px;
   border-radius: 3px;
 }
+.faq-search-bar.floating {
+  position: fixed;
+  bottom: 1rem;       /* Immer 1rem vom unteren Rand entfernt */
+  right: 1rem;
+  width: 380px;
+  z-index: 1000;
+  background: white;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  flex-wrap: nowrap;
+  transition: all 0.3s ease;
+}
+
+.faq-search-bar.floating input {
+  font-size: 0.85rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.faq-search-bar.floating .faq-navigation button {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 600px) {
+  .faq-search-bar.floating {
+    width: 90%;
+    left: 5%;
+    right: 5%;
+    bottom: 1rem;
+  }
+}
 
 
   </style>
-  
-<script>
-  document.querySelectorAll('.faq-question').forEach(button => {
-    button.addEventListener('click', () => {
-      const faqItem = button.closest('.faq-item');
-      const answer = faqItem.querySelector('.faq-answer');
-      const isExpanded = button.getAttribute('aria-expanded') === 'true';
-
-      // Reset only this item
-      if (isExpanded) {
-        button.setAttribute('aria-expanded', 'false');
-        answer.style.maxHeight = null;
-      } else {
-        button.setAttribute('aria-expanded', 'true');
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-      }
-    });
-  });
-</script>
+ 
 <script>
   const faqItems = document.querySelectorAll('.faq-item');
   const searchInput = document.getElementById('faqSearchInput');
   const prevBtn = document.getElementById('prevResult');
   const nextBtn = document.getElementById('nextResult');
   const resultIndexLabel = document.getElementById('faqResultIndex');
+  const faqSection = document.querySelector('.faq-section');
+  const faqSearchBar = document.querySelector('.faq-search-bar');
 
   let searchResults = [];
   let currentResult = 0;
@@ -2489,6 +2505,46 @@ const startAutoSlide = () => {
       const answer = item.querySelector('.faq-answer');
       button.setAttribute('aria-expanded', 'false');
       answer.style.maxHeight = null;
+    });
+  }
+
+  function removeHighlights() {
+    faqItems.forEach(item => {
+      const answer = item.querySelector('.faq-answer');
+      answer.innerHTML = answer.innerHTML.replace(/<\/?mark>/g, '');
+    });
+  }
+
+  function highlightKeyword(node, keyword) {
+    const regex = new RegExp(`(${keyword.split(/\s+/).join('|')})`, 'gi');
+    if (node.nodeType === 3) {
+      const span = document.createElement('span');
+      span.innerHTML = node.nodeValue.replace(regex, '<mark>$1</mark>');
+      node.parentNode.replaceChild(span, node);
+    } else if (node.nodeType === 1 && node.childNodes && !['SCRIPT', 'STYLE'].includes(node.tagName)) {
+      [...node.childNodes].forEach(child => highlightKeyword(child, keyword));
+    }
+  }
+
+  function scrollToMarkInCurrentItem(item) {
+    const mark = item.querySelector('mark');
+    if (!mark) return;
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const rect = mark.getBoundingClientRect();
+        const scrollY = window.scrollY || window.pageYOffset;
+        const elementMiddle = rect.top + scrollY + rect.height / 2;
+        const viewportMiddle = window.innerHeight / 2;
+
+        const floatingBar = document.querySelector('.faq-search-bar.floating');
+        const barHeight = floatingBar ? floatingBar.offsetHeight + 16 : 0;
+
+        window.scrollTo({
+          top: elementMiddle - viewportMiddle - barHeight,
+          behavior: 'smooth'
+        });
+      });
     });
   }
 
@@ -2507,19 +2563,33 @@ const startAutoSlide = () => {
     button.setAttribute('aria-expanded', 'true');
     answer.style.maxHeight = answer.scrollHeight + 'px';
 
-    currentItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Warten bis das Accordion sich aufgebaut hat
+    answer.removeEventListener('transitionend', answer._scrollHandler || (() => {}));
 
-    resultIndexLabel.textContent = `${currentResult + 1} / ${searchResults.length}`;
+    const onTransitionEnd = () => {
+      scrollToMarkInCurrentItem(currentItem);
+      resultIndexLabel.textContent = `${currentResult + 1} / ${searchResults.length}`;
+      answer.removeEventListener('transitionend', onTransitionEnd);
+    };
+
+    answer._scrollHandler = onTransitionEnd;
+    answer.addEventListener('transitionend', onTransitionEnd);
   }
 
   function searchFaqs(keyword) {
-    keyword = keyword.toLowerCase();
+    keyword = keyword.toLowerCase().trim();
+    const keywordParts = keyword.split(/\s+/).filter(k => k.length > 1);
     searchResults = [];
+    removeHighlights();
 
     faqItems.forEach(item => {
-      const text = item.textContent.toLowerCase();
-      if (text.includes(keyword)) {
+      const text = item.innerText.toLowerCase();
+      const answer = item.querySelector('.faq-answer');
+      const matches = keywordParts.some(k => text.includes(k));
+
+      if (matches) {
         searchResults.push(item);
+        highlightKeyword(answer, keyword);
       }
     });
 
@@ -2529,12 +2599,16 @@ const startAutoSlide = () => {
 
   searchInput.addEventListener('input', (e) => {
     const keyword = e.target.value.trim();
+
     if (keyword.length > 1) {
       searchFaqs(keyword);
+      faqSearchBar.classList.add('floating');
     } else {
       searchResults = [];
       resultIndexLabel.textContent = '0 / 0';
       closeAllFaqs();
+      removeHighlights();
+      faqSearchBar.classList.remove('floating');
     }
   });
 
@@ -2551,50 +2625,36 @@ const startAutoSlide = () => {
       highlightCurrent();
     }
   });
-</script>
-<script>
-function removeHighlights() {
-  faqItems.forEach(item => {
-    const answer = item.querySelector('.faq-answer');
-    answer.innerHTML = answer.innerHTML.replace(/<\/?mark>/g, '');
-  });
-}
 
-function highlightKeyword(node, keyword) {
-  const regex = new RegExp(`(${keyword})`, 'gi');
-  if (node.nodeType === 3) { // Text node
-    const match = node.nodeValue.match(regex);
-    if (match) {
-      const span = document.createElement('span');
-      span.innerHTML = node.nodeValue.replace(regex, '<mark>$1</mark>');
-      node.parentNode.replaceChild(span, node);
-    }
-  } else if (node.nodeType === 1 && node.childNodes && !['SCRIPT', 'STYLE'].includes(node.tagName)) {
-    for (let i = 0; i < node.childNodes.length; i++) {
-      highlightKeyword(node.childNodes[i], keyword);
-    }
-  }
-}
+  // Floating-Suchleiste nur innerhalb FAQ-Sektion aktivieren
+  window.addEventListener('scroll', () => {
+    const sectionTop = faqSection.offsetTop;
+    const sectionBottom = sectionTop + faqSection.offsetHeight;
+    const scrollPos = window.scrollY;
 
-function searchFaqs(keyword) {
-  keyword = keyword.toLowerCase();
-  searchResults = [];
-  removeHighlights();
-
-  faqItems.forEach(item => {
-    const text = item.textContent.toLowerCase();
-    if (text.includes(keyword)) {
-      searchResults.push(item);
-
-      // Highlight in answer section only
-      const answer = item.querySelector('.faq-answer');
-      highlightKeyword(answer, keyword);
+    if (scrollPos >= sectionTop && scrollPos <= sectionBottom - 200 && searchInput.value.trim().length > 1) {
+      faqSearchBar.classList.add('floating');
+    } else {
+      faqSearchBar.classList.remove('floating');
     }
   });
 
-  currentResult = 0;
-  highlightCurrent();
-}
+  // FAQ-Accordion manuelles Öffnen/Schließen
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+      const faqItem = button.closest('.faq-item');
+      const answer = faqItem.querySelector('.faq-answer');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      if (isExpanded) {
+        button.setAttribute('aria-expanded', 'false');
+        answer.style.maxHeight = null;
+      } else {
+        button.setAttribute('aria-expanded', 'true');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
 </script>
 
 
