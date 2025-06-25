@@ -419,7 +419,6 @@
       text-align: center;
     }
   }
-
 </style>
 
 <body>
@@ -444,7 +443,7 @@
       <p>Wir konzipieren digitale Erlebnisse. <br>maßgeschneidert und klickbar.</p>
       <a class="cta-btn neon-btn" href="#kontakt"><span>Projekt anfragen</span></a>
     </div>
-    <video preload="none" class="video-background" autoplay muted loop playsinline   poster="./IndexM/Background.webm">
+    <video preload="none" class="video-background" autoplay muted loop playsinline poster="./IndexM/Background.webm">
       <source src="./IndexM/Background.webm" type="video/mp4" />
     </video>
   </section>
@@ -514,110 +513,220 @@
     </div>
   </section>
 
+  <style>
+    .persona-clean {
+      background: #fff;
+      text-align: center;
+      color: #111;
+      padding: 6rem 2rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
 
-<style>
-  .persona-clean {
-    background: #fff;
-    text-align: center;
-    color: #111;
-    padding: 6rem 2rem;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    .persona-title {
+      font-size: 2.4rem;
+      font-weight: 900;
+      margin-bottom: 0.8rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+
+    .persona-subline {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 4rem;
+    }
+
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .persona-card {
+      background: linear-gradient(135deg, #ffffff 0%, #ffffff 20%, #9e9e9e80 100%);
+      border: 1px solid #eee;
+      border-radius: 16px;
+      padding: 2.5rem 1.8rem;
+      text-align: left;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .persona-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .persona-card h3 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+      margin-top: 1.0rem;
+    }
+
+    .persona-card .tagline {
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .persona-card ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .persona-card ul li {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .persona-card .vorteil {
+      font-size: 0.95rem;
+      color: #555;
+      font-style: italic;
+    }.persona-card:nth-child(1) {
+  background: linear-gradient(270deg, #ff5c00, #ff7a29, #ff6600);
+  background-size: 400% 400%;
+  color: #fff;
+}
+
+.persona-card:nth-child(2) {
+  background: linear-gradient(270deg, #1a1a1a, #2a2a2a, #1f1f1f);
+  background-size: 400% 400%;
+  color: #fff;
+}
+
+.persona-card:nth-child(3) {
+  background: linear-gradient(270deg, #3a30ff, #6a00ff, #4d00e0);
+  background-size: 400% 400%;
+  color: #fff;
+}
+.persona-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  color: #fff;
+  will-change: transform, box-shadow;
+  background-position: 0% 50%;
+}
+
+/* Glow-Overlay */
+.persona-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.18), transparent 70%);
+  transform: scale(0.5);
+  opacity: 0;
+  transition: all 0.6s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.persona-card:hover::before {
+  transform: scale(1);
+  opacity: 0.25;
+}
+
+.persona-card:hover {
+  transform: translateY(-8px) scale(1.035);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+  animation: gradientPulse 6s ease infinite;
+  background-position: 100% 50%;
+  z-index: 10;
+}
+
+@keyframes gradientPulse {
+  0% {
+    background-position: 0% 50%;
   }
-
-  .persona-title {
-    font-size: 2.4rem;
-    font-weight: 900;
-    margin-bottom: 0.8rem;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  50% {
+    background-position: 100% 50%;
   }
-
-
-  .persona-subline {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 4rem;
+  100% {
+    background-position: 0% 50%;
   }
-
-  .persona-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 2rem;
-    justify-content: center;
-  }
-
-  .persona-card {
-    background: linear-gradient(135deg, #ffffff 0%, #ffffff 20%, #9e9e9e80 100%);
-    border: 1px solid #eee;
-    border-radius: 16px;
-    padding: 2.5rem 1.8rem;
-    text-align: left;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .persona-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
-  }
-
-  .persona-card h3 {
-    font-size: 1.6rem;
-    font-weight: 800;
-    margin-bottom: 0.4rem;
-    margin-top: 1.0rem;
-  }
-
-  .persona-card .tagline {
-    font-size: 1rem;
-    color: #888;
-    margin-bottom: 1rem;
-    font-weight: 500;
-  }
-
-  .persona-card ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 1.5rem;
-  }
-
-  .persona-card ul li {
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-    color: #333;
-  }
-
-  .persona-card .vorteil {
-    font-size: 0.95rem;
-    color: #555;
-    font-style: italic;
-  }
-
-
-@media (min-width: 600px) and (max-width: 908px) {
-  .persona-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-
-  .persona-grid .persona-card:nth-child(3) {
-    grid-column: 1 / -1; /* über beide Spalten */
-    max-width: 100%;
-    margin: 0;
-  }
+}
+.persona-card h3,
+.persona-card ul li,
+.persona-card .vorteil,
+.persona-card .tagline {
+  color: inherit;
 }
 
 
-  @media (max-width: 768px) {
-    .persona-clean {
-      padding: 4rem 1rem;
+
+    @media (min-width: 1200px) {
+      .persona-clean {
+        padding: 8rem 3rem;
+      }
+
+      .persona-clean.container {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .persona-title {
+        font-size: 3rem;
+      }
+
+      .persona-subline {
+        font-size: 1.3rem;
+      }
+
+      .persona-grid {
+        gap: 3rem;
+      }
+
+      .persona-card {
+        padding: 3rem 2.5rem;
+      }
+
+      .persona-card h3 {
+        font-size: 1.8rem;
+      }
+
+      .persona-card .tagline,
+      .persona-card ul li,
+      .persona-card .vorteil {
+        font-size: 1.05rem;
+      }
     }
-  }
 
 
-</style>
+    @media (min-width: 600px) and (max-width: 908px) {
+      .persona-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+
+      .persona-grid .persona-card:nth-child(3) {
+        grid-column: 1 / -1;
+        /* über beide Spalten */
+        max-width: 100%;
+        margin: 0;
+      }
+    }
+
+
+    @media (max-width: 768px) {
+      .persona-clean {
+        padding: 4rem 1rem;
+      }
+    }
+  </style>
+
+
 
   <style>
     :root {
@@ -676,7 +785,7 @@
       pointer-events: none;
       transition: opacity 0.3s ease;
     }
-
+ /* Individuelle Farben je Service 
     .service-card::after {
       content: "";
       position: absolute;
@@ -698,7 +807,7 @@
     .service-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-    }
+    }*/
 
     .service-card .inner {
       position: relative;
@@ -726,16 +835,18 @@
     .service-card ul li {
       margin-bottom: 0.75rem;
     }
+
     .service-card {
-  display: flex;
-  flex-direction: column;
-}
-.service-card .inner {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: space-between;
-}
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card .inner {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
 
     .cta {
       display: inline-block;
@@ -750,11 +861,15 @@
       border-radius: 8px;
       transition: all 0.3s ease;
     }
+
     .cta {
-  margin-top: 2rem;       /* Abstand zum vorherigen Text */
-  margin-bottom: 1rem;    /* Luft zum unteren Kartenrand */
-  align-self: flex-start; /* Optional: links ausrichten, oder center für mittig */
-}
+      margin-top: 2rem;
+      /* Abstand zum vorherigen Text */
+      margin-bottom: 1rem;
+      /* Luft zum unteren Kartenrand */
+      align-self: flex-start;
+      /* Optional: links ausrichten, oder center für mittig */
+    }
 
     .cta:hover {
       background-color: hwb(0 95% 5%);
@@ -790,6 +905,7 @@
 
     }
 
+
     @media (max-width: 320px) {
       .service-card {
         padding: 1.5rem 1rem;
@@ -801,39 +917,260 @@
       }
     }
 
-    
-    /* Grundstil für Video-Card */
-.video-card {
-  display: none;
+    /* Ab 1152px anzeigen und zweifache Breite */
+    @media (min-width: 1152px) {
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        align-items: stretch;
+      }
+
+      .service-card {
+        display: block;
+      }
+
+      .video-card {
+        display: block;
+        grid-column: span 2;
+        height: 100%;
+      }
+    }
+
+    @media (min-width: 1300px){
+      .service-grid {
+        max-width: 1300px;
+        grid-template-columns: repeat(3, minmax(380px, 1fr));
+        /* Karten deutlich breiter */
+        gap: 4rem;
+        justify-content: center;
+
+      }
+    }
+
+
+    @media (min-width: 1600px) {
+      .apple-services {
+        padding: 6rem 2rem;
+        /* bleibt gleich */
+      }
+
+      .apple-services h2 {
+        font-size: 3rem;
+        margin-bottom: 5rem;
+      }
+
+      .service-grid {
+        max-width: 1800px;
+        grid-template-columns: repeat(3, minmax(460px, 1fr));
+        /* Karten deutlich breiter */
+        gap: 4rem;
+        justify-content: center;
+
+      }
+
+      .service-card {
+        padding: 2.5rem;
+        /* gleiche Höhe */
+        border-radius: 18px;
+      }
+
+      .service-card h3 {
+        font-size: 1.6rem;
+        margin-bottom: 1.2rem;
+      }
+
+      .service-card ul {
+        font-size: 1.05rem;
+        line-height: 1.75;
+      }
+
+      .service-card ul li {
+        margin-bottom: 0.8rem;
+      }
+
+      .cta {
+        font-size: 1rem;
+        padding: 0.7rem 1.4rem;
+        border-radius: 8px;
+      }
+    }
+    /* Individuelle Farben je Service */
+.service-card:nth-child(1) {
+    background: linear-gradient(270deg, #3b34ff, #7500ff, #3b34ff);
+
+  background-size: 300% 300%;
+  color: #fff;
+}
+
+.service-card:nth-child(2) {
+  background: linear-gradient(270deg, #121212, #2b2b2b, #1b1b1b);
+  background-size: 300% 300%;
+  color: #fff;
+}
+
+.service-card:nth-child(3) {
+  background: linear-gradient(270deg, #ff7700, #ff5c00, #ff7300);
+  
+  background-size: 300% 300%;
+  color: #fff;
+}
+
+.service-card:nth-child(4) {
+  background: linear-gradient(270deg, #121212, #2b2b2b, #1b1b1b);
+  background-size: 300% 300%;
+  color: #fff;
+}
+
+/* Basisstil für alle Cards */
+.service-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  background-position: 0% 50%;
+  will-change: transform, box-shadow, background-position;
+  padding: 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Glanz-Overlay */
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.18), transparent 70%);
+  transform: scale(0.5);
+  opacity: 0;
+  transition: all 0.6s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.service-card:hover::before {
+  transform: scale(1);
+  opacity: 0.25;
+}
+
+/* Hover-Effekt */
+.service-card:hover {
+  transform: translateY(-8px) scale(1.035);
+  animation: serviceGradientPulse 6s ease infinite;
+  background-position: 100% 50%;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+@keyframes serviceGradientPulse {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Textfarben dynamisch */
+.service-card .inner,
+.service-card h3,
+.service-card ul,
+.service-card ul li,
+.service-card a.cta {
+  position: relative;
+  z-index: 2;
+  color: inherit;
+}
+
+/* Titel-Optik */
+.service-card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Listen */
+.service-card ul {
+  list-style: none;
   padding: 0;
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.75;
 }
 
-.video-card video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 20px;
+.service-card ul li {
+  margin-bottom: 0.8rem;
 }
 
-/* Ab 1152px anzeigen und zweifache Breite */
+/* Call-to-Action Button */
+.service-card .cta {
+  display: inline-block;
+  margin-top: 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  text-decoration: none;
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+
+.service-card .cta:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+  transform: scale(1.03);
+}
+
+
 @media (min-width: 1152px) {
-  .service-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    align-items: stretch;
-  }
-
-  .service-card {
-    display: block;
-  }
-
-  .video-card {
-    display: block;
+  .service-card:nth-child(2) {
     grid-column: span 2;
-    height: 100%;
+  }
+    .service-card:nth-child(3) {
+    grid-column: span 2;
   }
 }
+
+.image-overlay {
+  position: absolute;
+  bottom: 0rem;
+  right: 1rem;
+  z-index: 3;
+}
+
+.image-overlay img {
+  width: 480px; /* oder z. B. 20% der Karte, aber meist ist fixe Größe besser */
+  height: auto;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.service-card:hover .image-overlay img {
+  opacity: 1;
+}
+
+.service-card:nth-child(2) .image-overlay {
+  bottom: -0.5rem; /* Weiter nach unten */
+}
+
+/* Nur für das zweite PNG (Grafikdesign-Block) */
+.service-card:nth-child(3) .image-overlay {
+  bottom: -2.3rem; /* Weiter nach unten */
+}
+
+
 
   </style>
 
@@ -866,6 +1203,10 @@
             <li>VR/AR-kompatible Modelle</li>
             <li>Optimiert für Web & Druck</li>
           </ul>
+          <div class="image-overlay">
+  <img src="./indexFotoSlideShow/2.png" alt="3D Icon" />
+</div>
+
           <a href="./3DDesign.html" class="cta">Mehr erfahren</a>
         </div>
       </div>
@@ -879,7 +1220,11 @@
             <li>Professionelles Logo-Design</li>
             <li>Druck- & Digitalmedien</li>
             <li>Infografiken & visuelle Systeme</li>
-          </ul>
+          </ul>          
+          <div class="image-overlay">
+  <img src="./indexFotoSlideShow/1.png" alt="3D Icon" />
+</div>
+
           <a href="./Grafikdesign.html" class="cta">Mehr erfahren</a>
         </div>
       </div>
@@ -898,23 +1243,10 @@
           <a href="./SocialMedia.html" class="cta">Mehr erfahren</a>
         </div>
       </div>
-
-      <!-- Video Block (nur sichtbar ab 1152px) -->
-<div class="service-card video-card">
-  <div class="inner">
-    <video autoplay muted loop playsinline>
-      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
-      Dein Browser unterstützt dieses Video nicht.
-    </video>
-  </div>
-</div>
-
-
     </div>
   </section>
 
 
-  
   <section class="cta-modern">
     <style>
       .cta-modern {
@@ -1132,8 +1464,6 @@
     <a href="#kontakt" class="cta-btn">Gespräch vereinbaren</a>
   </section>
 
-  
-
 
   <style>
     .white-transition-section {
@@ -1155,7 +1485,7 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-background: #f4f4f4;
+      background: #f4f4f4;
       opacity: 1;
       pointer-events: all;
       z-index: 5;
@@ -1241,7 +1571,7 @@ background: #f4f4f4;
       position: relative;
       background: rgba(255, 255, 255, 0.12);
       border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(70, 70, 70, 0.15);
       padding: 2.5rem;
       width: 400px;
       box-shadow: 0 0 0 rgba(0, 0, 0, 0);
@@ -1255,7 +1585,7 @@ background: #f4f4f4;
     .epic-step:hover {
       transform: translateY(-4px) scale(1.02);
       box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
-      border-color: rgba(255, 102, 0, 0.2);
+      border-color: rgba(25, 0, 255, 0.384);
     }
 
     .epic-step::before {
@@ -1265,7 +1595,7 @@ background: #f4f4f4;
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(ellipse at center, #fff 0%, transparent 60%);
+      background: radial-gradient(ellipse at center, #ffffff 0%, transparent 60%);
       opacity: 0.04;
       animation: lightMotion 8s linear infinite;
     }
@@ -1275,7 +1605,8 @@ background: #f4f4f4;
       position: absolute;
       inset: 0;
       border-radius: inherit;
-      background: linear-gradient(130deg, rgba(255, 102, 0, 0.08), transparent);
+     background: linear-gradient(130deg, rgba(230, 227, 255, 0.3), #ffffff);
+
       opacity: 0;
       transition: opacity 0.4s ease;
       pointer-events: none;
@@ -1379,40 +1710,71 @@ background: #f4f4f4;
         padding: 1.5rem 1rem;
       }
     }
+
     /* VIDEO-STEP Styling */
-.video-step {
-  display: none;
-  padding: 0;
-}
+    .video-step {
+      display: none;
+      padding: 0;
+    }
 
-.video-step video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 20px;
-}
+    .video-step video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
 
-/* Sichtbar ab 1152px, doppelte Breite */
-@media (min-width: 1152px) {
-  .project-white-steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    /* Sichtbar ab 1152px, doppelte Breite */
+    @media (min-width: 1152px) {
+      .project-white-steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+      }
+
+      .epic-step {
+        width: 100%;
+      }
+
+      .video-step {
+        display: block;
+        grid-column: span 2;
+        height: 100%;
+      }
+    }
+
+    @media (min-width: 1440px) {
+  .white-content {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .white-content h2 {
+    font-size: 3rem;
+    margin-bottom: 4rem;
   }
 
   .epic-step {
-    width: 100%;
+    padding: 3rem;
   }
 
-  .video-step {
-    display: block;
-    grid-column: span 2;
-    height: 100%;
+  .epic-step h3 {
+    font-size: 1.5rem;
+  }
+
+  .epic-step p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .step-number {
+    font-size: 2.8rem;
   }
 }
 
   </style>
-  
+
   <section class="white-transition-section" id="prozess">
     <div class="white-world visible" id="whiteWorld">
 
@@ -1466,18 +1828,6 @@ background: #f4f4f4;
               </p>
             </div>
           </div>
-
-          <!-- Video-Block (nur sichtbar ab 1152px) -->
-<div class="epic-step video-step">
-  <div class="step-inner">
-    <video autoplay muted loop playsinline>
-      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
-      Dein Browser unterstützt dieses Video nicht.
-    </video>
-  </div>
-</div>
-
-
         </div>
       </div>
     </div>
@@ -1519,224 +1869,227 @@ background: #f4f4f4;
     </div>
 
     <div class="tab-contents">
-   <!-- WebDesign -->
-<div class="tab-content active" id="tab-web">
-  <div class="gallery">
+      <!-- WebDesign -->
+      <div class="tab-content active" id="tab-web">
+        <div class="gallery">
 
-    <div class="gallery-item reveal">
-      <div class="media-wrapper">
-        <img src="./GallerieGesamt/WebDesign1.webp" width="1671px" height="1294px" loading="lazy"
-          alt="Webdesign für Friseursalon" />
-      </div>
-      <div class="overlay">
-        <p>Interaktive Friseursalon Website</p>
-        <ul>
-          <li>Online-Terminbuchung für einfache Planung</li>
-          <li>Styling-Galerie zur Inspiration für Kunden</li>
-          <li>Optimiert für mobile Nutzung & schnelle Ladezeiten</li>
-        </ul>
-        <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-      </div>
-    </div>
+          <div class="gallery-item reveal">
+            <div class="media-wrapper">
+              <img src="./GallerieGesamt/WebDesign1.webp" width="1671px" height="1294px" loading="lazy"
+                alt="Webdesign für Friseursalon" />
+            </div>
+            <div class="overlay">
+              <p>Interaktive Friseursalon Website</p>
+              <ul>
+                <li>Online-Terminbuchung für einfache Planung</li>
+                <li>Styling-Galerie zur Inspiration für Kunden</li>
+                <li>Optimiert für mobile Nutzung & schnelle Ladezeiten</li>
+              </ul>
+              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
+            </div>
+          </div>
 
-    <div class="gallery-item reveal">
-      <div class="media-wrapper">
-        <img src="./GallerieGesamt/WebDesign2.webp" width="1671px" height="1294px" loading="lazy"
-          alt="Webdesign für Industrieunternehmen" />
-      </div>
-      <div class="overlay">
-        <p>Informative Industrie Website</p>
-        <ul>
-          <li>Strukturierte Produkt- & Technik-Dokumentation</li>
-          <li>Visualisierte Prozessabläufe mit Infografiken</li>
-          <li>Passwortgeschützte Bereiche für Partner & Kunden</li>
-        </ul>
-        <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-      </div>
-    </div>
+          <div class="gallery-item reveal">
+            <div class="media-wrapper">
+              <img src="./GallerieGesamt/WebDesign2.webp" width="1671px" height="1294px" loading="lazy"
+                alt="Webdesign für Industrieunternehmen" />
+            </div>
+            <div class="overlay">
+              <p>Informative Industrie Website</p>
+              <ul>
+                <li>Strukturierte Produkt- & Technik-Dokumentation</li>
+                <li>Visualisierte Prozessabläufe mit Infografiken</li>
+                <li>Passwortgeschützte Bereiche für Partner & Kunden</li>
+              </ul>
+              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
+            </div>
+          </div>
 
-    <div class="gallery-item reveal">
-      <div class="media-wrapper">
-        <img src="./GallerieGesamt/WebDesign3.webp" width="1671px" height="1294px" loading="lazy"
-          alt="Webdesign für Produktlaunch" />
-      </div>
-      <div class="overlay">
-        <p>Coole Produktlaunch Website</p>
-        <ul>
-          <li>Gezielte Lead-Generierung durch Formulare & CTA</li>
-          <li>Dynamische Countdown-Timer für zeitlich limitierte Aktionen</li>
-          <li>Einbindung von Videos und Animationen zur Produktpräsentation</li>
-        </ul>
-        <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-      </div>
-    </div>
+          <div class="gallery-item reveal">
+            <div class="media-wrapper">
+              <img src="./GallerieGesamt/WebDesign3.webp" width="1671px" height="1294px" loading="lazy"
+                alt="Webdesign für Produktlaunch" />
+            </div>
+            <div class="overlay">
+              <p>Coole Produktlaunch Website</p>
+              <ul>
+                <li>Gezielte Lead-Generierung durch Formulare & CTA</li>
+                <li>Dynamische Countdown-Timer für zeitlich limitierte Aktionen</li>
+                <li>Einbindung von Videos und Animationen zur Produktpräsentation</li>
+              </ul>
+              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
+            </div>
+          </div>
 
-  </div>
-</div>
+        </div>
+      </div>
 
-     <!-- 3D Design -->
-<div class="tab-content" id="tab-3d">
-  <div class="gallery">
+      <!-- 3D Design -->
+      <div class="tab-content" id="tab-3d">
+        <div class="gallery">
 
-    <div class="gallery-item reveal">
-      <div class="media-wrapper">
-        <img src="./GallerieGesamt/3D1.webp" width="1671px" height="1294px" loading="lazy" alt="Industrieobjekt 3D Texturierung" />
-      </div>
-      <div class="overlay">
-        <p>Industrieobjekt: Texturierung & Animation</p>
-        <ul>
-          <li>Realistische Materialien mit PBR</li>
-          <li>Animation technischer Abläufe</li>
-          <li>Export für Echtzeit-Viewer & Web</li>
-        </ul>
-        <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-      </div>
-    </div>
+          <div class="gallery-item reveal">
+            <div class="media-wrapper">
+              <img src="./GallerieGesamt/3D1.webp" width="1671px" height="1294px" loading="lazy"
+                alt="Industrieobjekt 3D Texturierung" />
+            </div>
+            <div class="overlay">
+              <p>Industrieobjekt: Texturierung & Animation</p>
+              <ul>
+                <li>Realistische Materialien mit PBR</li>
+                <li>Animation technischer Abläufe</li>
+                <li>Export für Echtzeit-Viewer & Web</li>
+              </ul>
+              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
+            </div>
+          </div>
 
-    <div class="gallery-item reveal">
-      <div class="media-wrapper">
-        <img src="./GallerieGesamt/3D2.webp" width="1671px" height="1294px" loading="lazy" alt="3D Prototyp für neues Produkt" />
-      </div>
-      <div class="overlay">
-        <p>3D-Prototyp für neues Produkt</p>
-        <ul>
-          <li>Detailliertes 3D-Modell nach CAD-/Skizzen-Vorgabe</li>
-          <li>Realistische Licht- & Schatteneffekte (HDRI)</li>
-          <li>Ideal für Pitch, Investoren & Marketing</li>
-        </ul>
-        <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-      </div>
-    </div>
+          <div class="gallery-item reveal">
+            <div class="media-wrapper">
+              <img src="./GallerieGesamt/3D2.webp" width="1671px" height="1294px" loading="lazy"
+                alt="3D Prototyp für neues Produkt" />
+            </div>
+            <div class="overlay">
+              <p>3D-Prototyp für neues Produkt</p>
+              <ul>
+                <li>Detailliertes 3D-Modell nach CAD-/Skizzen-Vorgabe</li>
+                <li>Realistische Licht- & Schatteneffekte (HDRI)</li>
+                <li>Ideal für Pitch, Investoren & Marketing</li>
+              </ul>
+              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
+            </div>
+          </div>
 
-    <div class="gallery-item reveal">
-      <div class="media-wrapper">
-        <img src="./GallerieGesamt/3D3.webp" width="1671px" height="1294px" loading="lazy" alt="Interaktives 3D-Messemodell" />
-      </div>
-      <div class="overlay">
-        <p>Interaktive Präsentation für Messe oder Web</p>
-        <ul>
-          <li>Steuerbare 3D-Ansichten im Browser</li>
-          <li>WebGL/Three.js oder glTF-Kompatibilität</li>
-          <li>Optional: AR-Integration für Mobilgeräte</li>
-        </ul>
-        <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-      </div>
-    </div>
+          <div class="gallery-item reveal">
+            <div class="media-wrapper">
+              <img src="./GallerieGesamt/3D3.webp" width="1671px" height="1294px" loading="lazy"
+                alt="Interaktives 3D-Messemodell" />
+            </div>
+            <div class="overlay">
+              <p>Interaktive Präsentation für Messe oder Web</p>
+              <ul>
+                <li>Steuerbare 3D-Ansichten im Browser</li>
+                <li>WebGL/Three.js oder glTF-Kompatibilität</li>
+                <li>Optional: AR-Integration für Mobilgeräte</li>
+              </ul>
+              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
+            </div>
+          </div>
 
-  </div>
-</div>
-
-<!-- Grafikdesign -->
-<div class="tab-content" id="tab-graphic">
-  <div class="gallery">
-
-    <div class="gallery-item reveal">
-      <div class="media-wrapper">
-        <img src="./GallerieGesamt/Gradikdesign1.webp" width="1671px" height="1294px" loading="lazy"
-          alt="Branding Design Beispiel" />
+        </div>
       </div>
-      <div class="overlay">
-        <p>Branding & Markenidentität (Flat Design)</p>
-        <ul>
-          <li>Individuelle Logoentwicklung</li>
-          <li>Farbwelt & typografische Konzepte</li>
-          <li>Professioneller Styleguide als PDF</li>
-        </ul>
-        <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-      </div>
-    </div>
 
-    <div class="gallery-item reveal">
-      <div class="media-wrapper">
-        <img src="./GallerieGesamt/Gradikdesign2.webp" width="1671px" height="1294px" loading="lazy"
-          alt="Grafikdesign für Gastronomie" />
-      </div>
-      <div class="overlay">
-        <p>Printdesign für Gastronomie & Lifestyle</p>
-        <ul>
-          <li>Menükarten, Flyer & Tischaufsteller</li>
-          <li>Emotionale Bildsprache & Layouts</li>
-          <li>Druckfertige Daten inkl. Beratung</li>
-        </ul>
-        <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-      </div>
-    </div>
+      <!-- Grafikdesign -->
+      <div class="tab-content" id="tab-graphic">
+        <div class="gallery">
 
-    <div class="gallery-item reveal">
-      <div class="media-wrapper">
-        <img src="./GallerieGesamt/Gradikdesign3.webp" width="1671px" height="1294px" loading="lazy"
-          alt="Social Media Design für Events" />
-      </div>
-      <div class="overlay">
-        <p>Social Media Design für Events & Kampagnen</p>
-        <ul>
-          <li>Animierte Story- & Feed-Templates</li>
-          <li>Plakat- & Teaserdesign abgestimmt auf Zielgruppe</li>
-          <li>Export in allen Formaten & Größen</li>
-        </ul>
-        <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-      </div>
-    </div>
+          <div class="gallery-item reveal">
+            <div class="media-wrapper">
+              <img src="./GallerieGesamt/Gradikdesign1.webp" width="1671px" height="1294px" loading="lazy"
+                alt="Branding Design Beispiel" />
+            </div>
+            <div class="overlay">
+              <p>Branding & Markenidentität (Flat Design)</p>
+              <ul>
+                <li>Individuelle Logoentwicklung</li>
+                <li>Farbwelt & typografische Konzepte</li>
+                <li>Professioneller Styleguide als PDF</li>
+              </ul>
+              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
+            </div>
+          </div>
 
-  </div>
-</div>
+          <div class="gallery-item reveal">
+            <div class="media-wrapper">
+              <img src="./GallerieGesamt/Gradikdesign2.webp" width="1671px" height="1294px" loading="lazy"
+                alt="Grafikdesign für Gastronomie" />
+            </div>
+            <div class="overlay">
+              <p>Printdesign für Gastronomie & Lifestyle</p>
+              <ul>
+                <li>Menükarten, Flyer & Tischaufsteller</li>
+                <li>Emotionale Bildsprache & Layouts</li>
+                <li>Druckfertige Daten inkl. Beratung</li>
+              </ul>
+              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
+            </div>
+          </div>
 
+          <div class="gallery-item reveal">
+            <div class="media-wrapper">
+              <img src="./GallerieGesamt/Gradikdesign3.webp" width="1671px" height="1294px" loading="lazy"
+                alt="Social Media Design für Events" />
+            </div>
+            <div class="overlay">
+              <p>Social Media Design für Events & Kampagnen</p>
+              <ul>
+                <li>Animierte Story- & Feed-Templates</li>
+                <li>Plakat- & Teaserdesign abgestimmt auf Zielgruppe</li>
+                <li>Export in allen Formaten & Größen</li>
+              </ul>
+              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
+            </div>
+          </div>
 
-
-   <!-- Social Media -->
-<div class="tab-content" id="tab-social">
-  <div class="gallery">
-
-    <div class="gallery-item reveal">
-      <div class="media-wrapper">
-        <img src="./GallerieGesamt/SocialMedia1.webp" width="1671px" height="1294px" loading="lazy"
-          alt="Social Media Content Beauty Branche" />
+        </div>
       </div>
-      <div class="overlay">
-        <p>Beauty & Lifestyle Content</p>
-        <ul>
-          <li>Redaktionsplan inkl. saisonaler Themen</li>
-          <li>Individuelle Canva-Vorlagen im Markenstil</li>
-          <li>Hashtag- & Reel-Strategie für mehr Reichweite</li>
-        </ul>
-        <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-      </div>
-    </div>
 
-    <div class="gallery-item reveal">
-      <div class="media-wrapper">
-        <img src="./GallerieGesamt/SocialMedia2.webp" width="1671px" height="1294px" loading="lazy"
-          alt="Social Media für Events & Aktionen" />
-      </div>
-      <div class="overlay">
-        <p>Eventkampagnen & Launches</p>
-        <ul>
-          <li>Countdowns, Gewinnspiele & Teaser-Videos</li>
-          <li>Story- & Feed-Designs für mehr Engagement</li>
-          <li>Planung & Betreuung von Social Ads</li>
-        </ul>
-        <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-      </div>
-    </div>
 
-    <div class="gallery-item reveal">
-      <div class="media-wrapper">
-        <img src="./GallerieGesamt/SocialMedia3.webp" width="1671px" height="1294px" loading="lazy"
-          alt="Social Media für Coaches & Dienstleister" />
-      </div>
-      <div class="overlay">
-        <p>Content für Coaches & Dienstleister</p>
-        <ul>
-          <li>Visuelles Storytelling mit Mehrwert</li>
-          <li>Wissensvermittlung über Karussell-Posts</li>
-          <li>Conversion-optimierte Call-to-Actions</li>
-        </ul>
-        <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-      </div>
-    </div>
 
-  </div>
-</div>
+      <!-- Social Media -->
+      <div class="tab-content" id="tab-social">
+        <div class="gallery">
+
+          <div class="gallery-item reveal">
+            <div class="media-wrapper">
+              <img src="./GallerieGesamt/SocialMedia1.webp" width="1671px" height="1294px" loading="lazy"
+                alt="Social Media Content Beauty Branche" />
+            </div>
+            <div class="overlay">
+              <p>Beauty & Lifestyle Content</p>
+              <ul>
+                <li>Redaktionsplan inkl. saisonaler Themen</li>
+                <li>Individuelle Canva-Vorlagen im Markenstil</li>
+                <li>Hashtag- & Reel-Strategie für mehr Reichweite</li>
+              </ul>
+              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
+            </div>
+          </div>
+
+          <div class="gallery-item reveal">
+            <div class="media-wrapper">
+              <img src="./GallerieGesamt/SocialMedia2.webp" width="1671px" height="1294px" loading="lazy"
+                alt="Social Media für Events & Aktionen" />
+            </div>
+            <div class="overlay">
+              <p>Eventkampagnen & Launches</p>
+              <ul>
+                <li>Countdowns, Gewinnspiele & Teaser-Videos</li>
+                <li>Story- & Feed-Designs für mehr Engagement</li>
+                <li>Planung & Betreuung von Social Ads</li>
+              </ul>
+              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
+            </div>
+          </div>
+
+          <div class="gallery-item reveal">
+            <div class="media-wrapper">
+              <img src="./GallerieGesamt/SocialMedia3.webp" width="1671px" height="1294px" loading="lazy"
+                alt="Social Media für Coaches & Dienstleister" />
+            </div>
+            <div class="overlay">
+              <p>Content für Coaches & Dienstleister</p>
+              <ul>
+                <li>Visuelles Storytelling mit Mehrwert</li>
+                <li>Wissensvermittlung über Karussell-Posts</li>
+                <li>Conversion-optimierte Call-to-Actions</li>
+              </ul>
+              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
 
 
       <!-- Weitere Tabs (3D, Grafik, Video, Social Media) → GLEICHE STRUKTUR -->
@@ -1808,13 +2161,16 @@ background: #f4f4f4;
       opacity: 1;
       transform: translateY(0);
     }
+
     .gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  max-width: 1200px; /* ❗ maximale Breite */
-  margin: 0 auto;     /* ❗ zentriert die Gallery */
-}
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      /* ❗ maximale Breite */
+      margin: 0 auto;
+      /* ❗ zentriert die Gallery */
+    }
 
 
     .gallery-item {
@@ -1833,7 +2189,8 @@ background: #f4f4f4;
 
     .media-wrapper {
       overflow: hidden;
-      aspect-ratio: 4 / 3; /* gleichmäßiges Verhältnis */
+      aspect-ratio: 4 / 3;
+      /* gleichmäßiges Verhältnis */
     }
 
     .media-wrapper img,
@@ -1902,7 +2259,8 @@ background: #f4f4f4;
     }
 
     .cta-btn {
-      margin-top: 1rem; /* oder z.B. 0.5rem für weniger Abstand */
+      margin-top: 1rem;
+      /* oder z.B. 0.5rem für weniger Abstand */
       align-self: flex-start;
       background: var(--primary, #f97316);
       color: #fff;
@@ -1927,98 +2285,108 @@ background: #f4f4f4;
 
 
     @media (max-width: 768px) {
-  .tab-buttons {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 0.75rem;
-    padding: 0 1rem;
-  }
+      .tab-buttons {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 0.75rem;
+        padding: 0 1rem;
+      }
 
-  .tab {
-    justify-content: center;
-    text-align: center;
-    width: 100%;
-    font-size: 0.9rem;
-    padding: 0.6rem 1rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+      .tab {
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
-  .tab i {
-    display: none; /* Optional: Icons ausblenden, wenn zu eng */
-  }
-}
-@media (max-width: 480px) {
-  .tab-buttons {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(100px, 1fr));
-    gap: 0.6rem;
-    padding: 0 1rem;
-  }
+      .tab i {
+        display: none;
+        /* Optional: Icons ausblenden, wenn zu eng */
+      }
+    }
 
-  .tab {
-    justify-content: center;
-    text-align: center;
-    width: 100%;
-    font-size: 0.85rem;
-    padding: 0.5rem 0.9rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }  .tab.active {
-    background: #e5e5e5; /* Hellgrau */
-    color: #111;
-    border-color: #ccc;
-    box-shadow: none;
-  }
+    @media (max-width: 480px) {
+      .tab-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+        gap: 0.6rem;
+        padding: 0 1rem;
+      }
 
-  .tab i {
-    display: none; /* Optional: Versteckt Icons bei sehr schmalen Screens */
-  }
-}
-@media (max-width: 360px) {
-  .tab-buttons {
-    grid-template-columns: repeat(2, minmax(70px, 1fr)); /* Noch schmaler */
-    gap: 0.4rem;
-    padding: 0 0.5rem;
-  }
+      .tab {
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        font-size: 0.85rem;
+        padding: 0.5rem 0.9rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
-  .tab {
-    font-size: 0.7rem;
-    padding: 0.3rem 0.5rem;
-    max-width: 140px;
-    margin: 0 auto;
-    border-radius: 25px;
-  }
+      .tab.active {
+        background: #e5e5e5;
+        /* Hellgrau */
+        color: #111;
+        border-color: #ccc;
+        box-shadow: none;
+      }
 
-  .tab.active {
-    background: #e0e0e0;
-    color: #111;
-    border-color: #bbb;
-  }
-  .tab:active {
-  background-color: #d6d6d6 !important;
-  transform: scale(0.98);
-}
+      .tab i {
+        display: none;
+        /* Optional: Versteckt Icons bei sehr schmalen Screens */
+      }
+    }
 
-  .tab i {
-    display: none;
-  }
-}
+    @media (max-width: 360px) {
+      .tab-buttons {
+        grid-template-columns: repeat(2, minmax(70px, 1fr));
+        /* Noch schmaler */
+        gap: 0.4rem;
+        padding: 0 0.5rem;
+      }
+
+      .tab {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.5rem;
+        max-width: 140px;
+        margin: 0 auto;
+        border-radius: 25px;
+      }
+
+      .tab.active {
+        background: #e0e0e0;
+        color: #111;
+        border-color: #bbb;
+      }
+
+      .tab:active {
+        background-color: #d6d6d6 !important;
+        transform: scale(0.98);
+      }
+
+      .tab i {
+        display: none;
+      }
+    }
 
     @media (max-width: 425px) {
       .gallery {
-    padding: 0 1rem;
-    max-width: 100%;
-    justify-items: center;
-    grid-template-columns: 1fr;
-  }
+        padding: 0 1rem;
+        max-width: 100%;
+        justify-items: center;
+        grid-template-columns: 1fr;
+      }
 
-  .gallery-item {
-    max-width: 100%;
-    margin: 0 auto;
-  }
+      .gallery-item {
+        max-width: 100%;
+        margin: 0 auto;
+      }
+
       .tab-buttons {
         display: grid;
         grid-template-columns: repeat(2, minmax(140px, 1fr));
@@ -2042,7 +2410,120 @@ background: #f4f4f4;
 
     }
   </style>
+<style>.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 2.8rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 2rem 3rem;
+  justify-items: center;
+}
 
+.gallery-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+  min-height: 460px;
+}
+
+.gallery-item:hover {
+  transform: translateY(-10px) scale(1.025);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+}
+
+.media-wrapper {
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: 24px 24px 0 0;
+}
+
+.media-wrapper img,
+.media-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px 24px 0 0;
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img,
+.gallery-item:hover video {
+  transform: scale(1.07);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  padding: 2.4rem;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(245, 245, 245, 0.18));
+  backdrop-filter: blur(24px);
+  border-radius: 24px;
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.4rem;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px) scale(0.96);
+  transition: all 0.5s ease-in-out;
+  z-index: 2;
+}
+
+.gallery-item:hover .overlay {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.overlay p {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  color: #111;
+}
+
+.overlay ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.overlay ul li {
+  list-style-type: disc;
+  margin-bottom: 0.4rem;
+}
+
+.cta-btn {
+  margin-top: 1rem;
+  background: linear-gradient(135deg, #ff6600, #ff9800);
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 2rem;
+  text-decoration: none;
+  transition: all 0.35s ease;
+}
+
+.cta-btn:hover {
+  background: linear-gradient(135deg, #ff7a00, #ffa800);
+  transform: scale(1.12);
+}
+  </style>
   <script>
     feather.replace();
 
@@ -2057,12 +2538,12 @@ background: #f4f4f4;
       });
     });
   </script>
-<style>
-  .reveal {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-</style>
+  <style>
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  </style>
 
 
   <testimonial-slider></testimonial-slider>
@@ -3010,29 +3491,29 @@ background: #f4f4f4;
   </style>
 
   <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    feather.replace();
+    document.addEventListener('DOMContentLoaded', () => {
+      feather.replace();
 
-    const tabs = document.querySelectorAll('.tab');
-    const tabContents = document.querySelectorAll('.tab-content');
+      const tabs = document.querySelectorAll('.tab');
+      const tabContents = document.querySelectorAll('.tab-content');
 
-    tabs.forEach(button => {
-      button.addEventListener('click', () => {
-        // Tabs visuell zurücksetzen
-        tabs.forEach(tab => tab.classList.remove('active'));
-        tabContents.forEach(content => content.classList.remove('active'));
+      tabs.forEach(button => {
+        button.addEventListener('click', () => {
+          // Tabs visuell zurücksetzen
+          tabs.forEach(tab => tab.classList.remove('active'));
+          tabContents.forEach(content => content.classList.remove('active'));
 
-        // Aktiven Tab und Content setzen
-        button.classList.add('active');
-        const tabId = button.getAttribute('data-tab');
-        const activeContent = document.getElementById(`tab-${tabId}`);
-        if (activeContent) {
-          activeContent.classList.add('active');
-        }
+          // Aktiven Tab und Content setzen
+          button.classList.add('active');
+          const tabId = button.getAttribute('data-tab');
+          const activeContent = document.getElementById(`tab-${tabId}`);
+          if (activeContent) {
+            activeContent.classList.add('active');
+          }
+        });
       });
     });
-  });
-</script>
+  </script>
 
   <script>
     window.addEventListener('DOMContentLoaded', () => {
@@ -3043,4 +3524,3 @@ background: #f4f4f4;
       }
     });
   </script>
-  
