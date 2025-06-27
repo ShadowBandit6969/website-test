@@ -228,17 +228,18 @@
 
 
   <section class="hero-video-wrapper">
-    <video autoplay muted loop playsinline class="hero-bg-video">
-      <source src="./WebdesignPic/HintergrundHimmel.mp4" type="video/mp4">
+    <div class="hero-bg-image png-bg"></div>
+
+    <!-- <video autoplay muted loop playsinline class="hero-bg-video">
+      <source src="./3DPic/HintergrundProdukt1.png" type="video/mp4">
       Your browser does not support the video tag.
     </video>
 
-  <!-- PNG über dem Video – als eigene Ebene -->
+  PNG über dem Video – als eigene Ebene 
 <div class="hero-bg-image"></div>
-    <!-- 2. PNG – über dem Hintergrund -->
     <div class="hero-overlay-image"></div>   
-    <!-- TEXT + 3. PNG über dem Text -->
     <div class="above-text-image"></div>
+-->
 
     <div class="hero-video-content">
       <h1>UX & Webdesign</h1>
@@ -247,6 +248,19 @@
      </div>
   </section>
 <style>/* 1. PNG – als Hintergrund */
+.png-bg {
+  background-image: url('./3DPic/HintergrundProdukt1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
 
   .hero-video-wrapper {
     position: relative;
@@ -266,19 +280,6 @@
     font-family: 'VT323', monospace;
     z-index: 2;
   }
-.hero-bg-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('./WebdesignPic/HintergundLaptop.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: 0.5; /* Zwischen Video (0) und Overlay (1) */
-  pointer-events: none;
-}
 
 
   .hero-bg-video {
@@ -918,8 +919,8 @@ width: 170vw;
     }
   });
 </script>
-
-<div class="white-bg-wrapper">
+<!---->
+<div class="white-bg-wrapper"> LEISTUNGEN 
 <section class="services-section" id="leistungen">
   <div class="parallax-bg"></div>
   <div class="container">
@@ -930,7 +931,6 @@ width: 170vw;
       <div class="service-card scroll-fade">
         <div class="icon-circle"><i data-feather="layers"></i></div>
         <h3>Visual Start</h3>
-        <button class="accordion-toggle">Details anzeigen</button>
         <div class="accordion-content">
           <ul class="feature-list">
             <li><span class="check">✓</span> Optimiertes 3D-Modell in hoher Qualität</li>
@@ -940,13 +940,13 @@ width: 170vw;
           </ul>
           <div class="price-box">Preisrahmen: <br><strong>500–1.000 €</strong></div>
         </div>
+        <button class="accordion-toggle">Details anzeigen</button>
       </div>
 
       <!-- CARD 2 -->
-      <div class="service-card scroll-fade">
+      <div class="service-card scroll-fade wide-card">
         <div class="icon-circle"><i data-feather="film"></i></div>
         <h3>Motion Impact</h3>
-        <button class="accordion-toggle">Details anzeigen</button>
         <div class="accordion-content">
           <ul class="feature-list">
             <li><span class="check">✓</span> Produktvideo (5–10 Sek.) in hoher Qualität</li>
@@ -956,13 +956,13 @@ width: 170vw;
           </ul>
           <div class="price-box">Preisrahmen: <br><strong>1.000–2.500 €</strong></div>
         </div>
+        <button class="accordion-toggle">Details anzeigen</button>
       </div>
 
       <!-- CARD 3 -->
-      <div class="service-card scroll-fade">
+      <div class="service-card scroll-fade wide-card">
         <div class="icon-circle"><i data-feather="eye"></i></div>
         <h3>Immersive Vision</h3>
-        <button class="accordion-toggle">Details anzeigen</button>
         <div class="accordion-content">
           <ul class="feature-list">
             <li><span class="check">✓</span> Erweiterung für Virtual Reality (VR)</li>
@@ -972,13 +972,13 @@ width: 170vw;
           </ul>
           <div class="price-box">Preisrahmen: <br><strong>3.000–6.000 €</strong></div>
         </div>
+        <button class="accordion-toggle">Details anzeigen</button>
       </div>
 
       <!-- CARD 4 -->
       <div class="service-card scroll-fade">
         <div class="icon-circle"><i data-feather="settings"></i></div>
         <h3>Enterprise+</h3>
-        <button class="accordion-toggle">Details anzeigen</button>
         <div class="accordion-content">
           <ul class="feature-list">
             <li><span class="check">✓</span> Individuelle Komplettlösungen</li>
@@ -988,6 +988,7 @@ width: 170vw;
           </ul>
           <div class="price-box">Preis: <br><strong>auf Anfrage</strong></div>
         </div>
+        <button class="accordion-toggle">Details anzeigen</button>
       </div>
 
     </div>
@@ -995,7 +996,11 @@ width: 170vw;
   </div>
 </section>
 
-<style>
+<style>:root {
+  --card2-image: url('./indexFotoSlideShow/2.png');
+  --card3-image: url('./indexFotoSlideShow/2.png');
+}
+
 /* ===== Allgemeines Layout ===== */
 .services-section {
   padding: 6rem 2rem;
@@ -1003,6 +1008,7 @@ width: 170vw;
   text-align: center;
   color: #111;
   position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 .parallax-bg {
@@ -1021,9 +1027,10 @@ width: 170vw;
 }
 
 .section-title {
-  font-size: 2.4rem;
-  font-weight: 900;
+  font-size: 2.6rem;
+  font-weight: 800;
   margin-bottom: 3rem;
+  font-family: inherit;
 }
 
 .services-grid {
@@ -1031,7 +1038,7 @@ width: 170vw;
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
-  align-items: flex-start; /* <--- DER ENTSCHEIDENDE FIX */
+  align-items: flex-start;
 }
 
 .service-card {
@@ -1046,11 +1053,205 @@ width: 170vw;
   transition: 0.3s ease;
   display: flex;
   flex-direction: column;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  will-change: transform, box-shadow;
+  background-position: 0% 50%;
+  color: #fff;
+}
+
+.service-card:nth-child(1) {
+  background: linear-gradient(270deg, #ff5c00, #ff7a29, #ff6600);
+  background-size: 400% 400%;
+}
+
+.service-card:nth-child(2) {
+  background: linear-gradient(270deg, #1a1a1a, #2a2a2a, #1f1f1f);
+  background-size: 400% 400%;
+}
+
+.service-card:nth-child(3) {
+  background: linear-gradient(270deg, #3a30ff, #6a00ff, #4d00e0);
+  background-size: 400% 400%;
+}
+
+.service-card:nth-child(4) {
+  background: linear-gradient(270deg, #000000, #141414, #1d1d1e);
+  background-size: 400% 400%;
+}
+
+/* PNG-Hintergründe über Variablen */
+.service-card:nth-child(2)::after,
+.service-card:nth-child(3)::after {
+  content: "";
+  position: absolute;
+  bottom: 0.1rem;
+  right: 0;
+  width: 230px;
+  height: 230px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  opacity: 1;
+  z-index: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.service-card:nth-child(2)::after {
+  background-image: var(--card2-image);
+}
+
+.service-card:nth-child(3)::after {
+  background-image: var(--card3-image);
+}
+
+.service-card.accordion-open::after {
+  opacity: 0;
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.18), transparent 70%);
+  transform: scale(0.5);
+  opacity: 0;
+  transition: all 0.6s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.service-card:hover::before {
+  transform: scale(1);
+  opacity: 0.25;
 }
 
 .service-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px) scale(1.035);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+  animation: gradientPulse 6s ease infinite;
+  background-position: 100% 50%;
+  z-index: 10;
+}
+
+@keyframes gradientPulse {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.service-card h3,
+.service-card ul li,
+.service-card .vorteil,
+.service-card .tagline {
+  color: inherit;
+  font-family: inherit;
+}
+
+.service-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.feature-list li {
+  font-size: 1.05rem;
+  padding: 0.4rem 0;
+  color: #333;
+  display: flex;
+  align-items: flex-start;
+  font-family: inherit;
+}
+
+.feature-list .check {
+  color: #ffffff;
+  font-weight: bold;
+  margin-right: 0.6rem;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.price-box {
+  background: #f9f9f9;
+  border-left: 4px solid #ffa94d;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #111;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.accordion-toggle {
+  background: transparent;
+  border: 1px solid #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #fff;
+  transition: background 0.3s, color 0.3s;
+  font-family: inherit;
+}
+
+.accordion-toggle:hover {
+  background: #fff;
+  color: #111;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin-top: 0;
+  pointer-events: none;
+  transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.3s ease;
+}
+
+.accordion-content.open {
+  opacity: 1;
+  pointer-events: auto;
+  margin-top: 1rem;
+}
+
+.services-hint {
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: #888;
+  font-family: inherit;
+}
+
+/* PNG ausblenden, wenn Accordion offen */
+.service-card .accordion-content.open ~ .card-png-overlay {
+  opacity: 0;
+}
+
+@media (max-width: 993px) {
+  .service-card:nth-child(2)::after,
+  .service-card:nth-child(3)::after {
+    display: none;
+  }
 }
 
 /* RESPONSIVE: Tablet */
@@ -1074,92 +1275,36 @@ width: 170vw;
     padding: 0 1rem;
   }
 }
+@media (min-width: 1200px) {
+  .services-section {
+    padding: 8rem 3rem;
+  }
 
-/* ===== Inhalte der Karte ===== */
-.icon-circle {
-  width: 48px;
-  height: 48px;
-  background: #ffa94d;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
 
-.icon-circle i {
-  width: 24px;
-  height: 24px;
-  stroke: #fff;
-}
+  .service-card {
+    padding: 2.5rem;
+    transform: scale(1.04);
+  }
 
-.accordion-toggle {
-  background: none;
-  border: 1px solid #ddd;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  margin-top: 1rem;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s;
-}
+  .service-card h3 {
+    font-size: 1.6rem;
+  }
 
-.accordion-toggle:hover {
-  background: #f2f2f2;
-}
+  .feature-list li {
+    font-size: 1.1rem;
+  }
 
-.accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  margin-top: 0;
-  pointer-events: none;
-  transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.3s ease;
-}
+  .price-box {
+    font-size: 1.05rem;
+  }
 
-.accordion-content.open {
-  opacity: 1;
-  pointer-events: auto;
-  margin-top: 1rem;
-  /* max-height wird über JavaScript gesetzt */
-}
+  .accordion-toggle {
+    font-size: 1.05rem;
+  }
 
-.feature-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1rem 0;
-}
-
-.feature-list li {
-  font-size: 1rem;
-  padding: 0.4rem 0;
-  color: #333;
-  display: flex;
-  align-items: flex-start;
-}
-
-.feature-list .check {
-  color: #28a745;
-  font-weight: bold;
-  margin-right: 0.6rem;
-  font-size: 1.1rem;
-  line-height: 1.4;
-}
-
-.price-box {
-  background: #f9f9f9;
-  border-left: 4px solid #ffa94d;
-  padding: 0.8rem 1rem;
-  border-radius: 6px;
-  font-weight: 600;
-  color: #111;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-}
-
-.services-hint {
-  margin-top: 2rem;
-  font-size: 0.95rem;
-  color: #666;
+  .services-hint {
+    font-size: 1.1rem;
+  }
 }
 
 /* Scroll Fade Effekt */
@@ -1173,38 +1318,52 @@ width: 170vw;
   opacity: 1;
   transform: translateY(0);
 }
-</style>
 
+/* Zusätzliche Klasse für breite Karten */
+@media (min-width: 993px) {
+  .service-card.wide-card {
+    flex: 2 1 calc(66.666% - 2rem);
+  }
+}
+</style>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    feather.replace();
+  feather.replace();
 
-    const toggles = document.querySelectorAll(".accordion-toggle");
+  const toggles = document.querySelectorAll(".accordion-toggle");
 
-    toggles.forEach(toggle => {
-      toggle.addEventListener("click", () => {
-        const currentContent = toggle.nextElementSibling;
-        const isOpen = currentContent.classList.contains("open");
+  toggles.forEach(toggle => {
+    toggle.addEventListener("click", () => {
+      const card = toggle.closest(".service-card");
+      const currentContent = card.querySelector(".accordion-content");
+      const isOpen = currentContent.classList.contains("open");
 
-        // Alle schließen
-        document.querySelectorAll(".accordion-content").forEach(content => {
-          content.classList.remove("open");
-          content.style.maxHeight = null;
-        });
-
-        document.querySelectorAll(".accordion-toggle").forEach(btn => {
-          btn.textContent = "Details anzeigen";
-        });
-
-        // Falls geschlossen – öffnen
-        if (!isOpen) {
-          currentContent.classList.add("open");
-          currentContent.style.maxHeight = currentContent.scrollHeight + "px";
-          toggle.textContent = "Details ausblenden";
-        }
+      // Alles schließen
+      document.querySelectorAll(".accordion-content").forEach(content => {
+        content.classList.remove("open");
+        content.style.maxHeight = null;
       });
+
+      document.querySelectorAll(".accordion-toggle").forEach(btn => {
+        btn.textContent = "Details anzeigen";
+      });
+
+      document.querySelectorAll(".service-card").forEach(c => {
+        c.classList.remove("accordion-open");
+      });
+
+      // Öffnen, wenn nicht offen
+      if (!isOpen) {
+        currentContent.classList.add("open");
+        currentContent.style.maxHeight = currentContent.scrollHeight + "px";
+        toggle.textContent = "Details ausblenden";
+        card.classList.add("accordion-open");
+      }
     });
+  
+});
+
 
     // Scroll fade-in
     const scrollElements = document.querySelectorAll(".scroll-fade");
@@ -1215,7 +1374,7 @@ width: 170vw;
     };
 
     const displayScrollElement = (el) => {
-      el.classList.add('visible');
+      el.classList.add("visible");
     };
 
     const handleScrollAnimation = () => {
@@ -1226,7 +1385,7 @@ width: 170vw;
       });
     };
 
-    window.addEventListener('scroll', handleScrollAnimation);
+    window.addEventListener("scroll", handleScrollAnimation);
     handleScrollAnimation();
   });
 </script>
@@ -1602,7 +1761,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-
+   <!-- Beispielbilder 
 <section class="portfolio-section container" id="portfolio">
   <h2 class="portfolio-title">Projekte & Fallstudien</h2>
   <p class="portfolio-intro">
@@ -1617,7 +1776,7 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 
   <div class="portfolio-grid">
-    <!-- Beispielbilder -->
+ 
     <div class="portfolio-item" data-category="3d">
       <img src="https://placehold.co/600x400?text=3D+Sneaker" alt="3D Sneaker">
       <div class="item-info">
@@ -1652,8 +1811,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     </div>
 
-    <!-- 10+4 Einträge... -->
-    <!-- Weitere Items einfach kopieren mit jeweiligem `data-category` -->
+-->
   </div>
 </section>
 
@@ -1788,6 +1946,549 @@ document.addEventListener("DOMContentLoaded", () => {
   </script>
   
 </div>
+
+
+
+    <section class="branch-selection visible" id="branchSelection">
+      <div class="branch-inner">
+        <h2>So könnte Ihr Profukt aussehen:</h2>
+        <div class="branch-grid">
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./" type="video/mp4">
+            </video>
+            <div class="branch-overlay">
+              <h3>🍽️ Gastronomie</h3>
+            </div>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+            <div class="branch-overlay">
+              <h3>🏛️ Architektur</h3>
+            </div>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+            <div class="branch-overlay">
+
+            </div>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+            <div class="branch-overlay">
+
+            </div>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+            <div class="branch-overlay">
+
+            </div>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+            <div class="branch-overlay">
+
+            </div>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+            <div class="branch-overlay">
+
+            </div>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+          </div>
+
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="branch-card">
+            <video autoplay muted loop playsinline>
+              <source src="./Fotos/gastronomie.mp4" type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const branchCards = Array.from(document.querySelectorAll('.branch-grid .branch-card'));
+
+        // Karten aufteilen: 50% Bild, 50% Video
+        branchCards.forEach(card => {
+          card.dataset.cardType = (Math.random() < 0.5) ? "image" : "video";
+        });
+
+        // ----------- IMAGE CARDS LOGIK -------------
+        const imageCards = branchCards.filter(card => card.dataset.cardType === "image");
+        let imageQueue = [];
+
+        function shuffleImageQueue() {
+          imageQueue = Array.from({ length: 50 }, (_, i) => i + 1).sort(() => Math.random() - 0.5);
+        }
+
+
+        shuffleImageQueue();
+
+        imageCards.forEach(card => {
+          card.classList.add('dynamic-image');
+          card.innerHTML = '';
+
+          const imgNum = imageQueue.pop();
+          const img = document.createElement('img');
+          img.src = `./3DSlideShow/post${imgNum}.png`;
+          img.alt = `Post ${imgNum}`;
+          card.appendChild(img);
+
+          const overlay = document.createElement('div');
+          overlay.className = 'branch-overlay';
+          // Kein h3 mehr → stattdessen leerer oder neutraler Overlay
+          card.appendChild(overlay);
+
+          card.dataset.currentImg = imgNum;
+        });
+
+        setInterval(() => {
+          if (imageQueue.length < imageCards.length) {
+            shuffleImageQueue();
+          }
+
+          imageCards.forEach(card => {
+            const imgNum = imageQueue.pop();
+            const img = card.querySelector('img');
+            img.src = `./3DSlideShow/post${imgNum}.png`;
+            card.dataset.currentImg = imgNum;
+            // Keine h3-Updates mehr
+          });
+        }, 5000);
+
+        // ----------- VIDEO CARDS LOGIK -------------
+        const videoCards = branchCards.filter(card => card.dataset.cardType === "video");
+        let videoQueue = [];
+
+        function shuffleVideoQueue() {
+          videoQueue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].sort(() => Math.random() - 0.5);
+        }
+
+        shuffleVideoQueue();
+
+        videoCards.forEach(card => {
+          card.classList.add('dynamic-video');
+          card.innerHTML = '';
+
+          const vidNum = videoQueue.pop();
+          const video = document.createElement('video');
+          video.autoplay = true;
+          video.muted = true;
+          video.loop = true;
+          video.playsInline = true;
+
+          const source = document.createElement('source');
+          source.src = `./SocialMediaPic/VideoPost${vidNum}.mp4`;
+          source.type = "video/mp4";
+          video.appendChild(source);
+          card.appendChild(video);
+
+          const overlay = document.createElement('div');
+          overlay.className = 'branch-overlay';
+          // Kein h3 mehr im Overlay
+          card.appendChild(overlay);
+
+          card.dataset.currentVideo = vidNum;
+        });
+
+        setInterval(() => {
+          if (videoQueue.length < videoCards.length) {
+            shuffleVideoQueue();
+          }
+
+          videoCards.forEach(card => {
+            const vidNum = videoQueue.pop();
+            const video = card.querySelector('video');
+            const source = video.querySelector('source');
+            source.src = `./SocialMediaPic/VideoPost${vidNum}.mp4`;
+            video.load();
+            card.dataset.currentVideo = vidNum;
+            // Keine h3-Updates mehr
+          });
+        }, 30000);
+      });
+    </script>
+  <style>
+    .branch-card {
+      position: relative;
+      width: 100%;
+      height: auto;
+      /* auto statt aspect-ratio */
+      overflow: hidden;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      z-index: 4;
+    }
+
+    .branch-card img {
+      position: relative;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      /* oder sogar komplett weglassen */
+      display: block;
+    }
+
+
+    .branch-card img,
+    .branch-card video {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+
+
+    .branch-selection {
+      background: #ffffff;
+      margin-top: -20px;
+      color: #111;
+      padding: 6rem 2rem;
+      transition: none;
+    }
+
+    .branch-selection h2 {
+      color: inherit;
+      transition: color 0.6s ease;
+    }
+
+
+    .branch-card:hover {
+      background: #2a2a2a;
+      transform: translateY(-6px) scale(1.02);
+      border-color: var(--primary);
+    }
+
+    /* Nach Klick auf Kugel: Helles Theme */
+    .branch-selection.visible {
+      background: #ffffff;
+      color: #111;
+    }
+
+    .branch-selection.visible h2 {
+      color: #111;
+    }
+
+    .branch-selection.visible .branch-card {
+      background: #ffffff;
+      color: #111;
+      border-color: #ddd;
+    }
+
+    .branch-selection.visible .branch-card:hover {
+      background: #ffffff;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.06);
+      border-color: rgba(255, 102, 0, 0.2);
+    }
+
+    .branch-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .branch-inner h2 {
+      font-size: 2.8rem;
+      margin-bottom: 3rem;
+      font-weight: 900;
+    }
+
+
+
+    .branch-selection.visible .branch-card {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      color: #111;
+    }
+
+    .branch-selection.visible .branch-card:hover {
+      background: #fff;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
+    }
+
+    .branch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+      align-items: stretch;
+    }
+
+    /* Klasse, die einer Karte erlaubt, sich über zwei Spalten zu erstrecken */
+    .branch-card.span2 {
+      grid-column: span 2;
+    }
+
+
+    .branch-card video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      filter: brightness(1.07);
+      transition: filter 0.4s ease;
+    }
+
+    .branch-card:hover video {
+      filter: brightness(1.1);
+    }
+
+    .branch-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+
+    .branch-card:hover .branch-overlay h3 {
+      transform: translateY(-6px);
+    }
+
+
+    .branch-selection.visible .branch-overlay h3 {
+      color: #111;
+      text-shadow: none;
+    }
+
+    .branch-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .branch-card.selected {
+      outline: 4px solid var(--primary);
+      outline-offset: -8px;
+      box-shadow: 0 0 40px rgba(255, 102, 0, 0.3);
+      transform: scale(1.04);
+      z-index: 5;
+    }
+
+    .branch-card.selected .branch-overlay h3 {
+      animation: glowText 1.5s ease-in-out infinite alternate;
+    }
+
+
+    @keyframes glowText {
+      from {
+        text-shadow: 0 0 6px rgba(255, 102, 0, 0.3);
+      }
+
+      to {
+        text-shadow: 0 0 16px rgba(255, 102, 0, 0.6);
+      }
+    }
+
+
+
+
+    @media (min-width: 1024px) {
+      .branch-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      .branch-grid .branch-card:last-child:nth-child(odd) {
+        grid-column: span 2;
+      }
+
+    }
+
+    @media (min-width: 984px) {
+      .branch-grid .branch-card:last-child:nth-child(odd) {
+        grid-column: auto !important;
+        max-width: 100% !important;
+        text-align: left !important;
+      }
+    }
+
+
+
+
+    @media (max-width: 768px) {
+
+      .branch-grid {
+        grid-template-columns: repeat(3, 1fr);
+        /* exakt 3 Spalten auf großen Screens */
+      }
+
+      .branch-grid .branch-card:last-child:nth-child(odd) {
+        grid-column: span 2;
+        max-width: 100%;
+        text-align: center;
+      }
+      .branch-grid .branch-card:last-child:nth-child(odd) {
+        grid-column: span 2;
+        max-width: 100%;
+        text-align: center;
+      }
+
+      .project-white-steps .epic-step:last-child:nth-child(3) {
+        flex: unset !important;
+        max-width: 100% !important;
+        text-align: left !important;
+      }
+
+      .branch-grid .branch-card:last-child:nth-child(odd) {
+        grid-column: auto !important;
+        max-width: 100% !important;
+        text-align: left !important;
+      }
+    }
+
+ 
+
+   
+    /* === Medien-Spezifisch: 320px Mobile Fix === */
+    @media (max-width: 480px) {
+      
+
+      /* Branchen: Untereinander + ohne Stretch */
+      .branch-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .branch-card img {
+        max-height: 100%;
+        width: 100%;
+        height: auto;
+      }
+
+
+      .branch-card img,
+      .branch-card video {
+        position: relative;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        /* oder 'cover' wenn du willst, dass es gefüllt wird */
+        display: block;
+      }
+
+      .branch-overlay h3 {
+        font-size: 1.3rem;
+      }
+
+    }
+
+
+    .branch-grid .branch-card:last-child:nth-child(odd) {
+      grid-column: span 2;
+      max-width: 100%;
+      text-align: center;
+    }
+
+  </style>
 
 
 <section class="cta-modern">
