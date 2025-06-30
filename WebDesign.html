@@ -1263,6 +1263,1154 @@ width: 170vw;
   });
 </script>
 
+<section class="timeline-horizontal-section container">
+  <h2 class="section-title">Ablauf in 6 Schritten</h2>
+  <p class="section-subtitle">
+    Ein transparenter, strukturierter Weg – von der Idee bis zur fertigen Lösung.
+  </p>
+
+  <div class="timeline-horizontal">
+    <div class="step" data-title="Projektstart" data-text="Ein gemeinsamer Auftakt schafft Vertrauen: Wir analysieren Ihre Ziele, Zielgruppen und Rahmenbedingungen. Dabei hören wir genau zu – um Ihr Projekt von Anfang an auf den richtigen Kurs zu bringen.">Start</div>
+    <div class="step" data-title="Strategie & Planung" data-text="Basierend auf den Projektzielen entwickeln wir eine fundierte inhaltliche und visuelle Strategie. Dazu gehören Seitenstruktur, Nutzerführung, technische Rahmenbedingungen und erste Designideen.">Konzept</div>
+    <div class="step" data-title="Designphase" data-text="Wir gestalten pixelgenaue Entwürfe, die Nutzer begeistern und Ihre Marke zum Strahlen bringen. Vom Moodboard bis zum interaktiven Prototyp – mit Fokus auf Ästhetik, Klarheit und Wiedererkennung.">Design</div>
+    <div class="step" data-title="Technische Umsetzung" data-text="Auf Basis moderner Frameworks setzen wir Ihre Website performant, responsiv und suchmaschinenfreundlich um. Wir achten auf Ladezeiten, Barrierefreiheit und Skalierbarkeit – mit höchstem Qualitätsanspruch.">Code</div>
+    <div class="step" data-title="Go-Live & Übergabe" data-text="Wir testen auf allen Geräten, schärfen die Inhalte und begleiten Sie bis zum Livegang. Dazu gehört auch eine persönliche Übergabe mit Schulung, Dokumentation und Übergabe aller relevanten Daten.">Launch</div>
+    <div class="step" data-title="Wachstum & Betreuung" data-text="Auch nach dem Go-Live sind wir für Sie da: mit technischen Updates, Inhaltsanpassungen, strategischer Weiterentwicklung und langfristigem Support – schnell, transparent und zuverlässig.">Wachstum</div>
+  </div>
+
+  <div class="step-detail" id="stepDetail">
+    <h3 id="detailTitle">Projektstart</h3>
+    <p id="detailText">Ein gemeinsamer Auftakt schafft Vertrauen: Wir analysieren Ihre Ziele, Zielgruppen und Rahmenbedingungen. Dabei hören wir genau zu – um Ihr Projekt von Anfang an auf den richtigen Kurs zu bringen.</p>
+  </div>
+</section>
+
+<style>
+  .timeline-horizontal-section {
+    text-align: center;
+    padding: 5rem 1rem 4rem;
+    background: transparent;
+  }
+
+  .section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.4rem;
+    color: #111;
+    margin-bottom: 0.4rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    max-width: 620px;
+    margin: 0 auto 3rem;
+    color: #666;
+  }
+
+  .timeline-horizontal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3.5rem;
+    position: relative;
+    padding-top: 2rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .timeline-horizontal .step {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: #2b66d9;
+    border-radius: 50%;
+    width: 86px;
+    height: 86px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.3;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .timeline-horizontal .step:hover {
+    transform: scale(1.1);
+    opacity: 0.5;
+    z-index: 2;
+  }
+
+  .timeline-horizontal .step.active {
+    background-color: var(--primary, #ff6600);
+    opacity: 1;
+    color: #fff;
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(255, 102, 153, 0.3);
+    z-index: 3;
+  }
+
+  .step-detail {
+    margin-top: 3.5rem;
+    max-width: 700px;
+    margin-inline: auto;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.3s ease-in-out;
+    text-align: left;
+  }
+
+  .step-detail h3 {
+    font-size: 1.5rem;
+    color: var(--primary, #ff6600);
+    margin-bottom: 1rem;
+  }
+
+  .step-detail p {
+    font-size: 1.05rem;
+    color: #333;
+    line-height: 1.7;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .timeline-horizontal {
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .step-detail {
+      text-align: center;
+    }
+  }
+  
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const steps = document.querySelectorAll(".timeline-horizontal .step");
+    const detailBox = document.getElementById("stepDetail");
+    const detailTitle = document.getElementById("detailTitle");
+    const detailText = document.getElementById("detailText");
+
+    // Set first step as active
+    if (steps.length) steps[0].classList.add("active");
+
+    steps.forEach(step => {
+      step.addEventListener("click", (e) => {
+        e.preventDefault();
+        steps.forEach(s => s.classList.remove("active"));
+        step.classList.add("active");
+
+        detailTitle.textContent = step.getAttribute("data-title");
+        detailText.textContent = step.getAttribute("data-text");
+      });
+    });
+  });
+</script>
+
+
+
+<style>
+  .ux-elevated-2 {
+    background-color: #0a0a0a;
+    padding: 6rem 4vw;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    margin-top: 7rem;
+  }
+
+  .ux-inner-container {
+    max-width: 100%;
+    margin: 0 auto;
+
+    gap: 3rem;
+    align-items: flex-start;
+  }
+
+  .ux-visual-card {
+    perspective: 1000px;
+  }
+
+  .ux-card-glass {
+    background: rgba(255, 255, 255, 0.098);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 0 60px rgba(0, 212, 255, 0.05);
+    transition: transform 0.5s ease;
+  }
+
+  .ux-card-glass:hover {
+    transform: rotateY(6deg) rotateX(3deg) scale(1.02);
+    border-radius: 20px;
+  }
+
+  .ux-parallax-video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9/16;
+    object-fit: cover;
+    border-radius: 20px;
+
+  }
+
+  .ux-content-block {
+    text-align: left;
+  }
+
+  .ux-title {
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .ux-description {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+  }
+
+  .ux-feature-grid {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 3rem;
+
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;         /* NEU */
+  max-width: 100%;     /* NEU */
+}
+
+
+  .ux-feature {
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 2px solid transparent;
+    border-radius: 20px;
+    padding: 2rem;
+    min-height: 260px;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, border 0.3s ease;
+    cursor: pointer;
+  }
+
+  .ux-feature:hover {
+    border-radius: 20px;
+    border-image: linear-gradient(135deg, #00d2ff, #3a47d5) 1;
+    box-shadow: 0 0 18px rgba(0, 210, 255, 0.4);
+  }
+
+  .ux-feature h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .ux-feature p {
+    font-size: 1rem;
+    color: #aaa;
+    margin-bottom: 2rem;
+  }
+
+  .ux-feature img.corner-deco {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 240px;
+    height: 240px;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 0;
+    mask-image: linear-gradient(to top left, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to top left, black 50%, transparent 100%);
+    transition: opacity 0.3s ease;
+    opacity: 1;
+  }
+
+  .ux-feature.active img.corner-deco {
+    opacity: 0;
+  }
+
+  .ux-feature .detail-text {
+    color: #88ccff;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    display: none;
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+
+  .ux-feature.active .detail-text {
+    display: block;
+    opacity: 1;
+    margin-top: 1rem;
+  }
+
+  .ux-btn {
+    background: linear-gradient(135deg, #00d2ff, #3a47d5);
+    color: #fff;
+    padding: 0.9rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+
+  .ux-btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.6s ease-out;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+.corner-deco {
+  position: absolute;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(to top left, black 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top left, black 50%, transparent 100%);
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+.deco-1 {
+  bottom: -10px;
+  right: 10px;
+  width: 250px;
+}
+
+.deco-2 {
+  top: 57px;
+  right: 20px;
+  width: 200px;
+}
+
+.deco-3 {
+  top: 85px;
+  left: 5px;
+  width: 200px;
+}
+
+.deco-4 {
+  top: -20px;
+  left: 40px;
+  width: 220px;
+}
+.ux-feature.wide {
+  grid-column: span 2;
+}
+
+  @media (max-width: 768px) {
+    .ux-inner-container {
+      grid-template-columns: 1fr;
+    }
+
+    .ux-feature-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ux-content-block {
+      text-align: center;
+    }
+
+    .ux-title {
+      font-size: 2.2rem;
+    }
+  }
+</style>
+
+<section class="ux-elevated-2">
+  <div class="ux-inner-container">
+
+    <!-- Video Block -->
+    <div class="ux-visual-card">
+      <div class="ux-card-glass">
+        <video class="ux-parallax-video" autoplay muted loop playsinline>
+          <source src="./videos/ux-clip.mp4" type="video/mp4" />
+          Dein Browser unterstützt kein Video.
+        </video>
+      </div>
+    </div>
+
+    <!-- Text + Features -->
+    <div class="ux-content-block">
+      <h2 class="ux-title reveal">Professionelles UX Design – nutzerzentriert & messbar</h2>
+      <p class="ux-description reveal">
+        Wir gestalten digitale Produkte, die echte Nutzerbedürfnisse erfüllen – durch klare Prozesse, bewährte Methoden und messbare Ergebnisse.
+      </p>
+
+      <div class="ux-feature-grid reveal">
+        <div class="ux-feature" onclick="toggleDetail(this)">
+          <h3>Personas & Forschung</h3>
+          <p>Reale Zielgruppen verstehen und visualisieren.</p>
+          <div class="detail-text">Mit Interviews, Datenanalysen und Empathie-Karten erschließen wir echte Bedürfnisse und Pain Points.</div>
+          <img src="./assets/icon1.png" alt="Deko" class="corner-deco deco-1">
+        </div>
+
+      <div class="ux-feature wide" onclick="toggleDetail(this)">
+  <h3>Wireframing & Prototyping</h3>
+  <p>Ideen strukturiert, klickbar & iterativ machen.</p>
+  <div class="detail-text">Schnelle Entwürfe, validierte Klickdummys und strukturelle Klarheit im frühen Projektstadium.</div>
+  <img src="./WebdesignPic/ux wireframe.png" alt="Deko" class="corner-deco deco-2">
+</div>
+
+<div class="ux-feature wide" onclick="toggleDetail(this)">
+  <h3>UX-Testing & Analytics</h3>
+  <p>Nutzerfeedback messbar & integrierbar nutzen.</p>
+  <div class="detail-text">Durch User Tests, Heatmaps und KPIs erkennen wir Optimierungspotenziale im Verhalten.</div>
+  <img src="./WebdesignPic/uxtesting.webp" alt="Deko" class="corner-deco deco-3">
+</div>
+
+
+        <div class="ux-feature" onclick="toggleDetail(this)">
+          <h3>Optimierung & Growth</h3>
+          <p>Datengetriebene Weiterentwicklung & A/B-Tests.</p>
+          <div class="detail-text">Mit datenbasierten Iterationen und Experimenten schaffen wir nachhaltiges Wachstum.</div>
+          <img src="./assets/icon4.png" alt="Deko" class="corner-deco deco-4">
+        </div>
+      </div>
+
+      <button class="ux-btn reveal">UX Audit anfragen</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Scroll reveal
+  document.addEventListener("DOMContentLoaded", () => {
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(el => observer.observe(el));
+  });
+
+  // Toggle Erklärungstext
+  function toggleDetail(el) {
+    el.classList.toggle('active');
+  }
+</script>
+
+
+
+
+
+<section class="advanced-features-section">
+
+  <!-- 2x2 Grid Sektion -->
+  <div class="features-grid">
+    <!-- Oben links -->
+    <div class="feature-card">
+      <h3>Begleitung von A–Z</h3>
+      <p>Spitzenmäßiger Service von Anfang an – einfach & effektiv.</p>
+      <div class="tags">
+        <span title="Google Optimierung">Google</span>
+        <span title="Suchmaschinenoptimierung">SEO</span>
+        <span title="Texterstellung">Texte</span>
+        <span title="Sicheres Hosting">Hosting</span>
+      </div>
+    </div>
+
+    <!-- Oben rechts -->
+    <div class="feature-card image-blur" style="background-image: url('./assets/bookshelf.jpg');">
+      <h3>Individuelles Konzept</h3>
+      <p>Genauso einzigartig wie deine Marke.</p>
+    </div>
+
+    <!-- Unten links -->
+    <div class="feature-card">
+      <h3>Blitzschnelle Ladezeiten</h3>
+      <canvas class="speed-circle" data-value="100"></canvas>
+      <p>Ladezeit 100/97/94 (mobil/desktop/seo)</p>
+    </div>
+
+    <!-- Unten rechts -->
+    <div class="feature-card placeholder-card">
+      <h3>Platz für mehr</h3>
+      <p>Weitere Features oder Visuals</p>
+    </div>
+  </div>
+
+  <!-- Feature-Leiste unten -->
+  <div class="feature-bar">
+    <div class="feature-item">
+      <img src="./assets/slack-zapier.svg" alt="Slack Zapier" />
+      <h4>Perfekt integriert</h4>
+      <p>Slack → Zapier</p>
+    </div>
+    <div class="feature-item">
+      <img src="./assets/chip.svg" alt="Chip" />
+      <h4>Build to scale</h4>
+      <p>Modular & zukunftssicher</p>
+    </div>
+    <div class="feature-item">
+      <img src="./assets/clock.svg" alt="Clock" />
+      <h4>Einfache Bearbeitung</h4>
+      <p>Mo – Fr: 10 – 17 Uhr</p>
+    </div>
+    <div class="feature-item">
+      <img src="./assets/gdpr.svg" alt="DSGVO" />
+      <h4>Sicher & konform</h4>
+      <p>DSGVO-ready</p>
+    </div>
+  </div>
+</section>
+<style>
+.advanced-features-section {
+  padding: 80px 20vw;
+  background: #0a0a0a;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 80px;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(0, 255, 135, 0.1);
+  border-radius: 12px;
+  padding: 24px;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.feature-card:hover {
+  border-color: #00ff88;
+  box-shadow: 0 0 18px rgba(0, 255, 135, 0.3);
+}
+
+.feature-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.tags {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tags span {
+  background: #00ff88;
+  color: #000;
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: help;
+  animation: floatUp 0.4s ease-out;
+}
+
+.image-blur {
+  background-size: cover;
+  background-position: center;
+  filter: blur(0.5px) brightness(0.8);
+}
+
+.placeholder-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  opacity: 0.6;
+}
+
+.feature-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.feature-item {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.feature-item:hover {
+  border-color: #00ff88;
+  box-shadow: 0 0 12px rgba(0, 255, 135, 0.25);
+}
+
+.feature-item img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 0.8rem;
+  filter: brightness(1.1);
+}
+
+.feature-item h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.feature-item p {
+  font-size: 0.95rem;
+  color: #aaa;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .features-grid, .feature-bar {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+<script>
+// Kreisdiagramm zeichnen
+document.querySelectorAll('.speed-circle').forEach(canvas => {
+  const val = parseInt(canvas.dataset.value || 100);
+  const ctx = canvas.getContext("2d");
+  const size = 120;
+  canvas.width = size;
+  canvas.height = size;
+  const radius = size / 2 - 10;
+  const center = size / 2;
+
+  ctx.lineWidth = 8;
+  ctx.strokeStyle = "#333";
+  ctx.beginPath();
+  ctx.arc(center, center, radius, 0, 2 * Math.PI);
+  ctx.stroke();
+
+  ctx.strokeStyle = "#00ff88";
+  ctx.beginPath();
+  ctx.arc(center, center, radius, -0.5 * Math.PI, (val / 100) * 2 * Math.PI - 0.5 * Math.PI);
+  ctx.stroke();
+
+  ctx.fillStyle = "#fff";
+  ctx.font = "20px sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(val + "%", center, center);
+});
+</script>
+
+
+
+<section class="cta-modern">
+  <style>
+    .cta-modern {
+      position: relative;
+      padding: 7rem 1.5rem;
+      background: #0a0a0a;
+      overflow: hidden;
+      text-align: center;
+      z-index: 1;
+   
+    }
+
+    .cta-modern::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1800px;
+      max-width: 100vw;
+      height: 1800px;
+      z-index: 0;
+      pointer-events: none;
+      animation: glowShift 12s ease-in-out infinite alternate;
+      
+      
+    }
+
+
+    .cta-headline {
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      font-weight: 800;
+      font-family: 'Inter', sans-serif;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      line-height: 1.25;
+      letter-spacing: -0.3px;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 1s ease-out both;
+    }
+
+    .cta-small {
+      font-size: 0.6em;
+      font-weight: 500;
+      color: #ffffff !important;
+      font-family: 'Inter', sans-serif;
+      display: inline-block;
+      margin-right: 0.3em;
+      background: none !important;
+      background-clip: initial !important;
+      -webkit-background-clip: initial !important;
+      -webkit-text-fill-color: initial !important;
+    }
+
+    .cta-headline span {
+  font-family: 'VT323', monospace;
+  font-size: 1.3em;
+  line-height: 1;
+  display: inline-block;
+
+
+  background: linear-gradient(
+    220deg,
+    hwb(219 17% 0%) 0%,
+    hwb(219 18% 0%) 40%,
+    #e1e2ff 46%,
+    hwb(34 27% 0%) 52%,
+    hwb(29 0% 0%) 100%
+  );
+
+
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: gradientShift 16s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+    .cta-text {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 400;
+      color: #ececec;
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 1s ease-out 0.2s both;
+    }
+
+    .cta-btn {
+  background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
+  background-size: 300% 300%;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
+}
+
+/* Hover Glow & Lift */
+.cta-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
+}
+
+/* Entrance Animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animated Gradient */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+    @keyframes glowShift {
+      0% {
+        transform: translateX(-50%) rotate(0deg);
+      }
+
+      100% {
+        transform: translateX(-50%) rotate(3deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cta-modern {
+        padding: 5rem 1rem;
+      }
+
+      .cta-text {
+        margin-bottom: 2rem;
+        line-height: 1.5;
+      }
+
+      .cta-btn {
+        width: 100%;
+        padding: 0.9rem;
+      }
+    }
+
+    @media (max-width: 375px) {
+.cta-headline {
+  font-size: 1.5rem;
+}
+
+.cta-headline span {
+  font-size: 1.1em;
+}
+
+.cta-text {
+  font-size: 0.95rem;
+}
+
+.cta-btn {
+  font-size: 0.9rem;
+  padding: 0.75rem 1.2rem;
+}
+}
+
+
+  </style>
+
+  <h2 class="cta-headline">
+    <span class="cta-small">Bereit für</span> <span>deinen digitalen Auftritt?</span>
+  </h2>
+
+
+  <p class="cta-text">
+    Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.
+    Starte jetzt – unverbindlich und inspiriert.
+  </p>
+
+  <a href="#kontakt" class="cta-btn">Gespräch vereinbaren</a>
+</section>
+
+
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    .ux-elevated-section {
+      background-color: #0a0a0a;
+      padding: 6rem 20vw;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ux-inner-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+    }
+
+    .ux-visual-card {
+      perspective: 1000px;
+    }
+
+    .ux-card-glass {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 2rem;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 0 60px rgba(0, 212, 255, 0.05);
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+
+    .ux-card-glass:hover {
+      transform: rotateY(6deg) rotateX(3deg) scale(1.02);
+    }
+
+    .ux-parallax-img {
+      width: 100%;
+      display: block;
+      transform: translateZ(40px);
+      border-radius: 16px;
+    }
+
+    .ux-content-block {
+      text-align: left;
+      max-width: 550px;
+    }
+
+    .ux-title {
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      margin-top: 3rem;
+    }
+
+    .ux-description {
+      font-size: 1.2rem;
+      color: #cccccc;
+      margin-bottom: 3rem;
+      line-height: 1.6;
+    }
+
+    .ux-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .ux-feature {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .ux-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #00d2ff, #3a47d5);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 2.5s infinite ease-in-out;
+    }
+
+    .ux-feature h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .ux-feature p {
+      font-size: 1rem;
+      color: #aaaaaa;
+    }
+
+    .ux-btn {
+      background: linear-gradient(135deg, #00d2ff, #3a47d5);
+      color: #ffffff;
+      padding: 0.9rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .ux-btn:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.6s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .ux-inner-container {
+        grid-template-columns: 1fr;
+      }
+
+      .ux-feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ux-content-block {
+        text-align: center;
+        margin: 0 auto;
+      }
+
+      .ux-title {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+  <section class="ux-elevated-section">
+    <div class="ux-inner-container">
+      
+      <!-- Left content -->
+      <div class="ux-content-block reveal">
+        <h2 class="ux-title">MINDSET – UNSER ANSATZ & UNSERE MOTIVATION</h2>
+        <p class="ux-description">Ihr Qualitätsversprechen: Maßgeschneiderte digitale Lösungen für die Anforderungen von heute</p>
+
+        <div class="ux-feature-grid">
+          <div class="ux-feature">
+            <div class="ux-icon">🚀</div>
+            <h3>Wir steuern Ihr Projekt</h3>
+            <p>Lehnen Sie sich entspannt zurück: Wir begleiten Sie Schritt für Schritt und stimmen uns laufend mit Ihrem Feedback ab.</p>
+          </div>
+          <div class="ux-feature">
+            <div class="ux-icon">🎯</div>
+            <h3>Wir denken uns in Sie hinein</h3>
+            <p>Ein tiefes Verständnis Ihrer Zielgruppe und Unternehmensziele bildet das Fundament für einen überzeugenden digitalen Auftritt.</p>
+          </div>
+          <div class="ux-feature">
+            <div class="ux-icon">🎨</div>
+            <h3>Wir leben Design</h3>
+            <p>Ein starker erster Eindruck entscheidet. Deshalb entwerfen wir Designs, die begeistern – nicht nur das, was am einfachsten umsetzbar ist.</p>
+          </div>
+          <div class="ux-feature">
+            <div class="ux-icon">🔍</div>
+            <h3>Wir achten auf die Details</h3>
+            <p>Es sind die feinen Nuancen, die Ihre Website oder App unvergesslich machen. Genau dafür schlagen unsere Herzen.</p>
+          </div>
+          <div class="ux-feature">
+            <div class="ux-icon">💻</div>
+            <h3>Wir sind Tech-Enthusiast:innen</h3>
+            <p>Ob JavaScript, Headless-Architekturen, Webpack, APIs oder React – wir setzen auf modernste Technologien und Best Practices.</p>
+          </div>
+          <div class="ux-feature">
+            <div class="ux-icon">⚙️</div>
+            <h3>Wir schätzen effiziente Abläufe</h3>
+            <p>Mit klaren Prozessen und smarten Tools sorgen wir für reibungslose Zusammenarbeit und eine zügige Projektabwicklung.</p>
+          </div>
+        </div>
+
+        <button class="ux-btn">Mehr über uns →</button>
+      </div>
+
+      <!-- Right visual -->
+      <div class="ux-visual-card reveal">
+        <div class="ux-card-glass">
+          <video class="ux-parallax-img" autoplay muted loop playsinline>
+            <source src="./Fotos/Hintergrund.mp4" type="video/mp4" />
+            Video nicht verfügbar.
+          </video>
+          <img class="ux-parallax-img" src="./3DPic/1.jpg" alt="3D Illustration" style="margin-top: 20px;" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const reveals = document.querySelectorAll('.reveal');
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      reveals.forEach(el => observer.observe(el));
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1453,227 +2601,6 @@ body {
 }
 </style>
 
-
-
-<section class="cta-modern">
-  <style>
-    .cta-modern {
-      position: relative;
-      padding: 7rem 1.5rem;
-      background: linear-gradient(180deg, #f4f4f4, #ffffff);
-      overflow: hidden;
-      text-align: center;
-      z-index: 1;
-    }
-
-    .cta-modern::before {
-      content: '';
-      position: absolute;
-      top: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1800px;
-      max-width: 100vw;
-      height: 1800px;
-      z-index: 0;
-      pointer-events: none;
-      animation: glowShift 12s ease-in-out infinite alternate;
-    }
-
-
-    .cta-headline {
-      font-size: clamp(1.8rem, 4.5vw, 3rem);
-      font-weight: 800;
-      font-family: 'Inter', sans-serif;
-      color: #000;
-      margin-bottom: 1rem;
-      line-height: 1.25;
-      letter-spacing: -0.3px;
-      position: relative;
-      z-index: 2;
-      animation: fadeUp 1s ease-out both;
-    }
-
-    .cta-small {
-      font-size: 0.6em;
-      font-weight: 500;
-      color: #000000 !important;
-      font-family: 'Inter', sans-serif;
-      display: inline-block;
-      margin-right: 0.3em;
-      background: none !important;
-      background-clip: initial !important;
-      -webkit-background-clip: initial !important;
-      -webkit-text-fill-color: initial !important;
-    }
-
-    .cta-headline span {
-  font-family: 'VT323', monospace;
-  font-size: 1.3em;
-  line-height: 1;
-  display: inline-block;
-
-
-  background: linear-gradient(
-    220deg,
-    hwb(219 17% 0%) 0%,
-    hwb(219 18% 0%) 40%,
-    #e1e2ff 46%,
-    hwb(34 27% 0%) 52%,
-    hwb(29 0% 0%) 100%
-  );
-
-
-  background-size: 400% 400%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  animation: gradientShift 16s ease-in-out infinite;
-}
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-
-    .cta-text {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
-      font-weight: 400;
-      color: #272727;
-      max-width: 640px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.6;
-      position: relative;
-      z-index: 2;
-      animation: fadeUp 1s ease-out 0.2s both;
-    }
-
-    .cta-btn {
-  background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
-  background-size: 300% 300%;
-  color: #fff;
-  font-weight: 600;
-  padding: 0.8rem 2rem;
-  font-size: clamp(0.9rem, 2vw, 1rem);
-  border-radius: 10px;
-  text-decoration: none;
-  box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  z-index: 2;
-  animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
-}
-
-/* Hover Glow & Lift */
-.cta-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
-}
-
-/* Entrance Animation */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Animated Gradient */
-@keyframes gradientFlow {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-    @keyframes glowShift {
-      0% {
-        transform: translateX(-50%) rotate(0deg);
-      }
-
-      100% {
-        transform: translateX(-50%) rotate(3deg);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .cta-modern {
-        padding: 5rem 1rem;
-      }
-
-      .cta-text {
-        margin-bottom: 2rem;
-        line-height: 1.5;
-      }
-
-      .cta-btn {
-        width: 100%;
-        padding: 0.9rem;
-      }
-    }
-
-    @media (max-width: 375px) {
-.cta-headline {
-  font-size: 1.5rem;
-}
-
-.cta-headline span {
-  font-size: 1.1em;
-}
-
-.cta-text {
-  font-size: 0.95rem;
-}
-
-.cta-btn {
-  font-size: 0.9rem;
-  padding: 0.75rem 1.2rem;
-}
-}
-
-
-  </style>
-
-  <h2 class="cta-headline">
-    <span class="cta-small">Bereit für</span> <span>deinen digitalen Auftritt?</span>
-  </h2>
-
-
-  <p class="cta-text">
-    Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.
-    Starte jetzt – unverbindlich und inspiriert.
-  </p>
-
-  <a href="#kontakt" class="cta-btn">Gespräch vereinbaren</a>
-</section>
 
 
 <testimonial-slider></testimonial-slider>

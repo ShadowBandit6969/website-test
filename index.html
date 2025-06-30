@@ -590,78 +590,82 @@
       font-size: 0.95rem;
       color: #555;
       font-style: italic;
-/* CARD GRADIENTS */
+      /* CARD GRADIENTS */
     }
-.persona-card:nth-child(1) {
-  background: linear-gradient(135deg, #ff5100, #ff7b00, #ff5100);
-  background-size: 300% 300%;
-}
 
-.persona-card:nth-child(2) {
-  background: linear-gradient(135deg, #0d0d0d, #1c1f2f, #0d0d0d);
-  background-size: 300% 300%;
-}
+    .persona-card:nth-child(1) {
+      background: linear-gradient(135deg, #ff5100, #ff7b00, #ff5100);
+      background-size: 300% 300%;
+    }
 
-.persona-card:nth-child(3) {
-  background: linear-gradient(135deg, #4b00ff, #3000a3, #4b00ff);
-  background-size: 300% 300%;
-}
+    .persona-card:nth-child(2) {
+      background: linear-gradient(135deg, #0d0d0d, #1c1f2f, #0d0d0d);
+      background-size: 300% 300%;
+    }
 
-.persona-card {
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  color: #fff;
-  will-change: transform, box-shadow;
-  background-position: 0% 50%;
-}
+    .persona-card:nth-child(3) {
+      background: linear-gradient(135deg, #4b00ff, #3000a3, #4b00ff);
+      background-size: 300% 300%;
+    }
 
-/* Glow-Overlay */
-.persona-card::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.18), transparent 70%);
-  transform: scale(0.5);
-  opacity: 0;
-  transition: all 0.6s ease;
-  z-index: 1;
-  pointer-events: none;
-}
+    .persona-card {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      color: #fff;
+      will-change: transform, box-shadow;
+      background-position: 0% 50%;
+    }
 
-.persona-card:hover::before {
-  transform: scale(1);
-  opacity: 0.25;
-}
+    /* Glow-Overlay */
+    .persona-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.18), transparent 70%);
+      transform: scale(0.5);
+      opacity: 0;
+      transition: all 0.6s ease;
+      z-index: 1;
+      pointer-events: none;
+    }
 
-.persona-card:hover {
-  transform: translateY(-8px) scale(1.035);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
-  animation: gradientPulse 6s ease infinite;
-  background-position: 100% 50%;
-  z-index: 10;
-}
+    .persona-card:hover::before {
+      transform: scale(1);
+      opacity: 0.25;
+    }
 
-@keyframes gradientPulse {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-.persona-card h3,
-.persona-card ul li,
-.persona-card .vorteil,
-.persona-card .tagline {
-  color: inherit;
-}
+    .persona-card:hover {
+      transform: translateY(-8px) scale(1.035);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+      animation: gradientPulse 6s ease infinite;
+      background-position: 100% 50%;
+      z-index: 10;
+    }
+
+    @keyframes gradientPulse {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .persona-card h3,
+    .persona-card ul li,
+    .persona-card .vorteil,
+    .persona-card .tagline {
+      color: inherit;
+    }
 
 
 
@@ -785,7 +789,8 @@
       pointer-events: none;
       transition: opacity 0.3s ease;
     }
- /* Individuelle Farben je Service 
+
+    /* Individuelle Farben je Service 
     .service-card::after {
       content: "";
       position: absolute;
@@ -937,7 +942,7 @@
       }
     }
 
-    @media (min-width: 1300px){
+    @media (min-width: 1300px) {
       .service-grid {
         max-width: 1300px;
         grid-template-columns: repeat(3, minmax(380px, 1fr));
@@ -995,278 +1000,315 @@
         border-radius: 8px;
       }
     }
+
     /* Individuelle Farben je Service */
-.service-card:nth-child(1) {
-    background: linear-gradient(270deg, #04006c, #6f00ff, #050088);
-  background-size: 600% 600%;
-  color: #fff;
-}
+    .service-card:nth-child(1) {
+      background: linear-gradient(270deg, #04006c, #6f00ff, #050088);
+      background-size: 600% 600%;
+      color: #fff;
+    }
 
-.service-card:nth-child(2) {
-  background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
-  background-size: 300% 300%;
-  color: #fff;
-}
+    .service-card:nth-child(2) {
+      background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
+      background-size: 300% 300%;
+      color: #fff;
+    }
 
-.service-card:nth-child(3) {
-  background: linear-gradient(135deg, #ff5100, hwb(340 0% 0%), #ff5100);
-  background-size: 400% 400%;
-  color: #fff;
-}
-
-.service-card:nth-child(4) {
-  background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
-  background-size: 300% 300%;
-  color: #fff;
-}
-
-
-/* Basisstil für alle Cards */
-.service-card {
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  background-position: 0% 50%;
-  will-change: transform, box-shadow, background-position;
-  padding: 2.5rem;
-  border-radius: 18px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* Glanz-Overlay */
-.service-card::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.18), transparent 70%);
-  transform: scale(0.5);
-  opacity: 0;
-  transition: all 0.6s ease;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.service-card:hover::before {
-  transform: scale(1);
-  opacity: 0.25;
-}
-
-.service-card:hover {
-  transform: translateY(-8px) scale(1.035);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-  animation: serviceGradientPulse 0.5s ease 1 forwards;
-  background-position: 100% 50%;
-  z-index: 10;
-}
-
-@keyframes serviceGradientPulse {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
-}
-
-/* Textfarben dynamisch */
-.service-card .inner,
-.service-card h3,
-.service-card ul,
-.service-card ul li,
-.service-card a.cta {
-  position: relative;
-  z-index: 2;
-  color: inherit;
-}
-
-/* Titel-Optik */
-.service-card h3 {
-  font-size: 1.6rem;
-  margin-bottom: 1.2rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-/* Listen */
-.service-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.75;
-}
-
-.service-card ul li {
-  margin-bottom: 0.8rem;
-}
-
-/* Call-to-Action Button */
-.service-card .cta {
-  display: inline-block;
-  margin-top: 2rem;
-  font-size: 1rem;
-  font-weight: 500;
-  padding: 0.7rem 1.4rem;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  color: #fff;
-  text-decoration: none;
-  backdrop-filter: blur(4px);
-  transition: all 0.3s ease;
-}
-
-.service-card .cta:hover {
-  background-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
-  transform: scale(1.03);
-}
-
-
-@media (min-width: 1152px) {
-  .service-card:nth-child(2) {
-    grid-column: span 2;
-  }
     .service-card:nth-child(3) {
-    grid-column: span 2;
-  }
-}
+      background: linear-gradient(135deg, #ff5100, hwb(340 0% 0%), #ff5100);
+      background-size: 400% 400%;
+      color: #fff;
+    }
 
-.image-overlay {
-  position: absolute;
-  bottom: 0rem;
-  right: 1rem;
-  z-index: 3;
-}
-
-.image-overlay img {
-  width: 480px; /* oder z. B. 20% der Karte, aber meist ist fixe Größe besser */
-  height: auto;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-.service-card:hover .image-overlay img {
-  opacity: 1;
-}
-
-.service-card:nth-child(2) .image-overlay {
-  bottom: -0.5rem; /* Weiter nach unten */
-}
-
-/* Nur für das zweite PNG (Grafikdesign-Block) */
-.service-card:nth-child(3) .image-overlay {
-  bottom: -2.3rem; /* Weiter nach unten */
-}
-
-/* Initialzustand Planet */
-.planet-image {
-  position: absolute;
-  bottom: -15.5rem;
-  right: -6rem;
-  width: 140px;
-  height: auto;
-  opacity: 0;
-  transform: scale(1.3);
-  pointer-events: none;
-  z-index: 2; /* hinter Astronaut */
-  transform-origin: center;
-  animation: none;
-}
-
-/* Sichtbar und wachsende Animation beim Hover oder Klick */
-.card-3d:hover .planet-image,
-.card-3d.clicked .planet-image {
-  opacity: 1;
-  animation: planetGrow 10s ease-out forwards;
-}
-
-@keyframes planetGrow {
-  0%   { transform: scale(1.3); }
-  10%  { transform: scale(1.32); }
-  20%  { transform: scale(1.34); }
-  30%  { transform: scale(1.36); }
-  40%  { transform: scale(1.375); }
-  50%  { transform: scale(1.39); }
-  60%  { transform: scale(1.4); }
-}
-
-/* Stelle sicher, dass nur der Astronaut dauerhaft sichtbar ist */
-.image-overlay img:not(.planet-image) {
-  position: relative;
-  z-index: 3;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-/* Wrapper für Rotation */
-.planet-wrapper {
-  position: absolute;
-  bottom: 2.5rem;
-  right: 4rem;
-  width: 140px;
-  height: 140px;
-  z-index: 2;
-  pointer-events: none;
-  transform-origin: center;
-}
-
-/* Rotation läuft dauerhaft leicht */
-.card-3d:hover .planet-wrapper,
-.card-3d.clicked .planet-wrapper {
-  animation: planetRotate 8s linear infinite;
-}
-
-/* Planet selbst (nur Skalierung) */
-.planet-image {
-  width: 100%;
-  height: auto;
-  opacity: 0;
-  transform: scale(1.3);
-  animation: none;
-  transition: opacity 0.3s ease;
-}
-
-/* Beim Hover oder Klick erscheint er und wächst */
-.card-3d:hover .planet-image,
-.card-3d.clicked .planet-image {
-  opacity: 1;
-  animation: planetGrow 15.2s ease-out forwards;
-}
-
-@keyframes planetRotate {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(20deg); }
-}
-
-/* Astronaut nur ab 1152px sichtbar */
-@media (max-width: 1151px) {
-  .image-overlay img:not(.planet-image) {
-    display: none !important;
-  }
-}
-@media (max-width: 1299px) and (min-width: 1151px) {
-  .service-card:nth-child(2) .image-overlay {
-    right: -2rem; /* weiter nach rechts (Standard war: 1rem) */
-  }  .service-card:nth-child(3) .image-overlay {
-    right: -2rem; /* weiter nach rechts (Standard war: 1rem) */
-  }
-}
-
-/* Planet nur ab 1300px sichtbar */
-@media (max-width: 1299px) {
-  .planet-wrapper,
-  .planet-image {
-    display: none !important;
-  }
-}
+    .service-card:nth-child(4) {
+      background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
+      background-size: 300% 300%;
+      color: #fff;
+    }
 
 
+    /* Basisstil für alle Cards */
+    .service-card {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      background-position: 0% 50%;
+      will-change: transform, box-shadow, background-position;
+      padding: 2.5rem;
+      border-radius: 18px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Glanz-Overlay */
+    .service-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.18), transparent 70%);
+      transform: scale(0.5);
+      opacity: 0;
+      transition: all 0.6s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .service-card:hover::before {
+      transform: scale(1);
+      opacity: 0.25;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px) scale(1.035);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+      animation: serviceGradientPulse 0.5s ease 1 forwards;
+      background-position: 100% 50%;
+      z-index: 10;
+    }
+
+    @keyframes serviceGradientPulse {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* Textfarben dynamisch */
+    .service-card .inner,
+    .service-card h3,
+    .service-card ul,
+    .service-card ul li,
+    .service-card a.cta {
+      position: relative;
+      z-index: 2;
+      color: inherit;
+    }
+
+    /* Titel-Optik */
+    .service-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    /* Listen */
+    .service-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    .service-card ul li {
+      margin-bottom: 0.8rem;
+    }
+
+    /* Call-to-Action Button */
+    .service-card .cta {
+      display: inline-block;
+      margin-top: 2rem;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.7rem 1.4rem;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #fff;
+      text-decoration: none;
+      backdrop-filter: blur(4px);
+      transition: all 0.3s ease;
+    }
+
+    .service-card .cta:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+      transform: scale(1.03);
+    }
+
+
+    @media (min-width: 1152px) {
+      .service-card:nth-child(2) {
+        grid-column: span 2;
+      }
+
+      .service-card:nth-child(3) {
+        grid-column: span 2;
+      }
+    }
+
+    .image-overlay {
+      position: absolute;
+      bottom: 0rem;
+      right: 1rem;
+      z-index: 3;
+    }
+
+    .image-overlay img {
+      width: 480px;
+      /* oder z. B. 20% der Karte, aber meist ist fixe Größe besser */
+      height: auto;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .service-card:hover .image-overlay img {
+      opacity: 1;
+    }
+
+    .service-card:nth-child(2) .image-overlay {
+      bottom: -0.5rem;
+      /* Weiter nach unten */
+    }
+
+    /* Nur für das zweite PNG (Grafikdesign-Block) */
+    .service-card:nth-child(3) .image-overlay {
+      bottom: -2.3rem;
+      /* Weiter nach unten */
+    }
+
+    /* Initialzustand Planet */
+    .planet-image {
+      position: absolute;
+      bottom: -15.5rem;
+      right: -6rem;
+      width: 140px;
+      height: auto;
+      opacity: 0;
+      transform: scale(1.3);
+      pointer-events: none;
+      z-index: 2;
+      /* hinter Astronaut */
+      transform-origin: center;
+      animation: none;
+    }
+
+    /* Sichtbar und wachsende Animation beim Hover oder Klick */
+    .card-3d:hover .planet-image,
+    .card-3d.clicked .planet-image {
+      opacity: 1;
+      animation: planetGrow 10s ease-out forwards;
+    }
+
+    @keyframes planetGrow {
+      0% {
+        transform: scale(1.3);
+      }
+
+      10% {
+        transform: scale(1.32);
+      }
+
+      20% {
+        transform: scale(1.34);
+      }
+
+      30% {
+        transform: scale(1.36);
+      }
+
+      40% {
+        transform: scale(1.375);
+      }
+
+      50% {
+        transform: scale(1.39);
+      }
+
+      60% {
+        transform: scale(1.4);
+      }
+    }
+
+    /* Stelle sicher, dass nur der Astronaut dauerhaft sichtbar ist */
+    .image-overlay img:not(.planet-image) {
+      position: relative;
+      z-index: 3;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Wrapper für Rotation */
+    .planet-wrapper {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 4rem;
+      width: 140px;
+      height: 140px;
+      z-index: 2;
+      pointer-events: none;
+      transform-origin: center;
+    }
+
+    /* Rotation läuft dauerhaft leicht */
+    .card-3d:hover .planet-wrapper,
+    .card-3d.clicked .planet-wrapper {
+      animation: planetRotate 8s linear infinite;
+    }
+
+    /* Planet selbst (nur Skalierung) */
+    .planet-image {
+      width: 100%;
+      height: auto;
+      opacity: 0;
+      transform: scale(1.3);
+      animation: none;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Beim Hover oder Klick erscheint er und wächst */
+    .card-3d:hover .planet-image,
+    .card-3d.clicked .planet-image {
+      opacity: 1;
+      animation: planetGrow 15.2s ease-out forwards;
+    }
+
+    @keyframes planetRotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(20deg);
+      }
+    }
+
+    /* Astronaut nur ab 1152px sichtbar */
+    @media (max-width: 1151px) {
+      .image-overlay img:not(.planet-image) {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 1299px) and (min-width: 1151px) {
+      .service-card:nth-child(2) .image-overlay {
+        right: -2rem;
+        /* weiter nach rechts (Standard war: 1rem) */
+      }
+
+      .service-card:nth-child(3) .image-overlay {
+        right: -2rem;
+        /* weiter nach rechts (Standard war: 1rem) */
+      }
+    }
+
+    /* Planet nur ab 1300px sichtbar */
+    @media (max-width: 1299px) {
+
+      .planet-wrapper,
+      .planet-image {
+        display: none !important;
+      }
+    }
   </style>
 
   <section class="container apple-services" id="tools">
@@ -1288,28 +1330,28 @@
         </div>
       </div>
 
- <!-- 3D Design -->
-<div class="service-card card-3d" onclick="togglePlanet(this)">
-  <div class="inner">
-    <h3>3D Design</h3>
-    <ul>
-      <li>Fotorealistische 3D-Visualisierungen</li>
-      <li>Produkt & Architektur-Renderings</li>
-      <li>VR/AR-kompatible Modelle</li>
-      <li>Optimiert für Web & Druck</li>
-    </ul>
+      <!-- 3D Design -->
+      <div class="service-card card-3d" onclick="togglePlanet(this)">
+        <div class="inner">
+          <h3>3D Design</h3>
+          <ul>
+            <li>Fotorealistische 3D-Visualisierungen</li>
+            <li>Produkt & Architektur-Renderings</li>
+            <li>VR/AR-kompatible Modelle</li>
+            <li>Optimiert für Web & Druck</li>
+          </ul>
 
- <div class="image-overlay">
-  <div class="planet-wrapper">
-    <img class="planet-image" src="./indexFotoSlideShow/planet.png" alt="Planet" />
-  </div>
-  <img src="./indexFotoSlideShow/2.png" alt="3D Icon" />
-</div>
+          <div class="image-overlay">
+            <div class="planet-wrapper">
+              <img class="planet-image" src="./indexFotoSlideShow/planet.png" alt="Planet" />
+            </div>
+            <img src="./indexFotoSlideShow/2.png" alt="3D Icon" />
+          </div>
 
 
-    <a href="./3DDesign.html" class="cta">Mehr erfahren</a>
-  </div>
-</div>
+          <a href="./3DDesign.html" class="cta">Mehr erfahren</a>
+        </div>
+      </div>
 
 
       <!-- Grafikdesign -->
@@ -1321,10 +1363,10 @@
             <li>Professionelles Logo-Design</li>
             <li>Druck- & Digitalmedien</li>
             <li>Infografiken & visuelle Systeme</li>
-          </ul>          
+          </ul>
           <div class="image-overlay">
-  <img src="./indexFotoSlideShow/1.png" alt="3D Icon" />
-</div>
+            <img src="./indexFotoSlideShow/astro sitzend.png" alt="3D Icon" />
+          </div>
 
           <a href="./Grafikdesign.html" class="cta">Mehr erfahren</a>
         </div>
@@ -1566,126 +1608,127 @@
   </section>
 
 
-  
-<style>
-  .white-transition-section {
-    position: relative;
-    background: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    overflow: visible;
-  }
 
-  .white-world {
-    position: relative;
-    padding-top: 6rem;
-    height: auto;
-    clip-path: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background: #f4f4f4;
-    opacity: 1;
-    pointer-events: all;
-    z-index: 5;
-    width: 100vw;
-    transition: none;
-  }
+  <style>
+    .white-transition-section {
+      position: relative;
+      background: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: visible;
+    }
 
-  .white-content h2 {
-    margin-bottom: 3rem;
-  }
+    .white-world {
+      position: relative;
+      padding-top: 6rem;
+      height: auto;
+      clip-path: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: #f4f4f4;
+      opacity: 1;
+      pointer-events: all;
+      z-index: 5;
+      width: 100vw;
+      transition: none;
+    }
 
-  .white-world.visible {
-    clip-path: circle(150% at 50% 50%);
-    opacity: 1;
-    pointer-events: all;
-    width: 100vw;
-    transform: translateX(0);
-  }
+    .white-content h2 {
+      margin-bottom: 3rem;
+    }
 
-  .white-content {
-    text-align: center;
-    max-width: 90vw;
-    padding: 2rem 1rem;
-    animation: fadeIn 1.2s ease forwards;
-  }
+    .white-world.visible {
+      clip-path: circle(150% at 50% 50%);
+      opacity: 1;
+      pointer-events: all;
+      width: 100vw;
+      transform: translateX(0);
+    }
 
-  .epic-step h3 {
-    font-size: 1.25rem;
-    color: #111;
-    font-weight: 700;
-    margin-bottom: 0.6rem;
-    line-height: 1.4;
-  }
+    .white-content {
+      text-align: center;
+      max-width: 90vw;
+      padding: 2rem 1rem;
+      animation: fadeIn 1.2s ease forwards;
+    }
 
-  .epic-step p {
-    color: #333;
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
+    .epic-step h3 {
+      font-size: 1.25rem;
+      color: #111;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      line-height: 1.4;
+    }
 
-  .project-white-steps {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-  }
+    .epic-step p {
+      color: #333;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
 
-  .epic-step {
-    position: relative;
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 20px;
-    border: 1px solid rgba(70, 70, 70, 0.15);
-    padding: 2.5rem;
-    width: 400px;
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    backdrop-filter: blur(20px);
-    overflow: hidden;
-    transition: all 0.4s ease;
-    transform: translateY(40px);
-    opacity: 0;
-  }
+    .project-white-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
 
-  .project-white-steps .epic-step:nth-child(1) {
-  background: linear-gradient(270deg, #04006c, #6f00ff, #050088);
-  background-size: 600% 600%;
-  color: #fff;
-}
+    .epic-step {
+      position: relative;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      border: 1px solid rgba(70, 70, 70, 0.15);
+      padding: 2.5rem;
+      width: 400px;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      backdrop-filter: blur(20px);
+      overflow: hidden;
+      transition: all 0.4s ease;
+      transform: translateY(40px);
+      opacity: 0;
+    }
 
-.project-white-steps .epic-step:nth-child(2) {
-  background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
-  background-size: 300% 300%;
-  color: #fff;
-}
+    .project-white-steps .epic-step:nth-child(1) {
+      background: linear-gradient(270deg, #04006c, #6f00ff, #050088);
+      background-size: 600% 600%;
+      color: #fff;
+    }
 
-.project-white-steps .epic-step:nth-child(3) {
-  background: linear-gradient(135deg, #ff5100, hwb(340 0% 0%), #ff5100);
-  background-size: 400% 400%;
-  color: #fff;
-}
+    .project-white-steps .epic-step:nth-child(2) {
+      background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
+      background-size: 300% 300%;
+      color: #fff;
+    }
 
-.project-white-steps .epic-step:nth-child(4) {
-  background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
-  background-size: 300% 300%;
-  color: #fff;
-}
+    .project-white-steps .epic-step:nth-child(3) {
+      background: linear-gradient(135deg, #ff5100, hwb(340 0% 0%), #ff5100);
+      background-size: 400% 400%;
+      color: #fff;
+    }
 
-.project-white-steps .epic-step h3,
-.project-white-steps .epic-step p,
-.project-white-steps .epic-step .step-number {
-  color: #fff;
-}
-.project-white-steps .epic-step::before {
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), transparent 70%);
-  opacity: 0.1;
-}
+    .project-white-steps .epic-step:nth-child(4) {
+      background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
+      background-size: 300% 300%;
+      color: #fff;
+    }
+
+    .project-white-steps .epic-step h3,
+    .project-white-steps .epic-step p,
+    .project-white-steps .epic-step .step-number {
+      color: #fff;
+    }
+
+    .project-white-steps .epic-step::before {
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), transparent 70%);
+      opacity: 0.1;
+    }
 
 
-/* Individuelle Farben je Karte beim Hover 
+    /* Individuelle Farben je Karte beim Hover 
 .project-white-steps .epic-step:nth-child(1):hover {
  
     background: linear-gradient(135deg, #ff5100, hwb(340 0% 0%), #ff5100);
@@ -1711,147 +1754,255 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
   background-size: 300% 300%;
   color: #fff;
 }*/
-.project-white-steps .epic-step:hover h3,
-.project-white-steps .epic-step:hover p,
-.project-white-steps .epic-step:hover .step-number {
-  color: #fff;
-}
-.epic-step {
-  transition: all 0.4s ease, background 0.6s ease;
-}
-
-  @keyframes lightMotion {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  .step-inner {
-    position: relative;
-    z-index: 2;
-    text-align: left;
-  }
-
-  .step-number {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--primary);
-    display: block;
-    margin-bottom: 1rem;
-  }
-
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .project-white-steps {
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
+    .project-white-steps .epic-step:hover h3,
+    .project-white-steps .epic-step:hover p,
+    .project-white-steps .epic-step:hover .step-number {
+      color: #fff;
     }
 
     .epic-step {
-      width: 100%;
-      max-width: 95vw;
-      padding: 1.5rem;
+      transition: all 0.4s ease, background 0.6s ease;
     }
 
-    .epic-step h3 {
-      font-size: 1.1rem;
+    @keyframes lightMotion {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
-    .epic-step p {
-      font-size: 0.9rem;
-      line-height: 1.5;
+    .step-inner {
+      position: relative;
+      z-index: 2;
+      text-align: left;
     }
 
     .step-number {
-      font-size: 1.8rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .white-content {
-      padding: 1.5rem 1rem;
-    }
-  }
-
-  /* Sichtbar ab 1152px, doppelte Breite für Karte 1 und 4 */
-  @media (min-width: 1152px) {
-    .project-white-steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-
-    .epic-step {
-      width: 100%;
-    }
-
-    .project-white-steps .epic-step[data-step="00"],
-    .project-white-steps .epic-step[data-step="03"] {
-      grid-column: span 2;
-    }
-
-    .video-step {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary);
       display: block;
-      grid-column: span 2;
-      height: 100%;
+      margin-bottom: 1rem;
     }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .project-white-steps {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .epic-step {
+        width: 100%;
+        max-width: 95vw;
+        padding: 1.5rem;
+      }
+
+      .epic-step h3 {
+        font-size: 1.1rem;
+      }
+
+      .epic-step p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .step-number {
+        font-size: 1.8rem;
+        margin-bottom: 0.6rem;
+      }
+
+      .white-content {
+        padding: 1.5rem 1rem;
+      }
+    }
+
+    /* Sichtbar ab 1152px, doppelte Breite für Karte 1 und 4 */
+    @media (min-width: 1152px) {
+      .project-white-steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+      }
+
+      .epic-step {
+        width: 100%;
+      }
+
+      .project-white-steps .epic-step[data-step="00"],
+      .project-white-steps .epic-step[data-step="03"] {
+        grid-column: span 2;
+      }
+
+      .video-step {
+        display: block;
+        grid-column: span 2;
+        height: 100%;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      .white-content {
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+      }
+
+      .white-content h2 {
+        font-size: 3rem;
+        margin-bottom: 4rem;
+      }
+
+      .epic-step {
+        padding: 3rem;
+      }
+
+      .epic-step h3 {
+        font-size: 1.5rem;
+      }
+
+      .epic-step p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+
+      .step-number {
+        font-size: 2.8rem;
+      }
+    }
+
+
+  
+@media (min-width: 1152px) {
+  .epic-step.with-image {
+    position: relative;
   }
 
-  @media (min-width: 1440px) {
-    .white-content {
-      max-width: 1600px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-    }
-
-    .white-content h2 {
-      font-size: 3rem;
-      margin-bottom: 4rem;
-    }
-
-    .epic-step {
-      padding: 3rem;
-    }
-
-    .epic-step h3 {
-      font-size: 1.5rem;
-    }
-
-    .epic-step p {
-      font-size: 1.05rem;
-      line-height: 1.7;
-    }
-
-    .step-number {
-      font-size: 2.8rem;
-    }
+  .epic-step.with-image .step-inner {
+    max-width: 50%;
   }
 
-  .video-step {
-    display: none;
-    padding: 0;
+  .epic-step.with-image .step-image {
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    max-width: 40%;
   }
 
-  .video-step video {
+  .epic-step.with-image .step-image img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 20px;
+    max-height: 160px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
   }
-</style>
+}
+
+.epic-step.with-image .step-image img {
+  max-height: 140px;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 1152px) {
+  .step-image {
+    display: none !important;
+  }
+}
+.image-bottom-left {
+  position: absolute;
+  transform: translate(-150px, 250px) rotate(0deg) scale(1.0);
+  max-width: 280px;
+  transition: transform 3.2s cubic-bezier(0.9, 0, 1, 1); /* SANFTER START → TURBO */
+  pointer-events: none;
+  will-change: transform;
+}
+
+.fly-object {
+  width: 280px;
+  height: auto;
+}
+
+.epic-step.with-image:hover .image-bottom-left {
+  transform: translate(-130px, -200px) rotate(10deg) scale(0.3); /* Startflug nach oben rechts */
+}
+
+
+.image-bottom-top {
+  position: absolute;
+  transform: translate(-150px, 250px) rotate(0deg) scale(1.0);
+  max-width: 280px;
+  transition: transform 3.2s cubic-bezier(0.9, 0, 1, 1); /* SANFTER START → TURBO */
+  pointer-events: none;
+  will-change: transform;
+}
+
+.fly-object {
+  width: 280px;
+  height: auto;
+}
+
+.epic-step.with-image:hover .image-bottom-top {
+  transform: translate(-150px, 0px) rotate(0deg) scale(1); /* Startflug nach oben rechts */
+}
+
+
+@media (max-width: 1440px) {
+
+.image-bottom-left {
+  position: absolute;
+  transform: translate(-150px, 290px) rotate(0deg) scale(0.8);
+  max-width: 280px;
+  transition: transform 3.2s cubic-bezier(0.9, 0, 1, 1); /* SANFTER START → TURBO */
+  pointer-events: none;
+  will-change: transform;
+}
+
+}
+
+.image-bottom-right {
+  position: absolute;
+  transform: translateY(208px) scale(2.2) translateX(-140px); /* Verschiebt es sichtbar nach unten */
+  max-width: 220px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.static-object {
+  width: 220px;
+  height: auto;
+}
+
+.image-bottom {
+  position: absolute;
+  transform: translateY(188px) scale(4.2) translateX(-70px); /* Verschiebt es sichtbar nach unten */
+  max-width: 220px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.static-object2 {
+  width: 220px;
+  height: auto;
+}
+
+  </style>
 
   <section class="white-transition-section" id="prozess">
     <div class="white-world visible" id="whiteWorld">
@@ -1860,7 +2011,7 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
       <div class="white-content">
         <h2 class="section-title">So läuft ein Projekt mit Fusion³</h2>
         <div class="project-white-steps">
-          <div class="epic-step" data-step="00">
+          <div class="epic-step with-image" data-step="00">
             <div class="step-inner">
               <span class="step-number">00</span>
               <h3>Unser Ansatz:</h3>
@@ -1871,6 +2022,12 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
                 Projekt nicht nur Ihre Erwartungen erfüllt, sondern sie übertrifft.
               </p>
             </div>
+              <div class="step-image image-bottom-top">
+  <img class="fly-object2" src="./indexFotoSlideShow/rakete.png" alt="Dekoelement">
+</div>
+<div class="step-image image-bottom">
+  <img class="static-object2" src="./indexFotoSlideShow/Leiter.png" alt="Dekoration rechts unten">
+</div>
           </div>
 
           <div class="epic-step" data-step="01">
@@ -1896,7 +2053,8 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
             </div>
           </div>
 
-          <div class="epic-step" data-step="03">
+          <div class="epic-step with-image" data-step="03">
+
             <div class="step-inner">
               <span class="step-number">03</span>
               <h3>Feedback & Feinschliff: <br>Gemeinsam zur Perfektion</h3>
@@ -1905,9 +2063,18 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
                 nur beeindruckt, sondern auch nachhaltig performt.
               </p>
             </div>
+              <div class="step-image image-bottom-left">
+  <img class="fly-object" src="./indexFotoSlideShow/rakete.png" alt="Dekoelement">
+</div>
+<div class="step-image image-bottom-right">
+  <img class="static-object" src="./indexFotoSlideShow/tower.png" alt="Dekoration rechts unten">
+</div>
+
           </div>
         </div>
+        </div>
       </div>
+    </div>
     </div>
   </section>
 
@@ -2055,7 +2222,7 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
             </div>
           </div>
 
-                 <div class="gallery-item reveal">
+          <div class="gallery-item reveal">
             <div class="media-wrapper">
               <img src="./3DSlideShow/post1.png" width="1671px" height="1294px" loading="lazy"
                 alt="Interaktives 3D-Messemodell" />
@@ -2069,7 +2236,8 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
               </ul>
               <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
             </div>
-          </div>       <div class="gallery-item reveal">
+          </div>
+          <div class="gallery-item reveal">
             <div class="media-wrapper">
               <img src="./GallerieGesamt/3D3.webp" width="1671px" height="1294px" loading="lazy"
                 alt="Interaktives 3D-Messemodell" />
@@ -2083,7 +2251,8 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
               </ul>
               <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
             </div>
-          </div>       <div class="gallery-item reveal">
+          </div>
+          <div class="gallery-item reveal">
             <div class="media-wrapper">
               <img src="./GallerieGesamt/3D3.webp" width="1671px" height="1294px" loading="lazy"
                 alt="Interaktives 3D-Messemodell" />
@@ -2097,7 +2266,8 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
               </ul>
               <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
             </div>
-          </div>       <div class="gallery-item reveal">
+          </div>
+          <div class="gallery-item reveal">
             <div class="media-wrapper">
               <img src="./GallerieGesamt/3D3.webp" width="1671px" height="1294px" loading="lazy"
                 alt="Interaktives 3D-Messemodell" />
@@ -2111,7 +2281,8 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
               </ul>
               <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
             </div>
-          </div>       <div class="gallery-item reveal">
+          </div>
+          <div class="gallery-item reveal">
             <div class="media-wrapper">
               <img src="./GallerieGesamt/3D3.webp" width="1671px" height="1294px" loading="lazy"
                 alt="Interaktives 3D-Messemodell" />
@@ -2260,7 +2431,8 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
     .portfolio-headline {
       font-size: 2.8rem;
       font-weight: 700;
-      margin-top: 6rem; /* z. B. 4rem zusätzlich, passe je nach Bedarf an */
+      margin-top: 6rem;
+      /* z. B. 4rem zusätzlich, passe je nach Bedarf an */
       margin-bottom: 3rem;
       color: #111;
     }
@@ -2562,166 +2734,166 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
 
     }
   </style>
-<style>.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
-  gap: 2rem;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 2rem clamp(1rem, 5vw, 3rem);
-  justify-items: center;
-  box-sizing: border-box;
-}
+  <style>
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      gap: 2rem;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 2rem clamp(1rem, 5vw, 3rem);
+      justify-items: center;
+      box-sizing: border-box;
+    }
 
-.gallery-item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  border-radius: 24px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(16px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
-  transition: transform 0.45s ease, box-shadow 0.45s ease;
-  min-height: auto;
-  width: 100%;
-  max-width: 100%;
-}
+    .gallery-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border-radius: 24px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(16px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
+      transition: transform 0.45s ease, box-shadow 0.45s ease;
+      min-height: auto;
+      width: 100%;
+      max-width: 100%;
+    }
 
-.gallery-item:hover {
-  transform: translateY(-10px) scale(1.025);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
-}
+    .gallery-item:hover {
+      transform: translateY(-10px) scale(1.025);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+    }
 
-.media-wrapper {
-  overflow: hidden;
-  aspect-ratio: 16 / 9;
-  border-radius: 24px 24px 0 0;
-}
+    .media-wrapper {
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      border-radius: 24px 24px 0 0;
+    }
 
-.media-wrapper img,
-.media-wrapper video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 24px 24px 0 0;
-  transition: transform 0.5s ease;
-}
+    .media-wrapper img,
+    .media-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 24px 24px 0 0;
+      transition: transform 0.5s ease;
+    }
 
-.gallery-item:hover img,
-.gallery-item:hover video {
-  transform: scale(1.07);
-}
+    .gallery-item:hover img,
+    .gallery-item:hover video {
+      transform: scale(1.07);
+    }
 
-.overlay {
-  position: absolute;
-  inset: 0;
-  padding: 2.4rem;
-  background: linear-gradient(160deg, rgba(0, 0, 0, 0.655), rgba(46, 46, 46, 0.482));
-  backdrop-filter: blur(56px);
-  border-radius: 24px;
-  color: #1a1a1a;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 1.4rem;
-  opacity: 0;
-  pointer-events: none;
-  transform: none;
-  transition: all 0.5s ease-in-out;
-  z-index: 2;
-}
+    .overlay {
+      position: absolute;
+      inset: 0;
+      padding: 2.4rem;
+      background: linear-gradient(160deg, rgba(0, 0, 0, 0.655), rgba(46, 46, 46, 0.482));
+      backdrop-filter: blur(56px);
+      border-radius: 24px;
+      color: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 1.4rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: none;
+      transition: all 0.5s ease-in-out;
+      z-index: 2;
+    }
 
-.gallery-item:hover .overlay {
-  opacity: 1;
-  transform: none;
-  pointer-events: auto;
-}
+    .gallery-item:hover .overlay {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
 
 
 
-.overlay p {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin: 0;
-  color: #ffffff;
-  margin-top: 1rem;
-}
+    .overlay p {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0;
+      color: #ffffff;
+      margin-top: 1rem;
+    }
 
-.overlay ul {
-  margin: 0;
-  padding-left: 1.5rem;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: #ffffff;
-}
+    .overlay ul {
+      margin: 0;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #ffffff;
+    }
 
-.overlay ul li {
-  list-style-type: disc;
-  margin-bottom: 0.4rem;
-}
+    .overlay ul li {
+      list-style-type: disc;
+      margin-bottom: 0.4rem;
+    }
 
-.cta-btn {
-  margin-top: 0.1rem;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, #ff6600, #ff9800);
-  color: #fff;
-  border: none;
-  padding: 0.7rem 1.8rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 2rem;
-  text-decoration: none;
-  transition: all 0.35s ease;
-}
+    .cta-btn {
+      margin-top: 0.1rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ff6600, #ff9800);
+      color: #fff;
+      border: none;
+      padding: 0.7rem 1.8rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 2rem;
+      text-decoration: none;
+      transition: all 0.35s ease;
+    }
 
-.cta-btn:hover {
-  background: linear-gradient(135deg, #ff7a00, #ffa800);
-  transform: scale(1.12);
-}
+    .cta-btn:hover {
+      background: linear-gradient(135deg, #ff7a00, #ffa800);
+      transform: scale(1.12);
+    }
 
-/* RESPONSIVE FIXES */
-@media (max-width: 768px) {
-  .gallery {
-    grid-template-columns: 1fr;
-    padding: 1.5rem 1rem;
-  }
+    /* RESPONSIVE FIXES */
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: 1fr;
+        padding: 1.5rem 1rem;
+      }
 
-  .gallery-item {
-    margin: 0 auto;
-  }
-}
+      .gallery-item {
+        margin: 0 auto;
+      }
+    }
 
-@media (max-width: 480px) {
-  .gallery {
-    padding: 1.2rem 0.6rem;
-    gap: 1.5rem;
-  }
+    @media (max-width: 480px) {
+      .gallery {
+        padding: 1.2rem 0.6rem;
+        gap: 1.5rem;
+      }
 
-  .overlay {
-    padding: 1.4rem;
-  }
+      .overlay {
+        padding: 1.4rem;
+      }
 
-  .overlay p {
-    font-size: 1.1rem;
-  }
+      .overlay p {
+        font-size: 1.1rem;
+      }
 
-  .overlay ul {
-    font-size: 1rem;
-  }
+      .overlay ul {
+        font-size: 1rem;
+      }
 
-  .cta-btn {
-    font-size: 0.9rem;
-    padding: 0.5rem 1.4rem;
-  }
-}
+      .cta-btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 1.4rem;
+      }
+    }
 
-body {
-  overflow-x: hidden;
-}
-
+    body {
+      overflow-x: hidden;
+    }
   </style>
   <script>
     feather.replace();
@@ -2746,35 +2918,35 @@ body {
 
 
   <testimonial-slider></testimonial-slider>
-<script>
-  class TestimonialSlider extends HTMLElement {
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-      this.testimonials = [
-        {
-          image: "./TestemonialSlider/CS.webp",
-          name: "Christian Schulz",
-          quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
-          logo: "./TestemonialSlider/NeoLog.webp"
-        },
-        {
-          image: "./TestemonialSlider/CS.webp",
-          name: "Christian Schulz",
-          quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
-          logo: "./TestemonialSlider/NeoLog.webp"
-        },
-        {
-          image: "./TestemonialSlider/CS.webp",
-          name: "Christian Schulz",
-          quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
-          logo: "./TestemonialSlider/NeoLog.webp"
-        }
-      ];
-    }
+  <script>
+    class TestimonialSlider extends HTMLElement {
+      constructor() {
+        super();
+        this.attachShadow({ mode: "open" });
+        this.testimonials = [
+          {
+            image: "./TestemonialSlider/CS.webp",
+            name: "Christian Schulz",
+            quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
+            logo: "./TestemonialSlider/NeoLog.webp"
+          },
+          {
+            image: "./TestemonialSlider/CS.webp",
+            name: "Christian Schulz",
+            quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
+            logo: "./TestemonialSlider/NeoLog.webp"
+          },
+          {
+            image: "./TestemonialSlider/CS.webp",
+            name: "Christian Schulz",
+            quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
+            logo: "./TestemonialSlider/NeoLog.webp"
+          }
+        ];
+      }
 
-    connectedCallback() {
-      const style = `
+      connectedCallback() {
+        const style = `
       <style>
         :host {
           display: block;
@@ -2933,12 +3105,12 @@ body {
       </style>
     `;
 
-      const extendedTestimonials = [...this.testimonials, this.testimonials[0]];
+        const extendedTestimonials = [...this.testimonials, this.testimonials[0]];
 
-      const slidesHTML = extendedTestimonials.map((t, i) => {
-        const isClone = i === extendedTestimonials.length - 1;
-        const cardClass = isClone ? "card-clone" : `card-${i + 1}`;
-        return `
+        const slidesHTML = extendedTestimonials.map((t, i) => {
+          const isClone = i === extendedTestimonials.length - 1;
+          const cardClass = isClone ? "card-clone" : `card-${i + 1}`;
+          return `
           <div class="card ${cardClass}" role="listitem">
             <div class="inner-card">
               <div class="avatar-logo">
@@ -2950,15 +3122,15 @@ body {
             </div>
           </div>
         `;
-      }).join("");
+        }).join("");
 
-      const dotsHTML = `
+        const dotsHTML = `
         <div class="dots">
           ${this.testimonials.map((_, i) => `<div class="dot" data-index="${i}" aria-label="Testimonial ${i + 1}"></div>`).join("")}
         </div>
       `;
 
-      const html = `
+        const html = `
         ${style}
         <h2>Kundenstimmen</h2>
         <p class="intro">Was unsere Kunden über die Zusammenarbeit sagen.</p>
@@ -2970,81 +3142,81 @@ body {
         ${dotsHTML}
       `;
 
-      this.shadowRoot.innerHTML = html;
+        this.shadowRoot.innerHTML = html;
 
-      const track = this.shadowRoot.querySelector(".track");
-      const cards = this.shadowRoot.querySelectorAll(".card");
-      const dots = this.shadowRoot.querySelectorAll(".dot");
-      let currentIndex = 0;
-      let interval;
+        const track = this.shadowRoot.querySelector(".track");
+        const cards = this.shadowRoot.querySelectorAll(".card");
+        const dots = this.shadowRoot.querySelectorAll(".dot");
+        let currentIndex = 0;
+        let interval;
 
-      const goToSlide = (index, instant = false) => {
-        const isClone = index === cards.length - 1;
-        track.style.transition = instant ? 'none' : 'transform 0.6s ease';
-        track.style.transform = `translateX(-${index * 100}%)`;
+        const goToSlide = (index, instant = false) => {
+          const isClone = index === cards.length - 1;
+          track.style.transition = instant ? 'none' : 'transform 0.6s ease';
+          track.style.transform = `translateX(-${index * 100}%)`;
 
-        cards.forEach((card, i) => {
-          card.classList.toggle("active", i === index);
-        });
+          cards.forEach((card, i) => {
+            card.classList.toggle("active", i === index);
+          });
 
-        dots.forEach(dot => dot.classList.remove("active"));
-        if (isClone) {
-          dots[0]?.classList.add("active");
-        } else {
-          dots[index]?.classList.add("active");
-        }
-      };
-
-      const startAutoSlide = () => {
-        interval = setInterval(() => {
-          currentIndex++;
-          if (currentIndex === cards.length) {
-            goToSlide(currentIndex, true);
-            currentIndex = 1;
-            setTimeout(() => goToSlide(currentIndex), 20);
+          dots.forEach(dot => dot.classList.remove("active"));
+          if (isClone) {
+            dots[0]?.classList.add("active");
           } else {
-            goToSlide(currentIndex);
+            dots[index]?.classList.add("active");
           }
-        }, 4000);
-      };
+        };
 
-      // Touch support
-      let startX = 0;
-      track.addEventListener("touchstart", e => {
-        startX = e.touches[0].clientX;
-        clearInterval(interval);
-      }, { passive: true });
+        const startAutoSlide = () => {
+          interval = setInterval(() => {
+            currentIndex++;
+            if (currentIndex === cards.length) {
+              goToSlide(currentIndex, true);
+              currentIndex = 1;
+              setTimeout(() => goToSlide(currentIndex), 20);
+            } else {
+              goToSlide(currentIndex);
+            }
+          }, 4000);
+        };
 
-      track.addEventListener("touchend", e => {
-        const diff = e.changedTouches[0].clientX - startX;
-        if (Math.abs(diff) > 50) {
-          if (diff < 0 && currentIndex < cards.length - 1) currentIndex++;
-          else if (diff > 0 && currentIndex > 0) currentIndex--;
-        }
-        goToSlide(currentIndex);
-        startAutoSlide();
-      }, { passive: true });
+        // Touch support
+        let startX = 0;
+        track.addEventListener("touchstart", e => {
+          startX = e.touches[0].clientX;
+          clearInterval(interval);
+        }, { passive: true });
 
-      // Hover pause
-      track.addEventListener("mouseenter", () => clearInterval(interval));
-      track.addEventListener("mouseleave", startAutoSlide);
-
-      // Dot click
-      dots.forEach(dot => {
-        dot.addEventListener("click", e => {
-          const i = parseInt(e.target.dataset.index, 10);
-          currentIndex = i;
+        track.addEventListener("touchend", e => {
+          const diff = e.changedTouches[0].clientX - startX;
+          if (Math.abs(diff) > 50) {
+            if (diff < 0 && currentIndex < cards.length - 1) currentIndex++;
+            else if (diff > 0 && currentIndex > 0) currentIndex--;
+          }
           goToSlide(currentIndex);
+          startAutoSlide();
+        }, { passive: true });
+
+        // Hover pause
+        track.addEventListener("mouseenter", () => clearInterval(interval));
+        track.addEventListener("mouseleave", startAutoSlide);
+
+        // Dot click
+        dots.forEach(dot => {
+          dot.addEventListener("click", e => {
+            const i = parseInt(e.target.dataset.index, 10);
+            currentIndex = i;
+            goToSlide(currentIndex);
+          });
         });
-      });
 
-      goToSlide(0);
-      startAutoSlide();
+        goToSlide(0);
+        startAutoSlide();
+      }
     }
-  }
 
-  customElements.define("testimonial-slider", TestimonialSlider);
-</script>
+    customElements.define("testimonial-slider", TestimonialSlider);
+  </script>
 
   <section class="kontakt-clean" id="kontakt">
     <div class="kontakt-wrapper">

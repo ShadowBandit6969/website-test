@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fusion³ – UX & Webdesign Studio</title>
-  <meta name="description" content="Fusion³ ist dein Partner für UX-Design, Webdesign & Prototyping. Wir gestalten digitale Erlebnisse mit Substanz." />
+  <meta name="description"
+    content="Fusion³ ist dein Partner für UX-Design, Webdesign & Prototyping. Wir gestalten digitale Erlebnisse mit Substanz." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
@@ -27,12 +29,13 @@
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       font-family: 'Inter', sans-serif;
       background: white;
       color: var(--text);
       scroll-behavior: smooth;
-      
+
     }
 
     a {
@@ -42,7 +45,10 @@
     }
 
     /* Typo und Titel */
-    h1, h2, h3, h4 {
+    h1,
+    h2,
+    h3,
+    h4 {
       font-weight: 900;
     }
 
@@ -62,7 +68,7 @@
       border-bottom: 1px solid #222;
       position: relative;
       z-index: 10;
-      
+
     }
 
     .logo {
@@ -81,7 +87,7 @@
 
     nav a:hover {
       color: var(--primary);
-      
+
     }
 
     .burger {
@@ -113,47 +119,50 @@
     .burger.active span:nth-child(3) {
       transform: rotate(-45deg) translate(5px, -5px);
     }
+
     .burger-icon {
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: none; /* wird via Media Query eingeblendet */
-  z-index: 20;
-}
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: none;
+      /* wird via Media Query eingeblendet */
+      z-index: 20;
+    }
 
-.burger-icon i {
-  width: 32px;
-  height: 32px;
-  stroke: #000;
-}
-@media (max-width: 768px) {
-  .burger-icon {
-    display: block;
-  }
+    .burger-icon i {
+      width: 32px;
+      height: 32px;
+      stroke: #000;
+    }
 
-  nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: #fff;
-    flex-direction: column;
-    padding: 1rem;
-    width: 100%;
-    border-top: 1px solid #ddd;
-    z-index: 10;
-  }
+    @media (max-width: 768px) {
+      .burger-icon {
+        display: block;
+      }
 
-  nav.open {
-    display: flex;
-  }
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        padding: 1rem;
+        width: 100%;
+        border-top: 1px solid #ddd;
+        z-index: 10;
+      }
 
-  nav a {
-    font-size: 1rem;
-    padding: 0.8rem 1rem;
-    color: #111;
-  }
-}
+      nav.open {
+        display: flex;
+      }
+
+      nav a {
+        font-size: 1rem;
+        padding: 0.8rem 1rem;
+        color: #111;
+      }
+    }
 
 
     @media (max-width: 480px) {
@@ -187,6 +196,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <header>
@@ -194,7 +204,7 @@
     <button class="burger-icon" id="burgerToggle" aria-label="Menü öffnen">
       <i data-feather="menu"></i>
     </button>
-    
+
     <nav>
       <a href="#leistungen">Leistungen</a>
       <a href="#ueber-uns">Über uns</a>
@@ -209,10 +219,10 @@
       Your browser does not support the video tag.
     </video>
 
-  <!-- PNG über dem Video – als eigene Ebene -->
-<div class="hero-bg-image"></div>
+    <!-- PNG über dem Video – als eigene Ebene -->
+    <div class="hero-bg-image"></div>
     <!-- 2. PNG – über dem Hintergrund -->
-    <div class="hero-overlay-image"></div>   
+    <div class="hero-overlay-image"></div>
     <!-- TEXT + 3. PNG über dem Text -->
     <div class="above-text-image"></div>
 
@@ -220,1062 +230,162 @@
       <h1>Grafikdesign</h1>
       <p> Innovativ. Benutzerzentriert. Erfolgreich</p>
       <a class="cta-btn neon-btn" href="#kontakt"><span>Projekt anfragen</span></a>
-     </div>
+    </div>
   </section>
-<style>/* 1. PNG – als Hintergrund */
-
-  .hero-video-wrapper {
-    position: relative;
-    min-height: 100vh;
-    width: 100vw;
-    min-height: 100vh;
-    max-width: 100%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: transparent;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: 'VT323', monospace;
-    z-index: 2;
-  }
-.hero-bg-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('./GrafikdesignPic/HintergrundLaptop.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: 0.5; /* Zwischen Video (0) und Overlay (1) */
-  pointer-events: none;
-}
-
-
-  .hero-bg-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0; /* GANZ HINTEN */
-  pointer-events: none;
-}
-
-  
-  /* 2. PNG – über dem Hintergrund */
-  .hero-overlay-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('./GrafikdesignPic/HintergrundTabletp.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    pointer-events: none;
-    z-index: 1;
-  }
-  
-  /* TEXT-INHALT */
-  .hero-video-content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    max-width: 800px;
-    width: 100%;
-    text-align: center;
-    border-radius: 12px;
-    backdrop-filter: blur(6px);
-    background: rgba(255, 255, 255, 0.05);
-    overflow: hidden;
-    margin-top: -10rem;
-  }
-  /* 3. PNG – über dem Text */
-.above-text-image {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: url('./GrafikdesignPic/HintergrundHandy.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  pointer-events: none;
-}
-
-  /* TEXT-Stile */
-  .hero-video-content h1 {
-    font-size: 4.2rem;
-    font-weight: 600;
-    letter-spacing: 0.1rem;
-    line-height: 1.0;
-    margin-bottom: 1rem;
-    color: #ffffff;
-    mix-blend-mode: exclusion;
-    z-index: 3;
-  }
-  
-  .hero-video-content p {
-    font-size: 2rem;
-    font-weight: 400;
-    color: #ffffff;
-    max-width: 90%;
-    line-height: 1.6;
-    mix-blend-mode: exclusion;
-    z-index: 3;
-  }
-  .cta-btn {
-  background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
-  background-size: 300% 300%;
-  color: #fff;
-  font-weight: 600;
-
-  /* Weniger vertikales Padding für flacheren Button */
-  padding: 0.4em 2.5vw;
-
-  /* Responsive Font-Größe */
-  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-
-  border-radius: 0.75em;
-  text-decoration: none;
-  box-shadow: 0 0.4em 1.4em rgba(255, 102, 0, 0.22);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  z-index: 2;
-
-  animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
-
-  /* Breitensteuerung */
-  width: fit-content;
-  min-width: 12vw;
-  max-width: 90%;
-  height: auto;
-}
-
-/* Hover Glow & Lift */
-.cta-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
-}
-
-/* Text style (falls du .cta-text verwendest) */
-.cta-text {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  font-weight: 400;
-  color: #272727;
-  max-width: 640px;
-  margin: 0 auto 2.5rem;
-  line-height: 1.6;
-  position: relative;
-  z-index: 2;
-  animation: fadeUp 1s ease-out 0.2s both;
-}
-
-/* Entrance Animation */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Animated Gradient */
-@keyframes gradientFlow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-  /* Keyframes für animierte Lichtwelle */
-  @keyframes waveBlur {
-    0%   { --x: 20%; --y: 30%; }
-    25%  { --x: 80%; --y: 20%; }
-    50%  { --x: 60%; --y: 70%; }
-    75%  { --x: 30%; --y: 80%; }
-    100% { --x: 50%; --y: 50%; }
-  }
-  
-
-/* RESPONSIVE MEDIA QUERIES */
-@media (max-width: 768px) {
-  .cta-btn {
-    padding: 0.6em 4vw;
-    font-size: 1rem;
-    border-radius: 0.6em;
-  }
-}
-@media (max-width: 480px) {
-  .cta-btn {
-    padding: 0.25em 0.2vw;
-    font-size: 0.7rem;
-    border-radius: 0.4em;
-    max-width: 70%;
-    min-width: unset;
-    width: auto;
-    box-shadow: 0 0.2em 0.6em rgba(255, 102, 0, 0.2);
-    scale: 0.7;
-  }
-}
-@media (max-width: 320px) {
-  .cta-btn {
-    padding: 0.25em 0.2vw;
-    font-size: 0.7rem;
-    border-radius: 0.4em;
-    max-width: 70%;
-    min-width: unset;
-    width: auto;
-    box-shadow: 0 0.2em 0.6em rgba(255, 102, 0, 0.2);
-    scale: 0.7;
-  }
-}
-
-
-@media (max-width: 768px) {
-  .hero-video-content h1 { font-size: 2.4rem; letter-spacing: 0.05rem; }
-  .hero-video-content p  { font-size: 1rem; }
-
-}
-
-
-@media (max-width: 768px) {
-  .hero-overlay-image{
-left: -50vw;
-width: 170vw;
-
-  }
-
-  .above-text-image {
-    left: -35vw;
-    width: 190vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-  }
-}
-
-
-
-
-
-@media (max-width: 768px) and (min-height: 1280px) and (max-height: 2000px) {
-  .hero-overlay-image {
-    left: -110vw;
-    width: 250vw;
-    top: 4vh;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -70vw;
-    width: 310vw; /* <– erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-  }
-}
-
-@media (max-width: 768px) and (min-height: 1024px) and (max-height: 1280px) {
-  .hero-overlay-image {
-    left: -70vw;
-    width: 200vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -60vw;
-    width: 250vw;
-  }
-}
-
-@media (max-width: 768px) and (min-height: 900px) and (max-height: 1024px) {
-  .hero-overlay-image {
-    left: -50vw;
-    width: 185vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -45vw;
-    width: 210vw;
-  }
-}
-
-@media (max-width: 768px) and (min-height: 768px) and (max-height: 900px) {
-  .hero-overlay-image {
-    left: -45vw;
-    width: 170vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -34vw;
-    width: 185vw;
-  }
-}
-
-@media (max-width: 768px) and (min-height: 625px) and (max-height: 768px) {
-  .hero-overlay-image {
-    left: -35vw;
-    width: 165vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -30vw;
-    width: 175vw;
-  }
-}
-
-@media (max-width: 768px) and (min-height: 300px) and (max-height: 625px) {
-  .hero-overlay-image {
-    left: -30vw;
-    width: 160vw;
-  }
-
-  .above-text-image {
-    top: 5vh;
-    left: -25vw;
-    width: 160vw;
-  }
-}
-
-
-@media (max-width: 480px) and (min-height: 1530px)  and (max-height: 2000px){
-  .hero-overlay-image{
-left: -190vw;
-width: 320vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -40vw;
-    width: 400vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-  }
-}
-
-@media (max-width: 480px) and (min-height: 1060px)  and (max-height: 1530px){
-  .hero-overlay-image{
-left: -120vw;
-width: 220vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -5vw;
-    width: 250vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-  }
-}
-
-
-@media (max-width: 480px) and (min-height: 950px)  and (max-height: 1060px){
-  .hero-overlay-image{
-left: -60vw;
-width: 170vw;
-
-  }
-
-  .above-text-image {
-    left: -5vw;
-    width: 190vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-  }
-}
-
-@media (max-width: 480px) and (min-height: 768px)  and (max-height: 950px){
-  .hero-overlay-image{
-left: -60vw;
-width: 170vw;
-
-  }
-
-  .above-text-image {
-    left: -2vw;
-    width: 160vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-  }
-}
-
-@media (max-width: 480px) and (min-height: 625px)  and (max-height: 768px){
-  .hero-overlay-image{
-left: -50vw;
-width: 170vw;
-
-  }
-
-  .above-text-image {
-    left: -15vw;
-    width: 160vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-  }
-}
-
-@media (max-width: 480px) and (min-height: 25px)  and (max-height: 625px){
-  .hero-overlay-image{
-left: -40vw;
-width: 170vw;
-
-  }
-
-  .above-text-image {
-    left: -25vw;
-    width: 160vw; /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-  }
-}
-
-
-
-
-@media (max-width: 425px) and (min-height: 1530px) and (max-height: 2000px) {
-  .hero-overlay-image {
-    left: -165vw;
-    width: 285vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -35vw;
-    width: 360vw;
-  }
-}
-
-@media (max-width: 425px) and (min-height: 1060px) and (max-height: 1530px) {
-  .hero-overlay-image {
-    left: -100vw;
-    width: 200vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -4vw;
-    width: 230vw;
-  }
-}
-
-@media (max-width: 425px) and (min-height: 950px) and (max-height: 1060px) {
-  .hero-overlay-image {
-    left: -50vw;
-    width: 160vw;
-  }
-
-  .above-text-image {
-    left: -4vw;
-    width: 180vw;
-  }
-}
-
-@media (max-width: 425px) and (min-height: 768px) and (max-height: 950px) {
-  .hero-overlay-image {
-    left: -48vw;
-    width: 160vw;
-  }
-
-  .above-text-image {
-    left: -1vw;
-    width: 155vw;
-  }
-}
-
-@media (max-width: 425px) and (min-height: 625px) and (max-height: 768px) {
-  .hero-overlay-image {
-    left: -40vw;
-    width: 155vw;
-  }
-
-  .above-text-image {
-    left: -10vw;
-    width: 150vw;
-  }
-}
-
-@media (max-width: 425px) and (min-height: 25px) and (max-height: 625px) {
-  .hero-overlay-image {
-    left: -30vw;
-    width: 150vw;
-  }
-
-  .above-text-image {
-    left: -20vw;
-    width: 145vw;
-  }
-}
-
-
-
-
-
-@media (max-width: 375px) and (min-height: 1530px) and (max-height: 1680px) {
-  .hero-overlay-image {
-    left: -188vw;
-    width: 290vw;
-    top: 6vh;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -15vw;
-    width: 370vw;
-    top: 12vh;
-  }
-}
-
-
-@media (max-width: 375px) and (min-height: 1060px) and (max-height: 1530px) {
-  .hero-overlay-image {
-    left: -140vw;
-    width: 260vw;
-  }
-
-  .above-text-image {
-    top: 10vh;
-    left: -5vw;
-    width: 260vw;
-  }
-}
-
-@media (max-width: 375px) and (min-height: 840px) and (max-height: 1060px) {
-  .hero-overlay-image {
-    left: -90vw;
-    width: 195vw;
-  }
-
-  .above-text-image {
-    left: 5vw;
-    width: 195vw;
-    top: 10vh;
-  }
-}
-
-
-@media (max-width: 375px) and (min-height: 768px) and (max-height: 840px) {
-  .hero-overlay-image {
-    left: -70vw;
-    width: 195vw;
-  }
-
-  .above-text-image {
-    left: -5vw;
-    width: 195vw;
-  }
-}
-
-@media (max-width: 375px) and (min-height: 8px) and (max-height: 768px) {
-  .hero-overlay-image {
-    left: -70vw;
-    width: 195vw;
-  }
-
-  .above-text-image {
-    left: -25vw;
-    width: 195vw;
-  }
-}
-
-@media (max-width: 320px) and (min-height: 1024px) and (max-height: 1300px) {
-  .hero-overlay-image {
-    left: -180vw;
-    width: 300vw;
-    top: 10vh;
-  }
-
-  .above-text-image {
-    left: -5vw;
-    width: 285vw;
-  }
-}
-
-
-@media (max-width: 320px) and (min-height: 768px) and (max-height: 1024px) {
-  .hero-overlay-image {
-    left: -110vw;
-    width: 220vw;
-  }
-
-  .above-text-image {
-    left: -25vw;
-    width: 285vw;
-  }
-}
-
-
-@media (max-width: 320px) and (min-height: 600px) and (max-height: 768px) {
-  .hero-overlay-image {
-    left: -80vw;
-    width: 195vw;
-  }
-
-  .above-text-image {
-    left: -5vw;
-    width: 195vw;
-  }
-}
-
-@media (max-width: 320px) and (min-height: 200px) and (max-height: 600px) {
-  .hero-overlay-image {
-    left: -60vw;
-    width: 195vw;
-  }
-
-  .above-text-image {
-    left: -25vw;
-    width: 195vw;
-  }
-}
-
-
-
-
-
-
-
-
-.hero-overlay-image,
-.above-text-image {
-  opacity: 0;
-  transform: translateY(60px) scale(0.95); /* Mehr Bewegung */
-  transition: all 1.4s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-}
-
-.hero-overlay-image.animate,
-.above-text-image.animate {
-  opacity: 1;
-  transform: translateY(0px) scale(1.05); /* Leicht größer für Tiefe */
-}
-
-
-  </style>  
-
-<script>
-  // FADE-IN via IntersectionObserver
-  const animatedEls = document.querySelectorAll('.hero-overlay-image, .above-text-image');
-
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
-
-  animatedEls.forEach(el => observer.observe(el));
-
-  // SCROLL-BASIERTE TRANSFORMATION
-  const overlay = document.querySelector('.hero-overlay-image');
-  const above = document.querySelector('.above-text-image');
-
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY;
-    const maxScroll = window.innerHeight;
-    const progress = Math.min(scrollTop / maxScroll, 1); // Wert zwischen 0 und 1
-
-    const translateX = 20 * progress; // max 20px rechts
-    const translateY = 20 * progress; // max 20px runter
-    const scale = 1.05 + progress * 0.1; // von 1.05 auf 1.15
-
-    if (overlay.classList.contains('animate')) {
-      overlay.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-    }
-
-    if (above.classList.contains('animate')) {
-      above.style.transform = `translate(${translateX * 1.1}px, ${translateY * 1.1}px) scale(${scale})`;
-    }
-  });
-</script>
-
-<script src="https://unpkg.com/feather-icons"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<section class="container" id="tools">
   <style>
-    :root {
-      --primary: #ff6600;
-      --accent: #ebf3ff;
-      --font: 'Inter', sans-serif;
-      --text-dark: #1a1a1a;
-      --bg-card: #ffffff;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-    }
+    /* 1. PNG – als Hintergrund */
 
-    #tools {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 6rem 2rem;
-      font-family: var(--font);
-      color: var(--text-dark);
-      background: #fff;
-    }
-
-    #tools h2, #tools h3 {
-      text-align: center;
-      animation: fadeDown 0.8s ease-out forwards;
-      opacity: 0;
-    }
-
-    #tools h2 {
-      font-size: 2.7rem;
-      font-weight: 700;
-      margin-bottom: 0.6rem;
-    }
-
-    #tools h3 {
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: #666;
-      margin-bottom: 3.5rem;
-      animation-delay: 0.2s;
-    }
-
-    .preis-toggle {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 2.5rem;
-      font-weight: 500;
-    }
-
-    #preisModus {
-      background: var(--accent);
-      border: 1px solid #ccc;
-      padding: 0.5rem 1.2rem;
-      font-size: 0.95rem;
-      border-radius: 8px;
-      cursor: pointer;
-      color: var(--text-dark);
-      transition: all 0.3s ease;
-    }
-
-    #preisModus:hover {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    .tech-showcase {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.4rem;
-    }
-
-    .tech-card {
+    .hero-video-wrapper {
       position: relative;
-      background: linear-gradient(135deg, #fff, var(--accent));
-      border: 1px solid #e0e0e0;
-      border-radius: 20px;
-      padding: 2.5rem 2rem;
-      box-shadow: var(--shadow);
-      transform: perspective(1000px);
-      transform-style: preserve-3d;
-      opacity: 0;
-      animation: floatCard 1s ease-out forwards;
-      transition: transform 0.5s ease, box-shadow 0.4s ease;
-    }
-
-    .tech-card:hover {
-      transform: rotateY(2deg) rotateX(1.5deg) translateY(-6px) scale(1.015);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-    }
-
-    .tech-card h3 {
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 1.4rem;
-      display: flex;
-      align-items: center;
-
-      color: #000; /* ← HIER */
-    }
-
-    .tech-card .feather {
-      width: 22px;
-      height: 22px;
-      stroke: var(--primary);
-      margin-right: 0.6rem;
-      stroke-width: 2;
-    }
-
-    .tech-card ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .tech-card li {
-      position: relative;
-      padding-left: 1.6rem;
-      font-size: 0.96rem;
-      line-height: 1.6;
-      opacity: 0;
-      animation: slideReveal 0.5s ease-out forwards;
-    }
-
-    .tech-card li::before {
-      content: '';
-      position: absolute;
-      top: 0.6rem;
-      left: 0;
-      width: 10px;
-      height: 10px;
-      background: var(--primary);
-      border-radius: 50%;
-      animation: pulseDot 3s ease-in-out infinite;
-    }
-
-    .price {
-  margin-top: 1.5rem;
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: #000;
-  text-align: left;
-}
-
-.price span {
-  display: block;
-  font-size: 0.85rem;
-  font-weight: 400;
-  color: #666;
-  margin-top: 0.2rem;
-  text-align: left;
-}
-
-
-    .preis {
-      display: inline-block;
-    }
-
-    /* Stagger Reveal Delays */
-    .tech-card:nth-child(1) { animation-delay: 0.2s; }
-    .tech-card:nth-child(2) { animation-delay: 0.4s; }
-    .tech-card:nth-child(3) { animation-delay: 0.6s; }
-    .tech-card:nth-child(4) { animation-delay: 0.8s; }
-
-    .tech-card:nth-child(1) li:nth-child(1) { animation-delay: 0.6s; }
-    .tech-card:nth-child(1) li:nth-child(2) { animation-delay: 0.7s; }
-    .tech-card:nth-child(1) li:nth-child(3) { animation-delay: 0.8s; }
-    .tech-card:nth-child(1) li:nth-child(4) { animation-delay: 0.9s; }
-
-    /* Keyframes */
-    @keyframes fadeDown {
-      from { transform: translateY(-20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes floatCard {
-      from { opacity: 0; transform: translateY(40px) scale(0.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    @keyframes slideReveal {
-      from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    @keyframes pulseDot {
-      0%, 100% { transform: scale(1); opacity: 0.3; }
-      50% { transform: scale(1.2); opacity: 0.5; }
-    }
-
-    /* 🧘‍♂️ Motion Reduction Support */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation: none !important;
-        transition: none !important;
-        transform: none !important;
-      }
-
-      .tech-card {
-        opacity: 1 !important;
-      }
-
-      .tech-card li {
-        opacity: 1 !important;
-      }
-    }
-
-    
-  </style>
-
-  <h2>Unsere Leistungen</h2>
-  <h3>Minimalistisch. Beweglich. Visionär.</h3>
-
-  <!-- 🔄 Preis-Toggle 
-  <div class="preis-toggle">
-    <label for="preisModus">Preis anzeigen in:</label>
-    <button id="preisModus" onclick="togglePreise()">💼 Netto</button>
-  </div>
--->
-  <div class="tech-showcase">
-
-    <div class="tech-card">
-      <h3><i data-feather="hexagon"></i>Logo Starter Paket</h3>
-      <ul>
-        <li>2 individuelle Entwürfe</li>
-        <li>1 Korrekturschleife</li>
-        <li>Dateien für Web & Print (PNG, SVG, PDF)</li>
-        <li>Social Media Profilgrafiken</li>
-      </ul>
-      <p class="price preis" data-netto="149" data-brutto="177.31">ab 149 € <span>zzgl. MwSt.</span></p>
-    </div>
-
-    <div class="tech-card">
-      <h3><i data-feather="briefcase"></i>Brand Identity Paket</h3>
-      <ul>
-        <li>Logo, Farbwelt & Typografie</li>
-        <li>Mini-Styleguide für konsistente Nutzung</li>
-        <li>Visitenkarte & Briefpapierdesign</li>
-        <li>Digitale & druckfähige Dateien</li>
-      </ul>
-      <p class="price preis" data-netto="499" data-brutto="593.81">ab 499 € <span>zzgl. MwSt.</span></p>
-    </div>
-
-    <div class="tech-card">
-      <h3><i data-feather="printer"></i>Print & Poster</h3>
-      <ul>
-        <li>Flyer, Plakate & Visitenkarten</li>
-        <li>Druckvorbereitung inkl. Beschnitt & Farbprofil</li>
-        <li>Individuelle Gestaltung nach Zielgruppe</li>
-        <li>Druckfertige PDF-Dateien</li>
-      </ul>
-      <p class="price preis" data-netto="149" data-brutto="177.31">ab 149 € <span>zzgl. MwSt.</span></p>
-    </div>
-
-    <div class="tech-card">
-      <h3><i data-feather="monitor"></i>Digital Media Bundle</h3>
-      <ul>
-        <li>Social Media Templates & Werbegrafiken</li>
-        <li>Grafiken für Website, Newsletter & Ads</li>
-        <li>Responsives Design für alle Devices</li>
-        <li>Formatoptimierung für Plattformen</li>
-      </ul>
-      <p class="price preis" data-netto="199" data-brutto="236.81">ab 199 € <span>zzgl. MwSt.</span></p>
-    </div>
-
-  </div>
-
-  <script>
-    feather.replace();
-
-    let bruttoAktiv = false;
-    function togglePreise() {
-      bruttoAktiv = !bruttoAktiv;
-      const prices = document.querySelectorAll('.preis');
-      prices.forEach(p => {
-        const netto = parseFloat(p.dataset.netto);
-        const brutto = parseFloat(p.dataset.brutto);
-        p.innerHTML = bruttoAktiv
-          ? `ab ${brutto.toLocaleString("de-DE")} € <span>inkl. MwSt.</span>`
-          : `ab ${netto.toLocaleString("de-DE")} € <span>zzgl. MwSt.</span>`;
-      });
-      document.getElementById('preisModus').textContent = bruttoAktiv ? '🧾 Brutto' : '💼 Netto';
-    }
-  </script>
-</section>
-
-
-
-<section class="cta-modern">
-  <style>
-    .cta-modern {
-      position: relative;
-      padding: 7rem 1.5rem;
-      background: linear-gradient(180deg, #f4f4f4, #ffffff);
+      min-height: 100vh;
+      width: 100vw;
+      min-height: 100vh;
+      max-width: 100%;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
+      background-color: transparent;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      font-family: 'VT323', monospace;
+      z-index: 2;
+    }
+
+    .hero-bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('./GrafikdesignPic/HintergrundLaptop.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 0.5;
+      /* Zwischen Video (0) und Overlay (1) */
+      pointer-events: none;
+    }
+
+
+    .hero-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      /* GANZ HINTEN */
+      pointer-events: none;
+    }
+
+
+    /* 2. PNG – über dem Hintergrund */
+    .hero-overlay-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('./GrafikdesignPic/HintergrundTabletp.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      pointer-events: none;
       z-index: 1;
     }
 
-    .cta-modern::before {
-      content: '';
-      position: absolute;
-      top: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1800px;
-      max-width: 100vw;
-      height: 1800px;
-      z-index: 0;
-      pointer-events: none;
-      animation: glowShift 12s ease-in-out infinite alternate;
-    }
-
-
-    .cta-headline {
-      font-size: clamp(1.8rem, 4.5vw, 3rem);
-      font-weight: 800;
-      font-family: 'Inter', sans-serif;
-      color: #000;
-      margin-bottom: 1rem;
-      line-height: 1.25;
-      letter-spacing: -0.3px;
+    /* TEXT-INHALT */
+    .hero-video-content {
       position: relative;
       z-index: 2;
-      animation: fadeUp 1s ease-out both;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+      background: rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+      margin-top: -10rem;
     }
 
-    .cta-small {
-      font-size: 0.6em;
-      font-weight: 500;
-      color: #000000 !important;
-      font-family: 'Inter', sans-serif;
-      display: inline-block;
-      margin-right: 0.3em;
-      background: none !important;
-      background-clip: initial !important;
-      -webkit-background-clip: initial !important;
-      -webkit-text-fill-color: initial !important;
+    /* 3. PNG – über dem Text */
+    .above-text-image {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: url('./GrafikdesignPic/HintergrundHandy.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      pointer-events: none;
     }
 
-    .cta-headline span {
-  font-family: 'VT323', monospace;
-  font-size: 1.3em;
-  line-height: 1;
-  display: inline-block;
+    /* TEXT-Stile */
+    .hero-video-content h1 {
+      font-size: 4.2rem;
+      font-weight: 600;
+      letter-spacing: 0.1rem;
+      line-height: 1.0;
+      margin-bottom: 1rem;
+      color: #ffffff;
+      mix-blend-mode: exclusion;
+      z-index: 3;
+    }
 
-  background: linear-gradient(
-    220deg,
-    hwb(219 17% 0%) 0%,
-    hwb(219 18% 0%) 40%,
-    #e1e2ff 46%,
-    hwb(34 27% 0%) 52%,
-    hwb(29 0% 0%) 100%
-  );
+    .hero-video-content p {
+      font-size: 2rem;
+      font-weight: 400;
+      color: #ffffff;
+      max-width: 90%;
+      line-height: 1.6;
+      mix-blend-mode: exclusion;
+      z-index: 3;
+    }
 
-  background-size: 400% 400%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+    .cta-btn {
+      background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
+      background-size: 300% 300%;
+      color: #fff;
+      font-weight: 600;
 
-  animation: gradientShift 16s ease-in-out infinite;
-}
+      /* Weniger vertikales Padding für flacheren Button */
+      padding: 0.4em 2.5vw;
 
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
+      /* Responsive Font-Größe */
+      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
 
+      border-radius: 0.75em;
+      text-decoration: none;
+      box-shadow: 0 0.4em 1.4em rgba(255, 102, 0, 0.22);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      z-index: 2;
 
+      animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
+
+      /* Breitensteuerung */
+      width: fit-content;
+      min-width: 12vw;
+      max-width: 90%;
+      height: auto;
+    }
+
+    /* Hover Glow & Lift */
+    .cta-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
+    }
+
+    /* Text style (falls du .cta-text verwendest) */
     .cta-text {
       font-size: clamp(1rem, 2.5vw, 1.2rem);
       font-weight: 400;
@@ -1288,123 +398,1144 @@ width: 170vw;
       animation: fadeUp 1s ease-out 0.2s both;
     }
 
-    .cta-btn {
-  background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
-  background-size: 300% 300%;
-  color: #fff;
-  font-weight: 600;
-  padding: 0.8rem 2rem;
-  font-size: clamp(0.9rem, 2vw, 1rem);
-  border-radius: 10px;
-  text-decoration: none;
-  box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  z-index: 2;
-  animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
-}
-
-/* Hover Glow & Lift */
-.cta-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
-}
-
-/* Entrance Animation */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Animated Gradient */
-@keyframes gradientFlow {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-    @keyframes glowShift {
-      0% {
-        transform: translateX(-50%) rotate(0deg);
+    /* Entrance Animation */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
       }
 
-      100% {
-        transform: translateX(-50%) rotate(3deg);
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation: none !important;
-        transition: none !important;
+    /* Animated Gradient */
+    @keyframes gradientFlow {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Keyframes für animierte Lichtwelle */
+    @keyframes waveBlur {
+      0% {
+        --x: 20%;
+        --y: 30%;
+      }
+
+      25% {
+        --x: 80%;
+        --y: 20%;
+      }
+
+      50% {
+        --x: 60%;
+        --y: 70%;
+      }
+
+      75% {
+        --x: 30%;
+        --y: 80%;
+      }
+
+      100% {
+        --x: 50%;
+        --y: 50%;
+      }
+    }
+
+
+    /* RESPONSIVE MEDIA QUERIES */
+    @media (max-width: 768px) {
+      .cta-btn {
+        padding: 0.6em 4vw;
+        font-size: 1rem;
+        border-radius: 0.6em;
       }
     }
 
     @media (max-width: 480px) {
-      .cta-modern {
-        padding: 5rem 1rem;
-      }
-
-      .cta-text {
-        margin-bottom: 2rem;
-        line-height: 1.5;
-      }
-
       .cta-btn {
-        width: 100%;
-        padding: 0.9rem;
+        padding: 0.25em 0.2vw;
+        font-size: 0.7rem;
+        border-radius: 0.4em;
+        max-width: 70%;
+        min-width: unset;
+        width: auto;
+        box-shadow: 0 0.2em 0.6em rgba(255, 102, 0, 0.2);
+        scale: 0.7;
       }
     }
 
-    @media (max-width: 375px) {
-.cta-headline {
-  font-size: 1.5rem;
-}
-
-.cta-headline span {
-  font-size: 1.1em;
-}
-
-.cta-text {
-  font-size: 0.95rem;
-}
-
-.cta-btn {
-  font-size: 0.9rem;
-  padding: 0.75rem 1.2rem;
-}
-}
+    @media (max-width: 320px) {
+      .cta-btn {
+        padding: 0.25em 0.2vw;
+        font-size: 0.7rem;
+        border-radius: 0.4em;
+        max-width: 70%;
+        min-width: unset;
+        width: auto;
+        box-shadow: 0 0.2em 0.6em rgba(255, 102, 0, 0.2);
+        scale: 0.7;
+      }
+    }
 
 
+    @media (max-width: 768px) {
+      .hero-video-content h1 {
+        font-size: 2.4rem;
+        letter-spacing: 0.05rem;
+      }
+
+      .hero-video-content p {
+        font-size: 1rem;
+      }
+
+    }
+
+
+    @media (max-width: 768px) {
+      .hero-overlay-image {
+        left: -50vw;
+        width: 170vw;
+
+      }
+
+      .above-text-image {
+        left: -35vw;
+        width: 190vw;
+        /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+      }
+    }
+
+
+
+
+
+    @media (max-width: 768px) and (min-height: 1280px) and (max-height: 2000px) {
+      .hero-overlay-image {
+        left: -110vw;
+        width: 250vw;
+        top: 4vh;
+      }
+
+      .above-text-image {
+        top: 10vh;
+        left: -70vw;
+        width: 310vw;
+        /* <– erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+      }
+    }
+
+    @media (max-width: 768px) and (min-height: 1024px) and (max-height: 1280px) {
+      .hero-overlay-image {
+        left: -70vw;
+        width: 200vw;
+      }
+
+      .above-text-image {
+        top: 10vh;
+        left: -60vw;
+        width: 250vw;
+      }
+    }
+
+    @media (max-width: 768px) and (min-height: 900px) and (max-height: 1024px) {
+      .hero-overlay-image {
+        left: -50vw;
+        width: 185vw;
+      }
+
+      .above-text-image {
+        top: 10vh;
+        left: -45vw;
+        width: 210vw;
+      }
+    }
+
+    @media (max-width: 768px) and (min-height: 768px) and (max-height: 900px) {
+      .hero-overlay-image {
+        left: -45vw;
+        width: 170vw;
+      }
+
+      .above-text-image {
+        top: 10vh;
+        left: -34vw;
+        width: 185vw;
+      }
+    }
+
+    @media (max-width: 768px) and (min-height: 625px) and (max-height: 768px) {
+      .hero-overlay-image {
+        left: -35vw;
+        width: 165vw;
+      }
+
+      .above-text-image {
+        top: 10vh;
+        left: -30vw;
+        width: 175vw;
+      }
+    }
+
+    @media (max-width: 768px) and (min-height: 300px) and (max-height: 625px) {
+      .hero-overlay-image {
+        left: -30vw;
+        width: 160vw;
+      }
+
+      .above-text-image {
+        top: 5vh;
+        left: -25vw;
+        width: 160vw;
+      }
+    }
+
+
+    @media (max-width: 480px) and (min-height: 1530px) and (max-height: 2000px) {
+      .hero-overlay-image {
+        left: -190vw;
+        width: 320vw;
+      }
+
+      .above-text-image {
+        top: 10vh;
+        left: -40vw;
+        width: 400vw;
+        /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+      }
+    }
+
+    @media (max-width: 480px) and (min-height: 1060px) and (max-height: 1530px) {
+      .hero-overlay-image {
+        left: -120vw;
+        width: 220vw;
+      }
+
+      .above-text-image {
+        top: 10vh;
+        left: -5vw;
+        width: 250vw;
+        /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+      }
+    }
+
+
+    @media (max-width: 480px) and (min-height: 950px) and (max-height: 1060px) {
+      .hero-overlay-image {
+        left: -60vw;
+        width: 170vw;
+
+      }
+
+      .above-text-image {
+        left: -5vw;
+        width: 190vw;
+        /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+      }
+    }
+
+    @media (max-width: 480px) and (min-height: 768px) and (max-height: 950px) {
+      .hero-overlay-image {
+        left: -60vw;
+        width: 170vw;
+
+      }
+
+      .above-text-image {
+        left: -2vw;
+        width: 160vw;
+        /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+      }
+    }
+
+    @media (max-width: 480px) and (min-height: 625px) and (max-height: 768px) {
+      .hero-overlay-image {
+        left: -50vw;
+        width: 170vw;
+
+      }
+
+      .above-text-image {
+        left: -15vw;
+        width: 160vw;
+        /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+      }
+    }
+
+    @media (max-width: 480px) and (min-height: 25px) and (max-height: 625px) {
+      .hero-overlay-image {
+        left: -40vw;
+        width: 170vw;
+
+      }
+
+      .above-text-image {
+        left: -25vw;
+        width: 160vw;
+        /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
+      }
+    }
+
+
+
+
+    @media (max-width: 425px) and (min-height: 1530px) and (max-height: 2000px) {
+      .hero-overlay-image {
+        left: -165vw;
+        width: 285vw;
+      }
+
+      .above-text-image {
+        top: 10vh;
+        left: -35vw;
+        width: 360vw;
+      }
+    }
+
+    @media (max-width: 425px) and (min-height: 1060px) and (max-height: 1530px) {
+      .hero-overlay-image {
+        left: -100vw;
+        width: 200vw;
+      }
+
+      .above-text-image {
+        top: 10vh;
+        left: -4vw;
+        width: 230vw;
+      }
+    }
+
+    @media (max-width: 425px) and (min-height: 950px) and (max-height: 1060px) {
+      .hero-overlay-image {
+        left: -50vw;
+        width: 160vw;
+      }
+
+      .above-text-image {
+        left: -4vw;
+        width: 180vw;
+      }
+    }
+
+    @media (max-width: 425px) and (min-height: 768px) and (max-height: 950px) {
+      .hero-overlay-image {
+        left: -48vw;
+        width: 160vw;
+      }
+
+      .above-text-image {
+        left: -1vw;
+        width: 155vw;
+      }
+    }
+
+    @media (max-width: 425px) and (min-height: 625px) and (max-height: 768px) {
+      .hero-overlay-image {
+        left: -40vw;
+        width: 155vw;
+      }
+
+      .above-text-image {
+        left: -10vw;
+        width: 150vw;
+      }
+    }
+
+    @media (max-width: 425px) and (min-height: 25px) and (max-height: 625px) {
+      .hero-overlay-image {
+        left: -30vw;
+        width: 150vw;
+      }
+
+      .above-text-image {
+        left: -20vw;
+        width: 145vw;
+      }
+    }
+
+
+
+
+
+    @media (max-width: 375px) and (min-height: 1530px) and (max-height: 1680px) {
+      .hero-overlay-image {
+        left: -188vw;
+        width: 290vw;
+        top: 6vh;
+      }
+
+      .above-text-image {
+        top: 10vh;
+        left: -15vw;
+        width: 370vw;
+        top: 12vh;
+      }
+    }
+
+
+    @media (max-width: 375px) and (min-height: 1060px) and (max-height: 1530px) {
+      .hero-overlay-image {
+        left: -140vw;
+        width: 260vw;
+      }
+
+      .above-text-image {
+        top: 10vh;
+        left: -5vw;
+        width: 260vw;
+      }
+    }
+
+    @media (max-width: 375px) and (min-height: 840px) and (max-height: 1060px) {
+      .hero-overlay-image {
+        left: -90vw;
+        width: 195vw;
+      }
+
+      .above-text-image {
+        left: 5vw;
+        width: 195vw;
+        top: 10vh;
+      }
+    }
+
+
+    @media (max-width: 375px) and (min-height: 768px) and (max-height: 840px) {
+      .hero-overlay-image {
+        left: -70vw;
+        width: 195vw;
+      }
+
+      .above-text-image {
+        left: -5vw;
+        width: 195vw;
+      }
+    }
+
+    @media (max-width: 375px) and (min-height: 8px) and (max-height: 768px) {
+      .hero-overlay-image {
+        left: -70vw;
+        width: 195vw;
+      }
+
+      .above-text-image {
+        left: -25vw;
+        width: 195vw;
+      }
+    }
+
+    @media (max-width: 320px) and (min-height: 1024px) and (max-height: 1300px) {
+      .hero-overlay-image {
+        left: -180vw;
+        width: 300vw;
+        top: 10vh;
+      }
+
+      .above-text-image {
+        left: -5vw;
+        width: 285vw;
+      }
+    }
+
+
+    @media (max-width: 320px) and (min-height: 768px) and (max-height: 1024px) {
+      .hero-overlay-image {
+        left: -110vw;
+        width: 220vw;
+      }
+
+      .above-text-image {
+        left: -25vw;
+        width: 285vw;
+      }
+    }
+
+
+    @media (max-width: 320px) and (min-height: 600px) and (max-height: 768px) {
+      .hero-overlay-image {
+        left: -80vw;
+        width: 195vw;
+      }
+
+      .above-text-image {
+        left: -5vw;
+        width: 195vw;
+      }
+    }
+
+    @media (max-width: 320px) and (min-height: 200px) and (max-height: 600px) {
+      .hero-overlay-image {
+        left: -60vw;
+        width: 195vw;
+      }
+
+      .above-text-image {
+        left: -25vw;
+        width: 195vw;
+      }
+    }
+
+
+
+
+
+
+
+
+    .hero-overlay-image,
+    .above-text-image {
+      opacity: 0;
+      transform: translateY(60px) scale(0.95);
+      /* Mehr Bewegung */
+      transition: all 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+
+    .hero-overlay-image.animate,
+    .above-text-image.animate {
+      opacity: 1;
+      transform: translateY(0px) scale(1.05);
+      /* Leicht größer für Tiefe */
+    }
   </style>
 
-  <h2 class="cta-headline">
-    <span class="cta-small">Bereit für</span> <span>deinen digitalen Auftritt?</span>
-  </h2>
+  <script>
+    // FADE-IN via IntersectionObserver
+    const animatedEls = document.querySelectorAll('.hero-overlay-image, .above-text-image');
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    animatedEls.forEach(el => observer.observe(el));
+
+    // SCROLL-BASIERTE TRANSFORMATION
+    const overlay = document.querySelector('.hero-overlay-image');
+    const above = document.querySelector('.above-text-image');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const maxScroll = window.innerHeight;
+      const progress = Math.min(scrollTop / maxScroll, 1); // Wert zwischen 0 und 1
+
+      const translateX = 20 * progress; // max 20px rechts
+      const translateY = 20 * progress; // max 20px runter
+      const scale = 1.05 + progress * 0.1; // von 1.05 auf 1.15
+
+      if (overlay.classList.contains('animate')) {
+        overlay.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      }
+
+      if (above.classList.contains('animate')) {
+        above.style.transform = `translate(${translateX * 1.1}px, ${translateY * 1.1}px) scale(${scale})`;
+      }
+    });
+  </script>
+
+  <script src="https://unpkg.com/feather-icons"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 
-  <p class="cta-text">
-    Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.
-    Starte jetzt – unverbindlich und inspiriert.
-  </p>
+  <section class="pricing-clean container" id="pakete" aria-label="Website-Pakete und Preise">
+    <h1 class="visually-hidden">Unsere Leistungen</h1>
+    <h2 class="pricing-title">Grafikdesign<br>Minimalistisch. Beweglich. Visionär.</h2>
+    <p class="pricing-subline">
+      Von der einfachen Visitenkarte bis zur professionellen Digital Media Bundle – maßgeschneiderte Lösungen für Ihr
+      Unternehmen.
+    </p>
 
-  <a href="#kontakt" class="cta-btn">Gespräch vereinbaren</a>
-</section>
+    <!-- Toggle: Netto / Brutto 
+  <div class="preis-toggle">
+    <label for="preisModus">Preis anzeigen in:</label>
+    <button id="preisModus" onclick="togglePreise()" aria-pressed="false">💼 Netto</button>
+  </div>
+-->
+
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <article class="pricing-card">
+        <div class="icon-wrap"><i data-feather="zap"></i></div>
+        <h3>Starter-Paket</h3>
+        <p class="tagline">Logo Starter Paket</p>
+        <ul>
+          <li>✓ 2 individuelle Entwürfe</li>
+          <li>✓ 1 Korrekturschleife</li>
+          <li>✓ Dateien für Web & Print (PNG, SVG, PDF)</li>
+          <li>✓ Social Media Profilgrafiken</li>
+        </ul>
+        <p class="vorteil">Ideal für kleine Unternehmen, die mit einem professionellen Onepager online durchstarten
+          möchten – mobilfreundlich und DSGVO-konform.</p>
+        <div class="preis" data-netto="149" data-brutto="177.31">ab 149 € <span>zzgl. MwSt.</span></div>
+      </article>
+
+      <!-- Business -->
+      <article class="pricing-card">
+        <div class="icon-wrap"><i data-feather="layers"></i></div>
+        <h3>Brand Identity Paket</h3>
+        <p class="tagline">Mehrseitige test?-Präsenz</p>
+        <ul>
+          <li>✓ Logo, Farbwelt & Typografie</li>
+          <li>✓ Mini-Styleguide für konsistente Nutzung</li>
+          <li>✓ Visitenkarte & Briefpapierdesign</li>
+          <li>✓ Digitale & druckfähige Dateien</li>
+        </ul>
+        <p class="vorteil">Mehrseitige Business-Webseite mit klarer Struktur, Kontaktformular und grundlegender SEO für
+          bessere Sichtbarkeit.</p>
+        <div class="preis" data-netto="499" data-brutto="593.81">ab 499 € <span>zzgl. MwSt.</span></div>
+      </article>
+
+      <!-- Professional -->
+      <article class="pricing-card">
+        <div class="icon-wrap"><i data-feather="briefcase"></i></div>
+        <h3>Print & Poster</h3>
+        <p class="tagline">Komplettlösung f??(=) Business-Auftritt</p>
+        <ul>
+          <li>✓ Flyer, Plakate & Visitenkarten</li>
+          <li>✓ Druckvorbereitung inkl. Beschnitt & Farbprofil</li>
+          <li>✓ Individuelle Gestaltung nach Zielgruppe</li>
+          <li>✓ Druckfertige PDF-Dateien</li>
+        </ul>
+        <p class="vorteil">SEO-optimiertes Webdesign mit individuellem UX, CMS-Anbindung und ideal für mittlere
+          Unternehmen.</p>
+        <div class="preis" data-netto="149" data-brutto="177.31">ab 149 € <span>zzgl. MwSt.</span></div>
+      </article>
+
+      <!-- Premium -->
+      <article class="pricing-card highlight">
+        <div class="icon-wrap"><i data-feather="star"></i></div>
+        <h3>Digital Media Bundle</h3>
+        <p class="tagline">Rundum-sorglos für den Großauftritt</p>
+        <ul>
+          <li>Grafiken für Website, Newsletter & Ads</li>
+          <li>Responsives Design für alle Devices</li>
+          <li>Formatoptimierung für Plattformen</li>
+        </ul>
+        <p class="vorteil">Komplettlösung mit Webshop (E-Commerce), Top-Performance, SEO und maßgeschneidertem
+          Premium-Design.</p>
+        <div class="preis" data-netto="199" data-brutto="236.81">ab 199 € <span>zzgl. MwSt.</span></div>
+      </article>
+    </div>
+
+
+    </div>
+    </div>
+  </section>
+
+  <style>
+    :root {
+      --primary: #ff6600;
+      --secondary: #ffb266;
+      --text-color: #111;
+      --bg-light: #ffffff;
+      --highlight: #ffe2bd;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      left: -9999px;
+    }
+
+    .pricing-clean {
+      background: var(--bg-light);
+      text-align: center;
+      color: var(--text-color);
+    }
+
+    .pricing-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      margin-bottom: 0.8rem;
+    }
+
+    .pricing-subline {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 4rem;
+    }
+
+    .preis-toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 2rem;
+      gap: 1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    #preisModus {
+      background: var(--secondary);
+      border: none;
+      color: #111;
+      font-weight: bold;
+      padding: 0.5rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #preisModus:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .pricing-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .pricing-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #ffffff, #e6f0ff);
+      border: 1px solid #eee;
+      border-radius: 16px;
+      padding: 2.5rem 1.8rem;
+      text-align: left;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .pricing-card h3 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+    }
+
+    .tagline {
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .pricing-card ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-card ul li {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .vorteil {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .preis {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #111;
+      background: var(--secondary);
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(255, 148, 77, 0.3);
+      text-align: center;
+      width: 100%;
+    }
+
+    .preis span {
+      font-weight: 400;
+      font-size: 0.95rem;
+      margin-left: 0.4rem;
+    }
+
+    .highlight {
+      border: 2px solid #111;
+      background: linear-gradient(135deg, #ffffff, var(--highlight));
+    }
+
+    .icon-wrap {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .icon-wrap i {
+      stroke: #fff;
+      width: 24px;
+      height: 24px;
+
+    }
+
+    .pricing-card:nth-child(1) {
+
+      background: linear-gradient(135deg, #ffffff, rgb(235, 239, 255), #fbfbfb);
+      background-size: 600% 600%;
+      color: #fff;
+    }
+
+    .pricing-card:nth-child(1) {
+      border: 1px solid #3b3b3b;
+      border-radius: 16px;
+    }
+
+    .pricing-card:nth-child(1) .preis {
+      background: #f2f2f2;
+      /* hellgrau */
+      color: #111;
+      /* dunkle Schrift für Kontrast */
+    }
+
+
+    .pricing-card:nth-child(2) {
+      background: linear-gradient(270deg, #04006c, #6f00ff, #050088);
+      background-size: 300% 300%;
+      color: #fff;
+    }
+
+    .pricing-card:nth-child(3) {
+      background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
+      background-size: 400% 400%;
+      color: #fff;
+    }
+
+    .pricing-card:nth-child(4) {
+      background: linear-gradient(135deg, #ff5100, hwb(340 0% 0%), #ff5100);
+      background-size: 300% 300%;
+      color: #fff;
+    }
+
+    /* Textfarben für bessere Lesbarkeit */
+    .pricing-card h3,
+    .pricing-card .tagline,
+    .pricing-card ul li,
+    .pricing-card .vorteil,
+    .pricing-card .preis {
+      color: #fff !important;
+    }
+
+    /* Premium-Paket (4. Karte): Textfarbe schwarz */
+    .pricing-card:nth-child(1) h3,
+    .pricing-card:nth-child(1) .tagline,
+    .pricing-card:nth-child(1) ul li,
+    .pricing-card:nth-child(1) .vorteil,
+    .pricing-card:nth-child(1) .preis {
+      color: #111 !important;
+    }
+
+
+    /* Preis-Box farblich etwas transparenter */
+    .pricing-card .preis {
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: none;
+    }
+
+    /* Hover-Effekt optional heller */
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Professional-Paket: Icon-Hintergrund weiß, Icon schwarz */
+    .pricing-card:nth-child(4) .icon-wrap {
+      background: #fff;
+    }
+
+    .pricing-card:nth-child(4) .icon-wrap svg {
+      stroke: #000 !important;
+    }
+  </style>
+
+  <!-- JavaScript -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script>
+    feather.replace();
+
+    let bruttoAktiv = false;
+
+    function togglePreise() {
+      bruttoAktiv = !bruttoAktiv;
+      localStorage.setItem('bruttoAktiv', bruttoAktiv);
+      updatePreise();
+      document.getElementById('preisModus').setAttribute('aria-pressed', bruttoAktiv);
+    }
+
+    function updatePreise() {
+      const prices = document.querySelectorAll('.preis');
+      prices.forEach(p => {
+        const netto = parseFloat(p.dataset.netto);
+        const brutto = parseFloat(p.dataset.brutto);
+        p.innerHTML = bruttoAktiv
+          ? `ab ${brutto.toLocaleString("de-DE")} € <span>inkl. MwSt.</span>`
+          : `ab ${netto.toLocaleString("de-DE")} € <span>zzgl. MwSt.</span>`;
+      });
+      document.getElementById('preisModus').textContent = bruttoAktiv ? '🧾 Brutto' : '💼 Netto';
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      bruttoAktiv = localStorage.getItem('bruttoAktiv') === 'true';
+      updatePreise();
+    });
+  </script>
+
+
+  <section class="cta-modern">
+    <style>
+      .cta-modern {
+        position: relative;
+        padding: 7rem 1.5rem;
+        background: linear-gradient(180deg, #f4f4f4, #ffffff);
+        overflow: hidden;
+        text-align: center;
+        z-index: 1;
+      }
+
+      .cta-modern::before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1800px;
+        max-width: 100vw;
+        height: 1800px;
+        z-index: 0;
+        pointer-events: none;
+        animation: glowShift 12s ease-in-out infinite alternate;
+      }
+
+
+      .cta-headline {
+        font-size: clamp(1.8rem, 4.5vw, 3rem);
+        font-weight: 800;
+        font-family: 'Inter', sans-serif;
+        color: #000;
+        margin-bottom: 1rem;
+        line-height: 1.25;
+        letter-spacing: -0.3px;
+        position: relative;
+        z-index: 2;
+        animation: fadeUp 1s ease-out both;
+      }
+
+      .cta-small {
+        font-size: 0.6em;
+        font-weight: 500;
+        color: #000000 !important;
+        font-family: 'Inter', sans-serif;
+        display: inline-block;
+        margin-right: 0.3em;
+        background: none !important;
+        background-clip: initial !important;
+        -webkit-background-clip: initial !important;
+        -webkit-text-fill-color: initial !important;
+      }
+
+      .cta-headline span {
+        font-family: 'VT323', monospace;
+        font-size: 1.3em;
+        line-height: 1;
+        display: inline-block;
+
+        background: linear-gradient(220deg,
+            hwb(219 17% 0%) 0%,
+            hwb(219 18% 0%) 40%,
+            #e1e2ff 46%,
+            hwb(34 27% 0%) 52%,
+            hwb(29 0% 0%) 100%);
+
+        background-size: 400% 400%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        animation: gradientShift 16s ease-in-out infinite;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+
+      .cta-text {
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        font-weight: 400;
+        color: #272727;
+        max-width: 640px;
+        margin: 0 auto 2.5rem;
+        line-height: 1.6;
+        position: relative;
+        z-index: 2;
+        animation: fadeUp 1s ease-out 0.2s both;
+      }
+
+      .cta-btn {
+        background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
+        background-size: 300% 300%;
+        color: #fff;
+        font-weight: 600;
+        padding: 0.8rem 2rem;
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        border-radius: 10px;
+        text-decoration: none;
+        box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        z-index: 2;
+        animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
+      }
+
+      /* Hover Glow & Lift */
+      .cta-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
+      }
+
+      /* Entrance Animation */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Animated Gradient */
+      @keyframes gradientFlow {
+        0% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes glowShift {
+        0% {
+          transform: translateX(-50%) rotate(0deg);
+        }
+
+        100% {
+          transform: translateX(-50%) rotate(3deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .cta-modern {
+          padding: 5rem 1rem;
+        }
+
+        .cta-text {
+          margin-bottom: 2rem;
+          line-height: 1.5;
+        }
+
+        .cta-btn {
+          width: 100%;
+          padding: 0.9rem;
+        }
+      }
+
+      @media (max-width: 375px) {
+        .cta-headline {
+          font-size: 1.5rem;
+        }
+
+        .cta-headline span {
+          font-size: 1.1em;
+        }
+
+        .cta-text {
+          font-size: 0.95rem;
+        }
+
+        .cta-btn {
+          font-size: 0.9rem;
+          padding: 0.75rem 1.2rem;
+        }
+      }
+    </style>
+
+    <h2 class="cta-headline">
+      <span class="cta-small">Bereit für</span> <span>deinen digitalen Auftritt?</span>
+    </h2>
+
+
+    <p class="cta-text">
+      Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.
+      Starte jetzt – unverbindlich und inspiriert.
+    </p>
+
+    <a href="#kontakt" class="cta-btn">Gespräch vereinbaren</a>
+  </section>
 
 
 
@@ -1527,7 +1658,7 @@ width: 170vw;
             </div>
           </div>
 
-                 <div class="gallery-item reveal">
+          <div class="gallery-item reveal">
             <div class="media-wrapper">
               <img src="./3DSlideShow/post1.png" width="1671px" height="1294px" loading="lazy"
                 alt="Interaktives 3D-Messemodell" />
@@ -1541,7 +1672,8 @@ width: 170vw;
               </ul>
               <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
             </div>
-          </div>       <div class="gallery-item reveal">
+          </div>
+          <div class="gallery-item reveal">
             <div class="media-wrapper">
               <img src="./GallerieGesamt/3D3.webp" width="1671px" height="1294px" loading="lazy"
                 alt="Interaktives 3D-Messemodell" />
@@ -1555,7 +1687,8 @@ width: 170vw;
               </ul>
               <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
             </div>
-          </div>       <div class="gallery-item reveal">
+          </div>
+          <div class="gallery-item reveal">
             <div class="media-wrapper">
               <img src="./GallerieGesamt/3D3.webp" width="1671px" height="1294px" loading="lazy"
                 alt="Interaktives 3D-Messemodell" />
@@ -1569,7 +1702,8 @@ width: 170vw;
               </ul>
               <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
             </div>
-          </div>       <div class="gallery-item reveal">
+          </div>
+          <div class="gallery-item reveal">
             <div class="media-wrapper">
               <img src="./GallerieGesamt/3D3.webp" width="1671px" height="1294px" loading="lazy"
                 alt="Interaktives 3D-Messemodell" />
@@ -1583,7 +1717,8 @@ width: 170vw;
               </ul>
               <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
             </div>
-          </div>       <div class="gallery-item reveal">
+          </div>
+          <div class="gallery-item reveal">
             <div class="media-wrapper">
               <img src="./GallerieGesamt/3D3.webp" width="1671px" height="1294px" loading="lazy"
                 alt="Interaktives 3D-Messemodell" />
@@ -1732,7 +1867,8 @@ width: 170vw;
     .portfolio-headline {
       font-size: 2.8rem;
       font-weight: 700;
-      margin-top: 6rem; /* z. B. 4rem zusätzlich, passe je nach Bedarf an */
+      margin-top: 6rem;
+      /* z. B. 4rem zusätzlich, passe je nach Bedarf an */
       margin-bottom: 3rem;
       color: #111;
     }
@@ -2034,166 +2170,166 @@ width: 170vw;
 
     }
   </style>
-<style>.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
-  gap: 2rem;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 2rem clamp(1rem, 5vw, 3rem);
-  justify-items: center;
-  box-sizing: border-box;
-}
+  <style>
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      gap: 2rem;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 2rem clamp(1rem, 5vw, 3rem);
+      justify-items: center;
+      box-sizing: border-box;
+    }
 
-.gallery-item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  border-radius: 24px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(16px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
-  transition: transform 0.45s ease, box-shadow 0.45s ease;
-  min-height: auto;
-  width: 100%;
-  max-width: 100%;
-}
+    .gallery-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border-radius: 24px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(16px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
+      transition: transform 0.45s ease, box-shadow 0.45s ease;
+      min-height: auto;
+      width: 100%;
+      max-width: 100%;
+    }
 
-.gallery-item:hover {
-  transform: translateY(-10px) scale(1.025);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
-}
+    .gallery-item:hover {
+      transform: translateY(-10px) scale(1.025);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.15);
+    }
 
-.media-wrapper {
-  overflow: hidden;
-  aspect-ratio: 16 / 9;
-  border-radius: 24px 24px 0 0;
-}
+    .media-wrapper {
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      border-radius: 24px 24px 0 0;
+    }
 
-.media-wrapper img,
-.media-wrapper video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 24px 24px 0 0;
-  transition: transform 0.5s ease;
-}
+    .media-wrapper img,
+    .media-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 24px 24px 0 0;
+      transition: transform 0.5s ease;
+    }
 
-.gallery-item:hover img,
-.gallery-item:hover video {
-  transform: scale(1.07);
-}
+    .gallery-item:hover img,
+    .gallery-item:hover video {
+      transform: scale(1.07);
+    }
 
-.overlay {
-  position: absolute;
-  inset: 0;
-  padding: 2.4rem;
-  background: linear-gradient(160deg, rgba(0, 0, 0, 0.655), rgba(46, 46, 46, 0.482));
-  backdrop-filter: blur(56px);
-  border-radius: 24px;
-  color: #1a1a1a;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 1.4rem;
-  opacity: 0;
-  pointer-events: none;
-  transform: none;
-  transition: all 0.5s ease-in-out;
-  z-index: 2;
-}
+    .overlay {
+      position: absolute;
+      inset: 0;
+      padding: 2.4rem;
+      background: linear-gradient(160deg, rgba(0, 0, 0, 0.655), rgba(46, 46, 46, 0.482));
+      backdrop-filter: blur(56px);
+      border-radius: 24px;
+      color: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 1.4rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: none;
+      transition: all 0.5s ease-in-out;
+      z-index: 2;
+    }
 
-.gallery-item:hover .overlay {
-  opacity: 1;
-  transform: none;
-  pointer-events: auto;
-}
+    .gallery-item:hover .overlay {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
 
 
 
-.overlay p {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin: 0;
-  color: #ffffff;
-  margin-top: 1rem;
-}
+    .overlay p {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0;
+      color: #ffffff;
+      margin-top: 1rem;
+    }
 
-.overlay ul {
-  margin: 0;
-  padding-left: 1.5rem;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: #ffffff;
-}
+    .overlay ul {
+      margin: 0;
+      padding-left: 1.5rem;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #ffffff;
+    }
 
-.overlay ul li {
-  list-style-type: disc;
-  margin-bottom: 0.4rem;
-}
+    .overlay ul li {
+      list-style-type: disc;
+      margin-bottom: 0.4rem;
+    }
 
-.cta-btn {
-  margin-top: 0.1rem;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, #ff6600, #ff9800);
-  color: #fff;
-  border: none;
-  padding: 0.7rem 1.8rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 2rem;
-  text-decoration: none;
-  transition: all 0.35s ease;
-}
+    .cta-btn {
+      margin-top: 0.1rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ff6600, #ff9800);
+      color: #fff;
+      border: none;
+      padding: 0.7rem 1.8rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 2rem;
+      text-decoration: none;
+      transition: all 0.35s ease;
+    }
 
-.cta-btn:hover {
-  background: linear-gradient(135deg, #ff7a00, #ffa800);
-  transform: scale(1.12);
-}
+    .cta-btn:hover {
+      background: linear-gradient(135deg, #ff7a00, #ffa800);
+      transform: scale(1.12);
+    }
 
-/* RESPONSIVE FIXES */
-@media (max-width: 768px) {
-  .gallery {
-    grid-template-columns: 1fr;
-    padding: 1.5rem 1rem;
-  }
+    /* RESPONSIVE FIXES */
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: 1fr;
+        padding: 1.5rem 1rem;
+      }
 
-  .gallery-item {
-    margin: 0 auto;
-  }
-}
+      .gallery-item {
+        margin: 0 auto;
+      }
+    }
 
-@media (max-width: 480px) {
-  .gallery {
-    padding: 1.2rem 0.6rem;
-    gap: 1.5rem;
-  }
+    @media (max-width: 480px) {
+      .gallery {
+        padding: 1.2rem 0.6rem;
+        gap: 1.5rem;
+      }
 
-  .overlay {
-    padding: 1.4rem;
-  }
+      .overlay {
+        padding: 1.4rem;
+      }
 
-  .overlay p {
-    font-size: 1.1rem;
-  }
+      .overlay p {
+        font-size: 1.1rem;
+      }
 
-  .overlay ul {
-    font-size: 1rem;
-  }
+      .overlay ul {
+        font-size: 1rem;
+      }
 
-  .cta-btn {
-    font-size: 0.9rem;
-    padding: 0.5rem 1.4rem;
-  }
-}
+      .cta-btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 1.4rem;
+      }
+    }
 
-body {
-  overflow-x: hidden;
-}
-
+    body {
+      overflow-x: hidden;
+    }
   </style>
   <script>
     feather.replace();
@@ -2220,181 +2356,194 @@ body {
 
 
 
-  
 
-<section class="kontakt-clean" id="kontakt">
-  <div class="kontakt-wrapper">
-    <h2 class="kontakt-title">Lass uns loslegen!</h2>
-    <p class="kontakt-subline">
-      Eine starke Idee verdient ein starkes digitales Erlebnis. <br />
-      Erzähle uns von Deinem Projekt – wir bringen es gemeinsam auf das nächste Level.
-    </p>
 
-    <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm">
-      <input type="text" name="name" placeholder="Name" required />
-      <input type="email" name="email" placeholder="E-Mail-Adresse" required />
-      <input type="text" name="subject" placeholder="Betreff" />
-      <textarea name="message" placeholder="Nachricht" rows="5" required></textarea>
-      <button type="submit" class="kontakt-btn">🚀 Jetzt Anfrage senden!</button>
-    </form>
-  </div>
-</section>
+  <section class="kontakt-clean" id="kontakt">
+    <div class="kontakt-wrapper">
+      <h2 class="kontakt-title">Lass uns loslegen!</h2>
+      <p class="kontakt-subline">
+        Eine starke Idee verdient ein starkes digitales Erlebnis. <br />
+        Erzähle uns von Deinem Projekt – wir bringen es gemeinsam auf das nächste Level.
+      </p>
 
-<style>
-  .kontakt-clean {
-    background: #ffffff;
-    padding: 6rem 2rem;
-    text-align: center;
-    font-family: 'Inter', sans-serif;
-  }
+      <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm">
+        <input type="text" name="name" placeholder="Name" required />
+        <input type="email" name="email" placeholder="E-Mail-Adresse" required />
+        <input type="text" name="subject" placeholder="Betreff" />
+        <textarea name="message" placeholder="Nachricht" rows="5" required></textarea>
+        <button type="submit" class="kontakt-btn">🚀 Jetzt Anfrage senden!</button>
+      </form>
+    </div>
+  </section>
 
-  .kontakt-title {
-    font-size: 2.6rem;
-    font-weight: 900;
-    color: #000000;
-    margin-bottom: 1rem;
-  }
+  <style>
+    .kontakt-clean {
+      background: #ffffff;
+      padding: 6rem 2rem;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+    }
 
-  .kontakt-subline {
-    font-size: 1.2rem;
-    color: #666;
-    line-height: 1.6;
-    max-width: 700px;
-    margin: 0 auto 3rem;
-  }
+    .kontakt-title {
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: #000000;
+      margin-bottom: 1rem;
+    }
 
-  .kontakt-wrapper {
-    max-width: 80vw;
-    margin: 0 auto;
-  }
+    .kontakt-subline {
+      font-size: 1.2rem;
+      color: #666;
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
 
-  .kontakt-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-  }
+    .kontakt-wrapper {
+      max-width: 80vw;
+      margin: 0 auto;
+    }
 
-  .kontakt-form input,
-  .kontakt-form textarea {
-    padding: 1rem;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.8);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    transition: all 0.3s ease;
-  }
+    .kontakt-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
 
-  .kontakt-form input:focus,
-  .kontakt-form textarea:focus {
-    border-color: #ff6600;
-    box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
-    outline: none;
-    background: #fff;
-  }
+    .kontakt-form input,
+    .kontakt-form textarea {
+      padding: 1rem;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s ease;
+    }
 
-  .kontakt-btn {
-    background: #ff6600;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 700;
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 14px rgba(255, 102, 0, 0.3);
-  }
+    .kontakt-form input:focus,
+    .kontakt-form textarea:focus {
+      border-color: #ff6600;
+      box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
+      outline: none;
+      background: #fff;
+    }
 
-  .kontakt-btn:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
-    background: #ff944d;
-  }
+    .kontakt-btn {
+      background: #ff6600;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(255, 102, 0, 0.3);
+    }
 
-  .kontakt-btn.sent {
-    background: linear-gradient(135deg, #00c851, #007e33);
-    box-shadow: 0 0 14px rgba(0, 200, 81, 0.6);
-    transform: scale(1.02);
-  }
-</style>
+    .kontakt-btn:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
+      background: #ff944d;
+    }
 
-<script>
-  const form = document.getElementById("kontaktForm");
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    form.classList.add("submitted");
-    const button = form.querySelector(".kontakt-btn");
-    button.innerText = "✅ Anfrage gesendet!";
-    button.classList.add("sent");
-    setTimeout(() => {
-      form.reset();
-      button.innerText = "🚀 Jetzt Anfrage senden!";
-      button.classList.remove("sent");
-    }, 4000);
-  });
-</script>
+    .kontakt-btn.sent {
+      background: linear-gradient(135deg, #00c851, #007e33);
+      box-shadow: 0 0 14px rgba(0, 200, 81, 0.6);
+      transform: scale(1.02);
+    }
+  </style>
+
+  <script>
+    const form = document.getElementById("kontaktForm");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      form.classList.add("submitted");
+      const button = form.querySelector(".kontakt-btn");
+      button.innerText = "✅ Anfrage gesendet!";
+      button.classList.add("sent");
+      setTimeout(() => {
+        form.reset();
+        button.innerText = "🚀 Jetzt Anfrage senden!";
+        button.classList.remove("sent");
+      }, 4000);
+    });
+  </script>
 
 
 
   <section class="faq-section" id="faq">
     <h2 class="faq-title">Häufige Fragen <br> Klarheit vor Projektstart</h2>
-      <div class="faq-search-bar">
-  <input type="text" id="faqSearchInput" placeholder="Nach Stichwort suchen...">
-  <div class="faq-navigation">
-    <button id="prevResult">←</button>
-    <span id="faqResultIndex">0 / 0</span>
-    <button id="nextResult">→</button>
-  </div>
-</div>
+    <div class="faq-search-bar">
+      <input type="text" id="faqSearchInput" placeholder="Nach Stichwort suchen...">
+      <div class="faq-navigation">
+        <button id="prevResult">←</button>
+        <span id="faqResultIndex">0 / 0</span>
+        <button id="nextResult">→</button>
+      </div>
+    </div>
     <div class="faq-accordion">
 
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
           <span>Projektmanagement und Kommunikation</span>
           <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round"
+              stroke-linejoin="round" />
           </svg>
         </button>
         <div class="faq-answer">
           <p>
             <strong>Wie erfolgt die Abstimmung während des gesamten Projektverlaufs?</strong><br>
-            Während des gesamten Projektverlaufs steht Ihnen ein fester Projektmanager als zentrale Ansprechperson zur Verfügung.
-            Es finden regelmäßige Status-Updates, geplante Meetings (sowohl digital als auch persönlich) und umfassende Kommunikation via E-Mail oder Telefon statt.
-            Unser Ziel ist es, Sie kontinuierlich und transparent über alle Fortschritte zu informieren, sodass Sie jederzeit aktiv Feedback geben und in den kreativen und technischen Prozess eingebunden werden.
+            Während des gesamten Projektverlaufs steht Ihnen ein fester Projektmanager als zentrale Ansprechperson zur
+            Verfügung.
+            Es finden regelmäßige Status-Updates, geplante Meetings (sowohl digital als auch persönlich) und umfassende
+            Kommunikation via E-Mail oder Telefon statt.
+            Unser Ziel ist es, Sie kontinuierlich und transparent über alle Fortschritte zu informieren, sodass Sie
+            jederzeit aktiv Feedback geben und in den kreativen und technischen Prozess eingebunden werden.
           </p>
-  
+
           <p>
             <strong>Gibt es einen detaillierten Meilensteinplan, in den ich Einblick erhalte?</strong><br>
-            Vor Beginn des Projekts erstellen wir gemeinsam einen detaillierten Meilensteinplan, der alle relevanten Phasen, Zeiträume und Abnahmepunkte umfasst.
-            Dieser Plan dient als verlässliche Roadmap, die Ihnen jederzeit einen klaren Überblick über den Projektfortschritt ermöglicht.
+            Vor Beginn des Projekts erstellen wir gemeinsam einen detaillierten Meilensteinplan, der alle relevanten
+            Phasen, Zeiträume und Abnahmepunkte umfasst.
+            Dieser Plan dient als verlässliche Roadmap, die Ihnen jederzeit einen klaren Überblick über den
+            Projektfortschritt ermöglicht.
             Änderungen im Projektablauf werden offen kommuniziert und in enger Abstimmung angepasst.
           </p>
-  
+
           <p>
-            <strong>Was passiert, wenn während des Projekts unerwartete Änderungen oder Zusatzwünsche auftreten?</strong><br>
+            <strong>Was passiert, wenn während des Projekts unerwartete Änderungen oder Zusatzwünsche
+              auftreten?</strong><br>
             Unerwartete Änderungen und Zusatzwünsche werden über ein strukturiertes Änderungsmanagement aufgenommen.
-            Kleinere Anpassungen fließen unmittelbar in den bestehenden Ablauf ein, während umfangreichere Wünsche separat besprochen, kalkuliert und dokumentiert werden.
+            Kleinere Anpassungen fließen unmittelbar in den bestehenden Ablauf ein, während umfangreichere Wünsche
+            separat besprochen, kalkuliert und dokumentiert werden.
             So behalten Sie stets den Überblick, und der Projektplan bleibt transparent.
           </p>
-  
+
           <p>
             <strong>Wie werden komplexe Anforderungen in den Projektplan integriert?</strong><br>
-            Für komplexe Anforderungen setzen wir auf einen iterativen Entwicklungsprozess, bei dem das Projekt in überschaubare Teilschritte unterteilt wird.
-            Diese ermöglichen es uns, auch anspruchsvolle Funktionen schrittweise umzusetzen, regelmäßig zu evaluieren und flexibel anzupassen.
+            Für komplexe Anforderungen setzen wir auf einen iterativen Entwicklungsprozess, bei dem das Projekt in
+            überschaubare Teilschritte unterteilt wird.
+            Diese ermöglichen es uns, auch anspruchsvolle Funktionen schrittweise umzusetzen, regelmäßig zu evaluieren
+            und flexibel anzupassen.
             Dadurch garantieren wir, dass alle komplexen Anforderungen optimal in den Gesamtplan eingebunden werden.
           </p>
-  
+
           <p>
             <strong>Welche Tools werden für die Zusammenarbeit genutzt?</strong><br>
-            Wir nutzen moderne Kollaborations-Tools wie Trello, Asana oder Slack, um Aufgaben effektiv zu koordinieren und den Informationsfluss zu gewährleisten.
-            Diese Plattformen bieten Ihnen jederzeit einen transparenten Einblick in den Projektfortschritt und erlauben eine reibungslose Abstimmung zwischen allen Beteiligten.
+            Wir nutzen moderne Kollaborations-Tools wie Trello, Asana oder Slack, um Aufgaben effektiv zu koordinieren
+            und den Informationsfluss zu gewährleisten.
+            Diese Plattformen bieten Ihnen jederzeit einen transparenten Einblick in den Projektfortschritt und erlauben
+            eine reibungslose Abstimmung zwischen allen Beteiligten.
           </p>
-  
+
           <p>
             <strong>Was passiert, wenn das Projekt länger dauert als ursprünglich geplant?</strong><br>
             Sollte es zu Verzögerungen kommen, informieren wir Sie frühzeitig und transparent über den neuen Zeitplan.
-            Gemeinsam werden die Ursachen besprochen und der Projektplan entsprechend angepasst, ohne dass dabei Ihre Wünsche und Prioritäten aus den Augen verloren werden.
+            Gemeinsam werden die Ursachen besprochen und der Projektplan entsprechend angepasst, ohne dass dabei Ihre
+            Wünsche und Prioritäten aus den Augen verloren werden.
           </p>
         </div>
       </div>
@@ -2402,29 +2551,44 @@ body {
         <button class="faq-question" aria-expanded="false">
           <span>Projektmanagement und Kommunikation</span>
           <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round"
+              stroke-linejoin="round" />
           </svg>
         </button>
         <div class="faq-answer">
           <p>
             <strong>Wie stellen Sie die Sicherheit meiner Daten während der Entwicklung und danach sicher?</strong><br>
-            Die Datensicherheit hat für uns höchste Priorität. Wir arbeiten mit aktuellen Sicherheitsstandards wie SSL-Verschlüsselung, regelmäßigen Backups, Firewalls und strengen Zugriffsbeschränkungen. Alle sensiblen Informationen werden ausschließlich von autorisierten Personen bearbeitet, sodass Ihre Daten jederzeit bestens geschützt sind.
+            Die Datensicherheit hat für uns höchste Priorität. Wir arbeiten mit aktuellen Sicherheitsstandards wie
+            SSL-Verschlüsselung, regelmäßigen Backups, Firewalls und strengen Zugriffsbeschränkungen. Alle sensiblen
+            Informationen werden ausschließlich von autorisierten Personen bearbeitet, sodass Ihre Daten jederzeit
+            bestens geschützt sind.
           </p>
           <p>
             <strong>Bieten Sie nach dem Launch auch Support, Wartung oder Updates an?</strong><br>
-            Ja, unser Service endet nicht mit dem Livegang Ihrer Website. Wir bieten umfassenden Support sowie regelmäßige Wartungen und Updates an, um sicherzustellen, dass Ihre Website langfristig optimal funktioniert. Zusätzlich erhalten Sie Schulungen im Umgang mit dem Content-Management-System, sodass Sie Ihre Inhalte auch eigenständig pflegen können.
+            Ja, unser Service endet nicht mit dem Livegang Ihrer Website. Wir bieten umfassenden Support sowie
+            regelmäßige Wartungen und Updates an, um sicherzustellen, dass Ihre Website langfristig optimal
+            funktioniert. Zusätzlich erhalten Sie Schulungen im Umgang mit dem Content-Management-System, sodass Sie
+            Ihre Inhalte auch eigenständig pflegen können.
           </p>
           <p>
-            <strong>Wie gewährleisten Sie, dass die Website auch in Zukunft technisch und optisch aktuell bleibt?</strong><br>
-            Durch regelmäßige Reviews und Performance-Analysen prüfen wir kontinuierlich, ob Ihre Website den neuesten technischen Standards und Designtrends entspricht. Proaktive Upgrades, Erweiterungen und Anpassungen werden bei Bedarf empfohlen und umgesetzt, um langfristig ein modernes und leistungsstarkes Nutzererlebnis zu garantieren.
+            <strong>Wie gewährleisten Sie, dass die Website auch in Zukunft technisch und optisch aktuell
+              bleibt?</strong><br>
+            Durch regelmäßige Reviews und Performance-Analysen prüfen wir kontinuierlich, ob Ihre Website den neuesten
+            technischen Standards und Designtrends entspricht. Proaktive Upgrades, Erweiterungen und Anpassungen werden
+            bei Bedarf empfohlen und umgesetzt, um langfristig ein modernes und leistungsstarkes Nutzererlebnis zu
+            garantieren.
           </p>
           <p>
             <strong>Wie wird die Qualitätssicherung während des Projekts umgesetzt?</strong><br>
-            Über den gesamten Entwicklungsprozess hinweg führen wir umfangreiche Tests durch – von Funktionstests über Usability-Checks bis hin zu Beta-Tests. Jede Phase wird detailliert dokumentiert und auf mögliche Fehler überprüft, um sicherzustellen, dass die Endlösung Ihren höchsten Ansprüchen genügt.
+            Über den gesamten Entwicklungsprozess hinweg führen wir umfangreiche Tests durch – von Funktionstests über
+            Usability-Checks bis hin zu Beta-Tests. Jede Phase wird detailliert dokumentiert und auf mögliche Fehler
+            überprüft, um sicherzustellen, dass die Endlösung Ihren höchsten Ansprüchen genügt.
           </p>
           <p>
             <strong>Was passiert, wenn es nach dem Launch technische Probleme gibt?</strong><br>
-            Sollte es nach dem Launch zu technischen Problemen kommen, steht unser Support-Team bereit, um diese schnellstmöglich zu beheben. Wir bieten verschiedene Support-Pakete an, die je nach Dringlichkeit und Umfang eine rasche Problemlösung garantieren, sodass Ihre Website stets reibungslos funktioniert.
+            Sollte es nach dem Launch zu technischen Problemen kommen, steht unser Support-Team bereit, um diese
+            schnellstmöglich zu beheben. Wir bieten verschiedene Support-Pakete an, die je nach Dringlichkeit und Umfang
+            eine rasche Problemlösung garantieren, sodass Ihre Website stets reibungslos funktioniert.
           </p>
         </div>
       </div>
@@ -2432,29 +2596,38 @@ body {
         <button class="faq-question" aria-expanded="false">
           <span>Projektmanagement und Kommunikation</span>
           <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round"
+              stroke-linejoin="round" />
           </svg>
         </button>
         <div class="faq-answer">
           <p>
             <strong>Wie binden Sie den Kunden während der Designphase aktiv ein?</strong><br>
-            Unser Designprozess ist stark kundenorientiert: Wir präsentieren Ihnen regelmäßig Wireframes, Prototypen und erste Design-Entwürfe, um Ihr Feedback frühzeitig und kontinuierlich einfließen zu lassen.
+            Unser Designprozess ist stark kundenorientiert: Wir präsentieren Ihnen regelmäßig Wireframes, Prototypen und
+            erste Design-Entwürfe, um Ihr Feedback frühzeitig und kontinuierlich einfließen zu lassen.
           </p>
           <p>
-            <strong>Gibt es Möglichkeiten, spezifische Designwünsche oder Funktionen individuell anzupassen?</strong><br>
-            Absolut – jedes Projekt ist einzigartig, und wir passen unser Angebot individuell an Ihre Anforderungen an. Ob besondere Design-Elemente, individuelle Funktionalitäten oder spezielle Schnittstellen – gemeinsam erarbeiten wir maßgeschneiderte Lösungen.
+            <strong>Gibt es Möglichkeiten, spezifische Designwünsche oder Funktionen individuell
+              anzupassen?</strong><br>
+            Absolut – jedes Projekt ist einzigartig, und wir passen unser Angebot individuell an Ihre Anforderungen an.
+            Ob besondere Design-Elemente, individuelle Funktionalitäten oder spezielle Schnittstellen – gemeinsam
+            erarbeiten wir maßgeschneiderte Lösungen.
           </p>
           <p>
             <strong>Wie gehen Sie mit Feedback um und wie sind die Korrekturschleifen strukturiert?</strong><br>
-            Feedback ist ein wesentlicher Bestandteil unseres Entwicklungsprozesses. Wir definieren klare Feedback-Phasen, die in mehrere Korrekturschleifen eingebettet sind.
+            Feedback ist ein wesentlicher Bestandteil unseres Entwicklungsprozesses. Wir definieren klare
+            Feedback-Phasen, die in mehrere Korrekturschleifen eingebettet sind.
           </p>
           <p>
-            <strong>Wie garantieren Sie, dass das Design auch für weniger technikaffine Nutzer intuitiv ist?</strong><br>
-            Wir orientieren uns an bewährten UX-Prinzipien und führen Nutzertests durch, um sicherzustellen, dass Ihre Website für alle Zielgruppen leicht verständlich und intuitiv navigierbar ist.
+            <strong>Wie garantieren Sie, dass das Design auch für weniger technikaffine Nutzer intuitiv
+              ist?</strong><br>
+            Wir orientieren uns an bewährten UX-Prinzipien und führen Nutzertests durch, um sicherzustellen, dass Ihre
+            Website für alle Zielgruppen leicht verständlich und intuitiv navigierbar ist.
           </p>
           <p>
             <strong>Können spezifische Funktionen und Integrationen auch später ergänzt werden?</strong><br>
-            Ja, unsere Lösungen sind flexibel und skalierbar. Selbst nach dem Launch können zusätzliche Funktionen oder Integrationen problemlos implementiert werden.
+            Ja, unsere Lösungen sind flexibel und skalierbar. Selbst nach dem Launch können zusätzliche Funktionen oder
+            Integrationen problemlos implementiert werden.
           </p>
         </div>
       </div>
@@ -2462,29 +2635,35 @@ body {
         <button class="faq-question" aria-expanded="false">
           <span>Projektmanagement und Kommunikation</span>
           <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round"
+              stroke-linejoin="round" />
           </svg>
         </button>
         <div class="faq-answer">
           <p>
             <strong>Gibt es eine transparente Aufschlüsselung der Kosten?</strong><br>
-            Unsere Angebote basieren auf einer klaren und nachvollziehbaren Kostenstruktur. Versteckte Kosten gibt es bei uns nicht.
+            Unsere Angebote basieren auf einer klaren und nachvollziehbaren Kostenstruktur. Versteckte Kosten gibt es
+            bei uns nicht.
           </p>
           <p>
             <strong>Wie wird der Erfolg des neuen Webdesigns gemessen?</strong><br>
-            Der Erfolg wird anhand spezifischer Kennzahlen wie verbesserter Verweildauer, Conversion-Rate und SEO-Ranking gemessen.
+            Der Erfolg wird anhand spezifischer Kennzahlen wie verbesserter Verweildauer, Conversion-Rate und
+            SEO-Ranking gemessen.
           </p>
           <p>
             <strong>Was passiert, wenn ich mit dem Endergebnis nicht zufrieden bin?</strong><br>
-            Wir bieten zusätzliche Korrekturschleifen und Anpassungen an, bis Ihre Anforderungen vollständig erfüllt sind.
+            Wir bieten zusätzliche Korrekturschleifen und Anpassungen an, bis Ihre Anforderungen vollständig erfüllt
+            sind.
           </p>
           <p>
             <strong>Gibt es versteckte Gebühren während des Projekts?</strong><br>
-            Nein. Zusatzwünsche, die den Leistungsumfang erweitern, werden separat besprochen und mit Ihrer Zustimmung kalkuliert.
+            Nein. Zusatzwünsche, die den Leistungsumfang erweitern, werden separat besprochen und mit Ihrer Zustimmung
+            kalkuliert.
           </p>
           <p>
             <strong>Welche vertraglichen Sicherheiten bieten Sie?</strong><br>
-            Unsere Verträge halten alle Leistungen, Zeitpläne und Änderungsprozesse transparent fest und bieten Ihnen rechtliche Sicherheit.
+            Unsere Verträge halten alle Leistungen, Zeitpläne und Änderungsprozesse transparent fest und bieten Ihnen
+            rechtliche Sicherheit.
           </p>
         </div>
       </div>
@@ -2492,13 +2671,15 @@ body {
         <button class="faq-question" aria-expanded="false">
           <span>Projektmanagement und Kommunikation</span>
           <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round"
+              stroke-linejoin="round" />
           </svg>
         </button>
         <div class="faq-answer">
           <p>
             <strong>Welche Maßnahmen garantieren DSGVO-Konformität?</strong><br>
-            Wir integrieren Cookie-Management, SSL, Anonymisierungstools und aktuelle rechtliche Vorgaben in all unsere Projekte.
+            Wir integrieren Cookie-Management, SSL, Anonymisierungstools und aktuelle rechtliche Vorgaben in all unsere
+            Projekte.
           </p>
           <p>
             <strong>Werden meine Daten vertraulich behandelt?</strong><br>
@@ -2506,11 +2687,13 @@ body {
           </p>
           <p>
             <strong>Werden rechtliche Änderungen auch nach dem Launch berücksichtigt?</strong><br>
-            Wir informieren proaktiv über Gesetzesänderungen und passen Ihre Website im Rahmen von Wartungsverträgen entsprechend an.
+            Wir informieren proaktiv über Gesetzesänderungen und passen Ihre Website im Rahmen von Wartungsverträgen
+            entsprechend an.
           </p>
           <p>
             <strong>Wie sichern Sie meine Geschäftsdaten?</strong><br>
-            Verschlüsselte Übertragung, Zugriffsbeschränkungen und regelmäßige Sicherheitsprüfungen sorgen für maximalen Schutz.
+            Verschlüsselte Übertragung, Zugriffsbeschränkungen und regelmäßige Sicherheitsprüfungen sorgen für maximalen
+            Schutz.
           </p>
           <p>
             <strong>Gibt es Nachweise für Ihre Datenschutzmaßnahmen?</strong><br>
@@ -2522,711 +2705,734 @@ body {
         <button class="faq-question" aria-expanded="false">
           <span>Projektmanagement und Kommunikation</span>
           <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round"
+              stroke-linejoin="round" />
           </svg>
         </button>
         <div class="faq-answer">
           <p>
             <strong>Bieten Sie auch SEO, Marketing oder Content an?</strong><br>
-            Ja! Wir bieten SEO, Social Media Management und professionelle Content-Erstellung als zusätzliche Leistungen.
+            Ja! Wir bieten SEO, Social Media Management und professionelle Content-Erstellung als zusätzliche
+            Leistungen.
           </p>
           <p>
             <strong>Wie schnell sehe ich Ergebnisse?</strong><br>
-            Erste messbare Effekte zeigen sich oft innerhalb von 4–8 Wochen – nachhaltige Ergebnisse meist nach einigen Monaten.
+            Erste messbare Effekte zeigen sich oft innerhalb von 4–8 Wochen – nachhaltige Ergebnisse meist nach einigen
+            Monaten.
           </p>
           <p>
             <strong>Können Ihre Leistungen international skaliert werden?</strong><br>
-            Absolut. Wir bieten Mehrsprachigkeit, länderspezifisches Design und globale SEO-Strategien für Ihren internationalen Erfolg.
+            Absolut. Wir bieten Mehrsprachigkeit, länderspezifisches Design und globale SEO-Strategien für Ihren
+            internationalen Erfolg.
           </p>
         </div>
       </div>
-      
+
     </div>
   </section>
-  
-  
-<style>
-  .faq-section {
-    padding: 5rem 2rem;
-    background: #fefefe;
-    color: #111;
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .faq-title {
-    text-align: center;
-    font-size: clamp(2rem, 5vw, 2.8rem);
-    font-weight: 800;
-    margin-bottom: 3rem;
-  }
-  
-.faq-accordion {
-  max-width: 1000px;
-  align-items: start;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.2rem;
-  padding: 0 1rem;
-}
-
-@media (min-width: 600px) {
-  .faq-accordion {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (min-width: 900px) {
-  .faq-accordion {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-
-  
-  .faq-item {
-    border: 1px solid #ddd;
-    border-radius: 14px;
-    overflow: hidden;
-    background: linear-gradient(135deg, #ffffff, #f8f8f8);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.03);
-    transition: all 0.3s ease;
-  }
-  
-  .faq-item:hover {
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
-  }
-  
-  .faq-question {
-    background: none;
-    border: none;
-    width: 100%;
-    padding: 1.5rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-align: left;
-    color: #222;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .faq-question:hover {
-    background: #f2f2f2;
-  }
-  
-  .arrow-icon {
-    transform: rotate(0deg);
-    transition: transform 0.3s ease;
-  }
-  
-  .faq-question[aria-expanded="true"] .arrow-icon {
-    transform: rotate(180deg);
-  }
-  
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-  padding: 0 2rem;
-}
-
-.faq-question[aria-expanded="true"] + .faq-answer {
-  max-height: 300px; /* Feste Höhe für sichtbaren Bereich */
-  overflow-y: auto;   /* Ermöglicht Scrollen bei Überlänge */
-  padding: 1rem 2rem 1.5rem;
-}
-.faq-answer::-webkit-scrollbar {
-  width: 6px;
-}
-.faq-answer::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 10px;
-}
-
-  
-  .faq-answer p {
-    margin: 1rem 0 1.5rem;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #444;
-  }
 
 
+  <style>
+    .faq-section {
+      padding: 5rem 2rem;
+      background: #fefefe;
+      color: #111;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .faq-title {
+      text-align: center;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 800;
+      margin-bottom: 3rem;
+    }
+
+    .faq-accordion {
+      max-width: 1000px;
+      align-items: start;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      padding: 0 1rem;
+    }
+
+    @media (min-width: 600px) {
+      .faq-accordion {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .faq-accordion {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
 
 
-  .faq-search-bar {
-  max-width: 1000px;
-  margin: 0 auto 2rem;
-  padding: 0 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-}
+    .faq-item {
+      border: 1px solid #ddd;
+      border-radius: 14px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ffffff, #f8f8f8);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s ease;
+    }
 
-.faq-search-bar input {
-  flex: 1 1 60%;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
+    .faq-item:hover {
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
+    }
 
-.faq-navigation {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
+    .faq-question {
+      background: none;
+      border: none;
+      width: 100%;
+      padding: 1.5rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-align: left;
+      color: #222;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
 
-.faq-navigation button {
-  padding: 0.5rem 0.75rem;
-  background-color: #508dff;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-}
+    .faq-question:hover {
+      background: #f2f2f2;
+    }
 
-.faq-navigation span {
-  font-size: 0.95rem;
-  color: #333;
-}
+    .arrow-icon {
+      transform: rotate(0deg);
+      transition: transform 0.3s ease;
+    }
 
-.faq-answer mark {
-  background-color: #ff660088;
-  padding: 0 3px;
-  border-radius: 3px;
-}
+    .faq-question[aria-expanded="true"] .arrow-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      padding: 0 2rem;
+    }
+
+    .faq-question[aria-expanded="true"]+.faq-answer {
+      max-height: 300px;
+      /* Feste Höhe für sichtbaren Bereich */
+      overflow-y: auto;
+      /* Ermöglicht Scrollen bei Überlänge */
+      padding: 1rem 2rem 1.5rem;
+    }
+
+    .faq-answer::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .faq-answer::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 10px;
+    }
 
 
+    .faq-answer p {
+      margin: 1rem 0 1.5rem;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #444;
+    }
+
+
+
+
+    .faq-search-bar {
+      max-width: 1000px;
+      margin: 0 auto 2rem;
+      padding: 0 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .faq-search-bar input {
+      flex: 1 1 60%;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .faq-navigation {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .faq-navigation button {
+      padding: 0.5rem 0.75rem;
+      background-color: #508dff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .faq-navigation span {
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .faq-answer mark {
+      background-color: #ff660088;
+      padding: 0 3px;
+      border-radius: 3px;
+    }
   </style>
-  
-<script>
-  document.querySelectorAll('.faq-question').forEach(button => {
-    button.addEventListener('click', () => {
-      const faqItem = button.closest('.faq-item');
-      const answer = faqItem.querySelector('.faq-answer');
-      const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
-      // Reset only this item
-      if (isExpanded) {
+  <script>
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const faqItem = button.closest('.faq-item');
+        const answer = faqItem.querySelector('.faq-answer');
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+        // Reset only this item
+        if (isExpanded) {
+          button.setAttribute('aria-expanded', 'false');
+          answer.style.maxHeight = null;
+        } else {
+          button.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
+  <script>
+    const faqItems = document.querySelectorAll('.faq-item');
+    const searchInput = document.getElementById('faqSearchInput');
+    const prevBtn = document.getElementById('prevResult');
+    const nextBtn = document.getElementById('nextResult');
+    const resultIndexLabel = document.getElementById('faqResultIndex');
+
+    let searchResults = [];
+    let currentResult = 0;
+
+    function closeAllFaqs() {
+      faqItems.forEach(item => {
+        const button = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
         button.setAttribute('aria-expanded', 'false');
         answer.style.maxHeight = null;
-      } else {
-        button.setAttribute('aria-expanded', 'true');
-        answer.style.maxHeight = answer.scrollHeight + 'px';
+      });
+    }
+    function highlightCurrent() {
+      if (searchResults.length === 0) {
+        resultIndexLabel.textContent = '0 / 0';
+        return;
       }
-    });
-  });
-</script>
-<script>
-  const faqItems = document.querySelectorAll('.faq-item');
-  const searchInput = document.getElementById('faqSearchInput');
-  const prevBtn = document.getElementById('prevResult');
-  const nextBtn = document.getElementById('nextResult');
-  const resultIndexLabel = document.getElementById('faqResultIndex');
 
-  let searchResults = [];
-  let currentResult = 0;
+      closeAllFaqs();
 
-  function closeAllFaqs() {
-    faqItems.forEach(item => {
-      const button = item.querySelector('.faq-question');
-      const answer = item.querySelector('.faq-answer');
-      button.setAttribute('aria-expanded', 'false');
-      answer.style.maxHeight = null;
-    });
-  }
-function highlightCurrent() {
-  if (searchResults.length === 0) {
-    resultIndexLabel.textContent = '0 / 0';
-    return;
-  }
+      const currentItem = searchResults[currentResult];
+      const button = currentItem.querySelector('.faq-question');
+      const answer = currentItem.querySelector('.faq-answer');
 
-  closeAllFaqs();
+      // Öffne Accordion
+      button.setAttribute('aria-expanded', 'true');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
 
-  const currentItem = searchResults[currentResult];
-  const button = currentItem.querySelector('.faq-question');
-  const answer = currentItem.querySelector('.faq-answer');
+      // Warten auf Rendering → dann sauber scrollen
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          const rect = currentItem.getBoundingClientRect();
+          const absoluteElementTop = rect.top + window.pageYOffset;
+          const offset = (window.innerHeight / 2) - (rect.height / 2);
 
-  // Öffne Accordion
-  button.setAttribute('aria-expanded', 'true');
-  answer.style.maxHeight = answer.scrollHeight + 'px';
+          window.scrollTo({
+            top: absoluteElementTop - offset,
+            behavior: 'smooth'
+          });
 
-  // Warten auf Rendering → dann sauber scrollen
-  requestAnimationFrame(() => {
-    setTimeout(() => {
-      const rect = currentItem.getBoundingClientRect();
-      const absoluteElementTop = rect.top + window.pageYOffset;
-      const offset = (window.innerHeight / 2) - (rect.height / 2);
+          resultIndexLabel.textContent = `${currentResult + 1} / ${searchResults.length}`;
+        }, 100); // kleine Verzögerung erlaubt exakte Höhe nach Layoutänderung
+      });
+    }
 
-      window.scrollTo({
-        top: absoluteElementTop - offset,
-        behavior: 'smooth'
+    function searchFaqs(keyword) {
+      keyword = keyword.toLowerCase();
+      searchResults = [];
+
+      faqItems.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(keyword)) {
+          searchResults.push(item);
+        }
       });
 
-      resultIndexLabel.textContent = `${currentResult + 1} / ${searchResults.length}`;
-    }, 100); // kleine Verzögerung erlaubt exakte Höhe nach Layoutänderung
-  });
-}
+      currentResult = 0;
+      highlightCurrent();
+    }
 
-  function searchFaqs(keyword) {
-    keyword = keyword.toLowerCase();
-    searchResults = [];
-
-    faqItems.forEach(item => {
-      const text = item.textContent.toLowerCase();
-      if (text.includes(keyword)) {
-        searchResults.push(item);
+    searchInput.addEventListener('input', (e) => {
+      const keyword = e.target.value.trim();
+      if (keyword.length > 1) {
+        searchFaqs(keyword);
+      } else {
+        searchResults = [];
+        resultIndexLabel.textContent = '0 / 0';
+        closeAllFaqs();
       }
     });
 
-    currentResult = 0;
-    highlightCurrent();
-  }
+    prevBtn.addEventListener('click', () => {
+      if (searchResults.length > 0) {
+        currentResult = (currentResult - 1 + searchResults.length) % searchResults.length;
+        highlightCurrent();
+      }
+    });
 
-  searchInput.addEventListener('input', (e) => {
-    const keyword = e.target.value.trim();
-    if (keyword.length > 1) {
-      searchFaqs(keyword);
-    } else {
+    nextBtn.addEventListener('click', () => {
+      if (searchResults.length > 0) {
+        currentResult = (currentResult + 1) % searchResults.length;
+        highlightCurrent();
+      }
+    });
+  </script>
+  <script>
+    function removeHighlights() {
+      faqItems.forEach(item => {
+        const answer = item.querySelector('.faq-answer');
+        answer.innerHTML = answer.innerHTML.replace(/<\/?mark>/g, '');
+      });
+    }
+
+    function highlightKeyword(node, keyword) {
+      const regex = new RegExp(`(${keyword})`, 'gi');
+      if (node.nodeType === 3) { // Text node
+        const match = node.nodeValue.match(regex);
+        if (match) {
+          const span = document.createElement('span');
+          span.innerHTML = node.nodeValue.replace(regex, '<mark>$1</mark>');
+          node.parentNode.replaceChild(span, node);
+        }
+      } else if (node.nodeType === 1 && node.childNodes && !['SCRIPT', 'STYLE'].includes(node.tagName)) {
+        for (let i = 0; i < node.childNodes.length; i++) {
+          highlightKeyword(node.childNodes[i], keyword);
+        }
+      }
+    }
+
+    function searchFaqs(keyword) {
+      keyword = keyword.toLowerCase();
       searchResults = [];
-      resultIndexLabel.textContent = '0 / 0';
-      closeAllFaqs();
-    }
-  });
+      removeHighlights();
 
-  prevBtn.addEventListener('click', () => {
-    if (searchResults.length > 0) {
-      currentResult = (currentResult - 1 + searchResults.length) % searchResults.length;
+      faqItems.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(keyword)) {
+          searchResults.push(item);
+
+          // Highlight in answer section only
+          const answer = item.querySelector('.faq-answer');
+          highlightKeyword(answer, keyword);
+        }
+      });
+
+      currentResult = 0;
       highlightCurrent();
     }
-  });
-
-  nextBtn.addEventListener('click', () => {
-    if (searchResults.length > 0) {
-      currentResult = (currentResult + 1) % searchResults.length;
-      highlightCurrent();
-    }
-  });
-</script>
-<script>
-function removeHighlights() {
-  faqItems.forEach(item => {
-    const answer = item.querySelector('.faq-answer');
-    answer.innerHTML = answer.innerHTML.replace(/<\/?mark>/g, '');
-  });
-}
-
-function highlightKeyword(node, keyword) {
-  const regex = new RegExp(`(${keyword})`, 'gi');
-  if (node.nodeType === 3) { // Text node
-    const match = node.nodeValue.match(regex);
-    if (match) {
-      const span = document.createElement('span');
-      span.innerHTML = node.nodeValue.replace(regex, '<mark>$1</mark>');
-      node.parentNode.replaceChild(span, node);
-    }
-  } else if (node.nodeType === 1 && node.childNodes && !['SCRIPT', 'STYLE'].includes(node.tagName)) {
-    for (let i = 0; i < node.childNodes.length; i++) {
-      highlightKeyword(node.childNodes[i], keyword);
-    }
-  }
-}
-
-function searchFaqs(keyword) {
-  keyword = keyword.toLowerCase();
-  searchResults = [];
-  removeHighlights();
-
-  faqItems.forEach(item => {
-    const text = item.textContent.toLowerCase();
-    if (text.includes(keyword)) {
-      searchResults.push(item);
-
-      // Highlight in answer section only
-      const answer = item.querySelector('.faq-answer');
-      highlightKeyword(answer, keyword);
-    }
-  });
-
-  currentResult = 0;
-  highlightCurrent();
-}
-</script>
+  </script>
 
 
 
   <!-- ⬇️ Footer mit ARIA, SEO, Lazyload, optimiertem CSS, Barrierefreiheit -->
-<footer role="contentinfo" itemscope itemtype="https://schema.org/Organization">
-  <div class="footer-grid">
-    <div class="footer-logo glass-card">
-      <span itemprop="name">Fusion³</span>
-      <p>UX & Webdesign<br>Nutzerzentriert.<br>Visuell stark.<br>Technisch fundiert.</p>
-    </div>
+  <footer role="contentinfo" itemscope itemtype="https://schema.org/Organization">
+    <div class="footer-grid">
+      <div class="footer-logo glass-card">
+        <span itemprop="name">Fusion³</span>
+        <p>UX & Webdesign<br>Nutzerzentriert.<br>Visuell stark.<br>Technisch fundiert.</p>
+      </div>
 
-    <div class="footer-links glass-card">
-      <h4>Rechtliches</h4>
-      <ul>
-        <li><a href="/impressum.html">Impressum</a></li>
-        <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
-        <li><a href="/cookies.html">Cookie-Hinweis</a></li>
-      </ul>
-    </div>
+      <div class="footer-links glass-card">
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="/impressum.html">Impressum</a></li>
+          <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
+          <li><a href="/cookies.html">Cookie-Hinweis</a></li>
+        </ul>
+      </div>
 
-    <div class="footer-contact glass-card">
-      <h4>Kontakt</h4>
-      <ul>
-        <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
-        <li><a href="tel:+491234567890" itemprop="telephone">+49 123 4567890</a></li>
-        <li itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-          <span itemprop="addressLocality">Berlin</span>, <span itemprop="addressCountry">Deutschland</span>
-        </li>
-      </ul>
-    </div>
+      <div class="footer-contact glass-card">
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
+          <li><a href="tel:+491234567890" itemprop="telephone">+49 123 4567890</a></li>
+          <li itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <span itemprop="addressLocality">Berlin</span>, <span itemprop="addressCountry">Deutschland</span>
+          </li>
+        </ul>
+      </div>
 
-    <div class="footer-socials glass-card">
-      <h4>Social Media</h4>
-      <div class="footer-socials-icons">
-        <a href="mailto:hello@fusion3.de" title="E-Mail schreiben" aria-label="E-Mail schreiben">
-          <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="E-Mail Icon" aria-hidden="true" />
-        </a>
-        <a href="https://www.linkedin.com/" title="LinkedIn" target="_blank" rel="noopener" aria-label="LinkedIn besuchen">
-          <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn Icon" aria-hidden="true" />
-        </a>
-        <a href="https://wa.me/491234567890" title="WhatsApp schreiben" target="_blank" rel="noopener" aria-label="WhatsApp schreiben">
-          <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon" aria-hidden="true" />
-        </a>
+      <div class="footer-socials glass-card">
+        <h4>Social Media</h4>
+        <div class="footer-socials-icons">
+          <a href="mailto:hello@fusion3.de" title="E-Mail schreiben" aria-label="E-Mail schreiben">
+            <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="E-Mail Icon" aria-hidden="true" />
+          </a>
+          <a href="https://www.linkedin.com/" title="LinkedIn" target="_blank" rel="noopener"
+            aria-label="LinkedIn besuchen">
+            <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn Icon" aria-hidden="true" />
+          </a>
+          <a href="https://wa.me/491234567890" title="WhatsApp schreiben" target="_blank" rel="noopener"
+            aria-label="WhatsApp schreiben">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon" aria-hidden="true" />
+          </a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <p class="footer-bottom glass-card">
-    © <span id="currentYear"></span> Fusion³ – Alle Rechte vorbehalten. DSGVO-konform & barrierearm entwickelt.
-  </p>
+    <p class="footer-bottom glass-card">
+      © <span id="currentYear"></span> Fusion³ – Alle Rechte vorbehalten. DSGVO-konform & barrierearm entwickelt.
+    </p>
 
-  <div class="lottie-footer-bg">
-    <lottie-player
-      id="lottieFooter"
-      src="./Lottiefiles/KP.json"
-      background="transparent"
-      speed="1"
-      loop
-      autoplay
-    ></lottie-player>
-  </div>
-</footer>
+    <div class="lottie-footer-bg">
+      <lottie-player id="lottieFooter" src="./Lottiefiles/KP.json" background="transparent" speed="1" loop
+        autoplay></lottie-player>
+    </div>
+  </footer>
 
-<style>
-  footer {
-    position: relative;
-    background: white;
-    background-size: 600% 600%;
-    animation: animatedGradient 20s ease infinite;
-    color: #222;
-    padding: 4rem 5vw 6rem;
-    font-size: 0.9rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    z-index: 1;
-  }
-
-  @keyframes animatedGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  .footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto 2rem;
-    position: relative;
-    z-index: 2;
-  }
-
-  .footer-logo span {
-    font-size: 1.6rem;
-    font-weight: 900;
-    color: var(--primary, darkorange);
-  }
-
-  .footer-logo p {
-    margin-top: 0.5rem;
-    color: #555;
-    font-size: 0.95rem;
-  }
-
-  .footer-links h4,
-  .footer-contact h4,
-  .footer-socials h4 {
-    margin-bottom: 0.8rem;
-    color: rgb(65, 64, 64);
-    font-weight: 600;
-    font-size: 1rem;
-  }
-
-  .footer-links ul,
-  .footer-contact ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .footer-links li,
-  .footer-contact li {
-    margin-bottom: 0.4rem;
-  }
-
-  .footer-links a {
-    color: #444;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-
-  .footer-links a:hover {
-    color: black;
-    transform: translateX(4px);
-    filter: brightness(1.2) drop-shadow(0 0 6px white);
-  }
-
-  .footer-socials-icons {
-  display: flex;
-  gap: 12px;
-  margin-top: 0.5rem;
-  justify-content: flex-start; /* ← Icons nach links schieben */
-}
-
-
-  .footer-socials img {
-    width: clamp(24px, 4vw, 30px);
-    height: auto;
-    opacity: 1;
-    transition: transform 0.3s ease, filter 0.3s ease;
-    filter: grayscale(20%);
-  }
-
-  .footer-socials img:hover {
-    transform: scale(1.2);
-    filter: brightness(1.2) drop-shadow(0 0 6px white);
-  }
-
-  .footer-bottom {
-    text-align: center;
-    color: #555;
-    font-size: 0.85rem;
-    margin-top: 1.5rem;
-    position: relative;
-    z-index: 2;
-  }
-
-  .glass-card {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 1.5rem;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    animation: glassPulse 6s ease-in-out infinite;
-  }
-
-  @keyframes glassPulse {
-    0% { background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(6px); }
-    50% { background: rgba(255, 255, 255, 0.18); backdrop-filter: blur(14px); }
-    100% { background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(6px); }
-  }
-
-  .lottie-footer-bg {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 400px;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .lottie-footer-bg lottie-player {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      animation: none !important;
-      transition: none !important;
-    }
-  }
-
-  @media (max-width: 768px) {
+  <style>
     footer {
-      font-size: 0.85rem;
-      padding: 3rem 1.5rem 5rem;
+      position: relative;
+      background: white;
+      background-size: 600% 600%;
+      animation: animatedGradient 20s ease infinite;
+      color: #222;
+      padding: 4rem 5vw 6rem;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    @keyframes animatedGradient {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     .footer-grid {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 2rem;
-    }
-
-    .glass-card {
-      padding: 1.2rem;
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+      position: relative;
+      z-index: 2;
     }
 
     .footer-logo span {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--primary, darkorange);
+    }
+
+    .footer-logo p {
+      margin-top: 0.5rem;
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .footer-links h4,
+    .footer-contact h4,
+    .footer-socials h4 {
+      margin-bottom: 0.8rem;
+      color: rgb(65, 64, 64);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .footer-links ul,
+    .footer-contact ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li,
+    .footer-contact li {
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-links a {
+      color: #444;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: black;
+      transform: translateX(4px);
+      filter: brightness(1.2) drop-shadow(0 0 6px white);
+    }
+
+    .footer-socials-icons {
+      display: flex;
+      gap: 12px;
+      margin-top: 0.5rem;
+      justify-content: flex-start;
+      /* ← Icons nach links schieben */
+    }
+
+
+    .footer-socials img {
+      width: clamp(24px, 4vw, 30px);
+      height: auto;
+      opacity: 1;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      filter: grayscale(20%);
+    }
+
+    .footer-socials img:hover {
+      transform: scale(1.2);
+      filter: brightness(1.2) drop-shadow(0 0 6px white);
     }
 
     .footer-bottom {
-      font-size: 0.75rem;
-      margin-top: 2rem;
+      text-align: center;
+      color: #555;
+      font-size: 0.85rem;
+      margin-top: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      animation: glassPulse 6s ease-in-out infinite;
+    }
+
+    @keyframes glassPulse {
+      0% {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(6px);
+      }
+
+      50% {
+        background: rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(14px);
+      }
+
+      100% {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(6px);
+      }
     }
 
     .lottie-footer-bg {
-      height: 180px;
-    }
-  }
-</style>
-
-<!-- JS: Jahr automatisch setzen + Lottie deaktivieren bei reduced motion -->
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-<script>
-  // Jahr dynamisch setzen
-  document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-  // Lottie deaktivieren bei "prefers-reduced-motion"
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const lottie = document.getElementById('lottieFooter');
-    if (lottie) lottie.remove();
-  }
-</script>
-
-<style>
-  /* === Responsive Styles === */
-
-  @media (max-width: 768px) {
-    .container {
-      padding: 3rem 1.5rem;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 400px;
+      z-index: 0;
+      pointer-events: none;
     }
 
-    .hero-video-content {
-      margin-top: -35vh;
+    .lottie-footer-bg lottie-player {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .hero-video-content h1 {
-      font-size: 2rem;
-      line-height: 1.2;
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
     }
 
-    .hero-video-content p {
-      font-size: 1rem;
+    @media (max-width: 768px) {
+      footer {
+        font-size: 0.85rem;
+        padding: 3rem 1.5rem 5rem;
+      }
+
+      .footer-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .glass-card {
+        padding: 1.2rem;
+      }
+
+      .footer-logo span {
+        font-size: 1.4rem;
+      }
+
+      .footer-bottom {
+        font-size: 0.75rem;
+        margin-top: 2rem;
+      }
+
+      .lottie-footer-bg {
+        height: 180px;
+      }
+    }
+  </style>
+
+  <!-- JS: Jahr automatisch setzen + Lottie deaktivieren bei reduced motion -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script>
+    // Jahr dynamisch setzen
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Lottie deaktivieren bei "prefers-reduced-motion"
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const lottie = document.getElementById('lottieFooter');
+      if (lottie) lottie.remove();
+    }
+  </script>
+
+  <style>
+    /* === Responsive Styles === */
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 3rem 1.5rem;
+      }
+
+      .hero-video-content {
+        margin-top: -35vh;
+      }
+
+      .hero-video-content h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+      }
+
+      .hero-video-content p {
+        font-size: 1rem;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cs-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 2fr;
+        text-align: left;
+      }
+
+      .footer-socials-icons {
+        justify-content: flex-start;
+      }
+
+      .cta-modern .cta-headline {
+        font-size: 1.8rem;
+      }
+
+      .cta-modern .cta-text {
+        font-size: 1rem;
+      }
+
+      .cta-action {
+        flex-direction: column;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+
+      .kontakt-form {
+        gap: 1rem;
+      }
     }
 
-    .pricing-grid {
-      grid-template-columns: 1fr;
-    }
+    /* === Responsive Styles === */
 
-    .cs-grid {
-      grid-template-columns: 1fr;
-    }
+    @media (max-width: 768px) {
+      .container {
+        padding: 3rem 1.5rem;
+      }
 
-    .footer-grid {
-      grid-template-columns: 2fr;
-      text-align:left;
-    }
+      .hero-video-content {
+        margin-top: -35vh;
+      }
 
-    .footer-socials-icons {
-      justify-content: flex-start;
-    }
+      .hero-video-content h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+      }
 
-    .cta-modern .cta-headline {
-      font-size: 1.8rem;
-    }
+      .hero-video-content p {
+        font-size: 1rem;
+      }
 
-    .cta-modern .cta-text {
-      font-size: 1rem;
-    }
+      .cta-btn,
+      .neon-btn {
+        font-size: 0.9rem;
+        padding: 0.8rem 1.6rem;
+      }
 
-    .cta-action {
-      flex-direction: column;
-      font-size: 0.9rem;
-      text-align: center;
-    }
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
 
-    .kontakt-form {
-      gap: 1rem;
-    }
-  }
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
 
-  /* === Responsive Styles === */
+      .cs-grid {
+        grid-template-columns: 1fr;
+      }
 
-  @media (max-width: 768px) {
-    .container {
-      padding: 3rem 1.5rem;
-    }
+      .footer-grid {
+        grid-template-columns: 2fr;
+        text-align: left;
+      }
 
-    .hero-video-content {
-      margin-top: -35vh;
-    }
+      .footer-socials-icons {
+        justify-content: center;
+      }
 
-    .hero-video-content h1 {
-      font-size: 2rem;
-      line-height: 1.2;
-    }
+      .cta-modern .cta-headline {
+        font-size: 1.8rem;
+      }
 
-    .hero-video-content p {
-      font-size: 1rem;
-    }
+      .cta-modern .cta-text {
+        font-size: 1rem;
+      }
 
-    .cta-btn, .neon-btn {
-      font-size: 0.9rem;
-      padding: 0.8rem 1.6rem;
-    }
+      .cta-action {
+        flex-direction: column;
+        font-size: 0.9rem;
+        text-align: center;
+      }
 
-    .pricing-grid {
-      grid-template-columns: 1fr;
+      .kontakt-form {
+        gap: 1rem;
+      }
     }
-
-    .about-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .cs-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .footer-grid {
-      grid-template-columns: 2fr;
-      text-align:left;
-    }
-
-    .footer-socials-icons {
-      justify-content: center;
-    }
-
-    .cta-modern .cta-headline {
-      font-size: 1.8rem;
-    }
-
-    .cta-modern .cta-text {
-      font-size: 1rem;
-    }
-
-    .cta-action {
-      flex-direction: column;
-      font-size: 0.9rem;
-      text-align: center;
-    }
-
-    .kontakt-form {
-      gap: 1rem;
-    }
-  }
