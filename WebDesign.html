@@ -234,738 +234,401 @@
   </header>
 
 
-  <section class="hero-video-wrapper">
 
-    <!-- PNG über dem Video – als eigene Ebene -->
-    <div class="hero-bg-image"></div>
-    <!-- 2. PNG – über dem Hintergrund -->
-    <div class="hero-overlay-image"></div>
-    <!-- TEXT + 3. PNG über dem Text -->
-    <div class="above-text-image"></div>
-
-    <div class="hero-video-content">
-      <h1>Webdesign, das bleibt.</h1>
-      <p> Strategisch. Visuell. Technologisch auf den Punkt.
-      </p>
-      <a class="cta-btn neon-btn" href="#kontakt"><span>Projekt anfragen</span></a>
-    </div>
-  </section>
   <style>
-    /* 1. PNG – als Hintergrund */
-
-    .hero-video-wrapper {
+    .hero-block-unique {
       position: relative;
-      min-height: 100vh;
-      width: 100vw;
-      min-height: 100vh;
-      max-width: 100%;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background-color: #fff;
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-      font-family: 'VT323', monospace;
-      z-index: 2;
-    }
-
-    .hero-bg-image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('./WebdesignPic/HintergundLaptop.webp');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: 0.5;
-      /* Zwischen Video (0) und Overlay (1) */
-      pointer-events: none;
-    }
-
-
-    .hero-bg-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-      /* GANZ HINTEN */
-      pointer-events: none;
-    }
-
-
-    /* 2. PNG – über dem Hintergrund */
-    .hero-overlay-image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('./WebdesignPic/TabletHintergund.webp');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* TEXT-INHALT */
-    .hero-video-content {
-      position: relative;
-      z-index: 2;
+      min-height: 660px;
+      padding: 3rem 2rem;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      padding: 2rem;
-      max-width: 800px;
-      width: 100%;
+      align-items: center;
+      gap: 2rem;
       text-align: center;
-      border-radius: 12px;
-      backdrop-filter: blur(6px);
-      background: rgba(255, 255, 255, 0.05);
+      font-family: 'Inter', sans-serif;
       overflow: hidden;
-      margin-top: -10rem;
-    }
-
-    /* 3. PNG – über dem Text */
-    .above-text-image {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image: url('./WebdesignPic/HandyHintergrund.webp');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      pointer-events: none;
-    }
-
-    /* TEXT-Stile */
-    .hero-video-content h1 {
-      font-size: 4.2rem;
-      font-weight: 600;
-      letter-spacing: 0.1rem;
-      line-height: 1.0;
-      margin-bottom: 1rem;
+      animation: gradientMove 15s ease infinite;
       color: #000;
-      mix-blend-mode: exclusion;
-      z-index: 3;
     }
 
-    .hero-video-content p {
-      font-size: 2rem;
-      font-weight: 400;
-      color: #000000;
-      max-width: 90%;
-      line-height: 1.6;
-      mix-blend-mode: exclusion;
-      z-index: 3;
+    .heading-typewriter {
+      font-size: 2.4rem;
+      font-weight: 800;
+      white-space: pre;
+      z-index: 2;
+      position: relative;
+      color: #000;
     }
 
-    .cta-btn {
-      background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
-      background-size: 300% 300%;
+    .blinking-bar,
+    .animated-bar {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background: linear-gradient(180deg, #ff6600, #ff3300);
+      box-shadow: 0 0 4px #ff5100;
+      vertical-align: bottom;
+      animation: blink-flash 1s steps(1) infinite;
+      margin-left: 2px;
+    }
+
+    .highlight-box {
+      border: 2px dashed #aaa;
+      padding: 0.5rem;
+      max-width: 480px;
+      min-height: 2rem;
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+      background: #fff;
+      color: #000;
+    }
+
+    .dynamic-typing-area {
+      position: relative; /* <<< Hier eingefügt! */
+    }
+
+    .dynamic-line {
+      white-space: pre;
+    }
+
+    .cursor-icon {
+      position: absolute;
+      width: 1em;
+      height: 1.2em;
+      border-left: 2px solid #ff5100;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      transition: transform 0.05s;
+      z-index: 2;
+    }
+
+    .hero-cta {
+      margin-top: 2rem;
+      padding: 0.9rem 2.2rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border-radius: 10px;
+      background: #ff6600;
       color: #fff;
-      font-weight: 600;
-
-      /* Weniger vertikales Padding für flacheren Button */
-      padding: 0.4em 2.5vw;
-
-      /* Responsive Font-Größe */
-      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-
-      border-radius: 0.75em;
       text-decoration: none;
-      box-shadow: 0 0.4em 1.4em rgba(255, 102, 0, 0.22);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      z-index: 2;
-
-      animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
-
-      /* Breitensteuerung */
-      width: fit-content;
-      min-width: 12vw;
-      max-width: 90%;
-      height: auto;
-    }
-
-    /* Hover Glow & Lift */
-    .cta-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
-    }
-
-    /* Text style (falls du .cta-text verwendest) */
-    .cta-text {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
-      font-weight: 400;
-      color: #272727;
-      max-width: 640px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.6;
-      position: relative;
-      z-index: 2;
-      animation: fadeUp 1s ease-out 0.2s both;
-    }
-
-    /* Entrance Animation */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Animated Gradient */
-    @keyframes gradientFlow {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-
-    /* Keyframes für animierte Lichtwelle */
-    @keyframes waveBlur {
-      0% {
-        --x: 20%;
-        --y: 30%;
-      }
-
-      25% {
-        --x: 80%;
-        --y: 20%;
-      }
-
-      50% {
-        --x: 60%;
-        --y: 70%;
-      }
-
-      75% {
-        --x: 30%;
-        --y: 80%;
-      }
-
-      100% {
-        --x: 50%;
-        --y: 50%;
-      }
-    }
-
-
-    /* RESPONSIVE MEDIA QUERIES */
-    @media (max-width: 768px) {
-      .cta-btn {
-        padding: 0.6em 4vw;
-        font-size: 1rem;
-        border-radius: 0.6em;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .cta-btn {
-        padding: 0.25em 0.2vw;
-        font-size: 0.7rem;
-        border-radius: 0.4em;
-        max-width: 70%;
-        min-width: unset;
-        width: auto;
-        box-shadow: 0 0.2em 0.6em rgba(255, 102, 0, 0.2);
-        scale: 0.7;
-      }
-    }
-
-    @media (max-width: 320px) {
-      .cta-btn {
-        padding: 0.25em 0.2vw;
-        font-size: 0.7rem;
-        border-radius: 0.4em;
-        max-width: 70%;
-        min-width: unset;
-        width: auto;
-        box-shadow: 0 0.2em 0.6em rgba(255, 102, 0, 0.2);
-        scale: 0.7;
-      }
-    }
-
-
-    @media (max-width: 768px) {
-      .hero-video-content h1 {
-        font-size: 2.4rem;
-        letter-spacing: 0.05rem;
-      }
-
-      .hero-video-content p {
-        font-size: 1rem;
-      }
-
-    }
-
-
-    @media (max-width: 768px) {
-      .hero-overlay-image {
-        left: -50vw;
-        width: 170vw;
-
-      }
-
-      .above-text-image {
-        left: -35vw;
-        width: 190vw;
-        /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-      }
-    }
-
-
-
-
-
-    @media (max-width: 768px) and (min-height: 1280px) and (max-height: 2000px) {
-      .hero-overlay-image {
-        left: -110vw;
-        width: 250vw;
-        top: 4vh;
-      }
-
-      .above-text-image {
-        top: 10vh;
-        left: -70vw;
-        width: 310vw;
-        /* <– erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-      }
-    }
-
-    @media (max-width: 768px) and (min-height: 1024px) and (max-height: 1280px) {
-      .hero-overlay-image {
-        left: -70vw;
-        width: 200vw;
-      }
-
-      .above-text-image {
-        top: 10vh;
-        left: -60vw;
-        width: 250vw;
-      }
-    }
-
-    @media (max-width: 768px) and (min-height: 900px) and (max-height: 1024px) {
-      .hero-overlay-image {
-        left: -50vw;
-        width: 185vw;
-      }
-
-      .above-text-image {
-        top: 10vh;
-        left: -45vw;
-        width: 210vw;
-      }
-    }
-
-    @media (max-width: 768px) and (min-height: 768px) and (max-height: 900px) {
-      .hero-overlay-image {
-        left: -45vw;
-        width: 170vw;
-      }
-
-      .above-text-image {
-        top: 10vh;
-        left: -34vw;
-        width: 185vw;
-      }
-    }
-
-    @media (max-width: 768px) and (min-height: 625px) and (max-height: 768px) {
-      .hero-overlay-image {
-        left: -35vw;
-        width: 165vw;
-      }
-
-      .above-text-image {
-        top: 10vh;
-        left: -30vw;
-        width: 175vw;
-      }
-    }
-
-    @media (max-width: 768px) and (min-height: 300px) and (max-height: 625px) {
-      .hero-overlay-image {
-        left: -30vw;
-        width: 160vw;
-      }
-
-      .above-text-image {
-        top: 5vh;
-        left: -25vw;
-        width: 160vw;
-      }
-    }
-
-
-    @media (max-width: 480px) and (min-height: 1530px) and (max-height: 2000px) {
-      .hero-overlay-image {
-        left: -190vw;
-        width: 320vw;
-      }
-
-      .above-text-image {
-        top: 10vh;
-        left: -40vw;
-        width: 400vw;
-        /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-      }
-    }
-
-    @media (max-width: 480px) and (min-height: 1060px) and (max-height: 1530px) {
-      .hero-overlay-image {
-        left: -120vw;
-        width: 220vw;
-      }
-
-      .above-text-image {
-        top: 10vh;
-        left: -5vw;
-        width: 250vw;
-        /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-      }
-    }
-
-
-    @media (max-width: 480px) and (min-height: 950px) and (max-height: 1060px) {
-      .hero-overlay-image {
-        left: -60vw;
-        width: 170vw;
-
-      }
-
-      .above-text-image {
-        left: -5vw;
-        width: 190vw;
-        /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-      }
-    }
-
-    @media (max-width: 480px) and (min-height: 768px) and (max-height: 950px) {
-      .hero-overlay-image {
-        left: -60vw;
-        width: 170vw;
-
-      }
-
-      .above-text-image {
-        left: -2vw;
-        width: 160vw;
-        /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-      }
-    }
-
-    @media (max-width: 480px) and (min-height: 625px) and (max-height: 768px) {
-      .hero-overlay-image {
-        left: -50vw;
-        width: 170vw;
-
-      }
-
-      .above-text-image {
-        left: -15vw;
-        width: 160vw;
-        /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-      }
-    }
-
-    @media (max-width: 480px) and (min-height: 25px) and (max-height: 625px) {
-      .hero-overlay-image {
-        left: -40vw;
-        width: 170vw;
-
-      }
-
-      .above-text-image {
-        left: -25vw;
-        width: 160vw;
-        /* <– WICHTIG: erweitert die Breite, damit sie rechts nicht abgeschnitten wird */
-      }
-    }
-
-
-
-
-    @media (max-width: 425px) and (min-height: 1530px) and (max-height: 2000px) {
-      .hero-overlay-image {
-        left: -165vw;
-        width: 285vw;
-      }
-
-      .above-text-image {
-        top: 10vh;
-        left: -35vw;
-        width: 360vw;
-      }
-    }
-
-    @media (max-width: 425px) and (min-height: 1060px) and (max-height: 1530px) {
-      .hero-overlay-image {
-        left: -100vw;
-        width: 200vw;
-      }
-
-      .above-text-image {
-        top: 10vh;
-        left: -4vw;
-        width: 230vw;
-      }
-    }
-
-    @media (max-width: 425px) and (min-height: 950px) and (max-height: 1060px) {
-      .hero-overlay-image {
-        left: -50vw;
-        width: 160vw;
-      }
-
-      .above-text-image {
-        left: -4vw;
-        width: 180vw;
-      }
-    }
-
-    @media (max-width: 425px) and (min-height: 768px) and (max-height: 950px) {
-      .hero-overlay-image {
-        left: -48vw;
-        width: 160vw;
-      }
-
-      .above-text-image {
-        left: -1vw;
-        width: 155vw;
-      }
-    }
-
-    @media (max-width: 425px) and (min-height: 625px) and (max-height: 768px) {
-      .hero-overlay-image {
-        left: -40vw;
-        width: 155vw;
-      }
-
-      .above-text-image {
-        left: -10vw;
-        width: 150vw;
-      }
-    }
-
-    @media (max-width: 425px) and (min-height: 25px) and (max-height: 625px) {
-      .hero-overlay-image {
-        left: -30vw;
-        width: 150vw;
-      }
-
-      .above-text-image {
-        left: -20vw;
-        width: 145vw;
-      }
-    }
-
-
-
-
-
-    @media (max-width: 375px) and (min-height: 1530px) and (max-height: 1680px) {
-      .hero-overlay-image {
-        left: -188vw;
-        width: 290vw;
-        top: 6vh;
-      }
-
-      .above-text-image {
-        top: 10vh;
-        left: -15vw;
-        width: 370vw;
-        top: 12vh;
-      }
-    }
-
-
-    @media (max-width: 375px) and (min-height: 1060px) and (max-height: 1530px) {
-      .hero-overlay-image {
-        left: -140vw;
-        width: 260vw;
-      }
-
-      .above-text-image {
-        top: 10vh;
-        left: -5vw;
-        width: 260vw;
-      }
-    }
-
-    @media (max-width: 375px) and (min-height: 840px) and (max-height: 1060px) {
-      .hero-overlay-image {
-        left: -90vw;
-        width: 195vw;
-      }
-
-      .above-text-image {
-        left: 5vw;
-        width: 195vw;
-        top: 10vh;
-      }
-    }
-
-
-    @media (max-width: 375px) and (min-height: 768px) and (max-height: 840px) {
-      .hero-overlay-image {
-        left: -70vw;
-        width: 195vw;
-      }
-
-      .above-text-image {
-        left: -5vw;
-        width: 195vw;
-      }
-    }
-
-    @media (max-width: 375px) and (min-height: 8px) and (max-height: 768px) {
-      .hero-overlay-image {
-        left: -70vw;
-        width: 195vw;
-      }
-
-      .above-text-image {
-        left: -25vw;
-        width: 195vw;
-      }
-    }
-
-    @media (max-width: 320px) and (min-height: 1024px) and (max-height: 1300px) {
-      .hero-overlay-image {
-        left: -180vw;
-        width: 300vw;
-        top: 10vh;
-      }
-
-      .above-text-image {
-        left: -5vw;
-        width: 285vw;
-      }
-    }
-
-
-    @media (max-width: 320px) and (min-height: 768px) and (max-height: 1024px) {
-      .hero-overlay-image {
-        left: -110vw;
-        width: 220vw;
-      }
-
-      .above-text-image {
-        left: -25vw;
-        width: 285vw;
-      }
-    }
-
-
-    @media (max-width: 320px) and (min-height: 600px) and (max-height: 768px) {
-      .hero-overlay-image {
-        left: -80vw;
-        width: 195vw;
-      }
-
-      .above-text-image {
-        left: -5vw;
-        width: 195vw;
-      }
-    }
-
-    @media (max-width: 320px) and (min-height: 200px) and (max-height: 600px) {
-      .hero-overlay-image {
-        left: -60vw;
-        width: 195vw;
-      }
-
-      .above-text-image {
-        left: -25vw;
-        width: 195vw;
-      }
-    }
-
-
-
-
-
-
-
-
-    .hero-overlay-image,
-    .above-text-image {
+      box-shadow: 0 10px 30px rgba(255, 102, 0, 0.4);
       opacity: 0;
-      transform: translateY(60px) scale(0.95);
-      /* Mehr Bewegung */
-      transition: all 1.4s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: opacity, transform;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      z-index: 2;
     }
 
-    .hero-overlay-image.animate,
-    .above-text-image.animate {
+    .hero-cta.visible {
       opacity: 1;
-      transform: translateY(0px) scale(1.05);
-      /* Leicht größer für Tiefe */
+      transform: translateY(0);
+    }
+
+    @keyframes blink-flash {
+      0%, 50% { opacity: 1; }
+      50.1%, 100% { opacity: 0; }
+    }
+
+    @media (max-width: 600px) {
+      .heading-typewriter {
+        font-size: 1.8rem;
+      }
+      .highlight-box {
+        max-width: 100%;
+      }
+      .hero-block-unique {
+        padding: 2rem 1rem;
+        min-height: 540px;
+      }
     }
   </style>
+</head>
+<body>
 
-  <script>
-    // FADE-IN via IntersectionObserver
-    const animatedEls = document.querySelectorAll('.hero-overlay-image, .above-text-image');
+<style>
+    .hero-block-unique {
+      position: relative;
+      min-height: 660px;
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      animation: gradientMove 15s ease infinite;
+    }
 
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate');
-          obs.unobserve(entry.target);
+    .heading-typewriter {
+      font-size: 2.4rem;
+      font-weight: 800;
+      white-space: pre;
+      z-index: 2;
+      position: relative;
+    }
+
+    .blinking-bar,
+    .animated-bar {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background: linear-gradient(180deg, #ff6600, #ff3300);
+      box-shadow: 0 0 4px #ff5100;
+      vertical-align: bottom;
+      animation: blink-flash 1s steps(1) infinite;
+      margin-left: 2px;
+    }
+
+    .highlight-box {
+      border: 2px dashed #aaa;
+      padding: 0.5rem;
+      max-width: 480px;
+      min-height: 2rem;
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+      background: #fff;
+      color: #000;
+    }
+
+    .dynamic-typing-area {
+      position: relative; /* <<< Hier eingefügt! */
+    }
+
+    .dynamic-line {
+      white-space: pre;
+    }
+
+    .cursor-icon {
+      position: absolute;
+      width: 1em;
+      height: 1.2em;
+      border-left: 2px solid #ff5100;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      transition: transform 0.05s;
+      z-index: 2;
+    }
+
+    .hero-cta {
+      margin-top: 2rem;
+      padding: 0.9rem 2.2rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border-radius: 10px;
+      background: #ff6600;
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(255, 102, 0, 0.4);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      z-index: 2;
+    }
+
+    .hero-cta.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes blink-flash {
+      0%, 50% { opacity: 1; }
+      50.1%, 100% { opacity: 0; }
+    }
+.hero-block-unique {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Hintergrundbild */
+.hero-block-unique::before {
+  content: "";
+  background-image: url('./WebdesignPic/PCVektor.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain; /* Damit das Bild nicht verzerrt wird */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  opacity: 0.15; /* Optional: Bild leicht transparent für Lesbarkeit */
+}
+
+/* Alle Inhalte darüber */
+.hero-block-unique > * {
+  position: relative;
+  z-index: 1;
+}
+
+    @media (max-width: 600px) {
+      .heading-typewriter {
+        font-size: 1.8rem;
+      }
+      .highlight-box {
+        max-width: 100%;
+      }
+      .hero-block-unique {
+        padding: 2rem 1rem;
+        min-height: 540px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero-block-unique">
+  <!-- Animierter Titel -->
+  <h1 class="moveable-heading heading-typewriter">
+    <span class="animated-title-line"></span><span class="blinking-bar"></span>
+  </h1>
+  <!-- Schreibzeile -->
+  <div class="dynamic-typing-area moveable-heading">
+    <div class="highlight-box">
+      <span class="dynamic-line"></span><span class="animated-bar"></span>
+    </div>
+    <div class="cursor-icon"></div>
+  </div>
+
+  <!-- CTA erscheint nach Animation -->
+  <a href="#kontakt" class="hero-cta hidden">Projekt starten</a>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const elTitle = document.querySelector('.animated-title-line');
+    const elMainText = document.querySelector('.dynamic-line');
+    const elBar = document.querySelector('.animated-bar');
+    const elMouse = document.querySelector('.cursor-icon');
+    const elCTA = document.querySelector('.hero-cta');
+
+    const titleAnimations = [
+      { text: "Digitale Erlebnisse, die bleiben", delay: 60 },
+      { pause: 1000 },
+      { delete: 'all', delay: 30 },
+      { text: "UX & Webdesign mit Struktur", delay: 55 },
+      { pause: 1000 },
+      { delete: 'all', delay: 30 },
+      { text: "Prototyp. Analyse. Performance.", delay: 50 },
+      { pause: 1200 },
+      { delete: 'all', delay: 30 }
+    ];
+
+    const textAnimations = [
+      { text: "Validiert. Skalierbar. Schnell.", delay: 50 },
+      { pause: 1000 },
+      { delete: 'all', delay: 30 },
+      { text: "UX-Design trifft SEO & Strategie", delay: 50 },
+      { pause: 1000 },
+      { delete: 'all', delay: 30 },
+      { text: "Projekte mit messbarem Impact", delay: 50 },
+      { pause: 1000 },
+      { delete: 'all', delay: 30 }
+    ];
+
+    let titleStep = 0, titleChar = 0;
+    let textStep = 0, textChar = 0;
+
+    async function animateTitle() {
+      const item = titleAnimations[titleStep];
+      if (!item) { titleStep = 0; return animateTitle(); }
+
+      if (item.text !== undefined) {
+        if (titleChar < item.text.length) {
+          elTitle.textContent += item.text[titleChar++];
+          await pause(item.delay);
+          return animateTitle();
         }
-      });
-    }, { threshold: 0.2 });
-
-    animatedEls.forEach(el => observer.observe(el));
-
-    // SCROLL-BASIERTE TRANSFORMATION
-    const overlay = document.querySelector('.hero-overlay-image');
-    const above = document.querySelector('.above-text-image');
-
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.scrollY;
-      const maxScroll = window.innerHeight;
-      const progress = Math.min(scrollTop / maxScroll, 1); // Wert zwischen 0 und 1
-
-      const translateX = 20 * progress; // max 20px rechts
-      const translateY = 20 * progress; // max 20px runter
-      const scale = 1.05 + progress * 0.1; // von 1.05 auf 1.15
-
-      if (overlay.classList.contains('animate')) {
-        overlay.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+        titleChar = 0;
+        titleStep++;
+        await pause(400);
+        return animateTitle();
       }
 
-      if (above.classList.contains('animate')) {
-        above.style.transform = `translate(${translateX * 1.1}px, ${translateY * 1.1}px) scale(${scale})`;
+      if (item.delete !== undefined) {
+        let count = item.delete === 'all' ? elTitle.textContent.length : item.delete;
+        while (count--) {
+          elTitle.textContent = elTitle.textContent.slice(0, -1);
+          await pause(item.delay);
+        }
+        titleStep++;
+        return animateTitle();
       }
-    });
-  </script>
+
+      if (item.pause) {
+        await pause(item.pause);
+        titleStep++;
+        return animateTitle();
+      }
+    }
+
+    async function animateText() {
+      const item = textAnimations[textStep];
+      if (!item) { textStep = 0; return animateText(); }
+
+      if (item.text !== undefined) {
+        if (textChar < item.text.length) {
+          elMainText.textContent += item.text[textChar++];
+          moveMouse();
+          await pause(item.delay);
+          return animateText();
+        }
+        textChar = 0;
+        textStep++;
+        await pause(400);
+        return animateText();
+      }
+
+      if (item.delete !== undefined) {
+        let count = item.delete === 'all' ? elMainText.textContent.length : item.delete;
+        while (count--) {
+          elMainText.textContent = elMainText.textContent.slice(0, -1);
+          moveMouse();
+          await pause(item.delay);
+        }
+        textStep++;
+        return animateText();
+      }
+
+      if (item.pause) {
+        await pause(item.pause);
+        textStep++;
+        return animateText();
+      }
+    }
+
+    function moveMouse() {
+      const caret = elBar.getBoundingClientRect();
+      const parent = elBar.parentElement.getBoundingClientRect();
+      elMouse.style.transform = `translate(${caret.left - parent.left}px, ${caret.top - parent.top}px)`;
+    }
+
+    function pause(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    animateTitle();
+    animateText();
+
+    // CTA anzeigen nach 5 Sekunden
+    setTimeout(() => {
+      elCTA.classList.add('visible');
+      elCTA.classList.remove('hidden');
+    }, 5000);
+  });
+</script>
 
 
   <section class="pricing-clean container" id="pakete" aria-label="Website-Pakete und Preise">
@@ -1070,7 +733,7 @@
     }
 
     .pricing-clean {
-      background: var(--bg-light);
+      background: transparent;
       text-align: center;
       color: var(--text-color);
     }
@@ -1143,6 +806,7 @@
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
       transition: all 0.3s ease;
       height: 100%;
+      z-index: 5;
     }
 
     .pricing-card:hover {
@@ -1337,58 +1001,6 @@
 
 
 
-<!-- ZWEITE SECTION MIT EIGENEM BILD -->
-<section class="image-section image-section-alt">
-  <div class="image-background image-background-alt"></div>
-  <div class="container">
-    <div class="image-content">
-    </div>
-  </div>
-</section>
-
-<style>
-/* ZWEITE SECTION Styling */
-.image-section-alt {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  z-index: 0;
-}
-
-/* Neues Bild */
-.image-background-alt {
-  position: absolute;
-  top: -10vh;
-  left: -10vw;
-  width: 120vw;
-  height: 120vh;
-  background-image: url('./WebdesignPic/geradehintergrund.webp') ; /* DEIN ZWEITES BILD */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transform: rotate(-2deg) scale(1.1);
-  z-index: 1;
-}
-
-/* Inhalt über Bild */
-.image-section-alt .image-content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-align: center;
-  padding: 2rem;
-}
-</style>
-
-
 
 
   <div class="white-bg-wrapper"> LEISTUNGEN
@@ -1514,7 +1126,7 @@
     /* ===== Allgemeines Layout ===== */
     .services-section {
       padding: 6rem 2rem;
-      background: #fff;
+      background: white !important;
       text-align: center;
       color: #111;
       position: relative;
@@ -1527,7 +1139,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(to bottom, #fff, #f2f2f2);
+      background: transparent;
       z-index: -1;
     }
 
@@ -1570,6 +1182,7 @@
       will-change: transform, box-shadow;
       background-position: 0% 50%;
       color: #fff;
+           z-index: 7;
     }
 
     .service-card:nth-child(1) {
@@ -1756,7 +1369,7 @@
     }
 
     .services-hint {
-      margin-top: 2rem;
+      margin-top: 1rem;
       font-size: 1rem;
       color: #888;
       font-family: inherit;
@@ -2054,231 +1667,267 @@
 
 
 
-  <!-- Responsive-Section – Next Level -->
-  <section class="responsive-section">
-    <div class="responsive-grid">
-      <!-- Text links -->
-      <div class="responsive-text animate">
-        <h2>100 % Responsive Websites</h2>
-        <p>
-          Jede von uns erstellte Website passt sich nahtlos an alle Gerätetypen an – Smartphone, Tablet oder
-          Desktop. Mit mobile-first Media Queries, flexiblen Grids und optimierten Bildern liefern wir
-          beeindruckende Nutzererlebnisse auf jedem Screen.
-        </p>
-        <ul>
-          <li><span class="icon">🚀</span> Mobile-First-Ansatz</li>
-          <li><span class="icon">📐</span> Flexibles CSS-Grid-System</li>
-          <li><span class="icon">🌐</span> Browser-übergreifende Kompatibilität</li>
-          <li><span class="icon">⚡</span> Performance-Optimierungen</li>
-        </ul>
-        <a href="#kontakt" class="responsive-btn">Jetzt responsive starten</a>
-      </div>
-      <!-- Bild rechts -->
-      <div class="responsive-visual animate">
-        <div class="img-wrapper">
-          <img src="./WebdesignPic/responsive.jpeg" alt="Responsive Darstellung auf verschiedenen Geräten" />
-        </div>
-      </div>
+<section class="angled-image-section">
+  <div class="angled-image-wrapper">
+    <img src="./WebdesignPic/webgerade.webp" alt="Visuelles Highlight" />
+  </div>
+</section>
+<style>
+  html, body {
+    overflow-x: hidden;
+    
+  }
+
+  .angled-image-section {
+  position: relative;
+  width: 100vw;
+  overflow: visible;
+  margin-top: 3rem;
+  margin-bottom: -5rem;
+  
+  pointer-events: none;
+
+  background: linear-gradient(
+    to bottom,
+    white 0%,
+    white 66.66%,
+    black 66.67%,
+    black 100%
+  );
+  z-index: 0;
+}
+
+  .angled-image-wrapper {
+    width: 150vw;
+    margin-left: -25vw;
+    transform: rotate(-8deg);
+    position: relative;
+  }
+
+  .angled-image-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at bottom left,
+    black 0%,
+    rgba(0, 0, 0, 0.85) 10%,
+    rgba(0, 0, 0, 0) 45%
+  );
+  pointer-events: none;
+    z-index: 2;
+}
+
+  .angled-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
+
+
+<section class="responsive-section">
+  <div class="responsive-text-box animate">
+    <h2>100 % Responsive Websites</h2>
+    <div class="text-content">
+      <p>
+        Jede von uns erstellte Website passt sich nahtlos an alle Gerätetypen an – Smartphone, Tablet oder Desktop.
+        Mit mobile-first Media Queries, flexiblen Grids und optimierten Bildern liefern wir beeindruckende Nutzer-erlebnisse auf jedem Screen.
+      </p>
+
+      <div class="feature-boxes">
+  <div class="feature-item">
+    <i data-feather="smartphone"></i>
+    <h3>Mobile-First-Ansatz</h3>
+    <p>Wir entwickeln von Anfang an für mobile Geräte – für eine optimale Nutzung auf dem Smartphone.</p>
+  </div>
+  <div class="feature-item">
+    <i data-feather="grid"></i>
+    <h3>Flexibles Grid-System</h3>
+    <p>Unsere Layouts sind mit CSS Grid und Flexbox strukturiert – flexibel und sauber skalierbar.</p>
+  </div>
+  <div class="feature-item">
+    <i data-feather="globe"></i>
+    <h3>Kompatibilität</h3>
+    <p>Funktioniert reibungslos in allen modernen Browsern und Plattformen.</p>
+  </div>
+  <div class="feature-item">
+    <i data-feather="zap"></i>
+    <h3>Performance</h3>
+    <p>Schnelle Ladezeiten durch optimierte Bilder und Ressourcen – für ein besseres Ranking und UX.</p>
+  </div>
+  <div class="feature-item double-width">
+    <img src="./img/performance-icon.png" alt="Performance Icon" class="png-icon" />
+    <h3>Extra Performance</h3>
+    <p>Erweiterte Performance-Maßnahmen mit serverseitigem Caching und optimiertem Asset-Loading – für höchste Geschwindigkeiten.</p>
+  </div>
+</div>
+
+
+      <a href="#kontakt" class="responsive-btn">Jetzt responsive starten</a>
     </div>
-  </section>
+  </div>
+</section>
+<style>
+  /* SECTION */
+  .responsive-section {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    overflow: hidden;
+  }
+  /* TEXT-BOX */
+  .responsive-text-box {
+    display: inline-block;
+    max-width: 960px;
+    width: 100%;
+    z-index: 2;
+    padding: 2.5rem;
+    margin: 0 auto;
+    background: rgb(18, 18, 18);
+    border-radius: 12px;
+    box-shadow: 0 1px 1px rgb(37, 37, 37)
+    
+  }
+  .responsive-text-box h2 {
+    font-size: clamp(2rem, 5vw, 2.6rem);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+  .responsive-text-box .text-content p {
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
 
-  <style>
-    /* ==============================
-   Responsive-Section – Next Level
-============================== */
+  /* FEATURE BOXES */
+  .feature-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+  }
+  .feature-item {
+    background: rgba(255, 255, 255, 0.07);
+    padding: 1.5rem;
+    border-radius: 10px;
+    flex: 1 1 250px;
+    max-width: 280px;
+    text-align: left;
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+  }
+  .feature-item:hover {
+    transform: translateY(-6px);
+  }
+  .feature-item i {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 0.8rem;
+    color: #ff5100;
+  }
+  .feature-item h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+  }
+  .feature-item p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
 
-    /* 1. Grund-Layout unverändert */
-    .responsive-section {
-      position: relative;
-      background: #fff;
-      color: #111;
-      font-family: 'Inter', sans-serif;
-      overflow: hidden;
-      padding: clamp(2rem, 6vw, 6rem) 2rem;
+  /* BUTTON */
+  .responsive-btn {
+    display: inline-block;
+    padding: clamp(0.6rem, 1.5vw, 1rem) clamp(1rem, 3vw, 2rem);
+    font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+    font-weight: 700;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ff5100, #e60000, #ff5100);
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(255, 81, 0, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .responsive-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(255, 81, 0, 0.6);
+  }
+
+  /* ANIMATION */
+  .animate {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* BREAKPOINTS */
+  @media (max-width: 768px) {
+    .responsive-text-box {
+      padding: 2rem 1.5rem;
     }
-
-    /* 2. Grid-Layout – fluid & adaptiv */
-    .responsive-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: clamp(1.5rem, 4vw, 4rem);
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-      z-index: 1;
+  }
+  @media (max-width: 480px) {
+    .responsive-text-box h2 {
+      font-size: clamp(1.5rem, 8vw, 2rem);
     }
-
-    /* 3. Überschrift – Typografie an Services-Section angeglichen */
-    .responsive-text h2 {
-      background: none;
-      -webkit-text-fill-color: inherit;
-      font-size: clamp(2rem, 5vw, 2.6rem);
-      font-weight: 800;
-      letter-spacing: -0.01em;
-      color: #111;
-      margin-bottom: clamp(1rem, 2vw, 2rem);
+    .responsive-text-box .text-content p,
+    .feature-item p {
+      font-size: clamp(0.85rem, 4vw, 1rem);
     }
-
-    /* 4. Absatz – klarer, dunkler Fließtext */
-    .responsive-text p {
-      font-size: clamp(1rem, 2.5vw, 1.15rem);
-      font-weight: 500;
-      line-height: 1.8;
-      color: #111;
-      margin-bottom: clamp(1.5rem, 3vw, 2rem);
-    }
-
-    /* 5. Liste mit Icons – an Feature-List angelehnt */
-    .responsive-text ul {
-      list-style: none;
-      margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
-      padding: 0;
-    }
-
-    .responsive-text ul li {
-      display: flex;
-      align-items: center;
-      margin-bottom: clamp(0.6rem, 1.5vw, 1rem);
-      font-size: clamp(0.9rem, 2vw, 1.125rem);
-      font-weight: 400;
-      color: #333;
-    }
-
-    .responsive-text ul li .icon {
-      margin-right: 0.8rem;
-      font-size: 1.4em;
-      line-height: 1;
-    }
-
-    /* 6. Button – an Secret-Mode-Style angelehnt */
     .responsive-btn {
-      display: inline-block;
-      padding: clamp(0.6rem, 1.5vw, 1rem) clamp(1rem, 3vw, 2rem);
-      font-size: clamp(0.9rem, 2.5vw, 1.05rem);
-      font-weight: 700;
-      font-family: inherit;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #ff5100, hwb(340 0% 0%), #ff5100);
-      color: #fff;
-      text-decoration: none;
-      box-shadow: 0 6px 20px rgba(255, 81, 0, 0.4);
-      transition: transform .2s, box-shadow .2s;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
     }
+  }
 
-    .responsive-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 32px rgba(255, 81, 0, 0.6);
-    }
+  .double-width {
+  flex: 2 1 580px;
+  max-width: 580px;
+}
 
-    /* 7. Bild-Wrapper – an Tech-Radar-Style angelehnt */
-    .responsive-visual .img-wrapper {
-      overflow: hidden;
-      transition: transform .4s;
-    }
+.png-icon {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 0.8rem;
+  display: block;
+  color: #ff5100;
+}
 
-    .responsive-visual .img-wrapper img {
-      display: block;
-      width: 100%;
-      height: auto;
-      transition: transform .4s;
-    }
+</style>
+<!-- Feather Icons -->
+<script src="https://unpkg.com/feather-icons"></script>
+<script>
+  if (window.feather) {
+    feather.replace();
+  }
 
-    .responsive-visual .img-wrapper:hover img {
-      transform: scale(1.05);
-    }
-
-    .responsive-visual .img-wrapper:hover {
-      transform: translateY(-4px);
-    }
-
-    /* 8. Fade-In Animation bei Scroll */
-    .animate {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .8s ease, transform .8s ease;
-    }
-
-    .animate.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* 9. Zusätzliche Breakpoints */
-    /* Tablets */
-    @media (max-width: 1024px) {
-      .responsive-text h2 {
-        font-size: clamp(2rem, 6vw, 2.75rem);
-      }
-
-      .responsive-grid {
-        gap: 3rem;
-      }
-    }
-
-    /* Mobile */
-    @media (max-width: 768px) {
-      .responsive-section {
-        padding: clamp(2rem, 5vw, 4rem) 1.5rem;
-      }
-
-      .responsive-text h2 {
-        font-size: clamp(1.75rem, 7vw, 2.25rem);
-      }
-
-      .responsive-text p,
-      .responsive-text ul li {
-        font-size: clamp(0.9rem, 3vw, 1rem);
-      }
-
-      .responsive-btn {
-        padding: .6rem 1.2rem;
-        font-size: 1rem;
-      }
-
-      .responsive-grid {
-        gap: 2rem;
-      }
-    }
-
-    /* Kleinste Displays */
-    @media (max-width: 480px) {
-      .responsive-text h2 {
-        font-size: clamp(1.5rem, 8vw, 2rem);
-      }
-
-      .responsive-text p {
-        font-size: clamp(0.85rem, 4vw, 1rem);
-      }
-
-      .responsive-text ul li {
-        font-size: clamp(0.8rem, 4vw, 0.95rem);
-      }
-    }
-
-    /* 10. Einheitliche Font-Family */
-    .responsive-text,
-    .responsive-text * {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-  </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const obs = new IntersectionObserver((entries, o) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            o.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2 });
-      document.querySelectorAll('.animate').forEach(el => obs.observe(el));
-    });
-  </script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const obs = new IntersectionObserver((entries, o) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          o.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.animate').forEach(el => obs.observe(el));
+  });
+</script>
 
 
 
-
-  <!-- Neue Bild-Sektion -->
+  <!-- Neue Bild-Sektion 
   <section class="image-section">
     <div class="container">
       <img src="./WebdesignPic/Build to Scale.png" alt="Beschreibung des Bildes" />
@@ -2310,105 +1959,723 @@
       object-fit: cover;
     }
   </style>
+-->
 
 
 
+<div class="white-bg-wrapper">
+    LEISTUNGEN
+    <section class="block-wrapper-x" id="leistungen">
+      <div class="bg-overlay-x"></div>
+      <div class="wrapper-container-x">
+        <h2 class="heading-main-x scroll-fade">SEO Analyse & Optimierung</h2>
+        <h3 class="heading-sub-x scroll-fade">
+          Steigere deine organische Sichtbarkeit<br>
+          mit datengetriebenen Strategien
+        </h3>
 
-  <div class="white-bg-wrapper"> LEISTUNGEN
-    <section class="services-section" id="leistungen">
-      <div class="parallax-bg"></div>
-      <div class="container">
-        <h2 class="section-title scroll-fade">SEO Analyse & Optimierung</h2>
-        <h3 class="section-subtitle scroll-fade">Steigere deine organische Sichtbarkeit<br> mit datengetriebenen
-          Strategien</h3>
-
-        <div class="services-grid">
+        <div class="card-grid-x">
 
           <!-- CARD 1 -->
-          <div class="service-card scroll-fade">
-            <div class="icon-circle"><i data-feather="search"></i></div>
+          <div class="card-box-x card-type-a scroll-fade">
+            <div class="icon-container-x"><i data-feather="search"></i></div>
             <h3>SEO-Audit & Analyse</h3>
-            <div class="accordion-content">
-              <ul class="feature-list">
-                <li><span class="check"></span>Umfassende technische und inhaltliche Prüfung deiner Website mithilfe von
-                  Tools wie Screaming Frog und Google Search Console für klare Optimierungspotenziale.</li>
+            <div class="box-accordion-x">
+              <ul class="list-features-x">
+                <li><span class="check-icon-x"></span>
+                  Umfassende technische und inhaltliche Prüfung deiner Website mithilfe von Tools wie Screaming Frog und Google Search Console für klare Optimierungspotenziale.
+                </li>
               </ul>
-              <div class="price-box">Preis: <br><strong>auf Anfrage</strong></div>
+              <div class="box-price-x">
+                Preis: <br><strong>auf Anfrage</strong>
+              </div>
             </div>
-            <button class="accordion-toggle">Details anzeigen</button>
+            <button class="btn-toggle-x">Details anzeigen</button>
           </div>
 
           <!-- CARD 2 -->
-          <div class="service-card scroll-fade wide-card">
-            <div class="icon-circle"><i data-feather="bar-chart-2"></i></div>
+          <div class="card-box-x card-type-b scroll-fade wide-x">
+            <div class="icon-container-x"><i data-feather="bar-chart-2"></i></div>
             <h3>Keyword-Recherche & Strategie</h3>
-            <div class="accordion-content">
-              <ul class="feature-list">
-                <li><span class="check"></span>Identifizierung lukrativer Keywords anhand von Suchvolumen- und
-                  Wettbewerbsanalysen für zielgerichteten Traffic.</li>
+            <div class="box-accordion-x">
+              <ul class="list-features-x">
+                <li><span class="check-icon-x"></span>
+                  Identifizierung lukrativer Keywords anhand von Suchvolumen- und Wettbewerbsanalysen für zielgerichteten Traffic.
+                </li>
               </ul>
-              <div class="price-box">Preis: <br><strong>auf Anfrage</strong></div>
+              <div class="box-price-x">
+                Preis: <br><strong>auf Anfrage</strong>
+              </div>
             </div>
-            <button class="accordion-toggle">Details anzeigen</button>
+            <button class="btn-toggle-x">Details anzeigen</button>
           </div>
 
           <!-- CARD 3 -->
-          <div class="service-card scroll-fade wide-card">
-            <div class="icon-circle"><i data-feather="code"></i></div>
+          <div class="card-box-x card-type-c scroll-fade wide-x">
+            <div class="icon-container-x"><i data-feather="code"></i></div>
             <h3>Technische SEO & Performance</h3>
-            <div class="accordion-content">
-              <ul class="feature-list">
-                <li><span class="check"></span>Optimierung von Ladezeiten, Mobile-Usability und strukturierten Daten für
-                  Top-Rankings und bessere Nutzererfahrung.</li>
+            <div class="box-accordion-x">
+              <ul class="list-features-x">
+                <li><span class="check-icon-x"></span>
+                  Optimierung von Ladezeiten, Mobile-Usability und strukturierten Daten für Top-Rankings und bessere Nutzererfahrung.
+                </li>
               </ul>
-              <div class="price-box">Preis: <br><strong>auf Anfrage</strong></div>
+              <div class="box-price-x">
+                Preis: <br><strong>auf Anfrage</strong>
+              </div>
             </div>
-            <button class="accordion-toggle">Details anzeigen</button>
+            <button class="btn-toggle-x">Details anzeigen</button>
           </div>
 
           <!-- CARD 4 -->
-          <div class="service-card scroll-fade">
-            <div class="icon-circle"><i data-feather="link"></i></div>
+          <div class="card-box-x card-type-d scroll-fade">
+            <div class="icon-container-x"><i data-feather="link"></i></div>
             <h3>Off-Page & Linkaufbau</h3>
-            <div class="accordion-content">
-              <ul class="feature-list">
-                <li><span class="check"></span>Strategischer Aufbau hochwertiger Backlinks durch Outreach und
-                  Content-Marketing für autoritätssteigernde Effekte.</li>
+            <div class="box-accordion-x">
+              <ul class="list-features-x">
+                <li><span class="check-icon-x"></span>
+                  Strategischer Aufbau hochwertiger Backlinks durch Outreach und Content-Marketing für autoritätssteigernde Effekte.
+                </li>
               </ul>
-              <div class="price-box">Preis: <br><strong>auf Anfrage</strong></div>
+              <div class="box-price-x">
+                Preis: <br><strong>auf Anfrage</strong>
+              </div>
             </div>
-            <button class="accordion-toggle">Details anzeigen</button>
+            <button class="btn-toggle-x">Details anzeigen</button>
           </div>
 
           <!-- CARD 5 – SEO Benefits -->
-          <div class="service-card scroll-fade ux-benefits-card">
-            <div class="icon-circle"><i data-feather="trending-up"></i></div>
+          <div class="card-box-x card-type-e scroll-fade benefits-card-x">
+            <div class="icon-container-x"><i data-feather="trending-up"></i></div>
             <h3>Was starke SEO bewirkt</h3>
-
-            <div class="accordion-content">
-              <div class="ux-benefits-list">
-                <div class="ux-benefit-item"><strong>+40 % organischer Traffic:</strong> Top-Platzierungen führen zu
-                  signifikant mehr Besuchern ohne zusätzliche Ad-Spendings.</div>
-                <div class="ux-benefit-item"><strong>Höhere Conversion-Rate:</strong> Qualifizierte Besucher mit klarem
-                  Suchinteresse steigern deine Abschlüsse.</div>
-                <div class="ux-benefit-item"><strong>Nachhaltiges Wachstum:</strong> Langfristige Rankings sichern
-                  kontinuierlichen Traffic.</div>
-                <div class="ux-benefit-item"><strong>Markenautorität:</strong> Top-Positionen stärken dein Vertrauen und
-                  deine Reputation.</div>
-                <div class="ux-benefit-item"><strong>Messbarer ROI:</strong> Detailliertes Tracking und Reports zeigen
-                  den direkten Wert jeder Maßnahme.</div>
+            <div class="box-accordion-x">
+              <div class="benefits-list-x">
+                <div class="benefit-item-x">
+                  <strong>+40 % organischer Traffic:</strong>
+                  Top-Platzierungen führen zu signifikant mehr Besuchern ohne zusätzliche Ad-Spendings.
+                </div>
+                <div class="benefit-item-x">
+                  <strong>Höhere Conversion-Rate:</strong>
+                  Qualifizierte Besucher mit klarem Suchinteresse steigern deine Abschlüsse.
+                </div>
+                <div class="benefit-item-x">
+                  <strong>Nachhaltiges Wachstum:</strong>
+                  Langfristige Rankings sichern kontinuierlichen Traffic.
+                </div>
+                <div class="benefit-item-x">
+                  <strong>Markenautorität:</strong>
+                  Top-Positionen stärken dein Vertrauen und deine Reputation.
+                </div>
+                <div class="benefit-item-x">
+                  <strong>Messbarer ROI:</strong>
+                  Detailliertes Tracking und Reports zeigen den direkten Wert jeder Maßnahme.
+                </div>
               </div>
             </div>
-
-            <button class="accordion-toggle">Details anzeigen</button>
+            <button class="btn-toggle-x">Details anzeigen</button>
           </div>
 
         </div>
-        <p class="services-hint scroll-fade">Alle Preise sind Richtwerte. Für jedes Projekt erstellen wir ein
-          individuelles Angebot.</p>
+        <p class="note-hint-x scroll-fade">
+          Alle Preise sind Richtwerte. Für jedes Projekt erstellen wir ein individuelles Angebot.
+        </p>
       </div>
     </section>
   </div>
+<style>
+  :root {
+    --img-a1: url('./indexFotoSlideShow/2.png');
+    --img-a2: url('./indexFotoSlideShow/2.png');
+  }
+
+  .block-wrapper-x {
+    padding: 6rem 2rem;
+    background: #000 !important;
+    text-align: center;
+    position: relative;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin-top: -2rem;
+    z-index: 1;
+  }
+
+  .bg-overlay-x {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: transparent;
+    z-index: -1;
+  }
+
+  .wrapper-container-x {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .heading-main-x {
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin-bottom: 3rem;
+    color: #fff;
+  }
+
+  .heading-sub-x {
+    margin-top: -2rem;
+    margin-bottom: 2rem;
+    font-size: 1.25rem;
+    color: #fff;
+  }
+
+  .card-grid-x {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .card-box-x {
+    flex: 1 1 calc(33.333% - 2rem);
+    min-width: 260px;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    transition: transform .4s ease, box-shadow .4s ease;
+    background-position: 0% 50%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    z-index: 7;
+  }
+
+  .card-type-a { background: linear-gradient(270deg, #ff5c00, #ff7a29, #ff6600); background-size: 400% 400%; }
+  .card-type-b { background: #fff; color: #000; }
+  .card-type-c { background: linear-gradient(270deg, #3a30ff, #6a00ff, #4d00e0); background-size: 400% 400%; }
+  .card-type-d { background: #fff; color: #000; }
+  .card-type-e { background: linear-gradient(270deg, #ffffff, #f3f3ff, #fffafa); stroke: #000; stroke-width: 2px; background-size: 400% 400%; color: #000; }
+
+  .card-type-b::after,
+  .card-type-c::after {
+    content: "";
+    position: absolute;
+    bottom: .1rem;
+    right: 0;
+    width: 230px;
+    height: 230px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    opacity: 1;
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity .4s ease;
+  }
+
+  .card-type-b::after { background-image: var(--img-a1); }
+  .card-type-c::after { background-image: var(--img-a2); }
+  .card-box-x.is-open::after { opacity: 0; }
+
+  .card-type-b .btn-toggle-x:hover,
+  .card-type-d .btn-toggle-x:hover {
+    background-color: #000;
+    color: #fff;
+    border-color: #000;
+  }
+
+  .card-type-a .btn-toggle-x:hover,
+  .card-type-c .btn-toggle-x:hover {
+    background-color: #000;
+    color: #fff;
+    border-color: #000;
+  }
+
+  .card-box-x::before {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.18), transparent 70%);
+    transform: scale(.5);
+    opacity: 0;
+    transition: all .6s ease;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .card-box-x:hover::before {
+    transform: scale(1);
+    opacity: .25;
+  }
+
+  .card-box-x:hover {
+    transform: translateY(-8px) scale(1.035);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+    animation: pulseGradX 6s ease infinite;
+    background-position: 100% 50%;
+    z-index: 10;
+  }
+
+  @keyframes pulseGradX {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .card-box-x h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .list-features-x {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+  }
+
+  .list-features-x li {
+    display: flex;
+    align-items: flex-start;
+    font-size: 1.05rem;
+    padding: .4rem 0;
+    color: #333;
+  }
+
+  .check-icon-x {
+    margin-right: .6rem;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    font-weight: bold;
+    color: inherit;
+  }
+
+  .box-price-x {
+    background: #dedede;
+    padding: .8rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #111;
+    box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    font-size: 1rem;
+    margin-top: auto;
+  }
+
+  .btn-toggle-x {
+    background: transparent;
+    border: 1px solid currentColor;
+    padding: .6rem 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: .95rem;
+    color: inherit;
+    transition: background .3s, color .3s;
+  }
+
+  .btn-toggle-x:hover {
+    background: currentColor;
+    color: #fff;
+  }
+
+  .box-accordion-x {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    margin-top: 0;
+    pointer-events: none;
+    transition: max-height .4s ease, opacity .4s ease, margin-top .3s ease;
+  }
+
+  .box-accordion-x.open {
+    max-height: 500px;
+    opacity: 1;
+    pointer-events: auto;
+    margin-top: 1rem;
+  }
+
+  .note-hint-x {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #888;
+  }
+
+  .benefits-card-x {
+    background: #fff;
+    color: #111;
+    padding: 3rem 2.5rem;
+    border-radius: 16px;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+
+  .benefits-card-x:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.06);
+  }
+
+  .benefits-card-x h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  .benefits-list-x {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .benefit-item-x {
+    background: #fafafa;
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    transition: background .3s ease, transform .2s ease;
+  }
+
+  .benefit-item-x:hover {
+    background: #fff;
+    transform: translateX(3px);
+  }
+
+  .benefit-item-x strong {
+    display: block;
+    font-weight: 800;
+    font-size: 1.15rem;
+    margin-bottom: .5rem;
+  }
+
+  .benefits-card-x .icon-container-x {
+    background: #ff5100 !important;
+    border-radius: 50%;
+    padding: 1rem;
+    width: 60px; height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .benefits-card-x .btn-toggle-x {
+    border: 1px solid #ff5100;
+    color: #ff5100;
+  }
+
+  .benefits-card-x .btn-toggle-x:hover {
+    background-color: #ff5100;
+    color: #fff;
+  }
+
+  @media (max-width: 992px) {
+    .card-box-x { flex: 1 1 calc(50% - 2rem); }
+  }
+  @media (max-width: 767px) {
+    .card-box-x { flex: 1 1 100%; }
+    .heading-main-x { font-size: 2rem; }
+    .wrapper-container-x { padding: 0 1rem; }
+  }
+  @media (min-width: 1200px) {
+    .block-wrapper-x { padding: 8rem 3rem; }
+    .card-box-x { padding: 2.5rem; transform: scale(1.04); }
+    .card-box-x h3 { font-size: 1.6rem; }
+    .list-features-x li { font-size: 1.1rem; }
+    .box-price-x { font-size: 1.05rem; }
+    .btn-toggle-x { font-size: 1.05rem; }
+    .note-hint-x { font-size: 1.1rem; }
+  }
+  @media (min-width: 993px) {
+    .card-box-x.wide-x { flex: 2 1 calc(66.666% - 2rem); }
+  }
+
+  /* Weißer Text in Inhalt & Liste, aber Preis bleibt schwarz */
+.card-type-a .box-accordion-x,
+.card-type-a .box-accordion-x li,
+.card-type-c .box-accordion-x,
+.card-type-c .box-accordion-x li {
+  color: #fff;
+}
+
+.card-type-a .check-icon-x,
+.card-type-c .check-icon-x {
+  color: #fff;
+}
+
+.card-type-a .box-price-x,
+.card-type-c .box-price-x {
+  color: #111; /* schwarzer Text in Preisbox */
+  background: #f9f9f9;
+}
+.benefit-item-x {
+  background: #eaeaea; /* etwas dunkler als #fafafa */
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  transition: background .3s ease, transform .2s ease;
+}
+
+</style>
+<script>
+// Feather Icons laden
+if (typeof feather !== 'undefined') {
+  feather.replace();
+}
+
+// Accordion-Toggle Logik für die neuen Klassen
+document.querySelectorAll('.btn-toggle-x').forEach(button => {
+  button.addEventListener('click', () => {
+    const card = button.closest('.card-box-x');
+    const content = card.querySelector('.box-accordion-x');
+    const isOpen = content.classList.contains('open');
+
+    // Alle anderen schließen
+    document.querySelectorAll('.box-accordion-x.open').forEach(openContent => {
+      openContent.classList.remove('open');
+      openContent.closest('.card-box-x')?.classList.remove('is-open');
+    });
+
+    // Aktuelles umschalten
+    if (!isOpen) {
+      content.classList.add('open');
+      card.classList.add('is-open');
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+  <section class="cta-modern">
+    <style>
+      .cta-modern {
+        position: relative;
+        padding: 7rem 1.5rem;
+        background: #000;
+        overflow: hidden;
+        text-align: center;
+             z-index: 7;
+        margin-top: 0rem;
+
+      }
+
+      .cta-modern::before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1800px;
+        max-width: 100vw;
+        height: 1800px;
+        z-index: 0;
+        pointer-events: none;
+        animation: glowShift 12s ease-in-out infinite alternate;
+        z-index: 7;
+
+
+      }
+
+
+      .cta-headline {
+        font-size: clamp(1.8rem, 4.5vw, 3rem);
+        font-weight: 800;
+        font-family: 'Inter', sans-serif;
+        color: #ffffff;
+        margin-bottom: 1rem;
+        line-height: 1.25;
+        letter-spacing: -0.3px;
+        position: relative;
+        z-index: 2;
+        animation: fadeUp 1s ease-out both;
+      }
+
+      .cta-small {
+        font-size: 0.6em;
+        font-weight: 500;
+        color: #ffffff !important;
+        font-family: 'Inter', sans-serif;
+        display: inline-block;
+        margin-right: 0.3em;
+        background: none !important;
+        background-clip: initial !important;
+        -webkit-background-clip: initial !important;
+        -webkit-text-fill-color: initial !important;
+      }
+
+      .cta-headline span {
+        font-family: 'VT323', monospace;
+        font-size: 1.3em;
+        line-height: 1;
+        display: inline-block;
+
+
+        background: linear-gradient(220deg,
+            hwb(219 17% 0%) 0%,
+            hwb(219 18% 0%) 40%,
+            #e1e2ff 46%,
+            hwb(34 27% 0%) 52%,
+            hwb(29 0% 0%) 100%);
+
+
+        background-size: 400% 400%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        animation: gradientShift 16s ease-in-out infinite;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+
+      .cta-text {
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        font-weight: 400;
+        color: rgb(235, 235, 235);
+        max-width: 640px;
+        margin: 0 auto 2.5rem;
+        line-height: 1.6;
+        position: relative;
+        z-index: 2;
+        animation: fadeUp 1s ease-out 0.2s both;
+      }
+
+      .cta-btn {
+        background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
+        background-size: 300% 300%;
+        color: #fff;
+        font-weight: 600;
+        padding: 0.8rem 2rem;
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        border-radius: 10px;
+        text-decoration: none;
+        box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        z-index: 2;
+        animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
+      }
+
+      /* Hover Glow & Lift */
+      .cta-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
+      }
+
+      /* Entrance Animation */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Animated Gradient */
+      @keyframes gradientFlow {
+        0% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes glowShift {
+        0% {
+          transform: translateX(-50%) rotate(0deg);
+        }
+
+        100% {
+          transform: translateX(-50%) rotate(3deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .cta-modern {
+          padding: 5rem 1rem;
+        }
+
+        .cta-text {
+          margin-bottom: 2rem;
+          line-height: 1.5;
+        }
+
+        .cta-btn {
+          width: 100%;
+          padding: 0.9rem;
+        }
+      }
+
+      @media (max-width: 375px) {
+        .cta-headline {
+          font-size: 1.5rem;
+        }
+
+        .cta-headline span {
+          font-size: 1.1em;
+        }
+
+        .cta-text {
+          font-size: 0.95rem;
+        }
+
+        .cta-btn {
+          font-size: 0.9rem;
+          padding: 0.75rem 1.2rem;
+        }
+      }
+    </style>
+
+    <h2 class="cta-headline">
+      <span class="cta-small">Bereit für</span> <span>deinen digitalen Auftritt?</span>
+    </h2>
+
+
+    <p class="cta-text">
+      Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.
+      Starte jetzt – unverbindlich und inspiriert.
+    </p>
+
+    <a href="#kontakt" class="cta-btn">Gespräch vereinbaren</a>
+  </section>
+  
+  
+
 
 
 
@@ -2431,13 +2698,14 @@
 
     <!-- SEO-Optimierung -->
     <div class="feature-card seo-card">
-      <h3>SEO Optimierung</h3>
+      <h3>Google Optimierung</h3>
       <ul>
-        <li>Keyword-Recherche & Wettbewerbsanalyse für gezielte Traffic-Steigerung</li>
-        <li>Conversion-optimierte Title-Tags & Meta-Beschreibungen</li>
-        <li>Responsives & semantisches HTML (H1–H6, ARIA-Labels) für Crawling & Accessibility</li>
-        <li>Bild-Optimierung & Lazy-Loading für schnelle Ladezeiten</li>
-        <li>Monitoring via Core Web Vitals & regelmäßige Performance-Reports</li>
+ <li>Keyword- & Konkurrenzanalyse für bessere Auffindbarkeit</li>
+<li>Optimierte Title-Tags, Meta-Daten & strukturierte Inhalte</li>
+<li>Semantisches HTML für bessere Indexierung</li>
+<li>Technisches SEO: schnelle Ladezeiten & saubere URLs</li>
+<li>Monitoring über Core Web Vitals & regelmäßige Checks</li>
+
       </ul>
     </div>
   </div>
@@ -2565,7 +2833,7 @@
    ---------------------------------------- */
 .advanced-features-section {
   padding: 80px 20vw;
-  background: transparent;
+  background: #000;
   color: #fff;
   font-family: 'Inter', sans-serif;
 }
@@ -2585,11 +2853,8 @@
 }
 
 
-/* ----------------------------------------
-   Basis-Styles für alle Feature-Cards
-   ---------------------------------------- */
 .feature-card {
-  background: rgb(0, 0, 0);
+  background: linear-gradient(to bottom left, #181818, #00070d); /* Schwarz → Dunkelblau */
   border: none;
   border-radius: 12px;
   padding: 24px;
@@ -2597,6 +2862,7 @@
   transition: all 0.3s ease;
   position: relative;
 }
+
 
 .feature-card h3 {
   font-size: 1.8rem;
@@ -2616,7 +2882,8 @@
 }
 
 .tags span {
-  background: #00ff88;
+      background: linear-gradient(270deg, #ff5c00, #ff7a29, #ff6600);
+      background-size: 400% 400%;
   color: #000;
   padding: 0.35rem 0.8rem;
   border-radius: 20px;
@@ -2672,6 +2939,7 @@
   align-items: center;      /* horizontal mittig */
   gap: 2rem;
   padding: 2rem;
+  z-index: 6;
 }
 
 /* Entferne Hover-Glow auf allen Feature-Cards */
@@ -2715,77 +2983,215 @@
 
 </style>
 <script>
-// Typing-Demo
-const elText = document.querySelector('.typing-demo .text');
-const elCaret = document.querySelector('.typing-demo .caret');
-const elPointer = document.querySelector('.typing-demo .pointer');
-const steps = [
-  { text: 'Ich kann alles modular verndern', delay: 100 },
-  { delete: 2, delay: 200 },
-  { text: 'ändern', delay: 100 },
-  { pause: 800 },
-  { delete: 'all', delay: 50 },
-  { text: 'Hier bekomme ich Blitzschnelle Ladezeiten', delay: 100 },
-  { pause: 800 },
-  { delete: 'all', delay: 50 },
-  { text: 'Responsives Design begeistert auf jedem Gerät', delay: 100 },
-  { pause: 800 },
-  { delete: 'all', delay: 50 },
-  { text: 'Barrierefreie Interfaces für alle Nutzer:innen', delay: 100 },
-  { pause: 800 },
-  { delete: 'all', delay: 50 },
-  // ... weitere Steps ...
+document.addEventListener('DOMContentLoaded', () => {
+  const elText = document.querySelector('.typing-demo .text');
+  const elCaret = document.querySelector('.typing-demo .caret');
+  const elPointer = document.querySelector('.typing-demo .pointer');
+
+  if (!elText || !elCaret || !elPointer) return;
+
+  const steps = [
+  { text: 'Ich kann alles modular verändern', delay: 50 },
+  { pause: 1000 },
+  { delete: 'all', delay: 30 },
+
+  { text: 'Blitzschnelle Ladezeiten – auf jedem Gerät', delay: 50 },
+  { pause: 1200 },
+  { delete: 'all', delay: 30 },
+
+  { text: 'Top-Performance bei Google Lighthouse', delay: 50 },
+  { pause: 1000 },
+  { delete: 'all', delay: 30 },
+
+  { text: 'Optimiert für SEO, Struktur & Nutzerführung', delay: 50 },
+  { pause: 1200 },
+  { delete: 'all', delay: 30 },
+
+  { text: 'Barrierefreiheit für alle Nutzer:innen', delay: 50 },
+  { pause: 1000 },
+  { delete: 'all', delay: 30 },
+
+  { text: 'Responsives Design begeistert auf jedem Gerät', delay: 50 },
+  { pause: 1000 },
+  { delete: 'all', delay: 30 },
+
+  { text: 'Strukturierter Code. Schnelle Ladezeiten.', delay: 50 },
+  { pause: 1000 },
+  { delete: 'all', delay: 30 },
+
+  { text: 'Google liebt schnelle Seiten – deine auch', delay: 50 },
+  { pause: 1200 },
+  { delete: 'all', delay: 30 },
+
+  { text: 'Modulare Komponenten für maximale Flexibilität', delay: 50 },
+  { pause: 1000 },
+  { delete: 'all', delay: 30 },
+
+  { text: 'Kein Baukasten – echtes Webdesign mit System', delay: 55 },
+  { pause: 1000 },
+  { delete: 'all', delay: 30 },
+
+  { text: 'Updates? Inhalte? In Sekunden erledigt.', delay: 50 },
+  { pause: 1200 },
+  { delete: 'all', delay: 30 },
+
+  { text: 'Modernes HTML – semantisch, performant, sauber', delay: 55 },
+  { pause: 1000 },
+  { delete: 'all', delay: 30 },
+
+  { text: 'Ladezeit? 0,2 Sekunden. Wirklich.', delay: 50 },
+  { pause: 1200 },
+  { delete: 'all', delay: 30 },
+
+  { text: 'UX, Accessibility, Mobile First – alles drin', delay: 50 },
+  { pause: 1200 },
+  { delete: 'all', delay: 30 },
+
+  { text: 'Fokus auf Performance. Fokus auf Nutzer:innen.', delay: 55 },
+  { pause: 1200 },
+  { delete: 'all', delay: 30 },
+
+  { text: 'Visuell. Schnell. Für Menschen gemacht.', delay: 55 },
+  { pause: 1200 },
+  { delete: 'all', delay: 30 },
+
+  { text: 'Erweiterbar. Wartbar. Zukunftssicher.', delay: 55 },
+  { pause: 1200 },
+  { delete: 'all', delay: 30 },
 ];
 
-let stepIndex = 0, charIndex = 0;
-async function runStep() {
-  const step = steps[stepIndex];
-  if (step.text !== undefined) {
-    if (charIndex < step.text.length) {
-      elText.textContent += step.text[charIndex++];
-      updateCaret(); updatePointer();
-      await wait(step.delay); return runStep();
+
+  let stepIndex = 0;
+  let charIndex = 0;
+
+  async function runStep() {
+    const step = steps[stepIndex];
+    if (!step) {
+      stepIndex = 0;
+      return runStep(); // loop
     }
-    charIndex = 0; stepIndex++; await wait(200); return runStep();
-  }
-  if (step.delete !== undefined) {
-    let toDelete = step.delete === 'all' ? elText.textContent.length : step.delete;
-    while (toDelete--) {
-      elText.textContent = elText.textContent.slice(0, -1);
-      updateCaret(); updatePointer(); await wait(step.delay);
+
+    if (step.text !== undefined) {
+      if (charIndex < step.text.length) {
+        elText.textContent += step.text[charIndex++];
+        updateCaret(); updatePointer();
+        await wait(step.delay);
+        return runStep();
+      }
+      charIndex = 0;
+      stepIndex++;
+      await wait(300);
+      return runStep();
     }
-    stepIndex++; return runStep();
+
+    if (step.delete !== undefined) {
+      let toDelete = step.delete === 'all' ? elText.textContent.length : step.delete;
+      while (toDelete--) {
+        elText.textContent = elText.textContent.slice(0, -1);
+        updateCaret(); updatePointer();
+        await wait(step.delay);
+      }
+      stepIndex++;
+      return runStep();
+    }
+
+    if (step.pause) {
+      await wait(step.pause);
+      stepIndex++;
+      return runStep();
+    }
   }
-  if (step.pause) { await wait(step.pause); stepIndex++; return runStep(); }
-}
-function updateCaret() { elCaret.remove(); document.querySelector('.input-field').appendChild(elCaret); }
-function updatePointer() {
-  const rect = elCaret.getBoundingClientRect();
-  const parent = elCaret.parentElement.getBoundingClientRect();
-  elPointer.style.transform = `translate(${rect.left - parent.left}px, ${rect.top - parent.top}px)`;
-}
-function wait(ms) { return new Promise(res => setTimeout(res, ms)); }
-runStep();
+
+  function updateCaret() {
+    elCaret.remove();
+    document.querySelector('.input-field')?.appendChild(elCaret);
+  }
+
+  function updatePointer() {
+    const rect = elCaret.getBoundingClientRect();
+    const parent = elCaret.parentElement.getBoundingClientRect();
+    elPointer.style.transform = `translate(${rect.left - parent.left}px, ${rect.top - parent.top}px)`;
+  }
+
+  function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  runStep();
+});
 </script>
 <script>
-// Animiertes Kreisdiagramm
-document.querySelectorAll('.speed-circle').forEach(canvas => {
+// Animiertes Kreisdiagramm wird nur bei Sichtbarkeit gestartet
+const initCircle = (canvas) => {
   const targetVal = parseInt(canvas.dataset.value || 100);
   const label = canvas.dataset.label || "";
   const ctx = canvas.getContext("2d");
   const size = 120; canvas.width = size; canvas.height = size;
-  const radius = size/2 -10; const center = size/2; let current = 0;
+  const radius = size / 2 - 10;
+  const center = size / 2;
+  let current = 0;
+
+  const gradient = ctx.createLinearGradient(0, 0, size, 0);
+  gradient.addColorStop(0, '#ff5c00');
+  gradient.addColorStop(0.5, '#ff7a29');
+  gradient.addColorStop(1, '#ff6600');
+
   const draw = () => {
-    ctx.clearRect(0,0,size,size);
-    ctx.lineWidth = 8; ctx.strokeStyle = "#333";
-    ctx.beginPath(); ctx.arc(center,center,radius,0,2*Math.PI); ctx.stroke();
-    ctx.strokeStyle = "#00ff88";
-    ctx.beginPath(); ctx.arc(center,center,radius,-0.5*Math.PI,(current/100)*2*Math.PI-0.5*Math.PI); ctx.stroke();
-    ctx.fillStyle = "#fff"; ctx.font = "20px sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
-    ctx.fillText(current+"%", center, center);
-    if(label){ ctx.font="12px sans-serif"; ctx.fillText(label, center, center+20);}  };
-  const animate = () => { draw(); if(current<targetVal){ current++; requestAnimationFrame(animate);} };
+    ctx.clearRect(0, 0, size, size);
+
+    // Hintergrundkreis
+    ctx.lineWidth = 8;
+    ctx.strokeStyle = "#333";
+    ctx.beginPath();
+    ctx.arc(center, center, radius, 0, 2 * Math.PI);
+    ctx.stroke();
+
+    // Fortschrittskreis mit Verlauf
+    ctx.strokeStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(center, center, radius, -0.5 * Math.PI, (current / 100) * 2 * Math.PI - 0.5 * Math.PI);
+    ctx.stroke();
+
+    // Prozentzahl
+    ctx.fillStyle = "#fff";
+    ctx.font = "20px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(current + "%", center, center);
+
+    if (label) {
+      ctx.font = "12px sans-serif";
+      ctx.fillText(label, center, center + 20);
+    }
+  };
+
+  const animate = () => {
+    draw();
+    if (current < targetVal) {
+      current++;
+      requestAnimationFrame(animate);
+    }
+  };
+
   animate();
+};
+
+// Beobachte, wann die Canvas-Elemente sichtbar werden
+document.addEventListener('DOMContentLoaded', () => {
+  const canvases = document.querySelectorAll('.speed-circle');
+
+  const observer = new IntersectionObserver((entries, observerRef) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        initCircle(entry.target);
+        observerRef.unobserve(entry.target); // Nur einmal animieren
+      }
+    });
+  }, {
+    threshold: 0.5 // Mindestens 50% sichtbar
+  });
+
+  canvases.forEach(canvas => observer.observe(canvas));
 });
 </script>
 <script>
@@ -2843,12 +3249,380 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+<style>
+  @media (min-width: 1600px) {
+  .modular-card {
+    background-position: center 15% !important;
+    min-height: 950px;
+    gap: 1.2rem;
+    padding-top: 60px;
+  }
+
+  .modular-card h3 {
+    margin-top: -10rem;
+    transform: translateY(-0.5rem);
+  }
+
+  .modular-card p {
+    margin-top: -0.8rem;
+    margin-bottom: 1.5rem;
+    max-width: 450px;
+  }
+
+  .modular-card .typing-demo {
+    transform: translateY(-1rem);
+  }
+}
+
+@media (min-width: 1920px) {
+  .modular-card {
+    background-position: center 12% !important;
+    min-height: 1000px;
+    padding-top: 80px;
+  }
+
+  .modular-card h3 {
+    margin-top: -12rem;
+  }
+
+  .modular-card p {
+    max-width: 460px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .modular-card {
+    background-position: center 10% !important;
+    min-height: 1100px;
+    padding-top: 100px;
+  }
+
+  .modular-card h3 {
+    font-size: 2.4rem;
+    margin-top: -14rem;
+  }
+
+  .modular-card p {
+    font-size: 1.15rem;
+    max-width: 500px;
+  }
+
+  .typing-demo.draggable-element {
+    max-width: 600px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 1440px) {
+  .modular-card {
+    background-position: center 20% !important;
+    min-height: 900px;
+    padding-top: 40px;
+    gap: 1rem; /* reduziert vertikalen Abstand zwischen Elementen */
+    margin-top: -5rem;
+  }
+
+  .modular-card h3,
+  .modular-card p,
+  .modular-card .typing-demo {
+    transform: translateY(-1rem);
+    margin-top: 0.5rem; /* vorher 2rem – jetzt viel kompakter */
+    margin-bottom: 0.3rem;
+  }
+  .modular-card p {
+    transform: translateY(0);
+    margin-top: -0.95rem;
+    margin-bottom: 1.5rem;
+    max-width: 400px; /* ✳️ Begrenzung sorgt für 2 Zeilen */
+    text-align: center;
+  }
+  .modular-card h3{
+   margin-top: -12rem;
+  }
+}
+
+@media (max-width: 1024px) {
+
+  .advanced-features-section {
+    padding: 60px 10vw;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card {
+    padding: 20px;
+  }
+}
+@media (max-width: 1350px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 1024px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .modular-card {
+    background-image: 
+      linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgb(0, 0, 0) 100%),
+      url('./WebdesignPic/Tabletasia.webp') !important;
+    background-size: cover !important;
+    background-position: center 0% !important;
+    z-index: 1;
+    margin-top: -0.5rem;
+  }
+    .modular-card p {
+    max-width: 320px; /* oder z.B. 280px für noch schmaler */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1000px) {
+  .modular-card .typing-demo {
+    transform: translateY(-2.5rem);
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1264px) {
+  .modular-card .typing-demo {
+    transform: translateY(-2.8rem);
+  }
+}
+@media (min-width: 1025px) and (max-width: 1264px) {
+  .modular-card {
+    gap: 0.8rem;
+  }
+
+  .modular-card .typing-demo {
+    transform: translateY(-2.8rem);
+  }
+
+  .modular-card p {
+    margin-bottom: 1.2rem;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1112px) {
+  .modular-card {
+    min-height: 950px;
+    gap: 1rem;
+  }
+ .modular-card h3 {
+    margin-top: -17rem;
+   
+  }
+
+  .modular-card p {
+    margin-top: -1.8rem;
+    margin-bottom: 1.5rem;
+    max-width: 450px;
+  }
+
+  .modular-card .typing-demo {
+    margin-top: 0.8rem;
+  }
+
+}
+@media (max-width: 374px) {
+  .metrics-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .circle-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .speed-circle {
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  .circle-info {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .importance-note {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: center; /* statt justify */
+    margin-top: 0.5rem;
+    padding: 0 0.5rem;
+    color: #ccc; /* heller für bessere Lesbarkeit */
+  }
+
+  .feature-card {
+    padding: 16px;
+  }
+
+  .feature-card h3 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+}
+@media (min-width: 769px) and (max-width: 913px) {
+  .modular-card {
+    min-height: 950px;
+    gap: 1rem;
+  }
+ .modular-card h3 {
+    margin-top: -17rem;
+   
+  }
+
+  .modular-card p {
+    margin-top: -1.8rem;
+    margin-bottom: 1.5rem;
+    max-width: 450px;
+  }
+
+  .modular-card .typing-demo {
+    margin-top: 0.8rem;
+  }
+
+}
+</style>
 
 
 
 
+
+<section class="overflow-image-section">
+  <div class="overflow-image-container">
+    <img src="./WebdesignPic/handyasiahinterg.webp" alt="Visuelles Highlight" />
+  </div>
+</section>
+<style>
+  html, body {
+  overflow-x: hidden;
+}
+
+.overflow-image-section {
+  position: relative;
+  width: 100vw;
+  overflow: visible;
+  margin-top: -23rem; /* Überlappt obere Sektion */
+  margin-bottom: -5rem; /* Ragt in die nächste Sektion */
+  z-index: 2;
+  pointer-events: none; /* Falls du keine Interaktion willst */
+}
+
+.overflow-image-container {
+  width: 150vw;
+  margin-left: -25vw;
+  transform: rotate(-8deg);
+  position: relative; /* für ::after nötig */
+}
+
+.overflow-image-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(to top right, white 20%, transparent 100%);
+  pointer-events: none;
+}
+
+.overflow-image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+/* --- Für Tablets & kleine Desktops --- */
+@media (max-width: 1024px) {
+  .overflow-image-section {
+    margin-top: -18rem;
+    margin-bottom: -3rem;
+  }
+
+  .overflow-image-container {
+    width: 170vw;
+    margin-left: -35vw;
+    transform: rotate(-7deg);
+  }
+}
+
+/* --- Für Mobilgeräte --- */
+@media (max-width: 768px) {
+  .overflow-image-section {
+    margin-top: -14rem;
+    margin-bottom: -2rem;
+  }
+
+  .overflow-image-container {
+    width: 190vw;
+    margin-left: -45vw;
+    transform: rotate(-6deg);
+  }
+}
+
+@media (max-width: 425px) {
+  .overflow-image-section {
+    margin-top: -16rem; /* weiter nach oben */
+    margin-bottom: -1rem;
+  }
+
+  .overflow-image-container {
+    width: 340vw;         /* Bild deutlich größer */
+    margin-left: -70vw;   /* zentriert trotz größerer Breite */
+    transform: rotate(-4deg) translateY(-8rem); /* leicht nach oben */
+  }
+}@media (max-width: 375px) {
+  .overflow-image-section {
+    margin-top: -14rem;
+    margin-bottom: -0.5rem;
+  }
+
+  .overflow-image-container {
+    width: 380vw;
+    margin-left: -90vw;
+    transform: rotate(-3.5deg) translateY(-9rem);
+  }
+
+  .overflow-image-container::after {
+    background: linear-gradient(to top right, rgba(255,255,255,0.3) 10%, transparent 100%);
+  }
+}
+
+@media (max-width: 320px) {
+  .overflow-image-section {
+    margin-top: -13rem;
+  }
+
+  .overflow-image-container {
+    width: 420vw;
+    margin-left: -110vw;
+    transform: rotate(-3deg) translateY(-10rem);
+  }
+.overflow-image-container::after {
+    background: linear-gradient(to top right, rgb(255, 255, 255) 10%, transparent 100%);
+  }
  
+}
 
+
+</style>
+
+
+
+  <!--
 <section class="image-section">
   <div class="image-background"></div>
   <div class="container">
@@ -2898,1187 +3672,310 @@ window.addEventListener('DOMContentLoaded', () => {
   padding: 2rem;
 }
 </style>
+-->
 
 
+  
+<section class="cyber-section">
+  <div class="neuro-core-grid centered-layout">
 
+    <!-- Text Content -->
+    <div class="hypertext-block" style="z-index: 6;">
+      <h2 class="neon-title" style="z-index: 6;">UNSER ANSATZ & UNSERE MOTIVATION</h2>
+      <p class="subtext">Ihr Qualitätsversprechen: Maßgeschneiderte digitale Lösungen für die Anforderungen von heute</p>
 
-
-  <section class="cta-modern">
-    <style>
-      .cta-modern {
-        position: relative;
-        padding: 7rem 1.5rem;
-        background: transparent;
-        overflow: hidden;
-        text-align: center;
-        z-index: 1;
-
-      }
-
-      .cta-modern::before {
-        content: '';
-        position: absolute;
-        top: -100px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 1800px;
-        max-width: 100vw;
-        height: 1800px;
-        z-index: 0;
-        pointer-events: none;
-        animation: glowShift 12s ease-in-out infinite alternate;
-
-
-      }
-
-
-      .cta-headline {
-        font-size: clamp(1.8rem, 4.5vw, 3rem);
-        font-weight: 800;
-        font-family: 'Inter', sans-serif;
-        color: #000000;
-        margin-bottom: 1rem;
-        line-height: 1.25;
-        letter-spacing: -0.3px;
-        position: relative;
-        z-index: 2;
-        animation: fadeUp 1s ease-out both;
-      }
-
-      .cta-small {
-        font-size: 0.6em;
-        font-weight: 500;
-        color: #000000 !important;
-        font-family: 'Inter', sans-serif;
-        display: inline-block;
-        margin-right: 0.3em;
-        background: none !important;
-        background-clip: initial !important;
-        -webkit-background-clip: initial !important;
-        -webkit-text-fill-color: initial !important;
-      }
-
-      .cta-headline span {
-        font-family: 'VT323', monospace;
-        font-size: 1.3em;
-        line-height: 1;
-        display: inline-block;
-
-
-        background: linear-gradient(220deg,
-            hwb(219 17% 0%) 0%,
-            hwb(219 18% 0%) 40%,
-            #e1e2ff 46%,
-            hwb(34 27% 0%) 52%,
-            hwb(29 0% 0%) 100%);
-
-
-        background-size: 400% 400%;
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-
-        animation: gradientShift 16s ease-in-out infinite;
-      }
-
-      @keyframes gradientShift {
-        0% {
-          background-position: 0% 50%;
-        }
-
-        50% {
-          background-position: 100% 50%;
-        }
-
-        100% {
-          background-position: 0% 50%;
-        }
-      }
-
-
-      .cta-text {
-        font-size: clamp(1rem, 2.5vw, 1.2rem);
-        font-weight: 400;
-        color: rgb(20, 20, 20);
-        max-width: 640px;
-        margin: 0 auto 2.5rem;
-        line-height: 1.6;
-        position: relative;
-        z-index: 2;
-        animation: fadeUp 1s ease-out 0.2s both;
-      }
-
-      .cta-btn {
-        background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
-        background-size: 300% 300%;
-        color: #fff;
-        font-weight: 600;
-        padding: 0.8rem 2rem;
-        font-size: clamp(0.9rem, 2vw, 1rem);
-        border-radius: 10px;
-        text-decoration: none;
-        box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        position: relative;
-        z-index: 2;
-        animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
-      }
-
-      /* Hover Glow & Lift */
-      .cta-btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
-      }
-
-      /* Entrance Animation */
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Animated Gradient */
-      @keyframes gradientFlow {
-        0% {
-          background-position: 0% 50%;
-        }
-
-        50% {
-          background-position: 100% 50%;
-        }
-
-        100% {
-          background-position: 0% 50%;
-        }
-      }
-
-      @keyframes glowShift {
-        0% {
-          transform: translateX(-50%) rotate(0deg);
-        }
-
-        100% {
-          transform: translateX(-50%) rotate(3deg);
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        * {
-          animation: none !important;
-          transition: none !important;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .cta-modern {
-          padding: 5rem 1rem;
-        }
-
-        .cta-text {
-          margin-bottom: 2rem;
-          line-height: 1.5;
-        }
-
-        .cta-btn {
-          width: 100%;
-          padding: 0.9rem;
-        }
-      }
-
-      @media (max-width: 375px) {
-        .cta-headline {
-          font-size: 1.5rem;
-        }
-
-        .cta-headline span {
-          font-size: 1.1em;
-        }
-
-        .cta-text {
-          font-size: 0.95rem;
-        }
-
-        .cta-btn {
-          font-size: 0.9rem;
-          padding: 0.75rem 1.2rem;
-        }
-      }
-    </style>
-
-    <h2 class="cta-headline">
-      <span class="cta-small">Bereit für</span> <span>deinen digitalen Auftritt?</span>
-    </h2>
-
-
-    <p class="cta-text">
-      Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.
-      Starte jetzt – unverbindlich und inspiriert.
-    </p>
-
-    <a href="#kontakt" class="cta-btn">Gespräch vereinbaren</a>
-  </section>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    .cyber-section {
-      background-color: #050505;
-      padding: 6rem 10vw;
-      overflow: hidden;
-      position: relative;
-      z-index: 1;
-    }
-
-    .neuro-core-grid {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4rem;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .quantum-glass-wrapper {
-      flex: 1 1 48%;
-      perspective: 1200px;
-    }
-
-    .quantum-glass {
-      background: rgba(0, 255, 135, 0.03);
-      border: 1px solid rgba(0, 255, 135, 0.1);
-      border-radius: 24px;
-      padding: 2rem;
-      backdrop-filter: blur(18px);
-      box-shadow: 0 0 80px rgba(0, 255, 135, 0.08);
-      transform-style: preserve-3d;
-      transition: transform 0.5s ease;
-    }
-
-    .quantum-glass:hover {
-      transform: rotateY(8deg) rotateX(4deg) scale(1.04);
-    }
-
-    .tech-visual {
-      width: 100%;
-      display: block;
-      transform: translateZ(50px);
-      border-radius: 18px;
-      object-fit: cover;
-      aspect-ratio: 9 / 16;
-    }
-
-    .hypertext-block {
-      flex: 1 1 48%;
-      text-align: left;
-      max-width: 620px;
-      animation: fadeInUp 1s ease forwards;
-    }
-
-    .neon-title {
-      font-size: 3.2rem;
-      font-weight: 700;
-      color: #00ff9f;
-      margin-bottom: 1.2rem;
-    }
-
-    .subtext {
-      font-size: 1.25rem;
-      color: #aaaaaa;
-      margin-bottom: 2.8rem;
-      line-height: 1.7;
-    }
-
-    .feature-matrix {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-
-    .core-feature {
-      background: rgba(0, 255, 135, 0.04);
-      border: 1px solid rgba(0, 255, 135, 0.1);
-      border-radius: 18px;
-      padding: 1.5rem;
-      transition: background 0.3s ease, transform 0.3s ease;
-    }
-
-    .core-feature:hover {
-      background: rgba(0, 255, 135, 0.08);
-      transform: scale(1.03);
-    }
-
-    .core-feature h3 {
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: #ffffff;
-      margin-bottom: 0.6rem;
-    }
-
-    .core-feature p {
-      font-size: 1rem;
-      color: #bbbbbb;
-      line-height: 1.5;
-    }
-
-    .neon-pulse-btn {
-      background: linear-gradient(135deg, #00ff9f, #00b3ff);
-      color: #ffffff;
-      padding: 1rem 2.2rem;
-      font-size: 1.05rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 14px;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.4s ease;
-    }
-
-    .neon-pulse-btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 25px rgba(0, 255, 135, 0.5);
-    }
-
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .neuro-core-grid {
-        flex-direction: column;
-      }
-
-      .feature-matrix {
-        grid-template-columns: 1fr;
-      }
-
-      .hypertext-block {
-        text-align: center;
-      }
-
-      .neon-title {
-        font-size: 2.4rem;
-      }
-    }
-  </style>
-
-
-
-
-  <section class="cyber-section">
-    <div class="neuro-core-grid">
-
-      <!-- Text Content -->
-      <div class="hypertext-block">
-        <h2 class="neon-title">MINDSET – UNSER ANSATZ & UNSERE MOTIVATION</h2>
-        <p class="subtext">Ihr Qualitätsversprechen: Maßgeschneiderte digitale Lösungen für die Anforderungen von
-          heute</p>
-
-        <div class="feature-matrix">
-          <div class="core-feature">
-            <h3>Projektsteuerung 2.0</h3>
-            <p>Wir orchestrieren Ihre Transformation mit maximaler Transparenz und Echtzeit-Feedback.</p>
-          </div>
-          <div class="core-feature">
-            <h3>Empathie trifft Analyse</h3>
-            <p>Tiefes Zielgruppenverständnis kombiniert mit messerscharfer Strategie.</p>
-          </div>
-          <div class="core-feature">
-            <h3>Next-Level Design</h3>
-            <p>Unvergesslich visuell. Design, das Performance und Emotion vereint.</p>
-          </div>
-          <div class="core-feature">
-            <h3>Detailverliebtheit</h3>
-            <p>Pixel-Perfektion für ein Erlebnis, das Eindruck hinterlässt.</p>
-          </div>
-          <div class="core-feature">
-            <h3>Tech-DNA</h3>
-            <p>React, API-First, Headless: Wir atmen moderne Entwicklung.</p>
-          </div>
-          <div class="core-feature">
-            <h3>Automatisierte Abläufe</h3>
-            <p>Optimierte Prozesse für Geschwindigkeit und Skalierbarkeit.</p>
-          </div>
+      <div class="feature-matrix" style="z-index: 6;">
+        <div class="core-feature">
+          <h3>Projektsteuerung 2.0</h3>
+          <p>Wir orchestrieren Ihre Transformation mit maximaler Transparenz und Echtzeit-Feedback.</p>
         </div>
-
-        <button class="neon-pulse-btn">Mehr über uns →</button>
-      </div>
-
-      <!-- Visual Card -->
-      <div class="quantum-glass-wrapper">
-        <div class="quantum-glass">
-          <video class="tech-visual" autoplay muted loop playsinline>
-            <source src="./WebdesignPic/Hochformattest.mov" type="video/mp4" />
-            Video nicht verfügbar.
-          </video>
+        <div class="core-feature">
+          <h3>Empathie trifft Analyse</h3>
+          <p>Tiefes Zielgruppenverständnis kombiniert mit messerscharfer Strategie.</p>
+        </div>
+        <div class="core-feature">
+          <h3>Next-Level Design</h3>
+          <p>Unvergesslich visuell. Design, das Performance und Emotion vereint.</p>
+        </div>
+        <div class="core-feature">
+          <h3>Detailverliebtheit</h3>
+          <p>Pixel-Perfektion für ein Erlebnis, das Eindruck hinterlässt.</p>
+        </div>
+        <div class="core-feature">
+          <h3>Tech-DNA</h3>
+          <p>React, API-First, Headless: Wir atmen moderne Entwicklung.</p>
+        </div>
+        <div class="core-feature">
+          <h3>Automatisierte Abläufe</h3>
+          <p>Optimierte Prozesse für Geschwindigkeit und Skalierbarkeit.</p>
         </div>
       </div>
 
-    </div>
-  </section>
-  <style>
-    /* ================================
-   1. Sektion selbst hell gestalten
-   ================================ */
-    .cyber-section {
-      background: transparent;
-      padding: 6rem 2rem;
-      color: #111;
-      /* Grundtext schwarz */
-      font-family: 'Inter', sans-serif;
-    }
-
-    /* ======================
-   2. Grid-Layout optimieren
-   ====================== */
-    .neuro-core-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem 4rem;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    /* ====================================
-   3. Textblock: Max-Width & Abstände
-   ==================================== */
-    .hypertext-block {
-      max-width: 600px;
-    }
-
-    .neon-title {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      /* jetzt schwarz statt Neon-Gradient */
-      background: none;
-      -webkit-background-clip: initial;
-      -webkit-text-fill-color: initial;
-      color: #111;
-    }
-
-    .subtext {
-      font-size: 1.125rem;
-      margin-bottom: 2rem;
-      color: #444;
-      /* etwas helleres Schwarz für Subtext */
-    }
-
-    /* ===================================
-   4. Feature-Matrix: flexibles Grid
-   =================================== */
-    .feature-matrix {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .core-feature {
-      background: #fff;
-      border: 1px solid #e0e0e0;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-      /* Hover-Effekt abgeschaltet: keine Veränderung */
-    }
-
-    .core-feature h3 {
-      margin-bottom: .75rem;
-      font-size: 1.25rem;
-      color: #111;
-      /* schwarz */
-    }
-
-    .core-feature p {
-      color: #555;
-      /* dunkles Grau für Lesbarkeit */
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-
-    /* ====================================
-   5. Button: Orange → Blau Gradient
-   ==================================== */
-    .neon-pulse-btn {
-      display: inline-block;
-      padding: .75rem 1.5rem;
-      font-size: 1rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      /* Gradient von Orange nach Blau */
-      background: linear-gradient(45deg, #ff6600, #0055ff);
-      color: #fff;
-      box-shadow:
-        0 0 12px rgba(255, 102, 0, 0.4),
-        0 0 24px rgba(0, 85, 255, 0.4);
-      animation: pulse 2.5s ease-out infinite;
-      transition: filter .2s, box-shadow .2s;
-    }
-
-    .neon-pulse-btn:hover {
-      filter: brightness(1.1);
-      box-shadow:
-        0 0 16px rgba(255, 102, 0, 0.6),
-        0 0 32px rgba(0, 85, 255, 0.6);
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        box-shadow:
-          0 0 8px rgba(255, 102, 0, .6),
-          0 0 16px rgba(0, 85, 255, .6);
-      }
-
-      50% {
-        box-shadow:
-          0 0 24px rgba(255, 102, 0, .3),
-          0 0 48px rgba(0, 85, 255, .3);
-      }
-    }
-
-    /* ==========================================
-   6. Visual-Card: Querformat-Video & Glas-Optik
-   ========================================== */
-    .quantum-glass-wrapper {
-      display: flex;
-      justify-content: center;
-    }
-
-    .quantum-glass {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(12px);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-      /* Querformat erzwingen und Crop, falls Video höher ist */
-      width: 100%;
-      max-width: 640px;
-      aspect-ratio: 16 / 9;
-    }
-
-    .tech-visual {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      /* füllt Querformat-Container, schneidet oben/unten ab */
-    }
-
-    /* ================================
-   7. Responsiveness kleine Devices
-   ================================ */
-    @media (max-width: 768px) {
-      .cyber-section {
-        padding: 4rem 1.5rem;
-      }
-
-      .neon-title {
-        font-size: 2rem;
-      }
-
-      .subtext {
-        font-size: 1rem;
-      }
-
-      .neuro-core-grid {
-        gap: 1.5rem 2rem;
-      }
-
-      .feature-matrix {
-        gap: 1rem;
-      }
-
-      .quantum-glass {
-        max-width: 100%;
-        aspect-ratio: auto;
-      }
-
-      .tech-visual {
-        height: auto;
-        aspect-ratio: auto;
-      }
-    }
-  </style>
-
-
-
-
-
-
-
-
-
-
-
-  <section class="interactive-portfolio" id="portfolio">
-    <h2 class="portfolio-headline">Unser Portfolio</h2>
-
-    <!-- Tab Navigation -->
-    <div class="tab-buttons">
-      <button class="tab active" data-tab="web"><i data-feather="monitor"></i> WebDesign</button>
-      <button class="tab" data-tab="3d"><i data-feather="box"></i> 3D Design</button>
-      <button class="tab" data-tab="graphic"><i data-feather="image"></i> Grafikdesign</button>
-      <button class="tab" data-tab="social"><i data-feather="share-2"></i> Social Media</button>
+      <button class="neon-pulse-btn">Mehr über uns →</button>
     </div>
 
-    <div class="tab-contents">
-      <!-- WebDesign -->
-      <div class="tab-content active" id="tab-web">
-        <div class="gallery">
+ 
 
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./GallerieGesamt/WebDesign1.webp" width="1671px" height="1294px" loading="lazy"
-                alt="Webdesign für Friseursalon" />
-            </div>
-            <div class="overlay">
-              <p>Interaktive Friseursalon Website</p>
-              <ul>
-                <li>Online-Terminbuchung für einfache Planung</li>
-                <li>Styling-Galerie zur Inspiration für Kunden</li>
-                <li>Optimiert für mobile Nutzung & schnelle Ladezeiten</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
+  </div>
+</section>
+<style>html, body {
+  overflow-x: hidden;
+}
 
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./GallerieGesamt/WebDesign2.webp" width="1671px" height="1294px" loading="lazy"
-                alt="Webdesign für Industrieunternehmen" />
-            </div>
-            <div class="overlay">
-              <p>Informative Industrie Website</p>
-              <ul>
-                <li>Strukturierte Produkt- & Technik-Dokumentation</li>
-                <li>Visualisierte Prozessabläufe mit Infografiken</li>
-                <li>Passwortgeschützte Bereiche für Partner & Kunden</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
+.cyber-section {
+  background: transparent;
+  padding: 6rem 2rem;
+  color: #111;
+  font-family: 'Inter', sans-serif;
+}
 
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./GallerieGesamt/WebDesign3.webp" width="1671px" height="1294px" loading="lazy"
-                alt="Webdesign für Produktlaunch" />
-            </div>
-            <div class="overlay">
-              <p>Coole Produktlaunch Website</p>
-              <ul>
-                <li>Gezielte Lead-Generierung durch Formulare & CTA</li>
-                <li>Dynamische Countdown-Timer für zeitlich limitierte Aktionen</li>
-                <li>Einbindung von Videos und Animationen zur Produktpräsentation</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
+.neuro-core-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-        </div>
-      </div>
+/* ======================
+   ZENTRIERTER TEXTBLOCK
+====================== */
+.hypertext-block {
+  max-width: 800px;
+  z-index: 6;
+  position: relative;
+}
 
-      <!-- 3D Design -->
-      <div class="tab-content" id="tab-3d">
-        <div class="gallery">
+.neon-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #111;
+  z-index: 6;
+  position: relative;
+}
 
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./GallerieGesamt/3D1.webp" width="1671px" height="1294px" loading="lazy"
-                alt="Industrieobjekt 3D Texturierung" />
-            </div>
-            <div class="overlay">
-              <p>Industrieobjekt: Texturierung & Animation</p>
-              <ul>
-                <li>Realistische Materialien mit PBR</li>
-                <li>Animation technischer Abläufe</li>
-                <li>Export für Echtzeit-Viewer & Web</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
+.subtext {
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  color: #444;
+}
 
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./GallerieGesamt/3D2.webp" width="1671px" height="1294px" loading="lazy"
-                alt="3D Prototyp für neues Produkt" />
-            </div>
-            <div class="overlay">
-              <p>3D-Prototyp für neues Produkt</p>
-              <ul>
-                <li>Detailliertes 3D-Modell nach CAD-/Skizzen-Vorgabe</li>
-                <li>Realistische Licht- & Schatteneffekte (HDRI)</li>
-                <li>Ideal für Pitch, Investoren & Marketing</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
+/* ======================
+   FEATURE-KARTEN
+====================== */
+.feature-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  z-index: 6;
+  position: relative;
+}
 
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./GallerieGesamt/3D3.webp" width="1671px" height="1294px" loading="lazy"
-                alt="Interaktives 3D-Messemodell" />
-            </div>
-            <div class="overlay">
-              <p>Interaktive Präsentation für Messe oder Web</p>
-              <ul>
-                <li>Steuerbare 3D-Ansichten im Browser</li>
-                <li>WebGL/Three.js oder glTF-Kompatibilität</li>
-                <li>Optional: AR-Integration für Mobilgeräte</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
+.core-feature {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
 
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./3DSlideShow/post1.png" width="1671px" height="1294px" loading="lazy"
-                alt="Interaktives 3D-Messemodell" />
-            </div>
-            <div class="overlay">
-              <p>Interaktive Präsentation für Messe oder Web</p>
-              <ul>
-                <li>Steuerbare 3D-Ansichten im Browser</li>
-                <li>WebGL/Three.js oder glTF-Kompatibilität</li>
-                <li>Optional: AR-Integration für Mobilgeräte</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./GallerieGesamt/3D3.webp" width="1671px" height="1294px" loading="lazy"
-                alt="Interaktives 3D-Messemodell" />
-            </div>
-            <div class="overlay">
-              <p>Interaktive Präsentation für Messe oder Web</p>
-              <ul>
-                <li>Steuerbare 3D-Ansichten im Browser</li>
-                <li>WebGL/Three.js oder glTF-Kompatibilität</li>
-                <li>Optional: AR-Integration für Mobilgeräte</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./GallerieGesamt/3D3.webp" width="1671px" height="1294px" loading="lazy"
-                alt="Interaktives 3D-Messemodell" />
-            </div>
-            <div class="overlay">
-              <p>Interaktive Präsentation für Messe oder Web</p>
-              <ul>
-                <li>Steuerbare 3D-Ansichten im Browser</li>
-                <li>WebGL/Three.js oder glTF-Kompatibilität</li>
-                <li>Optional: AR-Integration für Mobilgeräte</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./GallerieGesamt/3D3.webp" width="1671px" height="1294px" loading="lazy"
-                alt="Interaktives 3D-Messemodell" />
-            </div>
-            <div class="overlay">
-              <p>Interaktive Präsentation für Messe oder Web</p>
-              <ul>
-                <li>Steuerbare 3D-Ansichten im Browser</li>
-                <li>WebGL/Three.js oder glTF-Kompatibilität</li>
-                <li>Optional: AR-Integration für Mobilgeräte</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./GallerieGesamt/3D3.webp" width="1671px" height="1294px" loading="lazy"
-                alt="Interaktives 3D-Messemodell" />
-            </div>
-            <div class="overlay">
-              <p>Interaktive Präsentation für Messe oder Web</p>
-              <ul>
-                <li>Steuerbare 3D-Ansichten im Browser</li>
-                <li>WebGL/Three.js oder glTF-Kompatibilität</li>
-                <li>Optional: AR-Integration für Mobilgeräte</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
+.core-feature h3 {
+  margin-bottom: .75rem;
+  font-size: 1.25rem;
+  color: #111;
+}
 
-        </div>
-      </div>
+.core-feature p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.5;
+}
 
-      <!-- Grafikdesign -->
-      <div class="tab-content" id="tab-graphic">
-        <div class="gallery">
+/* ======================
+   BUTTON
+====================== */
+.neon-pulse-btn {
+  display: inline-block;
+  padding: .75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: linear-gradient(45deg, #ff6600, #ff0051);
+  color: #fff;
+  box-shadow:
+    0 0 12px rgba(255, 102, 0, 0.4),
+    0 0 24px rgba(255, 64, 0, 0.4);
+  animation: pulse 2.5s ease-out infinite;
+  transition: filter .2s, box-shadow .2s;
+}
 
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./GallerieGesamt/Gradikdesign1.webp" width="1671px" height="1294px" loading="lazy"
-                alt="Branding Design Beispiel" />
-            </div>
-            <div class="overlay">
-              <p>Branding & Markenidentität (Flat Design)</p>
-              <ul>
-                <li>Individuelle Logoentwicklung</li>
-                <li>Farbwelt & typografische Konzepte</li>
-                <li>Professioneller Styleguide als PDF</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
+.neon-pulse-btn:hover {
+  filter: brightness(1.1);
+  box-shadow:
+    0 0 16px rgba(255, 102, 0, 0.6),
+    0 0 32px rgba(255, 89, 0, 0.6);
+}
 
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./GallerieGesamt/Gradikdesign2.webp" width="1671px" height="1294px" loading="lazy"
-                alt="Grafikdesign für Gastronomie" />
-            </div>
-            <div class="overlay">
-              <p>Printdesign für Gastronomie & Lifestyle</p>
-              <ul>
-                <li>Menükarten, Flyer & Tischaufsteller</li>
-                <li>Emotionale Bildsprache & Layouts</li>
-                <li>Druckfertige Daten inkl. Beratung</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
+@keyframes pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 8px rgba(255, 102, 0, .6),
+      0 0 16px rgba(255, 0, 89, 0.6);
+  }
+  50% {
+    box-shadow:
+      0 0 24px rgba(255, 102, 0, .3),
+      0 0 48px rgba(255, 0, 64, 0.3);
+  }
+}
 
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./GallerieGesamt/Gradikdesign3.webp" width="1671px" height="1294px" loading="lazy"
-                alt="Social Media Design für Events" />
-            </div>
-            <div class="overlay">
-              <p>Social Media Design für Events & Kampagnen</p>
-              <ul>
-                <li>Animierte Story- & Feed-Templates</li>
-                <li>Plakat- & Teaserdesign abgestimmt auf Zielgruppe</li>
-                <li>Export in allen Formaten & Größen</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
+/* ======================
+   VIDEO UNTEN OHNE RAHMEN
+====================== */
+.bare-video-container {
+  width: 100%;
+  max-width: 720px;
+  margin-top: 3rem;
+  z-index: 1;
+}
 
-        </div>
-      </div>
+.tech-visual-bare {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
 
+/* ======================
+   RESPONSIVE
+====================== */
+@media (max-width: 768px) {
+  .cyber-section {
+    padding: 4rem 1.5rem;
+  }
 
+  .neon-title {
+    font-size: 2rem;
+  }
 
-      <!-- Social Media -->
-      <div class="tab-content" id="tab-social">
-        <div class="gallery">
+  .subtext {
+    font-size: 1rem;
+  }
 
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./GallerieGesamt/SocialMedia1.webp" width="1671px" height="1294px" loading="lazy"
-                alt="Social Media Content Beauty Branche" />
-            </div>
-            <div class="overlay">
-              <p>Beauty & Lifestyle Content</p>
-              <ul>
-                <li>Redaktionsplan inkl. saisonaler Themen</li>
-                <li>Individuelle Canva-Vorlagen im Markenstil</li>
-                <li>Hashtag- & Reel-Strategie für mehr Reichweite</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
+  .feature-matrix {
+    gap: 1rem;
+  }
 
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./GallerieGesamt/SocialMedia2.webp" width="1671px" height="1294px" loading="lazy"
-                alt="Social Media für Events & Aktionen" />
-            </div>
-            <div class="overlay">
-              <p>Eventkampagnen & Launches</p>
-              <ul>
-                <li>Countdowns, Gewinnspiele & Teaser-Videos</li>
-                <li>Story- & Feed-Designs für mehr Engagement</li>
-                <li>Planung & Betreuung von Social Ads</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
+  .bare-video-container {
+    max-width: 100%;
+  }
 
-          <div class="gallery-item reveal">
-            <div class="media-wrapper">
-              <img src="./GallerieGesamt/SocialMedia3.webp" width="1671px" height="1294px" loading="lazy"
-                alt="Social Media für Coaches & Dienstleister" />
-            </div>
-            <div class="overlay">
-              <p>Content für Coaches & Dienstleister</p>
-              <ul>
-                <li>Visuelles Storytelling mit Mehrwert</li>
-                <li>Wissensvermittlung über Karussell-Posts</li>
-                <li>Conversion-optimierte Call-to-Actions</li>
-              </ul>
-              <a href="#kontakt" class="cta-btn">Jetzt ansehen!</a>
-            </div>
-          </div>
+  .tech-visual-bare {
+    height: auto;
+  }
+}
+@media (max-width: 425px) {
+  .cyber-section {
+    padding: 3rem 1rem;
+  }
 
-        </div>
-      </div>
+  .neon-title {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
 
+  .subtext {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
 
-      <!-- Weitere Tabs (3D, Grafik, Video, Social Media) → GLEICHE STRUKTUR -->
-      <!-- Du kannst bei Bedarf pro Karte eigene <ul> ergänzen -->
-    </div>
-  </section>
-  <style>
-    .interactive-portfolio {
-      padding: 6rem 2rem;
-      background-color: #ffffff;
-      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-      color: #ffffff;
-      text-align: center;
-    }
+  .feature-matrix {
+    grid-template-columns: 1fr; /* einspaltig auf sehr kleinen Screens */
+    gap: 1rem;
+  }
 
-    .portfolio-headline {
-      font-size: 2.8rem;
-      font-weight: 700;
-      margin-top: 6rem;
-      margin-bottom: 3rem;
-      color: #000000;
-    }
+  .core-feature {
+    padding: 1.2rem;
+  }
 
-    .tab-buttons {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 2.5rem;
-    }
+  .core-feature h3 {
+    font-size: 1.15rem;
+  }
 
-    .tab {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 0.6rem 1.5rem;
-      font-weight: 600;
-      border-radius: 50px;
-      backdrop-filter: blur(10px);
-      color: #000000;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: all 0.25s ease-in-out;
-    }
+  .core-feature p {
+    font-size: 0.95rem;
+  }
 
-    .tab:hover {
-      background-color: rgba(255, 255, 255, 0.15);
-    }
+  .neon-pulse-btn {
+    font-size: 0.95rem;
+    padding: 0.65rem 1.25rem;
+  }
+}
 
-    .tab.active {
-      background: var(--primary);
-      color: #0a0a0a;
-      border-color: var(--primary-color);
-      box-shadow: 0 4px 14px rgba(0, 255, 204, 0.3);
-    }
+@media (max-width: 375px) {
+  .neon-title {
+    font-size: 1.55rem;
+  }
 
-    .tab-content {
-      display: none;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.5s ease;
-    }
+  .core-feature {
+    padding: 1rem;
+  }
 
-    .tab-content.active {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .core-feature h3 {
+    font-size: 1.05rem;
+  }
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+  .core-feature p {
+    font-size: 0.9rem;
+  }
 
-    .gallery-item {
-      position: relative;
-      border-radius: 18px;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-      transition: transform 0.3s ease;
-    }
+  .neon-pulse-btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
 
-    .gallery-item:hover {
-      transform: translateY(-6px);
-    }
+@media (max-width: 320px) {
+  .cyber-section {
+    padding: 2.5rem 0.8rem;
+  }
 
-    .media-wrapper {
-      overflow: hidden;
-      aspect-ratio: 4 / 3;
-    }
+  .neon-title {
+    font-size: 1.4rem;
+  }
 
-    .media-wrapper img,
-    .media-wrapper video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-      border-radius: 18px 18px 0 0;
-    }
+  .subtext {
+    font-size: 0.85rem;
+  }
 
-    .gallery-item:hover img,
-    .gallery-item:hover video {
-      transform: scale(1.05);
-    }
+  .core-feature h3 {
+    font-size: 1rem;
+  }
 
-    .overlay {
-      position: absolute;
-      inset: 0;
-      padding: 2rem;
-      background: rgba(10, 10, 10, 0.75);
-      border-radius: 18px;
-      backdrop-filter: blur(20px);
-      color: #ffffff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 1rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.4s ease-in-out;
-      text-align: left;
-    }
+  .core-feature p {
+    font-size: 0.85rem;
+  }
 
-    .gallery-item:hover .overlay {
-      opacity: 1;
-      pointer-events: auto;
-    }
+  .neon-pulse-btn {
+    font-size: 0.85rem;
+    padding: 0.55rem 1rem;
+  }
+}
+@media (max-width: 400px) {
+  .cyber-section {
+    padding-top: 1.5rem;  /* weniger Abstand oben */
+    margin-top: -10rem;    /* optional, um sie noch weiter hoch zu drücken */
+  }
+}
 
-    .overlay p {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin: 0;
-      color: #ffffff;
-    }
-
-    .overlay ul {
-      margin: 0;
-      padding-left: 1.2rem;
-      font-size: 1.05rem;
-      line-height: 1.5;
-      color: #dddddd;
-    }
-
-    .overlay ul li {
-      list-style-type: disc;
-      margin-bottom: 0.3rem;
-    }
-
-    .cta-btn {
-      margin-top: 1rem;
-      align-self: flex-start;
-      background: #00ffcc;
-      color: #0a0a0a;
-      border: none;
-      padding: 0.5rem 1.4rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      border-radius: 2rem;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .cta-btn:hover {
-      background-color: #00e6b2;
-      transform: scale(1.12);
-    }
-
-    @media (max-width: 768px) {
-      .tab-buttons {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 0.75rem;
-        padding: 0 1rem;
-      }
-
-      .tab {
-        font-size: 0.9rem;
-        padding: 0.6rem 1rem;
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .gallery {
-        grid-template-columns: 1fr;
-        padding: 1.2rem 0.6rem;
-      }
-
-      .overlay {
-        padding: 1.4rem;
-      }
-
-      .overlay p {
-        font-size: 1.1rem;
-      }
-
-      .overlay ul {
-        font-size: 1rem;
-      }
-
-      .cta-btn {
-        font-size: 0.9rem;
-        padding: 0.5rem 1.4rem;
-      }
-
-      .tab-buttons {
-        grid-template-columns: repeat(2, minmax(100px, 1fr));
-      }
-    }
-
-    .reveal {
-      opacity: 1 !important;
-      transform: none !important;
-    }
-  </style>
-  <script>
-    feather.replace();
-
-    document.querySelectorAll('.tab').forEach(button => {
-      button.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-
-        button.classList.add('active');
-        const tabId = button.dataset.tab;
-        document.querySelector(`#tab-${tabId}`).classList.add('active');
-      });
-    });
-  </script>
-
-
+</style>
 
 
 
