@@ -226,11 +226,12 @@
     </nav>
   </header>
 
-
+<!--
   <section class="hero-video-wrapper">
     <div class="hero-bg-image png-bg"></div>
 
-    <!-- <video autoplay muted loop playsinline class="hero-bg-video">
+   
+    <video autoplay muted loop playsinline class="hero-bg-video">
       <source src="./3DPic/HintergrundProdukt1.png" type="video/mp4">
       Your browser does not support the video tag.
     </video>
@@ -239,8 +240,6 @@
 <div class="hero-bg-image"></div>
     <div class="hero-overlay-image"></div>   
     <div class="above-text-image"></div>
--->
-
     <div class="hero-video-content">
       <h1>UX & Webdesign</h1>
       <p> Innovativ. Benutzerzentriert. Erfolgreich</p>
@@ -919,7 +918,117 @@ width: 170vw;
     }
   });
 </script>
-<!---->
+-->
+
+<style>
+  .epic3d-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #000;
+  }
+
+  .epic3d-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0.8;
+  }
+
+  .epic3d-content {
+    position: relative;
+    z-index: 2;
+    max-width: 80%;
+    animation: fadeInUp 1.5s ease-out;
+  }
+
+  .epic3d-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.7);
+    animation: textPop 1s ease-out;
+  }
+
+  .epic3d-subtitle {
+    font-size: clamp(1.25rem, 2.5vw, 2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+    animation: fadeIn 2s ease-out;
+  }
+
+  .epic3d-cta {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(90deg, #007ACC, #66B2FF);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(0,108,204,0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: popIn 2.5s ease-out;
+  }
+
+  .epic3d-cta:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 40px rgba(0,108,204,0.7);
+  }
+
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(50px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes textPop {
+    0% { opacity: 0; transform: scale(0.5); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+</style>
+
+<section class="epic3d-section">
+  <!-- High-res 3D fly-through video or WebGL canvas -->
+  <video class="epic3d-bg" src="./assets/3d_flythrough.mp4" autoplay muted loop playsinline></video>
+
+  <div class="epic3d-content">
+    <h1 class="epic3d-title">Alles ist möglich in 3D</h1>
+    <p class="epic3d-subtitle">Dein Produkt – egal wo, egal wie. Wir bringen jede Vision in die Realität.</p>
+    <button class="epic3d-cta" onclick="location.href='#kontakt'">Jetzt episch starten</button>
+  </div>
+</section>
+
+
+
+
+
 <div class="white-bg-wrapper"> LEISTUNGEN 
 <section class="services-section" id="leistungen">
   <div class="parallax-bg"></div>
@@ -995,7 +1104,6 @@ width: 170vw;
     <p class="services-hint scroll-fade">Alle Preise sind Richtwerte. Für jedes Projekt erstellen wir ein passendes Angebot.</p>
   </div>
 </section>
-
 <style>:root {
   --card2-image: url('./indexFotoSlideShow/2.png');
   --card3-image: url('./indexFotoSlideShow/2.png');
@@ -1326,7 +1434,6 @@ width: 170vw;
   }
 }
 </style>
-
 <script>
   document.addEventListener("DOMContentLoaded", () => {
   feather.replace();
@@ -1484,7 +1591,6 @@ width: 170vw;
     }
   }
 </style>
-
 <section class="painpoints-section">
   <h2>KENNST DU DAS?</h2>
 
@@ -3230,223 +3336,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-<section class="configurator-section">
-  <h2>Ihr Fahrzeug – grenzenlos gerendert</h2>
-  <p class="configurator-tagline">
-    Schnell, günstig und völlig frei: Neue Hinter­gründe auf Knopf­druck – ob Mars­landschaft, Wüste oder futuristische City. Entfesseln Sie Ihre Kreativität!
-  </p>
-  <div class="configurator">
-    <!-- Linke Seite: Großes Bild -->
-    <div class="configurator-image">
-      <img id="mainImage" src="img/macan-silver-urban.jpg" alt="Fahrzeugkonfiguration">
-    </div>
-
-    <!-- Rechte Seite: Auswahl-Controls -->
-    <div class="configurator-controls">
-
-      <!-- Produkt-Auswahl -->
-      <div class="control-group">
-        <h3>Modell wählen</h3>
-        <div class="options" id="productOptions">
-          <button class="option-button active" data-product="macan">Macan</button>
-          <button class="option-button" data-product="taycan">Taycan</button>
-          <button class="option-button" data-product="cayenne">Cayenne</button>
-        </div>
-      </div>
-
-      <!-- Material-/Farb-Auswahl -->
-      <div class="control-group">
-        <h3>Farbe wählen</h3>
-        <div class="options" id="materialOptions">
-          <button class="swatch active" data-material="silver" style="background: #ccc"></button>
-          <button class="swatch" data-material="black" style="background: #000"></button>
-          <button class="swatch" data-material="blue"  style="background: #1f3a93"></button>
-          <button class="swatch" data-material="white" style="background: #fff; border: 1px solid #ccc"></button>
-        </div>
-      </div>
-
-      <!-- Szenario-Auswahl -->
-      <div class="control-group">
-        <h3>Hintergrund wählen</h3>
-        <div class="options" id="landscapeOptions">
-          <button class="scenario-thumb active" data-landscape="urban">
-            <img src="img/thumb-urban.jpg"  alt="Urban">
-          </button>
-          <button class="scenario-thumb" data-landscape="forest">
-            <img src="img/thumb-forest.jpg" alt="Wald">
-          </button>
-          <button class="scenario-thumb" data-landscape="desert">
-            <img src="img/thumb-desert.jpg" alt="Wüste">
-          </button>
-          <button class="scenario-thumb" data-landscape="mars">
-            <img src="img/thumb-mars.jpg" alt="Mars">
-          </button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<style>
-  .configurator-section {
-    max-width: 1200px;
-    margin: 4rem auto;
-    padding: 0 1rem;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  }
-  .configurator-section h2 {
-    text-align: center;
-    margin-bottom: 0.5rem;
-    font-size: clamp(2rem, 5vw, 2.5rem);
-    color: #222;
-  }
-  .configurator-tagline {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 1.1rem;
-    color: #555;
-  }
-  .configurator {
-    display: flex;
-    gap: 2rem;
-    align-items: flex-start;
-  }
-  .configurator-image {
-    flex: 2;
-  }
-  .configurator-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  }
-  .configurator-controls {
-    flex: 1;
-    max-width: 300px;
-  }
-  .control-group {
-    margin-bottom: 2rem;
-  }
-  .control-group h3 {
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-    color: #333;
-  }
-  .options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  .option-button {
-    flex: 1 1 calc(33% - 0.5rem);
-    padding: 0.5rem;
-    background: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    text-align: center;
-    transition: background 0.2s, border-color 0.2s;
-  }
-  .option-button.active {
-    background: #ff5100;
-    color: #fff;
-    border-color: #ff5100;
-  }
-  .swatch {
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    border: 2px solid transparent;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: border-color 0.2s;
-  }
-  .swatch.active {
-    border-color: #ff5100;
-  }
-  .scenario-thumb {
-    width: 60px;
-    height: 40px;
-    padding: 0;
-    border: 2px solid transparent;
-    border-radius: 4px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: border-color 0.2s;
-  }
-  .scenario-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .scenario-thumb.active {
-    border-color: #ff5100;
-  }
-  @media (max-width: 768px) {
-    .configurator {
-      flex-direction: column;
-    }
-    .configurator-controls {
-      max-width: none;
-    }
-  }
-</style>
-
-<script>
-  let selectedProduct   = 'macan';
-  let selectedMaterial  = 'silver';
-  let selectedLandscape = 'urban';
-
-  function updateImage() {
-    document.getElementById('mainImage')
-      .src = `img/${selectedProduct}-${selectedMaterial}-${selectedLandscape}.jpg`;
-  }
-
-  function bindOptions(groupId, dataAttr, setter) {
-    document.getElementById(groupId).addEventListener('click', e => {
-      const btn = e.target.closest('[data-' + dataAttr + ']');
-      if (!btn) return;
-      document.querySelectorAll(`#${groupId} [data-${dataAttr}]`)
-        .forEach(el => el.classList.remove('active'));
-      btn.classList.add('active');
-      setter(btn.dataset[dataAttr]);
-      updateImage();
-    });
-  }
-
-  bindOptions('productOptions' , 'product'   , val => selectedProduct   = val);
-  bindOptions('materialOptions', 'material'  , val => selectedMaterial  = val);
-  bindOptions('landscapeOptions','landscape' , val => selectedLandscape = val);
-</script>
-
-
-
-
-
-
 
 
 <section class="viewer-section">
-  <h2>Ihr Fahrzeug – grenzenlos gerendert</h2>
+  <h2>Ihr Produkt – grenzenlos gerendert</h2>
   <p class="viewer-tagline">
     Schnell, günstig und völlig frei: Neue Hinter­gründe auf Knopf­druck – ob Mars­landschaft, Wüste oder futuristische City.
   </p>
   <div class="viewer-layout">
     <!-- Linke Seite: Bild mit Cross-Fade -->
     <div class="image-display">
-      <img id="displayImg" class="alpha-in" src="img/macan-silver-urban.jpg" alt="Fahrzeug-Render">
+      <img id="displayImg" class="alpha-in" src="3DPic/creme-silver-urban.png" alt="Produkt-Render">
     </div>
 
     <!-- Rechte Seite: Auswahl-Panel -->
     <div class="controls-panel">
       <div class="group">
-        <h3>Modell</h3>
-        <div class="choices" id="modelChoices">
-          <button class="choice-btn active" data-model="macan">Macan</button>
-          <button class="choice-btn" data-model="taycan">Taycan</button>
-          <button class="choice-btn" data-model="cayenne">Cayenne</button>
+        <h3>Produkt</h3>
+        <div class="choices" id="productChoices">
+          <button class="choice-btn active" data-product="creme">Creme</button>
+          <button class="choice-btn" data-product="verpackung">Verpackung</button>
+          <button class="choice-btn" data-product="industrial-workstation">Industrial Workstation</button>
         </div>
       </div>
 
@@ -3586,35 +3496,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script>
   // neue State-Variablen
-  let chosenModel = 'macan';
-  let chosenColor = 'silver';
-  let chosenScene = 'urban';
+  let currentProduct = 'creme';
+  let currentColor   = 'silver';
+  let currentScene   = 'urban';
 
   const displayEl = document.getElementById('displayImg');
 
-  function cacheImage(path) {
-    const img = new Image();
-    img.src = path;
+  function preloadImg(path) {
+    const i = new Image();
+    i.src = path;
   }
 
-  function changeDisplay(nextPath) {
-    cacheImage(nextPath);
+  function animateSwap(nextPath) {
+    preloadImg(nextPath);
     displayEl.classList.replace('alpha-in', 'alpha-out');
-    displayEl.addEventListener('transitionend', function once() {
-      displayEl.removeEventListener('transitionend', once);
+    displayEl.addEventListener('transitionend', function handler() {
+      displayEl.removeEventListener('transitionend', handler);
       displayEl.src = nextPath;
       displayEl.classList.replace('alpha-out', 'alpha-in');
     });
   }
 
-  function refreshDisplay() {
-    const newPath = `img/${chosenModel}-${chosenColor}-${chosenScene}.jpg`;
-    if (!displayEl.src.includes(newPath)) {
-      changeDisplay(newPath);
+  function updateDisplay() {
+    const path = `3DPic/${currentProduct}-${currentColor}-${currentScene}.png`;
+    if (!displayEl.src.includes(path)) {
+      animateSwap(path);
     }
   }
 
-  function attachHandlers(containerId, dataKey, setter) {
+  function setupPicker(containerId, dataKey, setter) {
     document.getElementById(containerId).addEventListener('click', e => {
       const btn = e.target.closest(`[data-${dataKey}]`);
       if (!btn) return;
@@ -3622,242 +3532,19 @@ document.addEventListener("DOMContentLoaded", () => {
         .forEach(el => el.classList.remove('active'));
       btn.classList.add('active');
       setter(btn.dataset[dataKey]);
-      refreshDisplay();
+      updateDisplay();
     });
   }
 
-  // Event-Binder
-  attachHandlers('modelChoices',   'model',   val => chosenModel = val);
-  attachHandlers('colorChoices',   'color',   val => chosenColor = val);
-  attachHandlers('sceneChoices',   'scene',   val => chosenScene = val);
+  // Picker initialisieren
+  setupPicker('productChoices', 'product', val => currentProduct = val);
+  setupPicker('colorChoices',   'color',   val => currentColor   = val);
+  setupPicker('sceneChoices',   'scene',   val => currentScene   = val);
 </script>
 
 
-<style>
-  .epic3d-section {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    font-family: 'Inter', sans-serif;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: #000;
-  }
-
-  .epic3d-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-    opacity: 0.8;
-  }
-
-  .epic3d-content {
-    position: relative;
-    z-index: 2;
-    max-width: 80%;
-    animation: fadeInUp 1.5s ease-out;
-  }
-
-  .epic3d-title {
-    font-size: clamp(3rem, 8vw, 6rem);
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 1rem;
-    text-shadow: 0 4px 20px rgba(0,0,0,0.7);
-    animation: textPop 1s ease-out;
-  }
-
-  .epic3d-subtitle {
-    font-size: clamp(1.25rem, 2.5vw, 2rem);
-    font-weight: 600;
-    line-height: 1.2;
-    margin-bottom: 2rem;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.7);
-    animation: fadeIn 2s ease-out;
-  }
-
-  .epic3d-cta {
-    display: inline-block;
-    padding: 1rem 2rem;
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #fff;
-    background: linear-gradient(90deg, #007ACC, #66B2FF);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 8px 30px rgba(0,108,204,0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: popIn 2.5s ease-out;
-  }
-
-  .epic3d-cta:hover {
-    transform: scale(1.1);
-    box-shadow: 0 12px 40px rgba(0,108,204,0.7);
-  }
-
-  @keyframes fadeInUp {
-    0% { opacity: 0; transform: translateY(50px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes textPop {
-    0% { opacity: 0; transform: scale(0.5); }
-    100% { opacity: 1; transform: scale(1); }
-  }
-
-  @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-  }
-
-  @keyframes popIn {
-    0% { opacity: 0; transform: scale(0.8); }
-    100% { opacity: 1; transform: scale(1); }
-  }
-</style>
-
-<section class="epic3d-section">
-  <!-- High-res 3D fly-through video or WebGL canvas -->
-  <video class="epic3d-bg" src="./assets/3d_flythrough.mp4" autoplay muted loop playsinline></video>
-
-  <div class="epic3d-content">
-    <h1 class="epic3d-title">Alles ist möglich in 3D</h1>
-    <p class="epic3d-subtitle">Dein Produkt – egal wo, egal wie. Wir bringen jede Vision in die Realität.</p>
-    <button class="epic3d-cta" onclick="location.href='#kontakt'">Jetzt episch starten</button>
-  </div>
-</section>
 
 
 
 
 
-
-
-
-
-<style>
-  .spectacular-viewport {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    font-family: 'Inter', sans-serif;
-    color: #fff;
-  }
-
-  .spectacular-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    text-align: center;
-    pointer-events: none;
-  }
-
-  .spectacular-heading {
-    font-size: clamp(3rem, 8vw, 6rem);
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 1rem;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
-    pointer-events: auto;
-  }
-
-  .spectacular-tagline {
-    font-size: clamp(1.25rem, 2.5vw, 2rem);
-    font-weight: 600;
-    line-height: 1.2;
-    margin-bottom: 2rem;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
-    pointer-events: auto;
-  }
-
-  .spectacular-button {
-    display: inline-block;
-    padding: 1rem 2rem;
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #fff;
-    background: linear-gradient(90deg, #FF5733, #FF8D1A);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 8px 30px rgba(255, 87, 51, 0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    pointer-events: auto;
-  }
-
-  .spectacular-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 12px 40px rgba(255, 87, 51, 0.7);
-  }
-</style>
-
-<section class="spectacular-viewport">
-  <canvas id="glCanvas"></canvas>
-  <div class="spectacular-overlay">
-    <h1 class="spectacular-heading">Unbegrenzte 3D-Möglichkeiten</h1>
-    <p class="spectacular-tagline">Platziere dein Produkt überall – wir machen es möglich.</p>
-    <button class="spectacular-button" onclick="location.href='#kontakt'">Jetzt starten</button>
-  </div>
-</section>
-
-<script type="module">
-  import * as THREE from 'https://unpkg.com/three@0.152.2/build/three.module.js';
-  import { GLTFLoader } from 'https://unpkg.com/three@0.152.2/examples/jsm/loaders/GLTFLoader.js';
-
-  const glCanvas = document.getElementById('glCanvas');
-  const webglRenderer = new THREE.WebGLRenderer({ canvas: glCanvas, antialias: true, alpha: true });
-  webglRenderer.setSize(window.innerWidth, window.innerHeight);
-
-  const scene3D = new THREE.Scene();
-  const cam3D = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
-  cam3D.position.set(0, 1.5, 3);
-
-  const lightAmbient = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
-  scene3D.add(lightAmbient);
-  const lightDirectional = new THREE.DirectionalLight(0xffffff, 1);
-  lightDirectional.position.set(5, 10, 7);
-  scene3D.add(lightDirectional);
-
-  const modelLoader = new GLTFLoader();
-  modelLoader.load('Mini_roboter_Deniz_Herrnreither1.glb', gltfAsset => {
-    const loadedModel = gltfAsset.scene;
-    loadedModel.scale.set(1, 1, 1);
-    scene3D.add(loadedModel);
-  });
-
-  function handleResize() {
-    cam3D.aspect = window.innerWidth / window.innerHeight;
-    cam3D.updateProjectionMatrix();
-    webglRenderer.setSize(window.innerWidth, window.innerHeight);
-  }
-  window.addEventListener('resize', handleResize);
-
-  let rotTarget = 0;
-  window.addEventListener('scroll', () => {
-    const scrollRatio = window.scrollY / window.innerHeight;
-    rotTarget = scrollRatio * Math.PI * 2;
-  });
-
-  function renderLoop() {
-    requestAnimationFrame(renderLoop);
-    scene3D.rotation.y += (rotTarget - scene3D.rotation.y) * 0.05;
-    webglRenderer.render(scene3D, cam3D);
-  }
-  renderLoop();
-</script>

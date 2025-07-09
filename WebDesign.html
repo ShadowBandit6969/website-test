@@ -216,26 +216,128 @@
     }
   </style>
 </head>
-
 <body>
 
-  <header>
+
+<style>
+:root {
+  /* Schriftfamilien */
+  --font-sans: 'Inter', sans-serif;
+  --font-alt: 'Space Grotesk', sans-serif;
+  --font-mono: 'VT323', monospace;
+
+  /* Schriftschnitte */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --fw-black: 900;
+
+  /* Grundschriftgrößen */
+  --fs-base: 1rem;
+  --fs-h1: 2.8rem;
+  --fs-h2: 2.4rem;
+  --fs-h3: 1.8rem;
+  --fs-h4: 1.4rem;
+
+  /* Farbpalette */
+  --color-primary: #ff6600;
+  --color-secondary: #ff944d;
+  --color-accent: #ff5100;
+  --color-bg: #ffffff;
+  --color-text: #111111;
+  --color-muted: #999999;
+}
+</style>
+
+
+
+<header role="banner">
+  <a class="skip-link" href="#main-nav">Zum Hauptmenü springen</a>
+  <div class="container header-inner">
     <div class="logo">Fusion³</div>
-    <button class="burger-icon" id="burgerToggle" aria-label="Menü öffnen">
+    <button
+      id="burgerToggle"
+      class="burger-icon"
+      aria-label="Menü öffnen"
+      aria-controls="main-nav"
+      aria-expanded="false"
+    >
       <i data-feather="menu"></i>
     </button>
-
-    <nav>
+    <nav
+      id="main-nav"
+      class="nav"
+      aria-label="Hauptnavigation"
+    >
       <a href="#leistungen">Leistungen</a>
       <a href="#ueber-uns">Über uns</a>
       <a href="#portfolio">Portfolio</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
-  </header>
+  </div>
+</header>
 
 
 
 <style>
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+  }
+  .skip-link {
+    position: absolute;
+    left: -999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+    width: auto;
+    height: auto;
+    padding: .5rem;
+    background: #000;
+    color: #fff;
+    z-index: 1000;
+  }
+  .burger-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .nav {
+    display: flex;
+    gap: 2rem;
+  }
+  .nav a {
+    text-decoration: none;
+    font-weight: var(--fw-medium);
+    color: var(--color-muted);
+    transition: color .3s;
+  }
+  .nav a:hover,
+  .nav a:focus {
+    color: var(--color-primary);
+  }
+  .nav.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--color-bg);
+    width: 100%;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0, .1);
+  }
+
   .hero-block-unique {
     position: relative;
     height: 100vh;
@@ -245,7 +347,7 @@
     align-items: center;
     text-align: center;
     padding: 1.5rem;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-sans);
     color: #000;
     background-size: cover;
     background-position: top center;
@@ -253,643 +355,588 @@
     overflow: hidden;
     z-index: 1;
   }
-
-  /* Hintergrundbilder */
-  @media (min-width: 768px) {
-    .hero-block-unique {
-      background-image: url('./WebdesignPic/HintegrundPC.png');
-    }
+  .hero-block-unique[aria-hidden="true"] {
+    visibility: hidden;
   }
 
-  @media (max-width: 767px) {
-    .hero-block-unique {
-      background-image: url('./WebdesignPic/HintegrundHandy.png');
-    }
+  /* Highlight-Box & Typo */
+  .highlight-box {
+    border: 2px dashed var(--color-muted);
+    padding: .8rem 1.2rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    max-width: 600px;
+    width: 100%;
+    box-sizing: border-box;
   }
-
-.highlight-box {
-  border: 2px dashed #aaa;
-  padding: 0.8rem 1.2rem;
-  background: #fff;
-  color: #000;
-  max-width: 90vw;
-  min-width: 280px;
-  width: 100%;
-  max-width: 600px;
-  text-align: center;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  box-sizing: border-box;
-  z-index: 2;
-}
-
-.heading-typewriter {
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 800;
-  white-space: normal; /* <-- damit Umbrüche erlaubt sind */
-  line-height: 1.3;
-  color: #000;
-  z-index: 2;
-}
-
+  .heading-typewriter {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: var(--fw-black);
+    line-height: 1.3;
+  }
 
   .blinking-bar,
   .animated-bar {
     display: inline-block;
     width: 2px;
     height: 1.2em;
-    background: linear-gradient(180deg, #ff6600, #ff3300);
-    box-shadow: 0 0 4px #ff5100;
+    background: linear-gradient(180deg, var(--color-primary), var(--color-accent));
+    box-shadow: 0 0 4px var(--color-accent);
     vertical-align: bottom;
     animation: blink-flash 1s steps(1) infinite;
     margin-left: 2px;
   }
-
-  .dynamic-typing-area {
-    position: relative;
-    z-index: 2;
-    margin-top: 1rem;
-  }
-
-  .dynamic-line {
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
-
-  .cursor-icon {
-    position: absolute;
-    width: 1em;
-    height: 1.2em;
-    border-left: 2px solid #ff5100;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    transition: transform 0.05s;
-    z-index: 2;
-  }
-
-  .hero-cta {
-    margin-top: 2rem;
-    padding: 0.9rem 2.2rem;
-    font-size: 1.05rem;
-    font-weight: 700;
-    border-radius: 10px;
-    background: #ff6600;
-    color: #fff;
-    text-decoration: none;
-    box-shadow: 0 10px 30px rgba(255, 102, 0, 0.4);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-    z-index: 2;
-    display: inline-block;
-    touch-action: manipulation;
-  }
-
-  .hero-cta.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
   @keyframes blink-flash {
     0%, 50% { opacity: 1; }
     50.1%, 100% { opacity: 0; }
   }
 
-  /* Extra responsive Tweaks für ganz kleine Geräte */
+  .dynamic-typing-area {
+    margin-top: 1rem;
+    position: relative;
+  }
+  .dynamic-line {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .cursor-icon {
+    position: absolute;
+    border-left: 2px solid var(--color-accent);
+    height: 1.2em;
+    pointer-events: none;
+    transition: transform .05s;
+  }
+
+  .hero-cta {
+    margin-top: 2rem;
+    padding: .9rem 2.2rem;
+    font: var(--fw-bold) var(--fs-base) var(--font-sans);
+    border-radius: 10px;
+    background: var(--color-primary);
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(255,102,0,.4);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .hero-cta.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      display: none;
+    }
+    .burger-icon {
+      display: block;
+    }
+  }
   @media (max-width: 480px) {
     .hero-block-unique {
       padding: 1.2rem 1rem;
     }
-
     .hero-cta {
       font-size: 1rem;
-      padding: 0.8rem 1.6rem;
+      padding: .8rem 1.6rem;
     }
-
     .highlight-box {
-      padding: 0.6rem 0.8rem;
+      padding: .6rem .8rem;
     }
   }
 </style>
-
-
-<section class="hero-block-unique">
-  <!-- Titel in Highlight-Box -->
-  <div class="highlight-box moveable-heading">
+<section
+  class="hero-block-unique"
+  id="hero"
+  role="region"
+  aria-label="Hero-Bereich"
+  aria-hidden="false"
+  data-bg-desktop="./WebdesignPic/HintegrundPC.png"
+  data-bg-mobile="./WebdesignPic/HintegrundHandy.png"
+>
+  <div class="highlight-box" aria-hidden="true">
     <h1 class="heading-typewriter">
       <span class="animated-title-line"></span><span class="blinking-bar"></span>
     </h1>
   </div>
-
-  <!-- Schreibzeile -->
-  <div class="dynamic-typing-area moveable-heading">
+  <div class="dynamic-typing-area" aria-hidden="true">
     <div class="highlight-box">
       <span class="dynamic-line"></span><span class="animated-bar"></span>
     </div>
     <div class="cursor-icon"></div>
   </div>
-
-  <!-- CTA -->
-  <a href="#kontakt" class="hero-cta hidden">Projekt starten</a>
+  <a
+    href="#kontakt"
+    class="hero-cta"
+    aria-hidden="true"
+  >Projekt starten</a>
 </section>
-
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const elTitle = document.querySelector('.animated-title-line');
-    const elMainText = document.querySelector('.dynamic-line');
-    const elBar = document.querySelector('.animated-bar');
-    const elMouse = document.querySelector('.cursor-icon');
-    const elCTA = document.querySelector('.hero-cta');
-
-    const titleAnimations = [
-      { text: "Digitale Erlebnisse, die bleiben", delay: 60 },
-      { pause: 1000 },
-      { delete: 'all', delay: 30 },
-      { text: "UX & Webdesign mit Struktur", delay: 55 },
-      { pause: 1000 },
-      { delete: 'all', delay: 30 },
-      { text: "Prototyp. Analyse. Performance.", delay: 50 },
-      { pause: 1200 },
-      { delete: 'all', delay: 30 }
-    ];
-
-    const textAnimations = [
-      { text: "Validiert. Skalierbar. Schnell.", delay: 50 },
-      { pause: 1000 },
-      { delete: 'all', delay: 30 },
-      { text: "UX-Design trifft SEO & Strategie", delay: 50 },
-      { pause: 1000 },
-      { delete: 'all', delay: 30 },
-      { text: "Projekte mit messbarem Impact", delay: 50 },
-      { pause: 1000 },
-      { delete: 'all', delay: 30 }
-    ];
-
-    let titleStep = 0, titleChar = 0;
-    let textStep = 0, textChar = 0;
-
-    async function animateTitle() {
-      const item = titleAnimations[titleStep];
-      if (!item) { titleStep = 0; return animateTitle(); }
-
-      if (item.text !== undefined) {
-        if (titleChar < item.text.length) {
-          elTitle.textContent += item.text[titleChar++];
-          await pause(item.delay);
-          return animateTitle();
-        }
-        titleChar = 0;
-        titleStep++;
-        await pause(400);
-        return animateTitle();
-      }
-
-      if (item.delete !== undefined) {
-        let count = item.delete === 'all' ? elTitle.textContent.length : item.delete;
-        while (count--) {
-          elTitle.textContent = elTitle.textContent.slice(0, -1);
-          await pause(item.delay);
-        }
-        titleStep++;
-        return animateTitle();
-      }
-
-      if (item.pause) {
-        await pause(item.pause);
-        titleStep++;
-        return animateTitle();
-      }
-    }
-
-    async function animateText() {
-      const item = textAnimations[textStep];
-      if (!item) { textStep = 0; return animateText(); }
-
-      if (item.text !== undefined) {
-        if (textChar < item.text.length) {
-          elMainText.textContent += item.text[textChar++];
-          moveMouse();
-          await pause(item.delay);
-          return animateText();
-        }
-        textChar = 0;
-        textStep++;
-        await pause(400);
-        return animateText();
-      }
-
-      if (item.delete !== undefined) {
-        let count = item.delete === 'all' ? elMainText.textContent.length : item.delete;
-        while (count--) {
-          elMainText.textContent = elMainText.textContent.slice(0, -1);
-          moveMouse();
-          await pause(item.delay);
-        }
-        textStep++;
-        return animateText();
-      }
-
-      if (item.pause) {
-        await pause(item.pause);
-        textStep++;
-        return animateText();
-      }
-    }
-
-    function moveMouse() {
-      const caret = elBar.getBoundingClientRect();
-      const parent = elBar.parentElement.getBoundingClientRect();
-      elMouse.style.transform = `translate(${caret.left - parent.left}px, ${caret.top - parent.top}px)`;
-    }
-
-    function pause(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    animateTitle();
-    animateText();
-
-    setTimeout(() => {
-      elCTA.classList.add('visible');
-      elCTA.classList.remove('hidden');
-    }, 5000);
+(() => {
+  // Navigation Toggle
+  const burger = document.getElementById('burgerToggle');
+  const nav = document.getElementById('main-nav');
+  burger.addEventListener('click', () => {
+    const expanded = burger.getAttribute('aria-expanded') === 'true';
+    burger.setAttribute('aria-expanded', String(!expanded));
+    nav.classList.toggle('open');
   });
+
+  // Lazy-load Hero Background
+  const hero = document.getElementById('hero');
+  const loadBg = () => {
+    const src = window.innerWidth >= 768
+      ? hero.dataset.bgDesktop
+      : hero.dataset.bgMobile;
+    hero.style.backgroundImage = `url('${src}')`;
+  };
+  new IntersectionObserver((entries, obs) => {
+    if (entries[0].isIntersecting) {
+      loadBg();
+      obs.disconnect();
+    }
+  }, { threshold: .1 }).observe(hero);
+
+  // Typing Animation Module
+  const typeSequence = async (el, steps) => {
+    let step=0, char=0;
+    const pause = ms => new Promise(res=>setTimeout(res, ms));
+    while(true){
+      const item = steps[step] || (step=0, steps[step]);
+      if (item.text!==undefined){
+        if(char<item.text.length){
+          el.textContent += item.text[char++];
+          await pause(item.delay);
+          continue;
+        }
+        char=0; step++; await pause(400);
+      }
+      else if(item.delete!==undefined){
+        let cnt = item.delete==='all'?el.textContent.length:item.delete;
+        while(cnt--) { el.textContent=el.textContent.slice(0,-1); await pause(item.delay); }
+        step++;
+      }
+      else if(item.pause){ await pause(item.pause); step++; }
+    }
+  };
+
+  const titleAnim = [
+    { text:"Digitale Erlebnisse, die bleiben", delay:60 },
+    { pause:1000 },{ delete:'all', delay:30 },
+    { text:"UX & Webdesign mit Struktur", delay:55 },
+    { pause:1000 },{ delete:'all', delay:30 },
+    { text:"Prototyp. Analyse. Performance.", delay:50 },
+    { pause:1200 },{ delete:'all', delay:30 }
+  ];
+  const textAnim = [
+    { text:"Validiert. Skalierbar. Schnell.", delay:50 },
+    { pause:1000 },{ delete:'all', delay:30 },
+    { text:"UX-Design trifft SEO & Strategie", delay:50 },
+    { pause:1000 },{ delete:'all', delay:30 },
+    { text:"Projekte mit messbarem Impact", delay:50 },
+    { pause:1000 },{ delete:'all', delay:30 }
+  ];
+
+  const elTitle = hero.querySelector('.animated-title-line');
+  const elText  = hero.querySelector('.dynamic-line');
+  const elBar   = hero.querySelector('.animated-bar');
+  const elCursor= hero.querySelector('.cursor-icon');
+  // move cursor
+  const moveCursor = () => {
+    const r=elBar.getBoundingClientRect(), p=elBar.parentElement.getBoundingClientRect();
+    elCursor.style.transform = `translate(${r.left-p.left}px,${r.top-p.top}px)`;
+  };
+  // animate
+  typeSequence(elTitle, titleAnim);
+  typeSequence(elText,  textAnim).then();
+
+  // reveal CTA
+  setTimeout(()=>{
+    const cta = hero.querySelector('.hero-cta');
+    cta.classList.add('visible');
+    cta.setAttribute('aria-hidden','false');
+  },5000);
+})();
 </script>
 
 
 
+<style>
+  .painpoints-section {
+    background: #ffffff;
+    padding: 8rem 5vw 5rem;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
 
-  <section class="pricing-clean container" id="pakete" aria-label="Website-Pakete und Preise">
-    <h1 class="visually-hidden">Preise für Webdesign-Pakete</h1>
-    <h2 class="pricing-title">Webdesign-Pakete <br>Transparent, Skalierbar, Effektiv</h2>
-    <p class="pricing-subline">
-      Von der einfachen Onepager-Website bis zur professionellen Business-Webseite – maßgeschneiderte Lösungen für Ihr
-      Unternehmen.
-    </p>
+  .painpoints-section h2 {
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: #111;
+    margin-bottom: 4rem;
+    letter-spacing: -0.5px;
+  }
 
-    <!-- Toggle: Netto / Brutto 
-  <div class="preis-toggle">
-    <label for="preisModus">Preis anzeigen in:</label>
-    <button id="preisModus" onclick="togglePreise()" aria-pressed="false">💼 Netto</button>
-  </div>
--->
-    <div class="pricing-grid">
+  .painpoints-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 
-      <!-- Starter -->
-      <article class="pricing-card">
-        <div class="icon-wrap"><i data-feather="zap"></i></div>
-        <h3>Starter-Paket</h3>
-        <p class="tagline">Ein klarer erster Eindruck</p>
-        <ul>
-          <li>✓ Einzigartige Titelseite</li>
-          <li>✓ Responsive Design für alle Endgeräte</li>
-          <li>✓ 1 Korrekturschleife</li>
-          <li>✓ DSGVO-konform</li>
-        </ul>
-        <p class="vorteil">Ideal für kleine Unternehmen, die mit einem professionellen Onepager online durchstarten
-          möchten – mobilfreundlich und DSGVO-konform.</p>
-        <div class="preis" data-netto="699" data-brutto="831.81">ab 699 € <span>zzgl. MwSt.</span></div>
-      </article>
+  .painpoint-card {
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+    height: 100%;
+  }
 
-      <!-- Business -->
-      <article class="pricing-card">
-        <div class="icon-wrap"><i data-feather="layers"></i></div>
-        <h3>Business-Paket</h3>
-        <p class="tagline">Mehrseitige Online-Präsenz</p>
-        <ul>
-          <li>✓ Titelseite + bis zu 4 Unterseiten</li>
-          <li>✓ Responsive Design</li>
-          <li>✓ Kontaktformular & Basis-SEO</li>
-          <li>✓ 2 Korrekturschleifen</li>
-          <li>✓ DSGVO-konform</li>
-        </ul>
-        <p class="vorteil">Mehrseitige Business-Webseite mit klarer Struktur, Kontaktformular und grundlegender SEO für
-          bessere Sichtbarkeit.</p>
-        <div class="preis" data-netto="1290" data-brutto="1535.10">ab 1.290 € <span>zzgl. MwSt.</span></div>
-      </article>
+  .painpoint-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+  }
 
-      <!-- Professional -->
-      <article class="pricing-card">
-        <div class="icon-wrap"><i data-feather="briefcase"></i></div>
-        <h3>Professional-Paket</h3>
-        <p class="tagline">Komplettlösung für den Business-Auftritt</p>
-        <ul>
-          <li>✓ Bis zu 10 Seiten</li>
-          <li>✓ Responsive Design</li>
-          <li>✓ Individuelles UX-Design</li>
-          <li>✓ 3 Korrekturschleifen</li>
-          <li>✓ Erweiterte SEO & CMS</li>
-          <li>✓ DSGVO-konform</li>
-        </ul>
-        <p class="vorteil">SEO-optimiertes Webdesign mit individuellem UX, CMS-Anbindung und ideal für mittlere
-          Unternehmen.</p>
-        <div class="preis" data-netto="2290" data-brutto="2725.10">ab 2.290 € <span>zzgl. MwSt.</span></div>
-      </article>
+  .painpoint-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #ff6600, #ff944d);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+  }
 
-      <!-- Premium -->
-      <article class="pricing-card highlight">
-        <div class="icon-wrap"><i data-feather="star"></i></div>
-        <h3>Premium-Paket</h3>
-        <p class="tagline">Rundum-sorglos für den Großauftritt</p>
-        <ul>
-          <li>✓ Unbegrenzte Seitenanzahl</li>
-          <li>✓ Responsive Design</li>
-          <li>✓ Premium-Design & Animationen</li>
-          <li>✓ Bis zu 5 Korrekturschleifen</li>
-          <li>✓ SEO, CMS & E-Commerce</li>
-          <li>✓ DSGVO-konform</li>
-        </ul>
-        <p class="vorteil">Komplettlösung mit Webshop (E-Commerce), Top-Performance, SEO und maßgeschneidertem
-          Premium-Design.</p>
-        <div class="preis" data-netto="3990" data-brutto="4748.10">ab 3.990 € <span>zzgl. MwSt.</span></div>
-      </article>
+  .painpoint-icon svg {
+    stroke: #fff;
+    width: 26px;
+    height: 26px;
+  }
 
-    </div>
-  </section>
-  <style>
-    :root {
-      --primary: #ff6600;
-      --secondary: #ffb266;
-      --text-color: #111;
-      --bg-light: #ffffff;
-      --highlight: #ffe2bd;
+  .painpoint-text {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.5;
+  }
+
+  .painpoints-note {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #222;
+    margin-top: 4rem;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .painpoints-grid {
+      grid-template-columns: 1fr 1fr;
     }
+  }
 
-    .visually-hidden {
-      position: absolute;
-      left: -9999px;
-    }
-
-    .pricing-clean {
-      background: transparent;
-      text-align: center;
-      color: var(--text-color);
-    }
-
-    .pricing-title {
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      font-weight: 900;
-      margin-bottom: 0.8rem;
-    }
-
-    .pricing-subline {
-      font-size: 1.1rem;
-      color: #666;
-      margin-bottom: 4rem;
-    }
-
-    .preis-toggle {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 2rem;
-      gap: 1rem;
-      font-weight: 600;
-      color: var(--primary);
-    }
-
-    #preisModus {
-      background: var(--secondary);
-      border: none;
-      color: #111;
-      font-weight: bold;
-      padding: 0.5rem 1.2rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    #preisModus:hover {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    .pricing-grid {
-      display: grid;
+  @media (max-width: 540px) {
+    .painpoints-grid {
       grid-template-columns: 1fr;
-      gap: 2rem;
+    }
+  }
+</style>
+<section class="painpoints-section">
+  <h2>Kennen Sie das?</h2>
+
+  <div class="painpoints-grid">
+    <div class="painpoint-card">
+      <div class="painpoint-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+        </svg>
+      </div>
+      <p class="painpoint-text">„Unsere Website lädt ewig – Besucher springen ab, bevor sie ankommen.“</p>
+    </div>
+
+    <div class="painpoint-card">
+      <div class="painpoint-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M15 9l-6 6" />
+        </svg>
+      </div>
+      <p class="painpoint-text">„Auf dem Smartphone ist alles verzerrt – kein responsives Design.“</p>
+    </div>
+
+    <div class="painpoint-card">
+      <div class="painpoint-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <p class="painpoint-text">„Besucher finden nichts – die Navigation ist unübersichtlich.“</p>
+    </div>
+
+    <div class="painpoint-card">
+      <div class="painpoint-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M12 20l-9-8 9-8 9 8-9 8z" />
+        </svg>
+      </div>
+      <p class="painpoint-text">„Inkonsistente Farben und Style – kein Wiedererkennungswert.“</p>
+    </div>
+
+    <div class="painpoint-card">
+      <div class="painpoint-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2l6 6-6 6-6-6 6-6z" />
+        </svg>
+      </div>
+      <p class="painpoint-text">„Unsere Conversion-Rate stagniert – Besucher werden nicht zu Kunden.“</p>
+    </div>
+
+    <div class="painpoint-card">
+      <div class="painpoint-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M2 12h20M12 2v20" />
+        </svg>
+      </div>
+      <p class="painpoint-text">„Updates sind mühsam – unser Webdesign ist nicht skalierbar.“</p>
+    </div>
+  </div>
+
+  <p class="painpoints-note">
+    Mit professionellem Webdesign gestalte ich für euch eine schnell ladende, responsive und konsistente Website, die eure Marke stärkt und Besucher zu Kunden macht.
+  </p>
+</section>
+
+
+
+
+
+<section class="angled-image-section">
+  <figure class="angled-image-wrapper">
+    <img
+      src="./WebdesignPic/webgerade.webp"
+      alt=""
+      width="1920"
+      height="1080"
+      loading="lazy"
+      decoding="async"
+    />
+  </figure>
+</section>
+<style>
+  html, body {
+    overflow-x: hidden;
+  }
+
+  :root {
+    --angled-rotation: -8deg;
+    --angled-width: 150vw;
+    --angled-offset: -25vw;
+  }
+
+  .angled-image-section {
+    position: relative;
+    width: 100vw;
+    overflow: visible;
+    margin-top: 3rem;
+    margin-bottom: -5rem;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      white 0%,
+      white 66.66%,
+      black 66.67%,
+      black 100%
+    );
+    z-index: 0;
+  }
+
+  .angled-image-wrapper {
+    width: var(--angled-width);
+    margin-left: var(--angled-offset);
+    transform: rotate(var(--angled-rotation));
+    position: relative;
+  }
+
+  .angled-image-wrapper::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle at bottom left,
+      black 0%,
+      rgba(0, 0, 0, 0.85) 10%,
+      rgba(0, 0, 0, 0) 45%
+    );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .angled-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
+
+
+
+
+
+<style>
+    .offerings-area {
+      background: #111111;
+      padding: 8rem 5vw 5rem;
+      font-family: 'Inter', sans-serif;
+      color: #ffffff;
+      text-align: center;
+      max-width: 1440px;
+      margin: 0 auto;
     }
 
-    @media (min-width: 768px) {
-      .pricing-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    .offerings-heading {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-weight: 900;
+      margin-bottom: 4rem;
+      letter-spacing: -0.5px;
     }
 
-    @media (min-width: 1200px) {
-      .pricing-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
+    .offerings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    .pricing-card {
+    .offering-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .offering-item {
+      background: #1e1e1e;
+      border: 1px solid #333333;
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      background: linear-gradient(135deg, #ffffff, #e6f0ff);
-      border: 1px solid #eee;
-      border-radius: 16px;
-      padding: 2.5rem 1.8rem;
-      text-align: left;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      justify-content: center;
+      text-align: center;
       transition: all 0.3s ease;
       height: 100%;
-      z-index: 5;
     }
 
-    .pricing-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+    .offering-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
     }
 
-    .pricing-card h3 {
-      font-size: 1.6rem;
-      font-weight: 800;
-      margin-bottom: 0.4rem;
-    }
-
-    .tagline {
-      font-size: 1rem;
-      color: #888;
-      margin-bottom: 1rem;
-      font-weight: 500;
-    }
-
-    .pricing-card ul {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 1.5rem;
-    }
-
-    .pricing-card ul li {
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-      color: #333;
-    }
-
-    .vorteil {
-      font-size: 0.95rem;
-      color: #555;
-      margin-bottom: 1.5rem;
-      font-style: italic;
-    }
-
-    .preis {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
+    .offering-title {
+      font-size: 1.5rem;
       font-weight: 700;
-      color: #111;
-      background: var(--secondary);
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      box-shadow: 0 0 12px rgba(255, 148, 77, 0.3);
-      text-align: center;
-      width: 100%;
-    }
-
-    .preis span {
-      font-weight: 400;
-      font-size: 0.95rem;
-      margin-left: 0.4rem;
-    }
-
-    .highlight {
-      border: 2px solid #111;
-      background: linear-gradient(135deg, #ffffff, var(--highlight));
-    }
-
-    .icon-wrap {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       margin-bottom: 1rem;
+      color: #ffffff;
     }
 
-    .icon-wrap i {
-      stroke: #fff;
-      width: 24px;
-      height: 24px;
-
+    .offering-description {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #dddddd;
     }
 
-    .pricing-card:nth-child(1) {
-
-      background: linear-gradient(135deg, #ffffff, rgb(235, 239, 255), #fbfbfb);
-      background-size: 600% 600%;
-      color: #fff;
+    @media (max-width: 768px) {
+      .offerings-grid {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
-    .pricing-card:nth-child(1) {
-      border: 1px solid #3b3b3b;
-      border-radius: 16px;
-    }
-
-    .pricing-card:nth-child(1) .preis {
-      background: #f2f2f2;
-      /* hellgrau */
-      color: #111;
-      /* dunkle Schrift für Kontrast */
-    }
-
-
-    .pricing-card:nth-child(2) {
-      background: linear-gradient(270deg, #04006c, #6f00ff, #050088);
-      background-size: 300% 300%;
-      color: #fff;
-    }
-
-    .pricing-card:nth-child(3) {
-      background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
-      background-size: 400% 400%;
-      color: #fff;
-    }
-
-    .pricing-card:nth-child(4) {
-      background: linear-gradient(135deg, #ff5100, hwb(340 0% 0%), #ff5100);
-      background-size: 300% 300%;
-      color: #fff;
-    }
-
-    /* Textfarben für bessere Lesbarkeit */
-    .pricing-card h3,
-    .pricing-card .tagline,
-    .pricing-card ul li,
-    .pricing-card .vorteil,
-    .pricing-card .preis {
-      color: #fff !important;
-    }
-
-    /* Premium-Paket (4. Karte): Textfarbe schwarz */
-    .pricing-card:nth-child(1) h3,
-    .pricing-card:nth-child(1) .tagline,
-    .pricing-card:nth-child(1) ul li,
-    .pricing-card:nth-child(1) .vorteil,
-    .pricing-card:nth-child(1) .preis {
-      color: #111 !important;
-    }
-
-
-    /* Preis-Box farblich etwas transparenter */
-    .pricing-card .preis {
-      background: rgba(255, 255, 255, 0.15);
-      box-shadow: none;
-    }
-
-    /* Hover-Effekt optional heller */
-    .pricing-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Professional-Paket: Icon-Hintergrund weiß, Icon schwarz */
-    .pricing-card:nth-child(4) .icon-wrap {
-      background: #fff;
-    }
-
-    .pricing-card:nth-child(4) .icon-wrap svg {
-      stroke: #000 !important;
+    @media (max-width: 540px) {
+      .offerings-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
-  <script src="https://unpkg.com/feather-icons"></script>
-  <script>
-    feather.replace();
+  <!-- Übersicht der Kernleistungen mit Sprung-Links -->
+  <section class="offerings-area">
+    <h2 class="offerings-heading">Unsere Kernleistungen – Digital. Kreativ. Maßgeschneidert.</h2>
 
-    let bruttoAktiv = false;
+    <div class="offerings-grid">
+      <a href="#sect-responsive" class="offering-link">
+        <div class="offering-item">
+          <h3 class="offering-title">Responsive Webdesign</h3>
+          <p class="offering-description">
+            Nahtlose Darstellung auf allen Endgeräten – für ein herausragendes Nutzer­erlebnis.
+          </p>
+        </div>
+      </a>
 
-    function togglePreise() {
-      bruttoAktiv = !bruttoAktiv;
-      localStorage.setItem('bruttoAktiv', bruttoAktiv);
-      updatePreise();
-      document.getElementById('preisModus').setAttribute('aria-pressed', bruttoAktiv);
-    }
+      <a href="#sect-uxui" class="offering-link">
+        <div class="offering-item">
+          <h3 class="offering-title">UX/UI Kreation</h3>
+          <p class="offering-description">
+            Intuitive Interfaces mit klarem Fokus auf Usability und Ästhetik.
+          </p>
+        </div>
+      </a>
 
-    function updatePreise() {
-      const prices = document.querySelectorAll('.preis');
-      prices.forEach(p => {
-        const netto = parseFloat(p.dataset.netto);
-        const brutto = parseFloat(p.dataset.brutto);
-        p.innerHTML = bruttoAktiv
-          ? `ab ${brutto.toLocaleString("de-DE")} € <span>inkl. MwSt.</span>`
-          : `ab ${netto.toLocaleString("de-DE")} € <span>zzgl. MwSt.</span>`;
-      });
-      document.getElementById('preisModus').textContent = bruttoAktiv ? '🧾 Brutto' : '💼 Netto';
-    }
+      <a href="#sect-seo" class="offering-link">
+        <div class="offering-item">
+          <h3 class="offering-title">SEO & Performance</h3>
+          <p class="offering-description">
+            Optimierte Strukturen und Ladezeiten für bessere Sichtbarkeit.
+          </p>
+        </div>
+      </a>
 
-    document.addEventListener("DOMContentLoaded", () => {
-      bruttoAktiv = localStorage.getItem('bruttoAktiv') === 'true';
-      updatePreise();
-    });
-  </script>
+      <a href="#sect-cms" class="offering-link">
+        <div class="offering-item">
+          <h3 class="offering-title">CMS-Anbindung</h3>
+          <p class="offering-description">
+            Integration von WordPress, Webflow oder Headless-Systemen.
+          </p>
+        </div>
+      </a>
+
+      <a href="#sect-maintenance" class="offering-link">
+        <div class="offering-item">
+          <h3 class="offering-title">Wartung & Support</h3>
+          <p class="offering-description">
+            Updates, Sicherheits-Checks und schneller Support rund um die Uhr.
+          </p>
+        </div>
+      </a>
+
+      <a href="#sect-ecom" class="offering-link">
+        <div class="offering-item">
+          <h3 class="offering-title">E-Commerce Lösungen</h3>
+          <p class="offering-description">
+            Skalierbare Shopsysteme mit Zahlungsanbindung und Conversion-Optimierung.
+          </p>
+        </div>
+      </a>
+    </div>
+  </section>
 
 
 
+
+  
 
 
   <div class="white-bg-wrapper"> LEISTUNGEN
@@ -1015,7 +1062,7 @@
     /* ===== Allgemeines Layout ===== */
     .services-section {
       padding: 6rem 2rem;
-      background: white !important;
+      background: black !important;
       text-align: center;
       color: #111;
       position: relative;
@@ -1042,6 +1089,7 @@
       font-weight: 800;
       margin-bottom: 3rem;
       font-family: inherit;
+      color: #fff !important;
     }
 
     .services-grid {
@@ -1358,6 +1406,10 @@
       /* etwas mehr Abstand zum Text */
     }
 
+    .section-subtitle{
+      color: white !important;
+    }
+
     @media (max-width: 993px) {
 
       .service-card:nth-child(2)::after,
@@ -1556,335 +1608,75 @@
 
 
 
-<section class="workflow-horizontal" id="workflow" aria-label="Webdesign Prozess">
-  <h2 class="workflow-title">Unser Webdesign-Prozess</h2>
-  <p class="workflow-intro">
-    Digitale Erlebnisse mit Substanz entstehen durch Struktur, Strategie und kontinuierliches Feedback.
-  </p>
-
-  <div class="workflow-track">
-    <div class="workflow-point open" data-step="0">
-      <div class="icon"><i data-feather="target"></i></div>
-      <span class="step-label">Analyse</span>
-      <div class="step-popup">
-        <button class="close-popup">&times;</button>
-        <h3>Bedarfsanalyse & Zieldefinition</h3>
-        <p>Wir analysieren dein Business, Zielgruppen, technische Anforderungen und Projektziele – für eine klare Strategie von Anfang an.</p>
-      </div>
-    </div>
-
-    <div class="workflow-point" data-step="1">
-      <div class="icon"><i data-feather="layout"></i></div>
-      <span class="step-label">Struktur</span>
-      <div class="step-popup">
-        <button class="close-popup">&times;</button>
-        <h3>Informationsarchitektur & Wireframes</h3>
-        <p>Wir planen klare Nutzerflüsse, erstellen erste Wireframes und legen die Struktur der Website modular an – SEO- und UX-optimiert.</p>
-      </div>
-    </div>
-
-    <div class="workflow-point" data-step="2">
-      <div class="icon"><i data-feather="edit-3"></i></div>
-      <span class="step-label">Design</span>
-      <div class="step-popup">
-        <button class="close-popup">&times;</button>
-        <h3>Visuelles Design</h3>
-        <p>Auf Basis von Branding und Zielgruppe gestalten wir ein Designsystem mit Farben, Typografie, UI-Elementen und Animationen.</p>
-      </div>
-    </div>
-
-    <div class="workflow-point" data-step="3">
-      <div class="icon"><i data-feather="code"></i></div>
-      <span class="step-label">Umsetzung</span>
-      <div class="step-popup">
-        <button class="close-popup">&times;</button>
-        <h3>Technische Umsetzung</h3>
-        <p>Responsive Entwicklung, Performance-Optimierung und sauberes HTML/CSS – für skalierbare Websites mit Best Practices.</p>
-      </div>
-    </div>
-
-    <div class="workflow-point" data-step="4">
-      <div class="icon"><i data-feather="check-circle"></i></div>
-      <span class="step-label">Testing</span>
-      <div class="step-popup">
-        <button class="close-popup">&times;</button>
-        <h3>Testing & Validierung</h3>
-        <p>Usability-Tests, Browserchecks, SEO-Checks und mobile Optimierung – bevor deine Seite live geht, wird sie geprüft.</p>
-      </div>
-    </div>
-
-    <div class="workflow-point" data-step="5">
-      <div class="icon"><i data-feather="rocket"></i></div>
-      <span class="step-label">Launch</span>
-      <div class="step-popup">
-        <button class="close-popup">&times;</button>
-        <h3>Launch & Optimierung</h3>
-        <p>Go Live inklusive Übergabe, SEO-Basics und ggf. Schulung im CMS – plus Monitoring und erste Optimierungszyklen.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<style>.workflow-horizontal {
-  background: #fff;
-  color: #111;
-  padding: 4rem 2rem;
-  text-align: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  font-family: 'Inter', sans-serif;
-}
-
-.workflow-title {
-  font-size: 2.4rem;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
-}
-
-.workflow-intro {
-  font-size: 1.1rem;
-  color: #444;
-  max-width: 700px;
-  margin: 0 auto 3rem;
-  line-height: 1.6;
-}
-
-.workflow-track {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  flex-direction: row;
-  align-items: flex-start;
-}
-
-.workflow-point {
-  position: relative;
-  flex: 1 1 calc(16% - 1rem);
-  max-width: 160px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.icon {
-  width: 60px;
-  height: 60px;
-  background: #ff6600;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto 0.5rem;
-}
-
-.icon i {
-  stroke: #fff;
-  width: 26px;
-  height: 26px;
-}
-
-.step-label {
-  font-weight: 600;
-  font-size: 0.95rem;
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-.step-popup {
-  position: absolute;
-  top: 90px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 260px;
-  background: #f5f5f5;
-  color: #111;
-  padding: 1.2rem 1rem 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
-  text-align: left;
-  z-index: 10;
-  display: none;
-}
-
-.workflow-point.open .step-popup {
-  display: block;
-}
-
-.step-popup h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-}
-
-.step-popup p {
-  font-size: 0.95rem;
-  color: #333;
-  line-height: 1.5;
-}
-
-.step-popup .close-popup {
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  border: none;
-  background: none;
-  font-size: 1.3rem;
-  cursor: pointer;
-  color: #666;
-}
-
-.step-popup .close-popup:hover {
-  color: #111;
-}
-
-@media (max-width: 768px) {
-  .workflow-track {
-    justify-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .workflow-point {
-    flex: 1 1 45%;
-    max-width: 100%;
-    margin-bottom: 2rem;
-  }
-
-  .step-popup {
-    width: 90vw;
-    top: 80px;
-  }
-}
-</style>
-<script src="https://unpkg.com/feather-icons"></script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  feather.replace();
-
-  const points = document.querySelectorAll('.workflow-point');
-
-  points.forEach(point => {
-    const popup = point.querySelector('.step-popup');
-    const closeBtn = popup.querySelector('.close-popup');
-
-    point.addEventListener('click', () => {
-      points.forEach(p => p.classList.remove('open'));
-      point.classList.add('open');
-    });
-
-    closeBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      point.classList.remove('open');
-    });
-  });
-});
-</script>
 
 
-
-
-
-<section class="angled-image-section">
-  <div class="angled-image-wrapper">
-    <img src="./WebdesignPic/webgerade.webp" alt="Visuelles Highlight" />
-  </div>
-</section>
-<style>
-  html, body {
-    overflow-x: hidden;
-    
-  }
-
-  .angled-image-section {
-  position: relative;
-  width: 100vw;
-  overflow: visible;
-  margin-top: 3rem;
-  margin-bottom: -5rem;
-  
-  pointer-events: none;
-
-  background: linear-gradient(
-    to bottom,
-    white 0%,
-    white 66.66%,
-    black 66.67%,
-    black 100%
-  );
-  z-index: 0;
-}
-
-  .angled-image-wrapper {
-    width: 150vw;
-    margin-left: -25vw;
-    transform: rotate(-8deg);
-    position: relative;
-  }
-
-  .angled-image-wrapper::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(
-    circle at bottom left,
-    black 0%,
-    rgba(0, 0, 0, 0.85) 10%,
-    rgba(0, 0, 0, 0) 45%
-  );
-  pointer-events: none;
-    z-index: 2;
-}
-
-  .angled-image-wrapper img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-</style>
-
-
-<section class="responsive-section">
+<section
+  class="responsive-section"
+  role="region"
+  aria-labelledby="responsive-title"
+>
   <div class="responsive-text-box animate">
-    <h2>100 % Responsive Websites</h2>
+    <h2 id="responsive-title">100 % Responsive Websites</h2>
     <div class="text-content">
       <p>
         Jede von uns erstellte Website passt sich nahtlos an alle Gerätetypen an – Smartphone, Tablet oder Desktop.
         Mit mobile-first Media Queries, flexiblen Grids und optimierten Bildern liefern wir beeindruckende Nutzer-erlebnisse auf jedem Screen.
       </p>
 
-      <div class="feature-boxes">
-  <div class="feature-item">
-    <i data-feather="smartphone"></i>
-    <h3>Mobile-First-Ansatz</h3>
-    <p>Wir entwickeln von Anfang an für mobile Geräte – für eine optimale Nutzung auf dem Smartphone.</p>
-  </div>
-  <div class="feature-item">
-    <i data-feather="grid"></i>
-    <h3>Flexibles Grid-System</h3>
-    <p>Unsere Layouts sind mit CSS Grid und Flexbox strukturiert – flexibel und sauber skalierbar.</p>
-  </div>
-  <div class="feature-item">
-    <i data-feather="globe"></i>
-    <h3>Kompatibilität</h3>
-    <p>Funktioniert reibungslos in allen modernen Browsern und Plattformen.</p>
-  </div>
-  <div class="feature-item">
-    <i data-feather="zap"></i>
-    <h3>Performance</h3>
-    <p>Schnelle Ladezeiten durch optimierte Bilder und Ressourcen – für ein besseres Ranking und UX.</p>
-  </div>
-  <div class="feature-item double-width">
-    <img src="./img/performance-icon.png" alt="Performance Icon" class="png-icon" />
-    <h3>Extra Performance</h3>
-    <p>Erweiterte Performance-Maßnahmen mit serverseitigem Caching und optimiertem Asset-Loading – für höchste Geschwindigkeiten.</p>
-  </div>
-</div>
+      <div class="feature-boxes" role="group" aria-label="Unsere Features">
+        <div class="feature-item">
+          <i data-feather="smartphone" aria-hidden="true"></i>
+          <h3>Mobile-First-Ansatz</h3>
+          <p>
+            Wir entwickeln von Anfang an für mobile Geräte – für eine optimale Nutzung auf dem Smartphone.
+          </p>
+        </div>
+        <div class="feature-item">
+          <i data-feather="grid" aria-hidden="true"></i>
+          <h3>Flexibles Grid-System</h3>
+          <p>
+            Unsere Layouts sind mit CSS Grid und Flexbox strukturiert – flexibel und sauber skalierbar.
+          </p>
+        </div>
+        <div class="feature-item">
+          <i data-feather="globe" aria-hidden="true"></i>
+          <h3>Kompatibilität</h3>
+          <p>
+            Funktioniert reibungslos in allen modernen Browsern und Plattformen.
+          </p>
+        </div>
+        <div class="feature-item">
+          <i data-feather="zap" aria-hidden="true"></i>
+          <h3>Performance</h3>
+          <p>
+            Schnelle Ladezeiten durch optimierte Bilder und Ressourcen – für ein besseres Ranking und UX.
+          </p>
+        </div>
+        <div class="feature-item double-width">
+          <img
+            src="./img/performance-icon.png"
+            alt="Icon für erweiterte Performance"
+            class="png-icon"
+            width="32"
+            height="32"
+            loading="lazy"
+            decoding="async"
+          />
+          <h3>Extra Performance</h3>
+          <p>
+            Erweiterte Performance-Maßnahmen mit serverseitigem Caching und optimiertem Asset-Loading – für höchste Geschwindigkeiten.
+          </p>
+        </div>
+      </div>
 
-
-      <a href="#kontakt" class="responsive-btn">Jetzt responsive starten</a>
+      <a
+        href="#kontakt"
+        class="responsive-btn"
+        role="button"
+        aria-label="Jetzt responsive starten"
+      >
+        Jetzt responsive starten
+      </a>
     </div>
   </div>
 </section>
@@ -1907,8 +1699,7 @@ document.addEventListener("DOMContentLoaded", () => {
     margin: 0 auto;
     background: rgb(18, 18, 18);
     border-radius: 12px;
-    box-shadow: 0 1px 1px rgb(37, 37, 37)
-    
+    box-shadow: 0 1px 1px rgb(37, 37, 37);
   }
   .responsive-text-box h2 {
     font-size: clamp(2rem, 5vw, 2.6rem);
@@ -2009,20 +1800,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   .double-width {
-  flex: 2 1 580px;
-  max-width: 580px;
-}
+    flex: 2 1 580px;
+    max-width: 580px;
+  }
 
-.png-icon {
-  width: 32px;
-  height: 32px;
-  margin-bottom: 0.8rem;
-  display: block;
-  color: #ff5100;
-}
-
+  .png-icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 0.8rem;
+    display: block;
+    color: #ff5100;
+  }
 </style>
-<!-- Feather Icons -->
 <script src="https://unpkg.com/feather-icons"></script>
 <script>
   if (window.feather) {
@@ -2030,11 +1819,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    const obs = new IntersectionObserver((entries, o) => {
+    const obs = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          o.unobserve(entry.target);
+          observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.2 });
@@ -2043,162 +1832,269 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
+<div class="white-bg-wrapper">
+  <section
+    id="leistungen"
+    class="block-wrapper-x"
+    role="region"
+    aria-labelledby="leistungen-heading"
+  >
+    <!-- SEO-relevante Überschrift -->
+    <h2
+      id="leistungen-heading"
+      class="sr-only"
+    >
+  Leistungen
+    </h2>    
 
-  <!-- Neue Bild-Sektion 
-  <section class="image-section">
-    <div class="container">
-      <img src="./WebdesignPic/Build to Scale.png" alt="Beschreibung des Bildes" />
+    <div
+      class="bg-overlay-x"
+      aria-hidden="true"
+    ></div>
+
+    <div class="wrapper-container-x">
+      <!-- Haupttitel innerhalb der Section -->
+      <h3
+        id="seo-analyse-title"
+        class="heading-main-x scroll-fade"
+      >
+        SEO Analyse &amp; Optimierung
+      </h3>
+      <!-- Untertitel -->
+      <h4 class="heading-sub-x scroll-fade">
+        Steigere deine organische Sichtbarkeit<br>
+        mit datengetriebenen Strategien
+      </h4>
+
+      <div
+        class="card-grid-x"
+        role="list"
+        aria-label="Unsere SEO-Leistungen"
+      >
+        <!-- CARD 1 -->
+        <div
+          class="card-box-x card-type-a scroll-fade"
+          role="listitem"
+        >
+          <div
+            class="icon-container-x"
+            aria-hidden="true"
+          >
+            <i data-feather="search"></i>
+          </div>
+          <h5>SEO-Audit &amp; Analyse</h5>
+
+          <div
+            id="accordion-1"
+            class="box-accordion-x"
+            role="region"
+            aria-labelledby="toggle-1"
+          >
+            <ul class="list-features-x">
+              <li>
+                <span class="check-icon-x" aria-hidden="true"></span>
+                Umfassende technische und inhaltliche Prüfung deiner Website mithilfe
+                von Tools wie Screaming Frog und Google Search Console für klare Optimierungspotenziale.
+              </li>
+            </ul>
+            <div class="box-price-x">
+              Preis: <br><strong>auf Anfrage</strong>
+            </div>
+          </div>
+
+          <button
+            id="toggle-1"
+            class="btn-toggle-x"
+            aria-expanded="false"
+            aria-controls="accordion-1"
+          >
+            Details anzeigen
+          </button>
+        </div>
+
+        <!-- CARD 2 -->
+        <div
+          class="card-box-x card-type-b scroll-fade wide-x"
+          role="listitem"
+        >
+          <div
+            class="icon-container-x"
+            aria-hidden="true"
+          >
+            <i data-feather="bar-chart-2"></i>
+          </div>
+          <h5>Keyword-Recherche &amp; Strategie</h5>
+
+          <div
+            id="accordion-2"
+            class="box-accordion-x"
+            role="region"
+            aria-labelledby="toggle-2"
+          >
+            <ul class="list-features-x">
+              <li>
+                <span class="check-icon-x" aria-hidden="true"></span>
+                Identifizierung lukrativer Keywords anhand von Suchvolumen- und Wettbewerbsanalysen
+                für zielgerichteten Traffic.
+              </li>
+            </ul>
+            <div class="box-price-x">
+              Preis: <br><strong>auf Anfrage</strong>
+            </div>
+          </div>
+
+          <button
+            id="toggle-2"
+            class="btn-toggle-x"
+            aria-expanded="false"
+            aria-controls="accordion-2"
+          >
+            Details anzeigen
+          </button>
+        </div>
+
+        <!-- CARD 3 -->
+        <div
+          class="card-box-x card-type-c scroll-fade wide-x"
+          role="listitem"
+        >
+          <div
+            class="icon-container-x"
+            aria-hidden="true"
+          >
+            <i data-feather="code"></i>
+          </div>
+          <h5>Technische SEO &amp; Performance</h5>
+
+          <div
+            id="accordion-3"
+            class="box-accordion-x"
+            role="region"
+            aria-labelledby="toggle-3"
+          >
+            <ul class="list-features-x">
+              <li>
+                <span class="check-icon-x" aria-hidden="true"></span>
+                Optimierung von Ladezeiten, Mobile-Usability und strukturierten Daten
+                für Top-Rankings und bessere Nutzererfahrung.
+              </li>
+            </ul>
+            <div class="box-price-x">
+              Preis: <br><strong>auf Anfrage</strong>
+            </div>
+          </div>
+
+          <button
+            id="toggle-3"
+            class="btn-toggle-x"
+            aria-expanded="false"
+            aria-controls="accordion-3"
+          >
+            Details anzeigen
+          </button>
+        </div>
+
+        <!-- CARD 4 -->
+        <div
+          class="card-box-x card-type-d scroll-fade"
+          role="listitem"
+        >
+          <div
+            class="icon-container-x"
+            aria-hidden="true"
+          >
+            <i data-feather="link"></i>
+          </div>
+          <h5>Off-Page &amp; Linkaufbau</h5>
+
+          <div
+            id="accordion-4"
+            class="box-accordion-x"
+            role="region"
+            aria-labelledby="toggle-4"
+          >
+            <ul class="list-features-x">
+              <li>
+                <span class="check-icon-x" aria-hidden="true"></span>
+                Strategischer Aufbau hochwertiger Backlinks durch Outreach und Content-Marketing
+                für autoritätssteigernde Effekte.
+              </li>
+            </ul>
+            <div class="box-price-x">
+              Preis: <br><strong>auf Anfrage</strong>
+            </div>
+          </div>
+
+          <button
+            id="toggle-4"
+            class="btn-toggle-x"
+            aria-expanded="false"
+            aria-controls="accordion-4"
+          >
+            Details anzeigen
+          </button>
+        </div>
+
+        <!-- CARD 5 – SEO Benefits -->
+        <div
+          class="card-box-x card-type-e scroll-fade benefits-card-x"
+          role="listitem"
+        >
+          <div
+            class="icon-container-x"
+            aria-hidden="true"
+          >
+            <i data-feather="trending-up"></i>
+          </div>
+          <h5>Was starke SEO bewirkt</h5>
+
+          <div
+            id="accordion-5"
+            class="box-accordion-x"
+            role="region"
+            aria-labelledby="toggle-5"
+          >
+            <div class="benefits-list-x">
+              <div class="benefit-item-x">
+                <strong>+40 % organischer Traffic:</strong>
+                Top-Platzierungen führen zu signifikant mehr Besuchern ohne zusätzliche Ad-Spendings.
+              </div>
+              <div class="benefit-item-x">
+                <strong>Höhere Conversion-Rate:</strong>
+                Qualifizierte Besucher mit klarem Suchinteresse steigern deine Abschlüsse.
+              </div>
+              <div class="benefit-item-x">
+                <strong>Nachhaltiges Wachstum:</strong>
+                Langfristige Rankings sichern kontinuierlichen Traffic.
+              </div>
+              <div class="benefit-item-x">
+                <strong>Markenautorität:</strong>
+                Top-Positionen stärken dein Vertrauen und deine Reputation.
+              </div>
+              <div class="benefit-item-x">
+                <strong>Messbarer ROI:</strong>
+                Detailliertes Tracking und Reports zeigen den direkten Wert jeder Maßnahme.
+              </div>
+            </div>
+          </div>
+
+          <button
+            id="toggle-5"
+            class="btn-toggle-x"
+            aria-expanded="false"
+            aria-controls="accordion-5"
+          >
+            Details anzeigen
+          </button>
+        </div>
+      </div>
+
+      <p class="note-hint-x scroll-fade">
+        Alle Preise sind Richtwerte. Für jedes Projekt erstellen wir ein individuelles Angebot.
+      </p>
     </div>
   </section>
-  <style>
-    .image-section {
-      position: relative;
-      overflow: hidden;
-      padding: 0;
-      /* oberer Versatz: zwischen -20rem (große Screens) und -5rem (kleinste Screens),
-     automatisch interpoliert über die Viewport-Breite */
-      margin: clamp(-20rem, -5vw, -5rem) 0 clamp(14rem, 3vw, 4rem);
-      background: transparent;
-    }
-
-    .image-section .container {
-      position: relative;
-      width: 70%;
-      max-width: none;
-      padding: 0;
-      margin: 0 auto;
-    }
-
-    .image-section img {
-      display: block;
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-  </style>
--->
-
-
-
-<div class="white-bg-wrapper">
-    LEISTUNGEN
-    <section class="block-wrapper-x" id="leistungen">
-      <div class="bg-overlay-x"></div>
-      <div class="wrapper-container-x">
-        <h2 class="heading-main-x scroll-fade">SEO Analyse & Optimierung</h2>
-        <h3 class="heading-sub-x scroll-fade">
-          Steigere deine organische Sichtbarkeit<br>
-          mit datengetriebenen Strategien
-        </h3>
-
-        <div class="card-grid-x">
-
-          <!-- CARD 1 -->
-          <div class="card-box-x card-type-a scroll-fade">
-            <div class="icon-container-x"><i data-feather="search"></i></div>
-            <h3>SEO-Audit & Analyse</h3>
-            <div class="box-accordion-x">
-              <ul class="list-features-x">
-                <li><span class="check-icon-x"></span>
-                  Umfassende technische und inhaltliche Prüfung deiner Website mithilfe von Tools wie Screaming Frog und Google Search Console für klare Optimierungspotenziale.
-                </li>
-              </ul>
-              <div class="box-price-x">
-                Preis: <br><strong>auf Anfrage</strong>
-              </div>
-            </div>
-            <button class="btn-toggle-x">Details anzeigen</button>
-          </div>
-
-          <!-- CARD 2 -->
-          <div class="card-box-x card-type-b scroll-fade wide-x">
-            <div class="icon-container-x"><i data-feather="bar-chart-2"></i></div>
-            <h3>Keyword-Recherche & Strategie</h3>
-            <div class="box-accordion-x">
-              <ul class="list-features-x">
-                <li><span class="check-icon-x"></span>
-                  Identifizierung lukrativer Keywords anhand von Suchvolumen- und Wettbewerbsanalysen für zielgerichteten Traffic.
-                </li>
-              </ul>
-              <div class="box-price-x">
-                Preis: <br><strong>auf Anfrage</strong>
-              </div>
-            </div>
-            <button class="btn-toggle-x">Details anzeigen</button>
-          </div>
-
-          <!-- CARD 3 -->
-          <div class="card-box-x card-type-c scroll-fade wide-x">
-            <div class="icon-container-x"><i data-feather="code"></i></div>
-            <h3>Technische SEO & Performance</h3>
-            <div class="box-accordion-x">
-              <ul class="list-features-x">
-                <li><span class="check-icon-x"></span>
-                  Optimierung von Ladezeiten, Mobile-Usability und strukturierten Daten für Top-Rankings und bessere Nutzererfahrung.
-                </li>
-              </ul>
-              <div class="box-price-x">
-                Preis: <br><strong>auf Anfrage</strong>
-              </div>
-            </div>
-            <button class="btn-toggle-x">Details anzeigen</button>
-          </div>
-
-          <!-- CARD 4 -->
-          <div class="card-box-x card-type-d scroll-fade">
-            <div class="icon-container-x"><i data-feather="link"></i></div>
-            <h3>Off-Page & Linkaufbau</h3>
-            <div class="box-accordion-x">
-              <ul class="list-features-x">
-                <li><span class="check-icon-x"></span>
-                  Strategischer Aufbau hochwertiger Backlinks durch Outreach und Content-Marketing für autoritätssteigernde Effekte.
-                </li>
-              </ul>
-              <div class="box-price-x">
-                Preis: <br><strong>auf Anfrage</strong>
-              </div>
-            </div>
-            <button class="btn-toggle-x">Details anzeigen</button>
-          </div>
-
-          <!-- CARD 5 – SEO Benefits -->
-          <div class="card-box-x card-type-e scroll-fade benefits-card-x">
-            <div class="icon-container-x"><i data-feather="trending-up"></i></div>
-            <h3>Was starke SEO bewirkt</h3>
-            <div class="box-accordion-x">
-              <div class="benefits-list-x">
-                <div class="benefit-item-x">
-                  <strong>+40 % organischer Traffic:</strong>
-                  Top-Platzierungen führen zu signifikant mehr Besuchern ohne zusätzliche Ad-Spendings.
-                </div>
-                <div class="benefit-item-x">
-                  <strong>Höhere Conversion-Rate:</strong>
-                  Qualifizierte Besucher mit klarem Suchinteresse steigern deine Abschlüsse.
-                </div>
-                <div class="benefit-item-x">
-                  <strong>Nachhaltiges Wachstum:</strong>
-                  Langfristige Rankings sichern kontinuierlichen Traffic.
-                </div>
-                <div class="benefit-item-x">
-                  <strong>Markenautorität:</strong>
-                  Top-Positionen stärken dein Vertrauen und deine Reputation.
-                </div>
-                <div class="benefit-item-x">
-                  <strong>Messbarer ROI:</strong>
-                  Detailliertes Tracking und Reports zeigen den direkten Wert jeder Maßnahme.
-                </div>
-              </div>
-            </div>
-            <button class="btn-toggle-x">Details anzeigen</button>
-          </div>
-
-        </div>
-        <p class="note-hint-x scroll-fade">
-          Alle Preise sind Richtwerte. Für jedes Projekt erstellen wir ein individuelles Angebot.
-        </p>
-      </div>
-    </section>
-  </div>
+</div>
 <style>
   :root {
     --img-a1: url('./indexFotoSlideShow/2.png');
@@ -2566,282 +2462,602 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
 
 
 
+<section class="workflow-horizontal" id="workflow" aria-label="Webdesign Prozess">
+  <h2 class="workflow-title">Unser Webdesign-Prozess</h2>
+  <p class="workflow-intro">
+    Digitale Erlebnisse mit Substanz entstehen durch Struktur, Strategie und kontinuierliches Feedback.
+  </p>
 
-
-  <section class="cta-modern">
-    <style>
-      .cta-modern {
-        position: relative;
-        padding: 7rem 1.5rem;
-        background: #000;
-        overflow: hidden;
-        text-align: center;
-             z-index: 7;
-        margin-top: 0rem;
-
-      }
-
-      .cta-modern::before {
-        content: '';
-        position: absolute;
-        top: -100px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 1800px;
-        max-width: 100vw;
-        height: 1800px;
-        z-index: 0;
-        pointer-events: none;
-        animation: glowShift 12s ease-in-out infinite alternate;
-        z-index: 7;
-
-
-      }
-
-
-      .cta-headline {
-        font-size: clamp(1.8rem, 4.5vw, 3rem);
-        font-weight: 800;
-        font-family: 'Inter', sans-serif;
-        color: #ffffff;
-        margin-bottom: 1rem;
-        line-height: 1.25;
-        letter-spacing: -0.3px;
-        position: relative;
-        z-index: 2;
-        animation: fadeUp 1s ease-out both;
-      }
-
-      .cta-small {
-        font-size: 0.6em;
-        font-weight: 500;
-        color: #ffffff !important;
-        font-family: 'Inter', sans-serif;
-        display: inline-block;
-        margin-right: 0.3em;
-        background: none !important;
-        background-clip: initial !important;
-        -webkit-background-clip: initial !important;
-        -webkit-text-fill-color: initial !important;
-      }
-
-      .cta-headline span {
-        font-family: 'VT323', monospace;
-        font-size: 1.3em;
-        line-height: 1;
-        display: inline-block;
-
-
-        background: linear-gradient(220deg,
-            hwb(219 17% 0%) 0%,
-            hwb(219 18% 0%) 40%,
-            #e1e2ff 46%,
-            hwb(34 27% 0%) 52%,
-            hwb(29 0% 0%) 100%);
-
-
-        background-size: 400% 400%;
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-
-        animation: gradientShift 16s ease-in-out infinite;
-      }
-
-      @keyframes gradientShift {
-        0% {
-          background-position: 0% 50%;
-        }
-
-        50% {
-          background-position: 100% 50%;
-        }
-
-        100% {
-          background-position: 0% 50%;
-        }
-      }
-
-
-      .cta-text {
-        font-size: clamp(1rem, 2.5vw, 1.2rem);
-        font-weight: 400;
-        color: rgb(235, 235, 235);
-        max-width: 640px;
-        margin: 0 auto 2.5rem;
-        line-height: 1.6;
-        position: relative;
-        z-index: 2;
-        animation: fadeUp 1s ease-out 0.2s both;
-      }
-
-      .cta-btn {
-        background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
-        background-size: 300% 300%;
-        color: #fff;
-        font-weight: 600;
-        padding: 0.8rem 2rem;
-        font-size: clamp(0.9rem, 2vw, 1rem);
-        border-radius: 10px;
-        text-decoration: none;
-        box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        position: relative;
-        z-index: 2;
-        animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
-      }
-
-      /* Hover Glow & Lift */
-      .cta-btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
-      }
-
-      /* Entrance Animation */
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Animated Gradient */
-      @keyframes gradientFlow {
-        0% {
-          background-position: 0% 50%;
-        }
-
-        50% {
-          background-position: 100% 50%;
-        }
-
-        100% {
-          background-position: 0% 50%;
-        }
-      }
-
-      @keyframes glowShift {
-        0% {
-          transform: translateX(-50%) rotate(0deg);
-        }
-
-        100% {
-          transform: translateX(-50%) rotate(3deg);
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        * {
-          animation: none !important;
-          transition: none !important;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .cta-modern {
-          padding: 5rem 1rem;
-        }
-
-        .cta-text {
-          margin-bottom: 2rem;
-          line-height: 1.5;
-        }
-
-        .cta-btn {
-          width: 100%;
-          padding: 0.9rem;
-        }
-      }
-
-      @media (max-width: 375px) {
-        .cta-headline {
-          font-size: 1.5rem;
-        }
-
-        .cta-headline span {
-          font-size: 1.1em;
-        }
-
-        .cta-text {
-          font-size: 0.95rem;
-        }
-
-        .cta-btn {
-          font-size: 0.9rem;
-          padding: 0.75rem 1.2rem;
-        }
-      }
-    </style>
-
-    <h2 class="cta-headline">
-      <span class="cta-small">Bereit für</span> <span>deinen digitalen Auftritt?</span>
-    </h2>
-
-
-    <p class="cta-text">
-      Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.
-      Starte jetzt – unverbindlich und inspiriert.
-    </p>
-
-    <a href="#kontakt" class="cta-btn">Gespräch vereinbaren</a>
-  </section>
-  
-  
-
-
-<section class="live-preview-section">
-  <div class="live-preview-container fade-in-effect">
-    <h2>Echtzeit-Einblicke in die Entwicklung</h2>
-    <div class="live-preview-content">
-      <p>
-        Transparenz ist uns wichtig: Während der gesamten Projektlaufzeit erhalten Sie über einen privaten Link Zugriff auf die aktuelle Entwicklungsumgebung Ihrer Website.
-        <br><br>
-        So können Sie jederzeit live den Fortschritt verfolgen, konkrete Rückmeldungen geben und sich bereits vor dem Launch ein genaues Bild vom Ergebnis machen. Perfekt für zielführende Feedback-Gespräche und schnelle Abstimmungen.
-      </p>
-
-      <div class="benefit-wrapper">
-        <div class="benefit-card">
-          <i data-feather="link-2"></i>
-          <h3>Privater Vorschau-Link</h3>
-          <p>Sicherer Zugriff auf Ihre Website-Entwicklung in Echtzeit – individuell nur für Sie freigegeben.</p>
-        </div>
-        <div class="benefit-card">
-          <i data-feather="eye"></i>
-          <h3>Live-Fortschritt</h3>
-          <p>Beobachten Sie jeden Design- und Entwicklungsfortschritt, wann immer Sie möchten.</p>
-        </div>
-        <div class="benefit-card">
-          <i data-feather="message-square"></i>
-          <h3>Direktes Feedback</h3>
-          <p>Kommentieren Sie direkt anhand des aktuellen Standes und gestalten Sie aktiv mit.</p>
-        </div>
-        <div class="benefit-card">
-          <i data-feather="clock"></i>
-          <h3>Schnelle Abstimmung</h3>
-          <p>Vermeiden Sie unnötige Korrekturschleifen dank schneller und klarer Kommunikation.</p>
-        </div>
-        <div class="benefit-card full-width">
-          <img src="./img/live-preview-icon.png" alt="Live Preview Icon" class="icon-img" />
-          <h3>Launch-Vorbereitung</h3>
-          <p>Bereits vor dem Livegang ein realistischer Eindruck – ideal für finale Entscheidungen und Teamfreigaben.</p>
-        </div>
+  <ol class="workflow-track" role="list">
+    <li class="workflow-point" data-step="0">
+      <button
+        type="button"
+        class="workflow-trigger"
+        aria-expanded="false"
+        aria-controls="popup-step-0"
+      >
+        <div class="icon"><i data-feather="target"></i></div>
+        <span class="step-label">Analyse</span>
+      </button>
+      <div
+        id="popup-step-0"
+        class="step-popup"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="popup-step-0-title"
+        aria-describedby="popup-step-0-desc"
+        tabindex="-1"
+      >
+        <button type="button" class="close-popup" aria-label="Schließen">&times;</button>
+        <h3 id="popup-step-0-title">Bedarfsanalyse &amp; Zieldefinition</h3>
+        <p id="popup-step-0-desc">
+          Wir analysieren dein Business, Zielgruppen, technische Anforderungen und Projektziele – für eine klare Strategie von Anfang an.
+        </p>
       </div>
+    </li>
+    <li class="workflow-point" data-step="1">
+      <button
+        type="button"
+        class="workflow-trigger"
+        aria-expanded="false"
+        aria-controls="popup-step-1"
+      >
+        <div class="icon"><i data-feather="layout"></i></div>
+        <span class="step-label">Struktur</span>
+      </button>
+      <div
+        id="popup-step-1"
+        class="step-popup"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="popup-step-1-title"
+        aria-describedby="popup-step-1-desc"
+        tabindex="-1"
+      >
+        <button type="button" class="close-popup" aria-label="Schließen">&times;</button>
+        <h3 id="popup-step-1-title">Informationsarchitektur &amp; Wireframes</h3>
+        <p id="popup-step-1-desc">
+          Wir planen klare Nutzerflüsse, erstellen erste Wireframes und legen die Struktur der Website modular an – SEO- und UX-optimiert.
+        </p>
+      </div>
+    </li>
+    <li class="workflow-point" data-step="2">
+      <button
+        type="button"
+        class="workflow-trigger"
+        aria-expanded="false"
+        aria-controls="popup-step-2"
+      >
+        <div class="icon"><i data-feather="edit-3"></i></div>
+        <span class="step-label">Design</span>
+      </button>
+      <div
+        id="popup-step-2"
+        class="step-popup"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="popup-step-2-title"
+        aria-describedby="popup-step-2-desc"
+        tabindex="-1"
+      >
+        <button type="button" class="close-popup" aria-label="Schließen">&times;</button>
+        <h3 id="popup-step-2-title">Visuelles Design</h3>
+        <p id="popup-step-2-desc">
+          Auf Basis von Branding und Zielgruppe gestalten wir ein Designsystem mit Farben, Typografie, UI-Elementen und Animationen.
+        </p>
+      </div>
+    </li>
+    <li class="workflow-point" data-step="3">
+      <button
+        type="button"
+        class="workflow-trigger"
+        aria-expanded="false"
+        aria-controls="popup-step-3"
+      >
+        <div class="icon"><i data-feather="code"></i></div>
+        <span class="step-label">Umsetzung</span>
+      </button>
+      <div
+        id="popup-step-3"
+        class="step-popup"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="popup-step-3-title"
+        aria-describedby="popup-step-3-desc"
+        tabindex="-1"
+      >
+        <button type="button" class="close-popup" aria-label="Schließen">&times;</button>
+        <h3 id="popup-step-3-title">Technische Umsetzung</h3>
+        <p id="popup-step-3-desc">
+          Responsive Entwicklung, Performance-Optimierung und sauberes HTML/CSS – für skalierbare Websites mit Best Practices.
+        </p>
+      </div>
+    </li>
+    <li class="workflow-point" data-step="4">
+      <button
+        type="button"
+        class="workflow-trigger"
+        aria-expanded="false"
+        aria-controls="popup-step-4"
+      >
+        <div class="icon"><i data-feather="check-circle"></i></div>
+        <span class="step-label">Testing</span>
+      </button>
+      <div
+        id="popup-step-4"
+        class="step-popup"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="popup-step-4-title"
+        aria-describedby="popup-step-4-desc"
+        tabindex="-1"
+      >
+        <button type="button" class="close-popup" aria-label="Schließen">&times;</button>
+        <h3 id="popup-step-4-title">Testing &amp; Validierung</h3>
+        <p id="popup-step-4-desc">
+          Usability-Tests, Browserchecks, SEO-Checks und mobile Optimierung – bevor deine Seite live geht, wird sie geprüft.
+        </p>
+      </div>
+    </li>
+    <li class="workflow-point" data-step="5">
+      <button
+        type="button"
+        class="workflow-trigger"
+        aria-expanded="false"
+        aria-controls="popup-step-5"
+      >
+        <div class="icon"><i data-feather="rocket"></i></div>
+        <span class="step-label">Launch</span>
+      </button>
+      <div
+        id="popup-step-5"
+        class="step-popup"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="popup-step-5-title"
+        aria-describedby="popup-step-5-desc"
+        tabindex="-1"
+      >
+        <button type="button" class="close-popup" aria-label="Schließen">&times;</button>
+        <h3 id="popup-step-5-title">Launch &amp; Optimierung</h3>
+        <p id="popup-step-5-desc">
+          Go Live inklusive Übergabe, SEO-Basics und ggf. Schulung im CMS – plus Monitoring und erste Optimierungszyklen.
+        </p>
+      </div>
+    </li>
+  </ol>
+</section>
+<style>
+/* unveränderte Styles ... */
+.workflow-horizontal {
+  background: #fff;
+  color: #111;
+  padding: 4rem 2rem;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+}
 
-      <a href="#kontakt" class="cta-preview-btn">Jetzt Einblick erhalten</a>
-    </div>
+.workflow-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.workflow-intro {
+  font-size: 1.1rem;
+  color: #444;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+}
+
+.workflow-track {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  flex-direction: row;
+  align-items: flex-start;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.workflow-point {
+  position: relative;
+  flex: 1 1 calc(16% - 1rem);
+  max-width: 160px;
+  text-align: center;
+}
+
+.workflow-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  background: #ff6600;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 0.5rem;
+}
+
+.icon i {
+  stroke: #fff;
+  width: 26px;
+  height: 26px;
+}
+
+.step-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.step-popup {
+  position: absolute;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  background: #f5f5f5;
+  color: #111;
+  padding: 1.2rem 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+  text-align: left;
+  z-index: 10;
+  display: none;
+}
+
+.workflow-point.open .step-popup {
+  display: block;
+}
+
+.step-popup h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.step-popup p {
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+.step-popup .close-popup {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  border: none;
+  background: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.step-popup .close-popup:hover {
+  color: #111;
+}
+
+@media (max-width: 768px) {
+  .workflow-track {
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .workflow-point {
+    flex: 1 1 45%;
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .step-popup {
+    width: 90vw;
+    top: 80px;
+  }
+}
+</style>
+<script src="https://unpkg.com/feather-icons"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  feather.replace();
+
+  const points = document.querySelectorAll('.workflow-point');
+
+  points.forEach(point => {
+    const btn = point.querySelector('.workflow-trigger');
+    const popup = point.querySelector('.step-popup');
+    const closeBtn = popup.querySelector('.close-popup');
+
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+      // alle schließen
+      points.forEach(p => {
+        const t = p.querySelector('.workflow-trigger');
+        p.classList.remove('open');
+        t.setAttribute('aria-expanded', 'false');
+      });
+
+      // diesen öffnen/schließen
+      if (!isOpen) {
+        point.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        popup.focus();
+      }
+    });
+
+    closeBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      btn.setAttribute('aria-expanded', 'false');
+      point.classList.remove('open');
+      btn.focus();
+    });
+
+    popup.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        btn.setAttribute('aria-expanded', 'false');
+        point.classList.remove('open');
+        btn.focus();
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+<section
+  class="cta-modern"
+  role="region"
+  aria-labelledby="cta-headline"
+  aria-describedby="cta-text"
+>
+  <h2 id="cta-headline" class="cta-headline">
+    <span class="cta-small">Bereit für</span>
+    <span class="gradient-text">deinen digitalen Auftritt?</span>
+  </h2>
+
+  <p id="cta-text" class="cta-text">
+    Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart &amp; zukunftssicher.
+    Starte jetzt – unverbindlich und inspiriert.
+  </p>
+
+  <a
+    href="#kontakt"
+    class="cta-btn"
+    role="button"
+    aria-label="Gespräch vereinbaren"
+  >
+    Gespräch vereinbaren
+  </a>
+</section>
+<style>.cta-modern {
+  position: relative;
+  padding: 7rem 1.5rem;
+  background: #000;
+  overflow: hidden;
+  text-align: center;
+  z-index: 7;
+  margin-top: 0;
+}
+
+.cta-modern::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1800px;
+  max-width: 100vw;
+  height: 1800px;
+  z-index: 0;
+  pointer-events: none;
+  animation: glowShift 12s ease-in-out infinite alternate;
+}
+
+.cta-headline {
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  font-weight: 800;
+  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 1s ease-out both;
+}
+
+/* Ersetze die alte .cta-small-Definition durch diese: */
+.cta-small {
+  font-family: 'VT323', monospace;
+  font-size: 1.3em;
+  line-height: 1;
+  display: inline-block;
+  color: #ffffff;            /* Weiß statt Gradient */
+  /* Entferne alle bisherigen background- und clip-Eigenschaften */
+}
+
+
+.gradient-text {
+  font-family: 'VT323', monospace;
+  font-size: 1.3em;
+  line-height: 1;
+  display: inline-block;
+  /* Fallback-Farbe für Screenreader und Browser ohne Text-Gradient-Support */
+  color: #ffffff;
+  background: linear-gradient(
+    220deg,
+    hwb(219 17% 0%) 0%,
+    hwb(219 18% 0%) 40%,
+    #e1e2ff 46%,
+    hwb(34 27% 0%) 52%,
+    hwb(29 0% 0%) 100%
+  );
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 16s ease-in-out infinite;
+}
+
+.cta-text {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 400;
+  color: rgb(235, 235, 235);
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 1s ease-out 0.2s both;
+}
+
+.cta-btn {
+  display: inline-block;
+  cursor: pointer;
+  background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
+  background-size: 300% 300%;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
+  /* Fokus-Indikator für Tastaturnutzer */
+}
+.cta-btn:focus-visible {
+  outline: 3px dashed #ff6600;
+  outline-offset: 4px;
+}
+
+.cta-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
+}
+
+/* Keyframes */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes gradientFlow {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+@keyframes gradientShift {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+@keyframes glowShift {
+  0%   { transform: translateX(-50%) rotate(0deg); }
+  100% { transform: translateX(-50%) rotate(3deg); }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .cta-modern { padding: 5rem 1rem; }
+  .cta-text  { margin-bottom: 2rem; line-height: 1.5; }
+  .cta-btn   { width: 100%; padding: 0.9rem; }
+}
+@media (max-width: 375px) {
+  .cta-headline      { font-size: 1.5rem; }
+  .gradient-text     { font-size: 1.1em; }
+  .cta-text          { font-size: 0.95rem; }
+  .cta-btn           { font-size: 0.9rem; padding: 0.75rem 1.2rem; }
+}
+</style>
+
+  
+
+
+<section
+  class="live-preview-section"
+  role="region"
+  aria-labelledby="live-preview-title"
+  aria-describedby="live-preview-desc"
+>
+  <div class="live-preview-container fade-in-effect">
+    <h2 id="live-preview-title">Echtzeit-Einblicke in die Entwicklung</h2>
+    <ul class="benefit-wrapper" role="list">
+      <li class="benefit-card" role="listitem">
+        <i data-feather="link-2" aria-hidden="true"></i>
+        <h3>Privater Vorschau-Link</h3>
+        <p>Sicherer Zugriff auf Ihre Website-Entwicklung in Echtzeit – individuell nur für Sie freigegeben.</p>
+      </li>
+      <li class="benefit-card" role="listitem">
+        <i data-feather="eye" aria-hidden="true"></i>
+        <h3>Live-Fortschritt</h3>
+        <p>Beobachten Sie jeden Design- und Entwicklungsfortschritt, wann immer Sie möchten.</p>
+      </li>
+      <li class="benefit-card" role="listitem">
+        <i data-feather="message-square" aria-hidden="true"></i>
+        <h3>Direktes Feedback</h3>
+        <p>Kommentieren Sie direkt anhand des aktuellen Standes und gestalten Sie aktiv mit.</p>
+      </li>
+      <li class="benefit-card" role="listitem">
+        <i data-feather="clock" aria-hidden="true"></i>
+        <h3>Schnelle Abstimmung</h3>
+        <p>Vermeiden Sie unnötige Korrekturschleifen dank schneller und klarer Kommunikation.</p>
+      </li>
+      <li class="benefit-card full-width" role="listitem">
+        <img
+          src="./img/live-preview-icon.png"
+          alt="Symbol für Launch-Vorbereitung"
+          class="icon-img"
+          loading="lazy"
+          aria-hidden="false"
+        />
+        <h3>Launch-Vorbereitung</h3>
+        <p>Bereits vor dem Livegang ein realistischer Eindruck – ideal für finale Entscheidungen und Teamfreigaben.</p>
+      </li>
+    </ul>
+
+    <a href="#kontakt" class="cta-preview-btn">Jetzt Einblick erhalten</a>
   </div>
 </section>
-
 <style>
+  /* Live Preview Section */
   .live-preview-section {
-    background-color: #000;
+    background-color: black;
     color: #fff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: var(--font-sans);
     text-align: center;
     overflow: hidden;
   }
@@ -2852,27 +3068,38 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
     padding: 2.5rem;
     background-color: #121212;
     border-radius: 12px;
-    box-shadow: 0 1px 1px rgb(37, 37, 37);
+    box-shadow: 0 1px 1px rgba(37,37,37,0.8);
   }
 
+  /* Headline */
   .live-preview-container h2 {
-    font-size: clamp(2rem, 5vw, 2.6rem);
-    font-weight: 800;
+    font-family: var(--font-alt);
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-black);
     margin-bottom: 1.5rem;
   }
 
-  .live-preview-content p {
-    font-size: clamp(1rem, 2.5vw, 1.15rem);
+  /* Beschreibungstext */
+  .live-preview-content p,
+  .benefit-card p {
+    font-family: var(--font-sans);
+    font-size: var(--fs-base);
     line-height: 1.8;
     margin-bottom: 2rem;
   }
 
+  /* Benefits als Liste */
   .benefit-wrapper {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2.5rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1.5rem;
-    margin-bottom: 2.5rem;
+  }
+  .benefit-wrapper li {
+    list-style: none;
   }
 
   .benefit-card {
@@ -2895,17 +3122,14 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
     width: 28px;
     height: 28px;
     margin-bottom: 0.8rem;
-    color: #ff5100;
+    color: var(--color-primary);
   }
 
   .benefit-card h3 {
+    font-family: var(--font-alt);
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-bold);
     margin: 0 0 0.5rem;
-    font-size: 1.1rem;
-  }
-
-  .benefit-card p {
-    font-size: 0.95rem;
-    line-height: 1.5;
   }
 
   .full-width {
@@ -2920,13 +3144,15 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
     display: block;
   }
 
+  /* Call-to-Action Button */
   .cta-preview-btn {
     display: inline-block;
     padding: clamp(0.6rem, 1.5vw, 1rem) clamp(1rem, 3vw, 2rem);
-    font-size: clamp(0.9rem, 2.5vw, 1.05rem);
-    font-weight: 700;
+    font-family: var(--font-alt);
+    font-size: var(--fs-base);
+    font-weight: var(--fw-black);
     border-radius: 8px;
-    background: linear-gradient(135deg, #ff5100, #e60000, #ff5100);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-primary));
     color: #fff;
     text-decoration: none;
     box-shadow: 0 8px 24px rgba(255, 81, 0, 0.4);
@@ -2938,6 +3164,7 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
     box-shadow: 0 12px 32px rgba(255, 81, 0, 0.6);
   }
 
+  /* Fade-in Animation */
   .fade-in-effect {
     opacity: 0;
     transform: translateY(20px);
@@ -2949,6 +3176,7 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
     transform: translateY(0);
   }
 
+  /* Responsive */
   @media (max-width: 768px) {
     .live-preview-container {
       padding: 2rem 1.5rem;
@@ -2971,11 +3199,10 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
     }
   }
 </style>
-
 <script src="https://unpkg.com/feather-icons"></script>
 <script>
   if (window.feather) {
-    feather.replace();
+    feather.replace({ 'aria-hidden': 'true' });
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -2996,45 +3223,12 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
 
 
 
-
-<section class="advanced-features-section">
-
-  <!-- Haupt-Features (2x2 Grid) -->
-  <div class="features-grid">
+<section class="advanced-features-section" aria-label="Erweiterte Website-Funktionen">
+  <div class="metrics-grid" role="region" aria-labelledby="metrics-heading">
     <div class="feature-card">
-      <h3>Begleitung von A–Z</h3>
-      <p>Spitzenmäßiger Service von Anfang an – einfach & effektiv.</p>
-      <div class="tags">
-        <span title="Google Optimierung">Google Optimierung</span>
-        <span title="Suchmaschinenoptimierung">SEO</span>
-        <span title="Modularität">Modular</span>
-        <span title="Ladezeiten">Ladezeiten</span>
-        <span title="Texterstellung">PErformance</span>
-        <span title="Sicheres Hosting">Barrierefreiheit</span>
-      </div>
-    </div>
-
-    <!-- SEO-Optimierung -->
-    <div class="feature-card seo-card">
-      <h3>Google Optimierung</h3>
-      <ul>
- <li>Keyword- & Konkurrenzanalyse für bessere Auffindbarkeit</li>
-<li>Optimierte Title-Tags, Meta-Daten & strukturierte Inhalte</li>
-<li>Semantisches HTML für bessere Indexierung</li>
-<li>Technisches SEO: schnelle Ladezeiten & saubere URLs</li>
-<li>Monitoring über Core Web Vitals & regelmäßige Checks</li>
-
-      </ul>
-    </div>
-  </div>
-
-
-  <!-- Leistungsmetriken (3 breite Karten) -->
-  <div class="metrics-grid">
-    <div class="feature-card">
-      <h3>Blitzschnelle Ladezeiten</h3>
+      <h3 id="metrics-heading">Blitzschnelle Ladezeiten</h3>
       <div class="circle-row">
-        <canvas class="speed-circle" data-value="100" data-label="Pagespeed"></canvas>
+        <canvas class="speed-circle" aria-label="Pagespeed Score: 100" data-value="100" data-label="Pagespeed"></canvas>
         <div class="circle-info">
           <strong>100/97/94</strong><br>
           Mobil / Desktop / SEO Bewertung (Lighthouse)
@@ -3048,7 +3242,7 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
     <div class="feature-card">
       <h3>Echtzeit-Performance</h3>
       <div class="circle-row">
-        <canvas class="speed-circle" data-value="98" data-label="Live"></canvas>
+        <canvas class="speed-circle" aria-label="Live Performance Score: 98" data-value="98" data-label="Live"></canvas>
         <div class="circle-info">
           <strong>Live gemessen</strong><br>
           Fast überall 98+ bei Lighthouse & Core Web Vitals
@@ -3062,7 +3256,7 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
     <div class="feature-card">
       <h3>Barrierefreiheit</h3>
       <div class="circle-row">
-        <canvas class="speed-circle" data-value="95" data-label="A11Y"></canvas>
+        <canvas class="speed-circle" aria-label="Barrierefreiheits-Score: 95" data-value="95" data-label="A11Y"></canvas>
         <div class="circle-info">
           <strong>Zugänglich für alle</strong><br>
           Kontrast, Tastaturzugriff, Screenreader-Support ✔️
@@ -3072,685 +3266,60 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
         Eine barrierefreie Website ist nicht nur inklusiv, sondern wird auch von Suchmaschinen besser bewertet.
       </p>
     </div>
-
-    
-  </div>
-   <!-- Modulare Karte (volle Breite) -->
-  <div class="feature-card modular-card">
-  <h3 class="draggable-element">Modulare Optimierung</h3>
-  <p class="draggable-element">
-    Zukünftig lassen sich alle Komponenten flexibel und modular anpassen.
-  </p>
-  <div class="typing-demo draggable-element">
-      <div class="input-field">
-        <span class="text"></span><span class="caret"></span>
-      </div>
-      <div class="pointer"></div>
-    </div>
   </div>
 </section>
-<style>/* ----------------------------------------
-   Typing-Demo
-   ---------------------------------------- */
-
-
-.input-field {
-  position: relative;
-  padding: 0.5rem;
-  border: 2px dashed #888;
-  min-height: 2rem;
-  overflow: hidden;
-}
-
-.text {
-  white-space: pre;
-}
-
-
-.caret {
-  display: inline-block;
-  width: 2px;
-  height: 1em;
-  background: #5c5757;
-  vertical-align: bottom;
-  animation: blink 1s steps(1) infinite;
-}
-
-.pointer {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  background: url('data:image/svg+xml;utf8,\<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">\<path d="M0,0 L0,24 L6,18 L12,30 Z" fill="#000"/>\</svg>') no-repeat center center;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s linear;
-}
-
-@keyframes blink {
-  0%, 50%     { opacity: 1; }
-  50.1%, 100% { opacity: 0; }
-}
-
-
-/* ----------------------------------------
-   SEO-Card (Liste)
-   ---------------------------------------- */
-.seo-card ul {
-  list-style: disc inside;
-  color: #ccc;
-  margin-top: 1rem;
-}
-
-.seo-card ul li {
-  margin-bottom: 0.5rem;
-}
-
-
-/* ----------------------------------------
-   Advanced Features Section Grundlayout
-   ---------------------------------------- */
+<style>
 .advanced-features-section {
-  padding: 80px 20vw;
+  padding: 80px 20px;
   background: #000;
   color: #fff;
   font-family: 'Inter', sans-serif;
 }
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  margin-bottom: 80px;
-}
-
 .metrics-grid {
+  max-width: 960px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  margin: 3rem 0 80px;
 }
-
-
 .feature-card {
-  background: linear-gradient(to bottom left, #181818, #00070d); /* Schwarz → Dunkelblau */
-  border: none;
+  background: linear-gradient(to bottom left, #181818, #00070d);
   border-radius: 12px;
   padding: 24px;
   backdrop-filter: blur(8px);
   transition: all 0.3s ease;
-  position: relative;
+  z-index: 5;
 }
-
-
 .feature-card h3 {
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
 }
-
 .feature-card p {
   font-size: 1rem;
   color: #ccc;
 }
-
-.tags {
-  margin-top: 1rem;
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.tags span {
-      background: linear-gradient(270deg, #ff5c00, #ff7a29, #ff6600);
-      background-size: 400% 400%;
-  color: #000;
-  padding: 0.35rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  cursor: help;
-  animation: floatUp 0.4s ease-out;
-}
-
-@keyframes floatUp {
-  from { transform: translateY(10px); opacity: 0; }
-  to   { transform: translateY(0);  opacity: 1; }
-}
-
 .circle-row {
   display: flex;
   align-items: center;
   gap: 1.2rem;
   margin-bottom: 1rem;
 }
-
 .circle-info {
   font-size: 1rem;
   color: #ccc;
   line-height: 1.4;
 }
-
 .importance-note {
   font-size: 0.9rem;
   color: #aaa;
   line-height: 1.5;
 }
 
-
-/* ----------------------------------------
-   Modularkarte (volle Breite, Hintergrund-Bild)
-   ---------------------------------------- */
-.modular-card {
-  position: relative;
-
-  /* Hintergrund-Bild */
-  background: none !important;
-  backdrop-filter: none !important;
-  background-image: url('WebdesignPic/Handyseite.webp') !important;
-  background-position: center center !important;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
-
-  /* Höhe und Flex-Centering */
-  min-height: 800px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;  /* vertikal mittig */
-  align-items: center;      /* horizontal mittig */
-  gap: 2rem;
-  padding: 2rem;
-  z-index: 6;
-}
-
-/* Entferne Hover-Glow auf allen Feature-Cards */
-.feature-card:hover {
-  box-shadow: none !important;
-}
-
-.modular-card h3,
-.modular-card p,
-.modular-card .typing-demo {
-  position: relative;
-  margin-top: 2rem;
-  text-align: center;
-  color: #fff;
-  cursor: grab;
-  user-select: none;
-}
-
-.modular-card h3 {
-  position: relative;
-  text-align: center;
-  color: #fff;
-  margin: 0;
-  transform: translateY(40px); /* statt margin-top */
-  cursor: grab;
-  user-select: none;
-}
-
-
-.typing-demo.draggable-element {
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  text-align: center;
-}
-.drag-placeholder {
-  display: block;
-  background: transparent;
-}
-
-</style>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const elText = document.querySelector('.typing-demo .text');
-  const elCaret = document.querySelector('.typing-demo .caret');
-  const elPointer = document.querySelector('.typing-demo .pointer');
-
-  if (!elText || !elCaret || !elPointer) return;
-
-  const steps = [
-  { text: 'Ich kann alles modular verändern', delay: 50 },
-  { pause: 1000 },
-  { delete: 'all', delay: 30 },
-
-  { text: 'Blitzschnelle Ladezeiten – auf jedem Gerät', delay: 50 },
-  { pause: 1200 },
-  { delete: 'all', delay: 30 },
-
-  { text: 'Top-Performance bei Google Lighthouse', delay: 50 },
-  { pause: 1000 },
-  { delete: 'all', delay: 30 },
-
-  { text: 'Optimiert für SEO, Struktur & Nutzerführung', delay: 50 },
-  { pause: 1200 },
-  { delete: 'all', delay: 30 },
-
-  { text: 'Barrierefreiheit für alle Nutzer:innen', delay: 50 },
-  { pause: 1000 },
-  { delete: 'all', delay: 30 },
-
-  { text: 'Responsives Design begeistert auf jedem Gerät', delay: 50 },
-  { pause: 1000 },
-  { delete: 'all', delay: 30 },
-
-  { text: 'Strukturierter Code. Schnelle Ladezeiten.', delay: 50 },
-  { pause: 1000 },
-  { delete: 'all', delay: 30 },
-
-  { text: 'Google liebt schnelle Seiten – deine auch', delay: 50 },
-  { pause: 1200 },
-  { delete: 'all', delay: 30 },
-
-  { text: 'Modulare Komponenten für maximale Flexibilität', delay: 50 },
-  { pause: 1000 },
-  { delete: 'all', delay: 30 },
-
-  { text: 'Kein Baukasten – echtes Webdesign mit System', delay: 55 },
-  { pause: 1000 },
-  { delete: 'all', delay: 30 },
-
-  { text: 'Updates? Inhalte? In Sekunden erledigt.', delay: 50 },
-  { pause: 1200 },
-  { delete: 'all', delay: 30 },
-
-  { text: 'Modernes HTML – semantisch, performant, sauber', delay: 55 },
-  { pause: 1000 },
-  { delete: 'all', delay: 30 },
-
-  { text: 'Ladezeit? 0,2 Sekunden. Wirklich.', delay: 50 },
-  { pause: 1200 },
-  { delete: 'all', delay: 30 },
-
-  { text: 'UX, Accessibility, Mobile First – alles drin', delay: 50 },
-  { pause: 1200 },
-  { delete: 'all', delay: 30 },
-
-  { text: 'Fokus auf Performance. Fokus auf Nutzer:innen.', delay: 55 },
-  { pause: 1200 },
-  { delete: 'all', delay: 30 },
-
-  { text: 'Visuell. Schnell. Für Menschen gemacht.', delay: 55 },
-  { pause: 1200 },
-  { delete: 'all', delay: 30 },
-
-  { text: 'Erweiterbar. Wartbar. Zukunftssicher.', delay: 55 },
-  { pause: 1200 },
-  { delete: 'all', delay: 30 },
-];
-
-
-  let stepIndex = 0;
-  let charIndex = 0;
-
-  async function runStep() {
-    const step = steps[stepIndex];
-    if (!step) {
-      stepIndex = 0;
-      return runStep(); // loop
-    }
-
-    if (step.text !== undefined) {
-      if (charIndex < step.text.length) {
-        elText.textContent += step.text[charIndex++];
-        updateCaret(); updatePointer();
-        await wait(step.delay);
-        return runStep();
-      }
-      charIndex = 0;
-      stepIndex++;
-      await wait(300);
-      return runStep();
-    }
-
-    if (step.delete !== undefined) {
-      let toDelete = step.delete === 'all' ? elText.textContent.length : step.delete;
-      while (toDelete--) {
-        elText.textContent = elText.textContent.slice(0, -1);
-        updateCaret(); updatePointer();
-        await wait(step.delay);
-      }
-      stepIndex++;
-      return runStep();
-    }
-
-    if (step.pause) {
-      await wait(step.pause);
-      stepIndex++;
-      return runStep();
-    }
-  }
-
-  function updateCaret() {
-    elCaret.remove();
-    document.querySelector('.input-field')?.appendChild(elCaret);
-  }
-
-  function updatePointer() {
-    const rect = elCaret.getBoundingClientRect();
-    const parent = elCaret.parentElement.getBoundingClientRect();
-    elPointer.style.transform = `translate(${rect.left - parent.left}px, ${rect.top - parent.top}px)`;
-  }
-
-  function wait(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  runStep();
-});
-</script>
-<script>
-// Animiertes Kreisdiagramm wird nur bei Sichtbarkeit gestartet
-const initCircle = (canvas) => {
-  const targetVal = parseInt(canvas.dataset.value || 100);
-  const label = canvas.dataset.label || "";
-  const ctx = canvas.getContext("2d");
-  const size = 120; canvas.width = size; canvas.height = size;
-  const radius = size / 2 - 10;
-  const center = size / 2;
-  let current = 0;
-
-  const gradient = ctx.createLinearGradient(0, 0, size, 0);
-  gradient.addColorStop(0, '#ff5c00');
-  gradient.addColorStop(0.5, '#ff7a29');
-  gradient.addColorStop(1, '#ff6600');
-
-  const draw = () => {
-    ctx.clearRect(0, 0, size, size);
-
-    // Hintergrundkreis
-    ctx.lineWidth = 8;
-    ctx.strokeStyle = "#333";
-    ctx.beginPath();
-    ctx.arc(center, center, radius, 0, 2 * Math.PI);
-    ctx.stroke();
-
-    // Fortschrittskreis mit Verlauf
-    ctx.strokeStyle = gradient;
-    ctx.beginPath();
-    ctx.arc(center, center, radius, -0.5 * Math.PI, (current / 100) * 2 * Math.PI - 0.5 * Math.PI);
-    ctx.stroke();
-
-    // Prozentzahl
-    ctx.fillStyle = "#fff";
-    ctx.font = "20px sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText(current + "%", center, center);
-
-    if (label) {
-      ctx.font = "12px sans-serif";
-      ctx.fillText(label, center, center + 20);
-    }
-  };
-
-  const animate = () => {
-    draw();
-    if (current < targetVal) {
-      current++;
-      requestAnimationFrame(animate);
-    }
-  };
-
-  animate();
-};
-
-// Beobachte, wann die Canvas-Elemente sichtbar werden
-document.addEventListener('DOMContentLoaded', () => {
-  const canvases = document.querySelectorAll('.speed-circle');
-
-  const observer = new IntersectionObserver((entries, observerRef) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        initCircle(entry.target);
-        observerRef.unobserve(entry.target); // Nur einmal animieren
-      }
-    });
-  }, {
-    threshold: 0.5 // Mindestens 50% sichtbar
-  });
-
-  canvases.forEach(canvas => observer.observe(canvas));
-});
-</script>
-<script>
-window.addEventListener('DOMContentLoaded', () => {
-  const container = document.querySelector('.modular-card');
-  container.querySelectorAll('.draggable-element').forEach(el => {
-    // a) Startposition aus Data-Attributen setzen
-    const startX = parseInt(el.dataset.x) || 0;
-    const startY = parseInt(el.dataset.y) || 0;
-    el.style.left = startX + 'px';
-    el.style.top  = startY + 'px';
-
-    // b) Drag-Logic
-    el.addEventListener('mousedown', onMouseDown);
-    el.ondragstart = () => false;
-
- function onMouseDown(e) {
-  const rect = el.getBoundingClientRect();
-  const containerRect = container.getBoundingClientRect();
-
-  // Setze das Element auf absolute Position relativ zum Container
-  el.style.position = 'absolute';
-  el.style.zIndex = 999;
-  el.style.left = (rect.left - containerRect.left) + 'px';
-  el.style.top = (rect.top - containerRect.top) + 'px';
-  el.style.width = rect.width + 'px';
-  el.style.height = rect.height + 'px';
-  el.style.cursor = 'grabbing';
-
-  let shiftX = e.clientX - rect.left;
-  let shiftY = e.clientY - rect.top;
-
-  // Ab hier liegt das Element frei im Container
-  document.addEventListener('mousemove', onMouseMove);
-  document.addEventListener('mouseup', onMouseUp);
-
-  function onMouseMove(evt) {
-    const newX = evt.clientX - containerRect.left - shiftX;
-    const newY = evt.clientY - containerRect.top - shiftY;
-    el.style.left = newX + 'px';
-    el.style.top = newY + 'px';
-  }
-
-  function onMouseUp() {
-    el.style.cursor = 'grab';
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('mouseup', onMouseUp);
-  }
-
-  e.preventDefault();
-}
-
-
-
-  });
-});
-</script>
-<style>
-  @media (min-width: 1600px) {
-  .modular-card {
-    background-position: center 15% !important;
-    min-height: 950px;
-    gap: 1.2rem;
-    padding-top: 60px;
-  }
-
-  .modular-card h3 {
-    margin-top: -10rem;
-    transform: translateY(-0.5rem);
-  }
-
-  .modular-card p {
-    margin-top: -0.8rem;
-    margin-bottom: 1.5rem;
-    max-width: 450px;
-  }
-
-  .modular-card .typing-demo {
-    transform: translateY(-1rem);
-  }
-}
-
-@media (min-width: 1920px) {
-  .modular-card {
-    background-position: center 12% !important;
-    min-height: 1000px;
-    padding-top: 80px;
-  }
-
-  .modular-card h3 {
-    margin-top: -12rem;
-  }
-
-  .modular-card p {
-    max-width: 460px;
-  }
-}
-
-@media (min-width: 2560px) {
-  .modular-card {
-    background-position: center 10% !important;
-    min-height: 1100px;
-    padding-top: 100px;
-  }
-
-  .modular-card h3 {
-    font-size: 2.4rem;
-    margin-top: -14rem;
-  }
-
-  .modular-card p {
-    font-size: 1.15rem;
-    max-width: 500px;
-  }
-
-  .typing-demo.draggable-element {
-    max-width: 600px;
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 1440px) {
-  .modular-card {
-    background-position: center 20% !important;
-    min-height: 900px;
-    padding-top: 40px;
-    gap: 1rem; /* reduziert vertikalen Abstand zwischen Elementen */
-    margin-top: -5rem;
-  }
-
-  .modular-card h3,
-  .modular-card p,
-  .modular-card .typing-demo {
-    transform: translateY(-1rem);
-    margin-top: 0.5rem; /* vorher 2rem – jetzt viel kompakter */
-    margin-bottom: 0.3rem;
-  }
-  .modular-card p {
-    transform: translateY(0);
-    margin-top: -0.95rem;
-    margin-bottom: 1.5rem;
-    max-width: 400px; /* ✳️ Begrenzung sorgt für 2 Zeilen */
-    text-align: center;
-  }
-  .modular-card h3{
-   margin-top: -12rem;
-  }
-}
-
+/* Responsive Anpassungen */
 @media (max-width: 1024px) {
-
   .advanced-features-section {
     padding: 60px 10vw;
   }
-
-  .features-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .metrics-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .feature-card {
-    padding: 20px;
-  }
-}
-@media (max-width: 1350px) {
-  .metrics-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 1024px) {
-  .metrics-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .modular-card {
-    background-image: 
-      linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgb(0, 0, 0) 100%),
-      url('./WebdesignPic/Tabletasia.webp') !important;
-    background-size: cover !important;
-    background-position: center 0% !important;
-    z-index: 1;
-    margin-top: -0.5rem;
-  }
-    .modular-card p {
-    max-width: 320px; /* oder z.B. 280px für noch schmaler */
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1000px) {
-  .modular-card .typing-demo {
-    transform: translateY(-2.5rem);
-  }
-}
-
-@media (min-width: 1025px) and (max-width: 1264px) {
-  .modular-card .typing-demo {
-    transform: translateY(-2.8rem);
-  }
-}
-@media (min-width: 1025px) and (max-width: 1264px) {
-  .modular-card {
-    gap: 0.8rem;
-  }
-
-  .modular-card .typing-demo {
-    transform: translateY(-2.8rem);
-  }
-
-  .modular-card p {
-    margin-bottom: 1.2rem;
-  }
-}
-
-@media (min-width: 1025px) and (max-width: 1112px) {
-  .modular-card {
-    min-height: 950px;
-    gap: 1rem;
-  }
- .modular-card h3 {
-    margin-top: -17rem;
-   
-  }
-
-  .modular-card p {
-    margin-top: -1.8rem;
-    margin-bottom: 1.5rem;
-    max-width: 450px;
-  }
-
-  .modular-card .typing-demo {
-    margin-top: 0.8rem;
-  }
-
 }
 @media (max-width: 374px) {
   .metrics-grid {
@@ -3758,542 +3327,832 @@ window.addEventListener('DOMContentLoaded', () => {
     flex-direction: column;
     gap: 1.5rem;
   }
-
   .circle-row {
     flex-direction: column;
     align-items: center;
     gap: 0.8rem;
   }
-
-  .speed-circle {
-    width: 80px !important;
-    height: 80px !important;
-  }
-
-  .circle-info {
-    font-size: 0.9rem;
-    text-align: center;
-  }
-
   .importance-note {
     font-size: 0.95rem;
-    line-height: 1.6;
-    text-align: center; /* statt justify */
-    margin-top: 0.5rem;
+    text-align: center;
+    color: #ccc;
     padding: 0 0.5rem;
-    color: #ccc; /* heller für bessere Lesbarkeit */
+    margin-top: 0.5rem;
   }
-
   .feature-card {
     padding: 16px;
   }
-
   .feature-card h3 {
     font-size: 1.4rem;
     text-align: center;
   }
 }
-@media (min-width: 769px) and (max-width: 913px) {
-  .modular-card {
-    min-height: 950px;
-    gap: 1rem;
-  }
- .modular-card h3 {
-    margin-top: -17rem;
-   
-  }
-
-  .modular-card p {
-    margin-top: -1.8rem;
-    margin-bottom: 1.5rem;
-    max-width: 450px;
-  }
-
-  .modular-card .typing-demo {
-    margin-top: 0.8rem;
-  }
-
-}
 </style>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const initCircle = (canvas) => {
+    const targetVal = parseInt(canvas.dataset.value) || 0;
+    const label = canvas.dataset.label || "";
+    const ctx = canvas.getContext('2d');
+    const size = 120;
+    canvas.width = size; canvas.height = size;
+    const radius = size / 2 - 10;
+    let current = 0;
+
+    const gradient = ctx.createLinearGradient(0, 0, size, 0);
+    gradient.addColorStop(0, '#ff5c00');
+    gradient.addColorStop(0.5, '#ff7a29');
+    gradient.addColorStop(1, '#ff6600');
+
+    function draw() {
+      ctx.clearRect(0, 0, size, size);
+      ctx.lineWidth = 8;
+      ctx.strokeStyle = "#333";
+      ctx.beginPath();
+      ctx.arc(size/2, size/2, radius, 0, 2 * Math.PI);
+      ctx.stroke();
+      ctx.strokeStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(size/2, size/2, radius, -0.5 * Math.PI, (current/100)*2*Math.PI - 0.5*Math.PI);
+      ctx.stroke();
+      ctx.fillStyle = "#fff";
+      ctx.font = "20px sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(current + "%", size/2, size/2);
+      if (label) {
+        ctx.font = "12px sans-serif";
+        ctx.fillText(label, size/2, size/2 + 20);
+      }
+    }
+
+    function animate() {
+      draw();
+      if (current < targetVal) {
+        current++;
+        requestAnimationFrame(animate);
+      }
+    }
+    animate();
+  };
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        initCircle(entry.target);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.speed-circle').forEach(canvas => {
+    observer.observe(canvas);
+  });
+});
+</script>
 
 
 
 
 
-<section class="overflow-image-section">
+<section class="overflow-image-section" aria-label="Dekoratives Hintergrundbild mit Rotation">
   <div class="overflow-image-container">
-    <img src="./WebdesignPic/handyasiahinterg.webp" alt="Visuelles Highlight" />
+    <img
+      src="./WebdesignPic/handyasiahinterg.webp"
+      alt="Gestaltetes Handybild mit asiatischem Flair als visuelles Designelement"
+      loading="lazy"
+      decoding="async"
+    />
   </div>
 </section>
 <style>
+  :root {
+    --rotation: -8deg;
+    --translateY: 0;
+  }
+
   html, body {
-  overflow-x: hidden;
-}
+    overflow-x: hidden;
+  }
 
-.overflow-image-section {
-  position: relative;
-  width: 100vw;
-  overflow: visible;
-  margin-top: -23rem; /* Überlappt obere Sektion */
-  margin-bottom: -5rem; /* Ragt in die nächste Sektion */
-  z-index: 2;
-  pointer-events: none; /* Falls du keine Interaktion willst */
-}
-
-.overflow-image-container {
-  width: 150vw;
-  margin-left: -25vw;
-  transform: rotate(-8deg);
-  position: relative; /* für ::after nötig */
-}
-
-.overflow-image-container::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: linear-gradient(to top right, white 20%, transparent 100%);
-  pointer-events: none;
-}
-
-.overflow-image-container img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-/* --- Für Tablets & kleine Desktops --- */
-@media (max-width: 1024px) {
   .overflow-image-section {
-    margin-top: -18rem;
-    margin-bottom: -3rem;
+    position: relative;
+    width: 100vw;
+    overflow: visible;
+    margin-top: -23rem;
+    margin-bottom: -5rem;
+    z-index: 1;
+    pointer-events: none;
   }
 
   .overflow-image-container {
-    width: 170vw;
-    margin-left: -35vw;
-    transform: rotate(-7deg);
-  }
-}
-
-/* --- Für Mobilgeräte --- */
-@media (max-width: 768px) {
-  .overflow-image-section {
-    margin-top: -14rem;
-    margin-bottom: -2rem;
-  }
-
-  .overflow-image-container {
-    width: 190vw;
-    margin-left: -45vw;
-    transform: rotate(-6deg);
-  }
-}
-
-@media (max-width: 425px) {
-  .overflow-image-section {
-    margin-top: -16rem; /* weiter nach oben */
-    margin-bottom: -1rem;
-  }
-
-  .overflow-image-container {
-    width: 340vw;         /* Bild deutlich größer */
-    margin-left: -70vw;   /* zentriert trotz größerer Breite */
-    transform: rotate(-4deg) translateY(-8rem); /* leicht nach oben */
-  }
-}@media (max-width: 375px) {
-  .overflow-image-section {
-    margin-top: -14rem;
-    margin-bottom: -0.5rem;
-  }
-
-  .overflow-image-container {
-    width: 380vw;
-    margin-left: -90vw;
-    transform: rotate(-3.5deg) translateY(-9rem);
+    width: 150vw;
+    margin-left: -25vw;
+    transform: rotate(var(--rotation)) translateY(var(--translateY));
+    position: relative;
+    transition: transform 0.8s ease;
+       z-index: 1;
   }
 
   .overflow-image-container::after {
-    background: linear-gradient(to top right, rgba(255,255,255,0.3) 10%, transparent 100%);
-  }
-}
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top right, white 20%, transparent 100%);
+    pointer-events: none;
+       z-index: 1;
 
-@media (max-width: 320px) {
-  .overflow-image-section {
-    margin-top: -13rem;
   }
 
-  .overflow-image-container {
-    width: 420vw;
-    margin-left: -110vw;
-    transform: rotate(-3deg) translateY(-10rem);
+  .overflow-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
-.overflow-image-container::after {
-    background: linear-gradient(to top right, rgb(255, 255, 255) 10%, transparent 100%);
+
+  /* Tablets */
+  @media (max-width: 1024px) {
+    .overflow-image-section {
+      margin-top: -18rem;
+      margin-bottom: -3rem;
+    }
+
+    .overflow-image-container {
+      width: 170vw;
+      margin-left: -35vw;
+      --rotation: -7deg;
+    }
   }
- 
-}
 
+  /* Smartphones */
+  @media (max-width: 768px) {
+    .overflow-image-section {
+      margin-top: -14rem;
+      margin-bottom: -2rem;
+    }
 
+    .overflow-image-container {
+      width: 190vw;
+      margin-left: -45vw;
+      --rotation: -6deg;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .overflow-image-section {
+      margin-top: -16rem;
+      margin-bottom: -1rem;
+    }
+
+    .overflow-image-container {
+      width: 250vw;
+      margin-left: -60vw;
+      --rotation: -4deg;
+      --translateY: -8rem;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .overflow-image-section {
+      margin-top: -14rem;
+      margin-bottom: -0.5rem;
+    }
+
+    .overflow-image-container {
+      width: 270vw;
+      margin-left: -75vw;
+      --rotation: -3.5deg;
+      --translateY: -9rem;
+    }
+
+    .overflow-image-container::after {
+      background: linear-gradient(to top right, rgba(255, 255, 255, 0.3) 10%, transparent 100%);
+    }
+  }
+
+  @media (max-width: 320px) {
+    .overflow-image-section {
+      margin-top: -13rem;
+    }
+
+    .overflow-image-container {
+      width: 280vw;
+      margin-left: -85vw;
+      --rotation: -3deg;
+      --translateY: -10rem;
+    }
+
+    .overflow-image-container::after {
+      background: linear-gradient(to top right, rgb(255, 255, 255) 10%, transparent 100%);
+    }
+  }
+
+  /* Optional: Hover Animation */
+  @media (hover: hover) {
+    .overflow-image-container:hover {
+      transform: rotate(calc(var(--rotation) + 1deg)) scale(1.02) translateY(var(--translateY));
+    }
+  }
 </style>
 
 
-
-  <!--
-<section class="image-section">
-  <div class="image-background"></div>
-  <div class="container">
-      
-    </div>
-</section>
-<style>
-
-.image-section {
-  position: relative;
-  width: 100vw;
-  height: 100vh; /* oder 60vh, je nach Wunsch */
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  z-index: 0;
-}
-
-/* Das eigentliche Bild */
-.image-section .image-background {
-  position: absolute;
-  top: -10vh;
-  left: -10vw;
-  width: 120vw;
-  height: 120vh;
-  background-image: url('./WebdesignPic/schiefhintergrund.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-
-  transform: rotate(-2deg) scale(1.1);
-  z-index: 1;
-}
-
-/* Inhalt über dem Bild */
-.image-section .image-content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-align: center;
-  padding: 2rem;
-}
-</style>
--->
-
-
-  
-<section class="cyber-section">
-  <div class="neuro-core-grid centered-layout">
-
-    <!-- Text Content -->
-    <div class="hypertext-block" style="z-index: 6;">
-      <h2 class="neon-title" style="z-index: 6;">UNSER ANSATZ & UNSERE MOTIVATION</h2>
-      <p class="subtext">Ihr Qualitätsversprechen: Maßgeschneiderte digitale Lösungen für die Anforderungen von heute</p>
-
-      <div class="feature-matrix" style="z-index: 6;">
-        <div class="core-feature">
-          <h3>Projektsteuerung 2.0</h3>
-          <p>Wir orchestrieren Ihre Transformation mit maximaler Transparenz und Echtzeit-Feedback.</p>
-        </div>
-        <div class="core-feature">
-          <h3>Empathie trifft Analyse</h3>
-          <p>Tiefes Zielgruppenverständnis kombiniert mit messerscharfer Strategie.</p>
-        </div>
-        <div class="core-feature">
-          <h3>Next-Level Design</h3>
-          <p>Unvergesslich visuell. Design, das Performance und Emotion vereint.</p>
-        </div>
-        <div class="core-feature">
-          <h3>Detailverliebtheit</h3>
-          <p>Pixel-Perfektion für ein Erlebnis, das Eindruck hinterlässt.</p>
-        </div>
-        <div class="core-feature">
-          <h3>Tech-DNA</h3>
-          <p>React, API-First, Headless: Wir atmen moderne Entwicklung.</p>
-        </div>
-        <div class="core-feature">
-          <h3>Automatisierte Abläufe</h3>
-          <p>Optimierte Prozesse für Geschwindigkeit und Skalierbarkeit.</p>
-        </div>
-      </div>
-
-      <button class="neon-pulse-btn">Mehr über uns →</button>
-    </div>
-
  
+
+<section class="values-section container" id="werte" aria-labelledby="heading-values">
+  <h2 class="values-title" id="heading-values">Unser Ansatz & Unsere Motivation</h2>
+  <p class="values-subline">
+    Ihr Qualitätsversprechen: Maßgeschneiderte digitale Lösungen für die Anforderungen von heute.
+  </p>
+
+  <div class="values-grid">
+
+    <!-- VALUE 1 -->
+    <article class="value-card" aria-labelledby="steuerung-title">
+      <div class="icon-wrap"><i data-feather="activity"></i></div>
+      <h3 id="steuerung-title">Projektsteuerung 2.0</h3>
+      <p>Wir orchestrieren Ihre Transformation mit maximaler Transparenz und Echtzeit-Feedback.</p>
+    </article>
+
+    <!-- VALUE 2 -->
+    <article class="value-card" aria-labelledby="empathie-title">
+      <div class="icon-wrap"><i data-feather="heart"></i></div>
+      <h3 id="empathie-title">Empathie trifft Analyse</h3>
+      <p>Tiefes Zielgruppenverständnis kombiniert mit messerscharfer Strategie.</p>
+    </article>
+
+    <!-- VALUE 3 -->
+    <article class="value-card" aria-labelledby="design-title">
+      <div class="icon-wrap"><i data-feather="eye"></i></div>
+      <h3 id="design-title">Next-Level Design</h3>
+      <p>Unvergesslich visuell. Design, das Performance und Emotion vereint.</p>
+    </article>
+
+    <!-- VALUE 4 -->
+    <article class="value-card" aria-labelledby="details-title">
+      <div class="icon-wrap"><i data-feather="grid"></i></div>
+      <h3 id="details-title">Detailverliebtheit</h3>
+      <p>Pixel-Perfektion für ein Erlebnis, das Eindruck hinterlässt.</p>
+    </article>
+
+    <!-- VALUE 5 -->
+    <article class="value-card" aria-labelledby="tech-title">
+      <div class="icon-wrap"><i data-feather="cpu"></i></div>
+      <h3 id="tech-title">Tech-DNA</h3>
+      <p>React, API-First, Headless: Wir atmen moderne Entwicklung.</p>
+    </article>
+
+    <!-- VALUE 6 -->
+    <article class="value-card" aria-labelledby="automation-title">
+      <div class="icon-wrap"><i data-feather="repeat"></i></div>
+      <h3 id="automation-title">Automatisierte Abläufe</h3>
+      <p>Optimierte Prozesse für Geschwindigkeit und Skalierbarkeit.</p>
+    </article>
 
   </div>
+
+  <div class="values-cta-wrap">
+    <a href="#about" class="cta-button">Mehr über uns →</a>
+  </div>
 </section>
-<style>html, body {
-  overflow-x: hidden;
+<style>:root {
+  --primary: #ff6600;
+  --secondary: #ffb266;
+  --text-color: #111;
+  --bg-light: #ffffff;
+  --highlight: #ffe2bd;
 }
 
-.cyber-section {
+.values-section {
   background: transparent;
-  padding: 6rem 2rem;
-  color: #111;
-  font-family: 'Inter', sans-serif;
-}
-
-.neuro-core-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   text-align: center;
-  max-width: 1200px;
-  margin: 0 auto;
+  color: var(--text-color);
+  padding: 5rem 2rem;
 }
 
-/* ======================
-   ZENTRIERTER TEXTBLOCK
-====================== */
-.hypertext-block {
-  max-width: 800px;
-  z-index: 6;
-  position: relative;
+.values-title {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 0.8rem;
 }
 
-.neon-title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 1rem;
-  color: #111;
-  z-index: 6;
-  position: relative;
+.values-subline {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 3.5rem;
 }
 
-.subtext {
-  font-size: 1.125rem;
-  margin-bottom: 2rem;
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .values-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.value-card {
+  background: linear-gradient(135deg, #ffffff, #f2f5fa);
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: left;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.value-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.value-card p {
+  font-size: 1rem;
   color: #444;
 }
 
-/* ======================
-   FEATURE-KARTEN
-====================== */
-.feature-matrix {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
-  z-index: 6;
-  position: relative;
-}
-
-.core-feature {
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  padding: 1.5rem;
+.icon-wrap {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  width: 48px;
+  height: 48px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
-.core-feature h3 {
-  margin-bottom: .75rem;
-  font-size: 1.25rem;
-  color: #111;
+.icon-wrap i {
+  stroke: #fff;
+  width: 24px;
+  height: 24px;
 }
 
-.core-feature p {
-  color: #555;
-  font-size: 1rem;
-  line-height: 1.5;
+.values-cta-wrap {
+  margin-top: 3rem;
 }
 
-/* ======================
-   BUTTON
-====================== */
-.neon-pulse-btn {
-  display: inline-block;
-  padding: .75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+.cta-button {
   background: linear-gradient(45deg, #ff6600, #ff0051);
   color: #fff;
-  box-shadow:
-    0 0 12px rgba(255, 102, 0, 0.4),
-    0 0 24px rgba(255, 64, 0, 0.4);
-  animation: pulse 2.5s ease-out infinite;
-  transition: filter .2s, box-shadow .2s;
+  padding: 0.8rem 1.6rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background 0.3s ease;
 }
 
-.neon-pulse-btn:hover {
+.cta-button:hover {
   filter: brightness(1.1);
-  box-shadow:
-    0 0 16px rgba(255, 102, 0, 0.6),
-    0 0 32px rgba(255, 89, 0, 0.6);
 }
-
-@keyframes pulse {
-  0%, 100% {
-    box-shadow:
-      0 0 8px rgba(255, 102, 0, .6),
-      0 0 16px rgba(255, 0, 89, 0.6);
-  }
-  50% {
-    box-shadow:
-      0 0 24px rgba(255, 102, 0, .3),
-      0 0 48px rgba(255, 0, 64, 0.3);
-  }
-}
-
-/* ======================
-   VIDEO UNTEN OHNE RAHMEN
-====================== */
-.bare-video-container {
-  width: 100%;
-  max-width: 720px;
-  margin-top: 3rem;
-  z-index: 1;
-}
-
-.tech-visual-bare {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-/* ======================
-   RESPONSIVE
-====================== */
-@media (max-width: 768px) {
-  .cyber-section {
-    padding: 4rem 1.5rem;
-  }
-
-  .neon-title {
-    font-size: 2rem;
-  }
-
-  .subtext {
-    font-size: 1rem;
-  }
-
-  .feature-matrix {
-    gap: 1rem;
-  }
-
-  .bare-video-container {
-    max-width: 100%;
-  }
-
-  .tech-visual-bare {
-    height: auto;
-  }
-}
-@media (max-width: 425px) {
-  .cyber-section {
-    padding: 3rem 1rem;
-  }
-
-  .neon-title {
-    font-size: 1.75rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .subtext {
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .feature-matrix {
-    grid-template-columns: 1fr; /* einspaltig auf sehr kleinen Screens */
-    gap: 1rem;
-  }
-
-  .core-feature {
-    padding: 1.2rem;
-  }
-
-  .core-feature h3 {
-    font-size: 1.15rem;
-  }
-
-  .core-feature p {
-    font-size: 0.95rem;
-  }
-
-  .neon-pulse-btn {
-    font-size: 0.95rem;
-    padding: 0.65rem 1.25rem;
-  }
-}
-
-@media (max-width: 375px) {
-  .neon-title {
-    font-size: 1.55rem;
-  }
-
-  .core-feature {
-    padding: 1rem;
-  }
-
-  .core-feature h3 {
-    font-size: 1.05rem;
-  }
-
-  .core-feature p {
-    font-size: 0.9rem;
-  }
-
-  .neon-pulse-btn {
-    font-size: 0.9rem;
-    padding: 0.6rem 1.2rem;
-  }
-}
-
-@media (max-width: 320px) {
-  .cyber-section {
-    padding: 2.5rem 0.8rem;
-  }
-
-  .neon-title {
-    font-size: 1.4rem;
-  }
-
-  .subtext {
-    font-size: 0.85rem;
-  }
-
-  .core-feature h3 {
-    font-size: 1rem;
-  }
-
-  .core-feature p {
-    font-size: 0.85rem;
-  }
-
-  .neon-pulse-btn {
-    font-size: 0.85rem;
-    padding: 0.55rem 1rem;
-  }
-}
-@media (max-width: 400px) {
-  .cyber-section {
-    padding-top: 1.5rem;  /* weniger Abstand oben */
-    margin-top: -10rem;    /* optional, um sie noch weiter hoch zu drücken */
-  }
-}
-
 </style>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    document.querySelectorAll(".animate-on-scroll").forEach(el => {
+      observer.observe(el);
+    });
+  });
+</script>
+
+
+
+
+
+
+<section class="pricing-clean container" id="pakete" aria-labelledby="heading-pricing">
+  <h1 class="visually-hidden">Preise für Webdesign-Pakete</h1>
+  <h2 class="pricing-title" id="heading-pricing">Webdesign-Pakete <br>Transparent, Skalierbar, Effektiv</h2>
+  <p class="pricing-subline">
+    Von der einfachen Onepager-Website bis zur professionellen Business-Webseite – maßgeschneiderte Lösungen für Ihr Unternehmen.
+  </p>
+
+  <div class="pricing-grid">
+
+    <!-- STARTER -->
+    <article class="pricing-card" aria-labelledby="starter-title">
+      <div class="icon-wrap" aria-hidden="true"><i data-feather="zap"></i></div>
+      <h3 id="starter-title">Starter-Paket</h3>
+      <p class="tagline">Ein klarer erster Eindruck</p>
+      <ul role="list" aria-label="Leistungsübersicht Starter-Paket">
+        <li role="listitem">✓ Einzigartige Titelseite</li>
+        <li role="listitem">✓ Responsive Design</li>
+        <li role="listitem">✓ 1 Korrekturschleife</li>
+        <li role="listitem">✓ DSGVO-konform</li>
+      </ul>
+      <p class="vorteil">Ideal für kleine Unternehmen, die mit einem professionellen Onepager online durchstarten möchten.</p>
+      <div class="preis" aria-label="Preis ab 699 Euro netto" data-netto="699" data-brutto="831.81">ab 699 € <span>zzgl. MwSt.</span></div>
+    </article>
+
+    <!-- BUSINESS -->
+    <article class="pricing-card" aria-labelledby="business-title">
+      <div class="icon-wrap" aria-hidden="true"><i data-feather="layers"></i></div>
+      <h3 id="business-title">Business-Paket</h3>
+      <p class="tagline">Mehrseitige Online-Präsenz</p>
+      <ul role="list" aria-label="Leistungsübersicht Business-Paket">
+        <li role="listitem">✓ Titelseite + bis zu 4 Unterseiten</li>
+        <li role="listitem">✓ Kontaktformular &amp; Basis-SEO</li>
+        <li role="listitem">✓ 2 Korrekturschleifen</li>
+        <li role="listitem">✓ DSGVO-konform</li>
+      </ul>
+      <p class="vorteil">Strukturierte Business-Website mit Kontaktformular und SEO-Basics.</p>
+      <div class="preis" aria-label="Preis ab 1.290 Euro netto" data-netto="1290" data-brutto="1535.10">ab 1.290 € <span>zzgl. MwSt.</span></div>
+    </article>
+
+    <!-- PROFESSIONAL -->
+    <article class="pricing-card" aria-labelledby="professional-title">
+      <div class="icon-wrap" aria-hidden="true"><i data-feather="briefcase"></i></div>
+      <h3 id="professional-title">Professional-Paket</h3>
+      <p class="tagline">Komplettlösung für den Business-Auftritt</p>
+      <ul role="list" aria-label="Leistungsübersicht Professional-Paket">
+        <li role="listitem">✓ Bis zu 10 Seiten</li>
+        <li role="listitem">✓ Individuelles UX-Design</li>
+        <li role="listitem">✓ 3 Korrekturschleifen</li>
+        <li role="listitem">✓ Erweiterte SEO &amp; CMS</li>
+      </ul>
+      <p class="vorteil">Perfekt für wachsende Unternehmen mit Anspruch an UX, SEO und Technik.</p>
+      <div class="preis" aria-label="Preis ab 2.290 Euro netto" data-netto="2290" data-brutto="2725.10">ab 2.290 € <span>zzgl. MwSt.</span></div>
+    </article>
+
+    <!-- PREMIUM -->
+    <article class="pricing-card highlight" aria-labelledby="premium-title">
+      <div class="icon-wrap" aria-hidden="true"><i data-feather="star"></i></div>
+      <h3 id="premium-title">Premium-Paket</h3>
+      <p class="tagline">Rundum-sorglos für den Großauftritt</p>
+      <ul role="list" aria-label="Leistungsübersicht Premium-Paket">
+        <li role="listitem">✓ Unbegrenzte Seitenanzahl</li>
+        <li role="listitem">✓ Premium-Design &amp; Animationen</li>
+        <li role="listitem">✓ Bis zu 5 Korrekturschleifen</li>
+        <li role="listitem">✓ SEO, CMS &amp; E-Commerce</li>
+      </ul>
+      <p class="vorteil">Für Unternehmen mit höchsten Anforderungen an Performance, Shop und Design.</p>
+      <div class="preis" aria-label="Preis ab 3.990 Euro netto" data-netto="3990" data-brutto="4748.10">ab 3.990 € <span>zzgl. MwSt.</span></div>
+    </article>
+
+  </div>
+</section>
+  <style>
+    :root {
+      --primary: #ff6600;
+      --secondary: #ffb266;
+      --text-color: #111;
+      --bg-light: #ffffff;
+      --highlight: #ffe2bd;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      left: -9999px;
+    }
+
+    .pricing-clean {
+      background: transparent;
+      text-align: center;
+      color: var(--text-color);
+    }
+
+    .pricing-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      margin-bottom: 0.8rem;
+    }
+
+    .pricing-subline {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 4rem;
+    }
+
+    .preis-toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 2rem;
+      gap: 1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    #preisModus {
+      background: var(--secondary);
+      border: none;
+      color: #111;
+      font-weight: bold;
+      padding: 0.5rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #preisModus:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .pricing-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .pricing-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #ffffff, #e6f0ff);
+      border: 1px solid #eee;
+      border-radius: 16px;
+      padding: 2.5rem 1.8rem;
+      text-align: left;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s ease;
+      height: 100%;
+      z-index: 5;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .pricing-card h3 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+    }
+
+    .tagline {
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .pricing-card ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-card ul li {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .vorteil {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .preis {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #111;
+      background: var(--secondary);
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(255, 148, 77, 0.3);
+      text-align: center;
+      width: 100%;
+    }
+
+    .preis span {
+      font-weight: 400;
+      font-size: 0.95rem;
+      margin-left: 0.4rem;
+    }
+
+    .highlight {
+      border: 2px solid #111;
+      background: linear-gradient(135deg, #ffffff, var(--highlight));
+    }
+
+    .icon-wrap {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .icon-wrap i {
+      stroke: #fff;
+      width: 24px;
+      height: 24px;
+
+    }
+
+    .pricing-card:nth-child(1) {
+
+      background: linear-gradient(135deg, #ffffff, rgb(235, 239, 255), #fbfbfb);
+      background-size: 600% 600%;
+      color: #fff;
+    }
+
+    .pricing-card:nth-child(1) {
+      border: 1px solid #3b3b3b;
+      border-radius: 16px;
+    }
+
+    .pricing-card:nth-child(1) .preis {
+      background: #f2f2f2;
+      /* hellgrau */
+      color: #111;
+      /* dunkle Schrift für Kontrast */
+    }
+
+
+    .pricing-card:nth-child(2) {
+      background: linear-gradient(270deg, #04006c, #6f00ff, #050088);
+      background-size: 300% 300%;
+      color: #fff;
+    }
+
+    .pricing-card:nth-child(3) {
+      background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
+      background-size: 400% 400%;
+      color: #fff;
+    }
+
+    .pricing-card:nth-child(4) {
+      background: linear-gradient(135deg, #ff5100, hwb(340 0% 0%), #ff5100);
+      background-size: 300% 300%;
+      color: #fff;
+    }
+
+    /* Textfarben für bessere Lesbarkeit */
+    .pricing-card h3,
+    .pricing-card .tagline,
+    .pricing-card ul li,
+    .pricing-card .vorteil,
+    .pricing-card .preis {
+      color: #fff !important;
+    }
+
+    /* Premium-Paket (4. Karte): Textfarbe schwarz */
+    .pricing-card:nth-child(1) h3,
+    .pricing-card:nth-child(1) .tagline,
+    .pricing-card:nth-child(1) ul li,
+    .pricing-card:nth-child(1) .vorteil,
+    .pricing-card:nth-child(1) .preis {
+      color: #111 !important;
+    }
+
+
+    /* Preis-Box farblich etwas transparenter */
+    .pricing-card .preis {
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: none;
+    }
+
+    /* Hover-Effekt optional heller */
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Professional-Paket: Icon-Hintergrund weiß, Icon schwarz */
+    .pricing-card:nth-child(4) .icon-wrap {
+      background: #fff;
+    }
+
+    .pricing-card:nth-child(4) .icon-wrap svg {
+      stroke: #000 !important;
+    }
+  </style>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script>
+    feather.replace();
+
+    let bruttoAktiv = false;
+
+    function togglePreise() {
+      bruttoAktiv = !bruttoAktiv;
+      localStorage.setItem('bruttoAktiv', bruttoAktiv);
+      updatePreise();
+      document.getElementById('preisModus').setAttribute('aria-pressed', bruttoAktiv);
+    }
+
+    function updatePreise() {
+      const prices = document.querySelectorAll('.preis');
+      prices.forEach(p => {
+        const netto = parseFloat(p.dataset.netto);
+        const brutto = parseFloat(p.dataset.brutto);
+        p.innerHTML = bruttoAktiv
+          ? `ab ${brutto.toLocaleString("de-DE")} € <span>inkl. MwSt.</span>`
+          : `ab ${netto.toLocaleString("de-DE")} € <span>zzgl. MwSt.</span>`;
+      });
+      document.getElementById('preisModus').textContent = bruttoAktiv ? '🧾 Brutto' : '💼 Netto';
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      bruttoAktiv = localStorage.getItem('bruttoAktiv') === 'true';
+      updatePreise();
+    });
+  </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "name": "Starter-Paket",
+      "description": "Ein klarer erster Eindruck – ideal für Onepager.",
+      "offers": {
+        "@type": "Offer",
+        "price": "699",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Business-Paket",
+      "description": "Titelseite plus bis zu 4 Unterseiten, inklusive Kontaktformular.",
+      "offers": {
+        "@type": "Offer",
+        "price": "1290",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Professional-Paket",
+      "description": "Bis zu 10 Seiten mit UX-Design, CMS und SEO.",
+      "offers": {
+        "@type": "Offer",
+        "price": "2290",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Premium-Paket",
+      "description": "Unbegrenzte Seitenanzahl, Webshop und High-End-Design.",
+      "offers": {
+        "@type": "Offer",
+        "price": "3990",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  ]
+}
+</script>
+
+
 
 
 
