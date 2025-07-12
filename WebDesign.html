@@ -251,314 +251,284 @@
 
 
 
-<header role="banner">
-  <a class="skip-link" href="#main-nav">Zum Hauptmenü springen</a>
-  <div class="container header-inner">
-    <div class="logo">Fusion³</div>
-    <button
-      id="burgerToggle"
-      class="burger-icon"
-      aria-label="Menü öffnen"
-      aria-controls="main-nav"
-      aria-expanded="false"
-    >
-      <i data-feather="menu"></i>
-    </button>
-    <nav
-      id="main-nav"
-      class="nav"
-      aria-label="Hauptnavigation"
-    >
-      <a href="#leistungen">Leistungen</a>
-      <a href="#ueber-uns">Über uns</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
-  </div>
-</header>
-
-
 
 <style>
-  .header-inner {
+  .hero {
+    position: relative;
+    min-height: 100vh;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 2rem;
-    background: var(--color-bg);
-    color: var(--color-text);
-    font-family: var(--font-sans);
-  }
-  .skip-link {
-    position: absolute;
-    left: -999px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-  }
-  .skip-link:focus {
-    left: 1rem;
-    top: 1rem;
-    width: auto;
-    height: auto;
-    padding: .5rem;
-    background: #000;
-    color: #fff;
-    z-index: 1000;
-  }
-  .burger-icon {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  .nav {
-    display: flex;
-    gap: 2rem;
-  }
-  .nav a {
-    text-decoration: none;
-    font-weight: var(--fw-medium);
-    color: var(--color-muted);
-    transition: color .3s;
-  }
-  .nav a:hover,
-  .nav a:focus {
-    color: var(--color-primary);
-  }
-  .nav.open {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: var(--color-bg);
-    width: 100%;
-    padding: 1rem;
-    box-shadow: 0 4px 12px rgba(0,0,0, .1);
-  }
-
-  .hero-block-unique {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 1.5rem;
-    font-family: var(--font-sans);
-    color: #000;
-    background-size: cover;
-    background-position: top center;
-    background-repeat: no-repeat;
-    overflow: hidden;
+    padding: 0 5vw;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
     z-index: 1;
   }
-  .hero-block-unique[aria-hidden="true"] {
-    visibility: hidden;
-  }
 
-  /* Highlight-Box & Typo */
-  .highlight-box {
-    border: 2px dashed var(--color-muted);
-    padding: .8rem 1.2rem;
-    background: var(--color-bg);
-    color: var(--color-text);
-    max-width: 600px;
+  .hero::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    box-sizing: border-box;
-  }
-  .heading-typewriter {
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    font-weight: var(--fw-black);
-    line-height: 1.3;
+    height: 100%;
+    background: black;
+    z-index: -2;
   }
 
-  .blinking-bar,
-  .animated-bar {
+  video.desktop-video { display: block; }
+  video.mobile-video { display: none; }
+  video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .hero-content {
+    flex: 1;
+    max-width: 45%;
+    padding: 3rem 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: fadeInLeft 1s ease-out forwards;
+  }
+
+  .highlight-box {
+    border: none;
+    padding: .8rem 0;
+    background: transparent;
+    color: #111;
+    max-width: 100%;
+  }
+
+  .heading-typewriter {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: #111;
+    display: inline-block;
+  }
+
+  .dynamic-typing-area {
+    margin-top: 1.2rem;
+    position: relative;
+  }
+
+  .dynamic-line {
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 700;
+    color: #333;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .blinking-bar {
     display: inline-block;
     width: 2px;
     height: 1.2em;
-    background: linear-gradient(180deg, var(--color-primary), var(--color-accent));
-    box-shadow: 0 0 4px var(--color-accent);
+    background: linear-gradient(180deg, var(--primary), var(--hover));
+    box-shadow: 0 0 4px var(--hover);
     vertical-align: bottom;
     animation: blink-flash 1s steps(1) infinite;
-    margin-left: 2px;
+    margin-left: 3px;
   }
+
+  .cta-button {
+    margin-top: 2rem;
+    padding: 14px 28px;
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .cta-button.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .cta-button:hover {
+    background-color: var(--hover);
+    transform: scale(1.05);
+  }
+
+  .hero-side {
+    position: absolute;
+    bottom: 5vh;
+    right: 5vw;
+    max-width: 20%;
+    font-size: 1rem;
+    color: #222;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    animation: fadeInRight 1.5s ease-out forwards;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+
+  .hero-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-tags span {
+    padding: 6px 14px;
+    border: 1px solid var(--primary);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    color: var(--primary);
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+    font-weight: 600;
+  }
+
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
   @keyframes blink-flash {
     0%, 50% { opacity: 1; }
     50.1%, 100% { opacity: 0; }
   }
 
-  .dynamic-typing-area {
-    margin-top: 1rem;
-    position: relative;
-  }
-  .dynamic-line {
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
-  .cursor-icon {
-    position: absolute;
-    border-left: 2px solid var(--color-accent);
-    height: 1.2em;
-    pointer-events: none;
-    transition: transform .05s;
-  }
-
-  .hero-cta {
-    margin-top: 2rem;
-    padding: .9rem 2.2rem;
-    font: var(--fw-bold) var(--fs-base) var(--font-sans);
-    border-radius: 10px;
-    background: var(--color-primary);
-    color: #fff;
-    text-decoration: none;
-    box-shadow: 0 10px 30px rgba(255,102,0,.4);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity .8s ease, transform .8s ease;
-  }
-  .hero-cta.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (max-width: 768px) {
-    .nav {
-      display: none;
+  @media (max-width: 900px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
     }
-    .burger-icon {
-      display: block;
-    }
-  }
-  @media (max-width: 480px) {
-    .hero-block-unique {
-      padding: 1.2rem 1rem;
-    }
-    .hero-cta {
-      font-size: 1rem;
-      padding: .8rem 1.6rem;
-    }
-    .highlight-box {
-      padding: .6rem .8rem;
-    }
+    .hero-content, .hero-side { max-width: 100%; }
+    .heading-typewriter { font-size: 2.2rem; }
+    .dynamic-line { font-size: 1.8rem; }
+    video.desktop-video { display: none; }
+    video.mobile-video { display: block; }
+    .cta-button { width: 100%; }
   }
 </style>
-<section
-  class="hero-block-unique"
-  id="hero"
-  role="region"
-  aria-label="Hero-Bereich"
-  aria-hidden="false"
-  data-bg-desktop="./WebdesignPic/HintegrundPC.png"
-  data-bg-mobile="./WebdesignPic/HintegrundHandy.png"
->
-  <div class="highlight-box" aria-hidden="true">
-    <h1 class="heading-typewriter">
-      <span class="animated-title-line"></span><span class="blinking-bar"></span>
-    </h1>
-  </div>
-  <div class="dynamic-typing-area" aria-hidden="true">
+<div class="hero">
+  <video class="desktop-video" autoplay muted loop playsinline aria-hidden="true">
+    <source src="./IndexM/PC.mp4" type="video/mp4">
+  </video>
+  <video class="mobile-video" autoplay muted loop playsinline aria-hidden="true">
+    <source src="video-mobile.webm" type="video/webm">
+  </video>
+
+  <div class="hero-content">
     <div class="highlight-box">
-      <span class="dynamic-line"></span><span class="animated-bar"></span>
+      <h1 class="heading-typewriter">
+        <span class="animated-title-line"></span><span class="blinking-bar"></span>
+      </h1>
     </div>
-    <div class="cursor-icon"></div>
+    <div class="dynamic-typing-area">
+      <div class="highlight-box">
+        <span class="dynamic-line"></span>
+      </div>
+    </div>
+    <button class="cta-button">JETZT KONTAKTIEREN →</button>
   </div>
-  <a
-    href="#kontakt"
-    class="hero-cta"
-    aria-hidden="true"
-  >Projekt starten</a>
-</section>
+
+  <div class="hero-side">
+    Ob durch <strong>intuitive Interfaces</strong>, immersive <strong>3D-Erfahrungen</strong> oder mutiges <strong>Storytelling</strong> – wir gestalten Momente, die man nicht nur sieht, sondern fühlt.
+    <div class="hero-tags">
+      <span>Webdesign</span>
+      <span>SEO</span>
+      <span>UX Design</span>
+      <span>3D VISUALISIERUNG</span>
+      <span>Produktanimation</span>
+      <span>Logo</span>
+      <span>Grafikdesign</span>
+      <span>Social Media</span>
+    </div>
+  </div>
+</div>
 <script>
 (() => {
-  // Navigation Toggle
-  const burger = document.getElementById('burgerToggle');
-  const nav = document.getElementById('main-nav');
-  burger.addEventListener('click', () => {
-    const expanded = burger.getAttribute('aria-expanded') === 'true';
-    burger.setAttribute('aria-expanded', String(!expanded));
-    nav.classList.toggle('open');
-  });
+  const hero = document.querySelector('.hero');
 
-  // Lazy-load Hero Background
-  const hero = document.getElementById('hero');
-  const loadBg = () => {
-    const src = window.innerWidth >= 768
-      ? hero.dataset.bgDesktop
-      : hero.dataset.bgMobile;
-    hero.style.backgroundImage = `url('${src}')`;
-  };
-  new IntersectionObserver((entries, obs) => {
-    if (entries[0].isIntersecting) {
-      loadBg();
-      obs.disconnect();
-    }
-  }, { threshold: .1 }).observe(hero);
-
-  // Typing Animation Module
   const typeSequence = async (el, steps) => {
-    let step=0, char=0;
-    const pause = ms => new Promise(res=>setTimeout(res, ms));
-    while(true){
-      const item = steps[step] || (step=0, steps[step]);
-      if (item.text!==undefined){
-        if(char<item.text.length){
+    let step = 0, char = 0;
+    const pause = ms => new Promise(res => setTimeout(res, ms));
+    while (true) {
+      const item = steps[step] || (step = 0, steps[step]);
+      if (item.text !== undefined) {
+        if (char < item.text.length) {
           el.textContent += item.text[char++];
           await pause(item.delay);
           continue;
         }
-        char=0; step++; await pause(400);
-      }
-      else if(item.delete!==undefined){
-        let cnt = item.delete==='all'?el.textContent.length:item.delete;
-        while(cnt--) { el.textContent=el.textContent.slice(0,-1); await pause(item.delay); }
+        char = 0; step++; await pause(400);
+      } else if (item.delete !== undefined) {
+        let cnt = item.delete === 'all' ? el.textContent.length : item.delete;
+        while (cnt--) {
+          el.textContent = el.textContent.slice(0, -1);
+          await pause(item.delay);
+        }
+        step++;
+      } else if (item.pause) {
+        await pause(item.pause);
         step++;
       }
-      else if(item.pause){ await pause(item.pause); step++; }
     }
   };
 
   const titleAnim = [
-    { text:"Digitale Erlebnisse, die bleiben", delay:60 },
-    { pause:1000 },{ delete:'all', delay:30 },
-    { text:"UX & Webdesign mit Struktur", delay:55 },
-    { pause:1000 },{ delete:'all', delay:30 },
-    { text:"Prototyp. Analyse. Performance.", delay:50 },
-    { pause:1200 },{ delete:'all', delay:30 }
+    { text: "Digitale Erlebnisse, die bleiben", delay: 60 },
+    { pause: 1000 }, { delete: 'all', delay: 30 },
+    { text: "UX & Webdesign mit Struktur", delay: 55 },
+    { pause: 1000 }, { delete: 'all', delay: 30 },
+    { text: "Prototyp. Analyse. Performance.", delay: 50 },
+    { pause: 1200 }, { delete: 'all', delay: 30 }
   ];
   const textAnim = [
-    { text:"Validiert. Skalierbar. Schnell.", delay:50 },
-    { pause:1000 },{ delete:'all', delay:30 },
-    { text:"UX-Design trifft SEO & Strategie", delay:50 },
-    { pause:1000 },{ delete:'all', delay:30 },
-    { text:"Projekte mit messbarem Impact", delay:50 },
-    { pause:1000 },{ delete:'all', delay:30 }
+    { text: "Validiert. Skalierbar. Schnell.", delay: 50 },
+    { pause: 1000 }, { delete: 'all', delay: 30 },
+    { text: "UX-Design trifft SEO & Strategie", delay: 50 },
+    { pause: 1000 }, { delete: 'all', delay: 30 },
+    { text: "Projekte mit messbarem Impact", delay: 50 },
+    { pause: 1000 }, { delete: 'all', delay: 30 }
   ];
 
   const elTitle = hero.querySelector('.animated-title-line');
-  const elText  = hero.querySelector('.dynamic-line');
-  const elBar   = hero.querySelector('.animated-bar');
-  const elCursor= hero.querySelector('.cursor-icon');
-  // move cursor
-  const moveCursor = () => {
-    const r=elBar.getBoundingClientRect(), p=elBar.parentElement.getBoundingClientRect();
-    elCursor.style.transform = `translate(${r.left-p.left}px,${r.top-p.top}px)`;
-  };
-  // animate
-  typeSequence(elTitle, titleAnim);
-  typeSequence(elText,  textAnim).then();
+  const elText = hero.querySelector('.dynamic-line');
 
-  // reveal CTA
-  setTimeout(()=>{
-    const cta = hero.querySelector('.hero-cta');
+  typeSequence(elTitle, titleAnim);
+  typeSequence(elText, textAnim);
+
+  setTimeout(() => {
+    const cta = hero.querySelector('.cta-button');
     cta.classList.add('visible');
-    cta.setAttribute('aria-hidden','false');
-  },5000);
+    cta.setAttribute('aria-hidden', 'false');
+  }, 5000);
 })();
 </script>
+
+
 
 
 
@@ -720,9 +690,10 @@
 
 
 
-
-
 <section class="angled-image-section">
+  <!-- Overlay für diagonalen Hintergrund -->
+  <div class="angled-bg-overlay" aria-hidden="true"></div>
+
   <figure class="angled-image-wrapper">
     <img
       src="./WebdesignPic/webgerade.webp"
@@ -752,14 +723,21 @@
     margin-top: 3rem;
     margin-bottom: -5rem;
     pointer-events: none;
+    background: transparent;
+    z-index: 1;
+  }
+
+  /* Gradient-Hintergrund hinter dem Bild */
+  .angled-bg-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
     background: linear-gradient(
       to bottom,
-      white 0%,
-      white 66.66%,
-      black 66.67%,
-      black 100%
+      rgb(255, 255, 255) 0%,
+      rgb(255, 255, 255) 20%,
+      rgb(0, 0, 0) 70%
     );
-    z-index: 0;
   }
 
   .angled-image-wrapper {
@@ -767,29 +745,15 @@
     margin-left: var(--angled-offset);
     transform: rotate(var(--angled-rotation));
     position: relative;
-  }
-
-  .angled-image-wrapper::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-      circle at bottom left,
-      black 0%,
-      rgba(0, 0, 0, 0.85) 10%,
-      rgba(0, 0, 0, 0) 45%
-    );
-    pointer-events: none;
-    z-index: 2;
+    z-index: 1;
   }
 
   .angled-image-wrapper img {
     width: 100%;
     height: auto;
     display: block;
+    z-index: 2;
+    position: relative;
   }
 </style>
 
@@ -798,149 +762,190 @@
 
 
 <style>
-    .offerings-area {
-      background: #111111;
-      padding: 8rem 5vw 5rem;
-      font-family: 'Inter', sans-serif;
-      color: #ffffff;
-      text-align: center;
-      max-width: 1440px;
-      margin: 0 auto;
-    }
+  .offerings-area {
+    background: #000000;
+    padding: 8rem 5vw 5rem;
+    font-family: 'Inter', sans-serif;
+    color: #ffffff;
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+  }
 
-    .offerings-heading {
-      font-size: clamp(2.2rem, 4vw, 3rem);
-      font-weight: 900;
-      margin-bottom: 4rem;
-      letter-spacing: -0.5px;
-    }
+  .offerings-heading {
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-weight: 900;
+    margin-bottom: 4rem;
+    letter-spacing: -0.5px;
+    z-index: 9999 !important;
+    position: relative;
+  }
 
+  .offerings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .offering-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .offering-item {
+    background: #1e1e1e;
+    border: 1px solid #333333;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+
+  .offering-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
+  }
+
+  .offering-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    z-index: 5 !important;
+    position: relative;
+  }
+
+  .offering-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #dddddd;
+    z-index: 5 !important;
+    position: relative;
+  }
+
+  @media (max-width: 768px) {
     .offerings-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.5rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      grid-template-columns: 1fr 1fr;
     }
+  }
 
-    .offering-link {
-      display: block;
-      text-decoration: none;
-      color: inherit;
+  @media (max-width: 540px) {
+    .offerings-grid {
+      grid-template-columns: 1fr;
     }
+  }
+</style>
+<section class="offerings-area" role="region" aria-labelledby="core-services-heading">
+  <h2 id="core-services-heading" class="offerings-heading">
+    Unsere Kernleistungen <br> Digital. Kreativ. Maßgeschneidert.
+  </h2>
 
-    .offering-item {
-      background: #1e1e1e;
-      border: 1px solid #333333;
-      border-radius: 16px;
-      padding: 2rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      transition: all 0.3s ease;
-      height: 100%;
-    }
+  <div class="offerings-grid">
+    <a href="#leistungen" class="offering-link" data-target-slide="1" aria-label="Mehr zu Responsive Webdesign">
+      <div class="offering-item">
+        <h3 class="offering-title">Responsive Webdesign</h3>
+        <p class="offering-description">
+          Nahtlose Darstellung auf allen Endgeräten – für ein herausragendes Nutzer­erlebnis.
+        </p>
+      </div>
+    </a>
 
-    .offering-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
-    }
+    <a href="#leistungen" class="offering-link" data-target-slide="0" aria-label="Mehr zu UX/UI Kreation">
+      <div class="offering-item">
+        <h3 class="offering-title">UX/UI Kreation</h3>
+        <p class="offering-description">
+          Intuitive Interfaces mit klarem Fokus auf Usability und Ästhetik.
+        </p>
+      </div>
+    </a>
 
-    .offering-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: #ffffff;
-    }
+    <a href="#leistungen" class="offering-link" data-target-slide="2" aria-label="Mehr zu SEO und Performance">
+      <div class="offering-item">
+        <h3 class="offering-title">SEO & Performance</h3>
+        <p class="offering-description">
+          Optimierte Strukturen und Ladezeiten für bessere Sichtbarkeit.
+        </p>
+      </div>
+    </a>
 
-    .offering-description {
-      font-size: 1rem;
-      line-height: 1.5;
-      color: #dddddd;
-    }
+    <a href="#leistungen" class="offering-link" data-target-slide="3" aria-label="Mehr zu CMS Anbindung">
+      <div class="offering-item">
+        <h3 class="offering-title">CMS-Anbindung</h3>
+        <p class="offering-description">
+          Integration von WordPress, Webflow oder Headless-Systemen.
+        </p>
+      </div>
+    </a>
 
-    @media (max-width: 768px) {
-      .offerings-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
+    <a href="#leistungen" class="offering-link" data-target-slide="4" aria-label="Mehr zu Wartung und Support">
+      <div class="offering-item">
+        <h3 class="offering-title">Wartung & Support</h3>
+        <p class="offering-description">
+          Updates, Sicherheits-Checks und schneller Support rund um die Uhr.
+        </p>
+      </div>
+    </a>
 
-    @media (max-width: 540px) {
-      .offerings-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-  <!-- Übersicht der Kernleistungen mit Sprung-Links -->
-  <section class="offerings-area">
-    <h2 class="offerings-heading">Unsere Kernleistungen – Digital. Kreativ. Maßgeschneidert.</h2>
+    <a href="#leistungen" class="offering-link" data-target-slide="5" aria-label="Mehr zu E-Commerce Lösungen">
+      <div class="offering-item">
+        <h3 class="offering-title">E-Commerce Lösungen</h3>
+        <p class="offering-description">
+          Skalierbare Shopsysteme mit Zahlungsanbindung und Conversion-Optimierung.
+        </p>
+      </div>
+    </a>
+  </div>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const offeringLinks = document.querySelectorAll(".offering-link");
 
-    <div class="offerings-grid">
-      <a href="#sect-responsive" class="offering-link">
-        <div class="offering-item">
-          <h3 class="offering-title">Responsive Webdesign</h3>
-          <p class="offering-description">
-            Nahtlose Darstellung auf allen Endgeräten – für ein herausragendes Nutzer­erlebnis.
-          </p>
-        </div>
-      </a>
+    offeringLinks.forEach(link => {
+      const slideIndex = parseInt(link.getAttribute("data-target-slide"), 10);
 
-      <a href="#sect-uxui" class="offering-link">
-        <div class="offering-item">
-          <h3 class="offering-title">UX/UI Kreation</h3>
-          <p class="offering-description">
-            Intuitive Interfaces mit klarem Fokus auf Usability und Ästhetik.
-          </p>
-        </div>
-      </a>
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
 
-      <a href="#sect-seo" class="offering-link">
-        <div class="offering-item">
-          <h3 class="offering-title">SEO & Performance</h3>
-          <p class="offering-description">
-            Optimierte Strukturen und Ladezeiten für bessere Sichtbarkeit.
-          </p>
-        </div>
-      </a>
+        // Scroll to Slider (smooth)
+        const slider = document.querySelector(".mySwiper");
+        if (slider) {
+          slider.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
 
-      <a href="#sect-cms" class="offering-link">
-        <div class="offering-item">
-          <h3 class="offering-title">CMS-Anbindung</h3>
-          <p class="offering-description">
-            Integration von WordPress, Webflow oder Headless-Systemen.
-          </p>
-        </div>
-      </a>
-
-      <a href="#sect-maintenance" class="offering-link">
-        <div class="offering-item">
-          <h3 class="offering-title">Wartung & Support</h3>
-          <p class="offering-description">
-            Updates, Sicherheits-Checks und schneller Support rund um die Uhr.
-          </p>
-        </div>
-      </a>
-
-      <a href="#sect-ecom" class="offering-link">
-        <div class="offering-item">
-          <h3 class="offering-title">E-Commerce Lösungen</h3>
-          <p class="offering-description">
-            Skalierbare Shopsysteme mit Zahlungsanbindung und Conversion-Optimierung.
-          </p>
-        </div>
-      </a>
-    </div>
-  </section>
+        // Trigger Swiper to move to target slide
+        swiper.slideTo(slideIndex, 600); // Optional: 600ms slide duration
+      });
+    });
+  });
+</script>
 
 
 
 
-  
 
 
-  <div class="white-bg-wrapper"> LEISTUNGEN
-    <section class="services-section" id="leistungen">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<div class="mobile-slide-nav">
+  <button class="slide-nav-btn" data-slide="0">UX/UI</button>
+  <button class="slide-nav-btn" data-slide="1">Responsive</button>
+  <button class="slide-nav-btn" data-slide="2">SEO</button>
+</div>
+<div class="swiper mySwiper">
+  <div class="swiper-wrapper">
+
+    <!-- Slide 1: UX/UI Leistungen -->
+    <div class="swiper-slide">
+  <div class="white-bg-wrapper">
+          <section class="services-section" id="leistungen">
       <div class="parallax-bg"></div>
       <div class="container">
         <h2 class="section-title scroll-fade">Futuristisches UX/UI Design</h2>
@@ -1043,16 +1048,404 @@
             <button class="accordion-toggle">Details anzeigen</button>
           </div>
         </div>
-
-
-
-
-
       </div>
-      <p class="services-hint scroll-fade">Alle Preise sind Richtwerte. Für jedes Projekt erstellen wir ein passendes
-        Angebot.</p>
+
+      <div class="cta-button-group scroll-fade">
+  <a href="#kontakt" class="cta-primary-btn section-button">
+    Kostenfreies Performance Gespräch vereinbaren
+  </a>
+</div>
+
+ <!-- innerhalb jeder Slide -->
+<div class="swiper-nav-local">
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
   </div>
   </section>
+    </div>
+
+    <!-- Slide 2: Responsive Design -->
+    <div class="swiper-slide">
+      
+<!-- Slide: Responsive Websites -->
+<div class="swiper-slide">
+  <div class="white-bg-wrapper">
+    <section class="services-section" id="responsive">
+      <div class="parallax-bg"></div>
+      <div class="container">
+        <h2 class="section-title scroll-fade">100 % Responsive Websites</h2>
+        <h3 class="section-subtitle scroll-fade">
+          Optimiert für Smartphone, Tablet und Desktop <br>
+          – schnell, flexibel, zukunftssicher
+        </h3>
+
+        <div class="services-grid">
+          <!-- CARD 1 -->
+          <div class="service-card scroll-fade">
+            <div class="icon-circle"><i data-feather="smartphone"></i></div>
+            <h3>Mobile-First-Ansatz</h3>
+            <div class="accordion-content">
+              <ul class="feature-list">
+                <li><span class="check">Wir entwickeln von Anfang an für mobile Geräte – für eine optimale Nutzung auf dem Smartphone.</span></li>
+              </ul>
+            </div>
+            <button class="accordion-toggle">Details anzeigen</button>
+          </div>
+
+          <!-- CARD 2 -->
+          <div class="service-card scroll-fade">
+            <div class="icon-circle"><i data-feather="grid"></i></div>
+            <h3>Flexibles Grid-System</h3>
+            <div class="accordion-content">
+              <ul class="feature-list">
+                <li><span class="check">Unsere Layouts sind mit CSS Grid und Flexbox strukturiert – flexibel und sauber skalierbar.</span></li>
+              </ul>
+            </div>
+            <button class="accordion-toggle">Details anzeigen</button>
+          </div>
+
+          <!-- CARD 3 -->
+          <div class="service-card scroll-fade">
+            <div class="icon-circle"><i data-feather="globe"></i></div>
+            <h3>Kompatibilität</h3>
+            <div class="accordion-content">
+              <ul class="feature-list">
+                <li><span class="check">Funktioniert reibungslos in allen modernen Browsern und Plattformen.</span></li>
+              </ul>
+            </div>
+            <button class="accordion-toggle">Details anzeigen</button>
+          </div>
+
+          <!-- CARD 4 -->
+          <div class="service-card scroll-fade">
+            <div class="icon-circle"><i data-feather="zap"></i></div>
+            <h3>Performance</h3>
+            <div class="accordion-content">
+              <ul class="feature-list">
+                <li><span class="check">Schnelle Ladezeiten durch optimierte Bilder und Ressourcen – für besseres Ranking und UX.</span></li>
+              </ul>
+            </div>
+            <button class="accordion-toggle">Details anzeigen</button>
+          </div>
+
+          <!-- CARD 5 – Extra Performance -->
+          <div class="service-card scroll-fade wide-card ux-benefits-card">
+            <div class="icon-circle">
+              <img
+                src="./img/performance-icon.png"
+                alt="Icon für erweiterte Performance"
+                class="png-icon"
+                width="32"
+                height="32"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3>Extra Performance</h3>
+            <div class="accordion-content">
+              <div class="ux-benefits-list">
+                <div class="ux-benefit-item">
+                  <strong>Serverseitiges Caching:</strong> Inhalte werden blitzschnell geladen – auch bei hoher Last.
+                </div>
+                <div class="ux-benefit-item">
+                  <strong>Asset-Optimierung:</strong> Nur die Ressourcen, die du brauchst – sofort verfügbar.
+                </div>
+              </div>
+            </div>
+            <button class="accordion-toggle">Details anzeigen</button>
+          </div>
+        </div>
+
+
+
+<div class="cta-button-group scroll-fade">
+  <a href="#kontakt" class="cta-primary-btn section-button">
+    Kostenfreies Performance Gespräch vereinbaren
+  </a>
+</div>
+
+
+    
+         <!-- innerhalb jeder Slide -->
+<div class="swiper-nav-local">
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+      </div>
+    </section>
+  </div>
+</div>
+
+    </div>
+
+    <!-- Slide 3: SEO Leistungen -->
+    <div class="swiper-slide">
+      <div class="white-bg-wrapper">
+<!-- Slide: SEO Leistungen -->
+<div class="swiper-slide">
+  <div class="white-bg-wrapper">
+    <section class="services-section" id="seo">
+      <div class="parallax-bg"></div>
+      <div class="container">
+        <h2 class="section-title scroll-fade">SEO Analyse &amp; Optimierung</h2>
+        <h3 class="section-subtitle scroll-fade">
+          Steigere deine organische Sichtbarkeit<br>
+          mit datengetriebenen Strategien
+        </h3>
+
+        <div class="services-grid">
+          <!-- CARD 1 -->
+          <div class="service-card scroll-fade">
+            <div class="icon-circle"><i data-feather="search"></i></div>
+            <h3>SEO-Audit &amp; Analyse</h3>
+            <div class="accordion-content">
+              <ul class="feature-list">
+                <li><span class="check">Umfassende technische und inhaltliche Prüfung deiner Website mithilfe von Tools wie Screaming Frog und Google Search Console für klare Optimierungspotenziale.</span></li>
+              </ul>
+              <div class="price-box">Preis: <br><strong>auf Anfrage</strong></div>
+            </div>
+            <button class="accordion-toggle">Details anzeigen</button>
+          </div>
+
+          <!-- CARD 2 -->
+          <div class="service-card scroll-fade wide-card">
+            <div class="icon-circle"><i data-feather="bar-chart-2"></i></div>
+            <h3>Keyword-Recherche &amp; Strategie</h3>
+            <div class="accordion-content">
+              <ul class="feature-list">
+                <li><span class="check">Identifizierung lukrativer Keywords anhand von Suchvolumen- und Wettbewerbsanalysen für zielgerichteten Traffic.</span></li>
+              </ul>
+              <div class="price-box">Preis: <br><strong>auf Anfrage</strong></div>
+            </div>
+            <button class="accordion-toggle">Details anzeigen</button>
+          </div>
+
+          <!-- CARD 3 -->
+          <div class="service-card scroll-fade wide-card">
+            <div class="icon-circle"><i data-feather="code"></i></div>
+            <h3>Technische SEO &amp; Performance</h3>
+            <div class="accordion-content">
+              <ul class="feature-list">
+                <li><span class="check">Optimierung von Ladezeiten, Mobile-Usability und strukturierten Daten für Top-Rankings und bessere Nutzererfahrung.</span></li>
+              </ul>
+              <div class="price-box">Preis: <br><strong>auf Anfrage</strong></div>
+            </div>
+            <button class="accordion-toggle">Details anzeigen</button>
+          </div>
+
+          <!-- CARD 4 -->
+          <div class="service-card scroll-fade">
+            <div class="icon-circle"><i data-feather="link"></i></div>
+            <h3>Off-Page &amp; Linkaufbau</h3>
+            <div class="accordion-content">
+              <ul class="feature-list">
+                <li><span class="check">Strategischer Aufbau hochwertiger Backlinks durch Outreach und Content-Marketing für autoritätssteigernde Effekte.</span></li>
+              </ul>
+              <div class="price-box">Preis: <br><strong>auf Anfrage</strong></div>
+            </div>
+            <button class="accordion-toggle">Details anzeigen</button>
+          </div>
+
+          <!-- CARD 5 – SEO Benefits -->
+          <div class="service-card scroll-fade wide-card ux-benefits-card">
+            <div class="icon-circle"><i data-feather="trending-up"></i></div>
+            <h3>Was starke SEO bewirkt</h3>
+            <div class="accordion-content">
+              <div class="ux-benefits-list">
+                <div class="ux-benefit-item">
+                  <strong>+40 % organischer Traffic:</strong> Top-Platzierungen führen zu signifikant mehr Besuchern ohne zusätzliche Ad-Spendings.
+                </div>
+                <div class="ux-benefit-item">
+                  <strong>Höhere Conversion-Rate:</strong> Qualifizierte Besucher mit klarem Suchinteresse steigern deine Abschlüsse.
+                </div>
+                <div class="ux-benefit-item">
+                  <strong>Nachhaltiges Wachstum:</strong> Langfristige Rankings sichern kontinuierlichen Traffic.
+                </div>
+                <div class="ux-benefit-item">
+                  <strong>Markenautorität:</strong> Top-Positionen stärken dein Vertrauen und deine Reputation.
+                </div>
+                <div class="ux-benefit-item">
+                  <strong>Messbarer ROI:</strong> Detailliertes Tracking und Reports zeigen den direkten Wert jeder Maßnahme.
+                </div>
+              </div>
+            </div>
+            <button class="accordion-toggle">Details anzeigen</button>
+          </div>
+        </div>
+
+        <div class="cta-button-group scroll-fade">
+  <a href="#kontakt" class="cta-primary-btn section-button">
+    Kostenfreies Performance Gespräch vereinbaren
+  </a>
+</div>
+
+
+<!-- innerhalb jeder Slide -->
+<div class="swiper-nav-local">
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+
+      </div>
+    </section>
+  </div>
+</div>
+
+</div>
+    </div>
+
+  </div>
+
+  <!-- Optional: Navigation & Pagination -->
+  <div class="swiper-pagination"></div>
+</div>
+<script>
+  const swiper = new Swiper(".mySwiper", {
+    loop: false,
+    autoHeight: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+  document.querySelectorAll(".slide-nav-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const slideIndex = parseInt(btn.getAttribute("data-slide"), 10);
+    swiper.slideTo(slideIndex);
+  });
+});
+
+
+  document.addEventListener("DOMContentLoaded", () => {
+    feather.replace();
+
+    const toggles = document.querySelectorAll(".accordion-toggle");
+
+toggles.forEach(toggle => {
+  toggle.addEventListener("click", () => {
+    const card = toggle.closest(".service-card");
+    const currentContent = card.querySelector(".accordion-content");
+    const isOpen = currentContent.classList.contains("open");
+
+    // Alles schließen
+    document.querySelectorAll(".accordion-content").forEach(content => {
+      content.classList.remove("open");
+      content.style.maxHeight = null;
+    });
+
+    document.querySelectorAll(".accordion-toggle").forEach(btn => {
+      btn.textContent = "Details anzeigen";
+    });
+
+    document.querySelectorAll(".service-card").forEach(c => {
+      c.classList.remove("accordion-open");
+    });
+
+    if (!isOpen) {
+      currentContent.classList.add("open");
+      currentContent.style.maxHeight = currentContent.scrollHeight + "px";
+      toggle.textContent = "Details ausblenden";
+      card.classList.add("accordion-open");
+
+      // ➕ SWIPER: Verzögert updaten, damit es den neuen ScrollHeight erkennt
+      setTimeout(() => {
+        swiper.updateAutoHeight();
+      }, 400); // Timeout mindestens so lang wie Transition-Dauer
+    } else {
+      setTimeout(() => {
+        swiper.updateAutoHeight();
+      }, 300);
+    }
+  });
+});
+
+
+    // Scroll fade-in
+    const scrollElements = document.querySelectorAll(".scroll-fade");
+
+    const elementInView = (el, offset = 100) => {
+      const elementTop = el.getBoundingClientRect().top;
+      return elementTop <= (window.innerHeight - offset);
+    };
+
+    const displayScrollElement = (el) => {
+      el.classList.add("visible");
+    };
+
+    const handleScrollAnimation = () => {
+      scrollElements.forEach(el => {
+        if (elementInView(el)) {
+          displayScrollElement(el);
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScrollAnimation);
+    handleScrollAnimation();
+  });
+</script>
+<style>
+  
+.swiper-wrapper {
+  transition-property: height !important;
+  transition-duration: 300ms !important;
+  transition-timing-function: ease !important;
+}
+
+.swiper {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100vw;
+  background-color: #000;
+}
+
+.mobile-slide-nav {
+  display: none;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem 1rem 0.5rem;
+  background: #111;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.slide-nav-btn {
+  background-color: #ff5100;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.slide-nav-btn:hover {
+  background-color: #e04900;
+}
+
+
+@media (max-width: 768px) {
+  .mobile-slide-nav {
+    display: flex;
+  }
+}
+
+</style>
   <style>
     :root {
       --card2-image: url('./indexFotoSlideShow/2.png');
@@ -1121,6 +1514,20 @@
       color: #fff;
            z-index: 7;
     }
+.services-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start; /* wieder zurück auf flex-start */
+}
+.service-card {
+  /* nicht mehr stretch */
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  /* min-height kommt per JS hinzu */
+}
 
     .service-card:nth-child(1) {
       background: linear-gradient(270deg, #ff5c00, #ff7a29, #ff6600);
@@ -1542,922 +1949,82 @@
       color: #fff;
     }
   </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      feather.replace();
-
-      const toggles = document.querySelectorAll(".accordion-toggle");
-
-      toggles.forEach(toggle => {
-        toggle.addEventListener("click", () => {
-          const card = toggle.closest(".service-card");
-          const currentContent = card.querySelector(".accordion-content");
-          const isOpen = currentContent.classList.contains("open");
-
-          // Alles schließen
-          document.querySelectorAll(".accordion-content").forEach(content => {
-            content.classList.remove("open");
-            content.style.maxHeight = null;
-          });
-
-          document.querySelectorAll(".accordion-toggle").forEach(btn => {
-            btn.textContent = "Details anzeigen";
-          });
-
-          document.querySelectorAll(".service-card").forEach(c => {
-            c.classList.remove("accordion-open");
-          });
-
-          // Öffnen, wenn nicht offen
-          if (!isOpen) {
-            currentContent.classList.add("open");
-            currentContent.style.maxHeight = currentContent.scrollHeight + "px";
-            toggle.textContent = "Details ausblenden";
-            card.classList.add("accordion-open");
-          }
-        });
-
-      });
-
-
-      // Scroll fade-in
-      const scrollElements = document.querySelectorAll(".scroll-fade");
-
-      const elementInView = (el, offset = 100) => {
-        const elementTop = el.getBoundingClientRect().top;
-        return elementTop <= (window.innerHeight - offset);
-      };
-
-      const displayScrollElement = (el) => {
-        el.classList.add("visible");
-      };
-
-      const handleScrollAnimation = () => {
-        scrollElements.forEach(el => {
-          if (elementInView(el)) {
-            displayScrollElement(el);
-          }
-        });
-      };
-
-      window.addEventListener("scroll", handleScrollAnimation);
-      handleScrollAnimation();
-    });
-  </script>
-
-
-
-
-
-
-<section
-  class="responsive-section"
-  role="region"
-  aria-labelledby="responsive-title"
->
-  <div class="responsive-text-box animate">
-    <h2 id="responsive-title">100 % Responsive Websites</h2>
-    <div class="text-content">
-      <p>
-        Jede von uns erstellte Website passt sich nahtlos an alle Gerätetypen an – Smartphone, Tablet oder Desktop.
-        Mit mobile-first Media Queries, flexiblen Grids und optimierten Bildern liefern wir beeindruckende Nutzer-erlebnisse auf jedem Screen.
-      </p>
-
-      <div class="feature-boxes" role="group" aria-label="Unsere Features">
-        <div class="feature-item">
-          <i data-feather="smartphone" aria-hidden="true"></i>
-          <h3>Mobile-First-Ansatz</h3>
-          <p>
-            Wir entwickeln von Anfang an für mobile Geräte – für eine optimale Nutzung auf dem Smartphone.
-          </p>
-        </div>
-        <div class="feature-item">
-          <i data-feather="grid" aria-hidden="true"></i>
-          <h3>Flexibles Grid-System</h3>
-          <p>
-            Unsere Layouts sind mit CSS Grid und Flexbox strukturiert – flexibel und sauber skalierbar.
-          </p>
-        </div>
-        <div class="feature-item">
-          <i data-feather="globe" aria-hidden="true"></i>
-          <h3>Kompatibilität</h3>
-          <p>
-            Funktioniert reibungslos in allen modernen Browsern und Plattformen.
-          </p>
-        </div>
-        <div class="feature-item">
-          <i data-feather="zap" aria-hidden="true"></i>
-          <h3>Performance</h3>
-          <p>
-            Schnelle Ladezeiten durch optimierte Bilder und Ressourcen – für ein besseres Ranking und UX.
-          </p>
-        </div>
-        <div class="feature-item double-width">
-          <img
-            src="./img/performance-icon.png"
-            alt="Icon für erweiterte Performance"
-            class="png-icon"
-            width="32"
-            height="32"
-            loading="lazy"
-            decoding="async"
-          />
-          <h3>Extra Performance</h3>
-          <p>
-            Erweiterte Performance-Maßnahmen mit serverseitigem Caching und optimiertem Asset-Loading – für höchste Geschwindigkeiten.
-          </p>
-        </div>
-      </div>
-
-      <a
-        href="#kontakt"
-        class="responsive-btn"
-        role="button"
-        aria-label="Jetzt responsive starten"
-      >
-        Jetzt responsive starten
-      </a>
-    </div>
-  </div>
-</section>
 <style>
-  /* SECTION */
-  .responsive-section {
-    background: #000;
-    color: #fff;
-    text-align: center;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    overflow: hidden;
-  }
-  /* TEXT-BOX */
-  .responsive-text-box {
-    display: inline-block;
-    max-width: 960px;
-    width: 100%;
-    z-index: 2;
-    padding: 2.5rem;
-    margin: 0 auto;
-    background: rgb(18, 18, 18);
-    border-radius: 12px;
-    box-shadow: 0 1px 1px rgb(37, 37, 37);
-  }
-  .responsive-text-box h2 {
-    font-size: clamp(2rem, 5vw, 2.6rem);
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.01em;
-  }
-  .responsive-text-box .text-content p {
-    font-size: clamp(1rem, 2.5vw, 1.15rem);
-    line-height: 1.8;
-    margin-bottom: 2rem;
-  }
-
-  /* FEATURE BOXES */
-  .feature-boxes {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center;
-    margin-bottom: 2.5rem;
-  }
-  .feature-item {
-    background: rgba(255, 255, 255, 0.07);
-    padding: 1.5rem;
-    border-radius: 10px;
-    flex: 1 1 250px;
-    max-width: 280px;
-    text-align: left;
-    color: #fff;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s;
-  }
-  .feature-item:hover {
-    transform: translateY(-6px);
-  }
-  .feature-item i {
-    width: 28px;
-    height: 28px;
-    margin-bottom: 0.8rem;
-    color: #ff5100;
-  }
-  .feature-item h3 {
-    margin: 0 0 0.5rem;
-    font-size: 1.1rem;
-  }
-  .feature-item p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
-
-  /* BUTTON */
-  .responsive-btn {
-    display: inline-block;
-    padding: clamp(0.6rem, 1.5vw, 1rem) clamp(1rem, 3vw, 2rem);
-    font-size: clamp(0.9rem, 2.5vw, 1.05rem);
-    font-weight: 700;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #ff5100, #e60000, #ff5100);
-    color: #fff;
-    text-decoration: none;
-    box-shadow: 0 8px 24px rgba(255, 81, 0, 0.4);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .responsive-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(255, 81, 0, 0.6);
-  }
-
-  /* ANIMATION */
-  .animate {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .animate.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* BREAKPOINTS */
-  @media (max-width: 768px) {
-    .responsive-text-box {
-      padding: 2rem 1.5rem;
-    }
-  }
-  @media (max-width: 480px) {
-    .responsive-text-box h2 {
-      font-size: clamp(1.5rem, 8vw, 2rem);
-    }
-    .responsive-text-box .text-content p,
-    .feature-item p {
-      font-size: clamp(0.85rem, 4vw, 1rem);
-    }
-    .responsive-btn {
-      padding: 0.6rem 1.2rem;
-      font-size: 1rem;
-    }
-  }
-
-  .double-width {
-    flex: 2 1 580px;
-    max-width: 580px;
-  }
-
-  .png-icon {
-    width: 32px;
-    height: 32px;
-    margin-bottom: 0.8rem;
-    display: block;
-    color: #ff5100;
-  }
-</style>
-<script src="https://unpkg.com/feather-icons"></script>
-<script>
-  if (window.feather) {
-    feather.replace();
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const obs = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-    document.querySelectorAll('.animate').forEach(el => obs.observe(el));
-  });
-</script>
-
-
-<div class="white-bg-wrapper">
-  <section
-    id="leistungen"
-    class="block-wrapper-x"
-    role="region"
-    aria-labelledby="leistungen-heading"
-  >
-    <!-- SEO-relevante Überschrift -->
-    <h2
-      id="leistungen-heading"
-      class="sr-only"
-    >
-  Leistungen
-    </h2>    
-
-    <div
-      class="bg-overlay-x"
-      aria-hidden="true"
-    ></div>
-
-    <div class="wrapper-container-x">
-      <!-- Haupttitel innerhalb der Section -->
-      <h3
-        id="seo-analyse-title"
-        class="heading-main-x scroll-fade"
-      >
-        SEO Analyse &amp; Optimierung
-      </h3>
-      <!-- Untertitel -->
-      <h4 class="heading-sub-x scroll-fade">
-        Steigere deine organische Sichtbarkeit<br>
-        mit datengetriebenen Strategien
-      </h4>
-
-      <div
-        class="card-grid-x"
-        role="list"
-        aria-label="Unsere SEO-Leistungen"
-      >
-        <!-- CARD 1 -->
-        <div
-          class="card-box-x card-type-a scroll-fade"
-          role="listitem"
-        >
-          <div
-            class="icon-container-x"
-            aria-hidden="true"
-          >
-            <i data-feather="search"></i>
-          </div>
-          <h5>SEO-Audit &amp; Analyse</h5>
-
-          <div
-            id="accordion-1"
-            class="box-accordion-x"
-            role="region"
-            aria-labelledby="toggle-1"
-          >
-            <ul class="list-features-x">
-              <li>
-                <span class="check-icon-x" aria-hidden="true"></span>
-                Umfassende technische und inhaltliche Prüfung deiner Website mithilfe
-                von Tools wie Screaming Frog und Google Search Console für klare Optimierungspotenziale.
-              </li>
-            </ul>
-            <div class="box-price-x">
-              Preis: <br><strong>auf Anfrage</strong>
-            </div>
-          </div>
-
-          <button
-            id="toggle-1"
-            class="btn-toggle-x"
-            aria-expanded="false"
-            aria-controls="accordion-1"
-          >
-            Details anzeigen
-          </button>
-        </div>
-
-        <!-- CARD 2 -->
-        <div
-          class="card-box-x card-type-b scroll-fade wide-x"
-          role="listitem"
-        >
-          <div
-            class="icon-container-x"
-            aria-hidden="true"
-          >
-            <i data-feather="bar-chart-2"></i>
-          </div>
-          <h5>Keyword-Recherche &amp; Strategie</h5>
-
-          <div
-            id="accordion-2"
-            class="box-accordion-x"
-            role="region"
-            aria-labelledby="toggle-2"
-          >
-            <ul class="list-features-x">
-              <li>
-                <span class="check-icon-x" aria-hidden="true"></span>
-                Identifizierung lukrativer Keywords anhand von Suchvolumen- und Wettbewerbsanalysen
-                für zielgerichteten Traffic.
-              </li>
-            </ul>
-            <div class="box-price-x">
-              Preis: <br><strong>auf Anfrage</strong>
-            </div>
-          </div>
-
-          <button
-            id="toggle-2"
-            class="btn-toggle-x"
-            aria-expanded="false"
-            aria-controls="accordion-2"
-          >
-            Details anzeigen
-          </button>
-        </div>
-
-        <!-- CARD 3 -->
-        <div
-          class="card-box-x card-type-c scroll-fade wide-x"
-          role="listitem"
-        >
-          <div
-            class="icon-container-x"
-            aria-hidden="true"
-          >
-            <i data-feather="code"></i>
-          </div>
-          <h5>Technische SEO &amp; Performance</h5>
-
-          <div
-            id="accordion-3"
-            class="box-accordion-x"
-            role="region"
-            aria-labelledby="toggle-3"
-          >
-            <ul class="list-features-x">
-              <li>
-                <span class="check-icon-x" aria-hidden="true"></span>
-                Optimierung von Ladezeiten, Mobile-Usability und strukturierten Daten
-                für Top-Rankings und bessere Nutzererfahrung.
-              </li>
-            </ul>
-            <div class="box-price-x">
-              Preis: <br><strong>auf Anfrage</strong>
-            </div>
-          </div>
-
-          <button
-            id="toggle-3"
-            class="btn-toggle-x"
-            aria-expanded="false"
-            aria-controls="accordion-3"
-          >
-            Details anzeigen
-          </button>
-        </div>
-
-        <!-- CARD 4 -->
-        <div
-          class="card-box-x card-type-d scroll-fade"
-          role="listitem"
-        >
-          <div
-            class="icon-container-x"
-            aria-hidden="true"
-          >
-            <i data-feather="link"></i>
-          </div>
-          <h5>Off-Page &amp; Linkaufbau</h5>
-
-          <div
-            id="accordion-4"
-            class="box-accordion-x"
-            role="region"
-            aria-labelledby="toggle-4"
-          >
-            <ul class="list-features-x">
-              <li>
-                <span class="check-icon-x" aria-hidden="true"></span>
-                Strategischer Aufbau hochwertiger Backlinks durch Outreach und Content-Marketing
-                für autoritätssteigernde Effekte.
-              </li>
-            </ul>
-            <div class="box-price-x">
-              Preis: <br><strong>auf Anfrage</strong>
-            </div>
-          </div>
-
-          <button
-            id="toggle-4"
-            class="btn-toggle-x"
-            aria-expanded="false"
-            aria-controls="accordion-4"
-          >
-            Details anzeigen
-          </button>
-        </div>
-
-        <!-- CARD 5 – SEO Benefits -->
-        <div
-          class="card-box-x card-type-e scroll-fade benefits-card-x"
-          role="listitem"
-        >
-          <div
-            class="icon-container-x"
-            aria-hidden="true"
-          >
-            <i data-feather="trending-up"></i>
-          </div>
-          <h5>Was starke SEO bewirkt</h5>
-
-          <div
-            id="accordion-5"
-            class="box-accordion-x"
-            role="region"
-            aria-labelledby="toggle-5"
-          >
-            <div class="benefits-list-x">
-              <div class="benefit-item-x">
-                <strong>+40 % organischer Traffic:</strong>
-                Top-Platzierungen führen zu signifikant mehr Besuchern ohne zusätzliche Ad-Spendings.
-              </div>
-              <div class="benefit-item-x">
-                <strong>Höhere Conversion-Rate:</strong>
-                Qualifizierte Besucher mit klarem Suchinteresse steigern deine Abschlüsse.
-              </div>
-              <div class="benefit-item-x">
-                <strong>Nachhaltiges Wachstum:</strong>
-                Langfristige Rankings sichern kontinuierlichen Traffic.
-              </div>
-              <div class="benefit-item-x">
-                <strong>Markenautorität:</strong>
-                Top-Positionen stärken dein Vertrauen und deine Reputation.
-              </div>
-              <div class="benefit-item-x">
-                <strong>Messbarer ROI:</strong>
-                Detailliertes Tracking und Reports zeigen den direkten Wert jeder Maßnahme.
-              </div>
-            </div>
-          </div>
-
-          <button
-            id="toggle-5"
-            class="btn-toggle-x"
-            aria-expanded="false"
-            aria-controls="accordion-5"
-          >
-            Details anzeigen
-          </button>
-        </div>
-      </div>
-
-      <p class="note-hint-x scroll-fade">
-        Alle Preise sind Richtwerte. Für jedes Projekt erstellen wir ein individuelles Angebot.
-      </p>
-    </div>
-  </section>
-</div>
-<style>
-  :root {
-    --img-a1: url('./indexFotoSlideShow/2.png');
-    --img-a2: url('./indexFotoSlideShow/2.png');
-  }
-
-  .block-wrapper-x {
-    padding: 6rem 2rem;
-    background: #000 !important;
-    text-align: center;
-    position: relative;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    margin-top: -2rem;
-    z-index: 1;
-  }
-
-  .bg-overlay-x {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: transparent;
-    z-index: -1;
-  }
-
-  .wrapper-container-x {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .heading-main-x {
-    font-size: 2.6rem;
-    font-weight: 800;
-    margin-bottom: 3rem;
-    color: #fff;
-  }
-
-  .heading-sub-x {
-    margin-top: -2rem;
-    margin-bottom: 2rem;
-    font-size: 1.25rem;
-    color: #fff;
-  }
-
-  .card-grid-x {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-    align-items: flex-start;
-  }
-
-  .card-box-x {
-    flex: 1 1 calc(33.333% - 2rem);
-    min-width: 260px;
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-    transition: transform .4s ease, box-shadow .4s ease;
-    background-position: 0% 50%;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    z-index: 7;
-  }
-
-  .card-type-a { background: linear-gradient(270deg, #ff5c00, #ff7a29, #ff6600); background-size: 400% 400%; }
-  .card-type-b { background: #fff; color: #000; }
-  .card-type-c { background: linear-gradient(270deg, #3a30ff, #6a00ff, #4d00e0); background-size: 400% 400%; }
-  .card-type-d { background: #fff; color: #000; }
-  .card-type-e { background: linear-gradient(270deg, #ffffff, #f3f3ff, #fffafa); stroke: #000; stroke-width: 2px; background-size: 400% 400%; color: #000; }
-
-  .card-type-b::after,
-  .card-type-c::after {
-    content: "";
-    position: absolute;
-    bottom: .1rem;
-    right: 0;
-    width: 230px;
-    height: 230px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: bottom right;
-    opacity: 1;
-    z-index: 0;
-    pointer-events: none;
-    transition: opacity .4s ease;
-  }
-
-  .card-type-b::after { background-image: var(--img-a1); }
-  .card-type-c::after { background-image: var(--img-a2); }
-  .card-box-x.is-open::after { opacity: 0; }
-
-  .card-type-b .btn-toggle-x:hover,
-  .card-type-d .btn-toggle-x:hover {
-    background-color: #000;
-    color: #fff;
-    border-color: #000;
-  }
-
-  .card-type-a .btn-toggle-x:hover,
-  .card-type-c .btn-toggle-x:hover {
-    background-color: #000;
-    color: #fff;
-    border-color: #000;
-  }
-
-  .card-box-x::before {
-    content: "";
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle at center, rgba(255,255,255,0.18), transparent 70%);
-    transform: scale(.5);
-    opacity: 0;
-    transition: all .6s ease;
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  .card-box-x:hover::before {
-    transform: scale(1);
-    opacity: .25;
-  }
-
-  .card-box-x:hover {
-    transform: translateY(-8px) scale(1.035);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.35);
-    animation: pulseGradX 6s ease infinite;
-    background-position: 100% 50%;
-    z-index: 10;
-  }
-
-  @keyframes pulseGradX {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  .card-box-x h3 {
-    font-size: 1.4rem;
-    font-weight: 700;
-  }
-
-  .list-features-x {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1rem;
-  }
-
-  .list-features-x li {
-    display: flex;
-    align-items: flex-start;
-    font-size: 1.05rem;
-    padding: .4rem 0;
-    color: #333;
-  }
-
-  .check-icon-x {
-    margin-right: .6rem;
-    font-size: 1.1rem;
-    line-height: 1.4;
-    font-weight: bold;
-    color: inherit;
-  }
-
-  .box-price-x {
-    background: #dedede;
-    padding: .8rem 1rem;
-    border-radius: 6px;
-    font-weight: 600;
-    color: #111;
-    box-shadow: 0 0 8px rgba(0,0,0,0.05);
-    font-size: 1rem;
-    margin-top: auto;
-  }
-
-  .btn-toggle-x {
-    background: transparent;
-    border: 1px solid currentColor;
-    padding: .6rem 1rem;
-    border-radius: 8px;
-    margin-top: 1rem;
-    cursor: pointer;
-    font-weight: 500;
-    font-size: .95rem;
-    color: inherit;
-    transition: background .3s, color .3s;
-  }
-
-  .btn-toggle-x:hover {
-    background: currentColor;
-    color: #fff;
-  }
-
-  .box-accordion-x {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    margin-top: 0;
-    pointer-events: none;
-    transition: max-height .4s ease, opacity .4s ease, margin-top .3s ease;
-  }
-
-  .box-accordion-x.open {
-    max-height: 500px;
-    opacity: 1;
-    pointer-events: auto;
-    margin-top: 1rem;
-  }
-
-  .note-hint-x {
-    margin-top: 1rem;
-    font-size: 1rem;
-    color: #888;
-  }
-
-  .benefits-card-x {
-    background: #fff;
-    color: #111;
-    padding: 3rem 2.5rem;
-    border-radius: 16px;
-    border: 1px solid #e5e5e5;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
-    transition: transform .3s ease, box-shadow .3s ease;
-  }
-
-  .benefits-card-x:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.06);
-  }
-
-  .benefits-card-x h3 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-  }
-
-  .benefits-list-x {
-    display: flex;
-    flex-direction: column;
-    gap: 1.4rem;
-  }
-
-  .benefit-item-x {
-    background: #fafafa;
-    border-radius: 10px;
-    padding: 1.2rem 1.5rem;
-    font-size: 1.1rem;
-    line-height: 1.7;
-    transition: background .3s ease, transform .2s ease;
-  }
-
-  .benefit-item-x:hover {
-    background: #fff;
-    transform: translateX(3px);
-  }
-
-  .benefit-item-x strong {
-    display: block;
-    font-weight: 800;
-    font-size: 1.15rem;
-    margin-bottom: .5rem;
-  }
-
-  .benefits-card-x .icon-container-x {
-    background: #ff5100 !important;
-    border-radius: 50%;
-    padding: 1rem;
-    width: 60px; height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-  }
-
-  .benefits-card-x .btn-toggle-x {
-    border: 1px solid #ff5100;
-    color: #ff5100;
-  }
-
-  .benefits-card-x .btn-toggle-x:hover {
-    background-color: #ff5100;
-    color: #fff;
-  }
-
-  @media (max-width: 992px) {
-    .card-box-x { flex: 1 1 calc(50% - 2rem); }
-  }
-  @media (max-width: 767px) {
-    .card-box-x { flex: 1 1 100%; }
-    .heading-main-x { font-size: 2rem; }
-    .wrapper-container-x { padding: 0 1rem; }
-  }
-  @media (min-width: 1200px) {
-    .block-wrapper-x { padding: 8rem 3rem; }
-    .card-box-x { padding: 2.5rem; transform: scale(1.04); }
-    .card-box-x h3 { font-size: 1.6rem; }
-    .list-features-x li { font-size: 1.1rem; }
-    .box-price-x { font-size: 1.05rem; }
-    .btn-toggle-x { font-size: 1.05rem; }
-    .note-hint-x { font-size: 1.1rem; }
-  }
-  @media (min-width: 993px) {
-    .card-box-x.wide-x { flex: 2 1 calc(66.666% - 2rem); }
-  }
-
-  /* Weißer Text in Inhalt & Liste, aber Preis bleibt schwarz */
-.card-type-a .box-accordion-x,
-.card-type-a .box-accordion-x li,
-.card-type-c .box-accordion-x,
-.card-type-c .box-accordion-x li {
-  color: #fff;
+.cta-button-group {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.card-type-a .check-icon-x,
-.card-type-c .check-icon-x {
-  color: #fff;
+.cta-primary-btn,
+.cta-secondary-btn {
+  padding: 0.85rem 1.6rem;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(270deg, #ff5100, #006eff);
+  background-size: 400% 400%;
+  animation: glassmove 8s ease infinite;
+  color: white;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 }
 
-.card-type-a .box-price-x,
-.card-type-c .box-price-x {
-  color: #111; /* schwarzer Text in Preisbox */
-  background: #f9f9f9;
+.cta-primary-btn:hover,
+.cta-secondary-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 40px rgba(0, 0, 0, 0.3);
 }
-.benefit-item-x {
-  background: #eaeaea; /* etwas dunkler als #fafafa */
-  border-radius: 10px;
-  padding: 1.2rem 1.5rem;
-  font-size: 1.1rem;
-  line-height: 1.7;
-  transition: background .3s ease, transform .2s ease;
+
+/* Optional secondary with glass & border only */
+.cta-secondary-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ff5100;
+  border: 1px solid rgba(255, 81, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+.cta-secondary-btn:hover {
+  background: rgba(255, 81, 0, 0.2);
+  color: white;
+}
+
+/* Gradient animation */
+@keyframes glassmove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.cta-button-group,
+.cta-primary-btn {
+  margin-top: 3rem;
+  margin-bottom: 3.5rem; /* oder z. B. 5rem für mehr Abstand */
+  display: flex;
+  justify-content: center;
+}
+.section-button {
+  margin-top: 3rem;
+  margin-bottom: 3.5rem;
+  display: flex;
+  justify-content: center;
 }
 
 </style>
-<script>
-// Feather Icons laden
-if (typeof feather !== 'undefined') {
-  feather.replace();
-}
 
-// Accordion-Toggle Logik für die neuen Klassen
-document.querySelectorAll('.btn-toggle-x').forEach(button => {
-  button.addEventListener('click', () => {
-    const card = button.closest('.card-box-x');
-    const content = card.querySelector('.box-accordion-x');
-    const isOpen = content.classList.contains('open');
 
-    // Alle anderen schließen
-    document.querySelectorAll('.box-accordion-x.open').forEach(openContent => {
-      openContent.classList.remove('open');
-      openContent.closest('.card-box-x')?.classList.remove('is-open');
-    });
 
-    // Aktuelles umschalten
-    if (!isOpen) {
-      content.classList.add('open');
-      card.classList.add('is-open');
-    }
-  });
-});
-</script>
+
 
 
 
@@ -2470,171 +2037,85 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
 
   <ol class="workflow-track" role="list">
     <li class="workflow-point" data-step="0">
-      <button
-        type="button"
-        class="workflow-trigger"
-        aria-expanded="false"
-        aria-controls="popup-step-0"
-      >
-        <div class="icon"><i data-feather="target"></i></div>
+      <button type="button" class="workflow-trigger" aria-label="Analyse – öffnet Beschreibung" aria-expanded="false" aria-controls="popup-step-0">
+        <div class="icon" aria-hidden="true"><i data-feather="target"></i></div>
         <span class="step-label">Analyse</span>
       </button>
-      <div
-        id="popup-step-0"
-        class="step-popup"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="popup-step-0-title"
-        aria-describedby="popup-step-0-desc"
-        tabindex="-1"
-      >
+      <div id="popup-step-0" class="step-popup" role="dialog" aria-modal="true" aria-labelledby="popup-step-0-title" aria-describedby="popup-step-0-desc" tabindex="-1">
         <button type="button" class="close-popup" aria-label="Schließen">&times;</button>
         <h3 id="popup-step-0-title">Bedarfsanalyse &amp; Zieldefinition</h3>
-        <p id="popup-step-0-desc">
-          Wir analysieren dein Business, Zielgruppen, technische Anforderungen und Projektziele – für eine klare Strategie von Anfang an.
-        </p>
+        <p id="popup-step-0-desc">Wir analysieren dein Business, Zielgruppen, technische Anforderungen und Projektziele – für eine klare Strategie von Anfang an.</p>
       </div>
     </li>
+
     <li class="workflow-point" data-step="1">
-      <button
-        type="button"
-        class="workflow-trigger"
-        aria-expanded="false"
-        aria-controls="popup-step-1"
-      >
-        <div class="icon"><i data-feather="layout"></i></div>
+      <button type="button" class="workflow-trigger" aria-label="Struktur – öffnet Beschreibung" aria-expanded="false" aria-controls="popup-step-1">
+        <div class="icon" aria-hidden="true"><i data-feather="layout"></i></div>
         <span class="step-label">Struktur</span>
       </button>
-      <div
-        id="popup-step-1"
-        class="step-popup"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="popup-step-1-title"
-        aria-describedby="popup-step-1-desc"
-        tabindex="-1"
-      >
+      <div id="popup-step-1" class="step-popup" role="dialog" aria-modal="true" aria-labelledby="popup-step-1-title" aria-describedby="popup-step-1-desc" tabindex="-1">
         <button type="button" class="close-popup" aria-label="Schließen">&times;</button>
         <h3 id="popup-step-1-title">Informationsarchitektur &amp; Wireframes</h3>
-        <p id="popup-step-1-desc">
-          Wir planen klare Nutzerflüsse, erstellen erste Wireframes und legen die Struktur der Website modular an – SEO- und UX-optimiert.
-        </p>
+        <p id="popup-step-1-desc">Wir planen klare Nutzerflüsse, erstellen erste Wireframes und legen die Struktur der Website modular an – SEO- und UX-optimiert.</p>
       </div>
     </li>
+
     <li class="workflow-point" data-step="2">
-      <button
-        type="button"
-        class="workflow-trigger"
-        aria-expanded="false"
-        aria-controls="popup-step-2"
-      >
-        <div class="icon"><i data-feather="edit-3"></i></div>
+      <button type="button" class="workflow-trigger" aria-label="Design – öffnet Beschreibung" aria-expanded="false" aria-controls="popup-step-2">
+        <div class="icon" aria-hidden="true"><i data-feather="edit-3"></i></div>
         <span class="step-label">Design</span>
       </button>
-      <div
-        id="popup-step-2"
-        class="step-popup"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="popup-step-2-title"
-        aria-describedby="popup-step-2-desc"
-        tabindex="-1"
-      >
+      <div id="popup-step-2" class="step-popup" role="dialog" aria-modal="true" aria-labelledby="popup-step-2-title" aria-describedby="popup-step-2-desc" tabindex="-1">
         <button type="button" class="close-popup" aria-label="Schließen">&times;</button>
         <h3 id="popup-step-2-title">Visuelles Design</h3>
-        <p id="popup-step-2-desc">
-          Auf Basis von Branding und Zielgruppe gestalten wir ein Designsystem mit Farben, Typografie, UI-Elementen und Animationen.
-        </p>
+        <p id="popup-step-2-desc">Auf Basis von Branding und Zielgruppe gestalten wir ein Designsystem mit Farben, Typografie, UI-Elementen und Animationen.</p>
       </div>
     </li>
+
     <li class="workflow-point" data-step="3">
-      <button
-        type="button"
-        class="workflow-trigger"
-        aria-expanded="false"
-        aria-controls="popup-step-3"
-      >
-        <div class="icon"><i data-feather="code"></i></div>
+      <button type="button" class="workflow-trigger" aria-label="Umsetzung – öffnet Beschreibung" aria-expanded="false" aria-controls="popup-step-3">
+        <div class="icon" aria-hidden="true"><i data-feather="code"></i></div>
         <span class="step-label">Umsetzung</span>
       </button>
-      <div
-        id="popup-step-3"
-        class="step-popup"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="popup-step-3-title"
-        aria-describedby="popup-step-3-desc"
-        tabindex="-1"
-      >
+      <div id="popup-step-3" class="step-popup" role="dialog" aria-modal="true" aria-labelledby="popup-step-3-title" aria-describedby="popup-step-3-desc" tabindex="-1">
         <button type="button" class="close-popup" aria-label="Schließen">&times;</button>
         <h3 id="popup-step-3-title">Technische Umsetzung</h3>
-        <p id="popup-step-3-desc">
-          Responsive Entwicklung, Performance-Optimierung und sauberes HTML/CSS – für skalierbare Websites mit Best Practices.
-        </p>
+        <p id="popup-step-3-desc">Responsive Entwicklung, Performance-Optimierung und sauberes HTML/CSS – für skalierbare Websites mit Best Practices.</p>
       </div>
     </li>
+
     <li class="workflow-point" data-step="4">
-      <button
-        type="button"
-        class="workflow-trigger"
-        aria-expanded="false"
-        aria-controls="popup-step-4"
-      >
-        <div class="icon"><i data-feather="check-circle"></i></div>
+      <button type="button" class="workflow-trigger" aria-label="Testing – öffnet Beschreibung" aria-expanded="false" aria-controls="popup-step-4">
+        <div class="icon" aria-hidden="true"><i data-feather="check-circle"></i></div>
         <span class="step-label">Testing</span>
       </button>
-      <div
-        id="popup-step-4"
-        class="step-popup"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="popup-step-4-title"
-        aria-describedby="popup-step-4-desc"
-        tabindex="-1"
-      >
+      <div id="popup-step-4" class="step-popup" role="dialog" aria-modal="true" aria-labelledby="popup-step-4-title" aria-describedby="popup-step-4-desc" tabindex="-1">
         <button type="button" class="close-popup" aria-label="Schließen">&times;</button>
         <h3 id="popup-step-4-title">Testing &amp; Validierung</h3>
-        <p id="popup-step-4-desc">
-          Usability-Tests, Browserchecks, SEO-Checks und mobile Optimierung – bevor deine Seite live geht, wird sie geprüft.
-        </p>
+        <p id="popup-step-4-desc">Usability-Tests, Browserchecks, SEO-Checks und mobile Optimierung – bevor deine Seite live geht, wird sie geprüft.</p>
       </div>
     </li>
+
     <li class="workflow-point" data-step="5">
-      <button
-        type="button"
-        class="workflow-trigger"
-        aria-expanded="false"
-        aria-controls="popup-step-5"
-      >
-        <div class="icon"><i data-feather="rocket"></i></div>
+      <button type="button" class="workflow-trigger" aria-label="Launch – öffnet Beschreibung" aria-expanded="false" aria-controls="popup-step-5">
+        <div class="icon" aria-hidden="true"><i data-feather="star"></i></div>
         <span class="step-label">Launch</span>
       </button>
-      <div
-        id="popup-step-5"
-        class="step-popup"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="popup-step-5-title"
-        aria-describedby="popup-step-5-desc"
-        tabindex="-1"
-      >
+      <div id="popup-step-5" class="step-popup" role="dialog" aria-modal="true" aria-labelledby="popup-step-5-title" aria-describedby="popup-step-5-desc" tabindex="-1">
         <button type="button" class="close-popup" aria-label="Schließen">&times;</button>
         <h3 id="popup-step-5-title">Launch &amp; Optimierung</h3>
-        <p id="popup-step-5-desc">
-          Go Live inklusive Übergabe, SEO-Basics und ggf. Schulung im CMS – plus Monitoring und erste Optimierungszyklen.
-        </p>
+        <p id="popup-step-5-desc">Go Live inklusive Übergabe, SEO-Basics und ggf. Schulung im CMS – plus Monitoring und erste Optimierungszyklen.</p>
       </div>
     </li>
   </ol>
 </section>
-<style>
-/* unveränderte Styles ... */
-.workflow-horizontal {
-  background: #fff;
-  color: #111;
+
+<style>.workflow-horizontal {
+  background: #000000;
+  color: #ffffff;
   padding: 4rem 2rem;
   text-align: center;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   font-family: 'Inter', sans-serif;
 }
@@ -2647,7 +2128,7 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
 
 .workflow-intro {
   font-size: 1.1rem;
-  color: #444;
+  color: #ffffff;
   max-width: 700px;
   margin: 0 auto 3rem;
   line-height: 1.6;
@@ -2663,6 +2144,7 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
   list-style: none;
   padding: 0;
   margin: 0;
+  position: relative;
 }
 
 .workflow-point {
@@ -2689,6 +2171,8 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
   justify-content: center;
   align-items: center;
   margin: 0 auto 0.5rem;
+  z-index: 2;
+  position: relative;
 }
 
 .icon i {
@@ -2718,10 +2202,24 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
   text-align: left;
   z-index: 10;
   display: none;
+  max-width: 90vw;
 }
 
 .workflow-point.open .step-popup {
   display: block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.workflow-point:first-child .step-popup {
+  left: 0;
+  transform: none;
+}
+
+.workflow-point:last-child .step-popup {
+  right: 0;
+  left: auto;
+  transform: none;
 }
 
 .step-popup h3 {
@@ -2744,11 +2242,11 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
   background: none;
   font-size: 1.3rem;
   cursor: pointer;
-  color: #666;
+  color: #333;
 }
 
 .step-popup .close-popup:hover {
-  color: #111;
+  color: #000;
 }
 
 @media (max-width: 768px) {
@@ -2769,53 +2267,128 @@ document.querySelectorAll('.btn-toggle-x').forEach(button => {
     top: 80px;
   }
 }
+
+@media (min-width: 1024px) {
+  .workflow-track::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: calc(160px / 2);
+    right: calc(160px / 2);
+    height: 4px;
+    background-color: #ff6600;
+    z-index: 1;
+  }
+
+  .workflow-point .icon {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.workflow-point.open .icon::after {
+  content: '';
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: rgba(255, 102, 0, 0.4);
+  animation: pulse 2s infinite;
+  z-index: -1;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.workflow-point[data-step="1"].show-tooltip .workflow-trigger::before {
+  content: 'Klick mich';
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff6600;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  animation: floatLabel 3s ease-in-out infinite;
+  z-index: 10;
+}
+
+@keyframes floatLabel {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
 </style>
-<script src="https://unpkg.com/feather-icons"></script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  feather.replace();
+  document.addEventListener("DOMContentLoaded", () => {
+    feather.replace();
 
-  const points = document.querySelectorAll('.workflow-point');
+    const points = document.querySelectorAll('.workflow-point');
+    const tooltipTarget = document.querySelector('.workflow-point[data-step="1"]');
 
-  points.forEach(point => {
-    const btn = point.querySelector('.workflow-trigger');
-    const popup = point.querySelector('.step-popup');
-    const closeBtn = popup.querySelector('.close-popup');
+    // Öffne erste Karte beim Laden
+    const firstPoint = points[0];
+    firstPoint.classList.add('open');
+    firstPoint.querySelector('.workflow-trigger').setAttribute('aria-expanded', 'true');
 
-    btn.addEventListener('click', () => {
-      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+    // Tooltip initial sichtbar
+    tooltipTarget.classList.add('show-tooltip');
 
-      // alle schließen
-      points.forEach(p => {
-        const t = p.querySelector('.workflow-trigger');
-        p.classList.remove('open');
-        t.setAttribute('aria-expanded', 'false');
+    points.forEach(point => {
+      const btn = point.querySelector('.workflow-trigger');
+      const popup = point.querySelector('.step-popup');
+      const closeBtn = popup.querySelector('.close-popup');
+
+      btn.addEventListener('click', () => {
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+        // Tooltip dauerhaft entfernen beim ersten Klick
+        tooltipTarget.classList.remove('show-tooltip');
+
+        // Alle schließen
+        points.forEach(p => {
+          p.classList.remove('open');
+          p.querySelector('.workflow-trigger').setAttribute('aria-expanded', 'false');
+        });
+
+        // Aktivieren
+        if (!isOpen) {
+          point.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          popup.querySelector('h3')?.focus(); // Besser für Screenreader
+        }
       });
 
-      // diesen öffnen/schließen
-      if (!isOpen) {
-        point.classList.add('open');
-        btn.setAttribute('aria-expanded', 'true');
-        popup.focus();
-      }
-    });
-
-    closeBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      btn.setAttribute('aria-expanded', 'false');
-      point.classList.remove('open');
-      btn.focus();
-    });
-
-    popup.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
+      closeBtn.addEventListener('click', e => {
+        e.stopPropagation();
         btn.setAttribute('aria-expanded', 'false');
         point.classList.remove('open');
         btn.focus();
-      }
+      });
+
+      popup.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          btn.setAttribute('aria-expanded', 'false');
+          point.classList.remove('open');
+          btn.focus();
+        }
+      });
     });
   });
-});
 </script>
 
 
@@ -2852,7 +2425,7 @@ document.addEventListener("DOMContentLoaded", () => {
   background: #000;
   overflow: hidden;
   text-align: center;
-  z-index: 7;
+  z-index: 4;
   margin-top: 0;
 }
 
@@ -2881,6 +2454,7 @@ document.addEventListener("DOMContentLoaded", () => {
   position: relative;
   z-index: 2;
   animation: fadeUp 1s ease-out both;
+    margin-top: 10rem;
 }
 
 /* Ersetze die alte .cta-small-Definition durch diese: */
@@ -3004,7 +2578,6 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 </style>
 
-  
 
 
 <section
@@ -3051,6 +2624,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <a href="#kontakt" class="cta-preview-btn">Jetzt Einblick erhalten</a>
   </div>
+
 </section>
 <style>
   /* Live Preview Section */
@@ -3218,7 +2792,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('.fade-in-effect').forEach(el => observer.observe(el));
   });
 </script>
-
 
 
 
@@ -3559,16 +3132,21 @@ document.addEventListener('DOMContentLoaded', () => {
 </style>
 
 
- 
 
-<section class="values-section container" id="werte" aria-labelledby="heading-values">
-  <h2 class="values-title" id="heading-values">Unser Ansatz & Unsere Motivation</h2>
-  <p class="values-subline">
-    Ihr Qualitätsversprechen: Maßgeschneiderte digitale Lösungen für die Anforderungen von heute.
-  </p>
+
+
+
+ <section class="values-section container" id="werte" aria-labelledby="heading-values">
+  <img class="animated-bg" src="./pnglogoanimation/0000.png" alt="" aria-hidden="true" />
+
+  <div class="values-heading-box">
+    <h2 class="values-title" id="heading-values">Unser Ansatz & Unsere Motivation</h2>
+    <p class="values-subline">
+      Ihr Qualitätsversprechen: Maßgeschneiderte digitale Lösungen für die Anforderungen von heute.
+    </p>
+  </div>
 
   <div class="values-grid">
-
     <!-- VALUE 1 -->
     <article class="value-card" aria-labelledby="steuerung-title">
       <div class="icon-wrap"><i data-feather="activity"></i></div>
@@ -3610,38 +3188,50 @@ document.addEventListener('DOMContentLoaded', () => {
       <h3 id="automation-title">Automatisierte Abläufe</h3>
       <p>Optimierte Prozesse für Geschwindigkeit und Skalierbarkeit.</p>
     </article>
-
   </div>
 
   <div class="values-cta-wrap">
     <a href="#about" class="cta-button">Mehr über uns →</a>
   </div>
 </section>
-<style>:root {
-  --primary: #ff6600;
-  --secondary: #ffb266;
-  --text-color: #111;
-  --bg-light: #ffffff;
-  --highlight: #ffe2bd;
-}
-
+<style>
 .values-section {
+  position: relative;
   background: transparent;
   text-align: center;
   color: var(--text-color);
   padding: 5rem 2rem;
+  z-index: 1;
 }
+
+.animated-bg {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  object-fit: contain; /* <- wichtig: nicht zuschneiden */
+  z-index: 0;
+  pointer-events: none;
+  opacity: 1.08;
+}
+
 
 .values-title {
   font-size: clamp(1.8rem, 4vw, 2.4rem);
   font-weight: 900;
   margin-bottom: 0.8rem;
+  z-index: 5;
 }
 
 .values-subline {
   font-size: 1.1rem;
   color: #666;
   margin-bottom: 3.5rem;
+  z-index: 5;
 }
 
 .values-grid {
@@ -3663,13 +3253,16 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .value-card {
-  background: linear-gradient(135deg, #ffffff, #f2f5fa);
+  background: rgba(255, 255, 255, 0.5); /* halbtransparent nötig */
+  backdrop-filter: blur(10px); /* Hauptblur */
+  -webkit-backdrop-filter: blur(10px); /* Für Safari */
   border: 1px solid #eee;
   border-radius: 16px;
   padding: 2rem 1.5rem;
   text-align: left;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   transition: all 0.3s ease;
+  z-index: 5;
 }
 
 .value-card:hover {
@@ -3681,11 +3274,13 @@ document.addEventListener('DOMContentLoaded', () => {
   font-size: 1.4rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
+  z-index: 5;
 }
 
 .value-card p {
   font-size: 1rem;
   color: #444;
+  z-index: 5;
 }
 
 .icon-wrap {
@@ -3723,27 +3318,172 @@ document.addEventListener('DOMContentLoaded', () => {
 .cta-button:hover {
   filter: brightness(1.1);
 }
+
+.values-heading-box {
+  position: relative;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.5); /* halbtransparent nötig */
+  backdrop-filter: blur(10px); /* Hauptblur */
+  -webkit-backdrop-filter: blur(10px); /* Für Safari */
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  max-width: 1000px;
+  max-height: 160px;
+  margin: 0 auto 3rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+}/* === RESPONSIVE DESIGN === */
+@media (max-width: 1199px) {
+  .values-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .animated-bg {
+    width: 70vw; /* etwas kleiner bei Tablets */
+    top: 50%;
+  }
+
+  .values-heading-box {
+    padding: 1.5rem 1rem;
+    max-height: none;
+    margin-bottom: 2rem;
+  }
+
+  .values-title {
+    font-size: 1.8rem;
+  }
+
+  .values-subline {
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .value-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .value-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .value-card p {
+    font-size: 0.95rem;
+  }
+
+  .cta-button {
+    padding: 0.7rem 1.3rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .values-section {
+    padding: 2.5rem 1rem;
+  }
+
+  .animated-bg {
+    width: 85vw; /* kleiner auf Handys */
+    top: 55%;
+  }
+
+  .values-heading-box {
+    padding: 1.2rem 0.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .values-title {
+    font-size: 1.5rem;
+  }
+
+  .values-subline {
+    font-size: 0.95rem;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .value-card {
+    padding: 1.2rem 1rem;
+  }
+
+  .value-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .value-card p {
+    font-size: 0.9rem;
+  }
+
+  .icon-wrap {
+    width: 42px;
+    height: 42px;
+  }
+
+  .icon-wrap i {
+    width: 20px;
+    height: 20px;
+  }
+
+  .cta-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 1023px) {
+  .animated-bg {
+    width: 100vw;
+    top: 50%;
+  }
+}
+
+@media (max-width: 767px) {
+  .animated-bg {
+    width: 200vw;     /* sehr groß auf Handy */
+    top: 60%;         /* weiter nach unten */
+    opacity: 0.9;     /* optional: etwas transparenter für bessere Lesbarkeit */
+  }
+}
+@media (max-width: 375px) {
+  .animated-bg {
+    width: 300vw;     /* sehr groß auf Handy */
+    top: 60%;         /* weiter nach unten */
+    opacity: 0.9;     /* optional: etwas transparenter für bessere Lesbarkeit */
+  }
+}
 </style>
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = "1";
-          entry.target.style.transform = "translateY(0)";
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.2
-    });
+document.addEventListener("DOMContentLoaded", () => {
+  const imgEl = document.querySelector(".animated-bg");
+  const totalFrames = 250;
+  const frameRate = 65;
+  let currentFrame = 0;
+  const images = [];
 
-    document.querySelectorAll(".animate-on-scroll").forEach(el => {
-      observer.observe(el);
-    });
+  // Preload
+  for (let i = 0; i < totalFrames; i++) {
+    const frameStr = String(i).padStart(4, '0');
+    const img = new Image();
+    img.src = `./pnglogoanimation/${frameStr}.png`;
+    images.push(img);
+  }
+
+  // Animate after load
+  let loadedCount = 0;
+  images.forEach(img => {
+    img.onload = () => {
+      loadedCount++;
+      if (loadedCount === totalFrames) {
+        setInterval(() => {
+          const frameStr = String(currentFrame).padStart(4, '0');
+          imgEl.src = `./pnglogoanimation/${frameStr}.png`;
+          currentFrame = (currentFrame + 1) % totalFrames;
+        }, frameRate);
+      }
+    };
   });
+});
 </script>
-
 
 
 
@@ -3844,12 +3584,14 @@ document.addEventListener('DOMContentLoaded', () => {
       font-size: clamp(1.8rem, 4vw, 2.6rem);
       font-weight: 900;
       margin-bottom: 0.8rem;
+      z-index: 10;
     }
 
     .pricing-subline {
       font-size: 1.1rem;
       color: #666;
       margin-bottom: 4rem;
+            z-index: 10;
     }
 
     .preis-toggle {
@@ -3909,6 +3651,7 @@ document.addEventListener('DOMContentLoaded', () => {
       transition: all 0.3s ease;
       height: 100%;
       z-index: 5;
+            z-index: 10;
     }
 
     .pricing-card:hover {
@@ -3920,6 +3663,7 @@ document.addEventListener('DOMContentLoaded', () => {
       font-size: 1.6rem;
       font-weight: 800;
       margin-bottom: 0.4rem;
+            z-index: 10;
     }
 
     .tagline {
