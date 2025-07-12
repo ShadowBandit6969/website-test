@@ -437,219 +437,298 @@
     </nav>
   </header>
 
-  <style>
-    .hero {
-      position: relative;
-      min-height: 100dvh;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      padding: 0 5vw;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(10px);
-      z-index: 1;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: black;
-      z-index: -2;
+<style>
+  .hero {
+    position: relative;
+    min-height: 100dvh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 5vw;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: -2;
+  }
+
+  .video-fallback {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 110%;
+    object-fit: cover;
+    z-index: -1;
+    transition: opacity 0.5s ease;
+  }
+
+  .video-fallback.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 110%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    object-position: center center;
+    z-index: -1;
+  }
+
+  video.desktop-video,
+  video.tablet-video,
+  video.mobile-video {
+    display: none;
+  }
+
+  video.desktop-video {
+    display: block;
+  }
+
+  .hero-content {
+    flex: 1;
+    max-width: 90%;
+    padding: 6rem 2rem 3rem;
+    animation: fadeInLeft 1s ease-out forwards;
+  }
+
+  .hero-content h1 {
+    font-size: 4rem;
+    line-height: 1.1;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .hero-content p {
+    font-size: 1.6rem;
+    color: #f2f2f2;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    max-width: 520px;
+  }
+
+  .cta-button {
+    padding: 14px 28px;
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .cta-button:hover {
+    background-color: var(--hover);
+    transform: scale(1.05);
+  }
+
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
     }
 
-    video {
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      min-width: 100%;
-      min-height: 110%;
-      width: auto;
-      height: auto;
-      object-fit: cover;
-      object-position: center center;
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @media (min-width: 2560px) {
+    .hero-content h1 {
+      font-size: 5.2rem;
+    }
+
+    .hero-content p {
+      font-size: 2rem;
+    }
+
+    .cta-button {
+      font-size: 1.5rem;
+      padding: 20px 40px;
+    }
+  }
+
+  @media (max-width: 1140px) and (min-width: 768px) {
+    video.desktop-video {
+      display: none;
+    }
+
+    video.tablet-video {
+      display: block;
+    }
+
+    .hero {
+      flex-direction: column;
+      padding-top: 6vh;
+      align-items: flex-start;
+    }
+
+    .hero-content {
+      padding: 8rem 1.5rem 2rem;
+      max-width: 100%;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+    }
+
+    .cta-button {
+      font-size: 1rem;
+      padding: 12px 24px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    video.desktop-video,
+    video.tablet-video {
+      display: none;
+    }
+
+    video.mobile-video {
+      display: block;
+    }
+
+    .hero {
+      flex-direction: column;
+      text-align: center;
+      padding: 5vh 5vw;
+    }
+
+    .hero-content {
+      padding: 4rem 1rem 2rem;
+      max-width: 100%;
+    }
+
+    .hero-content h1 {
+      font-size: 2.2rem;
+    }
+
+    .hero-content p {
+      font-size: 1rem;
+    }
+
+    .cta-button {
+      font-size: 0.85rem;
+      padding: 10px 18px;
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .hero {
+      justify-content: center;
+    }
+
+    .hero-content {
+      position: relative;
+      display: inline-block;
+      margin: 0 auto;
+      text-align: center;
+      padding: 6rem 2rem 3rem;
+      max-width: 50%;
+    }
+
+    .hero-content::before {
+      content: "";
+      position: absolute;
+      inset: -1rem;
+      background: rgba(54, 54, 54, 0.053);
+      backdrop-filter: blur(25px) hue-rotate(15deg) brightness(1.1) saturate(1.2);
+      border-radius: 1rem;
       z-index: -1;
     }
 
-    video.desktop-video,
-    video.tablet-video,
-    video.mobile-video {
-      display: none;
-    }
-    video.desktop-video { display: block; }
-
-    .hero-content {
-      flex: 1;
-      max-width: 90%;
-      padding: 6rem 2rem 3rem;
-      animation: fadeInLeft 1s ease-out forwards;
-    }
-    .hero-content h1 {
-      font-size: 4rem;
-      line-height: 1.1;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 1rem;
-    }
     .hero-content p {
-      font-size: 1.6rem;
-      color: #f2f2f2;
-      font-weight: 500;
-      margin-bottom: 2rem;
-      max-width: 520px;
+      display: block;
+      margin: 0 auto 2rem;
+      text-align: center;
+      max-width: 620px;
     }
-    .cta-button {
-      padding: 14px 28px;
-      background-color: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 30px;
-      font-size: 1.2rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.3s ease, background-color 0.3s ease;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-    }
-    .cta-button:hover {
-      background-color: var(--hover);
-      transform: scale(1.05);
-    }
-    @keyframes fadeInLeft {
-      from { opacity: 0; transform: translateX(-30px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
-
-    /* Ultra-wide & große Bildschirme */
-    @media (min-width: 2560px) {
-      .hero-content h1 { font-size: 5.2rem; }
-      .hero-content p  { font-size: 2rem; }
-      .cta-button      { font-size: 1.5rem; padding: 20px 40px; }
-    }
-
-    /* Tablets & mittlere Bildschirme */
-    @media (max-width: 1140px) and (min-width: 768px) {
-      video.desktop-video { display: none; }
-      video.tablet-video  { display: block; }
-
-      .hero {
-        flex-direction: column;
-        padding-top: 6vh;
-        align-items: flex-start;
-      }
-      .hero-content {
-        padding: 8rem 1.5rem 2rem;
-        max-width: 100%;
-      }
-      .hero-content h1 {
-        font-size: 3rem;
-        margin-bottom: 1.5rem;
-      }
-      .hero-content p {
-        font-size: 1.2rem;
-      }
-      .cta-button {
-        font-size: 1rem;
-        padding: 12px 24px;
-      }
-    }
-
-    /* Smartphones */
-    @media (max-width: 767px) {
-      video.desktop-video, video.tablet-video { display: none; }
-      video.mobile-video                  { display: block; }
-
-      .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 5vh 5vw;
-      }
-      .hero-content {
-        padding: 4rem 1rem 2rem;
-        max-width: 100%;
-      }
-      .hero-content h1 {
-        font-size: 2.2rem;
-      }
-      .hero-content p {
-        font-size: 1rem;
-      }
-      .cta-button {
-        font-size: 0.85rem;
-        padding: 10px 18px;
-        width: 100%;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
-@media (min-width: 1440px) {
-  /* Hero-Inhalt zentrieren */
-  .hero {
-    justify-content: center;
   }
-.hero-content {
-  position: relative;    /* für das Pseudo-Element */
-  display: inline-block; /* passt Breite dem Inhalt an */
-  margin: 0 auto;        /* zentriert im Flex-Container */
-  text-align: center;    /* Textmittelung */
-  padding: 6rem 2rem 3rem;
-  max-width: 50%;
-}
-.hero-content::before {
-  content: "";
-  position: absolute;
-  inset: -1rem;                        /* rundherum 1rem Puffer */
-  background: rgba(54, 54, 54, 0.053);/* halbtransparent-weiß, damit’s aufgehellt wirkt */
-  backdrop-filter: blur(20px)          /* starker, aber nicht übertrieben extremer Blur */
-                  saturate(1.2)        /* leicht farbintensivierend */
-                  brightness(1.5);     /* etwas heller */
-  border-radius: 1rem;
-  z-index: -1;                         /* hinter den Text */
-  backdrop-filter: blur(25px) hue-rotate(15deg) brightness(1.1);
+</style>
 
-}
+<div class="hero" role="banner" aria-label="Startbereich mit Slogan und Call-to-Action">
+  <!-- Hintergrundbild (Frame 1) -->
+  <img class="video-fallback" src="./IndexM/frame1.jpg" alt="Hintergrundbild" aria-hidden="true" loading="eager" />
 
+  <!-- Desktop Video -->
+  <video class="desktop-video" autoplay muted loop playsinline poster="./IndexM/frame1pc.png">
+    <source src="./IndexM/PC.mp4" type="video/mp4">
+  </video>
 
-   /* Absatz mittig halten */
-  .hero-content p {
-    display: block;         /* Block-Level, damit margin auto wirkt */
-    margin: 0 auto 2rem;    /* oben 0, unten 2rem, links/rechts auto */
-    text-align: center;     /* Text selbst zentrieren */
-    max-width: 620px;       /* optional: Breite deckt nur deinen Text ab */
-  }
-}
+  <!-- Tablet Video -->
+  <video class="tablet-video" autoplay muted loop playsinline poster="./IndexM/frame1tablet.png">
+    <source src="./IndexM/Tablet.mp4" type="video/mp4">
+  </video>
 
+  <!-- Mobile Video -->
+  <video class="mobile-video" autoplay muted loop playsinline poster="./IndexM/frame1handy.png">
+    <source src="./IndexM/handy.mp4" type="video/webm">
+  </video>
 
-  </style>
-  <div class="hero" role="banner" aria-label="Startbereich mit Slogan und Call-to-Action">
-
-    <!-- Desktop Video -->
-    <video class="desktop-video" autoplay muted loop playsinline>
-      <source src="./IndexM/PC.mp4" type="video/mp4">
-    </video>
-
-    <!-- Tablet Video -->
-    <video class="tablet-video" autoplay muted loop playsinline>
-      <source src="./IndexM/Tablet.mp4" type="video/mp4">
-    </video>
-
-    <!-- Mobile Video -->
-    <video class="mobile-video" autoplay muted loop playsinline>
-      <source src="./IndexM/handy.mp4" type="video/webm">
-    </video>
-
-    <!-- Textinhalt -->
-    <div class="hero-content">
-      <h1><span>Design, das berührt.</span></h1>
-      <p>Wir vereinen Kreativität, Emotion und Innovation zu digitalen Welten, mit denen sich dein Publikum verbinden kann.</p>
-      <button class="cta-button" aria-label="Jetzt kontaktieren">JETZT KONTAKTIEREN</button>
-    </div>
+  <!-- Textinhalt -->
+  <div class="hero-content">
+    <h1><span>Design, das berührt.</span></h1>
+    <p>Wir vereinen Kreativität, Emotion und Innovation zu digitalen Welten, mit denen sich dein Publikum verbinden kann.</p>
+    <button class="cta-button" aria-label="Jetzt kontaktieren">JETZT KONTAKTIEREN</button>
   </div>
+</div>
+
+<script>
+  window.addEventListener('load', () => {
+    const videos = document.querySelectorAll('video');
+    const fallback = document.querySelector('.video-fallback');
+
+    let anyPlaying = false;
+
+    videos.forEach(video => {
+      video.addEventListener('playing', () => {
+        if (!anyPlaying) {
+          anyPlaying = true;
+          fallback.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
+
 
   <section id="branchen" class="persona-clean container">
     <h2 class="section-title">Für wen ist Fusion3?</h2>
