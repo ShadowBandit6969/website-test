@@ -562,6 +562,18 @@
     outline: 2px solid var(--primary);
     outline-offset: 4px;
   }
+  .video-fallback-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  pointer-events: none;
+}
+
 
   @media (max-width: 1024px) {
     .hero-video-content {
@@ -624,20 +636,42 @@
     }
   }
 </style>
+<main role="main">
+  <section class="hero-video-wrapper" aria-labelledby="hero-heading">
+    <!-- Sofort sichtbares Fallback-Bild -->
+    <img 
+      src="./IndexM/hero-poster.webp" 
+      alt="Hero Image – UX & Webdesign"
+      class="video-fallback-image" 
+      loading="eager" 
+      decoding="async"
+      aria-hidden="true"
+    />
 
-  <main role="main">
-    <section class="hero-video-wrapper" aria-labelledby="hero-heading">
-      <div class="hero-video-content">
-        <h1 id="hero-heading">UX & Webdesign<br>das Nutzer begeistert</h1>
-        <p>Wir konzipieren digitale Erlebnisse. <br>maßgeschneidert und klickbar.</p>
-        <a class="cta-btn" href="#kontakt" title="Projekt mit Fusion3 starten">Projekt anfragen</a>
-      </div>
+    <!-- Content -->
+    <div class="hero-video-content">
+      <h1 id="hero-heading">UX & Webdesign<br>das Nutzer begeistert</h1>
+      <p>Wir konzipieren digitale Erlebnisse.<br>maßgeschneidert und klickbar.</p>
+      <a class="cta-btn" href="#kontakt" title="Projekt mit Fusion3 starten">Projekt anfragen</a>
+    </div>
 
-      <video id="responsiveVideo" class="video-background" autoplay muted loop playsinline aria-label="Hintergrundvideo mit Interface-Animationen im Tech-Stil">
-        <source src="" type="video/mp4" />
-      </video>
-    </section>
-  </main>
+    <!-- Responsive Video -->
+    <video
+      id="responsiveVideo"
+      class="video-background"
+      poster="./IndexM/hero-poster.webp"
+      loading="lazy"
+      autoplay
+      muted
+      loop
+      playsinline
+      aria-label="Hintergrundvideo mit Interface-Animationen im Tech-Stil"
+    >
+      <source src="" type="video/webm" />
+      <source src="" type="video/mp4" />
+    </video>
+  </section>
+</main>
 <script>
   let videoInitialized = false;
 
@@ -662,7 +696,7 @@
       videoInitialized = true;
     } else if (source.getAttribute('src') !== src) {
       source.setAttribute('src', src);
-      video.load(); // Nur neu laden, wenn sich die Quelle ändert
+      video.load();
     }
   }
 
@@ -4315,93 +4349,64 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
 <div id="lottieAltWrapper">
   <div id="lottieAltContainer"></div>
 </div>
-<style>
-  #lottieAltWrapper {
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+<script>
+  let animationLoaded = false;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !animationLoaded) {
+        lottie.loadAnimation({
+          container: document.getElementById('lottieAltContainer'),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: './Animationen/Webdesignshuffle.json'
+        });
+        animationLoaded = true;
+        obs.disconnect(); // Stop observing once loaded
+      }
+    });
+  }, {
+    rootMargin: "0px 0px -20% 0px", // etwas früher starten
+    threshold: 0.1
+  });
+
+  observer.observe(document.getElementById('lottieAltWrapper'));
+</script>
+
+<style>#lottieAltWrapper {
   position: relative;
   width: 100%;
-  overflow: visible;
-  margin-top: -10rem;
-  padding-bottom: 12px; /* Optional */
+  overflow: hidden;
+  margin-top: -6rem;
+  padding-bottom: 12px;
 }
 
 #lottieAltContainer {
   width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   pointer-events: none;
-  display: block;
-  position: relative;
 }
 
-/* Sehr wichtig: Das SVG darf nicht aus seinem Container gedrückt werden */
 #lottieAltContainer > svg {
   width: 100%;
   height: auto;
   max-height: 100%;
-  display: block;
   object-fit: contain;
   object-position: top center;
-}
-
-
-/* Padding auf typischen Laptop-Breiten */
-@media (min-width: 1024px) and (max-width: 1440px) {
-  #lottieAltContainer {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
+  display: block;
 }
 
 @media (max-width: 540px) {
-  #lottieAltWrapper {
-    width: 100vw;
-    margin-top: -6rem;
-    padding: 0;
-  }
-
-  #lottieAltContainer {
-    width: 100vw;
-    max-width: 100%;
-    padding: 0;
-    margin: 0 auto;
-    overflow: hidden;
-  }
-
   #lottieAltContainer > svg {
-    width: 150% !important; /* 👈 Skaliert die Animation größer */
-    height: auto !important;
-    max-width: none;
-    display: block;
-    transform: scale(1.5); /* 👈 Alternativ: Zoomt die Animation */
-    transform-origin: center top; /* 👈 Wichtig für zentriertes Vergrößern */
+    transform: scale(1.2);
+    transform-origin: center top;
   }
 }
-
-
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
-<script>
-  const altLottieElement = document.getElementById('lottieAltContainer');
-
-  let altLottieAnimation = lottie.loadAnimation({
-    container: altLottieElement,
-    renderer: 'svg',
-    loop: false,
-    autoplay: true,
-    path: './Animationen/Webdesignshuffle.json'
-  });
-
-  altLottieAnimation.addEventListener('complete', () => {
-    setTimeout(() => {
-      altLottieAnimation.goToAndPlay(0, true);
-    }, 0);
-  });
-
-  window.addEventListener('resize', () => {
-    location.reload();
-  });
-</script>
-
-
 
 
 

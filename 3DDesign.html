@@ -1108,50 +1108,82 @@ width: 170vw;
   }
 </style>
 
-  <main role="main">
-    <section class="hero-video-wrapper" aria-labelledby="hero-heading">
-      <div class="hero-video-content">
-        <h1 id="hero-heading">3D Design<br>Alles ist möglich!</h1>
-        <p>Alles ist möglich!<br>Maßgeschneidert und Realitätsnah.</p>
-        <a class="cta-btn" href="#kontakt" title="Projekt mit Fusion3 starten">Projekt anfragen</a>
-      </div>
+<main role="main">
+  <section class="hero-video-wrapper" aria-labelledby="hero-heading">
+    <div class="hero-video-content">
+      <h1 id="hero-heading">3D Design<br>Alles ist möglich!</h1>
+      <p>Alles ist möglich!<br>Maßgeschneidert und Realitätsnah.</p>
+      <a class="cta-btn" href="#kontakt" title="Projekt mit Fusion3 starten">Projekt anfragen</a>
+    </div>
 
-      <video id="responsiveVideo" class="video-background" autoplay muted loop playsinline aria-label="Hintergrundvideo mit Interface-Animationen im Tech-Stil">
-        <source src="" type="video/mp4" />
-      </video>
-    </section>
-  </main>
+    <!-- Dynamisches Hintergrundvideo -->
+    <video
+      id="responsiveVideo"
+      class="video-background"
+      poster="./IndexM/hero-poster.webp"
+      loading="lazy"
+      autoplay
+      muted
+      loop
+      playsinline
+      aria-label="Hintergrundvideo mit Interface-Animationen im Tech-Stil"
+    >
+      <!-- Quellen werden dynamisch gesetzt -->
+    </video>
+  </section>
+</main>
+
 <script>
-  let videoInitialized = false;
-
-  function chooseVideoSrc() {
-    const video = document.getElementById('responsiveVideo');
-    const source = video.querySelector('source');
+  function getDeviceCategory() {
     const width = window.innerWidth;
     const height = window.innerHeight;
-    let src = "./IndexM/PC.webm";
 
-    if (width <= 480) {
-      src = "./IndexM/handy.webm";
-    } else if (width <= 768) {
-      src = "./IndexM/Tablet.webm";
-    } else if (width <= 1024) {
-      src = width > height ? "./IndexM/PC.webm" : "./IndexM/Tablet.webm";
-    }
+    if (width <= 480) return 'handy';
+    if (width <= 768) return 'tablet';
+    if (width <= 1024) return width > height ? 'pc' : 'tablet';
+    return 'pc';
+  }
 
-    if (!videoInitialized) {
-      source.setAttribute('src', src);
+  function loadResponsiveVideo() {
+    const video = document.getElementById('responsiveVideo');
+    const currentSources = Array.from(video.querySelectorAll('source')).map(s => s.getAttribute('src'));
+    const category = getDeviceCategory();
+
+    const sources = {
+      handy: {
+        webm: './IndexM/handy.webm',
+        mp4: './IndexM/handy.mp4'
+      },
+      tablet: {
+        webm: './IndexM/Tablet.webm',
+        mp4: './IndexM/Tablet.mp4'
+      },
+      pc: {
+        webm: './IndexM/PC.webm',
+        mp4: './IndexM/PC.mp4'
+      }
+    };
+
+    const selected = sources[category];
+
+    // Nur laden wenn nötig
+    if (!currentSources.includes(selected.webm)) {
+      video.innerHTML = `
+        <source src="${selected.webm}" type="video/webm">
+        <source src="${selected.mp4}" type="video/mp4">
+      `;
       video.load();
-      videoInitialized = true;
-    } else if (source.getAttribute('src') !== src) {
-      source.setAttribute('src', src);
-      video.load(); // Nur neu laden, wenn sich die Quelle ändert
     }
   }
 
-  window.addEventListener("DOMContentLoaded", chooseVideoSrc);
-  window.addEventListener("resize", chooseVideoSrc);
+  window.addEventListener('DOMContentLoaded', loadResponsiveVideo);
+  window.addEventListener('resize', () => {
+    // Debounce für Resize
+    clearTimeout(window.__resizeTimeout);
+    window.__resizeTimeout = setTimeout(loadResponsiveVideo, 300);
+  });
 </script>
+
 
 
 
