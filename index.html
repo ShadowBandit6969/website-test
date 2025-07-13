@@ -437,297 +437,87 @@
     </nav>
   </header>
 
-<style>
-  .hero {
-    position: relative;
-    min-height: 100dvh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    padding: 0 5vw;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px);
-    z-index: 1;
-    overflow: hidden;
-  }
 
-  .hero::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: black;
-    z-index: -2;
-  }
 
-  .video-fallback {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 110%;
-    object-fit: cover;
-    z-index: -1;
-    transition: opacity 0.5s ease;
-  }
-
-  .video-fallback.hidden {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  video {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 110%;
-    width: auto;
-    height: auto;
-    object-fit: cover;
-    object-position: center center;
-    z-index: -1;
-  }
-
-  video.desktop-video,
-  video.tablet-video,
-  video.mobile-video {
-    display: none;
-  }
-
-  video.desktop-video {
-    display: block;
-  }
-
-  .hero-content {
-    flex: 1;
-    max-width: 90%;
-    padding: 6rem 2rem 3rem;
-    animation: fadeInLeft 1s ease-out forwards;
-  }
-
-  .hero-content h1 {
-    font-size: 4rem;
-    line-height: 1.1;
-    font-weight: 800;
-    color: #fff;
-    margin-bottom: 1rem;
-  }
-
-  .hero-content p {
-    font-size: 1.6rem;
-    color: #f2f2f2;
-    font-weight: 500;
-    margin-bottom: 2rem;
-    max-width: 520px;
-  }
-
-  .cta-button {
-    padding: 14px 28px;
-    background-color: var(--primary);
-    color: #fff;
-    border: none;
-    border-radius: 30px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  }
-
-  .cta-button:hover {
-    background-color: var(--hover);
-    transform: scale(1.05);
-  }
-
-  @keyframes fadeInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-30px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @media (min-width: 2560px) {
-    .hero-content h1 {
-      font-size: 5.2rem;
-    }
-
-    .hero-content p {
-      font-size: 2rem;
-    }
-
-    .cta-button {
-      font-size: 1.5rem;
-      padding: 20px 40px;
-    }
-  }
-
-  @media (max-width: 1140px) and (min-width: 768px) {
-    video.desktop-video {
-      display: none;
-    }
-
-    video.tablet-video {
-      display: block;
-    }
-
-    .hero {
-      flex-direction: column;
-      padding-top: 6vh;
-      align-items: flex-start;
-    }
-
-    .hero-content {
-      padding: 8rem 1.5rem 2rem;
-      max-width: 100%;
-    }
-
-    .hero-content h1 {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-content p {
-      font-size: 1.2rem;
-    }
-
-    .cta-button {
-      font-size: 1rem;
-      padding: 12px 24px;
-    }
-  }
-
-  @media (max-width: 767px) {
-    video.desktop-video,
-    video.tablet-video {
-      display: none;
-    }
-
-    video.mobile-video {
-      display: block;
-    }
-
-    .hero {
-      flex-direction: column;
-      text-align: center;
-      padding: 5vh 5vw;
-    }
-
-    .hero-content {
-      padding: 4rem 1rem 2rem;
-      max-width: 100%;
-    }
-
-    .hero-content h1 {
-      font-size: 2.2rem;
-    }
-
-    .hero-content p {
-      font-size: 1rem;
-    }
-
-    .cta-button {
-      font-size: 0.85rem;
-      padding: 10px 18px;
-      width: 100%;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation: none !important;
-      transition: none !important;
-    }
-  }
-
-  @media (min-width: 1440px) {
-    .hero {
-      justify-content: center;
-    }
-
-    .hero-content {
-      position: relative;
-      display: inline-block;
-      margin: 0 auto;
-      text-align: center;
-      padding: 6rem 2rem 3rem;
-      max-width: 50%;
-    }
-
-    .hero-content::before {
-      content: "";
-      position: absolute;
-      inset: -1rem;
-      background: rgba(54, 54, 54, 0.053);
-      backdrop-filter: blur(25px) hue-rotate(15deg) brightness(1.1) saturate(1.2);
-      border-radius: 1rem;
-      z-index: -1;
-    }
-
-    .hero-content p {
-      display: block;
-      margin: 0 auto 2rem;
-      text-align: center;
-      max-width: 620px;
-    }
-  }
-</style>
-
-<div class="hero" role="banner" aria-label="Startbereich mit Slogan und Call-to-Action">
-  <!-- Hintergrundbild (Frame 1) -->
-  <img class="video-fallback" src="./IndexM/frame1.jpg" alt="Hintergrundbild" aria-hidden="true" loading="eager" />
-
-  <!-- Desktop Video -->
-  <video class="desktop-video" autoplay muted loop playsinline poster="./IndexM/frame1pc.png">
-    <source src="./IndexM/PC.mp4" type="video/mp4">
-  </video>
-
-  <!-- Tablet Video -->
-  <video class="tablet-video" autoplay muted loop playsinline poster="./IndexM/frame1tablet.png">
-    <source src="./IndexM/Tablet.mp4" type="video/mp4">
-  </video>
-
-  <!-- Mobile Video -->
-  <video class="mobile-video" autoplay muted loop playsinline poster="./IndexM/frame1handy.png">
-    <source src="./IndexM/handy.mp4" type="video/webm">
-  </video>
-
-  <!-- Textinhalt -->
-  <div class="hero-content">
-    <h1><span>Design, das berührt.</span></h1>
-    <p>Wir vereinen Kreativität, Emotion und Innovation zu digitalen Welten, mit denen sich dein Publikum verbinden kann.</p>
-    <button class="cta-button" aria-label="Jetzt kontaktieren">JETZT KONTAKTIEREN</button>
-  </div>
+<div id="lottieHeroWrapper">
+  <div id="lottieHeroContainer"></div>
 </div>
 
+<style>
+#lottieHeroWrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 12px; /* minimaler Abstand unten */
+  margin: 0;
+}
+
+#lottieHeroContainer {
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Direktes Styling für eingebettetes SVG */
+#lottieHeroContainer > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 2%;
+}
+
+/* Seitliches Padding auf typischen Laptop-Breiten */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  #lottieHeroContainer {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
 <script>
-  window.addEventListener('load', () => {
-    const videos = document.querySelectorAll('video');
-    const fallback = document.querySelector('.video-fallback');
+  const lottieContainer = document.getElementById('lottieHeroContainer');
 
-    let anyPlaying = false;
+  const getLottiePath = () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
-    videos.forEach(video => {
-      video.addEventListener('playing', () => {
-        if (!anyPlaying) {
-          anyPlaying = true;
-          fallback.classList.add('hidden');
-        }
-      });
-    });
+    // Wenn 768px und Portrait (Hochformat)
+    if (width === 768 && height > width) {
+      return './Animationen/herosectionmobile.json';
+    }
+
+    // Generell bei kleineren Geräten oder Portrait
+    if (width < 768 || height > width) {
+      return './Animationen/herosectionmobile.json';
+    }
+
+    // Sonst Desktop-Version
+    return './Animationen/herosection.json';
+  };
+
+  const animation = lottie.loadAnimation({
+    container: lottieContainer,
+    renderer: 'svg',
+    loop: false,
+    autoplay: true,
+    path: getLottiePath()
+  });
+
+  animation.addEventListener('complete', () => {
+    const totalFrames = animation.getDuration(true);
+    animation.goToAndStop(totalFrames - 1, true);
+  });
+
+  window.addEventListener('resize', () => {
+    location.reload(); // einfacher Reload, um das passende Lottie erneut zu laden
   });
 </script>
+
+
 
 
   <section id="branchen" class="persona-clean container">
@@ -988,6 +778,8 @@
       }
     }
   </style>
+
+
 
 
 
@@ -1569,7 +1361,6 @@
       }
     }
   </style>
-
   <section class="container apple-services" id="tools">
     <h2>Unsere Leistungen</h2>
 
@@ -1602,9 +1393,9 @@
 
           <div class="image-overlay">
             <div class="planet-wrapper">
-              <img class="planet-image" src="./indexFotoSlideShow/planet.png" alt="Planet" />
+              <img class="planet-image" src="./indexFotoSlideShow/planet.webp" alt="Planet" />
             </div>
-            <img src="./indexFotoSlideShow/2.png" alt="3D Icon" />
+            <img src="./indexFotoSlideShow/2.webp" alt="3D Icon" />
           </div>
 
 
@@ -1624,7 +1415,7 @@
             <li>Infografiken & visuelle Systeme</li>
           </ul>
           <div class="image-overlay">
-            <img src="./indexFotoSlideShow/astro sitzend.png" alt="3D Icon" />
+            <img src="./indexFotoSlideShow/astro sitzend.webp" alt="3D Icon" />
           </div>
 
           <a href="./Grafikdesign.html" class="cta">Mehr erfahren</a>
@@ -1647,6 +1438,11 @@
       </div>
     </div>
   </section>
+
+
+
+
+  
 
 
   <section class="cta-modern">
@@ -1868,6 +1664,9 @@
 
 
 
+
+
+
   <style>
     .white-transition-section {
       position: relative;
@@ -1888,12 +1687,12 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      background: #f4f4f4;
+        background: linear-gradient(0deg, #ffffff, #f4f4f4);
       opacity: 1;
       pointer-events: all;
-      z-index: 5;
       width: 100vw;
       transition: none;
+             z-index: 15;
     }
 
     .white-content h2 {
@@ -1906,6 +1705,7 @@
       pointer-events: all;
       width: 100vw;
       transform: translateX(0);
+                 
     }
 
     .white-content {
@@ -1934,6 +1734,7 @@
       flex-wrap: wrap;
       gap: 2rem;
       justify-content: center;
+                        z-index: 15;
     }
 
     .epic-step {
@@ -1955,35 +1756,41 @@
       background: linear-gradient(270deg, #04006c, #6f00ff, #050088);
       background-size: 600% 600%;
       color: #fff;
+                        z-index: 15;
     }
 
     .project-white-steps .epic-step:nth-child(2) {
       background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
       background-size: 300% 300%;
       color: #fff;
+                        z-index: 15;
     }
 
     .project-white-steps .epic-step:nth-child(3) {
       background: linear-gradient(135deg, #ff5100, hwb(340 0% 0%), #ff5100);
       background-size: 400% 400%;
       color: #fff;
+            z-index: 15;
     }
 
     .project-white-steps .epic-step:nth-child(4) {
       background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
       background-size: 300% 300%;
       color: #fff;
+            z-index: 15;
     }
 
     .project-white-steps .epic-step h3,
     .project-white-steps .epic-step p,
     .project-white-steps .epic-step .step-number {
       color: #fff;
+            z-index: 15;
     }
 
     .project-white-steps .epic-step::before {
       background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), transparent 70%);
       opacity: 0.1;
+            z-index: 15;
     }
 
 
@@ -2017,7 +1824,9 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
     .project-white-steps .epic-step:hover p,
     .project-white-steps .epic-step:hover .step-number {
       color: #fff;
+            z-index: 15;
     }
+    
 
     .epic-step {
       transition: all 0.4s ease, background 0.6s ease;
@@ -2250,10 +2059,17 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
 
 .image-bottom {
   position: absolute;
-  transform: translateY(188px) scale(4.2) translateX(-70px); /* Verschiebt es sichtbar nach unten */
-  max-width: 220px;
+  transform: translateY(568px) scale(8.2) translateX(-10px) rotate(120deg);
+  max-width: 620px;
   pointer-events: none;
   z-index: 1;
+  transition: transform 1s ease-in-out;
+}
+
+.epic-step:hover .image-bottom {
+  transform: translateY(568px) scale(8.2) translateX(-10px) rotate(220deg);
+  filter: hue-rotate(290deg);
+  
 }
 
 .static-object2 {
@@ -2261,8 +2077,9 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
   height: auto;
 }
 
-  </style>
 
+
+  </style>
   <section class="white-transition-section" id="prozess">
     <div class="white-world visible" id="whiteWorld">
 
@@ -2281,11 +2098,9 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
                 Projekt nicht nur Ihre Erwartungen erfüllt, sondern sie übertrifft.
               </p>
             </div>
-              <div class="step-image image-bottom-top">
-  <img class="fly-object2" src="./indexFotoSlideShow/rakete.png" alt="Dekoelement">
-</div>
+
 <div class="step-image image-bottom">
-  <img class="static-object2" src="./indexFotoSlideShow/Leiter.png" alt="Dekoration rechts unten">
+  <img class="static-object2" src="./indexFotoSlideShow/logo.webp" alt="Dekoration rechts unten">
 </div>
           </div>
 
@@ -2323,10 +2138,10 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
               </p>
             </div>
               <div class="step-image image-bottom-left">
-  <img class="fly-object" src="./indexFotoSlideShow/rakete.png" alt="Dekoelement">
+  <img class="fly-object" src="./indexFotoSlideShow/rakete.webp" alt="Dekoelement">
 </div>
 <div class="step-image image-bottom-right">
-  <img class="static-object" src="./indexFotoSlideShow/tower.png" alt="Dekoration rechts unten">
+  <img class="static-object" src="./indexFotoSlideShow/tower.webp" alt="Dekoration rechts unten">
 </div>
 
           </div>
@@ -2336,9 +2151,6 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
     </div>
     </div>
   </section>
-
-
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script>
@@ -2358,7 +2170,16 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
         delay: i * 0.2
       });
     });
-  </script>
+
+  // Langsame, endlose Drehung für static-object2
+  gsap.to(".static-object2", {
+    rotation: 360,
+    duration: 30, // Dauer für eine komplette Drehung (je höher, desto langsamer)
+    repeat: -1,
+    ease: "linear",
+    transformOrigin: "50% 50%" // rotiert um die Mitte
+  });
+</script>
 
 
 
@@ -2366,165 +2187,460 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
 
 
 
+<section class="values-section container" id="werte" aria-labelledby="heading-values">
+  <video class="animated-bg" autoplay muted loop playsinline>
+    <source src="./IndexM/hi.mp4" type="video/mp4" />
+    Ihr Browser unterstützt kein HTML5-Video.
+  </video>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<style>
-  .benefit-section {
-   background: #f4f4f4;
-    padding: 8rem 5vw;
-    max-width: 1440px;
-    margin: 0 auto;
-    font-family: 'Inter', sans-serif;
-    text-align: center;
-  }
-
-  .benefit-section h2 {
-    font-size: clamp(2.4rem, 5vw, 3.2rem);
-    font-weight: 900;
-    color: #111;
-    margin-bottom: 4rem;
-    letter-spacing: -0.5px;
-  }
-
-  .benefit-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .benefit-card {
-    background: #f9f9f9;
-    border: 1px solid #eee;
-    border-radius: 18px;
-    padding: 2.5rem 2rem;
-    text-align: left;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .benefit-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-  }
-
-  .benefit-logo {
-    width: 48px;
-    height: 48px;
-    background: linear-gradient(135deg, #ff6600, #ff944d);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.2rem;
-  }
-
-  .benefit-logo svg {
-    stroke: #fff;
-    width: 28px;
-    height: 28px;
-  }
-
-  .benefit-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #111;
-    margin-bottom: 0.6rem;
-  }
-
-  .benefit-desc {
-    font-size: 1rem;
-    color: #444;
-    line-height: 1.6;
-  }
-
-  @media (max-width: 768px) {
-    .benefit-card {
-      text-align: center;
-    }
-  }
-</style>
-
-<section class="benefit-section">
-  <h2>Deine Vorteile</h2>
-  <div class="benefit-grid">
-
-    <div class="benefit-card">
-      <div class="benefit-logo">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M12 20l9-5-9-5-9 5 9 5z" />
-          <path d="M12 12V4l9 5" />
-          <path d="M12 12L3 9" />
-        </svg>
-      </div>
-      <div class="benefit-title">Alles aus einem Guss</div>
-      <p class="benefit-desc">Von der kreativen Idee über die Gestaltung bis zur visuellen Umsetzung – bei uns greifen alle Leistungen nahtlos ineinander.</p>
+  <div class="values-heading-box">
+    <h2 class="animated-values-title" id="heading-values">
+      <span class="animated-values-line"></span><span class="blinking-bar-values"></span>
+    </h2>
+    <div class="dynamic-values-typing">
+      <span class="dynamic-values-line"></span>
     </div>
+  </div>
 
-    <div class="benefit-card">
-      <div class="benefit-logo">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-          <path d="M17 2l4 4-4 4" />
-          <path d="M7 22l-4-4 4-4" />
-          <path d="M14 2h-4v20h4" />
-        </svg>
-      </div>
-      <div class="benefit-title">Direkter Draht</div>
-      <p class="benefit-desc">Kurze Abstimmungswege und klare Ansprechpartner ermöglichen schnelle Reaktionen und persönliche Betreuung.</p>
-    </div>
+  <div class="values-grid">
+    <!-- VALUE 1 -->
+    <article class="value-card" aria-labelledby="steuerung-title">
+      <div class="icon-wrap"><i data-feather="activity"></i></div>
+      <h3 id="steuerung-title">Projektsteuerung 2.0</h3>
+      <p>Wir orchestrieren Ihre Transformation mit maximaler Transparenz und Echtzeit-Feedback.</p>
+    </article>
 
-    <div class="benefit-card">
-      <div class="benefit-logo">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="10" />
-          <path d="M4.93 4.93l14.14 14.14" />
-        </svg>
-      </div>
-      <div class="benefit-title">Kohärente Designsprache</div>
-      <p class="benefit-desc">Wir gestalten visuelle Systeme, die sich über alle Medien hinweg durchziehen – für einen durchdachten Markenauftritt mit Wiedererkennung.</p>
-    </div>
+    <!-- VALUE 2 -->
+    <article class="value-card" aria-labelledby="empathie-title">
+      <div class="icon-wrap"><i data-feather="heart"></i></div>
+      <h3 id="empathie-title">Empathie trifft Analyse</h3>
+      <p>Tiefes Zielgruppenverständnis kombiniert mit messerscharfer Strategie.</p>
+    </article>
 
+    <!-- VALUE 3 -->
+    <article class="value-card" aria-labelledby="design-title">
+      <div class="icon-wrap"><i data-feather="eye"></i></div>
+      <h3 id="design-title">Next-Level Design</h3>
+      <p>Unvergesslich visuell. Design, das Performance und Emotion vereint.</p>
+    </article>
+
+    <!-- VALUE 4 -->
+    <article class="value-card" aria-labelledby="details-title">
+      <div class="icon-wrap"><i data-feather="grid"></i></div>
+      <h3 id="details-title">Detailverliebtheit</h3>
+      <p>Pixel-Perfektion für ein Erlebnis, das Eindruck hinterlässt.</p>
+    </article>
+
+    <!-- VALUE 5 -->
+    <article class="value-card" aria-labelledby="tech-title">
+      <div class="icon-wrap"><i data-feather="cpu"></i></div>
+      <h3 id="tech-title">Tech-DNA</h3>
+      <p>React, API-First, Headless: Wir atmen moderne Entwicklung.</p>
+    </article>
+
+    <!-- VALUE 6 -->
+    <article class="value-card" aria-labelledby="automation-title">
+      <div class="icon-wrap"><i data-feather="repeat"></i></div>
+      <h3 id="automation-title">Automatisierte Abläufe</h3>
+      <p>Optimierte Prozesse für Geschwindigkeit und Skalierbarkeit.</p>
+    </article>
+  </div>
+
+  <div class="values-cta-wrap">
+    <a href="#about" class="cta-button">Mehr über uns →</a>
   </div>
 </section>
+<style>
+.values-section {
+  position: relative;
+  background: transparent;
+  text-align: center;
+  color: black;
+  padding: 5rem 2rem;
+  z-index: 5;
+  margin-top: 13rem;
+}
+
+.animated-bg {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 1.08;
+}
+
+.values-title {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 0.8rem;
+  z-index: 5;
+}
+
+.values-subline {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 3.5rem;
+  z-index: 5;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .values-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.value-card {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: left;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+  z-index: 5;
+}
+
+.value-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.value-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  z-index: 5;
+}
+
+.value-card p {
+  font-size: 1rem;
+  color: #444;
+  z-index: 5;
+}
+
+.icon-wrap {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.icon-wrap i {
+  stroke: #fff;
+  width: 24px;
+  height: 24px;
+}
+
+.values-cta-wrap {
+  margin-top: 3rem;
+}
+
+.cta-button {
+  background: linear-gradient(45deg, #ff6600, #ff0051);
+  color: #fff;
+  padding: 0.8rem 1.6rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+  filter: brightness(1.1);
+}
+
+.values-heading-box {
+  position: relative;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  max-width: 1000px;
+  max-height: 160px;
+  margin: 0 auto 3rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+}
+.animated-values-title {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 0.8rem;
+  display: inline-block;
+  color: #111;
+  position: relative;
+  z-index: 5;
+}
+
+.blinking-bar-values {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background: linear-gradient(180deg, #ff5100, #c03c00);
+  box-shadow: 0 0 4px #c03c00;
+  vertical-align: bottom;
+  animation: blink-flash 1s steps(1) infinite;
+  margin-left: 3px;
+}
+
+.dynamic-values-typing {
+  margin-top: 1.2rem;
+  position: relative;
+  z-index: 5;
+}
+
+.dynamic-values-line {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #555;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+@keyframes blink-flash {
+  0%, 50% { opacity: 1; }
+  50.1%, 100% { opacity: 0; }
+}
+
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 1199px) {
+  .values-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .animated-bg {
+    width: 70vw;
+    top: 50%;
+  }
+
+  .values-heading-box {
+    padding: 1.5rem 1rem;
+    max-height: none;
+    margin-bottom: 2rem;
+  }
+
+  .values-title {
+    font-size: 1.8rem;
+  }
+
+  .values-subline {
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .value-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .value-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .value-card p {
+    font-size: 0.95rem;
+  }
+
+  .cta-button {
+    padding: 0.7rem 1.3rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .values-section {
+    padding: 2.5rem 1rem;
+  }
+
+  .animated-bg {
+    width: 85vw;
+    top: 55%;
+  }
+
+  .values-heading-box {
+    padding: 1.2rem 0.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .values-title {
+    font-size: 1.5rem;
+  }
+
+  .values-subline {
+    font-size: 0.95rem;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .value-card {
+    padding: 1.2rem 1rem;
+  }
+
+  .value-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .value-card p {
+    font-size: 0.9rem;
+  }
+
+  .icon-wrap {
+    width: 42px;
+    height: 42px;
+  }
+
+  .icon-wrap i {
+    width: 20px;
+    height: 20px;
+  }
+
+  .cta-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  .animated-bg {
+    width: 100vw;
+    top: 50%;
+  }
+}
+
+@media (max-width: 767px) {
+  .animated-bg {
+    width: 200vw;
+    top: 60%;
+    opacity: 0.9;
+  }
+}
+
+@media (max-width: 375px) {
+  .animated-bg {
+    width: 300vw;
+    top: 60%;
+    opacity: 0.9;
+  }
+}
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const typeSequence = async (el, steps) => {
+      let step = 0, char = 0;
+      const pause = ms => new Promise(res => setTimeout(res, ms));
+      while (true) {
+        const item = steps[step] || (step = 0, steps[step]);
+        if (item.text !== undefined) {
+          if (char < item.text.length) {
+            el.textContent += item.text[char++];
+            await pause(item.delay);
+            continue;
+          }
+          char = 0; step++; await pause(600);
+        } else if (item.delete !== undefined) {
+          let cnt = item.delete === 'all' ? el.textContent.length : item.delete;
+          while (cnt--) {
+            el.textContent = el.textContent.slice(0, -1);
+            await pause(item.delay);
+          }
+          step++;
+        } else if (item.pause) {
+          await pause(item.pause);
+          step++;
+        }
+      }
+    };
+
+    const valuesTitleAnim = [
+      { text: "Unser Ansatz & Unsere Motivation", delay: 55 },
+      { pause: 1500 }, { delete: 'all', delay: 30 },
+      { text: "Werte, die digitale Lösungen formen", delay: 50 },
+      { pause: 1500 }, { delete: 'all', delay: 30 },
+      { text: "Warum wir tun, was wir tun.", delay: 50 },
+      { pause: 1500 }, { delete: 'all', delay: 30 }
+    ];
+
+    const valuesSublineAnim = [
+      { text: "Maßgeschneiderte digitale Lösungen für heute.", delay: 50 },
+      { pause: 1000 }, { delete: 'all', delay: 30 },
+      { text: "Ihr Qualitätsversprechen: Innovation trifft Fokus.", delay: 50 },
+      { pause: 1000 }, { delete: 'all', delay: 30 },
+      { text: "Technisch. Emotional. Zielgerichtet.", delay: 50 },
+      { pause: 1000 }, { delete: 'all', delay: 30 }
+    ];
+
+    const elValuesTitle = document.querySelector('.animated-values-line');
+    const elValuesSubline = document.querySelector('.dynamic-values-line');
+
+    if (elValuesTitle && elValuesSubline) {
+      typeSequence(elValuesTitle, valuesTitleAnim);
+      typeSequence(elValuesSubline, valuesSublineAnim);
+    }
+  });
+</script>
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--
   <section class="interactive-portfolio" id="portfolio">
     <h2 class="portfolio-headline">Unser Portfolio</h2>
 
-    <!-- Tab Navigation -->
+
     <div class="tab-buttons">
       <button class="tab active" data-tab="web"><i data-feather="monitor"></i> WebDesign</button>
       <button class="tab" data-tab="3d"><i data-feather="box"></i> 3D Design</button>
@@ -2533,7 +2649,6 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
     </div>
 
     <div class="tab-contents">
-      <!-- WebDesign -->
       <div class="tab-content active" id="tab-web">
         <div class="gallery">
 
@@ -2588,7 +2703,6 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
         </div>
       </div>
 
-      <!-- 3D Design -->
       <div class="tab-content" id="tab-3d">
         <div class="gallery">
 
@@ -2719,7 +2833,7 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
         </div>
       </div>
 
-      <!-- Grafikdesign -->
+
       <div class="tab-content" id="tab-graphic">
         <div class="gallery">
 
@@ -2776,7 +2890,6 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
 
 
 
-      <!-- Social Media -->
       <div class="tab-content" id="tab-social">
         <div class="gallery">
 
@@ -2832,15 +2945,15 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
       </div>
 
 
-      <!-- Weitere Tabs (3D, Grafik, Video, Social Media) → GLEICHE STRUKTUR -->
-      <!-- Du kannst bei Bedarf pro Karte eigene <ul> ergänzen -->
+   
     </div>
   </section>
-
+-->  
   <style>
     .interactive-portfolio {
       padding: 6rem 2rem;
-      background: linear-gradient(180deg, #f4f4f4, #ffffff);
+      margin-top: 20rem;
+      background: linear-gradient(180deg, #ffffff, #ffffff);
       font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
       color: #1a1a1a;
       text-align: center;
@@ -3335,7 +3448,451 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
   </style>
 
 
-  <testimonial-slider></testimonial-slider>
+
+
+
+
+
+<section class="angled-image-section">
+  <!-- Overlay für diagonalen Hintergrund -->
+  <div class="angled-bg-overlay" aria-hidden="true"></div>
+
+  <figure class="angled-image-wrapper">
+    <img
+      src="./WebdesignPic/webgerade.webp"
+      alt=""
+      width="1920"
+      height="1080"
+      loading="lazy"
+      decoding="async"
+    />
+  </figure>
+</section>
+<style>
+  html, body {
+    overflow-x: hidden;
+  }
+
+  :root {
+    --angled-rotation: -4deg;
+    --angled-width: 150vw;
+    --angled-offset: -25vw;
+  }
+
+  .angled-image-section {
+    position: relative;
+    width: 100vw;
+    overflow: visible;
+    margin-top: 3rem;
+    margin-bottom: -5rem;
+    pointer-events: none;
+    background: transparent;
+    z-index: 1;
+  }
+
+  /* Gradient-Hintergrund hinter dem Bild */
+  .angled-bg-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: transparent;
+  }
+
+  .angled-image-wrapper {
+    width: var(--angled-width);
+    margin-left: var(--angled-offset);
+    transform: rotate(var(--angled-rotation));
+    position: relative;
+    z-index: 1;
+  }
+
+  .angled-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    z-index: 2;
+    position: relative;
+  }
+</style>
+
+
+
+<div id="lottieAltWrapper">
+  <div id="lottieAltContainer"></div>
+</div>
+<style>
+  #lottieAltWrapper {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+  margin-top: -10rem;
+  padding-bottom: 12px; /* Optional */
+}
+
+#lottieAltContainer {
+  width: 100%;
+  margin: 0 auto;
+  pointer-events: none;
+  display: block;
+  position: relative;
+}
+
+/* Sehr wichtig: Das SVG darf nicht aus seinem Container gedrückt werden */
+#lottieAltContainer > svg {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: top center;
+}
+
+
+/* Padding auf typischen Laptop-Breiten */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  #lottieAltContainer {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
+@media (max-width: 540px) {
+  #lottieAltWrapper {
+    width: 100vw;
+    margin-top: -6rem;
+    padding: 0;
+  }
+
+  #lottieAltContainer {
+    width: 100vw;
+    max-width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  #lottieAltContainer > svg {
+    width: 150% !important; /* 👈 Skaliert die Animation größer */
+    height: auto !important;
+    max-width: none;
+    display: block;
+    transform: scale(1.5); /* 👈 Alternativ: Zoomt die Animation */
+    transform-origin: center top; /* 👈 Wichtig für zentriertes Vergrößern */
+  }
+}
+
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+<script>
+  const altLottieElement = document.getElementById('lottieAltContainer');
+
+  let altLottieAnimation = lottie.loadAnimation({
+    container: altLottieElement,
+    renderer: 'svg',
+    loop: false,
+    autoplay: true,
+    path: './Animationen/Webdesignshuffle.json'
+  });
+
+  altLottieAnimation.addEventListener('complete', () => {
+    setTimeout(() => {
+      altLottieAnimation.goToAndPlay(0, true);
+    }, 0);
+  });
+
+  window.addEventListener('resize', () => {
+    location.reload();
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="kontakt-testimonial-section" id="kontakt">
+  <div class="kontakt-testimonial-wrapper">
+    <!-- Kontaktbereich -->
+    <div class="kontakt-area">
+      <h2 class="section-title">Lass uns loslegen!</h2>
+      <p class="kontakt-subline">
+        Eine starke Idee verdient ein starkes digitales Erlebnis. <br />
+        Erzähle uns von Deinem Projekt – wir bringen es gemeinsam auf das nächste Level.
+      </p>
+
+      <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm">
+        <input type="text" name="name" placeholder="Name" required />
+        <input type="email" name="email" placeholder="E-Mail-Adresse" required />
+        <input type="text" name="subject" placeholder="Betreff" />
+        <textarea name="message" placeholder="Nachricht" rows="5" required></textarea>
+        <button type="submit" class="kontakt-btn">Jetzt Anfrage senden!</button>
+      </form>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="testimonial-area">
+      <testimonial-slider></testimonial-slider>
+    </div>
+  </div>
+</section>
+<style>
+  * {
+  box-sizing: border-box;
+}
+
+  .kontakt-testimonial-section {
+  background: #ffffff;
+  padding: 6rem 2rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.kontakt-testimonial-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  gap: 4rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.kontakt-area {
+  flex: 1 1 480px;
+  max-width: 640px;
+  min-width: 300px;
+}
+
+.testimonial-area {
+  flex: 1 1 380px;
+  max-width: 600px;
+  min-width: 280px;
+}
+
+/* Titel und Text */
+.section-title {
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: #000000;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.kontakt-subline {
+  font-size: 1.2rem;
+  color: #666;
+  line-height: 1.6;
+  max-width: 90%;
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+
+.kontakt-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Eingabefelder */
+.kontakt-form input,
+.kontakt-form textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem 1.2rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.kontakt-form input:focus,
+.kontakt-form textarea:focus {
+  border-color: #ff6600;
+  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
+  outline: none;
+  background: #fff;
+}
+
+/* Button */
+.kontakt-btn {
+  background: linear-gradient(135deg, #ff6600, #ff9950, #ff6a00);
+  background-size: 300% 300%;
+  animation: gradientShift 18s ease infinite;
+  color: #252525;
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+  font-weight: 700;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  max-width: 380px;
+  width: 100%;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.kontakt-btn:hover,
+.kontakt-btn:focus-visible {
+  transform: scale(1.04);
+  box-shadow: 0 6px 20px #ffb07366;
+  outline: none;
+}
+
+.kontakt-btn:focus-visible {
+  outline: 2px dashed #ff6600;
+  outline-offset: 4px;
+}
+
+.kontakt-btn.sent {
+  background: linear-gradient(135deg, #00c851, #007e33);
+  animation: none;
+  box-shadow: 0 0 14px rgba(0, 200, 81, 0.6);
+  transform: scale(1.02);
+  color: #fff;
+}
+
+/* Tablet-Ansicht */
+@media (max-width: 1024px) {
+  .kontakt-testimonial-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .section-title,
+  .kontakt-subline {
+    text-align: center;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .kontakt-area,
+  .testimonial-area {
+    max-width: 100%;
+  }
+
+  .kontakt-btn {
+    margin: 0 auto;
+  }
+}
+@media (max-width: 540px) {
+  html, body {
+    overflow-x: hidden;
+  }
+
+  .kontakt-testimonial-wrapper {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  .kontakt-area,
+  .testimonial-area {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    text-align: center;
+    margin: 0 auto 1rem;
+    max-width: 100%;
+    word-wrap: break-word;
+  }
+
+  .kontakt-subline {
+    font-size: 1rem;
+    text-align: center;
+    margin: 0 auto 2rem;
+    max-width: 100%;
+    line-height: 1.5;
+    word-wrap: break-word;
+  }
+
+  .kontakt-form {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .kontakt-form input,
+  .kontakt-form textarea {
+    font-size: 0.95rem;
+    padding: 0.9rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .kontakt-btn {
+    font-size: 1rem;
+    padding: 0.8rem 1.6rem;
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+
+</style>
+<script>
+  const form = document.getElementById("kontaktForm");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const button = form.querySelector(".kontakt-btn");
+
+    try {
+      const response = await fetch("https://formspree.io/f/xqapdvaq", {
+        method: "POST",
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        button.innerText = "✅ Anfrage gesendet!";
+        button.classList.add("sent");
+        form.reset();
+      } else {
+        button.innerText = "⚠️ Fehler beim Senden";
+      }
+    } catch (error) {
+      button.innerText = "❌ Netzwerkfehler";
+    }
+
+    setTimeout(() => {
+      button.innerText = "🚀 Jetzt Anfrage senden!";
+      button.classList.remove("sent");
+    }, 4000);
+  });
+</script>
   <script>
     class TestimonialSlider extends HTMLElement {
       constructor() {
@@ -3636,169 +4193,14 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
     customElements.define("testimonial-slider", TestimonialSlider);
   </script>
 
-  <section class="kontakt-clean" id="kontakt">
-    <div class="kontakt-wrapper">
-      <h2 class="section-title">Lass uns loslegen!</h2>
-      <p class="kontakt-subline">
-        Eine starke Idee verdient ein starkes digitales Erlebnis. <br />
-        Erzähle uns von Deinem Projekt – wir bringen es gemeinsam auf das nächste Level.
-      </p>
-
-      <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm">
-        <input type="text" name="name" placeholder="Name" required />
-        <input type="email" name="email" placeholder="E-Mail-Adresse" required />
-        <input type="text" name="subject" placeholder="Betreff" />
-        <textarea name="message" placeholder="Nachricht" rows="5" required></textarea>
-        <button type="submit" class="kontakt-btn">Jetzt Anfrage senden!</button>
-      </form>
-    </div>
-  </section>
-
-  <style>
-    .kontakt-clean {
-      background: #ffffff;
-      padding: 6rem 2rem;
-      text-align: center;
-      font-family: 'Inter', sans-serif;
-      margin-top: 5rem;
-      /* <-- das ist neu */
-    }
-
-    .kontakt-title {
-      font-size: 2.6rem;
-      font-weight: 900;
-      color: #000000;
-      margin-bottom: 1rem;
-    }
-
-    .kontakt-subline {
-      font-size: 1.2rem;
-      color: #666;
-      line-height: 1.6;
-      max-width: 700px;
-      margin: 0 auto 3rem;
-    }
-
-    .kontakt-wrapper {
-      max-width: 80vw;
-      margin: 0 auto;
-    }
-
-    .kontakt-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-
-    .kontakt-form input,
-    .kontakt-form textarea {
-      padding: 1rem;
-      font-size: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.8);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-      transition: all 0.3s ease;
-    }
-
-    .kontakt-form input:focus,
-    .kontakt-form textarea:focus {
-      border-color: #ff6600;
-      box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
-      outline: none;
-      background: #fff;
-    }
 
 
-    .kontakt-btn {
-      background: linear-gradient(135deg, var(--primary), #ff9950, #ff6a00);
-      background-size: 300% 300%;
-      animation: gradientShift 18s ease infinite;
-      color: #252525;
-      font-size: clamp(0.95rem, 2.5vw, 1.05rem);
-      font-weight: 700;
-      border: none;
-      padding: clamp(0.8rem, 2.5vw, 1rem) clamp(1.8rem, 4vw, 2.2rem);
-      border-radius: 12px;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-      display: inline-block;
-      text-align: center;
-      text-decoration: none;
-    }
 
-    @keyframes gradientShift {
-      0% {
-        background-position: 0% 50%;
-      }
 
-      50% {
-        background-position: 100% 50%;
-      }
 
-      100% {
-        background-position: 0% 50%;
-      }
-    }
 
-    .kontakt-btn:hover,
-    .kontakt-btn:focus-visible {
-      transform: scale(1.04);
-      box-shadow: 0 6px 20px #ffb07366;
-      outline: none;
-    }
 
-    .kontakt-btn:focus-visible {
-      outline: 2px dashed #ff6600;
-      outline-offset: 4px;
-    }
 
-    .kontakt-btn.sent {
-      background: linear-gradient(135deg, #00c851, #007e33);
-      background-size: 200%;
-      animation: none;
-      box-shadow: 0 0 14px rgba(0, 200, 81, 0.6);
-      transform: scale(1.02);
-      color: #fff;
-    }
-  </style>
-  <script>
-    const form = document.getElementById("kontaktForm");
-
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault(); // Nur um fetch zu nutzen statt normalem submit
-
-      const formData = new FormData(form);
-      const button = form.querySelector(".kontakt-btn");
-
-      try {
-        const response = await fetch("https://formspree.io/f/xqapdvaq", {
-          method: "POST",
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-
-        if (response.ok) {
-          button.innerText = "✅ Anfrage gesendet!";
-          button.classList.add("sent");
-          form.reset();
-        } else {
-          button.innerText = "⚠️ Fehler beim Senden";
-        }
-
-      } catch (error) {
-        button.innerText = "❌ Netzwerkfehler";
-      }
-
-      setTimeout(() => {
-        button.innerText = "🚀 Jetzt Anfrage senden!";
-        button.classList.remove("sent");
-      }, 4000);
-    });
-  </script>
 
 
 
@@ -3859,7 +4261,6 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
     </p>
     </div>
   </footer>
-
   <style>
     footer {
       position: relative;
@@ -4037,8 +4438,6 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
 
     }
   </style>
-
-
   <style>
     /* === Responsive Styles === */
 
@@ -4189,8 +4588,6 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
       }
     }
   </style>
-
-
   <style>
     @media screen and (max-height: 480px) and (orientation: landscape) {
       header {
@@ -4268,7 +4665,6 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
       }
     }
   </style>
-
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       feather.replace();
@@ -4293,7 +4689,6 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
       });
     });
   </script>
-
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       if (window.feather) {

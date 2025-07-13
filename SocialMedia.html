@@ -3022,6 +3022,74 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+<div id="lottieAltWrapper">
+  <div id="lottieAltContainer"></div>
+</div>
+<style>
+  #lottieAltWrapper {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+  margin: 0;
+  padding-bottom: 12px; /* Optional */
+}
+
+#lottieAltContainer {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  pointer-events: none;
+  display: block;
+  position: relative;
+}
+
+/* Sehr wichtig: Das SVG darf nicht aus seinem Container gedrückt werden */
+#lottieAltContainer > svg {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: top center;
+}
+
+
+/* Padding auf typischen Laptop-Breiten */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  #lottieAltContainer {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+<script>
+  const altLottieElement = document.getElementById('lottieAltContainer');
+
+  let altLottieAnimation = lottie.loadAnimation({
+    container: altLottieElement,
+    renderer: 'svg',
+    loop: false,
+    autoplay: true,
+    path: './Animationen/modularpresentationgrid.json'
+  });
+
+  altLottieAnimation.addEventListener('complete', () => {
+    setTimeout(() => {
+      altLottieAnimation.goToAndPlay(0, true);
+    }, 3000);
+  });
+
+  window.addEventListener('resize', () => {
+    location.reload();
+  });
+</script>
+
+
+
+
+
 
 
 
