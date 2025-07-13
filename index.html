@@ -439,347 +439,244 @@
 
 
 
-<div id="lottieHeroWrapper">
-  <div id="lottieHeroContainer"></div>
-</div>
 
-<style>
-#lottieHeroWrapper {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  padding-bottom: 12px; /* minimaler Abstand unten */
-  margin: 0;
-}
+<!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
+  
 
-#lottieHeroContainer {
-  width: 100%;
-  height: auto;
-  pointer-events: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* Direktes Styling für eingebettetes SVG */
-#lottieHeroContainer > svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0;
-  padding: 2%;
-}
-
-/* Seitliches Padding auf typischen Laptop-Breiten */
-@media (min-width: 1024px) and (max-width: 1440px) {
-  #lottieHeroContainer {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-}
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
-<script>
-  const lottieContainer = document.getElementById('lottieHeroContainer');
-
-  const getLottiePath = () => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-
-    // Wenn 768px und Portrait (Hochformat)
-    if (width === 768 && height > width) {
-      return './Animationen/herosectionmobile.json';
-    }
-
-    // Generell bei kleineren Geräten oder Portrait
-    if (width < 768 || height > width) {
-      return './Animationen/herosectionmobile.json';
-    }
-
-    // Sonst Desktop-Version
-    return './Animationen/herosection.json';
-  };
-
-  const animation = lottie.loadAnimation({
-    container: lottieContainer,
-    renderer: 'svg',
-    loop: false,
-    autoplay: true,
-    path: getLottiePath()
-  });
-
-  animation.addEventListener('complete', () => {
-    const totalFrames = animation.getDuration(true);
-    animation.goToAndStop(totalFrames - 1, true);
-  });
-
-  window.addEventListener('resize', () => {
-    location.reload(); // einfacher Reload, um das passende Lottie erneut zu laden
-  });
-</script>
-
-
-
-
-  <section id="branchen" class="persona-clean container">
-    <h2 class="section-title">Für wen ist Fusion3?</h2>
-    <p class="persona-subline">Individuelle Lösungen für jede Zielgruppe – mit Fokus auf Wirkung, Technik und Tempo.</p>
-
-    <div class="persona-grid">
-      <!-- Startups -->
-      <div class="persona-card">
-        <h3>Startups & Gründer</h3>
-        <p class="tagline">Schnelle MVPs, starke Visuals & Launch-Power</p>
-        <ul>
-          <li>✓ Fokus auf Time-to-Market</li>
-          <li>✓ Pitch-ready Branding</li>
-          <li>✓ Performance-First</li>
-        </ul>
-        <p class="vorteil">Ideal für neue Ideen mit Impact</p>
-      </div>
-
-      <!-- Kreative -->
-      <div class="persona-card">
-        <h3>Kreative & Agenturen</h3>
-        <p class="tagline">3D, Motion & Web aus einer Hand</p>
-        <ul>
-          <li>✓ White Label auf Wunsch</li>
-          <li>✓ Hochwertige Visuals</li>
-          <li>✓ Flexible Partnerschaft</li>
-        </ul>
-        <p class="vorteil">Gemeinsam außergewöhnlich erschaffen</p>
-      </div>
-
-      <!-- Unternehmen -->
-      <div class="persona-card">
-        <h3>Unternehmen & Brands</h3>
-        <p class="tagline">Starke Brand Stories & Erlebnisse</p>
-        <ul>
-          <li>✓ Interaktive Microsites</li>
-          <li>✓ Skalierbar & wartbar</li>
-          <li>✓ Conversion-getriebenes Design</li>
-        </ul>
-        <p class="vorteil">Für bleibenden Eindruck und Reichweite</p>
-      </div>
-    </div>
-  </section>
   <style>
-    .persona-clean {
-      background: #fff;
-      text-align: center;
+    :root {
+      --primary: #ff4d00;
+      --secondary: #ff9900;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: #fff;
       color: #111;
-      padding: 6rem 2rem;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
-    .persona-title {
-      font-size: 2.4rem;
-      font-weight: 900;
-      margin-bottom: 0.8rem;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    main {
+      display: block;
     }
 
-
-    .persona-subline {
-      font-size: 1.1rem;
-      color: #666;
-      margin-bottom: 4rem;
-    }
-
-    .persona-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
+    .hero-video-wrapper {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
       justify-content: center;
+      text-align: center;
+      background-color: #000;
     }
 
-    .persona-card {
-      background: linear-gradient(135deg, #ffffff 0%, #ffffff 20%, #9e9e9e80 100%);
-      border: 1px solid #eee;
-      border-radius: 16px;
-      padding: 2.5rem 1.8rem;
-      text-align: left;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-      transition: all 0.3s ease;
+    .hero-video-content {
       position: relative;
-      overflow: hidden;
-    }
-
-    .persona-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
-    }
-
-    .persona-card h3 {
-      font-size: 1.6rem;
-      font-weight: 800;
-      margin-bottom: 0.4rem;
-      margin-top: 1.0rem;
-    }
-
-    .persona-card .tagline {
-      font-size: 1rem;
-      color: #888;
-      margin-bottom: 1rem;
-      font-weight: 500;
-    }
-
-    .persona-card ul {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 1.5rem;
-    }
-
-    .persona-card ul li {
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-      color: #333;
-    }
-
-    .persona-card .vorteil {
-      font-size: 0.95rem;
-      color: #555;
-      font-style: italic;
-      /* CARD GRADIENTS */
-    }
-
-    .persona-card:nth-child(1) {
-      background: linear-gradient(135deg, #ff5100, #ff7b00, #ff5100);
-      background-size: 300% 300%;
-    }
-
-    .persona-card:nth-child(2) {
-      background: linear-gradient(135deg, #0d0d0d, #1c1f2f, #0d0d0d);
-      background-size: 300% 300%;
-    }
-
-    .persona-card:nth-child(3) {
-      background: linear-gradient(135deg, #4b00ff, #3000a3, #4b00ff);
-      background-size: 300% 300%;
-    }
-
-    .persona-card {
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      max-width: 800px;
+      width: 100%;
       color: #fff;
-      will-change: transform, box-shadow;
-      background-position: 0% 50%;
+      text-align: center;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+      background: rgba(255, 255, 255, 0.05);
+      margin-top: -5rem;
     }
 
-    /* Glow-Overlay */
-    .persona-card::before {
-      content: "";
+    .hero-video-content::before {
+      content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.18), transparent 70%);
-      transform: scale(0.5);
-      opacity: 0;
-      transition: all 0.6s ease;
-      z-index: 1;
+      inset: 0;
+      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.15), transparent 60%);
+      animation: waveBlur 8s infinite ease-in-out alternate;
+      z-index: -1;
       pointer-events: none;
     }
 
-    .persona-card:hover::before {
-      transform: scale(1);
-      opacity: 0.25;
+    @keyframes waveBlur {
+      0% { --x: 20%; --y: 30%; }
+      25% { --x: 80%; --y: 20%; }
+      50% { --x: 60%; --y: 70%; }
+      75% { --x: 30%; --y: 80%; }
+      100% { --x: 50%; --y: 50%; }
     }
 
-    .persona-card:hover {
-      transform: translateY(-8px) scale(1.035);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
-      animation: gradientPulse 6s ease infinite;
-      background-position: 100% 50%;
-      z-index: 10;
+    .video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+      pointer-events: none;
     }
 
-    @keyframes gradientPulse {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
+    .hero-video-wrapper::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+      z-index: 1;
     }
 
-    .persona-card h3,
-    .persona-card ul li,
-    .persona-card .vorteil,
-    .persona-card .tagline {
-      color: inherit;
+    .hero-video-content h1 {
+      font-size: 3.8rem;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      color: #000000;
     }
 
+    .hero-video-content p {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      color: rgba(0, 0, 0, 0.85);
+    }
 
+    .cta-btn {
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      color: #fff;
+      font-weight: 700;
+      padding: 1rem 2.2rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      text-transform: uppercase;
+      margin-top: 2rem;
+      border: none;
+      box-shadow: 0 0 12px rgba(255, 102, 0, 0.3),
+                  0 0 24px rgba(255, 102, 0, 0.25);
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-decoration: none;
+    }
 
-    @media (min-width: 1200px) {
-      .persona-clean {
-        padding: 8rem 3rem;
+    .cta-btn:hover,
+    .cta-btn:focus {
+      background: var(--secondary);
+      color: #000;
+      transform: scale(1.03);
+      cursor: pointer;
+      outline: 2px solid var(--primary);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-video-content {
+        padding: 2rem;
       }
-
-      .persona-clean.container {
-        max-width: 1400px;
-        margin: 0 auto;
-      }
-
-      .persona-title {
+      .hero-video-content h1 {
         font-size: 3rem;
       }
-
-      .persona-subline {
-        font-size: 1.3rem;
-      }
-
-      .persona-grid {
-        gap: 3rem;
-      }
-
-      .persona-card {
-        padding: 3rem 2.5rem;
-      }
-
-      .persona-card h3 {
-        font-size: 1.8rem;
-      }
-
-      .persona-card .tagline,
-      .persona-card ul li,
-      .persona-card .vorteil {
-        font-size: 1.05rem;
+      .hero-video-content p {
+        font-size: 1.1rem;
+        line-height: 1.5;
       }
     }
-
-
-    @media (min-width: 600px) and (max-width: 908px) {
-      .persona-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-      }
-
-      .persona-grid .persona-card:nth-child(3) {
-        grid-column: 1 / -1;
-        /* über beide Spalten */
-        max-width: 100%;
-        margin: 0;
-      }
-    }
-
 
     @media (max-width: 768px) {
-      .persona-clean {
-        padding: 4rem 1rem;
+      .hero-video-wrapper {
+        min-height: 80vh;
+      }
+      .hero-video-content {
+        padding: 1.5rem;
+        margin-top: 0;
+      }
+      .hero-video-content h1 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+      }
+      .hero-video-content p {
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+      .cta-btn {
+        font-size: 0.95rem;
+        padding: 0.75rem 1.5rem;
+        width: auto;
+        max-width: 90%;
+        margin: 1.5rem auto 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-video-content h1 {
+        font-size: 1.6rem;
+        line-height: 1.3;
+      }
+      .hero-video-content p {
+        font-size: 0.95rem;
       }
     }
   </style>
+</head>
 
+<body>
 
+  <main role="main">
+    <section class="hero-video-wrapper" aria-labelledby="hero-heading">
+      <div class="hero-video-content">
+        <h1 id="hero-heading">UX & Webdesign<br>das Nutzer begeistert</h1>
+        <p>Wir konzipieren digitale Erlebnisse. <br>maßgeschneidert und klickbar.</p>
+        <a class="cta-btn" href="#kontakt" title="Projekt mit Fusion3 starten">Projekt anfragen</a>
+      </div>
+
+      <video id="responsiveVideo" class="video-background" autoplay muted loop playsinline aria-label="Hintergrundvideo mit Interface-Animationen im Tech-Stil">
+        <source src="" type="video/mp4" />
+      </video>
+    </section>
+  </main>
+<script>
+    function chooseVideoSrc() {
+      const video = document.getElementById('responsiveVideo');
+      const source = video.querySelector('source');
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      let src = "./IndexM/PC.webm";
+
+      if (width <= 480) {
+        src = "./IndexM/handy.webm";
+      } else if (width <= 768) {
+        src = "./IndexM/Tablet.webm";
+      } else if (width <= 1024) {
+        src = width > height ? "./IndexM/PC.webm" : "./IndexM/Tablet.webm";
+      }
+
+      if (source.getAttribute('src') !== src) {
+        source.setAttribute('src', src);
+        video.load();
+      }
+    }
+
+    window.addEventListener('resize', chooseVideoSrc);
+    window.addEventListener('orientationchange', chooseVideoSrc);
+    window.addEventListener('DOMContentLoaded', chooseVideoSrc);
+
+    // Blur-Effekt (sanft animiert)
+    const heroContent = document.querySelector('.hero-video-content');
+    function animateRandomBlur() {
+      const blurAmount = Math.random() * 2 + 2;
+      heroContent.style.backdropFilter = `blur(${blurAmount.toFixed(1)}px)`;
+      const nextInterval = Math.random() * 3000 + 2000;
+      setTimeout(animateRandomBlur, nextInterval);
+    }
+    animateRandomBlur();
+  </script>
 
 
 
