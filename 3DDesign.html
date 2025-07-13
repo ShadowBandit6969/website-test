@@ -1116,7 +1116,7 @@ width: 170vw;
       <a class="cta-btn" href="#kontakt" title="Projekt mit Fusion3 starten">Projekt anfragen</a>
     </div>
 
-    <!-- Dynamisches Hintergrundvideo -->
+    <!-- Video jetzt mit Poster und lazy-loading -->
     <video
       id="responsiveVideo"
       class="video-background"
@@ -1128,60 +1128,42 @@ width: 170vw;
       playsinline
       aria-label="Hintergrundvideo mit Interface-Animationen im Tech-Stil"
     >
-      <!-- Quellen werden dynamisch gesetzt -->
+      <source src="" type="video/webm" />
+      <!-- Fallback für MP4 -->
+      <source src="" type="video/mp4" />
     </video>
   </section>
 </main>
-
 <script>
-  function getDeviceCategory() {
+  let videoInitialized = false;
+
+  function chooseVideoSrc() {
+    const video = document.getElementById('responsiveVideo');
+    const source = video.querySelector('source');
     const width = window.innerWidth;
     const height = window.innerHeight;
+    let src = "./IndexM/PC.webm";
 
-    if (width <= 480) return 'handy';
-    if (width <= 768) return 'tablet';
-    if (width <= 1024) return width > height ? 'pc' : 'tablet';
-    return 'pc';
-  }
+    if (width <= 480) {
+      src = "./IndexM/handy.webm";
+    } else if (width <= 768) {
+      src = "./IndexM/Tablet.webm";
+    } else if (width <= 1024) {
+      src = width > height ? "./IndexM/PC.webm" : "./IndexM/Tablet.webm";
+    }
 
-  function loadResponsiveVideo() {
-    const video = document.getElementById('responsiveVideo');
-    const currentSources = Array.from(video.querySelectorAll('source')).map(s => s.getAttribute('src'));
-    const category = getDeviceCategory();
-
-    const sources = {
-      handy: {
-        webm: './IndexM/handy.webm',
-        mp4: './IndexM/handy.mp4'
-      },
-      tablet: {
-        webm: './IndexM/Tablet.webm',
-        mp4: './IndexM/Tablet.mp4'
-      },
-      pc: {
-        webm: './IndexM/PC.webm',
-        mp4: './IndexM/PC.mp4'
-      }
-    };
-
-    const selected = sources[category];
-
-    // Nur laden wenn nötig
-    if (!currentSources.includes(selected.webm)) {
-      video.innerHTML = `
-        <source src="${selected.webm}" type="video/webm">
-        <source src="${selected.mp4}" type="video/mp4">
-      `;
+    if (!videoInitialized) {
+      source.setAttribute('src', src);
+      video.load();
+      videoInitialized = true;
+    } else if (source.getAttribute('src') !== src) {
+      source.setAttribute('src', src);
       video.load();
     }
   }
 
-  window.addEventListener('DOMContentLoaded', loadResponsiveVideo);
-  window.addEventListener('resize', () => {
-    // Debounce für Resize
-    clearTimeout(window.__resizeTimeout);
-    window.__resizeTimeout = setTimeout(loadResponsiveVideo, 300);
-  });
+  window.addEventListener("DOMContentLoaded", chooseVideoSrc);
+  window.addEventListener("resize", chooseVideoSrc);
 </script>
 
 
@@ -2060,7 +2042,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   .rd3-footer strong {
     background: linear-gradient(to right, #007ACC, #66B2FF);
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 800;
   }

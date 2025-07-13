@@ -1583,9 +1583,10 @@
 
           <div class="image-overlay">
             <div class="planet-wrapper">
-              <img class="planet-image" src="./indexFotoSlideShow/planet.webp" alt="Planet" />
+              <img class="planet-image" loading="lazy" src="./indexFotoSlideShow/planet.webp" alt="Planet" />
+
             </div>
-            <img src="./indexFotoSlideShow/2.webp" alt="3D Icon" />
+            <img class="lazy-image" data-src="./indexFotoSlideShow/2.webp" alt="3D Icon" />
           </div>
 
 
@@ -1605,7 +1606,7 @@
             <li>Infografiken & visuelle Systeme</li>
           </ul>
           <div class="image-overlay">
-            <img src="./indexFotoSlideShow/astro sitzend.webp" alt="3D Icon" />
+     <img class="lazy-image" data-src="./indexFotoSlideShow/astro sitzend.webp" alt="3D Icon" />
           </div>
 
           <a href="./Grafikdesign.html" class="cta">Mehr erfahren</a>
@@ -1628,7 +1629,27 @@
       </div>
     </div>
   </section>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const lazyImages = document.querySelectorAll("img.lazy-image");
 
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.classList.remove("lazy-image");
+          obs.unobserve(img);
+        }
+      });
+    }, {
+      rootMargin: "100px 0px", // Vorladen mit Puffer
+      threshold: 0.01
+    });
+
+    lazyImages.forEach(img => observer.observe(img));
+  });
+</script>
 
 
 
@@ -3922,7 +3943,6 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
 }
 
 </style>
-
 <script>
   const form = document.getElementById("kontaktForm");
 
@@ -4349,7 +4369,6 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
 <div id="lottieAltWrapper">
   <div id="lottieAltContainer"></div>
 </div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
 <script>
   let animationLoaded = false;
@@ -4375,7 +4394,6 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
 
   observer.observe(document.getElementById('lottieAltWrapper'));
 </script>
-
 <style>#lottieAltWrapper {
   position: relative;
   width: 100%;
