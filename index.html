@@ -17,6 +17,9 @@
 
 
 </head>
+
+
+
 <style>
   :root {
     --primary: #ff6600;
@@ -421,7 +424,6 @@
   }
 </style>
 
-<body>
 
   <header>
     <div class="logo">Fusion³</div>
@@ -444,189 +446,184 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
   
 
-  <style>
-    :root {
-      --primary: #ff4d00;
-      --secondary: #ff9900;
-    }
+<style>
+  :root {
+    --primary: #ff4d00;
+    --secondary: #ff9900;
+  }
 
-    * {
-      box-sizing: border-box;
-    }
+  * {
+    box-sizing: border-box;
+  }
 
-    body {
-      margin: 0;
-      font-family: 'Space Grotesk', sans-serif;
-      background-color: #fff;
-      color: #111;
-    }
+  body {
+    margin: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: #fff;
+    color: #111;
+  }
 
-    main {
-      display: block;
-    }
+  main {
+    display: block;
+  }
 
-    .hero-video-wrapper {
-      position: relative;
-      min-height: 100vh;
-      width: 100%;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background-color: #000;
-    }
+  .hero-video-wrapper {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #000;
+  }
 
+  .hero-video-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    max-width: 800px;
+    width: 100%;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 12px;
+    background-color: #2a2a2a63; /* Kein RGBA, kein Verlauf */
+    margin-top: -5rem;
+  }
+
+  /* Dieses Pseudo-Element entfernt */
+  .hero-video-content::before {
+    content: none !important;
+  }
+
+  .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero-video-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    z-index: 1;
+  }
+
+  .hero-video-content h1 {
+    font-size: 3.8rem;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+    color: #ffffff;
+  }
+
+  .hero-video-content p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .cta-btn {
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    color: #fff;
+    font-weight: 700;
+    padding: 1rem 2.2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-top: 2rem;
+    border: none;
+    box-shadow: 0 0 12px rgba(255, 102, 0, 0.3),
+                0 0 24px rgba(255, 102, 0, 0.25);
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .cta-btn:hover,
+  .cta-btn:focus {
+    background: var(--secondary);
+    color: #000;
+    transform: scale(1.03);
+    cursor: pointer;
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 1024px) {
     .hero-video-content {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 3rem 2rem;
-      max-width: 800px;
-      width: 100%;
-      color: #fff;
-      text-align: center;
-      border-radius: 12px;
-      backdrop-filter: blur(6px);
-      background: rgba(255, 255, 255, 0.05);
-      margin-top: -5rem;
+      padding: 2rem;
     }
-
-    .hero-video-content::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.15), transparent 60%);
-      animation: waveBlur 8s infinite ease-in-out alternate;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    @keyframes waveBlur {
-      0% { --x: 20%; --y: 30%; }
-      25% { --x: 80%; --y: 20%; }
-      50% { --x: 60%; --y: 70%; }
-      75% { --x: 30%; --y: 80%; }
-      100% { --x: 50%; --y: 50%; }
-    }
-
-    .video-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .hero-video-wrapper::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 120px;
-      background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
-      z-index: 1;
-    }
-
     .hero-video-content h1 {
-      font-size: 3.8rem;
-      line-height: 1.1;
-      margin-bottom: 1.2rem;
-      color: #000000;
+      font-size: 3rem;
     }
-
     .hero-video-content p {
-      font-size: 1.3rem;
-      line-height: 1.6;
-      color: rgba(0, 0, 0, 0.85);
+      font-size: 1.1rem;
+      line-height: 1.5;
     }
+  }
 
-    .cta-btn {
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      color: #fff;
-      font-weight: 700;
-      padding: 1rem 2.2rem;
-      border-radius: 12px;
+  @media (max-width: 768px) {
+    .hero-video-wrapper {
+      min-height: 80vh;
+    }
+    .hero-video-content {
+      padding: 1.5rem;
+      margin-top: 0;
+    }
+    .hero-video-content h1 {
+      font-size: 2.2rem;
+      line-height: 1.2;
+    }
+    .hero-video-content p {
       font-size: 1rem;
-      text-transform: uppercase;
-      margin-top: 2rem;
-      border: none;
-      box-shadow: 0 0 12px rgba(255, 102, 0, 0.3),
-                  0 0 24px rgba(255, 102, 0, 0.25);
-      transition: all 0.3s ease;
-      display: inline-block;
-      text-decoration: none;
+      line-height: 1.4;
     }
-
-    .cta-btn:hover,
-    .cta-btn:focus {
-      background: var(--secondary);
-      color: #000;
-      transform: scale(1.03);
-      cursor: pointer;
-      outline: 2px solid var(--primary);
-      outline-offset: 4px;
+    .cta-btn {
+      font-size: 0.95rem;
+      padding: 0.75rem 1.5rem;
+      width: auto;
+      max-width: 90%;
+      margin: 1.5rem auto 0;
     }
+  }
 
-    @media (max-width: 1024px) {
-      .hero-video-content {
-        padding: 2rem;
-      }
-      .hero-video-content h1 {
-        font-size: 3rem;
-      }
-      .hero-video-content p {
-        font-size: 1.1rem;
-        line-height: 1.5;
-      }
+  @media (max-width: 480px) {
+    .hero-video-content h1 {
+      font-size: 1.6rem;
+      line-height: 1.3;
     }
-
-    @media (max-width: 768px) {
-      .hero-video-wrapper {
-        min-height: 80vh;
-      }
-      .hero-video-content {
-        padding: 1.5rem;
-        margin-top: 0;
-      }
-      .hero-video-content h1 {
-        font-size: 2.2rem;
-        line-height: 1.2;
-      }
-      .hero-video-content p {
-        font-size: 1rem;
-        line-height: 1.4;
-      }
-      .cta-btn {
-        font-size: 0.95rem;
-        padding: 0.75rem 1.5rem;
-        width: auto;
-        max-width: 90%;
-        margin: 1.5rem auto 0;
-      }
+    .hero-video-content p {
+      font-size: 0.95rem;
     }
+  }
 
-    @media (max-width: 480px) {
-      .hero-video-content h1 {
-        font-size: 1.6rem;
-        line-height: 1.3;
-      }
-      .hero-video-content p {
-        font-size: 0.95rem;
-      }
+  @media (max-width: 425px) {
+    .cta-btn {
+      width: 100%;
+      max-width: 180px;
+      font-size: 0.9rem;
+      padding: 0.9rem 1.2rem;
+      box-sizing: border-box;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
     }
-  </style>
-</head>
-
-<body>
+  }
+</style>
 
   <main role="main">
     <section class="hero-video-wrapper" aria-labelledby="hero-heading">
@@ -642,41 +639,304 @@
     </section>
   </main>
 <script>
-    function chooseVideoSrc() {
-      const video = document.getElementById('responsiveVideo');
-      const source = video.querySelector('source');
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      let src = "./IndexM/PC.webm";
+  let videoInitialized = false;
 
-      if (width <= 480) {
-        src = "./IndexM/handy.webm";
-      } else if (width <= 768) {
-        src = "./IndexM/Tablet.webm";
-      } else if (width <= 1024) {
-        src = width > height ? "./IndexM/PC.webm" : "./IndexM/Tablet.webm";
+  function chooseVideoSrc() {
+    const video = document.getElementById('responsiveVideo');
+    const source = video.querySelector('source');
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    let src = "./IndexM/PC.webm";
+
+    if (width <= 480) {
+      src = "./IndexM/handy.webm";
+    } else if (width <= 768) {
+      src = "./IndexM/Tablet.webm";
+    } else if (width <= 1024) {
+      src = width > height ? "./IndexM/PC.webm" : "./IndexM/Tablet.webm";
+    }
+
+    if (!videoInitialized) {
+      source.setAttribute('src', src);
+      video.load();
+      videoInitialized = true;
+    } else if (source.getAttribute('src') !== src) {
+      source.setAttribute('src', src);
+      video.load(); // Nur neu laden, wenn sich die Quelle ändert
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", chooseVideoSrc);
+  window.addEventListener("resize", chooseVideoSrc);
+</script>
+
+
+
+
+<section id="branchen" class="persona-clean container">
+    <h2 class="persona-title">Für wen ist Fusion3?</h2>
+    <p class="persona-subline">Individuelle Lösungen für jede Zielgruppe – mit Fokus auf Wirkung, Technik und Tempo.</p>
+
+    <div class="persona-grid">
+      <!-- Startups -->
+      <div class="persona-card">
+        <h3>Startups & Gründer</h3>
+        <p class="tagline">Schnelle MVPs, starke Visuals & Launch-Power</p>
+        <ul>
+          <li>✓ Fokus auf Time-to-Market</li>
+          <li>✓ Pitch-ready Branding</li>
+          <li>✓ Performance-First</li>
+        </ul>
+        <p class="vorteil">Ideal für neue Ideen mit Impact</p>
+      </div>
+
+      <!-- Kreative -->
+      <div class="persona-card">
+        <h3>Kreative & Agenturen</h3>
+        <p class="tagline">3D, Motion & Web aus einer Hand</p>
+        <ul>
+          <li>✓ White Label auf Wunsch</li>
+          <li>✓ Hochwertige Visuals</li>
+          <li>✓ Flexible Partnerschaft</li>
+        </ul>
+        <p class="vorteil">Gemeinsam außergewöhnlich erschaffen</p>
+      </div>
+
+      <!-- Unternehmen -->
+      <div class="persona-card">
+        <h3>Unternehmen & Brands</h3>
+        <p class="tagline">Starke Brand Stories & Erlebnisse</p>
+        <ul>
+          <li>✓ Interaktive Microsites</li>
+          <li>✓ Skalierbar & wartbar</li>
+          <li>✓ Conversion-getriebenes Design</li>
+        </ul>
+        <p class="vorteil">Für bleibenden Eindruck und Reichweite</p>
+      </div>
+    </div>
+  </section>
+  <style>
+    .persona-clean {
+      background: #fff;
+      text-align: center;
+      color: #111;
+      padding: 6rem 2rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+.persona-title {
+  font-size: 2.4rem;
+  font-weight: 900;
+  margin-bottom: 0.8rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+
+
+    .persona-subline {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 4rem;
+    }
+
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .persona-card {
+      background: linear-gradient(135deg, #ffffff 0%, #ffffff 20%, #9e9e9e80 100%);
+      border: 1px solid #eee;
+      border-radius: 16px;
+      padding: 2.5rem 1.8rem;
+      text-align: left;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .persona-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .persona-card h3 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+      margin-top: 1.0rem;
+    }
+
+    .persona-card .tagline {
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .persona-card ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .persona-card ul li {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .persona-card .vorteil {
+      font-size: 0.95rem;
+      color: #555;
+      font-style: italic;
+      /* CARD GRADIENTS */
+    }
+
+    .persona-card:nth-child(1) {
+      background: linear-gradient(135deg, #ff5100, #ff7b00, #ff5100);
+      background-size: 300% 300%;
+    }
+
+    .persona-card:nth-child(2) {
+      background: linear-gradient(135deg, #0d0d0d, #1c1f2f, #0d0d0d);
+      background-size: 300% 300%;
+    }
+
+    .persona-card:nth-child(3) {
+      background: linear-gradient(135deg, #4b00ff, #3000a3, #4b00ff);
+      background-size: 300% 300%;
+    }
+
+    .persona-card {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      color: #fff;
+      will-change: transform, box-shadow;
+      background-position: 0% 50%;
+    }
+
+    /* Glow-Overlay */
+    .persona-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.18), transparent 70%);
+      transform: scale(0.5);
+      opacity: 0;
+      transition: all 0.6s ease;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .persona-card:hover::before {
+      transform: scale(1);
+      opacity: 0.25;
+    }
+
+    .persona-card:hover {
+      transform: translateY(-8px) scale(1.035);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+      animation: gradientPulse 6s ease infinite;
+      background-position: 100% 50%;
+      z-index: 10;
+    }
+
+    @keyframes gradientPulse {
+      0% {
+        background-position: 0% 50%;
       }
 
-      if (source.getAttribute('src') !== src) {
-        source.setAttribute('src', src);
-        video.load();
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
       }
     }
 
-    window.addEventListener('resize', chooseVideoSrc);
-    window.addEventListener('orientationchange', chooseVideoSrc);
-    window.addEventListener('DOMContentLoaded', chooseVideoSrc);
-
-    // Blur-Effekt (sanft animiert)
-    const heroContent = document.querySelector('.hero-video-content');
-    function animateRandomBlur() {
-      const blurAmount = Math.random() * 2 + 2;
-      heroContent.style.backdropFilter = `blur(${blurAmount.toFixed(1)}px)`;
-      const nextInterval = Math.random() * 3000 + 2000;
-      setTimeout(animateRandomBlur, nextInterval);
+    .persona-card h3,
+    .persona-card ul li,
+    .persona-card .vorteil,
+    .persona-card .tagline {
+      color: inherit;
     }
-    animateRandomBlur();
-  </script>
+
+
+
+    @media (min-width: 1200px) {
+      .persona-clean {
+        padding: 8rem 3rem;
+      }
+
+      .persona-clean.container {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .persona-title {
+        font-size: 3rem;
+      }
+
+      .persona-subline {
+        font-size: 1.3rem;
+      }
+
+      .persona-grid {
+        gap: 3rem;
+      }
+
+      .persona-card {
+        padding: 3rem 2.5rem;
+      }
+
+      .persona-card h3 {
+        font-size: 1.8rem;
+      }
+
+      .persona-card .tagline,
+      .persona-card ul li,
+      .persona-card .vorteil {
+        font-size: 1.05rem;
+      }
+    }
+
+
+    @media (min-width: 600px) and (max-width: 908px) {
+      .persona-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+
+      .persona-grid .persona-card:nth-child(3) {
+        grid-column: 1 / -1;
+        /* über beide Spalten */
+        max-width: 100%;
+        margin: 0;
+      }
+    }
+
+
+    @media (max-width: 768px) {
+      .persona-clean {
+        padding: 4rem 1rem;
+      }
+    }
+  </style>
+
+
+
 
 
 
@@ -1260,7 +1520,6 @@
   </style>
   <section class="container apple-services" id="tools">
     <h2>Unsere Leistungen</h2>
-
     <div class="service-grid">
 
       <!-- Webdesign -->
@@ -1593,8 +1852,14 @@
     }
 
     .white-content h2 {
-      margin-bottom: 3rem;
-    }
+  margin-bottom: 3rem;
+  text-align: center;
+  width: 100%;
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
 
     .white-world.visible {
       clip-path: circle(150% at 50% 50%);
@@ -3350,172 +3615,6 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
 
 
 
-<section class="angled-image-section">
-  <!-- Overlay für diagonalen Hintergrund -->
-  <div class="angled-bg-overlay" aria-hidden="true"></div>
-
-  <figure class="angled-image-wrapper">
-    <img
-      src="./WebdesignPic/webgerade.webp"
-      alt=""
-      width="1920"
-      height="1080"
-      loading="lazy"
-      decoding="async"
-    />
-  </figure>
-</section>
-<style>
-  html, body {
-    overflow-x: hidden;
-  }
-
-  :root {
-    --angled-rotation: -4deg;
-    --angled-width: 150vw;
-    --angled-offset: -25vw;
-  }
-
-  .angled-image-section {
-    position: relative;
-    width: 100vw;
-    overflow: visible;
-    margin-top: 3rem;
-    margin-bottom: -5rem;
-    pointer-events: none;
-    background: transparent;
-    z-index: 1;
-  }
-
-  /* Gradient-Hintergrund hinter dem Bild */
-  .angled-bg-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background: transparent;
-  }
-
-  .angled-image-wrapper {
-    width: var(--angled-width);
-    margin-left: var(--angled-offset);
-    transform: rotate(var(--angled-rotation));
-    position: relative;
-    z-index: 1;
-  }
-
-  .angled-image-wrapper img {
-    width: 100%;
-    height: auto;
-    display: block;
-    z-index: 2;
-    position: relative;
-  }
-</style>
-
-
-
-<div id="lottieAltWrapper">
-  <div id="lottieAltContainer"></div>
-</div>
-<style>
-  #lottieAltWrapper {
-  position: relative;
-  width: 100%;
-  overflow: visible;
-  margin-top: -10rem;
-  padding-bottom: 12px; /* Optional */
-}
-
-#lottieAltContainer {
-  width: 100%;
-  margin: 0 auto;
-  pointer-events: none;
-  display: block;
-  position: relative;
-}
-
-/* Sehr wichtig: Das SVG darf nicht aus seinem Container gedrückt werden */
-#lottieAltContainer > svg {
-  width: 100%;
-  height: auto;
-  max-height: 100%;
-  display: block;
-  object-fit: contain;
-  object-position: top center;
-}
-
-
-/* Padding auf typischen Laptop-Breiten */
-@media (min-width: 1024px) and (max-width: 1440px) {
-  #lottieAltContainer {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-}
-
-@media (max-width: 540px) {
-  #lottieAltWrapper {
-    width: 100vw;
-    margin-top: -6rem;
-    padding: 0;
-  }
-
-  #lottieAltContainer {
-    width: 100vw;
-    max-width: 100%;
-    padding: 0;
-    margin: 0 auto;
-    overflow: hidden;
-  }
-
-  #lottieAltContainer > svg {
-    width: 150% !important; /* 👈 Skaliert die Animation größer */
-    height: auto !important;
-    max-width: none;
-    display: block;
-    transform: scale(1.5); /* 👈 Alternativ: Zoomt die Animation */
-    transform-origin: center top; /* 👈 Wichtig für zentriertes Vergrößern */
-  }
-}
-
-
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
-<script>
-  const altLottieElement = document.getElementById('lottieAltContainer');
-
-  let altLottieAnimation = lottie.loadAnimation({
-    container: altLottieElement,
-    renderer: 'svg',
-    loop: false,
-    autoplay: true,
-    path: './Animationen/Webdesignshuffle.json'
-  });
-
-  altLottieAnimation.addEventListener('complete', () => {
-    setTimeout(() => {
-      altLottieAnimation.goToAndPlay(0, true);
-    }, 0);
-  });
-
-  window.addEventListener('resize', () => {
-    location.reload();
-  });
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <section class="kontakt-testimonial-section" id="kontakt">
   <div class="kontakt-testimonial-wrapper">
@@ -3543,194 +3642,68 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
   </div>
 </section>
 <style>
+  html, body {
+    box-sizing: border-box;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
   * {
-  box-sizing: border-box;
-}
+    box-sizing: inherit;
+  }
 
   .kontakt-testimonial-section {
-  background: #ffffff;
-  padding: 6rem 2rem;
-  font-family: 'Inter', sans-serif;
-}
+    background: #ffffff;
+    padding: 6rem 2rem;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    margin-top: 10rem;
+  }
 
-.kontakt-testimonial-wrapper {
-  max-width: 1440px;
-  margin: 0 auto;
-  display: flex;
-  gap: 4rem;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-.kontakt-area {
-  flex: 1 1 480px;
-  max-width: 640px;
-  min-width: 300px;
-}
-
-.testimonial-area {
-  flex: 1 1 380px;
-  max-width: 600px;
-  min-width: 280px;
-}
-
-/* Titel und Text */
-.section-title {
-  font-size: 2.6rem;
-  font-weight: 900;
-  color: #000000;
-  margin-bottom: 1rem;
-  text-align: left;
-}
-
-.kontakt-subline {
-  font-size: 1.2rem;
-  color: #666;
-  line-height: 1.6;
-  max-width: 90%;
-  margin-bottom: 2.5rem;
-  text-align: left;
-}
-
-.kontakt-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-/* Eingabefelder */
-.kontakt-form input,
-.kontakt-form textarea {
-  width: 100%;
-  max-width: 100%;
-  padding: 1rem 1.2rem;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  transition: all 0.3s ease;
-}
-
-.kontakt-form input:focus,
-.kontakt-form textarea:focus {
-  border-color: #ff6600;
-  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
-  outline: none;
-  background: #fff;
-}
-
-/* Button */
-.kontakt-btn {
-  background: linear-gradient(135deg, #ff6600, #ff9950, #ff6a00);
-  background-size: 300% 300%;
-  animation: gradientShift 18s ease infinite;
-  color: #252525;
-  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
-  font-weight: 700;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  max-width: 380px;
-  width: 100%;
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.kontakt-btn:hover,
-.kontakt-btn:focus-visible {
-  transform: scale(1.04);
-  box-shadow: 0 6px 20px #ffb07366;
-  outline: none;
-}
-
-.kontakt-btn:focus-visible {
-  outline: 2px dashed #ff6600;
-  outline-offset: 4px;
-}
-
-.kontakt-btn.sent {
-  background: linear-gradient(135deg, #00c851, #007e33);
-  animation: none;
-  box-shadow: 0 0 14px rgba(0, 200, 81, 0.6);
-  transform: scale(1.02);
-  color: #fff;
-}
-
-/* Tablet-Ansicht */
-@media (max-width: 1024px) {
   .kontakt-testimonial-wrapper {
-    flex-direction: column;
-    align-items: center;
-    gap: 4rem;
-  }
-
-  .section-title,
-  .kontakt-subline {
-    text-align: center;
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .kontakt-area,
-  .testimonial-area {
-    max-width: 100%;
-  }
-
-  .kontakt-btn {
+    max-width: 1440px;
     margin: 0 auto;
-  }
-}
-@media (max-width: 540px) {
-  html, body {
-    overflow-x: hidden;
-  }
-
-  .kontakt-testimonial-wrapper {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    overflow-x: hidden;
+    display: flex;
+    gap: 4rem;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
   }
 
-  .kontakt-area,
+  .kontakt-area {
+    flex: 1 1 480px;
+    max-width: 640px;
+    min-width: 300px;
+  }
+
   .testimonial-area {
-    width: 100%;
-    max-width: 100%;
-    padding: 0 1rem;
-    box-sizing: border-box;
-    text-align: center;
+    flex: 1 1 380px;
+    max-width: 600px;
+    min-width: 280px;
   }
 
   .section-title {
-    font-size: 1.8rem;
-    text-align: center;
-    margin: 0 auto 1rem;
-    max-width: 100%;
-    word-wrap: break-word;
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: #000000;
+    margin-bottom: 1rem;
+    text-align: left;
   }
 
   .kontakt-subline {
-    font-size: 1rem;
-    text-align: center;
-    margin: 0 auto 2rem;
-    max-width: 100%;
-    line-height: 1.5;
-    word-wrap: break-word;
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 90%;
+    margin-bottom: 2.5rem;
+    text-align: left;
   }
 
   .kontakt-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
     width: 100%;
     max-width: 100%;
     padding: 0;
@@ -3739,24 +3712,183 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
 
   .kontakt-form input,
   .kontakt-form textarea {
-    font-size: 0.95rem;
-    padding: 0.9rem 1rem;
     width: 100%;
-    box-sizing: border-box;
+    max-width: 100%;
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+  }
+
+  .kontakt-form input:focus,
+  .kontakt-form textarea:focus {
+    border-color: #ff6600;
+    box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
+    outline: none;
+    background: #fff;
   }
 
   .kontakt-btn {
-    font-size: 1rem;
-    padding: 0.8rem 1.6rem;
-    display: block;
-    margin: 0 auto;
+    background: linear-gradient(135deg, #ff6600, #ff9950, #ff6a00);
+    background-size: 300% 300%;
+    animation: gradientShift 18s ease infinite;
+    color: #252525;
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+    font-weight: 700;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    max-width: 380px;
+    width: 100%;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .kontakt-btn:hover,
+  .kontakt-btn:focus-visible {
+    transform: scale(1.04);
+    box-shadow: 0 6px 20px #ffb07366;
+    outline: none;
+  }
+
+  .kontakt-btn:focus-visible {
+    outline: 2px dashed #ff6600;
+    outline-offset: 4px;
+  }
+
+  .kontakt-btn.sent {
+    background: linear-gradient(135deg, #00c851, #007e33);
+    animation: none;
+    box-shadow: 0 0 14px rgba(0, 200, 81, 0.6);
+    transform: scale(1.02);
+    color: #fff;
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .kontakt-testimonial-wrapper {
+      flex-direction: column;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .section-title,
+    .kontakt-subline {
+      text-align: center;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .kontakt-area,
+    .testimonial-area {
+      max-width: 100%;
+    }
+
+    .kontakt-btn {
+      margin: 0 auto;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 540px) {
+    .kontakt-testimonial-wrapper {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    .kontakt-area,
+    .testimonial-area {
+      width: 100%;
+      max-width: 100%;
+      padding: 0 1rem;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      text-align: center;
+      margin: 0 auto 1rem;
+      max-width: 100%;
+      word-wrap: break-word;
+    }
+
+    .kontakt-subline {
+      font-size: 1rem;
+      text-align: center;
+      margin: 0 auto 2rem;
+      max-width: 100%;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+
+    .kontakt-form {
+      padding: 0 0.5rem;
+    }
+
+    .kontakt-form input,
+    .kontakt-form textarea {
+      font-size: 0.95rem;
+      padding: 0.9rem 1rem;
+    }
+
+    .kontakt-btn {
+      font-size: 1rem;
+      padding: 0.8rem 1.6rem;
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+@media (max-width: 400px) {
+  .kontakt-testimonial-section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .kontakt-testimonial-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
     width: 100%;
     max-width: 100%;
   }
+
+  .kontakt-area,
+  .testimonial-area {
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .kontakt-form {
+    margin: 0 auto;
+  }
+
+  .inner-card {
+    margin: 0 auto !important;
+  }
 }
 
-
 </style>
+
 <script>
   const form = document.getElementById("kontaktForm");
 
@@ -3968,12 +4100,21 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
         .dot.active {
           background-color: #ff6600;
         }
+@media (max-width: 558px) {
+  .inner-card {
+    width: 60vw;
+  }
+}
 
         @media (max-width: 425px) {
           h2 { font-size: 2rem; }
           .intro { font-size: 0.95rem; padding: 0 1.2rem; }
-          .inner-card { padding: 1.5rem; width: 90vw; }
+            .inner-card {
+    width: 55vw;
+  }
         }
+
+
       </style>
     `;
 
@@ -4101,9 +4242,184 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
 
 
 
-  <!-- ⬇️ Footer mit ARIA, SEO, Lazyload, optimiertem CSS, Barrierefreiheit -->
-  <footer role="contentinfo" itemscope itemtype="https://schema.org/Organization">
+
+
+
+<section class="angled-image-section">
+  <!-- Overlay für diagonalen Hintergrund -->
+  <div class="angled-bg-overlay" aria-hidden="true"></div>
+
+  <figure class="angled-image-wrapper">
+    <img
+      src="./WebdesignPic/webgerade.webp"
+      alt=""
+      width="1920"
+      height="1080"
+      loading="lazy"
+      decoding="async"
+    />
+  </figure>
+</section>
+<style>
+  html, body {
+    overflow-x: hidden;
+  }
+
+  :root {
+    --angled-rotation: -4deg;
+    --angled-width: 150vw;
+    --angled-offset: -25vw;
+  }
+
+  .angled-image-section {
+    position: relative;
+    width: 100vw;
+    overflow: visible;
+    margin-top: 3rem;
+    margin-bottom: -5rem;
+    pointer-events: none;
+    background: transparent;
+    z-index: 1;
+  }
+
+  /* Gradient-Hintergrund hinter dem Bild */
+  .angled-bg-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: transparent;
+  }
+
+  .angled-image-wrapper {
+    width: var(--angled-width);
+    margin-left: var(--angled-offset);
+    transform: rotate(var(--angled-rotation));
+    position: relative;
+    z-index: 1;
+  }
+
+  .angled-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    z-index: 2;
+    position: relative;
+  }
+</style>
+
+
+
+
+
+
+<div id="lottieAltWrapper">
+  <div id="lottieAltContainer"></div>
+</div>
+<style>
+  #lottieAltWrapper {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+  margin-top: -10rem;
+  padding-bottom: 12px; /* Optional */
+}
+
+#lottieAltContainer {
+  width: 100%;
+  margin: 0 auto;
+  pointer-events: none;
+  display: block;
+  position: relative;
+}
+
+/* Sehr wichtig: Das SVG darf nicht aus seinem Container gedrückt werden */
+#lottieAltContainer > svg {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: top center;
+}
+
+
+/* Padding auf typischen Laptop-Breiten */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  #lottieAltContainer {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
+@media (max-width: 540px) {
+  #lottieAltWrapper {
+    width: 100vw;
+    margin-top: -6rem;
+    padding: 0;
+  }
+
+  #lottieAltContainer {
+    width: 100vw;
+    max-width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  #lottieAltContainer > svg {
+    width: 150% !important; /* 👈 Skaliert die Animation größer */
+    height: auto !important;
+    max-width: none;
+    display: block;
+    transform: scale(1.5); /* 👈 Alternativ: Zoomt die Animation */
+    transform-origin: center top; /* 👈 Wichtig für zentriertes Vergrößern */
+  }
+}
+
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+<script>
+  const altLottieElement = document.getElementById('lottieAltContainer');
+
+  let altLottieAnimation = lottie.loadAnimation({
+    container: altLottieElement,
+    renderer: 'svg',
+    loop: false,
+    autoplay: true,
+    path: './Animationen/Webdesignshuffle.json'
+  });
+
+  altLottieAnimation.addEventListener('complete', () => {
+    setTimeout(() => {
+      altLottieAnimation.goToAndPlay(0, true);
+    }, 0);
+  });
+
+  window.addEventListener('resize', () => {
+    location.reload();
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer role="contentinfo" itemscope itemtype="https://schema.org/Organization">
+  <div class="footer-wrapper">
     <div class="footer-grid">
+
       <div class="footer-logo glass-card">
         <span itemprop="name">Fusion³</span>
         <p>UX & Webdesign<br>Nutzerzentriert.<br>Visuell stark.<br>Technisch fundiert.</p>
@@ -4132,466 +4448,160 @@ background: linear-gradient(135deg, #0d0d0d, #000000, #0d0d0d);
       <div class="footer-socials glass-card">
         <h4>Social Media</h4>
         <div class="footer-socials-icons">
-          <!-- Gmail -->
-          <a href="mailto:hello@fusion3.de" title="E-Mail schreiben" aria-label="E-Mail schreiben">
-            <img src="./FooterIcons/Gmail.png" alt="Gmail Icon" width="28" height="28" loading="lazy" />
+          <a href="mailto:hello@fusion3.de" aria-label="E-Mail schreiben">
+            <img src="./FooterIcons/Gmail.png" alt="Gmail Icon" loading="lazy" />
           </a>
-
-          <!-- LinkedIn -->
-          <a href="https://www.linkedin.com/" title="LinkedIn" target="_blank" rel="noopener"
-            aria-label="LinkedIn besuchen">
-            <img src="./FooterIcons/LinkedIn.png" alt="LinkedIn Icon" width="28" height="28" loading="lazy" />
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <img src="./FooterIcons/LinkedIn.png" alt="LinkedIn Icon" loading="lazy" />
           </a>
-
-          <!-- WhatsApp -->
-          <a href="https://wa.me/491234567890" title="WhatsApp schreiben" target="_blank" rel="noopener"
-            aria-label="WhatsApp schreiben">
-            <img src="./FooterIcons/Whatsapp.svg" alt="WhatsApp Icon" width="28" height="28" loading="lazy" />
+          <a href="https://wa.me/491234567890" target="_blank" rel="noopener" aria-label="WhatsApp schreiben">
+            <img src="./FooterIcons/Whatsapp.svg" alt="WhatsApp Icon" loading="lazy" />
           </a>
         </div>
       </div>
-
     </div>
 
-    <p class="footer-bottom glass-card">
+    <div class="footer-bottom">
       © <span id="currentYear"></span> Fusion³ – Alle Rechte vorbehalten. DSGVO-konform & barrierearm entwickelt.
-    </p>
     </div>
-  </footer>
-  <style>
+  </div>
+</footer>
+
+<style>
+  footer {
+    width: 100%;
+    background: white;
+    color: #222;
+    padding: 4rem 0 2rem;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5vw;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+  }
+
+  .footer-logo span {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--primary, darkorange);
+  }
+
+  .footer-logo p {
+    margin-top: 0.6rem;
+    color: #555;
+    font-size: 0.95rem;
+  }
+
+  .footer-links h4,
+  .footer-contact h4,
+  .footer-socials h4 {
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .footer-links ul,
+  .footer-contact ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-links li,
+  .footer-contact li {
+    margin-bottom: 0.4rem;
+  }
+
+  .footer-links a,
+  .footer-contact a {
+    color: #444;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .footer-links a:hover,
+  .footer-contact a:hover {
+    color: black;
+    transform: translateX(3px);
+  }
+
+  .footer-socials-icons {
+    display: flex;
+    gap: 14px;
+    margin-top: 0.5rem;
+  }
+
+  .footer-socials img {
+    width: 28px;
+    height: 28px;
+    filter: grayscale(10%);
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  .footer-socials img:hover {
+    transform: scale(1.15);
+    filter: brightness(1.2);
+  }
+
+  .footer-bottom {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  @media (max-width: 768px) {
     footer {
-      position: relative;
-      background: white;
-      background-size: 600% 600%;
-      animation: animatedGradient 20s ease infinite;
-      color: #222;
-      padding: 4rem 5vw 6rem;
-      font-size: 0.9rem;
-      border-top: 1px solid rgba(0, 0, 0, 0.08);
-      overflow: hidden;
-      z-index: 1;
+      padding: 3rem 0 2rem;
+      font-size: 0.85rem;
     }
 
-    @keyframes animatedGradient {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
+    .footer-wrapper {
+      padding: 0 1.5rem;
     }
 
     .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto 2rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .footer-logo span {
-      font-size: 1.6rem;
-      font-weight: 900;
-      color: var(--primary, darkorange);
-    }
-
-    .footer-logo p {
-      margin-top: 0.5rem;
-      color: #555;
-      font-size: 0.95rem;
-    }
-
-    .footer-links h4,
-    .footer-contact h4,
-    .footer-socials h4 {
-      margin-bottom: 0.8rem;
-      color: rgb(65, 64, 64);
-      font-weight: 600;
-      font-size: 1rem;
-    }
-
-    .footer-links ul,
-    .footer-contact ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .footer-links li,
-    .footer-contact li {
-      margin-bottom: 0.4rem;
-    }
-
-    .footer-links a {
-      color: #444;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .footer-links a:hover {
-      color: black;
-      transform: translateX(4px);
-      filter: brightness(1.2) drop-shadow(0 0 6px white);
-    }
-
-    .footer-socials-icons {
-      display: flex;
-      gap: 12px;
-      margin-top: 0.5rem;
-      justify-content: flex-start;
-      /* ← Icons nach links schieben */
-    }
-
-
-
-    .footer-socials img {
-      width: clamp(24px, 4vw, 30px);
-      height: auto;
-      opacity: 1;
-      transition: transform 0.3s ease, filter 0.3s ease;
-      filter: grayscale(20%);
-    }
-
-    .footer-socials img:hover {
-      transform: scale(1.2);
-      filter: brightness(1.2) drop-shadow(0 0 6px white);
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
 
     .footer-bottom {
-      text-align: center;
-      color: #555;
-      font-size: 0.85rem;
-      margin-top: 1.5rem;
-      position: relative;
-      z-index: 2;
+      font-size: 0.75rem;
+      margin-top: 2rem;
     }
 
     .glass-card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 1.5rem;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      animation: glassPulse 6s ease-in-out infinite;
+      padding: 1.2rem;
     }
 
-    @keyframes glassPulse {
-      0% {
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(6px);
-      }
-
-      50% {
-        background: rgba(255, 255, 255, 0.18);
-        backdrop-filter: blur(14px);
-      }
-
-      100% {
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(6px);
-      }
+    .footer-logo span {
+      font-size: 1.4rem;
     }
+  }
+</style>
 
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
-
-    @media (max-width: 768px) {
-      footer {
-        font-size: 0.85rem;
-        padding: 3rem 1.5rem 5rem;
-      }
-
-      .footer-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-      }
-
-      .glass-card {
-        padding: 1.2rem;
-      }
-
-      .footer-logo span {
-        font-size: 1.4rem;
-      }
-
-      .footer-bottom {
-        font-size: 0.75rem;
-        margin-top: 2rem;
-      }
-
-    }
-  </style>
-  <style>
-    /* === Responsive Styles === */
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 3rem 1.5rem;
-      }
-
-      .hero-video-content {
-        margin-top: -35vh;
-      }
-
-      .hero-video-content h1 {
-        font-size: 2rem;
-        line-height: 1.2;
-      }
-
-      .hero-video-content p {
-        font-size: 1rem;
-      }
-
-
-      .cta-btn,
-      .neon-btn {
-        font-size: 0.9rem;
-        padding: 0.8rem 1.6rem;
-      }
-
-      .pricing-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .cs-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .cta-modern .cta-headline {
-        font-size: 1.8rem;
-      }
-
-      .cta-modern .cta-text {
-        font-size: 1rem;
-      }
-
-      .cta-action {
-        flex-direction: column;
-        font-size: 0.9rem;
-        text-align: center;
-      }
-
-      .kontakt-form {
-        gap: 1rem;
-      }
-    }
-
-    @media (max-width: 375px) {
-      .hero-video-content h1 {
-        font-size: 1.5rem;
-      }
-
-      .hero-video-content p {
-        font-size: 0.9rem;
-      }
-
-      .cta-btn,
-      .neon-btn {
-        font-size: 0.8rem;
-        padding: 0.7rem 1.2rem;
-      }
-
-      .pricing-title {
-        font-size: 1.8rem;
-      }
-
-      .pricing-subline {
-        font-size: 1rem;
-      }
-
-      .cs-title {
-        font-size: 1.8rem;
-      }
-
-      .cs-subline {
-        font-size: 1rem;
-      }
-
-      .about-title,
-      .kontakt-title {
-        font-size: 2rem;
-      }
-
-      .about-subline,
-      .kontakt-subline {
-        font-size: 1rem;
-      }
-
-      .cta-headline {
-        font-size: 1.6rem;
-      }
-
-      .cta-text {
-        font-size: 0.95rem;
-      }
-    }
-
-    @media (max-width: 320px) {
-      .hero-video-content {
-        padding: 1rem;
-        margin-top: -20vh;
-      }
-
-      .hero-video-content h1 {
-        font-size: 1.3rem;
-        line-height: 1.2;
-      }
-
-      .hero-video-content p {
-        font-size: 0.85rem;
-      }
-
-      .cta-btn,
-      .neon-btn {
-        font-size: 0.75rem;
-        padding: 0.6rem 1rem;
-      }
-
-      .kontakt-form input,
-      .kontakt-form textarea {
-        font-size: 0.9rem;
-      }
-
-      .kontakt-btn {
-        font-size: 0.9rem;
-        padding: 0.8rem 1.2rem;
-      }
-
-      .cta-headline {
-        font-size: 1.4rem;
-      }
-
-      .cta-action {
-        font-size: 0.85rem;
-        padding: 0.8rem 1.4rem;
-      }
-    }
-  </style>
-  <style>
-    @media screen and (max-height: 480px) and (orientation: landscape) {
-      header {
-        padding: 0.4rem 3vw;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        min-height: 40px;
-      }
-
-      .logo {
-        font-size: clamp(1rem, 3vw, 1.4rem);
-        font-weight: 800;
-        line-height: 1;
-      }
-
-      .burger-icon {
-        display: block !important;
-      }
-
-      .burger-icon i {
-        width: clamp(22px, 4vw, 26px);
-        height: clamp(22px, 4vw, 26px);
-        stroke: #000;
-      }
-
-      nav {
-        position: absolute;
-        bottom: 42px;
-        /* Platz für Fixierung unten */
-        left: 0;
-        right: 0;
-        background: #fff;
-        flex-direction: column;
-        align-items: center;
-        padding: 0.5rem 1rem;
-        display: none;
-        z-index: 999;
-        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
-        flex-wrap: wrap;
-        gap: 0.4rem;
-      }
-
-      nav.open {
-        display: flex;
-      }
-
-      nav a {
-        font-size: clamp(0.65rem, 1.8vw, 0.9rem);
-        font-weight: 500;
-        padding: 0.4rem 0.6rem;
-        color: #000;
-        white-space: nowrap;
-      }
-
-      .hero-video-content h1 {
-        font-size: clamp(1rem, 4vw + 0.3rem, 1.4rem);
-        line-height: 1.2;
-        margin-bottom: 0.4rem;
-        letter-spacing: 0.02rem;
-        text-align: center;
-      }
-
-      .hero-video-content p {
-        font-size: clamp(0.7rem, 2vw + 0.2rem, 0.9rem);
-        line-height: 1.4;
-        text-align: center;
-      }
-
-      .cta-btn,
-      .neon-btn {
-        font-size: clamp(0.65rem, 1.5vw, 0.8rem);
-        padding: 0.5rem 1rem;
-        margin-top: 0.8rem;
-      }
-    }
-  </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      feather.replace();
-
-      const tabs = document.querySelectorAll('.tab');
-      const tabContents = document.querySelectorAll('.tab-content');
-
-      tabs.forEach(button => {
-        button.addEventListener('click', () => {
-          // Tabs visuell zurücksetzen
-          tabs.forEach(tab => tab.classList.remove('active'));
-          tabContents.forEach(content => content.classList.remove('active'));
-
-          // Aktiven Tab und Content setzen
-          button.classList.add('active');
-          const tabId = button.getAttribute('data-tab');
-          const activeContent = document.getElementById(`tab-${tabId}`);
-          if (activeContent) {
-            activeContent.classList.add('active');
-          }
-        });
-      });
-    });
-  </script>
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      if (window.feather) {
-        feather.replace();
-      } else {
-        console.warn("Feather Icons konnten nicht geladen werden.");
-      }
-    });
-  </script>
+<script>
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>

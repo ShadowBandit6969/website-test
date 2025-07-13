@@ -539,39 +539,27 @@
       video.addEventListener('playing', () => {
         if (!anyPlaying) {
           anyPlaying = true;
-          fallback.classList.add('hidden');
+          fallback?.classList?.add('hidden');
         }
       });
+
+      // iOS: Autoplay ist oft blockiert → optional versuchen zu starten
+      try {
+        video.play().catch(() => {});
+      } catch (e) {}
     });
+
+    // Fallback sicherheitshalber nach 3 Sekunden ausblenden
+    setTimeout(() => {
+      if (!anyPlaying) {
+        fallback?.classList?.add('hidden');
+      }
+    }, 3000);
 
     // Typewriter Animation
     const hero = document.querySelector('.hero');
-
-    const typeSequence = async (el, steps) => {
-      let step = 0, char = 0;
-      const pause = ms => new Promise(res => setTimeout(res, ms));
-      while (true) {
-        const item = steps[step] || (step = 0, steps[step]);
-        if (item.text !== undefined) {
-          if (char < item.text.length) {
-            el.textContent += item.text[char++];
-            await pause(item.delay);
-            continue;
-          }
-          char = 0; step++; await pause(400);
-        } else if (item.delete !== undefined) {
-          let cnt = item.delete === 'all' ? el.textContent.length : item.delete;
-          while (cnt--) {
-            el.textContent = el.textContent.slice(0, -1);
-            await pause(item.delay);
-          }
-          step++;
-        } else if (item.pause) {
-          await pause(item.pause);
-          step++;
-        }
-      }
-    };
+    const elTitle = hero.querySelector('.animated-title-line');
+    const elText = hero.querySelector('.dynamic-line');
 
     const titleAnim = [
       { text: "Digitale Erlebnisse, die bleiben", delay: 60 },
@@ -591,8 +579,38 @@
       { pause: 1000 }, { delete: 'all', delay: 30 }
     ];
 
-    const elTitle = hero.querySelector('.animated-title-line');
-    const elText = hero.querySelector('.dynamic-line');
+    // Begrenzte Wiederholungen für bessere Performance
+    const typeSequence = async (el, steps, maxLoops = 3) => {
+      let step = 0, char = 0, loop = 0;
+      const pause = ms => new Promise(res => setTimeout(res, ms));
+
+      while (loop < maxLoops) {
+        const item = steps[step] || (step = 0, steps[step]);
+        if (item.text !== undefined) {
+          if (char < item.text.length) {
+            el.textContent += item.text[char++];
+            await pause(item.delay);
+            continue;
+          }
+          char = 0; step++; await pause(400);
+        } else if (item.delete !== undefined) {
+          let cnt = item.delete === 'all' ? el.textContent.length : item.delete;
+          while (cnt--) {
+            el.textContent = el.textContent.slice(0, -1);
+            await pause(item.delay);
+          }
+          step++;
+        } else if (item.pause) {
+          await pause(item.pause);
+          step++;
+        }
+
+        if (step >= steps.length) {
+          step = 0;
+          loop++;
+        }
+      }
+    };
 
     typeSequence(elTitle, titleAnim);
     typeSequence(elText, textAnim);
@@ -600,13 +618,11 @@
     // CTA Button einblenden
     setTimeout(() => {
       const cta = hero.querySelector('.cta-button');
-      cta.classList.add('visible');
-      cta.setAttribute('aria-hidden', 'false');
+      cta?.classList?.add('visible');
+      cta?.setAttribute('aria-hidden', 'false');
     }, 5000);
   });
 </script>
-
-
 
 
 
@@ -2269,118 +2285,34 @@ toggles.forEach(toggle => {
     </li>
   </ol>
 </section>
-<style>.workflow-horizontal {
-  background: #000000;
-  color: #ffffff;
-  padding: 4rem 2rem;
+<style>/* Basis-Styling */
+.workflow-horizontal {
+  background: #000;
+  color: #fff;
+  padding: 4rem 1rem;
   text-align: center;
-  max-width: 100%;
-  margin: 0 auto;
   font-family: 'Inter', sans-serif;
 }
 
 .workflow-title {
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   font-weight: 800;
   margin-bottom: 0.5rem;
 }
 
 .workflow-intro {
-  font-size: 1.1rem;
-  color: #ffffff;
+  font-size: 1rem;
+  color: #fff;
   max-width: 700px;
-  margin: 0 auto 3rem;
+  margin: 0 auto 2.5rem;
   line-height: 1.6;
 }
 
+/* Workflow Track Layout */
 .workflow-track {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  flex-direction: row;
-  align-items: flex-start;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  position: relative;
-}
-
-.workflow-point {
-  position: relative;
-  flex: 1 1 calc(16% - 1rem);
-  max-width: 160px;
-  text-align: center;
-}
-
-.workflow-trigger {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  width: 100%;
-}
-
-.icon {
-  width: 60px;
-  height: 60px;
-  background: #ff6600;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto 0.5rem;
-  z-index: 2;
-  position: relative;
-}
-
-.icon i {
-  stroke: #fff;
-  width: 26px;
-  height: 26px;
-}
-
-.step-label {
-  font-weight: 600;
-  font-size: 0.95rem;
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-
-.workflow-track {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.workflow-point {
-  flex: 1 1 calc(33.33% - 1rem);
-  max-width: 140px;
-}
-
-.icon {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 0.3rem;
-}
-
-.icon i {
-  width: 20px;
-  height: 20px;
-}
-
-.step-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-.workflow-track {
-  display: flex;
-  justify-content: space-between;
   flex-wrap: nowrap;
+  justify-content: space-between;
   gap: 1.2rem;
   list-style: none;
   padding: 0;
@@ -2390,58 +2322,76 @@ toggles.forEach(toggle => {
 }
 
 .workflow-point {
-  position: relative;
   flex: 1 1 auto;
-  max-width: unset;
   text-align: center;
+  position: relative;
 }
 
+.workflow-trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  padding: 0;
+}
 
+.icon {
+  width: 48px;
+  height: 48px;
+  background: #ff6600;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.4rem;
+  position: relative;
+  z-index: 2;
+}
 
+.icon i {
+  stroke: #fff;
+  width: 20px;
+  height: 20px;
+}
 
+.step-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Popup Styling */
 .step-popup {
   position: absolute;
   top: 90px;
   left: 50%;
   transform: translateX(-50%);
-  width: 260px;
-  background: #f5f5f5;
-  color: #111;
+  background: #7b7b7bf0;
+  color: #ffffff;
   padding: 1.2rem 1rem 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
   text-align: left;
-  z-index: 10;
   display: none;
+  z-index: 10;
+  width: 260px;
   max-width: 90vw;
 }
 
 .workflow-point.open .step-popup {
   display: block;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.workflow-point:first-child .step-popup {
-  left: 0;
-  transform: none;
-}
-
-.workflow-point:last-child .step-popup {
-  right: 0;
-  left: auto;
-  transform: none;
 }
 
 .step-popup h3 {
   font-size: 1.1rem;
-  margin-bottom: 0.5rem;
   font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
 .step-popup p {
   font-size: 0.95rem;
-  color: #333;
+  color: #ffffff;
   line-height: 1.5;
 }
 
@@ -2452,51 +2402,15 @@ toggles.forEach(toggle => {
   border: none;
   background: none;
   font-size: 1.3rem;
+  color: #ffffff;
   cursor: pointer;
-  color: #333;
 }
 
 .step-popup .close-popup:hover {
   color: #000;
 }
 
-@media (max-width: 768px) {
-  .workflow-track {
-    justify-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .workflow-point {
-    flex: 1 1 45%;
-    max-width: 100%;
-    margin-bottom: 2rem;
-  }
-
-  .step-popup {
-    width: 90vw;
-    top: 80px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .workflow-track::before {
-    content: '';
-    position: absolute;
-    top: 30px;
-    left: calc(160px / 2);
-    right: calc(160px / 2);
-    height: 4px;
-    background-color: #ff6600;
-    z-index: 1;
-  }
-
-  .workflow-point .icon {
-    position: relative;
-    z-index: 2;
-  }
-}
-
+/* Animation für aktive Punkte */
 .workflow-point.open .icon::after {
   content: '';
   position: absolute;
@@ -2519,6 +2433,7 @@ toggles.forEach(toggle => {
   }
 }
 
+/* Tooltip */
 .workflow-point[data-step="1"].show-tooltip .workflow-trigger::before {
   content: 'Klick mich';
   position: absolute;
@@ -2526,7 +2441,7 @@ toggles.forEach(toggle => {
   left: 50%;
   transform: translateX(-50%);
   background: #ff6600;
-  color: #fff;
+  color: #ffffff;
   font-size: 0.75rem;
   padding: 0.25rem 0.6rem;
   border-radius: 4px;
@@ -2543,6 +2458,113 @@ toggles.forEach(toggle => {
     transform: translateX(-50%) translateY(-5px);
   }
 }
+
+/* ============================ */
+/* MEDIA QUERIES – RESPONSIVE  */
+/* ============================ */
+
+/* Tablets und kleine Laptops */
+@media (max-width: 1024px) {
+  .workflow-track {
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .workflow-point {
+    flex: 0 1 calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
+    margin-bottom: 2rem;
+  }
+
+  .step-popup {
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Smartphones */
+@media (max-width: 600px) {
+  .workflow-title {
+    font-size: 1.8rem;
+  }
+
+  .workflow-intro {
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  .workflow-point {
+    flex: 0 1 100%;
+    max-width: 100%;
+  }
+
+  .step-popup {
+    font-size: 0.9rem;
+    padding: 1rem 1rem 1.3rem;
+    max-height: 75vh;
+  }
+
+  .step-popup h3 {
+    font-size: 1rem;
+  }
+
+  .step-popup p {
+    font-size: 0.9rem;
+  }
+
+  .step-label {
+    font-size: 0.8rem;
+  }
+
+  .icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .icon i {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Linie im Hintergrund auf Desktop */
+@media (min-width: 1024px) {
+  .workflow-track::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: calc(160px / 2);
+    right: calc(160px / 2);
+    height: 4px;
+    background-color: #ff6600;
+    z-index: 1;
+  }
+
+  .workflow-point .icon {
+    z-index: 2;
+  }
+
+  .workflow-point:first-child .step-popup {
+    left: 0;
+    transform: none;
+  }
+
+  .workflow-point:last-child .step-popup {
+    right: 0;
+    left: auto;
+    transform: none;
+  }
+}
+
+
 </style>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -4225,213 +4247,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-<section class="angled-image-section">
-  <!-- Overlay für diagonalen Hintergrund -->
-  <div class="angled-bg-overlay" aria-hidden="true"></div>
-
-  <figure class="angled-image-wrapper">
-    <img
-      src="./WebdesignPic/webgerade.webp"
-      alt=""
-      width="1920"
-      height="1080"
-      loading="lazy"
-      decoding="async"
-    />
-  </figure>
-</section>
-<style>
-  html, body {
-    overflow-x: hidden;
-  }
-
-  :root {
-    --angled-rotation: -8deg;
-    --angled-width: 150vw;
-    --angled-offset: -25vw;
-  }
-
-  .angled-image-section {
-    position: relative;
-    width: 100vw;
-    overflow: visible;
-    margin-top: 3rem;
-    margin-bottom: -5rem;
-    pointer-events: none;
-    background: transparent;
-    z-index: 1;
-  }
-
-  /* Gradient-Hintergrund hinter dem Bild */
-  .angled-bg-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background: linear-gradient(
-      to bottom,
-      rgb(255, 255, 255) 0%,
-      rgb(255, 255, 255) 20%,
-      rgb(0, 0, 0) 70%
-    );
-  }
-
-  .angled-image-wrapper {
-    width: var(--angled-width);
-    margin-left: var(--angled-offset);
-    transform: rotate(var(--angled-rotation));
-    position: relative;
-    z-index: 1;
-  }
-
-  .angled-image-wrapper img {
-    width: 100%;
-    height: auto;
-    display: block;
-    z-index: 2;
-    position: relative;
-  }
-</style>
-
-
-<div id="lottieAltWrapper">
-  <div id="lottieAltContainer"></div>
-</div>
-<style>
-  #lottieAltWrapper {
-  position: relative;
-  width: 100%;
-  overflow: visible;
-  margin: 0;
-  padding-bottom: 12px; /* Optional */
-}
-
-#lottieAltContainer {
-  width: 100%;
-  margin: 0 auto;
-  pointer-events: none;
-  display: block;
-  position: relative;
-}
-
-/* Sehr wichtig: Das SVG darf nicht aus seinem Container gedrückt werden */
-#lottieAltContainer > svg {
-  width: 100%;
-  height: auto;
-  max-height: 100%;
-  display: block;
-  object-fit: contain;
-  object-position: top center;
-}
-
-
-/* Padding auf typischen Laptop-Breiten */
-@media (min-width: 1024px) and (max-width: 1440px) {
-  #lottieAltContainer {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-}
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
-<script>
-  const altLottieElement = document.getElementById('lottieAltContainer');
-
-  let altLottieAnimation = lottie.loadAnimation({
-    container: altLottieElement,
-    renderer: 'svg',
-    loop: false,
-    autoplay: true,
-    path: './Animationen/Webdesignshuffle.json'
-  });
-
-  altLottieAnimation.addEventListener('complete', () => {
-    setTimeout(() => {
-      altLottieAnimation.goToAndPlay(0, true);
-    }, 0);
-  });
-
-  window.addEventListener('resize', () => {
-    location.reload();
-  });
-</script>
-
-
-
-
-
-<section class="angled-image-section">
-  <!-- Overlay für diagonalen Hintergrund -->
-  <div class="angled-bg-overlay" aria-hidden="true"></div>
-
-  <figure class="angled-image-wrapper">
-    <img
-      src="./WebdesignPic/webgerade.webp"
-      alt=""
-      width="1920"
-      height="1080"
-      loading="lazy"
-      decoding="async"
-    />
-  </figure>
-</section>
-<style>
-  html, body {
-    overflow-x: hidden;
-  }
-
-  :root {
-    --angled-rotation: -8deg;
-    --angled-width: 150vw;
-    --angled-offset: -25vw;
-  }
-
-  .angled-image-section {
-    position: relative;
-    width: 100vw;
-    overflow: visible;
-    margin-top: 3rem;
-    margin-bottom: -5rem;
-    pointer-events: none;
-    background: transparent;
-    z-index: 1;
-  }
-
-  /* Gradient-Hintergrund hinter dem Bild */
-  .angled-bg-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background: linear-gradient(
-      to bottom,
-      rgb(255, 255, 255) 0%,
-      rgb(255, 255, 255) 20%,
-      rgb(0, 0, 0) 70%
-    );
-  }
-
-  .angled-image-wrapper {
-    width: var(--angled-width);
-    margin-left: var(--angled-offset);
-    transform: rotate(var(--angled-rotation));
-    position: relative;
-    z-index: 1;
-  }
-
-  .angled-image-wrapper img {
-    width: 100%;
-    height: auto;
-    display: block;
-    z-index: 2;
-    position: relative;
-  }
-</style>
-
-
-
-
-
-
   <section class="faq-section" id="faq">
     <h2 class="faq-title">Häufige Fragen <br> Klarheit vor Projektstart</h2>
     <div class="faq-search-bar">
@@ -5065,3 +4880,140 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   </script>
+
+
+
+
+
+<section class="angled-image-section">
+  <!-- Overlay für diagonalen Hintergrund -->
+  <div class="angled-bg-overlay" aria-hidden="true"></div>
+
+  <figure class="angled-image-wrapper">
+    <img
+      src="./WebdesignPic/webgerade.webp"
+      alt=""
+      width="1920"
+      height="1080"
+      loading="lazy"
+      decoding="async"
+    />
+  </figure>
+</section>
+<style>
+  html, body {
+    overflow-x: hidden;
+  }
+
+  :root {
+    --angled-rotation: -8deg;
+    --angled-width: 150vw;
+    --angled-offset: -25vw;
+  }
+
+  .angled-image-section {
+    position: relative;
+    width: 100vw;
+    overflow: visible;
+    margin-top: 3rem;
+    margin-bottom: -5rem;
+    pointer-events: none;
+    background: transparent;
+    z-index: 1;
+  }
+
+  /* Gradient-Hintergrund hinter dem Bild */
+  .angled-bg-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(
+      to bottom,
+      rgb(255, 255, 255) 0%,
+      rgb(255, 255, 255) 20%,
+      rgb(0, 0, 0) 70%
+    );
+  }
+
+  .angled-image-wrapper {
+    width: var(--angled-width);
+    margin-left: var(--angled-offset);
+    transform: rotate(var(--angled-rotation));
+    position: relative;
+    z-index: 1;
+  }
+
+  .angled-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    z-index: 2;
+    position: relative;
+  }
+</style>
+
+
+<div id="lottieAltWrapper">
+  <div id="lottieAltContainer"></div>
+</div>
+<style>
+  #lottieAltWrapper {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+  margin: 0;
+  padding-bottom: 12px; /* Optional */
+}
+
+#lottieAltContainer {
+  width: 100%;
+  margin: 0 auto;
+  pointer-events: none;
+  display: block;
+  position: relative;
+}
+
+/* Sehr wichtig: Das SVG darf nicht aus seinem Container gedrückt werden */
+#lottieAltContainer > svg {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: top center;
+}
+
+
+/* Padding auf typischen Laptop-Breiten */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  #lottieAltContainer {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+<script>
+  const altLottieElement = document.getElementById('lottieAltContainer');
+
+  let altLottieAnimation = lottie.loadAnimation({
+    container: altLottieElement,
+    renderer: 'svg',
+    loop: false,
+    autoplay: true,
+    path: './Animationen/Webdesignshuffle.json'
+  });
+
+  altLottieAnimation.addEventListener('complete', () => {
+    setTimeout(() => {
+      altLottieAnimation.goToAndPlay(0, true);
+    }, 0);
+  });
+
+  window.addEventListener('resize', () => {
+    location.reload();
+  });
+</script>
+
+
+
