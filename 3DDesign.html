@@ -935,245 +935,272 @@ width: 170vw;
 
 
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --primary: #ff4d00;
+    --secondary: #ff9900;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: #fff;
+    color: #111;
+  }
+
+  main {
+    display: block;
+  }
+
+  .hero-video-wrapper {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #000;
+  }
+
+  .hero-video-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    max-width: 800px;
+    width: 100%;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 12px;
+    background-color: #2a2a2a63; /* Kein RGBA, kein Verlauf */
+    margin-top: -5rem;
+  }
+
+  /* Dieses Pseudo-Element entfernt */
+  .hero-video-content::before {
+    content: none !important;
+  }
+
+  .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero-video-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    z-index: 1;
+  }
+
+  .hero-video-content h1 {
+    font-size: 3.8rem;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+    color: #ffffff;
+  }
+
+  .hero-video-content p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .cta-btn {
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    color: #fff;
+    font-weight: 700;
+    padding: 1rem 2.2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-top: 2rem;
+    border: none;
+    box-shadow: 0 0 12px rgba(255, 102, 0, 0.3),
+                0 0 24px rgba(255, 102, 0, 0.25);
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .cta-btn:hover,
+  .cta-btn:focus {
+    background: var(--secondary);
+    color: #000;
+    transform: scale(1.03);
+    cursor: pointer;
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+  }
+  .video-fallback-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  pointer-events: none;
+}
 
 
-  <style>
-    :root {
-      --primary: #ff4d00;
-      --secondary: #ff9900;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Space Grotesk', sans-serif;
-      background-color: #fff;
-      color: #111;
-    }
-
-    main {
-      display: block;
-    }
-
-    .hero-video-wrapper {
-      position: relative;
-      min-height: 100vh;
-      width: 100%;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background-color: #000;
-    }
-
+  @media (max-width: 1024px) {
     .hero-video-content {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 3rem 2rem;
-      max-width: 800px;
-      width: 100%;
-      color: #ffffff;
-      text-align: center;
-      border-radius: 12px;
-      background-color: #2a2a2a63;
-      /* Kein RGBA, kein Verlauf */
-      margin-top: -5rem;
+      padding: 2rem;
     }
-
-    /* Dieses Pseudo-Element entfernt */
-    .hero-video-content::before {
-      content: none !important;
-    }
-
-    .video-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .hero-video-wrapper::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 120px;
-      z-index: 1;
-    }
-
     .hero-video-content h1 {
-      font-size: 3.8rem;
-      line-height: 1.1;
-      margin-bottom: 1.2rem;
-      color: #ffffff;
+      font-size: 3rem;
     }
-
     .hero-video-content p {
-      font-size: 1.3rem;
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.85);
+      font-size: 1.1rem;
+      line-height: 1.5;
     }
+  }
 
-    .cta-btn {
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      color: #fff;
-      font-weight: 700;
-      padding: 1rem 2.2rem;
-      border-radius: 12px;
+  @media (max-width: 768px) {
+    .hero-video-wrapper {
+      min-height: 80vh;
+    }
+    .hero-video-content {
+      padding: 1.5rem;
+      margin-top: 0;
+    }
+    .hero-video-content h1 {
+      font-size: 2.2rem;
+      line-height: 1.2;
+    }
+    .hero-video-content p {
       font-size: 1rem;
-      text-transform: uppercase;
-      margin-top: 2rem;
-      border: none;
-      box-shadow: 0 0 12px rgba(255, 102, 0, 0.3),
-        0 0 24px rgba(255, 102, 0, 0.25);
-      transition: all 0.3s ease;
-      display: inline-block;
-      text-decoration: none;
+      line-height: 1.4;
+    }
+    .cta-btn {
+      font-size: 0.95rem;
+      padding: 0.75rem 1.5rem;
+      width: auto;
+      max-width: 90%;
+      margin: 1.5rem auto 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-video-content h1 {
+      font-size: 1.6rem;
+      line-height: 1.3;
+    }
+    .hero-video-content p {
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .cta-btn {
+      width: 100%;
+      max-width: 180px;
+      font-size: 0.9rem;
+      padding: 0.9rem 1.2rem;
+      box-sizing: border-box;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  /* Desktop Default */
+.hero-video-wrapper {
+  background: #000 url('./IndexM/PC.webp') center center / cover no-repeat;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .hero-video-wrapper {
+    background-image: url('./IndexM/Tablet.webp');
+  }
+}
+
+/* Smartphone */
+@media (max-width: 480px) {
+  .hero-video-wrapper {
+    background-image: url('./IndexM/handy.webp');
+  }
+}
+
+</style>
+<main role="main">
+<section class="hero-video-wrapper" aria-labelledby="hero-heading">
+  <div class="hero-video-content">
+    <h1 id="hero-heading">UX & Webdesign<br>das Nutzer begeistert</h1>
+    <p>Wir konzipieren digitale Erlebnisse.<br>maßgeschneidert und klickbar.</p>
+    <a class="cta-btn" href="#kontakt" title="Projekt mit Fusion3 starten">Projekt anfragen</a>
+  </div>
+
+  <video
+    id="responsiveVideo"
+    class="video-background"
+    poster="./IndexM/hero-poster.webp"
+    fetchpriority="high"
+    autoplay
+    muted
+    loop
+    playsinline
+    aria-label="Hintergrundvideo mit Interface-Animationen im Tech-Stil"
+  >
+<source src="./IndexM/PC.webm" type="video/webm" />
+<source src="./IndexM/PC.mp4" type="video/mp4" />
+
+  </video>
+</section>
+
+</main>
+<script>
+  let videoInitialized = false;
+
+  function chooseVideoSrc() {
+    const video = document.getElementById('responsiveVideo');
+    const source = video.querySelector('source');
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    let src = "./IndexM/PC.webm";
+
+    if (width <= 480) {
+      src = "./IndexM/handy.webm";
+    } else if (width <= 768) {
+      src = "./IndexM/Tablet.webm";
+    } else if (width <= 1024) {
+      src = width > height ? "./IndexM/PC.webm" : "./IndexM/Tablet.webm";
     }
 
-    .cta-btn:hover,
-    .cta-btn:focus {
-      background: var(--secondary);
-      color: #000;
-      transform: scale(1.03);
-      cursor: pointer;
-      outline: 2px solid var(--primary);
-      outline-offset: 4px;
+    if (!videoInitialized) {
+      source.setAttribute('src', src);
+      video.load();
+      videoInitialized = true;
+    } else if (source.getAttribute('src') !== src) {
+      source.setAttribute('src', src);
+      video.load();
     }
+  }
 
-    @media (max-width: 1024px) {
-      .hero-video-content {
-        padding: 2rem;
-      }
-
-      .hero-video-content h1 {
-        font-size: 3rem;
-      }
-
-      .hero-video-content p {
-        font-size: 1.1rem;
-        line-height: 1.5;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero-video-wrapper {
-        min-height: 80vh;
-      }
-
-      .hero-video-content {
-        padding: 1.5rem;
-        margin-top: 0;
-      }
-
-      .hero-video-content h1 {
-        font-size: 2.2rem;
-        line-height: 1.2;
-      }
-
-      .hero-video-content p {
-        font-size: 1rem;
-        line-height: 1.4;
-      }
-
-      .cta-btn {
-        font-size: 0.95rem;
-        padding: 0.75rem 1.5rem;
-        width: auto;
-        max-width: 90%;
-        margin: 1.5rem auto 0;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero-video-content h1 {
-        font-size: 1.6rem;
-        line-height: 1.3;
-      }
-
-      .hero-video-content p {
-        font-size: 0.95rem;
-      }
-    }
-
-    @media (max-width: 425px) {
-      .cta-btn {
-        width: 100%;
-        max-width: 180px;
-        font-size: 0.9rem;
-        padding: 0.9rem 1.2rem;
-        box-sizing: border-box;
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-      }
-    }
-  </style>
-
-  <main role="main">
-    <section class="hero-video-wrapper" aria-labelledby="hero-heading">
-      <div class="hero-video-content">
-        <h1 id="hero-heading">3D Design<br>Alles ist möglich!</h1>
-        <p>Alles ist möglich!<br>Maßgeschneidert und Realitätsnah.</p>
-        <a class="cta-btn" href="#kontakt" title="Projekt mit Fusion3 starten">Projekt anfragen</a>
-      </div>
-
-      <!-- Video jetzt mit Poster und lazy-loading -->
-      <video id="responsiveVideo" class="video-background" poster="./IndexM/hero-poster.webp" loading="lazy" autoplay
-        muted loop playsinline aria-label="Hintergrundvideo mit Interface-Animationen im Tech-Stil">
-        <source src="" type="video/webm" />
-        <!-- Fallback für MP4 -->
-        <source src="" type="video/mp4" />
-      </video>
-    </section>
-  </main>
-  <script>
-    let videoInitialized = false;
-
-    function chooseVideoSrc() {
-      const video = document.getElementById('responsiveVideo');
-      const source = video.querySelector('source');
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      let src = "./IndexM/PC.webm";
-
-      if (width <= 480) {
-        src = "./IndexM/handy.webm";
-      } else if (width <= 768) {
-        src = "./IndexM/Tablet.webm";
-      } else if (width <= 1024) {
-        src = width > height ? "./IndexM/PC.webm" : "./IndexM/Tablet.webm";
-      }
-
-      if (!videoInitialized) {
-        source.setAttribute('src', src);
-        video.load();
-        videoInitialized = true;
-      } else if (source.getAttribute('src') !== src) {
-        source.setAttribute('src', src);
-        video.load();
-      }
-    }
-
-    window.addEventListener("DOMContentLoaded", chooseVideoSrc);
-    window.addEventListener("resize", chooseVideoSrc);
-  </script>
+  window.addEventListener("DOMContentLoaded", chooseVideoSrc);
+  window.addEventListener("resize", chooseVideoSrc);
+</script>
 
 
 
@@ -1366,6 +1393,9 @@ width: 170vw;
 
 
 
+
+
+  
 
 
 
@@ -1981,7 +2011,296 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+  <section class="cta-modern">
+    <style>
+      .cta-modern {
+        position: relative;
+        padding: 7rem 1.5rem;
+        background: linear-gradient(180deg, #ffffff, #ffffff);
+        overflow: hidden;
+        text-align: center;
+        z-index: 1;
+      }
 
+      .cta-modern::before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1800px;
+        max-width: 100vw;
+        height: 1800px;
+        z-index: 0;
+        pointer-events: none;
+        animation: glowShift 12s ease-in-out infinite alternate;
+      }
+
+
+      .cta-headline {
+        font-size: clamp(1.8rem, 4.5vw, 3rem);
+        font-weight: 800;
+        font-family: 'Inter', sans-serif;
+        color: #000;
+        margin-bottom: 1rem;
+        line-height: 1.25;
+        letter-spacing: -0.3px;
+        position: relative;
+        z-index: 2;
+        animation: fadeUp 1s ease-out both;
+      }
+
+      .cta-small {
+        font-size: 0.6em;
+        font-weight: 500;
+        color: #000000 !important;
+        font-family: 'Inter', sans-serif;
+        display: inline-block;
+        margin-right: 0.3em;
+        background: none !important;
+        background-clip: initial !important;
+        -webkit-background-clip: initial !important;
+        -webkit-text-fill-color: initial !important;
+      }
+
+      .cta-headline span {
+        font-family: 'VT323', monospace;
+        font-size: 1.3em;
+        line-height: 1;
+        display: inline-block;
+
+
+        background: linear-gradient(220deg,
+            hwb(219 17% 0%) 0%,
+            hwb(219 18% 0%) 40%,
+            #e1e2ff 46%,
+            hwb(34 27% 0%) 52%,
+            hwb(29 0% 0%) 100%);
+
+        background-size: 400% 400%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        animation: gradientShift 16s ease-in-out infinite;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+
+      .cta-text {
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        font-weight: 400;
+        color: #272727;
+        max-width: 640px;
+        margin: 0 auto 2.5rem;
+        line-height: 1.6;
+        position: relative;
+        z-index: 2;
+        animation: fadeUp 1s ease-out 0.2s both;
+      }
+
+      .cta-btn {
+        background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
+        background-size: 300% 300%;
+        color: #fff;
+        font-weight: 600;
+        padding: 0.8rem 2rem;
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        border-radius: 10px;
+        text-decoration: none;
+        box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        z-index: 2;
+        animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
+      }
+
+      /* Hover Glow & Lift */
+      .cta-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 28px rgba(255, 102, 0, 0.35);
+      }
+
+      /* Entrance Animation */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Animated Gradient */
+      @keyframes gradientFlow {
+        0% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes glowShift {
+        0% {
+          transform: translateX(-50%) rotate(0deg);
+        }
+
+        100% {
+          transform: translateX(-50%) rotate(3deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .cta-modern {
+          padding: 5rem 1rem;
+        }
+
+        .cta-text {
+          margin-bottom: 2rem;
+          line-height: 1.5;
+        }
+
+        .cta-btn {
+          width: 100%;
+          padding: 0.9rem;
+        }
+      }
+
+      @media (max-width: 375px) {
+        .cta-headline {
+          font-size: 1.5rem;
+        }
+
+        .cta-headline span {
+          font-size: 1.1em;
+        }
+
+        .cta-text {
+          font-size: 0.95rem;
+        }
+
+        .cta-btn {
+          font-size: 0.9rem;
+          padding: 0.75rem 1.2rem;
+        }
+      }
+    </style>
+
+    <h2 class="cta-headline">
+      <span class="cta-small">Bereit für</span> <span>deinen digitalen Auftritt?</span>
+    </h2>
+
+
+    <p class="cta-text">
+      Lass uns gemeinsam dein visuelles Statement gestalten. Klar, smart & zukunftssicher.
+      Starte jetzt – unverbindlich und inspiriert.
+    </p>
+
+    <a href="#kontakt" class="cta-btn">Gespräch vereinbaren</a>
+  </section>
+
+
+
+
+
+
+
+
+<section class="angled-image-section">
+  <!-- Overlay für diagonalen Hintergrund -->
+  <div class="angled-bg-overlay" aria-hidden="true"></div>
+
+  <figure class="angled-image-wrapper">
+    <img
+      src="./WebdesignPic/webgerade.webp"
+      alt=""
+      width="1920"
+      height="1080"
+      loading="lazy"
+      decoding="async"
+    />
+  </figure>
+</section>
+<style>
+  html, body {
+    overflow-x: hidden;
+  }
+
+  :root {
+    --angled-rotation: 0deg;
+    --angled-width: 150vw;
+    --angled-offset: -25vw;
+  }
+
+  .angled-image-section {
+    position: relative;
+    width: 100vw;
+    overflow: visible;
+    margin-top: 3rem;
+    margin-bottom: -5rem;
+    pointer-events: none;
+    background: transparent;
+    z-index: 1;
+  }
+
+  /* Gradient-Hintergrund hinter dem Bild */
+  .angled-bg-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(
+      to bottom,
+      rgb(255, 255, 255) 0%,
+      rgb(255, 255, 255) 20%,
+      rgb(0, 0, 0) 70%
+    );
+  }
+
+  .angled-image-wrapper {
+    width: var(--angled-width);
+    margin-left: var(--angled-offset);
+    transform: rotate(var(--angled-rotation));
+    position: relative;
+    z-index: 1;
+  }
+
+  .angled-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    z-index: 2;
+    position: relative;
+  }
+</style>
 
 
 
@@ -3290,166 +3609,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
-
-
-
-
-
-  <style>
-    .rd3-section {
-      background: #ffffff;
-      padding: 8rem 5vw 6rem;
-      font-family: 'Inter', sans-serif;
-      max-width: 1440px;
-      margin: 0 auto;
-      color: #111;
-    }
-
-    .rd3-section h2 {
-      font-size: clamp(2.4rem, 5vw, 3.4rem);
-      font-weight: 900;
-      text-align: center;
-      margin-bottom: 1.2rem;
-      letter-spacing: -0.5px;
-    }
-
-    .rd3-section h2::after {
-      content: "";
-      display: block;
-      width: 80px;
-      height: 4px;
-      background: linear-gradient(90deg, #007ACC, #66B2FF);
-      margin: 1.2rem auto 3rem;
-      border-radius: 2px;
-    }
-
-    .rd3-intro {
-      max-width: 860px;
-      margin: 0 auto 5rem;
-      text-align: center;
-      font-size: 1.15rem;
-      line-height: 1.75;
-      color: #333;
-    }
-
-    .rd3-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .rd3-card {
-      background: #fdfdfd;
-      border: 1px solid #ebebeb;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.02);
-      transition: all 0.3s ease;
-      position: relative;
-      cursor: default;
-    }
-
-    .rd3-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.06);
-      border-color: #007ACC;
-    }
-
-    .rd3-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #111;
-      margin-bottom: 0.6rem;
-    }
-
-    .rd3-text {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: #444;
-    }
-
-    .rd3-footer {
-      margin-top: 5rem;
-      font-size: 1.2rem;
-      font-weight: 600;
-      text-align: center;
-      color: #000;
-    }
-
-    .rd3-footer strong {
-      background: linear-gradient(to right, #007ACC, #66B2FF);
-      -webkit-text-fill-color: transparent;
-      font-weight: 800;
-    }
-
-    @media (max-width: 768px) {
-      .rd3-card {
-        padding: 1.6rem;
-      }
-    }
-  </style>
-  <section class="rd3-section">
-    <h2>DAS ERGEBNIS? MEHR ALS NUR RENDERINGS</h2>
-
-    <p class="rd3-intro">
-      Nicht nur Bilder, sondern greifbare 3D-Erlebnisse: Hochauflösende Renderings, interaktive 3D-Viewer und
-      maßgeschneiderte Materialbibliotheken für deine Produkte.
-    </p>
-
-    <div class="rd3-grid">
-      <div class="rd3-card">
-        <div class="rd3-title">Fotorealistische Renderings</div>
-        <p class="rd3-text">Detailverliebte Produktansichten, Szeneaufbauten und Industriekontexte in höchster
-          Auflösung.</p>
-      </div>
-
-      <div class="rd3-card">
-        <div class="rd3-title">Materialbibliothek</div>
-        <p class="rd3-text">PBR-Texturen und Shaderpakete, individuell angepasst für Metalle, Kunststoffe und
-          Spezialbeschichtungen.</p>
-      </div>
-
-      <div class="rd3-card">
-        <div class="rd3-title">Animating & Loops</div>
-        <p class="rd3-text">Kurzanimations-Sequenzen und 3D-Loops, ideal für Präsentationen und Social-Media-Einbindung.
-        </p>
-      </div>
-
-      <div class="rd3-card">
-        <div class="rd3-title">Interaktive Viewer</div>
-        <p class="rd3-text">WebGL-basierte 3D-Viewer für Browser oder AR/VR-Anwendungen – Produktinspektion zum Drehen
-          und Zoomen.</p>
-      </div>
-
-      <div class="rd3-card">
-        <div class="rd3-title">Explosionszeichnungen</div>
-        <p class="rd3-text">Technische Illustrationen zur Darstellung von Baugruppen und Funktionsweisen im Detail.</p>
-      </div>
-
-      <div class="rd3-card">
-        <div class="rd3-title">Aftercare & Updates</div>
-        <p class="rd3-text">Zukunftssicher: Wir pflegen deine Assets, aktualisieren Materialien und passen Renderings an
-          neue Anforderungen an.</p>
-      </div>
-    </div>
-
-    <p class="rd3-footer">
-      Bereit für den nächsten Schritt?<br />
-      <strong>Let's visualize your vision in 3D.</strong>
-    </p>
-  </section>
-
-
-
-
-
-
-
-
   <section class="visual-slope-section">
     <div class="diagonal-image-frame">
       <img src="./GrafikdesignPic/NeologSMeinfach.webp" alt="Case Design Visual" />
@@ -4673,302 +4832,462 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  <section id="textureShowcase" class="texture-section">
-    <h2 class="texture-title">Texturenbibliothek</h2>
-    <p class="texture-sub">Ultrarealistisch. Handgefertigt. Für höchste Industrieansprüche.</p>
 
-    <!-- TEXTURE GRID -->
-    <div class="texture-grid">
-      <div class="texture-item" data-texture="1">
-        <img src="./textures/texture1.webp" alt="Textur 1" />
-      </div>
-      <div class="texture-item" data-texture="2">
-        <img src="./textures/texture2.webp" alt="Textur 2" />
-      </div>
-      <div class="texture-item" data-texture="3">
-        <img src="./textures/texture3.webp" alt="Textur 3" />
-      </div>
-      <div class="texture-item" data-texture="4">
-        <img src="./textures/texture4.webp" alt="Textur 4" />
-      </div>
-      <div class="texture-item" data-texture="5">
-        <img src="./textures/texture5.webp" alt="Textur 5" />
-      </div>
-      <div class="texture-item" data-texture="6">
-        <img src="./textures/texture6.webp" alt="Textur 6" />
-      </div>
-      <div class="texture-item" data-texture="7">
-        <img src="./textures/texture7.webp" alt="Textur 7" />
-      </div>
-      <div class="texture-item" data-texture="8">
-        <img src="./textures/texture8.webp" alt="Textur 8" />
-      </div>
+
+<section class="values-section container" id="werte" aria-labelledby="heading-values">
+<video class="animated-bg lazy-load-video" autoplay muted loop playsinline preload="none">
+  <source data-src="./IndexM/hi.mp4" type="video/mp4" />
+</video>
+
+
+
+  <div class="values-heading-box">
+    <h2 class="animated-values-title" id="heading-values">
+      <span class="animated-values-line"></span><span class="blinking-bar-values"></span>
+    </h2>
+    <div class="dynamic-values-typing">
+      <span class="dynamic-values-line"></span>
     </div>
+  </div>
 
-    <!-- IMAGE PREVIEW -->
-    <div class="texture-preview">
-      <img id="mainTextureImage" src="./textures/texture1_base_land1_day1.webp" alt="Preview" />
+  <div class="values-grid">
+    <!-- VALUE 1 -->
+    <article class="value-card" aria-labelledby="steuerung-title">
+      <div class="icon-wrap"><i data-feather="activity"></i></div>
+      <h3 id="steuerung-title">Projektsteuerung 2.0</h3>
+      <p>Wir orchestrieren Ihre Transformation mit maximaler Transparenz und Echtzeit-Feedback.</p>
+    </article>
 
-      <!-- Landscape Buttons -->
-      <div class="landscape-options">
-        <button class="landscape-btn" data-land="1"
-          style="background-image: url('./textures/land1.webp')"><span>Urban</span></button>
-        <button class="landscape-btn" data-land="2"
-          style="background-image: url('./textures/land2.webp')"><span>Wüste</span></button>
-        <button class="landscape-btn" data-land="3"
-          style="background-image: url('./textures/land3.webp')"><span>Berg</span></button>
-        <button class="landscape-btn" data-land="4"
-          style="background-image: url('./textures/land4.webp')"><span>Studio</span></button>
-      </div>
+    <!-- VALUE 2 -->
+    <article class="value-card" aria-labelledby="empathie-title">
+      <div class="icon-wrap"><i data-feather="heart"></i></div>
+      <h3 id="empathie-title">Empathie trifft Analyse</h3>
+      <p>Tiefes Zielgruppenverständnis kombiniert mit messerscharfer Strategie.</p>
+    </article>
+
+    <!-- VALUE 3 -->
+    <article class="value-card" aria-labelledby="design-title">
+      <div class="icon-wrap"><i data-feather="eye"></i></div>
+      <h3 id="design-title">Next-Level Design</h3>
+      <p>Unvergesslich visuell. Design, das Performance und Emotion vereint.</p>
+    </article>
+
+    <!-- VALUE 4 -->
+    <article class="value-card" aria-labelledby="details-title">
+      <div class="icon-wrap"><i data-feather="grid"></i></div>
+      <h3 id="details-title">Detailverliebtheit</h3>
+      <p>Pixel-Perfektion für ein Erlebnis, das Eindruck hinterlässt.</p>
+    </article>
+
+    <!-- VALUE 5 -->
+    <article class="value-card" aria-labelledby="tech-title">
+      <div class="icon-wrap"><i data-feather="cpu"></i></div>
+      <h3 id="tech-title">Tech-DNA</h3>
+      <p>React, API-First, Headless: Wir atmen moderne Entwicklung.</p>
+    </article>
+
+    <!-- VALUE 6 -->
+    <article class="value-card" aria-labelledby="automation-title">
+      <div class="icon-wrap"><i data-feather="repeat"></i></div>
+      <h3 id="automation-title">Automatisierte Abläufe</h3>
+      <p>Optimierte Prozesse für Geschwindigkeit und Skalierbarkeit.</p>
+    </article>
+  </div>
+
+  <div class="values-cta-wrap">
+    <a href="#about" class="cta-button">Mehr über uns →</a>
+  </div>
+</section>
+<style>
+.values-section {
+  position: relative;
+  background: transparent;
+  text-align: center;
+  color: black;
+  padding: 5rem 2rem;
+  z-index: 5;
+  margin-top: 13rem;
+}
+
+.animated-bg {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 1.08;
+}
+
+.values-title {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 0.8rem;
+  z-index: 5;
+}
+
+.values-subline {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 3.5rem;
+  z-index: 5;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .values-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.value-card {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: left;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+  z-index: 5;
+}
+
+.value-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.value-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  z-index: 5;
+}
+
+.value-card p {
+  font-size: 1rem;
+  color: #444;
+  z-index: 5;
+}
+
+.icon-wrap {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.icon-wrap i {
+  stroke: #fff;
+  width: 24px;
+  height: 24px;
+}
+
+.values-cta-wrap {
+  margin-top: 3rem;
+}
+
+.cta-button {
+  background: linear-gradient(45deg, #ff6600, #ff0051);
+  color: #fff;
+  padding: 0.8rem 1.6rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+  filter: brightness(1.1);
+}
+
+.values-heading-box {
+  position: relative;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  max-width: 1000px;
+  max-height: 160px;
+  margin: 0 auto 3rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+}
+.animated-values-title {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 0.8rem;
+  display: inline-block;
+  color: #111;
+  position: relative;
+  z-index: 5;
+}
+
+.blinking-bar-values {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background: linear-gradient(180deg, #ff5100, #c03c00);
+  box-shadow: 0 0 4px #c03c00;
+  vertical-align: bottom;
+  animation: blink-flash 1s steps(1) infinite;
+  margin-left: 3px;
+}
+
+.dynamic-values-typing {
+  margin-top: 1.2rem;
+  position: relative;
+  z-index: 5;
+}
+
+.dynamic-values-line {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #555;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+@keyframes blink-flash {
+  0%, 50% { opacity: 1; }
+  50.1%, 100% { opacity: 0; }
+}
 
 
-      <!-- TOOLS -->
-      <div class="tools-row">
-        <label class="accent-toggle glass-card">
-          <input type="checkbox" id="accentCheckbox" />
-          <span>Akzentlichter</span>
-        </label>
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 1199px) {
+  .values-section {
+    padding: 3rem 1.5rem;
+  }
 
-        <!-- SLIDER -->
-        <div class="sun-slider">
-          <div class="slider-container">
-            <span class="sun-icon">🌅</span>
-            <input type="range" min="1" max="4" value="1" step="1" id="sunSlider" />
-          </div>
-          <div class="sun-track"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <style>
-    .texture-section {
-      background: #0d0d0d;
-      padding: 6rem 2rem;
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      text-align: center;
-    }
+  .animated-bg {
+    width: 70vw;
+    top: 50%;
+  }
 
-    .texture-title {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-    }
+  .values-heading-box {
+    padding: 1.5rem 1rem;
+    max-height: none;
+    margin-bottom: 2rem;
+  }
 
-    .texture-sub {
-      color: #aaa;
-      font-size: 1.2rem;
-      margin-bottom: 3rem;
-    }
+  .values-title {
+    font-size: 1.8rem;
+  }
 
-    /* GRID - 4 pro Reihe */
-    .texture-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1.5rem;
-      max-width: 800px;
-      margin: 0 auto 4rem;
-    }
+  .values-subline {
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+  }
 
-    .texture-item {
-      height: 100px;
-      overflow: hidden;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+  .value-card {
+    padding: 1.5rem 1rem;
+  }
 
-    .texture-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      border-radius: inherit;
-    }
+  .value-card h3 {
+    font-size: 1.25rem;
+  }
 
-    .texture-item:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 16px rgba(255, 100, 0, 0.25);
-    }
+  .value-card p {
+    font-size: 0.95rem;
+  }
 
-    /* PREVIEW IMAGE */
-    .texture-preview {
-      max-width: 960px;
-      margin: 0 auto;
-    }
+  .cta-button {
+    padding: 0.7rem 1.3rem;
+    font-size: 0.95rem;
+  }
+}
 
-    .texture-preview img {
-      width: 100%;
-      max-height: 460px;
-      object-fit: cover;
-      border-radius: 20px;
-      margin-bottom: 2rem;
-      transition: all 0.5s ease;
-    }
+@media (max-width: 767px) {
+  .values-section {
+    padding: 2.5rem 1rem;
+  }
 
-    /* LANDSCAPE BUTTONS */
-    .landscape-options {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-bottom: 2rem;
-    }
+  .animated-bg {
+    width: 85vw;
+    top: 55%;
+  }
 
-    .landscape-btn {
-      position: relative;
-      padding: 1.2rem 1.5rem;
-      min-width: 120px;
-      height: 100px;
-      color: #fff;
-      font-weight: bold;
-      background-size: cover;
-      background-position: center;
-      border: none;
-      border-radius: 16px;
-      overflow: hidden;
-      cursor: pointer;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      transition: transform 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
+  .values-heading-box {
+    padding: 1.2rem 0.8rem;
+    margin-bottom: 2rem;
+  }
 
-    .landscape-btn::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
-      z-index: 1;
-    }
+  .values-title {
+    font-size: 1.5rem;
+  }
 
-    .landscape-btn:hover {
-      transform: scale(1.05);
-    }
+  .values-subline {
+    font-size: 0.95rem;
+  }
 
-    .landscape-btn span,
-    .landscape-btn::after {
-      position: relative;
-      z-index: 2;
-    }
+  .values-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 
+  .value-card {
+    padding: 1.2rem 1rem;
+  }
 
-    /* TOOLS */
-    .tools-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
+  .value-card h3 {
+    font-size: 1.2rem;
+  }
 
-    .accent-toggle {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.8rem 1.2rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
+  .value-card p {
+    font-size: 0.9rem;
+  }
 
-    .accent-toggle input {
-      transform: scale(1.4);
-    }
+  .icon-wrap {
+    width: 42px;
+    height: 42px;
+  }
 
-    /* SLIDER */
-    .sun-slider {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  .icon-wrap i {
+    width: 20px;
+    height: 20px;
+  }
 
-    .slider-container {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
+  .cta-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
 
-    .sun-icon {
-      font-size: 1.6rem;
-      animation: sunGlow 3s infinite alternate ease-in-out;
-    }
+@media (max-width: 1023px) {
+  .animated-bg {
+    width: 100vw;
+    top: 50%;
+  }
+}
 
-    @keyframes sunGlow {
-      0% {
-        filter: drop-shadow(0 0 3px #ffb347);
+@media (max-width: 767px) {
+  .animated-bg {
+    width: 200vw;
+    top: 60%;
+    opacity: 0.9;
+  }
+}
+
+@media (max-width: 375px) {
+  .animated-bg {
+    width: 300vw;
+    top: 60%;
+    opacity: 0.9;
+  }
+}
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const typeSequence = async (el, steps) => {
+      let step = 0, char = 0;
+      const pause = ms => new Promise(res => setTimeout(res, ms));
+      while (true) {
+        const item = steps[step] || (step = 0, steps[step]);
+        if (item.text !== undefined) {
+          if (char < item.text.length) {
+            el.textContent += item.text[char++];
+            await pause(item.delay);
+            continue;
+          }
+          char = 0; step++; await pause(600);
+        } else if (item.delete !== undefined) {
+          let cnt = item.delete === 'all' ? el.textContent.length : item.delete;
+          while (cnt--) {
+            el.textContent = el.textContent.slice(0, -1);
+            await pause(item.delay);
+          }
+          step++;
+        } else if (item.pause) {
+          await pause(item.pause);
+          step++;
+        }
       }
+    };
 
-      100% {
-        filter: drop-shadow(0 0 10px #ff8000);
-      }
+    const valuesTitleAnim = [
+      { text: "Unser Ansatz & Unsere Motivation", delay: 55 },
+      { pause: 1500 }, { delete: 'all', delay: 30 },
+      { text: "Werte, die digitale Lösungen formen", delay: 50 },
+      { pause: 1500 }, { delete: 'all', delay: 30 },
+      { text: "Warum wir tun, was wir tun.", delay: 50 },
+      { pause: 1500 }, { delete: 'all', delay: 30 }
+    ];
+
+    const valuesSublineAnim = [
+      { text: "Maßgeschneiderte digitale Lösungen für heute.", delay: 50 },
+      { pause: 1000 }, { delete: 'all', delay: 30 },
+      { text: "Ihr Qualitätsversprechen: Innovation trifft Fokus.", delay: 50 },
+      { pause: 1000 }, { delete: 'all', delay: 30 },
+      { text: "Technisch. Emotional. Zielgerichtet.", delay: 50 },
+      { pause: 1000 }, { delete: 'all', delay: 30 }
+    ];
+
+    const elValuesTitle = document.querySelector('.animated-values-line');
+    const elValuesSubline = document.querySelector('.dynamic-values-line');
+
+    if (elValuesTitle && elValuesSubline) {
+      typeSequence(elValuesTitle, valuesTitleAnim);
+      typeSequence(elValuesSubline, valuesSublineAnim);
     }
-
-    .sun-slider input {
-      width: 220px;
-      appearance: none;
-      height: 4px;
-      border-radius: 2px;
-      background: linear-gradient(to right, #ffd280, #ff8000);
-      outline: none;
-      cursor: pointer;
-    }
-
-    .sun-slider input::-webkit-slider-thumb {
-      appearance: none;
-      width: 16px;
-      height: 16px;
-      background: #fff;
-      border-radius: 50%;
-      box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-      transition: background 0.3s;
-    }
-  </style>
-  <script>
-    const textureCards = document.querySelectorAll('.texture-item');
-    const mainImage = document.getElementById('mainTextureImage');
-    const landscapeBtns = document.querySelectorAll('.landscape-btn');
-    const accentCheckbox = document.getElementById('accentCheckbox');
-    const sunSlider = document.getElementById('sunSlider');
-
-    let currentTexture = 1;
-    let currentLand = 1;
-    let accentOn = false;
-    let sunTime = 1;
-
-    function updateImage() {
-      const accent = accentOn ? 'accent' : 'base';
-      const path = `./textures/texture${currentTexture}_${accent}_land${currentLand}_day${sunTime}.webp`;
-      mainImage.src = path;
-    }
-
-    textureCards.forEach(card => {
-      card.addEventListener('click', () => {
-        currentTexture = card.dataset.texture;
-        updateImage();
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const video = entry.target;
+          const source = video.querySelector("source");
+          if (source && source.dataset.src) {
+            source.src = source.dataset.src;
+            video.load();
+            obs.unobserve(video);
+          }
+        }
       });
+    }, { rootMargin: "200px" });
+
+    document.querySelectorAll(".lazy-load-video").forEach(video => {
+      observer.observe(video);
     });
-
-    landscapeBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        currentLand = btn.dataset.land;
-        updateImage();
-      });
-    });
-
-    accentCheckbox.addEventListener('change', () => {
-      accentOn = accentCheckbox.checked;
-      updateImage();
-    });
-
-    sunSlider.addEventListener('input', () => {
-      sunTime = sunSlider.value;
-      updateImage();
-    });
-  </script>
+  });
+</script>
 
 
 
 
-<div class="light-bg-container"> SERVICES 
+
+
+
+
+
+
+
+<div class="light-bg-container"> 
 <section class="svc-section" id="services">
   <div class="svc-parallax-background"></div>
   <div class="svc-inner-wrapper">
@@ -5254,3 +5573,1002 @@ document.addEventListener("DOMContentLoaded", () => {
   onScroll();
 });
 </script>
+
+
+
+
+
+
+
+
+
+<section class="kontakt-testimonial-section" id="kontakt">
+  <div class="kontakt-testimonial-wrapper">
+    <!-- Kontaktbereich -->
+    <div class="kontakt-area">
+      <h2 class="section-title">Lass uns loslegen!</h2>
+      <p class="kontakt-subline">
+        Eine starke Idee verdient ein starkes digitales Erlebnis. <br />
+        Erzähle uns von Deinem Projekt – wir bringen es gemeinsam auf das nächste Level.
+      </p>
+
+      <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm">
+        <input type="text" name="name" placeholder="Name" required />
+        <input type="email" name="email" placeholder="E-Mail-Adresse" required />
+        <input type="text" name="subject" placeholder="Betreff" />
+        <textarea name="message" placeholder="Nachricht" rows="5" required></textarea>
+        <button type="submit" class="kontakt-btn">Jetzt Anfrage senden!</button>
+      </form>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="testimonial-area">
+      <testimonial-slider></testimonial-slider>
+    </div>
+  </div>
+</section>
+<style>
+  html, body {
+    box-sizing: border-box;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    box-sizing: inherit;
+  }
+
+  .kontakt-testimonial-section {
+    background: #ffffff;
+    padding: 6rem 2rem;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    margin-top: 10rem;
+  }
+
+  .kontakt-testimonial-wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    gap: 4rem;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .kontakt-area {
+    flex: 1 1 480px;
+    max-width: 640px;
+    min-width: 300px;
+  }
+
+  .testimonial-area {
+    flex: 1 1 380px;
+    max-width: 600px;
+    min-width: 280px;
+  }
+
+  .section-title {
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: #000000 !important;
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+
+  .kontakt-subline {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 90%;
+    margin-bottom: 2.5rem;
+    text-align: left;
+  }
+
+  .kontakt-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .kontakt-form input,
+  .kontakt-form textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+  }
+
+  .kontakt-form input:focus,
+  .kontakt-form textarea:focus {
+    border-color: #ff6600;
+    box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
+    outline: none;
+    background: #fff;
+  }
+
+  .kontakt-btn {
+    background: linear-gradient(135deg, #ff6600, #ff9950, #ff6a00);
+    background-size: 300% 300%;
+    animation: gradientShift 18s ease infinite;
+    color: #252525;
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+    font-weight: 700;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    max-width: 380px;
+    width: 100%;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .kontakt-btn:hover,
+  .kontakt-btn:focus-visible {
+    transform: scale(1.04);
+    box-shadow: 0 6px 20px #ffb07366;
+    outline: none;
+  }
+
+  .kontakt-btn:focus-visible {
+    outline: 2px dashed #ff6600;
+    outline-offset: 4px;
+  }
+
+  .kontakt-btn.sent {
+    background: linear-gradient(135deg, #00c851, #007e33);
+    animation: none;
+    box-shadow: 0 0 14px rgba(0, 200, 81, 0.6);
+    transform: scale(1.02);
+    color: #fff;
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .kontakt-testimonial-wrapper {
+      flex-direction: column;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .section-title,
+    .kontakt-subline {
+      text-align: center;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .kontakt-area,
+    .testimonial-area {
+      max-width: 100%;
+    }
+
+    .kontakt-btn {
+      margin: 0 auto;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 540px) {
+    .kontakt-testimonial-wrapper {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    .kontakt-area,
+    .testimonial-area {
+      width: 100%;
+      max-width: 100%;
+      padding: 0 1rem;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      text-align: center;
+      margin: 0 auto 1rem;
+      max-width: 100%;
+      word-wrap: break-word;
+    }
+
+    .kontakt-subline {
+      font-size: 1rem;
+      text-align: center;
+      margin: 0 auto 2rem;
+      max-width: 100%;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+
+    .kontakt-form {
+      padding: 0 0.5rem;
+    }
+
+    .kontakt-form input,
+    .kontakt-form textarea {
+      font-size: 0.95rem;
+      padding: 0.9rem 1rem;
+    }
+
+    .kontakt-btn {
+      font-size: 1rem;
+      padding: 0.8rem 1.6rem;
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+@media (max-width: 400px) {
+  .kontakt-testimonial-section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .kontakt-testimonial-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .kontakt-area,
+  .testimonial-area {
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .kontakt-form {
+    margin: 0 auto;
+  }
+
+  .inner-card {
+    margin: 0 auto !important;
+  }
+}
+
+</style>
+<script>
+  const form = document.getElementById("kontaktForm");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const button = form.querySelector(".kontakt-btn");
+
+    try {
+      const response = await fetch("https://formspree.io/f/xqapdvaq", {
+        method: "POST",
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        button.innerText = "✅ Anfrage gesendet!";
+        button.classList.add("sent");
+        form.reset();
+      } else {
+        button.innerText = "⚠️ Fehler beim Senden";
+      }
+    } catch (error) {
+      button.innerText = "❌ Netzwerkfehler";
+    }
+
+    setTimeout(() => {
+      button.innerText = "🚀 Jetzt Anfrage senden!";
+      button.classList.remove("sent");
+    }, 4000);
+  });
+</script>
+  <script>
+    class TestimonialSlider extends HTMLElement {
+      constructor() {
+        super();
+        this.attachShadow({ mode: "open" });
+        this.testimonials = [
+          {
+            image: "./TestemonialSlider/CS.webp",
+            name: "Christian Schulz",
+            quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
+            logo: "./TestemonialSlider/NeoLog.webp"
+          },
+          {
+            image: "./TestemonialSlider/CS.webp",
+            name: "Christian Schulz",
+            quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
+            logo: "./TestemonialSlider/NeoLog.webp"
+          },
+          {
+            image: "./TestemonialSlider/CS.webp",
+            name: "Christian Schulz",
+            quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
+            logo: "./TestemonialSlider/NeoLog.webp"
+          }
+        ];
+      }
+
+      connectedCallback() {
+        const style = `
+      <style>
+        :host {
+          display: block;
+          padding: 5rem 1.5rem;
+          background: transparent;
+          position: relative;
+        }
+
+        h2 {
+          font-size: 2.8rem;
+          text-align: center;
+          margin-bottom: 0.5rem;
+          color: #1c1c1e;
+          font-weight: 700;
+          letter-spacing: -0.02em;
+        }
+
+        .intro {
+          text-align: center;
+          font-size: 1.05rem;
+          color: #666;
+          margin: 0 auto 2.5rem;
+          max-width: 680px;
+          padding: 0 2.1rem;
+          line-height: 1.6;
+        }
+
+        .slider-wrapper {
+          overflow: hidden;
+          position: relative;
+        }
+
+        .track {
+          display: flex;
+          transition: transform 0.6s ease;
+        }
+
+        .card {
+          flex: 0 0 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          opacity: 0;
+          transform: scale(0.9);
+          pointer-events: none;
+          transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .card.active {
+          opacity: 1;
+          transform: scale(1);
+          pointer-events: auto;
+        }
+
+        .inner-card {
+          width: clamp(280px, 80vw, 360px);
+          max-width: 100%;
+          background: linear-gradient(135deg, #222, #444); /* Fallback */
+          color: #fff;
+          border-radius: 18px;
+          padding: 2.2rem;
+          text-align: center;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+          transition: transform 0.3s ease;
+        }
+
+        .card-1 .inner-card {
+          background: linear-gradient(135deg, #3b34ff, #7500ff);
+        }
+
+        .card-2 .inner-card {
+          background: linear-gradient(135deg, #121212, #2b2b2b);
+        }
+
+        .card-3 .inner-card {
+          background: linear-gradient(135deg, #ff6600, #ff00aa, #3a0ca3);
+          background-size: 400% 400%;
+        }
+
+        .card-clone .inner-card {
+          background: linear-gradient(135deg, #444, #111);
+        }
+
+        .inner-card:hover {
+          transform: translateY(-4px) scale(1.02);
+        }
+
+        .avatar-logo {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.8rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .avatar {
+          width: 64px;
+          height: 64px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 2px solid #8b5cf6;
+        }
+
+        .logo {
+          height: 28px;
+          max-width: 100px;
+          opacity: 0.7;
+          transition: 0.3s ease;
+          object-fit: contain;
+          filter: brightness(0) invert(1);
+        }
+
+        .logo:hover {
+          opacity: 1;
+        }
+
+        .quote {
+          font-style: italic;
+          color: #ddd;
+          font-size: 1rem;
+          margin: 1rem 0 0.5rem;
+          line-height: 1.6;
+        }
+
+        .author {
+          font-weight: 600;
+          color: #fff;
+          font-size: 1rem;
+        }
+
+        .dots {
+          display: flex;
+          justify-content: center;
+          gap: 0.5rem;
+          margin-top: 2rem;
+        }
+
+        .dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background-color: #999;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+
+        .dot.active {
+          background-color: #ff6600;
+        }
+@media (max-width: 558px) {
+  .inner-card {
+    width: 60vw;
+  }
+}
+
+        @media (max-width: 425px) {
+          h2 { font-size: 2rem; }
+          .intro { font-size: 0.95rem; padding: 0 1.2rem; }
+            .inner-card {
+    width: 55vw;
+  }
+        }
+
+
+      </style>
+    `;
+
+        const extendedTestimonials = [...this.testimonials, this.testimonials[0]];
+
+        const slidesHTML = extendedTestimonials.map((t, i) => {
+          const isClone = i === extendedTestimonials.length - 1;
+          const cardClass = isClone ? "card-clone" : `card-${i + 1}`;
+          return `
+          <div class="card ${cardClass}" role="listitem">
+            <div class="inner-card">
+              <div class="avatar-logo">
+                <img src="${t.image}" class="avatar" alt="${t.name}">
+                ${t.logo ? `<img src="${t.logo}" class="logo" alt="Logo von Kunde">` : ""}
+              </div>
+              <p class="quote">„${t.quote}“</p>
+              <p class="author">${t.name}</p>
+            </div>
+          </div>
+        `;
+        }).join("");
+
+        const dotsHTML = `
+        <div class="dots">
+          ${this.testimonials.map((_, i) => `<div class="dot" data-index="${i}" aria-label="Testimonial ${i + 1}"></div>`).join("")}
+        </div>
+      `;
+
+        const html = `
+        ${style}
+        <h2>Kundenstimmen</h2>
+        <p class="intro">Was unsere Kunden über die Zusammenarbeit sagen.</p>
+        <div class="slider-wrapper" role="list">
+          <div class="track">
+            ${slidesHTML}
+          </div>
+        </div>
+        ${dotsHTML}
+      `;
+
+        this.shadowRoot.innerHTML = html;
+
+        const track = this.shadowRoot.querySelector(".track");
+        const cards = this.shadowRoot.querySelectorAll(".card");
+        const dots = this.shadowRoot.querySelectorAll(".dot");
+        let currentIndex = 0;
+        let interval;
+
+        const goToSlide = (index, instant = false) => {
+          const isClone = index === cards.length - 1;
+          track.style.transition = instant ? 'none' : 'transform 0.6s ease';
+          track.style.transform = `translateX(-${index * 100}%)`;
+
+          cards.forEach((card, i) => {
+            card.classList.toggle("active", i === index);
+          });
+
+          dots.forEach(dot => dot.classList.remove("active"));
+          if (isClone) {
+            dots[0]?.classList.add("active");
+          } else {
+            dots[index]?.classList.add("active");
+          }
+        };
+
+        const startAutoSlide = () => {
+          interval = setInterval(() => {
+            currentIndex++;
+            if (currentIndex === cards.length) {
+              goToSlide(currentIndex, true);
+              currentIndex = 1;
+              setTimeout(() => goToSlide(currentIndex), 20);
+            } else {
+              goToSlide(currentIndex);
+            }
+          }, 4000);
+        };
+
+        // Touch support
+        let startX = 0;
+        track.addEventListener("touchstart", e => {
+          startX = e.touches[0].clientX;
+          clearInterval(interval);
+        }, { passive: true });
+
+        track.addEventListener("touchend", e => {
+          const diff = e.changedTouches[0].clientX - startX;
+          if (Math.abs(diff) > 50) {
+            if (diff < 0 && currentIndex < cards.length - 1) currentIndex++;
+            else if (diff > 0 && currentIndex > 0) currentIndex--;
+          }
+          goToSlide(currentIndex);
+          startAutoSlide();
+        }, { passive: true });
+
+        // Hover pause
+        track.addEventListener("mouseenter", () => clearInterval(interval));
+        track.addEventListener("mouseleave", startAutoSlide);
+
+        // Dot click
+        dots.forEach(dot => {
+          dot.addEventListener("click", e => {
+            const i = parseInt(e.target.dataset.index, 10);
+            currentIndex = i;
+            goToSlide(currentIndex);
+          });
+        });
+
+        goToSlide(0);
+        startAutoSlide();
+      }
+    }
+
+    customElements.define("testimonial-slider", TestimonialSlider);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="angled-image-section">
+  <!-- Overlay für diagonalen Hintergrund -->
+  <div class="angled-bg-overlay" aria-hidden="true"></div>
+
+  <figure class="angled-image-wrapper">
+    <img
+      src="./WebdesignPic/webgerade.webp"
+      alt=""
+      width="1920"
+      height="1080"
+      loading="lazy"
+      decoding="async"
+    />
+  </figure>
+</section>
+<style>
+  html, body {
+    overflow-x: hidden;
+  }
+
+  :root {
+    --angled-rotation: -4deg;
+    --angled-width: 150vw;
+    --angled-offset: -25vw;
+  }
+
+  .angled-image-section {
+    position: relative;
+    width: 100vw;
+    overflow: visible;
+    margin-top: 3rem;
+    margin-bottom: -5rem;
+    pointer-events: none;
+    background: transparent;
+    z-index: 1;
+  }
+
+  /* Gradient-Hintergrund hinter dem Bild */
+  .angled-bg-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: transparent;
+  }
+
+  .angled-image-wrapper {
+    width: var(--angled-width);
+    margin-left: var(--angled-offset);
+    transform: rotate(var(--angled-rotation));
+    position: relative;
+    z-index: 1;
+  }
+
+  .angled-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    z-index: 2;
+    position: relative;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="lottieAltWrapper">
+  <div id="lottieAltContainer"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+<script>
+  let animationLoaded = false;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !animationLoaded) {
+        lottie.loadAnimation({
+          container: document.getElementById('lottieAltContainer'),
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: './Animationen/Webdesignshuffle.json'
+        });
+        animationLoaded = true;
+        obs.disconnect(); // Stop observing once loaded
+      }
+    });
+  }, {
+    rootMargin: "0px 0px -20% 0px", // etwas früher starten
+    threshold: 0.1
+  });
+
+  observer.observe(document.getElementById('lottieAltWrapper'));
+</script>
+<style>#lottieAltWrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-top: -6rem;
+  padding-bottom: 12px;
+}
+
+#lottieAltContainer {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+#lottieAltContainer > svg {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: top center;
+  display: block;
+}
+
+@media (max-width: 540px) {
+  #lottieAltContainer > svg {
+    transform: scale(1.2);
+    transform-origin: center top;
+  }
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer role="contentinfo" itemscope itemtype="https://schema.org/Organization">
+  <div class="footer-wrapper">
+    <div class="footer-grid">
+
+      <div class="footer-logo glass-card">
+        <span itemprop="name">Fusion³</span>
+        <p>UX & Webdesign<br>Nutzerzentriert.<br>Visuell stark.<br>Technisch fundiert.</p>
+      </div>
+
+      <div class="footer-links glass-card">
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="/impressum.html">Impressum</a></li>
+          <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
+          <li><a href="/cookies.html">Cookie-Hinweis</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact glass-card">
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
+          <li><a href="tel:+491234567890" itemprop="telephone">+49 123 4567890</a></li>
+          <li itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <span itemprop="addressLocality">Berlin</span>, <span itemprop="addressCountry">Deutschland</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-socials glass-card">
+        <h4>Social Media</h4>
+        <div class="footer-socials-icons">
+          <a href="mailto:hello@fusion3.de" aria-label="E-Mail schreiben">
+            <img src="./FooterIcons/Gmail.png" alt="Gmail Icon" loading="lazy" />
+          </a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <img src="./FooterIcons/LinkedIn.png" alt="LinkedIn Icon" loading="lazy" />
+          </a>
+          <a href="https://wa.me/491234567890" target="_blank" rel="noopener" aria-label="WhatsApp schreiben">
+            <img src="./FooterIcons/Whatsapp.svg" alt="WhatsApp Icon" loading="lazy" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © <span id="currentYear"></span> Fusion³ – Alle Rechte vorbehalten. DSGVO-konform & barrierearm entwickelt.
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    width: 100%;
+    background: white;
+    color: #222;
+    padding: 4rem 0 2rem;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5vw;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+  }
+
+  .footer-logo span {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--primary, darkorange);
+  }
+
+  .footer-logo p {
+    margin-top: 0.6rem;
+    color: #555;
+    font-size: 0.95rem;
+  }
+
+  .footer-links h4,
+  .footer-contact h4,
+  .footer-socials h4 {
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #333;
+  }
+
+  .footer-links ul,
+  .footer-contact ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-links li,
+  .footer-contact li {
+    margin-bottom: 0.4rem;
+  }
+
+  .footer-links a,
+  .footer-contact a {
+    color: #444;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .footer-links a:hover,
+  .footer-contact a:hover {
+    color: black;
+    transform: translateX(3px);
+  }
+
+  .footer-socials-icons {
+    display: flex;
+    gap: 14px;
+    margin-top: 0.5rem;
+  }
+
+  .footer-socials img {
+    width: 28px;
+    height: 28px;
+    filter: grayscale(10%);
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  .footer-socials img:hover {
+    transform: scale(1.15);
+    filter: brightness(1.2);
+  }
+
+  .footer-bottom {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    footer {
+      padding: 3rem 0 2rem;
+      font-size: 0.85rem;
+    }
+
+    .footer-wrapper {
+      padding: 0 1.5rem;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .footer-bottom {
+      font-size: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .glass-card {
+      padding: 1.2rem;
+    }
+
+    .footer-logo span {
+      font-size: 1.4rem;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
