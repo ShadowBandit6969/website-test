@@ -3254,105 +3254,149 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+<section class="overflow-image-section" aria-label="Dekoratives Hintergrundbild mit Rotation">
+  <div class="overflow-image-container">
+    <img
+      src="./WebdesignPic/webgerade.webp"
+      alt="Gestaltetes Handybild mit asiatischem Flair als visuelles Designelement"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+</section>
 <style>
-  .messaging-v3-section {
-    background: #000000;
-    padding: 8rem 5vw 6rem;
-    font-family: 'Inter', sans-serif;
-    max-width: 1440px;
-    margin: 0 auto;
-    color: #ffffff;
+  :root {
+    --rotation: -8deg;
+    --translateY: 0;
   }
 
-  .messaging-v3-section h2 {
-    color: #ffffff;
-    font-size: clamp(2.4rem, 5vw, 3.4rem);
-    font-weight: 900;
-    text-align: center;
-    margin-bottom: 1.2rem;
-    letter-spacing: -0.5px;
+  html, body {
+    overflow-x: hidden;
+  }
+
+  .overflow-image-section {
     position: relative;
-  }
-.msg-v3-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1rem;
-  padding: 2rem;
-  margin: 1rem 0;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-}
-
-  .messaging-v3-section h2::after {
-    background: linear-gradient(90deg, #ff5100, #c03c00);
+    width: 100vw;
+    overflow: visible;
+    margin-top: -23rem;
+    margin-bottom: -5rem;
+    z-index: 3;
+    pointer-events: none;
   }
 
-  .messaging-v3-intro {
-    color: #bbbbbb;
+  .overflow-image-container {
+    width: 150vw;
+    margin-left: -25vw;
+    transform: rotate(var(--rotation)) translateY(var(--translateY));
+    position: relative;
+    transition: transform 0.8s ease;
+       z-index: 1;
   }
 
-  .msg-v3-title {
-    color: #ffffff;
+  .overflow-image-container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top right, white 20%, transparent 100%);
+    pointer-events: none;
+       z-index: 1;
+
   }
 
-  .msg-v3-text {
-    color: #dddddd;
+  .overflow-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
-  .messaging-v3-cta {
-    color: #ffffff;
+  /* Tablets */
+  @media (max-width: 1024px) {
+    .overflow-image-section {
+      margin-top: -18rem;
+      margin-bottom: -3rem;
+    }
+
+    .overflow-image-container {
+      width: 170vw;
+      margin-left: -35vw;
+      --rotation: -7deg;
+    }
+  }
+
+  /* Smartphones */
+  @media (max-width: 768px) {
+    .overflow-image-section {
+      margin-top: -14rem;
+      margin-bottom: -2rem;
+    }
+
+    .overflow-image-container {
+      width: 190vw;
+      margin-left: -45vw;
+      --rotation: -6deg;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .overflow-image-section {
+      margin-top: -16rem;
+      margin-bottom: -1rem;
+    }
+
+    .overflow-image-container {
+      width: 250vw;
+      margin-left: -60vw;
+      --rotation: -4deg;
+      --translateY: -8rem;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .overflow-image-section {
+      margin-top: -14rem;
+      margin-bottom: -0.5rem;
+    }
+
+    .overflow-image-container {
+      width: 270vw;
+      margin-left: -75vw;
+      --rotation: -3.5deg;
+      --translateY: -9rem;
+    }
+
+    .overflow-image-container::after {
+      background: linear-gradient(to top right, rgba(255, 255, 255, 0.3) 10%, transparent 100%);
+    }
+  }
+
+  @media (max-width: 320px) {
+    .overflow-image-section {
+      margin-top: -13rem;
+    }
+
+    .overflow-image-container {
+      width: 280vw;
+      margin-left: -85vw;
+      --rotation: -3deg;
+      --translateY: -10rem;
+    }
+
+    .overflow-image-container::after {
+      background: linear-gradient(to top right, rgb(255, 255, 255) 10%, transparent 100%);
+    }
+  }
+
+  /* Optional: Hover Animation */
+  @media (hover: hover) {
+    .overflow-image-container:hover {
+      transform: rotate(calc(var(--rotation) + 1deg)) scale(1.02) translateY(var(--translateY));
+    }
   }
 </style>
-
-<section class="messaging-v3-section">
-  <h2>Kommunikation mit Substanz</h2>
-
-  <p class="messaging-v3-intro">
-    Deine Marke hat etwas zu sagen – und wir helfen dabei, diese Botschaft sichtbar, spürbar und strukturiert zu erzählen. Mit Haltung, Klarheit und Story.
-  </p>
-
-  <div class="messaging-v3-grid">
-
-    <div class="msg-v3-card">
-      <div class="msg-v3-title">Story statt Slogan</div>
-      <p class="msg-v3-text">Wir formen aus deiner Markenidentität echte Geschichten – greifbar, emotional und überzeugend.</p>
-    </div>
-
-    <div class="msg-v3-card msg-wide">
-      <div class="msg-v3-title">Messaging House Struktur</div>
-      <p class="msg-v3-text">Wir entwickeln eine Architektur für deine Inhalte – klar gegliedert von der Leitidee bis zu den täglichen Posts.</p>
-      <img class="msg-v3-img" src="./img/structure.png" alt="Structure Icon">
-    </div>
-
-    <div class="msg-v3-card msg-wide">
-      <div class="msg-v3-title">Kernbotschaft mit Haltung</div>
-      <p class="msg-v3-text">Deine zentrale Aussage wird auf den Punkt gebracht – authentisch, wiedererkennbar und positionierend.</p>
-      <img class="msg-v3-img" src="./img/core-message.png" alt="Core Message Icon">
-    </div>
-
-    <div class="msg-v3-card">
-      <div class="msg-v3-title">Thematische Säulen</div>
-      <p class="msg-v3-text">Wir schaffen stabile Themenfelder, die deine Marke strukturieren – und sie langfristig im Kopf verankern.</p>
-    </div>
-
-    <div class="msg-v3-card">
-      <div class="msg-v3-title">Punktgenaue Beiträge</div>
-      <p class="msg-v3-text">Jeder Beitrag erfüllt ein klares Ziel – abgestimmt auf Zielgruppe, Kanal und Timing.</p>
-    </div>
-
-    <div class="msg-v3-card msg-wide">
-      <div class="msg-v3-title">Glaubwürdigkeit als Basis</div>
-      <p class="msg-v3-text">Wir sorgen dafür, dass deine Kommunikation ehrlich bleibt – und dadurch Vertrauen aufbaut.</p>
-      <img class="msg-v3-img" src="./img/trust.png" alt="Trust Icon">
-    </div>
-
-  </div>
-
-  <p class="messaging-v3-cta">
-    So entsteht ein Messaging-System mit Wiedererkennung, Wirkung und echter Markenstimme.
-  </p>
-</section>
 
 
 

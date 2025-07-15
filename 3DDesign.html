@@ -2309,218 +2309,141 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+<style>
+  .offerings-area {
+    position: relative;
+    background: #000000;
+    padding: 8rem 0 5rem;
+    font-family: 'Inter', sans-serif;
+    color: #ffffff;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+  }
 
-  <style>
-    .offerings-area {
-      background: #000000;
-      padding: 8rem 5vw 5rem;
-      font-family: 'Inter', sans-serif;
-      color: #ffffff;
-      text-align: center;
-      max-width: 100%;
-      margin: 0 auto;
+  .offerings-area video.bg-video {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    z-index: 0;
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  .offerings-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 5vw;
+    position: relative;
+    z-index: 1;
+  }
+
+  .offerings-heading-type {
+    margin-top: 10rem;
+    margin-bottom: 4rem;
+    position: relative;
+  }
+
+  .animated-offerings-title {
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: #fff;
+  }
+
+  .blinking-bar-offering {
+    display: inline-block;
+    width: 2px;
+    height: 1.2em;
+    background: linear-gradient(180deg, #ff5100, #c03c00);
+    box-shadow: 0 0 4px #c03c00;
+    vertical-align: bottom;
+    animation: blink-flash 1s steps(1) infinite;
+    margin-left: 3px;
+  }
+
+  @keyframes blink-flash {
+    0%, 50% {
+      opacity: 1;
     }
-
-    .offerings-heading-type {
-      margin-top: 10rem;
-      margin-bottom: 4rem;
-      z-index: 9999 !important;
-      position: relative;
+    50.1%, 100% {
+      opacity: 0;
     }
+  }
 
-    .animated-offerings-title {
-      font-size: clamp(2.2rem, 4vw, 3rem);
-      font-weight: 900;
-      letter-spacing: -0.5px;
-      display: inline-block;
-      color: #fff;
-    }
+  .offerings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 
-    .blinking-bar-offering {
-      display: inline-block;
-      width: 2px;
-      height: 1.2em;
-      background: linear-gradient(180deg, #ff5100, #c03c00);
-      box-shadow: 0 0 4px #c03c00;
-      vertical-align: bottom;
-      animation: blink-flash 1s steps(1) infinite;
-      margin-left: 3px;
-    }
+  .offering-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
 
-    .dynamic-offerings-typing {
-      margin-top: 1.2rem;
-      position: relative;
-    }
+  .offering-item {
+    background: rgba(30, 30, 30, 0.85);
+    border: 1px solid #333333;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+    backdrop-filter: blur(10px);
+  }
 
-    .dynamic-offerings-line {
-      font-size: clamp(1.2rem, 3vw, 2rem);
-      font-weight: 600;
-      color: #bbbbbb;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
+  .offering-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
+  }
 
-    @keyframes blink-flash {
+  .offering-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #ffffff;
+  }
 
-      0%,
-      50% {
-        opacity: 1;
-      }
+  .offering-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #dddddd;
+  }
 
-      50.1%,
-      100% {
-        opacity: 0;
-      }
-    }
-
+  @media (max-width: 768px) {
     .offerings-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.5rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      grid-template-columns: 1fr 1fr;
     }
+  }
 
-    .offering-link {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .offering-item {
-      background: #1e1e1e;
-      border: 1px solid #333333;
-      border-radius: 16px;
-      padding: 2rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      transition: all 0.3s ease;
-      height: 100%;
-    }
-
-    .offering-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
-    }
-
-    .offering-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: #ffffff;
-      z-index: 5 !important;
-      position: relative;
-    }
-
-    .offering-description {
-      font-size: 1rem;
-      line-height: 1.5;
-      color: #dddddd;
-      z-index: 5 !important;
-      position: relative;
-    }
-
-    @media (max-width: 768px) {
-      .offerings-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 540px) {
-      .offerings-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-  <style>
-    .offerings-area {
-      background: #000000;
-      padding: 8rem 5vw 5rem;
-      font-family: 'Inter', sans-serif;
-      color: #ffffff;
-      text-align: center;
-      max-width: 100%;
-      margin: 0 auto;
-    }
-
-    .offerings-heading-type {
-      margin-top: 10rem;
-      margin-bottom: 4rem;
-      position: relative;
-      z-index: 9999;
-    }
-
-    .animated-offerings-title {
-      font-size: clamp(2.2rem, 4vw, 3rem);
-      font-weight: 900;
-      letter-spacing: -0.5px;
-      color: #fff;
-    }
-
+  @media (max-width: 540px) {
     .offerings-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.5rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      grid-template-columns: 1fr;
     }
+  }
+</style>
 
-    .offering-link {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-    }
+<section class="offerings-area" role="region" aria-labelledby="core-services-heading">
+  <!-- Background Video (kleiner & höhenbasiert) -->
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="./IndexM/test.mp4" type="video/mp4">
+  </video>
 
-    .offering-item {
-      background: #1e1e1e;
-      border: 1px solid #333333;
-      border-radius: 16px;
-      padding: 2rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      transition: all 0.3s ease;
-      height: 100%;
-    }
-
-    .offering-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
-    }
-
-    .offering-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: #ffffff;
-    }
-
-    .offering-description {
-      font-size: 1rem;
-      line-height: 1.5;
-      color: #dddddd;
-    }
-
-    @media (max-width: 768px) {
-      .offerings-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 540px) {
-      .offerings-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-
-  <section class="offerings-area" role="region" aria-labelledby="core-services-heading">
+  <div class="offerings-inner">
     <div class="offerings-heading-type" id="core-services-heading">
       <h2 class="animated-offerings-title">
-        3D Dienstleistungen mit Blender – visuell überzeugend
+        3D Dienstleistungen mit Blender<br>visuell überzeugend
       </h2>
     </div>
 
@@ -2566,7 +2489,9 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </a>
     </div>
-  </section>
+  </div>
+</section>
+
 
 
 
