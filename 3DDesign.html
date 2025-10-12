@@ -330,6 +330,41 @@
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/denizs-dapper-site-2d192b.webflow.css" rel="stylesheet" type="text/css">
   <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+
+
+
+  <body data-page="3ddesign">
+
+<style>
+/* --------------------------
+   Lokale Bild-Overrides nur für 3DDesign.html
+--------------------------- */
+body[data-page="3ddesign"] .hero-image-background {
+  background-image: url("./images/hero-bg-sky_1hero-bg-sky.webp");
+  background-size: cover;
+  background-position: center;
+}
+
+body[data-page="3ddesign"] .hero-image-foreground {
+  background-image: url("./images/3ddesign-fg.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* Optional: Mobile- oder Tablet-Varianten */
+@media (max-width: 1024px) {
+  body[data-page="3ddesign"] .hero-image-background {
+    background-image: url("./images/3ddesign-bg-tablet.webp");
+  }
+}
+@media (max-width: 480px) {
+  body[data-page="3ddesign"] .hero-image-background {
+    background-image: url("./images/3ddesign-bg-mobile.webp");
+  }
+}
+</style>
+
+
 </head>
 
 
@@ -1810,6 +1845,23 @@ body.dark .header-actions .toggle.suggest .thumb{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 <style>
   /* Utilities */
@@ -3515,6 +3567,147 @@ body.dark .header-actions .toggle.suggest .thumb{
 
 
 
+<!-- =========================================================
+     SECTION: IMAGE MARQUEE — Scroll + sanfte Auto-Bewegung mobil
+========================================================== -->
+<section id="image-marquee" aria-label="3D Galerie">
+  <style>
+    #image-marquee {
+      --gap: clamp(12px, 1.6vw, 18px);
+      --h: clamp(110px, 20vw, 200px);
+      --dur-desktop: 28s;
+      --dur-mobile: 60s;
+      overflow: hidden;
+    }
+
+    #image-marquee .wrap {
+      max-width: min(95vw, 1340px);
+      margin: 0 auto;
+      padding: 24px 0;
+    }
+
+    #image-marquee .row {
+      overflow: hidden;
+      position: relative;
+      padding-block: 6px;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+              mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+    }
+
+    #image-marquee .track {
+      display: flex;
+      gap: var(--gap);
+      width: max-content;
+      align-items: center;
+      will-change: transform;
+    }
+
+    #image-marquee .tile {
+      flex: 0 0 auto;
+      height: var(--h);
+      aspect-ratio: 16/10;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    #image-marquee .tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ===== Standard: Endlosloop Desktop ===== */
+    @keyframes scroll-ltr { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    @keyframes scroll-rtl { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    #image-marquee .row.top .track {
+      animation: scroll-ltr var(--dur-desktop) linear infinite;
+    }
+    #image-marquee .row.bottom .track {
+      animation: scroll-rtl calc(var(--dur-desktop) * 1.1) linear infinite;
+    }
+
+    /* Hover = Pause */
+    @media (hover:hover) {
+      #image-marquee .row:hover .track { animation-play-state: paused; }
+    }
+
+    /* === Mobile: langsamere Bewegung + Scroll-Parallax === */
+    @media (max-width: 900px) {
+      #image-marquee .row.top .track {
+        animation: scroll-ltr var(--dur-mobile) linear infinite;
+      }
+      #image-marquee .row.bottom .track {
+        animation: scroll-rtl calc(var(--dur-mobile) * 1.1) linear infinite;
+      }
+    }
+  </style>
+
+  <div class="wrap">
+    <!-- OBERERE REIHE – links → rechts -->
+    <div class="row top">
+      <div class="track">
+        <a class="tile"><img src="./3DSlideShow/post1.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post2.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post3.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post4.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post5.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post6.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post7.png" alt=""></a>
+        <!-- Duplikat -->
+        <a class="tile"><img src="./3DSlideShow/post1.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post2.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post3.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post4.png" alt=""></a>
+      </div>
+    </div>
+
+    <!-- UNTERE REIHE – rechts → links -->
+    <div class="row bottom">
+      <div class="track">
+        <a class="tile"><img src="./3DSlideShow/post8.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post9.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post10.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post11.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post12.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post13.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post14.png" alt=""></a>
+        <!-- Duplikat -->
+        <a class="tile"><img src="./3DSlideShow/post8.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post9.png" alt=""></a>
+        <a class="tile"><img src="./3DSlideShow/post10.png" alt=""></a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Scroll-Parallax + sanfte Drift auf Mobil
+    (function(){
+      const marquee = document.getElementById('image-marquee');
+      const rows = marquee.querySelectorAll('.row');
+      const tracks = [...rows].map(r => r.querySelector('.track'));
+      const speeds = [0.4, -0.4]; // oben, unten
+
+      function onScroll(){
+        const rect = marquee.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const progress = 1 - Math.min(Math.max((rect.top + rect.height) / (vh + rect.height), 0), 1);
+        tracks.forEach((t,i)=>{
+          const drift = progress * 25 * speeds[i]; // sanftes Mitschieben
+          t.style.transform = `translateX(${drift}%)`;
+        });
+      }
+
+      // Nur bei kleinen Viewports aktiv
+      const mq = window.matchMedia("(max-width: 900px)");
+      if(mq.matches){
+        window.addEventListener('scroll', onScroll, {passive:true});
+        onScroll();
+      }
+    })();
+  </script>
+</section>
 
 
 
@@ -3942,12 +4135,374 @@ body.dark .header-actions .toggle.suggest .thumb{
 
 
 
+<!-- =========================================================
+     SECTION: KALLISTO — 3D WHY-US (Weißes Layout, optimierte Typo in Karten)
+     – Vollständiger Code mit UX-Upgrade für Bullet-Text
+========================================================== -->
+<section id="kallisto-core" aria-labelledby="kallisto-h">
+  <style>
+    /* ===== Basis (weißer Hintergrund) ===== */
+    #kallisto-core, #kallisto-core *{ box-sizing:border-box; }
+    #kallisto-core{
+      --surface: #ffffff;
+      --ink-900: #0b0c10;
+      --ink-700: #1c2230;
+      --muted:   #6b7280;
+      --blue:   #1b2dd6;
+      --ink:    #0f1220;
+      --orange: #ff5c1a;
+      --radius: 18px;
+      --shadow: 0 10px 28px rgba(0,0,0,.07);
+
+      color: var(--ink-900);
+      background: var(--surface);
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+    }
+    #kallisto-core .wrap{ max-width:min(95vw, 1340px); margin-inline:auto; padding:3rem 1rem 3.2rem; }
+
+    /* ===== Header ===== */
+    #kallisto-core .intro{ text-align:center; margin-bottom: 1.9rem; }
+    #kallisto-core .glyph{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.46rem .9rem; border-radius:999px; font-weight:800; font-size:.85rem;
+      background:#11131a; color:#fff; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.10);
+    }
+    #kallisto-core .crest{
+      font-size:clamp(2.2rem, 4.8vw, 3.4rem); font-weight:900; letter-spacing:-.022em;
+      margin:.8rem 0 .55rem; line-height:1.12; color: var(--ink-900);
+    }
+    #kallisto-core .crest .spark{ color: var(--ink-900); }
+    #kallisto-core .subtone{
+      color: var(--ink-700); max-width:56rem; margin:0 auto;
+      line-height:1.65; font-size:clamp(1.02rem,2vw,1.12rem); letter-spacing:.002em;
+    }
+
+    /* ===== Grid ===== */
+    #kallisto-core .nebula{
+      display:grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(9, 1fr);
+      gap: clamp(14px, 2vw, 22px);           /* mehr Luft zwischen Karten */
+      margin-top: 2rem;
+      min-height: 720px;
+    }
+    #kallisto-core .orb1 { grid-column: span 3 / span 3; grid-row: span 3 / span 3; }
+    #kallisto-core .orb2 { grid-column: span 3 / span 3; grid-row: span 3 / span 3; grid-column-start: 1; grid-row-start: 4; }
+    #kallisto-core .orb3 { grid-row: span 2 / span 2; grid-column-start: 4; grid-row-start: 1; }
+    #kallisto-core .orb4 { grid-column: span 3 / span 3; grid-row: span 4 / span 4; grid-column-start: 4; grid-row-start: 3; }
+    #kallisto-core .orb5 { grid-row: span 2 / span 2; grid-column-start: 6; grid-row-start: 1; }
+    #kallisto-core .orb6 { grid-column: span 6 / span 6; grid-row: span 3 / span 3; grid-column-start: 1; grid-row-start: 7; }
+    #kallisto-core .orb7 { grid-row: span 2 / span 2; grid-column-start: 5; grid-row-start: 1; }
+
+    /* ===== Karten ===== */
+    #kallisto-core .prism{
+      --measure: 60ch;
+      --rule: rgba(255,255,255,.18);
+      --mutedOnCard: rgba(255,255,255,.92);
+
+      font-kerning: normal;
+      font-variant-ligatures: contextual common-ligatures;
+
+      position:relative; border-radius:var(--radius);
+      display:flex; flex-direction:column; justify-content:flex-start;
+      height:100%; padding: clamp(1.2rem, 2.6vw, 2rem);
+      color:#fff; box-shadow: var(--shadow);
+    }
+    #kallisto-core .prism.blue   { background: var(--blue); }
+    #kallisto-core .prism.ink    { background: var(--ink); }
+    #kallisto-core .prism.orange { background: var(--orange); }
+
+    /* ===== Typografie in Karten ===== */
+    #kallisto-core .prism .kicker{
+      font-size:.82rem;
+      letter-spacing:.09em;
+      text-transform:uppercase;
+      opacity:.95;
+      margin-bottom:.65rem;
+      text-wrap:balance;
+    }
+    #kallisto-core .prism .flare{
+      margin:0 0 .6rem;
+      font-weight:960;
+      letter-spacing:-.016em;
+      font-size:clamp(1.32rem,2.35vw,1.66rem);
+      line-height:1.18;
+      text-wrap:balance;
+    }
+    #kallisto-core .prism .lede{
+      margin:0 0 1.1rem;
+      color:var(--mutedOnCard);
+      font-size:clamp(1.06rem,1.95vw,1.22rem);
+      line-height:1.75;
+      max-width:var(--measure);
+      hyphens:auto;
+      text-wrap:pretty;
+    }
+
+    /* ===== UX-UPGRADE: Bullet-Text neben den Punkten ===== */
+    #kallisto-core .prism .gridlist{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:.7rem;                            /* rhythmischer Abstand */
+      max-width:62ch;                       /* angenehme Zeilenlänge */
+    }
+    #kallisto-core .prism .griditem{
+      display:grid;
+      grid-template-columns:18px 1fr;       /* präzise Einrückung */
+      gap:.65rem;
+      align-items:start;
+      padding:.55rem 0 .7rem;               /* mehr Luft & bessere Touch-Ziele */
+      border-top:1px solid var(--rule);
+      line-height:1.6;
+    }
+    #kallisto-core .prism .griditem:first-child{ border-top:0; }
+
+    #kallisto-core .prism .pip{
+      width:10px; height:10px; border-radius:999px;
+      margin-top:.45rem;
+      background:#fff;
+      box-shadow:0 0 0 2px rgba(255,255,255,.22);
+    }
+
+    /* Lead als Mini-Überschrift je Bullet */
+    #kallisto-core .prism .lead{
+      display:block;                         /* eigene Zeile für Klarheit */
+      margin:0 0 .15rem;
+      font-weight:950;
+      font-size:clamp(1.05rem,1.7vw,1.18rem);
+      line-height:1.3;
+      letter-spacing:-.01em;
+      color:#fff;                            /* maximaler Kontrast */
+      text-wrap:balance;
+    }
+    /* Fließtext des Bullets (zweites Span) */
+    #kallisto-core .prism .griditem > span:last-child{
+      color: rgba(255,255,255,.92);
+      font-weight:680;
+      font-size: clamp(.98rem, 1.5vw, 1.08rem);
+      letter-spacing:-.003em;
+    }
+    /* feine Kontrast-Tweaks je Farbvariante */
+    #kallisto-core .prism.orange .griditem > span:last-child{ color: rgba(255,255,255,.95); }
+    #kallisto-core .prism.ink    .griditem > span:last-child{ color: rgba(255,255,255,.9);  }
+
+    /* Abschlussnotiz */
+    #kallisto-core .prism .note{
+      margin-top:1.2rem;
+      font-size:.95rem;
+      line-height:1.64;
+      max-width:var(--measure);
+      color:rgba(255,255,255,.93);
+      text-wrap:pretty;
+    }
+
+    /* ===== Medien ===== */
+    #kallisto-core .media{
+      border-radius:var(--radius); overflow:hidden; height:100%; position:relative;
+      border:1px solid #eceff3; box-shadow: var(--shadow);
+      background:#fff;
+    }
+    #kallisto-core .media img, #kallisto-core .media video{
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
+    #kallisto-core .caption{
+      position:absolute; left:12px; bottom:10px; color:#0f1220; font-weight:800; font-size:.9rem;
+      text-shadow:0 1px 0 rgba(255,255,255,.9), 0 6px 20px rgba(0,0,0,.28); pointer-events:none;
+    }
+
+    /* ===== Impact Card (Text links, Bild rechts) ===== */
+    #kallisto-core .impact-inner{
+      display:grid; grid-template-columns: 1.2fr .9fr; gap: clamp(12px, 2vw, 18px); align-items:stretch;
+    }
+    #kallisto-core .impact-visual{
+      border-radius: clamp(14px, 2vw, 18px); overflow:hidden; position:relative;
+      background:#fff; border:1px solid rgba(255,255,255,.4);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
+    }
+    #kallisto-core .impact-visual img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 900px){
+      #kallisto-core .nebula{
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: minmax(170px, 32vw);
+        gap: clamp(12px, 2.6vw, 18px);
+        min-height:unset;
+      }
+      #kallisto-core .orb1,
+      #kallisto-core .orb2,
+      #kallisto-core .orb4,
+      #kallisto-core .orb6 { grid-column:1 / -1; }
+
+      #kallisto-core .impact-inner{ grid-template-columns: 1fr; }
+      #kallisto-core .impact-visual{ min-height: 36vw; }
+
+      /* komfortablerer Bodytext mobil */
+      #kallisto-core .prism .gridlist{ max-width:100%; }
+      #kallisto-core .prism .griditem > span:last-child{
+        font-size: clamp(1rem, 2.2vw, 1.12rem);
+        line-height: 1.68;
+      }
+    }
+    
+  </style>
+
+  <div class="wrap">
+    <header class="intro">
+      <span class="glyph">Warum wir</span>
+      <h2 id="kallisto-h" class="crest">3D-Design, das <span class="spark">Resultate</span> liefert.</h2>
+      <p class="subtone">Wir kombinieren fotorealistische Renderings mit klaren Prozessen – so entstehen Visuals, die schneller live gehen und messbar besser performen.</p>
+    </header>
+
+    <div class="nebula">
+      <!-- 1: TEXT (BLAU) -->
+      <div class="orb1 prism blue">
+        <span class="kicker">Qualität</span>
+        <h3 class="flare">Visuelle Präzision</h3>
+        <p class="lede">Licht, Material und Perspektive sind fein aufeinander abgestimmt – für Renderings, die wie High-End-Fotografie wirken, nur flexibler.</p>
+        <ul class="gridlist">
+          <li class="griditem">
+            <span class="pip"></span>
+            <span>
+              <span class="lead">Physikalische Materialien</span>
+              erzeugen realistische Reflexe, Mikro-Rauheiten und Oberflächenharmonie.
+            </span>
+          </li>
+          <li class="griditem">
+            <span class="pip"></span>
+            <span>
+              <span class="lead">Farbtreue</span>
+              durch sRGB/Rec.709 – deine Markenfarben bleiben überall konsistent.
+            </span>
+          </li>
+          <li class="griditem">
+            <span class="pip"></span>
+            <span>
+              <span class="lead">Wiederverwendbare Setups</span>
+              sichern konstante Ergebnisse bei Serien und Varianten.
+            </span>
+          </li>
+        </ul>
+        <p class="note">Ergebnis: ein markenklares Bildsystem, das sich schnell skalieren lässt.</p>
+      </div>
+
+      <!-- 2: VIDEO -->
+      <div class="orb2 media">
+        <video src="./3DSlideShow/neolog-teaser.mp4" poster="./3DSlideShow/post2.png" playsinline muted controls></video>
+        <span class="caption">3D Motion Visual</span>
+      </div>
+
+      <!-- 3: BILD -->
+      <div class="orb3 media">
+        <img src="./3DSlideShow/post3.png" alt="3D Rendering – Detailansicht">
+      </div>
+
+      <!-- 4: TEXT (SCHWARZ / INK) -->
+      <div class="orb4 prism ink">
+        <span class="kicker">Prozess</span>
+        <h3 class="flare">Abläufe mit Plan</h3>
+        <p class="lede">Klare Timelines, feste Reviews, nachvollziehbare Versionierung – für Projekte, die pünktlich und stressfrei ins Ziel gehen.</p>
+        <ul class="gridlist">
+          <li class="griditem">
+            <span class="pip"></span>
+            <span>
+              <span class="lead">Fixe Review-Slots</span>
+              halten Fokus hoch und verhindern Schleifen.
+            </span>
+          </li>
+          <li class="griditem">
+            <span class="pip"></span>
+            <span>
+              <span class="lead">Schnelle Previews</span>
+              liefern Feedbackgrundlagen innerhalb weniger Tage.
+            </span>
+          </li>
+          <li class="griditem">
+            <span class="pip"></span>
+            <span>
+              <span class="lead">Dokumentierte Szenen</span>
+              machen jedes Setup reproduzierbar.
+            </span>
+          </li>
+        </ul>
+        <p class="note">Planbar statt zufällig – so wird Qualität verlässlich.</p>
+      </div>
+
+      <!-- 5: BILD -->
+      <div class="orb5 media">
+        <img src="./3DSlideShow/post5.png" alt="3D Rendering – Ambient Low-Key">
+      </div>
+
+      <!-- 6: TEXT (ORANGE, BREIT) + Bild rechts -->
+      <div class="orb6 prism orange">
+        <div class="impact-inner">
+          <div class="impact-copy">
+            <span class="kicker">Outcome</span>
+            <h3 class="flare">Design mit Wirkung</h3>
+            <p class="lede">Visuals, die Emotion und Klarheit verbinden – um Produkte verständlich zu machen, Begehrlichkeit zu erzeugen und Vertrauen zu stärken.</p>
+            <ul class="gridlist">
+              <li class="griditem">
+                <span class="pip"></span>
+                <span>
+                  <span class="lead">Feature-Makros</span>
+                  zeigen komplexe Details auf den Punkt erklärt.
+                </span>
+              </li>
+              <li class="griditem">
+                <span class="pip"></span>
+                <span>
+                  <span class="lead">Hero-Visuals</span>
+                  schaffen Wiedererkennung und Markentiefe.
+                </span>
+              </li>
+              <li class="griditem">
+                <span class="pip"></span>
+                <span>
+                  <span class="lead">Konsistente Bildsprache</span>
+                  über Varianten hinweg stärkt Vertrauen und Markenbindung.
+                </span>
+              </li>
+            </ul>
+            <p class="note">Mehr Klarheit, mehr Emotion – und sichtbar bessere Performance im gesamten Funnel.</p>
+          </div>
+          <div class="impact-visual" aria-hidden="true">
+            <img src="./3DSlideShow/post9.png" alt="">
+          </div>
+        </div>
+      </div>
+
+      <!-- 7: BILD -->
+      <div class="orb7 media">
+        <img src="./3DSlideShow/post7.png" alt="3D Rendering – Produktmakro">
+      </div>
+    </div>
+  </div>
+</section>
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  
   <section class="branch-selection visible" id="branchSelection">
     <div class="branch-inner">
       <h2>So könnte Ihr Profukt aussehen:</h2>
@@ -4508,2058 +5063,7 @@ body.dark .header-actions .toggle.suggest .thumb{
       text-align: center;
     }
   </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section class="kontakt-testimonial-section" id="kontakt">
-  <div class="kontakt-testimonial-wrapper">
-    <!-- Kontaktbereich -->
-    <div class="kontakt-area">
-      <h2 class="section-title">Lass uns loslegen!</h2>
-      <p class="kontakt-subline">
-        Eine starke Idee verdient ein starkes digitales Erlebnis. <br />
-        Erzähle uns von Deinem Projekt – wir bringen es gemeinsam auf das nächste Level.
-      </p>
-
-      <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm">
-        <input type="text" name="name" placeholder="Name" required />
-        <input type="email" name="email" placeholder="E-Mail-Adresse" required />
-        <input type="text" name="subject" placeholder="Betreff" />
-        <textarea name="message" placeholder="Nachricht" rows="5" required></textarea>
-        <button type="submit" class="kontakt-btn">Jetzt Anfrage senden!</button>
-      </form>
-    </div>
-
-    <!-- Testimonials -->
-    <div class="testimonial-area">
-      <testimonial-slider></testimonial-slider>
-    </div>
-  </div>
-</section>
-<style>
-  /* ========= Theme Tokens (nutzen globale data-theme toggles) ========= */
-  :root{
-    --surface: #ffffff;
-    --surface-elev: #f7f8fa;
-    --text: #0b0c0e;
-    --muted: #5d6066;
-    --border: #e6e8eb;
-    --input-bg: #ffffffcc;
-    --input-text: #0b0c0e;
-    --placeholder: #8b9096;
-    --ring: #ff6600;
-    --ring-soft: rgba(255,102,0,.15);
-    --btn-text: #ffffff;
-  }
-  :root[data-theme="dark"]{
-    --surface:#000000;
-    --surface-elev:#111216;
-    --text:#f5f7fa;
-    --muted:#c6cad1;
-    --border:#262a31;
-    --input-bg:#111216cc;
-    --input-text:#f5f7fa;
-    --placeholder:#95a0ad;
-    --ring:#ff7a1a;
-    --ring-soft: rgba(255,122,26,.22);
-    --btn-text: #ffffff;
-  }
-  @media (prefers-color-scheme: dark){
-    :root[data-theme="auto"]{
-      --surface:#0a0a0b;
-      --surface-elev:#000000;
-      --text:#f5f7fa;
-      --muted:#c6cad1;
-      --border:#262a31;
-      --input-bg:#000000cc;
-      --input-text:#f5f7fa;
-      --placeholder:#95a0ad;
-      --ring:#ff7a1a;
-      --ring-soft: rgba(255,122,26,.22);
-      --btn-text:#ffffff;
-    }
-  }
-
-  /* ========= Reset / Container ========= */
-  html, body {
-    box-sizing: border-box;
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-  }
-  *, *::before, *::after { box-sizing: inherit; }
-
-  .kontakt-testimonial-section {
-    background: var(--surface);
-    padding: clamp(3rem, 6vw, 6rem) 2rem;
-    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    overflow-x: hidden;
-    margin-top: clamp(5rem, 10vw, 10rem);
-    color: var(--text);
-  }
-
-  .kontakt-testimonial-wrapper {
-    max-width: 1440px;
-    margin: 0 auto;
-    display: flex;
-    gap: clamp(2rem, 4vw, 4rem);
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .kontakt-area {
-    flex: 1 1 480px;
-    max-width: 640px;
-    min-width: 300px;
-    background: color-mix(in oklab, var(--surface-elev) 85%, transparent);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: clamp(1.25rem, 2.2vw, 2rem);
-    box-shadow: 0 10px 30px rgba(0,0,0,.06);
-    backdrop-filter: blur(8px) saturate(1.02);
-  }
-
-  .testimonial-area {
-    flex: 1 1 380px;
-    max-width: 600px;
-    min-width: 280px;
-  }
-
-  .section-title {
-    font-size: clamp(1.8rem, 1.1rem + 2.4vw, 2.6rem);
-    font-weight: 900;
-    color: var(--text);
-    margin: 0 0 .8rem 0;
-    text-align: left;
-    letter-spacing: -.02em;
-  }
-
-  .kontakt-subline {
-    font-size: clamp(1rem, .9rem + .4vw, 1.15rem);
-    color: var(--muted);
-    line-height: 1.6;
-    max-width: 90%;
-    margin-bottom: 2rem;
-    text-align: left;
-  }
-
-  /* ========= Form ========= */
-  .kontakt-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    width: 100%;
-    max-width: 100%;
-    padding: 0;
-  }
-
-  .kontakt-form input,
-  .kontakt-form textarea {
-    width: 100%;
-    max-width: 100%;
-    padding: 1rem 1.1rem;
-    font-size: 1rem;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--input-bg);
-    color: var(--input-text);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    transition: border-color .25s ease, box-shadow .25s ease, background-color .25s ease;
-    appearance: none;
-  }
-
-  .kontakt-form input::placeholder,
-  .kontakt-form textarea::placeholder {
-    color: var(--placeholder);
-  }
-
-  .kontakt-form input:focus,
-  .kontakt-form textarea:focus {
-    border-color: var(--ring);
-    box-shadow: 0 0 0 3px var(--ring-soft);
-    outline: none;
-    background: color-mix(in oklab, var(--input-bg) 85%, transparent);
-  }
-
-  /* ========= CTA Button ========= */
-  .kontakt-btn {
-    background: linear-gradient(135deg, #ff6600, #ff9950, #ff6a00);
-    background-size: 300% 300%;
-    animation: gradientShift 18s ease infinite;
-    color: var(--btn-text);
-    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
-    font-weight: 800;
-    border: none;
-    padding: 1rem 1.2rem;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: transform .25s ease, box-shadow .25s ease, background-position .6s ease;
-    box-shadow: 0px 8px 22px rgba(255, 102, 0, 0.30);
-    max-width: 380px;
-    width: 100%;
-  }
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  .kontakt-btn:hover,
-  .kontakt-btn:focus-visible {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 16px 40px #ffb07366;
-    outline: none;
-  }
-  .kontakt-btn:focus-visible {
-    outline: 2px dashed var(--ring);
-    outline-offset: 4px;
-  }
-  .kontakt-btn.sent {
-    background: linear-gradient(135deg, #00c851, #007e33);
-    animation: none;
-    box-shadow: 0 0 18px rgba(0, 200, 81, 0.55);
-    transform: scale(1.01);
-    color: #fff;
-  }
-
-  /* ========= Responsive ========= */
-  @media (max-width: 1024px) {
-    .kontakt-testimonial-wrapper {
-      flex-direction: column;
-      align-items: center;
-      gap: 3rem;
-    }
-    .section-title, .kontakt-subline {
-      text-align: center;
-      max-width: 90%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .kontakt-area, .testimonial-area { max-width: 100%; }
-    .kontakt-btn { margin: 0 auto; }
-  }
-
-  @media (max-width: 540px) {
-    .kontakt-testimonial-wrapper {
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      padding: 0;
-      margin: 0;
-    }
-    .kontakt-area, .testimonial-area {
-      width: 100%;
-      max-width: 100%;
-      padding: 0 1rem;
-      text-align: center;
-    }
-    .section-title {
-      font-size: 1.8rem;
-      text-align: center;
-      margin: 0 auto 1rem;
-      max-width: 100%;
-    }
-    .kontakt-subline {
-      font-size: 1rem;
-      text-align: center;
-      margin: 0 auto 1.6rem;
-      max-width: 100%;
-      line-height: 1.5;
-    }
-    .kontakt-form { padding: 0 .5rem; }
-    .kontakt-form input, .kontakt-form textarea {
-      font-size: .95rem; padding: .9rem 1rem;
-    }
-    .kontakt-btn { font-size: 1rem; padding: .9rem 1rem; width: 100%; max-width: 100%; }
-  }
-
-  @media (max-width: 400px) {
-    .kontakt-testimonial-section { padding-left: 1rem; padding-right: 1rem; }
-    .kontakt-testimonial-wrapper { margin: 0 auto; width: 100%; max-width: 100%; }
-    .kontakt-area, .testimonial-area { padding: 0; margin: 0 auto; text-align: center; }
-    .kontakt-form { margin: 0 auto; }
-    .inner-card { margin: 0 auto !important; }
-  }
-
-  /* ========= Motion-Safe ========= */
-  @media (prefers-reduced-motion: reduce){
-    .kontakt-btn { animation: none !important; transition: none !important; }
-  }
-  /* ========= Fix 1: Headroom + saubere Zentrierung ≤ 540px ========= */
-@media (max-width: 540px){
-  /* Wrapper mittig ausrichten (kein Rest-Space durch Flex) */
-  .kontakt-testimonial-wrapper{
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;   /* statt space-between */
-    gap: 1.75rem;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0;
-  }
-
-  /* Karte: mehr Top-Padding -> Heading rutscht NICHT nach oben */
-  .kontakt-area{
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 1.5rem 1rem 1.6rem;   /* ↑ Top- und Bottom-Spacing */
-    box-sizing: border-box;
-  }
-
-  /* Heading/Subline: definierte Abstände */
-  .section-title{
-    margin-top: .25rem;           /* kleine Kappe oben */
-    margin-bottom: 1.1rem;        /* etwas mehr Luft zur Subline */
-    text-align: center;
-  }
-  .kontakt-subline{
-    margin: 0 auto 1.8rem;
-    text-align: center;
-    max-width: 36rem;
-  }
-
-  /* Section-Padding seitlich vereinheitlichen */
-  .kontakt-testimonial-section{
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
-
-/* ========= Fix 2: harte Zentrierung & Overflow-Schutz ≤ 375px ========= */
-@media (max-width: 375px){
-  .kontakt-testimonial-section{
-    padding-left: 1rem;
-    padding-right: 1rem;
-    overflow-x: hidden;                 /* falls irgendwas breiter wird */
-  }
-
-  .kontakt-testimonial-wrapper{
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 0;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Karte wirklich zentrieren und Breite sicher begrenzen */
-  .kontakt-area{
-    max-width: 360px;                   /* harte Kante für Mini-Screens */
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 1.25rem 1rem 1.5rem;       /* kompakter, aber luftiger Rand */
-  }
-
-  /* Inputs auf Breite der Karte einsperren (kein Schieben) */
-  .kontakt-form{
-    width: 100%;
-    max-width: 100%;
-    padding: 0;                         /* vermeidet Add-On-Overflow */
-    margin: 0 auto;
-  }
-
-  .kontakt-form input,
-  .kontakt-form textarea{
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;             /* inkl. Padding/Borders */
-  }
-
-  /* Button mittig */
-  .kontakt-btn{
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  /* Testimonial-Spalte ebenfalls 100% & mittig */
-  .testimonial-area{
-    width: 100%;
-    max-width: 360px;
-    margin: 0 auto;
-  }
-}
-
-
-
-/* ===== Hard-Fix für Mini-Phones (320–375px) ===== */
-@media (max-width: 375px){
-
-  /* 1) Container darf niemals breiter werden als der Viewport */
-  .kontakt-testimonial-section{
-    padding-left: 1rem;
-    padding-right: 1rem;
-    overflow-x: hidden;            /* killt Rest-Overflow */
-  }
-
-  /* 2) Flex-Wrap + keine starren Mindestbreiten */
-  .kontakt-testimonial-wrapper{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;   /* kein space-between */
-    gap: 1rem;                     /* kleineres Gap */
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    overflow-x: hidden;            /* falls ein Kind doch zu breit ist */
-  }
-
-  /* 3) Beide Spalten dürfen schrumpfen (min-width:0 ist der Schlüssel im Flex!) */
-  .kontakt-area,
-  .testimonial-area{
-    min-width: 0 !important;       /* überschreibt 300px / 280px */
-    max-width: 100% !important;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    box-sizing: border-box;
-  }
-
-  /* 4) Karte selbst: kompakter + garantiert innerhalb der Breite */
-  .kontakt-area{
-    padding: 1.1rem 0.9rem 1.4rem; /* etwas knapper, verhindert Summe > 100% */
-    border-radius: 16px;
-  }
-
-  /* 5) Formular-Controls: niemals breiter als die Karte */
-  .kontakt-form{
-    width: 100%;
-    max-width: 100%;
-    padding: 0;                    /* kein Zusatz-Offset */
-    margin: 0 auto;
-  }
-  .kontakt-form input,
-  .kontakt-form textarea,
-  .kontakt-btn{
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-
-}
-
-/* Bonus: 376–540px – leicht entschärftes Set, damit der Sprung weich ist */
-@media (min-width: 376px) and (max-width: 540px){
-  .kontakt-testimonial-wrapper{ gap: 1.25rem; }
-  .kontakt-area, .testimonial-area{ min-width: 0; max-width: 100%; }
-  .kontakt-area{ padding: 1.3rem 1rem 1.6rem; }
-}
-
-</style>
-<script>
-  /* ===== Form Handling inkl. UI-Feedback ===== */
-  const form = document.getElementById("kontaktForm");
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const formData = new FormData(form);
-    const button = form.querySelector(".kontakt-btn");
-
-    try {
-      const response = await fetch("https://formspree.io/f/xqapdvaq", {
-        method: "POST",
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (response.ok) {
-        button.innerText = "✅ Anfrage gesendet!";
-        button.classList.add("sent");
-        form.reset();
-      } else {
-        button.innerText = "⚠️ Fehler beim Senden";
-      }
-    } catch (error) {
-      button.innerText = "❌ Netzwerkfehler";
-    }
-
-    setTimeout(() => {
-      button.innerText = "🚀 Jetzt Anfrage senden!";
-      button.classList.remove("sent");
-    }, 4000);
-  });
-</script>
-<script>
-  /* ===== Testimonial Web Component mit Dark-Mode via :host-context ===== */
-  class TestimonialSlider extends HTMLElement {
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-      this.testimonials = [
-        {
-          image: "./TestemonialSlider/CS.webp",
-          name: "Christian Schulz",
-          quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
-          logo: "./TestemonialSlider/NeoLog.webp"
-        },
-        {
-          image: "./TestemonialSlider/CS.webp",
-          name: "Christian Schulz",
-          quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
-          logo: "./TestemonialSlider/NeoLog.webp"
-        },
-        {
-          image: "./TestemonialSlider/CS.webp",
-          name: "Christian Schulz",
-          quote: "Die Animationen bringen unsere Marke zum Leben – ein Gamechanger auf Messen & Social Media!",
-          logo: "./TestemonialSlider/NeoLog.webp"
-        }
-      ];
-    }
-
-    connectedCallback() {
-      const style = `
-        <style>
-          :host {
-            display: block;
-            padding: 5rem 1.5rem;
-            background: transparent;
-            position: relative;
-            color: var(--ts-text, #1c1c1e);
-          }
-
-          /* Light Defaults (werden per :host-context überschrieben) */
-          :host { 
-            --ts-text: #1c1c1e;
-            --ts-muted: #666;
-            --ts-card-shadow: 0 10px 30px rgba(0,0,0,.15);
-            --ts-dot: #999;
-            --ts-dot-active: #ff6600;
-          }
-
-          /* Dark-Mode aus dem Document-Root erben */
-          :host-context(:root[data-theme="dark"]),
-          :host-context(:root[data-theme="auto"][data-theme-auto="dark"]) {}
-
-          :host-context(:root[data-theme="dark"]) {
-            --ts-text: #f5f7fa;
-            --ts-muted: #c6cad1;
-            --ts-card-shadow: 0 14px 34px rgba(0,0,0,.45);
-            --ts-dot: #667085;
-            --ts-dot-active: #ff7a1a;
-          }
-          /* Auto + prefers dark – kleiner Trick: wir prüfen das attribute und Colors trotzdem darken */
-          @media (prefers-color-scheme: dark){
-            :host-context(:root[data-theme="auto"]) {
-              --ts-text: #f5f7fa;
-              --ts-muted: #c6cad1;
-              --ts-card-shadow: 0 14px 34px rgba(0,0,0,.45);
-              --ts-dot: #667085;
-              --ts-dot-active: #ff7a1a;
-            }
-          }
-
-          h2 {
-            font-size: 2.4rem;
-            text-align: center;
-            margin-bottom: .5rem;
-            color: var(--ts-text);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-          }
-
-          .intro {
-            text-align: center;
-            font-size: 1.05rem;
-            color: var(--ts-muted);
-            margin: 0 auto 2.2rem;
-            max-width: 680px;
-            padding: 0 2.1rem;
-            line-height: 1.6;
-          }
-
-          .slider-wrapper { overflow: hidden; position: relative; height: 550px;}
-          .track { display: flex; transition: transform 0.6s ease; will-change: transform; }
-
-          .card {
-            flex: 0 0 100%;
-            display: flex; justify-content: center; align-items: center;
-            opacity: 0; transform: scale(0.9);
-            pointer-events: none;
-            transition: opacity .4s ease, transform .4s ease;
-            height: 350px;
-          }
-          .card.active { opacity: 1; transform: scale(1); pointer-events: auto; }
-
-          .inner-card {
-            width: clamp(280px, 80vw, 360px);
-            max-width: 100%;
-            color: #fff;
-            border-radius: 18px;
-            padding: 2.2rem;
-            text-align: center;
-            box-shadow: var(--ts-card-shadow);
-            transition: transform .3s ease;
-            background: linear-gradient(135deg, #222, #444);
-          }
-          .inner-card:hover { transform: translateY(-4px) scale(1.02); }
-
-          /* Farb-Varianten */
-          .card-1 .inner-card { background: linear-gradient(135deg, #3b34ff, #7500ff); }
-          .card-2 .inner-card { background: linear-gradient(135deg, #121212, #2b2b2b); }
-          .card-3 .inner-card { background: linear-gradient(135deg, #ff6600, #ff00aa, #3a0ca3); background-size: 400% 400%; }
-          .card-clone .inner-card { background: linear-gradient(135deg, #444, #111); }
-
-          .avatar-logo {
-            display: flex; flex-direction: column; align-items: center; gap: .8rem; margin-bottom: 1.2rem;
-          }
-          .avatar {
-            width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid #8b5cf6;
-          }
-          .logo {
-            height: 28px; max-width: 100px; opacity: .75; transition: .3s ease; object-fit: contain; filter: brightness(0) invert(1);
-          }
-          .logo:hover { opacity: 1; }
-
-          .quote { font-style: italic; color: #e7e7e7; font-size: 1rem; margin: .8rem 0 .45rem; line-height: 1.6; }
-          .author { font-weight: 700; color: #fff; font-size: 1rem; }
-
-
-          @media (max-width: 558px) {
-            .inner-card { width: 60vw; }
-          }
-          @media (max-width: 425px) {
-            h2 { font-size: 2rem; }
-            .intro { font-size: .95rem; padding: 0 1.2rem; }
-            .inner-card { width: 55vw; }
-          }
-          @media (prefers-reduced-motion: reduce){
-            .track { transition: none !important; }
-            .card, .inner-card { transition: none !important; }
-          }
-        </style>
-      `;
-
-      const extended = [...this.testimonials, this.testimonials[0]];
-      const slidesHTML = extended.map((t, i) => {
-        const isClone = i === extended.length - 1;
-        const cardClass = isClone ? "card-clone" : `card-${i + 1}`;
-        return `
-          <div class="card ${cardClass}" role="listitem" aria-roledescription="slide">
-            <div class="inner-card">
-              <div class="avatar-logo">
-                <img src="${t.image}" class="avatar" alt="${t.name}">
-                ${t.logo ? `<img src="${t.logo}" class="logo" alt="Logo des Kunden">` : ""}
-              </div>
-              <p class="quote">„${t.quote}“</p>
-              <p class="author">${t.name}</p>
-            </div>
-          </div>
-        `;
-      }).join("");
-
-      const dotsHTML = `
-        <div class="dots" role="tablist" aria-label="Testimonials">
-          ${this.testimonials.map((_, i) => `<div class="dot" role="tab" tabindex="0" data-index="${i}" aria-label="Testimonial ${i + 1}"></div>`).join("")}
-        </div>
-      `;
-
-      const html = `
-        ${style}
-        <h2>Kundenstimmen</h2>
-        <p class="intro">Was unsere Kunden über die Zusammenarbeit sagen.</p>
-        <div class="slider-wrapper" role="list">
-          <div class="track">
-            ${slidesHTML}
-          </div>
-        </div>
-        ${dotsHTML}
-      `;
-      this.shadowRoot.innerHTML = html;
-
-      const track = this.shadowRoot.querySelector(".track");
-      const cards = this.shadowRoot.querySelectorAll(".card");
-      const dots = this.shadowRoot.querySelectorAll(".dot");
-      let currentIndex = 0;
-      let interval;
-
-      const goToSlide = (index, instant = false) => {
-        const isClone = index === cards.length - 1;
-        track.style.transition = instant ? 'none' : 'transform 0.6s ease';
-        track.style.transform = `translateX(-${index * 100}%)`;
-
-        cards.forEach((card, i) => card.classList.toggle("active", i === index));
-        dots.forEach(dot => dot.classList.remove("active"));
-        if (isClone) { dots[0]?.classList.add("active"); }
-        else { dots[index]?.classList.add("active"); }
-      };
-
-      const startAutoSlide = () => {
-        interval = setInterval(() => {
-          currentIndex++;
-          if (currentIndex === cards.length) {
-            goToSlide(currentIndex, true);
-            currentIndex = 1;
-            setTimeout(() => goToSlide(currentIndex), 20);
-          } else {
-            goToSlide(currentIndex);
-          }
-        }, 4000);
-      };
-
-      // Touch
-      let startX = 0;
-      track.addEventListener("touchstart", e => {
-        startX = e.touches[0].clientX;
-        clearInterval(interval);
-      }, { passive: true });
-
-      track.addEventListener("touchend", e => {
-        const diff = e.changedTouches[0].clientX - startX;
-        if (Math.abs(diff) > 50) {
-          if (diff < 0 && currentIndex < cards.length - 1) currentIndex++;
-          else if (diff > 0 && currentIndex > 0) currentIndex--;
-        }
-        goToSlide(currentIndex);
-        startAutoSlide();
-      }, { passive: true });
-
-      // Hover + Dots
-      track.addEventListener("mouseenter", () => clearInterval(interval));
-      track.addEventListener("mouseleave", startAutoSlide);
-      dots.forEach(dot => {
-        dot.addEventListener("click", e => {
-          const i = parseInt(e.target.dataset.index, 10);
-          currentIndex = i; goToSlide(currentIndex);
-        });
-        dot.addEventListener("keydown", e => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            const i = parseInt(e.target.dataset.index, 10);
-            currentIndex = i; goToSlide(currentIndex);
-          }
-        });
-      });
-
-      goToSlide(0);
-      startAutoSlide();
-    }
-  }
-  customElements.define("testimonial-slider", TestimonialSlider);
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- ===== ETHOS / WERTE SECTION ===== -->
-<section class="ev-section ev-container" id="ev-root" aria-labelledby="ev-heading">
-  <!-- (Hintergrund-Video entfernt) -->
-
-  <div class="ev-head">
-    <h2 class="ev-title" id="ev-heading">
-      <span class="ev-title-line">Werte, die digitale Lösungen formen</span>
-    </h2>
-    <div class="ev-sub">
-      <span class="ev-sub-line">Technisch. Emotional. Zielgerichtet.</span>
-    </div>
-  </div>
-
-  <!-- Eine Reihe: Ping-Pong (rechts <-> links) -->
-  <div class="ev-marquee" aria-hidden="false">
-    <ul class="ev-track" role="list" aria-label="Unsere Werte">
-      <li class="ev-card" role="listitem">
-        <div class="ev-icon"><i data-feather="activity"></i></div>
-        <div class="ev-content">
-          <h3>Projektsteuerung 2.0</h3>
-          <p>Transparenz in jeder Phase – Live-Roadmap, wöchentliche Demos.</p>
-          <small class="ev-proof">Ø 18 % schnellere Go-Lives.</small>
-        </div>
-        <a class="ev-btn ev-btn--ghost ev-card-cta" href="/process">Ablauf ansehen</a>
-      </li>
-
-      <li class="ev-card" role="listitem">
-        <div class="ev-icon"><i data-feather="heart"></i></div>
-        <div class="ev-content">
-          <h3>Empathie trifft Analyse</h3>
-          <p>Qualitatives Research + Metriken – Entscheidungen, die belegt sind.</p>
-          <small class="ev-proof">NPS +12 nach 8 Wochen Discovery.</small>
-        </div>
-        <a class="ev-btn ev-btn--ghost ev-card-cta" href="/research#case">Cases ansehen</a>
-      </li>
-
-      <li class="ev-card" role="listitem">
-        <div class="ev-icon"><i data-feather="eye"></i></div>
-        <div class="ev-content">
-          <h3>Next-Level Design</h3>
-          <p>Unvergesslich visuell – konsistent, barrierearm und performancestark.</p>
-          <small class="ev-proof">+27 % CR nach Design-System-Rollout.</small>
-        </div>
-        <a class="ev-btn ev-btn--ghost ev-card-cta" href="/cases#design">Design-Cases</a>
-      </li>
-
-      <li class="ev-card" role="listitem">
-        <div class="ev-icon"><i data-feather="grid"></i></div>
-        <div class="ev-content">
-          <h3>Detailverliebtheit</h3>
-          <p>Micro-Interactions, States, Edge-Cases – durchdacht bis zum letzten Pixel.</p>
-          <small class="ev-proof">Flow-Completion +15 %.</small>
-        </div>
-        <a class="ev-btn ev-btn--ghost ev-card-cta" href="/guidelines">UI-Guidelines</a>
-      </li>
-
-      <li class="ev-card" role="listitem">
-        <div class="ev-icon"><i data-feather="cpu"></i></div>
-        <div class="ev-content">
-          <h3>Tech-DNA</h3>
-          <p>API-First, Headless, React – moderne Stacks, die mitwachsen.</p>
-          <small class="ev-proof">TTFB −38 % nach Headless-Migration.</small>
-        </div>
-        <a class="ev-btn ev-btn--ghost ev-card-cta" href="/stack">Unser Stack</a>
-      </li>
-
-      <li class="ev-card" role="listitem">
-        <div class="ev-icon"><i data-feather="repeat"></i></div>
-        <div class="ev-content">
-          <h3>Automatisierte Abläufe</h3>
-          <p>CI/CD & QA-Pipelines für Tempo, Qualität und Skalierung.</p>
-          <small class="ev-proof">Release-Zyklen von 2 Wochen → 2 Tage.</small>
-        </div>
-        <a class="ev-btn ev-btn--ghost ev-card-cta" href="/devops">DevOps Details</a>
-      </li>
-    </ul>
-  </div>
-
-  <div class="ev-cta">
-    <a href="#about" class="ev-btn ev-btn--primary">Werte im Detail</a>
-    <a href="/contact" class="ev-btn ev-btn--accent">Erstgespräch buchen</a>
-  </div>
-</section>
-
-<style>
-/* ========= Basics ========= */
-.ev-section, .ev-section *{
-  -webkit-font-smoothing: antialiased;
-  font-kerning: normal; text-rendering: optimizeLegibility;
-}
-.ev-section{
-  font-family: var(--ev-font-system, 'Inter', sans-serif);
-  background: var(--surface);
-  color: var(--text);
-  text-align:center;
-  padding:clamp(3rem,5vw,6rem) 2rem;
-  margin-top:clamp(4rem,10vw,12rem);
-  position:relative; z-index:5; overflow:hidden;
-}
-.ev-container{ max-width:1400px; margin:0 auto; }
-
-/* Heading (unverändert) */
-.ev-head{
-  position:relative; z-index:2;
-  background: transparent;
-  padding:clamp(1.2rem,2.5vw,2rem);
-  max-width:1100px;
-  margin:0 auto clamp(1.6rem,3vw,2.6rem);
-}
-.ev-title{
-  font-size: clamp(2rem, 1.2rem + 2.6vw, 3rem);
-  font-weight: 900; margin:0; line-height:1.12; letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
-}
-.ev-sub-line{
-  font-size:clamp(1.05rem, .6rem + 1vw, 1.2rem);
-  font-weight:600; color:var(--muted);
-}
-
-/* ===== Eine Reihe mit Ping-Pong Animation ===== */
-.ev-marquee{
-  --gap: clamp(1rem, 2vw, 2rem);
-  --ping-distance: 30%;     /* WIE WEIT nach links schieben? (negativ im Keyframe) */
-  --ping-duration: 40s;     /* GESCHWINDIGKEIT */
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  margin-top: 2rem;
-
-  /* weiche Ränder – Karten „blenden“ ein/aus, look bleibt gleich */
-  mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
-}
-.ev-track{
-  display:flex;
-  flex-wrap: nowrap;
-  gap: var(--gap);
-  align-items: stretch;
-  will-change: transform;
-  animation: ev-ping var(--ping-duration) ease-in-out infinite;
-}
-@keyframes ev-ping{
-  0%   { transform: translateX(0); }
-  50%  { transform: translateX(calc(var(--ping-distance) * -1)); }
-  100% { transform: translateX(0); }
-}
-/* Pause bei Hover */
-.ev-marquee:hover .ev-track{ animation-play-state: paused; }
-/* Reduced motion: keine Bewegung */
-@media (prefers-reduced-motion: reduce){
-  .ev-track{ animation: none; transform: none; }
-}
-
-/* ===== Karten – exakt dein ursprünglicher Look ===== */
-.ev-card{
-  border-radius: 18px; /* mehr Rundung */
-  padding: clamp(1.2rem, 2vw, 1.6rem);
-  background: linear-gradient(180deg, var(--surface), color-mix(in oklab, var(--surface) 80%, transparent));
-  border:1px solid var(--border);
-  box-shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
-  color: var(--text);
-  display:flex; flex-direction:column; min-height:100%;
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; z-index: 10;
-
-  /* Für die horizontale Reihe: keine Umbrüche, Breite bleibt „wie vorher“ gefühlt */
-  flex: 0 0 auto;
-  min-width: min(420px, 80vw);
-  max-width: 460px;
-}
-.ev-card:hover{
-  transform: translateY(-4px);
-  box-shadow:0 2px 6px rgba(0,0,0,.06), 0 12px 30px rgba(0,0,0,.1);
-  border-color: color-mix(in oklab, var(--border) 70%, transparent);
-}
-.ev-card h3{ font-weight:900; font-size:1.3rem; margin:.1rem 0 .45rem; }
-.ev-card p{ color: var(--muted); line-height:1.65; }
-.ev-proof{ margin-top:.5rem; color: var(--muted); font-size:.9rem; }
-
-/* Icon (mit Schimmer wie gehabt) */
-.ev-icon{
-  width:48px; height:48px; border-radius:12px;
-  display:flex; align-items:center; justify-content:center;
-  background: color-mix(in oklab, var(--surface) 85%, transparent);
-  border:1px solid var(--border);
-  margin:0 auto .9rem;
-
-  position: relative; overflow: hidden;
-  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
-}
-.ev-icon i{ width:22px; height:22px; stroke: currentColor; color: var(--text); }
-
-.ev-icon::before{
-  content:"";
-  position:absolute; inset:0; border-radius:inherit; pointer-events:none;
-  background: linear-gradient(100deg,
-    transparent 20%,
-    color-mix(in oklab, var(--primary) 55%, transparent) 40%,
-    transparent 60%);
-  background-size: 200% 200%;
-  opacity: 0;
-}
-@keyframes ev-shimmer-once{
-  0%{ opacity:0; background-position: 0% 50%; }
-  10%{ opacity:1; }
-  100%{ opacity:0; background-position: 200% 50%; }
-}
-.ev-icon:hover{
-  border-color: var(--primary);
-  box-shadow: 0 0 0 4px color-mix(in oklab, var(--primary) 22%, transparent);
-  transform: translateY(-1px);
-}
-.ev-icon:hover::before{ animation: ev-shimmer-once .9s linear 1; }
-.ev-icon:hover svg,
-.ev-icon:hover i{
-  transform: translateY(-2px) scale(1.08);
-  transition: transform .25s ease;
-}
-
-/* Buttons – wie vorher */
-.ev-btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  min-height:44px; padding:.8rem 1.2rem;
-  border-radius:12px; font-weight:700; text-decoration:none;
-  transition: all .12s ease;
-  position: relative; overflow: hidden; z-index: 0; /* für Schimmer */
-}
-.ev-btn:focus-visible{ outline:none; box-shadow:0 0 0 4px color-mix(in oklab, var(--primary) 55%, transparent); }
-.ev-btn:active{ transform:translateY(1px); }
-
-.ev-btn--primary{ background:var(--primary); color:#fff; border:1px solid var(--primary); }
-.ev-btn--primary:hover{ background:color-mix(in oklab, var(--primary) 85%, black 0%); box-shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06); }
-
-.ev-btn--accent{ background:var(--accent); color:#fff; border:1px solid var(--accent); }
-.ev-btn--accent:hover{ background:color-mix(in oklab, var(--accent) 85%, black 0%); box-shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06); }
-
-.ev-btn--ghost{ background:transparent; border:1px solid var(--border); color:inherit; }
-.ev-btn--ghost:hover{ background:color-mix(in oklab, var(--surface) 60%, transparent); }
-
-.ev-btn:hover{
-  border-color: var(--primary) !important;
-  box-shadow: 0 0 0 4px color-mix(in oklab, var(--primary) 22%, transparent);
-}
-
-/* CTA */
-.ev-cta{ margin-top:2rem; display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; }
-.ev-cta .ev-btn{ min-width:220px; }
-@media (max-width:480px){ .ev-cta .ev-btn{ width:100%; min-width:unset; } }
-
-/* Einheitliche Button-Höhe in Karten, am unteren Rand */
-.ev-card{ height: 100%; display:flex; flex-direction:column; }
-.ev-card-cta{
-  margin-top: auto;
-  align-self: stretch;
-  min-height: 48px;
-  margin-top: 1rem;
-}
-</style>
-
-<!-- Feather Icons -->
-<script src="https://unpkg.com/feather-icons" defer></script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  if (window.feather) feather.replace();
-});
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section class="faq-section" id="faq">
-  <h2 class="faq-title">Häufige Fragen <br> Transparenz von Anfang an</h2>
-
-  <div class="faq-search-bar">
-    <input type="text" id="faqSearchInput" placeholder="Nach Stichwort suchen...">
-    <div class="faq-navigation">
-      <button id="prevResult">←</button>
-      <span id="faqResultIndex">0 / 0</span>
-      <button id="nextResult">→</button>
-    </div>
-  </div>
-
-  <div class="faq-accordion">
-
-    <!-- Projektmanagement -->
-    <div class="faq-item">
-      <button class="faq-question" aria-expanded="false">
-        <span>Projektmanagement &<br> Kommunikation</span>
-        <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-          <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg>
-      </button>
-      <div class="faq-answer">
-        <p>
-          <strong>Wie läuft die Abstimmung?</strong><br>
-          Ein fester Projektmanager koordiniert alles und hält Sie mit kurzen Updates und Meetings auf dem Laufenden.
-        </p>
-        <p>
-          <strong>Erhalte ich einen Zeitplan?</strong><br>
-          Ja – wir erstellen eine Roadmap mit Meilensteinen, die regelmäßig überprüft wird.
-        </p>
-        <p>
-          <strong>Wie gehen Sie mit Änderungen um?</strong><br>
-          Kleine Anpassungen integrieren wir direkt, größere werden gemeinsam abgestimmt.
-        </p>
-        <p>
-          <strong>Welche Tools nutzen Sie?</strong><br>
-          Je nach Projekt u.a. Asana, Trello oder Slack für transparente Zusammenarbeit.
-        </p>
-      </div>
-    </div>
-
-    <!-- Qualität & Support -->
-    <div class="faq-item">
-      <button class="faq-question" aria-expanded="false">
-        <span>Qualität &<br> Sicherheit & Support</span>
-        <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-          <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg>
-      </button>
-      <div class="faq-answer">
-        <p>
-          <strong>Wie sichern Sie Daten?</strong><br>
-          Mit SSL, Firewalls, Backups und klaren Zugriffsbeschränkungen.
-        </p>
-        <p>
-          <strong>Gibt es Support nach dem Launch?</strong><br>
-          Ja – mit flexiblen Wartungs- und Servicepaketen.
-        </p>
-        <p>
-          <strong>Wie stellen Sie Qualität sicher?</strong><br>
-          Durch Tests in jeder Phase: Funktion, Usability und Performance.
-        </p>
-      </div>
-    </div>
-
-    <!-- Design & UX -->
-    <div class="faq-item">
-      <button class="faq-question" aria-expanded="false">
-        <span>Design &<br> UX & Erweiterungen</span>
-        <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-          <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg>
-      </button>
-      <div class="faq-answer">
-        <p>
-          <strong>Wie werde ich eingebunden?</strong><br>
-          Über Wireframes, Prototypen und Design-Previews.
-        </p>
-        <p>
-          <strong>Können Wünsche umgesetzt werden?</strong><br>
-          Ja – wir entwickeln individuelle Lösungen und Funktionen.
-        </p>
-        <p>
-          <strong>Ist das Design nutzerfreundlich?</strong><br>
-          Wir setzen auf UX-Prinzipien und testen mit echten Usern.
-        </p>
-      </div>
-    </div>
-
-    <!-- Kosten & Erfolg -->
-    <div class="faq-item">
-      <button class="faq-question" aria-expanded="false">
-        <span>Kosten &<br> Erfolgskriterien</span>
-        <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-          <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg>
-      </button>
-      <div class="faq-answer">
-        <p>
-          <strong>Sind die Kosten transparent?</strong><br>
-          Ja – unsere Angebote sind klar aufgeschlüsselt ohne versteckte Gebühren.
-        </p>
-        <p>
-          <strong>Wie messen Sie den Erfolg?</strong><br>
-          Über KPIs wie Ladezeit, Conversion, Reichweite und SEO.
-        </p>
-        <p>
-          <strong>Was, wenn ich unzufrieden bin?</strong><br>
-          Wir bieten zusätzliche Korrekturschleifen bis Sie zufrieden sind.
-        </p>
-      </div>
-    </div>
-
-    <!-- Datenschutz -->
-    <div class="faq-item">
-      <button class="faq-question" aria-expanded="false">
-        <span>Datenschutz &<br> Rechtliches</span>
-        <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-          <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg>
-      </button>
-      <div class="faq-answer">
-        <p>
-          <strong>Ist alles DSGVO-konform?</strong><br>
-          Ja – mit Cookie-Management, SSL und regelmäßigen Updates.
-        </p>
-        <p>
-          <strong>Werden meine Daten vertraulich behandelt?</strong><br>
-          Absolut – Zugriff haben nur autorisierte Personen, NDAs sind möglich.
-        </p>
-      </div>
-    </div>
-
-    <!-- Zusatzleistungen -->
-    <div class="faq-item">
-      <button class="faq-question" aria-expanded="false">
-        <span>Marketing &<br> Zusatzleistungen</span>
-        <svg class="arrow-icon" viewBox="0 0 24 24" width="16" height="16">
-          <path d="M8 10l4 4 4-4" stroke="#666" stroke-width="2" fill="none" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg>
-      </button>
-      <div class="faq-answer">
-        <p>
-          <strong>Bieten Sie auch SEO & Content an?</strong><br>
-          Ja – inklusive Content-Produktion und Online-Marketing.
-        </p>
-        <p>
-          <strong>Kann das Projekt international skaliert werden?</strong><br>
-          Ja – mit Mehrsprachigkeit, länderspezifischem Design und globaler SEO.
-        </p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<style>
-  /* ===== FAQ Base ===== */
-  .faq-section {
-    padding: 5rem 2rem;
-    margin-top: 5rem;
-    background: transparent;
-    color: var(--text, #111);
-    font-family: 'Inter', sans-serif;
-  }
-
-  .faq-title {
-    text-align: center;
-    font-size: clamp(2rem, 5vw, 2.8rem);
-    font-weight: 800;
-    margin-bottom: 3rem;
-    color: #000; /* Vorgabe: Überschrift im Light Mode schwarz */
-  }
-
-  /* Dark Mode: Überschrift explizit schwarz (Ausnahme) */
-  :root[data-theme="dark"] .faq-title,
-  body.dark .faq-title {
-    color: #000 !important;
-  }
-
-  .faq-accordion {
-    max-width: 1000px;
-    align-items: start;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
-    padding: 0 1rem;
-  }
-  @media (min-width: 600px){ .faq-accordion{ grid-template-columns:1fr 1fr; } }
-  @media (min-width: 900px){ .faq-accordion{ grid-template-columns:1fr 1fr 1fr; } }
-
-  /* Karten (Rechtecke) */
-  .faq-item {
-    border: 1px solid var(--border, #ddd);
-    border-radius: 14px;
-    overflow: hidden;
-    background: linear-gradient(135deg, #ffffff, #f8f8f8); /* Light: weiß */
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.03);
-    transition: all 0.3s ease;
-  }
-  .faq-item:hover { box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06); }
-
-  /* Dark Mode: Rechtecke dunkelgrau */
-  :root[data-theme="dark"] .faq-item,
-  body.dark .faq-item {
-    background: linear-gradient(135deg, #232323, #1a1a1a);
-    border-color: rgba(255,255,255,0.12);
-    box-shadow: 0 10px 24px rgba(0,0,0,0.36);
-  }
-  :root[data-theme="dark"] .faq-item:hover,
-  body.dark .faq-item:hover {
-    box-shadow: 0 14px 34px rgba(0,0,0,0.46);
-  }
-
-  .faq-question {
-    background: none;
-    border: none;
-    width: 100%;
-    padding: 1.5rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-align: left;
-    color: var(--text, #222); /* Light: dunkel, Dark: weiß über Token */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  .faq-question:hover { background: #f2f2f2; }
-  :root[data-theme="dark"] .faq-question:hover,
-  body.dark .faq-question:hover { background: rgba(255,255,255,0.06); }
-
-  /* Pfeil: weiß auf --primary (in beiden Modi) */
-  .arrow-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 999px;
-    background: #00000011;
-    color: #fff;                 /* SVG mit stroke="currentColor" wird weiß */
-    flex: 0 0 auto;
-    transform: rotate(0deg);
-    transition: transform 0.3s ease;
-  }
-  .faq-question[aria-expanded="true"] .arrow-icon { transform: rotate(180deg); }
-
-  .faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.3s ease;
-    padding: 0 2rem;
-  }
-  .faq-question[aria-expanded="true"] + .faq-answer {
-    max-height: 300px; /* sichtbarer Bereich */
-    overflow-y: auto;  /* Scrollen bei Überlänge */
-    padding: 1rem 2rem 1.5rem;
-  }
-
-  .faq-answer::-webkit-scrollbar { width: 6px; }
-  .faq-answer::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 10px;
-  }
-  :root[data-theme="dark"] .faq-answer::-webkit-scrollbar-thumb,
-  body.dark .faq-answer::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.25);
-  }
-
-  /* Infotext in den Rechtecken */
-  .faq-answer p {
-    margin: 1rem 0 1.5rem;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #222; /* Light: schwarz/dunkel gewünscht */
-  }
-  :root[data-theme="dark"] .faq-answer p,
-  body.dark .faq-answer p { color: #e9e9e9; } /* Dark: Schrift weißlich */
-
-  /* Suche + Navigation */
-  .faq-search-bar {
-    max-width: 1000px;
-    margin: 0 auto 2rem;
-    padding: 0 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-  }
-  .faq-search-bar input {
-    flex: 1 1 60%;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    border: 1px solid var(--border, #ccc);
-    border-radius: 8px;
-    background: var(--surface, #fff);
-    color: var(--text, #111);
-  }
-
-  .faq-navigation { display: flex; align-items: center; gap: 0.5rem; }
-  .faq-navigation button {
-    padding: 0.5rem 0.75rem;
-    background-color: #508dff;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  .faq-navigation span { font-size: 0.95rem; color: var(--text, #333); }
-
-  .faq-answer mark {
-    background-color: #ff660088;
-    padding: 0 3px;
-    border-radius: 3px;
-  }
-
-  /* Floating-Bar */
-  .faq-search-bar.floating {
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    width: 380px;
-    z-index: 1000;
-    background: var(--surface, #fff);
-    padding: 0.5rem 1rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    border-radius: 12px;
-    flex-wrap: nowrap;
-    transition: all 0.3s ease;
-  }
-  :root[data-theme="dark"] .faq-search-bar.floating,
-  body.dark .faq-search-bar.floating {
-    box-shadow: 0 10px 28px rgba(0,0,0,0.45);
-  }
-  .faq-search-bar.floating input {
-    font-size: 0.85rem;
-    padding: 0.5rem 0.75rem;
-  }
-  .faq-search-bar.floating .faq-navigation button {
-    padding: 0.4rem 0.6rem;
-    font-size: 0.85rem;
-  }
-  @media (max-width: 600px) {
-    .faq-search-bar.floating {
-      width: 90%;
-      left: 5%;
-      right: 5%;
-      bottom: 1rem;
-    }
-  }
-  :root[data-theme="dark"] .faq-title,
-body.dark .faq-title {
-  color: #fff !important; /* Weiß im Dark Mode */
-}
-
-</style>
-  <script>
-    const faqItems = document.querySelectorAll('.faq-item');
-    const searchInput = document.getElementById('faqSearchInput');
-    const prevBtn = document.getElementById('prevResult');
-    const nextBtn = document.getElementById('nextResult');
-    const resultIndexLabel = document.getElementById('faqResultIndex');
-    const faqSection = document.querySelector('.faq-section');
-    const faqSearchBar = document.querySelector('.faq-search-bar');
-
-    let searchResults = [];
-    let currentResult = 0;
-
-    function closeAllFaqs() {
-      faqItems.forEach(item => {
-        const button = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
-        button.setAttribute('aria-expanded', 'false');
-        answer.style.maxHeight = null;
-      });
-    }
-
-    function removeHighlights() {
-      faqItems.forEach(item => {
-        const answer = item.querySelector('.faq-answer');
-        answer.innerHTML = answer.innerHTML.replace(/<\/?mark>/g, '');
-      });
-    }
-
-    function highlightKeyword(node, keyword) {
-      const regex = new RegExp(`(${keyword.split(/\s+/).join('|')})`, 'gi');
-      if (node.nodeType === 3) {
-        const span = document.createElement('span');
-        span.innerHTML = node.nodeValue.replace(regex, '<mark>$1</mark>');
-        node.parentNode.replaceChild(span, node);
-      } else if (node.nodeType === 1 && node.childNodes && !['SCRIPT', 'STYLE'].includes(node.tagName)) {
-        [...node.childNodes].forEach(child => highlightKeyword(child, keyword));
-      }
-    }
-
-    function scrollToMarkInCurrentItem(item) {
-      const mark = item.querySelector('mark');
-      if (!mark) return;
-
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          const rect = mark.getBoundingClientRect();
-          const scrollY = window.scrollY || window.pageYOffset;
-          const elementMiddle = rect.top + scrollY + rect.height / 2;
-          const viewportMiddle = window.innerHeight / 2;
-
-          const floatingBar = document.querySelector('.faq-search-bar.floating');
-          const barHeight = floatingBar ? floatingBar.offsetHeight + 16 : 0;
-
-          window.scrollTo({
-            top: elementMiddle - viewportMiddle - barHeight,
-            behavior: 'smooth'
-          });
-        });
-      });
-    }
-
-    function highlightCurrent() {
-      if (searchResults.length === 0) {
-        resultIndexLabel.textContent = '0 / 0';
-        return;
-      }
-
-      closeAllFaqs();
-
-      const currentItem = searchResults[currentResult];
-      const button = currentItem.querySelector('.faq-question');
-      const answer = currentItem.querySelector('.faq-answer');
-
-      button.setAttribute('aria-expanded', 'true');
-      answer.style.maxHeight = answer.scrollHeight + 'px';
-
-      // Warten bis das Accordion sich aufgebaut hat
-      answer.removeEventListener('transitionend', answer._scrollHandler || (() => { }));
-
-      const onTransitionEnd = () => {
-        scrollToMarkInCurrentItem(currentItem);
-        resultIndexLabel.textContent = `${currentResult + 1} / ${searchResults.length}`;
-        answer.removeEventListener('transitionend', onTransitionEnd);
-      };
-
-      answer._scrollHandler = onTransitionEnd;
-      answer.addEventListener('transitionend', onTransitionEnd);
-    }
-
-    function searchFaqs(keyword) {
-      keyword = keyword.toLowerCase().trim();
-      const keywordParts = keyword.split(/\s+/).filter(k => k.length > 1);
-      searchResults = [];
-      removeHighlights();
-
-      faqItems.forEach(item => {
-        const text = item.innerText.toLowerCase();
-        const answer = item.querySelector('.faq-answer');
-        const matches = keywordParts.some(k => text.includes(k));
-
-        if (matches) {
-          searchResults.push(item);
-          highlightKeyword(answer, keyword);
-        }
-      });
-
-      currentResult = 0;
-      highlightCurrent();
-    }
-
-    searchInput.addEventListener('input', (e) => {
-      const keyword = e.target.value.trim();
-
-      if (keyword.length > 1) {
-        searchFaqs(keyword);
-        faqSearchBar.classList.add('floating');
-      } else {
-        searchResults = [];
-        resultIndexLabel.textContent = '0 / 0';
-        closeAllFaqs();
-        removeHighlights();
-        faqSearchBar.classList.remove('floating');
-      }
-    });
-
-    prevBtn.addEventListener('click', () => {
-      if (searchResults.length > 0) {
-        currentResult = (currentResult - 1 + searchResults.length) % searchResults.length;
-        highlightCurrent();
-      }
-    });
-
-    nextBtn.addEventListener('click', () => {
-      if (searchResults.length > 0) {
-        currentResult = (currentResult + 1) % searchResults.length;
-        highlightCurrent();
-      }
-    });
-
-    // Floating-Suchleiste nur innerhalb FAQ-Sektion aktivieren
-    window.addEventListener('scroll', () => {
-      const sectionTop = faqSection.offsetTop;
-      const sectionBottom = sectionTop + faqSection.offsetHeight;
-      const scrollPos = window.scrollY;
-
-      if (scrollPos >= sectionTop && scrollPos <= sectionBottom - 200 && searchInput.value.trim().length > 1) {
-        faqSearchBar.classList.add('floating');
-      } else {
-        faqSearchBar.classList.remove('floating');
-      }
-    });
-
-    // FAQ-Accordion manuelles Öffnen/Schließen
-    document.querySelectorAll('.faq-question').forEach(button => {
-      button.addEventListener('click', () => {
-        const faqItem = button.closest('.faq-item');
-        const answer = faqItem.querySelector('.faq-answer');
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-
-        if (isExpanded) {
-          button.setAttribute('aria-expanded', 'false');
-          answer.style.maxHeight = null;
-        } else {
-          button.setAttribute('aria-expanded', 'true');
-          answer.style.maxHeight = answer.scrollHeight + 'px';
-        }
-      });
-    });
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section class="angled-image-section">
-  <!-- Overlay für diagonalen Hintergrund -->
-  <div class="angled-bg-overlay" aria-hidden="true"></div>
-
-  <figure class="angled-image-wrapper">
-    <img
-      src="./WebdesignPic/webgerade.webp"
-      alt=""
-      width="1920"
-      height="1080"
-      loading="lazy"
-      decoding="async"
-    />
-  </figure>
-</section>
-<style>
-  html, body {
-    overflow-x: hidden;
-  }
-
-  :root {
-    --angled-rotation: -4deg;
-    --angled-width: 150vw;
-    --angled-offset: -25vw;
-  }
-
-  .angled-image-section {
-    position: relative;
-    width: 100vw;
-    overflow: visible;
-    margin-top: 3rem;
-    margin-bottom: -5rem;
-    pointer-events: none;
-    background: transparent;
-    z-index: 10;
-  }
-
-  /* Gradient-Hintergrund hinter dem Bild */
-  .angled-bg-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background: transparent;
-  }
-
-  .angled-image-wrapper {
-    width: var(--angled-width);
-    margin-left: var(--angled-offset);
-    transform: rotate(var(--angled-rotation));
-    position: relative;
-    z-index: 1;
-  }
-
-  .angled-image-wrapper img {
-    width: 100%;
-    height: auto;
-    display: block;
-    z-index: 2;
-    position: relative;
-  }
-
-  /* Section enger an den Footer rücken */
-.angled-image-section {
-  margin-top: 5rem; /* stärker ins Footer reinziehen */
-  z-index: 0;
-}
-
-.footer-clean {
-  margin-top: 0;
-  position: relative;
-  z-index: 75;
-}
-
-</style>
-
-
-
-</body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<footer role="contentinfo" itemscope itemtype="https://schema.org/Organization" class="footer-clean" aria-label="Seitenende">
-  <div class="fc-container">
-    <!-- Head: Brand & Claim + CTA -->
-    <section class="fc-head" aria-label="Markenbereich">
-      <div class="fc-brand">
-        <h2 class="fc-logo" itemprop="name" aria-label="Fusion hoch drei">Fusion³</h2>
-        <p class="fc-claim">UX &amp; Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
-      </div>
-      <div class="fc-cta">
-        <a class="fc-btn" href="mailto:hello@fusion3.de" aria-label="Projekt anfragen per E-Mail">
-          Projekt anfragen
-        </a>
-      </div>
-    </section>
-
-    <!-- Grid -->
-    <nav class="fc-grid" aria-label="Footer-Navigation">
-      <div class="fc-col">
-        <h3 class="fc-col-title">Leistungen</h3>
-        <ul class="fc-links">
-          <li><a href="/ux-audit.html">UX-Audit</a></li>
-          <li><a href="/webdesign.html">Webdesign</a></li>
-          <li><a href="/prototyping.html">Prototyping</a></li>
-          <li><a href="/design-system.html">Design-Systeme</a></li>
-        </ul>
-      </div>
-
-      <div class="fc-col">
-        <h3 class="fc-col-title">Ressourcen</h3>
-        <ul class="fc-links">
-          <li><a href="/cases.html">Case Studies</a></li>
-          <li><a href="/blog.html">Insights &amp; Blog</a></li>
-          <li><a href="/faq.html">FAQ</a></li>
-          <li><a href="/kontakt.html">Termin buchen</a></li>
-        </ul>
-      </div>
-
-      <div class="fc-col">
-        <h3 class="fc-col-title">Rechtliches</h3>
-        <ul class="fc-links">
-          <li><a href="/impressum.html">Impressum</a></li>
-          <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
-          <li><a href="/cookies.html">Cookie-Hinweis</a></li>
-        </ul>
-      </div>
-
-      <div class="fc-col">
-        <h3 class="fc-col-title">Kontakt</h3>
-        <ul class="fc-links">
-          <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
-          <li><a href="tel:+491234567890" itemprop="telephone">+49&nbsp;123&nbsp;4567890</a></li>
-          <li itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" aria-label="Adresse">
-            <span itemprop="addressLocality">Berlin</span>, <span itemprop="addressCountry">Deutschland</span>
-          </li>
-        </ul>
-
-        <!-- Socials -->
-        <div class="fc-socials" aria-label="Social Media">
-          <a class="fc-social" href="mailto:hello@fusion3.de" aria-label="E-Mail">
-            <img src="./FooterIcons/Gmail.png" alt="E-Mail" loading="lazy" decoding="async" width="20" height="20" />
-          </a>
-          <a class="fc-social fc-li" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <img src="./FooterIcons/LinkedIn.png" alt="LinkedIn" loading="lazy" decoding="async" width="20" height="20" />
-          </a>
-          <a class="fc-social fc-wa" href="https://wa.me/491234567890" target="_blank" rel="noopener" aria-label="WhatsApp">
-            <img src="./FooterIcons/Whatsapp.svg" alt="WhatsApp" loading="lazy" decoding="async" width="20" height="20" />
-          </a>
-          <a class="fc-social fc-ig" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
-            <img src="./FooterIcons/instgram.jpg" alt="Instagram" loading="lazy" decoding="async" width="20" height="20" />
-          </a>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Bottom -->
-    <div class="fc-legal" aria-label="Rechtliches & Hinweise">
-      <p>© <span id="currentYear"></span> <span class="nowrap">Fusion³</span> · DSGVO-konform &amp; barrierearm entwickelt.</p>
-    </div>
-  </div>
-</footer>
-<style>
-  /* ===== Tokens & Fluid Type (Light Defaults) ===== */
-  :root{
-    --fc-bg: #ffffff;
-    --fc-fg: #0f1114;
-    --fc-fg-muted: #535861;
-    --fc-line: rgba(0,0,0,.08);
-    --fc-maxw: 1240px;
-
-    --fc-lh: 1.6;
-    --fc-rad: 12px;
-    --fc-s1: clamp(.5rem, .8vw, .75rem);
-    --fc-s2: clamp(.9rem, 1.1vw, 1.1rem);
-    --fc-s3: clamp(1.05rem, 1.4vw, 1.35rem);
-    --fc-s4: clamp(1.6rem, 2.4vw, 2.2rem);
-    --fc-s5: clamp(2.1rem, 3.5vw, 3rem);
-
-    --fc-focus-color: #111;
-    --fc-focus: 2px dashed var(--fc-focus-color);
-
-    /* Button */
-    --fc-btn-fg: #ffffff;
-    --fc-btn-bg: var(--primary);
-    --fc-btn-bg-hover: var(--primary);
-
-    /* Socials */
-    --fc-social-bg: #f5f5f5;
-    --fc-social-bg-hover: #ececec;
-    --fc-social-inset: rgba(0,0,0,.06);
-
-    /* Link hover underline decoration */
-    --fc-udc: currentColor;
-    --fc-udt: 1.5px;
-    --fc-udoff: 2px;
-  }
-
-  /* ===== Dark Mode via data-theme ===== */
-  :root[data-theme="dark"]{
-    --fc-bg: #0a0a0b;
-    --fc-fg: #f5f7fa;
-    --fc-fg-muted: #a8b0bb;
-    --fc-line: rgba(255,255,255,.10);
-
-    --fc-focus-color: #ff7a1a;
-
-    /* Button in Dark: warme Verlauf-CTA */
-    --fc-btn-fg: #ffffff;
-  
-
-    /* Socials in Dark */
-    --fc-social-bg: #17191d;
-    --fc-social-bg-hover: #1e2127;
-    --fc-social-inset: rgba(255,255,255,.08);
-  }
-
-  /* ===== Auto-Mode: folgt System-Theme ===== */
-  @media (prefers-color-scheme: dark){
-    :root[data-theme="auto"]{
-      --fc-bg: #0a0a0b;
-      --fc-fg: #f5f7fa;
-      --fc-fg-muted: #a8b0bb;
-      --fc-line: rgba(255,255,255,.10);
-
-      --fc-focus-color: #ff7a1a;
-
-      --fc-btn-fg: #ffffff;
-      --fc-btn-bg: linear-gradient(270deg,#ff6600,#ff944d,#ff6600);
-      --fc-btn-bg-hover: linear-gradient(270deg,#ff6e11,#ff9f61,#ff6e11);
-
-      --fc-social-bg: #17191d;
-      --fc-social-bg-hover: #1e2127;
-      --fc-social-inset: rgba(255,255,255,.08);
-    }
-  }
-
-  /* ===== Rendering ===== */
-  .footer-clean, .footer-clean *{
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-  }
-
-  .footer-clean{
-    margin-top: 0rem;
-    background: var(--fc-bg);
-    color: var(--fc-fg);
-    padding-block: clamp(2rem, 4vw, 3.5rem) calc(clamp(1.5rem, 3vw, 2.5rem) + env(safe-area-inset-bottom));
-    border-top: 1px solid var(--fc-line);
-    line-height: var(--fc-lh);
-  }
-
-  .fc-container{
-    max-width: var(--fc-maxw);
-    margin-inline: auto;
-    padding-inline: clamp(1rem, 5vw, 2rem);
-    z-index: 10;
-  }
-
-  /* ===== Header ===== */
-  .fc-head{
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
-    gap: clamp(.9rem, 2vw, var(--fc-s3));
-    align-items: end;
-    padding-bottom: clamp(1rem, 2vw, var(--fc-s3));
-    border-bottom: 1px solid var(--fc-line);
-  }
-  @media (max-width: 900px){
-    .fc-head{ grid-template-columns: 1fr; align-items: start; }
-  }
-
-  .fc-logo{
-    margin: 0;
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    font-size: clamp(1.6rem, 5vw, 3rem);
-    line-height: 1.08;
-    word-break: break-word;
-  }
-  .fc-claim{
-    margin: .55rem 0 0;
-    font-size: var(--fc-s2);
-    color: var(--fc-fg-muted);
-    max-width: 65ch;
-  }
-
-  .fc-cta{ justify-self: end; text-align: right; }
-  @media (max-width: 900px){ .fc-cta{ justify-self: start; text-align: left; } }
-
-  .fc-btn{
-    display: inline-flex; gap: .55rem; align-items: center; justify-content: center;
-    padding: .85rem 1rem;
-    border-radius: var(--fc-rad);
-    background: var(--fc-btn-bg);
-    color: var(--fc-btn-fg);
-    text-decoration: none;
-    font-weight: 800; letter-spacing: .01em;
-    transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
-    will-change: transform;
-    box-shadow: 0 2px 8px #555;
-  }
-  .fc-btn:hover{ transform: translateY(-1px); background: var(--fc-btn-bg-hover); }
-  .fc-btn:focus-visible{ outline: var(--fc-focus); outline-offset: 4px; }
-  .fc-btn svg{ width: 18px; height: 18px; flex: 0 0 18px; }
-
-  /* ===== Grid ===== */
-  .fc-grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
-    gap: clamp(1rem, 3vw, var(--fc-s4));
-    padding-top: clamp(1.25rem, 3vw, var(--fc-s4));
-  }
-
-  .fc-col{ min-width: 0; }
-
-  .fc-col-title{
-    margin: 0 0 .6rem 0;
-    font-size: .92rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: .08em;
-  }
-
-  .fc-links{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: .5rem;
-  }
-  .fc-links a{
-    display: inline-block;
-    color: var(--fc-fg);
-    font-size: .95rem;
-    text-decoration: none;
-    transition: color .18s ease, transform .18s ease, text-underline-offset .18s ease;
-    word-break: break-word;
-    text-decoration-thickness: var(--fc-udt);
-    text-underline-offset: var(--fc-udoff);
-  }
-  .fc-links a:hover{
-    color: var(--fc-fg-muted);
-    transform: translateX(2px);
-    text-decoration: underline;
-  }
-  .fc-links a:focus-visible{ outline: var(--fc-focus); outline-offset: 3px; }
-
-  /* ===== Socials ===== */
-  .fc-socials{
-    display: grid;
-    grid-template-columns: repeat( auto-fill, minmax(44px, 1fr) );
-    gap: .65rem;
-    margin-top: 1rem;
-    align-items: center;
-  }
-  @media (max-width: 420px){ .fc-socials{ gap: .55rem; } }
-
-  .fc-social{
-    position: relative;
-    display: grid; place-items: center;
-    width: 44px; height: 44px;
-    border-radius: 999px;
-    background: var(--fc-social-bg);
-    text-decoration: none;
-    box-shadow: inset 0 0 0 1px var(--fc-social-inset);
-    transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
-  }
-  .fc-social:hover{
-    transform: translateY(-1px);
-    background: var(--fc-social-bg-hover);
-    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--fc-social-inset) 80%, transparent);
-  }
-  .fc-social:focus-visible{ outline: var(--fc-focus); outline-offset: 3px; }
-  .fc-social img{
-    width: 20px; height: 20px; display: block;
-    pointer-events: none; -webkit-user-drag: none; user-select: none;
-  }
-  .fc-li:hover{ background: color-mix(in oklab, #0a66c2 20%, var(--fc-social-bg-hover)); }
-  .fc-wa:hover{ background: color-mix(in oklab, #25D366 20%, var(--fc-social-bg-hover)); }
-  .fc-ig:hover{ background: color-mix(in oklab, #d62976 18%, var(--fc-social-bg-hover)); }
-
-  /* ===== Legal ===== */
-  .fc-legal{
-    margin-top: clamp(1.25rem, 3vw, var(--fc-s4));
-    padding-top: clamp(.9rem, 2vw, var(--fc-s3));
-    border-top: 1px solid var(--fc-line);
-    color: var(--fc-fg-muted);
-    font-size: .95rem;
-    text-align: center;
-    word-break: break-word;
-  }
-  .nowrap{ white-space: nowrap; }
-
-  /* ===== Accessibility & Motion ===== */
-  @media (prefers-reduced-motion: reduce){
-    .fc-btn, .fc-links a, .fc-social{ transition: none !important; }
-    .fc-btn:hover, .fc-links a:hover, .fc-social:hover{ transform: none !important; }
-  }
-
-  /* ===== XS Phones (≤320px) ===== */
-  @media (max-width: 320px){
-    .fc-btn{ padding: .75rem .9rem; }
-    .fc-logo{ font-size: clamp(1.4rem, 8vw, 1.8rem); }
-    .fc-social{ width: 42px; height: 42px; }
-  }
-
-  /* Screenreader-only */
-  .sr-only{
-    position: absolute !important; width: 1px; height: 1px;
-    padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
-    white-space: nowrap; border: 0;
-  }
-</style>
-<script>
-  (function(){
-    var el = document.getElementById('currentYear');
-    if (el) el.textContent = new Date().getFullYear();
-  })();
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-->
 
 
 
