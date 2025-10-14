@@ -1930,7 +1930,7 @@ body[data-page="titlepage"] .hero-image-foreground {
 <style>
 /* ===== A11y Utility ===== */
 .visually-hidden{
-  position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden;
+  position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden;
   clip:rect(0,0,0,0); white-space:nowrap; border:0;
 }
 
@@ -2186,14 +2186,19 @@ body[data-page="titlepage"] .hero-image-foreground {
   .aether-card:focus-within{ outline-color: Highlight !important; }
 }
 
-/* ===== Dark Mode ===== */
+/* ===== Dark Mode via data-theme (explizit) ===== */
 :root[data-theme="dark"] #aurora-sheet.aurora-sheet{
   background:#000; color:#fff;
+}
+:root[data-theme="dark"] .aurora-title{
+  color:#ffffff !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
 }
 :root[data-theme="dark"] .aurora-subtitle{
   color:#fff !important;
   background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)) !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 2px 8px rgba(0,0,0,.35) !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
 }
 
 /* ===== Sichtbarkeits-/Höhen-Fallbacks ===== */
@@ -2245,83 +2250,83 @@ body[data-page="titlepage"] .hero-image-foreground {
   .quasar-grid > li, .aether-card{ min-width: 0; }
 }
 
-/* ==== Dark Mode: Titel & Untertitel ==== */
-:root[data-theme="dark"] #aurora-sheet.aurora-sheet{
-  background: #000000;  /* leicht angehobenes Schwarz für bessere Lesbarkeit */
-  color: #f6f8ff;
-}
-
-/* Überschrift */
-:root[data-theme="dark"] .aurora-title{
-  color: #ffffff !important;
-  text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
-}
-
-/* Unterzeile (verfeinert) */
-:root[data-theme="dark"] .aurora-subtitle{
-  color: #e8eeff !important; /* etwas softer als reines Weiß */
-  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035)) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.22),
-    0 2px 8px rgba(0,0,0,.45) !important;
-  border: 1px solid rgba(255,255,255,.08) !important;
-}
-
-/* Optional: Auto-Dark, falls du kein data-theme setzt */
+/* ===== Auto-Dark nur wenn ROOT kein data-theme hat ===== */
 @media (prefers-color-scheme: dark){
-  #aurora-sheet.aurora-sheet:not([data-theme]){
-    background: #0a0c12; color:#f6f8ff;
+  :root:not([data-theme]) #aurora-sheet{
+    background:#0a0c12; color:#f6f8ff;
   }
-  :not([data-theme]) .aurora-title{
+  :root:not([data-theme]) .aurora-title{
     color:#ffffff !important;
     text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
   }
-  :not([data-theme]) .aurora-subtitle{
+  :root:not([data-theme]) .aurora-subtitle{
     color:#e8eeff !important;
     background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035)) !important;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.22),
-      0 2px 8px rgba(0,0,0,.45) !important;
-    border: 1px solid rgba(255,255,255,.08) !important;
-  }
-
-
-/* 2) Auto-Dark nur anwenden, wenn das ROOT kein data-theme hat */
-@media (prefers-color-scheme: dark){
-  /* vorher: :not([data-theme]) .aurora-title  (zu breit)
-     besser: nur wenn das ROOT kein data-theme trägt */
-  :root:not([data-theme]) #aurora-sheet {
-    background: #0a0c12;
-    color: #f6f8ff;
-  }
-  :root:not([data-theme]) #aurora-sheet .aurora-title{
-    color:#ffffff !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
-  }
-  :root:not([data-theme]) #aurora-sheet .aurora-subtitle{
-    color:#e8eeff !important;
-    background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035)) !important;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.22),
-      0 2px 8px rgba(0,0,0,.45) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 2px 8px rgba(0,0,0,.45) !important;
     border: 1px solid rgba(255,255,255,.08) !important;
   }
 }
 
-/* 3) Force-Light für diese Section (falls du sicher IMMER hell willst) */
-#aurora-sheet {
+/* ===== Force-Light für diese Section (optional) ===== */
+#aurora-sheet{
   background:#fff;
   color:#0b0c10;
-  color-scheme: light;          /* Safari/iOS: Form-Controls etc. nicht auto-dunkeln */
+  color-scheme: light; /* Safari/iOS: Form-Controls etc. nicht auto-dunkeln */
 }
-:root[data-theme="dark"] #aurora-sheet[data-force-light],
-:root:not([data-theme]) #aurora-sheet[data-force-light]{
-  /* harte Bremse gegen alle Dark-Regeln */
+#aurora-sheet[data-force-light]{
   background:#fff !important;
   color:#0b0c10 !important;
 }
 
+/* === MOBILE: Wrapper hart zentrieren & margin:32 links killen === */
+@media (max-width: 699.98px){
+  #zen-faq{
+    margin: 0 auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    left: auto !important;
+    right: auto !important;
+    transform: translateX(0) !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left:  clamp(12px, 4vw, 20px) !important;
+    padding-right: clamp(12px, 4vw, 20px) !important;
+  }
+
+  .zen-vault,
+  .zen-vaq{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* === MOBILE: Fade links/rechts komplett aus === */
+@media (max-width: 699.98px){
+  #zen-faq .zen-viewport{
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+  }
+  #zen-faq .zen-viewport::before,
+  #zen-faq .zen-viewport::after{
+    content: none !important;
+    display: none !important;
+    background: none !important;
+  }
+  #zen-faq .zen-viewport{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  html, body{ overflow-x: hidden; }
+}
 </style>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -8327,5 +8332,5 @@ document.addEventListener("DOMContentLoaded", () => {
     .fc-btn, .fc-links a, .fc-social{ transition: none !important; }
     .fc-btn:hover, .fc-links a:hover, .fc-social:hover{ transform: none !important; }
   }
-}
+
 </style>

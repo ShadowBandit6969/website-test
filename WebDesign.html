@@ -1803,11 +1803,6 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
-<html data-theme="light">
-
-
-
-
 <section id="aurora-sheet" class="aurora-sheet container" aria-labelledby="aurora-crown" aria-describedby="aurora-chant" role="region">
  <!-- ================== Stolpersteine: 6 Karten ================== -->
 <h2 id="aurora-pit" class="aurora-title">Kennen Sie das?</h2>
@@ -1911,7 +1906,7 @@ body[data-page="webdesign"] .hero-image-foreground {
 <style>
 /* ===== A11y Utility ===== */
 .visually-hidden{
-  position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden;
+  position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden;
   clip:rect(0,0,0,0); white-space:nowrap; border:0;
 }
 
@@ -1980,16 +1975,9 @@ body[data-page="webdesign"] .hero-image-foreground {
   max-width: min(1600px, 100% - 2rem);
 }
 @media (min-width: 425px) and (max-width: 1024px){
-  .quasar-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  /* 3. Karte NICHT über volle Breite */
-  .quasar-grid > li:nth-child(3) {
-    grid-column: auto;
-  }
+  .quasar-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .quasar-grid > li:nth-child(3){ grid-column: auto; } /* 3. Karte NICHT über volle Breite */
 }
-
 @media (min-width: 1025px){
   .quasar-grid{
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2022,7 +2010,7 @@ body[data-page="webdesign"] .hero-image-foreground {
   overflow-wrap: anywhere;
 }
 
-/* Farbvarianten */
+/* Farbvarianten 1–3 */
 .quasar-grid > li:nth-child(1) .aether-card{
   --g1:#ff5100; --g2:#ff7b00;
   background: linear-gradient(135deg, var(--g1), var(--g2), var(--g1));
@@ -2035,6 +2023,22 @@ body[data-page="webdesign"] .hero-image-foreground {
 }
 .quasar-grid > li:nth-child(3) .aether-card{
   --g1:#4b00ff; --g2:#3000a3;
+  background: linear-gradient(135deg, var(--g1), var(--g2), var(--g1));
+  background-size: 300% 300%;
+}
+/* Farbvarianten 4–6 */
+.quasar-grid > li:nth-child(4) .aether-card{
+  --g1:#0d0d0d; --g2:#1c1c1c;
+  background: linear-gradient(135deg, var(--g1), var(--g2), var(--g1));
+  background-size: 300% 300%;
+}
+.quasar-grid > li:nth-child(5) .aether-card{
+  --g1:#0e00ce; --g2:#3b0099;
+  background: linear-gradient(135deg, var(--g1), var(--g2), var(--g1));
+  background-size: 300% 300%;
+}
+.quasar-grid > li:nth-child(6) .aether-card{
+  --g1:#ff6a00; --g2:#ff3c00;
   background: linear-gradient(135deg, var(--g1), var(--g2), var(--g1));
   background-size: 300% 300%;
 }
@@ -2174,14 +2178,19 @@ body[data-page="webdesign"] .hero-image-foreground {
   .aether-card:focus-within{ outline-color: Highlight !important; }
 }
 
-/* ===== Dark Mode ===== */
+/* ===== Dark Mode via data-theme (explizit) ===== */
 :root[data-theme="dark"] #aurora-sheet.aurora-sheet{
   background:#000; color:#fff;
+}
+:root[data-theme="dark"] .aurora-title{
+  color:#ffffff !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
 }
 :root[data-theme="dark"] .aurora-subtitle{
   color:#fff !important;
   background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)) !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 2px 8px rgba(0,0,0,.35) !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
 }
 
 /* ===== Sichtbarkeits-/Höhen-Fallbacks ===== */
@@ -2233,66 +2242,35 @@ body[data-page="webdesign"] .hero-image-foreground {
   .quasar-grid > li, .aether-card{ min-width: 0; }
 }
 
-/* ==== Dark Mode: Titel & Untertitel ==== */
-:root[data-theme="dark"] #aurora-sheet.aurora-sheet{
-  background: #000000;  /* leicht angehobenes Schwarz für bessere Lesbarkeit */
-  color: #f6f8ff;
-}
-
-/* Überschrift */
-:root[data-theme="dark"] .aurora-title{
-  color: #ffffff !important;
-  text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
-}
-
-/* Unterzeile (verfeinert) */
-:root[data-theme="dark"] .aurora-subtitle{
-  color: #e8eeff !important; /* etwas softer als reines Weiß */
-  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035)) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.22),
-    0 2px 8px rgba(0,0,0,.45) !important;
-  border: 1px solid rgba(255,255,255,.08) !important;
-}
-
-/* Optional: Auto-Dark, falls du kein data-theme setzt */
+/* ===== Auto-Dark (nur wenn ROOT KEIN data-theme hat) ===== */
 @media (prefers-color-scheme: dark){
-  #aurora-sheet.aurora-sheet:not([data-theme]){
-    background: #0a0c12; color:#f6f8ff;
+  :root:not([data-theme]) #aurora-sheet{
+    background:#0a0c12; color:#f6f8ff;
   }
-  :not([data-theme]) .aurora-title{
+  :root:not([data-theme]) .aurora-title{
     color:#ffffff !important;
     text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
   }
-  :not([data-theme]) .aurora-subtitle{
+  :root:not([data-theme]) .aurora-subtitle{
     color:#e8eeff !important;
     background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035)) !important;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.22),
-      0 2px 8px rgba(0,0,0,.45) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 2px 8px rgba(0,0,0,.45) !important;
     border: 1px solid rgba(255,255,255,.08) !important;
   }
 }
-/* Farbvarianten für Karten 4–6 */
-.quasar-grid > li:nth-child(4) .aether-card{
-  --g1:#0d0d0d; --g2:#1c1c1c; /* Tiefschwarz / Anthrazit */
-  background: linear-gradient(135deg, var(--g1), var(--g2), var(--g1));
-  background-size: 300% 300%;
-}
 
-.quasar-grid > li:nth-child(5) .aether-card{
-  --g1:#0e00ce; --g2:#3b0099; /* Digitales Blau */
-  background: linear-gradient(135deg, var(--g1), var(--g2), var(--g1));
-  background-size: 300% 300%;
+/* ===== Force-Light für diese Section (optional) ===== */
+#aurora-sheet{
+  background:#fff;
+  color:#0b0c10;
+  color-scheme: light; /* Safari/iOS: Controls nicht auto-dunkeln */
 }
-
-.quasar-grid > li:nth-child(6) .aether-card{
-  --g1:#ff6a00; --g2:#ff3c00; /* Leuchtendes Orange */
-  background: linear-gradient(135deg, var(--g1), var(--g2), var(--g1));
-  background-size: 300% 300%;
+#aurora-sheet[data-force-light]{
+  background:#fff !important;
+  color:#0b0c10 !important;
 }
-
 </style>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -2361,6 +2339,7 @@ body[data-page="webdesign"] .hero-image-foreground {
   ]
 }
 </script>
+
 
 
 
@@ -2460,30 +2439,460 @@ body[data-page="webdesign"] .hero-image-foreground {
   </div>
 </section>
 <style>
-/* ================== Variablen ================== */
 :root{
   --zen-base:#ffffff; --zen-alt:#f7f7f7; --zen-ink:#0b0c0e; --zen-muted:#5f6368; --zen-border:#e6e6e6; --zen-shadow:0 10px 26px rgba(0,0,0,.08);
-  --zen-accent:#34c759; --zen-accent-dark:#30d158;
-
   --zen-maxw: 1200px;
-  --zen-stage: 1500px;      /* max. Bühnenbreite */
-  --zen-gutter: 2rem;       /* Außenabstand */
   --zen-gap: clamp(.9rem, 2.5vw, 1.6rem);
   --zen-slides: 1;
   --zen-speed: 420ms;
   --zen-bleed: clamp(10px, 1.8vw, 16px);
 }
+
+@media (min-width:700px){ :root{ --zen-slides:2; } }
+@media (min-width:1024px){ :root{ --zen-slides:3; } }
+
+:root[data-theme="dark"]{
+  --zen-base:#000; --zen-alt:#0e0f12; --zen-ink:#fff; --zen-muted:#c6cad1; --zen-border:#1f1f1f; --zen-shadow:0 16px 38px rgba(0,0,0,.5);
+}
+
+.zen-vault{
+  padding: clamp(2rem, 5vw, 5.5rem) clamp(1rem, 4vw, 2rem);
+  background: transparent !important; /* Hintergrund raus */
+  color: var(--zen-ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Slider */
+.zen-slider{ max-width: min(var(--zen-maxw), 100%); margin: 0 auto; position: relative; }
+.zen-viewport{ overflow: hidden; width:100%; padding: var(--zen-bleed); margin: calc(var(--zen-bleed) * -1); }
+.zen-track{ display:flex; gap:var(--zen-gap); will-change:transform; transform:translate3d(0,0,0); position:relative; }
+
+/* Mobile = Grid */
+@media (max-width:699.98px){
+  .zen-viewport{ overflow: visible; padding: 0; margin: 0; }
+  .zen-track{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px,100%), 1fr));
+    gap:var(--zen-gap);
+    transform:none !important;
+  }
+}
+
+/* Card + Glass */
+.zen-card{
+  flex:0 0 calc((100% - var(--zen-gap) * (var(--zen-slides) - 1)) / var(--zen-slides));
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.4), rgba(255,255,255,.18));
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  box-shadow: 0 10px 10px rgba(0,0,0,.12);
+  overflow:hidden;
+  position: relative;
+  z-index: 0;
+  transition:
+    transform .22s cubic-bezier(.2,.7,.2,1),
+    box-shadow .22s ease,
+    filter .22s ease,
+    z-index 0s step-end;
+  will-change: transform, box-shadow, filter;
+  opacity: 0;              /* für Fade-In/Out */
+  transform: translateY(8px) scale(.995);
+}
+:root[data-theme="dark"] .zen-card{
+  border-color: rgba(255,255,255,.12);
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+}
+
+/* Reveal (schöner Fade in) via IO */
+.zen-card.is-in{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity .38s ease,
+    transform .44s cubic-bezier(.2,.7,.2,1),
+    box-shadow .22s ease;
+}
+/* leichter Fade-Out wenn Karte den Viewport verlässt */
+.zen-card.is-out{
+  opacity: .75;
+  filter: saturate(.9);
+}
+
+/* Hover/Fokus: größer + schwarze Umrandung */
+@media (hover:hover){
+  .zen-card:hover{
+    transform: scale(1.03);
+    box-shadow:
+      0 26px 64px rgba(0,0,0,.22),
+      0 6px 18px rgba(0,0,0,.12),
+      0 0 0 2px #000; /* schwarze Umrandung */
+    z-index: 5;
+    transition:
+      transform .22s cubic-bezier(.2,.7,.2,1),
+      box-shadow .22s ease,
+      z-index 0s step-start;
+  }
+}
+.zen-card:focus-within{
+  transform: scale(1.03);
+  box-shadow:
+    0 26px 64px rgba(0,0,0,.22),
+    0 6px 18px rgba(0,0,0,.12),
+    0 0 0 2px #000;
+  z-index: 5;
+}
+
+/* Header-Zeile (Zitat) */
+.zen-toggle{
+  width:100%; border:0; background:none; cursor: default;
+  padding: clamp(1rem, 2.4vw, 1.3rem) clamp(1rem, 3vw, 1.6rem) .2rem;
+  display:block; text-align:left;
+}
+.zen-quote{
+  display:block;
+  font-weight:800;
+  line-height:1.3;
+  font-size: clamp(1.08rem, 1rem + .7vw, 1.4rem);
+  padding-left: .9rem;
+  position:relative;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  text-wrap: balance;
+}
+.zen-quote::before{
+  content: "“";
+  position:absolute; left:0; top:-.1rem;
+  font-weight:900;
+  font-size: 1.6em;
+  line-height:1;
+  opacity:.22;
+}
+
+/* Inhalt */
+.zen-drop{
+  max-height:none !important;
+  padding: .15rem clamp(1rem, 3vw, 1.6rem) 1rem;
+}
+
+/* Meta: Sterne unter die Bewertung */
+.zen-meta{
+  display:grid;
+  grid-template-columns: 1fr auto;         /* links: Bewertung/Sterne, rechts: Autor */
+  grid-auto-rows: auto;
+  align-items:center;
+  column-gap:.75rem;
+  row-gap:.25rem;
+  margin: .25rem 0 .2rem;
+  padding: .35rem 0;
+}
+.zen-rating{
+  font-weight:800;
+}
+.zen-stars{
+  grid-column: 1 / 2;                      /* unter der Bewertung */
+  margin-top: .1rem;
+  letter-spacing:.08em;
+  line-height: 1;
+  user-select:none;
+  white-space: normal;
+}
+.zen-stars .zen-star-half{ opacity:.4; }
+.zen-author{
+  grid-column: 2 / 3;
+  justify-self:end;
+  font-weight:700;
+  white-space: normal;
+  text-align:right;
+}
+
+/* Fließtext */
+.zen-text{
+  margin:0;
+  padding:.5rem 0 0;
+  line-height:1.75;
+  font-weight:500;
+  text-wrap:pretty;
+  border-top: 1px solid color-mix(in oklab, var(--zen-ink) 15%, transparent);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .zen-card{ transition:none !important; opacity:1 !important; transform:none !important; }
+}
+
+/* Sehr kleine Viewports: Autor in eigene Zeile */
+@media (max-width: 360px){
+  .zen-meta{
+    grid-template-columns: 1fr;
+  }
+  .zen-author{
+    grid-column: 1 / -1;
+    justify-self:start;
+    text-align:left;
+  }
+}
+
+@media (max-width:699.98px){
+  /* ... dein bestehendes Mobile-CSS ... */
+
+  /* Nur die ersten 3 Rezensionen anzeigen */
+  .zen-track .zen-card:nth-of-type(n + 4){
+    display: none !important;
+  }
+}
+/* Hover unten nicht abschneiden (ab Tablet) */
+@media (min-width:700px){
+  .zen-viewport{
+    overflow: visible; /* statt hidden */
+    /* unten etwas mehr Platz geben und außenrum kompensieren */
+    padding-bottom: calc(var(--zen-bleed) + 18px);
+    margin-bottom:  calc(var(--zen-bleed) * -1 - 18px);
+  }
+
+  /* Wachstum nach oben verlagern, damit es noch seltener unten kollidiert */
+  .zen-card{ transform-origin: 50% 35%; }
+}
+
+/* Optional: beim Hover leicht anheben */
+@media (hover:hover) and (min-width:700px){
+  .zen-card:hover{
+    transform: translateY(-8px) scale(1.03);
+  }
+}
+ .zen-card:hover{
+    transform: translateY(-6px) scale(1.02);
+    box-shadow:
+      0 10px 14px rgba(0,0,0,.10),
+      0 4px 10px rgba(0,0,0,.06);
+  }
+
+/* Standardzustand: kräftige schwarze Linie */
+.zen-card{
+  border: 2px solid rgba(0,0,0,.55);
+  box-shadow: none;
+  transition:
+    transform .22s cubic-bezier(.2,.7,.2,1),
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+
+/* Hover/Fokus: stärkerer Kontrast + leicht angehoben */
+@media (hover:hover){
+  .zen-card:hover,
+  .zen-card:focus-within{
+    transform: translateY(-6px);
+    border-color: rgba(0,0,0,.9);
+    box-shadow:
+      0 10px 22px rgba(0,0,0,.22),
+      0 4px 8px rgba(0,0,0,.15);
+    z-index: 5;
+  }
+}
+/* ===== Verbesserungen: Farben, Sterne, Layout, Hover ===== */
+:root{
+  --zen-accent: #34c759;            /* Grün für Sterne (iOS-Grün) */
+  --zen-accent-dark: #30d158;       /* Grün in Dark Mode */
+}
+:root[data-theme="dark"]{
+  --zen-accent: var(--zen-accent-dark);
+}
+
+/* Kartenlayout straffer & konsistent */
+.zen-card{
+  display:flex;
+  flex-direction:column;
+  border: 2px solid rgba(0,0,0,.55) !important;  /* klare schwarze Umrandung */
+  border-radius: 20px;
+  box-shadow: none !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.5), rgba(255,255,255,.2));
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  transform-origin: 50% 35%;
+}
+:root[data-theme="dark"] .zen-card{
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+  border-color: rgba(255,255,255,.65) !important;
+}
+
+/* Header/Quote kompakter & lesbarer */
+.zen-toggle{
+  cursor: default;
+  padding: clamp(1rem, 2.2vw, 1.25rem) clamp(1rem, 2.6vw, 1.4rem) .2rem;
+}
+.zen-quote{
+  font-weight: 800;
+  line-height: 1.25;
+  font-size: clamp(1.05rem, .9rem + .7vw, 1.35rem);
+  padding-left: 1rem;
+  text-wrap: balance;
+}
+.zen-quote::before{
+  left: 0;
+  top: -.12rem;
+  font-size: 1.55em;
+  opacity: .22;
+}
+
+/* Content spacing */
+.zen-drop{
+  padding: .25rem clamp(1rem, 2.6vw, 1.4rem) 1rem;
+}
+.zen-text{
+  margin:0;
+  padding:.6rem 0 0;
+  line-height: 1.7;
+  border-top: 1px solid color-mix(in oklab, var(--zen-ink) 18%, transparent);
+}
+
+/* Meta-Row: stabil & kompakt */
+.zen-meta{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  align-items:center;
+  column-gap:.75rem;
+  row-gap:.2rem;
+  margin:.35rem 0 .1rem;
+  padding:.25rem 0;
+}
+.zen-rating{ font-weight: 800; }
+.zen-author{
+  justify-self:end;
+  font-weight:700;
+  opacity:.9;
+}
+
+/* ★ Sterne grün */
+.zen-stars{
+  grid-column: 1 / 2;
+  margin-top:.1rem;
+  letter-spacing:.08em;
+  line-height:1;
+  user-select:none;
+  color: var(--zen-accent) !important;        /* alle Sterne grün */
+  text-shadow: 0 0 .01em currentColor;        /* knackiger Kantenrender */
+}
+.zen-stars .zen-star-half{
+  opacity:.45;                                 /* halber Stern = leichter */
+}
+
+/* Mobile: nur 3 Rezensionen (wie gewünscht) */
+@media (max-width:699.98px){
+  .zen-track .zen-card:nth-of-type(n + 4){
+    display:none !important;
+  }
+}
+
+/* Hover unten nicht abschneiden (ab Tablet) */
+@media (min-width:700px){
+  .zen-viewport{
+    overflow: visible; 
+    padding-bottom: calc(var(--zen-bleed) + 18px);
+    margin-bottom:  calc(var(--zen-bleed) * -1 - 18px);
+  }
+}
+
+/* Interaktion: dezente, hochwertige Bewegung + stärkere Outline beim Hover/Focus */
+@media (hover:hover) and (min-width:700px){
+  .zen-card:hover,
+  .zen-card:focus-within{
+    transform: translateY(-6px) scale(1.01);
+    border-color: rgba(0,0,0,.9) !important;          /* deutlicher Rand */
+    box-shadow:                                       /* sanfter Depth-Effekt */
+      0 10px 22px rgba(0,0,0,.16),
+      0 4px 8px rgba(0,0,0,.10) !important;
+    z-index: 5;
+  }
+}
+
+/* Tastaturfokus sichtbar (A11y) */
+.zen-card:focus-within{
+  outline: 2px solid color-mix(in oklab, var(--zen-ink) 85%, transparent);
+  outline-offset: 2px;
+}
+
+/* Tablet/Desktop: keine starken Grundschatten – Flat Look; nur Hover arbeitet */
+@media (min-width:700px){
+  .zen-card{ box-shadow: none !important; }
+}
+
+/* Immer 3 Karten pro View ab Tablet */
+@media (min-width:700px){
+  :root{ --zen-slides: 3; }
+  .zen-viewport{
+    overflow: hidden;                 /* andere Karten unsichtbar */
+    padding-bottom: var(--zen-bleed); /* etwas Luft unten */
+    margin-bottom: calc(var(--zen-bleed) * -1);
+  }
+}
+
+/* Mobile: weiter wie gehabt – nur die ersten 3 überhaupt zeigen */
+@media (max-width:699.98px){
+  .zen-viewport{ overflow: visible; padding: 0; margin: 0; }
+  .zen-track{
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* genau 3 Karten */
+    gap:var(--zen-gap);
+    transform:none !important;
+  }
+  .zen-track .zen-card:nth-of-type(n + 4){ display:none !important; }
+}
+
+@media (hover:hover) and (min-width:700px){
+  .zen-card:hover,
+  .zen-card:focus-within{
+    transform: translateY(-4px) scale(1.005); /* minimaler Scale */
+    box-shadow: 0 8px 16px rgba(0,0,0,.12);
+  }
+}
+/* konsistent messen */
+.zen-slider, .zen-viewport, .zen-track, .zen-card { box-sizing: border-box; }
+
+/* ab 700px: links/rechts kein Padding, nur unten (wie gewollt) */
+@media (min-width:700px){
+  .zen-viewport{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+@media (min-width:700px){
+  .zen-viewport{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* ======= Zen Slider – fully responsive ======= */
+:root{
+  --zen-base:#ffffff; --zen-alt:#f7f7f7; --zen-ink:#0b0c0e; --zen-muted:#5f6368; --zen-border:#e6e6e6; --zen-shadow:0 10px 26px rgba(0,0,0,.08);
+  --zen-accent:#34c759; --zen-accent-dark:#30d158;
+
+  --zen-maxw: 1200px;
+  --zen-gap: clamp(.9rem, 2.5vw, 1.6rem);
+  --zen-slides: 1;                 /* default */
+  --zen-speed: 420ms;
+  --zen-bleed: clamp(10px, 1.8vw, 16px);
+}
+
+/* Dark theme */
 :root[data-theme="dark"]{
   --zen-base:#000; --zen-alt:#0e0f12; --zen-ink:#fff; --zen-muted:#c6cad1; --zen-border:#1f1f1f; --zen-shadow:0 16px 38px rgba(0,0,0,.5);
   --zen-accent: var(--zen-accent-dark);
 }
 
-/* Slides per View */
+/* Slides per View – feinere Stufen */
+@media (min-width:480px){ :root{ --zen-slides: 1; } }
 @media (min-width:700px){ :root{ --zen-slides: 2; } }
+@media (min-width:900px){ :root{ --zen-slides: 2; } }
 @media (min-width:1024px){ :root{ --zen-slides: 3; } }
-@media (min-width:1536px){ :root{ --zen-slides: 4; } }
+@media (min-width:1280px){ :root{ --zen-slides: 3; } }
+@media (min-width:1536px){ :root{ --zen-slides: 4; } }   /* extra groß: 4 pro View */
 
-/* ================== Layout Wrapper ================== */
+/* Wrapper */
 .zen-vault{
   padding: clamp(2rem, 5vw, 5.5rem) clamp(1rem, 4vw, 2rem);
   background: transparent !important;
@@ -2491,91 +2900,82 @@ body[data-page="webdesign"] .hero-image-foreground {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* feste Außenränder + Stage-Zentrierung */
-#zen-faq.zen-vault{
-  padding-left:  max(var(--zen-gutter), env(safe-area-inset-left));
-  padding-right: max(var(--zen-gutter), env(safe-area-inset-right));
+/* Slider */
+.zen-slider{ max-width: min(var(--zen-maxw), 100%); margin: 0 auto; position: relative; }
+.zen-viewport{ overflow: hidden; width:100%; padding: var(--zen-bleed); margin: calc(var(--zen-bleed) * -1); }
+.zen-track{ display:flex; gap:var(--zen-gap); will-change:transform; transform:translate3d(0,0,0); position:relative; }
+
+/* Mobile: Grid/Fallback ohne Translate (nichts wird abgeschnitten) */
+@media (max-width:699.98px){
+  .zen-viewport{ overflow: visible; padding: 0; margin: 0; }
+  .zen-track{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px,100%), 1fr));
+    gap:var(--zen-gap);
+    transform:none !important;
+    width:100% !important;
+  }
+  /* Optional: nur erste 3 Testimonials zeigen */
+  .zen-track .zen-card:nth-of-type(n + 4){ display: none !important; }
 }
 
-/* ================== Slider Grundstruktur ================== */
-.zen-slider{
-  max-width: min(var(--zen-maxw), 100%);
-  margin-inline: auto;
-  position: relative;
-}
-#zen-faq .zen-slider{
-  max-width: var(--zen-stage);
-}
-
-.zen-viewport{
-  overflow: hidden;
-  width:100%;
-  padding: var(--zen-bleed);
-  margin: calc(var(--zen-bleed) * -1);
-}
-
-.zen-track{
-  display:flex;
-  gap:var(--zen-gap);
-  will-change:transform;
-  transform:translate3d(0,0,0);
-  position:relative;
-}
-
-/* ================== Card ================== */
+/* Card + Glass */
 .zen-card{
-  /* Flex-Basis exakt aus --zen-slides berechnet */
+  /* exakte Flex-Basis nach Slides-per-View */
   flex:0 0 calc((100% - var(--zen-gap) * (var(--zen-slides) - 1)) / var(--zen-slides));
-  min-width: 0; /* wichtig gegen Überlauf */
-  border: 2px solid rgba(0,0,0,.55);
+  min-width: 260px;                                /* harte Untergrenze verhindert zu schmale Karten */
+  border: 2px solid rgba(0,0,0,.55) !important;
   border-radius:20px;
   background: linear-gradient(180deg, rgba(255,255,255,.5), rgba(255,255,255,.2));
   backdrop-filter: saturate(160%) blur(14px);
   -webkit-backdrop-filter: saturate(160%) blur(14px);
-  box-shadow:none;
+  box-shadow:none !important;
   overflow:hidden;
   position:relative;
   z-index:0;
-  display:flex;
-  flex-direction:column;
-  transform-origin:48% 35%;
-  transition: transform .22s cubic-bezier(.2,.7,.2,1), border-color .25s ease, box-shadow .25s ease, filter .22s ease, z-index 0s step-end, opacity .22s ease;
-  opacity:0;
-  transform: translateY(8px) scale(.995);
+  display:flex; flex-direction:column;
+  transform-origin:50% 35%;
+  transition:
+    transform .22s cubic-bezier(.2,.7,.2,1),
+    border-color .25s ease,
+    box-shadow .25s ease,
+    filter .22s ease,
+    z-index 0s step-end;
+  opacity:0; transform: translateY(8px) scale(.995);
 }
 :root[data-theme="dark"] .zen-card{
   background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-  border-color: rgba(255,255,255,.65);
+  border-color: rgba(255,255,255,.65) !important;
 }
 
-/* Reveal-Zustände */
-.zen-card.is-in{ opacity:1; transform: translateY(0) scale(1); }
+/* Reveal */
+.zen-card.is-in{
+  opacity:1;
+  transform: translateY(0) scale(1);
+  transition: opacity .38s ease, transform .44s cubic-bezier(.2,.7,.2,1), box-shadow .22s ease;
+}
 .zen-card.is-out{ opacity:.8; filter:saturate(.95); }
 
-/* Hover/Fokus (Pointer) */
+/* Hover/Fokus */
 @media (hover:hover){
   .zen-card:hover,
   .zen-card:focus-within{
     transform: translateY(-4px) scale(1.01);
-    border-color: rgba(0,0,0,.9);
-    box-shadow: 0 10px 22px rgba(0,0,0,.16), 0 4px 8px rgba(0,0,0,.10);
+    border-color: rgba(0,0,0,.9) !important;
+    box-shadow: 0 10px 22px rgba(0,0,0,.16), 0 4px 8px rgba(0,0,0,.10) !important;
     z-index:5;
   }
 }
 .zen-card:focus-within{
-  outline: 2px solid color-mix(in oklab, var(--zen-ink) 85%, transparent);
-  outline-offset: 2px;
+  outline:2px solid color-mix(in oklab, var(--zen-ink) 85%, transparent);
+  outline-offset:2px;
 }
 
-/* ================== Inhalte ================== */
+/* Header */
 .zen-toggle{
-  width:100%;
-  border:0;
-  background:none;
-  cursor: default;
+  width:100%; border:0; background:none; cursor: default;
   padding: clamp(1rem, 2.2vw, 1.25rem) clamp(1rem, 2.6vw, 1.4rem) .2rem;
-  display:block;
-  text-align:left;
+  display:block; text-align:left;
 }
 .zen-quote{
   display:block; font-weight:800; line-height:1.25;
@@ -2587,8 +2987,14 @@ body[data-page="webdesign"] .hero-image-foreground {
   font-weight:900; font-size:1.55em; line-height:1; opacity:.22;
 }
 
+/* Body */
 .zen-drop{ max-height:none !important; padding:.25rem clamp(1rem, 2.6vw, 1.4rem) 1rem; }
+.zen-text{
+  margin:0; padding:.6rem 0 0; line-height:1.7; font-weight:500; text-wrap:pretty;
+  border-top:1px solid color-mix(in oklab, var(--zen-ink) 18%, transparent);
+}
 
+/* Meta */
 .zen-meta{
   display:grid; grid-template-columns:1fr auto; align-items:center;
   column-gap:.75rem; row-gap:.2rem; margin:.35rem 0 .1rem; padding:.25rem 0;
@@ -2596,77 +3002,187 @@ body[data-page="webdesign"] .hero-image-foreground {
 .zen-rating{ font-weight:800; }
 .zen-stars{
   grid-column:1/2; margin-top:.1rem; letter-spacing:.08em; line-height:1; user-select:none;
-  color: var(--zen-accent); text-shadow:0 0 .01em currentColor;
+  color: var(--zen-accent) !important; text-shadow:0 0 .01em currentColor;
 }
 .zen-stars .zen-star-half{ opacity:.45; }
 .zen-author{ grid-column:2/3; justify-self:end; font-weight:700; opacity:.9; text-align:right; white-space:normal; }
 
-.zen-text{
-  margin:0; padding:.6rem 0 0; line-height:1.7; font-weight:500; text-wrap:pretty;
-  border-top:1px solid color-mix(in oklab, var(--zen-ink) 18%, transparent);
-}
-
-/* Sehr kleine Viewports */
+/* Very small: Author unter die Bewertung */
 @media (max-width:360px){
   .zen-meta{ grid-template-columns:1fr; }
   .zen-author{ grid-column:1/-1; justify-self:start; text-align:left; }
 }
 
-/* ================== Mobile (<=699.98px) ================== */
-/* Eine Spalte, Spur und Karten perfekt zentriert */
-@media (max-width:699.98px){
-  .zen-viewport{
-    overflow: visible;
-    padding: 0;
-    margin: 0 !important;
-    mask-image: none !important;
-    -webkit-mask-image: none !important;
-  }
-  .zen-track{
-    display: grid !important;
-    /* eine Spalte, die max. 640px breit ist – die Spur wird mittig zentriert */
-    grid-template-columns: min(640px, 100%) !important;
-    justify-content: center;   /* zentriert die Spalte im Viewport */
-    justify-items: stretch;
-    gap: var(--zen-gap);
-    transform: none !important;
-    width: 100%;
-  }
-  .zen-card{
-    width: 100% !important;
-    max-width: min(640px, 100%) !important;
-    margin-inline: auto;       /* Sicherheitsnetz für Zentrierung */
-    min-width: 0 !important;
-    opacity:1;                 /* kein Fade-Delay auf Mobile */
-    transform:none;
-  }
-  /* Optional: nur die ersten 3 anzeigen */
-  .zen-track .zen-card:nth-of-type(n + 4){ display: none !important; }
-}
-
-/* ================== Tablet/Desktop (>=700px) ================== */
+/* Tablet/Desktop: Hover unten nicht abschneiden, aber horizontales Clipping gegen Cutoffs */
 @media (min-width:700px){
-  :root{ --zen-slides: 3; } /* fix: 3 pro View standardmäßig */
   .zen-viewport{
-    /* kein horizontales Clipping + Platz für Border/Scale rechts */
-    overflow: hidden;
-    padding-left: 0;
+    overflow: hidden;                        /* verhindert „Abschneiden“ am rechten Rand durch Subpixel */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
     padding-bottom: calc(var(--zen-bleed) + 18px);
     margin-bottom:  calc(var(--zen-bleed) * -1 - 18px);
   }
-  .zen-card{ box-sizing: border-box; }
+  .zen-card{ transform-origin:50% 35%; }
 }
 
-/* XXL leichte Streckung */
+/* XXL: etwas mehr Luft im Grid */
 @media (min-width:1536px){
-  .zen-slider{ max-width: min(var(--zen-stage), 100%); }
+  .zen-slider{ max-width: min(1400px, 100%); }
+  .zen-gap{ --zen-gap: clamp(1rem, 2vw, 2rem); }
 }
 
-/* ================== Misc ================== */
+/* Konsistente Box-Sizing */
 .zen-slider, .zen-viewport, .zen-track, .zen-card { box-sizing: border-box; }
+@media (min-width:700px){
+  .zen-viewport{
+    overflow: hidden;
+    padding-right: 4px;              /* >= Border(2px) + rounding */
+    margin-right: -4px;
+  }
+}
+/* === Desktop: kein horizontales Clipping + optisch bündig === */
+@media (min-width:700px){
+  .zen-viewport{
+    overflow: visible !important;        /* nix mehr abschneiden */
+    padding-left: 0 !important;
+    padding-right: 12px !important;      /* Platz für Border + Scale + Rounding */
+    margin-right: -12px !important;      /* optisch bündig halten */
+  }
+}
+.zen-card{ transform-origin: 48% 35%; }  /* statt exakt 50% */
+/* Sichtfenster: nur die mittleren 3 Karten sichtbar */
+#zen-faq .zen-viewport{
+  overflow: hidden;                 /* harter Viewport */
+  position: relative;
+  /* sanfter Seiten-Fade (hell/dunkel automatisch) */
+  mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%);
+}
 
-@media (prefers-reduced-motion: reduce){
-  .zen-card{ transition:none !important; opacity:1 !important; transform:none !important; }
+/* Karten-Zustände */
+#zen-faq .zen-card{ transition: transform .22s ease, opacity .22s ease, filter .22s ease, border-color .22s ease; }
+#zen-faq .zen-card.is-active{
+  opacity: 1;
+  filter: none;
+}
+#zen-faq .zen-card.is-dim{
+  opacity: .25;               /* „ausgeblendet“ */
+  filter: saturate(.8) blur(.2px);
+  pointer-events: none;       /* nicht interaktiv */
+  transform: translateY(0) scale(.995);
+}
+
+/* Hover soll die Mitte nicht „sprengen“ */
+@media (hover:hover){
+  #zen-faq .zen-card.is-dim:hover{ transform:none; box-shadow:none; }
+}
+
+/* Mobile bleibt Grid: dort keine Dimmung nötig */
+@media (max-width:699.98px){
+  #zen-faq .zen-viewport{
+    mask-image:none; -webkit-mask-image:none;
+    overflow: visible;
+  }
+  #zen-faq .zen-card{ opacity:1 !important; filter:none !important; }
+}
+/* Nur rechts ausfaden – links volle Deckkraft */
+#zen-faq .zen-viewport{
+  --zen-fade: 28px; /* Breite des rechten Fades, gerne anpassen */
+
+  mask-image: linear-gradient(
+    to right,
+    #000 0,
+    #000 calc(100% - var(--zen-fade)),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 0,
+    #000 calc(100% - var(--zen-fade)),
+    transparent 100%
+  );
+}
+/* nur rechts ausfaden (Desktop/Tablet) – bleibt wie gehabt */
+#zen-faq .zen-viewport{
+  --zen-fade: 28px;
+  mask-image: linear-gradient(to right, #000 0, #000 calc(100% - var(--zen-fade)), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - var(--zen-fade)), transparent 100%);
+}
+
+/* Mobile: KEIN Fade (weder schwarz noch mask) */
+@media (max-width:699.98px){
+  #zen-faq .zen-viewport{
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+}
+
+/* === Zen Slider: Stage auf 1600px deckeln + fester Außenabstand === */
+:root{
+  --zen-stage: 1500px;   /* maximale Bühnenbreite */
+  --zen-gutter: 2rem;    /* fester Außenabstand je Seite */
+}
+
+/* fester Außenabstand der Section (respektiert Safe-Area) */
+#zen-faq.zen-vault{
+  padding-left:  max(var(--zen-gutter), env(safe-area-inset-left));
+  padding-right: max(var(--zen-gutter), env(safe-area-inset-right));
+  margin-left: 2rem;
+}
+
+/* Slider zentrieren und bei 1600px klemmen */
+#zen-faq .zen-slider{
+  max-width: var(--zen-stage) !important;
+  margin-inline: auto !important;
+}
+
+/* Viewport lässt die Karten nicht über die Stage hinauswachsen */
+#zen-faq .zen-viewport{
+  max-width: 100%;
+  margin-inline: 0;               /* wir zentrieren über .zen-slider */
+  padding-left: 0;                /* deine bestehenden >=700px Regeln bleiben */
+  padding-right: 0;
+}
+
+/* XXL-Override neutralisieren (du hast später noch max-widths für .zen-slider) */
+@media (min-width:1536px){
+  #zen-faq .zen-slider{ max-width: var(--zen-stage) !important; }
+}
+
+/* --- Fix: Hover nicht mehr abgeschnitten, aber mit rechtem Fade --- */
+
+/* 1) Viewport darf überstehen, Maske weg */
+#zen-faq .zen-viewport{
+  overflow: visible !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+  position: relative; /* für das Overlay */
+}
+
+/* 2) Rechten Fade als Overlay statt als Maske zeichnen */
+#zen-faq .zen-viewport::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--zen-fade, 28px);
+  height: 100%;
+  pointer-events: none;     /* klicks nicht blocken */
+  z-index: 10;
+  /* sanfter Fade ins Seiten-Hintergrund */
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--zen-base) 90%
+  );
+}
+
+/* 3) Kleiner „Hover-Gutter“, damit die letzte Karte Platz hat */
+@media (min-width:700px){
+  #zen-faq .zen-viewport{
+    padding-right: calc(var(--zen-bleed) + 24px);
+    margin-right:  calc(var(--zen-bleed) * -1 - 24px);
+  }
 }
 
 </style>
@@ -2682,14 +3198,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const isMobile = () => window.matchMedia("(max-width:699.98px)").matches;
 
-  // Slides-per-View aus CSS-Var lesen
+  // NEU: Slides-per-View sauber aus CSS lesen (synced zu deinen Breakpoints)
   const getSPV = () => {
     const v = getComputedStyle(document.documentElement).getPropertyValue("--zen-slides").trim();
     const n = Math.max(1, parseInt(v || "1", 10));
     return n;
   };
 
-  // --- ARIA ---
+  // ARIA (unverändert)
   Array.from(track.querySelectorAll(".zen-card")).forEach((card, i) => {
     const btn  = card.querySelector(".zen-toggle");
     const drop = card.querySelector(".zen-drop");
@@ -2701,7 +3217,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", (e) => e.preventDefault(), { passive:true });
   });
 
-  // --- Reveal IO ---
+  // Reveal IO
   const revealIO = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting){ e.target.classList.add("is-in"); e.target.classList.remove("is-out"); }
@@ -2723,41 +3239,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return g.endsWith("px") ? parseFloat(g) : 0;
   };
 
-  // === MOBILE RESET ===
-  function mobileReset(){
-    // Clones entfernen
-    track.querySelectorAll("[data-clone]").forEach(n => n.remove());
-    // Autoplay stoppen
-    stopAutoplay();
-
-    // Inline-Styles neutralisieren
-    viewport.style.padding = "0";
-    viewport.style.margin = "0";
-    viewport.style.overflow = "visible";
-
-    track.style.transition = "none";
-    track.style.transform  = "none";
-    track.style.margin     = "0";
-    track.style.left       = "auto";
-    track.style.right      = "auto";
-    track.style.width      = "100%";
-    track.style.maxWidth   = "100%";
-
-    // Karten-Breiten zurücksetzen
-    cardsAll().forEach(c => {
-      c.style.flex    = "";
-      c.style.width   = "";
-      c.style.maxWidth= "";
-      revealIO.observe(c);
-      c.classList.add("is-in"); // sofort sichtbar
-    });
-
-    // Statusvariablen neutral
-    index = 0;
-    animLock = false;
-  }
-
-  // === DESKTOP BERECHNUNG ===
   function measureSlideW(){
     const spv = getSPV();
     const vw  = viewport.clientWidth;
@@ -2775,6 +3256,7 @@ document.addEventListener("DOMContentLoaded", () => {
     c.style.flex = ""; c.style.width = ""; c.style.maxWidth = "";
   });
 
+  // NEU: nicht mehr „3 erzwingen“, sondern dynamisch je nach SPV
   function markActiveBySPV(){
     if (isMobile()) {
       cardsAll().forEach(c => { c.classList.remove('is-active','is-dim'); });
@@ -2842,13 +3324,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function next(){
     if (animLock || isMobile()) return;
     animLock = true;
-    index += getSPV();
+    index += getSPV();           // seitenweise passend zu SPV
     setTransform(false);
   }
   function prev(){
     if (animLock || isMobile()) return;
     animLock = true;
-    index -= getSPV();
+    index -= getSPV();           // seitenweise passend zu SPV
     setTransform(false);
   }
   track.addEventListener("transitionend", () => { normalizeAfterTransition(); animLock = false; });
@@ -2909,62 +3391,25 @@ document.addEventListener("DOMContentLoaded", () => {
     index = 0;
   }
 
-  // --- Resize Handling ---
   let rTo;
   function onResize(){
     clearTimeout(rTo);
     rTo = setTimeout(() => {
       if (!isMobile()){
-        // Wechsel auf Desktop
         destroyDesktop();
         initDesktop();
         setTimeout(markActiveBySPV, 60);
       } else {
-        // Wechsel auf Mobile
         destroyDesktop();
-        mobileReset();
+        cardsAll().forEach(card => { revealIO.observe(card); card.classList.add("is-in"); });
       }
     }, 120);
   }
   window.addEventListener("resize", onResize);
 
-  // --- Initialisierung ---
-  if (isMobile()){
-    mobileReset();
-  } else {
-    initDesktop();
-  }
+  if (!isMobile()){ initDesktop(); }
+  else { cardsAll().forEach(card => { revealIO.observe(card); card.classList.add("is-in"); }); }
 });
-</script>
-<script>
-(function(){
-  if (!matchMedia("(max-width:699.98px)").matches) return;
-  const target = document.querySelector("#zen-faq");
-  if (!target) return;
-
-  function sel(el){
-    const id = el.id ? '#'+el.id : '';
-    const cls = el.classList?.length ? '.'+[...el.classList].join('.') : '';
-    return el.tagName.toLowerCase()+id+cls;
-  }
-
-  const chain = [];
-  let el = target;
-  while (el) {
-    const cs = getComputedStyle(el);
-    const tr = cs.transform !== 'none' ? new DOMMatrixReadOnly(cs.transform).m41 : 0; // translateX
-    chain.push({
-      element: sel(el),
-      marginLeft: cs.marginLeft,
-      paddingLeft: cs.paddingLeft,
-      left: cs.left,
-      position: cs.position,
-      translateX: tr
-    });
-    el = el.parentElement;
-  }
-  console.table(chain);
-})();
 </script>
 
 
@@ -4022,6 +4467,13 @@ document.addEventListener("DOMContentLoaded", () => {
         animation: scroll-rtl calc(var(--dur-mobile) * 1.1) linear infinite;
       }
     }
+     /* === Mobile: Scroll steuert die Tracks, keine CSS-Animation === */
+  @media (max-width: 900px) {
+    #image-marquee .row .track {
+      animation: none !important;          /* Auto-Animation aus */
+      transform: translateX(0);            /* Startwert */
+    }
+  }
   </style>
 
   <div class="wrap">
@@ -4087,6 +4539,115 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })();
   </script>
+  
+<script>
+  (function () {
+    const marquee = document.getElementById('image-marquee');
+    if (!marquee) return;
+
+    const mq = window.matchMedia('(max-width: 900px)');
+    const rows = marquee.querySelectorAll('.row');
+    const tracks = [...rows].map(r => r.querySelector('.track'));
+
+    // Richtung je Reihe (oben nach rechts bei Scroll runter, unten nach links)
+    const dir = [1, -1];        // top, bottom
+    const speed = 0.6;          // feinjustierbarer Faktor: px Horizontal pro 1px Vertical-Scroll
+    const damping = 0.06;       // "Sanftheit" (0–1), kleiner = weicher
+
+    // Zustände pro Track
+    const state = tracks.map(() => ({
+      x: 0,          // aktuelle X-Position in px (Render)
+      vx: 0,         // Zielgeschwindigkeit (aus Scroll abgeleitet)
+      loopW: 0       // halbe Track-Breite für Endlosloop
+    }));
+
+    // Breite messen (halbe Strecke, weil du die Items dupliziert hast)
+    function measure() {
+      tracks.forEach((t, i) => {
+        // halbe Breite = Track-Gesamtbreite / 2
+        state[i].loopW = t.scrollWidth / 2;
+      });
+    }
+    measure();
+    new ResizeObserver(measure).observe(marquee);
+
+    // Scroll-Delta erfassen
+    let lastY = window.scrollY;
+    function onScroll() {
+      const y = window.scrollY;
+      const dy = y - lastY;
+      lastY = y;
+      // Geschwindigkeit aktualisieren (zielwert)
+      state.forEach((s, i) => {
+        s.vx += dy * speed * dir[i];
+      });
+      kickRAF();
+    }
+
+    // Smooth-RAF Loop (trägt vx sanft auf x auf, dämpft vx)
+    let rafId = null;
+    function tick() {
+      rafId = null;
+      let needMore = false;
+
+      tracks.forEach((t, i) => {
+        const s = state[i];
+        // Sanfte Annäherung: ein Stück der vx addieren
+        s.x += s.vx;
+        s.vx *= (1 - damping);
+
+        // Endlos-Loop: in den Bereich [-loopW, 0) normalisieren
+        if (s.loopW > 0) {
+          // Wir bewegen nach links (negativ) für translateX
+          // Also modulo auf [-loopW, 0)
+          s.x = ((s.x % s.loopW) + s.loopW) % s.loopW; // in [0, loopW)
+          const xNeg = -s.x; // translate nach links
+          t.style.transform = `translateX(${xNeg}px)`;
+        }
+
+        if (Math.abs(s.vx) > 0.1) needMore = true;
+      });
+
+      if (needMore) kickRAF();
+    }
+    function kickRAF() {
+      if (rafId == null) rafId = requestAnimationFrame(tick);
+    }
+
+    // Nur auf Mobile aktivieren/deaktivieren
+    function enableMobileMode(on) {
+      if (on) {
+        window.addEventListener('scroll', onScroll, { passive: true });
+        // Initialen Scroll-Impulse berechnen (falls Seite nicht bei 0 beginnt)
+        lastY = window.scrollY;
+      } else {
+        window.removeEventListener('scroll', onScroll);
+        // transform zurücksetzen, damit Desktop-Animation greift
+        tracks.forEach(t => { t.style.transform = ''; });
+        // Zustände zurücksetzen
+        state.forEach(s => { s.x = 0; s.vx = 0; });
+      }
+    }
+
+    // Aktivieren je nach Viewport
+    function applyMode(e) { enableMobileMode(e.matches); }
+    mq.addEventListener ? mq.addEventListener('change', applyMode)
+                        : mq.addListener(applyMode);
+    applyMode(mq);
+
+    // Bonus: wenn der Bereich in den Viewport scrollt, kurz "anstoßen"
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && mq.matches) {
+          // leichter Drift beim Eintritt (optional)
+          state.forEach((s, i) => { s.vx += 2 * dir[i]; });
+          kickRAF();
+        }
+      });
+    }, { threshold: 0.1 });
+    io.observe(marquee);
+  })();
+</script>
 </section>
 
 
@@ -6010,537 +6571,405 @@ function grad(ctx,size){
 </section>
 
 <style>
-  /* ========= Theme Tokens ========= */
-  :root{
-    --surface:#fff; --surface-elev:#f7f8fa; --text:#0b0c0e; --muted:#5d6066;
-    --border:#e6e8eb; --input-bg:#ffffffcc; --input-text:#0b0c0e; --placeholder:#8b9096; --btn-text:#fff;
-    --choice-green:#00c851; --choice-ink:#ffffff;
-    --pill-bg:#f3f5f7; --pill-text:#0b0c0e; --pill-green:#00c851; --pill-green-ink:#ffffff;
-    --aur-ink:#0b0c10; --aur-ink-muted:#0f1729; --aur-shadow-light: 0 1px 2px rgba(0,0,0,.06); --aur-shadow-strong: 0 1px 2px rgba(0,0,0,.18);
-  }
-  :root[data-theme="dark"]{
-    --surface:#000; --surface-elev:#111216; --text:#f5f7fa; --muted:#c6cad1;
-    --border:#262a31; --input-bg:#111216cc; --input-text:#f5f7fa; --placeholder:#95a0ad; --btn-text:#fff;
-    --pill-bg:#1b1d22; --pill-text:#e8ecf2;
-  }
-
-  /* ========= Layout ========= */
-  html, body { box-sizing:border-box; overflow-x:hidden; margin:0; padding:0; }
-  *, *::before, *::after { box-sizing:inherit; }
-
-  .kontakt-testimonial-section{ background:var(--surface); color:var(--text); padding:clamp(2.5rem,5.5vw,5rem) 1.5rem; margin-top:clamp(4rem,8vw,8rem); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; }
-  .kontakt-testimonial-wrapper{
-    max-width:1440px; margin:0 auto; display:flex; gap:clamp(1.5rem,3.5vw,3rem); flex-wrap:wrap;
-    justify-content:space-between; align-items:stretch; /* gleiche Höhe */
-  }
-
-  /* Karten nebeneinander gleich hoch */
-  .kontakt-area,
-  .video-area { flex:1 1 480px; max-width:640px; min-width:300px; }
-
-  .kontakt-area{
-    background:color-mix(in oklab,var(--surface-elev) 85%,transparent);
-    border:1px solid var(--border); border-radius:18px;
-    padding:clamp(1.1rem,2vw,1.6rem);
-    box-shadow:0 10px 30px rgba(0,0,0,.06);
-    backdrop-filter:blur(8px) saturate(1.02);
-    height:auto; display:block;
-  }
-
-  /* Videokarte */
-  .video-area{ display:flex; }
-  .video-card{
-    display:flex; flex-direction:column; gap:.8rem;
-    background:color-mix(in oklab,var(--surface-elev) 85%,transparent);
-    border:1px solid var(--border); border-radius:18px;
-    padding:clamp(1.1rem,2vw,1.6rem); width:100%;
-    box-shadow:0 10px 30px rgba(0,0,0,.06); backdrop-filter:blur(8px) saturate(1.02);
-  }
-  .video-header{ display:flex; flex-direction:column; gap:.15rem; text-align:center; } /* mittig */
-  .video-title{ margin:0; font-size:clamp(1.2rem,1rem + .9vw,1.6rem); font-weight:900; letter-spacing:-.01em; color:var(--aur-ink); text-shadow:var(--aur-shadow-light); }
-  .video-sub{ margin:0; color:var(--muted); font-weight:650; }
-
-  /* Video füllt die Kartenhöhe */
-  .video-wrapper{
-    position:relative; flex:1 1 auto; min-height:260px; border-radius:14px; overflow:hidden; background:#000;
-  }
-  .video-media,
-  .video-embed{
-    position:absolute; inset:0; width:100%; height:100%;
-    object-fit:cover; border:0; display:block;
-  }
-
-  /* Testimonials unter die beiden Karten schieben */
-  .testimonial-area{
-    flex:1 1 100%;
-    max-width:100%; min-width:280px;
-  }
-
-  /* ========= Typo ========= */
-  .section-title{
-    font-size:clamp(1.9rem,1.5rem + 2.2vw,2.65rem); font-weight:900; letter-spacing:-.02em; line-height:1.12;
-    margin:.1rem 0 .45rem; text-wrap:balance; color:var(--aur-ink); text-shadow:var(--aur-shadow-light);
-    text-align:center; margin-inline:auto; /* mittig */
-  }
-  .kontakt-subline{
-    color:var(--aur-ink-muted); max-width:62rem; margin:0 auto 1.15rem; line-height:1.6;
-    font-size:clamp(1.02rem,1rem + .5vw,1.18rem); letter-spacing:.004em; text-wrap:pretty;
-    padding:.85rem .95rem; border-radius:14px;
-    background:linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03));
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05);
-    text-align:center; /* mittig */
-  }
-  :root[data-theme="dark"] .kontakt-subline{
-    color:#fff;
-    background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 2px 8px rgba(0,0,0,.35);
-  }
-  .kontakt-area .copy{ color:rgba(0,0,0,.92); font-weight:690; letter-spacing:-.002em; font-size:clamp(1rem,.96rem + .35vw,1.12rem); line-height:1.55; margin:0 0 .25rem; }
-  .step1-copy{ margin-bottom:.25rem !important; }
-  :root[data-theme="dark"] .kontakt-area .copy{ color:rgba(255,255,255,.96); }
-
-  /* ========= Form ========= */
-  .kontakt-form{ display:flex; flex-direction:column; gap:.65rem; width:100%; }
-  .kontakt-form input, .kontakt-form textarea, .kontakt-form select{
-    width:100%; padding:.85rem .95rem; font-size:1rem; border:1px solid var(--border); border-radius:12px; background:var(--input-bg); color:var(--input-text); box-shadow:0 2px 8px rgba(0,0,0,0.04); transition:border-color .2s ease, box-shadow .2s ease, background-color .2s ease; appearance:none;
-  }
-
-  /* ========= Steps / Stepper / Choices etc. ========= */
-  .sr-only{ position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
-  .form-step{ display:none; }
-  .form-step.active{ display:block; }
-  .form-step[data-step="1"]{ margin-bottom:.05rem; }
-  .form-step[data-step="1"] .grid-choices{ margin-bottom:.05rem; }
-
-  .stepper{ display:flex; flex-direction:column; gap:.2rem; margin:.25rem 0 .05rem; padding-top:.25rem; border-top:1px solid color-mix(in oklab, var(--border) 75%, transparent); }
-  .stepper-header{ display:flex; justify-content:space-between; align-items:center; font-weight:800; font-size:.88rem; color:var(--muted); line-height:1; margin-bottom:.05rem; }
-  .stepper-track{ position:relative; width:100%; height:6px; background: color-mix(in oklab, var(--choice-green) 12%, transparent); border-radius:999px; overflow:hidden; }
-  .stepper-fill{ position:absolute; inset:0 auto 0 0; width:0%; height:100%; background: linear-gradient(90deg, var(--choice-green), color-mix(in oklab, var(--choice-green) 82%, #007e33 18%)); border-radius:999px; transition: width .22s ease; box-shadow: 0 2px 10px color-mix(in oklab, var(--choice-green) 35%, transparent); }
-
-  .grid-choices{ display:grid; grid-template-columns:repeat(3,1fr); gap:.5rem; }
-  @media (max-width:680px){ .grid-choices{ grid-template-columns:1fr; } }
-  .choice{ position:relative; display:flex; flex-direction:column; gap:.12rem; padding:.85rem; border:2px solid var(--border); border-radius:14px; cursor:pointer; user-select:none; background:var(--surface); transition: box-shadow .15s ease, border-color .15s ease, transform .06s ease, background .15s ease, color .15s ease; outline:none; }
-  .choice:hover{ box-shadow:0 0 0 3px color-mix(in oklab, var(--choice-green) 25%, transparent); }
-  .choice:active{ transform: scale(.995); }
-  .choice .title{ display:block; font-weight:950; letter-spacing:-.01em; line-height:1.18; font-size: clamp(1.06rem, 0.96rem + 0.8vw, 1.5rem); text-shadow: var(--aur-shadow-light); }
-  .choice small{ color:var(--muted); display:block; margin-top:.02rem; font-size: clamp(.9rem, .86rem + .25vw, 1rem); font-weight:650; letter-spacing:.01em; text-shadow: var(--aur-shadow-light); }
-  .choice input[type="radio"]{ position:absolute; opacity:0; pointer-events:none; inset:0; width:100%; height:100%; }
-  .choice.selected{ border-color:var(--choice-green); background:var(--choice-green); color:var(--choice-ink); box-shadow:0 6px 18px rgba(0,200,81,.25); }
-  .choice.selected .title, .choice.selected small{ color:var(--choice-ink) !important; text-shadow: 0 1px 1px rgba(0,0,0,.12); }
-
-  .service-block{ margin:.55rem 0 .55rem; padding:.55rem .7rem .7rem; border:1px dashed var(--border); border-radius:12px; background:color-mix(in oklab, var(--surface) 85%, transparent); }
-  .service-block[hidden]{ display:none !important; }
-  .block-title{ margin:.12rem 0 .45rem; font-size:1.04rem; font-weight:900; letter-spacing:-.01em; }
-  .select-row, .input-row{ display:flex; flex-direction:column; gap:.3rem; margin-bottom:.5rem; }
-
-  .tags{ display:grid; gap:.45rem; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); margin-top:.05rem; }
-  .checkbox-legend{ font-weight:800; margin-bottom:.15rem; }
-  .pill{ display:flex; align-items:center; justify-content:center; min-height:40px; padding:.5rem .65rem; border:2px solid var(--border); border-radius:12px; background:var(--pill-bg); color:var(--pill-text); cursor:pointer; user-select:none; transition: transform .06s ease, background .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease; }
-  .pill:hover{ box-shadow:0 0 0 3px color-mix(in oklab, var(--choice-green) 25%, transparent); }
-  .pill:active{ transform:scale(.992); }
-  .pill input{ position:absolute; opacity:0; pointer-events:none; }
-  .pill span{ font-weight:800; letter-spacing:-.01em; }
-  .pill.selected{ background:var(--pill-green); color:var(--pill-green-ink); border-color:var(--pill-green); box-shadow:0 6px 18px rgba(0,200,81,.25); }
-
-  .wizard-nav{ display:flex; gap:.55rem; align-items:center; margin-top:.1rem; padding-top:.25rem; }
-  .nav-btn{ background:var(--surface-elev); color:var(--text); border:1px solid var(--border); padding:.7rem .9rem; border-radius:12px; font-weight:800; cursor:pointer; transition:none; }
-  .nav-btn[disabled]{ opacity:.55; cursor:not-allowed; }
-  .nav-btn.next{ background: var(--choice-green); color: var(--choice-ink); border: none; box-shadow: 0 6px 18px color-mix(in oklab, var(--choice-green) 40%, transparent); }
-
-  /* Success Step */
-  .form-step[data-step="6"]{ display:none; }
-  .form-step.active[data-step="6"]{ display:block; }
-  .success-card{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.6rem; min-height: var(--step6-minh, 320px); padding: 1rem; border: 2px solid var(--choice-green); border-radius: 14px; background: color-mix(in oklab, var(--choice-green) 8%, var(--surface) 92%); text-align:center; }
-  .success-title{ font-weight:900; letter-spacing:-.01em; font-size: clamp(1.4rem,1.1rem + 1vw,1.9rem); }
-  .success-copy{ font-weight:700; letter-spacing:-.002em; font-size: clamp(1.02rem,.98rem + .35vw,1.16rem); opacity:.95; }
-  .success-sub{ color: var(--muted); }
-  .success-btn{ margin-top:.2rem; padding:.8rem 1rem; border-radius:12px; border:none; background:var(--choice-green); color:var(--choice-ink); font-weight:850; box-shadow:0 6px 18px rgba(0,200,81,.25); }
-  form.is-success .wizard-nav, form.is-success .stepper{ display:none !important; }
-  .success-card.fade-out { animation: successFade 3s ease forwards; }
-  @keyframes successFade { to { opacity: 0; transform: translateY(6px); } }
-
-  /* Responsive */
-  @media (max-width:1024px){
-    .kontakt-testimonial-wrapper{ flex-direction:column; align-items:center; gap:2rem; }
-    .kontakt-area, .video-area, .testimonial-area{ max-width:100%; }
-    .kontakt-btn{ margin:0 auto; }
-  }
-  @media (max-width:540px){
-    .kontakt-area, .testimonial-area, .video-area{ padding:0 .6rem; }
-    .section-title{ font-size:clamp(1.7rem,4.6vw,2.1rem); margin:0 auto .6rem; }
-    .kontakt-form{ padding:0 .1rem; gap:.6rem; }
-    .stepper{ position:sticky; bottom:0; background: color-mix(in oklab, var(--surface) 95%, transparent); padding:.3rem .2rem .2rem; margin:.25rem -.2rem 0; }
-    .wizard-nav{ position:sticky; bottom:0; background: color-mix(in oklab, var(--surface) 95%, transparent); padding:.25rem .2rem .3rem; margin:.05rem -.2rem 0; }
-  }
-
-  @media (prefers-reduced-motion:reduce){
-    .kontakt-btn{ animation:none !important; transition:none !important; }
-    .stepper-fill{ transition:none !important; }
-  }
-/* Karten-Wrapper: gleiche Höhe */
-.kontakt-testimonial-wrapper{
-  max-width:1440px; margin:0 auto; display:flex;
-  gap:clamp(1.5rem,3.5vw,3rem); flex-wrap:wrap;
-  justify-content:space-between; align-items:stretch; /* wichtig: gleiche Höhe */
+/* ==============================
+   THEME TOKENS
+   ============================== */
+:root{
+  /* surfaces & text */
+  --surface:#fff; --surface-elev:#f7f8fa; --text:#0b0c0e; --muted:#5d6066; --aur-ink:#0b0c10; --aur-ink-muted:#0f1729;
+  --border:#e6e8eb; --btn-text:#fff;
+  /* inputs */
+  --input-bg:#ffffffcc; --input-text:#0b0c0e; --placeholder:#8b9096;
+  /* accent */
+  --choice-green:#00c851; --choice-ink:#ffffff; --choice-orange:#f97316;
+  /* pills */
+  --pill-bg:#f3f5f7; --pill-text:#0b0c0e; --pill-green:#00c851; --pill-green-ink:#ffffff;
+  /* shadows */
+  --aur-shadow-light:0 1px 2px rgba(0,0,0,.06); --aur-shadow-strong:0 1px 2px rgba(0,0,0,.18);
+}
+:root[data-theme="dark"]{
+  --surface:#000; --surface-elev:#111216; --text:#f5f7fa; --muted:#c6cad1;
+  --border:#262a31; --input-bg:#111216cc; --input-text:#f5f7fa; --placeholder:#95a0ad;
+  --pill-bg:#1b1d22; --pill-text:#e8ecf2;
 }
 
-/* Kontakt- und Videokarte teilen sich die Zeile */
-.kontakt-area,
-.video-area { flex:1 1 480px; max-width:640px; min-width:300px; }
+/* ==============================
+   GLOBAL RESETS
+   ============================== */
+html, body{ box-sizing:border-box; overflow-x:hidden; margin:0; padding:0; }
+*, *::before, *::after{ box-sizing:inherit; }
+.sr-only{ position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 
-/* Texte zentriert */
-.section-title,
-.kontakt-subline { text-align:center; }
+/* ==============================
+   SECTION & WRAPPER
+   ============================== */
+.kontakt-testimonial-section{
+  background:var(--surface); color:var(--text);
+  padding:clamp(2.5rem,5.5vw,5rem) 1.5rem;
+  margin-top:clamp(4rem,8vw,8rem);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+.kontakt-testimonial-wrapper{
+  max-width:1440px; margin:0 auto; display:flex; gap:clamp(1.5rem,3.5vw,3rem);
+  flex-wrap:wrap; justify-content:space-between; align-items:stretch;
+}
 
-/* Videokarte ohne Headline – Video füllt Karte */
-.video-area{ display:flex; }
-.video-card{
-  position:relative; height:100%; width:100%;
+/* Karten (gleich hoch nebeneinander) */
+.kontakt-area, .video-area{ flex:1 1 480px; max-width:640px; min-width:300px; }
+.kontakt-area{
+  position:relative; isolation:auto; /* für Hover-Schatten */
   background:color-mix(in oklab,var(--surface-elev) 85%,transparent);
   border:1px solid var(--border); border-radius:18px;
-  box-shadow:0 10px 30px rgba(0,0,0,.06); backdrop-filter:blur(8px) saturate(1.02);
-  overflow:hidden; /* runde Ecken fürs Video */
-  padding:0;       /* randlos */
-}
-.video-media{
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover; display:block; border:0;
+  padding:clamp(1.1rem,2vw,1.6rem);
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+  backdrop-filter:blur(8px) saturate(1.02);
+  overflow:visible; min-width:0;
 }
 
-/* Testimonials weiterhin darunter in voller Breite */
-.testimonial-area{ flex:1 1 100%; max-width:100%; }
+/* ==============================
+   VIDEO CARD
+   ============================== */
+.video-area{ display:flex; }
+.video-card{
+  position:relative; display:flex; flex-direction:column; gap:.8rem; width:100%;
+  background:color-mix(in oklab,var(--surface-elev) 85%,transparent);
+  border:1px solid var(--border); border-radius:18px;
+  padding:clamp(1.1rem,2vw,1.6rem);
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+  backdrop-filter:blur(8px) saturate(1.02);
+  overflow:hidden;
+}
+.video-header{ display:flex; flex-direction:column; gap:.15rem; text-align:center; }
+.video-title{ margin:0; font-size:clamp(1.2rem,1rem + .9vw,1.6rem); font-weight:900; letter-spacing:-.01em; color:var(--aur-ink); text-shadow:var(--aur-shadow-light); }
+.video-sub{ margin:0; color:var(--muted); font-weight:650; }
+.video-wrapper{ position:relative; flex:1 1 auto; min-height:260px; border-radius:14px; overflow:hidden; background:#000; }
+.video-media, .video-embed{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border:0; display:block; }
 
-/* ===== Kontaktkarte (Step 5) – responsives Innen-Layout ===== */
+/* Testimonials volle Breite unter den Karten */
+.testimonial-area{ flex:1 1 100%; max-width:100%; min-width:280px; }
+
+/* ==============================
+   TYPOGRAPHY
+   ============================== */
+.section-title{
+  font-size:clamp(1.9rem,1.5rem + 2.2vw,2.65rem); font-weight:900; letter-spacing:-.02em; line-height:1.12;
+  margin:.1rem 0 .45rem; text-wrap:balance; color:var(--aur-ink); text-shadow:var(--aur-shadow-light);
+  text-align:center; margin-inline:auto;
+}
+.kontakt-subline{
+  color:var(--aur-ink-muted); max-width:62rem; margin:0 auto 1.15rem; line-height:1.6;
+  font-size:clamp(1.02rem,1rem + .5vw,1.18rem); letter-spacing:.004em; text-wrap:pretty;
+  padding:.85rem .95rem; border-radius:14px;
+  background:linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05);
+  text-align:center;
+}
+:root[data-theme="dark"] .kontakt-subline{
+  color:#fff; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 2px 8px rgba(0,0,0,.35);
+}
+.kontakt-area .copy{ color:rgba(0,0,0,.92); font-weight:690; letter-spacing:-.002em; font-size:clamp(1rem,.96rem + .35vw,1.12rem); line-height:1.55; margin:0 0 .25rem; }
+.step1-copy{ margin-bottom:.25rem!important; }
+:root[data-theme="dark"] .kontakt-area .copy{ color:rgba(255,255,255,.96); }
+
+/* ==============================
+   FORM BASICS
+   ============================== */
+.kontakt-form{ display:flex; flex-direction:column; gap:.65rem; width:100%; max-width:100%; overflow:clip; }
+.kontakt-form input, .kontakt-form textarea, .kontakt-form select{
+  width:100%; padding:.85rem .95rem; font-size:1rem; border:1px solid var(--border); border-radius:12px;
+  background:var(--input-bg); color:var(--input-text);
+  box-shadow:0 2px 8px rgba(0,0,0,.04);
+  transition:border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+  appearance:none;
+}
+/* Typo-Konsistenz */
+.kontakt-form, .kontakt-form input, .kontakt-form textarea, .kontakt-form select, .kontakt-form button{
+  font-family:inherit; color:var(--input-text); letter-spacing:.004em;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+}
+.kontakt-form ::placeholder{ color:var(--placeholder); opacity:1; }
+
+/* Autofill */
+.kontakt-form input:-webkit-autofill,
+.kontakt-form textarea:-webkit-autofill,
+.kontakt-form select:-webkit-autofill{
+  -webkit-text-fill-color:var(--input-text);
+  transition:background-color 9999s ease-out, color 9999s ease-out;
+  box-shadow:0 0 0 1000px var(--input-bg) inset!important;
+}
+:root[data-theme="dark"] .kontakt-form input:-webkit-autofill,
+:root[data-theme="dark"] .kontakt-form textarea:-webkit-autofill,
+:root[data-theme="dark"] .kontakt-form select:-webkit-autofill{
+  -webkit-text-fill-color:var(--input-text);
+  box-shadow:0 0 0 1000px color-mix(in oklab,var(--input-bg) 92%, black 8%) inset!important;
+}
+
+/* ==============================
+   STEPS / STEPPER
+   ============================== */
+.form-step{ display:none; max-width:100%; }
+.form-step.active{ display:block; }
+.form-step[data-step="1"]{ margin-bottom:.05rem; }
+.form-step[data-step="1"] .grid-choices{ margin-bottom:.05rem; }
+
+/* Stepper */
+.stepper{ display:flex; flex-direction:column; gap:.2rem; margin:.25rem 0 .05rem; padding-top:.25rem; border-top:1px solid color-mix(in oklab,var(--border) 75%, transparent); }
+.stepper-header{ display:flex; justify-content:space-between; align-items:center; font-weight:800; font-size:.88rem; color:var(--muted); line-height:1; margin-bottom:.05rem; }
+.stepper-track{ position:relative; width:100%; height:6px; background:color-mix(in oklab,var(--choice-green) 12%, transparent); border-radius:999px; overflow:hidden; }
+.stepper-fill{
+  position:absolute; inset:0 auto 0 0; width:0%; height:100%;
+  background:linear-gradient(90deg, var(--choice-green), color-mix(in oklab,var(--choice-green) 82%, #007e33 18%));
+  border-radius:999px; transition:width .22s ease;
+  box-shadow:0 2px 10px color-mix(in oklab,var(--choice-green) 35%, transparent);
+}
+
+/* ==============================
+   CHOICES (Step 1)
+   ============================== */
+.grid-choices{ display:grid; grid-template-columns:repeat(3,1fr); gap:.5rem; max-width:100%; overflow:visible; }
+@media (max-width:680px){ .grid-choices{ grid-template-columns:1fr; } }
+
+.choice{
+  position:relative; display:flex; flex-direction:column; gap:.12rem;
+  padding:.85rem; border:2px solid var(--border); border-radius:14px;
+  cursor:pointer; user-select:none; background:var(--surface);
+  transition:box-shadow .15s ease, border-color .15s ease, transform .06s ease, background .15s ease, color .15s ease;
+  outline:none; transform-origin:center; will-change:transform;
+}
+.choice:hover{ box-shadow:0 0 0 3px color-mix(in oklab,var(--choice-green) 25%, transparent); }
+.choice:active{ transform:scale(.995); }
+.choice .title{ display:block; font-weight:950; letter-spacing:-.01em; line-height:1.18; font-size:clamp(1.06rem, .96rem + .8vw, 1.5rem); text-shadow:var(--aur-shadow-light); }
+.choice small{ color:var(--muted); display:block; margin-top:.02rem; font-size:clamp(.9rem, .86rem + .25vw, 1rem); font-weight:650; text-shadow:var(--aur-shadow-light); }
+.choice input[type="radio"]{ position:absolute; opacity:0; pointer-events:none; inset:0; width:100%; height:100%; }
+.choice.selected{ border-color:var(--choice-green); background:var(--choice-green); color:var(--choice-ink); box-shadow:0 6px 18px rgba(0,200,81,.25); }
+.choice.selected .title, .choice.selected small{ color:var(--choice-ink)!important; text-shadow:0 1px 1px rgba(0,0,0,.12); }
+
+/* Fokus-States großflächig */
+.choice:focus-visible, .choice:focus-within{
+  outline:none; border-color:var(--choice-green)!important;
+  box-shadow:0 0 0 4px color-mix(in oklab,var(--choice-green) 45%, transparent), 0 8px 24px rgba(0,200,81,.15)!important;
+  background:color-mix(in oklab,var(--choice-green) 12%, var(--surface) 88%);
+}
+
+/* ==============================
+   SERVICE BLOCKS, TAGS & PILLS
+   ============================== */
+.service-block{ margin:.55rem 0 .55rem; padding:.55rem .7rem .7rem; border:1px dashed var(--border); border-radius:12px; background:color-mix(in oklab,var(--surface) 85%, transparent); }
+.service-block[hidden]{ display:none!important; }
+.block-title{ margin:.12rem 0 .45rem; font-size:1.04rem; font-weight:900; letter-spacing:-.01em; }
+.select-row, .input-row{ display:flex; flex-direction:column; gap:.3rem; margin-bottom:.5rem; }
+
+.tags{ display:grid; gap:.45rem; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); margin-top:.05rem; }
+.checkbox-legend{ font-weight:800; margin-bottom:.15rem; }
+.pill{
+  position:relative; display:flex; align-items:center; justify-content:center;
+  min-height:40px; padding:.5rem .65rem; border:2px solid var(--border); border-radius:12px;
+  background:var(--pill-bg); color:var(--pill-text); cursor:pointer; user-select:none;
+  transition:transform .06s ease, background .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease;
+}
+.pill:hover{ box-shadow:0 0 0 3px color-mix(in oklab,var(--choice-green) 25%, transparent); }
+.pill:active{ transform:scale(.992); }
+.pill input{ position:absolute; opacity:0; pointer-events:none; }
+.pill span{ font-weight:800; letter-spacing:-.01em; }
+.pill.selected{ background:var(--pill-green); color:var(--pill-green-ink); border-color:var(--pill-green); box-shadow:0 6px 18px rgba(0,200,81,.25); }
+
+/* Pill: Fokus großflächig */
+.pill:focus-visible, .pill:focus-within{
+  outline:none; background:var(--pill-green)!important; color:var(--pill-green-ink)!important; border-color:var(--pill-green)!important;
+  box-shadow:0 0 0 4px color-mix(in oklab,var(--pill-green) 45%, transparent), 0 8px 22px rgba(0,200,81,.22)!important;
+}
+
+/* Checkbox → ganze Pill grün */
+.pill input[type="checkbox"]:checked ~ *{
+  background:var(--pill-green); color:var(--pill-green-ink); border-color:var(--pill-green);
+  box-shadow:0 6px 18px rgba(0,200,81,.25);
+}
+
+/* ==============================
+   WIZARD NAVIGATION
+   ============================== */
+.wizard-nav{ display:flex; gap:.55rem; align-items:center; margin-top:.1rem; padding-top:.25rem; }
+.nav-btn{
+  background:var(--surface-elev); color:var(--text);
+  border:1px solid var(--border); padding:.7rem .9rem; border-radius:12px; font-weight:800; cursor:pointer; transition:none;
+}
+.nav-btn[disabled]{ opacity:.55; cursor:not-allowed; }
+.nav-btn.next{ background:var(--choice-green); color:var(--choice-ink); border:none; box-shadow:0 6px 18px color-mix(in oklab,var(--choice-green) 40%, transparent); }
+
+/* Submit-Button (orange) */
+#submitBtn, .kontakt-btn.submit{
+  background:var(--choice-orange); color:#fff;
+  border:1px solid color-mix(in oklab,#f97316 80%, #000 10%);
+  padding:.7rem .9rem; border-radius:12px; font-weight:800; font-size:1rem; cursor:pointer;
+  transition:background-color .2s ease, transform .06s ease, box-shadow .15s ease;
+  box-shadow:0 2px 6px rgba(249,115,22,.25);
+}
+#submitBtn:hover, .kontakt-btn.submit:hover{ background:color-mix(in oklab,#f97316 90%, white 10%); }
+#submitBtn:active, .kontakt-btn.submit:active{ transform:translateY(1px); box-shadow:0 1px 3px rgba(249,115,22,.3); }
+#submitBtn[disabled], .kontakt-btn.submit[disabled]{ opacity:.6; cursor:not-allowed; box-shadow:none; }
+
+/* Step 5: Submit linksbündig */
+.kontakt-area .form-step[data-step="5"] + .wizard-nav{
+  display:flex!important; justify-content:flex-start!important; text-align:left!important; width:100%;
+}
+.kontakt-area .form-step[data-step="5"] + .wizard-nav #submitBtn,
+.kontakt-area .form-step[data-step="5"] + .wizard-nav .kontakt-btn.submit{
+  justify-content:flex-start!important; align-self:flex-start!important;
+  margin-left:0!important; margin-right:auto!important; width:auto!important; min-width:160px;
+}
+.kontakt-area .form-step[data-step="5"] + .wizard-nav .nav-btn:not(#submitBtn){ margin-right:.6rem; }
+
+/* ==============================
+   SUCCESS STEP (6)
+   ============================== */
+.form-step[data-step="6"]{ display:none; }
+.form-step.active[data-step="6"]{ display:block; }
+.success-card{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.6rem;
+  min-height:var(--step6-minh,320px); padding:1rem; border:2px solid var(--choice-green); border-radius:14px;
+  background:color-mix(in oklab,var(--choice-green) 8%, var(--surface) 92%); text-align:center;
+}
+.success-title{ font-weight:900; letter-spacing:-.01em; font-size:clamp(1.4rem,1.1rem + 1vw,1.9rem); }
+.success-copy{ font-weight:700; letter-spacing:-.002em; font-size:clamp(1.02rem,.98rem + .35vw,1.16rem); opacity:.95; }
+.success-sub{ color:var(--muted); }
+.success-btn{ margin-top:.2rem; padding:.8rem 1rem; border-radius:12px; border:none; background:var(--choice-green); color:var(--choice-ink); font-weight:850; box-shadow:0 6px 18px rgba(0,200,81,.25); }
+form.is-success .wizard-nav, form.is-success .stepper{ display:none!important; }
+.success-card.fade-out{ animation:successFade 3s ease forwards; }
+@keyframes successFade{ to{ opacity:0; transform:translateY(6px); } }
+
+/* ==============================
+   STEP 5 – CONTACT GRID
+   ============================== */
+.form-step[data-step="5"]{
+  color:var(--text); line-height:1.55; letter-spacing:.004em;
+  font-size:clamp(1rem,.96rem + .35vw,1.12rem); text-align:left!important;
+}
 .form-step[data-step="5"] .contact-grid{
-  display:grid;
-  grid-template-columns: repeat(12, minmax(0,1fr));
-  gap:.65rem;
+  display:grid; grid-template-columns:repeat(12, minmax(0,1fr)); gap:.65rem; justify-items:stretch; align-items:start;
 }
-
-/* generische Feld-Box */
-.form-step[data-step="5"] .field{
-  grid-column: span 12;
-  display:flex; flex-direction:column; gap:.35rem;
-}
-
-/* Label etwas ruhiger, aber eindeutig */
-.form-step[data-step="5"] .field label{
-  font-weight:800; letter-spacing:-.01em;
-}
-
-/* Inputs / Textareas füllen die Spalte (nutzen schon deine Basis-Input-Styles) */
+.form-step[data-step="5"] .field{ grid-column:span 12; display:flex; flex-direction:column; gap:.35rem; font:inherit; color:inherit; text-align:left!important; }
+.form-step[data-step="5"] .field label{ font-weight:800; letter-spacing:-.01em; color:var(--aur-ink); }
 .form-step[data-step="5"] .field input,
 .form-step[data-step="5"] .field textarea,
-.form-step[data-step="5"] .field select{
-  width:100%;
+.form-step[data-step="5"] .field select{ width:100%; font:inherit; color:inherit; line-height:1.4; }
+.form-step[data-step="5"] .field textarea{ min-height:clamp(120px,16vh,220px); resize:vertical; }
+.form-step[data-step="5"] .field .field-error{ line-height:1.25; }
+.form-step[data-step="5"] .span-12{ grid-column:span 12; }
+.form-step[data-step="5"] .span-6{ grid-column:span 12; }
+.form-step[data-step="5"] .span-4{ grid-column:span 12; }
+.form-step[data-step="5"] .span-8{ grid-column:span 12; }
+/* Dark overrides Step 5 */
+:root[data-theme="dark"] .form-step[data-step="5"] .field label{ color:#f5f7fa!important; }
+:root[data-theme="dark"] .form-step[data-step="5"] input,
+:root[data-theme="dark"] .form-step[data-step="5"] textarea,
+:root[data-theme="dark"] .form-step[data-step="5"] select{
+  color:#f5f7fa!important; background:var(--input-bg)!important; border-color:var(--border)!important; caret-color:#f5f7fa;
 }
+:root[data-theme="dark"] .form-step[data-step="5"] ::placeholder{ color:var(--placeholder)!important; opacity:1; }
+:root[data-theme="dark"] .form-step[data-step="5"] .field .field-error{ color:#ffb4c0!important; }
+:root[data-theme="dark"] .form-step[data-step="5"] .req-note,
+:root[data-theme="dark"] .form-step[data-step="5"] ~ .legal-hint{ color:#e6e9ee!important; }
 
-/* Textarea angenehm groß, aber nicht riesig */
-.form-step[data-step="5"] .field textarea{
-  min-height: clamp(120px, 16vh, 220px);
-  resize: vertical;
+/* Step 5: linkslastige Navigation */
+.kontakt-area .form-step[data-step="5"] .field input,
+.kontakt-area .form-step[data-step="5"] .field select,
+.kontakt-area .form-step[data-step="5"] .field textarea{ text-align:left; }
+
+/* ==============================
+   DEADLINE PICKER & MISC
+   ============================== */
+.deadline-grid{ display:grid; grid-template-columns:1fr 1fr; gap:.5rem; }
+@media (max-width:540px){ .deadline-grid{ grid-template-columns:1fr; } }
+#deadlineRow .field-error{ margin-top:.25rem; }
+
+/* Auswahlkarte dauerhaft grün bei .selected */
+#choiceWire.selected{ background:var(--pill-green); color:#fff; border-color:var(--pill-green); box-shadow:0 6px 18px rgba(0,200,81,.25); }
+#choiceWire.selected h3, #choiceWire.selected p, #choiceWire.selected .btn{ color:#fff; }
+#choiceWire.selected .btn{ background:#fff; color:var(--pill-green-ink); border:none; }
+
+/* Rechtliches */
+.legal-hint{ font-size:.85rem; line-height:1.45; color:#666; margin:.4rem 0 .2rem; }
+.legal-hint a{ color:inherit; text-decoration:underline; }
+:root[data-theme="dark"] .legal-hint{ color:#c6cad1; }
+label.req::after{ content:" *"; color:#b00020; font-weight:900; }
+.req-note{ font-size:.85rem; color:#666; margin:.2rem 0 .4rem; }
+:root[data-theme="dark"] .req-note{ color:#c6cad1; }
+
+/* ==============================
+   HERO CARD (optional single choice)
+   ============================== */
+.grid-choices.single{ grid-template-columns:1fr; }
+.grid-choices.single .choice.hero{ width:100%; }
+
+.wf-card.hero{
+  position:relative; display:flex; flex-direction:column; align-items:center; text-align:center;
+  gap:.55rem; padding:clamp(1.1rem, 3.2vw, 2rem);
+  border-radius:16px; border:2px solid var(--border);
+  background:#fff!important; color:#0b0c0e!important;
+  box-shadow:0 10px 30px rgba(0,0,0,.06), inset 0 0 0 1px rgba(0,0,0,.06);
+  margin-top:1rem;
 }
-
-/* Fehlertexte brechen sauber um */
-.form-step[data-step="5"] .field .field-error{
-  line-height:1.25;
+:root[data-theme="dark"] .wf-card.hero{
+  background:#000!important; color:#f5f7fa!important; border:2px solid var(--border);
 }
-
-/* Grid-Spans (12er System) */
-.form-step[data-step="5"] .span-12{ grid-column: span 12; }
-.form-step[data-step="5"] .span-6 { grid-column: span 12; } /* default: full width */
-.form-step[data-step="5"] .span-4 { grid-column: span 12; }
-.form-step[data-step="5"] .span-8 { grid-column: span 12; }
-
-/* ab ~700px zweispaltig */
-@media (min-width:700px){
-  .form-step[data-step="5"] .span-6 { grid-column: span 6; }
-  .form-step[data-step="5"] .span-4 { grid-column: span 4; }
-  .form-step[data-step="5"] .span-8 { grid-column: span 8; }
+.wf-card.hero .wf-badge{
+  position:absolute; top:clamp(8px,1vw,14px); right:clamp(8px,1vw,14px);
+  padding:0; border:none!important; background:none!important; box-shadow:none!important;
+  color:currentColor; font-weight:1000; letter-spacing:-.02em; line-height:1;
+  font-size:clamp(1.6rem, 1rem + 3vw, 3rem);
 }
-
-/* ab ~1024px etwas luftiger – optional */
-@media (min-width:1024px){
-  .form-step[data-step="5"] .contact-grid{ gap:.75rem; }
+.wf-card.hero .wf-card-head{ display:flex; flex-direction:column; align-items:center; gap:.35rem; padding-right:clamp(56px,5.5vw,80px); }
+.wf-card.hero .title{
+  margin:.05rem 0 0; font-weight:1000; letter-spacing:-.022em; line-height:1.15;
+  font-size:clamp(1.1rem, .9rem + 1.1vw, 1.55rem);
 }
-
-/* Buttons in der Kontaktkarte über die volle Breite andocken */
-.form-step[data-step="5"] + .wizard-nav{
-  margin-top:.5rem;
+.wf-card.hero small{ font-weight:760; opacity:.95; letter-spacing:.003em; line-height:1.24; font-size:clamp(.96rem,.9rem + .35vw,1.08rem); margin-top:.15rem; }
+.wf-card.hero .cta-inline{
+  margin-top:.4rem; padding:clamp(.9rem,.7rem + .6vw,1.05rem) clamp(1rem,.8rem + 1vw,1.35rem);
+  border-radius:14px; font-weight:950; font-size:clamp(1rem,.92rem + .4vw,1.15rem); letter-spacing:.004em;
+  border:none; cursor:pointer; display:inline-flex; align-items:center; justify-content:center;
+  background:var(--choice-green); color:var(--choice-ink);
+  box-shadow:0 10px 22px color-mix(in oklab,var(--choice-green) 35%, transparent), inset 0 1px 0 rgba(255,255,255,.25);
+  transition:transform .06s ease, box-shadow .15s ease, filter .15s ease;
 }
-/* Handy: Videokarte bewusst flacher + nicht mehr gestreckt */
-@media (max-width:600px){
-  .video-area{
-    flex: 0 0 auto;               /* nicht mehr mitwachsen */
-    align-self: stretch;           /* volle Breite behalten */
-  }
-  .video-area .video-card{
-    height: 180px !important;      /* flach erzwingen */
-    min-height: 180px !important;
-    aspect-ratio: auto !important; /* falls ein aspect-ratio greift, neutralisieren */
-  }
-  .video-area .video-media{
-    object-fit: cover;
-    object-position: center center;
-  }
+.wf-card.hero:hover{ box-shadow:0 0 0 4px color-mix(in oklab,var(--choice-green) 22%, transparent), 0 10px 30px rgba(0,0,0,.18); }
+.wf-card.hero:focus-visible, .wf-card.hero:focus-within{
+  outline:none; border-color:var(--choice-green)!important;
+  box-shadow:0 0 0 4px color-mix(in oklab,var(--choice-green) 45%, transparent), 0 10px 28px rgba(0,200,81,.18)!important;
+  background:color-mix(in oklab,var(--choice-green) 10%, currentColor 0%, transparent)!important;
 }
-/* Step-1 Auswahlkarten strikt innerhalb der Kontaktkarte halten */
-.kontakt-area{
-  position: relative;
-  isolation: isolate;     /* eigener Stacking-Context */
-  overflow: clip;         /* nichts ragt aus der Karte heraus */
-  min-width: 0;           /* Flex-Overflow verhindern */
-}
+@media (max-width:560px){ .wf-card.hero .wf-card-head{ padding-right:60px; } }
 
-.kontakt-form{ max-width: 100%; overflow: clip; }
-.form-step[data-step="1"]{ max-width: 100%; }
-
-.grid-choices{ max-width: 100%; overflow: clip; }
-.grid-choices .choice{
-  transform-origin: center;     /* Hover/Active bleibt innen */
-  will-change: transform;
-}
-
-/* Kontaktkarte darf breiter werden, Videokarte etwas schmaler */
+/* ==============================
+   RESPONSIVE
+   ============================== */
+/* Kartenbreiten-Gewichtung desktop */
 .kontakt-area{ flex:1.2 1 640px; max-width:780px; }
 .video-area{ flex:0.8 1 420px; max-width:540px; }
 
-/* trotzdem gleich hohe Karten */
-.kontakt-testimonial-wrapper{
-  align-items:stretch;
-}
-
-/* Falls nötig: Hover-Effekte der Choices nicht abschneiden */
-.kontakt-area{ overflow:visible; }
-
-/* Wenn Karten untereinander: zentriert & breiter darstellen */
-@media (max-width:1024px){
-  .kontakt-testimonial-wrapper{
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    gap:2rem;
-  }
-
-  .kontakt-area,
-  .video-area{
-    width:90%;
-    max-width:1000px;      /* deutlich breiter */
-    margin-inline:auto;
-  }
-} 
-/* 1024px–1148px: Kontaktkarte mittig, Videokarte darunter */
+/* 1024px–1148px: Kontakt oben, Video darunter, volle Breite */
 @media (min-width:1024px) and (max-width:1148px){
-  .kontakt-testimonial-wrapper{
-    /* Spalten-Stack statt Reihe */
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1.75rem;
+  .kontakt-testimonial-wrapper{ flex-direction:column; align-items:center; justify-content:flex-start; gap:1.75rem; }
+  .kontakt-area, .video-area{
+    flex:0 0 auto; width:min(92vw,780px); max-width:100%; margin-inline:auto;
   }
+  .kontakt-area{ order:1; } .video-area{ order:2; } .testimonial-area{ order:3; width:100%; }
+  .video-area .video-card{ height:auto; min-height:260px; }
+}
 
-  /* Side-by-side Vorgaben überstimmen */
-  .kontakt-area,
-  .video-area{
-    flex: 0 0 auto;              /* nicht strecken/schrumpfen */
-    width: min(92vw, 780px);     /* schön breit, aber begrenzt */
-    max-width: 100%;
-    margin-inline: auto;         /* perfekt mittig */
+/* 680px–1024px: stapeln, nicht strecken */
+@media (max-width:1024px) and (min-width:680px){
+  .kontakt-testimonial-wrapper{ flex-direction:column; align-items:center; }
+  .kontakt-area, .video-area{
+    flex:0 0 auto!important; width:min(92vw,780px); height:auto!important; margin-inline:auto;
   }
-
-  /* Reihenfolge explizit festlegen */
-  .kontakt-area{ order: 1; }
-  .video-area{   order: 2; }
-  .testimonial-area{ order: 3; width: 100%; }
-
-  /* Falls die Videokarte zuvor höhengleich gezogen wurde: hier auto */
-  .video-area .video-card{
-    height: auto;
-    min-height: 260px;
-  }
+  .video-area .video-card{ height:auto!important; min-height:280px; aspect-ratio:16/9; }
+  .kontakt-area{ padding:clamp(14px,2.2vw,20px)!important; }
 }
 
-/* === 1) Hover oben nicht mehr abgeschnitten (Step 1) === */
-/* Alles, was Step-1 umgibt, darf Überstand durch Hover-Shadow zeigen */
-.kontakt-area,
-.kontakt-form,
-.form-step[data-step="1"],
-.grid-choices{
-  overflow: visible !important;
-}
-
-/* Falls ein Parent irgendwo noch clip/hidden setzt: neutralisieren */
-.kontakt-area{ isolation:auto !important; }
-
-/* Optional: minimaler Innenabstand oben, damit große Shadows Platz haben */
-.form-step[data-step="1"]{
-  padding-top: .1rem;
-}
-
-/* === 2) Kontaktkarte (Step 5) – alles untereinander + responsive === */
-.form-step[data-step="5"] .contact-grid{
-  display:grid;
-  grid-template-columns: 1fr; /* nur 1 Spalte */
-  gap: .7rem;
-}
-
-/* Alle Spans auf volle Breite erzwingen */
-.form-step[data-step="5"] .span-12,
-.form-step[data-step="5"] .span-8,
-.form-step[data-step="5"] .span-6,
-.form-step[data-step="5"] .span-4{
-  grid-column: 1 / -1 !important;
-}
-
-/* Typo & Abstände wie vorher – übernehmen/inherit */
-.form-step[data-step="5"] .field{
-  display:flex; flex-direction:column; gap:.35rem;
-  font: inherit; color: inherit;
-}
-.form-step[data-step="5"] .field label{
-  font-weight:800; letter-spacing:-.01em;
-}
-.form-step[data-step="5"] .field input,
-.form-step[data-step="5"] .field textarea,
-.form-step[data-step="5"] .field select{
-  width:100%;
-  font: inherit; color: inherit;
-}
-
-/* Textarea angenehm, aber nicht riesig – passt sich Viewport an */
-.form-step[data-step="5"] .field textarea{
-  min-height: clamp(120px, 18vh, 220px);
-  resize: vertical;
-}
-
-/* Mobile Feinschliff */
-@media (max-width:700px){
-  .form-step[data-step="5"] .contact-grid{ gap:.6rem; }
-  .form-step[data-step="5"] .field label{ font-weight:800; }
-  .form-step[data-step="5"] .field textarea{ min-height: clamp(110px, 22vh, 200px); }
-}
-
-/* === "Senden"-Button wie "Zurück", aber Orange === */
-#submitBtn,
-.kontakt-btn.submit {
-  background: var(--choice-orange, #f97316); /* Orange Basisfarbe */
-  color: #fff;
-  border: 1px solid color-mix(in oklab, #f97316 80%, #000 10%);
-  padding: .7rem .9rem;
-  border-radius: 12px;
-  font-weight: 800;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color .2s ease, transform .06s ease, box-shadow .15s ease;
-  box-shadow: 0 2px 6px rgba(249,115,22,.25);
-}
-
-/* Hover-Effekt wie beim Zurück-Button (leicht heller) */
-#submitBtn:hover,
-.kontakt-btn.submit:hover {
-  background: color-mix(in oklab, #f97316 90%, white 10%);
-}
-
-/* Active-State: leichter Klick-Eindruck */
-#submitBtn:active,
-.kontakt-btn.submit:active {
-  transform: translateY(1px);
-  box-shadow: 0 1px 3px rgba(249,115,22,.3);
-}
-
-/* Disabled-State: gleiches Verhalten wie Zurück-Button */
-#submitBtn[disabled],
-.kontakt-btn.submit[disabled] {
-  opacity: .6;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-/* Damit der Button im letzten Step (Step 5) schön sitzt */
-.form-step[data-step="5"] .wizard-nav #submitBtn,
-.form-step[data-step="5"] .wizard-nav .kontakt-btn.submit {
-  width: 100%;
-  margin-top: .4rem;
-}
-
-/* === Typo-Konsistenz für alle Formular-Controls (alle Steps) === */
-.kontakt-form,
-.kontakt-form input,
-.kontakt-form textarea,
-.kontakt-form select,
-.kontakt-form button {
-  font-family: inherit;                 /* gleiche Schriftfamilie wie außen */
-  color: var(--input-text);
-  letter-spacing: .004em;
-  -webkit-font-smoothing: antialiased;  /* gleiche Glättung */
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Placeholder-Optik angleichen */
-.kontakt-form ::placeholder {
-  color: var(--placeholder);
-  opacity: 1;
-}
-
-/* Browser-Autofill angleichen (hell) */
-.kontakt-form input:-webkit-autofill,
-.kontakt-form textarea:-webkit-autofill,
-.kontakt-form select:-webkit-autofill {
-  -webkit-text-fill-color: var(--input-text);
-  transition: background-color 9999s ease-out, color 9999s ease-out;
-  box-shadow: 0 0 0 1000px var(--input-bg) inset !important; /* gleiche Input-Fläche */
-}
-
-/* Dark-Theme: Autofill leicht abdunkeln */
-:root[data-theme="dark"] .kontakt-form input:-webkit-autofill,
-:root[data-theme="dark"] .kontakt-form textarea:-webkit-autofill,
-:root[data-theme="dark"] .kontakt-form select:-webkit-autofill {
-  -webkit-text-fill-color: var(--input-text);
-  box-shadow: 0 0 0 1000px color-mix(in oklab, var(--input-bg) 92%, black 8%) inset !important;
-}
-
-/* === Step 5 gezielt an die gleiche Typo wie die restlichen Copy-Texte binden === */
-.form-step[data-step="5"] {
-  color: var(--text);
-  line-height: 1.55;                 /* wie .kontakt-area .copy */
-  letter-spacing: .004em;
-  font-size: clamp(1rem,.96rem + .35vw,1.12rem);
-}
-
-/* Labels in Step 5 wie überall: kräftig, aber sauber */
-.form-step[data-step="5"] .field label{
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  color: var(--aur-ink);
-}
-
-/* Inputs in Step 5: die Basis-Input-Styles behalten + gleiche Typo */
-.form-step[data-step="5"] .field input,
-.form-step[data-step="5"] .field textarea,
-.form-step[data-step="5"] .field select{
-  font-family: inherit;
-  font-size: 1rem;     /* konsistent zu deiner globalen Input-Regel */
-  line-height: 1.4;
-  color: var(--input-text);
-}
-
-/* Optional: Headline/Intro in Step 5 optisch angleichen (falls vorhanden) */
-.form-step[data-step="5"] .copy {
-  color: rgba(0,0,0,.92);
-  font-weight: 690;
-  letter-spacing: -0.002em;
-  font-size: clamp(1rem,.96rem + .35vw,1.12rem);
-}
-:root[data-theme="dark"] .form-step[data-step="5"] .copy {
-  color: rgba(255,255,255,.96);
-}
-/* =========================
-   MOBILE POLISH (≤ 600px)
-   ========================= */
+/* ≤1024px: mobiles Polish inkl. Safe Areas */
 @media (max-width:1024px){
-
-  /* 1) Sektion: saubere Abstände + Safe-Area */
   .kontakt-testimonial-section{
     padding:
       max(16px, calc(env(safe-area-inset-top,0) + 12px))
@@ -6548,527 +6977,111 @@ function grad(ctx,size){
       max(20px, calc(env(safe-area-inset-bottom,0) + 12px))
       max(16px, calc(env(safe-area-inset-left,0) + 12px));
   }
-
-  /* 2) Wrapper enger, damit die Karte visuell breiter wirkt */
-  .kontakt-testimonial-wrapper{
-    gap: clamp(12px, 4vw, 18px);
-  }
-
-  /* 3) Kontaktkarte: wieder "innen" gepolstert & volle Breite
-        (überschreibt dein früheres padding: 0 .6rem auf mobile) */
+  .kontakt-testimonial-wrapper{ gap:clamp(12px,4vw,18px); flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+  .kontakt-area, .video-area{ width:90%; max-width:1000px; margin-inline:auto; }
   .kontakt-area{
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    border-radius: 16px;
-    padding: clamp(14px, 4.5vw, 18px) !important;   /* mehr Innenabstand */
-    overflow: visible;                               /* nichts abschneiden */
+    width:100%; max-width:none; margin:0; border-radius:16px;
+    padding:clamp(14px,4.5vw,18px)!important; overflow:visible;
   }
+  .section-title{ font-size:clamp(1.7rem,4.6vw,2.1rem); margin:0 auto .6rem; }
+  .kontakt-form{ padding:0 .1rem; gap:.6rem; }
+  .form-step[data-step="1"] .grid-choices{ gap:.6rem; }
+  .form-step[data-step="1"] .grid-choices .choice{ padding:1rem .95rem; border-radius:16px; min-height:64px; position:relative; z-index:0; }
+  .form-step[data-step="1"]{ padding-top:.25rem; }
 
-  /* 4) Überschrift/Subline: nie abgeschnitten, genug Luft oben */
-  .kontakt-area .section-title{
-    margin-top: .2rem;
-    padding-top: .15rem;
-    line-height: 1.2;
-    overflow: visible;
-    word-break: normal;
-    hyphens: auto;
-    text-wrap: balance;
-  }
-  .kontakt-area .kontakt-subline{
-    margin-top: .35rem;
-  }
+  .stepper{ position:sticky; bottom:0; background:color-mix(in oklab,var(--surface) 95%, transparent); padding:.3rem .2rem .2rem; margin:.25rem -.2rem 0; border-radius:12px; }
+  .wizard-nav{ position:sticky; bottom:0; background:color-mix(in oklab,var(--surface) 95%, transparent); padding:.25rem .2rem .3rem; margin:.05rem -.2rem 0; border-radius:12px; }
+  .wizard-nav .nav-btn{ flex:1 1 auto; }
 
-  /* 5) Choice-Karten: größere Touch-Ziele, kein Clipping */
-  .form-step[data-step="1"] .grid-choices{
-    gap: .6rem;
-  }
-  .form-step[data-step="1"] .grid-choices .choice{
-    padding: 1rem .95rem;
-    border-radius: 16px;
-    min-height: 64px;
-    /* eigener stacking-context, damit Shadow oben/unten sichtbar bleibt */
-    position: relative;
-    z-index: 0;
-  }
-  .form-step[data-step="1"]{
-    padding-top: .25rem; /* extra Luft damit Schatten nicht "oben" anstößt */
-  }
+  .kontakt-form input, .kontakt-form select, .kontakt-form textarea{ padding:.95rem 1rem; font-size:1.02rem; }
 
-  /* 6) Sticky-Elemente: vermeiden visuelles „Drücken“ */
-  .stepper,
-  .wizard-nav{
-    margin-left: -2px;
-    margin-right: -2px;
-    border-radius: 12px;
-  }
+  .video-area{ width:100%; max-width:none; }
+  .video-area .video-card{ height:200px!important; min-height:200px!important; border-radius:16px; padding:0; }
+  .video-media{ object-fit:cover; object-position:center; }
 
-  /* 7) Formularfelder: Fingerfreundlich */
-  .kontakt-form input,
-  .kontakt-form select,
-  .kontakt-form textarea{
-    padding: 0.95rem 1rem;
-    font-size: 1.02rem; /* minimal größer für Lesbarkeit */
-  }
-
-  /* 8) Video-Karte: darunter, vollbreit, flacher */
-  .video-area{
-    width: 100%;
-    max-width: none;
-  }
-  .video-area .video-card{
-    height: 200px !important;
-    min-height: 200px !important;
-    border-radius: 16px;
-  }
-  .video-area .video-media{
-    object-fit: cover;
-    object-position: center;
-  }
-
-  /* 9) Step-5: einspaltig + gleiche Typo (falls noch überstimmt) */
-  .form-step[data-step="5"] .contact-grid{
-    grid-template-columns: 1fr;
-    gap: .65rem;
-  }
-  .form-step[data-step="5"]{
-    font-size: clamp(1rem, 1.5vw + .96rem, 1.1rem);
-    line-height: 1.55;
-  }
-  .form-step[data-step="5"] .field label{
-    font-weight: 800;
-    letter-spacing: -0.01em;
-  }
-
-  /* 10) Buttons: full-width, klare Hierarchie */
-  .wizard-nav .nav-btn{
-    flex: 1 1 auto;
-  }
-  #submitBtn,
-  .kontakt-btn.submit{
-    width: 100%;
-  }
+  .form-step[data-step="5"] .contact-grid{ grid-template-columns:1fr; gap:.65rem; }
+  .form-step[data-step="5"]{ font-size:clamp(1rem, 1.5vw + .96rem, 1.1rem); line-height:1.55; }
+  .form-step[data-step="5"] .field label{ font-weight:800; letter-spacing:-.01em; }
+  #submitBtn, .kontakt-btn.submit{ width:100%; }
 }
 
-/* Optional (≤ 380px, sehr kleine Phones): noch etwas mehr Luft oben */
+/* ≤600px: Video flacher */
+@media (max-width:600px){
+  .video-area{ flex:0 0 auto; align-self:stretch; }
+  .video-area .video-card{ height:180px!important; min-height:180px!important; aspect-ratio:auto!important; }
+  .video-area .video-media{ object-fit:cover; object-position:center; }
+}
+
+/* ≤380px: enge Phones */
 @media (max-width:380px){
-  .kontakt-area{
-    padding: 16px !important;
-  }
-  .kontakt-area .section-title{
-    font-size: clamp(1.5rem, 7vw, 1.9rem);
-  }
-}
-/* Step 5: immer linksbündig, egal ob die Karte mittig steht */
-.kontakt-area .form-step[data-step="5"]{
-  text-align: left !important;            /* überschreibt zentrierte Eltern */
+  .kontakt-area{ padding:16px!important; }
+  .kontakt-area .section-title{ font-size:clamp(1.5rem,7vw,1.9rem); }
 }
 
-.kontakt-area .form-step[data-step="5"] .contact-grid{
-  justify-items: stretch;
-  align-items: start;
+/* ≥700px: Spalten für Step 5 aktivieren */
+@media (min-width:700px){
+  .form-step[data-step="5"] .span-6{ grid-column:span 6; }
+  .form-step[data-step="5"] .span-4{ grid-column:span 4; }
+  .form-step[data-step="5"] .span-8{ grid-column:span 8; }
+}
+/* ≥1024px: etwas mehr Gap im Contact Grid */
+@media (min-width:1024px){
+  .form-step[data-step="5"] .contact-grid{ gap:.75rem; }
 }
 
-.kontakt-area .form-step[data-step="5"] .field,
-.kontakt-area .form-step[data-step="5"] .field label{
-  text-align: left !important;
-}
-
-.kontakt-area .form-step[data-step="5"] .field input,
-.kontakt-area .form-step[data-step="5"] .field select,
-.kontakt-area .form-step[data-step="5"] .field textarea{
-  text-align: left;                        /* auch Inhalt/Placeholder links */
-}
-
-/* falls du irgendwo text-centring auf .wizard-nav hast: nur Buttons mittig lassen */
-.kontakt-area .form-step[data-step="5"] + .wizard-nav{
-  text-align: left;                        /* Navigation linksbündig (optional) */
-}
-/* === Step 5: "Senden"-Button immer linksbündig, auch wenn Karte mittig steht === */
-
-/* sorgt dafür, dass das Nav-Element selbst links ausgerichtet ist */
-.kontakt-area .form-step[data-step="5"] + .wizard-nav {
-  display: flex !important;
-  justify-content: flex-start !important;  /* Button-Leiste links ausrichten */
-  text-align: left !important;
-  width: 100%;
-}
-
-/* "Senden"-Button linksbündig halten, nicht zentrieren */
-.kontakt-area .form-step[data-step="5"] + .wizard-nav #submitBtn,
-.kontakt-area .form-step[data-step="5"] + .wizard-nav .kontakt-btn.submit {
-  justify-content: flex-start !important;
-  align-self: flex-start !important;
-  margin-left: 0 !important;
-  margin-right: auto !important;
-  width: auto !important;          /* verhindert full-width */
-  min-width: 160px;
-}
-
-/* Falls du den Zurück-Button daneben hast → schöner Abstand */
-.kontakt-area .form-step[data-step="5"] + .wizard-nav .nav-btn:not(#submitBtn) {
-  margin-right: .6rem;
-}
-
-.legal-hint{
-  font-size:.85rem; line-height:1.45;
-  color:#666; margin:.4rem 0 .2rem;
-}
-.legal-hint a{ color:inherit; text-decoration:underline; }
-:root[data-theme="dark"] .legal-hint{ color:#c6cad1; }
-
-/* Pflichtfeld-Kennzeichnung */
-label.req::after{
-  content:" *";
-  color:#b00020;
-  font-weight:900;
-}
-.req-note{
-  font-size:.85rem; color:#666; margin:.2rem 0 .4rem;
-}
-:root[data-theme="dark"] .req-note{ color:#c6cad1; }
-
-/* =======================================
-   Ganze Pill grün, wenn angeklickt
-   ======================================= */
-.pill input[type="checkbox"]:checked ~ span,
-.pill input[type="checkbox"]:checked ~ * {
-  background: var(--pill-green);
-  color: var(--pill-green-ink);
-  border-color: var(--pill-green);
-  box-shadow: 0 6px 18px rgba(0,200,81,.25);
-}
-
-/* ===== Fix: 680px–1024px -> Karten nicht mehr vertikal strecken ===== */
-@media (max-width:1024px) and (min-width:680px){
-  .kontakt-testimonial-wrapper{
-    flex-direction: column;      /* wie bei dir vorgesehen */
-    align-items: center;
-  }
-
-  /* wichtig: kein flex:1 im Spaltenlayout -> sonst wird Höhe aufgeblasen */
-  .kontakt-area,
-  .video-area{
-    flex: 0 0 auto !important;   /* nicht strecken */
-    width: min(92vw, 780px);     /* hübsche Breite */
-    height: auto !important;
-    margin-inline: auto;
-  }
-
-  /* Videokarte nicht künstlich hochziehen */
-  .video-area .video-card{
-    height: auto !important;
-    min-height: 280px;           /* angenehme Untergrenze */
-    aspect-ratio: 16 / 9;        /* hält das Video kompakt */
-  }
-
-  /* Optional: innen etwas kompakter, damit die Kontaktkarte nicht „luftig“ wirkt */
-  .kontakt-area{
-    padding: clamp(14px, 2.2vw, 20px) !important;
-  }
-}
-/* --- A) SOLO: Kontaktkarte alleine & breiter -------------------- */
-/* <section id="kontakt" class="kontakt-testimonial-section variant-solo"> */
+/* ==============================
+   VARIANTEN
+   ============================== */
+/* Solo-Variante: Kontaktkarte breit, Video ausgeblendet */
 @media (min-width:840px) and (max-width:1148px){
-  #kontakt.variant-solo .kontakt-testimonial-wrapper{
-    flex-direction: column;
-    align-items: center;
-    gap: clamp(16px, 2.5vw, 24px);
-  }
-  #kontakt.variant-solo .kontakt-area{
-    flex: 0 0 auto !important;
-    width: min(96vw, 980px);
-    max-width: 100%;
-    margin-inline: auto;
-  }
-  /* Video bewusst ausblenden (oder nach unten verlagern) */
-  #kontakt.variant-solo .video-area{
-    display: none;               /* oder: display:block;width:min(92vw,720px) */
-  }
-}
-/* ===== HERO-KARTE (Step 1, volle Breite, invertierte Schrift je Theme) ===== */
-.grid-choices.single { grid-template-columns: 1fr; }
-.grid-choices.single .choice.hero { width: 100%; }
-
-.wf-card.hero{
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;           /* alles mittig */
-  text-align: center;
-  gap: .55rem;
-  padding: clamp(1.1rem, 3.2vw, 2rem);
-  border-radius: 16px;
-  border: 2px solid transparent;
-  isolation: isolate;
-
-  /* Light (White Mode): weiße Schrift auf dunkler Fläche */
-  color: #fff;
-  background:
-    radial-gradient(80% 80% at 20% 0%, rgba(0,200,81,.22), transparent 60%),
-    linear-gradient(180deg, #0f1729, #111827);
-  box-shadow: 0 10px 30px rgba(0,0,0,.18), inset 0 0 0 1px rgba(255,255,255,.06);
+  #kontakt.variant-solo .kontakt-testimonial-wrapper{ flex-direction:column; align-items:center; gap:clamp(16px,2.5vw,24px); }
+  #kontakt.variant-solo .kontakt-area{ flex:0 0 auto!important; width:min(96vw,980px); max-width:100%; margin-inline:auto; }
+  #kontakt.variant-solo .video-area{ display:none; }
 }
 
-/* Dark Mode: schwarze Schrift auf heller Fläche */
-:root[data-theme="dark"] .wf-card.hero{
-  color: #000;
-  background:
-    radial-gradient(80% 80% at 80% 0%, rgba(0,200,81,.10), transparent 60%),
-    linear-gradient(180deg, #fff, #f7f8fa);
-  box-shadow: 0 10px 30px rgba(0,0,0,.06), inset 0 0 0 1px rgba(0,0,0,.06);
-  border-color: var(--border);
+/* ==============================
+   PREFERENCES
+   ============================== */
+@media (prefers-reduced-motion:reduce){
+  .kontakt-btn, .stepper-fill{ animation:none!important; transition:none!important; }
+}
+/* Hero-Karte bleibt grün, sobald ausgewählt */
+#wfTimer{} /* nur damit der Block nicht ganz oben landet */
+
+/* 1) Weiß nur anwenden, wenn NICHT selected */
+.wf-card.hero:not(.selected){
+  background:#fff!important;
+  color:#0b0c0e!important;
+}
+:root[data-theme="dark"] .wf-card.hero:not(.selected){
+  background:#000!important;
+  color:#f5f7fa!important;
 }
 
-/* Typo & Details innerhalb der Hero-Karte */
-.wf-card.hero .wf-card-head{ display:flex; gap:.5rem; align-items:center; justify-content:center; flex-wrap:wrap; }
-.wf-card.hero .title{ font-weight:1000; letter-spacing:-.02em; font-size:clamp(1.25rem,1.05rem + 1.4vw,1.9rem); }
-.wf-card.hero small{ opacity:.95; font-weight:700; }
-.wf-card.hero .wf-badge{
-  font-weight:1000; padding:.25rem .55rem; border-radius:999px; line-height:1;
-  background: rgba(255,255,255,.16); color: currentColor; border: 1px solid rgba(255,255,255,.25);
-}
-:root[data-theme="dark"] .wf-card.hero .wf-badge{
-  background: rgba(0,0,0,.06); border-color: rgba(0,0,0,.12);
-}
-
-/* Inline-CTA als dezenter Outline-Button mittig */
-.wf-card.hero .cta-inline{
-  margin-top:.2rem; font-weight:900; border-radius:12px; padding:.7rem 1rem;
-  background: transparent; color: currentColor; border:2px solid currentColor; cursor:pointer;
-}
-.wf-card.hero .cta-inline:hover{ transform: translateY(-1px); }
-.wf-card.hero .cta-inline:active{ transform: translateY(0); }
-
-/* Fokus & Hover */
-.wf-card.hero:hover{ box-shadow: 0 0 0 4px color-mix(in oklab, var(--choice-green) 22%, transparent), 0 10px 30px rgba(0,0,0,.18); }
-.wf-card.hero:focus-visible{
-  outline: none;
-  box-shadow: 0 0 0 4px color-mix(in oklab, var(--choice-green) 40%, transparent), 0 10px 30px rgba(0,0,0,.18);
-}
-/* === HERO Farbschema: White Mode = weiße Karte / schwarze Schrift === */
-.wf-card.hero{
-  background: #fff !important;
-  color: #0b0c0e !important;
-  border: 2px solid var(--border);
-  padding-block: clamp(1.2rem, 2.4vw, 2rem) clamp(1rem, 2vw, 1.6rem);
-  text-align: center;
+/* 2) Selected gewinnt gegen alle Hover/Focus-States */
+#choiceWire.selected,
+#choiceWire.selected:hover,
+#choiceWire.selected:active,
+#choiceWire.selected:focus,
+#choiceWire.selected:focus-visible,
+#choiceWire.selected:focus-within{
+  background:var(--pill-green)!important;
+  color:#fff!important;
+  border-color:var(--pill-green)!important;
+  box-shadow:0 6px 18px rgba(0,200,81,.25)!important;
 }
 
-/* Dark Mode: schwarze Karte / weiße Schrift */
-:root[data-theme="dark"] .wf-card.hero{
-  background: #000 !important;
-  color: #f5f7fa !important;
-  border: 2px solid var(--border);
-}
-
-/* Badge: oben rechts, sehr groß, KEIN Hintergrund/Outline */
-.wf-card.hero { position: relative; }
-.wf-card.hero .wf-badge{
-  position: absolute;
-  top: clamp(8px, 1vw, 14px);
-  right: clamp(8px, 1vw, 14px);
-  padding: 0;                      /* kein Pill-Style */
-  border: none !important;         /* kein Outline */
-  background: none !important;     /* kein Hintergrund */
-  box-shadow: none !important;
-  color: currentColor;             /* folgt Textfarbe der Karte */
-  font-weight: 1000;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  font-size: clamp(1.6rem, 1rem + 3vw, 3rem);
-}
-
-/* Headline/Copy: straffer Satz, mehr „Punch“ nach oben */
-.wf-card.hero .wf-card-head{
-  display: flex; flex-direction: column; align-items: center; gap: .35rem;
-  padding-right: clamp(56px, 5.5vw, 80px); /* Platz für große Badge */
-}
-.wf-card.hero .title{
-  margin: .05rem 0 0;
-  font-weight: 1000;
-  letter-spacing: -0.022em;
-  line-height: 1.08;  /* mehr Druck nach oben */
-  font-size: clamp(1.4rem, 1.05rem + 1.7vw, 2.1rem);
-}
-.wf-card.hero small{
-  font-weight: 760;
-  opacity: .95;
-  letter-spacing: .003em;
-  line-height: 1.24;
-  font-size: clamp(.96rem, .9rem + .35vw, 1.08rem);
-}
-
-/* CTA: ohne Pfeil, klare Primary-Optik */
-.wf-card.hero .cta-inline{
-  margin-top: .4rem;
-  padding: clamp(.9rem, .7rem + .6vw, 1.05rem) clamp(1rem, .8rem + 1vw, 1.35rem);
-  border-radius: 14px;
-  font-weight: 950;
-  font-size: clamp(1rem, .92rem + .4vw, 1.15rem);
-  letter-spacing: .004em;
-  border: none;
-  cursor: pointer;
-  display: inline-flex; align-items: center; justify-content: center;
-  background: var(--choice-green);
-  color: var(--choice-ink);
-  box-shadow: 0 10px 22px color-mix(in oklab, var(--choice-green) 35%, transparent), inset 0 1px 0 rgba(255,255,255,.25);
-  transition: transform .06s ease, box-shadow .15s ease, filter .15s ease;
-}
-
-
-/* Mobile: Badge-Platz freihalten */
-@media (max-width:560px){
-  .wf-card.hero .wf-card-head{ padding-right: 60px; }
-}
-/* === Hero-Karte Feintuning === */
-
-/* Karte selbst 1rem weiter unten */
-.wf-card.hero{
-  margin-top: 1rem; /* Abstand nach oben */
-}
-
-/* Headline ("Kostenloses Wireframe sichern") etwas kleiner und feiner abgestimmt */
-.wf-card.hero .title{
-  font-size: clamp(1.1rem, 0.9rem + 1.1vw, 1.55rem); /* vorher bis ~2.1rem */
-  font-weight: 950;
-  letter-spacing: -0.015em;
-  line-height: 1.15;
-  margin-top: .1rem;
-}
-
-/* Abstand zur Subline leicht erhöhen */
-.wf-card.hero small{
-  margin-top: .15rem;
-}
-/* =========================
-   1) FOKUS: ganze Flächen highlighten
-   ========================= */
-
-/* Hero-/Choice-Karten: sichtbarer Fokus (Tab + Klick) */
-.choice:focus-visible,
-.choice:focus-within{
-  outline: none;
-  border-color: var(--choice-green) !important;
-  box-shadow:
-    0 0 0 4px color-mix(in oklab, var(--choice-green) 45%, transparent),
-    0 8px 24px rgba(0,200,81,.15) !important;
-  background: color-mix(in oklab, var(--choice-green) 12%, var(--surface) 88%);
-}
-
-/* Speziell die Hero-Karte beim Fokus */
-.wf-card.hero:focus-visible,
-.wf-card.hero:focus-within{
-  outline: none;
-  border-color: var(--choice-green) !important;
-  box-shadow:
-    0 0 0 4px color-mix(in oklab, var(--choice-green) 45%, transparent),
-    0 10px 28px rgba(0,200,81,.18) !important;
-  background: color-mix(in oklab, var(--choice-green) 10%, currentColor 0%, transparent) !important;
-}
-
-
-/* Wenn Pill aktiv ausgewählt ist, Fokusring bleibt klar sichtbar */
-.pill.selected:focus-visible,
-.pill.selected:focus-within{
-  box-shadow:
-    0 0 0 4px color-mix(in oklab, var(--pill-green) 55%, transparent),
-    0 8px 22px rgba(0,200,81,.25) !important;
-}
-
-/* Radios/Checkboxen selbst unsichtbar, aber Fokus überträgt sich */
-.choice input[type="radio"]:focus-visible + *,
-.pill input[type="checkbox"]:focus-visible + *{
-  outline: none;
-}
-
-/* Maus-Hover darf Fokus nicht „verdrängen“ */
-.choice:hover,
-.pill:hover{
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--choice-green) 25%, transparent);
-}
-/* =========================
-   2) DARK MODE – Step 5 (Name / E-Mail / Kurz dein Ziel)
-   ========================= */
-
-/* Labels wirklich hell */
-:root[data-theme="dark"] .form-step[data-step="5"] .field label{
-  color: #f5f7fa !important;
-}
-
-/* Eingabetext & Ränder hell lesbar */
-:root[data-theme="dark"] .form-step[data-step="5"] input,
-:root[data-theme="dark"] .form-step[data-step="5"] textarea,
-:root[data-theme="dark"] .form-step[data-step="5"] select{
-  color: #f5f7fa !important;
-  background: var(--input-bg) !important;
-  border-color: var(--border) !important;
-  caret-color: #f5f7fa;
-}
-
-/* Placeholder gut sichtbar */
-:root[data-theme="dark"] .form-step[data-step="5"] ::placeholder{
-  color: var(--placeholder) !important;   /* bereits hell definiert */
-  opacity: 1;
-}
-
-/* Fehlermeldungen im Dark Mode kontrastreich */
-:root[data-theme="dark"] .form-step[data-step="5"] .field .field-error{
-  color: #ffb4c0 !important;
-}
-
-/* Hinweise/kleine Texte in Step 5 auf hell */
-:root[data-theme="dark"] .form-step[data-step="5"] .req-note,
-:root[data-theme="dark"] .form-step[data-step="5"] ~ .legal-hint{
-  color: #e6e9ee !important;
-}
-
-/* === Fokus-States sollen die GANZE Fläche grün machen === */
-
-
-
-/* Pill-Tags vollgrün bei Fokus */
-.pill:focus-visible,
-.pill:focus-within{
-  outline: none;
-  background: var(--pill-green) !important;
-  color: var(--pill-green-ink) !important;
-  border-color: var(--pill-green) !important;
-  box-shadow:
-    0 0 0 4px color-mix(in oklab, var(--pill-green) 45%, transparent),
-    0 8px 22px rgba(0,200,81,.22) !important;
-}
-
-/* Date/Time-Picker nebeneinander */
-.deadline-grid{ display:grid; grid-template-columns:1fr 1fr; gap:.5rem; }
-@media (max-width:540px){ .deadline-grid{ grid-template-columns:1fr; } }
-
-/* Fehlermeldung unter den Pickern konsistent */
-#deadlineRow .field-error{ margin-top:.25rem; }
-/* Dauerhaft grün, wenn Karte ausgewählt wurde */
-#choiceWire.selected {
-  background: var(--pill-green);
-  color: #fff; /* Weißer Text */
-  border-color: var(--pill-green);
-  box-shadow: 0 6px 18px rgba(0, 200, 81, .25);
-}
-
-/* Optional: Textfarben innerhalb der Karte anpassen */
-#choiceWire.selected h3,
-#choiceWire.selected p,
-#choiceWire.selected .btn {
-  color: #fff;
-}
-
-/* Falls ein Button drin ist, auf invertiertes Design achten */
-#choiceWire.selected .btn {
-  background: #fff;
-  color: var(--pill-green-ink);
-  border: none;
+/* 3) Inhalte in der ausgewählten Karte auch weiß halten */
+#choiceWire.selected .title,
+#choiceWire.selected small,
+#choiceWire.selected .wf-badge{
+  color:#fff!important;
+  text-shadow:0 1px 1px rgba(0,0,0,.12);
 }
 
 
 </style>
+
 <script>
 (function () {
   const form = document.getElementById('kontaktForm');
