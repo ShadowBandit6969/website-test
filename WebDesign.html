@@ -2460,460 +2460,30 @@ body[data-page="webdesign"] .hero-image-foreground {
   </div>
 </section>
 <style>
-:root{
-  --zen-base:#ffffff; --zen-alt:#f7f7f7; --zen-ink:#0b0c0e; --zen-muted:#5f6368; --zen-border:#e6e6e6; --zen-shadow:0 10px 26px rgba(0,0,0,.08);
-  --zen-maxw: 1200px;
-  --zen-gap: clamp(.9rem, 2.5vw, 1.6rem);
-  --zen-slides: 1;
-  --zen-speed: 420ms;
-  --zen-bleed: clamp(10px, 1.8vw, 16px);
-}
-
-@media (min-width:700px){ :root{ --zen-slides:2; } }
-@media (min-width:1024px){ :root{ --zen-slides:3; } }
-
-:root[data-theme="dark"]{
-  --zen-base:#000; --zen-alt:#0e0f12; --zen-ink:#fff; --zen-muted:#c6cad1; --zen-border:#1f1f1f; --zen-shadow:0 16px 38px rgba(0,0,0,.5);
-}
-
-.zen-vault{
-  padding: clamp(2rem, 5vw, 5.5rem) clamp(1rem, 4vw, 2rem);
-  background: transparent !important; /* Hintergrund raus */
-  color: var(--zen-ink);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
-
-/* Slider */
-.zen-slider{ max-width: min(var(--zen-maxw), 100%); margin: 0 auto; position: relative; }
-.zen-viewport{ overflow: hidden; width:100%; padding: var(--zen-bleed); margin: calc(var(--zen-bleed) * -1); }
-.zen-track{ display:flex; gap:var(--zen-gap); will-change:transform; transform:translate3d(0,0,0); position:relative; }
-
-/* Mobile = Grid */
-@media (max-width:699.98px){
-  .zen-viewport{ overflow: visible; padding: 0; margin: 0; }
-  .zen-track{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(320px,100%), 1fr));
-    gap:var(--zen-gap);
-    transform:none !important;
-  }
-}
-
-/* Card + Glass */
-.zen-card{
-  flex:0 0 calc((100% - var(--zen-gap) * (var(--zen-slides) - 1)) / var(--zen-slides));
-  border:1px solid rgba(255,255,255,.28);
-  border-radius:18px;
-  background: linear-gradient(180deg, rgba(255,255,255,.4), rgba(255,255,255,.18));
-  backdrop-filter: saturate(160%) blur(14px);
-  -webkit-backdrop-filter: saturate(160%) blur(14px);
-  box-shadow: 0 10px 10px rgba(0,0,0,.12);
-  overflow:hidden;
-  position: relative;
-  z-index: 0;
-  transition:
-    transform .22s cubic-bezier(.2,.7,.2,1),
-    box-shadow .22s ease,
-    filter .22s ease,
-    z-index 0s step-end;
-  will-change: transform, box-shadow, filter;
-  opacity: 0;              /* für Fade-In/Out */
-  transform: translateY(8px) scale(.995);
-}
-:root[data-theme="dark"] .zen-card{
-  border-color: rgba(255,255,255,.12);
-  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-}
-
-/* Reveal (schöner Fade in) via IO */
-.zen-card.is-in{
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  transition:
-    opacity .38s ease,
-    transform .44s cubic-bezier(.2,.7,.2,1),
-    box-shadow .22s ease;
-}
-/* leichter Fade-Out wenn Karte den Viewport verlässt */
-.zen-card.is-out{
-  opacity: .75;
-  filter: saturate(.9);
-}
-
-/* Hover/Fokus: größer + schwarze Umrandung */
-@media (hover:hover){
-  .zen-card:hover{
-    transform: scale(1.03);
-    box-shadow:
-      0 26px 64px rgba(0,0,0,.22),
-      0 6px 18px rgba(0,0,0,.12),
-      0 0 0 2px #000; /* schwarze Umrandung */
-    z-index: 5;
-    transition:
-      transform .22s cubic-bezier(.2,.7,.2,1),
-      box-shadow .22s ease,
-      z-index 0s step-start;
-  }
-}
-.zen-card:focus-within{
-  transform: scale(1.03);
-  box-shadow:
-    0 26px 64px rgba(0,0,0,.22),
-    0 6px 18px rgba(0,0,0,.12),
-    0 0 0 2px #000;
-  z-index: 5;
-}
-
-/* Header-Zeile (Zitat) */
-.zen-toggle{
-  width:100%; border:0; background:none; cursor: default;
-  padding: clamp(1rem, 2.4vw, 1.3rem) clamp(1rem, 3vw, 1.6rem) .2rem;
-  display:block; text-align:left;
-}
-.zen-quote{
-  display:block;
-  font-weight:800;
-  line-height:1.3;
-  font-size: clamp(1.08rem, 1rem + .7vw, 1.4rem);
-  padding-left: .9rem;
-  position:relative;
-  word-break: normal;
-  overflow-wrap: anywhere;
-  hyphens: auto;
-  text-wrap: balance;
-}
-.zen-quote::before{
-  content: "“";
-  position:absolute; left:0; top:-.1rem;
-  font-weight:900;
-  font-size: 1.6em;
-  line-height:1;
-  opacity:.22;
-}
-
-/* Inhalt */
-.zen-drop{
-  max-height:none !important;
-  padding: .15rem clamp(1rem, 3vw, 1.6rem) 1rem;
-}
-
-/* Meta: Sterne unter die Bewertung */
-.zen-meta{
-  display:grid;
-  grid-template-columns: 1fr auto;         /* links: Bewertung/Sterne, rechts: Autor */
-  grid-auto-rows: auto;
-  align-items:center;
-  column-gap:.75rem;
-  row-gap:.25rem;
-  margin: .25rem 0 .2rem;
-  padding: .35rem 0;
-}
-.zen-rating{
-  font-weight:800;
-}
-.zen-stars{
-  grid-column: 1 / 2;                      /* unter der Bewertung */
-  margin-top: .1rem;
-  letter-spacing:.08em;
-  line-height: 1;
-  user-select:none;
-  white-space: normal;
-}
-.zen-stars .zen-star-half{ opacity:.4; }
-.zen-author{
-  grid-column: 2 / 3;
-  justify-self:end;
-  font-weight:700;
-  white-space: normal;
-  text-align:right;
-}
-
-/* Fließtext */
-.zen-text{
-  margin:0;
-  padding:.5rem 0 0;
-  line-height:1.75;
-  font-weight:500;
-  text-wrap:pretty;
-  border-top: 1px solid color-mix(in oklab, var(--zen-ink) 15%, transparent);
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .zen-card{ transition:none !important; opacity:1 !important; transform:none !important; }
-}
-
-/* Sehr kleine Viewports: Autor in eigene Zeile */
-@media (max-width: 360px){
-  .zen-meta{
-    grid-template-columns: 1fr;
-  }
-  .zen-author{
-    grid-column: 1 / -1;
-    justify-self:start;
-    text-align:left;
-  }
-}
-
-@media (max-width:699.98px){
-  /* ... dein bestehendes Mobile-CSS ... */
-
-  /* Nur die ersten 3 Rezensionen anzeigen */
-  .zen-track .zen-card:nth-of-type(n + 4){
-    display: none !important;
-  }
-}
-/* Hover unten nicht abschneiden (ab Tablet) */
-@media (min-width:700px){
-  .zen-viewport{
-    overflow: visible; /* statt hidden */
-    /* unten etwas mehr Platz geben und außenrum kompensieren */
-    padding-bottom: calc(var(--zen-bleed) + 18px);
-    margin-bottom:  calc(var(--zen-bleed) * -1 - 18px);
-  }
-
-  /* Wachstum nach oben verlagern, damit es noch seltener unten kollidiert */
-  .zen-card{ transform-origin: 50% 35%; }
-}
-
-/* Optional: beim Hover leicht anheben */
-@media (hover:hover) and (min-width:700px){
-  .zen-card:hover{
-    transform: translateY(-8px) scale(1.03);
-  }
-}
- .zen-card:hover{
-    transform: translateY(-6px) scale(1.02);
-    box-shadow:
-      0 10px 14px rgba(0,0,0,.10),
-      0 4px 10px rgba(0,0,0,.06);
-  }
-
-/* Standardzustand: kräftige schwarze Linie */
-.zen-card{
-  border: 2px solid rgba(0,0,0,.55);
-  box-shadow: none;
-  transition:
-    transform .22s cubic-bezier(.2,.7,.2,1),
-    border-color .25s ease,
-    box-shadow .25s ease;
-}
-
-/* Hover/Fokus: stärkerer Kontrast + leicht angehoben */
-@media (hover:hover){
-  .zen-card:hover,
-  .zen-card:focus-within{
-    transform: translateY(-6px);
-    border-color: rgba(0,0,0,.9);
-    box-shadow:
-      0 10px 22px rgba(0,0,0,.22),
-      0 4px 8px rgba(0,0,0,.15);
-    z-index: 5;
-  }
-}
-/* ===== Verbesserungen: Farben, Sterne, Layout, Hover ===== */
-:root{
-  --zen-accent: #34c759;            /* Grün für Sterne (iOS-Grün) */
-  --zen-accent-dark: #30d158;       /* Grün in Dark Mode */
-}
-:root[data-theme="dark"]{
-  --zen-accent: var(--zen-accent-dark);
-}
-
-/* Kartenlayout straffer & konsistent */
-.zen-card{
-  display:flex;
-  flex-direction:column;
-  border: 2px solid rgba(0,0,0,.55) !important;  /* klare schwarze Umrandung */
-  border-radius: 20px;
-  box-shadow: none !important;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.5), rgba(255,255,255,.2));
-  backdrop-filter: saturate(160%) blur(14px);
-  -webkit-backdrop-filter: saturate(160%) blur(14px);
-  transform-origin: 50% 35%;
-}
-:root[data-theme="dark"] .zen-card{
-  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-  border-color: rgba(255,255,255,.65) !important;
-}
-
-/* Header/Quote kompakter & lesbarer */
-.zen-toggle{
-  cursor: default;
-  padding: clamp(1rem, 2.2vw, 1.25rem) clamp(1rem, 2.6vw, 1.4rem) .2rem;
-}
-.zen-quote{
-  font-weight: 800;
-  line-height: 1.25;
-  font-size: clamp(1.05rem, .9rem + .7vw, 1.35rem);
-  padding-left: 1rem;
-  text-wrap: balance;
-}
-.zen-quote::before{
-  left: 0;
-  top: -.12rem;
-  font-size: 1.55em;
-  opacity: .22;
-}
-
-/* Content spacing */
-.zen-drop{
-  padding: .25rem clamp(1rem, 2.6vw, 1.4rem) 1rem;
-}
-.zen-text{
-  margin:0;
-  padding:.6rem 0 0;
-  line-height: 1.7;
-  border-top: 1px solid color-mix(in oklab, var(--zen-ink) 18%, transparent);
-}
-
-/* Meta-Row: stabil & kompakt */
-.zen-meta{
-  display:grid;
-  grid-template-columns: 1fr auto;
-  align-items:center;
-  column-gap:.75rem;
-  row-gap:.2rem;
-  margin:.35rem 0 .1rem;
-  padding:.25rem 0;
-}
-.zen-rating{ font-weight: 800; }
-.zen-author{
-  justify-self:end;
-  font-weight:700;
-  opacity:.9;
-}
-
-/* ★ Sterne grün */
-.zen-stars{
-  grid-column: 1 / 2;
-  margin-top:.1rem;
-  letter-spacing:.08em;
-  line-height:1;
-  user-select:none;
-  color: var(--zen-accent) !important;        /* alle Sterne grün */
-  text-shadow: 0 0 .01em currentColor;        /* knackiger Kantenrender */
-}
-.zen-stars .zen-star-half{
-  opacity:.45;                                 /* halber Stern = leichter */
-}
-
-/* Mobile: nur 3 Rezensionen (wie gewünscht) */
-@media (max-width:699.98px){
-  .zen-track .zen-card:nth-of-type(n + 4){
-    display:none !important;
-  }
-}
-
-/* Hover unten nicht abschneiden (ab Tablet) */
-@media (min-width:700px){
-  .zen-viewport{
-    overflow: visible; 
-    padding-bottom: calc(var(--zen-bleed) + 18px);
-    margin-bottom:  calc(var(--zen-bleed) * -1 - 18px);
-  }
-}
-
-/* Interaktion: dezente, hochwertige Bewegung + stärkere Outline beim Hover/Focus */
-@media (hover:hover) and (min-width:700px){
-  .zen-card:hover,
-  .zen-card:focus-within{
-    transform: translateY(-6px) scale(1.01);
-    border-color: rgba(0,0,0,.9) !important;          /* deutlicher Rand */
-    box-shadow:                                       /* sanfter Depth-Effekt */
-      0 10px 22px rgba(0,0,0,.16),
-      0 4px 8px rgba(0,0,0,.10) !important;
-    z-index: 5;
-  }
-}
-
-/* Tastaturfokus sichtbar (A11y) */
-.zen-card:focus-within{
-  outline: 2px solid color-mix(in oklab, var(--zen-ink) 85%, transparent);
-  outline-offset: 2px;
-}
-
-/* Tablet/Desktop: keine starken Grundschatten – Flat Look; nur Hover arbeitet */
-@media (min-width:700px){
-  .zen-card{ box-shadow: none !important; }
-}
-
-/* Immer 3 Karten pro View ab Tablet */
-@media (min-width:700px){
-  :root{ --zen-slides: 3; }
-  .zen-viewport{
-    overflow: hidden;                 /* andere Karten unsichtbar */
-    padding-bottom: var(--zen-bleed); /* etwas Luft unten */
-    margin-bottom: calc(var(--zen-bleed) * -1);
-  }
-}
-
-/* Mobile: weiter wie gehabt – nur die ersten 3 überhaupt zeigen */
-@media (max-width:699.98px){
-  .zen-viewport{ overflow: visible; padding: 0; margin: 0; }
-  .zen-track{
-    display:grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr)); /* genau 3 Karten */
-    gap:var(--zen-gap);
-    transform:none !important;
-  }
-  .zen-track .zen-card:nth-of-type(n + 4){ display:none !important; }
-}
-
-@media (hover:hover) and (min-width:700px){
-  .zen-card:hover,
-  .zen-card:focus-within{
-    transform: translateY(-4px) scale(1.005); /* minimaler Scale */
-    box-shadow: 0 8px 16px rgba(0,0,0,.12);
-  }
-}
-/* konsistent messen */
-.zen-slider, .zen-viewport, .zen-track, .zen-card { box-sizing: border-box; }
-
-/* ab 700px: links/rechts kein Padding, nur unten (wie gewollt) */
-@media (min-width:700px){
-  .zen-viewport{
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-}
-@media (min-width:700px){
-  .zen-viewport{
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-}
-
-/* ======= Zen Slider – fully responsive ======= */
+/* ================== Variablen ================== */
 :root{
   --zen-base:#ffffff; --zen-alt:#f7f7f7; --zen-ink:#0b0c0e; --zen-muted:#5f6368; --zen-border:#e6e6e6; --zen-shadow:0 10px 26px rgba(0,0,0,.08);
   --zen-accent:#34c759; --zen-accent-dark:#30d158;
 
   --zen-maxw: 1200px;
+  --zen-stage: 1500px;      /* max. Bühnenbreite */
+  --zen-gutter: 2rem;       /* Außenabstand */
   --zen-gap: clamp(.9rem, 2.5vw, 1.6rem);
-  --zen-slides: 1;                 /* default */
+  --zen-slides: 1;
   --zen-speed: 420ms;
   --zen-bleed: clamp(10px, 1.8vw, 16px);
 }
-
-/* Dark theme */
 :root[data-theme="dark"]{
   --zen-base:#000; --zen-alt:#0e0f12; --zen-ink:#fff; --zen-muted:#c6cad1; --zen-border:#1f1f1f; --zen-shadow:0 16px 38px rgba(0,0,0,.5);
   --zen-accent: var(--zen-accent-dark);
 }
 
-/* Slides per View – feinere Stufen */
-@media (min-width:480px){ :root{ --zen-slides: 1; } }
+/* Slides per View */
 @media (min-width:700px){ :root{ --zen-slides: 2; } }
-@media (min-width:900px){ :root{ --zen-slides: 2; } }
 @media (min-width:1024px){ :root{ --zen-slides: 3; } }
-@media (min-width:1280px){ :root{ --zen-slides: 3; } }
-@media (min-width:1536px){ :root{ --zen-slides: 4; } }   /* extra groß: 4 pro View */
+@media (min-width:1536px){ :root{ --zen-slides: 4; } }
 
-/* Wrapper */
+/* ================== Layout Wrapper ================== */
 .zen-vault{
   padding: clamp(2rem, 5vw, 5.5rem) clamp(1rem, 4vw, 2rem);
   background: transparent !important;
@@ -2921,82 +2491,91 @@ body[data-page="webdesign"] .hero-image-foreground {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Slider */
-.zen-slider{ max-width: min(var(--zen-maxw), 100%); margin: 0 auto; position: relative; }
-.zen-viewport{ overflow: hidden; width:100%; padding: var(--zen-bleed); margin: calc(var(--zen-bleed) * -1); }
-.zen-track{ display:flex; gap:var(--zen-gap); will-change:transform; transform:translate3d(0,0,0); position:relative; }
-
-/* Mobile: Grid/Fallback ohne Translate (nichts wird abgeschnitten) */
-@media (max-width:699.98px){
-  .zen-viewport{ overflow: visible; padding: 0; margin: 0; }
-  .zen-track{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(320px,100%), 1fr));
-    gap:var(--zen-gap);
-    transform:none !important;
-    width:100% !important;
-  }
-  /* Optional: nur erste 3 Testimonials zeigen */
-  .zen-track .zen-card:nth-of-type(n + 4){ display: none !important; }
+/* feste Außenränder + Stage-Zentrierung */
+#zen-faq.zen-vault{
+  padding-left:  max(var(--zen-gutter), env(safe-area-inset-left));
+  padding-right: max(var(--zen-gutter), env(safe-area-inset-right));
 }
 
-/* Card + Glass */
+/* ================== Slider Grundstruktur ================== */
+.zen-slider{
+  max-width: min(var(--zen-maxw), 100%);
+  margin-inline: auto;
+  position: relative;
+}
+#zen-faq .zen-slider{
+  max-width: var(--zen-stage);
+}
+
+.zen-viewport{
+  overflow: hidden;
+  width:100%;
+  padding: var(--zen-bleed);
+  margin: calc(var(--zen-bleed) * -1);
+}
+
+.zen-track{
+  display:flex;
+  gap:var(--zen-gap);
+  will-change:transform;
+  transform:translate3d(0,0,0);
+  position:relative;
+}
+
+/* ================== Card ================== */
 .zen-card{
-  /* exakte Flex-Basis nach Slides-per-View */
+  /* Flex-Basis exakt aus --zen-slides berechnet */
   flex:0 0 calc((100% - var(--zen-gap) * (var(--zen-slides) - 1)) / var(--zen-slides));
-  min-width: 260px;                                /* harte Untergrenze verhindert zu schmale Karten */
-  border: 2px solid rgba(0,0,0,.55) !important;
+  min-width: 0; /* wichtig gegen Überlauf */
+  border: 2px solid rgba(0,0,0,.55);
   border-radius:20px;
   background: linear-gradient(180deg, rgba(255,255,255,.5), rgba(255,255,255,.2));
   backdrop-filter: saturate(160%) blur(14px);
   -webkit-backdrop-filter: saturate(160%) blur(14px);
-  box-shadow:none !important;
+  box-shadow:none;
   overflow:hidden;
   position:relative;
   z-index:0;
-  display:flex; flex-direction:column;
-  transform-origin:50% 35%;
-  transition:
-    transform .22s cubic-bezier(.2,.7,.2,1),
-    border-color .25s ease,
-    box-shadow .25s ease,
-    filter .22s ease,
-    z-index 0s step-end;
-  opacity:0; transform: translateY(8px) scale(.995);
+  display:flex;
+  flex-direction:column;
+  transform-origin:48% 35%;
+  transition: transform .22s cubic-bezier(.2,.7,.2,1), border-color .25s ease, box-shadow .25s ease, filter .22s ease, z-index 0s step-end, opacity .22s ease;
+  opacity:0;
+  transform: translateY(8px) scale(.995);
 }
 :root[data-theme="dark"] .zen-card{
   background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-  border-color: rgba(255,255,255,.65) !important;
+  border-color: rgba(255,255,255,.65);
 }
 
-/* Reveal */
-.zen-card.is-in{
-  opacity:1;
-  transform: translateY(0) scale(1);
-  transition: opacity .38s ease, transform .44s cubic-bezier(.2,.7,.2,1), box-shadow .22s ease;
-}
+/* Reveal-Zustände */
+.zen-card.is-in{ opacity:1; transform: translateY(0) scale(1); }
 .zen-card.is-out{ opacity:.8; filter:saturate(.95); }
 
-/* Hover/Fokus */
+/* Hover/Fokus (Pointer) */
 @media (hover:hover){
   .zen-card:hover,
   .zen-card:focus-within{
     transform: translateY(-4px) scale(1.01);
-    border-color: rgba(0,0,0,.9) !important;
-    box-shadow: 0 10px 22px rgba(0,0,0,.16), 0 4px 8px rgba(0,0,0,.10) !important;
+    border-color: rgba(0,0,0,.9);
+    box-shadow: 0 10px 22px rgba(0,0,0,.16), 0 4px 8px rgba(0,0,0,.10);
     z-index:5;
   }
 }
 .zen-card:focus-within{
-  outline:2px solid color-mix(in oklab, var(--zen-ink) 85%, transparent);
-  outline-offset:2px;
+  outline: 2px solid color-mix(in oklab, var(--zen-ink) 85%, transparent);
+  outline-offset: 2px;
 }
 
-/* Header */
+/* ================== Inhalte ================== */
 .zen-toggle{
-  width:100%; border:0; background:none; cursor: default;
+  width:100%;
+  border:0;
+  background:none;
+  cursor: default;
   padding: clamp(1rem, 2.2vw, 1.25rem) clamp(1rem, 2.6vw, 1.4rem) .2rem;
-  display:block; text-align:left;
+  display:block;
+  text-align:left;
 }
 .zen-quote{
   display:block; font-weight:800; line-height:1.25;
@@ -3008,14 +2587,8 @@ body[data-page="webdesign"] .hero-image-foreground {
   font-weight:900; font-size:1.55em; line-height:1; opacity:.22;
 }
 
-/* Body */
 .zen-drop{ max-height:none !important; padding:.25rem clamp(1rem, 2.6vw, 1.4rem) 1rem; }
-.zen-text{
-  margin:0; padding:.6rem 0 0; line-height:1.7; font-weight:500; text-wrap:pretty;
-  border-top:1px solid color-mix(in oklab, var(--zen-ink) 18%, transparent);
-}
 
-/* Meta */
 .zen-meta{
   display:grid; grid-template-columns:1fr auto; align-items:center;
   column-gap:.75rem; row-gap:.2rem; margin:.35rem 0 .1rem; padding:.25rem 0;
@@ -3023,187 +2596,77 @@ body[data-page="webdesign"] .hero-image-foreground {
 .zen-rating{ font-weight:800; }
 .zen-stars{
   grid-column:1/2; margin-top:.1rem; letter-spacing:.08em; line-height:1; user-select:none;
-  color: var(--zen-accent) !important; text-shadow:0 0 .01em currentColor;
+  color: var(--zen-accent); text-shadow:0 0 .01em currentColor;
 }
 .zen-stars .zen-star-half{ opacity:.45; }
 .zen-author{ grid-column:2/3; justify-self:end; font-weight:700; opacity:.9; text-align:right; white-space:normal; }
 
-/* Very small: Author unter die Bewertung */
+.zen-text{
+  margin:0; padding:.6rem 0 0; line-height:1.7; font-weight:500; text-wrap:pretty;
+  border-top:1px solid color-mix(in oklab, var(--zen-ink) 18%, transparent);
+}
+
+/* Sehr kleine Viewports */
 @media (max-width:360px){
   .zen-meta{ grid-template-columns:1fr; }
   .zen-author{ grid-column:1/-1; justify-self:start; text-align:left; }
 }
 
-/* Tablet/Desktop: Hover unten nicht abschneiden, aber horizontales Clipping gegen Cutoffs */
-@media (min-width:700px){
-  .zen-viewport{
-    overflow: hidden;                        /* verhindert „Abschneiden“ am rechten Rand durch Subpixel */
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    padding-bottom: calc(var(--zen-bleed) + 18px);
-    margin-bottom:  calc(var(--zen-bleed) * -1 - 18px);
-  }
-  .zen-card{ transform-origin:50% 35%; }
-}
-
-/* XXL: etwas mehr Luft im Grid */
-@media (min-width:1536px){
-  .zen-slider{ max-width: min(1400px, 100%); }
-  .zen-gap{ --zen-gap: clamp(1rem, 2vw, 2rem); }
-}
-
-/* Konsistente Box-Sizing */
-.zen-slider, .zen-viewport, .zen-track, .zen-card { box-sizing: border-box; }
-@media (min-width:700px){
-  .zen-viewport{
-    overflow: hidden;
-    padding-right: 4px;              /* >= Border(2px) + rounding */
-    margin-right: -4px;
-  }
-}
-/* === Desktop: kein horizontales Clipping + optisch bündig === */
-@media (min-width:700px){
-  .zen-viewport{
-    overflow: visible !important;        /* nix mehr abschneiden */
-    padding-left: 0 !important;
-    padding-right: 12px !important;      /* Platz für Border + Scale + Rounding */
-    margin-right: -12px !important;      /* optisch bündig halten */
-  }
-}
-.zen-card{ transform-origin: 48% 35%; }  /* statt exakt 50% */
-/* Sichtfenster: nur die mittleren 3 Karten sichtbar */
-#zen-faq .zen-viewport{
-  overflow: hidden;                 /* harter Viewport */
-  position: relative;
-  /* sanfter Seiten-Fade (hell/dunkel automatisch) */
-  mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%);
-}
-
-/* Karten-Zustände */
-#zen-faq .zen-card{ transition: transform .22s ease, opacity .22s ease, filter .22s ease, border-color .22s ease; }
-#zen-faq .zen-card.is-active{
-  opacity: 1;
-  filter: none;
-}
-#zen-faq .zen-card.is-dim{
-  opacity: .25;               /* „ausgeblendet“ */
-  filter: saturate(.8) blur(.2px);
-  pointer-events: none;       /* nicht interaktiv */
-  transform: translateY(0) scale(.995);
-}
-
-/* Hover soll die Mitte nicht „sprengen“ */
-@media (hover:hover){
-  #zen-faq .zen-card.is-dim:hover{ transform:none; box-shadow:none; }
-}
-
-/* Mobile bleibt Grid: dort keine Dimmung nötig */
+/* ================== Mobile (<=699.98px) ================== */
+/* Eine Spalte, Spur und Karten perfekt zentriert */
 @media (max-width:699.98px){
-  #zen-faq .zen-viewport{
-    mask-image:none; -webkit-mask-image:none;
+  .zen-viewport{
     overflow: visible;
-  }
-  #zen-faq .zen-card{ opacity:1 !important; filter:none !important; }
-}
-/* Nur rechts ausfaden – links volle Deckkraft */
-#zen-faq .zen-viewport{
-  --zen-fade: 28px; /* Breite des rechten Fades, gerne anpassen */
-
-  mask-image: linear-gradient(
-    to right,
-    #000 0,
-    #000 calc(100% - var(--zen-fade)),
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    #000 0,
-    #000 calc(100% - var(--zen-fade)),
-    transparent 100%
-  );
-}
-/* nur rechts ausfaden (Desktop/Tablet) – bleibt wie gehabt */
-#zen-faq .zen-viewport{
-  --zen-fade: 28px;
-  mask-image: linear-gradient(to right, #000 0, #000 calc(100% - var(--zen-fade)), transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - var(--zen-fade)), transparent 100%);
-}
-
-/* Mobile: KEIN Fade (weder schwarz noch mask) */
-@media (max-width:699.98px){
-  #zen-faq .zen-viewport{
+    padding: 0;
+    margin: 0 !important;
     mask-image: none !important;
     -webkit-mask-image: none !important;
   }
-}
-
-/* === Zen Slider: Stage auf 1600px deckeln + fester Außenabstand === */
-:root{
-  --zen-stage: 1500px;   /* maximale Bühnenbreite */
-  --zen-gutter: 2rem;    /* fester Außenabstand je Seite */
-}
-
-/* fester Außenabstand der Section (respektiert Safe-Area) */
-#zen-faq.zen-vault{
-  padding-left:  max(var(--zen-gutter), env(safe-area-inset-left));
-  padding-right: max(var(--zen-gutter), env(safe-area-inset-right));
-  margin-left: 2rem;
-}
-
-/* Slider zentrieren und bei 1600px klemmen */
-#zen-faq .zen-slider{
-  max-width: var(--zen-stage) !important;
-  margin-inline: auto !important;
-}
-
-/* Viewport lässt die Karten nicht über die Stage hinauswachsen */
-#zen-faq .zen-viewport{
-  max-width: 100%;
-  margin-inline: 0;               /* wir zentrieren über .zen-slider */
-  padding-left: 0;                /* deine bestehenden >=700px Regeln bleiben */
-  padding-right: 0;
-}
-
-/* XXL-Override neutralisieren (du hast später noch max-widths für .zen-slider) */
-@media (min-width:1536px){
-  #zen-faq .zen-slider{ max-width: var(--zen-stage) !important; }
-}
-
-/* --- Fix: Hover nicht mehr abgeschnitten, aber mit rechtem Fade --- */
-
-/* 1) Viewport darf überstehen, Maske weg */
-#zen-faq .zen-viewport{
-  overflow: visible !important;
-  mask-image: none !important;
-  -webkit-mask-image: none !important;
-  position: relative; /* für das Overlay */
-}
-
-/* 2) Rechten Fade als Overlay statt als Maske zeichnen */
-#zen-faq .zen-viewport::after{
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: var(--zen-fade, 28px);
-  height: 100%;
-  pointer-events: none;     /* klicks nicht blocken */
-  z-index: 10;
-  /* sanfter Fade ins Seiten-Hintergrund */
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    var(--zen-base) 90%
-  );
-}
-
-/* 3) Kleiner „Hover-Gutter“, damit die letzte Karte Platz hat */
-@media (min-width:700px){
-  #zen-faq .zen-viewport{
-    padding-right: calc(var(--zen-bleed) + 24px);
-    margin-right:  calc(var(--zen-bleed) * -1 - 24px);
+  .zen-track{
+    display: grid !important;
+    /* eine Spalte, die max. 640px breit ist – die Spur wird mittig zentriert */
+    grid-template-columns: min(640px, 100%) !important;
+    justify-content: center;   /* zentriert die Spalte im Viewport */
+    justify-items: stretch;
+    gap: var(--zen-gap);
+    transform: none !important;
+    width: 100%;
   }
+  .zen-card{
+    width: 100% !important;
+    max-width: min(640px, 100%) !important;
+    margin-inline: auto;       /* Sicherheitsnetz für Zentrierung */
+    min-width: 0 !important;
+    opacity:1;                 /* kein Fade-Delay auf Mobile */
+    transform:none;
+  }
+  /* Optional: nur die ersten 3 anzeigen */
+  .zen-track .zen-card:nth-of-type(n + 4){ display: none !important; }
+}
+
+/* ================== Tablet/Desktop (>=700px) ================== */
+@media (min-width:700px){
+  :root{ --zen-slides: 3; } /* fix: 3 pro View standardmäßig */
+  .zen-viewport{
+    /* kein horizontales Clipping + Platz für Border/Scale rechts */
+    overflow: hidden;
+    padding-left: 0;
+    padding-bottom: calc(var(--zen-bleed) + 18px);
+    margin-bottom:  calc(var(--zen-bleed) * -1 - 18px);
+  }
+  .zen-card{ box-sizing: border-box; }
+}
+
+/* XXL leichte Streckung */
+@media (min-width:1536px){
+  .zen-slider{ max-width: min(var(--zen-stage), 100%); }
+}
+
+/* ================== Misc ================== */
+.zen-slider, .zen-viewport, .zen-track, .zen-card { box-sizing: border-box; }
+
+@media (prefers-reduced-motion: reduce){
+  .zen-card{ transition:none !important; opacity:1 !important; transform:none !important; }
 }
 
 </style>
@@ -3219,14 +2682,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const isMobile = () => window.matchMedia("(max-width:699.98px)").matches;
 
-  // NEU: Slides-per-View sauber aus CSS lesen (synced zu deinen Breakpoints)
+  // Slides-per-View aus CSS-Var lesen
   const getSPV = () => {
     const v = getComputedStyle(document.documentElement).getPropertyValue("--zen-slides").trim();
     const n = Math.max(1, parseInt(v || "1", 10));
     return n;
   };
 
-  // ARIA (unverändert)
+  // --- ARIA ---
   Array.from(track.querySelectorAll(".zen-card")).forEach((card, i) => {
     const btn  = card.querySelector(".zen-toggle");
     const drop = card.querySelector(".zen-drop");
@@ -3238,7 +2701,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", (e) => e.preventDefault(), { passive:true });
   });
 
-  // Reveal IO
+  // --- Reveal IO ---
   const revealIO = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting){ e.target.classList.add("is-in"); e.target.classList.remove("is-out"); }
@@ -3260,6 +2723,41 @@ document.addEventListener("DOMContentLoaded", () => {
     return g.endsWith("px") ? parseFloat(g) : 0;
   };
 
+  // === MOBILE RESET ===
+  function mobileReset(){
+    // Clones entfernen
+    track.querySelectorAll("[data-clone]").forEach(n => n.remove());
+    // Autoplay stoppen
+    stopAutoplay();
+
+    // Inline-Styles neutralisieren
+    viewport.style.padding = "0";
+    viewport.style.margin = "0";
+    viewport.style.overflow = "visible";
+
+    track.style.transition = "none";
+    track.style.transform  = "none";
+    track.style.margin     = "0";
+    track.style.left       = "auto";
+    track.style.right      = "auto";
+    track.style.width      = "100%";
+    track.style.maxWidth   = "100%";
+
+    // Karten-Breiten zurücksetzen
+    cardsAll().forEach(c => {
+      c.style.flex    = "";
+      c.style.width   = "";
+      c.style.maxWidth= "";
+      revealIO.observe(c);
+      c.classList.add("is-in"); // sofort sichtbar
+    });
+
+    // Statusvariablen neutral
+    index = 0;
+    animLock = false;
+  }
+
+  // === DESKTOP BERECHNUNG ===
   function measureSlideW(){
     const spv = getSPV();
     const vw  = viewport.clientWidth;
@@ -3277,7 +2775,6 @@ document.addEventListener("DOMContentLoaded", () => {
     c.style.flex = ""; c.style.width = ""; c.style.maxWidth = "";
   });
 
-  // NEU: nicht mehr „3 erzwingen“, sondern dynamisch je nach SPV
   function markActiveBySPV(){
     if (isMobile()) {
       cardsAll().forEach(c => { c.classList.remove('is-active','is-dim'); });
@@ -3345,13 +2842,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function next(){
     if (animLock || isMobile()) return;
     animLock = true;
-    index += getSPV();           // seitenweise passend zu SPV
+    index += getSPV();
     setTransform(false);
   }
   function prev(){
     if (animLock || isMobile()) return;
     animLock = true;
-    index -= getSPV();           // seitenweise passend zu SPV
+    index -= getSPV();
     setTransform(false);
   }
   track.addEventListener("transitionend", () => { normalizeAfterTransition(); animLock = false; });
@@ -3412,26 +2909,64 @@ document.addEventListener("DOMContentLoaded", () => {
     index = 0;
   }
 
+  // --- Resize Handling ---
   let rTo;
   function onResize(){
     clearTimeout(rTo);
     rTo = setTimeout(() => {
       if (!isMobile()){
+        // Wechsel auf Desktop
         destroyDesktop();
         initDesktop();
         setTimeout(markActiveBySPV, 60);
       } else {
+        // Wechsel auf Mobile
         destroyDesktop();
-        cardsAll().forEach(card => { revealIO.observe(card); card.classList.add("is-in"); });
+        mobileReset();
       }
     }, 120);
   }
   window.addEventListener("resize", onResize);
 
-  if (!isMobile()){ initDesktop(); }
-  else { cardsAll().forEach(card => { revealIO.observe(card); card.classList.add("is-in"); }); }
+  // --- Initialisierung ---
+  if (isMobile()){
+    mobileReset();
+  } else {
+    initDesktop();
+  }
 });
 </script>
+<script>
+(function(){
+  if (!matchMedia("(max-width:699.98px)").matches) return;
+  const target = document.querySelector("#zen-faq");
+  if (!target) return;
+
+  function sel(el){
+    const id = el.id ? '#'+el.id : '';
+    const cls = el.classList?.length ? '.'+[...el.classList].join('.') : '';
+    return el.tagName.toLowerCase()+id+cls;
+  }
+
+  const chain = [];
+  let el = target;
+  while (el) {
+    const cs = getComputedStyle(el);
+    const tr = cs.transform !== 'none' ? new DOMMatrixReadOnly(cs.transform).m41 : 0; // translateX
+    chain.push({
+      element: sel(el),
+      marginLeft: cs.marginLeft,
+      paddingLeft: cs.paddingLeft,
+      left: cs.left,
+      position: cs.position,
+      translateX: tr
+    });
+    el = el.parentElement;
+  }
+  console.table(chain);
+})();
+</script>
+
 
 
 
