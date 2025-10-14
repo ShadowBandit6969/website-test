@@ -2284,6 +2284,45 @@ body[data-page="titlepage"] .hero-image-foreground {
     border: 1px solid rgba(255,255,255,.08) !important;
   }
 }
+/* 1) Dark-Styles nur aktivieren, wenn WIRKLICH das Root dark ist */
+:root[data-theme="dark"] #aurora-sheet {
+  /* deine Dark-Overrides – falls du sie brauchst */
+}
+
+/* 2) Auto-Dark nur anwenden, wenn das ROOT kein data-theme hat */
+@media (prefers-color-scheme: dark){
+  /* vorher: :not([data-theme]) .aurora-title  (zu breit)
+     besser: nur wenn das ROOT kein data-theme trägt */
+  :root:not([data-theme]) #aurora-sheet {
+    background: #0a0c12;
+    color: #f6f8ff;
+  }
+  :root:not([data-theme]) #aurora-sheet .aurora-title{
+    color:#ffffff !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
+  }
+  :root:not([data-theme]) #aurora-sheet .aurora-subtitle{
+    color:#e8eeff !important;
+    background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035)) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.22),
+      0 2px 8px rgba(0,0,0,.45) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+  }
+}
+
+/* 3) Force-Light für diese Section (falls du sicher IMMER hell willst) */
+#aurora-sheet {
+  background:#fff;
+  color:#0b0c10;
+  color-scheme: light;          /* Safari/iOS: Form-Controls etc. nicht auto-dunkeln */
+}
+:root[data-theme="dark"] #aurora-sheet[data-force-light],
+:root:not([data-theme]) #aurora-sheet[data-force-light]{
+  /* harte Bremse gegen alle Dark-Regeln */
+  background:#fff !important;
+  color:#0b0c10 !important;
+}
 
 </style>
 <script type="application/ld+json">
@@ -3142,6 +3181,57 @@ body[data-page="titlepage"] .hero-image-foreground {
   #nebula-hub .module-card.cinema-card > video{
     position: absolute; inset: 0; width: 100%; height: 100%;
     object-fit: cover; object-position: center;
+  }
+}
+/* === COSMOS SUITE – Stage bei 1600px deckeln + konstanter Außenabstand === */
+:root{
+  --cosmos-stage: 1600px;   /* maximale Bühnenbreite */
+  --cosmos-gutter: 2rem;    /* fester Außenabstand je Seite */
+}
+
+/* Fester Außenabstand (respektiert Notch/Safe-Area) */
+#nebula-hub.cosmos-suite{
+  padding-left:  max(var(--cosmos-gutter), env(safe-area-inset-left));
+  padding-right: max(var(--cosmos-gutter), env(safe-area-inset-right));
+}
+
+/* Grid zentrieren und bei 1600px klemmen */
+#nebula-hub .orbit-grid{
+  max-width: var(--cosmos-stage) !important;
+  margin-inline: auto !important;
+}
+
+/* Ab 1152px 3 Spalten (deine Logik bleibt), aber innerhalb der 1600px-Stage */
+@media (min-width: 1152px){
+  #nebula-hub .orbit-grid{
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 2rem !important; /* du kannst 4rem lassen, wenn du magst */
+  }
+}
+
+/* Alle größeren Breakpoints hart auf 1600px halten */
+@media (min-width: 1300px){
+  #nebula-hub .orbit-grid{
+    max-width: var(--cosmos-stage) !important;
+    /* optional: etwas größerer Gap, wenn gewünscht */
+    gap: 3rem !important;
+  }
+}
+
+@media (min-width: 1600px){
+  #nebula-hub .orbit-grid{
+    max-width: var(--cosmos-stage) !important; /* überschreibt dein 1800px */
+    /* Stell sicher, dass die Karten nicht weiter wachsen als die Stage */
+    grid-template-columns: repeat(3, minmax(460px, 1fr)) !important; /* passt zu deiner Typo */
+    gap: 3rem !important; /* oder 4rem, wenn der Platz reicht */
+  }
+}
+
+/* Mobile bleibt wie definiert; optional: einheitlicher Außenabstand auch hier */
+@media (max-width: 600px){
+  #nebula-hub.cosmos-suite{
+    padding-left:  max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
   }
 }
 
@@ -4118,6 +4208,74 @@ body[data-page="titlepage"] .hero-image-foreground {
   }
 }
 
+/* === Zen Slider: Stage auf 1600px deckeln + fester Außenabstand === */
+:root{
+  --zen-stage: 1500px;   /* maximale Bühnenbreite */
+  --zen-gutter: 2rem;    /* fester Außenabstand je Seite */
+}
+
+/* fester Außenabstand der Section (respektiert Safe-Area) */
+#zen-faq.zen-vault{
+  padding-left:  max(var(--zen-gutter), env(safe-area-inset-left));
+  padding-right: max(var(--zen-gutter), env(safe-area-inset-right));
+  margin-left: 2rem;
+}
+
+/* Slider zentrieren und bei 1600px klemmen */
+#zen-faq .zen-slider{
+  max-width: var(--zen-stage) !important;
+  margin-inline: auto !important;
+}
+
+/* Viewport lässt die Karten nicht über die Stage hinauswachsen */
+#zen-faq .zen-viewport{
+  max-width: 100%;
+  margin-inline: 0;               /* wir zentrieren über .zen-slider */
+  padding-left: 0;                /* deine bestehenden >=700px Regeln bleiben */
+  padding-right: 0;
+}
+
+/* XXL-Override neutralisieren (du hast später noch max-widths für .zen-slider) */
+@media (min-width:1536px){
+  #zen-faq .zen-slider{ max-width: var(--zen-stage) !important; }
+}
+
+/* --- Fix: Hover nicht mehr abgeschnitten, aber mit rechtem Fade --- */
+
+/* 1) Viewport darf überstehen, Maske weg */
+#zen-faq .zen-viewport{
+  overflow: visible !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+  position: relative; /* für das Overlay */
+}
+
+/* 2) Rechten Fade als Overlay statt als Maske zeichnen */
+#zen-faq .zen-viewport::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--zen-fade, 28px);
+  height: 100%;
+  pointer-events: none;     /* klicks nicht blocken */
+  z-index: 10;
+  /* sanfter Fade ins Seiten-Hintergrund */
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--zen-base) 90%
+  );
+}
+
+/* 3) Kleiner „Hover-Gutter“, damit die letzte Karte Platz hat */
+@media (min-width:700px){
+  #zen-faq .zen-viewport{
+    padding-right: calc(var(--zen-bleed) + 24px);
+    margin-right:  calc(var(--zen-bleed) * -1 - 24px);
+  }
+}
+
 </style>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -4532,8 +4690,9 @@ document.addEventListener("DOMContentLoaded", () => {
   /* === Gradients === */
   .flow-rail .flow-card:nth-child(1){ background:linear-gradient(270deg,#04006c,#6f00ff,#050088);background-size:600% 600%;color:#fff }
   .flow-rail .flow-card:nth-child(2){ background:linear-gradient(135deg,#0d0d0d,#000e5c,#0d0d0d);background-size:300% 300%;color:#fff }
-  .flow-rail .flow-card:nth-child(3){ background:linear-gradient(135deg,#ff5100,hwb(340 0% 0%),#ff5100);background-size:400% 400%;color:#fff }
-  .flow-rail .flow-card:nth-child(4){ background:linear-gradient(135deg,#0d0d0d,#000,#0d0d0d);background-size:300% 300%;color:#fff }
+    .flow-rail .flow-card:nth-child(3){ background:linear-gradient(135deg,#000000,#0d003b,#000000);background-size:300% 300%;color:#fff }
+  .flow-rail .flow-card:nth-child(4){ background:linear-gradient(135deg,#ff5100,hwb(340 0% 0%),#ff5100);background-size:400% 400%;color:#fff }
+  .flow-rail .flow-card:nth-child(5){ background:linear-gradient(135deg,#0d0d0d,#000,#0d0d0d);background-size:300% 300%;color:#fff }
 
   .flow-card[role="button"]:focus-visible{ outline:3px solid rgba(255,255,255,.6);outline-offset:4px }
   :root[data-theme="light"] .flow-card[role="button"]:focus-visible{ outline:3px solid rgba(0,0,0,.35) }
@@ -4702,66 +4861,118 @@ document.addEventListener("DOMContentLoaded", () => {
 /* 3) Kleinigkeit: kein zusätzlicher “letzter Rand” in Details */
 .flow-card .details:last-child{ margin-bottom: 0; }
 
-</style>
+/* === FLOWHUB: Stage bei 1600px deckeln + fester Außenabstand === */
+#flowhub {
+  --flow-stage: 1300px;     /* maximale Bühnenbreite */
+  --flow-gutter: 2rem;      /* Außenabstand je Seite */
+}
 
+/* Außenabstand der Sektion (respektiert Safe-Area) */
+#flowhub .pane-world{
+  padding-left:  max(var(--flow-gutter), calc(1rem + env(safe-area-inset-left)));
+  padding-right: max(var(--flow-gutter), calc(1rem + env(safe-area-inset-right)));
+}
+
+/* Bühne zentrieren + bei 1600px klemmen (überschreibt die 1200px aus .pane-wrap) */
+#flowhub .pane-wrap{
+  max-width: var(--flow-stage) !important;
+  width: 100%;
+  margin-inline: auto !important;
+  padding-inline: 0 !important;
+}
+
+/* Desktop-„Kästchen“-Modus: Rail selbst nicht darüber hinausziehen */
+@media (min-width:1025px){
+  #flowhub .flow-rail{
+    max-width: var(--flow-stage);
+    margin-inline: auto;
+  }
+}
+
+/* Sicherheitsnetz: kein horizontales Scrollen durch Subpixel */
+#flowhub .pane-world,
+#flowhub .pane-wrap{ overflow-x: clip; }
+
+</style>
 <section class="pane-transition" id="flowhub" aria-labelledby="flowhub-h">
   <div class="pane-world is-visible" id="paneWorld">
     <div class="pane-wrap">
       <h2 id="flowhub-h" class="pane-title">So läuft ein Projekt mit Fusion³</h2>
-      <p class="pane-subtitle">Transparenter Ablauf von Kick-off bis Launch – schnell, klar, partnerschaftlich.</p>
+      <p class="pane-subtitle">Kreativ, präzise und partnerschaftlich – von der ersten Idee bis zur finalen Umsetzung.</p>
 
       <div class="flow-rail" role="list">
-        <div class="flow-card has-art" id="flow-step-00" role="button" tabindex="0"
-             data-stage="00" aria-expanded="false" aria-labelledby="flow-step-00-h" aria-controls="flow-step-00-details">
-          <span class="card-num-giant" aria-hidden="true">00</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">00</span>
-            <h3 id="flow-step-00-h">Unser Ansatz:</h3>
-            <p>Sobald Sie sich für eine Zusammenarbeit mit Fusion³ entscheiden, startet unser strukturiertes Onboarding. Wir beginnen mit einem ausführlichen Erstgespräch, in dem wir alle Rahmenbedingungen, Ziele und individuellen Wünsche besprechen.</p>
-            <div class="details" id="flow-step-00-details">
-              <p>Von der Konzeption bis zur finalen Abstimmung beziehen wir Sie aktiv ein, damit das Ergebnis Erwartungen nicht nur erfüllt, sondern übertrifft.</p>
-            </div>
-          </div>
-        </div>
 
-        <div class="flow-card" id="flow-step-01" role="button" tabindex="0"
+        <!-- 01: STRATEGIE & VISION -->
+        <div class="flow-card has-art" id="flow-step-01" role="button" tabindex="0"
              data-stage="01" aria-expanded="false" aria-labelledby="flow-step-01-h" aria-controls="flow-step-01-details">
           <span class="card-num-giant" aria-hidden="true">01</span>
           <div class="card-core">
             <span class="card-num" aria-hidden="true">01</span>
-            <h3 id="flow-step-01-h">Erstgespräch: <br>Der Grundstein für Ihren Erfolg</h3>
-            <p>Wir hören zu, klären Ziele, Zielgruppen und gewünschte Wirkungen und legen so gemeinsam den Grundstein.</p>
+            <h3 id="flow-step-01-h">Strategie & Vision</h3>
+            <p>Jedes Projekt beginnt mit einem klaren Verständnis Ihrer Ziele, Zielgruppen und Markenidentität. Wir entwickeln eine Strategie, die Design, Technologie und Kommunikation zu einem stimmigen Gesamtkonzept verbindet.</p>
             <div class="details" id="flow-step-01-details">
-              <p>Auf Wunsch leiten wir konkrete nächste Schritte und einen realistischen Zeitplan ab.</p>
+              <p>So entsteht die Grundlage für ein Ergebnis, das visuell überzeugt, technisch funktioniert und strategisch Wirkung zeigt.</p>
             </div>
           </div>
         </div>
 
+        <!-- 02: KONZEPT & STRUKTUR -->
         <div class="flow-card" id="flow-step-02" role="button" tabindex="0"
              data-stage="02" aria-expanded="false" aria-labelledby="flow-step-02-h" aria-controls="flow-step-02-details">
           <span class="card-num-giant" aria-hidden="true">02</span>
           <div class="card-core">
             <span class="card-num" aria-hidden="true">02</span>
-            <h3 id="flow-step-02-h">Konzeption &amp; Design: <br>Kreativität trifft Strategie</h3>
-            <p>Aus dem Briefing entsteht ein Konzept, das zu Ihrer Marke passt: Wireframes, Styleframes und Interaktionsideen.</p>
+            <h3 id="flow-step-02-h">Konzept & Struktur</h3>
+            <p>Aus der Vision entsteht ein fundiertes Konzept: Informationsarchitektur, Storyboard oder Szenenlayout – je nach Projektart. So legen wir den Rahmen für eine ästhetisch und funktional überzeugende Umsetzung.</p>
             <div class="details" id="flow-step-02-details">
-              <p>Iterativ verfeinern wir Look &amp; Feel, bis Story, Usability und Performance stimmen.</p>
+              <p>Wir achten auf klare Strukturen, intuitive Abläufe und konsistente Designs – die Basis für ein stimmiges Nutzererlebnis.</p>
             </div>
           </div>
         </div>
 
+        <!-- 03: DESIGN & ENTWICKLUNG -->
         <div class="flow-card" id="flow-step-03" role="button" tabindex="0"
              data-stage="03" aria-expanded="false" aria-labelledby="flow-step-03-h" aria-controls="flow-step-03-details">
           <span class="card-num-giant" aria-hidden="true">03</span>
           <div class="card-core">
             <span class="card-num" aria-hidden="true">03</span>
-            <h3 id="flow-step-03-h">Feedback &amp; Feinschliff: <br>Gemeinsam zur Perfektion</h3>
-            <p>Ihre Meinung zählt. In Feedbackschleifen gleichen wir Erwartungen ab, optimieren Details und sichern Performance.</p>
+            <h3 id="flow-step-03-h">Design & Entwicklung</h3>
+            <p>Das visuelle Konzept wird in greifbare Ergebnisse übersetzt – von Webdesigns über 3D-Renderings bis zu Animationen. Fortschritte sind jederzeit transparent einsehbar, Anpassungen fließen agil in den Prozess ein.</p>
             <div class="details" id="flow-step-03-details">
-              <p>Abschluss mit Übergabe, Doku und Wunsch-Roadmap für spätere Ausbaustufen.</p>
+              <p>Wir kombinieren Kreativität mit technischer Präzision – für Designs, die begeistern und funktionieren.</p>
             </div>
           </div>
         </div>
+
+        <!-- 04: FEINSCHLIFF & VERÖFFENTLICHUNG -->
+        <div class="flow-card" id="flow-step-04" role="button" tabindex="0"
+             data-stage="04" aria-expanded="false" aria-labelledby="flow-step-04-h" aria-controls="flow-step-04-details">
+          <span class="card-num-giant" aria-hidden="true">04</span>
+          <div class="card-core">
+            <span class="card-num" aria-hidden="true">04</span>
+            <h3 id="flow-step-04-h">Feinschliff & Veröffentlichung</h3>
+            <p>In der finalen Phase werden alle Details perfektioniert – Design, Performance und Präsentation. Nach präzisem Testing oder Rendering erfolgt der Launch bzw. die Auslieferung – sauber, zuverlässig und auf höchstem Qualitätsniveau.</p>
+            <div class="details" id="flow-step-04-details">
+              <p>Das Ergebnis überzeugt visuell, technisch und konzeptionell – bereit für maximale Wirkung.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 05: WACHSTUM & SKALIERBARKEIT -->
+        <div class="flow-card" id="flow-step-05" role="button" tabindex="0"
+             data-stage="05" aria-expanded="false" aria-labelledby="flow-step-05-h" aria-controls="flow-step-05-details">
+          <span class="card-num-giant" aria-hidden="true">05</span>
+          <div class="card-core">
+            <span class="card-num" aria-hidden="true">05</span>
+            <h3 id="flow-step-05-h">Wachstum & Skalierbarkeit </span></h3>
+<p>Auch nach Projektabschluss bleibt das Fundament zukunftsfähig. Wir begleiten Skalierung, Content-Erweiterung und technische Weiterentwicklung – für nachhaltiges, messbares Wachstum.</p>
+<div class="details" id="flow-step-05-details">
+  <p>Mit modularen Designsystemen, automatisierten Renderpipelines und skalierbaren Architekturen wächst Ihr Projekt flexibel und effizient mit Ihrem Unternehmen.</p>
+</div>
+
+          </div>
+        </div>
+
       </div><!-- /.flow-rail -->
     </div>
   </div>
@@ -4779,6 +4990,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const cardsList = Array.from(document.querySelectorAll('#flowhub .flow-card'));
 
+      // === Nummerierung 00-basiert (00, 01, 02, ...) ===
+      cardsList.forEach((card, i) => {
+        const nn = String(i).padStart(2, '0');
+        card.setAttribute('data-stage', nn); // für ::after
+        const small = card.querySelector('.card-num');
+        const giant = card.querySelector('.card-num-giant');
+        if (small) small.textContent = nn;
+        if (giant) giant.textContent = nn;
+      });
+
       // === Intro-Animation (sanft oder aus bei Reduced Motion) ===
       const tlIntro = prefersReduced ? null : gsap.timeline({
         scrollTrigger: {
@@ -4788,49 +5009,52 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
-      let hasNudgeFired = false;
-      let nudgeTl = null;
       const isDesktop = () => window.matchMedia('(min-width: 1025px)').matches;
 
-      function stopNudge() {
-        if (nudgeTl) {
-          nudgeTl.kill();
-          nudgeTl = null;
-        }
+      // === Nudge (Doppel-Stups) der zweiten Karte, zyklisch ===
+      let nudgeInterval = null;
+      let nudgeTl = null;
+
+      function clearNudgeTl() {
+        if (nudgeTl) { nudgeTl.kill(); nudgeTl = null; }
         if (cardsList[1]) gsap.set(cardsList[1], { y: 0 });
       }
 
-      function makeNudge(target) {
-        const tl = gsap.timeline();
-        tl.to(target, { y: -12, duration: 0.18, ease: 'power1.out' })
-          .to(target, { y: 0, duration: 0.22, ease: 'bounce.out' })
-          .to(target, { y: -8, duration: 0.16, ease: 'power1.out' }, '+=0.18')
-          .to(target, { y: 0, duration: 0.20, ease: 'bounce.out' });
+      function stopNudge() {
+        if (nudgeInterval) {
+          clearInterval(nudgeInterval);
+          nudgeInterval = null;
+        }
+        clearNudgeTl();
+      }
+
+      function makeNudge(target, amp = 10) {
+        // zwei leichte Stupser
+        const tl = gsap.timeline({ defaults: { clearProps: false } });
+        tl.to(target, { y: -amp, duration: 0.16, ease: 'power1.out' })
+          .to(target, { y: 0, duration: 0.20, ease: 'power2.out' }, '+=0.02')
+          .to(target, { y: -(amp * 0.7), duration: 0.14, ease: 'power1.out' }, '+=0.18')
+          .to(target, { y: 0, duration: 0.18, ease: 'power2.out' });
         return tl;
       }
 
-      function nudgeCard() {
-        if (prefersReduced || hasNudgeFired || !isDesktop() || !cardsList[1]) return;
-        hasNudgeFired = true;
-        const second = cardsList[1];
-        nudgeTl = gsap.timeline({ defaults:{ clearProps:false }});
-        nudgeTl
-          .add(makeNudge(second))
-          .to(second, { y: 0, duration: 0.8 })
-          .add(makeNudge(second))
-          .to(second, { y: 0, duration: 0.8 })
-          .add(makeNudge(second));
+      function startNudge() {
+        if (prefersReduced || nudgeInterval || !isDesktop() || !cardsList[1]) return;
+        nudgeInterval = setInterval(() => {
+          clearNudgeTl();
+          nudgeTl = makeNudge(cardsList[1], 10);
+        }, 7000);
       }
 
+      // Build Intro Tweens (ohne Nudge-Callback)
       if (!prefersReduced) {
         cardsList.forEach((card, i) => {
-          const tween = tlIntro.fromTo(
+          tlIntro.fromTo(
             card,
             { opacity: 0, y: 60 },
             { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' },
             i * 0.16
           );
-          if (i === 1) tween.eventCallback('onComplete', nudgeCard);
         });
       } else {
         gsap.set(cardsList, { opacity: 1, y: 0 });
@@ -4899,13 +5123,13 @@ document.addEventListener("DOMContentLoaded", () => {
           if(railInView){
             if(!booted){ booted=true; openAt(0); planNext(); root.classList.add('booted'); }
             else { planNext(); }
-          }else{
-            clearAutoCycle();
+            startNudge(); // Sichtbar + Desktop -> Nudge starten
+          } else {
+            stopNudge();  // nicht sichtbar -> pausieren
           }
         },{threshold:[0,0.5,1]});
         io.observe(rail);
 
-        // === WICHTIG: applyMode korrigiert ===
         function applyMode(){
           expandMode = mqDesktop.matches && !prefersReduced;
           if (root){
@@ -4921,7 +5145,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cards.forEach(c=>{ c.classList.remove('is-open'); c.setAttribute('aria-expanded','false'); });
             openAt(Math.max(0,selectedIdx,0)); // sofort öffnen
             root?.classList.add('booted'); // Boot-Modus aktivieren
-            if(railInView){ planNext(); }
+            if(railInView){ planNext(); startNudge(); }
           }
         }
 
@@ -4932,11 +5156,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Doppelt absichern: beim Laden direkt öffnen falls Desktop
         if (expandMode) { openAt(0); root?.classList.add('booted'); }
-
       })();
     }
   });
 </script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -5232,26 +5456,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
           <!-- Responsive Kontakt-Grid -->
           <div class="contact-grid">
-            <div class="field span-6">
-              <label for="name">Name</label>
-              <input id="name" type="text" name="name" placeholder="Dein Name" autocomplete="name" />
-            </div>
+           <div class="field span-6">
+  <label for="name" class="req">Name</label>
+  <input id="name" type="text" name="name" placeholder="Dein Name" autocomplete="name" required />
+</div>
 
-            <div class="field span-6">
-              <label for="email">E-Mail</label>
-              <input id="email" type="email" name="email" placeholder="dein@mail.de" autocomplete="email" />
-            </div>
+<div class="field span-6">
+  <label for="email" class="req">E-Mail</label>
+  <input id="email" type="email" name="email" placeholder="dein@mail.de" autocomplete="email" required />
+</div>
 
-            <div class="field span-6">
-              <label for="phone">Telefon (optional)</label>
-              <input id="phone" type="tel" name="phone" placeholder="z. B. +49 151 12345678" autocomplete="tel" />
-            </div>
+<div class="field span-6">
+  <label for="phone">Telefon (optional)</label>
+  <input id="phone" type="tel" name="phone" placeholder="z. B. +49 151 12345678" autocomplete="tel" />
+</div>
 
-            <div class="field span-12">
-              <label for="message">Nachricht</label>
-              <textarea id="message" name="message" rows="6" placeholder="Kurz dein Projekt / Ziel beschreiben…"></textarea>
-            </div>
+<div class="field span-12">
+  <label for="message" class="req">Nachricht</label>
+  <textarea id="message" name="message" rows="6" placeholder="Kurz dein Projekt / Ziel beschreiben…" minlength="5" required></textarea>
+</div>
+
+<p class="req-note">* Pflichtfelder</p>
+
           </div>
+          <p class="legal-hint">
+  Deine Angaben werden über <strong>Formspree</strong> zur Beantwortung deiner Anfrage verarbeitet.
+  Mehr unter <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.
+</p>
+
         </fieldset>
 
         <!-- STEP 6: Abschluss / Erfolg -->
@@ -6008,6 +6240,83 @@ document.addEventListener("DOMContentLoaded", () => {
   margin-right: .6rem;
 }
 
+.legal-hint{
+  font-size:.85rem; line-height:1.45;
+  color:#666; margin:.4rem 0 .2rem;
+}
+.legal-hint a{ color:inherit; text-decoration:underline; }
+:root[data-theme="dark"] .legal-hint{ color:#c6cad1; }
+
+/* Pflichtfeld-Kennzeichnung */
+label.req::after{
+  content:" *";
+  color:#b00020;
+  font-weight:900;
+}
+.req-note{
+  font-size:.85rem; color:#666; margin:.2rem 0 .4rem;
+}
+:root[data-theme="dark"] .req-note{ color:#c6cad1; }
+
+/* =======================================
+   Ganze Pill grün, wenn angeklickt
+   ======================================= */
+.pill input[type="checkbox"]:checked ~ span,
+.pill input[type="checkbox"]:checked ~ * {
+  background: var(--pill-green);
+  color: var(--pill-green-ink);
+  border-color: var(--pill-green);
+  box-shadow: 0 6px 18px rgba(0,200,81,.25);
+}
+
+/* ===== Fix: 680px–1024px -> Karten nicht mehr vertikal strecken ===== */
+@media (max-width:1024px) and (min-width:680px){
+  .kontakt-testimonial-wrapper{
+    flex-direction: column;      /* wie bei dir vorgesehen */
+    align-items: center;
+  }
+
+  /* wichtig: kein flex:1 im Spaltenlayout -> sonst wird Höhe aufgeblasen */
+  .kontakt-area,
+  .video-area{
+    flex: 0 0 auto !important;   /* nicht strecken */
+    width: min(92vw, 780px);     /* hübsche Breite */
+    height: auto !important;
+    margin-inline: auto;
+  }
+
+  /* Videokarte nicht künstlich hochziehen */
+  .video-area .video-card{
+    height: auto !important;
+    min-height: 280px;           /* angenehme Untergrenze */
+    aspect-ratio: 16 / 9;        /* hält das Video kompakt */
+  }
+
+  /* Optional: innen etwas kompakter, damit die Kontaktkarte nicht „luftig“ wirkt */
+  .kontakt-area{
+    padding: clamp(14px, 2.2vw, 20px) !important;
+  }
+}
+/* --- A) SOLO: Kontaktkarte alleine & breiter -------------------- */
+/* <section id="kontakt" class="kontakt-testimonial-section variant-solo"> */
+@media (min-width:840px) and (max-width:1148px){
+  #kontakt.variant-solo .kontakt-testimonial-wrapper{
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(16px, 2.5vw, 24px);
+  }
+  #kontakt.variant-solo .kontakt-area{
+    flex: 0 0 auto !important;
+    width: min(96vw, 980px);
+    max-width: 100%;
+    margin-inline: auto;
+  }
+  /* Video bewusst ausblenden (oder nach unten verlagern) */
+  #kontakt.variant-solo .video-area{
+    display: none;               /* oder: display:block;width:min(92vw,720px) */
+  }
+}
+
 </style>
 <script>
 (function () {
@@ -6134,6 +6443,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if(currentStepEl === allSteps[0]) nextBtn.disabled = !any;
     setProgress(getCurrentIndex());
   }
+
+  function updatePillUI(){
+    form.querySelectorAll('.pill').forEach(lbl=>{
+      const cb = lbl.querySelector('input[type="checkbox"]');
+      lbl.classList.toggle('selected', !!(cb && cb.checked));
+    });
+  }
+
   function syncServiceBlocks(){
     const sel = form.querySelector('input[name="service"]:checked');
     const key = sel ? sel.dataset.toggle : null;
@@ -6151,7 +6468,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       });
     });
+    // nach dem Umschalten neu bewerten (grün hinterlegen)
+    updatePillUI();
   }
+
   function setProgress(idx){
     const steps = getApplicableSteps();
     let pct = 0;
@@ -6199,7 +6519,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const h = step1 ? step1.scrollHeight : 320;
       targetEl.style.setProperty('--step6-minh', h + 'px');
 
-      // 💡 Neuer Fix: Restart-Button immer neu, immer klickbar
+      // 💡 Restart-Button immer neu, immer klickbar
       const oldBtn = successFieldset.querySelector('.success-btn');
       if (oldBtn) {
         const freshBtn = oldBtn.cloneNode(true);
@@ -6208,7 +6528,7 @@ document.addEventListener("DOMContentLoaded", () => {
         freshBtn.textContent = 'Neu starten';
         freshBtn.setAttribute('aria-label','Wizard neu starten');
         freshBtn.style.color = '#fff';
-        freshBtn.addEventListener('click', handleRestart); // kein once
+        freshBtn.addEventListener('click', handleRestart);
       }
 
       if (successSub) {
@@ -6227,6 +6547,9 @@ document.addEventListener("DOMContentLoaded", () => {
       nextBtn.disabled = targetEl === allSteps[0] && !form.querySelector('input[name="service"]:checked');
     }
 
+    // sicherstellen, dass Pills korrekt eingefärbt bleiben
+    updatePillUI();
+
     setProgress(targetIdx);
     const first = targetEl.querySelector('input:not([disabled]),select:not([disabled]),textarea:not([disabled])');
     first?.focus({preventScroll:true});
@@ -6244,6 +6567,7 @@ document.addEventListener("DOMContentLoaded", () => {
     currentStepEl = step1;
     syncServiceBlocks();
     updateChoiceUI();
+    updatePillUI();
     setProgress(0);
     toggleFormDisabled(false);
     setStatus('', '');
@@ -6341,7 +6665,7 @@ document.addEventListener("DOMContentLoaded", () => {
     q('#autoSubject').value     = `Projektanfrage: ${selectedService}`;
     q('#selectedService').value = selectedService;
     q('#summaryPlain').value    = compiledPlain;
-    q('#honeypot').value = '';
+    q('#honeypot').value        = '';
 
     const fd = new FormData(form);
     submitting = true;
@@ -6381,20 +6705,40 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isContactStep(currentStepEl)) form.requestSubmit();
     else showStepByIndex(getCurrentIndex()+1);
   });
+
+  // Klick auf Step-1-Karten (Service)
   form.addEventListener('click', (e)=>{
     const choice = e.target.closest('.choice');
-    if(!choice) return;
-    const rb = choice.querySelector('input[type="radio"]');
-    if(!rb) return;
-    setTimeout(()=>{
-      form.classList.remove('is-success');
-      updateChoiceUI(); syncServiceBlocks(); showStepByIndex(getCurrentIndex());
-    },0);
+    if(choice){
+      const rb = choice.querySelector('input[type="radio"]');
+      if(rb){
+        setTimeout(()=>{
+          form.classList.remove('is-success');
+          updateChoiceUI();
+          syncServiceBlocks();
+          showStepByIndex(getCurrentIndex());
+        },0);
+      }
+    }
+    // Klick auf Pill-Labels (Schwerpunkte)
+    const pill = e.target.closest('.pill');
+    if (pill) {
+      // Wait until checkbox toggled, then refresh UI
+      setTimeout(updatePillUI, 0);
+    }
   });
+
+  // Änderungen an Service oder Pill-Checkboxen
   form.addEventListener('change', (e)=>{
     if(e.target && e.target.matches('input[name="service"]')){
       form.classList.remove('is-success');
-      updateChoiceUI(); syncServiceBlocks(); showStepByIndex(getCurrentIndex());
+      updateChoiceUI();
+      syncServiceBlocks();
+      showStepByIndex(getCurrentIndex());
+      return;
+    }
+    if (e.target && (e.target.matches('.pill input[type="checkbox"]') || e.target.matches('input[data-pills]'))) {
+      updatePillUI();
     }
   });
 
@@ -6405,6 +6749,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.classList.remove('is-success');
     syncServiceBlocks();
     updateChoiceUI();
+    updatePillUI();
     showStepByIndex(0);
     setStatus('');
   }
@@ -6429,51 +6774,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
 <!-- ===== ETHOS / WERTE SECTION ===== -->
-<section class="ethos section-wrap" id="ethos-root" aria-labelledby="ethos-heading">
+<section class="ethos section-wrap" id="webdesign-ethos" aria-labelledby="webdesign-ethos-heading">
   <div class="ethos-head">
-    <h2 class="ethos-title" id="ethos-heading">
-      <span class="ethos-title-line">Werte, die unsere Arbeit prägen</span>
+    <h2 class="ethos-title" id="webdesign-ethos-heading">
+      <span class="ethos-title-line">Werte, die gutes Webdesign formen</span>
     </h2>
     <div class="ethos-sub">
-      <span class="ethos-sub-line">Kreativ. Präzise. Nachhaltig gedacht.</span>
+      <span class="ethos-sub-line">Ästhetisch. Funktional. Nutzerzentriert.</span>
     </div>
   </div>
 
   <div class="ethos-marquee" aria-live="off">
-    <ul class="ethos-track" aria-label="Unsere Werte">
+    <ul class="ethos-track" aria-label="Unsere Webdesign-Grundsätze">
+      
+      <li class="ethos-card" id="ethos-ux">
+        <div class="ethos-icon"><i data-feather="users" aria-hidden="true"></i></div>
+        <div class="ethos-content">
+          <h3 id="ethos-ux-h">User Experience im Fokus</h3>
+          <p>Wir gestalten Websites, die intuitiv funktionieren und echte Mehrwerte bieten. Jedes Detail dient der Nutzerfreundlichkeit und Markenbotschaft.</p>
+        </div>
+      </li>
 
       <li class="ethos-card" id="ethos-design">
         <div class="ethos-icon"><i data-feather="layout" aria-hidden="true"></i></div>
         <div class="ethos-content">
-          <h3 id="ethos-design-h">Ganzheitliches Design</h3>
-          <p>Ob Website, Rendering oder Print – jedes Projekt entsteht aus einem klaren Konzept. Ästhetik trifft Funktion, Idee trifft Wirkung.</p>
+          <h3 id="ethos-design-h">Ästhetik mit Struktur</h3>
+          <p>Visuelles Design folgt klaren Prinzipien: Balance, Kontrast, Typografie. So entstehen Layouts, die begeistern – auf jedem Bildschirm.</p>
         </div>
       </li>
 
-      <li class="ethos-card" id="ethos-innovation">
-        <div class="ethos-icon"><i data-feather="cpu" aria-hidden="true"></i></div>
+      <li class="ethos-card" id="ethos-tech">
+        <div class="ethos-icon"><i data-feather="code" aria-hidden="true"></i></div>
         <div class="ethos-content">
-          <h3 id="ethos-innovation-h">Technische Präzision</h3>
-          <p>Wir verbinden Design mit moderner Technologie – von 3D-Workflows über Performance-Optimierung bis hin zu skalierbaren CMS-Lösungen.</p>
+          <h3 id="ethos-tech-h">Sauberer Code, starke Performance</h3>
+          <p>Wir setzen auf moderne Webtechnologien und optimierte Strukturen. Das Ergebnis: schnelle Ladezeiten und nachhaltige Skalierbarkeit.</p>
         </div>
       </li>
 
-      <li class="ethos-card" id="ethos-vision">
-        <div class="ethos-icon"><i data-feather="aperture" aria-hidden="true"></i></div>
+      <li class="ethos-card" id="ethos-growth">
+        <div class="ethos-icon"><i data-feather="trending-up" aria-hidden="true"></i></div>
         <div class="ethos-content">
-          <h3 id="ethos-vision-h">Visuelle Markenstärke</h3>
-          <p>Gutes Design erzählt Geschichten. Wir gestalten Markenauftritte, die Emotionen wecken, Orientierung schaffen und im Gedächtnis bleiben.</p>
-        </div>
-      </li>
-
-      <li class="ethos-card" id="ethos-care">
-        <div class="ethos-icon"><i data-feather="refresh-ccw" aria-hidden="true"></i></div>
-        <div class="ethos-content">
-          <h3 id="ethos-care-h">Partnerschaft &amp; Weiterentwicklung</h3>
-          <p>Nach dem Projekt ist vor dem nächsten Schritt. Wir begleiten Sie langfristig – mit Updates, Support und Raum für Wachstum.</p>
+          <h3 id="ethos-growth-h">Design als Wachstumstreiber</h3>
+          <p>Gutes Webdesign schafft messbare Ergebnisse – höhere Conversion, stärkere Markenbindung und langfristigen Erfolg.</p>
         </div>
       </li>
 
@@ -6936,394 +7279,169 @@ document.addEventListener("DOMContentLoaded", () => {
     transform: translateY(-4px) scale(1.005);
   }
 }
-/* ETHOS – Sichtfenster + nur rechts ausfaden */
-#ethos-root .ethos-marquee{
-  --ethos-fade: 28px; /* anpassbar */
-  overflow: hidden; /* hartes Sichtfenster */
-  position: relative;
-  mask-image: linear-gradient(
-    to right,
-    #000 0,
-    #000 calc(100% - var(--ethos-fade)),
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    #000 0,
-    #000 calc(100% - var(--ethos-fade)),
-    transparent 100%
-  );
-}
-
-/* ETHOS – aktive 3 vs. gedimmt (wie zen) */
-#ethos-root .ethos-card{ 
-  transition: transform .22s ease, opacity .22s ease, filter .22s ease, border-color .22s ease; 
-}
-#ethos-root .ethos-card.is-active{
-  opacity: 1;
-  filter: none;
-  pointer-events: auto;
-}
-#ethos-root .ethos-card.is-dim{
-  opacity: .25;
-  filter: saturate(.85) blur(.2px);
-  pointer-events: none;
-  transform: translateY(0) scale(.995);
-}
-
-/* Hover soll gedimmte Karten nicht hervorheben */
-@media (hover:hover){
-  #ethos-root .ethos-card.is-dim:hover{
-    transform:none; box-shadow:none;
+@media (min-width:700px){
+  .ethos-marquee{
+    max-width: 1600px;      /* nimmt ab hier keinen zusätzlichen Platz mehr ein */
+    margin-inline: auto;    /* zentriert */
   }
 }
 
-/* Mobile: keine Dimmung, keine Mask */
-@media (max-width:699.98px){
-  #ethos-root .ethos-marquee{
-    mask-image:none; -webkit-mask-image:none; overflow:visible;
-  }
-  #ethos-root .ethos-card{ opacity:1 !important; filter:none !important; pointer-events:auto !important; }
-}
-/* === ETHOS cards wie zen (nur Look & Motion, Farben/Typo bleiben) === */
-#ethos-root .ethos-card{
-  /* zen-mäßige „Physik“ */
-  flex: 0 0 auto;
-  min-width: 0 !important;     /* JS setzt die Breite – keine harte Min-Breite */
-  max-width: none !important;
-
-  border: 2px solid rgba(0,0,0,.55);         /* kräftige Outline wie zen */
-  border-radius: 20px;
-  box-shadow: none;                           /* Flat-Basis; Hover macht Depth */
-  transform-origin: 48% 35%;
-  will-change: transform, box-shadow, filter, opacity;
-
-  /* Reveal wie zen */
-  opacity: 0;
-  transform: translateY(8px) scale(.995);
-  transition:
-    transform .22s cubic-bezier(.2,.7,.2,1),
-    border-color .25s ease,
-    box-shadow .25s ease,
-    filter .22s ease,
-    opacity .25s ease;
+/* === ETHOS: Bühne auf 1600px deckeln + fixe Gutter === */
+#webdesign-ethos{
+  --ethos-stage: 1450px;      /* maximale Breite */
+  --ethos-gutter: 2rem;       /* Außenabstand je Seite */
 }
 
-/* Dark Mode: nur die Outline anpassen (Farben/Typo bleiben unverändert) */
-:root[data-theme="dark"] #ethos-root .ethos-card{
-  border-color: rgba(255,255,255,.65);
+/* sichere Außenabstände (inkl. Safe-Area) */
+#webdesign-ethos.section-wrap{
+  padding-left:  max(var(--ethos-gutter), calc(1rem + env(safe-area-inset-left)));
+  padding-right: max(var(--ethos-gutter), calc(1rem + env(safe-area-inset-right)));
+  overflow-x: clip; /* keine horizontale Scrollleiste durch Subpixel */
 }
 
-/* Reveal-Zustände wie zen */
-#ethos-root .ethos-card.is-in{
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-#ethos-root .ethos-card.is-out{
-  opacity: .75;
-  filter: saturate(.9);
-}
-
-/* Hover/Focus: dezentes Liften + stärkere Outline, wie zen */
-@media (hover:hover){
-  #ethos-root .ethos-card:hover,
-  #ethos-root .ethos-card:focus-within{
-    transform: translateY(-6px) scale(1.02);
-    border-color: rgba(0,0,0,.9);
-    box-shadow:
-      0 10px 22px rgba(0,0,0,.16),
-      0 4px 8px rgba(0,0,0,.10);
-    z-index: 5;
-  }
-}
-:root[data-theme="dark"] #ethos-root .ethos-card:hover,
-:root[data-theme="dark"] #ethos-root .ethos-card:focus-within{
-  border-color: #fff;
-  box-shadow:
-    0 10px 22px rgba(0,0,0,.35),
-    0 4px 8px rgba(0,0,0,.22);
-}
-
-/* Keyboard-Focus sichtbar (a11y) – harmoniert mit zen-Verhalten */
-#ethos-root .ethos-card:focus-within{
-  outline: 2px solid color-mix(in oklab, currentColor 85%, transparent);
-  outline-offset: 2px;
-}
-
-/* Mobile bleibt wie gehabt; keine zusätzliche Motion nötig */
-@media (max-width:699.98px){
-  #ethos-root .ethos-card{
-    opacity: 1;
-    transform: none;
-    box-shadow: 0 8px 22px rgba(0,0,0,.16); /* dein bestehender mobiler Schatten darf bleiben */
-  }
-}
-/* ETHOS wie zen: max Breite + seitlicher Bleed */
-#ethos-root{
-  --ethos-maxw: 1200px;                 /* wie --zen-maxw */
-  --ethos-bleed: clamp(10px, 1.8vw, 16px);
-}
-
-/* Die Marquee wirkt als "Viewport" wie .zen-slider/.zen-viewport */
-#ethos-root .ethos-marquee{
-  max-width: min(var(--ethos-maxw), 100%);
+/* Head + Marquee zentriert und bei 1600px geklemmt */
+#webdesign-ethos .ethos-head,
+#webdesign-ethos .ethos-marquee{
+  max-width: var(--ethos-stage);
   margin-inline: auto;
-  padding-inline: var(--ethos-bleed);
-  box-sizing: border-box;
 }
 
-/* Mask nur rechts (damit links nichts abgeknabbert wird) */
-#ethos-root .ethos-marquee{
-  --ethos-fade: 28px;
-  mask-image: linear-gradient(to right, #000 0, #000 calc(100% - var(--ethos-fade)), transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - var(--ethos-fade)), transparent 100%);
-}
-
-/* Mobile: keine Begrenzung/Mask nötig */
-@media (max-width:699.98px){
-  #ethos-root .ethos-marquee{
-    max-width: 100%;
-    padding-inline: 0;
-    mask-image: none; -webkit-mask-image: none;
+/* ab 700px sowieso: Sichtfenster hart, aber nicht breiter als 1600px */
+@media (min-width:700px){
+  #webdesign-ethos .ethos-marquee{
+    overflow: hidden;
   }
+}
+
+/* Sicherheit: Track nimmt nicht mehr Platz als die Bühne ein */
+#webdesign-ethos .ethos-track{
+  max-width: var(--ethos-stage);
+  margin-inline: auto;
 }
 
 </style>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  if (window.feather) feather.replace?.();
+(function(){
+  const section = document.getElementById('webdesign-ethos'); // <- richtige ID
+  if (!section) return;
 
-  const section = document.getElementById('ethos-root');
-  const marquee = section?.querySelector('.ethos-marquee');   // Viewport
+  const marquee = section.querySelector('.ethos-marquee');
   const track   = marquee?.querySelector('.ethos-track');
-  if (!section || !marquee || !track) return;
+  if (!track) return;
 
-  const isMobile = () => window.matchMedia("(max-width:699.98px)").matches;
-  const getSPV   = () => (window.matchMedia("(min-width:700px)").matches ? 3 : 1); // 3 pro View ab 700px
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const isMobile = () => window.matchMedia('(max-width:699.98px)').matches;
 
-  // Reveal (optional)
-  const revealIO = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting){ e.target.classList.add('is-in'); e.target.classList.remove('is-out'); }
-      else { e.target.classList.remove('is-in'); e.target.classList.add('is-out'); }
-    });
-  }, { root: marquee, threshold: 0.25 });
+  // ---- Config
+  const AUTOPLAY_MS  = 5500;
+  const MAX_VIEWPORT = 1600;    // <- Karten nehmen ab hier keinen zusätzlichen Platz mehr ein
 
-  // ---------- Infinity Slider (komplette Liste clonen) ----------
+  // ---- State
   let originals = [];
-  let index     = 0;
-  let slideW    = 0;
-  let animLock  = false;
-
-  const AUTOPLAY_MS = 4200;
+  let index = 0;
+  let cardW = 0;
+  let gap = 0;
+  let spv = 1;
+  let animLock = false;
   let autoplayTimer = null;
 
-  const cardsSel = () => Array.from(track.querySelectorAll('.ethos-card'));
-  const gapPX = () => {
-    const g = getComputedStyle(track).gap || "0px";
-    return g.endsWith("px") ? parseFloat(g) : 0;
+  // ---- Helpers
+  const cards = () => Array.from(track.querySelectorAll('.ethos-card'));
+  const pxGap = () => {
+    const g = getComputedStyle(track).gap || '0px';
+    return g.endsWith('px') ? parseFloat(g) : 0;
   };
 
-  // Breite wie zen aus dem (begrenzten) Viewport berechnen
-  const measure = () => {
-    const spv = getSPV();
-    const vw  = marquee.clientWidth; // border-box des begrenzten Viewports
-    slideW = (vw - gapPX() * (spv - 1)) / spv;
-  };
-
-  const applyFixedWidths  = () => cardsSel().forEach(c => {
-    c.style.flex     = `0 0 ${slideW}px`;
-    c.style.width    = `${slideW}px`;
-    c.style.maxWidth = `${slideW}px`;
-  });
-  const clearFixedWidths  = () => cardsSel().forEach(c => {
-    c.style.flex = ""; c.style.width = ""; c.style.maxWidth = "";
-  });
-
-function applySideGutters(){
-  if (isMobile()){ track.style.paddingLeft = track.style.paddingRight = ""; return; }
-
-  const spv  = getSPV();                 // 3
-  const g    = gapPX();
-  const visibleWidth = slideW * spv + g * (spv - 1);
-  const vw   = marquee.clientWidth;
-  const side = Math.max(0, Math.round((vw - visibleWidth) / 2));
-  const SAFETY = 1;                      // Subpixel-Puffer wie zen
-
-  // NEU: Fade-Breite aus CSS-Var lesen (Fallback 28px)
-  const fadeVar = getComputedStyle(marquee).getPropertyValue("--ethos-fade").trim();
-  const fade = parseFloat(fadeVar || "28") || 28;
-
-  track.style.paddingLeft  = side + "px";
-  track.style.paddingRight = (side + SAFETY + fade) + "px"; // rechts: + Fade, damit nichts abgeschnitten wird
-}
-
-
-  // Nur die 3 mittleren sichtbar (Rest gedimmt)
-  function markActive3(){
-    if (isMobile()){
-      cardsSel().forEach(c => c.classList.remove('is-active','is-dim'));
-      return;
-    }
-    const spv = getSPV();
-    const start = index;
-    const end   = start + spv - 1;
-    cardsSel().forEach((c, i) => {
-      if (i >= start && i <= end){ c.classList.add('is-active'); c.classList.remove('is-dim'); }
-      else { c.classList.add('is-dim'); c.classList.remove('is-active'); }
-    });
+  function measure(){
+    spv = isMobile() ? 1 : 3;
+    gap = pxGap();
+    // Breite anhand gedeckelter „Viewport“-Breite
+    const raw = marquee.clientWidth;
+    const vw  = Math.min(raw, MAX_VIEWPORT);    // cap bei 1600px
+    cardW = (vw - gap * (spv - 1)) / spv;
   }
+
+  function applyWidths(){ cards().forEach(c => c.style.width = cardW + 'px'); }
+  function clearWidths(){ cards().forEach(c => c.style.width = ''); }
 
   function setTransform(jump=false){
-    const translate = -(index * (slideW + gapPX())) + "px";
-    track.style.transition = jump ? "none" : `transform 420ms ease`;
-    track.style.transform  = `translate3d(${translate},0,0)`;
-    requestAnimationFrame(markActive3);
+    const x = -(index * (cardW + gap));
+    track.style.transition = jump ? 'none' : 'transform 420ms ease';
+    track.style.transform  = `translate3d(${x}px,0,0)`;
   }
 
-  // Clones
-  function buildFullClones(){
-    track.querySelectorAll('[data-clone]').forEach(n => n.remove());
-    const list = originals;
-    if (!list.length) return;
-
-    const pre = list.map(n => { const c = n.cloneNode(true); c.dataset.clone = 'true'; return c; });
-    pre.reverse().forEach(c => track.insertBefore(c, track.firstChild));
-
-    const post = list.map(n => { const c = n.cloneNode(true); c.dataset.clone = 'true'; return c; });
-    post.forEach(c => track.appendChild(c));
-
-    cardsSel().forEach(card => revealIO.observe(card));
-  }
-
-  // Start im mittleren Block
-  function goToPageStart(page, jump=false){
-    const spv = getSPV();
-    const base = originals.length;
-    index = base + page * spv;
-    setTransform(jump);
-  }
-
-  function normalizeAfterTransition(){
-    const base = originals.length;
-    const first = base;
-    const last  = base + originals.length - 1;
-
-    if (index < first){
-      index += originals.length;
-      setTransform(true);
-    } else if (index > last){
-      index -= originals.length;
-      setTransform(true);
-    }
-    markActive3();
-  }
-
-  function next(){
-    if (animLock || isMobile()) return;
-    animLock = true;
-    index += getSPV();
-    setTransform(false);
-  }
-  function prev(){
-    if (animLock || isMobile()) return;
-    animLock = true;
-    index -= getSPV();
-    setTransform(false);
-  }
-
-  track.addEventListener('transitionend', () => { normalizeAfterTransition(); animLock = false; });
-
-  // Autoplay
-  function startAutoplay(){
-    if (autoplayTimer || isMobile()) return;
-    stopAutoplay();
-    autoplayTimer = setInterval(next, AUTOPLAY_MS);
-  }
-  function stopAutoplay(){
-    if (autoplayTimer) clearInterval(autoplayTimer);
-    autoplayTimer = null;
-  }
-
-  // Sichtbarkeit steuert Autoplay
-  const visIO = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const visible = entry.isIntersecting && !document.hidden;
-      if (visible) startAutoplay(); else stopAutoplay();
-    });
-  }, { threshold: 0.5 });
-  visIO.observe(section);
-
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) stopAutoplay(); else startAutoplay();
-  });
-
-  // Interaktionen
-  ["mouseenter","focusin"].forEach(ev => section.addEventListener(ev, stopAutoplay));
-  ["mouseleave","focusout"].forEach(ev => section.addEventListener(ev, startAutoplay));
-  section.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight") { e.preventDefault(); next(); }
-    if (e.key === "ArrowLeft")  { e.preventDefault(); prev(); }
-  });
-  marquee.addEventListener("wheel", (e) => {
-    if (isMobile()) return;
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-      e.preventDefault();
-      if (e.deltaX > 0) next(); else prev();
-    }
-  }, { passive:false });
-
-  // Init / Destroy
-  function initDesktop(){
-    originals = Array.from(track.querySelectorAll('.ethos-card')).filter(n => !n.dataset.clone);
+  function buildClones(){
+    track.querySelectorAll('[data-clone]')?.forEach(n => n.remove());
+    originals = Array.from(track.children).filter(n => n.classList?.contains('ethos-card') && !n.dataset.clone);
     if (!originals.length) return;
 
-    originals.forEach(card => revealIO.observe(card));
-    buildFullClones();
-    measure();
-    applyFixedWidths();
-    applySideGutters();           // <<< neu: seitliche Gutters setzen
+    const pre  = originals.map(n => { const c = n.cloneNode(true); c.dataset.clone = 'true'; return c; });
+    const post = originals.map(n => { const c = n.cloneNode(true); c.dataset.clone = 'true'; return c; });
 
-    goToPageStart(0, true);
-    startAutoplay();
-    markActive3();
+    pre.reverse().forEach(c => track.insertBefore(c, track.firstChild));
+    post.forEach(c => track.appendChild(c));
   }
 
-  function destroyDesktop(){
+  function goToStart(jump=true){ index = originals.length; setTransform(jump); }
+
+  function normalize(){
+    const firstReal = originals.length;
+    const lastReal  = firstReal + originals.length - 1;
+    if (index < firstReal){ index += originals.length; setTransform(true); }
+    else if (index > lastReal){ index -= originals.length; setTransform(true); }
+  }
+
+  function next(){ if (animLock || isMobile()) return; animLock = true; index += spv; setTransform(false); }
+  function prev(){ if (animLock || isMobile()) return; animLock = true; index -= spv; setTransform(false); }
+
+  track.addEventListener('transitionend', () => { normalize(); animLock = false; }, {passive:true});
+
+  function startAutoplay(){
+    if (prefersReduced.matches || isMobile() || autoplayTimer) return;
+    stopAutoplay(); autoplayTimer = setInterval(next, AUTOPLAY_MS);
+  }
+  function stopAutoplay(){ if (autoplayTimer) clearInterval(autoplayTimer); autoplayTimer = null; }
+
+  const visIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => { const visible = e.isIntersecting && !document.hidden; if (visible) startAutoplay(); else stopAutoplay(); });
+  }, { threshold: 0.5 });
+  visIO.observe(section);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stopAutoplay(); else startAutoplay(); });
+
+  section.addEventListener('mouseenter', stopAutoplay);
+  section.addEventListener('mouseleave', startAutoplay);
+  section.addEventListener('focusin', stopAutoplay);
+  section.addEventListener('focusout', startAutoplay);
+
+  // Resize/Init
+  let resizeTO;
+  function rebuild(){
     stopAutoplay();
-    track.querySelectorAll('[data-clone]').forEach(n => n.remove());
-    clearFixedWidths();
-    track.style.transition = 'none';
-    track.style.transform  = 'none';
-    track.style.paddingLeft = track.style.paddingRight = ""; // Gutters zurücksetzen
-    index = 0;
+    clearWidths();
+    buildClones();
+    measure();
+    applyWidths();
+    goToStart(true);
+    startAutoplay();
   }
-
-  // Resize
-  let resizeTo;
   function onResize(){
-    clearTimeout(resizeTo);
-    resizeTo = setTimeout(() => {
-      if (!isMobile()){
-        // Bei Desktop neu messen & neu aufbauen (wie zen)
-        destroyDesktop();
-        initDesktop();
-      } else {
-        destroyDesktop();
-        // Mobile: Grid; alle „in“
-        cardsSel().forEach(card => { revealIO.observe(card); card.classList.add('is-in'); });
+    clearTimeout(resizeTO);
+    resizeTO = setTimeout(() => {
+      if (!isMobile()) rebuild();
+      else {
+        stopAutoplay(); clearWidths();
+        track.style.transition = 'none';
+        track.style.transform  = 'none';
       }
     }, 120);
   }
   window.addEventListener('resize', onResize);
 
-  // INIT
-  if (!isMobile()){ initDesktop(); }
-  else { cardsSel().forEach(card => { revealIO.observe(card); card.classList.add('is-in'); }); }
-});
+  // Boot
+  rebuild();
+})();
 </script>
-
 
 
 <script type="application/ld+json">
@@ -7379,11 +7497,6 @@ function applySideGutters(){
   ]
 }
 </script>
-
-
-
-
-
 
 
 

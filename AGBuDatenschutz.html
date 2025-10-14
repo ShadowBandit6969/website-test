@@ -1,754 +1,2107 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" data-theme="auto">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AGB & Datenschutz – Fusion³</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet" />
-    <style>
-        :root {
-            --primary: #ff6600;
-            --secondary: #ff944d;
-            --bg: #0b0b0b;
-            --text: #fff;
-            --muted: #aaa;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fusion³ – UX & Webdesign Studio</title>
+  <meta name="description" content="Fusion³ ist dein Partner für UX-Design, Webdesign & Prototyping. Wir gestalten digitale Erlebnisse mit Substanz." />
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <!-- Google Fonts Optimierung -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" media="all" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  </noscript>
 
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-        }
+  <!-- Lokale Fonts optimieren -->
+  <link rel="preload" as="style" href="./fonts/fonts.css">
+  <link rel="stylesheet" href="./fonts/fonts.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="./fonts/fonts.css"></noscript>
 
-        header,
-        footer {
-            background: #0d0d0d;
-            color: var(--muted);
-            padding: 2rem 5vw;
-        }
+  <!-- Optional Scripts (lassen wir drin; keine Abhängigkeit) -->
+  <script type="module" src="https://unpkg.com/feather-icons" defer></script>
+  <script nomodule src="feather-icons.legacy.js"></script>
+  <script src="https://unpkg.com/scrollreveal" defer></script>
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--primary);
-        }
+  <!-- Analytics Beispiel (unverändert) -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "t1mbvlhldj");
+  </script>
 
-        header {
-            width: 100%;
-            padding: 2rem 5vw;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #222;
-            position: relative;
-            z-index: 10;
-        }
+  <!-- ===============================
+       GLOBAL CSS
+       =============================== -->
+  <style>
+    :root{
+      --accent:#0062ff;
+      --text:#111;
+      --muted:#555;
+      --border:rgba(0,0,0,.08);
+      --surface:#ffffff;
+  --container-width: min(95vw, 1340px);
+      --header-pad-y: .75rem;
+      --radius: 12px;
 
-        nav a {
-            margin-left: 2rem;
-            font-weight: 500;
-            font-size: 1rem;
-            color: var(--muted);
-        }
+      --primary: #ff4d00;
+      --secondary: #ff9900;
+    }
+    /* Dark Theme Tokens */
+    @media (prefers-color-scheme: dark){
+      :root{
+        --text:#f5f7fa;
+        --muted:#b7bec7;
+        --border:rgba(255,255,255,.12);
+        --surface:#000000;
+      }
+    }
+    :root[data-theme="dark"]{
+      --text:#f5f7fa;
+      --muted:#b7bec7;
+      --border:rgba(255,255,255,.12);
+      --surface:#000000;
+    }
 
-        nav a:hover {
-            color: var(--primary);
-        }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,sans-serif;
+      background:#fff; /* via data-theme dunkler */
+      color:var(--text);
+      scroll-behavior:smooth;
+    }
+    :root[data-theme="dark"] body{ background:#000000; }
 
-        .burger {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 24px;
-            height: 18px;
-            cursor: pointer;
-            z-index: 20;
-        }
+    a{color:inherit;text-decoration:none;transition:color .2s ease,opacity .2s ease}
+    h1,h2,h3,h4{font-weight:900;letter-spacing:-.02em}
+    .container{max-width:var(--container-width);margin:0 auto;padding:5rem 2rem}
+    .section-title{font-size:clamp(2rem, 1.2rem + 2.4vw, 2.8rem);text-align:center;margin-bottom:.5rem;color:var(--text);font-weight:700;letter-spacing:-.02em}
 
-        .burger span {
-            display: block;
-            height: 3px;
-            background: var(--text);
-            border-radius: 2px;
-            transition: 0.3s;
-        }
+    /* Skip-Link */
+    .skip-link{
+      position:absolute; left:-9999px; top:auto; z-index:1000;
+    }
+    .skip-link:focus{
+      left:auto; top:.5rem; inset-inline-start:.5rem;
+      background:#000; color:#fff; padding:.5rem .75rem; border-radius:.5rem;
+    }
 
-        .burger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
+    /* ===== HERO (Video) ===== */
+    main{ display:block; }
 
-        .burger.active span:nth-child(2) {
-            opacity: 0;
-        }
+    .hero-video-wrapper {
+      position: relative;
+      /* Reihenfolge = bestes Fallback */
+      min-height: 100vh;
+      min-height: 100dvh;
+      min-height: 100svh;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-color: #000;
+      /* Fallback-Bilder */
+      background: #000 url('./IndexM/PC.webp') center center / cover no-repeat;
+    }
+    /* Tablet Fallback-Bild */
+    @media (max-width: 1024px) {
+      .hero-video-wrapper { background-image: url('./IndexM/Tablet.webp'); }
+    }
+    /* Smartphone Fallback-Bild */
+    @media (max-width: 480px) {
+      .hero-video-wrapper { background-image: url('./IndexM/handy.webp'); }
+    }
 
-        .burger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
+    .hero-video-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      max-width: 800px;
+      width: 100%;
+      color: #ffffff;
+      text-align: center;
+      border-radius: 12px;
+      background-color: #2a2a2a63; /* semitransparent, kein Verlauf */
+      margin-top: -5rem;
+    }
+    .hero-video-content::before { content: none !important; }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
+    .video-background {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+      pointer-events: none;
+    }
 
-        h1,
-        h2,
-        h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
+    .hero-video-content h1 {
+      font-size: 3.8rem;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      color: #ffffff;
+    }
+    .hero-video-content p {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.85);
+    }
 
-        h1 {
-            font-size: 2.8rem;
-            text-align: center;
-        }
+    .cta-btn {
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      color: #fff;
+      font-weight: 700;
+      padding: 1rem 2.2rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      text-transform: uppercase;
+      margin-top: 2rem;
+      border: none;
+      box-shadow: 0 0 12px rgba(255, 102, 0, 0.3),
+                  0 0 24px rgba(255, 102, 0, 0.25);
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .cta-btn:hover,
+    .cta-btn:focus {
+      background: var(--secondary);
+      color: #000;
+      transform: scale(1.03);
+      cursor: pointer;
+      outline: 2px solid var(--primary);
+      outline-offset: 4px;
+    }
 
-        h2 {
-            font-size: 2rem;
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 0.5rem;
-            margin-top: 3rem;
-        }
+    .video-fallback-image {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      z-index: 0; pointer-events: none;
+    }
 
-        h3 {
-            font-size: 1.2rem;
-            margin-top: 2rem;
-        }
+    /* Typo/Spacing – Responsiv */
+    @media (max-width: 1024px) {
+      .hero-video-content { padding: 2rem; }
+      .hero-video-content h1 { font-size: 3rem; }
+      .hero-video-content p  { font-size: 1.1rem; line-height: 1.5; }
+    }
+    @media (max-width: 768px) {
+      .hero-video-content { padding: 1.5rem; margin-top: 0; }
+      .hero-video-content h1 { font-size: 2.2rem; line-height: 1.2; }
+      .hero-video-content p  { font-size: 1rem; line-height: 1.4; }
+      .cta-btn { font-size: 0.95rem; padding: 0.75rem 1.5rem; width: auto; max-width: 90%; margin: 1.5rem auto 0; }
+    }
+    @media (max-width: 480px) {
+      .hero-video-content h1 { font-size: 1.6rem; line-height: 1.3; }
+      .hero-video-content p  { font-size: 0.95rem; }
+    }
+    @media (max-width: 425px) {
+      .cta-btn {
+        width: 100%; max-width: 180px; font-size: 0.9rem;
+        padding: 0.9rem 1.2rem; text-align: center; margin-left: auto; margin-right: auto;
+      }
+    }
 
-        p {
-            margin-bottom: 1rem;
-            color: #ddd;
-        }
+    /* ===== Hero-Video: „immer 100% höhe“ & Beschnitt-Regeln ===== */
 
-        ul {
-            padding-left: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
+    /* Mobile: Hero bleibt 100vh/dvh/svh */
+    @media (max-width: 768px) {
+      .hero-video-wrapper {
+        min-height: 100vh;
+        min-height: 100dvh;
+        min-height: 100svh;
+      }
+    }
 
-        li {
-            margin-bottom: 0.5rem;
-            color: #ccc;
-        }
+    /* Desktop ≥ 1025px: Video 10% höher, seitlich beschnitten */
+    @media (min-width: 1025px) {
+      .video-background {
+        top: 50%; left: 50%;
+        width: auto;
+        height: 110%;
+        transform: translate(-50%, -50%);
+        object-fit: contain; /* wir steuern Größe selbst */
+      }
+    }
 
-        footer {
-            background: #0d0d0d;
-            color: #aaa;
-            padding: 4rem 5vw 2rem;
-            font-size: 0.9rem;
-            border-top: 1px solid #222;
-        }
+    /* iPad quer / mittlere Geräte: 832–1024px Breite UND Höhe unter 833px */
+    @media (min-width: 832px) and (max-width: 1024px) and (max-height: 832px) {
+      .video-background {
+        top: 50%; left: 50%;
+        width: auto;
+        height: 110%;
+        transform: translate(-50%, -50%);
+        object-fit: contain;
+      }
+    }
+  </style>
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto 2rem;
-        }
+<style>/* ===== Section Headings – Root Tokens ===== */
+:root{
+  /* Title */
+  --sec-title-fs: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --sec-title-fw: 900;
+  --sec-title-ls: -0.02em;
+  --sec-title-mb: 0rem;
+  --sec-title-color: var(--text-main, #1c1c1e);
 
-        .footer-logo span {
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: var(--primary);
-        }
+  /* Subtitle */
+  --sec-sub-fs: 1.1rem;
+  --sec-sub-color: #666;
+  --sec-sub-mb: 2rem;
+  --sec-sub-lh: 1.5;
+  --sec-sub-max: 65ch;
+}
 
-        .footer-logo p {
-            margin-top: 0.5rem;
-            color: #666;
-            font-size: 0.95rem;
-        }
+/* ===== Utilities (kannst du überall verwenden) ===== */
+.section-title{
+  font-size: var(--sec-title-fs);
+  font-weight: var(--sec-title-fw);
+  letter-spacing: var(--sec-title-ls);
+  margin: 0 0 var(--sec-title-mb);
+  color: var(--sec-title-color);
+  text-align: center; /* optional, rausnehmen wenn nicht gewünscht */
+}
 
-        .footer-links h4,
-        .footer-contact h4,
-        .footer-socials h4 {
-            margin-bottom: 0.8rem;
-            color: var(--secondary);
-            font-weight: 600;
-            font-size: 1rem;
-        }
+.section-subtitle{
+  font-size: var(--sec-sub-fs);
+  color: var(--sec-sub-color);
+  margin: 0 0 var(--sec-sub-mb);
+  line-height: var(--sec-sub-lh);
+  max-width: var(--sec-sub-max);
+  margin-inline: auto;
+  text-align: center; /* optional */
+}
 
-        .footer-links ul,
-        .footer-contact ul {
-            list-style: none;
-            padding: 0;
-        }
+/* ===== Optional: bestehende Klassen aliasen ===== */
+:is(.persona-title)   { all: unset; display:block; }
+:is(.persona-subline) { all: unset; display:block; }
 
-        .footer-links li,
-        .footer-contact li {
-            margin-bottom: 0.4rem;
-        }
+/* Fallback ohne PostCSS "composes": dupliziere die Regeln */
+.persona-title{
+  font-size: var(--sec-title-fs);
+  font-weight: var(--sec-title-fw);
+  letter-spacing: var(--sec-title-ls);
+  margin: 0 0 var(--sec-title-mb);
+  color: var(--sec-title-color);
+  text-align: center;
+}
+.persona-subline{
+  font-size: var(--sec-sub-fs);
+  color: var(--sec-sub-color);
+  margin: 0 0 var(--sec-sub-mb);
+  line-height: var(--sec-sub-lh);
+  max-width: var(--sec-sub-max);
+  margin-inline: auto;
+  text-align: center;
+}
 
-        .footer-links a {
-            color: #ccc;
-        }
+/* ===== Dark / Auto-Dark ===== */
+:root[data-theme="dark"] .section-title,
+:root[data-theme="dark"] .persona-title{ color:#fff; }
 
-        .footer-links a:hover {
-            color: var(--primary);
-        }
+:root[data-theme="dark"] .section-subtitle,
+:root[data-theme="dark"] .persona-subline{ color:#fff; }
 
-        .footer-socials {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
+@media (prefers-color-scheme: dark){
+  :root[data-theme="auto"] .section-title,
+  :root[data-theme="auto"] .persona-title{ color:#fff; }
+  :root[data-theme="auto"] .section-subtitle,
+  :root[data-theme="auto"] .persona-subline{ color:#fff; }
+}
+</style>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="Webflow" name="generator">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/denizs-dapper-site-2d192b.webflow.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
 
-        .footer-socials-icons {
-            display: flex;
-            gap: 12px;
-            margin-top: 0.5rem;
-        }
 
-        .footer-socials img {
-            width: 26px;
-            height: 26px;
-            margin-right: 12px;
-            opacity: 1;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-            vertical-align: middle;
-        }
+  <body data-page="titlepage">
 
-        .footer-socials img:hover {
-            transform: scale(1.1);
-            opacity: 1;
-        }
+<style>
+/* --------------------------
+   Lokale Bild-Overrides nur für titlepage.html
+--------------------------- */
+body[data-page="titlepage"] .hero-image-background {
+  background-image: url("./images/hero-bg-sky_1hero-bg-sky.webp") !important;
+}
 
-        .footer-bottom {
-            text-align: center;
-            color: #666;
-            font-size: 0.85rem;
-            margin-top: 1rem;
-        }
+body[data-page="titlepage"] .hero-image-foreground {
+  background-image: url("./images/titlepage-fg.webp") !important;
+}
 
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem;
-            }
+/* Optional: Mobile- oder Tablet-Varianten */
+@media (max-width: 1024px) {
+  body[data-page="titlepage"] .hero-image-foreground {
+    background-image: url("./images/titlepage-fg-tablet.webp") !important;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page="titlepage"] .hero-image-foreground {
+    background-image: url("./images/titlepage-fg-mobile.webp") !important;
+  }
+}
+</style>
 
-            h2 {
-                font-size: 1.5rem;
-            }
 
-            nav {
-                display: none;
-            }
-        }
 
-        @media (max-width: 480px) {
-            .burger {
-                display: flex;
-            }
 
-            nav {
-                position: absolute;
-                top: 100%;
-                right: 0;
-                background: #111;
-                flex-direction: column;
-                align-items: flex-end;
-                padding: 1rem;
-                display: none;
-                gap: 1rem;
-                border-left: 1px solid #222;
-                border-bottom: 1px solid #222;
-            }
-
-            nav.open {
-                display: flex;
-            }
-
-            nav a {
-                margin: 0;
-                font-size: 1rem;
-                color: var(--text);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .burger {
-                display: flex;
-            }
-
-            nav {
-                display: none;
-                flex-direction: column;
-                gap: 1rem;
-                background: #111;
-                padding: 1rem;
-                border: 1px solid #222;
-                margin-top: 1rem;
-            }
-
-            nav.open {
-                display: flex;
-            }
-        }
-    </style>
 </head>
+
+
+
+
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+<style>
+/* === BASIS (umbenannt, mystisch) ===================================================== */
+.aether-header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(255,255,255,.9);
+  border-bottom:1px solid var(--border);
+  padding-top:max(0px, env(safe-area-inset-top));
+  transition:box-shadow .2s ease, background-color .2s ease, padding .2s ease;
+}
+@supports(backdrop-filter: blur(8px)){
+  .aether-header{ backdrop-filter:saturate(1.1) blur(8px); background:color-mix(in oklab, var(--surface) 88%, transparent); }
+}
+.aether-header.is-ascended{ box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+
+.aether-header__bar{
+  max-width:var(--container-width);
+  margin:0 auto;
+  padding:var(--header-pad-y) clamp(6px,5vw,10px);
+  display:grid;
+  grid-template-columns:auto 1fr auto; /* Sigil | Nav | Actions */
+  align-items:center;
+  gap:1rem;
+}
+
+.sigil-mark{
+  font-size:clamp(1.1rem, 2vw, 1.4rem);
+  font-weight:900; letter-spacing:0.02em;
+  color:var(--text);
+  display:inline-flex; align-items:center; gap:.5rem;
+  white-space:nowrap; text-decoration:none;
+}
+
+/* Actions */
+.astral-actions{ display:inline-flex; align-items:center; gap:.5rem; }
+.charm-cta{
+  padding:.6rem .9rem; border-radius:var(--radius); font-weight:600;
+  background:var(--primary); color:#fff; text-decoration:none; line-height:1;
+  min-height:44px; display:inline-flex; align-items:center; justify-content:center;
+}
+/* CTA-Button global */
+.charm-cta{ background: var(--primary) !important; }
+
+/* Toggle (Burger/X) */
+.portal-toggle{
+  appearance:none; border:1px solid var(--border); background:var(--surface);
+  border-radius:var(--radius); padding:.5rem .6rem; line-height:1; cursor:pointer;
+  display:inline-flex; align-items:center; gap:.5rem; justify-self:end; min-width:44px; min-height:44px;
+  color:var(--text);
+}
+.portal-toggle:focus-visible{outline:2px solid color-mix(in oklab, var(--text) 20%, transparent); outline-offset:2px}
+.portal-toggle .icon{ width:22px; height:22px; }
+.portal-toggle .icon-close{ display:none; }
+.portal-toggle[aria-expanded="true"] .icon-burger{ display:none; }
+.portal-toggle[aria-expanded="true"] .icon-close{ display:inline; }
+
+/* NAV – Basis */
+.astral-nav{ width:100%; }
+.astral-nav__list{ list-style:none; padding:0; margin:0; }
+.astral-item{ position:relative; border:0; }
+.astral-link{
+  display:block; text-decoration:none;
+  font-weight:500; color:var(--muted);
+  white-space:nowrap; text-align:center;
+  padding:0.85rem 1rem; min-height:44px; line-height:44px;
+  position:relative;
+}
+.astral-link:hover,
+.astral-link:focus-visible{ color:var(--text); }
+.astral-link[aria-current="page"],
+.astral-link[data-active]{ color:var(--text); font-weight:600; }
+.astral-link::after{
+  content:""; position:absolute; left:10px; right:10px; bottom:6px;
+  height:2px; background:currentColor; opacity:0; transform:scaleX(.6);
+  transition:opacity .18s ease, transform .18s ease;
+}
+@media(hover:hover){
+  .astral-link:hover::after,
+  .astral-link:focus-visible::after,
+  .astral-link[aria-current="page"]::after,
+  .astral-link[data-active]::after{ opacity:.75; transform:scaleX(1); }
+}
+
+/* Mobile Menüs */
+@media (max-width:479px){
+  .astral-nav{
+    display:flex; flex-direction:column;
+    position:fixed; inset:var(--gate-height) 0 0;
+    background:var(--surface);
+    transform:translateY(-8px); opacity:0; pointer-events:none;
+    transition:transform .18s ease, opacity .18s ease;
+    height:calc(100dvh - var(--gate-height));
+  }
+  .astral-nav.is-awakened{ transform:translateY(0); opacity:1; pointer-events:auto; }
+  .astral-nav__list{
+    display:grid; grid-template-columns:1fr; gap:0;
+    padding:.25rem clamp(16px,5vw,40px) .75rem;
+    flex:1 1 auto; overflow:auto;
+  }
+  .astral-link{ padding:0.95rem 0; font-size:1rem; line-height:1.4; min-height:auto; }
+  .astral-actions .charm-cta{ display:none; }
+}
+.night-veil{ position:fixed; inset:var(--gate-height) 0 0; background:rgba(0,0,0,.28); opacity:0; pointer-events:none; transition:opacity .18s ease; }
+.night-veil.is-awakened{ opacity:1; pointer-events:auto; }
+
+@media (min-width:480px) and (max-width:767px){
+  .astral-nav{
+    display:flex; flex-direction:column;
+    position:fixed; inset:var(--gate-height) 0 0;
+    background:var(--surface);
+    transform:translateY(-8px); opacity:0; pointer-events:none;
+    transition:transform .18s ease, opacity .18s ease;
+    height:calc(100dvh - var(--gate-height));
+  }
+  .astral-nav.is-awakened{ transform:translateY(0); opacity:1; pointer-events:auto; }
+  .astral-nav__list{
+    display:flex; flex-direction:column; gap:0;
+    padding:.5rem clamp(16px,6vw,48px) .75rem;
+    flex:1 1 auto; overflow:auto;
+  }
+  .astral-link{ padding:.8rem 0; }
+  .astral-actions .charm-cta{ display:none; }
+}
+
+/* Tablet & Desktop */
+@media (min-width:768px){
+  .portal-toggle{ display:none; }
+  .astral-nav{ display:block; position:static; transform:none; opacity:1; pointer-events:auto; background:transparent; width:auto; height:auto; }
+  .astral-nav__list{ display:flex; gap:0; padding:0; align-items:center; justify-content:center; overflow:visible; }
+  .astral-item{ border:0; }
+  .astral-link{ padding:.85rem 1.05rem; color:var(--muted); min-height:auto; line-height:normal; }
+  .astral-actions{ display:inline-flex; }
+}
+
+/* Fokus-Stile */
+.astral-link:focus-visible{ outline:2px solid color-mix(in oklab, currentColor 60%, transparent); outline-offset:3px; border-radius:8px; }
+
+/* Scroll-Lock */
+.nav-lock, .nav-lock body{ overflow:hidden; }
+
+/* Mobile CTA Container */
+.astral-nav__mobile-actions{ display:none; }
+@media (max-width:767px){
+  .astral-nav__mobile-actions{
+    display:grid; grid-template-columns: 1fr; gap:.75rem;
+    padding:.75rem clamp(16px,6vw,48px) 1rem; background:inherit;
+    margin-top:auto; border-top:none !important;
+  }
+  .astral-nav__mobile-actions .charm-cta{ width:100%; min-height:44px; }
+}
+
+/* THEME scopes bleiben gleich (data-theme) */
+:root:not([data-theme="dark"]) .astral-nav.is-awakened{ background:#fff; }
+:root:not([data-theme="dark"]) .astral-link{ color:#111; }
+:root:not([data-theme="dark"]) .astral-link[aria-current="page"],
+:root:not([data-theme="dark"]) .astral-link[data-active]{ color:#000; }
+:root:not([data-theme="dark"]) .portal-toggle{ color:#111; border-color:var(--border); background:#fff; }
+[data-theme="dark"] .astral-nav.is-awakened{ background:#000; }
+[data-theme="dark"] .astral-link{ color:#fff; }
+[data-theme="dark"] .astral-link::after{ background:#fff; }
+[data-theme="dark"] .astral-link[aria-current="page"],
+[data-theme="dark"] .astral-link[data-active]{ color:#fff; }
+[data-theme="dark"] .portal-toggle{ color:#fff; border-color:rgba(255,255,255,.25); background:#111; }
+[data-theme="dark"] .night-veil.is-awakened{ background:rgba(0,0,0,.6); }
+
+/* Kompaktere Abstände Mobile */
+@media (max-width: 767px){
+  .astral-nav__list{ padding: .25rem clamp(16px,5vw,40px) .5rem; }
+  .astral-link{ padding: .5rem 0; line-height: 1.25; min-height: 40px; font-size: .98rem; }
+  .astral-link::after{ bottom:4px; height:2px; opacity:.6; }
+  .astral-item + .astral-item{ border-top:none !important; }
+}
+@media (max-width: 479px){
+  .astral-nav__list{ padding:.2rem clamp(14px,5vw,36px) .45rem; }
+  .astral-link{ padding:.45rem 0; font-size:.95rem; min-height:38px; }
+}
+
+/* Mobile Subnav Grundlayout */
+@media (max-width: 767px){
+  .astral-item{ display:block; position:relative; }
+  .astral-item > .astral-link{ text-align:center !important; padding-right: 2.5rem; }
+  .gatelet{
+    position:absolute; right: clamp(16px,5vw,40px); top:50%; transform:translateY(-50%);
+    appearance:none; border:0; background:transparent; padding:.25rem; line-height:1; cursor:pointer;
+    display:inline-flex; align-items:center; justify-content:center;
+    min-width:36px; min-height:36px; border-radius:8px; color:var(--muted);
+  }
+  .gatelet svg{ width:18px; height:18px; transition:transform .18s ease, color .18s ease; }
+  .gatelet[aria-expanded="true"] svg{ transform:rotate(180deg); color:var(--text); }
+  .underrealm{ list-style:none; padding:0; margin:.2rem 0 .4rem; }
+  .astral-link--sub{
+    text-align:left; padding:.35rem 0 .35rem 1rem;
+    line-height:1.25; min-height:36px; font-size:.95rem;
+    color: color-mix(in oklab, var(--muted) 90%, var(--text) 10%);
+  }
+  .astral-link--sub:hover, .astral-link--sub:focus-visible{ color:var(--text); }
+}
+
+/* Pill/Active im Mobile */
+@media (max-width:767px){
+  .astral-item{ display:grid; grid-template-columns: 1fr auto; align-items:center; border-bottom:1px solid color-mix(in oklab, var(--muted) 12%, transparent); }
+  .astral-item:last-child{ border-bottom:0; }
+  .astral-item > .astral-link{ text-align:left !important; padding: 0.85rem clamp(16px,6vw,24px); padding-right: 3.25rem; line-height:1.3; }
+  .gatelet{ position:static; transform:none; margin-right: clamp(12px,5vw,24px); color: var(--muted); }
+  .gatelet:hover{ color: var(--text); }
+  .astral-link[aria-current="page"],
+  .astral-link[data-active]{ background: color-mix(in oklab, var(--accent) 9%, transparent); color: var(--text); border-radius:12px; }
+  .astral-link::after{ display:none; }
+}
+
+/* Subnav Kompaktheit + Einblendung */
+@media (max-width:767px){
+  .underrealm{ margin: .25rem 0 .6rem; padding-left: clamp(18px, 7vw, 28px); border-left: 2px solid color-mix(in oklab, var(--muted) 20%, transparent); }
+  .astral-link--sub{ padding: .45rem 0; font-size: .96rem; color: color-mix(in oklab, var(--text) 70%, var(--muted) 30%); }
+  .underrealm[hidden]{ display:block !important; height:0; overflow:hidden; opacity:0; }
+  .underrealm:not([hidden]){ animation: subreveal .18s ease-out; }
+  @keyframes subreveal { from{ opacity:0; height:0 } to{ opacity:1; height:auto } }
+  .astral-link{ padding-top:.9rem; padding-bottom:.9rem; }
+  .astral-nav__mobile-actions{
+    position:sticky; bottom:0;
+    padding: .85rem clamp(16px,6vw,24px) calc(.85rem + env(safe-area-inset-bottom));
+    background: inherit; box-shadow: 0 -8px 24px rgba(0,0,0,.08);
+  }
+  .astral-nav__mobile-actions .charm-cta{ font-size:1rem; font-weight:700; border-radius: 12px; }
+  .astral-item > .astral-link{ font-weight: 750; font-size: 1.08rem; letter-spacing: .1px; }
+}
+[data-theme="dark"] .astral-nav.is-awakened{ background:#000000; }
+@media (max-width:767px){
+  [data-theme="dark"] .astral-item{ border-bottom:1px solid rgba(255,255,255,.07); }
+  [data-theme="dark"] .underrealm{ border-left-color: rgba(255,255,255,.12); }
+}
+
+/* Zusätzliche Feinheiten Mobile */
+@media (max-width:767px){
+  .underrealm{ margin: .15rem 0 .5rem; padding-left: clamp(16px,6vw,24px); border-left: 2px solid color-mix(in oklab, var(--muted) 22%, transparent); }
+  .astral-link--sub{ padding: .4rem 0; font-size: .96rem; }
+  .astral-item.is-awakened > .astral-link{ padding-bottom: .35rem; }
+  .astral-item.is-awakened .underrealm{ margin-top: .1rem; }
+}
+
+/* CTA Effekte/States */
+.charm-cta { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+@media (hover:hover){
+  .charm-cta:hover{ transform: translateY(-1px); box-shadow: var(--cta-shadow-hover), inset 0 0 0 1px rgba(255,255,255,.08); }
+  .charm-cta:active{ transform: translateY(0); box-shadow: var(--cta-shadow); }
+}
+.charm-cta:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 3px color-mix(in oklab, var(--cta-focus) 70%, transparent),
+    0 0 0 6px color-mix(in oklab, var(--cta-focus) 25%, transparent),
+    var(--cta-shadow);
+}
+.charm-cta__icon{ width: 1.15em; height: 1.15em; flex: 0 0 auto; transform: translateX(0); transition: transform .18s ease; }
+@media(hover:hover){ .charm-cta:hover .charm-cta__icon{ transform: translateX(2px); } }
+@media (prefers-contrast: more){
+  .charm-cta{ box-shadow: 0 0 0 2px color-mix(in oklab, #000 20%, var(--cta-bg)); }
+  .charm-cta:focus-visible{ box-shadow: 0 0 0 3px #fff, 0 0 0 6px color-mix(in oklab, var(--cta-bg) 60%, #000 40%); }
+}
+[data-theme="dark"] .charm-cta{ --cta-shadow: 0 10px 24px rgba(0,0,0,.36); --cta-shadow-hover: 0 14px 34px rgba(0,0,0,.46); }
+.charm-cta::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; z-index:0;
+  background: radial-gradient(120% 140% at 0% 0%, rgba(255,255,255,.22), rgba(255,255,255,.08) 35%, transparent 60%);
+  mix-blend-mode: soft-light; pointer-events:none; opacity:.95;
+}
+.charm-cta > *{ position:relative; z-index:1; }
+.charm-cta .cta-ripple{
+  position:absolute; inset:auto; border-radius:50%;
+  pointer-events:none; transform: translate(-50%, -50%) scale(0);
+  opacity:.5; filter:saturate(120%);
+  background: radial-gradient(circle at center, rgba(255,255,255,.55), rgba(255,255,255,.22), rgba(255,255,255,0) 70%);
+}
+.charm-cta .cta-ripple.is-anim{ animation: ctaRipple .6s ease-out forwards; }
+@keyframes ctaRipple{ to{ transform: translate(-50%, -50%) scale(20); opacity:0; } }
+@media (prefers-reduced-motion: reduce){
+  .charm-cta .cta-ripple{ display:none !important; }
+  .charm-cta{ transition: box-shadow .01ms, transform .01ms; }
+}
+.charm-cta[aria-busy="true"]{ cursor: progress; filter: saturate(.9) brightness(.96); }
+.charm-cta[aria-busy="true"] .charm-cta__labl{ opacity:.0; }
+.charm-cta[aria-busy="true"] .charm-cta__icon{ opacity:0; }
+.charm-cta[aria-busy="true"]::after{
+  content:""; position:absolute; inset:0; display:block; margin:auto;
+  width:1.25rem; height:1.25rem; border-radius:50%;
+  border: 2px solid rgba(255,255,255,.55);
+  border-top-color: rgba(255,255,255,0);
+  animation: ctaSpin .9s linear infinite; z-index:2;
+}
+@keyframes ctaSpin{ to{ transform: rotate(360deg); } }
+.charm-cta[aria-disabled="true"], .charm-cta.is-disabled{ opacity:.58; cursor:not-allowed; pointer-events:none; }
+.charm-cta--lg{ padding: .9rem 1.1rem; font-size:1.05rem; }
+.charm-cta--sm{ padding: .55rem .8rem; font-size:.92rem; }
+.astral-actions .charm-cta{ white-space:nowrap; }
+
+/* Header-Actions rechtsbündig + Reihenfolge */
+.astral-actions{ justify-content:flex-end; gap:.5rem; }
+.astral-actions .orb-toggle{ order:0; }
+.astral-actions .charm-cta{ order:1; }
+
+/* Mobile Subnav – enger */
+@media (max-width:767px){
+  .astral-item.is-awakened > .underrealm{ margin-top: -2rem !important; }
+  .astral-item.is-awakened > .astral-link,
+  .astral-item:has(.gatelet[aria-expanded="true"]) > .astral-link{ padding-bottom: .18rem !important; }
+  .underrealm{ margin: .08rem 0 .38rem !important; padding-left: clamp(16px,6vw,24px); border-left: 2px solid color-mix(in oklab, var(--muted) 22%, transparent); }
+  .astral-link--sub{ padding: .35rem 0 !important; }
+  .astral-item.is-awakened{ border-bottom: 0 !important; }
+}
+
+/* Tablet kompakt */
+@media (min-width:768px) and (max-width:1023px){
+  .astral-nav__list{ flex-wrap: nowrap !important; justify-content: flex-start; gap: .25rem !important; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+  .astral-nav__list::-webkit-scrollbar{ display:none; }
+  .astral-link{ padding:.56rem .68rem !important; font-size:.80rem !important; line-height:1.15 !important; }
+  .aether-header__bar{ grid-template-columns: auto minmax(0,1fr) auto !important; gap:.5rem !important; }
+  .sigil-mark{ flex-shrink:0 !important; white-space:nowrap !important; margin-right: clamp(8px,2vw,16px) !important; font-size: clamp(1.05rem, 1.6vw, 1.25rem) !important; line-height:1 !important; }
+  .astral-nav{ min-width:0 !important; justify-self:end !important; margin-left: clamp(10px, 2.5vw, 28px) !important; }
+  .gatelet{ display:none !important; }
+  .astral-actions{ gap:.35rem !important; }
+  .astral-actions .charm-cta{ font-size:.80rem !important; padding:.55rem .85rem !important; min-height:38px !important; border-radius:10px !important; margin:0 !important; white-space:nowrap !important; }
+}
+
+/* Desktop/Tablet Dropdown */
+@media (min-width:768px){
+  .gatelet{ display:inline-flex !important; appearance:none; border:0; background:transparent; cursor:pointer; padding:.25rem; line-height:1; color:var(--muted); }
+  .gatelet svg{ width:16px; height:16px; transition:transform .18s ease, color .18s ease; }
+  .gatelet[aria-expanded="true"] svg{ transform:rotate(180deg); color:var(--text); }
+
+  .astral-item{ display:inline-flex; align-items:center; position:relative; }
+  .astral-item > .astral-link{ padding-right:.25rem; }
+
+  .underrealm{
+    position:absolute; left:0; top:calc(100% + 8px);
+    min-width: 240px; max-width:420px;
+    padding:.5rem 0 !important;
+    background: rgba(0,0,0,.9) !important; color:#fff;
+    border-radius:12px; border:1px solid rgba(255,255,255,.10) !important;
+    box-shadow:0 14px 34px rgba(0,0,0,.36);
+    display:none; z-index:2000 !important;
+  }
+  .underrealm::before{
+    content:""; position:absolute; top:-6px; left:14px; width:12px; height:12px;
+    background: rgba(0,0,0,.9) !important;
+    transform:rotate(45deg);
+    border-left:1px solid rgba(255,255,255,.10) !important;
+    border-top:1px solid rgba(255,255,255,.10) !important;
+  }
+  .underrealm li{ list-style:none; margin:0; }
+  .underrealm li + li{ border-top:1px solid rgba(255,255,255,.12); }
+  .astral-link--sub{
+    display:block; text-align:left !important;
+    padding:.6rem .9rem !important; margin:0; border-radius:0; color:#e9e9e9;
+  }
+  .astral-link--sub:hover, .astral-link--sub:focus-visible{ background: rgba(255,255,255,.08); color:#fff; }
+  .astral-item.is-awakened > .underrealm{ display:block !important; }
+  .astral-nav__list{ overflow: visible !important; }
+}
+
+/* Light-Mode Dropdown */
+:root:not([data-theme="dark"]) .underrealm{
+  background:#fff !important; color:#111 !important;
+  border:1px solid rgba(0,0,0,.12) !important; box-shadow:0 14px 34px rgba(0,0,0,.14) !important;
+}
+:root:not([data-theme="dark"]) .underrealm::before{
+  background:#fff !important;
+  border-left:1px solid rgba(0,0,0,.12) !important;
+  border-top:1px solid rgba(0,0,0,.12) !important;
+}
+:root:not([data-theme="dark"]) .astral-link--sub{ color:#111 !important; }
+:root:not([data-theme="dark"]) .astral-link--sub:hover,
+:root:not([data-theme="dark"]) .astral-link--sub:focus-visible{ background:rgba(0,0,0,.06) !important; color:#000 !important; }
+
+/* Mobile Light Mode: Subnav ohne Box */
+@media (max-width: 767px){
+  :root:not([data-theme="dark"]) .underrealm{
+    background: transparent !important; border: 0 !important; box-shadow: none !important; border-radius: 0 !important;
+    padding: .08rem 0 .38rem clamp(16px,6vw,24px) !important;
+  }
+  :root:not([data-theme="dark"]) .underrealm::before{ display:none !important; }
+  :root:not([data-theme="dark"]) .astral-link--sub{ color:#111 !important; }
+  :root:not([data-theme="dark"]) .astral-link--sub:hover,
+  :root:not([data-theme="dark"]) .astral-link--sub:focus-visible{
+    background: rgba(0,0,0,.05) !important; color:#000 !important; border-radius:8px;
+  }
+}
+
+/* XS Phones: Einrückungen & Abstände */
+@media (max-width: 479px){
+  .astral-item.is-awakened > .underrealm{ margin-top: 0.35rem !important; margin-bottom: 2.35rem !important; }
+  .astral-item.is-awakened > .astral-link{ padding-bottom: .35rem !important; }
+  .underrealm{ padding-left: clamp(16px, 6vw, 22px) !important; }
+}
+
+/* Brand größer auf Phones */
+@media (max-width: 767px){
+  .sigil-mark{ font-size: clamp(1.4rem, 6vw, 1.9rem) !important; line-height: 1.1; }
+}
+
+/* Mobile CTA unten ohne Box-Hintergrund */
+@media (max-width: 767px){
+  .astral-nav__mobile-actions{
+    background: transparent !important; box-shadow: none !important; border-top: none !important; padding-top: 1rem;
+  }
+}
+
+/* Mobile: Subnav nur beim offenen Punkt zeigen */
+@media (max-width:767px){
+  .astral-nav__list{ display:flex; flex-direction:column; }
+  .underrealm{ display:none; }
+  .astral-item.is-awakened > .underrealm{ display:block; }
+}
+
+/* === Aurora Typo-Feeling im Header/Nav (nur Schrift) ===================== */
+.aether-header,
+.astral-link,
+.astral-link--sub,
+.sigil-mark,
+.charm-cta{
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+.sigil-mark{
+  font-weight: 900 !important;
+  letter-spacing: -0.02em !important;
+}
+.astral-link{
+  font-weight: 750 !important;
+  letter-spacing: 0.01em !important;
+  line-height: 1.2 !important;
+}
+.astral-link--sub{
+  font-weight: 650 !important;
+  letter-spacing: 0.005em !important;
+  line-height: 1.25 !important;
+}
+
+/* Balken/Shadow über Mobile-Menü entfernen, wenn Menü offen */
+@media (max-width: 767px){
+  .aether-header.portal-open{
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+    background: var(--surface) !important;
+  }
+}
+
+/* === Header-Typo wie Lead-Text – voll responsive =================== */
+
+/* Skalierung global steuerbar */
+:root{ --nav-scale: 1; }
+
+/* XS Phones (≤360px) -> minimal kleiner */
+@media (max-width:360px){ :root{ --nav-scale:.92; } }
+
+/* Small Phones (361–479px) */
+@media (min-width:361px) and (max-width:479px){ :root{ --nav-scale:.96; } }
+
+/* Phones / Phablets (480–767px) */
+@media (min-width:480px) and (max-width:767px){ :root{ --nav-scale:.98; } }
+
+/* Large Desktops (≥1200px) -> leicht größer */
+@media (min-width:1200px){ :root{ --nav-scale:1.06; } }
+
+/* Header als Container für feineres Tuning */
+.aether-header__bar{ container-type:inline-size; }
+
+/* Container-Query: wenn der Header sehr wenig Platz hat (z.B. viele Menüpunkte) */
+@container (max-width:520px){
+  .sigil-mark{ letter-spacing:-0.012em !important; }
+  .astral-link{ letter-spacing:0 !important; line-height:1.55 !important; }
+}
+
+/* Brand (ähnlich .lead) */
+.sigil-mark{
+  font-weight:950 !important;
+  letter-spacing:-0.01em !important;
+  line-height:1.28 !important;
+  font-size: calc(var(--nav-scale) * clamp(1.06rem, 1rem + .5vw, 1.22rem)) !important;
+  text-wrap:balance !important;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* Hauptlinks (ähnlich .copy) */
+.astral-link{
+  font-weight:690 !important;
+  letter-spacing:-0.002em !important;
+  font-size: calc(var(--nav-scale) * clamp(1.02rem, .98rem + .35vw, 1.16rem)) !important;
+  line-height:1.7 !important;
+  text-wrap:pretty !important;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* Subnav-Links (0.95 der Hauptlinks) */
+.astral-link--sub{
+  font-weight:690 !important;
+  letter-spacing:-0.002em !important;
+  font-size: calc(var(--nav-scale) * clamp(.97rem, .93rem + .33vw, 1.10rem)) !important;
+  line-height:1.65 !important;
+  text-wrap:pretty !important;
+}
+
+/* CTA wie Lead: kräftig & kompakt */
+.charm-cta{
+  font-weight:950 !important;
+  letter-spacing:-0.01em !important;
+  font-size: calc(var(--nav-scale) * clamp(1.02rem, .98rem + .35vw, 1.16rem)) !important;
+  line-height:1.28 !important;
+  text-wrap:balance !important;
+}
+
+/* Optional: engere, lead-typische Pillen-Unterstreichung */
+.astral-link::after{
+  height:2px !important;
+  transform:scaleX(.6);
+}
+
+/* Feinschliff je Breakpoint */
+@media (max-width:479px){
+  .astral-link{ line-height:1.5 !important; }
+  .astral-link--sub{ line-height:1.5 !important; }
+}
+@media (min-width:768px) and (max-width:1023px){
+  .astral-link{ line-height:1.6 !important; }
+}
+@media (min-width:1024px){
+  .astral-link{ line-height:1.55 !important; }
+}
+/* === Responsive Feinjustierung: kleinere Nav-Schrift zwischen 768–880px === */
+@media (min-width: 768px) and (max-width: 880px){
+  .astral-link{
+    font-size: clamp(.88rem, .82rem + .25vw, 1rem) !important;
+    line-height: 1.55 !important;
+    letter-spacing: -0.001em !important;
+  }
+}
+/* === OVERRIDE: Brand (Fusion³) größer ===================== */
+/* Desktop/Tablet */
+.sigil-mark{
+  font-size: clamp(1.6rem, 1.05rem + 1.6vw, 2.4rem) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.015em !important;
+}
+
+/* Phones */
+@media (max-width: 767px){
+  .sigil-mark{
+    font-size: clamp(1.8rem, 7.2vw, 2.3rem) !important;
+  }
+}
+
+/* Optional: gib der Brand minimal mehr Luft auf sehr schmalen Headern */
+@container (max-width:520px){
+  .sigil-mark{ letter-spacing:-0.006em !important; }
+}
+
+</style>
+
+<header class="aether-header" id="aetherGate">
+  <div class="aether-header__bar">
+    <a href="/" class="sigil-mark">Fusion³</a>
+
+    <!-- NAV mit Subnav-Accordions (nur Mobile sichtbar) -->
+    <nav class="astral-nav" id="astralWay" aria-labl="Hauptnavigation">
+      <ul class="astral-nav__list">
+
+        <!-- Leistungen -->
+        <li class="astral-item">
+          <a class="astral-link" href="/leistungen">Leistungen</a>
+          <button class="gatelet" aria-expanded="false" aria-controls="grimoire-services" aria-labl="Unterpunkte zu Leistungen ein-/ausklappen">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul id="grimoire-services" class="underrealm" hidden>
+            <li><a class="astral-link astral-link--sub" href="/leistungen/webdesign">Webdesign</a></li>
+            <li><a class="astral-link astral-link--sub" href="/leistungen/branding-ci">Branding &amp; CI</a></li>
+            <li><a class="astral-link astral-link--sub" href="/leistungen/performance">Performance Marketing</a></li>
+            <li><a class="astral-link astral-link--sub" href="/leistungen/support">Wartung &amp; Support</a></li>
+          </ul>
+        </li>
+
+        <!-- Über uns -->
+        <li class="astral-item">
+          <a class="astral-link" href="#ueber-uns">Blog</a>
+          <button class="gatelet" aria-expanded="false" aria-controls="codex-about" aria-labl="Unterpunkte zu Über uns ein-/ausklappen">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul id="codex-about" class="underrealm" hidden>
+            <li><a class="astral-link astral-link--sub" href="#team">Team</a></li>
+            <li><a class="astral-link astral-link--sub" href="#werte">Werte</a></li>
+            <li><a class="astral-link astral-link--sub" href="/jobs">Jobs</a></li>
+            <li><a class="astral-link astral-link--sub" href="/presse">Presse</a></li>
+          </ul>
+        </li>
+
+        <!-- Portfolio -->
+        <li class="astral-item">
+          <a class="astral-link" href="#portfolio">Portfolio</a>
+          <button class="gatelet" aria-expanded="false" aria-controls="vault-portfolio" aria-labl="Unterpunkte zu Portfolio ein-/ausklappen">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul id="vault-portfolio" class="underrealm" hidden>
+            <li><a class="astral-link astral-link--sub" href="#web-projekte">Web-Projekte</a></li>
+            <li><a class="astral-link astral-link--sub" href="#markenauftritte">Markenauftritte</a></li>
+            <li><a class="astral-link astral-link--sub" href="/cases">Case Studies</a></li>
+            <li><a class="astral-link astral-link--sub" href="/referenzen">Referenzen</a></li>
+          </ul>
+        </li>
+
+        <!-- Kontakt -->
+        <li class="astral-item">
+          <a class="astral-link" href="#kontakt">Kontakt</a>
+          <button class="gatelet" aria-expanded="false" aria-controls="altar-contact" aria-labl="Unterpunkte zu Kontakt ein-/ausklappen">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul id="altar-contact" class="underrealm" hidden>
+            <li><a class="astral-link astral-link--sub" href="/anfrage">Anfrage stellen</a></li>
+            <li><a class="astral-link astral-link--sub" href="/beratung">Beratung buchen</a></li>
+            <li><a class="astral-link astral-link--sub" href="/standort">Standort</a></li>
+            <li><a class="astral-link astral-link--sub" href="/impressum">Impressum</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+
+    <div class="astral-actions">
+
+      <!-- Theme Toggle -->
+      <button class="orb-toggle" id="eclipseStone" aria-pressed="true" aria-describedby="omenWhisper" aria-controls="omenWhisper" aria-labl="Hell- oder Dunkelmodus umschalten">
+        <div class="sky day-sky" aria-hidden="true"></div>
+        <div class="sky night-sky" aria-hidden="true"></div>
+        <div class="stars" id="starField" aria-hidden="true"></div>
+        <div class="clouds" id="nebulaSea" aria-hidden="true">
+          <div class="leyline back"  data-lane="back"></div>
+          <div class="leyline mid"   data-lane="mid"></div>
+          <div class="leyline front" data-lane="front"></div>
+        </div>
+        <span class="thumb" id="moonShard" aria-hidden="true"></span>
+      </button>
+      
+      <p id="omenWhisper" class="visually-hidden" aria-live="polite">Dunkelmodus aktiv</p>
+
+      <!-- CTA -->
+      <a
+        class="charm-cta charm-cta--prime"
+        href="#kontakt"
+        id="sigilOffer"
+        role="button"
+        aria-labl="Angebot anfordern"
+        data-cta
+        data-cta-context="header"
+      >
+        <span class="charm-cta__labl">Check starten</span>
+        <span class="visually-hidden" aria-live="polite" aria-atomic="true"></span>
+      </a>
+  
+    </div>
+
+    <button class="portal-toggle" id="runeSwitch" aria-labl="Menü öffnen" aria-expanded="false" aria-controls="astralWay">
+      <!-- Burger -->
+      <svg class="icon icon-burger" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <!-- X -->
+      <svg class="icon icon-close" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span class="labl">Menü</span>
+    </button>
+  </div>
+  <div class="night-veil" id="voidVeil" hidden></div>
+</header>
+
+<script>
+  /* ---------------------------
+     Aether / Astral Navigation
+     --------------------------- */
+  (function(){
+    const docEl   = document.documentElement;
+    const gate    = document.getElementById('aetherGate');
+    const switchRune = document.getElementById('runeSwitch');
+    const astral  = document.getElementById('astralWay');
+    const veil    = document.getElementById('voidVeil');
+    if(!switchRune || !astral) return;
+
+    // Headerhöhe -> CSS Var
+    function setGateHeight(){
+      const h = gate.getBoundingClientRect().height;
+      docEl.style.setProperty('--gate-height', h + 'px');
+    }
+    setGateHeight();
+    addEventListener('resize', setGateHeight, {passive:true});
+
+    // MQ Sync
+    const mq = window.matchMedia('(min-width: 768px)');
+
+    // Mobile Actions Container
+    const mobileSatchelId = 'mobileSatchel';
+    let mobileSatchel = null;
+    function ensureSatchel(){
+      if(!mobileSatchel){
+        mobileSatchel = document.createElement('div');
+        mobileSatchel.id = mobileSatchelId;
+        mobileSatchel.className = 'astral-nav__mobile-actions';
+        mobileSatchel.setAttribute('hidden','');
+        astral.appendChild(mobileSatchel);
+      }
+    }
+    function stowCharm(){
+      ensureSatchel();
+      const cta = document.querySelector('.charm-cta');
+      if(cta && cta.parentElement !== mobileSatchel){ mobileSatchel.appendChild(cta); }
+      mobileSatchel.removeAttribute('hidden');
+    }
+    function recallCharm(){
+      const actions = document.querySelector('.astral-actions');
+      if(!actions) return;
+      const cta = mobileSatchel?.querySelector('.charm-cta');
+      if(cta && actions !== cta.parentElement){
+        actions.appendChild(cta);
+      }
+      mobileSatchel?.setAttribute('hidden','');
+    }
+
+    // Focus Trap
+    const ward = (()=>{
+      let active = false;
+      function handle(e){
+        if(!active || e.key !== 'Tab') return;
+        const focusables = astral.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+        const list = Array.from(focusables).filter(el=>!el.hasAttribute('disabled'));
+        if(list.length === 0) return;
+        const first = list[0];
+        const last  = list[list.length-1];
+        if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+      return {
+        activate(){ if(!active){ active = true; document.addEventListener('keydown', handle); }},
+        deactivate(){ if(active){ active = false; document.removeEventListener('keydown', handle); }}
+      };
+    })();
+
+    function sealUnderrealms(){
+      astral.querySelectorAll('.gatelet[aria-expanded="true"]').forEach(btn=>{
+        btn.setAttribute('aria-expanded','false');
+      });
+      astral.querySelectorAll('.underrealm:not([hidden])').forEach(ul=>{
+        ul.setAttribute('hidden','');
+      });
+      astral.querySelectorAll('.astral-item.is-awakened').forEach(li=>{
+        li.classList.remove('is-awakened');
+      });
+    }
+
+    function closePortal(){
+      astral.classList.remove('is-awakened');
+      veil?.classList.remove('is-awakened');
+      veil?.setAttribute('hidden', '');
+      switchRune.setAttribute('aria-expanded','false');
+      switchRune.setAttribute('aria-labl','Menü öffnen');
+      docEl.classList.remove('nav-lock');
+      ward.deactivate();
+      document.querySelector('main')?.removeAttribute('inert');
+      sealUnderrealms();
+      recallCharm();
+      gate.classList.remove('portal-open'); /* Balken/Shadow fix */
+      switchRune.focus();
+    }
+    function openPortal(){
+      astral.classList.add('is-awakened');
+      veil?.classList.add('is-awakened');
+      veil?.removeAttribute('hidden');
+      switchRune.setAttribute('aria-expanded','true');
+      switchRune.setAttribute('aria-labl','Menü schließen');
+      docEl.classList.add('nav-lock');
+
+      const firstLink = astral.querySelector('a');
+      if(firstLink) firstLink.focus();
+
+      ward.activate();
+      document.querySelector('main')?.setAttribute('inert', '');
+      stowCharm();
+      gate.classList.add('portal-open'); /* Balken/Shadow fix */
+    }
+    function syncState(){ if(mq.matches){ closePortal(); } }
+    mq.addEventListener?.('change', syncState);
+    syncState();
+
+    // Toggle Button
+    switchRune.addEventListener('click', function(){
+      const isOpen = astral.classList.contains('is-awakened');
+      if(isOpen) closePortal(); else openPortal();
+    });
+
+    // Overlay / Outside click
+    veil?.addEventListener('click', () => closePortal());
+    document.addEventListener('click', (e) => {
+      if(!astral.classList.contains('is-awakened')) return;
+      if (e.target.closest('.orb-toggle')) return; // Theme-Toggle schließt nicht
+      if(!astral.contains(e.target) && !switchRune.contains(e.target)) closePortal();
+    });
+
+    // ESC
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && astral.classList.contains('is-awakened')){
+        e.preventDefault(); closePortal();
+      }
+    });
+
+    // Scroll Shadow
+    addEventListener('scroll', () => {
+      const y = window.scrollY || 0;
+      gate.classList.toggle('is-ascended', y>4);
+    }, {passive:true});
+
+    // Scrollspy
+    const links = [...document.querySelectorAll('.astral-link')];
+    const linkMap = Object.fromEntries(links.map(a=>[a.getAttribute('href'), a]));
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const id = '#'+e.target.id;
+        if(e.isIntersecting){
+          links.forEach(l=>{ l.removeAttribute('data-active'); l.removeAttribute('aria-current'); });
+          const link = linkMap[id];
+          if(link){ link.setAttribute('data-active',''); link.setAttribute('aria-current','page'); }
+        }
+      });
+    }, {rootMargin:'-40% 0px -55% 0px', threshold:[0, 1]});
+    document.querySelectorAll('section[id]').forEach(s=>obs.observe(s));
+
+    // Smooth scroll Offset
+    links.forEach(a=>{
+      a.addEventListener('click', (ev)=>{
+        const href = a.getAttribute('href')||'';
+        if(href.startsWith('#')){
+          const target = document.getElementById(href.slice(1));
+          if(target){
+            ev.preventDefault();
+            const y = target.getBoundingClientRect().top + window.scrollY - (gate.getBoundingClientRect().height + 8);
+            window.scrollTo({top:y, behavior:'smooth'});
+            closePortal();
+          }
+        }
+      });
+    });
+  })();
+</script>
+
+<script>
+/* CTA Ripple (Namen mystisch gelassen, Klassen bereits umbenannt) */
+(function(){
+  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function makeRipple(btn, x, y){
+    if (prefersReduced) return;
+    const r = document.createElement('span');
+    r.className = 'cta-ripple';
+    r.style.left = x + 'px';
+    r.style.top  = y + 'px';
+    btn.appendChild(r);
+    r.offsetWidth; r.classList.add('is-anim');
+    r.addEventListener('animationend', ()=> r.remove(), {once:true});
+  }
+
+  function keyRipple(e){
+    if(e.key !== ' ' && e.key !== 'Enter') return;
+    const btn = e.currentTarget;
+    const rect = btn.getBoundingClientRect();
+    makeRipple(btn, rect.width/2, rect.height/2);
+  }
+
+  function setBusy(btn, busy=true){
+    btn.setAttribute('aria-busy', String(!!busy));
+    const live = btn.querySelector('[aria-live]');
+    if(live){ live.textContent = busy ? 'Lädt…' : 'Bereit'; }
+  }
+
+  document.querySelectorAll('[data-cta]').forEach(btn=>{
+    btn.addEventListener('pointerdown', e=>{
+      if(e.pointerType === 'mouse' || e.pointerType === 'touch' || e.pointerType === 'pen'){
+        const rect = btn.getBoundingClientRect();
+        makeRipple(btn, e.clientX - rect.left, e.clientY - rect.top);
+      }
+    });
+    btn.addEventListener('keydown', keyRipple);
+    btn.addEventListener('click', (e)=>{
+      const href = btn.getAttribute('href') || '';
+      const targetLocal = href.startsWith('#');
+      if(targetLocal){
+        setBusy(btn, true);
+        setTimeout(()=> setBusy(btn, false), 420);
+      }
+    }, {passive:true});
+  });
+})();
+</script>
+
+<script>
+/* Underrealm Toggle (Subnav) */
+(function(){
+  const nav = document.getElementById('astralWay');
+  if(!nav) return;
+
+  nav.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.gatelet');
+    if(!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+
+    const li  = btn.closest('.astral-item');
+    const id  = btn.getAttribute('aria-controls');
+    const sub = id ? document.getElementById(id) : li?.querySelector('.underrealm');
+    if(!li || !sub) return;
+
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+    // andere schließen
+    nav.querySelectorAll('.astral-item.is-awakened').forEach(other=>{
+      if(other !== li){
+        other.classList.remove('is-awakened');
+        const otherBtn = other.querySelector('.gatelet[aria-expanded="true"]');
+        const otherSub = other.querySelector('.underrealm');
+        if(otherBtn) otherBtn.setAttribute('aria-expanded','false');
+        if(otherSub) otherSub.setAttribute('hidden','');
+      }
+    });
+
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    li.classList.toggle('is-awakened', !isOpen);
+    sub.toggleAttribute('hidden', isOpen);
+  });
+
+  // Outside-Click schließt alles
+  document.addEventListener('click', (e)=>{
+    if(!nav.contains(e.target)){
+      nav.querySelectorAll('.astral-item.is-awakened').forEach(li=>{
+        li.classList.remove('is-awakened');
+        const b = li.querySelector('.gatelet[aria-expanded="true"]');
+        const s = li.querySelector('.underrealm');
+        if(b) b.setAttribute('aria-expanded','false');
+        if(s) s.setAttribute('hidden','');
+      });
+    }
+  });
+
+  // ESC schließt alle
+  document.addEventListener('keydown', (e)=>{
+    if(e.key !== 'Escape') return;
+    nav.querySelectorAll('.astral-item.is-awakened').forEach(li=>{
+      li.classList.remove('is-awakened');
+      const b = li.querySelector('.gatelet[aria-expanded="true"]');
+      const s = li.querySelector('.underrealm');
+      if(b) b.setAttribute('aria-expanded','false');
+      if(s) s.setAttribute('hidden','');
+    });
+  });
+})();
+</script>
+
+<style>
+  :root{
+    color-scheme: light dark;
+
+    /* Himmel */
+    --sky-day-zenith:#1d7ce2;
+    --sky-day-horizon:#a5d4ff;
+    --sky-night-zenith:#0a0a2e;
+    --sky-night-horizon:#1a0033;
+
+    --cloud-day:#ffffff;
+    --cloud-night:#d2d8e4;
+
+    --sun-core:#ffd54f;
+    --sun-glow:#ffe597;
+    --moon-core:#f0f3fa;
+    --accent:#0026ff;
+    --pulse: rgba(255, 213, 79, .45);
+  }
+  body.nocturne{ --pulse: rgba(200, 220, 255, .40); }
+
+  /* Toggle */
+  .orb-toggle{
+    --w: clamp(140px, 42vw, 220px);
+    --h: calc(var(--w) / 2.3);
+    --pad: calc(var(--h) * 0.125);
+    --thumb: calc(var(--h) - var(--pad) * 2);
+
+    position:relative;
+    width:var(--w);
+    height:var(--h);
+    border:0;
+    cursor:pointer;
+    outline:none;
+    overflow:hidden;
+    isolation:isolate;
+    border-radius:999px;
+    background:transparent;
+    box-shadow: 0 14px 34px rgba(0,0,0,.38), inset 0 0 0 1px rgba(255,255,255,.07);
+  }
+  .orb-toggle:focus-visible{
+    box-shadow:0 0 0 4px color-mix(in oklab, var(--accent), transparent 65%), 0 14px 34px rgba(0,0,0,.38);
+  }
+
+  .sky{ position:absolute; inset:0; border-radius:inherit; z-index:0; overflow:hidden; }
+  .day-sky{
+    position:absolute; inset:0; border-radius:inherit; opacity:1; transition:opacity 1200ms ease;
+    background: linear-gradient(180deg, var(--sky-day-zenith), var(--sky-day-horizon));
+  }
+  .day-sky::after{
+    content:""; position:absolute; inset:-20%; border-radius:inherit; pointer-events:none;
+    background: conic-gradient(from 0deg,
+      color-mix(in oklab, var(--sky-day-zenith), transparent 0%) 0deg,
+      color-mix(in oklab, var(--sky-day-horizon), transparent 15%) 90deg,
+      color-mix(in oklab, var(--sky-day-zenith), transparent 8%) 180deg,
+      color-mix(in oklab, var(--sky-day-horizon), transparent 20%) 270deg,
+      color-mix(in oklab, var(--sky-day-zenith), transparent 0%) 360deg);
+    filter: blur(12px) saturate(1.06) brightness(1);
+    animation: rotateDay 40s linear infinite, dayBreathe 10s ease-in-out infinite;
+    opacity:.9;
+  }
+  @keyframes rotateDay { to{ transform: rotate(360deg); } }
+  @keyframes dayBreathe { 0%,100%{ filter: blur(12px) saturate(1.06) brightness(1) } 50%{ filter: blur(12px) saturate(1.08) brightness(1.06) } }
+
+  .night-sky{
+    position:absolute; inset:0; border-radius:inherit; opacity:0; transition:opacity 1200ms ease;
+    background: linear-gradient(180deg, var(--sky-night-zenith), var(--sky-night-horizon));
+  }
+  .night-sky::after{
+    content:""; position:absolute; inset:-25%; border-radius:inherit; pointer-events:none;
+    background: conic-gradient(from 0deg, rgba(40,45,95,.12), rgba(110,20,120,.10), rgba(30,35,90,.12), rgba(60,20,110,.10), rgba(40,45,95,.12));
+    filter: blur(16px) saturate(1.02);
+    animation: driftNight 120s linear infinite;
+    opacity:.35;
+  }
+  @keyframes driftNight { to{ transform: rotate(360deg); } }
+
+  body.nocturne .day-sky{ opacity:0; } body.nocturne .night-sky{ opacity:1; }
+
+  .stars{ position:absolute; inset:0; z-index:1; border-radius:inherit; opacity:0; transition:opacity 900ms ease; pointer-events:none; }
+  body.nocturne .stars{ opacity:1; }
+  .stars i{ position:absolute; width:2px; height:2px; background:#fff; border-radius:50%; opacity:.2; animation:twinkle 3.2s infinite ease-in-out; }
+  @keyframes twinkle{ 50%{ opacity:1; transform:scale(1.6)} }
+
+  .clouds{ position:absolute; inset:0; border-radius:inherit; z-index:2; pointer-events:none; }
+  .leyline{ position:absolute; inset:0; overflow:hidden; }
+  .leyline.back{ opacity:.25; filter:blur(1.2px); }
+  .leyline.mid{  opacity:.6; filter:blur(.6px); }
+  .leyline.front{opacity:.95;}
+
+  .cloud{ position:absolute; top:0; transform:translateX(0); animation-name: drift; animation-timing-function: linear; animation-iteration-count: infinite; }
+  @keyframes drift{ from{ transform:translateX(-320px)} to{ transform:translateX(320px)} }
+  .bubble{ position:absolute; border-radius:50%; background: var(--cloud-day); }
+  body.nocturne .bubble{ background: var(--cloud-night); }
+
+  .thumb#moonShard{
+    position:absolute;
+    top:var(--pad);
+    left:var(--pad);
+    width:var(--thumb);
+    height:var(--thumb);
+    border-radius:50%;
+    z-index:5;
+    box-shadow: 0 12px 24px rgba(0,0,0,.35);
+    transition: transform 820ms cubic-bezier(.2,.85,.2,1), background 600ms ease, filter 600ms ease;
+  }
+  body.dawn  #moonShard{ background: var(--sun-core); filter: drop-shadow(0 0 12px var(--sun-glow)); }
+  body.nocturne  #moonShard{ background: var(--moon-core); filter: drop-shadow(0 0 6px rgba(200,220,255,.5)); }
+
+  #moonShard{ transform: translateX(0); }
+  body.nocturne #moonShard{
+    transform: translateX(calc(var(--w) - var(--thumb) - (var(--pad) * 2) - var(--nudge-x, 0px)));
+  }
+
+  #moonShard.pulse{ animation:pulse 720ms ease-out; }
+  @keyframes pulse{ 0%{ box-shadow:0 0 0 0 var(--pulse)} 100%{ box-shadow:0 0 0 22px rgba(0,0,0,0)} }
+
+  /* Compact in Actions */
+  .astral-actions .orb-toggle{
+    --w: clamp(88px, 16vw, 128px);
+    --h: 32px;
+    --pad: 4px;
+    --thumb: calc(var(--h) - var(--pad) * 2);
+
+    width: var(--w);
+    height: var(--h);
+    border-radius: 999px;
+    box-shadow: 0 8px 18px rgba(0,0,0,.24), inset 0 0 0 1px rgba(255,255,255,.06);
+    vertical-align: middle;
+  }
+  @media (min-width:768px){
+    .astral-actions .orb-toggle{
+      --w: 108px; --h: 34px; --pad: 5px;
+    }
+  }
+  .astral-actions #moonShard{ box-shadow: 0 8px 16px rgba(0,0,0,.25); }
+  .astral-actions{ gap: .4rem; align-items:center; }
+  .aether-header__bar{ grid-template-columns: auto 1fr auto; }
+  .astral-actions{
+    display:inline-flex; align-items:center; gap:.4rem; justify-self:end; min-width:0;
+  }
+  .astral-actions .orb-toggle{
+    --w: 96px; --h: 30px; --pad: 4px; --thumb: calc(var(--h) - var(--pad)*2);
+    width: var(--w); height: var(--h); max-width:100%;
+    border-radius: 999px; box-shadow: 0 8px 18px rgba(0,0,0,.24), inset 0 0 0 1px rgba(255,255,255,.06);
+  }
+  @media (max-width: 374px){
+    .astral-actions .orb-toggle{ --w: 84px; --h: 28px; --pad: 4px; }
+  }
+  @media (min-width: 425px) and (max-width: 767px){
+    .astral-actions .orb-toggle{ --w: 104px; --h: 32px; --pad: 5px; }
+  }
+  @media (min-width: 768px){
+    .astral-actions .orb-toggle{ --w: 112px; --h: 34px; --pad: 6px; }
+  }
+  .astral-actions #moonShard{ box-shadow: 0 8px 16px rgba(0,0,0,.25); }
+  .astral-actions .orb-toggle{ overflow:hidden; }
+
+  @media (min-width:768px) and (max-width:1023px){
+    .astral-actions .orb-toggle{ --w: 72px; --h: 30px; --pad: 5px; }
+    .astral-nav__list{ flex-wrap: wrap; }
+    .astral-link{ padding: .75rem .9rem; }
+    .astral-actions .charm-cta{ margin-right: -3.1rem; }
+  }
+  @media (min-width:320px){
+    .astral-actions .orb-toggle{ --w: 60px; --h: 30px; --pad: 5px; }
+  }
+
+  body.nocturne .astral-actions .orb-toggle,
+  [data-theme="dark"] .astral-actions .orb-toggle{
+    box-shadow:
+      0 8px 18px rgba(0,0,0,.35),
+      inset 0 0 0 2px #8f67ff;
+  }
+  @media (max-width: 320px){
+    .astral-actions .orb-toggle{ --w: 52px; --h: 26px; --pad: 4px; }
+  }
+  @media (min-width:768px) and (max-width:1023px){
+    .astral-actions .orb-toggle{ --w: 64px; --h: 28px; --pad: 5px; --nudge-x: 1px; }
+    .astral-actions .charm-cta{ margin-left: 1rem; margin-right: 0; }
+  }
+  @media (min-width:1024px){
+    .astral-actions .orb-toggle{ --w: 96px; --h: 30px; --pad: 6px; }
+  }
+
+  /* ATTENTION NUDGES (unverändert außer Klassen) */
+  .astral-actions .orb-toggle { position: relative; isolation: isolate; }
+  .astral-actions .orb-toggle.suggest::after{
+    content:""; position:absolute; inset:-6px; border-radius:inherit;
+    pointer-events:none; z-index:10;
+    box-shadow: 0 0 0 0 var(--pulse);
+    animation: hintHalo 1200ms ease-out 6;
+  }
+  @keyframes hintHalo{
+    0%   { box-shadow:0 0 0 0 var(--pulse);           opacity:1 }
+    100% { box-shadow:0 0 0 26px rgba(0,0,0,0);       opacity:0 }
+  }
+  .astral-actions .orb-toggle.suggest #moonShard{
+    animation: hintNudge 900ms cubic-bezier(.3,1,.3,1) 2 250ms;
+  }
+  @keyframes hintNudge{
+    0%,100% { transform: translateX(var(--hint-x, 0)); }
+    40%     { transform: translateX(calc(var(--hint-x, 0) + 6px)); }
+    70%     { transform: translateX(calc(var(--hint-x, 0) - 3px)); }
+  }
+  body.nocturne .astral-actions .orb-toggle.suggest #moonShard{
+    --hint-x: calc(var(--w) - var(--thumb) - (var(--pad) * 2) - var(--nudge-x, 0px));
+  }
+  .astral-actions .orb-toggle[data-hint]:not([data-hint=""])::before{
+    content: attr(data-hint);
+    position:absolute;
+    left:50%; transform: translateX(-50%) translateY(-8px);
+    bottom: 100%;
+    padding:.25rem .5rem;
+    font-size: 11px; line-height: 1;
+    color:#fff; background: color-mix(in oklab, var(--accent), black 25%);
+    border-radius:6px; white-space:nowrap;
+    box-shadow: 0 6px 16px rgba(0,0,0,.25);
+    opacity:0; pointer-events:none; z-index:11;
+  }
+  .astral-actions .orb-toggle.suggest[data-hint]:not([data-hint=""])::before{
+    animation: hintFloat 1800ms ease-in-out 2 both;
+  }
+  @keyframes hintFloat{
+    0%   { opacity:0; transform: translateX(-50%) translateY(-2px) }
+    15%  { opacity:1; transform: translateX(-50%) translateY(-6px) }
+    85%  { opacity:1; transform: translateX(-50%) translateY(-6px) }
+    100% { opacity:0; transform: translateX(-50%) translateY(-10px) }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .astral-actions .orb-toggle.suggest::after,
+    .astral-actions .orb-toggle.suggest #moonShard,
+    .astral-actions .orb-toggle.suggest[data-hint]:not([data-hint=""])::before{
+      animation: none !important;
+    }
+    .astral-actions .orb-toggle.suggest::after{
+      box-shadow: 0 0 0 6px var(--pulse);
+      opacity:.9;
+      transition: opacity .6s ease;
+    }
+  }
+</style>
+<script>
+  (function(){
+    const rootEl   = document.documentElement;
+    const bodyEl   = document.body;
+    const toggleEl = document.getElementById('eclipseStone');
+    const shard    = document.getElementById('moonShard');
+    const stars    = document.getElementById('starField');
+    const statusEl = document.getElementById('omenWhisper');
+
+    /* Sterne */
+    (function seedStars(){
+      if(!stars) return;
+      const N = 26;
+      const frag = document.createDocumentFragment();
+      for(let i=0;i<N;i++){
+        const el = document.createElement('i');
+        el.style.top = (5 + Math.random()*90) + '%';
+        el.style.left = (5 + Math.random()*90) + '%';
+        el.style.animationDelay = (Math.random()*2.5).toFixed(2)+'s';
+        frag.appendChild(el);
+      }
+      stars.appendChild(frag);
+    })();
+
+    /* Wolken */
+    (function seedClouds(){
+      const lanes = Array.from(document.querySelectorAll('[data-lane]'));
+      if(!lanes.length || !toggleEl) return;
+
+      const presets = {
+        back:  { count: 3, speed:[80,120], scale:[0.60,0.90],  opacity:[0.25,0.40] },
+        mid:   { count: 3, speed:[60, 90], scale:[0.80,1.00],  opacity:[0.50,0.70] },
+        front: { count: 2, speed:[45, 70], scale:[1.00,1.15],  opacity:[0.85,0.95] }
+      };
+
+      function render(){
+        lanes.forEach(l=>l.innerHTML = '');
+        const rect = toggleEl.getBoundingClientRect();
+        const W = Math.max(60, Math.round(rect.width));
+        const H = Math.max(24, Math.round(rect.height));
+        lanes.forEach(lane=>{
+          const cfg = presets[lane.dataset.lane];
+          for(let i=0;i<cfg.count;i++){
+            const cloud = document.createElement('div');
+            cloud.className = 'cloud';
+
+            const minW = Math.max(0.28*W, 36);
+            const maxW = Math.max(0.46*W, 54);
+            const cw   = randf(minW, maxW);
+            const ch   = cw*0.5;
+
+            cloud.style.width  = cw+'px';
+            cloud.style.height = ch+'px';
+
+            const freeY = Math.max(0, H - ch);
+            cloud.style.top  = (freeY ? randf(0, freeY) : 0) + 'px';
+
+            cloud.style.left = (Math.max(0, W - cw) ? randf(0, W - cw) : 0) + 'px';
+
+            const dur = rand(cfg.speed[0], cfg.speed[1]);
+            cloud.style.animationDuration = dur+'s';
+            cloud.style.animationDelay = (-Math.random()*dur).toFixed(2)+'s';
+            cloud.style.opacity = randf(cfg.opacity[0], cfg.opacity[1]);
+            cloud.style.transform = `translateX(0) scale(${randf(cfg.scale[0], cfg.scale[1])})`;
+
+            ['b1','b2','b3','b4','b5'].forEach((b,idx)=>{
+              const s = document.createElement('span');
+              s.className = 'bubble '+b;
+              const w = [0.58,0.50,0.66,0.38,0.42][idx] * (0.92 + Math.random()*0.16);
+              const h = [0.78,0.70,0.88,0.58,0.62][idx] * (0.92 + Math.random()*0.16);
+              s.style.width  = (w*100)+'%';
+              s.style.height = (h*100)+'%';
+              const lefts = [10,38,46,-2,22];
+              const tops  = [12,-4,12,28,28];
+              s.style.left = (lefts[idx] + (Math.random()*4-2))+'%';
+              s.style.top  = (tops[idx]  + (Math.random()*4-2))+'%';
+              cloud.appendChild(s);
+            });
+
+            lane.appendChild(cloud);
+          }
+        });
+      }
+
+      function rand(min,max){ return Math.floor(min + Math.random()*(max-min+1)); }
+      function randf(min,max){ return +(min + Math.random()*(max-min)).toFixed(2); }
+
+      let t;
+      const onResize = () => { clearTimeout(t); t = setTimeout(render, 120); };
+      render();
+      addEventListener('resize', onResize, {passive:true});
+    })();
+
+    const KEY = 'theme-pref';
+    function apply(mode){ // 'dark' | 'light'
+      const isDark = (mode === 'dark');
+      bodyEl.classList.toggle('nocturne', isDark);
+      bodyEl.classList.toggle('dawn', !isDark);
+      rootEl.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      if(toggleEl) toggleEl.setAttribute('aria-pressed', String(isDark));
+      if(statusEl) statusEl.textContent = isDark ? 'Dunkelmodus aktiv' : 'Hellmodus aktiv';
+    }
+
+    (function init(){
+      const saved = localStorage.getItem(KEY);
+      if(saved === 'light' || saved === 'dark'){
+        apply(saved);
+      }else{
+        const sysDark = matchMedia('(prefers-color-scheme:dark)').matches;
+        apply(sysDark ? 'dark' : 'light');
+      }
+    })();
+
+    document.addEventListener('click', (e)=>{
+      const t = e.target.closest?.('.orb-toggle');
+      if(!t) return;
+      const nowDark = !bodyEl.classList.contains('nocturne');
+      apply(nowDark ? 'dark' : 'light');
+      localStorage.setItem(KEY, nowDark ? 'dark' : 'light');
+      if(shard){
+        shard.classList.remove('pulse'); void shard.offsetWidth; shard.classList.add('pulse');
+      }
+    });
+
+    matchMedia('(prefers-color-scheme:dark)').addEventListener('change', (e)=>{
+      if(localStorage.getItem(KEY)) return;
+      apply(e.matches ? 'dark' : 'light');
+    });
+  })();
+</script>
+
+
+
+
+
+
+
+
+<style>
+/* --------------------------
+   Lokale Bild-Overrides nur für titlepage.html
+--------------------------- */
+body[data-page="titlepage"] .hero-image-background {
+  background-image: url("./images/hero-bg-sky_1hero-bg-sky.webp") !important;
+}
+
+body[data-page="titlepage"] .hero-image-foreground {
+  background-image: url("./images/titlepage-fg.webp") !important;
+}
+
+/* Optional: Mobile- oder Tablet-Varianten */
+@media (max-width: 1024px) {
+  body[data-page="titlepage"] .hero-image-foreground {
+    background-image: url("./images/titlepage-fg-tablet.webp") !important;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page="titlepage"] .hero-image-foreground {
+    background-image: url("./images/titlepage-fg-mobile.webp") !important;
+  }
+}
+</style>
+
+
+
+<style>/* ab 768px: leicht nach unten */
+@media (min-width: 768px) {
+  .hero-image-foreground {
+    transform: translateY(10%);              /* dein bisheriger Versatz */
+  }
+}
+@media (min-width: 1400px) {
+  .hero-image-foreground {
+    transform: translateY(15%);              /* dein bisheriger Versatz */
+  }
+}
+@media (min-width: 1800px) {
+  .hero-image-foreground {
+    transform: translateY(15%);              /* dein bisheriger Versatz */
+  }
+}
+@media (min-width: 2200px) {
+  .hero-image-foreground {
+    transform: translateY(7%);              /* dein bisheriger Versatz */
+  }
+}
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .hero-section {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .hero-images-wrapper {
+    position: relative;
+    width: 100%;      /* statt 100vw, verhindert Scrollbar-Lücke links */
+    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden; /* falls Kinder minimal überstehen */
+  }
+
+  .hero-image-background,
+  .hero-image-foreground {
+    position: absolute;
+    inset: 0;         /* top/right/bottom/left = 0 */
+    width: 100%;
+    max-width: none;
+  }
+
+
+  /* Nur Handys: Hintergrund minimal „herauszoomen“ */
+@media (max-width: 767px) {
+  .hero-image-foreground {
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    margin: 0 !important;                  /* falls woanders Mobile-Margins gesetzt sind */
+        transform: translateY(17%);              /* dein bisheriger Versatz */
+  }
+}
+
+
+</style>
 
 <body>
 
-    <header>
-        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-            <div class="logo">Fusion³</div>
-            <div class="burger" id="burger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+
+  <section class="hero-section">
+    <div class="hero-images-wrapper">
+      <div class="hero-image-background"></div>
+      <div class="page-title">
+        <div class="container">
+          <h1 class="large-title">Datenschutz</h1>
         </div>
-        <nav id="nav">
-            <a href="/">Home</a>
-            <a href="/3d.html">3D Design</a>
-            <a href="/kontakt.html">Kontakt</a>
-        </nav>
+      </div>
+      <div class="hero-image-foreground"></div>
+    </div>
+  </section>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6877d9380337379217c72f87" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="js/webflow.js" type="text/javascript"></script>
+  <script src="https://cdn.prod.website-files.com/gsap/3.13.0/gsap.min.js" type="text/javascript"></script>
+  <script src="https://cdn.prod.website-files.com/gsap/3.13.0/ScrollTrigger.min.js" type="text/javascript"></script>
+  <script src="https://cdn.prod.website-files.com/gsap/3.13.0/SplitText.min.js" type="text/javascript"></script>
+
+  <style>
+    :root{
+      --bg:#0f1220; --card:#12172a; --text:#e8eefc; --muted:#a9b3c9; --link:#8ab4ff; --accent:#00c851;
+      --border:#28314a;
+    }
+    body{margin:0;background:linear-gradient(180deg,#0b1020 0%,#0a0e1a 100%);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--text);line-height:1.65;}
+    .wrap{max-width:960px;margin:clamp(20px,5vw,48px) auto;padding:0 16px;}
+    header{margin-bottom:24px}
+    h1{font-size:clamp(1.8rem,2.4vw,2.4rem);line-height:1.2;margin:.2rem 0 .6rem;font-weight:900;letter-spacing:-.01em}
+    .lead{color:var(--muted)}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--border);border-radius:16px;padding:clamp(16px,2.2vw,22px);box-shadow:0 20px 60px rgba(0,0,0,.25);backdrop-filter:saturate(1.1) blur(6px)}
+    h2{font-size:clamp(1.3rem,2vw,1.6rem);margin:1.6rem 0 .6rem;letter-spacing:-.01em}
+    h3{font-size:1.05rem;margin:1rem 0 .4rem}
+    p,li{color:var(--text)}
+    small, .muted{color:var(--muted)}
+    a{color:var(--link)}
+    code{background:rgba(255,255,255,.06);border:1px solid var(--border);padding:.08rem .35rem;border-radius:6px}
+    .toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:14px 0 6px}
+    .toc a{display:block;padding:.55rem .7rem;border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--text);background:rgba(255,255,255,.03)}
+    .tag{display:inline-block;font-size:.8rem;color:#0b0c0e;background:#e6f8ed;border-radius:999px;padding:.15rem .5rem;margin-left:.35rem}
+    .alert{border-left:4px solid var(--accent);padding:.6rem .8rem;background:rgba(0,200,81,.06);border-radius:10px}
+    hr{border:0;border-top:1px solid var(--border);margin:1.2rem 0}
+    .meta{margin-top:18px}
+    ul{padding-left:1.1rem}
+  </style>
+</head>
+
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Datenschutzerklärung<span class="tag">DSGVO</span></h1>
+      <p class="lead">Informationen gemäß Art. 12 ff. DSGVO darüber, wie wir personenbezogene Daten verarbeiten, wenn du unsere Website besuchst und das Kontaktformular verwendest.</p>
+      <p class="meta muted">Zuletzt aktualisiert: 14. Oktober 2025</p>
     </header>
 
-    <main class="container">
-        <h1>AGB &amp; Datenschutzerklärung</h1>
+    <section class="card">
+      <h2>Inhalt</h2>
+      <nav class="toc">
+        <a href="#verantwortlicher">1. Verantwortlicher</a>
+        <a href="#zwecke-rechtsgrundlagen">2. Zwecke &amp; Rechtsgrundlagen</a>
+        <a href="#hosting">3. Hosting (GitHub Pages)</a>
+        <a href="#kontaktformular">4. Kontaktformular (Formspree)</a>
+        <a href="#empfaenger">5. Empfänger / Auftragsverarbeitung</a>
+        <a href="#drittland">6. Übermittlungen in Drittländer</a>
+        <a href="#speicherdauer">7. Speicherdauer</a>
+        <a href="#pflichtangaben">8. Pflichtangaben</a>
+        <a href="#rechte">9. Deine Rechte</a>
+        <a href="#sicherheit">10. Sicherheit</a>
+        <a href="#kinder">11. Kinder</a>
+        <a href="#aenderungen">12. Änderungen dieser Erklärung</a>
+        <a href="#kontakt">13. Datenschutz-Kontakt</a>
+        <a href="#cookies-consent">14. Cookies &amp; Einwilligungs-Management</a>
+<a href="#google-analytics">15. Google Analytics (GA4)</a>
+<a href="#ms-clarity">16. Microsoft Clarity</a>
+<a href="#widerruf-consent">17. Einwilligung widerrufen / Einstellungen</a>
 
-        <!-- AGB -->
-        <h2>Allgemeine Geschäftsbedingungen (AGB)</h2>
-        <p><strong>Muster-AGB für Fusion³ – Testversion</strong></p>
+      </nav>
+    </section>
 
-        <h3>1. Geltungsbereich</h3>
-        <p>1.1. Diese AGB gelten für alle Verträge, die zwischen Fusion³ (nachfolgend „Anbieter“) und seinen Kunden
-            abgeschlossen werden.</p>
-        <p>1.2. Sie regeln insbesondere die Geschäftsbeziehungen im Bereich Grafikdesign, 3D-Design, Webdesign und
-            Social Media Content.</p>
+    <section id="verantwortlicher" class="card">
+      <h2>1. Verantwortlicher</h2>
+      <p><strong>Fusion3</strong> <!-- TODO: Wenn UG fertig: "Fusion3 UG (haftungsbeschränkt)" -->
+        <br><!-- TODO: Straße, Nr. -->Musterstraße 1
+        <br><!-- TODO: PLZ, Ort -->12345 Musterstadt
+        <br><!-- TODO: Land -->Deutschland
+      </p>
+      <p>E-Mail: <a href="mailto:hello@fusion3.example">hello@fusion3.example</a> <!-- TODO: echte Adresse --></p>
+      <p>Website: <a href="https://example.github.io">https://example.github.io</a> <!-- TODO: echte Domain --></p>
+      <p class="muted">Wenn sich der Rechtsträger ändert (z. B. Gründung der UG), wird diese Erklärung entsprechend aktualisiert.</p>
+    </section>
 
-        <h3>2. Vertragsschluss und Leistungsbeschreibung</h3>
-        <p><strong>2.1. Vertragsschluss:</strong> Ein Vertrag kommt durch die schriftliche oder elektronische
-            Auftragsbestätigung durch den Anbieter oder durch das Akzeptieren eines Online-Angebots zustande. Angebote
-            des Anbieters sind freibleibend und unverbindlich.</p>
-        <p><strong>2.2. Leistungsbeschreibung:</strong> Der Anbieter erbringt folgende Leistungen:</p>
-        <ul>
-            <li><strong>Grafikdesign:</strong> Erstellung von individuellen Entwürfen, Corporate-Design-Konzepten, Logos
-                etc.</li>
-            <li><strong>3D-Design:</strong> Anfertigung von 3D-Visualisierungen, Animationen oder Modellierungen.</li>
-            <li><strong>Webdesign:</strong> Gestaltung und Entwicklung von Webseiten inkl. Responsive Design sowie
-                Wartung.</li>
-            <li><strong>Social Media Content:</strong> Konzeption und Erstellung von Inhalten (Grafiken, Videos, etc.)
-                für Social-Media-Plattformen.</li>
-        </ul>
-        <p>2.3. Änderungen des Leistungsumfangs bedürfen der schriftlichen Zustimmung beider Parteien.</p>
+    <section id="zwecke-rechtsgrundlagen" class="card">
+      <h2>2. Zwecke &amp; Rechtsgrundlagen</h2>
+      <p>Wir verarbeiten personenbezogene Daten zu folgenden Zwecken und auf diesen Rechtsgrundlagen:</p>
+      <ul>
+        <li><strong>Webseitenbetrieb</strong> (technische Bereitstellung): Berechtigtes Interesse an einer sicheren, performanten Website, Art. 6 Abs. 1 lit. f DSGVO.</li>
+        <li><strong>Beantwortung von Anfragen</strong> über das Kontaktformular (Projektanbahnung: Webdesign, 3D-Design, Grafikdesign): <strong>Art. 6 Abs. 1 lit. b DSGVO</strong> (vorvertragliche Maßnahmen).</li>
+        <li><strong>Freiwillige Angaben</strong> (z. B. Budget, Materialien): auf Basis deiner Entscheidung; für die Bearbeitung deiner Anfrage erforderlich, Art. 6 Abs. 1 lit. b DSGVO.</li>
+      </ul>
+      <p class="alert">Wir nutzen <strong>keine</strong> Tracking-Cookies, Werbe-IDs oder externe Analysedienste, sofern hier nicht ausdrücklich genannt. <!-- TODO: Falls Analytics/Fonts etc. genutzt werden, hier ergänzen. --></p>
+    </section>
 
-        <h3>3. Preise und Zahlungsbedingungen</h3>
-        <p><strong>3.1. Preise:</strong> Die Preise richten sich nach den vertraglichen Vereinbarungen (Festpreise,
-            Stunden- oder Tagessätze).</p>
-        <p><strong>3.2. Zahlungsmodalitäten:</strong> Sofern nichts anderes vereinbart wurde, sind Rechnungen innerhalb
-            von 14 Tagen ab Rechnungsdatum fällig.</p>
-        <p><strong>3.3. Zahlungsverzug:</strong> Bei Zahlungsverzug werden Verzugszinsen in gesetzlicher Höhe berechnet.
-            Der Anbieter behält sich das Recht vor, bei Zahlungsverzug Leistungen zurückzuhalten.</p>
+    <section id="hosting" class="card">
+      <h2>3. Hosting (GitHub Pages)</h2>
+      <p>Unsere Website wird über <strong>GitHub Pages</strong> bereitgestellt (GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA). GitHub agiert als Hosting-Dienstleister und kann in diesem Rahmen technische Daten (z. B. IP-Adresse, Zeitpunkt des Zugriffs, User-Agent) verarbeiten, um die Seite auszuliefern und Angriffe abzuwehren.</p>
+      <p>Rechtsgrundlage: berechtigtes Interesse an sicherem und effizientem Hosting (Art. 6 Abs. 1 lit. f DSGVO). Mit GitHub wurde ein geeigneter Vertrag zur Datenverarbeitung abgeschlossen bzw. es bestehen Standardvertragsklauseln. <!-- TODO: Prüfen/Verlinken: GitHub DPA/SCC/DPF --></p>
+      <p class="muted">Hinweis: Bei GitHub Pages stehen uns üblicherweise keine personenbezogenen Server-Logfiles zur individuellen Auswertung zur Verfügung.</p>
+    </section>
 
-        <h3>4. Urheber- und Nutzungsrechte</h3>
-        <p><strong>4.1. Urheberrecht:</strong> Das Urheberrecht an den erstellten Designs und Inhalten verbleibt bis zur
-            vollständigen Bezahlung beim Anbieter.</p>
-        <p><strong>4.2. Nutzungsrechte:</strong> Mit vollständiger Zahlung erhält der Kunde ein einfaches, nicht
-            übertragbares Nutzungsrecht an den gelieferten Endergebnissen. Eine weitergehende Nutzung bedarf einer
-            separaten vertraglichen Vereinbarung.</p>
-        <p><strong>4.3. Vorlagen:</strong> Vorhandene Vorlagen oder Arbeitsmaterialien verbleiben Eigentum des
-            Anbieters.</p>
+    <section id="kontaktformular" class="card">
+      <h2>4. Kontaktformular (Formspree)</h2>
+      <p>Wenn du uns über das Formular eine Anfrage zu <em>Webdesign</em>, <em>3D-Design</em> oder <em>Grafikdesign</em> sendest, verarbeiten wir die von dir eingegebenen Daten (insb. Name, E-Mail, Nachricht sowie freiwillige Angaben zu Material, Ziel, Budget etc.), um deine Anfrage zu beantworten und – falls nötig – Rückfragen zu stellen.</p>
+      <p>Zur technischen Abwicklung nutzen wir den Dienst <strong>Formspree</strong> (Formspree, Inc., USA). Die Formularinhalte werden über Formspree an uns weitergeleitet und uns per E-Mail zugestellt.</p>
+      <ul>
+        <li><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen).</li>
+        <li><strong>Auftragsverarbeitung:</strong> Mit Formspree schließen/halten wir einen Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO (DPA/AVV).</li>
+        <li><strong>Drittlandtransfer:</strong> Eine Übermittlung in die USA kann erfolgen; diese wird durch geeignete Garantien (z. B. Standardvertragsklauseln und/oder EU-US Data Privacy Framework) abgesichert. <!-- TODO: Nach Bestätigung konkretisieren. --></li>
+        <li><strong>Speicherdauer:</strong> Wir speichern deine Anfrage nur solange, wie es zur Bearbeitung erforderlich ist (z. B. zur Angebotserstellung, Kommunikation). Gesetzliche Aufbewahrungsfristen bleiben unberührt.</li>
+      </ul>
+      <p>Bitte sende keine besonderen Kategorien personenbezogener Daten (z. B. Gesundheitsdaten) über das Formular.</p>
+    </section>
 
-        <h3>5. Haftung und Gewährleistung</h3>
-        <p><strong>5.1. Haftung:</strong> Der Anbieter haftet uneingeschränkt nur für vorsätzliche oder grob fahrlässige
-            Pflichtverletzungen. Bei leichter Fahrlässigkeit ist die Haftung auf den vertragstypisch vorhersehbaren
-            Schaden begrenzt, sofern keine Kardinalpflichten verletzt werden.</p>
-        <p><strong>5.2. Gewährleistung:</strong> Mängelansprüche verjähren grundsätzlich 12 Monate nach Abnahme der
-            erbrachten Leistung. Im Falle eines Mangels ist der Anbieter nach eigenem Ermessen zur Nachbesserung oder
-            Ersatzlieferung berechtigt. Weitergehende Ansprüche sind ausgeschlossen, sofern nicht Vorsatz vorliegt.</p>
+    <section id="empfaenger" class="card">
+      <h2>5. Empfänger / Auftragsverarbeitung</h2>
+      <p>Wir setzen Dienstleister (Auftragsverarbeiter) ein, die uns beim Betrieb der Website und der Kommunikation unterstützen. Diese verarbeiten Daten ausschließlich nach unserer Weisung und auf Grundlage von Verträgen nach Art. 28 DSGVO.</p>
+      <ul>
+        <li><strong>Hosting:</strong> GitHub Pages (USA) – Bereitstellung der Website.</li>
+        <li><strong>Formular-Routing:</strong> Formspree (USA) – Weiterleitung von Formularinhalten.</li>
+        <!-- TODO: Weitere Empfänger ergänzen (z. B. E-Mail-Provider, CDN, Backup). -->
+      </ul>
+    </section>
 
-        <h3>6. Widerrufsrecht und Vertragsrücktritt</h3>
-        <p><strong>6.1. Widerrufsrecht:</strong> Bei individuellen, personalisierten digitalen Leistungen kann das
-            Widerrufsrecht ausgeschlossen werden, sofern der Kunde dem ausdrücklich zugestimmt hat.</p>
-        <p><strong>6.2. Vertragsrücktritt:</strong> Beide Parteien können den Vertrag aus wichtigem Grund fristlos
-            kündigen.</p>
+    <section id="drittland" class="card">
+      <h2>6. Übermittlungen in Drittländer</h2>
+      <p>Bei Nutzung von US-Dienstleistern (z. B. GitHub, Formspree) kann eine Übermittlung in Drittländer (USA) stattfinden. Wir stellen sicher, dass hierfür geeignete Garantien bestehen (z. B. Standardvertragsklauseln i. S. v. Art. 46 DSGVO und/oder Zertifizierungen nach dem EU-US Data Privacy Framework), oder dass eine gesetzliche Ausnahme greift.</p>
+    </section>
 
-        <h3>7. Datenschutz und Vertraulichkeit</h3>
-        <p><strong>7.1. Vertraulichkeit:</strong> Beide Parteien verpflichten sich, alle im Rahmen der Zusammenarbeit
-            erlangten vertraulichen Informationen nicht an Dritte weiterzugeben.</p>
-        <p><strong>7.2. Datenverarbeitung:</strong> Die Verarbeitung personenbezogener Daten erfolgt gemäß den
-            gesetzlichen Bestimmungen, insbesondere der DSGVO. Weitere Details sind in der Datenschutzerklärung
-            geregelt.</p>
+    <section id="speicherdauer" class="card">
+      <h2>7. Speicherdauer</h2>
+      <p>Wir verarbeiten personenbezogene Daten nur so lange, wie es für die genannten Zwecke erforderlich ist. Sobald der Zweck entfällt, löschen oder anonymisieren wir die Daten, sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen (z. B. handels- oder steuerrechtliche Fristen).</p>
+    </section>
 
-        <h3>8. Schlussbestimmungen</h3>
-        <p><strong>8.1. Anwendbares Recht:</strong> Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss
-            des UN-Kaufrechts. Gerichtsstand ist der Geschäftssitz des Anbieters.</p>
-        <p><strong>8.2. Salvatorische Klausel:</strong> Sollte eine Bestimmung dieser AGB unwirksam sein, bleibt die
-            Wirksamkeit der übrigen Bestimmungen unberührt. Die Parteien verpflichten sich, die unwirksame Bestimmung
-            durch eine rechtlich zulässige Regelung zu ersetzen, die dem wirtschaftlichen Zweck der ursprünglichen
-            Bestimmung am nächsten kommt.</p>
-        <p><strong>8.3. Änderungen der AGB:</strong> Änderungen dieser AGB bedürfen der Schriftform. Mündliche
-            Nebenabreden sind nichtig.</p>
+    <section id="pflichtangaben" class="card">
+      <h2>8. Pflichtangaben / Erforderlichkeit</h2>
+      <p>Im Formular sind nur die Angaben verpflichtend, die für die Bearbeitung der Anfrage unbedingt erforderlich sind (typischerweise: Name, E-Mail, kurze Nachricht). Alle darüber hinausgehenden Felder sind freiwillig und dienen der besseren Einschätzung deines Projekts.</p>
+    </section>
 
-        <!-- Social Media Abonnementmodelle und Projektablauf -->
-        <h3>9. Abonnementmodelle und Projektablauf für Social Media Content</h3>
-        <p><strong>§ 9 Abonnementmodelle und Projektablauf für Social Media Content</strong></p>
-        <p><em>(Hinweis zur Geltung der AGB)</em><br>
-            Diese AGB gelten für Verträge mit Verbrauchern und Unternehmern im Sinne des BGB, sofern nicht ausdrücklich
-            abweichend geregelt.</p>
+    <section id="rechte" class="card">
+      <h2>9. Deine Rechte</h2>
+      <p>Du hast nach der DSGVO insbesondere folgende Rechte:</p>
+      <ul>
+        <li>Recht auf Auskunft (Art. 15 DSGVO)</li>
+        <li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
+        <li>Recht auf Löschung (Art. 17 DSGVO)</li>
+        <li>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+        <li>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</li>
+        <li>Widerspruchsrecht gegen Verarbeitungen auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (Art. 21 DSGVO)</li>
+      </ul>
+      <p>Du kannst dich zudem bei einer Datenschutz-Aufsichtsbehörde beschweren (Art. 77 DSGVO), z. B. bei der für deinen Wohnort zuständigen Behörde.</p>
+    </section>
 
-        <h4>9.1 Leistungsumfang und Abonnementbedingungen</h4>
-        <p>Fusion³ bietet im Bereich Social Media die folgenden individuell zugeschnittenen Leistungspakete an:</p>
+    <section id="sicherheit" class="card">
+      <h2>10. Sicherheit</h2>
+      <p>Die Übertragung erfolgt über HTTPS. Wir treffen angemessene technische und organisatorische Maßnahmen, um personenbezogene Daten vor Verlust, Missbrauch und unbefugtem Zugriff zu schützen.</p>
+    </section>
 
-        <p><strong>(1) Probierpaket:</strong></p>
-        <ul>
-            <li><strong>Laufzeit:</strong> 1 Monat (einmalig)</li>
-            <li><strong>Leistungen:</strong> 1 Social-Media-Post pro Woche, 1 maßgeschneidertes 3D-Modell, 1
-                Produktanimation, 2 Renderings, SEO-Optimierung</li>
-            <li><strong>Preis:</strong> 49,00 € (einmalig)</li>
-        </ul>
+    <section id="kinder" class="card">
+      <h2>11. Kinder</h2>
+      <p>Unser Angebot richtet sich nicht an Kinder im Sinne von Art. 8 DSGVO. Wir erheben wissentlich keine Daten von Kindern.</p>
+    </section>
 
-        <p><strong>(2) 1-Monatsabo:</strong></p>
-        <ul>
-            <li><strong>Laufzeit:</strong> unbefristet mit monatlicher Abrechnung</li>
-            <li><strong>Leistungen:</strong> 2 Social-Media-Posts pro Woche, 1 maßgeschneidertes 3D-Modell, Renderings,
-                Werbekampagnen, Ad-Designs, SEO-Optimierung</li>
-            <li><strong>Preis:</strong> 159,00 € pro Monat</li>
-        </ul>
+    <section id="aenderungen" class="card">
+      <h2>12. Änderungen dieser Erklärung</h2>
+      <p>Wir passen diese Datenschutzerklärung an, wenn sich Prozesse, Rechtslagen oder eingesetzte Dienstleister ändern. Die jeweils aktuelle Fassung ist hier abrufbar.</p>
+    </section>
 
-        <p><strong>(3) 3-Monatsabo:</strong></p>
-        <ul>
-            <li><strong>Laufzeit:</strong> unbefristet mit quartalsweiser Abrechnung</li>
-            <li><strong>Leistungen:</strong> 3 Social-Media-Posts pro Woche, 2 maßgeschneiderte 3D-Modelle, 2
-                Produktanimationen, Renderings, Content-Strategien, Werbekampagnen, Ad-Designs, SEO-Optimierung</li>
-            <li><strong>Preis:</strong> 409,00 € alle 3 Monate</li>
-        </ul>
+    <section id="kontakt" class="card">
+      <h2>13. Datenschutz-Kontakt</h2>
+      <p>Bei Fragen oder zur Ausübung deiner Rechte wende dich bitte an:</p>
+      <p><strong>Datenschutz</strong><br>
+        E-Mail: <a href="mailto:privacy@fusion3.example">privacy@fusion3.example</a> <!-- TODO: echte Adresse -->
+      </p>
+    </section>
 
-        <p><strong>(4) Templates zur Marken-Konsistenz:</strong></p>
-        <ul>
-            <li><strong>Einmalige Lieferung</strong></li>
-            <li><strong>Leistungen:</strong> Bereitstellung eines Templatesystems (20 Vorlagen in Photoshop/InDesign
-                oder Canva), 4 maßgeschneiderte 3D-Modelle, 5 Produktanimationen, Renderings, Content-Strategien,
-                Werbekampagnen, Ad-Designs, SEO-Optimierung</li>
-            <li><strong>Preis:</strong> 1.199,00 € (einmalig)</li>
-        </ul>
+<section id="cookies-consent" class="card">
+  <h2>14. Cookies &amp; Einwilligungs-Management</h2>
+  <p>Wir verwenden Cookies und ähnliche Technologien. Technisch notwendige Cookies sind für den Betrieb der Website erforderlich (z.&nbsp;B. zur Auslieferung von Inhalten und zum Schutz vor Missbrauch) und werden auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO eingesetzt. Alle weiteren Cookies (z.&nbsp;B. für Statistik/Analyse oder Marketing) setzen wir nur mit deiner Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die du jederzeit mit Wirkung für die Zukunft widerrufen kannst.</p>
 
-        <p>Die Abonnements verlängern sich automatisch um das jeweils gebuchte Intervall, sofern nicht fristgerecht
-            gekündigt wird.</p>
+  <h3>Kategorien</h3>
+  <ul>
+    <li><strong>Essentiell</strong> (zwingend erforderlich, keine Einwilligung nötig) – z.&nbsp;B. Consent-Speicher, Sicherheitsfunktionen.</li>
+    <li><strong>Statistik/Analyse</strong> (Einwilligung) – z.&nbsp;B. Google Analytics, Microsoft Clarity.</li>
+    <li><strong>Marketing</strong> (Einwilligung, derzeit nicht genutzt – sofern später geplant, hier ergänzen).</li>
+  </ul>
 
-        <h4>9.2 Projektablauf</h4>
-        <p>Der Ablauf eines gebuchten Social Media Projekts gliedert sich wie folgt:</p>
+  <h3>Consent-Banner</h3>
+  <p>Beim ersten Besuch kannst du <strong>„Zustimmen“</strong>, <strong>„Nicht zustimmen“</strong> oder über <strong>„Einstellungen“</strong> eine Auswahl treffen. Deine Entscheidung wird in einem Cookie gespeichert. Du kannst deine Auswahl jederzeit ändern (siehe <a href="#widerruf-consent">Einwilligung widerrufen / Einstellungen</a>).</p>
 
-        <li>1. Erstgespräch: Analyse von Zielen, Zielgruppen und gewünschter Wirkung.</li>
-        <li>2. Konzeption &amp; Design: Entwicklung individueller Konzepte inkl. Wireframes, Styleframes und
-            Interaktionsideen.</li>
-        <li>3. Feedback &amp; Feinschliff: Eine Feedbackrunde zur finalen Anpassung.</li>
-        <li>4. Finalisierung &amp; Abnahme: Bereitstellung der finalen Leistungen; mit Abnahme beginnt die
-            Reklamationsfrist.</li>
+  <h3>Speicherdauer</h3>
+  <p>Die Speicherdauer richtet sich nach der Cookie-Art. Essentielle Cookies werden gelöscht, sobald sie nicht mehr erforderlich sind; Analyse-Cookies haben feste Laufzeiten (siehe unten bei den jeweiligen Diensten).</p>
+</section>
 
+<section id="google-analytics" class="card">
+  <h2>15. Google Analytics (GA4)</h2>
+  <p>Wir setzen – nur mit deiner Einwilligung – <strong>Google Analytics 4</strong> ein, einen Webanalysedienst der Google Ireland Limited (Gordon House, Barrow Street, Dublin 4, Irland) und ggf. der Google LLC (1600 Amphitheatre Parkway, Mountain View, CA 94043, USA) als Muttergesellschaft. Google nutzt Cookies/ähnliche Technologien, um unsere Seitenutzung zu analysieren.</p>
 
-        <h4>9.3 Zusatzleistungen und externe Materialien</h4>
-        <p>Nicht im Paketumfang enthaltene Leistungen, z. B. lizenzierte Schriftarten, Stockbilder oder
-            Drittanbieter-Leistungen, werden gesondert in Rechnung gestellt. Für solche Materialien gelten die
-            Lizenzbedingungen der jeweiligen Anbieter.</p>
+  <ul>
+    <li><strong>Zweck:</strong> Reichweitenmessung, Nutzungsanalyse, Verbesserung unserer Website.</li>
+    <li><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).</li>
+    <li><strong>Datenarten:</strong> u.&nbsp;a. Seitenaufrufe, Klickpfade, Ereignisse, Browser-/Geräteinformationen; es kann eine Verarbeitung der IP-Adresse zu Sicherheits- und Standortzwecken stattfinden. In GA4 wird die IP standardmäßig nicht gespeichert; Standort wird mit Hilfe von IP-Daten abgeleitet.</li>
+    <li><strong>Drittlandtransfer:</strong> Es kann ein Transfer in die USA erfolgen. Dieser ist über geeignete Garantien (z.&nbsp;B. EU-Standardvertragsklauseln und/oder EU-US Data Privacy Framework) abgesichert.</li>
+    <li><strong>Speicherdauer bei Google:</strong> Ereignisdaten typischerweise 2–14 Monate (projektspezifisch konfigurierbar).</li>
+    <li><strong>Widerspruch/Widerruf:</strong> Du kannst deine Einwilligung jederzeit ändern (siehe <a href="#widerruf-consent">Einwilligung widerrufen</a>). Zusätzlich bietet Google ein Opt-out-Add-on: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">https://tools.google.com/dlpage/gaoptout</a>.</li>
+  </ul>
 
-        <h4>9.4 Urheber- und Nutzungsrechte</h4>
-        <p>Bis zur vollständigen Bezahlung verbleiben sämtliche Urheberrechte bei Fusion³. Nach vollständiger Zahlung
-            erhält der Kunde ein einfaches, nicht übertragbares Nutzungsrecht an den erbrachten Leistungen zur
-            vertragsgemäßen Verwendung. Für Dritte lizenzierte Inhalte gelten eigene Nutzungsregelungen.</p>
+  <p class="muted">Hinweis: Wir nutzen Analytics nur, wenn du im Banner „Statistik/Analyse“ zugestimmt hast (Consent Mode).</p>
+</section>
 
-        <h4>9.5 Reklamationen und Nachbesserungen</h4>
-        <p>Mängel und Änderungswünsche sind spätestens innerhalb von 7 Kalendertagen nach Lieferung schriftlich geltend
-            zu machen. Fusion³ wird im Rahmen des vereinbarten Leistungsprofils eine einmalige Nachbesserung vornehmen.
-            Eine Rückerstattung erfolgt nur bei nachweislich erheblichen Mängeln, die nicht behoben werden können.</p>
+<section id="ms-clarity" class="card">
+  <h2>16. Microsoft Clarity</h2>
+  <p>Mit deiner Einwilligung verwenden wir <strong>Microsoft Clarity</strong>, einen Analysedienst der Microsoft Corporation (One Microsoft Way, Redmond, WA 98052-6399, USA). Clarity verwendet Cookies und ähnliche Technologien, um zu verstehen, wie Besucher mit unserer Website interagieren (z.&nbsp;B. Heatmaps, Sitzungsmetriken).</p>
 
-        <h4>9.6 Rechnungsstellung, Zahlungsverzug</h4>
-        <p>Die Abonnementgebühren werden gemäß des jeweiligen Abrechnungsintervalls in Rechnung gestellt.
-            Zusatzleistungen werden transparent gesondert ausgewiesen.</p>
-        <p>Bei Zahlungsverzug ist Fusion³ berechtigt, Verzugszinsen in gesetzlicher Höhe sowie Mahnkosten geltend zu
-            machen. Weitere Rechte bleiben unberührt.</p>
+  <ul>
+    <li><strong>Zweck:</strong> Nutzungsanalyse, UI/UX-Optimierung (z.&nbsp;B. Klick-/Scroll-Verhalten).</li>
+    <li><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).</li>
+    <li><strong>Datenarten:</strong> u.&nbsp;a. Seitenaufrufe, Klicks, Mausbewegungen, Browser-/Geräteinformationen, ggf. gekürzte IP-Adressen; es werden <em>keine</em> sensiblen Formularinhalte aufgezeichnet (wir konfigurieren Clarity so, dass Eingaben in Formularfeldern maskiert werden).</li>
+    <li><strong>Drittlandtransfer:</strong> Eine Übermittlung in die USA kann stattfinden; abgesichert über geeignete Garantien (z.&nbsp;B. EU-Standardvertragsklauseln und/oder EU-US Data Privacy Framework).</li>
+    <li><strong>Typische Cookies:</strong> <code>_clck</code> (bis 1 Jahr), <code>_clsk</code> (1 Tag), <code>CLID</code> (1 Jahr), sowie von Microsoft-Domains <code>ANONCHK</code>, <code>MR</code>, <code>MUID</code>, <code>SM</code>.</li>
+  </ul>
 
-        <h4>9.7 Vertragslaufzeit, Kündigungsfristen und Widerrufsrecht</h4>
-        <p>(1) Die maximale Vertragslaufzeit für Verbraucherverträge beträgt 24 Monate. Eine automatische Verlängerung
-            ist nur mit ausdrücklicher Zustimmung des Verbrauchers zulässig.</p>
-        <p>(2) Kündigung: Der Vertrag kann von beiden Parteien mit einer Frist von 14 Tagen zum Ende des jeweiligen
-            Abrechnungsintervalls schriftlich gekündigt werden.</p>
-        <p>(3) Widerrufsrecht: Verbrauchern steht ein Widerrufsrecht nach Maßgabe der gesetzlichen Bestimmungen (§§ 355
-            ff. BGB) zu. Eine gesonderte Widerrufsbelehrung wird zur Verfügung gestellt.</p>
+  <p class="muted">Hinweis: Clarity wird nur geladen, wenn du im Banner „Statistik/Analyse“ zugestimmt hast. Du kannst die Einwilligung jederzeit widerrufen.</p>
+</section>
 
-        <h4>9.8 Mitwirkungspflichten</h4>
-        <p>Der Kunde verpflichtet sich, alle für die Projektdurchführung erforderlichen Informationen, Daten, Inhalte
-            oder sonstigen Materialien rechtzeitig bereitzustellen. Verzögerungen, die auf fehlende Mitwirkung
-            zurückzuführen sind, verlängern vereinbarte Fristen entsprechend. Fusion³ haftet nicht für daraus
-            resultierende Verzögerungen oder Qualitätsverluste.</p>
+<section id="widerruf-consent" class="card">
+  <h2>17. Einwilligung widerrufen / Einstellungen</h2>
+  <p>Du kannst deine Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen oder deine Auswahl ändern. Klicke dazu hier:</p>
+  <p><button type="button" onclick="window.__openConsentModal && window.__openConsentModal();" aria-label="Cookie-Einstellungen öffnen">Cookie-Einstellungen</button></p>
+  <p class="muted">Der Button öffnet den Einstellungsdialog unseres Einwilligungs-Banners. Alternativ kannst du Cookies über die Einstellungen deines Browsers löschen; beim nächsten Besuch wirst du erneut gefragt.</p>
+</section>
 
-        <h4>9.9 Haftung und Gewährleistung</h4>
-        <p>(1) Fusion³ haftet für Schäden, gleich aus welchem Rechtsgrund, nur bei Vorsatz und grober Fahrlässigkeit.
-            Bei einfacher Fahrlässigkeit haftet Fusion³ nur bei Verletzung wesentlicher Vertragspflichten
-            (Kardinalpflichten) und nur für den vertragstypisch vorhersehbaren Schaden.</p>
-        <p>(2) Die Gewährleistungsfrist für Werkleistungen beträgt 12 Monate ab Abnahme, es sei denn, gesetzlich ist
-            eine längere Frist vorgeschrieben oder vereinbart.</p>
+<!-- Consent Default: alles auf "denied", bis User zustimmt -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
 
-        <h4>9.10 Gerichtsstand für Unternehmer</h4>
-        <p>Für Verträge mit Unternehmern im Sinne des § 14 BGB ist der Gerichtsstand der Sitz von Fusion³, sofern kein
-            ausschließlicher gesetzlicher Gerichtsstand besteht.</p>
+  // Consent Mode v2 – Default (vor Consent)
+  gtag('consent', 'default', {
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    ad_storage: 'denied',
+    analytics_storage: 'denied',
+    functionality_storage: 'granted',   // essenziell (nur wenn nötig)
+    security_storage: 'granted'
+  });
 
+  // Diese Funktion rufst du aus deinem Banner auf:
+  // consentUpdate({analytics: true/false});
+  window.consentUpdate = function(opts){
+    const analytics = !!opts.analytics;
+    gtag('consent', 'update', {
+      analytics_storage: analytics ? 'granted' : 'denied'
+    });
+    if (analytics) {
+      loadGA();
+      loadClarity();
+    } else {
+      // optional: nichts laden / ggf. Unload nicht möglich
+    }
+  };
 
+  function loadGA(){
+    if (window.__gaLoaded) return; window.__gaLoaded = true;
+    // TODO: deine GA4-ID eintragen (z.B. G-XXXXXXX)
+    var s=document.createElement('script'); s.async=1;
+    s.src='https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX';
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXX', { anonymize_ip: true }); // zusätzliche Vorsicht
+  }
 
-        <!-- Grafikdesign-Projekte -->
-        <h3>10 Grafikdesign-Projekte</h3>
+  function loadClarity(){
+    if (window.__clarityLoaded) return; window.__clarityLoaded = true;
+    // TODO: deine Clarity-ID eintragen (z.B. abcdefg)
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r); t.async=1; t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "CLARITY-ID");
+  }
 
-        <h4>10.1 Leistungsumfang und Paketinhalte</h4>
-        <p>Fusion³ bietet im Bereich Grafikdesign folgende standardisierte Leistungspakete an. Die genaue vertragliche
-            Leistung richtet sich nach dem individuell vereinbarten Angebot. Soweit nicht ausdrücklich anders
-            vereinbart, gelten folgende Paketinhalte:</p>
-
-        <p><strong>(1) Logo Starter Paket:</strong></p>
-        <ul>
-            <li>Zwei individuelle Entwürfe eines Logos</li>
-            <li>Eine Korrekturschleife</li>
-            <li>Übergabe der finalen Versionen in gängigen Formaten (PNG, SVG, PDF) für Web &amp; Print</li>
-            <li>Optional: Social Media Profilgrafiken</li>
-            <li>Ab-Preis: 149,00 €</li>
-        </ul>
-
-        <p><strong>(2) Brand Identity Paket:</strong></p>
-        <ul>
-            <li>Entwicklung eines Logos, Farbkonzepts und Typografie</li>
-            <li>Erstellung eines Mini-Styleguides zur konsistenten Markenanwendung</li>
-            <li>Gestaltung von Visitenkarte und Briefpapier</li>
-            <li>Übergabe aller Dateien digital und druckfähig</li>
-            <li>Ab-Preis: 499,00 €</li>
-        </ul>
-
-        <p><strong>(3) Print &amp; Poster:</strong></p>
-        <ul>
-            <li>Gestaltung von Flyern, Plakaten, Visitenkarten o.ä.</li>
-            <li>Druckvorbereitung inkl. Beschnitt- und Farbprofilen</li>
-            <li>Zielgruppenspezifische Gestaltung</li>
-            <li>Abgabe als druckfertige PDF-Dateien</li>
-            <li>Ab-Preis: 149,00 €</li>
-        </ul>
-
-        <p><strong>(4) Digital Media Bundle:</strong></p>
-        <ul>
-            <li>Gestaltung von Templates für Social Media, Website-Grafiken, Ads und Newsletter</li>
-            <li>Optimierung für responsive Darstellung auf verschiedenen Geräten</li>
-            <li>Formatoptimierung für alle relevanten Plattformen</li>
-            <li>Ab-Preis: 199,00 €</li>
-        </ul>
-
-        <h4>10.2 Projektablauf</h4>
-        <p>Der typische Projektablauf bei Fusion³ besteht aus folgenden Phasen:</p>
-        <li>1. Erstgespräch: Klärung der Anforderungen, Zielgruppen, Projektziele und Stilpräferenzen.</li>
-        <li>2. Konzeption &amp; Entwurf: Entwicklung eines individuellen Designkonzepts inkl. erster Visualisierungen.
-        </li>
-        <li>3. Feedback &amp; Finalisierung: Eine Feedbackrunde zur Abstimmung und Endanpassung.</li>
-        <li>4. Abschluss &amp; Übergabe: Übergabe der finalen Daten. Mit Abnahme beginnt die Reklamationsfrist.</li>
-
-        <h4>10.3 Mitwirkungspflichten</h4>
-        <p>Der Kunde verpflichtet sich, sämtliche zur Leistungserbringung erforderlichen Informationen, Daten, Inhalte
-            oder Materialien (z. B. Logos, Texte, CI-Vorgaben) rechtzeitig bereitzustellen. Verzögerungen infolge
-            fehlender Mitwirkung verlängern Fristen entsprechend. Fusion³ haftet nicht für dadurch bedingte
-            Leistungsverzögerungen oder Einschränkungen im Ergebnis.</p>
-
-        <h4>10.4 Korrekturschleifen und Zusatzleistungen</h4>
-        <p>Im Rahmen der Pakete ist eine Korrekturschleife inkludiert. Weitere Änderungswünsche werden gesondert nach
-            Aufwand berechnet. Zusatzleistungen außerhalb des vereinbarten Umfangs (z. B. zusätzliche Medien,
-            alternative Formate, spätere Änderungswünsche) werden nach vorheriger Absprache individuell kalkuliert.</p>
-
-        <h4>10.5 Nutzungsrechte</h4>
-        <p>Bis zur vollständigen Bezahlung verbleiben sämtliche Urheberrechte bei Fusion³. Nach vollständiger Zahlung
-            erhält der Kunde ein einfaches, nicht übertragbares Nutzungsrecht zur vertragsgemäßen Nutzung. Die
-            Bearbeitung, Vervielfältigung oder Weitergabe der Designs an Dritte ist ohne schriftliche Zustimmung nicht
-            gestattet. Für verwendete Drittlizenzen (z. B. Schriften, Bilder) gelten jeweils die Lizenzbedingungen der
-            Anbieter.</p>
-
-        <h4>10.6 Lieferung, Fristen, Verzug</h4>
-        <p>Lieferfristen gelten nur als verbindlich, wenn sie ausdrücklich schriftlich als verbindlich vereinbart wurden. Bei Verzögerungen aufgrund höherer Gewalt, technischer Ausfälle oder verspäteter Mitwirkung des Kunden verlängern sich Lieferzeiten entsprechend. Im Fall des Verzugs ist zunächst eine angemessene Nachfrist zu setzen. Kommt der Anbieter auch nach Ablauf der Nachfrist nicht nach, ist der Kunde berechtigt, vom Vertrag zurückzutreten.</p>
-
-        <h4>10.7 Vergütung und Zahlungsbedingungen</h4>
-        <p>Die Vergütung erfolgt auf Grundlage des individuell vereinbarten Festpreises oder einer verbindlichen
-            Aufwandsschätzung. Alle Preise verstehen sich als Nettopreise zzgl. gesetzlicher Umsatzsteuer, sofern nicht
-            anders ausgewiesen. Fusion³ ist berechtigt, bei Projektbeginn eine angemessene Vorauszahlung zu verlangen.
-            Die Rechnung ist mit Zugang sofort fällig. Bei Zahlungsverzug gelten die gesetzlichen Regelungen zu
-            Verzugszinsen (§ 288 BGB) sowie Mahngebühren. Der Anbieter behält sich das Recht vor, bei wiederholtem
-            Zahlungsverzug Leistungen auszusetzen.</p>
-
-        <h4>10.8 Gewährleistung und Haftung</h4>
-        <p>Es gelten die gesetzlichen Vorschriften über Werkverträge (§§ 631 ff. BGB), soweit nachfolgend nicht
-            abweichend geregelt. Fusion³ haftet nur bei Vorsatz oder grober Fahrlässigkeit. Bei leichter Fahrlässigkeit
-            besteht Haftung nur bei Verletzung wesentlicher Vertragspflichten (Kardinalpflichten), und zwar begrenzt auf
-            den vorhersehbaren, vertragstypischen Schaden. Die Gewährleistungsfrist beträgt 12 Monate ab Abnahme, sofern
-            keine längere gesetzliche Frist gilt.</p>
-
-        <h4>10.9 Gerichtsstand für Unternehmer</h4>
-        <p>Für Streitigkeiten mit Unternehmern ist der Gerichtsstand der Sitz von Fusion³, sofern kein gesetzlicher
-            ausschließlicher Gerichtsstand besteht.</p>
+  // Optional: Consent-UI öffnen
+  window.__openConsentModal = function(){
+    // TODO: Öffne hier dein eigenes Consent-Modal / Einstellungen
+    alert('Consent-Einstellungen: Hier dein Modal öffnen.');
+  };
+</script>
 
 
-
-
-
-        <!-- Datenschutzerklärung -->
-        <h2>Datenschutzerklärung</h2>
-
-        <h3>1. Einleitung</h3>
-        <p>Vielen Dank für Ihr Interesse an unserer Website. Der Schutz Ihrer personenbezogenen Daten ist uns ein
-            wichtiges Anliegen. In dieser Datenschutzerklärung informieren wir Sie darüber, welche Daten wir erheben,
-            wie wir diese verarbeiten und welche Rechte Sie in Bezug auf Ihre personenbezogenen Daten haben.</p>
-
-        <h3>2. Verantwortlicher</h3>
-        <p><strong>Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO):</strong><br>
-            Fusion³<br>
-            Musterstraße 1<br>
-            12345 Musterstadt<br>
-            Deutschland<br>
-            Telefon: [Telefon]<br>
-            E-Mail: [E-Mail]
-        </p>
-
-        <h3>3. Erhebung und Speicherung personenbezogener Daten sowie Art und Zweck der Verarbeitung</h3>
-        <p><strong>3.1. Zugriffsdaten (Server-Logfiles):</strong><br>
-            Beim Aufrufen unserer Website werden automatisch folgende Informationen erfasst, die Ihr Browser an unseren
-            Server übermittelt:<br>
-            - Browsertyp und -version<br>
-            - Verwendetes Betriebssystem<br>
-            - Referrer-URL (die zuvor besuchte Seite)<br>
-            - Datum und Uhrzeit des Zugriffs<br>
-            - IP-Adresse (in anonymisierter Form, sofern möglich)<br>
-            Diese Daten werden ausschließlich zu statistischen Zwecken sowie zur Optimierung unserer Website verwendet.
-        </p>
-        <p><strong>3.2. Cookies:</strong><br>
-            Unsere Website verwendet Cookies, um die Nutzung unseres Angebots zu erleichtern und bestimmte Funktionen zu
-            ermöglichen. Es werden dabei sowohl essentielle Cookies (z. B. für die Navigation) als auch
-            nicht-essentielle Cookies (z. B. für Analysen, sofern eine Einwilligung vorliegt) eingesetzt. Weitere
-            Informationen finden Sie in unserem Cookie-Hinweis.
-        </p>
-        <p><strong>3.3. Kontaktformular / E-Mail-Kontakt:</strong><br>
-            Wenn Sie uns über ein Kontaktformular oder per E-Mail kontaktieren, werden die von Ihnen eingegebenen Daten
-            (z. B. Name, E-Mail-Adresse, Nachricht) gespeichert, um Ihre Anfrage zu bearbeiten. Diese Daten werden ohne
-            Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben, es sei denn, es ist zur Erfüllung gesetzlicher
-            Pflichten erforderlich.
-        </p>
-
-        <h3>4. Weitergabe von Daten</h3>
-        <p>
-            Eine Übermittlung Ihrer personenbezogenen Daten an Dritte erfolgt nur, wenn:
-        </p>
-        <ul>
-            <li>Dies zur Vertragserfüllung oder zur Erfüllung gesetzlicher Pflichten notwendig ist,</li>
-            <li>Sie ausdrücklich eingewilligt haben oder</li>
-            <li>eine Übermittlung aus behördlichen oder gerichtlichen Gründen angeordnet wird.</li>
-        </ul>
-
-        <h3>5. Verwendung von Diensten Dritter</h3>
-        <p>
-            Unsere Website bindet unter Umständen Dienste von Drittanbietern ein, wie z. B. Google Analytics zur Analyse
-            des Nutzerverhaltens oder Social Media Plugins, um das Teilen von Inhalten zu ermöglichen. Die Verarbeitung
-            der dabei erhobenen Daten erfolgt gemäß den jeweiligen Datenschutzbestimmungen der Drittanbieter.
-        </p>
-
-        <h3>6. Ihre Rechte</h3>
-        <p>Sie haben das Recht, von uns gemäß Art. 15 DSGVO Auskunft über Ihre gespeicherten personenbezogenen Daten zu
-            erhalten. Ferner stehen Ihnen folgende Rechte zu:</p>
-        <ul>
-            <li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
-            <li>Recht auf Löschung (Art. 17 DSGVO), sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen</li>
-            <li>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
-            <li>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</li>
-            <li>Recht auf Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
-            <li>Recht, einmal erteilte Einwilligungen gemäß Art. 7 DSGVO jederzeit für die Zukunft zu widerrufen</li>
-        </ul>
-
-        <h3>7. Datensicherheit</h3>
-        <p>
-            Wir setzen technische und organisatorische Sicherheitsmaßnahmen ein, um Ihre Daten vor unbefugtem Zugriff,
-            Verlust oder Zerstörung zu schützen. Unsere Sicherheitsmaßnahmen werden regelmäßig überprüft und an den
-            Stand der Technik angepasst.
-        </p>
-
-        <h3>8. Änderungen der Datenschutzerklärung</h3>
-        <p>
-            Wir behalten uns vor, diese Datenschutzerklärung anzupassen, um sie an geänderte Rechtslagen oder Änderungen
-            unserer Dienstleistungen anzupassen. Für Ihren erneuten Besuch gilt dann die jeweils aktuell gültige
-            Datenschutzerklärung.
-        </p>
-
-        <h3>9. Externe Schriftarten (Google Fonts)</h3>
-        <p>
-            Unsere Website verwendet externe Schriftarten, die von den Servern von Google (z. B.
-            <a href="https://fonts.gstatic.com" target="_blank">https://fonts.gstatic.com</a>) geladen werden, um das
-            Design und die Typografie unserer Website ansprechend darzustellen. Durch diesen Vorgang können unter
-            Umständen technische Informationen wie Ihre IP-Adresse, Browserinformationen und das Zugriffsdatum an Google
-            übertragen werden. Moderne Browser können aufgrund von Tracking Prevention‑Maßnahmen den Zugriff auf lokale
-            Speicherbereiche einschränken, was in der Browserkonsole zu Meldungen wie „Tracking Prevention blocked
-            access to storage“ führen kann. Diese Mechanismen haben jedoch keinen Einfluss auf die Funktionalität der
-            Website.
-        </p>
-
-        <h3>10. Kontakt</h3>
-        <p>
-            Bei Fragen zum Datenschutz oder zur Ausübung Ihrer Rechte wenden Sie sich bitte an:<br>
-            Fusion³<br>
-            Musterstraße 1, 12345 Musterstadt<br>
-            Deutschland<br>
-            E-Mail: [E-Mail]<br>
-            Telefon: [Telefon]
-        </p>
-
-    </main>
-
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-logo">
-                <span>Fusion³</span>
-                <p>Web &amp; 3D Design mit Wirkung.</p>
-            </div>
-            <div class="footer-links">
-                <h4>Rechtliches</h4>
-                <ul>
-                    <li><a href="/impressum.html">Impressum</a></li>
-                    <li><a href="/datenschutz.html">Datenschutz</a></li>
-                    <li><a href="/agb.html">AGB</a></li>
-                </ul>
-            </div>
-            <div class="footer-contact">
-                <h4>Kontakt</h4>
-                <ul>
-                    <li><a href="mailto:hello@fusion3.de">hello@fusion3.de</a></li>
-                    <li>+49 123 4567890</li>
-                    <li>Berlin, Deutschland</li>
-                </ul>
-            </div>
-            <div class="footer-socials">
-                <h4>Social</h4>
-                <div class="footer-socials-icons">
-                    <a href="mailto:hello@fusion3.de" title="E-Mail">
-                        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="E-Mail Icon" />
-                    </a>
-                    <a href="https://github.com/" title="GitHub" target="_blank">
-                        <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub Logo" />
-                    </a>
-                    <a href="https://www.linkedin.com/" title="LinkedIn" target="_blank">
-                        <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn Blau" />
-                    </a>
-                    <a href="https://wa.me/491234567890" title="WhatsApp schreiben" target="_blank">
-                        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp Icon" />
-                    </a>
-                </div>
-            </div>
-        </div>
-        <p class="footer-bottom">© 2025 Fusion³ – Alle Rechte vorbehalten.</p>
-    </footer>
-
-    <script>
-        const burger = document.getElementById('burger');
-        const nav = document.getElementById('nav');
-
-        burger.addEventListener('click', () => {
-            burger.classList.toggle('active');
-            nav.classList.toggle('open');
-        });
-    </script>
+    <p class="muted" style="margin-top:14px">Tipp: Wenn du künftig andere Dienste nutzt (z. B. Analytics, Fonts, CDNs, Payment, Newsletter), ergänze die jeweiligen Abschnitte mit Anbieter, Zweck, Rechtsgrundlage, Empfänger, Drittlandtransfer und Speicherdauer.</p>
+  </div>
 </body>
-
 </html>
