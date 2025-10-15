@@ -367,7 +367,6 @@ body[data-page="titlepage"] .hero-image-foreground {
 
 
 
-<body>
   <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
 <style>
@@ -1838,18 +1837,25 @@ body[data-page="titlepage"] .hero-image-foreground {
 <section id="aurora-sheet" class="aurora-sheet container" aria-labelledby="aurora-crown" aria-describedby="aurora-chant" role="region">
   <h2 id="aurora-crown" class="aurora-title">Über Fusion3</h2>
 
-  <p id="aurora-chant" class="aurora-subtitle">
+<p id="aurora-chant" class="aurora-subtitle" aria-live="polite">
+  <span class="subtitle-snippet">Design, 3D & Web – prägnant kombiniert für maximale Markenwirkung.</span>
+  <span class="subtitle-full">
     Wir verbinden Design, 3D und Web – für Marken, die in Erinnerung bleiben.<br>
     Kreativität trifft Technologie. Wirkung trifft Tempo.
-  </p>
+  </span>
+</p>
 
   <!-- Semantische Liste der Bereiche -->
   <ul class="quasar-grid" aria-label="Bereiche: Mission, Team, Vision">
+
     <li>
       <article class="aether-card" id="aether-mission"
                aria-labelledby="aether-mission-h"
-               aria-describedby="aether-mission-k">
+               aria-describedby="aether-mission-k aether-mission-s">
         <h3 id="aether-mission-h">Unsere Mission</h3>
+        <!-- Kurzsatz / Snippet -->
+        <p class="snippet" id="aether-mission-s">Design, Code &amp; 3D als Einheit – Balance, Erlebnis und skalierbare Systeme.</p>
+        <!-- Tagline bleibt für Desktop sichtbar -->
         <p class="microtag" id="aether-mission-k">Design, Code &amp; 3D als Einheit</p>
 
         <ul class="delta-list" aria-label="Was uns antreibt">
@@ -1875,8 +1881,9 @@ body[data-page="titlepage"] .hero-image-foreground {
     <li>
       <article class="aether-card" id="aether-crew"
                aria-labelledby="aether-crew-h"
-               aria-describedby="aether-crew-k">
+               aria-describedby="aether-crew-k aether-crew-s">
         <h3 id="aether-crew-h">Unser Team</h3>
+        <p class="snippet" id="aether-crew-s">Komplementär, agil, erfahren – Designer, Entwickler &amp; 3D-Artists als Produktteam.</p>
         <p class="microtag" id="aether-crew-k">Interdisziplinär, kreativ &amp; technisch stark</p>
 
         <ul class="delta-list" aria-label="Stärken unseres Teams">
@@ -1902,8 +1909,9 @@ body[data-page="titlepage"] .hero-image-foreground {
     <li>
       <article class="aether-card" id="aether-vision"
                aria-labelledby="aether-vision-h"
-               aria-describedby="aether-vision-k">
+               aria-describedby="aether-vision-k aether-vision-s">
         <h3 id="aether-vision-h">Unsere Vision</h3>
+        <p class="snippet" id="aether-vision-s">Zukunftsorientiertes Design mit Wirkung – Emotion, Technologie &amp; Nachhaltigkeit.</p>
         <p class="microtag" id="aether-vision-k">Zukunftsorientiertes Design mit Wirkung</p>
 
         <ul class="delta-list" aria-label="Unsere Ziele und Visionen">
@@ -1925,8 +1933,10 @@ body[data-page="titlepage"] .hero-image-foreground {
         </ul>
       </article>
     </li>
+
   </ul>
 </section>
+
 <style>
 /* ===== A11y Utility ===== */
 .visually-hidden{
@@ -2325,6 +2335,205 @@ body[data-page="titlepage"] .hero-image-foreground {
 
   html, body{ overflow-x: hidden; }
 }
+/* === MOBILE-KARTE: nur Headline + kurzer Satz === */
+@media (max-width: 699.98px){
+  /* Karte kompakt */
+  #aurora-sheet .aether-card{
+    padding: 14px 16px !important;
+    min-height: auto !important;
+    contain-intrinsic-size: auto 120px !important; /* deutlich flacher */
+    box-shadow: 0 2px 10px rgba(0,0,0,.12) !important;
+  }
+
+  /* Headline enger setzen */
+  #aurora-sheet .aether-card h3{
+    margin: 0 0 .25rem !important;
+  }
+
+  /* nur kurzer Satz sichtbar */
+  #aurora-sheet .aether-card .snippet{
+    display:block !important;
+    font-size: 1rem !important;
+    line-height: 1.45 !important;
+    font-weight: 680 !important;
+    color: rgba(255,255,255,.98) !important;
+    text-wrap: pretty;
+    /* optional: auf 2 Zeilen klemmen */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  /* alles andere ausblenden */
+  #aurora-sheet .aether-card .delta-list,
+  #aurora-sheet .aether-card .benefit-line{
+    display:none !important;
+  }
+
+  /* microtag: aus oder als Ersatz verwenden */
+  /* Variante A (Snippet vorhanden): microtag aus */
+  #aurora-sheet .aether-card .microtag{ display:none !important; }
+
+  /* Variante B (kein .snippet genutzt):
+     #aurora-sheet .aether-card .microtag{
+       display:block !important;
+       margin:.15rem 0 0 !important;
+       font-size: 1rem !important;
+       line-height:1.45 !important;
+       font-weight:680 !important;
+       color: rgba(255,255,255,.98) !important;
+       text-shadow:none !important;
+       opacity:1 !important;
+       display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden;
+     }
+  */
+
+  /* Grid-Abstände leicht straffen */
+  #aurora-sheet .quasar-grid{
+    gap: .8rem !important;
+  }
+}
+/* === SUBTITLE: Mobile = nur Kurzsatz (ohne Ellipsis), Desktop = Volltext === */
+@media (max-width: 699.98px){
+  #aurora-sheet .aurora-subtitle{
+    padding: 12px 14px !important;
+    margin-bottom: var(--space-4) !important;
+  }
+
+  /* Nur Snippet anzeigen – frei umbrechend, KEIN clamp/overflow */
+  #aurora-sheet .aurora-subtitle .subtitle-snippet{
+    display: block !important;
+    font-size: 1rem !important;
+    line-height: 1.45 !important;
+    font-weight: 700 !important;
+    letter-spacing: .002em !important;
+    white-space: normal !important;   /* kein erzwungener Einzeiler */
+    overflow: visible !important;     /* nichts abschneiden */
+  }
+
+  /* Volltext komplett ausblenden */
+  #aurora-sheet .aurora-subtitle .subtitle-full{
+    display: none !important;
+  }
+}
+
+/* Ab Tablet/Desktop: Volltext zeigen, Snippet ausblenden */
+@media (min-width: 700px){
+  #aurora-sheet .aurora-subtitle .subtitle-snippet{ display: none !important; }
+  #aurora-sheet .aurora-subtitle .subtitle-full{ display: inline !important; }
+}
+
+/* === MOBILE Smart Cards (≤700px) === */
+@media (max-width: 699.98px){
+
+  /* weicheres Einsteigen der ganzen Section */
+  #aurora-sheet{
+    transition: opacity .25s ease;
+    will-change: opacity;
+  }
+  #aurora-sheet.section-enter{ opacity: 1; }
+  #aurora-sheet.section-exit{ opacity: .95; }
+
+  /* Karten: Basis für Animationen */
+  #aurora-sheet .aether-card{
+    transform: translateY(12px) scale(1);
+    opacity: 0;
+    transition:
+      transform .28s cubic-bezier(.2,.8,.2,1),
+      opacity .22s ease,
+      box-shadow .2s ease,
+      background-position .45s ease;
+    will-change: transform, opacity;
+  }
+
+  /* Entrance (wenn sichtbar) */
+  #aurora-sheet .aether-card.is-revealed{
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  /* Beim Teilverlassen leicht abblenden */
+  #aurora-sheet .aether-card.is-fading{
+    opacity: .88;
+    transform: translateY(6px) scale(1);
+  }
+
+  /* Aktive (zentrierte) Karte: größer + stärkerer Glow/Schatten */
+  #aurora-sheet .aether-card.is-active{
+    transform: translateY(0) scale(1.04);
+    opacity: 1;
+  }
+
+  /* Press / Tap-Effekt (kurzzeitig zusätzliches Scale) */
+  #aurora-sheet .aether-card.is-pressed{
+    transform: translateY(0) scale(1.06);
+  }
+
+  /* Glow/Schatten performant über ::before (du nutzt es schon – hier verstärken) */
+  #aurora-sheet .aether-card::before{
+    transition: opacity .25s ease, transform .25s ease, filter .25s ease;
+    opacity: .14;               /* Grundglow */
+    filter: blur(10px);
+  }
+  #aurora-sheet .aether-card.is-active::before{
+    opacity: .28;               /* stärkerer Glow */
+    transform: scale(1.05);
+    filter: blur(16px);
+  }
+
+  /* zusätzlicher Schatten via box-shadow (klein halten, bleibt flott) */
+  #aurora-sheet .aether-card{
+    box-shadow: 0 4px 14px rgba(0,0,0,.10);
+  }
+  #aurora-sheet .aether-card.is-active{
+    box-shadow: 0 10px 28px rgba(0,0,0,.22);
+    background-position: 80% 50%; /* subtiler „Energy shift“ */
+  }
+
+  /* Wenn Section rausgescrollt ist → Karten beruhigen */
+  #aurora-sheet.section-exit .aether-card{
+    opacity: .85;
+    transform: translateY(4px) scale(1);
+  }
+
+  /* Optional: Snap für „appiges“ Gefühl (aktivieren, wenn gewollt) */
+  /*
+  #aurora-sheet .quasar-grid{
+    scroll-snap-type: y mandatory;
+  }
+  #aurora-sheet .quasar-grid > li{
+    scroll-snap-align: center;
+  }
+  */
+
+  /* Barrierefreiheit: Reduce Motion */
+  @media (prefers-reduced-motion: reduce){
+    #aurora-sheet,
+    #aurora-sheet .aether-card{
+      transition: none !important;
+    }
+    #aurora-sheet .aether-card,
+    #aurora-sheet .aether-card.is-active,
+    #aurora-sheet .aether-card.is-pressed{
+      transform: none !important;
+    }
+  }
+}
+
+
+
+@media (max-width: 699.98px){
+  /* etwas weichere Umschaltung fürs „Step“-Gefühl */
+  #aurora-sheet .aether-card{
+    transition:
+      transform .28s cubic-bezier(.2,.8,.2,1),
+      opacity .22s ease,
+      box-shadow .2s ease,
+      background-position .45s ease;
+  }
+}
+
 </style>
 
 <script type="application/ld+json">
@@ -2396,6 +2605,201 @@ body[data-page="titlepage"] .hero-image-foreground {
 }
 </script>
 
+<script>
+(function(){
+  const mqMobile = window.matchMedia('(max-width: 699.98px)');
+  const section = document.getElementById('aurora-sheet');
+  if(!section) return;
+
+  const cards = Array.from(section.querySelectorAll('.aether-card'));
+  if(!cards.length) return;
+
+  // ---- Hilfsfunktionen
+  const vhMid = () => window.innerHeight / 2;
+  const centerAbs = () => window.scrollY + vhMid();
+
+  // Zustand für richtungssensitives „Step“-Aktivieren
+  let currentIndex = 0;
+  let lastScrollY = window.scrollY;
+
+  // Sichtbarkeits-Observer (wie gehabt)
+  function setupObservers(){
+    const sectionObserver = new IntersectionObserver(([entry])=>{
+      if(entry.isIntersecting){
+        section.classList.add('section-enter');
+        section.classList.remove('section-exit');
+      }else{
+        section.classList.add('section-exit');
+        section.classList.remove('section-enter');
+      }
+    }, { root: null, threshold: 0.05 });
+    sectionObserver.observe(section);
+
+    const revealObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        const el = entry.target;
+        if(entry.intersectionRatio >= 0.3){
+          el.classList.add('is-revealed');
+          el.classList.remove('is-fading');
+        }else if(entry.intersectionRatio > 0 && entry.intersectionRatio < 0.3){
+          el.classList.add('is-fading');
+        }else{
+          el.classList.remove('is-fading','is-revealed');
+        }
+      });
+    }, { root: null, threshold: [0, .15, .3], rootMargin: '-10% 0px -10% 0px' });
+
+    cards.forEach(c => revealObserver.observe(c));
+  }
+
+  // aktuelle Karte „stepweise“ bestimmen
+  function pickActiveStepwise(){
+    const dirDown = window.scrollY > lastScrollY;
+    lastScrollY = window.scrollY;
+
+    // Mittenpositionen (Dokumentkoordinaten) & dynamische Grenzen berechnen
+    const mids = cards.map(c=>{
+      const r = c.getBoundingClientRect();
+      return window.scrollY + r.top + r.height/2;
+    });
+
+    // Grenzen zwischen Karten: Mitte zwischen den Mittelpunkten
+    // boundary[i] trennt i und i+1
+    const boundaries = [];
+    for(let i=0; i<mids.length-1; i++){
+      boundaries.push((mids[i] + mids[i+1]) / 2);
+    }
+
+    const cAbs = centerAbs();
+
+    // Wenn wir uns außerhalb der Section befinden, nichts ändern
+    const secRect = section.getBoundingClientRect();
+    if(secRect.bottom <= 0 || secRect.top >= window.innerHeight) return;
+
+    // Initialisierung: beim Eintritt von oben → Index 0
+    if(cAbs <= boundaries[0]) currentIndex = 0;
+
+    // Step-Logik: nur bei Überschreiten der passenden Grenze wechseln
+    if(dirDown){
+      // nach unten: steigt max. um 1 pro Grenze
+      if(currentIndex < cards.length - 1 && cAbs >= boundaries[currentIndex]){
+        currentIndex += 1;
+      }
+    }else{
+      // nach oben: sinkt max. um 1 pro Grenze
+      if(currentIndex > 0 && cAbs <= boundaries[currentIndex - 1]){
+        currentIndex -= 1;
+      }
+    }
+
+    // Klassen anwenden
+    cards.forEach((c, i)=>{
+      if(i === currentIndex){
+        c.classList.add('is-active');
+        c.style.willChange = 'transform, opacity';
+      }else{
+        c.classList.remove('is-active','is-pressed');
+        c.style.willChange = '';
+      }
+    });
+  }
+
+  // rAF-Throttling
+  let ticking = false;
+  function onScroll(){
+    if(!ticking){
+      requestAnimationFrame(()=>{
+        pickActiveStepwise();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  // Tap/Press & Click-Setzen
+  function setupPress(){
+    const pressMs = 160;
+    const vibrate = (ms)=>{ try{ navigator.vibrate && navigator.vibrate(ms); }catch(e){} };
+
+    cards.forEach((card, idx)=>{
+      let pressTO = null;
+
+      card.addEventListener('pointerdown', (e)=>{
+        if(e.pointerType && e.button !== 0) return;
+        card.classList.add('is-pressed');
+        vibrate(10);
+        clearTimeout(pressTO);
+        pressTO = setTimeout(()=> card.classList.remove('is-pressed'), pressMs);
+      });
+
+      ['pointerup','pointercancel','pointerleave'].forEach(type=>{
+        card.addEventListener(type, ()=> card.classList.remove('is-pressed'));
+      });
+
+      card.addEventListener('click', ()=>{
+        currentIndex = idx;               // Reihenfolge bleibt kohärent
+        cards.forEach((c,i)=> c.classList.toggle('is-active', i===currentIndex));
+        // sanft zur Mitte scrollen, falls stark off-center
+        const r = card.getBoundingClientRect();
+        const delta = (r.top + r.height/2) - vhMid();
+        if(Math.abs(delta) > 24){
+          window.scrollBy({ top: delta, left: 0, behavior: 'smooth' });
+        }
+      });
+    });
+  }
+
+  // Reduced Motion: Bewegung minimieren
+  function setupReducedMotion(){
+    const rdm = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const handle = (e)=>{
+      if(e.matches){
+        cards.forEach(c=>{
+          c.classList.remove('is-pressed','is-active','is-revealed','is-fading');
+          c.style.transform = '';
+          c.style.willChange = '';
+        });
+      }else{
+        pickActiveStepwise();
+      }
+    };
+    rdm.addEventListener?.('change', handle);
+    handle(rdm);
+  }
+
+  // aktivieren/deaktivieren für Mobile
+  function enableMobileEffects(){
+    setupObservers();
+    setupPress();
+    setupReducedMotion();
+    // Listener
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    // Initial: starte auf erster Karte
+    currentIndex = 0;
+    pickActiveStepwise();
+  }
+
+  function disableMobileEffects(){
+    section.classList.remove('section-enter','section-exit');
+    cards.forEach(c=>{
+      c.classList.remove('is-revealed','is-fading','is-active','is-pressed');
+      c.style.willChange = '';
+    });
+    window.removeEventListener('scroll', onScroll);
+    window.removeEventListener('resize', onScroll);
+  }
+
+  // Bootstrapping
+  if(mqMobile.matches){ enableMobileEffects(); }
+  (mqMobile.addEventListener ? mqMobile.addEventListener('change', e=>{
+    if(e.matches){ enableMobileEffects(); } else { disableMobileEffects(); }
+  }) : mqMobile.addListener && mqMobile.addListener(e=>{
+    if(e.matches){ enableMobileEffects(); } else { disableMobileEffects(); }
+  }));
+
+})();
+</script>
 
 
 
@@ -3236,34 +3640,181 @@ body[data-page="titlepage"] .hero-image-foreground {
     padding-right: max(1.5rem, env(safe-area-inset-right));
   }
 }
+/* === COSMOS Mobile (≤700px): kurze Karten + pro Karte individuelle Gradients/Größen === */
+@media (max-width: 699.98px){
+  /* Grundlayout: 1 Spalte, kompakt */
+  #nebula-hub .orbit-grid{
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    justify-items: stretch !important;
+    max-width: 640px !important;
+    margin-inline: auto !important;
+  }
 
-/* Mobile bleibt wie gehabt: die vorhandene aspect-ratio:16/9-Regel greift weiter */
+  /* Karte: kompakt + Platz für CTA; Hintergrund über Variablen steuerbar */
+  #nebula-hub .module-card{
+    /* Defaults (kannst du global anpassen) */
+    --card-bg: inherit;
+    --card-bg-size: 400% 400%;
+    --card-bg-pos: 58% 52%;
+
+    --cta-h: 44px;
+    --cta-gap: 16px;
+
+    position: relative !important;
+    padding: 14px 16px calc(var(--cta-h) + var(--cta-gap) + 6px) !important;
+    min-height: 150px !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,.12) !important;
+
+    /* HINTERGRUND per Variablen */
+    background: var(--card-bg) !important;
+    background-size: var(--card-bg-size) !important;
+    background-position: var(--card-bg-pos) !important;
+  }
+
+  /* ====== PRO KARTE: Werte individuell setzen (Beispiele) ====== */
+  /* Webdesign */
+  #svc-webdesign.module-card{
+    --card-bg: linear-gradient(270deg, #030053, #240066, #090087);
+    --card-bg-size: 320% 320%;
+    --card-bg-pos: 52% 8%;
+  }
+  /* 3D Design */
+  #svc-3d.module-card{
+    --card-bg: linear-gradient(135deg, #101010, #000420, #101010);
+    --card-bg-size: 360% 360%;
+    --card-bg-pos: 44% 54%;
+  }
+  /* Grafikdesign */
+  #svc-grafik.module-card{
+    --card-bg: linear-gradient(135deg, #ff5100, #ff0044, #ff5100);
+    --card-bg-size: 400% 400%;   /* Wunschwert 400 beibehalten */
+    --card-bg-pos: 60% 6%;
+  }
+  /* Social (Video-Card) – Hintergrund optional; Video füllt die Karte */
+  #svc-social.module-card{
+    --card-bg: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
+    --card-bg-size: 300% 300%;
+    --card-bg-pos: 50% 50%;
+  }
+
+  /* Headline kompakt */
+  #nebula-hub .module-card h3{
+    margin: 0 0 .28rem !important;
+    line-height: 1.18 !important;
+    font-size: 1.22rem !important;
+  }
+
+  /* Kurzsatz: frei umbrechen, KEINE Ellipsis */
+  #nebula-hub .module-card .card-snippet,
+  #nebula-hub .module-card .snippet{
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    margin: 0 0 .6rem !important;
+    font-size: 1rem !important;
+    line-height: 1.45 !important;
+    font-weight: 700 !important;
+    letter-spacing: .002em !important;
+    color: rgba(255,255,255,.98) !important;
+    text-wrap: pretty;
+  }
+
+  /* Liste & Art auf Mobile ausblenden (nur H3 + Snippet + CTA) */
+  #nebula-hub .module-card .payload > ul,
+  #nebula-hub .module-card .overlay-art{
+    display: none !important;
+  }
+
+  /* CTA: zentriert unten, kompakt, weniger rund */
+  #nebula-hub .module-card .payload{ position: static !important; }
+  #nebula-hub .module-card > .payload > .warp-cta{
+    position: absolute !important;
+    left: 50% !important;
+    bottom: 10px !important;
+    transform: translateX(-50%) !important;
+    z-index: 3 !important;
+
+    display: inline-flex !important;
+    align-items: center; justify-content: center;
+
+    height: var(--cta-h) !important;
+    padding: 0 14px !important;
+    width: auto !important; min-width: auto !important;
+    max-width: calc(100% - 32px) !important; /* bricht um, aber nicht 100% */
+    white-space: normal !important; text-align: center !important;
+
+    font-size: .92rem !important;
+    line-height: 1.1 !important;
+    border-radius: 10px !important;          /* weniger rund */
+    box-shadow: 0 2px 6px rgba(0,0,0,.25) !important;
+    margin: 0 !important;
+  }
+
+  /* Video-Karte: flach, CTA dort ausblenden */
+  #nebula-hub .module-card.cinema-card{
+    padding: 0 !important;
+    aspect-ratio: 16 / 9 !important;
+    min-height: auto !important;
+    border-radius: 14px !important;
+  }
+  #nebula-hub .module-card.cinema-card > .payload > .warp-cta{
+    display: none !important;
+  }
+}
+
+/* === Mobile-Trim für „cluster cosmos-suite“ (weniger Padding) === */
+@media (max-width: 699.98px){
+  /* Section enger – respektiert Safe-Area */
+  #nebula-hub.cluster.cosmos-suite{
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+    padding-left:  max(10px, env(safe-area-inset-left)) !important;
+    padding-right: max(10px, env(safe-area-inset-right)) !important;
+  }
+
+  /* Headline/Subline: vertikale Abstände straffen (optional) */
+  #nebula-hub.cluster.cosmos-suite .headline{ margin-bottom: .6rem !important; }
+  #nebula-hub.cluster.cosmos-suite .subline{  margin-bottom: 1.5rem !important; }
+}
 
 </style>
 <section class="cluster cosmos-suite" id="nebula-hub" aria-labelledby="nebula-hub-h">
   <h2 id="nebula-hub-h" class="headline">Unsere Leistungen</h2>
   <p class="subline">Von Web bis 3D – alles aus einer Hand, schnell &amp; wirkungsvoll.</p>
 
-  <div class="orbit-grid">
+  <div class="orbit-grid" aria-label="Leistungen: Webdesign, 3D Design, Grafikdesign, Social Media">
 
     <!-- Webdesign -->
-    <div class="module-card" id="svc-webdesign" aria-labelledby="svc-webdesign-h">
+    <div class="module-card" id="svc-webdesign" aria-labelledby="svc-webdesign-h" aria-describedby="svc-webdesign-s">
       <div class="payload">
         <h3 id="svc-webdesign-h">Webdesign</h3>
+        <!-- Kurzsatz für Mobile -->
+        <p class="card-snippet" id="svc-webdesign-s">Schnelle, responsive Websites mit klarem UI und sauberen Animationen.</p>
+
+        <!-- Volltext / Liste für größere Viewports -->
         <ul>
           <li>Responsive &amp; performanceoptimierte Websites</li>
           <li>Visuell ansprechende User Interfaces</li>
           <li>Moderne Animationen &amp; Microinteractions</li>
           <li>CMS-Integration &amp; SEO Ready</li>
         </ul>
+
         <a href="./WebDesign.html" class="warp-cta">Mehr erfahren</a>
       </div>
     </div>
 
     <!-- 3D Design -->
-    <div class="module-card stellar-3d" id="svc-3d" aria-labelledby="svc-3d-h" onclick="togglePlanet(this)">
+    <div class="module-card stellar-3d" id="svc-3d" aria-labelledby="svc-3d-h" aria-describedby="svc-3d-s">
       <div class="payload">
         <h3 id="svc-3d-h">3D Design</h3>
+        <!-- Kurzsatz für Mobile -->
+        <p class="card-snippet" id="svc-3d-s">Fotorealistische Visuals &amp; Modelle – ready für Web, AR/VR &amp; Print.</p>
+
+        <!-- Volltext / Liste für größere Viewports -->
         <ul>
           <li>Fotorealistische 3D-Visualisierungen</li>
           <li>Produkt &amp; Architektur-Renderings</li>
@@ -3271,6 +3822,7 @@ body[data-page="titlepage"] .hero-image-foreground {
           <li>Optimiert für Web &amp; Druck</li>
         </ul>
 
+        <!-- Dekor -->
         <div class="overlay-art">
           <div class="orbit-shell">
             <img class="planet-sprite" loading="lazy" decoding="async" src="./indexFotoSlideShow/planet.webp" alt="Planet">
@@ -3283,15 +3835,20 @@ body[data-page="titlepage"] .hero-image-foreground {
     </div>
 
     <!-- Grafikdesign -->
-    <div class="module-card" id="svc-grafik" aria-labelledby="svc-grafik-h">
+    <div class="module-card" id="svc-grafik" aria-labelledby="svc-grafik-h" aria-describedby="svc-grafik-s">
       <div class="payload">
         <h3 id="svc-grafik-h">Grafikdesign</h3>
+        <!-- Kurzsatz für Mobile -->
+        <p class="card-snippet" id="svc-grafik-s">Starke Markenauftritte – vom Logo bis zum konsistenten Designsystem.</p>
+
+        <!-- Volltext / Liste für größere Viewports -->
         <ul>
           <li>Corporate Design &amp; Markenauftritt</li>
           <li>Professionelles Logo-Design</li>
           <li>Druck- &amp; Digitalmedien</li>
           <li>Infografiken &amp; visuelle Systeme</li>
         </ul>
+
         <div class="overlay-art">
           <img class="lazy-comet" data-src="./indexFotoSlideShow/astro sitzend.webp" alt="3D Icon" decoding="async">
         </div>
@@ -3301,8 +3858,11 @@ body[data-page="titlepage"] .hero-image-foreground {
     </div>
 
     <!-- Social Media (Video) -->
-    <div class="module-card cinema-card" id="svc-social" aria-labelledby="svc-social-h">
-      <h3 id="svc-social-h" class="visually-hidden">Social Media</h3>
+    <div class="module-card cinema-card" id="svc-social" aria-labelledby="svc-social-h" aria-describedby="svc-social-s">
+      <div class="payload">
+        <h3 id="svc-social-h" class="visually-hidden">Social Media</h3>
+        <!-- Kurzsatz für Mobile (optional sichtbar über CSS) -->     </div>
+
       <video
         autoplay
         muted
@@ -4277,6 +4837,75 @@ body[data-page="titlepage"] .hero-image-foreground {
     margin-right:  calc(var(--zen-bleed) * -1 - 24px);
   }
 }
+/* === MOBILE HARD FIX (≤700px): exakt 1 Karte, bündig, keine Scrollbar === */
+@media (max-width: 699.98px){
+  /* Außenabstände an der Section killen, damit nichts „vorsteht“ */
+  #zen-faq.zen-vault{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Slider/Viewport auf volle Geräteschirmbreite zwingen */
+  #zen-faq .zen-slider{
+    max-width: 100dvw !important;
+    margin: 0 !important;
+  }
+  #zen-faq .zen-viewport{
+    width: 100dvw !important;
+    padding: 0 !important;
+    margin: 0 !important;
+
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+
+    /* Scrollbar ausblenden */
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* Edge Legacy */
+  }
+  #zen-faq .zen-viewport::-webkit-scrollbar{ display: none; } /* WebKit */
+
+  /* Track ohne Lücken */
+  #zen-faq .zen-track{
+    display: flex !important;
+    gap: 0 !important;
+    column-gap: 0 !important;
+    transform: none !important;
+    width: max-content !important;
+  }
+
+  /* Karten füllen den Viewport pixelgenau (inkl. Border) */
+  #zen-faq .zen-card{
+    box-sizing: border-box !important;   /* Border in Breite einrechnen */
+    margin: 0 !important;
+    border-width: 2px !important;
+
+    flex: 0 0 100dvw !important;
+    max-width: 100dvw !important;
+    width: 100dvw !important;
+
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  /* Masken/Fades/Overlays auf Mobile aus */
+  #zen-faq .zen-viewport::after{ display: none !important; }
+  #zen-faq .zen-viewport{
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+
+  /* Falls irgendwo per nth-of-type versteckt wurde: alles zeigen */
+  #zen-faq .zen-track .zen-card{ display: block !important; }
+}
 
 </style>
 <script>
@@ -4503,6 +5132,114 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!isMobile()){ initDesktop(); }
   else { cardsAll().forEach(card => { revealIO.observe(card); card.classList.add("is-in"); }); }
 });
+</script>
+<script>
+(function(){
+  const root = document.querySelector("#zen-faq");
+  if(!root) return;
+
+  const viewport = root.querySelector(".zen-viewport");
+  const track    = root.querySelector(".zen-track");
+  const cards    = () => Array.from(track.querySelectorAll(".zen-card"));
+  const isMobile = () => matchMedia("(max-width: 699.98px)").matches;
+
+  const AUTOPLAY_MS   = 3500;  // Zeit pro Slide
+  const RESUME_AFTER  = 4000;  // nach User-Interaktion wieder starten
+  let timer = null, resumeTO = null;
+
+  // Hilfen
+  function closestIndexToCenter(){
+    const all = cards();
+    const vpRect = viewport.getBoundingClientRect();
+    const vpMid  = viewport.scrollLeft + vpRect.width/2;
+    let bestI = 0, bestD = Infinity;
+    all.forEach((c,i)=>{
+      const r = c.getBoundingClientRect();
+      const left = r.left + viewport.scrollLeft - vpRect.left;
+      const mid  = left + r.width/2;
+      const d = Math.abs(mid - vpMid);
+      if(d < bestD){ bestD = d; bestI = i; }
+    });
+    return bestI;
+  }
+
+  function scrollToIndex(i){
+    const all = cards();
+    if(!all.length) return;
+    const c = all[(i % all.length + all.length) % all.length];
+    const vpRect = viewport.getBoundingClientRect();
+    const r = c.getBoundingClientRect();
+    const left = r.left + viewport.scrollLeft - vpRect.left;
+    const targetLeft = left - (viewport.clientWidth - r.width)/2;
+    viewport.scrollTo({ left: targetLeft, behavior: "smooth" });
+  }
+
+  function markActive(){
+    const idx = closestIndexToCenter();
+    cards().forEach((c,i)=> c.classList.toggle("is-active", i===idx));
+  }
+
+  // Autoplay
+  function startAutoplay(){
+    if(timer || !isMobile()) return;
+    stopAutoplay();
+    timer = setInterval(()=>{
+      const next = closestIndexToCenter() + 1;
+      scrollToIndex(next);
+    }, AUTOPLAY_MS);
+  }
+  function stopAutoplay(){
+    if(timer) clearInterval(timer);
+    timer = null;
+  }
+  function pauseAndResume(){
+    stopAutoplay();
+    clearTimeout(resumeTO);
+    resumeTO = setTimeout(()=> startAutoplay(), RESUME_AFTER);
+  }
+
+  // Events
+  let ticking = false;
+  function onScroll(){
+    if(!isMobile()) return;
+    if(!ticking){
+      requestAnimationFrame(()=>{ markActive(); ticking = false; });
+      ticking = true;
+    }
+  }
+
+  // User-Interaktion pausiert Autoplay
+  ["touchstart","pointerdown","mousedown","wheel","keydown"].forEach(ev=>{
+    viewport.addEventListener(ev, pauseAndResume, { passive: true });
+  });
+
+  // Sichtbarkeit steuert Autoplay
+  const visIO = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting && !document.hidden) startAutoplay();
+      else stopAutoplay();
+    });
+  }, { threshold: 0.6 });
+  visIO.observe(root);
+
+  document.addEventListener("visibilitychange", ()=>{
+    if(document.hidden) stopAutoplay(); else startAutoplay();
+  });
+
+  // Mode-Wechsel
+  function applyMode(){
+    if(isMobile()){
+      viewport.addEventListener("scroll", onScroll, { passive:true });
+      setTimeout(()=>{ markActive(); startAutoplay(); }, 60);
+    }else{
+      viewport.removeEventListener("scroll", onScroll);
+      stopAutoplay();
+      cards().forEach(c=>c.classList.remove("is-active"));
+    }
+  }
+  applyMode();
+  window.addEventListener("resize", applyMode);
+})();
 </script>
 
 
@@ -4895,6 +5632,120 @@ document.addEventListener("DOMContentLoaded", () => {
 #flowhub .pane-world,
 #flowhub .pane-wrap{ overflow-x: clip; }
 
+/* === FLOWHUB – Mobile Ansicht (breit wie Aurora, kurze Texte) === */
+@media (max-width: 699.98px){
+  /* Gutter wie bei Aurora */
+  #flowhub {
+    --flow-mobile-gutter: clamp(14px, 4vw, 20px);
+  }
+
+  /* Bühne nutzt volle Breite, keine schmale 92vw-Klemme */
+  #flowhub .pane-wrap{
+    max-width: none !important;
+    width: 100% !important;
+    padding-inline: 0 !important;
+  }
+
+  /* Einspaltig, etwas engerer Abstand */
+  #flowhub .flow-rail{
+    grid-template-columns: 1fr !important;
+    gap: .9rem !important;
+    justify-items: stretch !important;
+  }
+
+  /* Karten: so breit wie Aurora (quasi full-bleed, aber mit sicherem Gutter) */
+  #flowhub .flow-card{
+    width: calc(100% - var(--flow-mobile-gutter) * 2) !important;
+    margin-inline: auto !important;
+    border-radius: 16px !important;
+
+    /* kompakter, aber mit Bodenluft (du nutzt --card-bottom-safe schon) */
+    padding: 14px 16px calc(16px + var(--card-bottom-safe)) 16px !important;
+
+    /* Hintergründe nicht „zu groß“ wirken lassen */
+    background-size: 300% 300% !important;
+    background-position: 55% 50% !important;
+
+    /* keine Kästchen-/Expand-Mechanik mobil */
+    flex: 0 0 auto !important;
+    height: auto !important;
+  }
+
+  /* Headline der Karte knapper */
+  #flowhub .flow-card h3{
+    margin: 0 0 .25rem !important;
+    font-size: 1.2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Mobile-Snippet einblenden … */
+  #flowhub .flow-card .m-snippet{
+    display: block !important;
+    font-size: 1rem !important;
+    line-height: 1.45 !important;
+    font-weight: 700 !important;
+    letter-spacing: .002em !important;
+    color: rgba(255,255,255,.98) !important;
+    margin: 0 !important;
+    text-wrap: pretty;
+  }
+
+  /* … und die langen Texte mobil ausblenden */
+  #flowhub .flow-card > .card-core > p:not(.m-snippet),
+  #flowhub .flow-card .details{
+    display: none !important;
+  }
+
+  /* optisch ruhigere Gradients pro Karte (optional feinjustieren) */
+  #flowhub .flow-rail .flow-card:nth-child(1){ background-size: 340% 340% !important; background-position: 50% 55% !important; }
+  #flowhub .flow-rail .flow-card:nth-child(2){ background-size: 320% 320% !important; background-position: 50% 55% !important; }
+  #flowhub .flow-rail .flow-card:nth-child(3){ background-size: 320% 320% !important; background-position: 50% 55% !important; }
+  #flowhub .flow-rail .flow-card:nth-child(4){ background-size: 360% 360% !important; background-position: 52% 52% !important; }
+  #flowhub .flow-rail .flow-card:nth-child(5){ background-size: 300% 300% !important; background-position: 50% 55% !important; }
+
+  /* Riesen-Zahl mobil verstecken (Platz sparen) */
+  #flowhub .card-num-giant{ display:none !important; }
+
+  /* Sicherheitsnetz: nichts ragt seitlich raus */
+  #flowhub .pane-world,
+  #flowhub .pane-wrap{ overflow-x: clip !important; }
+}
+
+/* === FLOWHUB – Mobile: Karten breiter, kleiner Außenrand === */
+@media (max-width: 699.98px){
+  /* Außenabstand der Section straffen (respect Safe-Area) */
+  #flowhub .pane-world{
+    padding-left:  max(12px, env(safe-area-inset-left)) !important;
+    padding-right: max(12px, env(safe-area-inset-right)) !important;
+  }
+
+  /* Bühne darf volle Breite nutzen */
+  #flowhub .pane-wrap{
+    max-width: 100% !important;
+  }
+
+  /* Grid enger zusammenrücken */
+  #flowhub .flow-rail{
+    gap: .75rem !important;
+  }
+
+  /* Karten kompakter & breiter */
+  #flowhub .flow-card{
+    width: 100% !important;
+    margin-inline: 0 !important;
+    border-radius: 16px !important;
+    padding: 14px 16px !important;
+  }
+
+  /* Optional: „nahezu edge-to-edge“ Look aktivieren:
+     Setz data-edge auf dem Section-Tag: <section id="flowhub" data-edge>
+  */
+  #flowhub[data-edge] .pane-world{
+    padding-left:  max(8px, env(safe-area-inset-left)) !important;
+    padding-right: max(8px, env(safe-area-inset-right)) !important;
+  }
+}
+
 </style>
 <section class="pane-transition" id="flowhub" aria-labelledby="flowhub-h">
   <div class="pane-world is-visible" id="paneWorld">
@@ -4910,7 +5761,8 @@ document.addEventListener("DOMContentLoaded", () => {
           <span class="card-num-giant" aria-hidden="true">01</span>
           <div class="card-core">
             <span class="card-num" aria-hidden="true">01</span>
-            <h3 id="flow-step-01-h">Strategie & Vision</h3>
+            <h3 id="flow-step-01-h">Strategie &amp; Vision</h3>
+            <p class="m-snippet">Wir klären Ziele, Zielgruppen und Wirkung – kompakt, verständlich und mit klarer Priorisierung. Daraus entsteht ein umsetzbarer Fahrplan.</p>
             <p>Jedes Projekt beginnt mit einem klaren Verständnis Ihrer Ziele, Zielgruppen und Markenidentität. Wir entwickeln eine Strategie, die Design, Technologie und Kommunikation zu einem stimmigen Gesamtkonzept verbindet.</p>
             <div class="details" id="flow-step-01-details">
               <p>So entsteht die Grundlage für ein Ergebnis, das visuell überzeugt, technisch funktioniert und strategisch Wirkung zeigt.</p>
@@ -4924,7 +5776,8 @@ document.addEventListener("DOMContentLoaded", () => {
           <span class="card-num-giant" aria-hidden="true">02</span>
           <div class="card-core">
             <span class="card-num" aria-hidden="true">02</span>
-            <h3 id="flow-step-02-h">Konzept & Struktur</h3>
+            <h3 id="flow-step-02-h">Konzept &amp; Struktur</h3>
+            <p class="m-snippet">Wir übersetzen die Vision in klare Informationsarchitektur, Userflows und Storyboards. Alles greifbar, alles testbar.</p>
             <p>Aus der Vision entsteht ein fundiertes Konzept: Informationsarchitektur, Storyboard oder Szenenlayout – je nach Projektart. So legen wir den Rahmen für eine ästhetisch und funktional überzeugende Umsetzung.</p>
             <div class="details" id="flow-step-02-details">
               <p>Wir achten auf klare Strukturen, intuitive Abläufe und konsistente Designs – die Basis für ein stimmiges Nutzererlebnis.</p>
@@ -4938,7 +5791,8 @@ document.addEventListener("DOMContentLoaded", () => {
           <span class="card-num-giant" aria-hidden="true">03</span>
           <div class="card-core">
             <span class="card-num" aria-hidden="true">03</span>
-            <h3 id="flow-step-03-h">Design & Entwicklung</h3>
+            <h3 id="flow-step-03-h">Design &amp; Entwicklung</h3>
+            <p class="m-snippet">UI, 3D &amp; Code entstehen parallel. Wir zeigen Zwischenstände früh, holen Feedback ein und optimieren in kurzen Zyklen.</p>
             <p>Das visuelle Konzept wird in greifbare Ergebnisse übersetzt – von Webdesigns über 3D-Renderings bis zu Animationen. Fortschritte sind jederzeit transparent einsehbar, Anpassungen fließen agil in den Prozess ein.</p>
             <div class="details" id="flow-step-03-details">
               <p>Wir kombinieren Kreativität mit technischer Präzision – für Designs, die begeistern und funktionieren.</p>
@@ -4952,7 +5806,8 @@ document.addEventListener("DOMContentLoaded", () => {
           <span class="card-num-giant" aria-hidden="true">04</span>
           <div class="card-core">
             <span class="card-num" aria-hidden="true">04</span>
-            <h3 id="flow-step-04-h">Feinschliff & Veröffentlichung</h3>
+            <h3 id="flow-step-04-h">Feinschliff &amp; Veröffentlichung</h3>
+            <p class="m-snippet">Performance, Barrierefreiheit und Details werden poliert. Danach folgt ein sauberer Launch mit Monitoring.</p>
             <p>In der finalen Phase werden alle Details perfektioniert – Design, Performance und Präsentation. Nach präzisem Testing oder Rendering erfolgt der Launch bzw. die Auslieferung – sauber, zuverlässig und auf höchstem Qualitätsniveau.</p>
             <div class="details" id="flow-step-04-details">
               <p>Das Ergebnis überzeugt visuell, technisch und konzeptionell – bereit für maximale Wirkung.</p>
@@ -4966,12 +5821,12 @@ document.addEventListener("DOMContentLoaded", () => {
           <span class="card-num-giant" aria-hidden="true">05</span>
           <div class="card-core">
             <span class="card-num" aria-hidden="true">05</span>
-            <h3 id="flow-step-05-h">Wachstum & Skalierbarkeit </span></h3>
-<p>Auch nach Projektabschluss bleibt das Fundament zukunftsfähig. Wir begleiten Skalierung, Content-Erweiterung und technische Weiterentwicklung – für nachhaltiges, messbares Wachstum.</p>
-<div class="details" id="flow-step-05-details">
-  <p>Mit modularen Designsystemen, automatisierten Renderpipelines und skalierbaren Architekturen wächst Ihr Projekt flexibel und effizient mit Ihrem Unternehmen.</p>
-</div>
-
+            <h3 id="flow-step-05-h">Wachstum &amp; Skalierbarkeit</h3>
+            <p class="m-snippet">Wir erweitern Inhalte, Funktionen und Systeme iterativ – messbar, stabil und zukunftsfähig.</p>
+            <p>Auch nach Projektabschluss bleibt das Fundament zukunftsfähig. Wir begleiten Skalierung, Content-Erweiterung und technische Weiterentwicklung – für nachhaltiges, messbares Wachstum.</p>
+            <div class="details" id="flow-step-05-details">
+              <p>Mit modularen Designsystemen, automatisierten Renderpipelines und skalierbaren Architekturen wächst Ihr Projekt flexibel und effizient mit Ihrem Unternehmen.</p>
+            </div>
           </div>
         </div>
 
@@ -4979,7 +5834,6 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 </section>
-
 <!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
@@ -4988,7 +5842,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (window.gsap) {
-      gsap.registerPlugin(ScrollTrigger);
+      // ScrollTrigger wird NICHT mehr verwendet (Scroll-Reveal entfernt),
+      // Registrierung ist aber unschädlich, falls du später wieder willst.
+      gsap.registerPlugin(window.ScrollTrigger || {});
 
       const cardsList = Array.from(document.querySelectorAll('#flowhub .flow-card'));
 
@@ -5002,18 +5858,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (giant) giant.textContent = nn;
       });
 
-      // === Intro-Animation (sanft oder aus bei Reduced Motion) ===
-      const tlIntro = prefersReduced ? null : gsap.timeline({
-        scrollTrigger: {
-          trigger:'#flowhub',
-          start:'top 80%',
-          toggleActions:'play none none reverse'
-        }
-      });
+      // === KEIN Scroll-Reveal mehr: Basiszustand sofort sichtbar/neutral ===
+      gsap.set(cardsList, { opacity: 1, y: 0 });
 
+      // === Nudge (Doppel-Stups) der zweiten Karte, zyklisch — bleibt erhalten ===
       const isDesktop = () => window.matchMedia('(min-width: 1025px)').matches;
-
-      // === Nudge (Doppel-Stups) der zweiten Karte, zyklisch ===
       let nudgeInterval = null;
       let nudgeTl = null;
 
@@ -5048,21 +5897,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 7000);
       }
 
-      // Build Intro Tweens (ohne Nudge-Callback)
-      if (!prefersReduced) {
-        cardsList.forEach((card, i) => {
-          tlIntro.fromTo(
-            card,
-            { opacity: 0, y: 60 },
-            { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' },
-            i * 0.16
-          );
-        });
-      } else {
-        gsap.set(cardsList, { opacity: 1, y: 0 });
-      }
-
-      // === Expand/Auto-Cycle nur auf Desktop ===
+      // === Expand/Auto-Cycle nur auf Desktop — bleibt erhalten ===
       (function(){
         const rail = document.querySelector('#flowhub .flow-rail');
         if(!rail) return;
@@ -5146,7 +5981,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }else{
             cards.forEach(c=>{ c.classList.remove('is-open'); c.setAttribute('aria-expanded','false'); });
             openAt(Math.max(0,selectedIdx,0)); // sofort öffnen
-            root?.classList.add('booted'); // Boot-Modus aktivieren
+            root?.classList.add('booted');     // Boot-Modus aktivieren
             if(railInView){ planNext(); startNudge(); }
           }
         }
@@ -5228,6 +6063,235 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   ]
 }
+</script>
+ <!--GSAP Mobile-->
+ <style>
+  /* Tap-Glow für Mobile */
+  #flowhub .flow-card .touch-glow{
+    position:absolute; inset:0; pointer-events:none; z-index:1;
+    background: radial-gradient(120px 120px at var(--tx,50%) var(--ty,50%),
+                rgba(255,255,255,.28), rgba(255,255,255,0) 60%);
+    opacity:0; transition:opacity .18s ease;
+    mix-blend-mode:soft-light;
+  }
+  @media (min-width:700px){
+    #flowhub .flow-card .touch-glow{ display:none; }
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  if (!window.gsap) return;
+
+  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mm = gsap.matchMedia();
+
+  // Helper: ist #flowhub sichtbar?
+  const hub = document.getElementById('flowhub');
+  let hubInView = true;
+  const io = new IntersectionObserver(([e]) => hubInView = e?.isIntersecting ?? true, {threshold:.25});
+  if (hub) io.observe(hub);
+
+  mm.add("(max-width: 700px)", () => {
+    const cards = Array.from(document.querySelectorAll('#flowhub .flow-card'));
+    if (!cards.length) return;
+
+    // 1) DOM: Touch-Glow Layer einfügen
+    cards.forEach(card => {
+      if (!card.querySelector('.touch-glow')) {
+        const g = document.createElement('span');
+        g.className = 'touch-glow';
+        card.appendChild(g);
+      }
+    });
+
+    // 2) Initial: sanfter Stagger (kein ScrollReveal, nur einmalig)
+    if (!prefersReduced){
+      gsap.from(cards, {
+        opacity: 0, y: 16,
+        duration: .6, ease: 'power2.out',
+        stagger: .08
+      });
+    } else {
+      gsap.set(cards, {opacity:1, y:0});
+    }
+
+    // 3) Idle-„Atmen“ der Gradients (sehr leicht, yoyo)
+    const bgTweens = [];
+    if (!prefersReduced){
+      cards.forEach((card, i) => {
+        const t = gsap.to(card, {
+          backgroundPosition: '60% 52%',
+          duration: 3.2 + i * 0.2,
+          ease: 'sine.inOut',
+          repeat: -1, yoyo: true
+        });
+        bgTweens.push(t);
+      });
+    }
+
+    // 4) Tap-Feedback (Press-Bounce + Glow)
+    function press(card, x, y){
+      const glow = card.querySelector('.touch-glow');
+      // Position des Glows merken (für CSS radial-gradient)
+      if (glow){
+        const r = card.getBoundingClientRect();
+        const tx = Math.max(0, Math.min(1, (x - r.left) / r.width)) * 100;
+        const ty = Math.max(0, Math.min(1, (y - r.top)  / r.height)) * 100;
+        glow.style.setProperty('--tx', tx + '%');
+        glow.style.setProperty('--ty', ty + '%');
+        glow.style.opacity = '1';
+        // sanft ausblenden
+        setTimeout(() => { glow.style.opacity = '0'; }, 160);
+      }
+      // Bounce
+      gsap.fromTo(card,
+        { y: 0, scale: 1 },
+        { y: -3, scale: 0.985, duration: 0.09, ease: 'power1.out',
+          yoyo: true, repeat: 1
+        }
+      );
+    }
+
+    cards.forEach(card => {
+      // Touch
+      card.addEventListener('touchstart', e => {
+        const t = e.touches[0] || {clientX: card.offsetLeft, clientY: card.offsetTop};
+        press(card, t.clientX, t.clientY);
+      }, {passive:true});
+      // Optional Mouse (für Emulatoren)
+      card.addEventListener('mousedown', e => press(card, e.clientX, e.clientY));
+    });
+
+    // 5) Auto-Nudge: alle 6s eine Karte leicht „anstupsen“, nur wenn sichtbar
+    let nudgeIdx = 0, nudgeTimer = null;
+    function nudge(){
+      if (!hubInView || prefersReduced) return;
+      const c = cards[nudgeIdx % cards.length];
+      nudgeIdx++;
+      gsap.fromTo(c, {y:0}, {
+        y:-6, duration:.12, ease:'power1.out',
+        yoyo:true, repeat:1
+      });
+    }
+    function startNudge(){
+      stopNudge();
+      nudgeTimer = setInterval(nudge, 6000);
+    }
+    function stopNudge(){
+      if (nudgeTimer){ clearInterval(nudgeTimer); nudgeTimer = null; }
+    }
+    startNudge();
+
+    // Pausieren bei Tab-Hidden
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) { stopNudge(); bgTweens.forEach(t=>t.pause()); }
+      else { startNudge(); bgTweens.forEach(t=>t.resume()); }
+    });
+
+    // Cleanup bei Unmatch
+    return () => {
+      stopNudge();
+      bgTweens.forEach(t => t.kill());
+      cards.forEach(c => {
+        const g = c.querySelector('.touch-glow');
+        if (g) g.remove();
+        gsap.killTweensOf(c);
+        gsap.set(c, {clearProps: 'all'});
+      });
+    };
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  if (!window.gsap || !window.ScrollTrigger) return;
+  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const mm = gsap.matchMedia();
+
+  // Nur Mobile
+  mm.add("(max-width: 700px)", () => {
+    const cards = gsap.utils.toArray('#flowhub .flow-card');
+    if (!cards.length) return;
+
+    // Performance-Hint
+    cards.forEach(c => c.style.willChange = 'transform, opacity, background-position');
+
+    // Grundzustand (kein „Sprung“)
+    gsap.set(cards, { opacity: 0, y: 24, scale: 0.985 });
+
+    // Für jede Karte eine Scroll-gebundene Timeline
+    cards.forEach((card, i) => {
+      const core = card.querySelector('.card-core');
+
+      // sanftes Einblenden + leichtes Parallax & Gradient-Shift
+      const tl = gsap.timeline({
+        defaults: { ease: 'power2.out' },
+        scrollTrigger: {
+          trigger: card,
+          start: "top 90%",     // beginnt kurz bevor die Karte sichtbar wird
+          end:   "top 20%",     // bis etwa obere 20% des Viewports
+          scrub: true,          // an Scrollbewegung gekoppelt
+          fastScrollEnd: true,  // verhindert Nachschwingen
+          invalidateOnRefresh: true
+        }
+      });
+
+      tl
+      // 1) Reveal
+      .to(card, { opacity: 1, y: 0, scale: 1, duration: 0.6 }, 0)
+      // 2) Parallax fürs Innenleben (wirkt „tiefer“)
+      .fromTo(core, { y: 8 }, { y: 0, duration: 0.6 }, 0)
+      // 3) Gradient leicht „atmen“ lassen während des Reveals
+      .to(card, { backgroundPosition: "60% 52%", duration: 0.6 }, 0);
+
+      // Nachlauf: wenn Karte die Mitte passiert, ganz leicht liften (mikro Interaktion)
+      gsap.to(card, {
+        y: -4,
+        duration: 0.3,
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "center 80%",
+          end:   "center 60%",
+          scrub: true
+        }
+      });
+    });
+
+    // Option: dezenter globaler Stagger beim ersten Sichtkontakt der Sektion
+    const hub = document.querySelector('#flowhub');
+    if (hub) {
+      gsap.fromTo('#flowhub .flow-card',
+        { opacity: 0.0001 },
+        {
+          opacity: (i, el) => +getComputedStyle(el).opacity || 1,
+          duration: 0.4,
+          stagger: 0.06,
+          ease: "power1.out",
+          scrollTrigger: {
+            trigger: hub,
+            start: "top 95%",
+            end: "top 80%",
+            scrub: true
+          }
+        }
+      );
+    }
+
+    // Cleanup wenn Breakpoint wechselt
+    return () => {
+      ScrollTrigger.getAll().forEach(st => {
+        if (st.trigger && st.trigger.closest('#flowhub')) st.kill();
+      });
+      cards.forEach(c => c.style.willChange = '');
+    };
+  });
+});
 </script>
 
 
