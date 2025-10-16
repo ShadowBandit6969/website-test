@@ -6136,83 +6136,71 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
+
+
+
 <!-- =============================================
      Kontakt + Video (gleich hohe Karten) + Testimonials
      – 6-Step Wizard-Form (Formspree) + Success-Screen
      ============================================= -->
 <section class="kontakt-testimonial-section" id="kontakt">
   <div class="kontakt-testimonial-wrapper">
-    
-    <!-- =====================
-         KONTAKTBEREICH
-         ===================== -->
+    <!-- Kontaktbereich -->
     <div class="kontakt-area">
-      <h2 class="section-title" id="kontaktTitle">Lass uns loslegen!</h2>
-      <p class="kontakt-subline" id="kontaktSub">
+      <h2 class="section-title">Lass uns loslegen!</h2>
+      <p class="kontakt-subline">
         Eine starke Idee verdient ein starkes digitales Erlebnis.
       </p>
 
-      <!-- Wizard Formular -->
-      <form action="https://formspree.io/f/xqapdvaq"
-            method="POST"
-            class="kontakt-form"
-            id="kontaktForm"
-            novalidate
-            aria-labelledby="kontaktTitle kontaktSub">
-
-        <!-- A11y: Status + Fehlerzusammenfassung -->
-        <div id="errorSummary" class="sr-only" role="alert" aria-live="assertive"></div>
-        <div data-status role="status" aria-live="polite" class="vis-status"></div>
-        <!-- Honeypot gegen Spam -->
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true">
+      <!-- =====================
+           Wizard Formular
+           ===================== -->
+      <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm" novalidate>
 
         <!-- STEP 1: Leistungswahl -->
         <fieldset class="form-step active" data-step="1" aria-labelledby="step1Title">
           <legend id="step1Title" class="sr-only">Leistungswahl</legend>
-          <p class="copy" id="step1Desc">Wofür interessierst du dich?</p>
+          <p class="copy step1-copy">Wofür interessierst du dich?</p>
 
-          <div class="grid-choices" aria-describedby="step1Desc">
-            <label class="choice">
-              <input type="radio" name="service" value="Webdesign" data-toggle="web" aria-describedby="webDesc">
+          <div class="grid-choices" role="radiogroup" aria-label="Leistung wählen">
+            <label class="choice" tabindex="0">
+              <input type="radio" name="service" value="Webdesign" data-toggle="web" />
               <span class="title">Webdesign</span>
-              <small id="webDesc">Speed, Responsiveness, SEO, UX</small>
+              <small>Speed, Responsiveness, SEO, UX</small>
             </label>
-            <label class="choice">
-              <input type="radio" name="service" value="3D-Design" data-toggle="d3" aria-describedby="d3Desc">
+            <label class="choice" tabindex="0">
+              <input type="radio" name="service" value="3D-Design" data-toggle="d3" />
               <span class="title">3D-Design</span>
-              <small id="d3Desc">Renderings, Animationen, Produkt/Architektur</small>
+              <small>Renderings, Animationen, Produkt/Architektur</small>
             </label>
-            <label class="choice">
-              <input type="radio" name="service" value="Grafikdesign" data-toggle="gfx" aria-describedby="gfxDesc">
+            <label class="choice" tabindex="0">
+              <input type="radio" name="service" value="Grafikdesign" data-toggle="gfx" />
               <span class="title">Grafikdesign</span>
-              <small id="gfxDesc">Logo, Visitenkarte, Poster/Flyer, Styleguide</small>
+              <small>Logo, Visitenkarte, Poster/Flyer, Styleguide</small>
             </label>
           </div>
-
-          <p class="microcopy-help" id="helpConsult">
-            Unsicher? Wir beraten dich im Erstgespräch gerne zur passenden Leistung.
-          </p>
         </fieldset>
 
         <!-- STEP 2: Material & Styleguides -->
         <fieldset class="form-step" data-step="2" aria-labelledby="step2Title">
-          <legend id="step2Title" class="sr-only">Material &amp; Styleguide</legend>
+          <legend id="step2Title" class="sr-only">Material & Styleguide</legend>
 
           <!-- Web -->
-          <div class="service-block" data-service="web" aria-labelledby="webMatTitle">
-            <h3 class="block-title" id="webMatTitle">Webdesign – Material &amp; Branding</h3>
-            <label class="select-row" for="web_material">
+          <div class="service-block" data-service="web">
+            <h3 class="block-title">Webdesign – Material & Branding</h3>
+            <label class="select-row">
               <span>Material (Texte/Bilder/Logo)</span>
-              <select id="web_material" name="web_material">
+              <select name="web_material">
                 <option value="">Bitte wählen</option>
                 <option value="alles">Alles vorhanden</option>
                 <option value="teilweise">Teilweise vorhanden</option>
                 <option value="nichts">Bitte komplett erstellen</option>
               </select>
             </label>
-            <label class="select-row" for="web_styleguide">
+            <label class="select-row">
               <span>Styleguide / CI vorhanden?</span>
-              <select id="web_styleguide" name="web_styleguide">
+              <select name="web_styleguide">
                 <option value="">Bitte wählen</option>
                 <option value="ja">Ja</option>
                 <option value="nein">Nein</option>
@@ -6221,11 +6209,11 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
 
           <!-- 3D -->
-          <div class="service-block" data-service="d3" aria-labelledby="d3MatTitle">
-            <h3 class="block-title" id="d3MatTitle">3D-Design – Ausgangsmaterial</h3>
-            <label class="select-row" for="d3_daten">
+          <div class="service-block" data-service="d3">
+            <h3 class="block-title">3D-Design – Ausgangsmaterial</h3>
+            <label class="select-row">
               <span>3D-Daten / Modelle vorhanden?</span>
-              <select id="d3_daten" name="d3_daten">
+              <select name="d3_daten">
                 <option value="">Bitte wählen</option>
                 <option value="vorhanden">Ja, vorhanden</option>
                 <option value="modellierung_noetig">Nein, bitte modellieren</option>
@@ -6234,38 +6222,38 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
 
           <!-- Grafik -->
-          <div class="service-block" data-service="gfx" aria-labelledby="gfxMatTitle">
-            <h3 class="block-title" id="gfxMatTitle">Grafikdesign – Material &amp; Branding</h3>
-            <label class="select-row" for="gfx_styleguide">
+          <div class="service-block" data-service="gfx">
+            <h3 class="block-title">Grafikdesign – Material & Branding</h3>
+            <label class="select-row">
               <span>Branding / Styleguide vorhanden?</span>
-              <select id="gfx_styleguide" name="gfx_styleguide">
+              <select name="gfx_styleguide">
                 <option value="">Bitte wählen</option>
                 <option value="ja">Ja</option>
                 <option value="nein">Nein</option>
               </select>
             </label>
-            <label class="select-row" for="gfx_material">
+            <label class="select-row">
               <span>Text-/Bildmaterial</span>
-              <select id="gfx_material" name="gfx_material">
+              <select name="gfx_material">
                 <option value="">Bitte wählen</option>
                 <option value="alles">Alles vorhanden</option>
-                <option value="teilweise">Teilweise vorhanden</option>
+                <option value="teilweise">Teilweise</option>
                 <option value="nichts">Bitte erstellen</option>
               </select>
             </label>
           </div>
         </fieldset>
 
-        <!-- STEP 3: Projektspezifikationen -->
+        <!-- STEP 3: Spezifische Ziele/Typen -->
         <fieldset class="form-step" data-step="3" aria-labelledby="step3Title">
           <legend id="step3Title" class="sr-only">Projektspezifikationen</legend>
 
           <!-- Web -->
-          <div class="service-block" data-service="web" aria-labelledby="webSpecTitle">
-            <h3 class="block-title" id="webSpecTitle">Webdesign – Typ &amp; Prioritäten</h3>
-            <label class="select-row" for="web_typ">
+          <div class="service-block" data-service="web">
+            <h3 class="block-title">Webdesign – Typ & Prioritäten</h3>
+            <label class="select-row">
               <span>Website-Typ</span>
-              <select id="web_typ" name="web_typ">
+              <select name="web_typ">
                 <option value="">Bitte wählen</option>
                 <option value="unternehmensseite">Unternehmensseite</option>
                 <option value="portfolio">Portfolio</option>
@@ -6275,22 +6263,22 @@ document.addEventListener("DOMContentLoaded", () => {
               </select>
             </label>
 
-            <fieldset class="checkbox-group tags">
+            <fieldset class="checkbox-group tags" aria-label="Besondere Schwerpunkte">
               <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Ladegeschwindigkeit"><span>Ladegeschwindigkeit</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Responsiveness"><span>Responsiveness</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="SEO"><span>SEO</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Benutzerfreundlichkeit"><span>Benutzerfreundlichkeit</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Designqualität"><span>Designqualität</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Ladegeschwindigkeit" data-pills /><span>Ladegeschwindigkeit</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Responsiveness" data-pills /><span>Responsiveness</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="SEO" data-pills /><span>SEO</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Benutzerfreundlichkeit" data-pills /><span>Benutzerfreundlichkeit</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Designqualität" data-pills /><span>Designqualität</span></label>
             </fieldset>
           </div>
 
           <!-- 3D -->
-          <div class="service-block" data-service="d3" aria-labelledby="d3SpecTitle">
-            <h3 class="block-title" id="d3SpecTitle">3D-Design – Ziel &amp; Anwendung</h3>
-            <label class="select-row" for="d3_typ">
+          <div class="service-block" data-service="d3">
+            <h3 class="block-title">3D-Design – Ziel & Anwendung</h3>
+            <label class="select-row">
               <span>Was soll entstehen?</span>
-              <select id="d3_typ" name="d3_typ">
+              <select name="d3_typ">
                 <option value="">Bitte wählen</option>
                 <option value="rendering">Rendering</option>
                 <option value="animation">Animation</option>
@@ -6299,9 +6287,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 <option value="sonstiges">Sonstiges</option>
               </select>
             </label>
-            <label class="select-row" for="d3_use">
+            <label class="select-row">
               <span>Verwendungszweck</span>
-              <select id="d3_use" name="d3_use">
+              <select name="d3_use">
                 <option value="">Bitte wählen</option>
                 <option value="marketing">Marketing / Werbung</option>
                 <option value="praesentation">Präsentation</option>
@@ -6312,11 +6300,11 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
 
           <!-- Grafik -->
-          <div class="service-block" data-service="gfx" aria-labelledby="gfxSpecTitle">
-            <h3 class="block-title" id="gfxSpecTitle">Grafikdesign – Typ &amp; Prioritäten</h3>
-            <label class="select-row" for="gfx_typ">
+          <div class="service-block" data-service="gfx">
+            <h3 class="block-title">Grafikdesign – Typ & Prioritäten</h3>
+            <label class="select-row">
               <span>Design-Typ</span>
-              <select id="gfx_typ" name="gfx_typ">
+              <select name="gfx_typ">
                 <option value="">Bitte wählen</option>
                 <option value="logo">Logo</option>
                 <option value="visitenkarte">Visitenkarte</option>
@@ -6325,89 +6313,84 @@ document.addEventListener("DOMContentLoaded", () => {
                 <option value="sonstiges">Sonstiges</option>
               </select>
             </label>
-            <fieldset class="checkbox-group tags">
+            <fieldset class="checkbox-group tags" aria-label="Prioritäten Grafikdesign">
               <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Brand-Konsistenz"><span>Brand-Konsistenz</span></label>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Typografie"><span>Typografie</span></label>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Druckvorbereitung"><span>Druckvorbereitung</span></label>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Illustration"><span>Illustration</span></label>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Schnelle Umsetzung"><span>Schnelle Umsetzung</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Brand-Konsistenz" data-pills /><span>Brand-Konsistenz</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Typografie" data-pills /><span>Typografie</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Druckvorbereitung" data-pills /><span>Druckvorbereitung</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Illustration" data-pills /><span>Illustration</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Schnelle Umsetzung" data-pills /><span>Schnelle Umsetzung</span></label>
             </fieldset>
           </div>
         </fieldset>
 
         <!-- STEP 4: Zeit & Budget -->
         <fieldset class="form-step" data-step="4" aria-labelledby="step4Title">
-          <legend id="step4Title" class="sr-only">Zeit &amp; Budget</legend>
-
-          <label class="input-row" for="deadline">
+          <legend id="step4Title" class="sr-only">Zeit & Budget</legend>
+          <label class="input-row">
             <span>Deadline oder Zeitraum</span>
-            <input type="text" id="deadline" name="deadline" placeholder="z. B. bis 15. November oder Q4">
+            <input type="text" name="deadline" placeholder="z. B. bis 15. November oder Q4" />
           </label>
-
-          <label class="input-row" for="budget">
+          <label class="input-row">
             <span>Budgetrahmen (optional)</span>
-            <input type="text" id="budget" name="budget" placeholder="z. B. 4.500–9.000 €" inputmode="numeric">
+            <input type="text" name="budget" placeholder="z. B. 3.000–6.000 €" />
           </label>
-
-          <div class="budget-chips" role="group" aria-label="Budget-Schnellauswahl">
-            <button type="button" class="chip" data-fill="#budget" data-value="2.500 – 4.500 €">2.500 – 4.500 €</button>
-            <button type="button" class="chip" data-fill="#budget" data-value="4.500 – 10.000 €">4.500 – 10.000 €</button>
-            <button type="button" class="chip" data-fill="#budget" data-value="10.000 – 15.000 €">10.000 – 15.000 €</button>
-            <button type="button" class="chip" data-fill="#budget" data-value="+15.000 €">+15.000 €</button>
-          </div>
         </fieldset>
 
         <!-- STEP 5: Kontaktdaten -->
         <fieldset class="form-step" data-step="5" aria-labelledby="step5Title">
           <legend id="step5Title" class="sr-only">Kontaktdaten</legend>
 
-          <input type="hidden" name="_subject" id="autoSubject">
+          <!-- Hidden (nur gewünschte Felder) -->
+          <input type="hidden" name="_subject" id="autoSubject" />
           <textarea class="sr-only" name="summary_plain" id="summaryPlain" aria-hidden="true"></textarea>
-          <input type="hidden" name="selected_service" id="selectedService">
+          <input type="hidden" name="selected_service" id="selectedService" />
 
+          <!-- Responsive Kontakt-Grid -->
           <div class="contact-grid">
-            <div class="field span-6">
-              <label for="name" class="req">Name</label>
-              <input id="name" type="text" name="name" placeholder="Dein Name" autocomplete="name" required>
-            </div>
-            <div class="field span-6">
-              <label for="email" class="req">E-Mail</label>
-              <input id="email" type="email" name="email" placeholder="dein@mail.de" autocomplete="email" inputmode="email" required aria-describedby="emailError">
-              <small id="emailError" class="error" hidden>Bitte eine gültige E-Mail eingeben.</small>
-            </div>
-            <div class="field span-6">
-              <label for="phone">Telefon (optional)</label>
-              <input id="phone" type="tel" name="phone" placeholder="+49 151 12345678" autocomplete="tel" inputmode="tel" pattern="^[0-9+\s()-]{6,}$">
-            </div>
-            <div class="field span-12">
-              <label for="message" class="req">Nachricht</label>
-              <textarea id="message" name="message" rows="6" placeholder="Kurz dein Projekt / Ziel beschreiben…" minlength="5" required></textarea>
-            </div>
-            <p class="req-note">* Pflichtfelder</p>
-          </div>
+           <div class="field span-6">
+  <label for="name" class="req">Name</label>
+  <input id="name" type="text" name="name" placeholder="Dein Name" autocomplete="name" required />
+</div>
 
+<div class="field span-6">
+  <label for="email" class="req">E-Mail</label>
+  <input id="email" type="email" name="email" placeholder="dein@mail.de" autocomplete="email" required />
+</div>
+
+<div class="field span-6">
+  <label for="phone">Telefon (optional)</label>
+  <input id="phone" type="tel" name="phone" placeholder="z. B. +49 151 12345678" autocomplete="tel" />
+</div>
+
+<div class="field span-12">
+  <label for="message" class="req">Nachricht</label>
+  <textarea id="message" name="message" rows="6" placeholder="Kurz dein Projekt / Ziel beschreiben…" minlength="5" required></textarea>
+</div>
+
+<p class="req-note">* Pflichtfelder</p>
+
+          </div>
           <p class="legal-hint">
-            Deine Angaben werden über <strong>Formspree</strong> zur Beantwortung deiner Anfrage verarbeitet.
-            Mehr unter <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.
-          </p>
+  Deine Angaben werden über <strong>Formspree</strong> zur Beantwortung deiner Anfrage verarbeitet.
+  Mehr unter <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.
+</p>
+
         </fieldset>
 
-        <!-- STEP 6: Abschluss -->
+        <!-- STEP 6: Abschluss / Erfolg -->
         <fieldset class="form-step" data-step="6" aria-labelledby="step6Title">
           <legend id="step6Title" class="sr-only">Abschluss</legend>
           <div class="success-card" role="status" aria-live="polite">
             <h3 class="success-title">Geschafft! 🎉</h3>
-            <p class="success-copy">Vielen Dank für deine Anfrage.<br>Wir melden uns in Kürze bei dir.</p>
-            <p class="success-sub">Du kannst jetzt neu starten und die Schritte erneut durchlaufen.</p>
-            <button type="button" class="success-btn">Neu starten</button>
+            <p class="success-copy">Vielen Dank für deine Anfrage <br> Wir melden uns in Kürze bei dir.</p>
+            <p class="success-sub">Du wirst gleich automatisch zum Start zurückgeführt …</p>
+            <button type="button" class="success-btn" disabled>✅ Anfrage gesendet</button>
           </div>
         </fieldset>
 
-        <!-- Stepper -->
-        <div class="stepper" role="progressbar" aria-label="Fortschritt"
-             aria-valuemin="1" aria-valuemax="6" aria-valuenow="1"
-             aria-valuetext="Schritt 1 von 6: Leistung wählen">
+        <!-- === Progressbar === -->
+        <div class="stepper" aria-label="Fortschritt" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1">
           <div class="stepper-header">
             <span id="stepLabel">Schritt 1/6</span>
           </div>
@@ -6416,500 +6399,825 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
 
-        <!-- Navigation -->
+        <!-- Wizard Navigation -->
         <div class="wizard-nav" id="wizardNav">
-          <button type="button" class="nav-btn prev" id="prevBtn" disabled aria-disabled="true">Zurück</button>
-          <button type="button" class="nav-btn next" id="nextBtn" disabled aria-disabled="true">Weiter</button>
+          <button type="button" class="nav-btn prev" id="prevBtn" disabled>Zurück</button>
+          <button type="button" class="nav-btn next" id="nextBtn" disabled>Weiter</button>
           <button type="submit" class="kontakt-btn submit" id="submitBtn" hidden>Senden!</button>
         </div>
-
-        <noscript>
-          <style>.form-step{display:block !important}</style>
-          <p>JavaScript ist deaktiviert – das Formular wird in einem Schritt angezeigt.</p>
-        </noscript>
       </form>
     </div>
 
-    <!-- =====================
-         VIDEO-BEREICH
-         ===================== -->
+    <!-- Videokarte -->
     <div class="video-area" aria-label="Einblick in Prozess, Tools & Zusammenarbeit">
       <div class="video-card">
-        <video class="video-media"
-               muted
-               playsinline
-               preload="metadata"
-               poster="/indexFotoSlideShow/poster.jpg"
-               aria-describedby="videoDesc">
-          <source src="./indexFotoSlideShow/kartenvideo.mp4" type="video/mp4">
-          <track kind="captions" src="/captions.vtt" srclang="de" label="Deutsch" default>
+        <video 
+          class="video-media"
+          autoplay 
+          loop 
+          muted 
+          playsinline 
+          preload="auto"
+        >
+          <source src="./indexFotoSlideShow/kartenvideo.mp4" type="video/mp4" />
           Dein Browser unterstützt das Video-Tag nicht.
         </video>
-        <p id="videoDesc" class="sr-only">Ein kurzer Einblick in Arbeitsweise, Tools und Zusammenarbeit.</p>
       </div>
     </div>
 
-    <!-- =====================
-         TESTIMONIALS
-         ===================== -->
-    <section class="testimonial-area" aria-labelledby="testiTitle">
-      <h2 id="testiTitle" class="sr-only">Stimmen von Kund:innen</h2>
-      <ul class="testi-list">
-        <!-- Beispielkarte: -->
-        <li class="testi-card" hidden>
-          <figure>
-            <blockquote>
-              „Super Zusammenarbeit – schnell, sauber, kreativ. Unsere Conversion ist spürbar gestiegen.“
-            </blockquote>
-            <figcaption>
-              <strong>Alex M.</strong>, CMO bei Beispiel GmbH
-            </figcaption>
-          </figure>
-        </li>
-      </ul>
-    </section>
-
+    <!-- Testimonials (volle Breite darunter) -->
+    <div class="testimonial-area">
+      <testimonial-slider></testimonial-slider>
+    </div>
   </div>
 </section>
-
- <style>
-  /* ======================= *
-   *        THEME / TOKENS   *
-   * ======================= */
+<style>
+  /* ========= Theme Tokens ========= */
   :root{
     --surface:#fff; --surface-elev:#f7f8fa; --text:#0b0c0e; --muted:#5d6066;
     --border:#e6e8eb; --input-bg:#ffffffcc; --input-text:#0b0c0e; --placeholder:#8b9096; --btn-text:#fff;
-    --choice-green:#00c851; --choice-ink:#ffffff; --choice-orange:#f97316;
+    --choice-green:#00c851; --choice-ink:#ffffff;
     --pill-bg:#f3f5f7; --pill-text:#0b0c0e; --pill-green:#00c851; --pill-green-ink:#ffffff;
-    --aur-ink:#0b0c10; --aur-ink-muted:#0f1729;
-
-    --radius-s:10px; --radius-m:12px; --radius-l:18px;
-    --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem;
-    --shadow-1:0 1px 2px rgba(0,0,0,.06);
-    --shadow-2:0 6px 18px rgba(0,0,0,.12);
-    --shadow-card:0 10px 30px rgba(0,0,0,.06);
-    color-scheme: light dark;
+    --aur-ink:#0b0c10; --aur-ink-muted:#0f1729; --aur-shadow-light: 0 1px 2px rgba(0,0,0,.06); --aur-shadow-strong: 0 1px 2px rgba(0,0,0,.18);
   }
   :root[data-theme="dark"]{
     --surface:#000; --surface-elev:#111216; --text:#f5f7fa; --muted:#c6cad1;
-    --border:#262a31; --input-bg:#111216cc; --input-text:#f5f7fa; --placeholder:#95a0ad;
+    --border:#262a31; --input-bg:#111216cc; --input-text:#f5f7fa; --placeholder:#95a0ad; --btn-text:#fff;
     --pill-bg:#1b1d22; --pill-text:#e8ecf2;
   }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme]){
-      --surface:#000; --surface-elev:#111216; --text:#f5f7fa; --muted:#c6cad1;
-      --border:#262a31; --input-bg:#111216cc; --input-text:#f5f7fa; --placeholder:#95a0ad;
-      --pill-bg:#1b1d22; --pill-text:#e8ecf2;
-    }
-  }
 
-  /* ======================= *
-   *          LAYOUT         *
-   * ======================= */
+  /* ========= Layout ========= */
+  html, body { box-sizing:border-box; overflow-x:hidden; margin:0; padding:0; }
+  *, *::before, *::after { box-sizing:inherit; }
 
-  .kontakt-testimonial-section{
-    background:var(--surface); color:var(--text);
-
-    margin-top:clamp(4rem,8vw,8rem);
-    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-  }
+  .kontakt-testimonial-section{ background:var(--surface); color:var(--text); padding:clamp(2.5rem,5.5vw,5rem) 1.5rem; margin-top:clamp(4rem,8vw,8rem); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; }
   .kontakt-testimonial-wrapper{
-    max-width:1440px; margin:0 auto; display:flex;
-    gap:clamp(1.5rem,3.5vw,3rem); flex-wrap:wrap;
-    justify-content:space-between; align-items:stretch;
+    max-width:1440px; margin:0 auto; display:flex; gap:clamp(1.5rem,3.5vw,3rem); flex-wrap:wrap;
+    justify-content:space-between; align-items:stretch; /* gleiche Höhe */
   }
 
   /* Karten nebeneinander gleich hoch */
-  .kontakt-area, .video-area { flex:1 1 480px; max-width:640px; min-width:300px; }
+  .kontakt-area,
+  .video-area { flex:1 1 480px; max-width:640px; min-width:300px; }
+
   .kontakt-area{
-    background: var(--surface-elev); /* Fallback */
-    background: color-mix(in oklab,var(--surface-elev) 85%,transparent);
-    border:1px solid var(--border); border-radius:var(--radius-l);
+    background:color-mix(in oklab,var(--surface-elev) 85%,transparent);
+    border:1px solid var(--border); border-radius:18px;
     padding:clamp(1.1rem,2vw,1.6rem);
-    box-shadow:var(--shadow-card);
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
     backdrop-filter:blur(8px) saturate(1.02);
-    position:relative; overflow:visible; isolation:auto; min-width:0;
-    content-visibility:auto; contain-intrinsic-size:600px 800px;
+    height:auto; display:block;
   }
+
+  /* Videokarte */
+  .video-area{ display:flex; }
+  .video-card{
+    display:flex; flex-direction:column; gap:.8rem;
+    background:color-mix(in oklab,var(--surface-elev) 85%,transparent);
+    border:1px solid var(--border); border-radius:18px;
+    padding:clamp(1.1rem,2vw,1.6rem); width:100%;
+    box-shadow:0 10px 30px rgba(0,0,0,.06); backdrop-filter:blur(8px) saturate(1.02);
+  }
+  .video-header{ display:flex; flex-direction:column; gap:.15rem; text-align:center; } /* mittig */
+  .video-title{ margin:0; font-size:clamp(1.2rem,1rem + .9vw,1.6rem); font-weight:900; letter-spacing:-.01em; color:var(--aur-ink); text-shadow:var(--aur-shadow-light); }
+  .video-sub{ margin:0; color:var(--muted); font-weight:650; }
+
+  /* Video füllt die Kartenhöhe */
+  .video-wrapper{
+    position:relative; flex:1 1 auto; min-height:260px; border-radius:14px; overflow:hidden; background:#000;
+  }
+  .video-media,
+  .video-embed{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; border:0; display:block;
+  }
+
+  /* Testimonials unter die beiden Karten schieben */
+  .testimonial-area{
+    flex:1 1 100%;
+    max-width:100%; min-width:280px;
+  }
+
+  /* ========= Typo ========= */
   .section-title{
     font-size:clamp(1.9rem,1.5rem + 2.2vw,2.65rem); font-weight:900; letter-spacing:-.02em; line-height:1.12;
-    margin-block:.1rem .45rem; text-wrap:balance; color:var(--aur-ink); text-align:center;
+    margin:.1rem 0 .45rem; text-wrap:balance; color:var(--aur-ink); text-shadow:var(--aur-shadow-light);
+    text-align:center; margin-inline:auto; /* mittig */
   }
   .kontakt-subline{
     color:var(--aur-ink-muted); max-width:62rem; margin:0 auto 1.15rem; line-height:1.6;
-    font-size:clamp(1.02rem,1rem + .5vw,1.18rem); letter-spacing:.004em; text-wrap:pretty; padding:.85rem .95rem; border-radius:14px;
+    font-size:clamp(1.02rem,1rem + .5vw,1.18rem); letter-spacing:.004em; text-wrap:pretty;
+    padding:.85rem .95rem; border-radius:14px;
     background:linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03));
     box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05);
-    text-align:center; hyphens:auto;
+    text-align:center; /* mittig */
   }
   :root[data-theme="dark"] .kontakt-subline{
-    color:#fff; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    color:#fff;
+    background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
     box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 2px 8px rgba(0,0,0,.35);
   }
-
-  /* Video */
-  .video-area{ display:flex; }
-  .video-card{
-    position:relative; width:100%; aspect-ratio:16/9;
-    background: var(--surface-elev);
-    background: color-mix(in oklab,var(--surface-elev) 85%,transparent);
-    border:1px solid var(--border); border-radius:var(--radius-l);
-    box-shadow:var(--shadow-card); backdrop-filter:blur(8px) saturate(1.02);
-    overflow:hidden; padding:0;
-    content-visibility:auto; contain-intrinsic-size:360px 640px;
-  }
-  .video-media{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; border:0; }
-
-  /* Testimonials */
-  .testimonial-area{ flex:1 1 100%; max-width:100%; }
-
-  /* ======================= *
-   *          TYPO           *
-   * ======================= */
   .kontakt-area .copy{ color:rgba(0,0,0,.92); font-weight:690; letter-spacing:-.002em; font-size:clamp(1rem,.96rem + .35vw,1.12rem); line-height:1.55; margin:0 0 .25rem; }
+  .step1-copy{ margin-bottom:.25rem !important; }
   :root[data-theme="dark"] .kontakt-area .copy{ color:rgba(255,255,255,.96); }
-  .microcopy-help{ color:var(--muted); margin:.25rem 0 0; font-weight:600; }
 
-  /* ======================= *
-   *          FORM           *
-   * ======================= */
+  /* ========= Form ========= */
   .kontakt-form{ display:flex; flex-direction:column; gap:.65rem; width:100%; }
-
-  .kontakt-form :where(input, textarea, select){
-    width:100%; padding:.85rem .95rem; font-size:1rem;
-    border:1px solid var(--border); border-radius:var(--radius-m);
-    background:var(--input-bg); color:var(--input-text);
-    box-shadow:0 2px 8px rgba(0,0,0,0.04);
-    transition:border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
-    appearance:none;
-  }
-  .kontakt-form :where(input, textarea, select):hover{
-    border-color: color-mix(in oklab,var(--text) 20%, var(--border));
-  }
-  .kontakt-form :where(input, textarea, select):focus-visible{
-    outline:3px solid color-mix(in oklab, var(--choice-green) 70%, #000 0%); outline-offset:2px;
-    box-shadow:0 0 0 3px color-mix(in oklab, var(--choice-green) 25%, transparent);
-  }
-  .kontakt-form input:-webkit-autofill{
-    transition: background-color 9999s, color 9999s; /* verhindert gelbes Blinken */
+  .kontakt-form input, .kontakt-form textarea, .kontakt-form select{
+    width:100%; padding:.85rem .95rem; font-size:1rem; border:1px solid var(--border); border-radius:12px; background:var(--input-bg); color:var(--input-text); box-shadow:0 2px 8px rgba(0,0,0,0.04); transition:border-color .2s ease, box-shadow .2s ease, background-color .2s ease; appearance:none;
   }
 
-  /* ======================= *
-   *    STEPS / STEPPER      *
-   * ======================= */
-  .sr-only{
-    position:absolute !important; width:1px; height:1px; padding:0; margin:-1px;
-    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
-  }
+  /* ========= Steps / Stepper / Choices etc. ========= */
+  .sr-only{ position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
   .form-step{ display:none; }
   .form-step.active{ display:block; }
+  .form-step[data-step="1"]{ margin-bottom:.05rem; }
+  .form-step[data-step="1"] .grid-choices{ margin-bottom:.05rem; }
 
   .stepper{ display:flex; flex-direction:column; gap:.2rem; margin:.25rem 0 .05rem; padding-top:.25rem; border-top:1px solid color-mix(in oklab, var(--border) 75%, transparent); }
-  .stepper-header{ display:flex; justify-content:space-between; align-items:center; font-weight:800; font-size:.88rem; color:var(--muted); line-height:1; }
-  .stepper-track{ position:relative; width:100%; height:6px;
-    background:#e9f7ef; /* Fallback */
-    background: color-mix(in oklab, var(--choice-green) 12%, transparent);
-    border-radius:999px; overflow:hidden;
-  }
-  .stepper-fill{ position:absolute; inset:0 auto 0 0; width:0%; height:100%;
-    background:#00c851; /* Fallback */
-    background: linear-gradient(90deg, var(--choice-green), color-mix(in oklab, var(--choice-green) 82%, #007e33 18%));
-    border-radius:999px; transition: width .22s ease; box-shadow: 0 2px 10px color-mix(in oklab, var(--choice-green) 35%, transparent);
-    will-change: width;
-  }
+  .stepper-header{ display:flex; justify-content:space-between; align-items:center; font-weight:800; font-size:.88rem; color:var(--muted); line-height:1; margin-bottom:.05rem; }
+  .stepper-track{ position:relative; width:100%; height:6px; background: color-mix(in oklab, var(--choice-green) 12%, transparent); border-radius:999px; overflow:hidden; }
+  .stepper-fill{ position:absolute; inset:0 auto 0 0; width:0%; height:100%; background: linear-gradient(90deg, var(--choice-green), color-mix(in oklab, var(--choice-green) 82%, #007e33 18%)); border-radius:999px; transition: width .22s ease; box-shadow: 0 2px 10px color-mix(in oklab, var(--choice-green) 35%, transparent); }
 
   .grid-choices{ display:grid; grid-template-columns:repeat(3,1fr); gap:.5rem; }
   @media (max-width:680px){ .grid-choices{ grid-template-columns:1fr; } }
-  .choice{
-    position:relative; display:flex; flex-direction:column; gap:.12rem; padding:1rem;
-    border:2px solid var(--border); border-radius:var(--radius-m); cursor:pointer;
-    background:var(--surface);
-    transition: box-shadow .15s ease, border-color .15s ease, transform .06s ease, background .15s ease, color .15s ease; outline:none;
-  }
+  .choice{ position:relative; display:flex; flex-direction:column; gap:.12rem; padding:.85rem; border:2px solid var(--border); border-radius:14px; cursor:pointer; user-select:none; background:var(--surface); transition: box-shadow .15s ease, border-color .15s ease, transform .06s ease, background .15s ease, color .15s ease; outline:none; }
   .choice:hover{ box-shadow:0 0 0 3px color-mix(in oklab, var(--choice-green) 25%, transparent); }
   .choice:active{ transform: scale(.995); }
-  .choice .title{ display:block; font-weight:950; letter-spacing:-.01em; line-height:1.18; font-size: clamp(1.06rem, 0.96rem + 0.8vw, 1.5rem); }
-  .choice small{ color:var(--muted); display:block; margin-top:.02rem; font-size: clamp(.9rem, .86rem + .25vw, 1rem); font-weight:650; }
+  .choice .title{ display:block; font-weight:950; letter-spacing:-.01em; line-height:1.18; font-size: clamp(1.06rem, 0.96rem + 0.8vw, 1.5rem); text-shadow: var(--aur-shadow-light); }
+  .choice small{ color:var(--muted); display:block; margin-top:.02rem; font-size: clamp(.9rem, .86rem + .25vw, 1rem); font-weight:650; letter-spacing:.01em; text-shadow: var(--aur-shadow-light); }
   .choice input[type="radio"]{ position:absolute; opacity:0; pointer-events:none; inset:0; width:100%; height:100%; }
+  .choice.selected{ border-color:var(--choice-green); background:var(--choice-green); color:var(--choice-ink); box-shadow:0 6px 18px rgba(0,200,81,.25); }
+  .choice.selected .title, .choice.selected small{ color:var(--choice-ink) !important; text-shadow: 0 1px 1px rgba(0,0,0,.12); }
 
-  /* Ausgewählter State: via :has() UND optional .selected (falls JS das setzt) */
-  .choice:has(input[type="radio"]:checked),
-  .choice.selected{
-    border-color:var(--choice-green); background:var(--choice-green); color:var(--choice-ink); box-shadow:0 6px 18px rgba(0,200,81,.25);
-  }
-  .choice:has(input[type="radio"]:checked) .title,
-  .choice:has(input[type="radio"]:checked) small,
-  .choice.selected .title, .choice.selected small{ color:var(--choice-ink) !important; text-shadow:0 1px 1px rgba(0,0,0,.12); }
-
-  /* Service-Blöcke */
-  .service-block{ margin:.55rem 0 .55rem; padding:.55rem .7rem .7rem; border:1px dashed var(--border); border-radius:var(--radius-m); background:color-mix(in oklab, var(--surface) 85%, transparent); }
+  .service-block{ margin:.55rem 0 .55rem; padding:.55rem .7rem .7rem; border:1px dashed var(--border); border-radius:12px; background:color-mix(in oklab, var(--surface) 85%, transparent); }
   .service-block[hidden]{ display:none !important; }
   .block-title{ margin:.12rem 0 .45rem; font-size:1.04rem; font-weight:900; letter-spacing:-.01em; }
   .select-row, .input-row{ display:flex; flex-direction:column; gap:.3rem; margin-bottom:.5rem; }
 
-  /* Tags / Pills */
   .tags{ display:grid; gap:.45rem; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); margin-top:.05rem; }
   .checkbox-legend{ font-weight:800; margin-bottom:.15rem; }
-  .pill{
-    display:flex; align-items:center; justify-content:center; min-height:40px; padding:.5rem .65rem;
-    border:2px solid var(--border); border-radius:var(--radius-m); background:var(--pill-bg); color:var(--pill-text); cursor:pointer; user-select:none;
-    transition: transform .06s ease, background .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease;
-  }
+  .pill{ display:flex; align-items:center; justify-content:center; min-height:40px; padding:.5rem .65rem; border:2px solid var(--border); border-radius:12px; background:var(--pill-bg); color:var(--pill-text); cursor:pointer; user-select:none; transition: transform .06s ease, background .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease; }
   .pill:hover{ box-shadow:0 0 0 3px color-mix(in oklab, var(--choice-green) 25%, transparent); }
   .pill:active{ transform:scale(.992); }
   .pill input{ position:absolute; opacity:0; pointer-events:none; }
   .pill span{ font-weight:800; letter-spacing:-.01em; }
-  .pill:has(input[type="checkbox"]:checked),
   .pill.selected{ background:var(--pill-green); color:var(--pill-green-ink); border-color:var(--pill-green); box-shadow:0 6px 18px rgba(0,200,81,.25); }
 
-  /* Wizard Nav */
-  .wizard-nav{ display:flex; gap:.55rem; align-items:center; padding-top:.25rem; }
-  .nav-btn{
-    background:var(--surface-elev); color:var(--text); border:1px solid var(--border);
-    padding:.7rem .9rem; border-radius:var(--radius-m); font-weight:800; cursor:pointer; min-height:44px; min-width:44px;
-  }
+  .wizard-nav{ display:flex; gap:.55rem; align-items:center; margin-top:.1rem; padding-top:.25rem; }
+  .nav-btn{ background:var(--surface-elev); color:var(--text); border:1px solid var(--border); padding:.7rem .9rem; border-radius:12px; font-weight:800; cursor:pointer; transition:none; }
   .nav-btn[disabled]{ opacity:.55; cursor:not-allowed; }
   .nav-btn.next{ background: var(--choice-green); color: var(--choice-ink); border: none; box-shadow: 0 6px 18px color-mix(in oklab, var(--choice-green) 40%, transparent); }
-
-  /* Submit (Orange) – AA-Kontrast sichergestellt */
-  #submitBtn,.kontakt-btn.submit{
-    background: color-mix(in oklab, var(--choice-orange) 90%, black 10%);
-    color:#fff;
-    border:1px solid color-mix(in oklab, #f97316 80%, #000 10%);
-    padding:.7rem .9rem; border-radius:var(--radius-m); font-weight:800; font-size:1rem; cursor:pointer;
-    transition: background-color .2s ease, transform .06s ease, box-shadow .15s ease;
-    box-shadow:0 2px 6px rgba(249,115,22,.25);
-  }
-  #submitBtn:hover,.kontakt-btn.submit:hover{ background: color-mix(in oklab, var(--choice-orange) 80%, black 20%); }
-  #submitBtn:active,.kontakt-btn.submit:active{ transform: translateY(1px); box-shadow: 0 1px 3px rgba(249,115,22,.3); }
-  #submitBtn[disabled],.kontakt-btn.submit[disabled]{ opacity:.6; cursor:not-allowed; box-shadow:none; }
 
   /* Success Step */
   .form-step[data-step="6"]{ display:none; }
   .form-step.active[data-step="6"]{ display:block; }
-  .success-card{
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.6rem;
-    min-height: var(--step6-minh, 320px); padding:1rem;
-    border: 2px solid var(--choice-green); border-radius:var(--radius-m);
-    background: color-mix(in oklab, var(--choice-green) 8%, var(--surface) 92%); text-align:center;
-  }
+  .success-card{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.6rem; min-height: var(--step6-minh, 320px); padding: 1rem; border: 2px solid var(--choice-green); border-radius: 14px; background: color-mix(in oklab, var(--choice-green) 8%, var(--surface) 92%); text-align:center; }
   .success-title{ font-weight:900; letter-spacing:-.01em; font-size: clamp(1.4rem,1.1rem + 1vw,1.9rem); }
   .success-copy{ font-weight:700; letter-spacing:-.002em; font-size: clamp(1.02rem,.98rem + .35vw,1.16rem); opacity:.95; }
   .success-sub{ color: var(--muted); }
-  .success-btn{ margin-top:.2rem; padding:.8rem 1rem; border-radius:var(--radius-m); border:none; background:var(--choice-green); color:var(--choice-ink); font-weight:850; box-shadow:0 6px 18px rgba(0,200,81,.25); }
+  .success-btn{ margin-top:.2rem; padding:.8rem 1rem; border-radius:12px; border:none; background:var(--choice-green); color:var(--choice-ink); font-weight:850; box-shadow:0 6px 18px rgba(0,200,81,.25); }
   form.is-success .wizard-nav, form.is-success .stepper{ display:none !important; }
+  .success-card.fade-out { animation: successFade 3s ease forwards; }
+  @keyframes successFade { to { opacity: 0; transform: translateY(6px); } }
 
-  /* Pflicht/Kleingedrucktes */
-  .legal-hint{ font-size:.85rem; line-height:1.45; color:#666; margin:.4rem 0 .2rem; }
-  .legal-hint a{ color:inherit; text-decoration:underline; }
-  :root[data-theme="dark"] .legal-hint, :root[data-theme="dark"] .req-note{ color:#c6cad1; }
-  label.req::after{ content:" *"; color:#b00020; font-weight:900; }
-  .req-note{ font-size:.85rem; color:#666; margin:.2rem 0 .4rem; }
-
-  /* Budget-Chips */
-  .budget-chips{ display:flex; flex-wrap:wrap; gap:.4rem; }
-  .budget-chips .chip{ border:1px solid var(--border); background:var(--surface-elev); border-radius:999px; padding:.4rem .7rem; font-weight:700; cursor:pointer; }
-
-  /* A11y: sichtbarer Fokus */
-  :where(button,.choice,.pill,input,select,textarea):focus-visible{
-    outline:3px solid color-mix(in oklab, var(--choice-green) 70%, #000 0%); outline-offset:2px; border-radius:12px;
-  }
-
-  /* ====== RESPONSIVE / CQ ====== */
+  /* Responsive */
   @media (max-width:1024px){
-    .kontakt-testimonial-section{
-      padding:
-        max(16px, calc(env(safe-area-inset-top,0) + 12px))
-        max(16px, calc(env(safe-area-inset-right,0) + 12px))
-        max(20px, calc(env(safe-area-inset-bottom,0) + 12px))
-        max(16px, calc(env(safe-area-inset-left,0) + 12px));
-    }
-    .kontakt-testimonial-wrapper{ gap: clamp(12px, 4vw, 18px); flex-direction:column; align-items:center; }
-    .kontakt-area, .video-area{ width:90%; max-width:1000px; margin-inline:auto; }
-    .wizard-nav{ margin-inline:-2px; border-radius:var(--radius-m); padding-bottom:max(.25rem, env(safe-area-inset-bottom)); }
-    #submitBtn,.kontakt-btn.submit{ width:100%; }
+    .kontakt-testimonial-wrapper{ flex-direction:column; align-items:center; gap:2rem; }
+    .kontakt-area, .video-area, .testimonial-area{ max-width:100%; }
+    .kontakt-btn{ margin:0 auto; }
+  }
+  @media (max-width:540px){
+    .kontakt-area, .testimonial-area, .video-area{ padding:0 .6rem; }
+    .section-title{ font-size:clamp(1.7rem,4.6vw,2.1rem); margin:0 auto .6rem; }
+    .kontakt-form{ padding:0 .1rem; gap:.6rem; }
+    .stepper{ position:sticky; bottom:0; background: color-mix(in oklab, var(--surface) 95%, transparent); padding:.3rem .2rem .2rem; margin:.25rem -.2rem 0; }
+    .wizard-nav{ position:sticky; bottom:0; background: color-mix(in oklab, var(--surface) 95%, transparent); padding:.25rem .2rem .3rem; margin:.05rem -.2rem 0; }
   }
 
-  /* Container Queries (nur in bestimmter Breite aktivieren) */
-  @media (min-width: 1024px) and (max-width: 1330px){
-    .kontakt-area { container-type: inline-size; }
-    .form-step    { container-type: inline-size; }
-
-    .grid-choices{
-      display: grid;
-      gap: .5rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      min-width: 0;
-    }
-    .choice{ min-width: 0; }
-
-    @container (max-width: 520px){
-      .grid-choices{ grid-template-columns: 1fr; }
-    }
-    @container (min-width: 521px) and (max-width: 820px){
-      .grid-choices{ grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @supports not (container-type: inline-size){
-      .grid-choices{ grid-template-columns: repeat(2, 1fr); }
-    }
-  }
-
-  /* 2-Spalten-Layout nur ~1024–1045px */
-  @media (min-width:1024px) and (max-width:1045px){
-    .kontakt-testimonial-wrapper{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(1.5rem,3.5vw,3rem);
-      align-items: stretch;
-      justify-content: space-between;
-    }
-    .kontakt-area{ grid-column: 1; }
-    .video-area  { grid-column: 2; }
-    .testimonial-area{ grid-column: 1 / -1; }
-
-    .kontakt-area, .video-area{
-      width: auto; max-width: none; margin-inline: 0; flex: initial;
-    }
-  }
-
-  /* Video-Card Höhe in Column-Layout */
-  @media (max-width: 1023.98px){
-    .kontakt-area, .video-area{ flex: 0 0 auto; }
-    .video-area{ display:block; width:90%; max-width:1000px; margin-inline:auto; }
-  }
-
-  /* Extra-kompakt für sehr kleine Phones */
-  @media (max-width: 380px){
-    .section-title{ font-size: clamp(1.5rem, 7vw, 1.9rem); }
-    .kontakt-area{ padding:16px !important; }
-  }
-
-  /* Reduced motion & High contrast */
-  @media (prefers-reduced-motion: reduce){
+  @media (prefers-reduced-motion:reduce){
+    .kontakt-btn{ animation:none !important; transition:none !important; }
     .stepper-fill{ transition:none !important; }
   }
-  @media (forced-colors: active){
-    *{ forced-color-adjust: auto; }
-    .choice, .pill, .nav-btn{ border: 1px solid ButtonText; }
-    .stepper-track{ background: CanvasText; }
-    .stepper-fill{ background: Highlight; }
-  }
-  /* ======================================================
-   Kontaktfelder (Name, E-Mail, Telefon, Nachricht)
-   ====================================================== */
-.contact-grid .field {
-  margin-block: 0.8rem 1rem;      /* mehr vertikaler Abstand */
+/* Karten-Wrapper: gleiche Höhe */
+.kontakt-testimonial-wrapper{
+  max-width:1440px; margin:0 auto; display:flex;
+  gap:clamp(1.5rem,3.5vw,3rem); flex-wrap:wrap;
+  justify-content:space-between; align-items:stretch; /* wichtig: gleiche Höhe */
 }
 
-.contact-grid label {
-  font-size: 1.05rem;
-  font-weight: 750;
-  margin-bottom: 0.45rem;
-  letter-spacing: -0.005em;
+/* Kontakt- und Videokarte teilen sich die Zeile */
+.kontakt-area,
+.video-area { flex:1 1 480px; max-width:640px; min-width:300px; }
+
+/* Texte zentriert */
+.section-title,
+.kontakt-subline { text-align:center; }
+
+/* Videokarte ohne Headline – Video füllt Karte */
+.video-area{ display:flex; }
+.video-card{
+  position:relative; height:100%; width:100%;
+  background:color-mix(in oklab,var(--surface-elev) 85%,transparent);
+  border:1px solid var(--border); border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.06); backdrop-filter:blur(8px) saturate(1.02);
+  overflow:hidden; /* runde Ecken fürs Video */
+  padding:0;       /* randlos */
+}
+.video-media{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block; border:0;
 }
 
-.contact-grid input,
-.contact-grid textarea {
-  font-size: 1.1rem;              /* größere Schrift */
-  line-height: 1.55;
-  padding-block: 1.05rem;         /* mehr Innenabstand oben/unten */
-  padding-inline: 1rem;
-  border-radius: var(--radius-m);
-  border: 1px solid var(--border);
-  background: var(--input-bg);
-  color: var(--input-text);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+/* Testimonials weiterhin darunter in voller Breite */
+.testimonial-area{ flex:1 1 100%; max-width:100%; }
+
+/* ===== Kontaktkarte (Step 5) – responsives Innen-Layout ===== */
+.form-step[data-step="5"] .contact-grid{
+  display:grid;
+  grid-template-columns: repeat(12, minmax(0,1fr));
+  gap:.65rem;
 }
 
-.contact-grid textarea {
-  min-height: 8rem;
+/* generische Feld-Box */
+.form-step[data-step="5"] .field{
+  grid-column: span 12;
+  display:flex; flex-direction:column; gap:.35rem;
+}
+
+/* Label etwas ruhiger, aber eindeutig */
+.form-step[data-step="5"] .field label{
+  font-weight:800; letter-spacing:-.01em;
+}
+
+/* Inputs / Textareas füllen die Spalte (nutzen schon deine Basis-Input-Styles) */
+.form-step[data-step="5"] .field input,
+.form-step[data-step="5"] .field textarea,
+.form-step[data-step="5"] .field select{
+  width:100%;
+}
+
+/* Textarea angenehm groß, aber nicht riesig */
+.form-step[data-step="5"] .field textarea{
+  min-height: clamp(120px, 16vh, 220px);
   resize: vertical;
 }
 
-.contact-grid input:focus-visible,
-.contact-grid textarea:focus-visible {
-  outline: 3px solid color-mix(in oklab, var(--choice-green) 70%, #000 0%);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--choice-green) 25%, transparent);
+/* Fehlertexte brechen sauber um */
+.form-step[data-step="5"] .field .field-error{
+  line-height:1.25;
 }
 
-/* Engere Ränder auf Phones */
-@media (max-width: 480px){
-  .kontakt-testimonial-section{
-    /* Seiten-Padding von 16px -> 10px (mit Safe-Area) */
-    padding:
-      max(12px, calc(env(safe-area-inset-top,0) + 8px))
-      max(10px, calc(env(safe-area-inset-right,0) + 8px))
-      max(14px, calc(env(safe-area-inset-bottom,0) + 8px))
-      max(10px, calc(env(safe-area-inset-left,0) + 8px));
+/* Grid-Spans (12er System) */
+.form-step[data-step="5"] .span-12{ grid-column: span 12; }
+.form-step[data-step="5"] .span-6 { grid-column: span 12; } /* default: full width */
+.form-step[data-step="5"] .span-4 { grid-column: span 12; }
+.form-step[data-step="5"] .span-8 { grid-column: span 12; }
+
+/* ab ~700px zweispaltig */
+@media (min-width:700px){
+  .form-step[data-step="5"] .span-6 { grid-column: span 6; }
+  .form-step[data-step="5"] .span-4 { grid-column: span 4; }
+  .form-step[data-step="5"] .span-8 { grid-column: span 8; }
+}
+
+/* ab ~1024px etwas luftiger – optional */
+@media (min-width:1024px){
+  .form-step[data-step="5"] .contact-grid{ gap:.75rem; }
+}
+
+/* Buttons in der Kontaktkarte über die volle Breite andocken */
+.form-step[data-step="5"] + .wizard-nav{
+  margin-top:.5rem;
+}
+/* Handy: Videokarte bewusst flacher + nicht mehr gestreckt */
+@media (max-width:600px){
+  .video-area{
+    flex: 0 0 auto;               /* nicht mehr mitwachsen */
+    align-self: stretch;           /* volle Breite behalten */
+  }
+  .video-area .video-card{
+    height: 180px !important;      /* flach erzwingen */
+    min-height: 180px !important;
+    aspect-ratio: auto !important; /* falls ein aspect-ratio greift, neutralisieren */
+  }
+  .video-area .video-media{
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+/* Step-1 Auswahlkarten strikt innerhalb der Kontaktkarte halten */
+.kontakt-area{
+  position: relative;
+  isolation: isolate;     /* eigener Stacking-Context */
+  overflow: clip;         /* nichts ragt aus der Karte heraus */
+  min-width: 0;           /* Flex-Overflow verhindern */
+}
+
+.kontakt-form{ max-width: 100%; overflow: clip; }
+.form-step[data-step="1"]{ max-width: 100%; }
+
+.grid-choices{ max-width: 100%; overflow: clip; }
+.grid-choices .choice{
+  transform-origin: center;     /* Hover/Active bleibt innen */
+  will-change: transform;
+}
+
+/* Kontaktkarte darf breiter werden, Videokarte etwas schmaler */
+.kontakt-area{ flex:1.2 1 640px; max-width:780px; }
+.video-area{ flex:0.8 1 420px; max-width:540px; }
+
+/* trotzdem gleich hohe Karten */
+.kontakt-testimonial-wrapper{
+  align-items:stretch;
+}
+
+/* Falls nötig: Hover-Effekte der Choices nicht abschneiden */
+.kontakt-area{ overflow:visible; }
+
+/* Wenn Karten untereinander: zentriert & breiter darstellen */
+@media (max-width:1024px){
+  .kontakt-testimonial-wrapper{
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    gap:2rem;
   }
 
-  /* Karten dürfen die volle Breite der Section nutzen */
   .kontakt-area,
+  .video-area{
+    width:90%;
+    max-width:1000px;      /* deutlich breiter */
+    margin-inline:auto;
+  }
+} 
+/* 1024px–1148px: Kontaktkarte mittig, Videokarte darunter */
+@media (min-width:1024px) and (max-width:1148px){
+  .kontakt-testimonial-wrapper{
+    /* Spalten-Stack statt Reihe */
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.75rem;
+  }
+
+  /* Side-by-side Vorgaben überstimmen */
+  .kontakt-area,
+  .video-area{
+    flex: 0 0 auto;              /* nicht strecken/schrumpfen */
+    width: min(92vw, 780px);     /* schön breit, aber begrenzt */
+    max-width: 100%;
+    margin-inline: auto;         /* perfekt mittig */
+  }
+
+  /* Reihenfolge explizit festlegen */
+  .kontakt-area{ order: 1; }
+  .video-area{   order: 2; }
+  .testimonial-area{ order: 3; width: 100%; }
+
+  /* Falls die Videokarte zuvor höhengleich gezogen wurde: hier auto */
+  .video-area .video-card{
+    height: auto;
+    min-height: 260px;
+  }
+}
+
+/* === 1) Hover oben nicht mehr abgeschnitten (Step 1) === */
+/* Alles, was Step-1 umgibt, darf Überstand durch Hover-Shadow zeigen */
+.kontakt-area,
+.kontakt-form,
+.form-step[data-step="1"],
+.grid-choices{
+  overflow: visible !important;
+}
+
+/* Falls ein Parent irgendwo noch clip/hidden setzt: neutralisieren */
+.kontakt-area{ isolation:auto !important; }
+
+/* Optional: minimaler Innenabstand oben, damit große Shadows Platz haben */
+.form-step[data-step="1"]{
+  padding-top: .1rem;
+}
+
+/* === 2) Kontaktkarte (Step 5) – alles untereinander + responsive === */
+.form-step[data-step="5"] .contact-grid{
+  display:grid;
+  grid-template-columns: 1fr; /* nur 1 Spalte */
+  gap: .7rem;
+}
+
+/* Alle Spans auf volle Breite erzwingen */
+.form-step[data-step="5"] .span-12,
+.form-step[data-step="5"] .span-8,
+.form-step[data-step="5"] .span-6,
+.form-step[data-step="5"] .span-4{
+  grid-column: 1 / -1 !important;
+}
+
+/* Typo & Abstände wie vorher – übernehmen/inherit */
+.form-step[data-step="5"] .field{
+  display:flex; flex-direction:column; gap:.35rem;
+  font: inherit; color: inherit;
+}
+.form-step[data-step="5"] .field label{
+  font-weight:800; letter-spacing:-.01em;
+}
+.form-step[data-step="5"] .field input,
+.form-step[data-step="5"] .field textarea,
+.form-step[data-step="5"] .field select{
+  width:100%;
+  font: inherit; color: inherit;
+}
+
+/* Textarea angenehm, aber nicht riesig – passt sich Viewport an */
+.form-step[data-step="5"] .field textarea{
+  min-height: clamp(120px, 18vh, 220px);
+  resize: vertical;
+}
+
+/* Mobile Feinschliff */
+@media (max-width:700px){
+  .form-step[data-step="5"] .contact-grid{ gap:.6rem; }
+  .form-step[data-step="5"] .field label{ font-weight:800; }
+  .form-step[data-step="5"] .field textarea{ min-height: clamp(110px, 22vh, 200px); }
+}
+
+/* === "Senden"-Button wie "Zurück", aber Orange === */
+#submitBtn,
+.kontakt-btn.submit {
+  background: var(--choice-orange, #f97316); /* Orange Basisfarbe */
+  color: #fff;
+  border: 1px solid color-mix(in oklab, #f97316 80%, #000 10%);
+  padding: .7rem .9rem;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color .2s ease, transform .06s ease, box-shadow .15s ease;
+  box-shadow: 0 2px 6px rgba(249,115,22,.25);
+}
+
+/* Hover-Effekt wie beim Zurück-Button (leicht heller) */
+#submitBtn:hover,
+.kontakt-btn.submit:hover {
+  background: color-mix(in oklab, #f97316 90%, white 10%);
+}
+
+/* Active-State: leichter Klick-Eindruck */
+#submitBtn:active,
+.kontakt-btn.submit:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px rgba(249,115,22,.3);
+}
+
+/* Disabled-State: gleiches Verhalten wie Zurück-Button */
+#submitBtn[disabled],
+.kontakt-btn.submit[disabled] {
+  opacity: .6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Damit der Button im letzten Step (Step 5) schön sitzt */
+.form-step[data-step="5"] .wizard-nav #submitBtn,
+.form-step[data-step="5"] .wizard-nav .kontakt-btn.submit {
+  width: 100%;
+  margin-top: .4rem;
+}
+
+/* === Typo-Konsistenz für alle Formular-Controls (alle Steps) === */
+.kontakt-form,
+.kontakt-form input,
+.kontakt-form textarea,
+.kontakt-form select,
+.kontakt-form button {
+  font-family: inherit;                 /* gleiche Schriftfamilie wie außen */
+  color: var(--input-text);
+  letter-spacing: .004em;
+  -webkit-font-smoothing: antialiased;  /* gleiche Glättung */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Placeholder-Optik angleichen */
+.kontakt-form ::placeholder {
+  color: var(--placeholder);
+  opacity: 1;
+}
+
+/* Browser-Autofill angleichen (hell) */
+.kontakt-form input:-webkit-autofill,
+.kontakt-form textarea:-webkit-autofill,
+.kontakt-form select:-webkit-autofill {
+  -webkit-text-fill-color: var(--input-text);
+  transition: background-color 9999s ease-out, color 9999s ease-out;
+  box-shadow: 0 0 0 1000px var(--input-bg) inset !important; /* gleiche Input-Fläche */
+}
+
+/* Dark-Theme: Autofill leicht abdunkeln */
+:root[data-theme="dark"] .kontakt-form input:-webkit-autofill,
+:root[data-theme="dark"] .kontakt-form textarea:-webkit-autofill,
+:root[data-theme="dark"] .kontakt-form select:-webkit-autofill {
+  -webkit-text-fill-color: var(--input-text);
+  box-shadow: 0 0 0 1000px color-mix(in oklab, var(--input-bg) 92%, black 8%) inset !important;
+}
+
+/* === Step 5 gezielt an die gleiche Typo wie die restlichen Copy-Texte binden === */
+.form-step[data-step="5"] {
+  color: var(--text);
+  line-height: 1.55;                 /* wie .kontakt-area .copy */
+  letter-spacing: .004em;
+  font-size: clamp(1rem,.96rem + .35vw,1.12rem);
+}
+
+/* Labels in Step 5 wie überall: kräftig, aber sauber */
+.form-step[data-step="5"] .field label{
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--aur-ink);
+}
+
+/* Inputs in Step 5: die Basis-Input-Styles behalten + gleiche Typo */
+.form-step[data-step="5"] .field input,
+.form-step[data-step="5"] .field textarea,
+.form-step[data-step="5"] .field select{
+  font-family: inherit;
+  font-size: 1rem;     /* konsistent zu deiner globalen Input-Regel */
+  line-height: 1.4;
+  color: var(--input-text);
+}
+
+/* Optional: Headline/Intro in Step 5 optisch angleichen (falls vorhanden) */
+.form-step[data-step="5"] .copy {
+  color: rgba(0,0,0,.92);
+  font-weight: 690;
+  letter-spacing: -0.002em;
+  font-size: clamp(1rem,.96rem + .35vw,1.12rem);
+}
+:root[data-theme="dark"] .form-step[data-step="5"] .copy {
+  color: rgba(255,255,255,.96);
+}
+/* =========================
+   MOBILE POLISH (≤ 600px)
+   ========================= */
+@media (max-width:1024px){
+
+  /* 1) Sektion: saubere Abstände + Safe-Area */
+  .kontakt-testimonial-section{
+    padding:
+      max(16px, calc(env(safe-area-inset-top,0) + 12px))
+      max(16px, calc(env(safe-area-inset-right,0) + 12px))
+      max(20px, calc(env(safe-area-inset-bottom,0) + 12px))
+      max(16px, calc(env(safe-area-inset-left,0) + 12px));
+  }
+
+  /* 2) Wrapper enger, damit die Karte visuell breiter wirkt */
+  .kontakt-testimonial-wrapper{
+    gap: clamp(12px, 4vw, 18px);
+  }
+
+  /* 3) Kontaktkarte: wieder "innen" gepolstert & volle Breite
+        (überschreibt dein früheres padding: 0 .6rem auf mobile) */
+  .kontakt-area{
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    border-radius: 16px;
+    padding: clamp(14px, 4.5vw, 18px) !important;   /* mehr Innenabstand */
+    overflow: visible;                               /* nichts abschneiden */
+  }
+
+  /* 4) Überschrift/Subline: nie abgeschnitten, genug Luft oben */
+  .kontakt-area .section-title{
+    margin-top: .2rem;
+    padding-top: .15rem;
+    line-height: 1.2;
+    overflow: visible;
+    word-break: normal;
+    hyphens: auto;
+    text-wrap: balance;
+  }
+  .kontakt-area .kontakt-subline{
+    margin-top: .35rem;
+  }
+
+  /* 5) Choice-Karten: größere Touch-Ziele, kein Clipping */
+  .form-step[data-step="1"] .grid-choices{
+    gap: .6rem;
+  }
+  .form-step[data-step="1"] .grid-choices .choice{
+    padding: 1rem .95rem;
+    border-radius: 16px;
+    min-height: 64px;
+    /* eigener stacking-context, damit Shadow oben/unten sichtbar bleibt */
+    position: relative;
+    z-index: 0;
+  }
+  .form-step[data-step="1"]{
+    padding-top: .25rem; /* extra Luft damit Schatten nicht "oben" anstößt */
+  }
+
+  /* 6) Sticky-Elemente: vermeiden visuelles „Drücken“ */
+  .stepper,
+  .wizard-nav{
+    margin-left: -2px;
+    margin-right: -2px;
+    border-radius: 12px;
+  }
+
+  /* 7) Formularfelder: Fingerfreundlich */
+  .kontakt-form input,
+  .kontakt-form select,
+  .kontakt-form textarea{
+    padding: 0.95rem 1rem;
+    font-size: 1.02rem; /* minimal größer für Lesbarkeit */
+  }
+
+  /* 8) Video-Karte: darunter, vollbreit, flacher */
   .video-area{
     width: 100%;
     max-width: none;
-    margin-inline: 0; /* statt auto -> klebt an das (kleinere) Section-Padding */
+  }
+  .video-area .video-card{
+    height: 200px !important;
+    min-height: 200px !important;
+    border-radius: 16px;
+  }
+  .video-area .video-media{
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* 9) Step-5: einspaltig + gleiche Typo (falls noch überstimmt) */
+  .form-step[data-step="5"] .contact-grid{
+    grid-template-columns: 1fr;
+    gap: .65rem;
+  }
+  .form-step[data-step="5"]{
+    font-size: clamp(1rem, 1.5vw + .96rem, 1.1rem);
+    line-height: 1.55;
+  }
+  .form-step[data-step="5"] .field label{
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  /* 10) Buttons: full-width, klare Hierarchie */
+  .wizard-nav .nav-btn{
+    flex: 1 1 auto;
+  }
+  #submitBtn,
+  .kontakt-btn.submit{
+    width: 100%;
   }
 }
 
-/* Desktop-Gutter: Karten sollen nicht am Rand kleben */
-@media (min-width: 1025px){
-  .kontakt-testimonial-section{
-    /* horizontale Innenabstände (min 24px, bis ~72px mitwachsen) */
-    padding-inline: clamp(24px, 4vw, 72px);
+/* Optional (≤ 380px, sehr kleine Phones): noch etwas mehr Luft oben */
+@media (max-width:380px){
+  .kontakt-area{
+    padding: 16px !important;
   }
-  /* Optional: etwas mehr Luft oben/unten, wenn gewünscht */
-  /* .kontakt-testimonial-section{ padding-block: clamp(16px, 2vw, 32px); } */
+  .kontakt-area .section-title{
+    font-size: clamp(1.5rem, 7vw, 1.9rem);
+  }
 }
-/* 2 Spalten fix zwischen 1046–1085px (kein Umbruch) */
-@media (min-width: 1046px) and (max-width: 1085px){
-  /* etwas kleinere Seiten-Gutter, damit 2 Spalten sicher passen */
-  .kontakt-testimonial-section{
-    padding-inline: clamp(16px, 2vw, 28px);
-  }
+/* Step 5: immer linksbündig, egal ob die Karte mittig steht */
+.kontakt-area .form-step[data-step="5"]{
+  text-align: left !important;            /* überschreibt zentrierte Eltern */
+}
 
-  /* Grid statt Flex: zwei gleich breite Spalten */
+.kontakt-area .form-step[data-step="5"] .contact-grid{
+  justify-items: stretch;
+  align-items: start;
+}
+
+.kontakt-area .form-step[data-step="5"] .field,
+.kontakt-area .form-step[data-step="5"] .field label{
+  text-align: left !important;
+}
+
+.kontakt-area .form-step[data-step="5"] .field input,
+.kontakt-area .form-step[data-step="5"] .field select,
+.kontakt-area .form-step[data-step="5"] .field textarea{
+  text-align: left;                        /* auch Inhalt/Placeholder links */
+}
+
+/* falls du irgendwo text-centring auf .wizard-nav hast: nur Buttons mittig lassen */
+.kontakt-area .form-step[data-step="5"] + .wizard-nav{
+  text-align: left;                        /* Navigation linksbündig (optional) */
+}
+/* === Step 5: "Senden"-Button immer linksbündig, auch wenn Karte mittig steht === */
+
+/* sorgt dafür, dass das Nav-Element selbst links ausgerichtet ist */
+.kontakt-area .form-step[data-step="5"] + .wizard-nav {
+  display: flex !important;
+  justify-content: flex-start !important;  /* Button-Leiste links ausrichten */
+  text-align: left !important;
+  width: 100%;
+}
+
+/* "Senden"-Button linksbündig halten, nicht zentrieren */
+.kontakt-area .form-step[data-step="5"] + .wizard-nav #submitBtn,
+.kontakt-area .form-step[data-step="5"] + .wizard-nav .kontakt-btn.submit {
+  justify-content: flex-start !important;
+  align-self: flex-start !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  width: auto !important;          /* verhindert full-width */
+  min-width: 160px;
+}
+
+/* Falls du den Zurück-Button daneben hast → schöner Abstand */
+.kontakt-area .form-step[data-step="5"] + .wizard-nav .nav-btn:not(#submitBtn) {
+  margin-right: .6rem;
+}
+
+.legal-hint{
+  font-size:.85rem; line-height:1.45;
+  color:#666; margin:.4rem 0 .2rem;
+}
+.legal-hint a{ color:inherit; text-decoration:underline; }
+:root[data-theme="dark"] .legal-hint{ color:#c6cad1; }
+
+/* Pflichtfeld-Kennzeichnung */
+label.req::after{
+  content:" *";
+  color:#b00020;
+  font-weight:900;
+}
+.req-note{
+  font-size:.85rem; color:#666; margin:.2rem 0 .4rem;
+}
+:root[data-theme="dark"] .req-note{ color:#c6cad1; }
+
+/* =======================================
+   Ganze Pill grün, wenn angeklickt
+   ======================================= */
+.pill input[type="checkbox"]:checked ~ span,
+.pill input[type="checkbox"]:checked ~ * {
+  background: var(--pill-green);
+  color: var(--pill-green-ink);
+  border-color: var(--pill-green);
+  box-shadow: 0 6px 18px rgba(0,200,81,.25);
+}
+
+/* ===== Fix: 680px–1024px -> Karten nicht mehr vertikal strecken ===== */
+@media (max-width:1024px) and (min-width:680px){
   .kontakt-testimonial-wrapper{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(16px, 3vw, 28px);
-    align-items: stretch;
-    justify-content: space-between;
+    flex-direction: column;      /* wie bei dir vorgesehen */
+    align-items: center;
   }
 
-  /* Karten voll ins Grid einpassen (keine eigenen max/auto-Margen) */
+  /* wichtig: kein flex:1 im Spaltenlayout -> sonst wird Höhe aufgeblasen */
   .kontakt-area,
   .video-area{
-    width: auto;
-    max-width: none;
-    margin-inline: 0;
-    flex: initial; /* Flex-Settings neutralisieren */
+    flex: 0 0 auto !important;   /* nicht strecken */
+    width: min(92vw, 780px);     /* hübsche Breite */
+    height: auto !important;
+    margin-inline: auto;
   }
 
-  .testimonial-area{ grid-column: 1 / -1; } /* bleibt unterhalb über volle Breite */
+  /* Videokarte nicht künstlich hochziehen */
+  .video-area .video-card{
+    height: auto !important;
+    min-height: 280px;           /* angenehme Untergrenze */
+    aspect-ratio: 16 / 9;        /* hält das Video kompakt */
+  }
+
+  /* Optional: innen etwas kompakter, damit die Kontaktkarte nicht „luftig“ wirkt */
+  .kontakt-area{
+    padding: clamp(14px, 2.2vw, 20px) !important;
+  }
+}
+/* --- A) SOLO: Kontaktkarte alleine & breiter -------------------- */
+/* <section id="kontakt" class="kontakt-testimonial-section variant-solo"> */
+@media (min-width:840px) and (max-width:1148px){
+  #kontakt.variant-solo .kontakt-testimonial-wrapper{
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(16px, 2.5vw, 24px);
+  }
+  #kontakt.variant-solo .kontakt-area{
+    flex: 0 0 auto !important;
+    width: min(96vw, 980px);
+    max-width: 100%;
+    margin-inline: auto;
+  }
+  /* Video bewusst ausblenden (oder nach unten verlagern) */
+  #kontakt.variant-solo .video-area{
+    display: none;               /* oder: display:block;width:min(92vw,720px) */
+  }
 }
 
-  </style>
-
+</style>
 <script>
 (function () {
-  'use strict';
-
-  /* =====================================================
-     Guard: Script nicht doppelt initialisieren
-  ====================================================== */
-  if (window.__kontaktWizardInitialized) return;
-  window.__kontaktWizardInitialized = true;
-
-  /* =====================================================
-     Cache DOM
-  ====================================================== */
   const form = document.getElementById('kontaktForm');
   if (!form) return;
 
+  /* =========================
+     Cache DOM
+  ========================== */
   const allSteps  = Array.from(form.querySelectorAll('.form-step'));
   const stepper   = form.querySelector('.stepper');
   const stepLabel = document.getElementById('stepLabel');
@@ -6917,41 +7225,36 @@ document.addEventListener("DOMContentLoaded", () => {
   const prevBtn   = document.getElementById('prevBtn');
   const nextBtn   = document.getElementById('nextBtn');
   const submitBtn = document.getElementById('submitBtn');
-  const errorSummary = document.getElementById('errorSummary');
-  const statusBox = form.querySelector('[data-status]');
 
-  // Success-Card DOM (kann bei "is-success" sichtbar werden)
+  // Success-Card DOM
   const successFieldset = allSteps.find(s => s.dataset.step === '6');
+  const successCard     = successFieldset?.querySelector('.success-card');
+  const successBtn      = successFieldset?.querySelector('.success-btn');
+  const successSub      = successFieldset?.querySelector('.success-sub');
 
-  /* =====================================================
-     Helpers
-  ====================================================== */
-  const q  = (sel,root=document)=>root.querySelector(sel);
-  const qa = (sel,root=document)=>Array.from(root.querySelectorAll(sel));
-  const trim = s => (s||'').toString().trim();
-
-  const STEP_NAMES = ['Leistung wählen','Material & Style','Ziele','Zeit & Budget','Kontaktdaten','Fertig'];
-  const STORE_KEY = 'kontakt-wizard-v1';
-
-  function setStatus(msg, tone=''){
-    if (!statusBox) return;
+  /* =========================
+     Live Status (a11y)
+  ========================== */
+  let statusBox = form.querySelector('[data-status]');
+  if (!statusBox) {
+    statusBox = document.createElement('div');
+    statusBox.setAttribute('data-status','');
+    statusBox.setAttribute('role','status');
+    statusBox.setAttribute('aria-live','polite');
+    statusBox.style.cssText = 'margin:.5rem 0 .25rem;font-weight:700;text-align:center;';
+    form.insertBefore(statusBox, form.firstChild);
+  }
+  const setStatus = (msg, tone='')=>{
     statusBox.textContent = msg || '';
-    // statt Inline-Farbe: nur Tone-Flag; Styling per CSS möglich
-    statusBox.dataset.tone = tone;
-  }
+    statusBox.style.color =
+      tone==='error' ? '#b00020' :
+      tone==='ok'    ? '#0a7f2e' :
+      tone==='warn'  ? '#a15c00' : 'inherit';
+  };
 
-  // Einfache Debounce-Utility fürs Draft-Speichern
-  function debounce(fn, wait=200){
-    let t=0;
-    return (...args)=>{
-      clearTimeout(t);
-      t = setTimeout(()=>fn(...args), wait);
-    };
-  }
-
-  /* =====================================================
-     Hidden Fields / Honeypot / Meta
-  ====================================================== */
+  /* =========================
+     Hidden Fields / Honeypot
+  ========================== */
   ensureHidden({ id:'autoSubject',     name:'_subject',         tag:'input'    });
   ensureHidden({ id:'summaryPlain',    name:'summary_plain',    tag:'textarea' });
   ensureHidden({ id:'selectedService', name:'selected_service', tag:'input'    });
@@ -6974,9 +7277,13 @@ document.addEventListener("DOMContentLoaded", () => {
     return el;
   }
 
-  /* =====================================================
-     Data helpers
-  ====================================================== */
+  /* =========================
+     Helpers
+  ========================== */
+  const q  = (sel,root=form)=>root.querySelector(sel);
+  const qa = (sel,root=form)=>Array.from(root.querySelectorAll(sel));
+  const trim = s => (s||'').toString().trim();
+
   function collectStepData(stepEl) {
     const data = {};
     stepEl.querySelectorAll('input, select, textarea').forEach(el=>{
@@ -7004,30 +7311,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const success = allSteps.find(s => s.dataset.step === '6');
     return form.classList.contains('is-success') && success ? [...base, success] : base;
   }
+  function getCurrentIndex(){ return Math.max(0, getApplicableSteps().indexOf(currentStepEl)); }
+  function clampIndex(i){ const st = getApplicableSteps(); return Math.min(Math.max(i,0), st.length-1); }
 
-  /* =====================================================
-     Stepper / Service-Blocks / Pills
-  ====================================================== */
+  function isContactStep(stepEl){
+    if (!stepEl) return false;
+    if (stepEl.dataset.step === '5') return true;
+    const hasName = stepEl.querySelector('input[name="name"]');
+    const hasMail = stepEl.querySelector('input[name="email"]');
+    const hasMsg  = stepEl.querySelector('textarea[name="message"]');
+    return !!(hasName || hasMail || hasMsg);
+  }
+
+  /* =========================
+     UI / Progress
+  ========================== */
   function updateChoiceUI(){
     form.querySelectorAll('.grid-choices .choice').forEach(label=>{
       const rb = label.querySelector('input[type="radio"]');
-      const on = !!(rb && rb.checked);
-      label.classList.toggle('selected', on);
-      label.setAttribute('aria-checked', on ? 'true' : 'false');
-      label.setAttribute('role', 'radio');
+      label.classList.toggle('selected', !!(rb && rb.checked));
     });
     const any = form.querySelector('input[name="service"]:checked');
-    if (currentStepEl === allSteps[0]) nextBtn.disabled = !any;
+    if(currentStepEl === allSteps[0]) nextBtn.disabled = !any;
     setProgress(getCurrentIndex());
   }
 
   function updatePillUI(){
     form.querySelectorAll('.pill').forEach(lbl=>{
       const cb = lbl.querySelector('input[type="checkbox"]');
-      const on = !!(cb && cb.checked);
-      lbl.classList.toggle('selected', on);
-      lbl.setAttribute('aria-pressed', on ? 'true' : 'false');
-      lbl.setAttribute('role','button');
+      lbl.classList.toggle('selected', !!(cb && cb.checked));
     });
   }
 
@@ -7048,11 +7360,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       });
     });
+    // nach dem Umschalten neu bewerten (grün hinterlegen)
     updatePillUI();
-  }
-
-  function getCurrentIndex(){
-    return Math.max(0, getApplicableSteps().indexOf(currentStepEl));
   }
 
   function setProgress(idx){
@@ -7061,12 +7370,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if(idx === 0){
       pct = form.querySelector('input[name="service"]:checked') ? 12 : 0;
     } else {
-      const max = Math.max(steps.length - 1, 1);
-      pct = Math.min(100, Math.round((idx / max) * 100));
+      pct = Math.min(100, Math.round((idx / (steps.length - 1)) * 100));
     }
     if (stepFill) stepFill.style.width = pct + '%';
     stepper?.setAttribute('aria-valuenow', String(idx + 1));
-    stepper?.setAttribute('aria-valuetext', `Schritt ${idx+1} von ${steps.length}: ${STEP_NAMES[idx]||''}`);
     if (stepLabel) stepLabel.textContent = `Schritt ${idx + 1}/${steps.length}`;
   }
 
@@ -7076,24 +7383,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!submitBtn.textContent.trim()) submitBtn.textContent = 'Jetzt Anfrage senden';
   }
 
-  function isContactStep(stepEl){
-    if (!stepEl) return false;
-    if (stepEl.dataset.step === '5') return true;
-    const hasName = stepEl.querySelector('input[name="name"]');
-    const hasMail = stepEl.querySelector('input[name="email"]');
-    const hasMsg  = stepEl.querySelector('textarea[name="message"]');
-    return !!(hasName || hasMail || hasMsg);
-  }
-
-  /* =====================================================
-     Navigation + Fokusfluss
-  ====================================================== */
+  /* =========================
+     Navigation
+  ========================== */
   let currentStepEl = allSteps[0];
 
   function showStepByIndex(idx){
     const steps = getApplicableSteps();
     if(!steps.length) return;
-    const targetIdx = Math.min(Math.max(idx,0), steps.length-1);
+    const targetIdx = clampIndex(idx);
     const targetEl  = steps[targetIdx];
 
     allSteps.forEach(s => s.classList.remove('active'));
@@ -7104,19 +7402,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (isSuccess) {
       form.classList.add('is-success');
-      prevBtn.hidden = true; nextBtn.hidden = true; submitBtn.hidden = true;
+
+      prevBtn.hidden = true;
+      nextBtn.hidden = true;
+      submitBtn.hidden = true;
 
       const step1 = allSteps.find(s => s.dataset.step === '1');
       const h = step1 ? step1.scrollHeight : 320;
       targetEl.style.setProperty('--step6-minh', h + 'px');
 
-      const btn = successFieldset?.querySelector('.success-btn');
-      if (btn && !btn.dataset.bound) {
-        btn.disabled = false;
-        btn.textContent = 'Neu starten';
-        btn.setAttribute('aria-label','Wizard neu starten');
-        btn.addEventListener('click', handleRestart, { once:true });
-        btn.dataset.bound = '1';
+      // 💡 Restart-Button immer neu, immer klickbar
+      const oldBtn = successFieldset.querySelector('.success-btn');
+      if (oldBtn) {
+        const freshBtn = oldBtn.cloneNode(true);
+        oldBtn.parentNode.replaceChild(freshBtn, oldBtn);
+        freshBtn.disabled = false;
+        freshBtn.textContent = 'Neu starten';
+        freshBtn.setAttribute('aria-label','Wizard neu starten');
+        freshBtn.style.color = '#fff';
+        freshBtn.addEventListener('click', handleRestart);
+      }
+
+      if (successSub) {
+        successSub.textContent = 'Du kannst jetzt neu starten und die Schritte erneut durchlaufen.';
+        successSub.style.color = '#fff';
       }
 
     } else {
@@ -7130,90 +7439,94 @@ document.addEventListener("DOMContentLoaded", () => {
       nextBtn.disabled = targetEl === allSteps[0] && !form.querySelector('input[name="service"]:checked');
     }
 
+    // sicherstellen, dass Pills korrekt eingefärbt bleiben
     updatePillUI();
-    setProgress(targetIdx);
 
-    // Fokus auf Step-Titel für SR-Kontextwechsel
-    const focusTarget = targetEl.querySelector('h3,.block-title,.copy') || targetEl;
-    focusTarget.setAttribute('tabindex','-1');
-    focusTarget.focus({preventScroll:true});
+    setProgress(targetIdx);
+    const first = targetEl.querySelector('input:not([disabled]),select:not([disabled]),textarea:not([disabled])');
+    first?.focus({preventScroll:true});
   }
 
-  // "Enter" in Step 1 ≙ Weiter (wenn gewählt)
-  form.addEventListener('keydown', (e)=>{
-    if(e.key==='Enter' && currentStepEl?.dataset.step==='1'){
-      const any = form.querySelector('input[name="service"]:checked');
-      if(any){ e.preventDefault(); nextBtn.click(); }
+  /* =========================
+     Restart / Success Handling
+  ========================== */
+  function resetToStep1(scrollToStart = true){
+    form.reset();
+    form.classList.remove('is-success');
+    allSteps.forEach(s => s.classList.remove('active'));
+    const step1 = allSteps.find(s => s.dataset.step === '1') || allSteps[0];
+    step1.classList.add('active');
+    currentStepEl = step1;
+    syncServiceBlocks();
+    updateChoiceUI();
+    updatePillUI();
+    setProgress(0);
+    toggleFormDisabled(false);
+    setStatus('', '');
+    if (scrollToStart) {
+      step1.scrollIntoView({ behavior:'smooth', block:'start' });
+      const first = step1.querySelector('input,select,textarea,button');
+      first?.focus({ preventScroll:true });
     }
-  });
+  }
 
-  /* =====================================================
-     Validierung (vereinfacht: nur eine Sammelmeldung)
-  ====================================================== */
-  function markInvalid(el){
-    if (!el) return;
+  function handleRestart(e){
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    resetToStep1(true);
+  }
+
+  function showSuccessScreen(){
+    const steps = getApplicableSteps();
+    const successIdx = steps.findIndex(s => s.dataset.step === '6');
+    if (successIdx >= 0) showStepByIndex(successIdx);
+  }
+
+  /* =========================
+     Validierung / Markierung
+  ========================== */
+  function markInvalid(el, msg){
     el.classList.add('is-invalid');
     el.setAttribute('aria-invalid','true');
+    if (!el.nextElementSibling || !el.nextElementSibling.matches('.field-error')) {
+      const e = document.createElement('div');
+      e.className = 'field-error';
+      e.style.cssText = 'color:#b00020;font-weight:700;margin-top:.2rem;font-size:.9rem;';
+      e.textContent = msg;
+      el.insertAdjacentElement('afterend', e);
+    } else el.nextElementSibling.textContent = msg;
   }
-
   function clearInvalids(){
     qa('.is-invalid', form).forEach(el=>{
-      el.classList.remove('is-invalid');
-      el.removeAttribute('aria-invalid');
-      if (el.getAttribute('aria-describedby')?.endsWith('__error')) {
-        el.removeAttribute('aria-describedby');
-      }
+      el.classList.remove('is-invalid'); el.removeAttribute('aria-invalid');
     });
-    if (errorSummary){
-      errorSummary.classList.add('sr-only');
-      errorSummary.textContent = '';
-    }
+    qa('.field-error', form).forEach(el=> el.remove());
+  }
+  function validEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s); }
+  function validateRequired(){
+    clearInvalids();
+    const name  = q('input[name="name"]');
+    const email = q('input[name="email"]');
+    const msg   = q('textarea[name="message"]');
+    let ok = true;
+    if (!trim(name?.value))               { markInvalid(name,'Bitte Namen angeben.'); ok=false; }
+    if (!validEmail(trim(email?.value)))  { markInvalid(email,'Bitte gültige E-Mail angeben.'); ok=false; }
+    if (trim(msg?.value).length < 5)      { markInvalid(msg,'Bitte kurz dein Projekt beschreiben.'); ok=false; }
+    if (!ok) {
+      const first = q('.is-invalid');
+      first?.focus({preventScroll:true});
+      setStatus('Bitte fehlende Angaben ergänzen.', 'warn');
+    } else setStatus('', '');
+    return ok;
   }
 
-  function validEmail(s){ return /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/i.test(s); }
-
- function validateRequired(){
-  clearInvalids();
-  setStatus('', ''); // alten Status leeren, aber KEIN Fehlerstatus setzen
-
-  const name  = q('input[name="name"]', form);
-  const email = q('input[name="email"]', form);
-  const msg   = q('textarea[name="message"]', form);
-
-  let ok = true;
-  const vName = !!trim(name?.value);
-  const vMail = validEmail(trim(email?.value));
-  const vMsg  = trim(msg?.value).length >= 5;
-
-  if (!vName) markInvalid(name), ok = false;
-  if (!vMail) markInvalid(email), ok = false;
-  if (!vMsg)  markInvalid(msg), ok = false;
-
-  if (!ok) {
-    if (errorSummary){
-      errorSummary.classList.remove('sr-only');
-      errorSummary.textContent = 'Bitte fehlende Angaben ergänzen.';
-    }
-    const first = q('.is-invalid', form) || name || email || msg;
-    first?.focus({preventScroll:true});
-    return false;
-  }
-
-  // alles ok
-  if (errorSummary){
-    errorSummary.classList.add('sr-only');
-    errorSummary.textContent = '';
-  }
-  return true;
-}
-
-  /* =====================================================
+  /* =========================
      Submit Flow
-  ====================================================== */
+  ========================== */
   let submitting = false;
   function toggleFormDisabled(disabled){
     qa('input,select,textarea,button', form).forEach(el=> el.disabled = disabled);
   }
+
   async function postWithTimeout(url, options={}, timeoutMs=12000) {
     const controller = new AbortController();
     const t = setTimeout(()=>controller.abort(), timeoutMs);
@@ -7224,26 +7537,27 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener('submit', async function(e){
     e.preventDefault();
     if (submitting) return;
+
     if (!validateRequired()) return;
 
-    const selectedServiceEl = q('input[name="service"]:checked', form);
+    const selectedServiceEl = q('input[name="service"]:checked');
     const selectedService   = selectedServiceEl ? selectedServiceEl.value : '';
 
     const summary = {};
     getApplicableSteps().forEach((step, i) => { summary[`step_${i+1}`] = collectStepData(step); });
 
     const lines = [];
-    lines.push(`[Service] ${selectedService || '-'}`);
+    lines.push(`[Service] ${selectedService}`);
     lines.push(`[Kontakt]`);
     lines.push(`- Name: ${summary.step_5?.name || '-'}`);
     lines.push(`- E-Mail: ${summary.step_5?.email || '-'}`);
     if (summary.step_5?.message) lines.push(`- Nachricht: ${summary.step_5.message}`);
     const compiledPlain = lines.join('\n');
 
-    q('#autoSubject', form).value     = `Projektanfrage: ${selectedService || 'Allgemein'}`;
-    q('#selectedService', form).value = selectedService || '';
-    q('#summaryPlain', form).value    = compiledPlain;
-    q('#honeypot', form).value        = '';
+    q('#autoSubject').value     = `Projektanfrage: ${selectedService}`;
+    q('#selectedService').value = selectedService;
+    q('#summaryPlain').value    = compiledPlain;
+    q('#honeypot').value        = '';
 
     const fd = new FormData(form);
     submitting = true;
@@ -7260,7 +7574,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!res.ok) throw new Error(res.statusText);
       submitBtn.innerText = '✅ Anfrage gesendet!';
       setStatus('Danke! Wir melden uns in Kürze.', 'ok');
-      try { localStorage.removeItem(STORE_KEY); } catch {}
       form.classList.add('is-success');
       showSuccessScreen();
     } catch (err) {
@@ -7273,170 +7586,69 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* =====================================================
+  /* =========================
      Buttons & Choices
-  ====================================================== */
+  ========================== */
   prevBtn.addEventListener('click', (e)=>{
     e.preventDefault();
     showStepByIndex(getCurrentIndex()-1);
   });
-
   nextBtn.addEventListener('click', ()=>{
     if (isContactStep(currentStepEl)) form.requestSubmit();
     else showStepByIndex(getCurrentIndex()+1);
   });
 
-  // Klick-Delegation
+  // Klick auf Step-1-Karten (Service)
   form.addEventListener('click', (e)=>{
-    // Service-Choice
     const choice = e.target.closest('.choice');
-    if(choice && form.contains(choice)){
+    if(choice){
       const rb = choice.querySelector('input[type="radio"]');
       if(rb){
-        rb.checked = true;
-        queueMicrotask(()=>{
+        setTimeout(()=>{
           form.classList.remove('is-success');
           updateChoiceUI();
           syncServiceBlocks();
           showStepByIndex(getCurrentIndex());
-          debouncedSaveDraft();
-        });
+        },0);
       }
     }
-    // Pill-Labels (Schwerpunkte)
+    // Klick auf Pill-Labels (Schwerpunkte)
     const pill = e.target.closest('.pill');
-    if (pill && form.contains(pill)) {
-      queueMicrotask(()=>{ updatePillUI(); debouncedSaveDraft(); });
-    }
-    // Budget-Chips
-    const chip = e.target.closest('.chip');
-    if(chip){
-      const target = q(chip.dataset.fill);
-      if(target){
-        target.value = chip.dataset.value || '';
-        target.dispatchEvent(new Event('input', {bubbles:true}));
-        debouncedSaveDraft();
-      }
+    if (pill) {
+      // Wait until checkbox toggled, then refresh UI
+      setTimeout(updatePillUI, 0);
     }
   });
 
-  /* =====================================================
-     Restart / Success Handling
-  ====================================================== */
-  function resetToStep1(scrollToStart = true){
-    form.reset();
-    form.classList.remove('is-success');
-    allSteps.forEach(s => s.classList.remove('active'));
-    const step1 = allSteps.find(s => s.dataset.step === '1') || allSteps[0];
-    step1.classList.add('active');
-    currentStepEl = step1;
-    syncServiceBlocks(); updateChoiceUI(); updatePillUI();
-    setProgress(0);
-    toggleFormDisabled(false);
-    clearInvalids();
-    setStatus('', '');
-    if (scrollToStart) {
-      step1.scrollIntoView({ behavior:'smooth', block:'start' });
-      const first = step1.querySelector('input,select,textarea,button');
-      first?.focus({ preventScroll:true });
+  // Änderungen an Service oder Pill-Checkboxen
+  form.addEventListener('change', (e)=>{
+    if(e.target && e.target.matches('input[name="service"]')){
+      form.classList.remove('is-success');
+      updateChoiceUI();
+      syncServiceBlocks();
+      showStepByIndex(getCurrentIndex());
+      return;
     }
-  }
-  function handleRestart(e){
-    if (e) { e.preventDefault(); e.stopPropagation(); }
-    resetToStep1(true);
-  }
-  function showSuccessScreen(){
-    const steps = getApplicableSteps();
-    const successIdx = steps.findIndex(s => s.dataset.step === '6');
-    if (successIdx >= 0) showStepByIndex(successIdx);
-  }
+    if (e.target && (e.target.matches('.pill input[type="checkbox"]') || e.target.matches('input[data-pills]'))) {
+      updatePillUI();
+    }
+  });
 
-  /* =====================================================
-     Draft speichern/wiederherstellen
-  ====================================================== */
-  function saveDraft(){
-    const data = {};
-    allSteps.forEach(s=>Object.assign(data, collectStepData(s)));
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch {}
-  }
-  const debouncedSaveDraft = debounce(saveDraft, 250);
-
-  function restoreDraft(){
-    try{
-      const data = JSON.parse(localStorage.getItem(STORE_KEY) || '{}');
-      Object.entries(data).forEach(([name,val])=>{
-        const els = qa(`[name="${CSS.escape(name)}"]`, form);
-        if(!els.length) return;
-        els.forEach(el=>{
-          if(el.type==='checkbox'){ el.checked = Array.isArray(val) && val.includes(el.value); }
-          else if(el.type==='radio'){ el.checked = el.value===val; }
-          else el.value = val;
-        });
-      });
-      syncServiceBlocks(); updateChoiceUI(); updatePillUI();
-    }catch{}
-  }
-  form.addEventListener('change', debouncedSaveDraft);
-
-  /* =====================================================
+  /* =========================
      Init
-  ====================================================== */
+  ========================== */
   function init(){
     form.classList.remove('is-success');
-    restoreDraft();
+    syncServiceBlocks();
     updateChoiceUI();
     updatePillUI();
     showStepByIndex(0);
     setStatus('');
-    const tst = document.querySelector('testimonial-slider');
-    if (tst && !tst.dataset.enhanced) {
-      tst.dataset.enhanced = '1';
-    }
   }
   init();
 
-  /* =====================================================
-     Video nur im Viewport abspielen (mit Guards)
-  ====================================================== */
-  const video = document.querySelector('.video-media');
-  const section = document.getElementById('kontakt');
-
-  function pauseVideoForPrefersReducedMotion(){
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      try { video?.pause?.(); } catch {}
-      video?.removeAttribute?.('autoplay');
-      video?.setAttribute?.('aria-hidden','true');
-      return true;
-    }
-    return false;
-  }
-  const reduced = pauseVideoForPrefersReducedMotion();
-
-  if (!reduced && video && section && 'IntersectionObserver' in window){
-    let rafId = 0;
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        cancelAnimationFrame(rafId);
-        rafId = requestAnimationFrame(async ()=>{
-          if(entry.isIntersecting && entry.intersectionRatio > 0.25){
-            try { await video.play(); } catch {}
-          } else {
-            try { video.pause(); } catch {}
-          }
-        });
-      });
-    }, { root:null, threshold:[0, .25, .5, .75, 1] });
-    io.observe(section);
-
-    document.addEventListener('visibilitychange', ()=>{
-      if (document.hidden) { try{ video.pause(); }catch{} }
-    });
-  }
-
 })();
 </script>
-
-
 
 
 
@@ -8301,7 +8513,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-
 <section class="lyra-vault" id="lyra-faq">
   <h2 class="lyra-heading">Häufige Fragen</h2>
 
@@ -8949,27 +9160,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-<footer role="contentinfo" itemscope itemtype="https://schema.org/Organization" class="footer-clean" aria-label="Seitenende">
+<footer itemscope itemtype="https://schema.org/Organization" class="footer-clean">
   <link itemprop="url" href="https://www.fusion3.de">
+
   <div class="fc-container">
+
     <!-- Head: Brand & Claim + CTA -->
-    <section class="fc-head" aria-label="Markenbereich">
+    <section class="fc-head" aria-labelledby="fc-head-title">
+      <h2 id="fc-head-title" class="sr-only">Markenbereich</h2>
       <div class="fc-brand">
-        <h2 class="fc-logo" itemprop="name" aria-label="Fusion hoch drei">Fusion³</h2>
+        <p class="fc-logo" itemprop="name">Fusion³</p>
         <p class="fc-claim">UX &amp; Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
       </div>
       <div class="fc-cta">
-        <a class="fc-btn" href="mailto:hello@fusion3.de" aria-label="Projekt anfragen per E-Mail">
-          Projekt anfragen
-        </a>
+        <a class="fc-btn" href="mailto:hello@fusion3.de" aria-label="Projekt anfragen per E-Mail">Projekt anfragen</a>
       </div>
     </section>
 
     <!-- Grid -->
-    <nav class="fc-grid" aria-label="Footer-Navigation">
+    <nav class="fc-grid" aria-labelledby="fc-nav-title">
+      <h2 id="fc-nav-title" class="sr-only">Footer-Navigation</h2>
+
       <div class="fc-col">
-        <h3 class="fc-col-title">Leistungen</h3>
-        <ul class="fc-links">
+        <h3 class="fc-col-title" id="fc-services">Leistungen</h3>
+        <ul class="fc-links" aria-labelledby="fc-services">
           <li><a href="/ux-audit.html">UX-Audit</a></li>
           <li><a href="/webdesign.html">Webdesign</a></li>
           <li><a href="/prototyping.html">Prototyping</a></li>
@@ -8978,8 +9192,8 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
 
       <div class="fc-col">
-        <h3 class="fc-col-title">Ressourcen</h3>
-        <ul class="fc-links">
+        <h3 class="fc-col-title" id="fc-resources">Ressourcen</h3>
+        <ul class="fc-links" aria-labelledby="fc-resources">
           <li><a href="/cases.html">Case Studies</a></li>
           <li><a href="/blog.html">Insights &amp; Blog</a></li>
           <li><a href="/faq.html">FAQ</a></li>
@@ -8988,8 +9202,8 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
 
       <div class="fc-col">
-        <h3 class="fc-col-title">Rechtliches</h3>
-        <ul class="fc-links">
+        <h3 class="fc-col-title" id="fc-legal">Rechtliches</h3>
+        <ul class="fc-links" aria-labelledby="fc-legal">
           <li><a href="/impressum.html">Impressum</a></li>
           <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
           <li><a href="/cookies.html">Cookie-Hinweis</a></li>
@@ -8997,32 +9211,35 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
 
       <div class="fc-col">
-        <h3 class="fc-col-title">Kontakt</h3>
-        <ul class="fc-links">
+        <h3 class="fc-col-title" id="fc-contact">Kontakt</h3>
+        <ul class="fc-links" aria-labelledby="fc-contact">
           <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
           <li><a href="tel:+491234567890" itemprop="telephone">+49&nbsp;123&nbsp;4567890</a></li>
           <li>
-            <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" aria-label="Adresse" class="fc-address">
+            <!-- Address ohne aria-label; per Kontext benannt -->
+            <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" class="fc-address">
               <span itemprop="addressLocality">Berlin</span>, <span itemprop="addressCountry">Deutschland</span>
             </address>
           </li>
         </ul>
 
-        <!-- Socials -->
-        <div class="fc-socials" aria-label="Social Media">
-          <a class="fc-social" href="mailto:hello@fusion3.de" aria-label="E-Mail" itemprop="sameAs">
+        <!-- Socials: Container via aria-labelledby benennen -->
+        <div class="fc-socials" aria-labelledby="fc-socials-title" role="list">
+          <h3 id="fc-socials-title" class="sr-only">Social Media</h3>
+
+          <a class="fc-social" href="mailto:hello@fusion3.de" aria-label="E-Mail" itemprop="sameAs" role="listitem">
             <span class="sr-only">E-Mail</span>
             <img src="./FooterIcons/Gmail.png" alt="" loading="lazy" decoding="async" width="20" height="20">
           </a>
-          <a class="fc-social fc-li" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" itemprop="sameAs">
+          <a class="fc-social fc-li" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" itemprop="sameAs" role="listitem">
             <span class="sr-only">LinkedIn</span>
             <img src="./FooterIcons/LinkedIn.png" alt="" loading="lazy" decoding="async" width="20" height="20">
           </a>
-          <a class="fc-social fc-wa" href="https://wa.me/491234567890" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" itemprop="sameAs">
+          <a class="fc-social fc-wa" href="https://wa.me/491234567890" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" itemprop="sameAs" role="listitem">
             <span class="sr-only">WhatsApp</span>
             <img src="./FooterIcons/Whatsapp.svg" alt="" loading="lazy" decoding="async" width="20" height="20">
           </a>
-          <a class="fc-social fc-ig" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" itemprop="sameAs">
+          <a class="fc-social fc-ig" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" itemprop="sameAs" role="listitem">
             <span class="sr-only">Instagram</span>
             <img src="./FooterIcons/instagram.jpg" alt="" loading="lazy" decoding="async" width="20" height="20">
           </a>
@@ -9031,9 +9248,11 @@ document.addEventListener("DOMContentLoaded", () => {
     </nav>
 
     <!-- Bottom -->
-    <div class="fc-legal" aria-label="Rechtliches & Hinweise">
-      <p>© <time id="currentYear" aria-label="Aktuelles Jahr"></time> <span class="nowrap">Fusion³</span> · DSGVO-konform &amp; barrierearm entwickelt.</p>
+    <div class="fc-legal" aria-labelledby="fc-legal-title">
+      <h3 id="fc-legal-title" class="sr-only">Rechtliches &amp; Hinweise</h3>
+      <p>© <time id="currentYear" datetime="2025">2025</time> <span class="nowrap">Fusion³</span> · DSGVO-konform &amp; barrierearm entwickelt.</p>
     </div>
+
   </div>
 </footer>
 
@@ -9063,7 +9282,8 @@ document.addEventListener("DOMContentLoaded", () => {
     --fc-s4: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
     --fc-s5: clamp(2rem, 1.6rem + 2.2vw, 3rem);
 
-    --fc-focus-color: color-mix(in oklab, var(--primary) 92%, #000 8%);
+    /* focus color: fallback + dashed outline */
+    --fc-focus-color: #ff7a1a; /* Fallback ohne color-mix */
     --fc-focus: 2px dashed var(--fc-focus-color);
 
     --fc-btn-fg: var(--btn-text);
@@ -9080,12 +9300,19 @@ document.addEventListener("DOMContentLoaded", () => {
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
 
+  /* Modern focus color nur wenn color-mix unterstützt wird */
+  @supports (color: color-mix(in oklab, #000 50%, #fff 50%)) {
+    :root{
+      --fc-focus-color: color-mix(in oklab, var(--primary) 92%, #000 8%);
+    }
+  }
+
   /* dark / auto */
   :root[data-theme="dark"]{
     --fc-bg:#0a0a0b; --fc-fg:#f5f7fa; --fc-fg-muted:#a8b0bb; --fc-line:rgba(255,255,255,.10);
     --fc-btn-fg:#fff; --fc-btn-bg:#111; --fc-btn-bg-hover:#000;
     --fc-social-bg:#17191d; --fc-social-bg-hover:#1e2127; --fc-social-inset:rgba(255,255,255,.08);
-    --fc-focus-color:#ff7a1a;
+    /* behalte die obige Fallback/Supports-Logik für --fc-focus-color bei */
   }
   @media (prefers-color-scheme: dark){
     :root[data-theme="auto"]{ color-scheme: dark; }
@@ -9101,7 +9328,14 @@ document.addEventListener("DOMContentLoaded", () => {
   .footer-clean{
     background: var(--fc-bg);
     color: var(--fc-fg);
+
+    /* Fallback spacing für ältere Parser */
+    padding-top: clamp(2rem, 4vw, 3.5rem);
+    padding-bottom: calc(clamp(1.5rem, 3vw, 2.5rem) + env(safe-area-inset-bottom));
+
+    /* Modern enhancement */
     padding-block: clamp(2rem, 4vw, 3.5rem) calc(clamp(1.5rem, 3vw, 2.5rem) + env(safe-area-inset-bottom));
+
     border-top: 1px solid var(--fc-line);
     line-height: var(--fc-lh);
     font-family: var(--font-sans) !important;
@@ -9242,36 +9476,43 @@ document.addEventListener("DOMContentLoaded", () => {
     box-shadow: inset 0 0 0 1px var(--fc-social-inset);
     transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
   }
- .fc-social:hover {
-  transform: translateY(-1px);
-  background-color: var(--fc-social-bg-hover);
 
-  /* Fallback for older parsers */
-  box-shadow: inset 0 0 0 1px var(--fc-social-inset);
-}
-
-/* Use color-mix() only where supported */
-@supports (color: color-mix(in oklab, #000 50%, #fff 50%)) {
-  .fc-social:hover {
-    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--fc-social-inset) 80%, transparent);
+  .fc-social:hover{
+    transform: translateY(-1px);
+    /* Fallback */
+    background-color: var(--fc-social-bg-hover);
+    /* Fallback shadow bleibt gesetzt, siehe Basisregel */
   }
-}
+
+  /* Nur wenn color-mix unterstützt wird: feinere Schattenmischung */
+  @supports (color: color-mix(in oklab, #000 50%, #fff 50%)) {
+    .fc-social:hover{
+      box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--fc-social-inset) 80%, transparent);
+    }
+  }
 
   .fc-social:focus-visible{ outline: var(--fc-focus); outline-offset: 3px; }
   .fc-social img{
     width: 20px; height: 20px; display: block;
     pointer-events: none; -webkit-user-drag: none; user-select: none;
-  }.fc-li:hover {
-  background-color: color-mix(in oklab, #0a66c2 20%, var(--fc-social-bg-hover));
-}
+  }
 
-.fc-wa:hover {
-  background-color: color-mix(in oklab, #25D366 20%, var(--fc-social-bg-hover));
-}
+  /* Brand-spezifische Hoverfarben: Fallback + moderne Variante */
+  .fc-li:hover { background-color: #0a66c2; }
+  .fc-wa:hover { background-color: #25D366; }
+  .fc-ig:hover { background-color: #d62976; }
 
-.fc-ig:hover {
-  background-color: color-mix(in oklab, #d62976 18%, var(--fc-social-bg-hover));
-}
+  @supports (background-color: color-mix(in oklab, #000 50%, #fff 50%)) {
+    .fc-li:hover {
+      background-color: color-mix(in oklab, #0a66c2 20%, var(--fc-social-bg-hover));
+    }
+    .fc-wa:hover {
+      background-color: color-mix(in oklab, #25D366 20%, var(--fc-social-bg-hover));
+    }
+    .fc-ig:hover {
+      background-color: color-mix(in oklab, #d62976 18%, var(--fc-social-bg-hover));
+    }
+  }
 
   /* ===== Legal ===== */
   .fc-legal{
@@ -9298,8 +9539,6 @@ document.addEventListener("DOMContentLoaded", () => {
     padding:0!important; margin:-1px!important; overflow:hidden!important;
     clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important;
   }
-  
 </style>
-
 
 </html>
