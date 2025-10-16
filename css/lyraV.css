@@ -1,0 +1,183 @@
+
+:root{
+  --nova-base:#ffffff; --nova-alt:#f7f7f7; --nova-ink:#0b0c0e; --nova-muted:#5f6368; --nova-border:#e6e6e6; --nova-shadow:0 10px 26px rgba(0,0,0,.08);
+  --lyra-maxw: 1200px;
+}
+:root[data-theme="dark"]{
+  --nova-base:#000; --nova-alt:#0e0f12; --nova-ink:#fff; --nova-muted:#c6cad1; --nova-border:#1f1f1f; --nova-shadow:0 16px 38px rgba(0,0,0,.5);
+}
+
+/* Section */
+.lyra-vault{
+  padding: clamp(2rem, 5vw, 5.5rem) clamp(1rem, 4vw, 2rem);
+  background: var(--nova-base);
+  color: var(--nova-ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin-top: 5rem;
+}
+
+/* Heading */
+.lyra-heading{
+  text-align: center !important;
+  font-size: clamp(1.8rem, 1.4rem + 2vw, 3rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: clamp(1.25rem, 3vw, 2.5rem) !important;
+  color: var(--nova-ink) !important;
+  text-wrap: balance !important;
+}
+
+/* Search Console */
+.lyra-console{
+  max-width: min(var(--lyra-maxw), 100%);
+  margin: 0 auto clamp(1.2rem, 3vw, 2.2rem);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .9rem;
+  align-items: center;
+}
+.lyra-console input{
+  min-height: 48px;
+  padding: .9rem 1.1rem;
+  border:1px solid var(--nova-border); border-radius:10px;
+  background: var(--nova-alt); color: var(--nova-ink);
+  font-size: 1rem; font-weight: 500; letter-spacing:.01em;
+  transition:border-color .25s ease, box-shadow .25s ease;
+  width:100%;
+}
+.lyra-console input::placeholder{ color: color-mix(in oklab, var(--nova-ink) 55%, transparent); opacity:.8; }
+.lyra-console input:focus{ outline:none; border-color: color-mix(in oklab, var(--nova-ink) 45%, transparent); box-shadow: 0 0 0 3px color-mix(in oklab, var(--nova-ink) 18%, transparent); }
+
+/* Console responsive: stack on small */
+@media (max-width: 680px){
+  .lyra-console{ grid-template-columns: 1fr; }
+  .lyra-nav{ justify-content: space-between; }
+}
+
+/* Nav */
+.lyra-nav{ display:flex; align-items:center; gap:.6rem; }
+.lyra-nav button{
+  padding:.6rem .9rem; min-height:44px;
+  border-radius:10px; border:1px solid var(--nova-border);
+  background:var(--nova-base); color:var(--nova-ink);
+  font-size:1rem; font-weight:700; line-height:1;
+  cursor:pointer; transition: all .2s ease;
+  display:flex; align-items:center; justify-content:center;
+}
+.lyra-nav button:hover{ background: color-mix(in oklab, var(--nova-alt) 70%, transparent); transform: translateY(-1px); }
+.lyra-nav span{ font-size: .95rem; font-weight:600; letter-spacing:.02em; color: color-mix(in oklab, var(--nova-ink) 75%, transparent); user-select:none; }
+
+/* Feather icons in nav */
+.lyra-nav button .feather{
+  width: 20px;
+  height: 20px;
+  stroke-width: 2.5;
+  display: block;
+}
+
+/* Grid */
+.lyra-grid{
+  max-width: min(var(--lyra-maxw), 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: clamp(.9rem, 2.5vw, 1.6rem);
+  padding-inline: clamp(.25rem, 2vw, 1rem);
+}
+/* Karten-Grid exakt so breit wie die Konsole */
+@media (min-width: 681px){
+  .lyra-grid{ padding-inline: 0; }
+}
+/* Mobile-Fix: auch auf Handy kein zusätzliches Padding */
+@media (max-width: 680px){
+  .lyra-grid{ padding-inline: 0; }
+}
+
+/* Card */
+.lyra-card{
+  border:1px solid var(--nova-border); border-radius:18px;
+  background: linear-gradient(180deg, var(--nova-base), var(--nova-alt));
+  box-shadow: var(--nova-shadow);
+  transition: transform .2s ease, box-shadow .2s ease;
+  overflow: hidden;
+}
+@media (hover:hover){
+  .lyra-card:hover{ transform: translateY(-3px); box-shadow: 0 20px 56px rgba(0,0,0,.10); }
+}
+
+/* Toggle */
+.lyra-toggle{
+  width:100%; background:none; border:0; padding: clamp(1rem, 2.5vw, 1.3rem) clamp(1rem, 3vw, 1.6rem);
+  display:flex; align-items:center; justify-content:space-between; gap:.75rem;
+  text-align:left; cursor:pointer; color:var(--nova-ink);
+}
+.lyra-toggle span{
+  font-size: clamp(1.06rem, 1rem + .6vw, 1.35rem);
+  font-weight: 800; line-height: 1.25; text-wrap: balance;
+}
+
+/* Icon */
+.lyra-icon{
+  width: clamp(28px, 6vw, 42px); height: clamp(28px, 6vw, 42px);
+  color: color-mix(in oklab, var(--nova-ink) 85%, transparent);
+  stroke-width: 2.25; flex: 0 0 auto;
+  transition: transform .3s ease, color .2s ease;
+}
+.lyra-toggle[aria-expanded="true"] .lyra-icon{ transform: rotate(180deg); }
+
+/* Drop */
+.lyra-drop{
+  max-height: 0; overflow: hidden;
+  padding: 0 clamp(1rem, 3vw, 1.6rem);
+  transition: max-height .35s ease, padding .25s ease;
+  /* Performance hint (keine optische Änderung) */
+  content-visibility: auto;
+  contain-intrinsic-size: 0 400px;
+}
+.lyra-toggle[aria-expanded="true"] + .lyra-drop{
+  max-height: 900px; padding: .25rem clamp(1rem, 3vw, 1.6rem) 1rem;
+}
+.lyra-drop p{
+  margin: 0; padding: .8rem 0;
+  font-size: clamp(.98rem, .95rem + .2vw, 1.05rem);
+  line-height: 1.7; font-weight: 500; color: var(--nova-ink);
+}
+.lyra-drop strong{ font-weight: 700; }
+.lyra-drop p + p{
+  border-top: 1px solid color-mix(in oklab, var(--nova-ink) 15%, transparent);
+  margin-top: .3rem;
+}
+
+/* Markierung (hell + dark) */
+.lyra-card mark{
+  background:#ffe58a; color:#000; padding:0 3px; border-radius:3px;
+}
+:root[data-theme="dark"] .lyra-card mark{
+  background:#665c00; color:#fff;
+}
+
+/* Dark tweaks */
+:root[data-theme="dark"] .lyra-nav button{ background:#111; border-color:#333; color:#fff; }
+:root[data-theme="dark"] .lyra-console input::placeholder{ color: rgba(255,255,255,.55); }
+:root[data-theme="dark"] .lyra-nav span{ color: rgba(255,255,255,.8); }
+
+/* Fokus-Akzente (nur Tastatur) – keine visuelle Änderung mit Maus */
+.lyra-toggle:focus-visible,
+.lyra-nav button:focus-visible,
+.lyra-console input:focus-visible{
+  outline: 3px solid color-mix(in oklab, var(--nova-ink) 30%, transparent);
+  outline-offset: 2px;
+  border-color: color-mix(in oklab, var(--nova-ink) 45%, transparent);
+}
+
+/* High-Contrast/OS-Settings respektieren */
+@media (forced-colors: active){
+  .lyra-nav button, .lyra-toggle, .lyra-console input{ forced-color-adjust: auto; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  html:focus-within{ scroll-behavior: auto; }
+  .lyra-card, .lyra-icon, .lyra-drop, .lyra-nav button{ transition: none !important; }
+}
+

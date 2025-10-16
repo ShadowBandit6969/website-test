@@ -1,0 +1,241 @@
+
+  :root{
+    color-scheme: light dark;
+
+    /* Himmel */
+    --sky-day-zenith:#1d7ce2;
+    --sky-day-horizon:#a5d4ff;
+    --sky-night-zenith:#0a0a2e;
+    --sky-night-horizon:#1a0033;
+
+    --cloud-day:#ffffff;
+    --cloud-night:#d2d8e4;
+
+    --sun-core:#ffd54f;
+    --sun-glow:#ffe597;
+    --moon-core:#f0f3fa;
+    --accent:#0026ff;
+    --pulse: rgba(255, 213, 79, .45);
+  }
+  body.nocturne{ --pulse: rgba(200, 220, 255, .40); }
+
+  /* Toggle */
+  .orb-toggle{
+    --w: clamp(140px, 42vw, 220px);
+    --h: calc(var(--w) / 2.3);
+    --pad: calc(var(--h) * 0.125);
+    --thumb: calc(var(--h) - var(--pad) * 2);
+
+    position:relative;
+    width:var(--w);
+    height:var(--h);
+    border:0;
+    cursor:pointer;
+    outline:none;
+    overflow:hidden;
+    isolation:isolate;
+    border-radius:999px;
+    background:transparent;
+    box-shadow: 0 14px 34px rgba(0,0,0,.38), inset 0 0 0 1px rgba(255,255,255,.07);
+  }
+  .orb-toggle:focus-visible{
+    box-shadow:0 0 0 4px color-mix(in oklab, var(--accent), transparent 65%), 0 14px 34px rgba(0,0,0,.38);
+  }
+
+  .sky{ position:absolute; inset:0; border-radius:inherit; z-index:0; overflow:hidden; }
+  .day-sky{
+    position:absolute; inset:0; border-radius:inherit; opacity:1; transition:opacity 1200ms ease;
+    background: linear-gradient(180deg, var(--sky-day-zenith), var(--sky-day-horizon));
+  }
+  .day-sky::after{
+    content:""; position:absolute; inset:-20%; border-radius:inherit; pointer-events:none;
+    background: conic-gradient(from 0deg,
+      color-mix(in oklab, var(--sky-day-zenith), transparent 0%) 0deg,
+      color-mix(in oklab, var(--sky-day-horizon), transparent 15%) 90deg,
+      color-mix(in oklab, var(--sky-day-zenith), transparent 8%) 180deg,
+      color-mix(in oklab, var(--sky-day-horizon), transparent 20%) 270deg,
+      color-mix(in oklab, var(--sky-day-zenith), transparent 0%) 360deg);
+    filter: blur(12px) saturate(1.06) brightness(1);
+    animation: rotateDay 40s linear infinite, dayBreathe 10s ease-in-out infinite;
+    opacity:.9;
+  }
+  @keyframes rotateDay { to{ transform: rotate(360deg); } }
+  @keyframes dayBreathe { 0%,100%{ filter: blur(12px) saturate(1.06) brightness(1) } 50%{ filter: blur(12px) saturate(1.08) brightness(1.06) } }
+
+  .night-sky{
+    position:absolute; inset:0; border-radius:inherit; opacity:0; transition:opacity 1200ms ease;
+    background: linear-gradient(180deg, var(--sky-night-zenith), var(--sky-night-horizon));
+  }
+  .night-sky::after{
+    content:""; position:absolute; inset:-25%; border-radius:inherit; pointer-events:none;
+    background: conic-gradient(from 0deg, rgba(40,45,95,.12), rgba(110,20,120,.10), rgba(30,35,90,.12), rgba(60,20,110,.10), rgba(40,45,95,.12));
+    filter: blur(16px) saturate(1.02);
+    animation: driftNight 120s linear infinite;
+    opacity:.35;
+  }
+  @keyframes driftNight { to{ transform: rotate(360deg); } }
+
+  body.nocturne .day-sky{ opacity:0; } body.nocturne .night-sky{ opacity:1; }
+
+  .stars{ position:absolute; inset:0; z-index:1; border-radius:inherit; opacity:0; transition:opacity 900ms ease; pointer-events:none; }
+  body.nocturne .stars{ opacity:1; }
+  .stars i{ position:absolute; width:2px; height:2px; background:#fff; border-radius:50%; opacity:.2; animation:twinkle 3.2s infinite ease-in-out; }
+  @keyframes twinkle{ 50%{ opacity:1; transform:scale(1.6)} }
+
+  .clouds{ position:absolute; inset:0; border-radius:inherit; z-index:2; pointer-events:none; }
+  .leyline{ position:absolute; inset:0; overflow:hidden; }
+  .leyline.back{ opacity:.25; filter:blur(1.2px); }
+  .leyline.mid{  opacity:.6; filter:blur(.6px); }
+  .leyline.front{opacity:.95;}
+
+  .cloud{ position:absolute; top:0; transform:translateX(0); animation-name: drift; animation-timing-function: linear; animation-iteration-count: infinite; }
+  @keyframes drift{ from{ transform:translateX(-320px)} to{ transform:translateX(320px)} }
+  .bubble{ position:absolute; border-radius:50%; background: var(--cloud-day); }
+  body.nocturne .bubble{ background: var(--cloud-night); }
+
+  .thumb#moonShard{
+    position:absolute;
+    top:var(--pad);
+    left:var(--pad);
+    width:var(--thumb);
+    height:var(--thumb);
+    border-radius:50%;
+    z-index:5;
+    box-shadow: 0 12px 24px rgba(0,0,0,.35);
+    transition: transform 820ms cubic-bezier(.2,.85,.2,1), background 600ms ease, filter 600ms ease;
+  }
+  body.dawn  #moonShard{ background: var(--sun-core); filter: drop-shadow(0 0 12px var(--sun-glow)); }
+  body.nocturne  #moonShard{ background: var(--moon-core); filter: drop-shadow(0 0 6px rgba(200,220,255,.5)); }
+
+  #moonShard{ transform: translateX(0); }
+  body.nocturne #moonShard{
+    transform: translateX(calc(var(--w) - var(--thumb) - (var(--pad) * 2) - var(--nudge-x, 0px)));
+  }
+
+  #moonShard.pulse{ animation:pulse 720ms ease-out; }
+  @keyframes pulse{ 0%{ box-shadow:0 0 0 0 var(--pulse)} 100%{ box-shadow:0 0 0 22px rgba(0,0,0,0)} }
+
+  /* Compact in Actions */
+  .astral-actions .orb-toggle{
+    --w: clamp(88px, 16vw, 128px);
+    --h: 32px;
+    --pad: 4px;
+    --thumb: calc(var(--h) - var(--pad) * 2);
+
+    width: var(--w);
+    height: var(--h);
+    border-radius: 999px;
+    box-shadow: 0 8px 18px rgba(0,0,0,.24), inset 0 0 0 1px rgba(255,255,255,.06);
+    vertical-align: middle;
+  }
+  @media (min-width:768px){
+    .astral-actions .orb-toggle{
+      --w: 108px; --h: 34px; --pad: 5px;
+    }
+  }
+  .astral-actions #moonShard{ box-shadow: 0 8px 16px rgba(0,0,0,.25); }
+  .astral-actions{ gap: .4rem; align-items:center; }
+  .aether-header__bar{ grid-template-columns: auto 1fr auto; }
+  .astral-actions{
+    display:inline-flex; align-items:center; gap:.4rem; justify-self:end; min-width:0;
+  }
+  .astral-actions .orb-toggle{
+    --w: 96px; --h: 30px; --pad: 4px; --thumb: calc(var(--h) - var(--pad)*2);
+    width: var(--w); height: var(--h); max-width:100%;
+    border-radius: 999px; box-shadow: 0 8px 18px rgba(0,0,0,.24), inset 0 0 0 1px rgba(255,255,255,.06);
+  }
+  @media (max-width: 374px){
+    .astral-actions .orb-toggle{ --w: 84px; --h: 28px; --pad: 4px; }
+  }
+  @media (min-width: 425px) and (max-width: 767px){
+    .astral-actions .orb-toggle{ --w: 104px; --h: 32px; --pad: 5px; }
+  }
+  @media (min-width: 768px){
+    .astral-actions .orb-toggle{ --w: 112px; --h: 34px; --pad: 6px; }
+  }
+  .astral-actions #moonShard{ box-shadow: 0 8px 16px rgba(0,0,0,.25); }
+  .astral-actions .orb-toggle{ overflow:hidden; }
+
+  @media (min-width:768px) and (max-width:1023px){
+    .astral-actions .orb-toggle{ --w: 72px; --h: 30px; --pad: 5px; }
+    .astral-nav__list{ flex-wrap: wrap; }
+    .astral-link{ padding: .75rem .9rem; }
+    .astral-actions .charm-cta{ margin-right: -3.1rem; }
+  }
+  @media (min-width:320px){
+    .astral-actions .orb-toggle{ --w: 60px; --h: 30px; --pad: 5px; }
+  }
+
+  body.nocturne .astral-actions .orb-toggle,
+  [data-theme="dark"] .astral-actions .orb-toggle{
+    box-shadow:
+      0 8px 18px rgba(0,0,0,.35),
+      inset 0 0 0 2px #8f67ff;
+  }
+  @media (max-width: 320px){
+    .astral-actions .orb-toggle{ --w: 52px; --h: 26px; --pad: 4px; }
+  }
+  @media (min-width:768px) and (max-width:1023px){
+    .astral-actions .orb-toggle{ --w: 64px; --h: 28px; --pad: 5px; --nudge-x: 1px; }
+    .astral-actions .charm-cta{ margin-left: 1rem; margin-right: 0; }
+  }
+  @media (min-width:1024px){
+    .astral-actions .orb-toggle{ --w: 96px; --h: 30px; --pad: 6px; }
+  }
+
+  /* ATTENTION NUDGES (unverändert außer Klassen) */
+  .astral-actions .orb-toggle { position: relative; isolation: isolate; }
+  .astral-actions .orb-toggle.suggest::after{
+    content:""; position:absolute; inset:-6px; border-radius:inherit;
+    pointer-events:none; z-index:10;
+    box-shadow: 0 0 0 0 var(--pulse);
+    animation: hintHalo 1200ms ease-out 6;
+  }
+  @keyframes hintHalo{
+    0%   { box-shadow:0 0 0 0 var(--pulse);           opacity:1 }
+    100% { box-shadow:0 0 0 26px rgba(0,0,0,0);       opacity:0 }
+  }
+  .astral-actions .orb-toggle.suggest #moonShard{
+    animation: hintNudge 900ms cubic-bezier(.3,1,.3,1) 2 250ms;
+  }
+  @keyframes hintNudge{
+    0%,100% { transform: translateX(var(--hint-x, 0)); }
+    40%     { transform: translateX(calc(var(--hint-x, 0) + 6px)); }
+    70%     { transform: translateX(calc(var(--hint-x, 0) - 3px)); }
+  }
+  body.nocturne .astral-actions .orb-toggle.suggest #moonShard{
+    --hint-x: calc(var(--w) - var(--thumb) - (var(--pad) * 2) - var(--nudge-x, 0px));
+  }
+  .astral-actions .orb-toggle[data-hint]:not([data-hint=""])::before{
+    content: attr(data-hint);
+    position:absolute;
+    left:50%; transform: translateX(-50%) translateY(-8px);
+    bottom: 100%;
+    padding:.25rem .5rem;
+    font-size: 11px; line-height: 1;
+    color:#fff; background: color-mix(in oklab, var(--accent), black 25%);
+    border-radius:6px; white-space:nowrap;
+    box-shadow: 0 6px 16px rgba(0,0,0,.25);
+    opacity:0; pointer-events:none; z-index:11;
+  }
+  .astral-actions .orb-toggle.suggest[data-hint]:not([data-hint=""])::before{
+    animation: hintFloat 1800ms ease-in-out 2 both;
+  }
+  @keyframes hintFloat{
+    0%   { opacity:0; transform: translateX(-50%) translateY(-2px) }
+    15%  { opacity:1; transform: translateX(-50%) translateY(-6px) }
+    85%  { opacity:1; transform: translateX(-50%) translateY(-6px) }
+    100% { opacity:0; transform: translateX(-50%) translateY(-10px) }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .astral-actions .orb-toggle.suggest::after,
+    .astral-actions .orb-toggle.suggest #moonShard,
+    .astral-actions .orb-toggle.suggest[data-hint]:not([data-hint=""])::before{
+      animation: none !important;
+    }
+    .astral-actions .orb-toggle.suggest::after{
+      box-shadow: 0 0 0 6px var(--pulse);
+      opacity:.9;
+      transition: opacity .6s ease;
+    }
+  }

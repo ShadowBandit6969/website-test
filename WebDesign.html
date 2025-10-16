@@ -1801,6 +1801,73 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
+<style>/* ab 768px: leicht nach unten */
+@media (min-width: 768px) {
+  .hero-image-foreground {
+    transform: translateY(10%);              /* dein bisheriger Versatz */
+  }
+}
+@media (min-width: 1400px) {
+  .hero-image-foreground {
+    transform: translateY(15%);              /* dein bisheriger Versatz */
+  }
+}
+@media (min-width: 1800px) {
+  .hero-image-foreground {
+    transform: translateY(15%);              /* dein bisheriger Versatz */
+  }
+}
+@media (min-width: 2200px) {
+  .hero-image-foreground {
+    transform: translateY(7%);              /* dein bisheriger Versatz */
+  }
+}
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .hero-section {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .hero-images-wrapper {
+    position: relative;
+    width: 100%;      /* statt 100vw, verhindert Scrollbar-Lücke links */
+    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden; /* falls Kinder minimal überstehen */
+  }
+
+  .hero-image-background,
+  .hero-image-foreground {
+    position: absolute;
+    inset: 0;         /* top/right/bottom/left = 0 */
+    width: 100%;
+    max-width: none;
+  }
+
+
+  /* Nur Handys: Hintergrund minimal „herauszoomen“ */
+@media (max-width: 767px) {
+  .hero-image-foreground {
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    margin: 0 !important;                  /* falls woanders Mobile-Margins gesetzt sind */
+        transform: translateY(17%);              /* dein bisheriger Versatz */
+  }
+}
+
+
+</style>
+
+
 
 
 <section id="aurora-sheet" class="aurora-sheet container" aria-labelledby="aurora-crown" aria-describedby="aurora-chant" role="region">

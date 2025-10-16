@@ -1,0 +1,579 @@
+
+  /* === Basis-Struktur === */
+  .pane-transition{
+    position:relative;
+    background:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    overflow:visible;
+    color:#111;
+    -webkit-tap-highlight-color: transparent;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif
+  }
+  .pane-world{
+    position:relative;
+    padding-top:clamp(2rem, 5vw, 6rem);
+    padding-left: calc(1rem + env(safe-area-inset-left));
+    padding-right: calc(1rem + env(safe-area-inset-right));
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+    height:auto;
+    clip-path:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    background:linear-gradient(0deg,#ffffff,#ffffff);
+    opacity:1;
+    pointer-events:all;
+    width:100%;            /* statt 100vw -> kein horizontaler Overflow */
+    transition:background-color .25s ease,color .25s ease;
+    z-index:15
+  }
+  .pane-wrap{
+    text-align:center;
+    width:100%;
+    max-width:min(1200px, 92vw);
+    margin-inline:auto;
+    padding:0; /* Außen-Padding kommt über .pane-world (Safe-Area) */
+  }
+
+  /* ===== Headline & Subline im Aurora-Stil ===== */
+  .pane-wrap .pane-title{
+    margin: .2rem 0 .6rem;
+    text-align:center;
+    width:100%;
+    display:block;
+    font-weight:900;
+    letter-spacing:-.02em;
+    color:inherit;
+    font-size: clamp(2rem, 1.6rem + 2.2vw, 3rem);
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+  .pane-wrap .pane-subtitle{
+    position: relative;
+    color:#0f1729;
+    max-width: 62rem;
+    margin: 0 auto 2.2rem;
+    line-height: 1.78;
+    font-size: clamp(1.06rem, 1rem + .6vw, 1.22rem);
+    letter-spacing: .004em;
+    text-wrap: pretty;
+    padding: 1.1rem 1.2rem 1.1rem;
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05);
+  }
+  :root[data-theme="dark"] .pane-wrap .pane-subtitle{
+    color:#fff;
+    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 2px 8px rgba(0,0,0,.35);
+  }
+
+  /* === Karten-Layout (Basis) === */
+  .flow-rail{
+    display:grid;                 /* grid als Basis – flexibel */
+    grid-template-columns: 1fr;   /* mobile: 1 Spalte */
+    gap:clamp(.8rem, 2.5vw, 1rem);
+    align-items:stretch;
+    justify-items:stretch;
+    z-index:15;
+    width:100%;
+  }
+
+  /* Tablet: 2 Spalten */
+  @media (min-width: 601px) and (max-width: 1024px){
+    .flow-rail{
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Desktop: Flex-„Kästchen“-Modus via .is-enhanced (unten) */
+  @media (min-width: 1025px){
+    .flow-rail{
+      display:flex;
+      gap:1rem;
+      justify-content:stretch;
+      align-items:stretch;
+    }
+  }
+
+  .flow-card{
+    position:relative;
+    border-radius:20px;
+    border:1px solid rgba(70,70,70,.15);
+    padding:clamp(1.2rem, 2.5vw, 2rem) clamp(1rem, 2vw, 1.6rem);
+    box-shadow:0 0 0 rgba(0,0,0,0);
+    overflow:hidden;
+    cursor:pointer;
+    --dur:0s;
+    height:var(--tile-h,auto);
+    min-width:0;                 /* wichtig gegen Überlauf */
+    isolation:isolate;           /* für ::after Blend sauber */
+  }
+  .flow-card.is-growing{ --dur:8s; }
+  .flow-card.is-open{ flex:1 1 auto }
+
+  .card-core{
+    position:relative;
+    z-index:2;
+    text-align:left;
+    display:flex;
+    flex-direction:column;
+    gap:.75rem;
+    min-width:0;                 /* verhindert Überlauf */
+    height:100%;
+    overflow-wrap:anywhere;      /* bricht lange Wörter */
+  }
+
+  /* h3 – wie Aurora .aether-card h3 */
+  .flow-card h3{
+    font-size: clamp(1.2rem, 1rem + 1.1vw, 1.9rem);
+    color:#fff;
+    font-weight:800;
+    margin:.1rem 0 .5rem;
+    line-height:1.2;
+    letter-spacing:-.01em;
+    text-shadow:0 1px 2px rgba(0,0,0,.25);
+    text-wrap: balance;
+  }
+
+  /* p – wie Aurora .copy */
+  .flow-card p{
+    color: rgba(255,255,255,.96);
+    font-weight: 690;
+    letter-spacing: -.002em;
+    font-size: clamp(1rem, .96rem + .4vw, 1.16rem);
+    line-height: 1.7;
+    text-wrap: pretty;
+    hyphens: auto;
+    max-width: 62ch;
+    text-shadow: 0 1px 2px rgba(0,0,0,.18);
+    margin: 0;
+  }
+  .flow-card .details p{ margin-top:.35rem; }
+
+  .card-num{ font-size:1.4rem;font-weight:900;display:block;margin-bottom:.6rem;color:#fff }
+
+  /* === große Zahl (visueller Akzent) === */
+  .card-num-giant{
+    position:absolute;right:.6rem;bottom:.6rem;
+    font-weight:900;letter-spacing:-.03em;line-height:1;
+    font-size:clamp(2.2rem, 10vh, 8rem);
+    color:rgba(255,255,255,.18);
+    pointer-events:none;z-index:1;white-space:nowrap;text-align:right;
+    transform:rotate(-90deg);
+    transform-origin:bottom right;
+    transition:opacity .35s ease,transform .35s ease;
+    mix-blend-mode:soft-light;
+  }
+  /* auf kleinen Screens ausblenden – spart Platz */
+  @media (max-width: 600px){
+    .card-num-giant{ display:none; }
+  }
+
+  /* === Gradients === */
+  .flow-rail .flow-card:nth-child(1){ background:linear-gradient(270deg,#04006c,#6f00ff,#050088);background-size:600% 600%;color:#fff }
+  .flow-rail .flow-card:nth-child(2){ background:linear-gradient(135deg,#0d0d0d,#000e5c,#0d0d0d);background-size:300% 300%;color:#fff }
+    .flow-rail .flow-card:nth-child(3){ background:linear-gradient(135deg,#000000,#0d003b,#000000);background-size:300% 300%;color:#fff }
+  .flow-rail .flow-card:nth-child(4){ background:linear-gradient(135deg,#ff5100,hwb(340 0% 0%),#ff5100);background-size:400% 400%;color:#fff }
+  .flow-rail .flow-card:nth-child(5){ background:linear-gradient(135deg,#0d0d0d,#000,#0d0d0d);background-size:300% 300%;color:#fff }
+
+  .flow-card[role="button"]:focus-visible{ outline:3px solid rgba(255,255,255,.6);outline-offset:4px }
+  :root[data-theme="light"] .flow-card[role="button"]:focus-visible{ outline:3px solid rgba(0,0,0,.35) }
+
+  /* === JS-Modus – Kästchen/Expand nur ab Desktop === */
+  @media (min-width: 1025px){
+    #flowhub.is-enhanced .flow-card{ flex:0 0 clamp(140px,14vw,220px);transition:flex var(--dur) ease }
+    #flowhub.is-enhanced .flow-card.is-open{ flex:1 1 auto }
+
+    #flowhub.is-enhanced .flow-card:not(.is-open) .card-num,
+    #flowhub.is-enhanced .flow-card:not(.is-open) h3,
+    #flowhub.is-enhanced .flow-card:not(.is-open) p,
+    #flowhub.is-enhanced .flow-card:not(.is-open) .details{
+      height:0;opacity:0;overflow:hidden;visibility:hidden
+    }
+    #flowhub.is-enhanced .flow-card.is-open .card-num,
+    #flowhub.is-enhanced .flow-card.is-open h3,
+    #flowhub.is-enhanced .flow-card.is-open p,
+    #flowhub.is-enhanced .flow-card.is-open .details{
+      height:auto;opacity:1;visibility:visible;transition:opacity .35s ease .1s
+    }
+
+    /* große Zahl per ::after nur auf Desktop */
+    #flowhub.is-enhanced .flow-card::after{
+      content:attr(data-stage);
+      position:absolute;right:1rem;bottom:10rem;
+      transform:rotate(-90deg);
+      transform-origin:bottom right;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,"Roboto Mono",monospace;
+      font-weight:900;
+      font-size:clamp(3rem,12vh,8rem);
+      line-height:1;
+      color:rgba(255,255,255,.4);
+      white-space:nowrap;
+      pointer-events:none;
+      z-index:3;
+      opacity:1;
+      transition:opacity .25s ease;
+      mix-blend-mode:soft-light;
+    }
+    #flowhub.is-enhanced .flow-card.is-open::after{ opacity:0 }
+  }
+
+  /* === Fallback ohne JS (immer grid, kein Kästchen) === */
+  #flowhub:not(.is-enhanced) .flow-card{
+    flex:1 1 320px !important;
+    height:auto !important;
+    --tile-h:auto !important;
+    transition:none !important;
+  }
+  #flowhub:not(.is-enhanced) .flow-card .card-core{
+    clip-path:none !important;
+    min-width:0;
+  }
+  #flowhub:not(.is-enhanced) .flow-card .card-num,
+  #flowhub:not(.is-enhanced) .flow-card h3,
+  #flowhub:not(.is-enhanced) .flow-card p,
+  #flowhub:not(.is-enhanced) .flow-card .details{
+    height:auto !important;
+    opacity:1 !important;
+    visibility:visible !important;
+    overflow:visible !important;
+  }
+  #flowhub:not(.is-enhanced) .flow-card::after{ display:none !important }
+
+  /* === Feintuning Responsiv === */
+  /* kleine Landscape-Displays: etwas kompakter */
+  @media (max-height: 520px) and (max-width: 900px){
+    .pane-world{ padding-top:1.2rem; }
+    .pane-wrap .pane-subtitle{ margin-bottom:1.2rem; }
+    .flow-card{ padding:1rem; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+  }
+  /* verstecke Inhalte der Karten erst, wenn .booted aktiv ist */
+#flowhub.is-enhanced.booted .flow-card:not(.is-open) .card-num,
+#flowhub.is-enhanced.booted .flow-card:not(.is-open) h3,
+#flowhub.is-enhanced.booted .flow-card:not(.is-open) p,
+#flowhub.is-enhanced.booted .flow-card:not(.is-open) .details{
+  height:0;
+  opacity:0;
+  overflow:hidden;
+  visibility:hidden;
+}
+/* ===============================
+   FLOWHUB — Dark Mode
+   Hintergrund immer #000 + Titel/Subline anpassen
+   =============================== */
+
+:root[data-theme="dark"] #flowhub .pane-world{
+  background: #000 !important;
+  color: #fff !important;
+}
+
+/* Überschrift */
+:root[data-theme="dark"] #flowhub .pane-wrap .pane-title{
+  color: #fff !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
+}
+
+/* Subline (Glas-Look auf Schwarz) */
+:root[data-theme="dark"] #flowhub .pane-wrap .pane-subtitle{
+  color: #e8eeff !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035)) !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    0 2px 8px rgba(0,0,0,.45) !important;
+}
+
+/* Optional: System-Dark bei data-theme="auto" */
+@media (prefers-color-scheme: dark){
+  :root[data-theme="auto"] #flowhub .pane-world{
+    background: #000 !important;
+    color: #fff !important;
+  }
+  :root[data-theme="auto"] #flowhub .pane-wrap .pane-title{
+    color: #fff !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
+  }
+  :root[data-theme="auto"] #flowhub .pane-wrap .pane-subtitle{
+    color: #e8eeff !important;
+    background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035)) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.22),
+      0 2px 8px rgba(0,0,0,.45) !important;
+  }
+}
+:root[data-theme="dark"] #flowhub .flow-card{
+  border: 1px solid rgba(255,255,255,0.35) !important;
+}
+
+@media (prefers-color-scheme: dark){
+  :root[data-theme="auto"] #flowhub .flow-card{
+    border: 1px solid rgba(255,255,255,0.35) !important;
+  }
+}
+
+/* 1) Unteren Sicherheitsabstand als Variable einführen */
+.flow-card{
+  /* NEU */
+  --card-bottom-safe: 2.25rem;               /* Grundabstand unten */
+  padding-top: clamp(1.2rem, 2.5vw, 2rem);
+  padding-right: clamp(1rem, 2vw, 1.6rem);
+  /* NEU: padding-bottom inkl. Sicherheitsabstand */
+  padding-bottom: calc(clamp(1.2rem, 2.5vw, 2rem) + var(--card-bottom-safe));
+  padding-left: clamp(1rem, 2vw, 1.6rem);
+}
+
+/* 2) Im Desktop-/Enhanced-Modus etwas mehr Luft, 
+      weil ::after / .card-num-giant dort eine Rolle spielen kann */
+@media (min-width: 1025px){
+  #flowhub.is-enhanced .flow-card{
+    --card-bottom-safe: 3.5rem;              /* mehr Freiraum unten */
+  }
+  /* Optional: wenn eine Karte offen ist, minimal kompakter */
+  #flowhub.is-enhanced .flow-card.is-open{
+    --card-bottom-safe: 2.75rem;
+  }
+}
+
+/* 3) Kleinigkeit: kein zusätzlicher “letzter Rand” in Details */
+.flow-card .details:last-child{ margin-bottom: 0; }
+
+/* === FLOWHUB: Stage bei 1600px deckeln + fester Außenabstand === */
+#flowhub {
+  --flow-stage: 1300px;     /* maximale Bühnenbreite */
+  --flow-gutter: 2rem;      /* Außenabstand je Seite */
+}
+
+/* Außenabstand der Sektion (respektiert Safe-Area) */
+#flowhub .pane-world{
+  padding-left:  max(var(--flow-gutter), calc(1rem + env(safe-area-inset-left)));
+  padding-right: max(var(--flow-gutter), calc(1rem + env(safe-area-inset-right)));
+}
+
+/* Bühne zentrieren + bei 1600px klemmen (überschreibt die 1200px aus .pane-wrap) */
+#flowhub .pane-wrap{
+  max-width: var(--flow-stage) !important;
+  width: 100%;
+  margin-inline: auto !important;
+  padding-inline: 0 !important;
+}
+
+/* Desktop-„Kästchen“-Modus: Rail selbst nicht darüber hinausziehen */
+@media (min-width:1025px){
+  #flowhub .flow-rail{
+    max-width: var(--flow-stage);
+    margin-inline: auto;
+  }
+}
+
+/* Sicherheitsnetz: kein horizontales Scrollen durch Subpixel */
+#flowhub .pane-world,
+#flowhub .pane-wrap{ overflow-x: clip; }
+
+/* === FLOWHUB – Mobile Ansicht (breit wie Aurora, kurze Texte) === */
+@media (max-width: 699.98px){
+  /* Gutter wie bei Aurora */
+  #flowhub {
+    --flow-mobile-gutter: clamp(14px, 4vw, 20px);
+  }
+
+  /* Bühne nutzt volle Breite, keine schmale 92vw-Klemme */
+  #flowhub .pane-wrap{
+    max-width: none !important;
+    width: 100% !important;
+    padding-inline: 0 !important;
+  }
+
+  /* Einspaltig, etwas engerer Abstand */
+  #flowhub .flow-rail{
+    grid-template-columns: 1fr !important;
+    gap: .9rem !important;
+    justify-items: stretch !important;
+  }
+
+  /* Karten: so breit wie Aurora (quasi full-bleed, aber mit sicherem Gutter) */
+  #flowhub .flow-card{
+    width: calc(100% - var(--flow-mobile-gutter) * 2) !important;
+    margin-inline: auto !important;
+    border-radius: 16px !important;
+
+    /* kompakter, aber mit Bodenluft (du nutzt --card-bottom-safe schon) */
+    padding: 14px 16px calc(16px + var(--card-bottom-safe)) 16px !important;
+
+    /* Hintergründe nicht „zu groß“ wirken lassen */
+    background-size: 300% 300% !important;
+    background-position: 55% 50% !important;
+
+    /* keine Kästchen-/Expand-Mechanik mobil */
+    flex: 0 0 auto !important;
+    height: auto !important;
+  }
+
+  /* Headline der Karte knapper */
+  #flowhub .flow-card h3{
+    margin: 0 0 .25rem !important;
+    font-size: 1.2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Mobile-Snippet einblenden … */
+  #flowhub .flow-card .m-snippet{
+    display: block !important;
+    font-size: 1rem !important;
+    line-height: 1.45 !important;
+    font-weight: 700 !important;
+    letter-spacing: .002em !important;
+    color: rgba(255,255,255,.98) !important;
+    margin: 0 !important;
+    text-wrap: pretty;
+  }
+
+  /* … und die langen Texte mobil ausblenden */
+  #flowhub .flow-card > .card-core > p:not(.m-snippet),
+  #flowhub .flow-card .details{
+    display: none !important;
+  }
+
+  /* optisch ruhigere Gradients pro Karte (optional feinjustieren) */
+  #flowhub .flow-rail .flow-card:nth-child(1){ background-size: 340% 340% !important; background-position: 50% 55% !important; }
+  #flowhub .flow-rail .flow-card:nth-child(2){ background-size: 1200% 100% !important; background-position: 100% 0% !important; }
+  #flowhub .flow-rail .flow-card:nth-child(3){ background-size: 200% 150% !important; background-position: 50% 100% !important; }
+  #flowhub .flow-rail .flow-card:nth-child(4){ background-size: 150% 100% !important; background-position: 52% 52% !important; }
+  #flowhub .flow-rail .flow-card:nth-child(5){ background-size: 300% 300% !important; background-position: 50% 55% !important; }
+
+  /* Riesen-Zahl mobil verstecken (Platz sparen) */
+  #flowhub .card-num-giant{ display:none !important; }
+
+  /* Sicherheitsnetz: nichts ragt seitlich raus */
+  #flowhub .pane-world,
+  #flowhub .pane-wrap{ overflow-x: clip !important; }
+}
+
+/* === FLOWHUB – Mobile: Karten breiter, kleiner Außenrand === */
+@media (max-width: 699.98px){
+  /* Außenabstand der Section straffen (respect Safe-Area) */
+  #flowhub .pane-world{
+    padding-left:  max(12px, env(safe-area-inset-left)) !important;
+    padding-right: max(12px, env(safe-area-inset-right)) !important;
+  }
+
+  /* Bühne darf volle Breite nutzen */
+  #flowhub .pane-wrap{
+    max-width: 100% !important;
+  }
+
+  /* Grid enger zusammenrücken */
+  #flowhub .flow-rail{
+    gap: .75rem !important;
+  }
+
+  /* Karten kompakter & breiter */
+  #flowhub .flow-card{
+    width: 100% !important;
+    margin-inline: 0 !important;
+    border-radius: 16px !important;
+    padding: 14px 16px !important;
+  }
+
+  /* Optional: „nahezu edge-to-edge“ Look aktivieren:
+     Setz data-edge auf dem Section-Tag: <section id="flowhub" data-edge>
+  */
+  #flowhub[data-edge] .pane-world{
+    padding-left:  max(8px, env(safe-area-inset-left)) !important;
+    padding-right: max(8px, env(safe-area-inset-right)) !important;
+  }
+}
+
+/* Tablet-Kurztexte (leicht gekürzt, aber nicht so kurz wie mobile) */
+@media (min-width:700px) and (max-width:1240px){
+  #flowhub .flow-card .t-snippet{
+    display:block !important;
+    font-size:1.05rem !important;
+    line-height:1.6 !important;
+    font-weight:700 !important;
+    color:rgba(255,255,255,.96) !important;
+    margin:0 !important;
+  }
+  #flowhub .flow-card > .card-core > p:not(.t-snippet),
+  #flowhub .flow-card .details,
+  #flowhub .flow-card .m-snippet{
+    display:none !important;
+  }
+}
+
+/* Tablet-Sonderfall: Wenn die letzte Karte alleine in der letzten Reihe steht
+   (also bei 2-Spalten-Grid + ungerader Anzahl), soll sie die volle Breite einnehmen
+   und unten rechts ein Bild zeigen. */
+@media (min-width:700px) and (max-width:1024px){
+  /* volle Breite nur, wenn die Gesamtzahl ungerade ist -> last + nth-child(odd) */
+  #flowhub .flow-rail > .flow-card:last-child:nth-child(odd){
+    grid-column: 1 / -1;                      /* über beide Spalten */
+    position: relative;                        /* Anker für ::after-Bild */
+    --solo-img-w: clamp(140px, 26vw, 220px);   /* Bildbreite */
+    /* rechts Platz fürs Bild schaffen */
+    padding-right: calc(clamp(1rem, 2vw, 1.6rem) + var(--solo-img-w) + 12px);
+  }
+
+  /* Bild unten rechts einblenden (nur wenn alleine & in diesem Breakpoint) */
+  #flowhub .flow-rail > .flow-card:last-child:nth-child(odd)::after{
+    content: "";
+    position: absolute;
+    right: clamp(10px, 2vw, 18px);
+    bottom: var(--card-bottom-safe, 2.25rem);
+    width: var(--solo-img-w);
+    aspect-ratio: 1 / 1;                       /* quadratisch; gerne anpassen */
+    background: var(--solo-img, none) center / contain no-repeat;
+    opacity: .98;
+    pointer-events: none;
+    filter: drop-shadow(0 4px 14px rgba(0,0,0,.25));
+  }
+}
+
+/* === FLOWHUB — Aurora-Gutter wie in .aurora-sheet ===================== */
+/* Basis: 1rem Seitenabstand; ab Desktop (≥1025px) 2rem – safe-area aware */
+#flowhub {
+  --aurora-gutter: 1rem;            /* wie .aurora-sheet mobil/tablet */
+  --flow-stage:  1500px;            /* Bühne/Maxbreite für Inhalte */
+}
+@media (min-width:1025px){
+  #flowhub { --aurora-gutter: 2rem; }
+}
+
+/* Außenabstand der Section (respektiert Safe-Area) */
+#flowhub .pane-world{
+  padding-left:  max(var(--aurora-gutter), env(safe-area-inset-left));
+  padding-right: max(var(--aurora-gutter), env(safe-area-inset-right));
+}
+
+/* Bühne zentrieren und mit gleichem „optischen Rand“ klemmen */
+#flowhub .pane-wrap{
+  width: 100%;
+  margin-inline: auto;
+  max-width: min(var(--flow-stage), calc(100% - var(--aurora-gutter) * 2));
+  padding-inline: 0; /* Außenabstand kommt von .pane-world */
+}
+
+/* Flex/Grid-Rail soll nicht über die Bühne hinausragen */
+#flowhub .flow-rail{
+  max-width: min(var(--flow-stage), calc(100% - var(--aurora-gutter) * 2));
+  margin-inline: auto;
+}
+
+/* Mobile: nichts über den Rand schieben, aber Aurora-Gutter beibehalten */
+@media (max-width:699.98px){
+  #flowhub .pane-wrap{ max-width: none; } /* volle Breite, Klemme über .pane-world */
+  #flowhub .flow-rail{
+    max-width: none;               /* Rail darf volle Breite nutzen */
+    width: 100%;
+  }
+}
