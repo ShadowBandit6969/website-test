@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="de" data-theme="auto">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fusion³ – UX & Webdesign Studio</title>
-  <meta name="description" content="Fusion³ ist dein Partner für UX-Design, Webdesign & Prototyping. Wir gestalten digitale Erlebnisse mit Substanz." />
+  <meta name="description" content="Fusion³ ist dein Partner für UX-Design, Webdesign & Prototyping. Wir gestalten digitale Erlebnisse mit Substanz.">
 
   <!-- Google Fonts Optimierung -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,13 +20,16 @@
   <link rel="stylesheet" href="./fonts/fonts.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="./fonts/fonts.css"></noscript>
 
-  <!-- Optional Scripts (lassen wir drin; keine Abhängigkeit) -->
-  <script type="module" src="https://unpkg.com/feather-icons" defer></script>
+  <!-- Optional Scripts -->
+  <!-- Module: ohne defer (Module laden implizit deferred) -->
+  <script type="module" src="https://unpkg.com/feather-icons"></script>
+  <!-- Legacy Fallback -->
   <script nomodule src="feather-icons.legacy.js"></script>
+  <!-- Normales Script kann defer tragen -->
   <script src="https://unpkg.com/scrollreveal" defer></script>
 
-  <!-- Analytics Beispiel (unverändert) -->
-  <script type="text/javascript">
+  <!-- Analytics Beispiel -->
+  <script>
     (function(c,l,a,r,i,t,y){
       c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
       t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
@@ -45,14 +47,12 @@
       --muted:#555;
       --border:rgba(0,0,0,.08);
       --surface:#ffffff;
-  --container-width: min(95vw, 1340px);
+      --container-width: min(95vw, 1340px);
       --header-pad-y: .75rem;
       --radius: 12px;
-
       --primary: #ff4d00;
       --secondary: #ff9900;
     }
-    /* Dark Theme Tokens */
     @media (prefers-color-scheme: dark){
       :root{
         --text:#f5f7fa;
@@ -71,11 +71,11 @@
     *{margin:0;padding:0;box-sizing:border-box}
     html,body{
       font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,sans-serif;
-      background:#fff; /* via data-theme dunkler */
+      background:#fff;
       color:var(--text);
       scroll-behavior:smooth;
     }
-    :root[data-theme="dark"] body{ background:#000000; }
+    :root[data-theme="dark"] body{ background:#000 }
 
     a{color:inherit;text-decoration:none;transition:color .2s ease,opacity .2s ease}
     h1,h2,h3,h4{font-weight:900;letter-spacing:-.02em}
@@ -83,9 +83,7 @@
     .section-title{font-size:clamp(2rem, 1.2rem + 2.4vw, 2.8rem);text-align:center;margin-bottom:.5rem;color:var(--text);font-weight:700;letter-spacing:-.02em}
 
     /* Skip-Link */
-    .skip-link{
-      position:absolute; left:-9999px; top:auto; z-index:1000;
-    }
+    .skip-link{ position:absolute; left:-9999px; top:auto; z-index:1000; }
     .skip-link:focus{
       left:auto; top:.5rem; inset-inline-start:.5rem;
       background:#000; color:#fff; padding:.5rem .75rem; border-radius:.5rem;
@@ -96,274 +94,172 @@
 
     .hero-video-wrapper {
       position: relative;
-      /* Reihenfolge = bestes Fallback */
-      min-height: 100vh;
-      min-height: 100dvh;
       min-height: 100svh;
       width: 100%;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       text-align: center;
-      background-color: #000;
-      /* Fallback-Bilder */
-      background: #000 url('./IndexM/PC.webp') center center / cover no-repeat;
+      background: #000 url('./IndexM/PC.webp') center/cover no-repeat;
     }
-    /* Tablet Fallback-Bild */
-    @media (max-width: 1024px) {
-      .hero-video-wrapper { background-image: url('./IndexM/Tablet.webp'); }
+    @media (max-width: 1024px) { .hero-video-wrapper { background-image: url('./IndexM/Tablet.webp'); } }
+    @media (max-width: 480px)  { .hero-video-wrapper { background-image: url('./IndexM/handy.webp'); } }
+
+    .hero-video-content{
+      position: relative; z-index: 2;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding: 3rem 2rem; max-width: 800px; width: 100%;
+      color:#fff; text-align:center; border-radius:12px;
+      background-color:#2a2a2a63; margin-top:-5rem;
     }
-    /* Smartphone Fallback-Bild */
-    @media (max-width: 480px) {
-      .hero-video-wrapper { background-image: url('./IndexM/handy.webp'); }
+    .hero-video-content::before{ content:none !important; }
+
+    .video-background{
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; object-position:center; z-index:0; pointer-events:none;
     }
 
-    .hero-video-content {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 3rem 2rem;
-      max-width: 800px;
-      width: 100%;
-      color: #ffffff;
-      text-align: center;
-      border-radius: 12px;
-      background-color: #2a2a2a63; /* semitransparent, kein Verlauf */
-      margin-top: -5rem;
-    }
-    .hero-video-content::before { content: none !important; }
+    .hero-video-content h1{ font-size:3.8rem; line-height:1.1; margin-bottom:1.2rem; color:#fff; }
+    .hero-video-content p { font-size:1.3rem; line-height:1.6; color:rgba(255,255,255,.85); }
 
-    .video-background {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .hero-video-content h1 {
-      font-size: 3.8rem;
-      line-height: 1.1;
-      margin-bottom: 1.2rem;
-      color: #ffffff;
-    }
-    .hero-video-content p {
-      font-size: 1.3rem;
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.85);
-    }
-
-    .cta-btn {
+    .cta-btn{
       background: linear-gradient(to right, var(--primary), var(--secondary));
-      color: #fff;
-      font-weight: 700;
-      padding: 1rem 2.2rem;
-      border-radius: 12px;
-      font-size: 1rem;
-      text-transform: uppercase;
-      margin-top: 2rem;
-      border: none;
-      box-shadow: 0 0 12px rgba(255, 102, 0, 0.3),
-                  0 0 24px rgba(255, 102, 0, 0.25);
-      transition: all 0.3s ease;
-      display: inline-block;
-      text-decoration: none;
+      color:#fff; font-weight:700; padding:1rem 2.2rem; border-radius:12px;
+      font-size:1rem; text-transform:uppercase; margin-top:2rem; border:none;
+      box-shadow:0 0 12px rgba(255,102,0,.3), 0 0 24px rgba(255,102,0,.25);
+      transition:all .3s ease; display:inline-block; text-decoration:none;
     }
-    .cta-btn:hover,
-    .cta-btn:focus {
-      background: var(--secondary);
-      color: #000;
-      transform: scale(1.03);
-      cursor: pointer;
-      outline: 2px solid var(--primary);
-      outline-offset: 4px;
+    .cta-btn:hover,.cta-btn:focus{
+      background:var(--secondary); color:#000; transform:scale(1.03);
+      cursor:pointer; outline:2px solid var(--primary); outline-offset:4px;
     }
 
-    .video-fallback-image {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center;
-      z-index: 0; pointer-events: none;
+    .video-fallback-image{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; z-index:0; pointer-events:none; }
+
+    @media (max-width:1024px){
+      .hero-video-content{ padding:2rem; }
+      .hero-video-content h1{ font-size:3rem; }
+      .hero-video-content p { font-size:1.1rem; line-height:1.5; }
+    }
+    @media (max-width:768px){
+      .hero-video-content{ padding:1.5rem; margin-top:0; }
+      .hero-video-content h1{ font-size:2.2rem; line-height:1.2; }
+      .hero-video-content p { font-size:1rem; line-height:1.4; }
+      .cta-btn{ font-size:.95rem; padding:.75rem 1.5rem; width:auto; max-width:90%; margin:1.5rem auto 0; }
+    }
+    @media (max-width:480px){
+      .hero-video-content h1{ font-size:1.6rem; line-height:1.3; }
+      .hero-video-content p { font-size:.95rem; }
+    }
+    @media (max-width:425px){
+      .cta-btn{ width:100%; max-width:180px; font-size:.9rem; padding:.9rem 1.2rem; text-align:center; margin-inline:auto; }
     }
 
-    /* Typo/Spacing – Responsiv */
-    @media (max-width: 1024px) {
-      .hero-video-content { padding: 2rem; }
-      .hero-video-content h1 { font-size: 3rem; }
-      .hero-video-content p  { font-size: 1.1rem; line-height: 1.5; }
-    }
-    @media (max-width: 768px) {
-      .hero-video-content { padding: 1.5rem; margin-top: 0; }
-      .hero-video-content h1 { font-size: 2.2rem; line-height: 1.2; }
-      .hero-video-content p  { font-size: 1rem; line-height: 1.4; }
-      .cta-btn { font-size: 0.95rem; padding: 0.75rem 1.5rem; width: auto; max-width: 90%; margin: 1.5rem auto 0; }
-    }
-    @media (max-width: 480px) {
-      .hero-video-content h1 { font-size: 1.6rem; line-height: 1.3; }
-      .hero-video-content p  { font-size: 0.95rem; }
-    }
-    @media (max-width: 425px) {
-      .cta-btn {
-        width: 100%; max-width: 180px; font-size: 0.9rem;
-        padding: 0.9rem 1.2rem; text-align: center; margin-left: auto; margin-right: auto;
+    @media (min-width:1025px){
+      .video-background{
+        top:50%; left:50%; width:auto; height:110%;
+        transform:translate(-50%,-50%); object-fit:contain;
       }
     }
-
-    /* ===== Hero-Video: „immer 100% höhe“ & Beschnitt-Regeln ===== */
-
-    /* Mobile: Hero bleibt 100vh/dvh/svh */
-    @media (max-width: 768px) {
-      .hero-video-wrapper {
-        min-height: 100vh;
-        min-height: 100dvh;
-        min-height: 100svh;
-      }
-    }
-
-    /* Desktop ≥ 1025px: Video 10% höher, seitlich beschnitten */
-    @media (min-width: 1025px) {
-      .video-background {
-        top: 50%; left: 50%;
-        width: auto;
-        height: 110%;
-        transform: translate(-50%, -50%);
-        object-fit: contain; /* wir steuern Größe selbst */
-      }
-    }
-
-    /* iPad quer / mittlere Geräte: 832–1024px Breite UND Höhe unter 833px */
-    @media (min-width: 832px) and (max-width: 1024px) and (max-height: 832px) {
-      .video-background {
-        top: 50%; left: 50%;
-        width: auto;
-        height: 110%;
-        transform: translate(-50%, -50%);
-        object-fit: contain;
+    @media (min-width:832px) and (max-width:1024px) and (max-height:832px){
+      .video-background{
+        top:50%; left:50%; width:auto; height:110%;
+        transform:translate(-50%,-50%); object-fit:contain;
       }
     }
   </style>
 
-<style>/* ===== Section Headings – Root Tokens ===== */
-:root{
-  /* Title */
-  --sec-title-fs: clamp(2rem, 1.5rem + 2vw, 3rem);
-  --sec-title-fw: 900;
-  --sec-title-ls: -0.02em;
-  --sec-title-mb: 0rem;
-  --sec-title-color: var(--text-main, #1c1c1e);
+  <style>
+    /* ===== Section Headings – Root Tokens ===== */
+    :root{
+      --sec-title-fs: clamp(2rem, 1.5rem + 2vw, 3rem);
+      --sec-title-fw: 900;
+      --sec-title-ls: -0.02em;
+      --sec-title-mb: 0rem;
+      --sec-title-color: var(--text-main, #1c1c1e);
+      --sec-sub-fs: 1.1rem;
+      --sec-sub-color: #666;
+      --sec-sub-mb: 2rem;
+      --sec-sub-lh: 1.5;
+      --sec-sub-max: 65ch;
+    }
+    .section-title{
+      font-size: var(--sec-title-fs);
+      font-weight: var(--sec-title-fw);
+      letter-spacing: var(--sec-title-ls);
+      margin: 0 0 var(--sec-title-mb);
+      color: var(--sec-title-color);
+      text-align: center;
+    }
+    .section-subtitle{
+      font-size: var(--sec-sub-fs);
+      color: var(--sec-sub-color);
+      margin: 0 0 var(--sec-sub-mb);
+      line-height: var(--sec-sub-lh);
+      max-width: var(--sec-sub-max);
+      margin-inline: auto;
+      text-align: center;
+    }
+    :is(.persona-title){ all:unset; display:block; }
+    :is(.persona-subline){ all:unset; display:block; }
+    .persona-title{
+      font-size: var(--sec-title-fs);
+      font-weight: var(--sec-title-fw);
+      letter-spacing: var(--sec-title-ls);
+      margin: 0 0 var(--sec-title-mb);
+      color: var(--sec-title-color);
+      text-align: center;
+    }
+    .persona-subline{
+      font-size: var(--sec-sub-fs);
+      color: var(--sec-sub-color);
+      margin: 0 0 var(--sec-sub-mb);
+      line-height: var(--sec-sub-lh);
+      max-width: var(--sec-sub-max);
+      margin-inline: auto;
+      text-align: center;
+    }
+    :root[data-theme="dark"] .section-title,
+    :root[data-theme="dark"] .persona-title{ color:#fff; }
+    :root[data-theme="dark"] .section-subtitle,
+    :root[data-theme="dark"] .persona-subline{ color:#fff; }
+    @media (prefers-color-scheme: dark){
+      :root[data-theme="auto"] .section-title,
+      :root[data-theme="auto"] .persona-title{ color:#fff; }
+      :root[data-theme="auto"] .section-subtitle,
+      :root[data-theme="auto"] .persona-subline{ color:#fff; }
+    }
+  </style>
 
-  /* Subtitle */
-  --sec-sub-fs: 1.1rem;
-  --sec-sub-color: #666;
-  --sec-sub-mb: 2rem;
-  --sec-sub-lh: 1.5;
-  --sec-sub-max: 65ch;
-}
-
-/* ===== Utilities (kannst du überall verwenden) ===== */
-.section-title{
-  font-size: var(--sec-title-fs);
-  font-weight: var(--sec-title-fw);
-  letter-spacing: var(--sec-title-ls);
-  margin: 0 0 var(--sec-title-mb);
-  color: var(--sec-title-color);
-  text-align: center; /* optional, rausnehmen wenn nicht gewünscht */
-}
-
-.section-subtitle{
-  font-size: var(--sec-sub-fs);
-  color: var(--sec-sub-color);
-  margin: 0 0 var(--sec-sub-mb);
-  line-height: var(--sec-sub-lh);
-  max-width: var(--sec-sub-max);
-  margin-inline: auto;
-  text-align: center; /* optional */
-}
-
-/* ===== Optional: bestehende Klassen aliasen ===== */
-:is(.persona-title)   { all: unset; display:block; }
-:is(.persona-subline) { all: unset; display:block; }
-
-/* Fallback ohne PostCSS "composes": dupliziere die Regeln */
-.persona-title{
-  font-size: var(--sec-title-fs);
-  font-weight: var(--sec-title-fw);
-  letter-spacing: var(--sec-title-ls);
-  margin: 0 0 var(--sec-title-mb);
-  color: var(--sec-title-color);
-  text-align: center;
-}
-.persona-subline{
-  font-size: var(--sec-sub-fs);
-  color: var(--sec-sub-color);
-  margin: 0 0 var(--sec-sub-mb);
-  line-height: var(--sec-sub-lh);
-  max-width: var(--sec-sub-max);
-  margin-inline: auto;
-  text-align: center;
-}
-
-/* ===== Dark / Auto-Dark ===== */
-:root[data-theme="dark"] .section-title,
-:root[data-theme="dark"] .persona-title{ color:#fff; }
-
-:root[data-theme="dark"] .section-subtitle,
-:root[data-theme="dark"] .persona-subline{ color:#fff; }
-
-@media (prefers-color-scheme: dark){
-  :root[data-theme="auto"] .section-title,
-  :root[data-theme="auto"] .persona-title{ color:#fff; }
-  :root[data-theme="auto"] .section-subtitle,
-  :root[data-theme="auto"] .persona-subline{ color:#fff; }
-}
-</style>
-  <meta content="width=device-width, initial-scale=1" name="viewport">
-  <meta content="Webflow" name="generator">
+  <!-- Webflow/Normalize -->
+  <meta name="generator" content="Webflow">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/denizs-dapper-site-2d192b.webflow.css" rel="stylesheet" type="text/css">
-  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <script>!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
 
-
-  <body data-page="titlepage">
-
-<style>
-/* --------------------------
-   Lokale Bild-Overrides nur für titlepage.html
---------------------------- */
-body[data-page="titlepage"] .hero-image-background {
-  background-image: url("./images/hero-bg-sky_1hero-bg-sky.webp") !important;
-}
-
-body[data-page="titlepage"] .hero-image-foreground {
-  background-image: url("./images/titlepage-fg.webp") !important;
-}
-
-/* Optional: Mobile- oder Tablet-Varianten */
-@media (max-width: 1024px) {
-  body[data-page="titlepage"] .hero-image-foreground {
-    background-image: url("./images/titlepage-fg-tablet.webp") !important;
-  }
-}
-@media (max-width: 480px) {
-  body[data-page="titlepage"] .hero-image-foreground {
-    background-image: url("./images/titlepage-fg-mobile.webp") !important;
-  }
-}
-</style>
-
-
-
-
+  <!-- Titelpage-spezifische Bild-Overrides (in den Head verschoben) -->
+  <style>
+    body[data-page="titlepage"] .hero-image-background {
+      background-image: url("./images/hero-bg-sky_1hero-bg-sky.webp") !important;
+    }
+    body[data-page="titlepage"] .hero-image-foreground {
+      background-image: url("./images/titlepage-fg.webp") !important;
+    }
+    @media (max-width: 1024px) {
+      body[data-page="titlepage"] .hero-image-foreground {
+        background-image: url("./images/titlepage-fg-tablet.webp") !important;
+      }
+    }
+    @media (max-width: 480px) {
+      body[data-page="titlepage"] .hero-image-foreground {
+        background-image: url("./images/titlepage-fg-mobile.webp") !important;
+      }
+    }
+  </style>
 </head>
 
+<body data-page="titlepage">
+  <!-- dein Body-Inhalt hier -->
 
 
 
@@ -1837,13 +1733,14 @@ body[data-page="titlepage"] .hero-image-foreground {
 <section id="aurora-sheet" class="aurora-sheet container" aria-labelledby="aurora-crown" aria-describedby="aurora-chant" role="region">
   <h2 id="aurora-crown" class="aurora-title">Über Fusion3</h2>
 
-<p id="aurora-chant" class="aurora-subtitle" aria-live="polite">
-  <span class="subtitle-snippet">Design, 3D & Web – prägnant kombiniert für maximale Markenwirkung.</span>
-  <span class="subtitle-full">
-    Wir verbinden Design, 3D und Web – für Marken, die in Erinnerung bleiben.<br>
-    Kreativität trifft Technologie. Wirkung trifft Tempo.
-  </span>
-</p>
+  <p id="aurora-chant" class="aurora-subtitle" aria-live="polite">
+    <span class="subtitle-snippet">Design, 3D &amp; Web – prägnant kombiniert für maximale Markenwirkung.</span>
+    <span class="subtitle-t">Design, 3D und Web greifen nahtlos ineinander – klar strukturiert, schnell umsetzbar und mit spürbarer Markenwirkung.</span>
+    <span class="subtitle-full">
+      Wir verbinden Design, 3D und Web – für Marken, die in Erinnerung bleiben.<br>
+      Kreativität trifft Technologie. Wirkung trifft Tempo.
+    </span>
+  </p>
 
   <!-- Semantische Liste der Bereiche -->
   <ul class="quasar-grid" aria-label="Bereiche: Mission, Team, Vision">
@@ -1853,9 +1750,11 @@ body[data-page="titlepage"] .hero-image-foreground {
                aria-labelledby="aether-mission-h"
                aria-describedby="aether-mission-k aether-mission-s">
         <h3 id="aether-mission-h">Unsere Mission</h3>
-        <!-- Kurzsatz / Snippet -->
+        <!-- Kurzsatz / Snippet (Mobile) -->
         <p class="snippet" id="aether-mission-s">Design, Code &amp; 3D als Einheit – Balance, Erlebnis und skalierbare Systeme.</p>
-        <!-- Tagline bleibt für Desktop sichtbar -->
+        <!-- Tablet-Text (neu, etwas länger) -->
+        <p class="t-snippet">Design, Code und 3D denken wir als Einheit: ausbalanciert, erlebnisorientiert und auf skalierbaren Systemen aufgebaut – damit Form, Funktion und Tempo zusammenwirken.</p>
+        <!-- Tagline (Desktop sichtbar, optional auch Tablet) -->
         <p class="microtag" id="aether-mission-k">Design, Code &amp; 3D als Einheit</p>
 
         <ul class="delta-list" aria-label="Was uns antreibt">
@@ -1884,6 +1783,7 @@ body[data-page="titlepage"] .hero-image-foreground {
                aria-describedby="aether-crew-k aether-crew-s">
         <h3 id="aether-crew-h">Unser Team</h3>
         <p class="snippet" id="aether-crew-s">Komplementär, agil, erfahren – Designer, Entwickler &amp; 3D-Artists als Produktteam.</p>
+        <p class="t-snippet">Designer, Entwickler und 3D-Artists arbeiten als eingespieltes Produktteam: komplementär, agil und praxisnah – mit kurzen Feedback-Schleifen und klaren Meilensteinen.</p>
         <p class="microtag" id="aether-crew-k">Interdisziplinär, kreativ &amp; technisch stark</p>
 
         <ul class="delta-list" aria-label="Stärken unseres Teams">
@@ -1912,6 +1812,7 @@ body[data-page="titlepage"] .hero-image-foreground {
                aria-describedby="aether-vision-k aether-vision-s">
         <h3 id="aether-vision-h">Unsere Vision</h3>
         <p class="snippet" id="aether-vision-s">Zukunftsorientiertes Design mit Wirkung – Emotion, Technologie &amp; Nachhaltigkeit.</p>
+        <p class="t-snippet">Wir gestalten zukunftsorientiert: emotional wirksam, technologisch sinnvoll und <br>nachhaltig gedacht – als konsistentes System statt einmaligem Effekt.</p>
         <p class="microtag" id="aether-vision-k">Zukunftsorientiertes Design mit Wirkung</p>
 
         <ul class="delta-list" aria-label="Unsere Ziele und Visionen">
@@ -1995,6 +1896,10 @@ body[data-page="titlepage"] .hero-image-foreground {
   background: linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03)) !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05) !important;
 }
+/* Basis: Tablet-/Desktop zeigen Full; Mobile zeigt Snippet – Tablet-Regel überschreibt unten */
+.aurora-subtitle .subtitle-snippet{ display:none; }
+.aurora-subtitle .subtitle-t{ display:none; }
+.aurora-subtitle .subtitle-full{ display:inline; }
 
 /* ===== Grid (ohne Overflow) ===== */
 .quasar-grid{
@@ -2288,7 +2193,7 @@ body[data-page="titlepage"] .hero-image-foreground {
   color:#0b0c10 !important;
 }
 
-/* === MOBILE: Wrapper hart zentrieren & margin:32 links killen === */
+/* === MOBILE: Wrapper hart zentrieren & margin:32 links killen (falls benötigt) === */
 @media (max-width: 699.98px){
   #zen-faq{
     margin: 0 auto !important;
@@ -2311,7 +2216,7 @@ body[data-page="titlepage"] .hero-image-foreground {
   }
 }
 
-/* === MOBILE: Fade links/rechts komplett aus === */
+/* === MOBILE: Fade links/rechts komplett aus (falls vorhanden) === */
 @media (max-width: 699.98px){
   #zen-faq .zen-viewport{
     -webkit-mask-image: none !important;
@@ -2335,6 +2240,7 @@ body[data-page="titlepage"] .hero-image-foreground {
 
   html, body{ overflow-x: hidden; }
 }
+
 /* === MOBILE-KARTE: nur Headline + kurzer Satz === */
 @media (max-width: 699.98px){
   /* Karte kompakt */
@@ -2358,183 +2264,82 @@ body[data-page="titlepage"] .hero-image-foreground {
     font-weight: 680 !important;
     color: rgba(255,255,255,.98) !important;
     text-wrap: pretty;
-    /* optional: auf 2 Zeilen klemmen */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
   }
 
   /* alles andere ausblenden */
   #aurora-sheet .aether-card .delta-list,
-  #aurora-sheet .aether-card .benefit-line{
+  #aurora-sheet .aether-card .benefit-line,
+  #aurora-sheet .aether-card .t-snippet{
     display:none !important;
   }
 
-  /* microtag: aus oder als Ersatz verwenden */
-  /* Variante A (Snippet vorhanden): microtag aus */
+  /* microtag: aus */
   #aurora-sheet .aether-card .microtag{ display:none !important; }
-
-  /* Variante B (kein .snippet genutzt):
-     #aurora-sheet .aether-card .microtag{
-       display:block !important;
-       margin:.15rem 0 0 !important;
-       font-size: 1rem !important;
-       line-height:1.45 !important;
-       font-weight:680 !important;
-       color: rgba(255,255,255,.98) !important;
-       text-shadow:none !important;
-       opacity:1 !important;
-       display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden;
-     }
-  */
 
   /* Grid-Abstände leicht straffen */
   #aurora-sheet .quasar-grid{
     gap: .8rem !important;
   }
-}
-/* === SUBTITLE: Mobile = nur Kurzsatz (ohne Ellipsis), Desktop = Volltext === */
-@media (max-width: 699.98px){
+
+  /* Subtitle: Mobile zeigt nur Kurzsatz */
   #aurora-sheet .aurora-subtitle{
     padding: 12px 14px !important;
     margin-bottom: var(--space-4) !important;
   }
+  #aurora-sheet .aurora-subtitle .subtitle-snippet{ display:block !important; }
+  #aurora-sheet .aurora-subtitle .subtitle-t,
+  #aurora-sheet .aurora-subtitle .subtitle-full{ display:none !important; }
+}
 
-  /* Nur Snippet anzeigen – frei umbrechend, KEIN clamp/overflow */
-  #aurora-sheet .aurora-subtitle .subtitle-snippet{
-    display: block !important;
-    font-size: 1rem !important;
-    line-height: 1.45 !important;
+/* === TABLET / SCHMALER DESKTOP: 700–1240 px
+       Zeige die neuen t-snippets, blende Liste aus, behalte Microtag bei === */
+@media (min-width:700px) and (max-width:1240px){
+  /* Subtitle: Tablet-Variante aktiv */
+  #aurora-sheet .aurora-subtitle .subtitle-snippet{ display:none !important; }
+  #aurora-sheet .aurora-subtitle .subtitle-t{ display:inline !important; }
+  #aurora-sheet .aurora-subtitle .subtitle-full{ display:none !important; }
+
+  /* Cards: t-snippet aktiv, Liste aus; Microtag bleibt */
+  #aurora-sheet .aether-card .t-snippet{
+    display:block !important;
+    font-size: 1.05rem !important;
+    line-height: 1.65 !important;
     font-weight: 700 !important;
-    letter-spacing: .002em !important;
-    white-space: normal !important;   /* kein erzwungener Einzeiler */
-    overflow: visible !important;     /* nichts abschneiden */
+    color: rgba(255,255,255,.96) !important;
+    margin: .1rem 0 0 !important;
   }
-
-  /* Volltext komplett ausblenden */
-  #aurora-sheet .aurora-subtitle .subtitle-full{
-    display: none !important;
-  }
+  #aurora-sheet .aether-card .snippet{ display:none !important; }
+  #aurora-sheet .aether-card .delta-list{ display:none !important; }
 }
 
-/* Ab Tablet/Desktop: Volltext zeigen, Snippet ausblenden */
-@media (min-width: 700px){
-  #aurora-sheet .aurora-subtitle .subtitle-snippet{ display: none !important; }
-  #aurora-sheet .aurora-subtitle .subtitle-full{ display: inline !important; }
+/* Ab Tablet/Desktop (≥1240px): Volltext & Liste zeigen, t/snippet ausblenden */
+@media (min-width:1240px){
+  #aurora-sheet .aurora-subtitle .subtitle-snippet,
+  #aurora-sheet .aurora-subtitle .subtitle-t{ display:none !important; }
+  #aurora-sheet .aurora-subtitle .subtitle-full{ display:inline !important; }
+
+  #aurora-sheet .aether-card .t-snippet,
+  #aurora-sheet .aether-card .snippet{ display:none !important; }
+  #aurora-sheet .aether-card .delta-list{ display:grid !important; }
 }
 
-/* === MOBILE Smart Cards (≤700px) === */
-@media (max-width: 699.98px){
-
-  /* weicheres Einsteigen der ganzen Section */
-  #aurora-sheet{
-    transition: opacity .25s ease;
-    will-change: opacity;
-  }
-  #aurora-sheet.section-enter{ opacity: 1; }
-  #aurora-sheet.section-exit{ opacity: .95; }
-
-  /* Karten: Basis für Animationen */
-  #aurora-sheet .aether-card{
-    transform: translateY(12px) scale(1);
-    opacity: 0;
-    transition:
-      transform .28s cubic-bezier(.2,.8,.2,1),
-      opacity .22s ease,
-      box-shadow .2s ease,
-      background-position .45s ease;
-    will-change: transform, opacity;
-  }
-
-  /* Entrance (wenn sichtbar) */
-  #aurora-sheet .aether-card.is-revealed{
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-
-  /* Beim Teilverlassen leicht abblenden */
-  #aurora-sheet .aether-card.is-fading{
-    opacity: .88;
-    transform: translateY(6px) scale(1);
-  }
-
-  /* Aktive (zentrierte) Karte: größer + stärkerer Glow/Schatten */
-  #aurora-sheet .aether-card.is-active{
-    transform: translateY(0) scale(1.04);
-    opacity: 1;
-  }
-
-  /* Press / Tap-Effekt (kurzzeitig zusätzliches Scale) */
-  #aurora-sheet .aether-card.is-pressed{
-    transform: translateY(0) scale(1.06);
-  }
-
-  /* Glow/Schatten performant über ::before (du nutzt es schon – hier verstärken) */
-  #aurora-sheet .aether-card::before{
-    transition: opacity .25s ease, transform .25s ease, filter .25s ease;
-    opacity: .14;               /* Grundglow */
-    filter: blur(10px);
-  }
-  #aurora-sheet .aether-card.is-active::before{
-    opacity: .28;               /* stärkerer Glow */
-    transform: scale(1.05);
-    filter: blur(16px);
-  }
-
-  /* zusätzlicher Schatten via box-shadow (klein halten, bleibt flott) */
-  #aurora-sheet .aether-card{
-    box-shadow: 0 4px 14px rgba(0,0,0,.10);
-  }
-  #aurora-sheet .aether-card.is-active{
-    box-shadow: 0 10px 28px rgba(0,0,0,.22);
-    background-position: 80% 50%; /* subtiler „Energy shift“ */
-  }
-
-  /* Wenn Section rausgescrollt ist → Karten beruhigen */
-  #aurora-sheet.section-exit .aether-card{
-    opacity: .85;
-    transform: translateY(4px) scale(1);
-  }
-
-  /* Optional: Snap für „appiges“ Gefühl (aktivieren, wenn gewollt) */
-  /*
-  #aurora-sheet .quasar-grid{
-    scroll-snap-type: y mandatory;
-  }
-  #aurora-sheet .quasar-grid > li{
-    scroll-snap-align: center;
-  }
-  */
-
-  /* Barrierefreiheit: Reduce Motion */
-  @media (prefers-reduced-motion: reduce){
-    #aurora-sheet,
-    #aurora-sheet .aether-card{
-      transition: none !important;
-    }
-    #aurora-sheet .aether-card,
-    #aurora-sheet .aether-card.is-active,
-    #aurora-sheet .aether-card.is-pressed{
-      transform: none !important;
-    }
-  }
-}
-
-
-
-@media (max-width: 699.98px){
-  /* etwas weichere Umschaltung fürs „Step“-Gefühl */
-  #aurora-sheet .aether-card{
-    transition:
-      transform .28s cubic-bezier(.2,.8,.2,1),
-      opacity .22s ease,
-      box-shadow .2s ease,
-      background-position .45s ease;
+/* Aurora-Subtitle: zwischen 600–1200px mit mehr Rand und etwas kompakterer Optik */
+@media (min-width: 600px) and (max-width: 1200px){
+  #aurora-sheet .aurora-subtitle{
+    /* responsive, aber nicht bis ganz an den Rand */
+    width: min(90%, 58rem) !important;  /* 90% der Breite, aber max 58rem */
+    margin-inline: auto !important;     /* zentriert */
+    
+    /* leicht kompakterer Look */
+    padding: 1rem 2.4rem !important;    /* mehr Innenabstand links/rechts */
+    line-height: 1.7 !important;
+    border-radius: 14px !important;
   }
 }
 
 </style>
+
 
 <script type="application/ld+json">
 {
@@ -3780,22 +3585,123 @@ body[data-page="titlepage"] .hero-image-foreground {
   #nebula-hub.cluster.cosmos-suite .headline{ margin-bottom: .6rem !important; }
   #nebula-hub.cluster.cosmos-suite .subline{  margin-bottom: 1.5rem !important; }
 }
+/* Basis: Container bleibt fix, Inhalt darf „pulsieren“ */
+#nebula-hub .module-card { overflow: hidden; }
+#nebula-hub .module-card .payload { transition: transform .4s ease; }
+
+/* Bestehenden Hover-Scale der Karte abschwächen/entkoppeln */
+#nebula-hub .module-card:hover {
+  transform: translateY(-4px);   /* leichtes Lift-Feeling */
+  /* KEIN scale() mehr auf der Karte selbst */
+}
+
+/* Stattdessen den Inhalt skalieren – bleibt im Container */
+#nebula-hub .module-card:hover .payload {
+  transform: scale(1.035);
+}
+/* Alle Card-Snippets – etwas dezenter */
+#nebula-hub .module-card .card-snippet {
+  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem) !important;
+  line-height: 1.45 !important;
+  font-weight: 650 !important;
+  margin: 0 0 0.6rem !important;
+  letter-spacing: 0em !important;
+}
+
+/* Mobile (≤700px) – leicht betont, aber dezent */
+@media (max-width: 699.98px){
+  #nebula-hub .module-card .card-snippet {
+    font-size: 1.02rem !important;
+    line-height: 1.42 !important;
+  }
+}
+
+
+/* Alle Leistungs-Headlines (Webdesign, 3D Design, Grafikdesign) */
+#nebula-hub .module-card h3 {
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.3rem) !important;
+  line-height: 1.18 !important;
+  font-weight: 870 !important;
+  letter-spacing: -0.012em !important;
+  margin: 0.25rem 0 0.65rem !important;
+  text-wrap: balance !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.25) !important; /* für bessere Lesbarkeit */
+}
+
+/* Mobile (≤700px) – deutlich, aber nicht überdimensioniert */
+@media (max-width: 699.98px){
+  #nebula-hub .module-card h3 {
+    font-size: 1.5rem !important;
+    line-height: 1.22 !important;
+    font-weight: 850 !important;
+  }
+}
+
+/* === TOP-LOCK: Inhalt startet oben, CTA nach unten === */
+#nebula-hub .module-card .payload{
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;  /* statt space-between */
+  gap: .6rem; /* angenehmer Innenabstand */
+  min-height: 100%;
+}
+
+/* CTA an den Kartenboden schieben, Text bleibt oben */
+#nebula-hub .module-card .warp-cta{
+  margin-top: auto !important;
+  align-self: flex-start;
+}
+
+/* Konsistenter Startabstand unter dem Titel */
+#nebula-hub .module-card .payload > h3{
+  margin-bottom: .5rem !important;
+}
+
+/* Listen beginnen ohne zusätzlichen Außenabstand */
+#nebula-hub .module-card .payload > ul{
+  margin: 0 !important;
+}
+
+/* Etwas „Luft“ am Kartenboden – nur auf größeren Viewports,
+   Mobile regelt das bereits deine Mobile-Styles mit absoluter CTA */
+@media (min-width: 700px){
+  #nebula-hub .module-card{
+    padding-bottom: calc(2.5rem + 10px) !important; /* dezenter Zusatzfreiraum */
+  }
+}
+
+/* Safety: Art/Dekor bleibt rein dekorativ und beeinflusst Layout nicht */
+#nebula-hub .module-card .overlay-art{
+  pointer-events: none;
+}
+/* Fix: 700–719px -> Video-Karte höher */
+@media (min-width: 700px) and (max-width: 719.98px){
+  #nebula-hub .module-card.cinema-card{
+    min-height: 360px !important;   /* 320–400px je nach Geschmack */
+    aspect-ratio: 16 / 9 !important;/* hält eine stimmige Höhe/Wirkung */
+  }
+  #nebula-hub .module-card.cinema-card > video{
+    height: 100% !important; width: 100% !important;
+    object-fit: cover; object-position: center;
+  }
+}
 
 </style>
 <section class="cluster cosmos-suite" id="nebula-hub" aria-labelledby="nebula-hub-h">
   <h2 id="nebula-hub-h" class="headline">Unsere Leistungen</h2>
-  <p class="subline">Von Web bis 3D – alles aus einer Hand, schnell &amp; wirkungsvoll.</p>
+  <p class="subline" id="nebula-hub-sub">Von Web bis 3D – alles aus einer Hand, schnell &amp; wirkungsvoll.</p>
 
-  <div class="orbit-grid" aria-label="Leistungen: Webdesign, 3D Design, Grafikdesign, Social Media">
+  <!-- statt aria-label -> an Überschrift/Subline anbinden + als Liste kenntlich machen -->
+  <div class="orbit-grid" role="list" aria-labelledby="nebula-hub-h" aria-describedby="nebula-hub-sub">
 
     <!-- Webdesign -->
-    <div class="module-card" id="svc-webdesign" aria-labelledby="svc-webdesign-h" aria-describedby="svc-webdesign-s">
+    <div class="module-card" id="svc-webdesign"
+         role="listitem"
+         aria-labelledby="svc-webdesign-h"
+         aria-describedby="svc-webdesign-s">
       <div class="payload">
         <h3 id="svc-webdesign-h">Webdesign</h3>
-        <!-- Kurzsatz für Mobile -->
         <p class="card-snippet" id="svc-webdesign-s">Schnelle, responsive Websites mit klarem UI und sauberen Animationen.</p>
-
-        <!-- Volltext / Liste für größere Viewports -->
         <ul>
           <li>Responsive &amp; performanceoptimierte Websites</li>
           <li>Visuell ansprechende User Interfaces</li>
@@ -3803,18 +3709,20 @@ body[data-page="titlepage"] .hero-image-foreground {
           <li>CMS-Integration &amp; SEO Ready</li>
         </ul>
 
-        <a href="./WebDesign.html" class="warp-cta">Mehr erfahren</a>
+        <!-- Link disambiguieren -->
+        <a href="./WebDesign.html" class="warp-cta" aria-label="Mehr über Webdesign erfahren">Mehr erfahren</a>
       </div>
     </div>
 
     <!-- 3D Design -->
-    <div class="module-card stellar-3d" id="svc-3d" aria-labelledby="svc-3d-h" aria-describedby="svc-3d-s">
+    <div class="module-card stellar-3d" id="svc-3d"
+         role="listitem"
+         aria-labelledby="svc-3d-h"
+         aria-describedby="svc-3d-s">
       <div class="payload">
         <h3 id="svc-3d-h">3D Design</h3>
-        <!-- Kurzsatz für Mobile -->
         <p class="card-snippet" id="svc-3d-s">Fotorealistische Visuals &amp; Modelle – ready für Web, AR/VR &amp; Print.</p>
 
-        <!-- Volltext / Liste für größere Viewports -->
         <ul>
           <li>Fotorealistische 3D-Visualisierungen</li>
           <li>Produkt &amp; Architektur-Renderings</li>
@@ -3822,26 +3730,27 @@ body[data-page="titlepage"] .hero-image-foreground {
           <li>Optimiert für Web &amp; Druck</li>
         </ul>
 
-        <!-- Dekor -->
-        <div class="overlay-art">
+        <!-- Deko stummschalten -->
+        <div class="overlay-art" aria-hidden="true">
           <div class="orbit-shell">
-            <img class="planet-sprite" loading="lazy" decoding="async" src="./indexFotoSlideShow/planet.webp" alt="Planet">
+            <img class="planet-sprite" loading="lazy" decoding="async" src="./indexFotoSlideShow/planet.webp" alt="" aria-hidden="true">
           </div>
-          <img class="lazy-comet astronaut-sprite" data-src="./indexFotoSlideShow/2.webp" alt="3D Icon / Astronaut" decoding="async">
+          <img class="lazy-comet astronaut-sprite" data-src="./indexFotoSlideShow/2.webp" alt="" decoding="async" aria-hidden="true">
         </div>
 
-        <a href="./3DDesign.html" class="warp-cta">Mehr erfahren</a>
+        <a href="./3DDesign.html" class="warp-cta" aria-label="Mehr über 3D Design erfahren">Mehr erfahren</a>
       </div>
     </div>
 
     <!-- Grafikdesign -->
-    <div class="module-card" id="svc-grafik" aria-labelledby="svc-grafik-h" aria-describedby="svc-grafik-s">
+    <div class="module-card" id="svc-grafik"
+         role="listitem"
+         aria-labelledby="svc-grafik-h"
+         aria-describedby="svc-grafik-s">
       <div class="payload">
         <h3 id="svc-grafik-h">Grafikdesign</h3>
-        <!-- Kurzsatz für Mobile -->
         <p class="card-snippet" id="svc-grafik-s">Starke Markenauftritte – vom Logo bis zum konsistenten Designsystem.</p>
 
-        <!-- Volltext / Liste für größere Viewports -->
         <ul>
           <li>Corporate Design &amp; Markenauftritt</li>
           <li>Professionelles Logo-Design</li>
@@ -3849,19 +3758,23 @@ body[data-page="titlepage"] .hero-image-foreground {
           <li>Infografiken &amp; visuelle Systeme</li>
         </ul>
 
-        <div class="overlay-art">
-          <img class="lazy-comet" data-src="./indexFotoSlideShow/astro sitzend.webp" alt="3D Icon" decoding="async">
+        <!-- Deko stummschalten -->
+        <div class="overlay-art" aria-hidden="true">
+          <img class="lazy-comet" data-src="./indexFotoSlideShow/astro sitzend.webp" alt="" decoding="async" aria-hidden="true">
         </div>
 
-        <a href="./Grafikdesign.html" class="warp-cta">Mehr erfahren</a>
+        <a href="./Grafikdesign.html" class="warp-cta" aria-label="Mehr über Grafikdesign erfahren">Mehr erfahren</a>
       </div>
     </div>
 
     <!-- Social Media (Video) -->
-    <div class="module-card cinema-card" id="svc-social" aria-labelledby="svc-social-h" aria-describedby="svc-social-s">
+    <div class="module-card cinema-card" id="svc-social"
+         role="listitem"
+         aria-labelledby="svc-social-h">
       <div class="payload">
         <h3 id="svc-social-h" class="visually-hidden">Social Media</h3>
-        <!-- Kurzsatz für Mobile (optional sichtbar über CSS) -->     </div>
+        <!-- optional: <p id="svc-social-s" class="card-snippet">Kurzbeschreibung …</p> -->
+      </div>
 
       <video
         autoplay
@@ -3870,7 +3783,7 @@ body[data-page="titlepage"] .hero-image-foreground {
         playsinline
         preload="metadata"
         poster="./indexFotoSlideShow/social-poster.jpg"
-        aria-label="Showreel Social Media"
+        aria-labelledby="svc-social-h"  <!-- statt aria-label -->
         controlslist="nodownload noplaybackrate"
         disablepictureinpicture
       >
@@ -3882,6 +3795,7 @@ body[data-page="titlepage"] .hero-image-foreground {
 
   </div>
 </section>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const lazyImages = document.querySelectorAll("img.lazy-comet");
@@ -4009,8 +3923,6 @@ body[data-page="titlepage"] .hero-image-foreground {
           </button>
           <div class="zen-drop">
             <p class="zen-meta">
-              <strong class="zen-rating">5/5 Sterne</strong>
-              <span class="zen-stars" aria-label="5 von 5 Sternen">★★★★★</span>
               <span class="zen-author">– Laura M., Head of Marketing, AlpinaTech</span>
             </p>
             <p class="zen-text">„Unser Projektmanager hat uns mit kurzen, präzisen Updates geführt. Meilensteine wurden eingehalten und der Launch lief reibungslos.“</p>
@@ -4023,8 +3935,6 @@ body[data-page="titlepage"] .hero-image-foreground {
           </button>
           <div class="zen-drop">
             <p class="zen-meta">
-              <strong class="zen-rating">5/5 Sterne</strong>
-              <span class="zen-stars" aria-label="5 von 5 Sternen">★★★★★</span>
               <span class="zen-author">– Denis M., CTO, Pixel &amp; Co.</span>
             </p>
             <p class="zen-text">„Die Testabdeckung ist hervorragend. Nach dem Launch haben wir einen klaren Wartungsplan und schnelle Reaktionszeiten.“</p>
@@ -4037,9 +3947,7 @@ body[data-page="titlepage"] .hero-image-foreground {
           </button>
           <div class="zen-drop">
             <p class="zen-meta">
-              <strong class="zen-rating">4.5/5 Sterne</strong>
-              <span class="zen-stars" aria-label="4,5 von 5 Sternen"><span>★★★★</span><span class="zen-star-half">★</span></span>
-              <span class="zen-author">– Jana M., E-Commerce Lead, Naturwerk</span>
+             <span class="zen-author">– Jana M., E-Commerce Lead, Naturwerk</span>
             </p>
             <p class="zen-text">„Wireframes, Prototypen und Tests mit echten Nutzer:innen – wir waren in jeder Phase eingebunden. Die Conversion stieg nach dem Relaunch um 23%.“</p>
           </div>
@@ -4051,8 +3959,6 @@ body[data-page="titlepage"] .hero-image-foreground {
           </button>
           <div class="zen-drop">
             <p class="zen-meta">
-              <strong class="zen-rating">5/5 Sterne</strong>
-              <span class="zen-stars" aria-label="5 von 5 Sternen">★★★★★</span>
               <span class="zen-author">– Tim M., Geschäftsführer, UrbanKaffee</span>
             </p>
             <p class="zen-text">„Klare Angebotsstruktur ohne Überraschungen. Wir verfolgen KPIs wie Ladezeit, SEO und Conversion – alles deutlich verbessert.“</p>
@@ -4065,8 +3971,6 @@ body[data-page="titlepage"] .hero-image-foreground {
           </button>
           <div class="zen-drop">
             <p class="zen-meta">
-              <strong class="zen-rating">5/5 Sterne</strong>
-              <span class="zen-stars" aria-label="5 von 5 Sternen">★★★★★</span>
               <span class="zen-author">– Katharina M., Legal Counsel, Nordlicht GmbH</span>
             </p>
             <p class="zen-text">„DSGVO-Konzept, SSL, Backups und klare Rollen – wir haben sogar ein NDA erhalten. Genau so wollen wir arbeiten.“</p>
@@ -4079,8 +3983,6 @@ body[data-page="titlepage"] .hero-image-foreground {
           </button>
           <div class="zen-drop">
             <p class="zen-meta">
-              <strong class="zen-rating">4.5/5 Sterne</strong>
-              <span class="zen-stars" aria-label="4,5 von 5 Sternen"><span>★★★★</span><span class="zen-star-half">★</span></span>
               <span class="zen-author">– Rafael M., <br> Growth Lead, GlobeFit</span>
             </p>
             <p class="zen-text">„Content-Produktion, OnPage-SEO und Mehrsprachigkeit – unser Rollout in zwei Märkten war unkompliziert und performant.“</p>
@@ -4907,6 +4809,39 @@ body[data-page="titlepage"] .hero-image-foreground {
   #zen-faq .zen-track .zen-card{ display: block !important; }
 }
 
+/* === Mobile: Karten mittig mit seitlichem Gutter === */
+:root { --zen-mobile-pad: clamp(12px, 4vw, 20px); }
+
+@media (max-width: 699.98px){
+  /* Sichtfenster bekommt Gutter, Snapping rechnet ihn mit ein */
+  #zen-faq .zen-viewport{
+    padding-inline: var(--zen-mobile-pad) !important;
+    scroll-snap-type: x mandatory;                 /* bleibt */
+    scroll-padding-inline: var(--zen-mobile-pad);  /* wichtig fürs Zentrieren */
+  }
+
+  /* Track kann wieder Gaps haben, kein negativer Margin-Hack nötig */
+  #zen-faq .zen-track{
+    display: flex !important;
+    gap: var(--zen-gap) !important;
+    width: max-content !important;
+  }
+
+  /* Jede Karte füllt den Viewport abzüglich Gutter – und snappt zur Mitte */
+  #zen-faq .zen-card{
+    box-sizing: border-box !important;
+    flex: 0 0 calc(100dvw - 2 * var(--zen-mobile-pad)) !important;
+    width: calc(100dvw - 2 * var(--zen-mobile-pad)) !important;
+    max-width: calc(100dvw - 2 * var(--zen-mobile-pad)) !important;
+
+    scroll-snap-align: center !important;  /* <-- macht’s mittig */
+    scroll-snap-stop: always;
+  }
+
+  /* Mobile: nichts ausfaden/übermaskieren */
+  #zen-faq .zen-viewport::after{ display:none !important; }
+}
+
 </style>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -5241,8 +5176,6 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", applyMode);
 })();
 </script>
-
-
 
 
 
@@ -5746,7 +5679,53 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 }
 
+/* Tablet-Kurztexte (leicht gekürzt, aber nicht so kurz wie mobile) */
+@media (min-width:700px) and (max-width:1240px){
+  #flowhub .flow-card .t-snippet{
+    display:block !important;
+    font-size:1.05rem !important;
+    line-height:1.6 !important;
+    font-weight:700 !important;
+    color:rgba(255,255,255,.96) !important;
+    margin:0 !important;
+  }
+  #flowhub .flow-card > .card-core > p:not(.t-snippet),
+  #flowhub .flow-card .details,
+  #flowhub .flow-card .m-snippet{
+    display:none !important;
+  }
+}
+
+/* Tablet-Sonderfall: Wenn die letzte Karte alleine in der letzten Reihe steht
+   (also bei 2-Spalten-Grid + ungerader Anzahl), soll sie die volle Breite einnehmen
+   und unten rechts ein Bild zeigen. */
+@media (min-width:700px) and (max-width:1024px){
+  /* volle Breite nur, wenn die Gesamtzahl ungerade ist -> last + nth-child(odd) */
+  #flowhub .flow-rail > .flow-card:last-child:nth-child(odd){
+    grid-column: 1 / -1;                      /* über beide Spalten */
+    position: relative;                        /* Anker für ::after-Bild */
+    --solo-img-w: clamp(140px, 26vw, 220px);   /* Bildbreite */
+    /* rechts Platz fürs Bild schaffen */
+    padding-right: calc(clamp(1rem, 2vw, 1.6rem) + var(--solo-img-w) + 12px);
+  }
+
+  /* Bild unten rechts einblenden (nur wenn alleine & in diesem Breakpoint) */
+  #flowhub .flow-rail > .flow-card:last-child:nth-child(odd)::after{
+    content: "";
+    position: absolute;
+    right: clamp(10px, 2vw, 18px);
+    bottom: var(--card-bottom-safe, 2.25rem);
+    width: var(--solo-img-w);
+    aspect-ratio: 1 / 1;                       /* quadratisch; gerne anpassen */
+    background: var(--solo-img, none) center / contain no-repeat;
+    opacity: .98;
+    pointer-events: none;
+    filter: drop-shadow(0 4px 14px rgba(0,0,0,.25));
+  }
+}
+
 </style>
+
 <section class="pane-transition" id="flowhub" aria-labelledby="flowhub-h">
   <div class="pane-world is-visible" id="paneWorld">
     <div class="pane-wrap">
@@ -5763,6 +5742,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <span class="card-num" aria-hidden="true">01</span>
             <h3 id="flow-step-01-h">Strategie &amp; Vision</h3>
             <p class="m-snippet">Wir klären Ziele, Zielgruppen und Wirkung – kompakt, verständlich und mit klarer Priorisierung. Daraus entsteht ein umsetzbarer Fahrplan.</p>
+            <p class="t-snippet">Wir starten mit einem klaren Verständnis Ihrer Ziele, Zielgruppen und Markenidentität. Daraus entsteht eine präzise Strategie, die Design, Technologie und Kommunikation zu einem umsetzbaren Gesamtplan verbindet.</p>
             <p>Jedes Projekt beginnt mit einem klaren Verständnis Ihrer Ziele, Zielgruppen und Markenidentität. Wir entwickeln eine Strategie, die Design, Technologie und Kommunikation zu einem stimmigen Gesamtkonzept verbindet.</p>
             <div class="details" id="flow-step-01-details">
               <p>So entsteht die Grundlage für ein Ergebnis, das visuell überzeugt, technisch funktioniert und strategisch Wirkung zeigt.</p>
@@ -5778,6 +5758,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <span class="card-num" aria-hidden="true">02</span>
             <h3 id="flow-step-02-h">Konzept &amp; Struktur</h3>
             <p class="m-snippet">Wir übersetzen die Vision in klare Informationsarchitektur, Userflows und Storyboards. Alles greifbar, alles testbar.</p>
+            <p class="t-snippet">Aus Ihrer Vision entsteht ein klares Konzept: Informationsarchitektur, Userflows und Storyboards machen Ideen greifbar und überprüfbar – die Basis für eine ästhetisch und funktional überzeugende Umsetzung.</p>
             <p>Aus der Vision entsteht ein fundiertes Konzept: Informationsarchitektur, Storyboard oder Szenenlayout – je nach Projektart. So legen wir den Rahmen für eine ästhetisch und funktional überzeugende Umsetzung.</p>
             <div class="details" id="flow-step-02-details">
               <p>Wir achten auf klare Strukturen, intuitive Abläufe und konsistente Designs – die Basis für ein stimmiges Nutzererlebnis.</p>
@@ -5793,6 +5774,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <span class="card-num" aria-hidden="true">03</span>
             <h3 id="flow-step-03-h">Design &amp; Entwicklung</h3>
             <p class="m-snippet">UI, 3D &amp; Code entstehen parallel. Wir zeigen Zwischenstände früh, holen Feedback ein und optimieren in kurzen Zyklen.</p>
+            <p class="t-snippet">Design, 3D und Code entstehen parallel. Wir präsentieren regelmäßig Zwischenstände, integrieren Feedback direkt und verfeinern in kurzen, agilen Zyklen – so bleibt der Prozess transparent und effizient.</p>
             <p>Das visuelle Konzept wird in greifbare Ergebnisse übersetzt – von Webdesigns über 3D-Renderings bis zu Animationen. Fortschritte sind jederzeit transparent einsehbar, Anpassungen fließen agil in den Prozess ein.</p>
             <div class="details" id="flow-step-03-details">
               <p>Wir kombinieren Kreativität mit technischer Präzision – für Designs, die begeistern und funktionieren.</p>
@@ -5808,6 +5790,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <span class="card-num" aria-hidden="true">04</span>
             <h3 id="flow-step-04-h">Feinschliff &amp; Veröffentlichung</h3>
             <p class="m-snippet">Performance, Barrierefreiheit und Details werden poliert. Danach folgt ein sauberer Launch mit Monitoring.</p>
+            <p class="t-snippet">In dieser Phase verfeinern wir Design, Performance und Barrierefreiheit bis ins Detail. Anschließend folgt ein sorgfältig vorbereiteter Launch – sauber umgesetzt, stabil und mit aktivem Monitoring.</p>
             <p>In der finalen Phase werden alle Details perfektioniert – Design, Performance und Präsentation. Nach präzisem Testing oder Rendering erfolgt der Launch bzw. die Auslieferung – sauber, zuverlässig und auf höchstem Qualitätsniveau.</p>
             <div class="details" id="flow-step-04-details">
               <p>Das Ergebnis überzeugt visuell, technisch und konzeptionell – bereit für maximale Wirkung.</p>
@@ -5823,6 +5806,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <span class="card-num" aria-hidden="true">05</span>
             <h3 id="flow-step-05-h">Wachstum &amp; Skalierbarkeit</h3>
             <p class="m-snippet">Wir erweitern Inhalte, Funktionen und Systeme iterativ – messbar, stabil und zukunftsfähig.</p>
+            <p class="t-snippet">Nach Projektabschluss begleiten wir Sie weiter: Wir erweitern Inhalte, Funktionen und Systeme schrittweise – messbar, stabil und zukunftsfähig, damit Ihr Projekt langfristig wachsen kann.</p>
             <p>Auch nach Projektabschluss bleibt das Fundament zukunftsfähig. Wir begleiten Skalierung, Content-Erweiterung und technische Weiterentwicklung – für nachhaltiges, messbares Wachstum.</p>
             <div class="details" id="flow-step-05-details">
               <p>Mit modularen Designsystemen, automatisierten Renderpipelines und skalierbaren Architekturen wächst Ihr Projekt flexibel und effizient mit Ihrem Unternehmen.</p>
@@ -5834,6 +5818,8 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 </section>
+
+
 <!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
@@ -6064,235 +6050,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ]
 }
 </script>
- <!--GSAP Mobile-->
- <style>
-  /* Tap-Glow für Mobile */
-  #flowhub .flow-card .touch-glow{
-    position:absolute; inset:0; pointer-events:none; z-index:1;
-    background: radial-gradient(120px 120px at var(--tx,50%) var(--ty,50%),
-                rgba(255,255,255,.28), rgba(255,255,255,0) 60%);
-    opacity:0; transition:opacity .18s ease;
-    mix-blend-mode:soft-light;
-  }
-  @media (min-width:700px){
-    #flowhub .flow-card .touch-glow{ display:none; }
-  }
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  if (!window.gsap) return;
-
-  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const mm = gsap.matchMedia();
-
-  // Helper: ist #flowhub sichtbar?
-  const hub = document.getElementById('flowhub');
-  let hubInView = true;
-  const io = new IntersectionObserver(([e]) => hubInView = e?.isIntersecting ?? true, {threshold:.25});
-  if (hub) io.observe(hub);
-
-  mm.add("(max-width: 700px)", () => {
-    const cards = Array.from(document.querySelectorAll('#flowhub .flow-card'));
-    if (!cards.length) return;
-
-    // 1) DOM: Touch-Glow Layer einfügen
-    cards.forEach(card => {
-      if (!card.querySelector('.touch-glow')) {
-        const g = document.createElement('span');
-        g.className = 'touch-glow';
-        card.appendChild(g);
-      }
-    });
-
-    // 2) Initial: sanfter Stagger (kein ScrollReveal, nur einmalig)
-    if (!prefersReduced){
-      gsap.from(cards, {
-        opacity: 0, y: 16,
-        duration: .6, ease: 'power2.out',
-        stagger: .08
-      });
-    } else {
-      gsap.set(cards, {opacity:1, y:0});
-    }
-
-    // 3) Idle-„Atmen“ der Gradients (sehr leicht, yoyo)
-    const bgTweens = [];
-    if (!prefersReduced){
-      cards.forEach((card, i) => {
-        const t = gsap.to(card, {
-          backgroundPosition: '60% 52%',
-          duration: 3.2 + i * 0.2,
-          ease: 'sine.inOut',
-          repeat: -1, yoyo: true
-        });
-        bgTweens.push(t);
-      });
-    }
-
-    // 4) Tap-Feedback (Press-Bounce + Glow)
-    function press(card, x, y){
-      const glow = card.querySelector('.touch-glow');
-      // Position des Glows merken (für CSS radial-gradient)
-      if (glow){
-        const r = card.getBoundingClientRect();
-        const tx = Math.max(0, Math.min(1, (x - r.left) / r.width)) * 100;
-        const ty = Math.max(0, Math.min(1, (y - r.top)  / r.height)) * 100;
-        glow.style.setProperty('--tx', tx + '%');
-        glow.style.setProperty('--ty', ty + '%');
-        glow.style.opacity = '1';
-        // sanft ausblenden
-        setTimeout(() => { glow.style.opacity = '0'; }, 160);
-      }
-      // Bounce
-      gsap.fromTo(card,
-        { y: 0, scale: 1 },
-        { y: -3, scale: 0.985, duration: 0.09, ease: 'power1.out',
-          yoyo: true, repeat: 1
-        }
-      );
-    }
-
-    cards.forEach(card => {
-      // Touch
-      card.addEventListener('touchstart', e => {
-        const t = e.touches[0] || {clientX: card.offsetLeft, clientY: card.offsetTop};
-        press(card, t.clientX, t.clientY);
-      }, {passive:true});
-      // Optional Mouse (für Emulatoren)
-      card.addEventListener('mousedown', e => press(card, e.clientX, e.clientY));
-    });
-
-    // 5) Auto-Nudge: alle 6s eine Karte leicht „anstupsen“, nur wenn sichtbar
-    let nudgeIdx = 0, nudgeTimer = null;
-    function nudge(){
-      if (!hubInView || prefersReduced) return;
-      const c = cards[nudgeIdx % cards.length];
-      nudgeIdx++;
-      gsap.fromTo(c, {y:0}, {
-        y:-6, duration:.12, ease:'power1.out',
-        yoyo:true, repeat:1
-      });
-    }
-    function startNudge(){
-      stopNudge();
-      nudgeTimer = setInterval(nudge, 6000);
-    }
-    function stopNudge(){
-      if (nudgeTimer){ clearInterval(nudgeTimer); nudgeTimer = null; }
-    }
-    startNudge();
-
-    // Pausieren bei Tab-Hidden
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) { stopNudge(); bgTweens.forEach(t=>t.pause()); }
-      else { startNudge(); bgTweens.forEach(t=>t.resume()); }
-    });
-
-    // Cleanup bei Unmatch
-    return () => {
-      stopNudge();
-      bgTweens.forEach(t => t.kill());
-      cards.forEach(c => {
-        const g = c.querySelector('.touch-glow');
-        if (g) g.remove();
-        gsap.killTweensOf(c);
-        gsap.set(c, {clearProps: 'all'});
-      });
-    };
-  });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  if (!window.gsap || !window.ScrollTrigger) return;
-  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  const mm = gsap.matchMedia();
-
-  // Nur Mobile
-  mm.add("(max-width: 700px)", () => {
-    const cards = gsap.utils.toArray('#flowhub .flow-card');
-    if (!cards.length) return;
-
-    // Performance-Hint
-    cards.forEach(c => c.style.willChange = 'transform, opacity, background-position');
-
-    // Grundzustand (kein „Sprung“)
-    gsap.set(cards, { opacity: 0, y: 24, scale: 0.985 });
-
-    // Für jede Karte eine Scroll-gebundene Timeline
-    cards.forEach((card, i) => {
-      const core = card.querySelector('.card-core');
-
-      // sanftes Einblenden + leichtes Parallax & Gradient-Shift
-      const tl = gsap.timeline({
-        defaults: { ease: 'power2.out' },
-        scrollTrigger: {
-          trigger: card,
-          start: "top 90%",     // beginnt kurz bevor die Karte sichtbar wird
-          end:   "top 20%",     // bis etwa obere 20% des Viewports
-          scrub: true,          // an Scrollbewegung gekoppelt
-          fastScrollEnd: true,  // verhindert Nachschwingen
-          invalidateOnRefresh: true
-        }
-      });
-
-      tl
-      // 1) Reveal
-      .to(card, { opacity: 1, y: 0, scale: 1, duration: 0.6 }, 0)
-      // 2) Parallax fürs Innenleben (wirkt „tiefer“)
-      .fromTo(core, { y: 8 }, { y: 0, duration: 0.6 }, 0)
-      // 3) Gradient leicht „atmen“ lassen während des Reveals
-      .to(card, { backgroundPosition: "60% 52%", duration: 0.6 }, 0);
-
-      // Nachlauf: wenn Karte die Mitte passiert, ganz leicht liften (mikro Interaktion)
-      gsap.to(card, {
-        y: -4,
-        duration: 0.3,
-        ease: "power1.out",
-        scrollTrigger: {
-          trigger: card,
-          start: "center 80%",
-          end:   "center 60%",
-          scrub: true
-        }
-      });
-    });
-
-    // Option: dezenter globaler Stagger beim ersten Sichtkontakt der Sektion
-    const hub = document.querySelector('#flowhub');
-    if (hub) {
-      gsap.fromTo('#flowhub .flow-card',
-        { opacity: 0.0001 },
-        {
-          opacity: (i, el) => +getComputedStyle(el).opacity || 1,
-          duration: 0.4,
-          stagger: 0.06,
-          ease: "power1.out",
-          scrollTrigger: {
-            trigger: hub,
-            start: "top 95%",
-            end: "top 80%",
-            scrub: true
-          }
-        }
-      );
-    }
-
-    // Cleanup wenn Breakpoint wechselt
-    return () => {
-      ScrollTrigger.getAll().forEach(st => {
-        if (st.trigger && st.trigger.closest('#flowhub')) st.kill();
-      });
-      cards.forEach(c => c.style.willChange = '');
-    };
-  });
-});
-</script>
 
 
 
@@ -6320,61 +6077,77 @@ document.addEventListener('DOMContentLoaded', () => {
      ============================================= -->
 <section class="kontakt-testimonial-section" id="kontakt">
   <div class="kontakt-testimonial-wrapper">
-    <!-- Kontaktbereich -->
+    
+    <!-- =====================
+         KONTAKTBEREICH
+         ===================== -->
     <div class="kontakt-area">
-      <h2 class="section-title">Lass uns loslegen!</h2>
-      <p class="kontakt-subline">
+      <h2 class="section-title" id="kontaktTitle">Lass uns loslegen!</h2>
+      <p class="kontakt-subline" id="kontaktSub">
         Eine starke Idee verdient ein starkes digitales Erlebnis.
       </p>
 
-      <!-- =====================
-           Wizard Formular
-           ===================== -->
-      <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm" novalidate>
+      <!-- Wizard Formular -->
+      <form action="https://formspree.io/f/xqapdvaq"
+            method="POST"
+            class="kontakt-form"
+            id="kontaktForm"
+            novalidate
+            aria-labelledby="kontaktTitle kontaktSub">
+
+        <!-- A11y: Status + Fehlerzusammenfassung -->
+        <div id="errorSummary" class="sr-only" role="alert" aria-live="assertive"></div>
+        <div data-status role="status" aria-live="polite" class="vis-status"></div>
+        <!-- Honeypot gegen Spam -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true">
 
         <!-- STEP 1: Leistungswahl -->
         <fieldset class="form-step active" data-step="1" aria-labelledby="step1Title">
           <legend id="step1Title" class="sr-only">Leistungswahl</legend>
-          <p class="copy step1-copy">Wofür interessierst du dich?</p>
+          <p class="copy" id="step1Desc">Wofür interessierst du dich?</p>
 
-          <div class="grid-choices" role="radiogroup" aria-label="Leistung wählen">
-            <label class="choice" tabindex="0">
-              <input type="radio" name="service" value="Webdesign" data-toggle="web" />
+          <div class="grid-choices" aria-describedby="step1Desc">
+            <label class="choice">
+              <input type="radio" name="service" value="Webdesign" data-toggle="web" aria-describedby="webDesc">
               <span class="title">Webdesign</span>
-              <small>Speed, Responsiveness, SEO, UX</small>
+              <small id="webDesc">Speed, Responsiveness, SEO, UX</small>
             </label>
-            <label class="choice" tabindex="0">
-              <input type="radio" name="service" value="3D-Design" data-toggle="d3" />
+            <label class="choice">
+              <input type="radio" name="service" value="3D-Design" data-toggle="d3" aria-describedby="d3Desc">
               <span class="title">3D-Design</span>
-              <small>Renderings, Animationen, Produkt/Architektur</small>
+              <small id="d3Desc">Renderings, Animationen, Produkt/Architektur</small>
             </label>
-            <label class="choice" tabindex="0">
-              <input type="radio" name="service" value="Grafikdesign" data-toggle="gfx" />
+            <label class="choice">
+              <input type="radio" name="service" value="Grafikdesign" data-toggle="gfx" aria-describedby="gfxDesc">
               <span class="title">Grafikdesign</span>
-              <small>Logo, Visitenkarte, Poster/Flyer, Styleguide</small>
+              <small id="gfxDesc">Logo, Visitenkarte, Poster/Flyer, Styleguide</small>
             </label>
           </div>
+
+          <p class="microcopy-help" id="helpConsult">
+            Unsicher? Wir beraten dich im Erstgespräch gerne zur passenden Leistung.
+          </p>
         </fieldset>
 
         <!-- STEP 2: Material & Styleguides -->
         <fieldset class="form-step" data-step="2" aria-labelledby="step2Title">
-          <legend id="step2Title" class="sr-only">Material & Styleguide</legend>
+          <legend id="step2Title" class="sr-only">Material &amp; Styleguide</legend>
 
           <!-- Web -->
-          <div class="service-block" data-service="web">
-            <h3 class="block-title">Webdesign – Material & Branding</h3>
-            <label class="select-row">
+          <div class="service-block" data-service="web" aria-labelledby="webMatTitle">
+            <h3 class="block-title" id="webMatTitle">Webdesign – Material &amp; Branding</h3>
+            <label class="select-row" for="web_material">
               <span>Material (Texte/Bilder/Logo)</span>
-              <select name="web_material">
+              <select id="web_material" name="web_material">
                 <option value="">Bitte wählen</option>
                 <option value="alles">Alles vorhanden</option>
                 <option value="teilweise">Teilweise vorhanden</option>
                 <option value="nichts">Bitte komplett erstellen</option>
               </select>
             </label>
-            <label class="select-row">
+            <label class="select-row" for="web_styleguide">
               <span>Styleguide / CI vorhanden?</span>
-              <select name="web_styleguide">
+              <select id="web_styleguide" name="web_styleguide">
                 <option value="">Bitte wählen</option>
                 <option value="ja">Ja</option>
                 <option value="nein">Nein</option>
@@ -6383,11 +6156,11 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
 
           <!-- 3D -->
-          <div class="service-block" data-service="d3">
-            <h3 class="block-title">3D-Design – Ausgangsmaterial</h3>
-            <label class="select-row">
+          <div class="service-block" data-service="d3" aria-labelledby="d3MatTitle">
+            <h3 class="block-title" id="d3MatTitle">3D-Design – Ausgangsmaterial</h3>
+            <label class="select-row" for="d3_daten">
               <span>3D-Daten / Modelle vorhanden?</span>
-              <select name="d3_daten">
+              <select id="d3_daten" name="d3_daten">
                 <option value="">Bitte wählen</option>
                 <option value="vorhanden">Ja, vorhanden</option>
                 <option value="modellierung_noetig">Nein, bitte modellieren</option>
@@ -6396,38 +6169,38 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
 
           <!-- Grafik -->
-          <div class="service-block" data-service="gfx">
-            <h3 class="block-title">Grafikdesign – Material & Branding</h3>
-            <label class="select-row">
+          <div class="service-block" data-service="gfx" aria-labelledby="gfxMatTitle">
+            <h3 class="block-title" id="gfxMatTitle">Grafikdesign – Material &amp; Branding</h3>
+            <label class="select-row" for="gfx_styleguide">
               <span>Branding / Styleguide vorhanden?</span>
-              <select name="gfx_styleguide">
+              <select id="gfx_styleguide" name="gfx_styleguide">
                 <option value="">Bitte wählen</option>
                 <option value="ja">Ja</option>
                 <option value="nein">Nein</option>
               </select>
             </label>
-            <label class="select-row">
+            <label class="select-row" for="gfx_material">
               <span>Text-/Bildmaterial</span>
-              <select name="gfx_material">
+              <select id="gfx_material" name="gfx_material">
                 <option value="">Bitte wählen</option>
                 <option value="alles">Alles vorhanden</option>
-                <option value="teilweise">Teilweise</option>
+                <option value="teilweise">Teilweise vorhanden</option>
                 <option value="nichts">Bitte erstellen</option>
               </select>
             </label>
           </div>
         </fieldset>
 
-        <!-- STEP 3: Spezifische Ziele/Typen -->
+        <!-- STEP 3: Projektspezifikationen -->
         <fieldset class="form-step" data-step="3" aria-labelledby="step3Title">
           <legend id="step3Title" class="sr-only">Projektspezifikationen</legend>
 
           <!-- Web -->
-          <div class="service-block" data-service="web">
-            <h3 class="block-title">Webdesign – Typ & Prioritäten</h3>
-            <label class="select-row">
+          <div class="service-block" data-service="web" aria-labelledby="webSpecTitle">
+            <h3 class="block-title" id="webSpecTitle">Webdesign – Typ &amp; Prioritäten</h3>
+            <label class="select-row" for="web_typ">
               <span>Website-Typ</span>
-              <select name="web_typ">
+              <select id="web_typ" name="web_typ">
                 <option value="">Bitte wählen</option>
                 <option value="unternehmensseite">Unternehmensseite</option>
                 <option value="portfolio">Portfolio</option>
@@ -6437,22 +6210,22 @@ document.addEventListener('DOMContentLoaded', () => {
               </select>
             </label>
 
-            <fieldset class="checkbox-group tags" aria-label="Besondere Schwerpunkte">
+            <fieldset class="checkbox-group tags">
               <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Ladegeschwindigkeit" data-pills /><span>Ladegeschwindigkeit</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Responsiveness" data-pills /><span>Responsiveness</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="SEO" data-pills /><span>SEO</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Benutzerfreundlichkeit" data-pills /><span>Benutzerfreundlichkeit</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Designqualität" data-pills /><span>Designqualität</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Ladegeschwindigkeit"><span>Ladegeschwindigkeit</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Responsiveness"><span>Responsiveness</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="SEO"><span>SEO</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Benutzerfreundlichkeit"><span>Benutzerfreundlichkeit</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Designqualität"><span>Designqualität</span></label>
             </fieldset>
           </div>
 
           <!-- 3D -->
-          <div class="service-block" data-service="d3">
-            <h3 class="block-title">3D-Design – Ziel & Anwendung</h3>
-            <label class="select-row">
+          <div class="service-block" data-service="d3" aria-labelledby="d3SpecTitle">
+            <h3 class="block-title" id="d3SpecTitle">3D-Design – Ziel &amp; Anwendung</h3>
+            <label class="select-row" for="d3_typ">
               <span>Was soll entstehen?</span>
-              <select name="d3_typ">
+              <select id="d3_typ" name="d3_typ">
                 <option value="">Bitte wählen</option>
                 <option value="rendering">Rendering</option>
                 <option value="animation">Animation</option>
@@ -6461,9 +6234,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <option value="sonstiges">Sonstiges</option>
               </select>
             </label>
-            <label class="select-row">
+            <label class="select-row" for="d3_use">
               <span>Verwendungszweck</span>
-              <select name="d3_use">
+              <select id="d3_use" name="d3_use">
                 <option value="">Bitte wählen</option>
                 <option value="marketing">Marketing / Werbung</option>
                 <option value="praesentation">Präsentation</option>
@@ -6474,11 +6247,11 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
 
           <!-- Grafik -->
-          <div class="service-block" data-service="gfx">
-            <h3 class="block-title">Grafikdesign – Typ & Prioritäten</h3>
-            <label class="select-row">
+          <div class="service-block" data-service="gfx" aria-labelledby="gfxSpecTitle">
+            <h3 class="block-title" id="gfxSpecTitle">Grafikdesign – Typ &amp; Prioritäten</h3>
+            <label class="select-row" for="gfx_typ">
               <span>Design-Typ</span>
-              <select name="gfx_typ">
+              <select id="gfx_typ" name="gfx_typ">
                 <option value="">Bitte wählen</option>
                 <option value="logo">Logo</option>
                 <option value="visitenkarte">Visitenkarte</option>
@@ -6487,84 +6260,89 @@ document.addEventListener('DOMContentLoaded', () => {
                 <option value="sonstiges">Sonstiges</option>
               </select>
             </label>
-            <fieldset class="checkbox-group tags" aria-label="Prioritäten Grafikdesign">
+            <fieldset class="checkbox-group tags">
               <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Brand-Konsistenz" data-pills /><span>Brand-Konsistenz</span></label>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Typografie" data-pills /><span>Typografie</span></label>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Druckvorbereitung" data-pills /><span>Druckvorbereitung</span></label>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Illustration" data-pills /><span>Illustration</span></label>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Schnelle Umsetzung" data-pills /><span>Schnelle Umsetzung</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Brand-Konsistenz"><span>Brand-Konsistenz</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Typografie"><span>Typografie</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Druckvorbereitung"><span>Druckvorbereitung</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Illustration"><span>Illustration</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Schnelle Umsetzung"><span>Schnelle Umsetzung</span></label>
             </fieldset>
           </div>
         </fieldset>
 
         <!-- STEP 4: Zeit & Budget -->
         <fieldset class="form-step" data-step="4" aria-labelledby="step4Title">
-          <legend id="step4Title" class="sr-only">Zeit & Budget</legend>
-          <label class="input-row">
+          <legend id="step4Title" class="sr-only">Zeit &amp; Budget</legend>
+
+          <label class="input-row" for="deadline">
             <span>Deadline oder Zeitraum</span>
-            <input type="text" name="deadline" placeholder="z. B. bis 15. November oder Q4" />
+            <input type="text" id="deadline" name="deadline" placeholder="z. B. bis 15. November oder Q4">
           </label>
-          <label class="input-row">
+
+          <label class="input-row" for="budget">
             <span>Budgetrahmen (optional)</span>
-            <input type="text" name="budget" placeholder="z. B. 3.000–6.000 €" />
+            <input type="text" id="budget" name="budget" placeholder="z. B. 4.500–9.000 €" inputmode="numeric">
           </label>
+
+          <div class="budget-chips" role="group" aria-label="Budget-Schnellauswahl">
+            <button type="button" class="chip" data-fill="#budget" data-value="2.500 – 4.500 €">2.500 – 4.500 €</button>
+            <button type="button" class="chip" data-fill="#budget" data-value="4.500 – 10.000 €">4.500 – 10.000 €</button>
+            <button type="button" class="chip" data-fill="#budget" data-value="10.000 – 15.000 €">10.000 – 15.000 €</button>
+            <button type="button" class="chip" data-fill="#budget" data-value="+15.000 €">+15.000 €</button>
+          </div>
         </fieldset>
 
         <!-- STEP 5: Kontaktdaten -->
         <fieldset class="form-step" data-step="5" aria-labelledby="step5Title">
           <legend id="step5Title" class="sr-only">Kontaktdaten</legend>
 
-          <!-- Hidden (nur gewünschte Felder) -->
-          <input type="hidden" name="_subject" id="autoSubject" />
+          <input type="hidden" name="_subject" id="autoSubject">
           <textarea class="sr-only" name="summary_plain" id="summaryPlain" aria-hidden="true"></textarea>
-          <input type="hidden" name="selected_service" id="selectedService" />
+          <input type="hidden" name="selected_service" id="selectedService">
 
-          <!-- Responsive Kontakt-Grid -->
           <div class="contact-grid">
-           <div class="field span-6">
-  <label for="name" class="req">Name</label>
-  <input id="name" type="text" name="name" placeholder="Dein Name" autocomplete="name" required />
-</div>
-
-<div class="field span-6">
-  <label for="email" class="req">E-Mail</label>
-  <input id="email" type="email" name="email" placeholder="dein@mail.de" autocomplete="email" required />
-</div>
-
-<div class="field span-6">
-  <label for="phone">Telefon (optional)</label>
-  <input id="phone" type="tel" name="phone" placeholder="z. B. +49 151 12345678" autocomplete="tel" />
-</div>
-
-<div class="field span-12">
-  <label for="message" class="req">Nachricht</label>
-  <textarea id="message" name="message" rows="6" placeholder="Kurz dein Projekt / Ziel beschreiben…" minlength="5" required></textarea>
-</div>
-
-<p class="req-note">* Pflichtfelder</p>
-
+            <div class="field span-6">
+              <label for="name" class="req">Name</label>
+              <input id="name" type="text" name="name" placeholder="Dein Name" autocomplete="name" required>
+            </div>
+            <div class="field span-6">
+              <label for="email" class="req">E-Mail</label>
+              <input id="email" type="email" name="email" placeholder="dein@mail.de" autocomplete="email" inputmode="email" required aria-describedby="emailError">
+              <small id="emailError" class="error" hidden>Bitte eine gültige E-Mail eingeben.</small>
+            </div>
+            <div class="field span-6">
+              <label for="phone">Telefon (optional)</label>
+              <input id="phone" type="tel" name="phone" placeholder="+49 151 12345678" autocomplete="tel" inputmode="tel" pattern="^[0-9+\s()-]{6,}$">
+            </div>
+            <div class="field span-12">
+              <label for="message" class="req">Nachricht</label>
+              <textarea id="message" name="message" rows="6" placeholder="Kurz dein Projekt / Ziel beschreiben…" minlength="5" required></textarea>
+            </div>
+            <p class="req-note">* Pflichtfelder</p>
           </div>
-          <p class="legal-hint">
-  Deine Angaben werden über <strong>Formspree</strong> zur Beantwortung deiner Anfrage verarbeitet.
-  Mehr unter <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.
-</p>
 
+          <p class="legal-hint">
+            Deine Angaben werden über <strong>Formspree</strong> zur Beantwortung deiner Anfrage verarbeitet.
+            Mehr unter <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.
+          </p>
         </fieldset>
 
-        <!-- STEP 6: Abschluss / Erfolg -->
+        <!-- STEP 6: Abschluss -->
         <fieldset class="form-step" data-step="6" aria-labelledby="step6Title">
           <legend id="step6Title" class="sr-only">Abschluss</legend>
           <div class="success-card" role="status" aria-live="polite">
             <h3 class="success-title">Geschafft! 🎉</h3>
-            <p class="success-copy">Vielen Dank für deine Anfrage <br> Wir melden uns in Kürze bei dir.</p>
-            <p class="success-sub">Du wirst gleich automatisch zum Start zurückgeführt …</p>
-            <button type="button" class="success-btn" disabled>✅ Anfrage gesendet</button>
+            <p class="success-copy">Vielen Dank für deine Anfrage.<br>Wir melden uns in Kürze bei dir.</p>
+            <p class="success-sub">Du kannst jetzt neu starten und die Schritte erneut durchlaufen.</p>
+            <button type="button" class="success-btn">Neu starten</button>
           </div>
         </fieldset>
 
-        <!-- === Progressbar === -->
-        <div class="stepper" aria-label="Fortschritt" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1">
+        <!-- Stepper -->
+        <div class="stepper" role="progressbar" aria-label="Fortschritt"
+             aria-valuemin="1" aria-valuemax="6" aria-valuenow="1"
+             aria-valuetext="Schritt 1 von 6: Leistung wählen">
           <div class="stepper-header">
             <span id="stepLabel">Schritt 1/6</span>
           </div>
@@ -6573,825 +6351,445 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </div>
 
-        <!-- Wizard Navigation -->
+        <!-- Navigation -->
         <div class="wizard-nav" id="wizardNav">
-          <button type="button" class="nav-btn prev" id="prevBtn" disabled>Zurück</button>
-          <button type="button" class="nav-btn next" id="nextBtn" disabled>Weiter</button>
+          <button type="button" class="nav-btn prev" id="prevBtn" disabled aria-disabled="true">Zurück</button>
+          <button type="button" class="nav-btn next" id="nextBtn" disabled aria-disabled="true">Weiter</button>
           <button type="submit" class="kontakt-btn submit" id="submitBtn" hidden>Senden!</button>
         </div>
+
+        <noscript>
+          <style>.form-step{display:block !important}</style>
+          <p>JavaScript ist deaktiviert – das Formular wird in einem Schritt angezeigt.</p>
+        </noscript>
       </form>
     </div>
 
-    <!-- Videokarte -->
+    <!-- =====================
+         VIDEO-BEREICH
+         ===================== -->
     <div class="video-area" aria-label="Einblick in Prozess, Tools & Zusammenarbeit">
       <div class="video-card">
-        <video 
-          class="video-media"
-          autoplay 
-          loop 
-          muted 
-          playsinline 
-          preload="auto"
-        >
-          <source src="./indexFotoSlideShow/kartenvideo.mp4" type="video/mp4" />
+        <video class="video-media"
+               muted
+               playsinline
+               preload="metadata"
+               poster="/indexFotoSlideShow/poster.jpg"
+               aria-describedby="videoDesc">
+          <source src="./indexFotoSlideShow/kartenvideo.mp4" type="video/mp4">
+          <track kind="captions" src="/captions.vtt" srclang="de" label="Deutsch" default>
           Dein Browser unterstützt das Video-Tag nicht.
         </video>
+        <p id="videoDesc" class="sr-only">Ein kurzer Einblick in Arbeitsweise, Tools und Zusammenarbeit.</p>
       </div>
     </div>
 
-    <!-- Testimonials (volle Breite darunter) -->
-    <div class="testimonial-area">
-      <testimonial-slider></testimonial-slider>
-    </div>
+    <!-- =====================
+         TESTIMONIALS
+         ===================== -->
+    <section class="testimonial-area" aria-labelledby="testiTitle">
+      <h2 id="testiTitle" class="sr-only">Stimmen von Kund:innen</h2>
+      <ul class="testi-list">
+        <!-- Beispielkarte: -->
+        <li class="testi-card" hidden>
+          <figure>
+            <blockquote>
+              „Super Zusammenarbeit – schnell, sauber, kreativ. Unsere Conversion ist spürbar gestiegen.“
+            </blockquote>
+            <figcaption>
+              <strong>Alex M.</strong>, CMO bei Beispiel GmbH
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
+
   </div>
 </section>
-<style>
-  /* ========= Theme Tokens ========= */
+
+ <style>
+  /* ======================= *
+   *        THEME / TOKENS   *
+   * ======================= */
   :root{
     --surface:#fff; --surface-elev:#f7f8fa; --text:#0b0c0e; --muted:#5d6066;
     --border:#e6e8eb; --input-bg:#ffffffcc; --input-text:#0b0c0e; --placeholder:#8b9096; --btn-text:#fff;
-    --choice-green:#00c851; --choice-ink:#ffffff;
+    --choice-green:#00c851; --choice-ink:#ffffff; --choice-orange:#f97316;
     --pill-bg:#f3f5f7; --pill-text:#0b0c0e; --pill-green:#00c851; --pill-green-ink:#ffffff;
-    --aur-ink:#0b0c10; --aur-ink-muted:#0f1729; --aur-shadow-light: 0 1px 2px rgba(0,0,0,.06); --aur-shadow-strong: 0 1px 2px rgba(0,0,0,.18);
+    --aur-ink:#0b0c10; --aur-ink-muted:#0f1729;
+
+    --radius-s:10px; --radius-m:12px; --radius-l:18px;
+    --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem;
+    --shadow-1:0 1px 2px rgba(0,0,0,.06);
+    --shadow-2:0 6px 18px rgba(0,0,0,.12);
+    --shadow-card:0 10px 30px rgba(0,0,0,.06);
+    color-scheme: light dark;
   }
   :root[data-theme="dark"]{
     --surface:#000; --surface-elev:#111216; --text:#f5f7fa; --muted:#c6cad1;
-    --border:#262a31; --input-bg:#111216cc; --input-text:#f5f7fa; --placeholder:#95a0ad; --btn-text:#fff;
+    --border:#262a31; --input-bg:#111216cc; --input-text:#f5f7fa; --placeholder:#95a0ad;
     --pill-bg:#1b1d22; --pill-text:#e8ecf2;
   }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme]){
+      --surface:#000; --surface-elev:#111216; --text:#f5f7fa; --muted:#c6cad1;
+      --border:#262a31; --input-bg:#111216cc; --input-text:#f5f7fa; --placeholder:#95a0ad;
+      --pill-bg:#1b1d22; --pill-text:#e8ecf2;
+    }
+  }
 
-  /* ========= Layout ========= */
+  /* ======================= *
+   *          LAYOUT         *
+   * ======================= */
   html, body { box-sizing:border-box; overflow-x:hidden; margin:0; padding:0; }
   *, *::before, *::after { box-sizing:inherit; }
 
-  .kontakt-testimonial-section{ background:var(--surface); color:var(--text); padding:clamp(2.5rem,5.5vw,5rem) 1.5rem; margin-top:clamp(4rem,8vw,8rem); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; }
+  .kontakt-testimonial-section{
+    background:var(--surface); color:var(--text);
+    padding:clamp(2.5rem,5.5vw,5rem) 1.5rem;
+    margin-top:clamp(4rem,8vw,8rem);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
   .kontakt-testimonial-wrapper{
-    max-width:1440px; margin:0 auto; display:flex; gap:clamp(1.5rem,3.5vw,3rem); flex-wrap:wrap;
-    justify-content:space-between; align-items:stretch; /* gleiche Höhe */
+    max-width:1440px; margin:0 auto; display:flex;
+    gap:clamp(1.5rem,3.5vw,3rem); flex-wrap:wrap;
+    justify-content:space-between; align-items:stretch;
   }
 
   /* Karten nebeneinander gleich hoch */
-  .kontakt-area,
-  .video-area { flex:1 1 480px; max-width:640px; min-width:300px; }
-
+  .kontakt-area, .video-area { flex:1 1 480px; max-width:640px; min-width:300px; }
   .kontakt-area{
-    background:color-mix(in oklab,var(--surface-elev) 85%,transparent);
-    border:1px solid var(--border); border-radius:18px;
+    background: var(--surface-elev); /* Fallback */
+    background: color-mix(in oklab,var(--surface-elev) 85%,transparent);
+    border:1px solid var(--border); border-radius:var(--radius-l);
     padding:clamp(1.1rem,2vw,1.6rem);
-    box-shadow:0 10px 30px rgba(0,0,0,.06);
+    box-shadow:var(--shadow-card);
     backdrop-filter:blur(8px) saturate(1.02);
-    height:auto; display:block;
+    position:relative; overflow:visible; isolation:auto; min-width:0;
+    content-visibility:auto; contain-intrinsic-size:600px 800px;
   }
-
-  /* Videokarte */
-  .video-area{ display:flex; }
-  .video-card{
-    display:flex; flex-direction:column; gap:.8rem;
-    background:color-mix(in oklab,var(--surface-elev) 85%,transparent);
-    border:1px solid var(--border); border-radius:18px;
-    padding:clamp(1.1rem,2vw,1.6rem); width:100%;
-    box-shadow:0 10px 30px rgba(0,0,0,.06); backdrop-filter:blur(8px) saturate(1.02);
-  }
-  .video-header{ display:flex; flex-direction:column; gap:.15rem; text-align:center; } /* mittig */
-  .video-title{ margin:0; font-size:clamp(1.2rem,1rem + .9vw,1.6rem); font-weight:900; letter-spacing:-.01em; color:var(--aur-ink); text-shadow:var(--aur-shadow-light); }
-  .video-sub{ margin:0; color:var(--muted); font-weight:650; }
-
-  /* Video füllt die Kartenhöhe */
-  .video-wrapper{
-    position:relative; flex:1 1 auto; min-height:260px; border-radius:14px; overflow:hidden; background:#000;
-  }
-  .video-media,
-  .video-embed{
-    position:absolute; inset:0; width:100%; height:100%;
-    object-fit:cover; border:0; display:block;
-  }
-
-  /* Testimonials unter die beiden Karten schieben */
-  .testimonial-area{
-    flex:1 1 100%;
-    max-width:100%; min-width:280px;
-  }
-
-  /* ========= Typo ========= */
   .section-title{
     font-size:clamp(1.9rem,1.5rem + 2.2vw,2.65rem); font-weight:900; letter-spacing:-.02em; line-height:1.12;
-    margin:.1rem 0 .45rem; text-wrap:balance; color:var(--aur-ink); text-shadow:var(--aur-shadow-light);
-    text-align:center; margin-inline:auto; /* mittig */
+    margin-block:.1rem .45rem; text-wrap:balance; color:var(--aur-ink); text-align:center;
   }
   .kontakt-subline{
     color:var(--aur-ink-muted); max-width:62rem; margin:0 auto 1.15rem; line-height:1.6;
-    font-size:clamp(1.02rem,1rem + .5vw,1.18rem); letter-spacing:.004em; text-wrap:pretty;
-    padding:.85rem .95rem; border-radius:14px;
+    font-size:clamp(1.02rem,1rem + .5vw,1.18rem); letter-spacing:.004em; text-wrap:pretty; padding:.85rem .95rem; border-radius:14px;
     background:linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03));
     box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05);
-    text-align:center; /* mittig */
+    text-align:center; hyphens:auto;
   }
   :root[data-theme="dark"] .kontakt-subline{
-    color:#fff;
-    background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    color:#fff; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
     box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 2px 8px rgba(0,0,0,.35);
   }
-  .kontakt-area .copy{ color:rgba(0,0,0,.92); font-weight:690; letter-spacing:-.002em; font-size:clamp(1rem,.96rem + .35vw,1.12rem); line-height:1.55; margin:0 0 .25rem; }
-  .step1-copy{ margin-bottom:.25rem !important; }
-  :root[data-theme="dark"] .kontakt-area .copy{ color:rgba(255,255,255,.96); }
 
-  /* ========= Form ========= */
+  /* Video */
+  .video-area{ display:flex; }
+  .video-card{
+    position:relative; width:100%; aspect-ratio:16/9;
+    background: var(--surface-elev);
+    background: color-mix(in oklab,var(--surface-elev) 85%,transparent);
+    border:1px solid var(--border); border-radius:var(--radius-l);
+    box-shadow:var(--shadow-card); backdrop-filter:blur(8px) saturate(1.02);
+    overflow:hidden; padding:0;
+    content-visibility:auto; contain-intrinsic-size:360px 640px;
+  }
+  .video-media{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; border:0; }
+
+  /* Testimonials */
+  .testimonial-area{ flex:1 1 100%; max-width:100%; }
+
+  /* ======================= *
+   *          TYPO           *
+   * ======================= */
+  .kontakt-area .copy{ color:rgba(0,0,0,.92); font-weight:690; letter-spacing:-.002em; font-size:clamp(1rem,.96rem + .35vw,1.12rem); line-height:1.55; margin:0 0 .25rem; }
+  :root[data-theme="dark"] .kontakt-area .copy{ color:rgba(255,255,255,.96); }
+  .microcopy-help{ color:var(--muted); margin:.25rem 0 0; font-weight:600; }
+
+  /* ======================= *
+   *          FORM           *
+   * ======================= */
   .kontakt-form{ display:flex; flex-direction:column; gap:.65rem; width:100%; }
-  .kontakt-form input, .kontakt-form textarea, .kontakt-form select{
-    width:100%; padding:.85rem .95rem; font-size:1rem; border:1px solid var(--border); border-radius:12px; background:var(--input-bg); color:var(--input-text); box-shadow:0 2px 8px rgba(0,0,0,0.04); transition:border-color .2s ease, box-shadow .2s ease, background-color .2s ease; appearance:none;
+
+  .kontakt-form :where(input, textarea, select){
+    width:100%; padding:.85rem .95rem; font-size:1rem;
+    border:1px solid var(--border); border-radius:var(--radius-m);
+    background:var(--input-bg); color:var(--input-text);
+    box-shadow:0 2px 8px rgba(0,0,0,0.04);
+    transition:border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+    appearance:none;
+  }
+  .kontakt-form :where(input, textarea, select):hover{
+    border-color: color-mix(in oklab,var(--text) 20%, var(--border));
+  }
+  .kontakt-form :where(input, textarea, select):focus-visible{
+    outline:3px solid color-mix(in oklab, var(--choice-green) 70%, #000 0%); outline-offset:2px;
+    box-shadow:0 0 0 3px color-mix(in oklab, var(--choice-green) 25%, transparent);
+  }
+  .kontakt-form input:-webkit-autofill{
+    transition: background-color 9999s, color 9999s; /* verhindert gelbes Blinken */
   }
 
-  /* ========= Steps / Stepper / Choices etc. ========= */
-  .sr-only{ position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  /* ======================= *
+   *    STEPS / STEPPER      *
+   * ======================= */
+  .sr-only{
+    position:absolute !important; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
   .form-step{ display:none; }
   .form-step.active{ display:block; }
-  .form-step[data-step="1"]{ margin-bottom:.05rem; }
-  .form-step[data-step="1"] .grid-choices{ margin-bottom:.05rem; }
 
   .stepper{ display:flex; flex-direction:column; gap:.2rem; margin:.25rem 0 .05rem; padding-top:.25rem; border-top:1px solid color-mix(in oklab, var(--border) 75%, transparent); }
-  .stepper-header{ display:flex; justify-content:space-between; align-items:center; font-weight:800; font-size:.88rem; color:var(--muted); line-height:1; margin-bottom:.05rem; }
-  .stepper-track{ position:relative; width:100%; height:6px; background: color-mix(in oklab, var(--choice-green) 12%, transparent); border-radius:999px; overflow:hidden; }
-  .stepper-fill{ position:absolute; inset:0 auto 0 0; width:0%; height:100%; background: linear-gradient(90deg, var(--choice-green), color-mix(in oklab, var(--choice-green) 82%, #007e33 18%)); border-radius:999px; transition: width .22s ease; box-shadow: 0 2px 10px color-mix(in oklab, var(--choice-green) 35%, transparent); }
+  .stepper-header{ display:flex; justify-content:space-between; align-items:center; font-weight:800; font-size:.88rem; color:var(--muted); line-height:1; }
+  .stepper-track{ position:relative; width:100%; height:6px;
+    background:#e9f7ef; /* Fallback */
+    background: color-mix(in oklab, var(--choice-green) 12%, transparent);
+    border-radius:999px; overflow:hidden;
+  }
+  .stepper-fill{ position:absolute; inset:0 auto 0 0; width:0%; height:100%;
+    background:#00c851; /* Fallback */
+    background: linear-gradient(90deg, var(--choice-green), color-mix(in oklab, var(--choice-green) 82%, #007e33 18%));
+    border-radius:999px; transition: width .22s ease; box-shadow: 0 2px 10px color-mix(in oklab, var(--choice-green) 35%, transparent);
+    will-change: width;
+  }
 
   .grid-choices{ display:grid; grid-template-columns:repeat(3,1fr); gap:.5rem; }
   @media (max-width:680px){ .grid-choices{ grid-template-columns:1fr; } }
-  .choice{ position:relative; display:flex; flex-direction:column; gap:.12rem; padding:.85rem; border:2px solid var(--border); border-radius:14px; cursor:pointer; user-select:none; background:var(--surface); transition: box-shadow .15s ease, border-color .15s ease, transform .06s ease, background .15s ease, color .15s ease; outline:none; }
+  .choice{
+    position:relative; display:flex; flex-direction:column; gap:.12rem; padding:1rem;
+    border:2px solid var(--border); border-radius:var(--radius-m); cursor:pointer;
+    background:var(--surface);
+    transition: box-shadow .15s ease, border-color .15s ease, transform .06s ease, background .15s ease, color .15s ease; outline:none;
+  }
   .choice:hover{ box-shadow:0 0 0 3px color-mix(in oklab, var(--choice-green) 25%, transparent); }
   .choice:active{ transform: scale(.995); }
-  .choice .title{ display:block; font-weight:950; letter-spacing:-.01em; line-height:1.18; font-size: clamp(1.06rem, 0.96rem + 0.8vw, 1.5rem); text-shadow: var(--aur-shadow-light); }
-  .choice small{ color:var(--muted); display:block; margin-top:.02rem; font-size: clamp(.9rem, .86rem + .25vw, 1rem); font-weight:650; letter-spacing:.01em; text-shadow: var(--aur-shadow-light); }
+  .choice .title{ display:block; font-weight:950; letter-spacing:-.01em; line-height:1.18; font-size: clamp(1.06rem, 0.96rem + 0.8vw, 1.5rem); }
+  .choice small{ color:var(--muted); display:block; margin-top:.02rem; font-size: clamp(.9rem, .86rem + .25vw, 1rem); font-weight:650; }
   .choice input[type="radio"]{ position:absolute; opacity:0; pointer-events:none; inset:0; width:100%; height:100%; }
-  .choice.selected{ border-color:var(--choice-green); background:var(--choice-green); color:var(--choice-ink); box-shadow:0 6px 18px rgba(0,200,81,.25); }
-  .choice.selected .title, .choice.selected small{ color:var(--choice-ink) !important; text-shadow: 0 1px 1px rgba(0,0,0,.12); }
 
-  .service-block{ margin:.55rem 0 .55rem; padding:.55rem .7rem .7rem; border:1px dashed var(--border); border-radius:12px; background:color-mix(in oklab, var(--surface) 85%, transparent); }
+  /* Ausgewählter State: via :has() UND optional .selected (falls JS das setzt) */
+  .choice:has(input[type="radio"]:checked),
+  .choice.selected{
+    border-color:var(--choice-green); background:var(--choice-green); color:var(--choice-ink); box-shadow:0 6px 18px rgba(0,200,81,.25);
+  }
+  .choice:has(input[type="radio"]:checked) .title,
+  .choice:has(input[type="radio"]:checked) small,
+  .choice.selected .title, .choice.selected small{ color:var(--choice-ink) !important; text-shadow:0 1px 1px rgba(0,0,0,.12); }
+
+  /* Service-Blöcke */
+  .service-block{ margin:.55rem 0 .55rem; padding:.55rem .7rem .7rem; border:1px dashed var(--border); border-radius:var(--radius-m); background:color-mix(in oklab, var(--surface) 85%, transparent); }
   .service-block[hidden]{ display:none !important; }
   .block-title{ margin:.12rem 0 .45rem; font-size:1.04rem; font-weight:900; letter-spacing:-.01em; }
   .select-row, .input-row{ display:flex; flex-direction:column; gap:.3rem; margin-bottom:.5rem; }
 
+  /* Tags / Pills */
   .tags{ display:grid; gap:.45rem; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); margin-top:.05rem; }
   .checkbox-legend{ font-weight:800; margin-bottom:.15rem; }
-  .pill{ display:flex; align-items:center; justify-content:center; min-height:40px; padding:.5rem .65rem; border:2px solid var(--border); border-radius:12px; background:var(--pill-bg); color:var(--pill-text); cursor:pointer; user-select:none; transition: transform .06s ease, background .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease; }
+  .pill{
+    display:flex; align-items:center; justify-content:center; min-height:40px; padding:.5rem .65rem;
+    border:2px solid var(--border); border-radius:var(--radius-m); background:var(--pill-bg); color:var(--pill-text); cursor:pointer; user-select:none;
+    transition: transform .06s ease, background .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease;
+  }
   .pill:hover{ box-shadow:0 0 0 3px color-mix(in oklab, var(--choice-green) 25%, transparent); }
   .pill:active{ transform:scale(.992); }
   .pill input{ position:absolute; opacity:0; pointer-events:none; }
   .pill span{ font-weight:800; letter-spacing:-.01em; }
+  .pill:has(input[type="checkbox"]:checked),
   .pill.selected{ background:var(--pill-green); color:var(--pill-green-ink); border-color:var(--pill-green); box-shadow:0 6px 18px rgba(0,200,81,.25); }
 
-  .wizard-nav{ display:flex; gap:.55rem; align-items:center; margin-top:.1rem; padding-top:.25rem; }
-  .nav-btn{ background:var(--surface-elev); color:var(--text); border:1px solid var(--border); padding:.7rem .9rem; border-radius:12px; font-weight:800; cursor:pointer; transition:none; }
+  /* Wizard Nav */
+  .wizard-nav{ display:flex; gap:.55rem; align-items:center; padding-top:.25rem; }
+  .nav-btn{
+    background:var(--surface-elev); color:var(--text); border:1px solid var(--border);
+    padding:.7rem .9rem; border-radius:var(--radius-m); font-weight:800; cursor:pointer; min-height:44px; min-width:44px;
+  }
   .nav-btn[disabled]{ opacity:.55; cursor:not-allowed; }
   .nav-btn.next{ background: var(--choice-green); color: var(--choice-ink); border: none; box-shadow: 0 6px 18px color-mix(in oklab, var(--choice-green) 40%, transparent); }
+
+  /* Submit (Orange) – AA-Kontrast sichergestellt */
+  #submitBtn,.kontakt-btn.submit{
+    background: color-mix(in oklab, var(--choice-orange) 90%, black 10%);
+    color:#fff;
+    border:1px solid color-mix(in oklab, #f97316 80%, #000 10%);
+    padding:.7rem .9rem; border-radius:var(--radius-m); font-weight:800; font-size:1rem; cursor:pointer;
+    transition: background-color .2s ease, transform .06s ease, box-shadow .15s ease;
+    box-shadow:0 2px 6px rgba(249,115,22,.25);
+  }
+  #submitBtn:hover,.kontakt-btn.submit:hover{ background: color-mix(in oklab, var(--choice-orange) 80%, black 20%); }
+  #submitBtn:active,.kontakt-btn.submit:active{ transform: translateY(1px); box-shadow: 0 1px 3px rgba(249,115,22,.3); }
+  #submitBtn[disabled],.kontakt-btn.submit[disabled]{ opacity:.6; cursor:not-allowed; box-shadow:none; }
 
   /* Success Step */
   .form-step[data-step="6"]{ display:none; }
   .form-step.active[data-step="6"]{ display:block; }
-  .success-card{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.6rem; min-height: var(--step6-minh, 320px); padding: 1rem; border: 2px solid var(--choice-green); border-radius: 14px; background: color-mix(in oklab, var(--choice-green) 8%, var(--surface) 92%); text-align:center; }
+  .success-card{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.6rem;
+    min-height: var(--step6-minh, 320px); padding:1rem;
+    border: 2px solid var(--choice-green); border-radius:var(--radius-m);
+    background: color-mix(in oklab, var(--choice-green) 8%, var(--surface) 92%); text-align:center;
+  }
   .success-title{ font-weight:900; letter-spacing:-.01em; font-size: clamp(1.4rem,1.1rem + 1vw,1.9rem); }
   .success-copy{ font-weight:700; letter-spacing:-.002em; font-size: clamp(1.02rem,.98rem + .35vw,1.16rem); opacity:.95; }
   .success-sub{ color: var(--muted); }
-  .success-btn{ margin-top:.2rem; padding:.8rem 1rem; border-radius:12px; border:none; background:var(--choice-green); color:var(--choice-ink); font-weight:850; box-shadow:0 6px 18px rgba(0,200,81,.25); }
+  .success-btn{ margin-top:.2rem; padding:.8rem 1rem; border-radius:var(--radius-m); border:none; background:var(--choice-green); color:var(--choice-ink); font-weight:850; box-shadow:0 6px 18px rgba(0,200,81,.25); }
   form.is-success .wizard-nav, form.is-success .stepper{ display:none !important; }
-  .success-card.fade-out { animation: successFade 3s ease forwards; }
-  @keyframes successFade { to { opacity: 0; transform: translateY(6px); } }
 
-  /* Responsive */
+  /* Pflicht/Kleingedrucktes */
+  .legal-hint{ font-size:.85rem; line-height:1.45; color:#666; margin:.4rem 0 .2rem; }
+  .legal-hint a{ color:inherit; text-decoration:underline; }
+  :root[data-theme="dark"] .legal-hint, :root[data-theme="dark"] .req-note{ color:#c6cad1; }
+  label.req::after{ content:" *"; color:#b00020; font-weight:900; }
+  .req-note{ font-size:.85rem; color:#666; margin:.2rem 0 .4rem; }
+
+  /* Budget-Chips */
+  .budget-chips{ display:flex; flex-wrap:wrap; gap:.4rem; }
+  .budget-chips .chip{ border:1px solid var(--border); background:var(--surface-elev); border-radius:999px; padding:.4rem .7rem; font-weight:700; cursor:pointer; }
+
+  /* A11y: sichtbarer Fokus */
+  :where(button,.choice,.pill,input,select,textarea):focus-visible{
+    outline:3px solid color-mix(in oklab, var(--choice-green) 70%, #000 0%); outline-offset:2px; border-radius:12px;
+  }
+
+  /* ====== RESPONSIVE / CQ ====== */
   @media (max-width:1024px){
-    .kontakt-testimonial-wrapper{ flex-direction:column; align-items:center; gap:2rem; }
-    .kontakt-area, .video-area, .testimonial-area{ max-width:100%; }
-    .kontakt-btn{ margin:0 auto; }
-  }
-  @media (max-width:540px){
-    .kontakt-area, .testimonial-area, .video-area{ padding:0 .6rem; }
-    .section-title{ font-size:clamp(1.7rem,4.6vw,2.1rem); margin:0 auto .6rem; }
-    .kontakt-form{ padding:0 .1rem; gap:.6rem; }
-    .stepper{ position:sticky; bottom:0; background: color-mix(in oklab, var(--surface) 95%, transparent); padding:.3rem .2rem .2rem; margin:.25rem -.2rem 0; }
-    .wizard-nav{ position:sticky; bottom:0; background: color-mix(in oklab, var(--surface) 95%, transparent); padding:.25rem .2rem .3rem; margin:.05rem -.2rem 0; }
+    .kontakt-testimonial-section{
+      padding:
+        max(16px, calc(env(safe-area-inset-top,0) + 12px))
+        max(16px, calc(env(safe-area-inset-right,0) + 12px))
+        max(20px, calc(env(safe-area-inset-bottom,0) + 12px))
+        max(16px, calc(env(safe-area-inset-left,0) + 12px));
+    }
+    .kontakt-testimonial-wrapper{ gap: clamp(12px, 4vw, 18px); flex-direction:column; align-items:center; }
+    .kontakt-area, .video-area{ width:90%; max-width:1000px; margin-inline:auto; }
+    .wizard-nav{ margin-inline:-2px; border-radius:var(--radius-m); padding-bottom:max(.25rem, env(safe-area-inset-bottom)); }
+    #submitBtn,.kontakt-btn.submit{ width:100%; }
   }
 
-  @media (prefers-reduced-motion:reduce){
-    .kontakt-btn{ animation:none !important; transition:none !important; }
+  /* Container Queries (nur in bestimmter Breite aktivieren) */
+  @media (min-width: 1024px) and (max-width: 1330px){
+    .kontakt-area { container-type: inline-size; }
+    .form-step    { container-type: inline-size; }
+
+    .grid-choices{
+      display: grid;
+      gap: .5rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      min-width: 0;
+    }
+    .choice{ min-width: 0; }
+
+    @container (max-width: 520px){
+      .grid-choices{ grid-template-columns: 1fr; }
+    }
+    @container (min-width: 521px) and (max-width: 820px){
+      .grid-choices{ grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @supports not (container-type: inline-size){
+      .grid-choices{ grid-template-columns: repeat(2, 1fr); }
+    }
+  }
+
+  /* 2-Spalten-Layout nur ~1024–1045px */
+  @media (min-width:1024px) and (max-width:1045px){
+    .kontakt-testimonial-wrapper{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1.5rem,3.5vw,3rem);
+      align-items: stretch;
+      justify-content: space-between;
+    }
+    .kontakt-area{ grid-column: 1; }
+    .video-area  { grid-column: 2; }
+    .testimonial-area{ grid-column: 1 / -1; }
+
+    .kontakt-area, .video-area{
+      width: auto; max-width: none; margin-inline: 0; flex: initial;
+    }
+  }
+
+  /* Video-Card Höhe in Column-Layout */
+  @media (max-width: 1023.98px){
+    .kontakt-area, .video-area{ flex: 0 0 auto; }
+    .video-area{ display:block; width:90%; max-width:1000px; margin-inline:auto; }
+  }
+
+  /* Extra-kompakt für sehr kleine Phones */
+  @media (max-width: 380px){
+    .section-title{ font-size: clamp(1.5rem, 7vw, 1.9rem); }
+    .kontakt-area{ padding:16px !important; }
+  }
+
+  /* Reduced motion & High contrast */
+  @media (prefers-reduced-motion: reduce){
     .stepper-fill{ transition:none !important; }
   }
-/* Karten-Wrapper: gleiche Höhe */
-.kontakt-testimonial-wrapper{
-  max-width:1440px; margin:0 auto; display:flex;
-  gap:clamp(1.5rem,3.5vw,3rem); flex-wrap:wrap;
-  justify-content:space-between; align-items:stretch; /* wichtig: gleiche Höhe */
+  @media (forced-colors: active){
+    *{ forced-color-adjust: auto; }
+    .choice, .pill, .nav-btn{ border: 1px solid ButtonText; }
+    .stepper-track{ background: CanvasText; }
+    .stepper-fill{ background: Highlight; }
+  }
+  /* ======================================================
+   Kontaktfelder (Name, E-Mail, Telefon, Nachricht)
+   ====================================================== */
+.contact-grid .field {
+  margin-block: 0.8rem 1rem;      /* mehr vertikaler Abstand */
 }
 
-/* Kontakt- und Videokarte teilen sich die Zeile */
-.kontakt-area,
-.video-area { flex:1 1 480px; max-width:640px; min-width:300px; }
-
-/* Texte zentriert */
-.section-title,
-.kontakt-subline { text-align:center; }
-
-/* Videokarte ohne Headline – Video füllt Karte */
-.video-area{ display:flex; }
-.video-card{
-  position:relative; height:100%; width:100%;
-  background:color-mix(in oklab,var(--surface-elev) 85%,transparent);
-  border:1px solid var(--border); border-radius:18px;
-  box-shadow:0 10px 30px rgba(0,0,0,.06); backdrop-filter:blur(8px) saturate(1.02);
-  overflow:hidden; /* runde Ecken fürs Video */
-  padding:0;       /* randlos */
-}
-.video-media{
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover; display:block; border:0;
+.contact-grid label {
+  font-size: 1.05rem;
+  font-weight: 750;
+  margin-bottom: 0.45rem;
+  letter-spacing: -0.005em;
 }
 
-/* Testimonials weiterhin darunter in voller Breite */
-.testimonial-area{ flex:1 1 100%; max-width:100%; }
-
-/* ===== Kontaktkarte (Step 5) – responsives Innen-Layout ===== */
-.form-step[data-step="5"] .contact-grid{
-  display:grid;
-  grid-template-columns: repeat(12, minmax(0,1fr));
-  gap:.65rem;
+.contact-grid input,
+.contact-grid textarea {
+  font-size: 1.1rem;              /* größere Schrift */
+  line-height: 1.55;
+  padding-block: 1.05rem;         /* mehr Innenabstand oben/unten */
+  padding-inline: 1rem;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  color: var(--input-text);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
 
-/* generische Feld-Box */
-.form-step[data-step="5"] .field{
-  grid-column: span 12;
-  display:flex; flex-direction:column; gap:.35rem;
-}
-
-/* Label etwas ruhiger, aber eindeutig */
-.form-step[data-step="5"] .field label{
-  font-weight:800; letter-spacing:-.01em;
-}
-
-/* Inputs / Textareas füllen die Spalte (nutzen schon deine Basis-Input-Styles) */
-.form-step[data-step="5"] .field input,
-.form-step[data-step="5"] .field textarea,
-.form-step[data-step="5"] .field select{
-  width:100%;
-}
-
-/* Textarea angenehm groß, aber nicht riesig */
-.form-step[data-step="5"] .field textarea{
-  min-height: clamp(120px, 16vh, 220px);
+.contact-grid textarea {
+  min-height: 8rem;
   resize: vertical;
 }
 
-/* Fehlertexte brechen sauber um */
-.form-step[data-step="5"] .field .field-error{
-  line-height:1.25;
+.contact-grid input:focus-visible,
+.contact-grid textarea:focus-visible {
+  outline: 3px solid color-mix(in oklab, var(--choice-green) 70%, #000 0%);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--choice-green) 25%, transparent);
 }
 
-/* Grid-Spans (12er System) */
-.form-step[data-step="5"] .span-12{ grid-column: span 12; }
-.form-step[data-step="5"] .span-6 { grid-column: span 12; } /* default: full width */
-.form-step[data-step="5"] .span-4 { grid-column: span 12; }
-.form-step[data-step="5"] .span-8 { grid-column: span 12; }
+  </style>
 
-/* ab ~700px zweispaltig */
-@media (min-width:700px){
-  .form-step[data-step="5"] .span-6 { grid-column: span 6; }
-  .form-step[data-step="5"] .span-4 { grid-column: span 4; }
-  .form-step[data-step="5"] .span-8 { grid-column: span 8; }
-}
-
-/* ab ~1024px etwas luftiger – optional */
-@media (min-width:1024px){
-  .form-step[data-step="5"] .contact-grid{ gap:.75rem; }
-}
-
-/* Buttons in der Kontaktkarte über die volle Breite andocken */
-.form-step[data-step="5"] + .wizard-nav{
-  margin-top:.5rem;
-}
-/* Handy: Videokarte bewusst flacher + nicht mehr gestreckt */
-@media (max-width:600px){
-  .video-area{
-    flex: 0 0 auto;               /* nicht mehr mitwachsen */
-    align-self: stretch;           /* volle Breite behalten */
-  }
-  .video-area .video-card{
-    height: 180px !important;      /* flach erzwingen */
-    min-height: 180px !important;
-    aspect-ratio: auto !important; /* falls ein aspect-ratio greift, neutralisieren */
-  }
-  .video-area .video-media{
-    object-fit: cover;
-    object-position: center center;
-  }
-}
-/* Step-1 Auswahlkarten strikt innerhalb der Kontaktkarte halten */
-.kontakt-area{
-  position: relative;
-  isolation: isolate;     /* eigener Stacking-Context */
-  overflow: clip;         /* nichts ragt aus der Karte heraus */
-  min-width: 0;           /* Flex-Overflow verhindern */
-}
-
-.kontakt-form{ max-width: 100%; overflow: clip; }
-.form-step[data-step="1"]{ max-width: 100%; }
-
-.grid-choices{ max-width: 100%; overflow: clip; }
-.grid-choices .choice{
-  transform-origin: center;     /* Hover/Active bleibt innen */
-  will-change: transform;
-}
-
-/* Kontaktkarte darf breiter werden, Videokarte etwas schmaler */
-.kontakt-area{ flex:1.2 1 640px; max-width:780px; }
-.video-area{ flex:0.8 1 420px; max-width:540px; }
-
-/* trotzdem gleich hohe Karten */
-.kontakt-testimonial-wrapper{
-  align-items:stretch;
-}
-
-/* Falls nötig: Hover-Effekte der Choices nicht abschneiden */
-.kontakt-area{ overflow:visible; }
-
-/* Wenn Karten untereinander: zentriert & breiter darstellen */
-@media (max-width:1024px){
-  .kontakt-testimonial-wrapper{
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    gap:2rem;
-  }
-
-  .kontakt-area,
-  .video-area{
-    width:90%;
-    max-width:1000px;      /* deutlich breiter */
-    margin-inline:auto;
-  }
-} 
-/* 1024px–1148px: Kontaktkarte mittig, Videokarte darunter */
-@media (min-width:1024px) and (max-width:1148px){
-  .kontakt-testimonial-wrapper{
-    /* Spalten-Stack statt Reihe */
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1.75rem;
-  }
-
-  /* Side-by-side Vorgaben überstimmen */
-  .kontakt-area,
-  .video-area{
-    flex: 0 0 auto;              /* nicht strecken/schrumpfen */
-    width: min(92vw, 780px);     /* schön breit, aber begrenzt */
-    max-width: 100%;
-    margin-inline: auto;         /* perfekt mittig */
-  }
-
-  /* Reihenfolge explizit festlegen */
-  .kontakt-area{ order: 1; }
-  .video-area{   order: 2; }
-  .testimonial-area{ order: 3; width: 100%; }
-
-  /* Falls die Videokarte zuvor höhengleich gezogen wurde: hier auto */
-  .video-area .video-card{
-    height: auto;
-    min-height: 260px;
-  }
-}
-
-/* === 1) Hover oben nicht mehr abgeschnitten (Step 1) === */
-/* Alles, was Step-1 umgibt, darf Überstand durch Hover-Shadow zeigen */
-.kontakt-area,
-.kontakt-form,
-.form-step[data-step="1"],
-.grid-choices{
-  overflow: visible !important;
-}
-
-/* Falls ein Parent irgendwo noch clip/hidden setzt: neutralisieren */
-.kontakt-area{ isolation:auto !important; }
-
-/* Optional: minimaler Innenabstand oben, damit große Shadows Platz haben */
-.form-step[data-step="1"]{
-  padding-top: .1rem;
-}
-
-/* === 2) Kontaktkarte (Step 5) – alles untereinander + responsive === */
-.form-step[data-step="5"] .contact-grid{
-  display:grid;
-  grid-template-columns: 1fr; /* nur 1 Spalte */
-  gap: .7rem;
-}
-
-/* Alle Spans auf volle Breite erzwingen */
-.form-step[data-step="5"] .span-12,
-.form-step[data-step="5"] .span-8,
-.form-step[data-step="5"] .span-6,
-.form-step[data-step="5"] .span-4{
-  grid-column: 1 / -1 !important;
-}
-
-/* Typo & Abstände wie vorher – übernehmen/inherit */
-.form-step[data-step="5"] .field{
-  display:flex; flex-direction:column; gap:.35rem;
-  font: inherit; color: inherit;
-}
-.form-step[data-step="5"] .field label{
-  font-weight:800; letter-spacing:-.01em;
-}
-.form-step[data-step="5"] .field input,
-.form-step[data-step="5"] .field textarea,
-.form-step[data-step="5"] .field select{
-  width:100%;
-  font: inherit; color: inherit;
-}
-
-/* Textarea angenehm, aber nicht riesig – passt sich Viewport an */
-.form-step[data-step="5"] .field textarea{
-  min-height: clamp(120px, 18vh, 220px);
-  resize: vertical;
-}
-
-/* Mobile Feinschliff */
-@media (max-width:700px){
-  .form-step[data-step="5"] .contact-grid{ gap:.6rem; }
-  .form-step[data-step="5"] .field label{ font-weight:800; }
-  .form-step[data-step="5"] .field textarea{ min-height: clamp(110px, 22vh, 200px); }
-}
-
-/* === "Senden"-Button wie "Zurück", aber Orange === */
-#submitBtn,
-.kontakt-btn.submit {
-  background: var(--choice-orange, #f97316); /* Orange Basisfarbe */
-  color: #fff;
-  border: 1px solid color-mix(in oklab, #f97316 80%, #000 10%);
-  padding: .7rem .9rem;
-  border-radius: 12px;
-  font-weight: 800;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color .2s ease, transform .06s ease, box-shadow .15s ease;
-  box-shadow: 0 2px 6px rgba(249,115,22,.25);
-}
-
-/* Hover-Effekt wie beim Zurück-Button (leicht heller) */
-#submitBtn:hover,
-.kontakt-btn.submit:hover {
-  background: color-mix(in oklab, #f97316 90%, white 10%);
-}
-
-/* Active-State: leichter Klick-Eindruck */
-#submitBtn:active,
-.kontakt-btn.submit:active {
-  transform: translateY(1px);
-  box-shadow: 0 1px 3px rgba(249,115,22,.3);
-}
-
-/* Disabled-State: gleiches Verhalten wie Zurück-Button */
-#submitBtn[disabled],
-.kontakt-btn.submit[disabled] {
-  opacity: .6;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-/* Damit der Button im letzten Step (Step 5) schön sitzt */
-.form-step[data-step="5"] .wizard-nav #submitBtn,
-.form-step[data-step="5"] .wizard-nav .kontakt-btn.submit {
-  width: 100%;
-  margin-top: .4rem;
-}
-
-/* === Typo-Konsistenz für alle Formular-Controls (alle Steps) === */
-.kontakt-form,
-.kontakt-form input,
-.kontakt-form textarea,
-.kontakt-form select,
-.kontakt-form button {
-  font-family: inherit;                 /* gleiche Schriftfamilie wie außen */
-  color: var(--input-text);
-  letter-spacing: .004em;
-  -webkit-font-smoothing: antialiased;  /* gleiche Glättung */
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Placeholder-Optik angleichen */
-.kontakt-form ::placeholder {
-  color: var(--placeholder);
-  opacity: 1;
-}
-
-/* Browser-Autofill angleichen (hell) */
-.kontakt-form input:-webkit-autofill,
-.kontakt-form textarea:-webkit-autofill,
-.kontakt-form select:-webkit-autofill {
-  -webkit-text-fill-color: var(--input-text);
-  transition: background-color 9999s ease-out, color 9999s ease-out;
-  box-shadow: 0 0 0 1000px var(--input-bg) inset !important; /* gleiche Input-Fläche */
-}
-
-/* Dark-Theme: Autofill leicht abdunkeln */
-:root[data-theme="dark"] .kontakt-form input:-webkit-autofill,
-:root[data-theme="dark"] .kontakt-form textarea:-webkit-autofill,
-:root[data-theme="dark"] .kontakt-form select:-webkit-autofill {
-  -webkit-text-fill-color: var(--input-text);
-  box-shadow: 0 0 0 1000px color-mix(in oklab, var(--input-bg) 92%, black 8%) inset !important;
-}
-
-/* === Step 5 gezielt an die gleiche Typo wie die restlichen Copy-Texte binden === */
-.form-step[data-step="5"] {
-  color: var(--text);
-  line-height: 1.55;                 /* wie .kontakt-area .copy */
-  letter-spacing: .004em;
-  font-size: clamp(1rem,.96rem + .35vw,1.12rem);
-}
-
-/* Labels in Step 5 wie überall: kräftig, aber sauber */
-.form-step[data-step="5"] .field label{
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  color: var(--aur-ink);
-}
-
-/* Inputs in Step 5: die Basis-Input-Styles behalten + gleiche Typo */
-.form-step[data-step="5"] .field input,
-.form-step[data-step="5"] .field textarea,
-.form-step[data-step="5"] .field select{
-  font-family: inherit;
-  font-size: 1rem;     /* konsistent zu deiner globalen Input-Regel */
-  line-height: 1.4;
-  color: var(--input-text);
-}
-
-/* Optional: Headline/Intro in Step 5 optisch angleichen (falls vorhanden) */
-.form-step[data-step="5"] .copy {
-  color: rgba(0,0,0,.92);
-  font-weight: 690;
-  letter-spacing: -0.002em;
-  font-size: clamp(1rem,.96rem + .35vw,1.12rem);
-}
-:root[data-theme="dark"] .form-step[data-step="5"] .copy {
-  color: rgba(255,255,255,.96);
-}
-/* =========================
-   MOBILE POLISH (≤ 600px)
-   ========================= */
-@media (max-width:1024px){
-
-  /* 1) Sektion: saubere Abstände + Safe-Area */
-  .kontakt-testimonial-section{
-    padding:
-      max(16px, calc(env(safe-area-inset-top,0) + 12px))
-      max(16px, calc(env(safe-area-inset-right,0) + 12px))
-      max(20px, calc(env(safe-area-inset-bottom,0) + 12px))
-      max(16px, calc(env(safe-area-inset-left,0) + 12px));
-  }
-
-  /* 2) Wrapper enger, damit die Karte visuell breiter wirkt */
-  .kontakt-testimonial-wrapper{
-    gap: clamp(12px, 4vw, 18px);
-  }
-
-  /* 3) Kontaktkarte: wieder "innen" gepolstert & volle Breite
-        (überschreibt dein früheres padding: 0 .6rem auf mobile) */
-  .kontakt-area{
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    border-radius: 16px;
-    padding: clamp(14px, 4.5vw, 18px) !important;   /* mehr Innenabstand */
-    overflow: visible;                               /* nichts abschneiden */
-  }
-
-  /* 4) Überschrift/Subline: nie abgeschnitten, genug Luft oben */
-  .kontakt-area .section-title{
-    margin-top: .2rem;
-    padding-top: .15rem;
-    line-height: 1.2;
-    overflow: visible;
-    word-break: normal;
-    hyphens: auto;
-    text-wrap: balance;
-  }
-  .kontakt-area .kontakt-subline{
-    margin-top: .35rem;
-  }
-
-  /* 5) Choice-Karten: größere Touch-Ziele, kein Clipping */
-  .form-step[data-step="1"] .grid-choices{
-    gap: .6rem;
-  }
-  .form-step[data-step="1"] .grid-choices .choice{
-    padding: 1rem .95rem;
-    border-radius: 16px;
-    min-height: 64px;
-    /* eigener stacking-context, damit Shadow oben/unten sichtbar bleibt */
-    position: relative;
-    z-index: 0;
-  }
-  .form-step[data-step="1"]{
-    padding-top: .25rem; /* extra Luft damit Schatten nicht "oben" anstößt */
-  }
-
-  /* 6) Sticky-Elemente: vermeiden visuelles „Drücken“ */
-  .stepper,
-  .wizard-nav{
-    margin-left: -2px;
-    margin-right: -2px;
-    border-radius: 12px;
-  }
-
-  /* 7) Formularfelder: Fingerfreundlich */
-  .kontakt-form input,
-  .kontakt-form select,
-  .kontakt-form textarea{
-    padding: 0.95rem 1rem;
-    font-size: 1.02rem; /* minimal größer für Lesbarkeit */
-  }
-
-  /* 8) Video-Karte: darunter, vollbreit, flacher */
-  .video-area{
-    width: 100%;
-    max-width: none;
-  }
-  .video-area .video-card{
-    height: 200px !important;
-    min-height: 200px !important;
-    border-radius: 16px;
-  }
-  .video-area .video-media{
-    object-fit: cover;
-    object-position: center;
-  }
-
-  /* 9) Step-5: einspaltig + gleiche Typo (falls noch überstimmt) */
-  .form-step[data-step="5"] .contact-grid{
-    grid-template-columns: 1fr;
-    gap: .65rem;
-  }
-  .form-step[data-step="5"]{
-    font-size: clamp(1rem, 1.5vw + .96rem, 1.1rem);
-    line-height: 1.55;
-  }
-  .form-step[data-step="5"] .field label{
-    font-weight: 800;
-    letter-spacing: -0.01em;
-  }
-
-  /* 10) Buttons: full-width, klare Hierarchie */
-  .wizard-nav .nav-btn{
-    flex: 1 1 auto;
-  }
-  #submitBtn,
-  .kontakt-btn.submit{
-    width: 100%;
-  }
-}
-
-/* Optional (≤ 380px, sehr kleine Phones): noch etwas mehr Luft oben */
-@media (max-width:380px){
-  .kontakt-area{
-    padding: 16px !important;
-  }
-  .kontakt-area .section-title{
-    font-size: clamp(1.5rem, 7vw, 1.9rem);
-  }
-}
-/* Step 5: immer linksbündig, egal ob die Karte mittig steht */
-.kontakt-area .form-step[data-step="5"]{
-  text-align: left !important;            /* überschreibt zentrierte Eltern */
-}
-
-.kontakt-area .form-step[data-step="5"] .contact-grid{
-  justify-items: stretch;
-  align-items: start;
-}
-
-.kontakt-area .form-step[data-step="5"] .field,
-.kontakt-area .form-step[data-step="5"] .field label{
-  text-align: left !important;
-}
-
-.kontakt-area .form-step[data-step="5"] .field input,
-.kontakt-area .form-step[data-step="5"] .field select,
-.kontakt-area .form-step[data-step="5"] .field textarea{
-  text-align: left;                        /* auch Inhalt/Placeholder links */
-}
-
-/* falls du irgendwo text-centring auf .wizard-nav hast: nur Buttons mittig lassen */
-.kontakt-area .form-step[data-step="5"] + .wizard-nav{
-  text-align: left;                        /* Navigation linksbündig (optional) */
-}
-/* === Step 5: "Senden"-Button immer linksbündig, auch wenn Karte mittig steht === */
-
-/* sorgt dafür, dass das Nav-Element selbst links ausgerichtet ist */
-.kontakt-area .form-step[data-step="5"] + .wizard-nav {
-  display: flex !important;
-  justify-content: flex-start !important;  /* Button-Leiste links ausrichten */
-  text-align: left !important;
-  width: 100%;
-}
-
-/* "Senden"-Button linksbündig halten, nicht zentrieren */
-.kontakt-area .form-step[data-step="5"] + .wizard-nav #submitBtn,
-.kontakt-area .form-step[data-step="5"] + .wizard-nav .kontakt-btn.submit {
-  justify-content: flex-start !important;
-  align-self: flex-start !important;
-  margin-left: 0 !important;
-  margin-right: auto !important;
-  width: auto !important;          /* verhindert full-width */
-  min-width: 160px;
-}
-
-/* Falls du den Zurück-Button daneben hast → schöner Abstand */
-.kontakt-area .form-step[data-step="5"] + .wizard-nav .nav-btn:not(#submitBtn) {
-  margin-right: .6rem;
-}
-
-.legal-hint{
-  font-size:.85rem; line-height:1.45;
-  color:#666; margin:.4rem 0 .2rem;
-}
-.legal-hint a{ color:inherit; text-decoration:underline; }
-:root[data-theme="dark"] .legal-hint{ color:#c6cad1; }
-
-/* Pflichtfeld-Kennzeichnung */
-label.req::after{
-  content:" *";
-  color:#b00020;
-  font-weight:900;
-}
-.req-note{
-  font-size:.85rem; color:#666; margin:.2rem 0 .4rem;
-}
-:root[data-theme="dark"] .req-note{ color:#c6cad1; }
-
-/* =======================================
-   Ganze Pill grün, wenn angeklickt
-   ======================================= */
-.pill input[type="checkbox"]:checked ~ span,
-.pill input[type="checkbox"]:checked ~ * {
-  background: var(--pill-green);
-  color: var(--pill-green-ink);
-  border-color: var(--pill-green);
-  box-shadow: 0 6px 18px rgba(0,200,81,.25);
-}
-
-/* ===== Fix: 680px–1024px -> Karten nicht mehr vertikal strecken ===== */
-@media (max-width:1024px) and (min-width:680px){
-  .kontakt-testimonial-wrapper{
-    flex-direction: column;      /* wie bei dir vorgesehen */
-    align-items: center;
-  }
-
-  /* wichtig: kein flex:1 im Spaltenlayout -> sonst wird Höhe aufgeblasen */
-  .kontakt-area,
-  .video-area{
-    flex: 0 0 auto !important;   /* nicht strecken */
-    width: min(92vw, 780px);     /* hübsche Breite */
-    height: auto !important;
-    margin-inline: auto;
-  }
-
-  /* Videokarte nicht künstlich hochziehen */
-  .video-area .video-card{
-    height: auto !important;
-    min-height: 280px;           /* angenehme Untergrenze */
-    aspect-ratio: 16 / 9;        /* hält das Video kompakt */
-  }
-
-  /* Optional: innen etwas kompakter, damit die Kontaktkarte nicht „luftig“ wirkt */
-  .kontakt-area{
-    padding: clamp(14px, 2.2vw, 20px) !important;
-  }
-}
-/* --- A) SOLO: Kontaktkarte alleine & breiter -------------------- */
-/* <section id="kontakt" class="kontakt-testimonial-section variant-solo"> */
-@media (min-width:840px) and (max-width:1148px){
-  #kontakt.variant-solo .kontakt-testimonial-wrapper{
-    flex-direction: column;
-    align-items: center;
-    gap: clamp(16px, 2.5vw, 24px);
-  }
-  #kontakt.variant-solo .kontakt-area{
-    flex: 0 0 auto !important;
-    width: min(96vw, 980px);
-    max-width: 100%;
-    margin-inline: auto;
-  }
-  /* Video bewusst ausblenden (oder nach unten verlagern) */
-  #kontakt.variant-solo .video-area{
-    display: none;               /* oder: display:block;width:min(92vw,720px) */
-  }
-}
-
-</style>
 <script>
 (function () {
+  'use strict';
+
+  /* =====================================================
+     Guard: Script nicht doppelt initialisieren
+  ====================================================== */
+  if (window.__kontaktWizardInitialized) return;
+  window.__kontaktWizardInitialized = true;
+
+  /* =====================================================
+     Cache DOM
+  ====================================================== */
   const form = document.getElementById('kontaktForm');
   if (!form) return;
 
-  /* =========================
-     Cache DOM
-  ========================== */
   const allSteps  = Array.from(form.querySelectorAll('.form-step'));
   const stepper   = form.querySelector('.stepper');
   const stepLabel = document.getElementById('stepLabel');
@@ -7399,36 +6797,41 @@ label.req::after{
   const prevBtn   = document.getElementById('prevBtn');
   const nextBtn   = document.getElementById('nextBtn');
   const submitBtn = document.getElementById('submitBtn');
+  const errorSummary = document.getElementById('errorSummary');
+  const statusBox = form.querySelector('[data-status]');
 
-  // Success-Card DOM
+  // Success-Card DOM (kann bei "is-success" sichtbar werden)
   const successFieldset = allSteps.find(s => s.dataset.step === '6');
-  const successCard     = successFieldset?.querySelector('.success-card');
-  const successBtn      = successFieldset?.querySelector('.success-btn');
-  const successSub      = successFieldset?.querySelector('.success-sub');
 
-  /* =========================
-     Live Status (a11y)
-  ========================== */
-  let statusBox = form.querySelector('[data-status]');
-  if (!statusBox) {
-    statusBox = document.createElement('div');
-    statusBox.setAttribute('data-status','');
-    statusBox.setAttribute('role','status');
-    statusBox.setAttribute('aria-live','polite');
-    statusBox.style.cssText = 'margin:.5rem 0 .25rem;font-weight:700;text-align:center;';
-    form.insertBefore(statusBox, form.firstChild);
-  }
-  const setStatus = (msg, tone='')=>{
+  /* =====================================================
+     Helpers
+  ====================================================== */
+  const q  = (sel,root=document)=>root.querySelector(sel);
+  const qa = (sel,root=document)=>Array.from(root.querySelectorAll(sel));
+  const trim = s => (s||'').toString().trim();
+
+  const STEP_NAMES = ['Leistung wählen','Material & Style','Ziele','Zeit & Budget','Kontaktdaten','Fertig'];
+  const STORE_KEY = 'kontakt-wizard-v1';
+
+  function setStatus(msg, tone=''){
+    if (!statusBox) return;
     statusBox.textContent = msg || '';
-    statusBox.style.color =
-      tone==='error' ? '#b00020' :
-      tone==='ok'    ? '#0a7f2e' :
-      tone==='warn'  ? '#a15c00' : 'inherit';
-  };
+    // statt Inline-Farbe: nur Tone-Flag; Styling per CSS möglich
+    statusBox.dataset.tone = tone;
+  }
 
-  /* =========================
-     Hidden Fields / Honeypot
-  ========================== */
+  // Einfache Debounce-Utility fürs Draft-Speichern
+  function debounce(fn, wait=200){
+    let t=0;
+    return (...args)=>{
+      clearTimeout(t);
+      t = setTimeout(()=>fn(...args), wait);
+    };
+  }
+
+  /* =====================================================
+     Hidden Fields / Honeypot / Meta
+  ====================================================== */
   ensureHidden({ id:'autoSubject',     name:'_subject',         tag:'input'    });
   ensureHidden({ id:'summaryPlain',    name:'summary_plain',    tag:'textarea' });
   ensureHidden({ id:'selectedService', name:'selected_service', tag:'input'    });
@@ -7451,13 +6854,9 @@ label.req::after{
     return el;
   }
 
-  /* =========================
-     Helpers
-  ========================== */
-  const q  = (sel,root=form)=>root.querySelector(sel);
-  const qa = (sel,root=form)=>Array.from(root.querySelectorAll(sel));
-  const trim = s => (s||'').toString().trim();
-
+  /* =====================================================
+     Data helpers
+  ====================================================== */
   function collectStepData(stepEl) {
     const data = {};
     stepEl.querySelectorAll('input, select, textarea').forEach(el=>{
@@ -7485,35 +6884,30 @@ label.req::after{
     const success = allSteps.find(s => s.dataset.step === '6');
     return form.classList.contains('is-success') && success ? [...base, success] : base;
   }
-  function getCurrentIndex(){ return Math.max(0, getApplicableSteps().indexOf(currentStepEl)); }
-  function clampIndex(i){ const st = getApplicableSteps(); return Math.min(Math.max(i,0), st.length-1); }
 
-  function isContactStep(stepEl){
-    if (!stepEl) return false;
-    if (stepEl.dataset.step === '5') return true;
-    const hasName = stepEl.querySelector('input[name="name"]');
-    const hasMail = stepEl.querySelector('input[name="email"]');
-    const hasMsg  = stepEl.querySelector('textarea[name="message"]');
-    return !!(hasName || hasMail || hasMsg);
-  }
-
-  /* =========================
-     UI / Progress
-  ========================== */
+  /* =====================================================
+     Stepper / Service-Blocks / Pills
+  ====================================================== */
   function updateChoiceUI(){
     form.querySelectorAll('.grid-choices .choice').forEach(label=>{
       const rb = label.querySelector('input[type="radio"]');
-      label.classList.toggle('selected', !!(rb && rb.checked));
+      const on = !!(rb && rb.checked);
+      label.classList.toggle('selected', on);
+      label.setAttribute('aria-checked', on ? 'true' : 'false');
+      label.setAttribute('role', 'radio');
     });
     const any = form.querySelector('input[name="service"]:checked');
-    if(currentStepEl === allSteps[0]) nextBtn.disabled = !any;
+    if (currentStepEl === allSteps[0]) nextBtn.disabled = !any;
     setProgress(getCurrentIndex());
   }
 
   function updatePillUI(){
     form.querySelectorAll('.pill').forEach(lbl=>{
       const cb = lbl.querySelector('input[type="checkbox"]');
-      lbl.classList.toggle('selected', !!(cb && cb.checked));
+      const on = !!(cb && cb.checked);
+      lbl.classList.toggle('selected', on);
+      lbl.setAttribute('aria-pressed', on ? 'true' : 'false');
+      lbl.setAttribute('role','button');
     });
   }
 
@@ -7534,8 +6928,11 @@ label.req::after{
         });
       });
     });
-    // nach dem Umschalten neu bewerten (grün hinterlegen)
     updatePillUI();
+  }
+
+  function getCurrentIndex(){
+    return Math.max(0, getApplicableSteps().indexOf(currentStepEl));
   }
 
   function setProgress(idx){
@@ -7544,10 +6941,12 @@ label.req::after{
     if(idx === 0){
       pct = form.querySelector('input[name="service"]:checked') ? 12 : 0;
     } else {
-      pct = Math.min(100, Math.round((idx / (steps.length - 1)) * 100));
+      const max = Math.max(steps.length - 1, 1);
+      pct = Math.min(100, Math.round((idx / max) * 100));
     }
     if (stepFill) stepFill.style.width = pct + '%';
     stepper?.setAttribute('aria-valuenow', String(idx + 1));
+    stepper?.setAttribute('aria-valuetext', `Schritt ${idx+1} von ${steps.length}: ${STEP_NAMES[idx]||''}`);
     if (stepLabel) stepLabel.textContent = `Schritt ${idx + 1}/${steps.length}`;
   }
 
@@ -7557,15 +6956,24 @@ label.req::after{
     if (!submitBtn.textContent.trim()) submitBtn.textContent = 'Jetzt Anfrage senden';
   }
 
-  /* =========================
-     Navigation
-  ========================== */
+  function isContactStep(stepEl){
+    if (!stepEl) return false;
+    if (stepEl.dataset.step === '5') return true;
+    const hasName = stepEl.querySelector('input[name="name"]');
+    const hasMail = stepEl.querySelector('input[name="email"]');
+    const hasMsg  = stepEl.querySelector('textarea[name="message"]');
+    return !!(hasName || hasMail || hasMsg);
+  }
+
+  /* =====================================================
+     Navigation + Fokusfluss
+  ====================================================== */
   let currentStepEl = allSteps[0];
 
   function showStepByIndex(idx){
     const steps = getApplicableSteps();
     if(!steps.length) return;
-    const targetIdx = clampIndex(idx);
+    const targetIdx = Math.min(Math.max(idx,0), steps.length-1);
     const targetEl  = steps[targetIdx];
 
     allSteps.forEach(s => s.classList.remove('active'));
@@ -7576,30 +6984,19 @@ label.req::after{
 
     if (isSuccess) {
       form.classList.add('is-success');
-
-      prevBtn.hidden = true;
-      nextBtn.hidden = true;
-      submitBtn.hidden = true;
+      prevBtn.hidden = true; nextBtn.hidden = true; submitBtn.hidden = true;
 
       const step1 = allSteps.find(s => s.dataset.step === '1');
       const h = step1 ? step1.scrollHeight : 320;
       targetEl.style.setProperty('--step6-minh', h + 'px');
 
-      // 💡 Restart-Button immer neu, immer klickbar
-      const oldBtn = successFieldset.querySelector('.success-btn');
-      if (oldBtn) {
-        const freshBtn = oldBtn.cloneNode(true);
-        oldBtn.parentNode.replaceChild(freshBtn, oldBtn);
-        freshBtn.disabled = false;
-        freshBtn.textContent = 'Neu starten';
-        freshBtn.setAttribute('aria-label','Wizard neu starten');
-        freshBtn.style.color = '#fff';
-        freshBtn.addEventListener('click', handleRestart);
-      }
-
-      if (successSub) {
-        successSub.textContent = 'Du kannst jetzt neu starten und die Schritte erneut durchlaufen.';
-        successSub.style.color = '#fff';
+      const btn = successFieldset?.querySelector('.success-btn');
+      if (btn && !btn.dataset.bound) {
+        btn.disabled = false;
+        btn.textContent = 'Neu starten';
+        btn.setAttribute('aria-label','Wizard neu starten');
+        btn.addEventListener('click', handleRestart, { once:true });
+        btn.dataset.bound = '1';
       }
 
     } else {
@@ -7613,94 +7010,90 @@ label.req::after{
       nextBtn.disabled = targetEl === allSteps[0] && !form.querySelector('input[name="service"]:checked');
     }
 
-    // sicherstellen, dass Pills korrekt eingefärbt bleiben
     updatePillUI();
-
     setProgress(targetIdx);
-    const first = targetEl.querySelector('input:not([disabled]),select:not([disabled]),textarea:not([disabled])');
-    first?.focus({preventScroll:true});
+
+    // Fokus auf Step-Titel für SR-Kontextwechsel
+    const focusTarget = targetEl.querySelector('h3,.block-title,.copy') || targetEl;
+    focusTarget.setAttribute('tabindex','-1');
+    focusTarget.focus({preventScroll:true});
   }
 
-  /* =========================
-     Restart / Success Handling
-  ========================== */
-  function resetToStep1(scrollToStart = true){
-    form.reset();
-    form.classList.remove('is-success');
-    allSteps.forEach(s => s.classList.remove('active'));
-    const step1 = allSteps.find(s => s.dataset.step === '1') || allSteps[0];
-    step1.classList.add('active');
-    currentStepEl = step1;
-    syncServiceBlocks();
-    updateChoiceUI();
-    updatePillUI();
-    setProgress(0);
-    toggleFormDisabled(false);
-    setStatus('', '');
-    if (scrollToStart) {
-      step1.scrollIntoView({ behavior:'smooth', block:'start' });
-      const first = step1.querySelector('input,select,textarea,button');
-      first?.focus({ preventScroll:true });
+  // "Enter" in Step 1 ≙ Weiter (wenn gewählt)
+  form.addEventListener('keydown', (e)=>{
+    if(e.key==='Enter' && currentStepEl?.dataset.step==='1'){
+      const any = form.querySelector('input[name="service"]:checked');
+      if(any){ e.preventDefault(); nextBtn.click(); }
+    }
+  });
+
+  /* =====================================================
+     Validierung (vereinfacht: nur eine Sammelmeldung)
+  ====================================================== */
+  function markInvalid(el){
+    if (!el) return;
+    el.classList.add('is-invalid');
+    el.setAttribute('aria-invalid','true');
+  }
+
+  function clearInvalids(){
+    qa('.is-invalid', form).forEach(el=>{
+      el.classList.remove('is-invalid');
+      el.removeAttribute('aria-invalid');
+      if (el.getAttribute('aria-describedby')?.endsWith('__error')) {
+        el.removeAttribute('aria-describedby');
+      }
+    });
+    if (errorSummary){
+      errorSummary.classList.add('sr-only');
+      errorSummary.textContent = '';
     }
   }
 
-  function handleRestart(e){
-    if (e) { e.preventDefault(); e.stopPropagation(); }
-    resetToStep1(true);
+  function validEmail(s){ return /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/i.test(s); }
+
+ function validateRequired(){
+  clearInvalids();
+  setStatus('', ''); // alten Status leeren, aber KEIN Fehlerstatus setzen
+
+  const name  = q('input[name="name"]', form);
+  const email = q('input[name="email"]', form);
+  const msg   = q('textarea[name="message"]', form);
+
+  let ok = true;
+  const vName = !!trim(name?.value);
+  const vMail = validEmail(trim(email?.value));
+  const vMsg  = trim(msg?.value).length >= 5;
+
+  if (!vName) markInvalid(name), ok = false;
+  if (!vMail) markInvalid(email), ok = false;
+  if (!vMsg)  markInvalid(msg), ok = false;
+
+  if (!ok) {
+    if (errorSummary){
+      errorSummary.classList.remove('sr-only');
+      errorSummary.textContent = 'Bitte fehlende Angaben ergänzen.';
+    }
+    const first = q('.is-invalid', form) || name || email || msg;
+    first?.focus({preventScroll:true});
+    return false;
   }
 
-  function showSuccessScreen(){
-    const steps = getApplicableSteps();
-    const successIdx = steps.findIndex(s => s.dataset.step === '6');
-    if (successIdx >= 0) showStepByIndex(successIdx);
+  // alles ok
+  if (errorSummary){
+    errorSummary.classList.add('sr-only');
+    errorSummary.textContent = '';
   }
+  return true;
+}
 
-  /* =========================
-     Validierung / Markierung
-  ========================== */
-  function markInvalid(el, msg){
-    el.classList.add('is-invalid');
-    el.setAttribute('aria-invalid','true');
-    if (!el.nextElementSibling || !el.nextElementSibling.matches('.field-error')) {
-      const e = document.createElement('div');
-      e.className = 'field-error';
-      e.style.cssText = 'color:#b00020;font-weight:700;margin-top:.2rem;font-size:.9rem;';
-      e.textContent = msg;
-      el.insertAdjacentElement('afterend', e);
-    } else el.nextElementSibling.textContent = msg;
-  }
-  function clearInvalids(){
-    qa('.is-invalid', form).forEach(el=>{
-      el.classList.remove('is-invalid'); el.removeAttribute('aria-invalid');
-    });
-    qa('.field-error', form).forEach(el=> el.remove());
-  }
-  function validEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s); }
-  function validateRequired(){
-    clearInvalids();
-    const name  = q('input[name="name"]');
-    const email = q('input[name="email"]');
-    const msg   = q('textarea[name="message"]');
-    let ok = true;
-    if (!trim(name?.value))               { markInvalid(name,'Bitte Namen angeben.'); ok=false; }
-    if (!validEmail(trim(email?.value)))  { markInvalid(email,'Bitte gültige E-Mail angeben.'); ok=false; }
-    if (trim(msg?.value).length < 5)      { markInvalid(msg,'Bitte kurz dein Projekt beschreiben.'); ok=false; }
-    if (!ok) {
-      const first = q('.is-invalid');
-      first?.focus({preventScroll:true});
-      setStatus('Bitte fehlende Angaben ergänzen.', 'warn');
-    } else setStatus('', '');
-    return ok;
-  }
-
-  /* =========================
+  /* =====================================================
      Submit Flow
-  ========================== */
+  ====================================================== */
   let submitting = false;
   function toggleFormDisabled(disabled){
     qa('input,select,textarea,button', form).forEach(el=> el.disabled = disabled);
   }
-
   async function postWithTimeout(url, options={}, timeoutMs=12000) {
     const controller = new AbortController();
     const t = setTimeout(()=>controller.abort(), timeoutMs);
@@ -7711,27 +7104,26 @@ label.req::after{
   form.addEventListener('submit', async function(e){
     e.preventDefault();
     if (submitting) return;
-
     if (!validateRequired()) return;
 
-    const selectedServiceEl = q('input[name="service"]:checked');
+    const selectedServiceEl = q('input[name="service"]:checked', form);
     const selectedService   = selectedServiceEl ? selectedServiceEl.value : '';
 
     const summary = {};
     getApplicableSteps().forEach((step, i) => { summary[`step_${i+1}`] = collectStepData(step); });
 
     const lines = [];
-    lines.push(`[Service] ${selectedService}`);
+    lines.push(`[Service] ${selectedService || '-'}`);
     lines.push(`[Kontakt]`);
     lines.push(`- Name: ${summary.step_5?.name || '-'}`);
     lines.push(`- E-Mail: ${summary.step_5?.email || '-'}`);
     if (summary.step_5?.message) lines.push(`- Nachricht: ${summary.step_5.message}`);
     const compiledPlain = lines.join('\n');
 
-    q('#autoSubject').value     = `Projektanfrage: ${selectedService}`;
-    q('#selectedService').value = selectedService;
-    q('#summaryPlain').value    = compiledPlain;
-    q('#honeypot').value        = '';
+    q('#autoSubject', form).value     = `Projektanfrage: ${selectedService || 'Allgemein'}`;
+    q('#selectedService', form).value = selectedService || '';
+    q('#summaryPlain', form).value    = compiledPlain;
+    q('#honeypot', form).value        = '';
 
     const fd = new FormData(form);
     submitting = true;
@@ -7748,6 +7140,7 @@ label.req::after{
       if (!res.ok) throw new Error(res.statusText);
       submitBtn.innerText = '✅ Anfrage gesendet!';
       setStatus('Danke! Wir melden uns in Kürze.', 'ok');
+      try { localStorage.removeItem(STORE_KEY); } catch {}
       form.classList.add('is-success');
       showSuccessScreen();
     } catch (err) {
@@ -7760,72 +7153,168 @@ label.req::after{
     }
   });
 
-  /* =========================
+  /* =====================================================
      Buttons & Choices
-  ========================== */
+  ====================================================== */
   prevBtn.addEventListener('click', (e)=>{
     e.preventDefault();
     showStepByIndex(getCurrentIndex()-1);
   });
+
   nextBtn.addEventListener('click', ()=>{
     if (isContactStep(currentStepEl)) form.requestSubmit();
     else showStepByIndex(getCurrentIndex()+1);
   });
 
-  // Klick auf Step-1-Karten (Service)
+  // Klick-Delegation
   form.addEventListener('click', (e)=>{
+    // Service-Choice
     const choice = e.target.closest('.choice');
-    if(choice){
+    if(choice && form.contains(choice)){
       const rb = choice.querySelector('input[type="radio"]');
       if(rb){
-        setTimeout(()=>{
+        rb.checked = true;
+        queueMicrotask(()=>{
           form.classList.remove('is-success');
           updateChoiceUI();
           syncServiceBlocks();
           showStepByIndex(getCurrentIndex());
-        },0);
+          debouncedSaveDraft();
+        });
       }
     }
-    // Klick auf Pill-Labels (Schwerpunkte)
+    // Pill-Labels (Schwerpunkte)
     const pill = e.target.closest('.pill');
-    if (pill) {
-      // Wait until checkbox toggled, then refresh UI
-      setTimeout(updatePillUI, 0);
+    if (pill && form.contains(pill)) {
+      queueMicrotask(()=>{ updatePillUI(); debouncedSaveDraft(); });
+    }
+    // Budget-Chips
+    const chip = e.target.closest('.chip');
+    if(chip){
+      const target = q(chip.dataset.fill);
+      if(target){
+        target.value = chip.dataset.value || '';
+        target.dispatchEvent(new Event('input', {bubbles:true}));
+        debouncedSaveDraft();
+      }
     }
   });
 
-  // Änderungen an Service oder Pill-Checkboxen
-  form.addEventListener('change', (e)=>{
-    if(e.target && e.target.matches('input[name="service"]')){
-      form.classList.remove('is-success');
-      updateChoiceUI();
-      syncServiceBlocks();
-      showStepByIndex(getCurrentIndex());
-      return;
+  /* =====================================================
+     Restart / Success Handling
+  ====================================================== */
+  function resetToStep1(scrollToStart = true){
+    form.reset();
+    form.classList.remove('is-success');
+    allSteps.forEach(s => s.classList.remove('active'));
+    const step1 = allSteps.find(s => s.dataset.step === '1') || allSteps[0];
+    step1.classList.add('active');
+    currentStepEl = step1;
+    syncServiceBlocks(); updateChoiceUI(); updatePillUI();
+    setProgress(0);
+    toggleFormDisabled(false);
+    clearInvalids();
+    setStatus('', '');
+    if (scrollToStart) {
+      step1.scrollIntoView({ behavior:'smooth', block:'start' });
+      const first = step1.querySelector('input,select,textarea,button');
+      first?.focus({ preventScroll:true });
     }
-    if (e.target && (e.target.matches('.pill input[type="checkbox"]') || e.target.matches('input[data-pills]'))) {
-      updatePillUI();
-    }
-  });
+  }
+  function handleRestart(e){
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    resetToStep1(true);
+  }
+  function showSuccessScreen(){
+    const steps = getApplicableSteps();
+    const successIdx = steps.findIndex(s => s.dataset.step === '6');
+    if (successIdx >= 0) showStepByIndex(successIdx);
+  }
 
-  /* =========================
+  /* =====================================================
+     Draft speichern/wiederherstellen
+  ====================================================== */
+  function saveDraft(){
+    const data = {};
+    allSteps.forEach(s=>Object.assign(data, collectStepData(s)));
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch {}
+  }
+  const debouncedSaveDraft = debounce(saveDraft, 250);
+
+  function restoreDraft(){
+    try{
+      const data = JSON.parse(localStorage.getItem(STORE_KEY) || '{}');
+      Object.entries(data).forEach(([name,val])=>{
+        const els = qa(`[name="${CSS.escape(name)}"]`, form);
+        if(!els.length) return;
+        els.forEach(el=>{
+          if(el.type==='checkbox'){ el.checked = Array.isArray(val) && val.includes(el.value); }
+          else if(el.type==='radio'){ el.checked = el.value===val; }
+          else el.value = val;
+        });
+      });
+      syncServiceBlocks(); updateChoiceUI(); updatePillUI();
+    }catch{}
+  }
+  form.addEventListener('change', debouncedSaveDraft);
+
+  /* =====================================================
      Init
-  ========================== */
+  ====================================================== */
   function init(){
     form.classList.remove('is-success');
-    syncServiceBlocks();
+    restoreDraft();
     updateChoiceUI();
     updatePillUI();
     showStepByIndex(0);
     setStatus('');
+    const tst = document.querySelector('testimonial-slider');
+    if (tst && !tst.dataset.enhanced) {
+      tst.dataset.enhanced = '1';
+    }
   }
   init();
 
+  /* =====================================================
+     Video nur im Viewport abspielen (mit Guards)
+  ====================================================== */
+  const video = document.querySelector('.video-media');
+  const section = document.getElementById('kontakt');
+
+  function pauseVideoForPrefersReducedMotion(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      try { video?.pause?.(); } catch {}
+      video?.removeAttribute?.('autoplay');
+      video?.setAttribute?.('aria-hidden','true');
+      return true;
+    }
+    return false;
+  }
+  const reduced = pauseVideoForPrefersReducedMotion();
+
+  if (!reduced && video && section && 'IntersectionObserver' in window){
+    let rafId = 0;
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(async ()=>{
+          if(entry.isIntersecting && entry.intersectionRatio > 0.25){
+            try { await video.play(); } catch {}
+          } else {
+            try { video.pause(); } catch {}
+          }
+        });
+      });
+    }, { root:null, threshold:[0, .25, .5, .75, 1] });
+    io.observe(section);
+
+    document.addEventListener('visibilitychange', ()=>{
+      if (document.hidden) { try{ video.pause(); }catch{} }
+    });
+  }
+
 })();
 </script>
-
-
-
 
 
 
@@ -7899,26 +7388,26 @@ label.req::after{
 </style>
 
 <!-- ===== Overlay / Viewer ===== -->
-<div class="ethos-overlay" id="ethos-overlay" role="dialog" aria-modal="true" aria-lablledby="ethos-overlay-title" aria-hidden="true">
+<div class="ethos-overlay" id="ethos-overlay" role="dialog" aria-modal="true" aria-labelledby="ethos-overlay-title" aria-hidden="true">
   <div class="ethos-overlay__backdrop" data-ethos-close></div>
   <div class="ethos-overlay__panel" tabindex="-1">
     <header class="ethos-overlay__header">
       <h3 class="ethos-overlay__title" id="ethos-overlay-title">Unsere Werte im Überblick</h3>
-      <button class="icon-btn overlay-close" type="button" aria-labl="Schließen" title="Schließen" data-ethos-close>
-        <i data-feather="x"></i>
+      <button class="icon-btn overlay-close" type="button" aria-label="Schließen" title="Schließen" data-ethos-close>
+        <i data-feather="x" aria-hidden="true"></i>
       </button>
     </header>
 
     <!-- Desktop/Tablet: Grid -->
-    <div class="ethos-overlay__grid" id="ethos-overlay-grid" aria-hidden="false" role="region" aria-labl="Werte-Grid"></div>
+    <div class="ethos-overlay__grid" id="ethos-overlay-grid" aria-hidden="false" role="region" aria-label="Werte-Grid"></div>
 
     <!-- Mobile: Carousel (nur falls jemand per DevTools einblendet) -->
-    <div class="ethos-carousel" id="ethos-carousel" aria-hidden="true" role="region" aria-labl="Werte Durchblättern">
-      <button class="carousel-nav prev" type="button" aria-labl="Vorherige" title="Vorherige" data-ethos-prev>‹</button>
+    <div class="ethos-carousel" id="ethos-carousel" aria-hidden="true" role="region" aria-label="Werte durchblättern">
+      <button class="carousel-nav prev" type="button" aria-label="Vorherige" title="Vorherige" data-ethos-prev aria-controls="ethos-carousel-track">‹</button>
       <div class="carousel-viewport">
         <ul class="carousel-track" id="ethos-carousel-track"></ul>
       </div>
-      <button class="carousel-nav next" type="button" aria-labl="Nächste" title="Nächste" data-ethos-next>›</button>
+      <button class="carousel-nav next" type="button" aria-label="Nächste" title="Nächste" data-ethos-next aria-controls="ethos-carousel-track">›</button>
     </div>
   </div>
 </div>
@@ -8102,6 +7591,7 @@ label.req::after{
 :root[data-theme="dark"] .carousel-nav{ background:rgba(20,20,20,.9) }
 .carousel-nav.prev{ left:8px } .carousel-nav.next{ right:8px }
 .carousel-nav:active{ transform:translateY(-50%) scale(.98) }
+
 /* Global: Box-Sizing, damit Padding in Breite eingerechnet wird */
 .ethos, .ethos *{
   box-sizing: border-box;
@@ -8257,7 +7747,7 @@ label.req::after{
   margin: clamp(.35rem, .6vw, 1rem) auto 2.6rem; /* oben | seitlich | unten */
 }
 /* ==== ETHOS: 3 Karten pro View (ab 700px), rest unsichtbar ==== */
-@media (min-width:700px){
+@media (min-width:700.02px){
   .ethos-marquee{
     overflow: hidden;          /* harte Sichtfensterbegrenzung */
     mask-image: none !important;
@@ -8385,11 +7875,89 @@ label.req::after{
   margin-inline: auto;
 }
 
+/* === ETHOS Mobile-Fix: Karten wirklich gerade/ausgerichtet === */
+@media (max-width: 720px){
+  /* 1) Container: keine Mask/Overlays, keine Extra-Paddings */
+  #webdesign-ethos .ethos-marquee{
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+    overflow: visible !important;
+    padding-inline: 0 !important;
+  }
+  /* Seiten-Fade-Overlay entfernen, damit Kanten optisch sauber sind */
+  #webdesign-ethos .ethos-marquee::after{ display:none !important; }
+
+  /* 2) Track als 1-Spalten-Grid, exakt am Container ausgerichtet */
+  #webdesign-ethos .ethos-track{
+    list-style: none;
+    margin: 0;
+    padding: 0 !important;
+    display: grid !important;
+    grid-template-columns: 1fr;     /* eine Spalte = Containerbreite */
+    gap: 1rem;
+    justify-items: stretch;         /* volle Breite einnehmen */
+    width: 100% !important;
+  }
+
+  /* 3) Karten: 100% Containerbreite (keine vw!), sauber mittig */
+  #webdesign-ethos .ethos-card{
+    min-width: 0 !important;
+    width: 100% !important;         /* füllt die Grid-Spalte */
+    max-width: 600px;               /* Kappung für große Phones */
+    margin-inline: auto;            /* mittig im Container */
+    box-sizing: border-box;         /* Border in Breite einrechnen */
+    transform: translateZ(0);       /* Subpixel-Jitter minimieren */
+  }
+}
+
+/* ---- Nicht-visuelle Verbesserungen: bessere Performance & Fokus ---- */
+@media (hover:hover){
+  .ethos-card{ will-change: auto; }     /* nur bei Hover aktivieren */
+  .ethos-card:hover{ will-change: transform; }
+}
+.ethos-card{ content-visibility:auto; contain-intrinsic-size: 300px 400px; }
+.ethos-card:focus-visible{
+  outline: 3px solid rgba(255,255,255,.75);
+  outline-offset: 3px;
+}
+:root[data-theme="dark"] .ethos-card:focus-visible{ outline-color:#fff; }
+/* === ETHOS: Head ohne unteren Abstand === */
+#webdesign-ethos .ethos-head{
+  margin-bottom: 0 !important;
+}
+/* === ETHOS: Marquee ohne oberen Abstand === */
+#webdesign-ethos .ethos-marquee{
+  margin-top: 0 !important;
+}
+/* --- Hotfix: Ethos sichtbar zwischen 700–720px --- */
+@media (min-width:700px) and (max-width:720px){
+  #webdesign-ethos .ethos-track{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:1rem !important;
+    justify-items:center !important;
+    transform:none !important;
+  }
+  #webdesign-ethos .ethos-card{
+    width:min(600px,94vw) !important;
+    min-width:0 !important;
+  }
+}
+
 </style>
 
 <script>
+/* Feather Icons sicher initialisieren (ohne optische Änderung) */
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.feather && typeof window.feather.replace === 'function') {
+    window.feather.replace({ 'aria-hidden': 'true' });
+  }
+});
+</script>
+
+<script>
 (function(){
-  const section = document.getElementById('webdesign-ethos'); // <- richtige ID
+  const section = document.getElementById('webdesign-ethos');
   if (!section) return;
 
   const marquee = section.querySelector('.ethos-marquee');
@@ -8401,7 +7969,7 @@ label.req::after{
 
   // ---- Config
   const AUTOPLAY_MS  = 5500;
-  const MAX_VIEWPORT = 1600;    // <- Karten nehmen ab hier keinen zusätzlichen Platz mehr ein
+  const MAX_VIEWPORT = 1600;
 
   // ---- State
   let originals = [];
@@ -8422,9 +7990,8 @@ label.req::after{
   function measure(){
     spv = isMobile() ? 1 : 3;
     gap = pxGap();
-    // Breite anhand gedeckelter „Viewport“-Breite
     const raw = marquee.clientWidth;
-    const vw  = Math.min(raw, MAX_VIEWPORT);    // cap bei 1600px
+    const vw  = Math.min(raw, MAX_VIEWPORT);
     cardW = (vw - gap * (spv - 1)) / spv;
   }
 
@@ -8437,13 +8004,21 @@ label.req::after{
     track.style.transform  = `translate3d(${x}px,0,0)`;
   }
 
+  function markClone(el){
+    el.dataset.clone = 'true';
+    el.setAttribute('aria-hidden','true');
+    el.setAttribute('tabindex','-1');
+    el.setAttribute('role','presentation'); // list semantics nicht duplizieren
+    return el;
+  }
+
   function buildClones(){
     track.querySelectorAll('[data-clone]')?.forEach(n => n.remove());
     originals = Array.from(track.children).filter(n => n.classList?.contains('ethos-card') && !n.dataset.clone);
     if (!originals.length) return;
 
-    const pre  = originals.map(n => { const c = n.cloneNode(true); c.dataset.clone = 'true'; return c; });
-    const post = originals.map(n => { const c = n.cloneNode(true); c.dataset.clone = 'true'; return c; });
+    const pre  = originals.map(n => markClone(n.cloneNode(true)));
+    const post = originals.map(n => markClone(n.cloneNode(true)));
 
     pre.reverse().forEach(c => track.insertBefore(c, track.firstChild));
     post.forEach(c => track.appendChild(c));
@@ -8469,6 +8044,7 @@ label.req::after{
   }
   function stopAutoplay(){ if (autoplayTimer) clearInterval(autoplayTimer); autoplayTimer = null; }
 
+  // Sichtbarkeit & Fokus beeinflussen Autoplay (A11y)
   const visIO = new IntersectionObserver((entries) => {
     entries.forEach(e => { const visible = e.isIntersecting && !document.hidden; if (visible) startAutoplay(); else stopAutoplay(); });
   }, { threshold: 0.5 });
@@ -8477,8 +8053,8 @@ label.req::after{
 
   section.addEventListener('mouseenter', stopAutoplay);
   section.addEventListener('mouseleave', startAutoplay);
-  section.addEventListener('focusin', stopAutoplay);
-  section.addEventListener('focusout', startAutoplay);
+  marquee.addEventListener('focusin', stopAutoplay, {passive:true});
+  marquee.addEventListener('focusout', startAutoplay, {passive:true});
 
   // Resize/Init
   let resizeTO;
@@ -8506,9 +8082,41 @@ label.req::after{
 
   // Boot
   rebuild();
+
+  /* ===== Dialog/Overlay: Fokus-Management & ESC ===== */
+  const overlay  = document.getElementById('ethos-overlay');
+  const panel    = overlay?.querySelector('.ethos-overlay__panel');
+  const closeBtn = overlay?.querySelector('[data-ethos-close]');
+  const openers  = document.querySelectorAll('[data-ethos-open]');
+
+  function onKeydown(e){
+    if(e.key === 'Escape'){ closeOverlay(); }
+    if(e.key === 'Tab' && overlay.getAttribute('aria-hidden') === 'false'){
+      const focusables = panel.querySelectorAll('a,button,input,select,textarea,[tabindex]:not([tabindex="-1"])');
+      if(!focusables.length) return;
+      const first = focusables[0], last = focusables[focusables.length-1];
+      if(e.shiftKey && document.activeElement === first){ last.focus(); e.preventDefault(); }
+      else if(!e.shiftKey && document.activeElement === last){ first.focus(); e.preventDefault(); }
+    }
+  }
+  function openOverlay(){
+    overlay.setAttribute('aria-hidden','false');
+    document.documentElement.style.overflow='hidden';
+    panel?.focus();
+    document.addEventListener('keydown', onKeydown);
+  }
+  function closeOverlay(){
+    overlay.setAttribute('aria-hidden','true');
+    document.documentElement.style.overflow='';
+    document.removeEventListener('keydown', onKeydown);
+  }
+
+  openers?.forEach(btn => btn.addEventListener('click', openOverlay));
+  closeBtn?.addEventListener('click', closeOverlay);
+  overlay?.querySelector('.ethos-overlay__backdrop')?.addEventListener('click', closeOverlay);
+
 })();
 </script>
-
 
 <script type="application/ld+json">
 {
@@ -8574,13 +8182,18 @@ label.req::after{
 
 
 
-
-
 <section class="lyra-vault" id="lyra-faq">
   <h2 class="lyra-heading">Häufige Fragen</h2>
 
   <div class="lyra-console" role="search">
-    <input type="text" id="lyraSearch" placeholder="Nach Stichwort suchen …" aria-label="FAQ durchsuchen">
+    <input
+      type="text"
+      id="lyraSearch"
+      placeholder="Nach Stichwort suchen …"
+      aria-label="FAQ durchsuchen"
+      enterkeyhint="search"
+      autocomplete="off"
+    >
     <div class="lyra-nav">
       <button id="lyraPrev" type="button" aria-label="Vorheriges Ergebnis">
         <i data-feather="chevron-left" aria-hidden="true"></i>
@@ -8674,7 +8287,6 @@ label.req::after{
 
   </div>
 </section>
-
 
 <style>
 :root{
@@ -8808,6 +8420,9 @@ label.req::after{
   max-height: 0; overflow: hidden;
   padding: 0 clamp(1rem, 3vw, 1.6rem);
   transition: max-height .35s ease, padding .25s ease;
+  /* Performance hint (keine optische Änderung) */
+  content-visibility: auto;
+  contain-intrinsic-size: 0 400px;
 }
 .lyra-toggle[aria-expanded="true"] + .lyra-drop{
   max-height: 900px; padding: .25rem clamp(1rem, 3vw, 1.6rem) 1rem;
@@ -8836,6 +8451,20 @@ label.req::after{
 :root[data-theme="dark"] .lyra-console input::placeholder{ color: rgba(255,255,255,.55); }
 :root[data-theme="dark"] .lyra-nav span{ color: rgba(255,255,255,.8); }
 
+/* Fokus-Akzente (nur Tastatur) – keine visuelle Änderung mit Maus */
+.lyra-toggle:focus-visible,
+.lyra-nav button:focus-visible,
+.lyra-console input:focus-visible{
+  outline: 3px solid color-mix(in oklab, var(--nova-ink) 30%, transparent);
+  outline-offset: 2px;
+  border-color: color-mix(in oklab, var(--nova-ink) 45%, transparent);
+}
+
+/* High-Contrast/OS-Settings respektieren */
+@media (forced-colors: active){
+  .lyra-nav button, .lyra-toggle, .lyra-console input{ forced-color-adjust: auto; }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){
   html:focus-within{ scroll-behavior: auto; }
@@ -8849,134 +8478,207 @@ document.addEventListener("DOMContentLoaded", () => {
   if (window.feather) feather.replace();
 
   const vault = document.getElementById("lyra-faq");
-  const cards = document.querySelectorAll(".lyra-card");
+  const cards = [...document.querySelectorAll(".lyra-card")];
   const input = document.getElementById("lyraSearch");
   const prev = document.getElementById("lyraPrev");
   const next = document.getElementById("lyraNext");
-  const indexlabl = document.getElementById("lyraIndex");
-  let matches = [], current = 0;
+  const indexLbl = document.getElementById("lyraIndex");
 
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const smoothOpts = prefersReduced ? {behavior:"auto"} : {behavior:"smooth"};
 
-  function closeAll() {
-    cards.forEach(c => {
+  // ---- Utilities ------------------------------------------------------------
+  const normalize = (s) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
+
+  let matches = [], current = 0, debounceTo = null;
+
+  function setButtonsEnabled(enabled){
+    [prev, next].forEach(b=>{
+      b.disabled = !enabled;
+      b.setAttribute("aria-disabled", String(!enabled));
+      b.style.opacity = enabled ? "" : ".6";
+      b.style.cursor  = enabled ? "pointer" : "not-allowed";
+    });
+  }
+
+  function closeAll(){
+    cards.forEach(c=>{
       const b = c.querySelector(".lyra-toggle");
       const d = c.querySelector(".lyra-drop");
-      b.setAttribute("aria-expanded", "false");
+      b.setAttribute("aria-expanded","false");
       d.style.maxHeight = null;
     });
   }
 
-  function removeMarks() {
-    vault.querySelectorAll("mark").forEach(m => {
+  function removeMarks(){
+    vault.querySelectorAll("mark").forEach(m=>{
       const t = document.createTextNode(m.textContent);
       m.replaceWith(t);
     });
   }
 
   // Escape RegExp Sonderzeichen
-  function escapeRegExp(str){
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  }
+  const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-  function highlight(node, keyword) {
+  function highlight(node, keyword){
     const terms = keyword.split(/\s+/).filter(Boolean).map(escapeRegExp);
     if (!terms.length) return;
     const rx = new RegExp("(" + terms.join("|") + ")", "gi");
 
-    if (node.nodeType === 3) {
+    if (node.nodeType === 3){
       const span = document.createElement("span");
       span.innerHTML = node.nodeValue.replace(rx, "<mark>$1</mark>");
       node.parentNode.replaceChild(span, node);
-    } else if (node.nodeType === 1 && node.childNodes && !["SCRIPT","STYLE","INPUT","BUTTON"].includes(node.tagName)) {
+    } else if (node.nodeType === 1 && node.childNodes && !["SCRIPT","STYLE","INPUT","BUTTON"].includes(node.tagName)){
       [...node.childNodes].forEach(child => highlight(child, keyword));
     }
   }
 
-  function scrollToCard(c) {
+  function scrollToCard(c){
     const y = c.getBoundingClientRect().top + window.scrollY - 80;
     window.scrollTo({ top: y, ...smoothOpts });
   }
 
-  function openCard(c) {
+  function openCard(c){
     const b = c.querySelector(".lyra-toggle");
     const d = c.querySelector(".lyra-drop");
-    b.setAttribute("aria-expanded", "true");
+    b.setAttribute("aria-expanded","true");
     d.style.maxHeight = d.scrollHeight + "px";
   }
 
-  function recalcOpenHeights() {
-    // bei Resize: Höhe offener Panels neu setzen
-    cards.forEach(c => {
+  function recalcOpenHeights(){
+    cards.forEach(c=>{
       const b = c.querySelector(".lyra-toggle");
       const d = c.querySelector(".lyra-drop");
-      if (b.getAttribute("aria-expanded") === "true") {
+      if (b.getAttribute("aria-expanded")==="true"){
         d.style.maxHeight = d.scrollHeight + "px";
       }
     });
   }
 
-  function updateIndex() {
-    indexlabl.textContent = matches.length ? `${current + 1} / ${matches.length}` : "0 / 0";
+  function updateIndex(){
+    indexLbl.textContent = matches.length ? `${current+1} / ${matches.length}` : "0 / 0";
+    setButtonsEnabled(matches.length > 0);
   }
 
-  function search(keyword) {
-    const q = keyword.trim().toLowerCase();
+  // Precompute normalisierte Inhalte für schnelle Suche
+  const cardCache = cards.map(c => ({
+    el: c,
+    textNorm: normalize(c.innerText)
+  }));
+
+  function doSearch(keyword){
+    const qRaw = keyword.trim();
+    const q = normalize(qRaw);
     removeMarks();
     closeAll();
     matches = [];
-    if (!q) return updateIndex();
+    if (!q){ updateIndex(); return; }
 
-    cards.forEach(c => {
-      if (c.innerText.toLowerCase().includes(q)) {
-        matches.push(c);
-        // Markiere gesamten Karteninhalt (Titel + Body)
-        highlight(c, q);
+    cardCache.forEach(({el, textNorm})=>{
+      if (textNorm.includes(q)){
+        matches.push(el);
+        // Markiere realen DOM-Text (nicht den Cache)
+        highlight(el, qRaw);
       }
     });
 
     current = 0;
-    if (matches.length) {
+    if (matches.length){
       openCard(matches[0]);
       scrollToCard(matches[0]);
     }
     updateIndex();
   }
 
-  input.addEventListener("input", e => search(e.target.value));
-  prev.addEventListener("click", () => {
+  // ---- Events ---------------------------------------------------------------
+  input.addEventListener("input", e=>{
+    clearTimeout(debounceTo);
+    debounceTo = setTimeout(()=>doSearch(e.target.value), 140);
+  });
+
+  prev.addEventListener("click", ()=>{
     if (!matches.length) return;
     current = (current - 1 + matches.length) % matches.length;
     closeAll(); openCard(matches[current]); scrollToCard(matches[current]); updateIndex();
   });
-  next.addEventListener("click", () => {
+
+  next.addEventListener("click", ()=>{
     if (!matches.length) return;
     current = (current + 1) % matches.length;
     closeAll(); openCard(matches[current]); scrollToCard(matches[current]); updateIndex();
   });
 
-  // Toggle expand/collapse
-  cards.forEach((c, i) => {
-    const btn = c.querySelector(".lyra-toggle");
+  // Akkordeon: IDs + ARIA + Click
+  cards.forEach((c, i)=>{
+    const btn  = c.querySelector(".lyra-toggle");
     const drop = c.querySelector(".lyra-drop");
+    const btnId  = `lyra-toggle-${i+1}`;
     const dropId = `lyra-drop-${i+1}`;
+    btn.id = btnId;
     drop.id = dropId;
+
+    // bessere Roles/Labels
+    drop.setAttribute("role","region");
+    drop.setAttribute("aria-labelledby", btnId);
     btn.setAttribute("aria-controls", dropId);
 
-    btn.addEventListener("click", () => {
-      const isOpen = btn.getAttribute("aria-expanded") === "true";
+    btn.addEventListener("click", ()=>{
+      const isOpen = btn.getAttribute("aria-expanded")==="true";
       btn.setAttribute("aria-expanded", isOpen ? "false" : "true");
       drop.style.maxHeight = isOpen ? null : drop.scrollHeight + "px";
     });
+
+    // ResizeObserver: offene Panels passen sich automatisch an
+    const ro = new ResizeObserver(()=>{
+      if (btn.getAttribute("aria-expanded")==="true"){
+        drop.style.maxHeight = drop.scrollHeight + "px";
+      }
+    });
+    ro.observe(drop);
+  });
+
+  // Tastatur-Navigation (Akkordeon-Header)
+  const toggles = cards.map(c=>c.querySelector(".lyra-toggle"));
+  function focusToggle(idx){
+    if (idx<0) idx = 0;
+    if (idx>=toggles.length) idx = toggles.length-1;
+    toggles[idx].focus();
+  }
+  toggles.forEach((btn, idx)=>{
+    btn.addEventListener("keydown", (e)=>{
+      switch(e.key){
+        case "ArrowDown": e.preventDefault(); focusToggle(idx+1); break;
+        case "ArrowUp":   e.preventDefault(); focusToggle(idx-1); break;
+        case "Home":      e.preventDefault(); focusToggle(0);     break;
+        case "End":       e.preventDefault(); focusToggle(toggles.length-1); break;
+        case "Enter":
+        case " ":
+          e.preventDefault();
+          btn.click();
+          break;
+      }
+    });
+  });
+
+  // Shortcut: "/" fokussiert Suche
+  document.addEventListener("keydown", (e)=>{
+    if (e.key === "/" && document.activeElement !== input){
+      e.preventDefault();
+      input.focus();
+    }
   });
 
   // Recalc on resize (responsive)
   let resizeTo;
-  window.addEventListener("resize", () => {
+  window.addEventListener("resize", ()=>{
     clearTimeout(resizeTo);
     resizeTo = setTimeout(recalcOpenHeights, 120);
   });
+
+  // Initial
+  setButtonsEnabled(false);
+  updateIndex();
 });
 </script>
 
@@ -8991,51 +8693,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
-<section class="angled-image-section">
-  <!-- Overlay für diagonalen Hintergrund -->
-  <div class="angled-bg-overlay" aria-hidden="true"></div>
+<section class="angled-image-section" aria-labelledby="angled-image-heading">
+  <h2 id="angled-image-heading" class="visually-hidden">Modernes Webdesign – diagonale Bildsektion</h2>
 
   <figure class="angled-image-wrapper">
-    <img
-      src="./WebdesignPic/webgerade.webp"
-      alt=""
-      width="1920"
-      height="1080"
-      loading="lazy"
-      decoding="async"
-    />
+    <picture>
+      <source srcset="./WebdesignPic/webgerade.webp" type="image/webp" />
+      <img
+        src="./WebdesignPic/webgerade.webp"
+        alt="Beispiel eines modernen Webdesign-Layouts, leicht diagonal ausgerichtet"
+        width="1920"
+        height="1080"
+        loading="lazy"
+        decoding="async"
+        style="aspect-ratio:16/9"
+        sizes="(max-width: 768px) 110vw, (max-width: 1200px) 120vw, 125vw"
+      />
+    </picture>
   </figure>
 </section>
+
 <style>
-  html, body {
-    overflow-x: hidden;
+  /* A11y: unsichtbare Überschrift für Screenreader */
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0);
+    white-space: nowrap; border: 0;
   }
 
+  /* Sanfte Drehung und Schatten */
   :root {
-    --angled-rotation: -4deg;
-    --angled-width: 150vw;
-    --angled-offset: -25vw;
+    --angled-rotation: -1.5deg; /* sehr leicht geneigt */
+    --angled-width: 125vw;
+    --angled-offset: -12.5vw;
+    --angled-shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
   }
 
   .angled-image-section {
     position: relative;
     width: 100vw;
-    overflow: visible;
-    margin-top: 3rem;
-    margin-bottom: -5rem;
-    pointer-events: none;
+    margin-top: 4rem;
+    margin-bottom: -4rem; /* leicht in den Footer ziehen */
     background: transparent;
-    z-index: 10;
-  }
-
-  /* Gradient-Hintergrund hinter dem Bild */
-  .angled-bg-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background: transparent;
+    z-index: 1;
   }
 
   .angled-image-wrapper {
@@ -9043,30 +8745,74 @@ document.addEventListener("DOMContentLoaded", () => {
     margin-left: var(--angled-offset);
     transform: rotate(var(--angled-rotation));
     position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: var(--angled-shadow);
+    transition: transform 0.6s ease-out, filter 0.3s ease-out;
+  }
+
+  /* Kein Overlay oder Farbe mehr */
+  .angled-image-wrapper::after {
+    content: none; /* entfernt das Pseudo-Element */
+  }
+
+  .angled-image-wrapper picture,
+  .angled-image-wrapper img {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
     z-index: 1;
   }
 
-  .angled-image-wrapper img {
-    width: 100%;
-    height: auto;
-    display: block;
-    z-index: 2;
-    position: relative;
+  /* Dezente Hover-Reaktion */
+  .angled-image-section:hover .angled-image-wrapper {
+    transform: rotate(calc(var(--angled-rotation) + 0.4deg)) scale(1.01);
   }
 
-  /* Section enger an den Footer rücken */
-.angled-image-section {
-  margin-top: 5rem; /* stärker ins Footer reinziehen */
-  z-index: 0;
-}
+  /* Bewegungsreduktion respektieren */
+  @media (prefers-reduced-motion: reduce) {
+    .angled-image-wrapper { transition: none; }
+    .angled-image-section:hover .angled-image-wrapper {
+      transform: rotate(var(--angled-rotation)) scale(1);
+    }
+  }
 
-.footer-clean {
-  margin-top: 0;
-  position: relative;
-  z-index: 75;
-}
+  /* Tablet */
+  @media (max-width: 1200px) {
+    :root {
+      --angled-rotation: -1deg;
+      --angled-width: 120vw;
+      --angled-offset: -10vw;
+    }
+    .angled-image-section {
+      margin-top: 3.5rem;
+      margin-bottom: -3.5rem;
+    }
+  }
 
+  /* Mobile */
+  @media (max-width: 768px) {
+    :root {
+      --angled-rotation: -0.6deg;
+      --angled-width: 110vw;
+      --angled-offset: -5vw;
+    }
+    .angled-image-section {
+      margin-top: 3rem;
+      margin-bottom: -3rem;
+    }
+    .angled-image-wrapper { border-radius: 10px; }
+  }
+
+  /* Footer bleibt darüber */
+  .footer-clean {
+    position: relative;
+    margin-top: 0;
+    z-index: 2;
+  }
 </style>
+
 
 
 
@@ -9083,27 +8829,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-<footer role="contentinfo" itemscope itemtype="https://schema.org/Organization" class="footer-clean" aria-labl="Seitenende">
+<footer role="contentinfo" itemscope itemtype="https://schema.org/Organization" class="footer-clean" aria-label="Seitenende">
+  <link itemprop="url" href="https://www.fusion3.de">
   <div class="fc-container">
     <!-- Head: Brand & Claim + CTA -->
-    <section class="fc-head" aria-labl="Markenbereich">
+    <section class="fc-head" aria-label="Markenbereich">
       <div class="fc-brand">
-        <h2 class="fc-logo" itemprop="name" aria-labl="Fusion hoch drei">Fusion³</h2>
+        <h2 class="fc-logo" itemprop="name" aria-label="Fusion hoch drei">Fusion³</h2>
         <p class="fc-claim">UX &amp; Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
       </div>
       <div class="fc-cta">
-        <a class="fc-btn" href="mailto:hello@fusion3.de" aria-labl="Projekt anfragen per E-Mail">
+        <a class="fc-btn" href="mailto:hello@fusion3.de" aria-label="Projekt anfragen per E-Mail">
           Projekt anfragen
         </a>
       </div>
     </section>
 
     <!-- Grid -->
-    <nav class="fc-grid" aria-labl="Footer-Navigation">
+    <nav class="fc-grid" aria-label="Footer-Navigation">
       <div class="fc-col">
         <h3 class="fc-col-title">Leistungen</h3>
-        <ul class="fc-links" role="list">
+        <ul class="fc-links">
           <li><a href="/ux-audit.html">UX-Audit</a></li>
           <li><a href="/webdesign.html">Webdesign</a></li>
           <li><a href="/prototyping.html">Prototyping</a></li>
@@ -9113,7 +8859,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <div class="fc-col">
         <h3 class="fc-col-title">Ressourcen</h3>
-        <ul class="fc-links" role="list">
+        <ul class="fc-links">
           <li><a href="/cases.html">Case Studies</a></li>
           <li><a href="/blog.html">Insights &amp; Blog</a></li>
           <li><a href="/faq.html">FAQ</a></li>
@@ -9123,7 +8869,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <div class="fc-col">
         <h3 class="fc-col-title">Rechtliches</h3>
-        <ul class="fc-links" role="list">
+        <ul class="fc-links">
           <li><a href="/impressum.html">Impressum</a></li>
           <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
           <li><a href="/cookies.html">Cookie-Hinweis</a></li>
@@ -9132,43 +8878,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <div class="fc-col">
         <h3 class="fc-col-title">Kontakt</h3>
-        <ul class="fc-links" role="list">
+        <ul class="fc-links">
           <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
           <li><a href="tel:+491234567890" itemprop="telephone">+49&nbsp;123&nbsp;4567890</a></li>
-          <li itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" aria-labl="Adresse">
-            <span itemprop="addressLocality">Berlin</span>, <span itemprop="addressCountry">Deutschland</span>
+          <li>
+            <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" aria-label="Adresse" class="fc-address">
+              <span itemprop="addressLocality">Berlin</span>, <span itemprop="addressCountry">Deutschland</span>
+            </address>
           </li>
         </ul>
 
         <!-- Socials -->
-        <div class="fc-socials" aria-labl="Social Media">
-          <a class="fc-social" href="mailto:hello@fusion3.de" aria-labl="E-Mail">
-            <img src="./FooterIcons/Gmail.png" alt="E-Mail" loading="lazy" decoding="async" width="20" height="20">
+        <div class="fc-socials" aria-label="Social Media">
+          <a class="fc-social" href="mailto:hello@fusion3.de" aria-label="E-Mail" itemprop="sameAs">
+            <span class="sr-only">E-Mail</span>
+            <img src="./FooterIcons/Gmail.png" alt="" loading="lazy" decoding="async" width="20" height="20">
           </a>
-          <a class="fc-social fc-li" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-labl="LinkedIn">
-            <img src="./FooterIcons/LinkedIn.png" alt="LinkedIn" loading="lazy" decoding="async" width="20" height="20">
+          <a class="fc-social fc-li" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" itemprop="sameAs">
+            <span class="sr-only">LinkedIn</span>
+            <img src="./FooterIcons/LinkedIn.png" alt="" loading="lazy" decoding="async" width="20" height="20">
           </a>
-          <a class="fc-social fc-wa" href="https://wa.me/491234567890" target="_blank" rel="noopener" aria-labl="WhatsApp">
-            <img src="./FooterIcons/Whatsapp.svg" alt="WhatsApp" loading="lazy" decoding="async" width="20" height="20">
+          <a class="fc-social fc-wa" href="https://wa.me/491234567890" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" itemprop="sameAs">
+            <span class="sr-only">WhatsApp</span>
+            <img src="./FooterIcons/Whatsapp.svg" alt="" loading="lazy" decoding="async" width="20" height="20">
           </a>
-          <a class="fc-social fc-ig" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-labl="Instagram">
-            <img src="./FooterIcons/instgram.jpg" alt="Instagram" loading="lazy" decoding="async" width="20" height="20">
+          <a class="fc-social fc-ig" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" itemprop="sameAs">
+            <span class="sr-only">Instagram</span>
+            <img src="./FooterIcons/instagram.jpg" alt="" loading="lazy" decoding="async" width="20" height="20">
           </a>
         </div>
       </div>
     </nav>
 
     <!-- Bottom -->
-    <div class="fc-legal" aria-labl="Rechtliches & Hinweise">
-      <p>© <span id="currentYear"></span> <span class="nowrap">Fusion³</span> · DSGVO-konform &amp; barrierearm entwickelt.</p>
+    <div class="fc-legal" aria-label="Rechtliches & Hinweise">
+      <p>© <time id="currentYear" aria-label="Aktuelles Jahr"></time> <span class="nowrap">Fusion³</span> · DSGVO-konform &amp; barrierearm entwickelt.</p>
     </div>
   </div>
 </footer>
 
+<script>
+  (function(){
+    var el = document.getElementById('currentYear');
+    if (el) el.textContent = new Date().getFullYear();
+  })();
+</script>
+
 <style>
   /* ===== Tokens & Typo ===== */
   :root{
-    --primary: #111;
+    --primary: var(--clr-orange);
     --fc-bg: #ffffff;
     --fc-fg: #0f1114;
     --fc-fg-muted: #535861;
@@ -9187,8 +8946,8 @@ document.addEventListener("DOMContentLoaded", () => {
     --fc-focus-color: color-mix(in oklab, var(--primary) 92%, #000 8%);
     --fc-focus: 2px dashed var(--fc-focus-color);
 
-    --fc-btn-fg: #fff;
-    --fc-btn-bg: var(--primary);
+    --fc-btn-fg: var(--btn-text);
+    --fc-btn-bg: var(--clr-orange);
     --fc-btn-bg-hover: #000;
 
     --fc-social-bg: #f5f5f5;
@@ -9307,7 +9066,6 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ===== Grid ===== */
   .fc-grid{
     display: grid;
-    /* kleinstes sinnvoll lesbares Kartenmaß */
     grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
     gap: clamp(1rem, 3vw, var(--fc-s4));
     padding-top: clamp(1.2rem, 3vw, var(--fc-s4));
@@ -9397,4 +9155,14 @@ document.addEventListener("DOMContentLoaded", () => {
     .fc-btn:hover, .fc-links a:hover, .fc-social:hover{ transform: none !important; }
   }
 
+  /* Visually hidden für zugängliche Namen neben Icons */
+  .sr-only{
+    position:absolute!important; width:1px!important; height:1px!important;
+    padding:0!important; margin:-1px!important; overflow:hidden!important;
+    clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important;
+  }
+  
 </style>
+
+
+</html>
