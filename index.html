@@ -922,22 +922,26 @@
     <div class="astral-actions">
       <!-- Theme Toggle -->
       <button
-        class="orb-toggle"
-        id="eclipseStone"
-        type="button"
-        aria-pressed="true"
-        aria-controls="omenWhisper"
-        aria-label="Dunkelmodus aktiv">
-        <div class="sky day-sky" aria-hidden="true"></div>
-        <div class="sky night-sky" aria-hidden="true"></div>
-        <div class="stars" id="starField" aria-hidden="true"></div>
-        <div class="clouds" id="nebulaSea" aria-hidden="true">
-          <div class="leyline back" data-lane="back"></div>
-          <div class="leyline mid" data-lane="mid"></div>
-          <div class="leyline front" data-lane="front"></div>
-        </div>
-        <span class="thumb" id="moonShard" aria-hidden="true"></span>
-      </button>
+  class="orb-toggle"
+  id="eclipseStone"
+  type="button"
+  aria-pressed="true"
+  aria-controls="omenWhisper"
+  aria-label="Dunkelmodus aktiv">
+
+  <span class="sky day-sky" aria-hidden="true"></span>
+  <span class="sky night-sky" aria-hidden="true"></span>
+  <span class="stars" id="starField" aria-hidden="true"></span>
+
+  <span class="clouds" id="nebulaSea" aria-hidden="true">
+    <span class="leyline back" data-lane="back"></span>
+    <span class="leyline mid" data-lane="mid"></span>
+    <span class="leyline front" data-lane="front"></span>
+  </span>
+
+  <span class="thumb" id="moonShard" aria-hidden="true"></span>
+</button>
+
 
       <!-- Live-Region für Modusansage -->
       <p id="omenWhisper" class="visually-hidden" aria-live="polite" aria-atomic="true">Dunkelmodus aktiv</p>
@@ -1548,7 +1552,7 @@
         lanes.forEach(lane=>{
           const cfg = presets[lane.dataset.lane];
           for(let i=0;i<cfg.count;i++){
-            const cloud = document.createElement('div');
+            const cloud = document.createElement('span');
             cloud.className = 'cloud';
 
             const minW = Math.max(0.28*W, 36);
