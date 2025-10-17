@@ -358,7 +358,12 @@ body[data-page="titlepage"] .hero-image-foreground {
   position:sticky; top:0; z-index:50;
   background:rgba(255,255,255,.9);
   border-bottom:1px solid var(--border);
-  padding-top:max(0px, env(safe-area-inset-top));
+/* padding mit safe-area-bottom */
+padding: clamp(.75rem, 2vw, 1.5rem) clamp(1rem, 3vw, 2rem)
+          max(1rem, env(safe-area-inset-bottom)) clamp(1rem, 3vw, 2rem);
+/* oder nur bottom ergänzen */
+padding-bottom: max(1rem, env(safe-area-inset-bottom));
+
   transition:box-shadow .2s ease, background-color .2s ease, padding .2s ease;
 }
 @supports(backdrop-filter: blur(8px)){
@@ -3854,7 +3859,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </p>
   </header>
 
-  <div class="zenith-grid" aria-label="Projektbeispiele">
+<div class="zenith-grid" aria-labelledby="zenith-h">
     <article class="tile palette-a span-cols-2" aria-labelledby="case-dus-title" aria-label="Designstudie Aurora – 3D Web Experience">
       <div class="tile-media" aria-hidden="true">
         <img src="./3DSlideShow/post13.png" alt="3D Web Experience für Flughafen Düsseldorf" loading="lazy">
@@ -3933,7 +3938,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </article>
 
-    <article class="tile palette-c"aria-labelledby="case-b-title" aria-label="Brand B – Campaign Hub">
+    <article class="tile palette-c" aria-labelledby="case-b-title" aria-label="Brand B – Campaign Hub">
       <div class="tile-media" aria-hidden="true">
         <img src="./thumbs/case-b.jpg" alt="Campaign Hub für Brand B" loading="lazy">
       </div>
