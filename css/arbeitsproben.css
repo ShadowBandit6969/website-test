@@ -350,3 +350,41 @@ html, body{
 @media (prefers-color-scheme: dark){
   .footer-action{ color: #f5f7fa !important; }
 }
+/* === Fix: .zenith-subtitle auf mobilen Geräten wie Desktop beibehalten === */
+@media (max-width: 700px) {
+  .zenith-subtitle {
+    background: linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03)) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05) !important;
+    color: #0f1729 !important;
+  }
+
+  /* Dark Mode explizit angleichen */
+  :root[data-theme="dark"] .zenith-subtitle {
+    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)) !important;
+    box-shadow: inset 0 1px 0 rgba(0,0,0,.6), 0 2px 8px rgba(255,255,255,.05) !important;
+    color: #fff !important;
+  }
+}
+/* === Mobile Fix: Schrift soll tiefschwarz wirken, nicht hellgrau === */
+@media (max-width: 700px) {
+  .zenith-subtitle,
+  .zenith-title,
+  .tile-title,
+  .tile-client,
+  .footer-copy {
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important; /* iOS Safari Fix */
+    text-shadow: none !important;
+    filter: none !important;
+  }
+
+  /* falls Dark Mode aktiv ist, bleib bei Weiß */
+  :root[data-theme="dark"] .zenith-subtitle,
+  :root[data-theme="dark"] .zenith-title,
+  :root[data-theme="dark"] .tile-title,
+  :root[data-theme="dark"] .tile-client,
+  :root[data-theme="dark"] .footer-copy {
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+  }
+}
