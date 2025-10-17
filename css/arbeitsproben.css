@@ -249,3 +249,104 @@ html, body{
     max-width: min(1400px, 100% - clamp(2rem, 4vw, 3rem)) !important;
   }
 }
+/* ====== TYPOGRAPHY (Aurora-Style Integration) ====== */
+
+/* 1️⃣ Systemfont Variable */
+:root{
+  --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* 2️⃣ Global Font-Setup */
+html, body{
+  font-family: var(--font-base);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* 3️⃣ Section Headline (.zenith-title) */
+.zenith-title{
+  font-family: var(--font-base) !important;
+  text-align: center !important;
+  font-size: clamp(1.8rem, 1.4rem + 2vw, 3rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.12 !important;
+  margin: .2rem 0 clamp(1.25rem, 3vw, 2.5rem) !important;
+  color: var(--nova-ink) !important;
+  text-wrap: balance !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+/* 4️⃣ Subtitle (.zenith-subtitle) */
+.zenith-subtitle{
+  font-family: var(--font-base) !important;
+  color: var(--nova-ink) !important;
+  max-width: 62rem !important;
+  margin: 0 auto 2.4rem !important;
+  line-height: 1.78 !important;
+  font-size: clamp(1.06rem, 1rem + .6vw, 1.22rem) !important;
+  font-weight: 500 !important;
+  letter-spacing: .004em !important;
+  text-wrap: pretty !important;
+  padding: 1.1rem 1.2rem !important;
+  border-radius: 14px !important;
+  background: linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03)) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05) !important;
+  text-align: center !important;
+}
+
+/* 5️⃣ Dark Mode Anpassung */
+@media (prefers-color-scheme: dark){
+  .zenith-subtitle{
+    color: #fff !important;
+    background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25)) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 2px 8px rgba(0,0,0,.4) !important;
+  }
+}
+
+/* 6️⃣ Tile-Typo */
+.tile-title{
+  font-family: var(--font-base) !important;
+  font-size: clamp(1.05rem, 1rem + .6vw, 1.25rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.3 !important;
+  letter-spacing: -0.01em !important;
+  color: #0b0c10 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+
+.tile-client{
+  font-family: var(--font-base) !important;
+  font-weight: 690 !important;
+  letter-spacing: -0.002em !important;
+  font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem) !important;
+  line-height: 1.7 !important;
+  color: rgba(0,0,0,.96) !important;
+  text-wrap: pretty !important;
+  hyphens: auto !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.18) !important;
+  margin: 0 !important;
+}
+
+/* Dark Mode Tiles */
+@media (prefers-color-scheme: dark){
+  .tile-title,
+  .tile-client{
+    color: #f5f7fa !important;
+    text-shadow: none !important;
+  }
+}
+
+/* 7️⃣ Footer & Link */
+.footer-action{
+  font-family: var(--font-base) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+  color: #0b0c10 !important;
+}
+@media (prefers-color-scheme: dark){
+  .footer-action{ color: #f5f7fa !important; }
+}
