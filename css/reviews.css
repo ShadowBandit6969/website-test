@@ -855,3 +855,35 @@
     color: #fff !important;
   }
 }
+/* --- Sichtbarkeit der Quote auf iOS/Phones sicherstellen --- */
+.zen-toggle {
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 0;
+}
+
+/* Hellmodus: klare, geerbte Tinte nutzen */
+.zen-toggle, .zen-quote {
+  color: var(--zen-ink) !important;
+  -webkit-text-fill-color: currentColor !important; /* iOS/WebKit */
+  text-shadow: none !important;
+}
+
+/* Dunkelmodus: explizit weiß */
+:root[data-theme="dark"] .zen-toggle,
+:root[data-theme="dark"] .zen-quote {
+  color: #fff !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+/* Das Anführungszeichen soll die gleiche Farbe übernehmen */
+.zen-quote::before {
+  color: currentColor;
+  opacity: .22;
+}
+
+/* optional: falls es nur mobil auftritt */
+@media (max-width: 700px){
+  .zen-toggle, .zen-quote { /* gleiche Regeln wie oben */ }
+}
