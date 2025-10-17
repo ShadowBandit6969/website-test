@@ -660,3 +660,23 @@
     box-shadow: inset 0 1px 0 rgba(0,0,0,.6), 0 2px 8px rgba(255,255,255,.05) !important;
   }
 }
+/* === Galerie-Footer: Icon dauerhaft schwarz (auch auf iOS) === */
+.footer-action svg {
+  stroke: #000 !important;            /* Linien-Icons (z. B. Lucide, Feather) */
+  fill: none !important;              /* sicherstellen, dass nichts überlagert */
+  -webkit-text-fill-color: #000 !important; /* iOS-Fallback */
+  opacity: 1 !important;
+}
+
+/* Optional: falls du Solid-Icons oder FontAwesome nutzt */
+.footer-action svg path {
+  fill: #000 !important;
+  stroke: #000 !important;
+}
+
+/* Dark Mode – nur wenn du wirklich schwarz beibehalten willst */
+:root[data-theme="dark"] .footer-action svg,
+:root[data-theme="dark"] .footer-action svg path {
+  stroke: #000 !important;
+  fill: #000 !important;
+}
