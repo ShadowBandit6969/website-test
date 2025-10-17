@@ -1,0 +1,251 @@
+
+:root{
+  --rim:16px;
+  --grad-a:linear-gradient(270deg,#120a8f,#5b2dff,#0a0f8f);
+  --grad-b:linear-gradient(135deg,#0c0c0c,#01124e,#0c0c0c);
+  --grad-c:linear-gradient(135deg,#ff5100,#ff0044,#ff5100);
+
+  --nova-ink:#0b0c0e;
+  --aurora-gutter:1rem; /* bis 1024px */
+}
+@media (prefers-color-scheme: dark){
+  :root{ --nova-ink:#fff; }
+}
+@media (min-width:1025px){
+  :root{ --aurora-gutter:2rem; }
+}
+
+/* ====== HEADER ====== */
+.zenith-head{
+  text-align:center;
+  padding-inline:clamp(1rem, 4vw, 2rem);
+  padding-top: clamp(2rem, 5vw, 6rem);
+}
+@media (max-width:699.98px){
+  .zenith-head{
+    padding-inline-start: max(12px, env(safe-area-inset-left)) !important;
+    padding-inline-end:   max(12px, env(safe-area-inset-right)) !important;
+  }
+  #flowhub[data-edge]{
+    padding-inline-start: max(8px, env(safe-area-inset-left)) !important;
+    padding-inline-end:   max(8px, env(safe-area-inset-right)) !important;
+  }
+}
+@media (min-width:699.99px){
+  .zenith-head{
+    padding-inline-start: max(var(--aurora-gutter), env(safe-area-inset-left));
+    padding-inline-end:   max(var(--aurora-gutter), env(safe-area-inset-right));
+  }
+}
+
+/* ====== TYPOGRAPHY ====== */
+.zenith-title{
+  text-align:center!important;
+  font-size:clamp(1.8rem, 1.4rem + 2vw, 3rem)!important;
+  font-weight:900!important;
+  letter-spacing:-0.02em!important;
+  line-height:1.12!important;
+  margin:.2rem 0 clamp(1.25rem, 3vw, 2.5rem)!important;
+  color: var(--nova-ink)!important;
+  text-wrap: balance!important;
+}
+
+/* Untertitel – Sichtbarkeit & Stil */
+.zenith-subtitle{
+  color: var(--nova-ink)!important;
+  max-width:62rem!important;
+  margin:0 auto 2.4rem!important;
+  line-height:1.7!important;
+  font-size: clamp(.98rem, .95rem + .2vw, 1.05rem)!important;
+  font-weight:500!important;
+  letter-spacing:.004em!important;
+  padding:1.1rem 1.2rem!important;
+  border-radius:14px!important;
+  background:linear-gradient(180deg,rgba(15,23,41,.06),rgba(15,23,41,.03))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 2px 8px rgba(0,0,0,.05)!important;
+  text-align:center!important;
+}
+/* Bessere Lesbarkeit im Dark Mode */
+@media (prefers-color-scheme: dark){
+  .zenith-subtitle{
+    background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25)) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 2px 8px rgba(0,0,0,.4) !important;
+  }
+}
+
+/* Standard: erst alles verstecken … */
+.blurb-short, .blurb-medium, .blurb-full{ display:none; }
+/* … dann je Breakpoint genau eine Variante zeigen */
+@media (max-width:699.98px){  .blurb-short{  display:inline; } }
+@media (min-width:700px) and (max-width:1099.98px){ .blurb-medium{ display:inline; } }
+@media (min-width:1100px){ .blurb-full{ display:inline; } }
+
+/* ====== GRID ====== */
+.zenith-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:clamp(1.2rem, 2vw, 2rem);
+  max-width:1300px;
+  margin:0 auto;
+  grid-auto-flow:dense;
+  padding-inline:clamp(1rem, 4vw, 3rem);
+  padding-bottom:clamp(2rem, 5vw, 4rem);
+}
+@media(min-width:700px){
+  .zenith-grid{
+    grid-template-columns:repeat(2,1fr);
+    grid-auto-rows:260px;
+  }
+  .span-cols-2{grid-column:span 2;}
+  .span-rows-2{grid-row:span 2;}
+}
+@media(min-width:1100px){
+  .zenith-grid{
+    grid-template-columns:repeat(3,1fr);
+    max-width:1400px;
+    gap:clamp(1.6rem, 2vw, 2.4rem);
+  }
+}
+
+/* ====== TILES ====== */
+.tile{
+  display:flex;
+  flex-direction:column;
+  background:var(--tile-bg,var(--grad-a));
+  border-radius:var(--rim);
+  overflow:hidden;
+  border:2px solid #000;
+  transition:transform .25s ease, background-position .4s ease;
+  background-size:300% 300%;
+  background-position:0 50%;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+.tile:hover{transform:translateY(-4px);background-position:100% 50%;}
+@media(prefers-color-scheme:dark){
+  .tile{border-color:#fff;}
+}
+.palette-a{--tile-bg:var(--grad-a);}
+.palette-b{--tile-bg:var(--grad-b);}
+.palette-c{--tile-bg:var(--grad-c);}
+
+/* ====== MEDIA ====== */
+.tile-media{flex:1 1 auto;position:relative;overflow:hidden;background:rgba(0,0,0,.1);}
+.tile-media img, .tile-media video{width:100%;height:100%;object-fit:cover;display:block;}
+.media-video{}
+
+/* ====== FOOTER ====== */
+.tile-footer{
+  background:#fff;
+  color:#0b0c10;
+  padding:1rem 1.2rem;
+  border-top:1px solid rgba(0,0,0,.06);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  text-align:center;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 -1px 8px rgba(0,0,0,.06);
+}
+.footer-copy{text-align:center;flex:1;}
+.tile-title{
+  margin:0!important;
+  font-size:clamp(1.05rem,1rem+.6vw,1.25rem)!important;
+  font-weight:800!important;
+  line-height:1.3!important;
+  letter-spacing:-0.01em!important;
+  color:#0b0c10!important;
+}
+.tile-client{
+  margin:0!important;
+  font-size:.95rem!important;
+  opacity:.9!important;
+  color:#0b0c10!important;
+}
+.footer-action{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  margin-left:.5rem!important;
+  color:#0b0c10!important;
+  text-decoration:none!important;
+}
+.footer-action:hover{transform:scale(1.1)!important;}
+.footer-action svg{width:22px!important;height:22px!important;stroke-width:2!important;}
+
+/* ====== MOBILE ====== */
+@media(max-width:699px){
+  .tile{border-width:1.5px!important;}
+  .tile-media{
+    position:relative!important;
+    height:8px!important;
+    overflow:hidden!important;
+    background:var(--tile-bg)!important;
+  }
+  .tile-media img, .tile-media video{
+    opacity:0!important;
+    pointer-events:none!important;
+  }
+  .tile-footer{
+    flex-direction:row!important;
+    text-align:left!important;
+    align-items:center!important;
+  }
+  .footer-copy{text-align:left!important;}
+}
+/* Mehr Abstand NUR über die Section */
+#zenith-wrap{
+  padding-top: clamp(3rem, 7vw, 8rem); /* vorher war's am Header */
+}
+
+/* Header: Top-Padding zurücknehmen, damit es sich nicht addiert */
+.zenith-head{
+  padding-top: 0 !important;  /* überschreibt die frühere Regel */
+}
+/* 1) Seite: normaler, einziger Scroll-Container */
+html, body{
+  height: auto;
+  overflow-x: hidden;   /* nur horizontal kappen */
+  overflow-y: auto;     /* genau EIN vertikaler Scrollbalken */
+  box-sizing: border-box;
+}
+
+/* 2) Deine Section & Grid: niemals eigenes Scrolling erzwingen */
+#zenith-wrap,
+.zenith-grid{
+  max-height: none !important;
+  overflow: visible !important;   /* killt etwaige innere Scrollleisten */
+  box-sizing: border-box;         /* Padding zählt in die Breite/Höhe */
+}
+
+/* 3) Videos/Media dürfen nie Scrollen auslösen */
+.tile-media{
+  overflow: hidden !important;
+}
+/* ===== TILE CLIENT wie .copy ===== */
+.tile-client{
+  font-family: var(--font-base) !important;
+  font-weight: 690 !important;
+  letter-spacing: -0.002em !important;
+  font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem) !important;
+  line-height: 1.7 !important;
+  color: rgba(0, 0, 0, 0.96) !important;
+  text-wrap: pretty !important;
+  hyphens: auto !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.18) !important;
+  margin: 0 !important;
+  opacity: 1 !important; /* ersetzt dein vorheriges .9-Opacity */
+}
+/* === Subtitle-Breite an Grid angleichen === */
+#zenith-wrap .zenith-subtitle{
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: min(1300px, 100% - clamp(2rem, 4vw, 3rem)) !important;
+  margin-inline: auto !important;
+  padding-inline: clamp(1rem, 2vw, 2rem) !important;
+}
+
+/* Ab 1100px: Grid ist breiter → Subtitle leicht mitschieben */
+@media (min-width:1100px){
+  #zenith-wrap .zenith-subtitle{
+    max-width: min(1400px, 100% - clamp(2rem, 4vw, 3rem)) !important;
+  }
+}
