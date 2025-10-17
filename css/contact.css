@@ -814,3 +814,34 @@ label.req::after{
   }
 }
 
+/* 1) .form-step selbst soll nie einen sichtbaren UA-Outline zeigen */
+.form-step { 
+  /* verschluckt Rendering-Seams ohne sichtbaren Rand */
+  border: 1px solid transparent;
+  outline: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+/* falls der Container jemals Fokus bekommt (z.B. via JS/scrollIntoView) */
+.form-step:focus { outline: none; }
+
+/* 2) die aktive Stufe zusätzlich „stabilisieren“ (GPU-Layer) */
+.form-step.active {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0); /* erzeugt eigenen Compositing-Layer */
+}
+
+/* 3) Inputs behalten weiterhin eine gut sichtbare, zugängliche Outline */
+.kontakt-form input:focus-visible,
+.kontakt-form select:focus-visible,
+.kontakt-form textarea:focus-visible,
+.kontakt-form button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--choice-green) 60%, transparent);
+  outline-offset: 2px;
+}
+
+/* 4) Vermeide Clipping am Formular/Step (du hast teils schon :)) */
+.kontakt-form,
+.form-step,
+.grid-choices { overflow: visible; }

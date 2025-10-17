@@ -232,12 +232,27 @@
 
   <!-- Webflow/Normalize -->
   <meta name="generator" content="Webflow">
-  <link href="css/normalize.css" rel="stylesheet" type="text/css">
-  <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/denizs-dapper-site-2d192b.webflow.css" rel="stylesheet" type="text/css">
-  <script>!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
-
-
+  
+  <!-- Titelpage-spezifische Bild-Overrides (in den Head verschoben) -->
+  <style>
+    body[data-page="webdesign"] .hero-image-background {
+      background-image: url("./images/hero-bg-sky_1hero-bg-sky.webp") !important;
+    }
+    body[data-page="webdesign"] .hero-image-foreground {
+      background-image: url("./images/webdesign-fg.webp") !important;
+    }
+    @media (max-width: 1024px) {
+      body[data-page="webdesign"] .hero-image-foreground {
+        background-image: url("./images/webdesign-fg-tablet.webp") !important;
+      }
+    }
+    @media (max-width: 480px) {
+      body[data-page="webdesign"] .hero-image-foreground {
+        background-image: url("./images/webdesign-fg-mobile.webp") !important;
+      }
+    }
+  </style>
 <link rel="stylesheet" href="css/lyraV.css" type="text/css">
 <link rel="stylesheet" href="css/footer.css" type="text/css">
 <link rel="stylesheet" href="css/angledimg.css" type="text/css">
@@ -251,7 +266,6 @@
 <link rel="stylesheet" href="css/darkmodeLast.css" type="text/css">
 <link rel="stylesheet" href="css/reviews.css" type="text/css">
 <style>
-
 /* --------------------------
    Lokale Bild-Overrides nur für webdesign.html
 --------------------------- */
@@ -337,12 +351,6 @@ body[data-page="webdesign"] .hero-image-foreground {
   }
 }
 </style>
-</head>
-
-<body data-page="webdesign">
-  <!-- dein Body-Inhalt hier -->
-
-
 
 <style>
 /* === BASIS (umbenannt, mystisch) ===================================================== */
@@ -350,7 +358,12 @@ body[data-page="webdesign"] .hero-image-foreground {
   position:sticky; top:0; z-index:50;
   background:rgba(255,255,255,.9);
   border-bottom:1px solid var(--border);
-  padding-top:max(0px, env(safe-area-inset-top));
+/* padding mit safe-area-bottom */
+padding: clamp(.75rem, 2vw, 1.5rem) clamp(1rem, 3vw, 2rem)
+          max(1rem, env(safe-area-inset-bottom)) clamp(1rem, 3vw, 2rem);
+/* oder nur bottom ergänzen */
+padding-bottom: max(1rem, env(safe-area-inset-bottom));
+
   transition:box-shadow .2s ease, background-color .2s ease, padding .2s ease;
 }
 @supports(backdrop-filter: blur(8px)){
@@ -920,6 +933,14 @@ body[data-page="webdesign"] .hero-image-foreground {
 }
 
 </style>
+</head>
+
+<body data-page="webdesign">
+  <!-- dein Body-Inhalt hier -->
+
+
+
+
 
 <header class="aether-header" id="aetherGate">
   <div class="aether-header__bar">
@@ -1513,103 +1534,94 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
-<section id="aurora-sheet" class="aurora-sheet container" aria-labelledby="aurora-crown" aria-describedby="aurora-chant" role="region">
-  <h2 id="aurora-crown" class="aurora-title">Webdesign bei Fusion3</h2>
+<section id="aurora-sheet" class="aurora-sheet container" aria-labelledby="aurora-crown" aria-describedby="aurora-chant">
+  <h2 id="aurora-crown" class="aurora-title">Webdesign</h2>
 
   <p id="aurora-chant" class="aurora-subtitle" aria-live="polite">
-    <span class="subtitle-snippet">Webdesign, das Marken sichtbar macht.</span>
-    <span class="subtitle-t">Wir gestalten Webseiten, die Marken spürbar machen – klar, schnell und mit Fokus auf Nutzererlebnis und Conversion.</span>
+    <span class="subtitle-snippet">Schnelle, klare Websites – mit Design, das bleibt.</span>
+    <span class="subtitle-t">Webdesign bedeutet bei uns Klarheit, Performance und erlebbares Design – auf allen Geräten, für alle Marken.</span>
     <span class="subtitle-full">
-      Unser Webdesign vereint Ästhetik, Performance und Funktion.<br>
-      Für digitale Auftritte, die intuitiv, markant und messbar erfolgreich sind.
+      Wir gestalten Websites, die nicht nur gut aussehen, sondern wirken.  
+      Klar im Aufbau, schnell im Code, präzise in der Marke.
     </span>
   </p>
 
-  <!-- Semantische Liste der Bereiche -->
-  <ul class="quasar-grid" aria-label="Bereiche: Strategie, Umsetzung, Performance">
+  <!-- Webdesign Inhalte -->
+  <ul class="quasar-grid" aria-label="Bereiche: Strategie, Gestaltung, Entwicklung">
 
     <li>
       <article class="aether-card" id="aether-strategy"
                aria-labelledby="aether-strategy-h"
                aria-describedby="aether-strategy-k aether-strategy-s">
         <h3 id="aether-strategy-h">Strategie</h3>
-        <p class="snippet" id="aether-strategy-s">Klarheit, Struktur &amp; Nutzerführung – jedes Detail folgt einem Ziel.</p>
-        <p class="t-snippet">Wir gestalten mit System: Von der Markenanalyse über UX-Strategie bis hin zur visuellen Sprache entsteht ein klarer, intuitiver digitaler Auftritt, der Wirkung zeigt.</p>
-        <p class="microtag" id="aether-strategy-k">UX-Design mit klarem Ziel</p>
+        <p class="snippet" id="aether-strategy-s">Struktur, Fokus, Ziel – jede Seite folgt einem klaren Plan.</p>
+        <p class="t-snippet">Unsere Strategien vereinen Markenführung, Usability und SEO. Damit Websites nicht nur gefunden, sondern verstanden werden.</p>
+        <p class="microtag" id="aether-strategy-k">Strukturiert &amp; zielführend</p>
 
-        <ul class="delta-list" aria-label="Fokus unserer Strategie">
+        <ul class="delta-list" aria-label="Kernpunkte der Strategie">
           <li>
-            <span class="visually-hidden">Fokus: </span>
-            <span class="lead">Klarheit</span>
-            <span class="copy">Inhalt, Struktur und Design sprechen eine Sprache – präzise und leicht verständlich.</span>
+            <span class="lead">UX-Fokus</span>
+            <span class="copy">Klares Nutzererlebnis mit logischem Flow und minimalen Klicks.</span>
           </li>
           <li>
-            <span class="visually-hidden">Fokus: </span>
-            <span class="lead">Nutzerführung</span>
-            <span class="copy">Jede Interaktion ist logisch, jedes Element führt gezielt zum nächsten Schritt.</span>
+            <span class="lead">Markenfit</span>
+            <span class="copy">Jedes Design transportiert Haltung, Ton und Identität der Marke.</span>
           </li>
           <li>
-            <span class="visually-hidden">Fokus: </span>
-            <span class="lead">Markenidentität</span>
-            <span class="copy">Design transportiert Werte – unverwechselbar, modern und konsistent.</span>
+            <span class="lead">Datenbasiert</span>
+            <span class="copy">Entscheidungen stützen sich auf Verhalten, nicht auf Bauchgefühl.</span>
           </li>
         </ul>
       </article>
     </li>
 
     <li>
-      <article class="aether-card" id="aether-build"
-               aria-labelledby="aether-build-h"
-               aria-describedby="aether-build-k aether-build-s">
-        <h3 id="aether-build-h">Umsetzung</h3>
-        <p class="snippet" id="aether-build-s">Design trifft Code – präzise umgesetzt, pixelgenau und performant.</p>
-        <p class="t-snippet">Wir entwickeln maßgeschneiderte Webseiten mit Fokus auf Performance, Barrierefreiheit und Responsivität. Sauberer Code trifft modernes Design – für schnelle Ladezeiten und starke Wirkung.</p>
-        <p class="microtag" id="aether-build-k">Technisch sauber. Visuell stark.</p>
+      <article class="aether-card" id="aether-design"
+               aria-labelledby="aether-design-h"
+               aria-describedby="aether-design-k aether-design-s">
+        <h3 id="aether-design-h">Gestaltung</h3>
+        <p class="snippet" id="aether-design-s">Modern, markant, barrierearm – Design mit Funktion.</p>
+        <p class="t-snippet">Wir gestalten Interfaces mit Typografie, Bewegung und Struktur – reduziert im Stil, stark im Ausdruck.</p>
+        <p class="microtag" id="aether-design-k">Klar. Präzise. Markant.</p>
 
-        <ul class="delta-list" aria-label="Stärken unserer Umsetzung">
+        <ul class="delta-list" aria-label="Gestaltungsprinzipien">
           <li>
-            <span class="visually-hidden">Stärke: </span>
+            <span class="lead">Visuelle Balance</span>
+            <span class="copy">Form folgt Funktion – jedes Element dient dem Nutzer.</span>
+          </li>
+          <li>
             <span class="lead">Responsiv</span>
-            <span class="copy">Perfekte Darstellung auf jedem Gerät – vom Smartphone bis zum 4K-Display.</span>
+            <span class="copy">Pixelgenaue Umsetzung für alle Viewports – vom Desktop bis Mobile.</span>
           </li>
           <li>
-            <span class="visually-hidden">Stärke: </span>
             <span class="lead">Barrierearm</span>
-            <span class="copy">Zugänglich für alle – klare Kontraste, saubere Semantik und leichte Bedienung.</span>
-          </li>
-          <li>
-            <span class="visually-hidden">Stärke: </span>
-            <span class="lead">Performance</span>
-            <span class="copy">Optimiert für Geschwindigkeit – SEO-freundlich und technisch effizient.</span>
+            <span class="copy">Zugänglich für alle – technisch wie visuell.</span>
           </li>
         </ul>
       </article>
     </li>
 
     <li>
-      <article class="aether-card" id="aether-performance"
-               aria-labelledby="aether-performance-h"
-               aria-describedby="aether-performance-k aether-performance-s">
-        <h3 id="aether-performance-h">Wirkung</h3>
-        <p class="snippet" id="aether-performance-s">Websites, die überzeugen – im Design, in der Technik und in den Ergebnissen.</p>
-        <p class="t-snippet">Wir denken Webdesign als Erlebnis: emotional, markenstark und messbar erfolgreich – durch klare Kommunikation, überzeugende Bildsprache und nachhaltige Nutzerbindung.</p>
-        <p class="microtag" id="aether-performance-k">Design mit messbarer Wirkung</p>
+      <article class="aether-card" id="aether-dev"
+               aria-labelledby="aether-dev-h"
+               aria-describedby="aether-dev-k aether-dev-s">
+        <h3 id="aether-dev-h">Entwicklung</h3>
+        <p class="snippet" id="aether-dev-s">Sauberer Code, kurze Ladezeiten, flexible Systeme.</p>
+        <p class="t-snippet">Wir entwickeln mit modernen Frameworks, performanten Strukturen und einer Liebe zum Detail – wartbar, skalierbar und sicher.</p>
+        <p class="microtag" id="aether-dev-k">Technisch stark &amp; zukunftsfähig</p>
 
-        <ul class="delta-list" aria-label="Ziele unseres Webdesigns">
+        <ul class="delta-list" aria-label="Technische Schwerpunkte">
           <li>
-            <span class="visually-hidden">Ziel: </span>
-            <span class="lead">Emotion</span>
-            <span class="copy">Ein Design, das inspiriert und Vertrauen schafft – vom ersten Klick an.</span>
+            <span class="lead">Performance</span>
+            <span class="copy">Schnelle Ladezeiten durch optimierten Code und saubere Assets.</span>
           </li>
           <li>
-            <span class="visually-hidden">Ziel: </span>
-            <span class="lead">Conversion</span>
-            <span class="copy">Visuelle Führung und klare Botschaften, die Besucher zu Kunden machen.</span>
+            <span class="lead">CMS</span>
+            <span class="copy">Nahtlose Integration in Systeme wie WordPress, Webflow oder Headless CMS.</span>
           </li>
           <li>
-            <span class="visually-hidden">Ziel: </span>
-            <span class="lead">Nachhaltigkeit</span>
-            <span class="copy">Langlebige Systeme, einfache Pflege und skalierbare Lösungen für die Zukunft.</span>
+            <span class="lead">SEO &amp; Sicherheit</span>
+            <span class="copy">Von Anfang an suchmaschinenfreundlich und DSGVO-konform.</span>
           </li>
         </ul>
       </article>
@@ -1617,14 +1629,13 @@ body[data-page="webdesign"] .hero-image-foreground {
 
   </ul>
 </section>
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebPage",
-      "@id": "https://example.com/ueber-fusion3/#webpage",
+      "@type": "webdesign",
+      "@id": "https://example.com/ueber-fusion3/#webdesign",
       "url": "https://example.com/ueber-fusion3/",
       "name": "Über Fusion3 — Design, 3D & Web",
       "inLanguage": "de",
@@ -1652,7 +1663,7 @@ body[data-page="webdesign"] .hero-image-foreground {
           "@type": "ListItem",
           "position": 1,
           "item": {
-            "@type": "WebPageElement",
+            "@type": "webdesignElement",
             "@id": "https://example.com/ueber-fusion3/#aether-mission",
             "url": "https://example.com/ueber-fusion3/#aether-mission",
             "name": "Unsere Mission",
@@ -1663,7 +1674,7 @@ body[data-page="webdesign"] .hero-image-foreground {
           "@type": "ListItem",
           "position": 2,
           "item": {
-            "@type": "WebPageElement",
+            "@type": "webdesignElement",
             "@id": "https://example.com/ueber-fusion3/#aether-crew",
             "url": "https://example.com/ueber-fusion3/#aether-crew",
             "name": "Unser Team",
@@ -1674,7 +1685,7 @@ body[data-page="webdesign"] .hero-image-foreground {
           "@type": "ListItem",
           "position": 3,
           "item": {
-            "@type": "WebPageElement",
+            "@type": "webdesignElement",
             "@id": "https://example.com/ueber-fusion3/#aether-vision",
             "url": "https://example.com/ueber-fusion3/#aether-vision",
             "name": "Unsere Vision",
@@ -1887,522 +1898,117 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
-<section class="zen-vault" id="zen-faq" aria-label="Kundenstimmen">
-  <div class="zen-slider">
-    <div class="zen-viewport">
-      <div class="zen-track">
-        <!-- Slides -->
-        <div class="zen-card">
-          <button class="zen-toggle" id="toggle-1" aria-expanded="true" aria-controls="panel-1">
-            <span class="zen-quote">„Transparente Kommunikation und schneller Go-Live.“</span>
-          </button>
-          <div class="zen-drop" id="panel-1" role="region" aria-labelledby="toggle-1">
-            <p class="zen-meta">
-              <span class="zen-author">– Laura M., Head of Marketing, AlpinaTech</span>
-            </p>
-            <p class="zen-text">„Unser Projektmanager hat uns mit kurzen, präzisen Updates geführt. Meilensteine wurden eingehalten und der Launch lief reibungslos.“</p>
-          </div>
-        </div>
-
-        <div class="zen-card">
-          <button class="zen-toggle" id="toggle-2" aria-expanded="true" aria-controls="panel-2">
-            <span class="zen-quote">„Top Qualität &amp; verlässlicher Support.“</span>
-          </button>
-          <div class="zen-drop" id="panel-2" role="region" aria-labelledby="toggle-2">
-            <p class="zen-meta">
-              <span class="zen-author">– Denis M., CTO, Pixel &amp; Co.</span>
-            </p>
-            <p class="zen-text">„Die Testabdeckung ist hervorragend. Nach dem Launch haben wir einen klaren Wartungsplan und schnelle Reaktionszeiten.“</p>
-          </div>
-        </div>
-
-        <div class="zen-card">
-          <button class="zen-toggle" id="toggle-3" aria-expanded="true" aria-controls="panel-3">
-            <span class="zen-quote">„UX, die unsere Conversion sichtbar gesteigert hat.“</span>
-          </button>
-          <div class="zen-drop" id="panel-3" role="region" aria-labelledby="toggle-3">
-            <p class="zen-meta">
-             <span class="zen-author">– Jana M., E-Commerce Lead, Naturwerk</span>
-            </p>
-            <p class="zen-text">„Wireframes, Prototypen und Tests mit echten Nutzer:innen – wir waren in jeder Phase eingebunden. Die Conversion stieg nach dem Relaunch um 23%.“</p>
-          </div>
-        </div>
-
-        <div class="zen-card">
-          <button class="zen-toggle" id="toggle-4" aria-expanded="true" aria-controls="panel-4">
-            <span class="zen-quote">„Transparente Kosten, messbarer Erfolg.“</span>
-          </button>
-          <div class="zen-drop" id="panel-4" role="region" aria-labelledby="toggle-4">
-            <p class="zen-meta">
-              <span class="zen-author">– Tim M., Geschäftsführer, UrbanKaffee</span>
-            </p>
-            <p class="zen-text">„Klare Angebotsstruktur ohne Überraschungen. Wir verfolgen KPIs wie Ladezeit, SEO und Conversion – alles deutlich verbessert.“</p>
-          </div>
-        </div>
-
-        <div class="zen-card">
-          <button class="zen-toggle" id="toggle-5" aria-expanded="true" aria-controls="panel-5">
-            <span class="zen-quote">„Datenschutz ernst genommen – endlich sorgenfrei.“</span>
-          </button>
-          <div class="zen-drop" id="panel-5" role="region" aria-labelledby="toggle-5">
-            <p class="zen-meta">
-              <span class="zen-author">– Katharina M., Legal Counsel, Nordlicht GmbH</span>
-            </p>
-            <p class="zen-text">„DSGVO-Konzept, SSL, Backups und klare Rollen – wir haben sogar ein NDA erhalten. Genau so wollen wir arbeiten.“</p>
-          </div>
-        </div>
-
-        <div class="zen-card">
-          <button class="zen-toggle" id="toggle-6" aria-expanded="true" aria-controls="panel-6">
-            <span class="zen-quote">„SEO &amp; Content aus einer Hand – international skalierbar.“</span>
-          </button>
-          <div class="zen-drop" id="panel-6" role="region" aria-labelledby="toggle-6">
-            <p class="zen-meta">
-              <span class="zen-author">– Rafael M., <br> Growth Lead, GlobeFit</span>
-            </p>
-            <p class="zen-text">„Content-Produktion, OnPage-SEO und Mehrsprachigkeit – unser Rollout in zwei Märkten war unkompliziert und performant.“</p>
-          </div>
-        </div>
-        <!-- Ende Slides -->
-      </div>
-    </div>
-  </div>
-</section>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const root     = document.querySelector("#zen-faq");
-  if (!root) return;
-
-  const slider   = root.querySelector(".zen-slider");
-  const viewport = slider?.querySelector(".zen-viewport");
-  const track    = slider?.querySelector(".zen-track");
-  if (!slider || !viewport || !track) return;
-
-  const isMobile = () => window.matchMedia("(max-width:699.98px)").matches;
-
-  // NEU: Slides-per-View sauber aus CSS lesen (synced zu deinen Breakpoints)
-  const getSPV = () => {
-    const v = getComputedStyle(document.documentElement).getPropertyValue("--zen-slides").trim();
-    const n = Math.max(1, parseInt(v || "1", 10));
-    return n;
-  };
-
-  // ARIA (unverändert)
-  Array.from(track.querySelectorAll(".zen-card")).forEach((card, i) => {
-    const btn  = card.querySelector(".zen-toggle");
-    const drop = card.querySelector(".zen-drop");
-    if (!btn || !drop) return;
-    const id = `zen-drop-${i+1}`;
-    drop.id = id;
-    btn.setAttribute("aria-controls", id);
-    btn.setAttribute("aria-expanded", "true");
-    btn.addEventListener("click", (e) => e.preventDefault(), { passive:true });
-  });
-
-  // Reveal IO
-  const revealIO = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting){ e.target.classList.add("is-in"); e.target.classList.remove("is-out"); }
-      else { e.target.classList.remove("is-in"); e.target.classList.add("is-out"); }
-    });
-  }, { root: viewport, threshold: 0.25 });
-
-  let originals = [];
-  let index     = 0;
-  let slideW    = 0;
-  let animLock  = false;
-
-  const AUTOPLAY_MS = 4000;
-  let autoplayTimer  = null;
-
-  const cardsAll = () => Array.from(track.querySelectorAll(".zen-card"));
-  const gapPX = () => {
-    const g = getComputedStyle(track).gap || "0px";
-    return g.endsWith("px") ? parseFloat(g) : 0;
-  };
-
-  function measureSlideW(){
-    const spv = getSPV();
-    const vw  = viewport.clientWidth;
-    const padL = parseFloat(getComputedStyle(viewport).paddingLeft)||0;
-    const padR = parseFloat(getComputedStyle(viewport).paddingRight)||0;
-    const inner = vw - padL - padR;
-    slideW = (inner - gapPX() * (spv - 1)) / spv;
-  }
-  const applyFixedWidths = () => cardsAll().forEach(c => {
-    c.style.flex = `0 0 ${slideW}px`;
-    c.style.width = `${slideW}px`;
-    c.style.maxWidth = `${slideW}px`;
-  });
-  const clearFixedWidths = () => cardsAll().forEach(c => {
-    c.style.flex = ""; c.style.width = ""; c.style.maxWidth = "";
-  });
-
-  // NEU: nicht mehr „3 erzwingen“, sondern dynamisch je nach SPV
-  function markActiveBySPV(){
-    if (isMobile()) {
-      cardsAll().forEach(c => { c.classList.remove('is-active','is-dim'); });
-      return;
-    }
-    const spv   = getSPV();
-    const start = index;
-    const end   = start + spv - 1;
-
-    cardsAll().forEach((c, i) => {
-      if (i >= start && i <= end) {
-        c.classList.add('is-active');
-        c.classList.remove('is-dim');
-      } else {
-        c.classList.add('is-dim');
-        c.classList.remove('is-active');
-      }
-    });
-  }
-
-  function setTransform(jump=false){
-    if (isMobile()){
-      track.style.transition = "none";
-      track.style.transform  = "none";
-      requestAnimationFrame(markActiveBySPV);
-      return;
-    }
-    const translate = -(index * (slideW + gapPX()));
-    track.style.transition = jump ? "none" : `transform var(--zen-speed,420ms) ease`;
-    track.style.transform  = `translate3d(${translate}px,0,0)`;
-    requestAnimationFrame(markActiveBySPV);
-  }
-
-  function buildFullClones(){
-    track.querySelectorAll("[data-clone]").forEach(n => n.remove());
-    if (!originals.length) return;
-    const pre = originals.map(n => { const c = n.cloneNode(true); c.dataset.clone = "true"; return c; });
-    pre.reverse().forEach(c => track.insertBefore(c, track.firstChild));
-    const post = originals.map(n => { const c = n.cloneNode(true); c.dataset.clone = "true"; return c; });
-    post.forEach(c => track.appendChild(c));
-    cardsAll().forEach(card => revealIO.observe(card));
-  }
-
-  function goToPageStart(page, jump=false){
-    const spv = getSPV();
-    const base = originals.length;
-    index = base + page * spv;
-    setTransform(jump);
-  }
-
-  function normalizeAfterTransition(){
-    const base = originals.length;
-    const first = base;
-    const last  = base + originals.length - 1;
-    if (index < first){
-      index += originals.length;
-      setTransform(true);
-    } else if (index > last){
-      index -= originals.length;
-      setTransform(true);
-    }
-    markActiveBySPV();
-  }
-
-  function next(){
-    if (animLock || isMobile()) return;
-    animLock = true;
-    index += getSPV();           // seitenweise passend zu SPV
-    setTransform(false);
-  }
-  function prev(){
-    if (animLock || isMobile()) return;
-    animLock = true;
-    index -= getSPV();           // seitenweise passend zu SPV
-    setTransform(false);
-  }
-  track.addEventListener("transitionend", () => { normalizeAfterTransition(); animLock = false; });
-
-  function startAutoplay(){
-    if (autoplayTimer || isMobile()) return;
-    stopAutoplay();
-    autoplayTimer = setInterval(next, AUTOPLAY_MS);
-  }
-  function stopAutoplay(){
-    if (autoplayTimer) clearInterval(autoplayTimer);
-    autoplayTimer = null;
-  }
-
-  const visIO = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const visible = entry.isIntersecting && !document.hidden;
-      if (visible) startAutoplay(); else stopAutoplay();
-    });
-  }, { threshold: 0.5 });
-  visIO.observe(root);
-
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) stopAutoplay(); else startAutoplay();
-  });
-
-  ["mouseenter","focusin"].forEach(ev => slider.addEventListener(ev, stopAutoplay));
-  ["mouseleave","focusout"].forEach(ev => slider.addEventListener(ev, startAutoplay));
-  root.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight") { e.preventDefault(); next(); }
-    if (e.key === "ArrowLeft")  { e.preventDefault(); prev(); }
-  });
-  viewport.addEventListener("wheel", (e) => {
-    if (isMobile()) return;
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-      e.preventDefault();
-      if (e.deltaX > 0) next(); else prev();
-    }
-  }, { passive:false });
-
-  function initDesktop(){
-    originals = Array.from(track.querySelectorAll(".zen-card")).filter(n => !n.dataset.clone);
-    if (!originals.length) return;
-    originals.forEach(card => revealIO.observe(card));
-    buildFullClones();
-    measureSlideW();
-    applyFixedWidths();
-    goToPageStart(0, true);
-    startAutoplay();
-    markActiveBySPV();
-  }
-  function destroyDesktop(){
-    stopAutoplay();
-    track.querySelectorAll("[data-clone]").forEach(n => n.remove());
-    clearFixedWidths();
-    track.style.transition = "none";
-    track.style.transform  = "none";
-    index = 0;
-  }
-
-  let rTo;
-  function onResize(){
-    clearTimeout(rTo);
-    rTo = setTimeout(() => {
-      if (!isMobile()){
-        destroyDesktop();
-        initDesktop();
-        setTimeout(markActiveBySPV, 60);
-      } else {
-        destroyDesktop();
-        cardsAll().forEach(card => { revealIO.observe(card); card.classList.add("is-in"); });
-      }
-    }, 120);
-  }
-  window.addEventListener("resize", onResize);
-
-  if (!isMobile()){ initDesktop(); }
-  else { cardsAll().forEach(card => { revealIO.observe(card); card.classList.add("is-in"); }); }
-});
-</script>
-<script>
-(function(){
-  const root = document.querySelector("#zen-faq");
-  if(!root) return;
-
-  const viewport = root.querySelector(".zen-viewport");
-  const track    = root.querySelector(".zen-track");
-  const cards    = () => Array.from(track.querySelectorAll(".zen-card"));
-  const isMobile = () => matchMedia("(max-width: 699.98px)").matches;
-
-  const AUTOPLAY_MS   = 3500;  // Zeit pro Slide
-  const RESUME_AFTER  = 4000;  // nach User-Interaktion wieder starten
-  let timer = null, resumeTO = null;
-
-  // Hilfen
-  function closestIndexToCenter(){
-    const all = cards();
-    const vpRect = viewport.getBoundingClientRect();
-    const vpMid  = viewport.scrollLeft + vpRect.width/2;
-    let bestI = 0, bestD = Infinity;
-    all.forEach((c,i)=>{
-      const r = c.getBoundingClientRect();
-      const left = r.left + viewport.scrollLeft - vpRect.left;
-      const mid  = left + r.width/2;
-      const d = Math.abs(mid - vpMid);
-      if(d < bestD){ bestD = d; bestI = i; }
-    });
-    return bestI;
-  }
-
-  function scrollToIndex(i){
-    const all = cards();
-    if(!all.length) return;
-    const c = all[(i % all.length + all.length) % all.length];
-    const vpRect = viewport.getBoundingClientRect();
-    const r = c.getBoundingClientRect();
-    const left = r.left + viewport.scrollLeft - vpRect.left;
-    const targetLeft = left - (viewport.clientWidth - r.width)/2;
-    viewport.scrollTo({ left: targetLeft, behavior: "smooth" });
-  }
-
-  function markActive(){
-    const idx = closestIndexToCenter();
-    cards().forEach((c,i)=> c.classList.toggle("is-active", i===idx));
-  }
-
-  // Autoplay
-  function startAutoplay(){
-    if(timer || !isMobile()) return;
-    stopAutoplay();
-    timer = setInterval(()=>{
-      const next = closestIndexToCenter() + 1;
-      scrollToIndex(next);
-    }, AUTOPLAY_MS);
-  }
-  function stopAutoplay(){
-    if(timer) clearInterval(timer);
-    timer = null;
-  }
-  function pauseAndResume(){
-    stopAutoplay();
-    clearTimeout(resumeTO);
-    resumeTO = setTimeout(()=> startAutoplay(), RESUME_AFTER);
-  }
-
-  // Events
-  let ticking = false;
-  function onScroll(){
-    if(!isMobile()) return;
-    if(!ticking){
-      requestAnimationFrame(()=>{ markActive(); ticking = false; });
-      ticking = true;
-    }
-  }
-
-  // User-Interaktion pausiert Autoplay
-  ["touchstart","pointerdown","mousedown","wheel","keydown"].forEach(ev=>{
-    viewport.addEventListener(ev, pauseAndResume, { passive: true });
-  });
-
-  // Sichtbarkeit steuert Autoplay
-  const visIO = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting && !document.hidden) startAutoplay();
-      else stopAutoplay();
-    });
-  }, { threshold: 0.6 });
-  visIO.observe(root);
-
-  document.addEventListener("visibilitychange", ()=>{
-    if(document.hidden) stopAutoplay(); else startAutoplay();
-  });
-
-  // Mode-Wechsel
-  function applyMode(){
-    if(isMobile()){
-      viewport.addEventListener("scroll", onScroll, { passive:true });
-      setTimeout(()=>{ markActive(); startAutoplay(); }, 60);
-    }else{
-      viewport.removeEventListener("scroll", onScroll);
-      stopAutoplay();
-      cards().forEach(c=>c.classList.remove("is-active"));
-    }
-  }
-  applyMode();
-  window.addEventListener("resize", applyMode);
-})();
-</script>
-
-
-
-
-
 
 <section class="cluster cosmos-suite" id="nebula-hub" aria-labelledby="nebula-hub-h">
-  <h2 id="nebula-hub-h" class="headline">Unsere Leistungen im Webdesign</h2>
+  <h2 id="nebula-hub-h" class="headline">Unsere Leistungen</h2>
   <p class="subline" id="nebula-hub-sub">
-    Von Konzept bis Launch – wir gestalten Websites, die begeistern, performen und Marken sichtbar machen.
+    Webdesign, Entwicklung &amp; digitale Markenführung – ganzheitlich gedacht, präzise umgesetzt.
   </p>
 
-  <div class="orbit-grid" role="list" aria-labelledby="nebula-hub-h" aria-describedby="nebula-hub-sub">
+  <ul class="orbit-grid" aria-labelledby="nebula-hub-h" aria-describedby="nebula-hub-sub">
 
-    <!-- UX & UI Design -->
-    <div class="module-card" id="svc-webdesign"
-         role="listitem"
-         aria-labelledby="svc-webdesign-h"
-         aria-describedby="svc-webdesign-s">
+    <!-- UX / Webdesign -->
+    <li class="module-card" id="svc-webdesign"
+        aria-labelledby="svc-webdesign-h"
+        aria-describedby="svc-webdesign-s">
       <div class="payload">
-        <h3 id="svc-webdesign-h">UX &amp; UI Design</h3>
+        <h3 id="svc-webdesign-h">UX &amp; Webdesign</h3>
         <p class="card-snippet" id="svc-webdesign-s">
-          Nutzerzentriertes Webdesign – klar, ästhetisch und intuitiv.
+          Wir gestalten Websites, die überzeugen – funktional, schnell und emotional.
         </p>
         <ul>
-          <li>Strukturierte UX-Konzepte &amp; Wireframes</li>
-          <li>Modernes, responsives UI-Design</li>
-          <li>Designsysteme &amp; Prototyping</li>
-          <li>Fokus auf Benutzerführung &amp; Conversion</li>
+          <li>UX-Strategie &amp; Wireframing</li>
+          <li>UI-Design &amp; Prototyping</li>
+          <li>Responsive &amp; barrierearmes Design</li>
+          <li>Interaction Design &amp; Animation</li>
         </ul>
 
-        <a href="./WebDesign.html" class="warp-cta" aria-label="Mehr über UX und UI Design erfahren">
-          Mehr erfahren
-        </a>
+        <a href="./WebDesign.html" class="warp-cta" aria-label="Mehr über UX & Webdesign erfahren">Mehr erfahren</a>
       </div>
-    </div>
+    </li>
 
     <!-- Webentwicklung -->
-    <div class="module-card stellar-3d" id="svc-3d"
-         role="listitem"
-         aria-labelledby="svc-3d-h"
-         aria-describedby="svc-3d-s">
+    <li class="module-card stellar-3d" id="svc-3d"
+        aria-labelledby="svc-3d-h"
+        aria-describedby="svc-3d-s">
       <div class="payload">
         <h3 id="svc-3d-h">Webentwicklung</h3>
         <p class="card-snippet" id="svc-3d-s">
-          Sauberer Code, schnelle Performance und nachhaltige Technik.
+          Sauberer Code trifft Designpräzision – flexibel, skalierbar und wartungsfreundlich.
         </p>
 
         <ul>
-          <li>Frontend-Entwicklung mit modernem Stack</li>
-          <li>Optimierte Ladezeiten &amp; Core Web Vitals</li>
-          <li>CMS-Integration &amp; modulare Systeme</li>
-          <li>Barrierefreiheit &amp; SEO-Optimierung</li>
+          <li>Frontend-Entwicklung (React, Vue, HTML/CSS)</li>
+          <li>Headless &amp; klassische CMS (WordPress, Webflow)</li>
+          <li>Performance &amp; SEO-Optimierung</li>
+          <li>Hosting, Deploy &amp; Wartung</li>
         </ul>
 
+        <!-- Bilder / Deko bleiben -->
         <div class="overlay-art" aria-hidden="true">
           <div class="orbit-shell">
-            <img class="planet-sprite" loading="lazy" decoding="async" src="./indexFotoSlideShow/planet.webp" alt="" aria-hidden="true">
+            <img
+              class="planet-sprite"
+              loading="lazy"
+              decoding="async"
+              src="./indexFotoSlideShow/planet.webp"
+              alt=""
+              aria-hidden="true"
+              width="512" height="512">
           </div>
-          <img class="lazy-comet astronaut-sprite" data-src="./indexFotoSlideShow/2.webp" alt="" decoding="async" aria-hidden="true">
+
+          <img
+            class="lazy-comet astronaut-sprite"
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+            data-src="./indexFotoSlideShow/2.webp"
+            alt=""
+            decoding="async"
+            loading="lazy"
+            aria-hidden="true"
+            width="512" height="512">
         </div>
 
-        <a href="./Entwicklung.html" class="warp-cta" aria-label="Mehr über Webentwicklung erfahren">
-          Mehr erfahren
-        </a>
+        <a href="./WebEntwicklung.html" class="warp-cta" aria-label="Mehr über Webentwicklung erfahren">Mehr erfahren</a>
       </div>
-    </div>
+    </li>
 
-    <!-- Marken & Content Design -->
-    <div class="module-card" id="svc-grafik"
-         role="listitem"
-         aria-labelledby="svc-grafik-h"
-         aria-describedby="svc-grafik-s">
+    <!-- Brand & UI-Systeme -->
+    <li class="module-card" id="svc-grafik"
+        aria-labelledby="svc-grafik-h"
+        aria-describedby="svc-grafik-s">
       <div class="payload">
-        <h3 id="svc-grafik-h">Marken &amp; Content Design</h3>
+        <h3 id="svc-grafik-h">Brand &amp; UI-Systeme</h3>
         <p class="card-snippet" id="svc-grafik-s">
-          Klare Markenkommunikation – visuell stark und konsistent über alle Kanäle.
+          Marken, die man erkennt – Designsysteme, die mitwachsen.
         </p>
 
         <ul>
-          <li>Corporate &amp; Digital Branding</li>
-          <li>Webtypografie &amp; Icon-Design</li>
-          <li>Content-Guidelines &amp; Visual Storytelling</li>
-          <li>Designsysteme für langfristige Markenpflege</li>
+          <li>Corporate Design &amp; Web-Branding</li>
+          <li>Styleguides &amp; Komponentenbibliotheken</li>
+          <li>Iconsets, Typografie &amp; Farbsysteme</li>
+          <li>Design Tokens &amp; UI-Kits</li>
         </ul>
 
         <div class="overlay-art" aria-hidden="true">
-          <img class="lazy-comet" data-src="./indexFotoSlideShow/astro sitzend.webp" alt="" decoding="async" aria-hidden="true">
+          <img
+            class="lazy-comet"
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+            data-src="./indexFotoSlideShow/astro sitzend.webp"
+            alt=""
+            decoding="async"
+            loading="lazy"
+            aria-hidden="true"
+            width="512" height="512">
         </div>
 
-        <a href="./BrandDesign.html" class="warp-cta" aria-label="Mehr über Marken- und Content Design erfahren">
-          Mehr erfahren
-        </a>
+        <a href="./BrandDesign.html" class="warp-cta" aria-label="Mehr über Brand & UI-Systeme erfahren">Mehr erfahren</a>
       </div>
-    </div>
+    </li>
 
-    <!-- Showreel / Projekte -->
-    <div class="module-card cinema-card" id="svc-social"
-         role="listitem"
-         aria-labelledby="svc-social-h">
+    <!-- Content & Motion (Video) -->
+    <li class="module-card cinema-card" id="svc-social" aria-labelledby="svc-social-h">
       <div class="payload">
-        <h3 id="svc-social-h" class="visually-hidden">Showreel</h3>
+        <h3 id="svc-social-h" class="visually-hidden">Content &amp; Motion</h3>
       </div>
 
       <video
@@ -2412,18 +2018,46 @@ document.addEventListener("DOMContentLoaded", () => {
         playsinline
         preload="metadata"
         poster="./indexFotoSlideShow/social-poster.jpg"
-        aria-labelledby="svc-social-h"
-        controlslist="nodownload noplaybackrate"
-        disablepictureinpicture
-      >
+        aria-labelledby="svc-social-h">
         <source src="./videos/social-showreel.webm" type="video/webm">
         <source src="./indexFotoSlideShow/kartenvideo.mp4" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
       </video>
-    </div>
+    </li>
 
-  </div>
+  </ul>
 </section>
+<!-- Optionales JS: Lazy-Images & Video Controls feinjustieren -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Lazy-Image Loading (data-src → src)
+    const lazyImgs = document.querySelectorAll('img[data-src]');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const img = e.target;
+          img.src = img.dataset.src;
+          obs.unobserve(img);
+        }
+      });
+    });
+    lazyImgs.forEach(img => obs.observe(img));
+
+    // Optional: disable PiP / Download via JS (validator-freundlich)
+    const vid = document.querySelector('#svc-social video');
+    if (vid) {
+      if (vid.controlsList && vid.controlsList.add) {
+        try {
+          vid.controlsList.add('nodownload');
+          vid.controlsList.add('noplaybackrate');
+        } catch (e) {}
+      }
+      if ('disablePictureInPicture' in vid)
+        vid.disablePictureInPicture = true;
+      vid.addEventListener('contextmenu', e => e.preventDefault());
+    }
+  });
+</script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const lazyImages = document.querySelectorAll("img.lazy-comet");
@@ -2452,8 +2086,8 @@ document.addEventListener("DOMContentLoaded", () => {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebPage",
-      "@id": "https://example.com/leistungen/#webpage",
+      "@type": "webdesign",
+      "@id": "https://example.com/leistungen/#webdesign",
       "url": "https://example.com/leistungen/",
       "name": "Unsere Leistungen — Web, 3D & Design",
       "inLanguage": "de",
@@ -2525,11 +2159,12 @@ document.addEventListener("DOMContentLoaded", () => {
       "contentUrl": "https://example.com/indexFotoSlideShow/kartenvideo.mp4",
       "embedUrl": "https://example.com/leistungen/#svc-social",
       "description": "Kurz-Showreel Social Media Assets.",
-      "isPartOf": { "@id": "https://example.com/leistungen/#webpage" }
+      "isPartOf": { "@id": "https://example.com/leistungen/#webdesign" }
     }
   ]
 }
 </script>
+
 
 
 
@@ -3734,7 +3369,7 @@ function grad(ctx,size){
   <script type="application/ld+json" id="metrics-jsonld">
     {
       "@context": "https://schema.org",
-      "@type": "WebPageElement",
+      "@type": "webdesignElement",
       "name": "Lighthouse & Core Web Vitals",
       "cssSelector": "#metrics",
       "isAccessibleForFree": true,
@@ -3742,744 +3377,6 @@ function grad(ctx,size){
     }
   </script>
 </section>
-
-
-
-
-
-
-
-
-
-<style>
-  /* === Basis-Struktur === */
-  .pane-transition{
-    position:relative;
-    background:none;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    overflow:visible;
-    color:#111;
-    -webkit-tap-highlight-color: transparent;
-    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif
-  }
-  .pane-world{
-    position:relative;
-    padding-top:clamp(2rem, 5vw, 6rem);
-    padding-left: calc(1rem + env(safe-area-inset-left));
-    padding-right: calc(1rem + env(safe-area-inset-right));
-    padding-bottom: calc(2rem + env(safe-area-inset-bottom));
-    height:auto;
-    clip-path:none;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    background:linear-gradient(0deg,#ffffff,#ffffff);
-    opacity:1;
-    pointer-events:all;
-    width:100%;            /* statt 100vw -> kein horizontaler Overflow */
-    transition:background-color .25s ease,color .25s ease;
-    z-index:15
-  }
-  .pane-wrap{
-    text-align:center;
-    width:100%;
-    max-width:min(1200px, 92vw);
-    margin-inline:auto;
-    padding:0; /* Außen-Padding kommt über .pane-world (Safe-Area) */
-  }
-
-  /* ===== Headline & Subline im Aurora-Stil ===== */
-  .pane-wrap .pane-title{
-    margin: .2rem 0 .6rem;
-    text-align:center;
-    width:100%;
-    display:block;
-    font-weight:900;
-    letter-spacing:-.02em;
-    color:inherit;
-    font-size: clamp(2rem, 1.6rem + 2.2vw, 3rem);
-    line-height: 1.12;
-    text-wrap: balance;
-  }
-  .pane-wrap .pane-subtitle{
-    position: relative;
-    color:#0f1729;
-    max-width: 62rem;
-    margin: 0 auto 2.2rem;
-    line-height: 1.78;
-    font-size: clamp(1.06rem, 1rem + .6vw, 1.22rem);
-    letter-spacing: .004em;
-    text-wrap: pretty;
-    padding: 1.1rem 1.2rem 1.1rem;
-    border-radius: 14px;
-    background: linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03));
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05);
-  }
-  :root[data-theme="dark"] .pane-wrap .pane-subtitle{
-    color:#fff;
-    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 2px 8px rgba(0,0,0,.35);
-  }
-
-  /* === Karten-Layout (Basis) === */
-  .flow-rail{
-    display:grid;                 /* grid als Basis – flexibel */
-    grid-template-columns: 1fr;   /* mobile: 1 Spalte */
-    gap:clamp(.8rem, 2.5vw, 1rem);
-    align-items:stretch;
-    justify-items:stretch;
-    z-index:15;
-    width:100%;
-  }
-
-  /* Tablet: 2 Spalten */
-  @media (min-width: 601px) and (max-width: 1024px){
-    .flow-rail{
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  /* Desktop: Flex-„Kästchen“-Modus via .is-enhanced (unten) */
-  @media (min-width: 1025px){
-    .flow-rail{
-      display:flex;
-      gap:1rem;
-      justify-content:stretch;
-      align-items:stretch;
-    }
-  }
-
-  .flow-card{
-    position:relative;
-    border-radius:20px;
-    border:1px solid rgba(70,70,70,.15);
-    padding:clamp(1.2rem, 2.5vw, 2rem) clamp(1rem, 2vw, 1.6rem);
-    box-shadow:0 0 0 rgba(0,0,0,0);
-    overflow:hidden;
-    cursor:pointer;
-    --dur:0s;
-    height:var(--tile-h,auto);
-    min-width:0;                 /* wichtig gegen Überlauf */
-    isolation:isolate;           /* für ::after Blend sauber */
-  }
-  .flow-card.is-growing{ --dur:8s; }
-  .flow-card.is-open{ flex:1 1 auto }
-
-  .card-core{
-    position:relative;
-    z-index:2;
-    text-align:left;
-    display:flex;
-    flex-direction:column;
-    gap:.75rem;
-    min-width:0;                 /* verhindert Überlauf */
-    height:100%;
-    overflow-wrap:anywhere;      /* bricht lange Wörter */
-  }
-
-  /* h3 – wie Aurora .aether-card h3 */
-  .flow-card h3{
-    font-size: clamp(1.2rem, 1rem + 1.1vw, 1.9rem);
-    color:#fff;
-    font-weight:800;
-    margin:.1rem 0 .5rem;
-    line-height:1.2;
-    letter-spacing:-.01em;
-    text-shadow:0 1px 2px rgba(0,0,0,.25);
-    text-wrap: balance;
-  }
-
-  /* p – wie Aurora .copy */
-  .flow-card p{
-    color: rgba(255,255,255,.96);
-    font-weight: 690;
-    letter-spacing: -.002em;
-    font-size: clamp(1rem, .96rem + .4vw, 1.16rem);
-    line-height: 1.7;
-    text-wrap: pretty;
-    hyphens: auto;
-    max-width: 62ch;
-    text-shadow: 0 1px 2px rgba(0,0,0,.18);
-    margin: 0;
-  }
-  .flow-card .details p{ margin-top:.35rem; }
-
-  .card-num{ font-size:1.4rem;font-weight:900;display:block;margin-bottom:.6rem;color:#fff }
-
-  /* === große Zahl (visueller Akzent) === */
-  .card-num-giant{
-    position:absolute;right:.6rem;bottom:.6rem;
-    font-weight:900;letter-spacing:-.03em;line-height:1;
-    font-size:clamp(2.2rem, 10vh, 8rem);
-    color:rgba(255,255,255,.18);
-    pointer-events:none;z-index:1;white-space:nowrap;text-align:right;
-    transform:rotate(-90deg);
-    transform-origin:bottom right;
-    transition:opacity .35s ease,transform .35s ease;
-    mix-blend-mode:soft-light;
-  }
-  /* auf kleinen Screens ausblenden – spart Platz */
-  @media (max-width: 600px){
-    .card-num-giant{ display:none; }
-  }
-
-  /* === Gradients === */
-  .flow-rail .flow-card:nth-child(1){ background:linear-gradient(270deg,#04006c,#6f00ff,#050088);background-size:600% 600%;color:#fff }
-  .flow-rail .flow-card:nth-child(2){ background:linear-gradient(135deg,#0d0d0d,#000e5c,#0d0d0d);background-size:300% 300%;color:#fff }
-    .flow-rail .flow-card:nth-child(3){ background:linear-gradient(135deg,#000000,#0d003b,#000000);background-size:300% 300%;color:#fff }
-  .flow-rail .flow-card:nth-child(4){ background:linear-gradient(135deg,#ff5100,hwb(340 0% 0%),#ff5100);background-size:400% 400%;color:#fff }
-  .flow-rail .flow-card:nth-child(5){ background:linear-gradient(135deg,#0d0d0d,#000,#0d0d0d);background-size:300% 300%;color:#fff }
-
-  .flow-card[role="button"]:focus-visible{ outline:3px solid rgba(255,255,255,.6);outline-offset:4px }
-  :root[data-theme="light"] .flow-card[role="button"]:focus-visible{ outline:3px solid rgba(0,0,0,.35) }
-
-  /* === JS-Modus – Kästchen/Expand nur ab Desktop === */
-  @media (min-width: 1025px){
-    #flowhub.is-enhanced .flow-card{ flex:0 0 clamp(140px,14vw,220px);transition:flex var(--dur) ease }
-    #flowhub.is-enhanced .flow-card.is-open{ flex:1 1 auto }
-
-    #flowhub.is-enhanced .flow-card:not(.is-open) .card-num,
-    #flowhub.is-enhanced .flow-card:not(.is-open) h3,
-    #flowhub.is-enhanced .flow-card:not(.is-open) p,
-    #flowhub.is-enhanced .flow-card:not(.is-open) .details{
-      height:0;opacity:0;overflow:hidden;visibility:hidden
-    }
-    #flowhub.is-enhanced .flow-card.is-open .card-num,
-    #flowhub.is-enhanced .flow-card.is-open h3,
-    #flowhub.is-enhanced .flow-card.is-open p,
-    #flowhub.is-enhanced .flow-card.is-open .details{
-      height:auto;opacity:1;visibility:visible;transition:opacity .35s ease .1s
-    }
-
-    /* große Zahl per ::after nur auf Desktop */
-    #flowhub.is-enhanced .flow-card::after{
-      content:attr(data-stage);
-      position:absolute;right:1rem;bottom:10rem;
-      transform:rotate(-90deg);
-      transform-origin:bottom right;
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,"Roboto Mono",monospace;
-      font-weight:900;
-      font-size:clamp(3rem,12vh,8rem);
-      line-height:1;
-      color:rgba(255,255,255,.4);
-      white-space:nowrap;
-      pointer-events:none;
-      z-index:3;
-      opacity:1;
-      transition:opacity .25s ease;
-      mix-blend-mode:soft-light;
-    }
-    #flowhub.is-enhanced .flow-card.is-open::after{ opacity:0 }
-  }
-
-  /* === Fallback ohne JS (immer grid, kein Kästchen) === */
-  #flowhub:not(.is-enhanced) .flow-card{
-    flex:1 1 320px !important;
-    height:auto !important;
-    --tile-h:auto !important;
-    transition:none !important;
-  }
-  #flowhub:not(.is-enhanced) .flow-card .card-core{
-    clip-path:none !important;
-    min-width:0;
-  }
-  #flowhub:not(.is-enhanced) .flow-card .card-num,
-  #flowhub:not(.is-enhanced) .flow-card h3,
-  #flowhub:not(.is-enhanced) .flow-card p,
-  #flowhub:not(.is-enhanced) .flow-card .details{
-    height:auto !important;
-    opacity:1 !important;
-    visibility:visible !important;
-    overflow:visible !important;
-  }
-  #flowhub:not(.is-enhanced) .flow-card::after{ display:none !important }
-
-  /* === Feintuning Responsiv === */
-  /* kleine Landscape-Displays: etwas kompakter */
-  @media (max-height: 520px) and (max-width: 900px){
-    .pane-world{ padding-top:1.2rem; }
-    .pane-wrap .pane-subtitle{ margin-bottom:1.2rem; }
-    .flow-card{ padding:1rem; }
-  }
-
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
-  }
-  /* verstecke Inhalte der Karten erst, wenn .booted aktiv ist */
-#flowhub.is-enhanced.booted .flow-card:not(.is-open) .card-num,
-#flowhub.is-enhanced.booted .flow-card:not(.is-open) h3,
-#flowhub.is-enhanced.booted .flow-card:not(.is-open) p,
-#flowhub.is-enhanced.booted .flow-card:not(.is-open) .details{
-  height:0;
-  opacity:0;
-  overflow:hidden;
-  visibility:hidden;
-}
-/* ===============================
-   FLOWHUB — Dark Mode
-   Hintergrund immer #000 + Titel/Subline anpassen
-   =============================== */
-
-:root[data-theme="dark"] #flowhub .pane-world{
-  background: #000 !important;
-  color: #fff !important;
-}
-
-/* Überschrift */
-:root[data-theme="dark"] #flowhub .pane-wrap .pane-title{
-  color: #fff !important;
-  text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
-}
-
-/* Subline (Glas-Look auf Schwarz) */
-:root[data-theme="dark"] #flowhub .pane-wrap .pane-subtitle{
-  color: #e8eeff !important;
-  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035)) !important;
-  border: 1px solid rgba(255,255,255,.08) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.22),
-    0 2px 8px rgba(0,0,0,.45) !important;
-}
-
-/* Optional: System-Dark bei data-theme="auto" */
-@media (prefers-color-scheme: dark){
-  :root[data-theme="auto"] #flowhub .pane-world{
-    background: #000 !important;
-    color: #fff !important;
-  }
-  :root[data-theme="auto"] #flowhub .pane-wrap .pane-title{
-    color: #fff !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
-  }
-  :root[data-theme="auto"] #flowhub .pane-wrap .pane-subtitle{
-    color: #e8eeff !important;
-    background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035)) !important;
-    border: 1px solid rgba(255,255,255,.08) !important;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.22),
-      0 2px 8px rgba(0,0,0,.45) !important;
-  }
-}
-:root[data-theme="dark"] #flowhub .flow-card{
-  border: 1px solid rgba(255,255,255,0.35) !important;
-}
-
-@media (prefers-color-scheme: dark){
-  :root[data-theme="auto"] #flowhub .flow-card{
-    border: 1px solid rgba(255,255,255,0.35) !important;
-  }
-}
-
-/* 1) Unteren Sicherheitsabstand als Variable einführen */
-.flow-card{
-  /* NEU */
-  --card-bottom-safe: 2.25rem;               /* Grundabstand unten */
-  padding-top: clamp(1.2rem, 2.5vw, 2rem);
-  padding-right: clamp(1rem, 2vw, 1.6rem);
-  /* NEU: padding-bottom inkl. Sicherheitsabstand */
-  padding-bottom: calc(clamp(1.2rem, 2.5vw, 2rem) + var(--card-bottom-safe));
-  padding-left: clamp(1rem, 2vw, 1.6rem);
-}
-
-/* 2) Im Desktop-/Enhanced-Modus etwas mehr Luft, 
-      weil ::after / .card-num-giant dort eine Rolle spielen kann */
-@media (min-width: 1025px){
-  #flowhub.is-enhanced .flow-card{
-    --card-bottom-safe: 3.5rem;              /* mehr Freiraum unten */
-  }
-  /* Optional: wenn eine Karte offen ist, minimal kompakter */
-  #flowhub.is-enhanced .flow-card.is-open{
-    --card-bottom-safe: 2.75rem;
-  }
-}
-
-/* 3) Kleinigkeit: kein zusätzlicher “letzter Rand” in Details */
-.flow-card .details:last-child{ margin-bottom: 0; }
-
-/* === FLOWHUB: Stage bei 1600px deckeln + fester Außenabstand === */
-#flowhub {
-  --flow-stage: 1300px;     /* maximale Bühnenbreite */
-  --flow-gutter: 2rem;      /* Außenabstand je Seite */
-}
-
-/* Außenabstand der Sektion (respektiert Safe-Area) */
-#flowhub .pane-world{
-  padding-left:  max(var(--flow-gutter), calc(1rem + env(safe-area-inset-left)));
-  padding-right: max(var(--flow-gutter), calc(1rem + env(safe-area-inset-right)));
-}
-
-/* Bühne zentrieren + bei 1600px klemmen (überschreibt die 1200px aus .pane-wrap) */
-#flowhub .pane-wrap{
-  max-width: var(--flow-stage) !important;
-  width: 100%;
-  margin-inline: auto !important;
-  padding-inline: 0 !important;
-}
-
-/* Desktop-„Kästchen“-Modus: Rail selbst nicht darüber hinausziehen */
-@media (min-width:1025px){
-  #flowhub .flow-rail{
-    max-width: var(--flow-stage);
-    margin-inline: auto;
-  }
-}
-
-/* Sicherheitsnetz: kein horizontales Scrollen durch Subpixel */
-#flowhub .pane-world,
-#flowhub .pane-wrap{ overflow-x: clip; }
-
-</style>
-<section class="pane-transition" id="flowhub" aria-labelledby="flowhub-h">
-  <div class="pane-world is-visible" id="paneWorld">
-    <div class="pane-wrap">
-      <h2 id="flowhub-h" class="pane-title">So läuft ein Projekt mit Fusion³</h2>
-      <p class="pane-subtitle">Effizient, transparent und partnerschaftlich – vom Kick-off bis zum Launch.</p>
-
-      <div class="flow-rail" role="list">
-
-        <!-- 01: KICK-OFF & STRATEGIE -->
-        <div class="flow-card has-art" id="flow-step-01" role="button" tabindex="0"
-             data-stage="01" aria-expanded="false" aria-labelledby="flow-step-01-h" aria-controls="flow-step-01-details">
-          <span class="card-num-giant" aria-hidden="true">01</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">01</span>
-            <h3 id="flow-step-01-h">Kick-off & Strategie</h3>
-            <p>Zum Start klären wir Ziele, Zielgruppen und technische Rahmenbedingungen. Gemeinsam legen wir den Fahrplan und die Projektstruktur fest.</p>
-            <div class="details" id="flow-step-01-details">
-              <p>Das Kick-off schafft eine klare Grundlage für Design, Inhalte und Funktionalität – inklusive realistischer Zeitplanung und Priorisierung.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 02: CONTENT & STRUKTUR -->
-        <div class="flow-card" id="flow-step-02" role="button" tabindex="0"
-             data-stage="02" aria-expanded="false" aria-labelledby="flow-step-02-h" aria-controls="flow-step-02-details">
-          <span class="card-num-giant" aria-hidden="true">02</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">02</span>
-            <h3 id="flow-step-02-h">Content & Struktur</h3>
-            <p>Wir erstellen eine Sitemap, planen Inhalte und entwickeln ein schlüssiges Informationskonzept. So entsteht ein klarer Rahmen für Design und User Flow.</p>
-            <div class="details" id="flow-step-02-details">
-              <p>Auf Wunsch unterstützen wir bei Text, Bildsprache oder SEO – damit alles perfekt zusammenspielt.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 03: DESIGN & LIVE-LINK -->
-        <div class="flow-card" id="flow-step-03" role="button" tabindex="0"
-             data-stage="03" aria-expanded="false" aria-labelledby="flow-step-03-h" aria-controls="flow-step-03-details">
-          <span class="card-num-giant" aria-hidden="true">03</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">03</span>
-            <h3 id="flow-step-03-h">Design & Live-Link</h3>
-            <p>Basierend auf dem Konzept entsteht das visuelle Design. Über Ihren Live-Link sehen Sie jede Änderung in Echtzeit – ohne Wartezeiten oder endlose Abstimmung.</p>
-            <div class="details" id="flow-step-03-details">
-              <p>Zwei strukturierte Feedbackgespräche sind inklusive. Dazwischen können Sie Fortschritte jederzeit prüfen und sich optimal auf die Besprechungen vorbereiten.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 04: FEEDBACK & LAUNCH -->
-        <div class="flow-card" id="flow-step-04" role="button" tabindex="0"
-             data-stage="04" aria-expanded="false" aria-labelledby="flow-step-04-h" aria-controls="flow-step-04-details">
-          <span class="card-num-giant" aria-hidden="true">04</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">04</span>
-            <h3 id="flow-step-04-h">Feinschliff & Launch</h3>
-            <p>Wir optimieren Design, Inhalte und Performance bis ins Detail. Nach finalem Testing begleiten wir den Go-Live aktiv – sicher, schnell und sauber umgesetzt.</p>
-            <div class="details" id="flow-step-04-details">
-              <p>Sie erhalten eine vollständige Übergabe mit Dokumentation, Zugängen und technischer Einrichtung.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 05: NACHBETREUUNG & WACHSTUM -->
-        <div class="flow-card" id="flow-step-05" role="button" tabindex="0"
-             data-stage="05" aria-expanded="false" aria-labelledby="flow-step-05-h" aria-controls="flow-step-05-details">
-          <span class="card-num-giant" aria-hidden="true">05</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">05</span>
-            <h3 id="flow-step-05-h">Nachbetreuung & Wachstum <span class="optional">(optional)</span></h3>
-            <p>Nach dem Launch begleiten wir Sie auf Wunsch weiter – mit Hosting, Wartung, Datenauswertung oder strategischer Weiterentwicklung.</p>
-            <div class="details" id="flow-step-05-details">
-              <p>Diese Leistungen sind flexibel und individuell buchbar – für nachhaltige Performance und langfristigen Erfolg.</p>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /.flow-rail -->
-    </div>
-  </div>
-</section>
-<!-- GSAP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (window.gsap) {
-      gsap.registerPlugin(ScrollTrigger);
-
-      const cardsList = Array.from(document.querySelectorAll('#flowhub .flow-card'));
-
-      // === Nummerierung 00-basiert (00, 01, 02, ...) ===
-      cardsList.forEach((card, i) => {
-        const nn = String(i).padStart(2, '0');
-        card.setAttribute('data-stage', nn); // für ::after
-        const small = card.querySelector('.card-num');
-        const giant = card.querySelector('.card-num-giant');
-        if (small) small.textContent = nn;
-        if (giant) giant.textContent = nn;
-      });
-
-      // === Intro-Animation (sanft oder aus bei Reduced Motion) ===
-      const tlIntro = prefersReduced ? null : gsap.timeline({
-        scrollTrigger: {
-          trigger:'#flowhub',
-          start:'top 80%',
-          toggleActions:'play none none reverse'
-        }
-      });
-
-      const isDesktop = () => window.matchMedia('(min-width: 1025px)').matches;
-
-      // === Nudge (Doppel-Stups) der zweiten Karte, zyklisch ===
-      let nudgeInterval = null;
-      let nudgeTl = null;
-
-      function clearNudgeTl() {
-        if (nudgeTl) { nudgeTl.kill(); nudgeTl = null; }
-        if (cardsList[1]) gsap.set(cardsList[1], { y: 0 });
-      }
-
-      function stopNudge() {
-        if (nudgeInterval) {
-          clearInterval(nudgeInterval);
-          nudgeInterval = null;
-        }
-        clearNudgeTl();
-      }
-
-      function makeNudge(target, amp = 10) {
-        // zwei leichte Stupser
-        const tl = gsap.timeline({ defaults: { clearProps: false } });
-        tl.to(target, { y: -amp, duration: 0.16, ease: 'power1.out' })
-          .to(target, { y: 0, duration: 0.20, ease: 'power2.out' }, '+=0.02')
-          .to(target, { y: -(amp * 0.7), duration: 0.14, ease: 'power1.out' }, '+=0.18')
-          .to(target, { y: 0, duration: 0.18, ease: 'power2.out' });
-        return tl;
-      }
-
-      function startNudge() {
-        if (prefersReduced || nudgeInterval || !isDesktop() || !cardsList[1]) return;
-        nudgeInterval = setInterval(() => {
-          clearNudgeTl();
-          nudgeTl = makeNudge(cardsList[1], 10);
-        }, 7000);
-      }
-
-      // Build Intro Tweens (ohne Nudge-Callback)
-      if (!prefersReduced) {
-        cardsList.forEach((card, i) => {
-          tlIntro.fromTo(
-            card,
-            { opacity: 0, y: 60 },
-            { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' },
-            i * 0.16
-          );
-        });
-      } else {
-        gsap.set(cardsList, { opacity: 1, y: 0 });
-      }
-
-      // === Expand/Auto-Cycle nur auf Desktop ===
-      (function(){
-        const rail = document.querySelector('#flowhub .flow-rail');
-        if(!rail) return;
-        const cards = Array.from(rail.querySelectorAll('.flow-card'));
-        const rootEl = document.documentElement;
-        const root = document.getElementById('flowhub');
-        let autoId=null,selectedIdx=-1,railInView=false,booted=false;
-
-        const mqDesktop = window.matchMedia('(min-width:1025px)');
-        let expandMode = mqDesktop.matches && !prefersReduced;
-
-        function syncHeightFromFirst(){
-          const first=cards[0];
-          if(!first) return;
-          const wasOpen=first.classList.contains('is-open');
-          if(!wasOpen) first.classList.add('is-open');
-          const h=first.getBoundingClientRect().height;
-          rootEl.style.setProperty('--tile-h', (h||0)+'px');
-          if(!wasOpen) first.classList.remove('is-open');
-        }
-
-        function openAt(idx){
-          if(!expandMode) return;
-          if(idx<0||idx>=cards.length) return;
-          selectedIdx=idx;
-          stopNudge();
-          cards.forEach((c,i)=>{
-            const open=i===idx;
-            c.classList.toggle('is-open',open);
-            c.setAttribute('aria-expanded',open?'true':'false');
-          });
-          if(idx===0) syncHeightFromFirst();
-        }
-
-        function clearAutoCycle(){ if(autoId){ clearTimeout(autoId); autoId=null; } }
-        function planNext(delayMs=18000){
-          if(!expandMode) return;
-          clearAutoCycle();
-          if(!railInView) return;
-          autoId=setTimeout(()=>{
-            if(!railInView) return;
-            const next=(selectedIdx+1)%cards.length;
-            openAt(next);
-            planNext(delayMs);
-          },delayMs);
-        }
-
-        cards.forEach((c,i)=>{
-          c.addEventListener('click',()=>{ if(!expandMode) return; stopNudge(); openAt(i); planNext(); });
-          c.addEventListener('keydown',e=>{
-            if(!expandMode) return;
-            if(e.key==='Enter'||e.key===' '){ e.preventDefault(); stopNudge(); openAt(i); planNext(); }
-          });
-        });
-
-        const io=new IntersectionObserver((entries)=>{
-          const entry=entries[0];
-          railInView=entry.isIntersecting && entry.intersectionRatio>=0.5;
-          if(!expandMode) return;
-          if(railInView){
-            if(!booted){ booted=true; openAt(0); planNext(); root.classList.add('booted'); }
-            else { planNext(); }
-            startNudge(); // Sichtbar + Desktop -> Nudge starten
-          } else {
-            stopNudge();  // nicht sichtbar -> pausieren
-          }
-        },{threshold:[0,0.5,1]});
-        io.observe(rail);
-
-        function applyMode(){
-          expandMode = mqDesktop.matches && !prefersReduced;
-          if (root){
-            root.classList.toggle('is-enhanced', expandMode);
-          }
-          if(!expandMode){
-            clearAutoCycle();
-            cards.forEach(c=>{ c.classList.add('is-open'); c.setAttribute('aria-expanded','true'); });
-            rootEl.style.setProperty('--tile-h','auto');
-            stopNudge();
-            root?.classList.remove('booted');
-          }else{
-            cards.forEach(c=>{ c.classList.remove('is-open'); c.setAttribute('aria-expanded','false'); });
-            openAt(Math.max(0,selectedIdx,0)); // sofort öffnen
-            root?.classList.add('booted'); // Boot-Modus aktivieren
-            if(railInView){ planNext(); startNudge(); }
-          }
-        }
-
-        mqDesktop.addEventListener('change', applyMode);
-        window.addEventListener('resize', () => { if(expandMode) syncHeightFromFirst(); });
-
-        applyMode();
-
-        // Doppelt absichern: beim Laden direkt öffnen falls Desktop
-        if (expandMode) { openAt(0); root?.classList.add('booted'); }
-      })();
-    }
-  });
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": "https://example.com/prozess/#webpage",
-      "url": "https://example.com/prozess/",
-      "name": "Projektablauf mit Fusion³",
-      "inLanguage": "de",
-      "description": "So läuft ein Projekt mit Fusion³: transparenter Ablauf von Kick-off bis Launch – schnell, klar, partnerschaftlich.",
-      "isPartOf": { "@type": "WebSite", "@id": "https://example.com/#website", "url": "https://example.com/" },
-      "mainEntity": { "@id": "https://example.com/prozess/#howto-flow" }
-    },
-    {
-      "@type": "HowTo",
-      "@id": "https://example.com/prozess/#howto-flow",
-      "name": "So läuft ein Projekt mit Fusion³",
-      "inLanguage": "de",
-      "description": "Schritt-für-Schritt-Ablauf von Erstgespräch über Konzeption bis Feinschliff und Übergabe.",
-      "step": [
-        {
-          "@type": "HowToStep",
-          "position": 0,
-          "name": "Unser Ansatz",
-          "url": "https://example.com/prozess/#flow-step-00",
-          "itemListElement": [
-            { "@type": "HowToDirection", "text": "Strukturiertes Onboarding nach Projektstart." },
-            { "@type": "HowToDirection", "text": "Erstgespräch zu Rahmenbedingungen, Zielen und Wünschen." }
-          ]
-        },
-        {
-          "@type": "HowToStep",
-          "position": 1,
-          "name": "Erstgespräch – Der Grundstein",
-          "url": "https://example.com/prozess/#flow-step-01",
-          "itemListElement": [
-            { "@type": "HowToDirection", "text": "Ziele, Zielgruppen und gewünschte Wirkungen klären." },
-            { "@type": "HowToTip", "text": "Auf Wunsch nächste Schritte und Zeitplan definieren." }
-          ]
-        },
-        {
-          "@type": "HowToStep",
-          "position": 2,
-          "name": "Konzeption & Design",
-          "url": "https://example.com/prozess/#flow-step-02",
-          "itemListElement": [
-            { "@type": "HowToDirection", "text": "Wireframes, Styleframes und Interaktionsideen entwickeln." },
-            { "@type": "HowToDirection", "text": "Iterativ Look & Feel verfeinern – Story, Usability, Performance." }
-          ]
-        },
-        {
-          "@type": "HowToStep",
-          "position": 3,
-          "name": "Feedback & Feinschliff",
-          "url": "https://example.com/prozess/#flow-step-03",
-          "itemListElement": [
-            { "@type": "HowToDirection", "text": "Feedbackschleifen zur Erwartungsabstimmung und Detailoptimierung." },
-            { "@type": "HowToDirection", "text": "Übergabe, Dokumentation und Roadmap für spätere Ausbaustufen." }
-          ]
-        }
-      ]
-    }
-  ]
-}
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -4712,7 +3609,6 @@ function grad(ctx,size){
     </div>
   </div>
 </section>
-
 <style>
 /* ==============================
    THEME TOKENS
@@ -5224,7 +4120,6 @@ label.req::after{ content:" *"; color:#b00020; font-weight:900; }
 
 
 </style>
-
 <script>
 (function () {
   const form = document.getElementById('kontaktForm');
@@ -5726,1401 +4621,27 @@ label.req::after{ content:" *"; color:#b00020; font-weight:900; }
 
 
 
-<!-- ===== ETHOS / WERTE SECTION ===== -->
-<section class="ethos section-wrap" id="webdesign-ethos" aria-labelledby="webdesign-ethos-heading">
-  <div class="ethos-head">
-    <h2 class="ethos-title" id="webdesign-ethos-heading">
-      <span class="ethos-title-line">Werte, die starkes Webdesign ausmachen</span>
-    </h2>
-    <div class="ethos-sub">
-      <span class="ethos-sub-line">Klar. Ästhetisch. Nutzerzentriert.</span>
-    </div>
-  </div>
 
-  <div class="ethos-marquee" aria-live="off">
-    <ul class="ethos-track" aria-label="Unsere Webdesign-Grundsätze">
 
-      <li class="ethos-card" id="ethos-ux">
-        <div class="ethos-icon"><i data-feather="users" aria-hidden="true"></i></div>
-        <div class="ethos-content">
-          <h3 id="ethos-ux-h">Nutzererlebnis an erster Stelle</h3>
-          <p>Wir gestalten Websites, die intuitiv verständlich sind und echten Mehrwert bieten. Jedes Element stärkt die Benutzerfreundlichkeit und transportiert die Markenbotschaft klar und direkt.</p>
-        </div>
-      </li>
 
-      <li class="ethos-card" id="ethos-design">
-        <div class="ethos-icon"><i data-feather="layout" aria-hidden="true"></i></div>
-        <div class="ethos-content">
-          <h3 id="ethos-design-h">Ästhetik mit System</h3>
-          <p>Unser Design folgt klaren Prinzipien – Balance, Kontrast und Typografie. So entstehen moderne Layouts, die visuell überzeugen und auf jedem Endgerät harmonisch wirken.</p>
-        </div>
-      </li>
 
-      <li class="ethos-card" id="ethos-tech">
-        <div class="ethos-icon"><i data-feather="code" aria-hidden="true"></i></div>
-        <div class="ethos-content">
-          <h3 id="ethos-tech-h">Sauberer Code. Starke Performance.</h3>
-          <p>Wir entwickeln mit aktuellen Webtechnologien und schlanken Strukturen. Das sorgt für schnelle Ladezeiten, hohe Sicherheit und langfristige Skalierbarkeit.</p>
-        </div>
-      </li>
 
-      <li class="ethos-card" id="ethos-growth">
-        <div class="ethos-icon"><i data-feather="trending-up" aria-hidden="true"></i></div>
-        <div class="ethos-content">
-          <h3 id="ethos-growth-h">Design, das Wachstum schafft</h3>
-          <p>Gutes Webdesign wirkt – es steigert Conversions, stärkt die Markenbindung und fördert nachhaltigen Geschäftserfolg.</p>
-        </div>
-      </li>
 
-    </ul>
-  </div>
-</section>
 
-<!-- Optional: reduziert Bewegung → Marquee pausieren -->
-<style>
-@media (prefers-reduced-motion: reduce){
-  .ethos-marquee * { animation: none !important; transition: none !important; }
-}
-</style>
 
-<!-- ===== Overlay / Viewer ===== -->
-<div class="ethos-overlay" id="ethos-overlay" role="dialog" aria-modal="true" aria-lablledby="ethos-overlay-title" aria-hidden="true">
-  <div class="ethos-overlay__backdrop" data-ethos-close></div>
-  <div class="ethos-overlay__panel" tabindex="-1">
-    <header class="ethos-overlay__header">
-      <h3 class="ethos-overlay__title" id="ethos-overlay-title">Unsere Werte im Überblick</h3>
-      <button class="icon-btn overlay-close" type="button" aria-labl="Schließen" title="Schließen" data-ethos-close>
-        <i data-feather="x"></i>
-      </button>
-    </header>
 
-    <!-- Desktop/Tablet: Grid -->
-    <div class="ethos-overlay__grid" id="ethos-overlay-grid" aria-hidden="false" role="region" aria-labl="Werte-Grid"></div>
 
-    <!-- Mobile: Carousel (nur falls jemand per DevTools einblendet) -->
-    <div class="ethos-carousel" id="ethos-carousel" aria-hidden="true" role="region" aria-labl="Werte Durchblättern">
-      <button class="carousel-nav prev" type="button" aria-labl="Vorherige" title="Vorherige" data-ethos-prev>‹</button>
-      <div class="carousel-viewport">
-        <ul class="carousel-track" id="ethos-carousel-track"></ul>
-      </div>
-      <button class="carousel-nav next" type="button" aria-labl="Nächste" title="Nächste" data-ethos-next>›</button>
-    </div>
-  </div>
-</div>
 
-<style>
-/* ===== Tokens (Flat Colors) ===== */
-:root{
-  --clr-orange: #ff6600;
-  --clr-blue-dark: #0a1f6f;
-  --clr-black:  #0b0c0e;
 
-  --surface: #ffffff;
-  --ink:     #0b0c0e;
-  --muted:   #41444a;
-  --line:    #e6e8eb;
 
-  --card-radius: 22px;
-  --ring: rgba(10,31,111,.28);
-}
-:root[data-theme="dark"]{ --surface:#000; --ink:#fff; --muted:#c8ccd3; --line:#2a2e36; }
-@media (prefers-color-scheme: dark){
-  :root[data-theme="auto"]{ --surface:#000; --ink:#fff; --muted:#c8ccd3; --line:#2a2e36; }
-}
 
-/* ===== Section / Typo ===== */
-.ethos, .ethos *{ -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; font-feature-settings:"liga","kern","calt","ss01"; }
-.section-wrap{ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; background:var(--surface); color:var(--ink); text-align:center; padding:clamp(3.5rem,6vw,7rem) 2rem; margin-top:clamp(3rem,7vw,10rem); position:relative; z-index:5; overflow:visible; }
-.section-wrap .ethos-head{ max-width:1200px; margin:0 auto clamp(1.6rem,3vw,2.6rem); }
-.ethos-title{ font-size:clamp(2.2rem, 1.6rem + 2.4vw, 3.4rem); font-weight:900; letter-spacing:-.02em; line-height:1.12; margin:.15rem 0 .5rem; text-wrap:balance; }
-.ethos-sub-line{ display:inline-block; max-width:64rem; margin:0 auto 2.6rem; padding:1.05rem 1.2rem; font-size:clamp(1.06rem, 1rem + .6vw, 1.22rem); line-height:1.78; letter-spacing:.004em; color:var(--muted); background:rgba(0,0,0,.035); border:1px solid var(--line); border-radius:16px; }
 
-/* ===== Marquee ===== */
-.ethos-marquee{
-  --gap:clamp(1.2rem, 2.2vw, 2.4rem);
-  --speed:45s;
-  position:relative; width:100%; margin-top:1.8rem; overflow:visible;
-  mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
-  -webkit-mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
-}
-.ethos-track{ display:flex; gap:var(--gap); align-items:stretch; will-change:transform; animation:ethos-loop var(--speed) linear infinite; }
-@keyframes ethos-loop{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
-.ethos-marquee:hover .ethos-track{ animation-play-state:paused; }
-@media (prefers-reduced-motion: reduce){ .ethos-track{ animation:none; transform:none } }
 
-/* ===== Cards (desktop baseline) ===== */
-.ethos-card{
-  position:relative; border-radius:var(--card-radius);
-  padding: clamp(1.25rem, 2.1vw, 1.9rem);
-  display:flex; flex-direction:column; min-height:100%;
-  flex:0 0 auto; min-width:min(520px, 85vw); max-width:560px;
-  color:#fff; box-shadow:0 8px 24px rgba(0,0,0,.14);
-  transition:transform .18s ease, box-shadow .18s ease, border-color .2s ease, background-color .2s ease;
-  border:1px solid transparent; will-change:transform; transform:translateZ(0);
-}
-.ethos-content{ display:flex; flex-direction:column; gap:.45rem; }
 
-.ethos-card:nth-child(1){ background:var(--clr-blue-dark) }
-.ethos-card:nth-child(2){ background:var(--clr-black) }
-.ethos-card:nth-child(3){ background:var(--clr-orange) }
-.ethos-card:nth-child(4){ background:var(--clr-black) }
-.ethos-card:nth-child(5){ background:var(--clr-blue-dark) }
-.ethos-card:nth-child(6){ background:var(--clr-black) }
 
-@media (hover:hover){
-  .ethos-card:hover{ transform:translateY(-7px); box-shadow:0 22px 52px rgba(0,0,0,.24); border-color:rgba(255,255,255,.18) }
-}
 
-/* Icon */
-.ethos-icon{ width:56px; height:56px; border-radius:14px; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28); transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease, background-color .2s ease; }
-.ethos-icon i{ width:26px; height:26px; color:#fff }
-@media (hover:hover){ .ethos-card:hover .ethos-icon{ transform:translateY(-1px) scale(1.05); box-shadow:0 0 0 4px rgba(255,255,255,.12) } }
 
-/* Typo in Cards */
-.ethos-card h3{ font-size:clamp(1.5rem, 1.1rem + 1.15vw, 2.1rem); font-weight:900; margin:.05rem 0 .5rem; letter-spacing:-.02em; line-height:1.16; }
-.ethos-card p{ margin:0; padding:.1rem 0 0; color:rgba(255,255,255,.98); font-weight:690; letter-spacing:-.002em; font-size:clamp(1.08rem, 1rem + .44vw, 1.24rem); line-height:1.72; }
-.ethos-proof{ margin-top:.55rem; color:rgba(255,255,255,.92); font-size:1rem; font-weight:650 }
 
-/* ===== Tablet Tweaks (<= 1024px) ===== */
-@media (max-width: 1024px){
-  .ethos-marquee{ --gap:clamp(1rem, 1.5vw, 1.6rem); --speed:42s; }
-  .ethos-card{ min-width:min(460px, 88vw); max-width:520px; padding:clamp(1.1rem, 1.6vw, 1.5rem); border-radius:20px; }
-  .ethos-icon{ width:52px; height:52px; border-radius:12px; }
-  .ethos-icon i{ width:24px; height:24px; }
-  .ethos-card h3{ font-size:clamp(1.35rem, 1rem + 1vw, 1.8rem); }
-  .ethos-card p{ font-size:clamp(1.02rem, .96rem + .38vw, 1.14rem); line-height:1.7; }
-}
-
-/* ===== Phone Tweaks (<= 720px) =====
-   Mobile: Werte als EINSPALTIGES Grid, Karten breit & zentriert,
-   Button verstecken, Overlay deaktivieren, Marquee-Animation aus  */
-@media (max-width: 720px){
-
-  /* Deko & Animation aus */
-  .ethos-marquee{
-    mask-image:none; -webkit-mask-image:none;
-    overflow:visible; margin-top:1.2rem;
-  }
-
-  /* Track als 1-Spalten-Grid, Items zentriert */
-  .ethos-marquee .ethos-track{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:1rem;
-    justify-items:center;
-    animation:none; transform:none; width:100%;
-  }
-
-  /* Karten: alte min-width sicher überschreiben, breiter & mittig */
-  .ethos-card{
-    min-width:0 !important;
-    width:min(600px, 94vw);
-    max-width:600px;
-    margin-inline:auto;
-    box-shadow:0 8px 22px rgba(0,0,0,.16);
-  }
-
-  /* Button "Werte im Detail" ausblenden */
-  .ethos-cta-row [data-ethos-open]{ display:none !important; }
-
-  /* Overlay auf Handy nicht nutzen */
-  .ethos-overlay{ display:none !important; }
-}
-
-/* ===== Very Small Phones (<= 360px) – nur Typo leicht schrumpfen ===== */
-@media (max-width: 360px){
-  .ethos-card{ padding:.9rem .9rem 1rem; }
-  .ethos-icon{ width:40px; height:40px; }
-  .ethos-icon i{ width:20px; height:20px; }
-  .ethos-card h3{ font-size:1.16rem }
-  .ethos-card p{ font-size:.98rem }
-}
-
-/* ===== Buttons unten ===== */
-.btn{ display:inline-flex; align-items:center; justify-content:center; min-height:46px; padding:.95rem 1.3rem; border-radius:14px; font-weight:800; text-decoration:none; transition:transform .12s ease, box-shadow .12s ease, background-color .12s ease, border-color .12s ease, color .12s ease; border:1px solid transparent; letter-spacing:.005em; }
-.btn:focus-visible{ outline:none; box-shadow:0 0 0 4px var(--ring) }
-.btn:active{ transform:translateY(1px) }
-.btn--primary{ background:var(--clr-orange); color:#fff; border-color:var(--clr-orange) }
-.btn--primary:hover{ box-shadow:0 12px 28px rgba(255,102,0,.36); transform:translateY(-2px) }
-.btn--accent{ background:var(--clr-blue-dark); color:#fff; border-color:var(--clr-blue-dark) }
-.btn--accent:hover{ box-shadow:0 12px 28px rgba(10,31,111,.36); transform:translateY(-2px) }
-.ethos-cta-row{ margin-top:clamp(3rem, 2.2rem + 2vw, 4rem); display:flex; gap:1rem; justify-content:center; flex-wrap:wrap }
-.ethos-cta-row .btn{ min-width:240px }
-@media (max-width:480px){ .ethos-cta-row .btn{ width:100%; min-width:unset } }
-
-/* ===== Overlay ===== */
-.ethos-overlay[aria-hidden="true"]{ display:none }
-.ethos-overlay{ position:fixed; inset:0; z-index:999; display:grid; place-items:center; }
-.ethos-overlay__backdrop{ position:absolute; inset:0; background:rgba(0,0,0,.5); backdrop-filter:saturate(1.2) blur(4px); }
-.ethos-overlay__panel{ position:relative; z-index:2; background:var(--surface); color:var(--ink); width:min(1100px, 92vw); max-height:min(86vh, 1000px); border-radius:20px; box-shadow: 0 30px 90px rgba(0,0,0,.45); border:1px solid var(--line); display:flex; flex-direction:column; overflow:hidden; transform: translateY(12px) scale(.98); opacity:0; transition: transform .22s cubic-bezier(.2,.7,.2,1), opacity .22s ease; }
-.ethos-overlay[aria-hidden="false"] .ethos-overlay__panel{ transform: translateY(0) scale(1); opacity:1 }
-.ethos-overlay__header{ display:flex; align-items:center; justify-content:space-between; padding: clamp(1rem, 1rem + 1vw, 1.25rem) clamp(1rem, 1rem + 1.2vw, 1.5rem); border-bottom:1px solid var(--line); }
-.ethos-overlay__title{ font-size: clamp(1.35rem, 1rem + 1vw, 1.7rem); font-weight:900; letter-spacing:-.01em; line-height:1.2; }
-.icon-btn.overlay-close{ display:inline-flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:12px; border:1px solid var(--line); background:transparent; cursor:pointer; transition: transform .12s ease, background-color .12s ease, border-color .12s ease; }
-.icon-btn.overlay-close:hover{ background:rgba(0,0,0,.04) }
-.icon-btn.overlay-close:active{ transform: translateY(1px) }
-.icon-btn.overlay-close i{ width:20px; height:20px; color:var(--ink) }
-
-/* Grid / Carousel im Overlay */
-.ethos-overlay__grid{ padding: clamp(1rem, 1rem + 1.2vw, 1.5rem); overflow:auto; display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, .8rem + 1vw, 1.6rem); }
-@media (max-width: 1024px){ .ethos-overlay__grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 720px){ .ethos-overlay__grid{ display:none } }
-.ethos-mini{ border:1px solid var(--line); border-radius:16px; padding: clamp(.9rem, .8rem + .4vw, 1.1rem); background:#fff; box-shadow: 0 6px 18px rgba(0,0,0,.08); }
-:root[data-theme="dark"] .ethos-mini{ background:#0b0c10 }
-.ethos-mini__eyebrow{ display:inline-flex; align-items:center; gap:.4rem; font-weight:800; letter-spacing:-.01em; font-size:1rem; line-height:1.2; color:#111; }
-:root[data-theme="dark"] .ethos-mini__eyebrow{ color:#fff }
-.ethos-mini__eyebrow i{ width:18px; height:18px }
-.ethos-mini h4{ font-size: clamp(1.1rem, 1rem + .5vw, 1.35rem); font-weight:900; letter-spacing:-.01em; line-height:1.22; margin:.4rem 0 .35rem; }
-.ethos-mini p{ margin:0; color:#363a40; line-height:1.6; font-size:1rem; letter-spacing:0; }
-:root[data-theme="dark"] .ethos-mini p{ color:#d5d9e0 }
-
-.ethos-carousel{ display:none; padding: clamp(.6rem, .6rem + 1vw, 1rem); }
-@media (max-width: 720px){ .ethos-carousel{ display:block } }
-.carousel-viewport{ overflow:hidden; border-top:1px solid var(--line) }
-.carousel-track{ display:flex; gap:1rem; will-change:transform; transform:translateX(0); transition: transform .25s ease; padding:1rem .2rem }
-.carousel-slide{ flex:0 0 92%; margin-inline:auto; border:1px solid var(--line); border-radius:16px; background:#fff; padding:1rem 1rem 1.2rem; box-shadow: 0 10px 24px rgba(0,0,0,.12); }
-:root[data-theme="dark"] .carousel-slide{ background:#0b0c10 }
-.carousel-slide h4{ font-size:1.2rem; font-weight:900; letter-spacing:-.01em; margin:.3rem 0 .35rem; }
-.carousel-slide p{ margin:0; line-height:1.65; color:#363a40 }
-:root[data-theme="dark"] .carousel-slide p{ color:#d5d9e0 }
-.carousel-nav{ position:absolute; top:50%; transform:translateY(-50%); width:42px; height:42px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--line); background:rgba(255,255,255,.9); box-shadow: 0 8px 18px rgba(0,0,0,.18); z-index:3; cursor:pointer; }
-:root[data-theme="dark"] .carousel-nav{ background:rgba(20,20,20,.9) }
-.carousel-nav.prev{ left:8px } .carousel-nav.next{ right:8px }
-.carousel-nav:active{ transform:translateY(-50%) scale(.98) }
-/* Global: Box-Sizing, damit Padding in Breite eingerechnet wird */
-.ethos, .ethos *{
-  box-sizing: border-box;
-}
-
-/* Verhindert horizontales Scrollen/Clipping innerhalb der Section */
-.section-wrap{
-  overflow-x: hidden; /* nur x verstecken; y bleibt sichtbar */
-}
-
-/* ===== Phone (<= 720px): 1-Spalten-Grid, Karten zentriert, keine rechte Überbreite ===== */
-@media (max-width: 720px){
-
-  /* Mask & Animation aus, kein zusätzliches Innenpadding auf dem Container */
-  .ethos-marquee{
-    mask-image: none;
-    -webkit-mask-image: none;
-    overflow: visible;
-    margin-top: 1.2rem;
-    padding-inline: 0; /* sicherstellen, dass nichts addiert wird */
-  }
-
-  /* Track als 1-Spalten-Grid; Breite am Container ausrichten */
-  .ethos-marquee .ethos-track{
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    justify-items: center;       /* Karten mittig */
-    animation: none;
-    transform: none;
-    width: 100%;
-    margin: 0 auto;              /* zentrieren */
-  }
-
-  /* Karten: nicht mit vw, sondern innerhalb des Containers aufspannen */
-  .ethos-card{
-    min-width: 0 !important;     /* überschreibt Desktop-Minbreite sicher */
-    width: 100%;                 /* füllt die Grid-Spalte, kein Überlauf */
-    max-width: 600px;            /* obere Kappung, wirkt nur auf größeren Phones */
-    margin-inline: auto;         /* zentriert */
-    box-shadow: 0 8px 22px rgba(0,0,0,.16);
-    flex: initial;               /* falls Flex-Verhalten vom Desktop greift */
-  }
-
-  /* Button "Werte im Detail" ausblenden */
-  .ethos-cta-row [data-ethos-open]{ display: none !important; }
-
-  /* Overlay auf Handy nicht nutzen */
-  .ethos-overlay{ display: none !important; }
-}
-
-/* Very small (<= 360px): nur leichte Typo-Anpassungen */
-@media (max-width: 360px){
-  .ethos-card{ padding:.9rem .9rem 1rem; }
-  .ethos-icon{ width:40px; height:40px; }
-  .ethos-icon i{ width:20px; height:20px; }
-  .ethos-card h3{ font-size:1.16rem }
-  .ethos-card p{ font-size:.98rem }
-}
-/* Reset für die Liste – entfernt die linke Einrückung */
-.ethos-track{
-  list-style: none;
-  margin: 0;
-  padding: 0;          /* <- Wichtig */
-}
-
-/* Mobile: harte Zentrierung absichern */
-@media (max-width: 720px){
-  .ethos-marquee{
-    padding-inline: 0; /* falls irgendwo Padding übrig blieb */
-  }
-  .ethos-marquee .ethos-track{
-    justify-items: center;
-  }
-  .ethos-card{
-    justify-self: center;       /* falls ein Browser das Grid anders interpretiert */
-    width: min(600px, 100%);    /* 100% des Tracks, maximal 600px */
-    margin-inline: auto;
-  }
-}
-/* Lift-Headroom für Hover in der Marquee schaffen */
-.ethos-marquee{
-  /* so hoch „springt“ die Karte auf Hover (7px) + Reserve */
-  --hover-lift: 10px;
-  padding-top: var(--hover-lift);
-  /* optische Position beibehalten */
-  margin-top: calc(1.8rem - var(--hover-lift));
-  overflow: visible;            /* Sicherheit */
-}
-
-/* (optional) Falls noch Clipping in WebKit: Container über Deckelement heben */
-.ethos-marquee,
-.ethos-track{ position: relative; z-index: 1; }
-
-/* Dein bestehender Hover kann bleiben:
-@media (hover:hover){
-  .ethos-card:hover{ transform: translateY(-7px); }
-}
-*/
-/* Mask entfernen */
-.ethos-marquee{
-  mask-image: none !important;
-  -webkit-mask-image: none !important;
-  overflow: visible;
-  position: relative;
-}
-
-/* Seiten-Fade als Overlay (blockiert Schatten nicht) */
-.ethos-marquee::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:
-    linear-gradient(to right,
-      rgba(255,255,255,0) 0%,
-      rgba(255,255,255,1) 6%,
-      rgba(255,255,255,1) 94%,
-      rgba(255,255,255,0) 100%);
-  mix-blend-mode: multiply;          /* Light-Mode */
-}
-:root[data-theme="dark"] .ethos-marquee::after{
-  background:
-    linear-gradient(to right,
-      rgba(0,0,0,0) 0%,
-      rgba(0,0,0,1) 6%,
-      rgba(0,0,0,1) 94%,
-      rgba(0,0,0,0) 100%);
-  mix-blend-mode: screen;            /* Dark-Mode */
-}
-/* === Blaue Karte + Button: neuer Verlauf === */
-.ethos-card:nth-child(1),
-.ethos-card[data-tone="blue"]{
-  background: linear-gradient(135deg, #04006c, #050088) !important;
-  background-size: 200% 200% !important;
-  color: #fff !important;
-}
-
-/* Falls der Button dasselbe Blau haben soll */
-.btn--accent{
-  background: linear-gradient(135deg, #04006c, #050088) !important;
-  border-color: #050088 !important;
-  color: #fff !important;
-}
-
-.btn--accent:hover{
-  box-shadow: 0 12px 28px rgba(4,0,108,.36) !important;
-  transform: translateY(-2px);
-}
-/* Unterüberschrift (Box) etwas weiter unter die H2 schieben – responsiv */
-.ethos-sub-line{
-  /* vorher: margin: 0 auto 2.6rem; */
-  margin: clamp(.35rem, .6vw, 1rem) auto 2.6rem; /* oben | seitlich | unten */
-}
-/* ==== ETHOS: 3 Karten pro View (ab 700px), rest unsichtbar ==== */
-@media (min-width:700px){
-  .ethos-marquee{
-    overflow: hidden;          /* harte Sichtfensterbegrenzung */
-    mask-image: none !important;
-    -webkit-mask-image: none !important;
-  }
-  .ethos-track{
-    display:flex;
-    gap: clamp(1.2rem, 2.2vw, 2.4rem);
-    will-change: transform;
-    animation: none !important;      /* Marquee-Animation aus */
-    transform: translate3d(0,0,0);
-  }
-  /* Drei pro View – Flex-Basis exakt berechnen */
-  .ethos-track .ethos-card{
-    flex: 0 0 calc((100% - 2 * clamp(1.2rem, 2.2vw, 2.4rem)) / 3);
-    min-width: 0 !important;         /* alte min-width überfahren */
-    max-width: none;
-  }
-}
-
-/* Mobile (<= 700px): nur die ersten 3 überhaupt zeigen & zentrieren */
-@media (max-width:699.98px){
-  .ethos-marquee{ overflow: visible; }
-  .ethos-track{
-    display:grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    transform: none !important;
-    animation: none !important;
-    justify-items: center;
-  }
-  .ethos-track .ethos-card{
-    width: min(600px, 94vw);
-    min-width: 0 !important;
-  }
-  .ethos-track .ethos-card:nth-of-type(n+4){ display:none !important; }
-}
-
-/* Optional: dezenter Hover ab Tablet, damit nix abgeschnitten wirkt */
-@media (hover:hover) and (min-width:700px){
-  .ethos-card:hover{ transform: translateY(-4px) scale(1.005); }
-}
-
-/* ===== ETHOS: starke Outline + zyklische Gradients ===== */
-
-/* Grundstil: kräftige Outline, Inhalte bleiben weiß */
-.ethos-card{
-  border: 3px solid #000 !important;          /* starke schwarze Outline */
-  box-shadow: none !important;                 /* Flat-Look */
-  color: #fff !important;                      /* Text gut lesbar auf dunklem Gradient */
-  background: #0b0c0e !important;              /* Fallback */
-  background-size: 300% 300% !important;       /* Default, wird unten je Gradient überschrieben */
-}
-
-/* Dark Mode: weiße Outline */
-:root[data-theme="dark"] .ethos-card{
-  border-color: #fff !important;
-}
-
-/* Zyklische Zuweisung der vier Gradients (wiederholt sich alle 4 Karten) */
-.ethos-track .ethos-card:nth-child(4n + 1){
-  /* Blau/Violett Verlauf */
-  background: linear-gradient(270deg, #04006c, #6f00ff, #050088) !important;
-  background-size: 600% 600% !important;
-}
-.ethos-track .ethos-card:nth-child(4n + 2){
-  /* Dunkelblau auf Graphit */
-  background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d) !important;
-  background-size: 300% 300% !important;
-}
-.ethos-track .ethos-card:nth-child(4n + 3){
-  /* Orange → Magenta → Orange */
-  background: linear-gradient(135deg, #ff5100, hwb(340 0% 0%), #ff5100) !important;
-  background-size: 400% 400% !important;
-}
-.ethos-track .ethos-card:nth-child(4n + 4){
-  /* Tiefschwarz Verlauf */
-  background: linear-gradient(135deg, #0d0d0d, #000, #0d0d0d) !important;
-  background-size: 300% 300% !important;
-}
-
-/* Optional: dezenter Hover ohne Rand-Clipping */
-@media (hover:hover){
-  .ethos-card:hover{
-    transform: translateY(-4px) scale(1.005);
-  }
-}
-@media (min-width:700px){
-  .ethos-marquee{
-    max-width: 1600px;      /* nimmt ab hier keinen zusätzlichen Platz mehr ein */
-    margin-inline: auto;    /* zentriert */
-  }
-}
-
-/* === ETHOS: Bühne auf 1600px deckeln + fixe Gutter === */
-#webdesign-ethos{
-  --ethos-stage: 1450px;      /* maximale Breite */
-  --ethos-gutter: 2rem;       /* Außenabstand je Seite */
-}
-
-/* sichere Außenabstände (inkl. Safe-Area) */
-#webdesign-ethos.section-wrap{
-  padding-left:  max(var(--ethos-gutter), calc(1rem + env(safe-area-inset-left)));
-  padding-right: max(var(--ethos-gutter), calc(1rem + env(safe-area-inset-right)));
-  overflow-x: clip; /* keine horizontale Scrollleiste durch Subpixel */
-}
-
-/* Head + Marquee zentriert und bei 1600px geklemmt */
-#webdesign-ethos .ethos-head,
-#webdesign-ethos .ethos-marquee{
-  max-width: var(--ethos-stage);
-  margin-inline: auto;
-}
-
-/* ab 700px sowieso: Sichtfenster hart, aber nicht breiter als 1600px */
-@media (min-width:700px){
-  #webdesign-ethos .ethos-marquee{
-    overflow: hidden;
-  }
-}
-
-/* Sicherheit: Track nimmt nicht mehr Platz als die Bühne ein */
-#webdesign-ethos .ethos-track{
-  max-width: var(--ethos-stage);
-  margin-inline: auto;
-}
-
-</style>
-
-<script>
-(function(){
-  const section = document.getElementById('webdesign-ethos'); // <- richtige ID
-  if (!section) return;
-
-  const marquee = section.querySelector('.ethos-marquee');
-  const track   = marquee?.querySelector('.ethos-track');
-  if (!track) return;
-
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const isMobile = () => window.matchMedia('(max-width:699.98px)').matches;
-
-  // ---- Config
-  const AUTOPLAY_MS  = 5500;
-  const MAX_VIEWPORT = 1600;    // <- Karten nehmen ab hier keinen zusätzlichen Platz mehr ein
-
-  // ---- State
-  let originals = [];
-  let index = 0;
-  let cardW = 0;
-  let gap = 0;
-  let spv = 1;
-  let animLock = false;
-  let autoplayTimer = null;
-
-  // ---- Helpers
-  const cards = () => Array.from(track.querySelectorAll('.ethos-card'));
-  const pxGap = () => {
-    const g = getComputedStyle(track).gap || '0px';
-    return g.endsWith('px') ? parseFloat(g) : 0;
-  };
-
-  function measure(){
-    spv = isMobile() ? 1 : 3;
-    gap = pxGap();
-    // Breite anhand gedeckelter „Viewport“-Breite
-    const raw = marquee.clientWidth;
-    const vw  = Math.min(raw, MAX_VIEWPORT);    // cap bei 1600px
-    cardW = (vw - gap * (spv - 1)) / spv;
-  }
-
-  function applyWidths(){ cards().forEach(c => c.style.width = cardW + 'px'); }
-  function clearWidths(){ cards().forEach(c => c.style.width = ''); }
-
-  function setTransform(jump=false){
-    const x = -(index * (cardW + gap));
-    track.style.transition = jump ? 'none' : 'transform 420ms ease';
-    track.style.transform  = `translate3d(${x}px,0,0)`;
-  }
-
-  function buildClones(){
-    track.querySelectorAll('[data-clone]')?.forEach(n => n.remove());
-    originals = Array.from(track.children).filter(n => n.classList?.contains('ethos-card') && !n.dataset.clone);
-    if (!originals.length) return;
-
-    const pre  = originals.map(n => { const c = n.cloneNode(true); c.dataset.clone = 'true'; return c; });
-    const post = originals.map(n => { const c = n.cloneNode(true); c.dataset.clone = 'true'; return c; });
-
-    pre.reverse().forEach(c => track.insertBefore(c, track.firstChild));
-    post.forEach(c => track.appendChild(c));
-  }
-
-  function goToStart(jump=true){ index = originals.length; setTransform(jump); }
-
-  function normalize(){
-    const firstReal = originals.length;
-    const lastReal  = firstReal + originals.length - 1;
-    if (index < firstReal){ index += originals.length; setTransform(true); }
-    else if (index > lastReal){ index -= originals.length; setTransform(true); }
-  }
-
-  function next(){ if (animLock || isMobile()) return; animLock = true; index += spv; setTransform(false); }
-  function prev(){ if (animLock || isMobile()) return; animLock = true; index -= spv; setTransform(false); }
-
-  track.addEventListener('transitionend', () => { normalize(); animLock = false; }, {passive:true});
-
-  function startAutoplay(){
-    if (prefersReduced.matches || isMobile() || autoplayTimer) return;
-    stopAutoplay(); autoplayTimer = setInterval(next, AUTOPLAY_MS);
-  }
-  function stopAutoplay(){ if (autoplayTimer) clearInterval(autoplayTimer); autoplayTimer = null; }
-
-  const visIO = new IntersectionObserver((entries) => {
-    entries.forEach(e => { const visible = e.isIntersecting && !document.hidden; if (visible) startAutoplay(); else stopAutoplay(); });
-  }, { threshold: 0.5 });
-  visIO.observe(section);
-  document.addEventListener('visibilitychange', () => { if (document.hidden) stopAutoplay(); else startAutoplay(); });
-
-  section.addEventListener('mouseenter', stopAutoplay);
-  section.addEventListener('mouseleave', startAutoplay);
-  section.addEventListener('focusin', stopAutoplay);
-  section.addEventListener('focusout', startAutoplay);
-
-  // Resize/Init
-  let resizeTO;
-  function rebuild(){
-    stopAutoplay();
-    clearWidths();
-    buildClones();
-    measure();
-    applyWidths();
-    goToStart(true);
-    startAutoplay();
-  }
-  function onResize(){
-    clearTimeout(resizeTO);
-    resizeTO = setTimeout(() => {
-      if (!isMobile()) rebuild();
-      else {
-        stopAutoplay(); clearWidths();
-        track.style.transition = 'none';
-        track.style.transform  = 'none';
-      }
-    }, 120);
-  }
-  window.addEventListener('resize', onResize);
-
-  // Boot
-  rebuild();
-})();
-</script>
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": "https://example.com/werte/#webpage",
-      "url": "https://example.com/werte/",
-      "name": "Werte von Fusion³",
-      "inLanguage": "de",
-      "description": "Werte, die digitale Erlebnisse prägen: Kreativ, strategisch, nachhaltig – unser Ethos für Web, Brand & Performance.",
-      "mainEntity": { "@id": "https://example.com/werte/#ethos-terms" },
-      "isPartOf": { "@type": "WebSite", "@id": "https://example.com/#website", "url": "https://example.com/" }
-    },
-    {
-      "@type": "DefinedTermSet",
-      "@id": "https://example.com/werte/#ethos-terms",
-      "name": "Ethos & Werte",
-      "inLanguage": "de",
-      "hasDefinedTerm": [
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://example.com/werte/#ethos-webdesign",
-          "name": "Ganzheitliches Webdesign",
-          "description": "Konzeptgetrieben, technisch fundiert, visuell einprägsam und leicht bedienbar – Design trifft Funktion.",
-          "url": "https://example.com/werte/#ethos-webdesign"
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://example.com/werte/#ethos-brand",
-          "name": "Markenidentität mit Charakter",
-          "description": "Erscheinungsbilder, die aus Emotion und Strategie entstehen, Wiedererkennung schaffen und Vertrauen wecken.",
-          "url": "https://example.com/werte/#ethos-brand"
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://example.com/werte/#ethos-performance",
-          "name": "Performance mit Sinn",
-          "description": "Gestaltung, Analyse und datenbasierte Optimierung verbinden – Designentscheidungen führen zu messbarem Erfolg.",
-          "url": "https://example.com/werte/#ethos-performance"
-        },
-        {
-          "@type": "DefinedTerm",
-          "@id": "https://example.com/werte/#ethos-care",
-          "name": "Langfristige Betreuung",
-          "description": "Wartung, Updates und kontinuierliche Optimierung nach dem Launch – Weiterentwicklung als Prinzip.",
-          "url": "https://example.com/werte/#ethos-care"
-        }
-      ]
-    }
-  ]
-}
-</script>
-
-
-
-
-
-
-
-
-
-  <section class="cta-modern">
-   <style>
-  /* ===============================
-     CTA Modern – Basis (Light)
-     =============================== */
-  .cta-modern {
-    position: relative;
-    padding: 7rem 1.5rem;
-    background: linear-gradient(180deg, #ffffff, #ffffff);
-    color: #000000; /* wie 'branchen': dunkler Text auf hellem BG */
-    overflow: hidden;
-    text-align: center;
-    z-index: 1;
-    transition: background-color .25s ease, color .25s ease;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  }
-
-  .cta-modern::before {
-    content: '';
-    position: absolute;
-    top: -100px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1800px;
-    max-width: 100vw;
-    height: 1800px;
-    z-index: 0;
-    pointer-events: none;
-    animation: glowShift 12s ease-in-out infinite alternate;
-  }
-
-  .cta-headline {
-    font-size: clamp(1.8rem, 4.5vw, 3rem);
-    font-weight: 900; /* wie 'branchen' */
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    color: currentColor;
-    margin-bottom: 1rem;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-    position: relative;
-    z-index: 2;
-    animation: fadeUp 1s ease-out both;
-    transition: color .25s ease;
-  }
-
-.cta-small {
-  font-size: 0.6em;
-  font-weight: 600;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  display: inline-block;
-  margin-right: 0.3em;
-  background: none;
-  background-clip: initial;
-  -webkit-background-clip: initial;
-  -webkit-text-fill-color: initial;
-  color: #000; /* Standard: schwarz im Light Mode */
-  transition: color .25s ease;
-}
-  .cta-headline span {
-    font-family: 'VT323', monospace;
-    font-size: 1.3em;
-    line-height: 1;
-    display: inline-block;
-    background: linear-gradient(220deg,
-      hwb(219 17% 0%) 0%,
-      hwb(219 18% 0%) 40%,
-      #e1e2ff 46%,
-      hwb(34 27% 0%) 52%,
-      hwb(29 0% 0%) 100%);
-    background-size: 400% 400%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientShift 16s ease-in-out infinite;
-  }
-
-  .cta-text {
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
-    font-weight: 400;
-    color: #272727;
-    max-width: 640px;
-    margin: 0 auto 0rem;
-    line-height: 1.6;
-    position: relative;
-    z-index: 2;
-    animation: fadeUp 1s ease-out 0.2s both;
-    transition: color .25s ease;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  }
-
-  .cta-btn {
-    --primary: #ff6600; --secondary: #ff944d;
-    background: linear-gradient(270deg, var(--primary), var(--secondary), var(--primary));
-    background-size: 300% 300%;
-    color: #fff;
-    font-weight: 600;
-    padding: 0.8rem 2rem;
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    border-radius: 10px;
-    text-decoration: none;
-    box-shadow: 0 5px 18px rgba(255, 102, 0, 0.22);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    z-index: 2;
-    animation: fadeUp 1s ease-out 0.4s both, gradientFlow 6s ease infinite;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  }
-
-  .cta-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 28px rgba(255, 233, 216, 0);
-  }
-
-  /* Animations */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes gradientFlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  @keyframes glowShift {
-    0% { transform: translateX(-50%) rotate(0deg); }
-    100% { transform: translateX(-50%) rotate(3deg); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; }
-  }
-
-  @media (max-width: 480px) {
-    .cta-modern { padding: 5rem 1rem; }
-    .cta-text { margin-bottom: 2rem; line-height: 1.5; }
-    .cta-btn { width: 100%; padding: 0.9rem; }
-  }
-
-  @media (max-width: 375px) {
-    .cta-headline { font-size: 1.5rem; }
-    .cta-headline span { font-size: 1.1em; }
-    .cta-text { font-size: 0.95rem; }
-    .cta-btn { font-size: 0.9rem; padding: 0.75rem 1.2rem; }
-  }
-
-  /* ===============================
-     Dark Mode (scoped to .cta-modern)
-     =============================== */
-  :root[data-theme="dark"] .cta-modern {
-    background: linear-gradient(180deg, #000000, #000000);
-    color: #fff;
-  }
-  :root[data-theme="dark"] .cta-modern .cta-headline,
-  :root[data-theme="dark"] .cta-modern .cta-small,
-  :root[data-theme="dark"] .cta-modern .cta-text {
-    color: #fff;
-  }
-
-  /* Auto-Mode: respektiert System-Dark */
-  @media (prefers-color-scheme: dark) {
-    :root[data-theme="auto"] .cta-modern {
-      background: linear-gradient(180deg, #050505, #0b0b0b);
-      color: #fff;
-    }
-  }
-    :root[data-theme="auto"] .cta-modern .cta-headline,
-    :root[data-theme="auto"] .cta-modern .cta-small,
-    :root[data-theme="auto"] .cta-modern .cta-text {
-      color: #fff;
-    }
-    /* Dark Mode: wird weiß */
-:root[data-theme="dark"] .cta-modern .cta-small {
-  color: #fff;
-  
-}
-@media (prefers-color-scheme: dark) {
-  :root[data-theme="auto"] .cta-modern .cta-small {
-    color: #fff;
-  }
-  }
-
-  /* 1) Gradient NUR auf das nicht-.cta-small Span anwenden */
-.cta-headline span:not(.cta-small) {
-  font-family: 'VT323', monospace;
-  font-size: 1.3em;
-  line-height: 1;
-  display: inline-block;
-  background: linear-gradient(220deg,
-    hwb(219 17% 0%) 0%,
-    hwb(219 18% 0%) 40%,
-    #e1e2ff 46%,
-    hwb(34 27% 0%) 52%,
-    hwb(29 0% 0%) 100%);
-  background-size: 400% 400%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientShift 16s ease-in-out infinite;
-}
-
-/* 2) .cta-small hard-reset: kein Gradient, normale Textfarbe */
-.cta-small {
-  font-size: 0.6em;
-  font-weight: 600;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  display: inline-block;
-  margin-right: 0.3em;
-  color: #000; /* Light */
-  /* explizit alles auf normal zurücksetzen */
-  background: none !important;
-  background-clip: initial !important;
-  -webkit-background-clip: initial !important;
-  -webkit-text-fill-color: unset !important;
-  transition: color .25s ease;
-}
-
-/* 3) Dark/Auto Mode Farbe Weiß für .cta-small */
-:root[data-theme="dark"] .cta-modern .cta-small { color: #fff; }
-@media (prefers-color-scheme: dark){
-  :root[data-theme="auto"] .cta-modern .cta-small { color: #fff; }
-}
-
-</style>
-<h2 class="cta-headline">
-  <span class="cta-small">Effizient</span> <span>und transparent</span>
-</h2>
-
-<p class="cta-text">
-  Mit unserem Live-Link siehst du Änderungen in Echtzeit. <br> Ohne endlose Feedback-Schleifen. 
-  Schnellere Entscheidungen, weniger Aufwand, mehr Ergebnis.
-</p>
-
-<a href="#kontakt" class="cta-btn">Jetzt Projekt starten</a>
-
-  </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section class="lyra-vault" id="lyra-faq">
-  <h2 class="lyra-heading">Häufige Fragen</h2>
-
-  <div class="lyra-console" role="search">
-    <input type="text" id="lyraSearch" placeholder="Nach Stichwort suchen …" aria-label="FAQ durchsuchen">
-    <div class="lyra-nav">
-      <button id="lyraPrev" type="button" aria-label="Vorheriges Ergebnis">
-        <i data-feather="chevron-left" aria-hidden="true"></i>
-      </button>
-      <span id="lyraIndex" aria-live="polite">0 / 0</span>
-      <button id="lyraNext" type="button" aria-label="Nächstes Ergebnis">
-        <i data-feather="chevron-right" aria-hidden="true"></i>
-      </button>
-    </div>
-  </div>
-
-  <div class="lyra-grid">
-    <!-- Card 1 -->
-    <div class="lyra-card">
-      <button class="lyra-toggle" aria-expanded="false">
-        <span>Projektablauf &<br> Dauer</span>
-        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
-      </button>
-      <div class="lyra-drop">
-        <p><strong>Wie lange dauert ein Webdesign-Projekt?</strong><br>Je nach Umfang in der Regel 3 – 6 Wochen vom Briefing bis zum Launch.</p>
-        <p><strong>Wie läuft das Projekt ab?</strong><br>Kick-off → Konzept → Design &amp; Umsetzung → Feedback → Launch. Sie sehen alles live über einen Projektlink.</p>
-        <p><strong>Wie oft gibt es Feedbackrunden?</strong><br>Zwei strukturierte Gespräche mit direktem Live-Einblick – so sparen wir Zeit und Abstimmungsschleifen.</p>
-      </div>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="lyra-card">
-      <button class="lyra-toggle" aria-expanded="false">
-        <span>Kosten &<br> Bezahlung</span>
-        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
-      </button>
-      <div class="lyra-drop">
-        <p><strong>Was kostet eine Website?</strong><br>Das hängt von Umfang, Funktionen und CMS ab. Kleine Seiten starten meist im mittleren vierstelligen Bereich.</p>
-        <p><strong>Gibt es feste Preise?</strong><br>Ja – nach dem Erstgespräch erhalten Sie ein transparentes, verbindliches Angebot.</p>
-        <p><strong>Wie wird bezahlt?</strong><br>In Etappen – z. B. 50 % zu Projektstart, 50 % nach Fertigstellung.</p>
-      </div>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="lyra-card">
-      <button class="lyra-toggle" aria-expanded="false">
-        <span>Technik &<br> CMS &amp; Hosting</span>
-        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
-      </button>
-      <div class="lyra-drop">
-        <p><strong>Arbeiten Sie mit CMS?</strong><br>Ja – z. B. WordPress oder individuelle Systeme, je nach Bedarf und Budget.</p>
-        <p><strong>Kümmern Sie sich um Hosting?</strong><br>Ja – wir unterstützen bei Auswahl, Einrichtung und Domainverwaltung.</p>
-        <p><strong>Optimieren Sie auch Performance?</strong><br>Ja – wir achten auf kurze Ladezeiten, gute Core Web Vitals und SEO-Struktur.</p>
-      </div>
-    </div>
-
-    <!-- Card 4 -->
-    <div class="lyra-card">
-      <button class="lyra-toggle" aria-expanded="false">
-        <span>Design &<br> Inhalte</span>
-        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
-      </button>
-      <div class="lyra-drop">
-        <p><strong>Kann ich beim Design mitreden?</strong><br>Natürlich – Sie sehen über den Live-Link jede Änderung und geben direkt Feedback.</p>
-        <p><strong>Was ist, wenn ich kein Material habe?</strong><br>Wir unterstützen bei Texten, Bildern und Struktur.</p>
-        <p><strong>Ist das Design mobilfreundlich?</strong><br>Ja – alle Websites sind responsive und für alle Geräte optimiert.</p>
-      </div>
-    </div>
-
-    <!-- Card 5 -->
-    <div class="lyra-card">
-      <button class="lyra-toggle" aria-expanded="false">
-        <span>Nach Projektende &<br> Betreuung</span>
-        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
-      </button>
-      <div class="lyra-drop">
-        <p><strong>Gibt es Unterstützung nach dem Launch?</strong><br>Ja – wir bieten Wartung, Updates und auf Wunsch laufende Optimierung.</p>
-        <p><strong>Kann ich die Website selbst pflegen?</strong><br>Ja – Sie erhalten eine kurze CMS-Einweisung und alle nötigen Zugänge.</p>
-        <p><strong>Was ist, wenn ich später etwas ändern möchte?</strong><br>Kleine Anpassungen übernehmen wir schnell – oder Sie ändern selbst im CMS.</p>
-      </div>
-    </div>
-
-    <!-- Card 6 -->
-    <div class="lyra-card">
-      <button class="lyra-toggle" aria-expanded="false">
-        <span>Rechtliches &<br> Datenschutz</span>
-        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
-      </button>
-      <div class="lyra-drop">
-        <p><strong>Ist alles DSGVO-konform?</strong><br>Ja – mit SSL, Cookie-Banner, Consent-Management und regelmäßigen Updates.</p>
-        <p><strong>Wie gehen Sie mit Daten um?</strong><br>Sicher – Zugriff nur für autorisierte Personen. Bei Bedarf schließen wir eine Vertraulichkeitsvereinbarung.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<style>
-:root{
-  --nova-base:#ffffff; --nova-alt:#f7f7f7; --nova-ink:#0b0c0e; --nova-muted:#5f6368; --nova-border:#e6e6e6; --nova-shadow:0 10px 26px rgba(0,0,0,.08);
-  --lyra-maxw: 1200px;
-}
-:root[data-theme="dark"]{
-  --nova-base:#000; --nova-alt:#0e0f12; --nova-ink:#fff; --nova-muted:#c6cad1; --nova-border:#1f1f1f; --nova-shadow:0 16px 38px rgba(0,0,0,.5);
-}
-
-/* Section */
-.lyra-vault{
-  padding: clamp(2rem, 5vw, 5.5rem) clamp(1rem, 4vw, 2rem);
-  background: var(--nova-base);
-  color: var(--nova-ink);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  margin-top: 5rem;
-}
-
-/* Heading */
-.lyra-heading{
-  text-align: center !important;
-  font-size: clamp(1.8rem, 1.4rem + 2vw, 3rem) !important;
-  font-weight: 900 !important;
-  letter-spacing: -0.02em !important;
-  margin-bottom: clamp(1.25rem, 3vw, 2.5rem) !important;
-  color: var(--nova-ink) !important;
-  text-wrap: balance !important;
-}
-
-/* Search Console */
-.lyra-console{
-  max-width: min(var(--lyra-maxw), 100%);
-  margin: 0 auto clamp(1.2rem, 3vw, 2.2rem);
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: .9rem;
-  align-items: center;
-}
-.lyra-console input{
-  min-height: 48px;
-  padding: .9rem 1.1rem;
-  border:1px solid var(--nova-border); border-radius:10px;
-  background: var(--nova-alt); color: var(--nova-ink);
-  font-size: 1rem; font-weight: 500; letter-spacing:.01em;
-  transition:border-color .25s ease, box-shadow .25s ease;
-  width:100%;
-}
-.lyra-console input::placeholder{ color: color-mix(in oklab, var(--nova-ink) 55%, transparent); opacity:.8; }
-.lyra-console input:focus{ outline:none; border-color: color-mix(in oklab, var(--nova-ink) 45%, transparent); box-shadow: 0 0 0 3px color-mix(in oklab, var(--nova-ink) 18%, transparent); }
-
-/* Console responsive: stack on small */
-@media (max-width: 680px){
-  .lyra-console{ grid-template-columns: 1fr; }
-  .lyra-nav{ justify-content: space-between; }
-}
-
-/* Nav */
-.lyra-nav{ display:flex; align-items:center; gap:.6rem; }
-.lyra-nav button{
-  padding:.6rem .9rem; min-height:44px;
-  border-radius:10px; border:1px solid var(--nova-border);
-  background:var(--nova-base); color:var(--nova-ink);
-  font-size:1rem; font-weight:700; line-height:1;
-  cursor:pointer; transition: all .2s ease;
-  display:flex; align-items:center; justify-content:center;
-}
-.lyra-nav button:hover{ background: color-mix(in oklab, var(--nova-alt) 70%, transparent); transform: translateY(-1px); }
-.lyra-nav span{ font-size: .95rem; font-weight:600; letter-spacing:.02em; color: color-mix(in oklab, var(--nova-ink) 75%, transparent); user-select:none; }
-
-/* Feather icons in nav */
-.lyra-nav button .feather{
-  width: 20px;
-  height: 20px;
-  stroke-width: 2.5;
-  display: block;
-}
-
-/* Grid */
-.lyra-grid{
-  max-width: min(var(--lyra-maxw), 100%);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
-  gap: clamp(.9rem, 2.5vw, 1.6rem);
-  padding-inline: clamp(.25rem, 2vw, 1rem);
-}
-/* Karten-Grid exakt so breit wie die Konsole */
-@media (min-width: 681px){
-  .lyra-grid{ padding-inline: 0; }
-}
-/* Mobile-Fix: auch auf Handy kein zusätzliches Padding */
-@media (max-width: 680px){
-  .lyra-grid{ padding-inline: 0; }
-}
-
-/* Card */
-.lyra-card{
-  border:1px solid var(--nova-border); border-radius:18px;
-  background: linear-gradient(180deg, var(--nova-base), var(--nova-alt));
-  box-shadow: var(--nova-shadow);
-  transition: transform .2s ease, box-shadow .2s ease;
-  overflow: hidden;
-}
-@media (hover:hover){
-  .lyra-card:hover{ transform: translateY(-3px); box-shadow: 0 20px 56px rgba(0,0,0,.10); }
-}
-
-/* Toggle */
-.lyra-toggle{
-  width:100%; background:none; border:0; padding: clamp(1rem, 2.5vw, 1.3rem) clamp(1rem, 3vw, 1.6rem);
-  display:flex; align-items:center; justify-content:space-between; gap:.75rem;
-  text-align:left; cursor:pointer; color:var(--nova-ink);
-}
-.lyra-toggle span{
-  font-size: clamp(1.06rem, 1rem + .6vw, 1.35rem);
-  font-weight: 800; line-height: 1.25; text-wrap: balance;
-}
-
-/* Icon */
-.lyra-icon{
-  width: clamp(28px, 6vw, 42px); height: clamp(28px, 6vw, 42px);
-  color: color-mix(in oklab, var(--nova-ink) 85%, transparent);
-  stroke-width: 2.25; flex: 0 0 auto;
-  transition: transform .3s ease, color .2s ease;
-}
-.lyra-toggle[aria-expanded="true"] .lyra-icon{ transform: rotate(180deg); }
-
-/* Drop */
-.lyra-drop{
-  max-height: 0; overflow: hidden;
-  padding: 0 clamp(1rem, 3vw, 1.6rem);
-  transition: max-height .35s ease, padding .25s ease;
-}
-.lyra-toggle[aria-expanded="true"] + .lyra-drop{
-  max-height: 900px; padding: .25rem clamp(1rem, 3vw, 1.6rem) 1rem;
-}
-.lyra-drop p{
-  margin: 0; padding: .8rem 0;
-  font-size: clamp(.98rem, .95rem + .2vw, 1.05rem);
-  line-height: 1.7; font-weight: 500; color: var(--nova-ink);
-}
-.lyra-drop strong{ font-weight: 700; }
-.lyra-drop p + p{
-  border-top: 1px solid color-mix(in oklab, var(--nova-ink) 15%, transparent);
-  margin-top: .3rem;
-}
-
-/* Markierung (hell + dark) */
-.lyra-card mark{
-  background:#ffe58a; color:#000; padding:0 3px; border-radius:3px;
-}
-:root[data-theme="dark"] .lyra-card mark{
-  background:#665c00; color:#fff;
-}
-
-/* Dark tweaks */
-:root[data-theme="dark"] .lyra-nav button{ background:#111; border-color:#333; color:#fff; }
-:root[data-theme="dark"] .lyra-console input::placeholder{ color: rgba(255,255,255,.55); }
-:root[data-theme="dark"] .lyra-nav span{ color: rgba(255,255,255,.8); }
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-  html:focus-within{ scroll-behavior: auto; }
-  .lyra-card, .lyra-icon, .lyra-drop, .lyra-nav button{ transition: none !important; }
-}
-</style>
-
-<script src="https://unpkg.com/feather-icons" defer></script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  if (window.feather) feather.replace();
-
-  const vault = document.getElementById("lyra-faq");
-  const cards = document.querySelectorAll(".lyra-card");
-  const input = document.getElementById("lyraSearch");
-  const prev = document.getElementById("lyraPrev");
-  const next = document.getElementById("lyraNext");
-  const indexlabl = document.getElementById("lyraIndex");
-  let matches = [], current = 0;
-
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const smoothOpts = prefersReduced ? {behavior:"auto"} : {behavior:"smooth"};
-
-  function closeAll() {
-    cards.forEach(c => {
-      const b = c.querySelector(".lyra-toggle");
-      const d = c.querySelector(".lyra-drop");
-      b.setAttribute("aria-expanded", "false");
-      d.style.maxHeight = null;
-    });
-  }
-
-  function removeMarks() {
-    vault.querySelectorAll("mark").forEach(m => {
-      const t = document.createTextNode(m.textContent);
-      m.replaceWith(t);
-    });
-  }
-
-  // Escape RegExp Sonderzeichen
-  function escapeRegExp(str){
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  }
-
-  function highlight(node, keyword) {
-    const terms = keyword.split(/\s+/).filter(Boolean).map(escapeRegExp);
-    if (!terms.length) return;
-    const rx = new RegExp("(" + terms.join("|") + ")", "gi");
-
-    if (node.nodeType === 3) {
-      const span = document.createElement("span");
-      span.innerHTML = node.nodeValue.replace(rx, "<mark>$1</mark>");
-      node.parentNode.replaceChild(span, node);
-    } else if (node.nodeType === 1 && node.childNodes && !["SCRIPT","STYLE","INPUT","BUTTON"].includes(node.tagName)) {
-      [...node.childNodes].forEach(child => highlight(child, keyword));
-    }
-  }
-
-  function scrollToCard(c) {
-    const y = c.getBoundingClientRect().top + window.scrollY - 80;
-    window.scrollTo({ top: y, ...smoothOpts });
-  }
-
-  function openCard(c) {
-    const b = c.querySelector(".lyra-toggle");
-    const d = c.querySelector(".lyra-drop");
-    b.setAttribute("aria-expanded", "true");
-    d.style.maxHeight = d.scrollHeight + "px";
-  }
-
-  function recalcOpenHeights() {
-    // bei Resize: Höhe offener Panels neu setzen
-    cards.forEach(c => {
-      const b = c.querySelector(".lyra-toggle");
-      const d = c.querySelector(".lyra-drop");
-      if (b.getAttribute("aria-expanded") === "true") {
-        d.style.maxHeight = d.scrollHeight + "px";
-      }
-    });
-  }
-
-  function updateIndex() {
-    indexlabl.textContent = matches.length ? `${current + 1} / ${matches.length}` : "0 / 0";
-  }
-
-  function search(keyword) {
-    const q = keyword.trim().toLowerCase();
-    removeMarks();
-    closeAll();
-    matches = [];
-    if (!q) return updateIndex();
-
-    cards.forEach(c => {
-      if (c.innerText.toLowerCase().includes(q)) {
-        matches.push(c);
-        // Markiere gesamten Karteninhalt (Titel + Body)
-        highlight(c, q);
-      }
-    });
-
-    current = 0;
-    if (matches.length) {
-      openCard(matches[0]);
-      scrollToCard(matches[0]);
-    }
-    updateIndex();
-  }
-
-  input.addEventListener("input", e => search(e.target.value));
-  prev.addEventListener("click", () => {
-    if (!matches.length) return;
-    current = (current - 1 + matches.length) % matches.length;
-    closeAll(); openCard(matches[current]); scrollToCard(matches[current]); updateIndex();
-  });
-  next.addEventListener("click", () => {
-    if (!matches.length) return;
-    current = (current + 1) % matches.length;
-    closeAll(); openCard(matches[current]); scrollToCard(matches[current]); updateIndex();
-  });
-
-  // Toggle expand/collapse
-  cards.forEach((c, i) => {
-    const btn = c.querySelector(".lyra-toggle");
-    const drop = c.querySelector(".lyra-drop");
-    const dropId = `lyra-drop-${i+1}`;
-    drop.id = dropId;
-    btn.setAttribute("aria-controls", dropId);
-
-    btn.addEventListener("click", () => {
-      const isOpen = btn.getAttribute("aria-expanded") === "true";
-      btn.setAttribute("aria-expanded", isOpen ? "false" : "true");
-      drop.style.maxHeight = isOpen ? null : drop.scrollHeight + "px";
-    });
-  });
-
-  // Recalc on resize (responsive)
-  let resizeTo;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTo);
-    resizeTo = setTimeout(recalcOpenHeights, 120);
-  });
-});
-</script>
 
 
 
