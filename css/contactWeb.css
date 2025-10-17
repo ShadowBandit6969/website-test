@@ -1,0 +1,1026 @@
+
+  /* ========= Theme Tokens ========= */
+  :root{
+    --surface:#fff; --surface-elev:#f7f8fa; --text:#0b0c0e; --muted:#5d6066;
+    --border:#e6e8eb; --input-bg:#ffffffcc; --input-text:#0b0c0e; --placeholder:#8b9096; --btn-text:#fff;
+    --choice-green:#00c851; --choice-ink:#ffffff;
+    --pill-bg:#f3f5f7; --pill-text:#0b0c0e; --pill-green:#00c851; --pill-green-ink:#ffffff;
+    --aur-ink:#0b0c10; --aur-ink-muted:#0f1729; --aur-shadow-light: 0 1px 2px rgba(0,0,0,.06); --aur-shadow-strong: 0 1px 2px rgba(0,0,0,.18);
+  }
+  :root[data-theme="dark"]{
+    --surface:#000; --surface-elev:#111216; --text:#f5f7fa; --muted:#c6cad1;
+    --border:#262a31; --input-bg:#111216cc; --input-text:#f5f7fa; --placeholder:#95a0ad; --btn-text:#fff;
+    --pill-bg:#1b1d22; --pill-text:#e8ecf2;
+  }
+
+  /* ========= Layout ========= */
+  html, body { box-sizing:border-box; overflow-x:hidden; margin:0; padding:0; }
+  *, *::before, *::after { box-sizing:inherit; }
+
+  .kontakt-testimonial-section{ background:var(--surface); color:var(--text); padding:clamp(2.5rem,5.5vw,5rem) 1.5rem; margin-top:clamp(4rem,8vw,8rem); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; }
+  .kontakt-testimonial-wrapper{
+    max-width:1440px; margin:0 auto; display:flex; gap:clamp(1.5rem,3.5vw,3rem); flex-wrap:wrap;
+    justify-content:space-between; align-items:stretch; /* gleiche Höhe */
+  }
+
+  /* Karten nebeneinander gleich hoch */
+  .kontakt-area,
+  .video-area { flex:1 1 480px; max-width:640px; min-width:300px; }
+
+  .kontakt-area{
+    background:color-mix(in oklab,var(--surface-elev) 85%,transparent);
+    border:1px solid var(--border); border-radius:18px;
+    padding:clamp(1.1rem,2vw,1.6rem);
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+    backdrop-filter:blur(8px) saturate(1.02);
+    height:auto; display:block;
+  }
+
+  /* Videokarte */
+  .video-area{ display:flex; }
+  .video-card{
+    display:flex; flex-direction:column; gap:.8rem;
+    background:color-mix(in oklab,var(--surface-elev) 85%,transparent);
+    border:1px solid var(--border); border-radius:18px;
+    padding:clamp(1.1rem,2vw,1.6rem); width:100%;
+    box-shadow:0 10px 30px rgba(0,0,0,.06); backdrop-filter:blur(8px) saturate(1.02);
+  }
+  .video-header{ display:flex; flex-direction:column; gap:.15rem; text-align:center; } /* mittig */
+  .video-title{ margin:0; font-size:clamp(1.2rem,1rem + .9vw,1.6rem); font-weight:900; letter-spacing:-.01em; color:var(--aur-ink); text-shadow:var(--aur-shadow-light); }
+  .video-sub{ margin:0; color:var(--muted); font-weight:650; }
+
+  /* Video füllt die Kartenhöhe */
+  .video-wrapper{
+    position:relative; flex:1 1 auto; min-height:260px; border-radius:14px; overflow:hidden; background:#000;
+  }
+  .video-media,
+  .video-embed{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; border:0; display:block;
+  }
+
+  /* Testimonials unter die beiden Karten schieben */
+  .testimonial-area{
+    flex:1 1 100%;
+    max-width:100%; min-width:280px;
+  }
+
+  /* ========= Typo ========= */
+  .section-title{
+    font-size:clamp(1.9rem,1.5rem + 2.2vw,2.65rem); font-weight:900; letter-spacing:-.02em; line-height:1.12;
+    margin:.1rem 0 .45rem; text-wrap:balance; color:var(--aur-ink); text-shadow:var(--aur-shadow-light);
+    text-align:center; margin-inline:auto; /* mittig */
+  }
+  .kontakt-subline{
+    color:var(--aur-ink-muted); max-width:62rem; margin:0 auto 1.15rem; line-height:1.6;
+    font-size:clamp(1.02rem,1rem + .5vw,1.18rem); letter-spacing:.004em; text-wrap:pretty;
+    padding:.85rem .95rem; border-radius:14px;
+    background:linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05);
+    text-align:center; /* mittig */
+  }
+  :root[data-theme="dark"] .kontakt-subline{
+    color:#fff;
+    background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 2px 8px rgba(0,0,0,.35);
+  }
+  .kontakt-area .copy{ color:rgba(0,0,0,.92); font-weight:690; letter-spacing:-.002em; font-size:clamp(1rem,.96rem + .35vw,1.12rem); line-height:1.55; margin:0 0 .25rem; }
+  .step1-copy{ margin-bottom:.25rem !important; }
+  :root[data-theme="dark"] .kontakt-area .copy{ color:rgba(255,255,255,.96); }
+
+  /* ========= Form ========= */
+  .kontakt-form{ display:flex; flex-direction:column; gap:.65rem; width:100%; }
+  .kontakt-form input, .kontakt-form textarea, .kontakt-form select{
+    width:100%; padding:.85rem .95rem; font-size:1rem; border:1px solid var(--border); border-radius:12px; background:var(--input-bg); color:var(--input-text); box-shadow:0 2px 8px rgba(0,0,0,0.04); transition:border-color .2s ease, box-shadow .2s ease, background-color .2s ease; appearance:none;
+  }
+
+  /* ========= Steps / Stepper / Choices etc. ========= */
+  .sr-only{ position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  .form-step{ display:none; }
+  .form-step.active{ display:block; }
+  .form-step[data-step="1"]{ margin-bottom:.05rem; }
+  .form-step[data-step="1"] .grid-choices{ margin-bottom:.05rem; }
+
+  .stepper{ display:flex; flex-direction:column; gap:.2rem; margin:.25rem 0 .05rem; padding-top:.25rem; border-top:1px solid color-mix(in oklab, var(--border) 75%, transparent); }
+  .stepper-header{ display:flex; justify-content:space-between; align-items:center; font-weight:800; font-size:.88rem; color:var(--muted); line-height:1; margin-bottom:.05rem; }
+  .stepper-track{ position:relative; width:100%; height:6px; background: color-mix(in oklab, var(--choice-green) 12%, transparent); border-radius:999px; overflow:hidden; }
+  .stepper-fill{ position:absolute; inset:0 auto 0 0; width:0%; height:100%; background: linear-gradient(90deg, var(--choice-green), color-mix(in oklab, var(--choice-green) 82%, #007e33 18%)); border-radius:999px; transition: width .22s ease; box-shadow: 0 2px 10px color-mix(in oklab, var(--choice-green) 35%, transparent); }
+
+  .grid-choices{ display:grid; grid-template-columns:repeat(3,1fr); gap:.5rem; }
+  @media (max-width:680px){ .grid-choices{ grid-template-columns:1fr; } }
+  .choice{ position:relative; display:flex; flex-direction:column; gap:.12rem; padding:.85rem; border:2px solid var(--border); border-radius:14px; cursor:pointer; user-select:none; background:var(--surface); transition: box-shadow .15s ease, border-color .15s ease, transform .06s ease, background .15s ease, color .15s ease; outline:none; }
+  .choice:hover{ box-shadow:0 0 0 3px color-mix(in oklab, var(--choice-green) 25%, transparent); }
+  .choice:active{ transform: scale(.995); }
+  .choice .title{ display:block; font-weight:950; letter-spacing:-.01em; line-height:1.18; font-size: clamp(1.06rem, 0.96rem + 0.8vw, 1.5rem); text-shadow: var(--aur-shadow-light); }
+  .choice small{ color:var(--muted); display:block; margin-top:.02rem; font-size: clamp(.9rem, .86rem + .25vw, 1rem); font-weight:650; letter-spacing:.01em; text-shadow: var(--aur-shadow-light); }
+  .choice input[type="radio"]{ position:absolute; opacity:0; pointer-events:none; inset:0; width:100%; height:100%; }
+  .choice.selected{ border-color:var(--choice-green); background:var(--choice-green); color:var(--choice-ink); box-shadow:0 6px 18px rgba(0,200,81,.25); }
+  .choice.selected .title, .choice.selected small{ color:var(--choice-ink) !important; text-shadow: 0 1px 1px rgba(0,0,0,.12); }
+
+  .service-block{ margin:.55rem 0 .55rem; padding:.55rem .7rem .7rem; border:1px dashed var(--border); border-radius:12px; background:color-mix(in oklab, var(--surface) 85%, transparent); }
+  .service-block[hidden]{ display:none !important; }
+  .block-title{ margin:.12rem 0 .45rem; font-size:1.04rem; font-weight:900; letter-spacing:-.01em; }
+  .select-row, .input-row{ display:flex; flex-direction:column; gap:.3rem; margin-bottom:.5rem; }
+
+  .tags{ display:grid; gap:.45rem; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); margin-top:.05rem; }
+  .checkbox-legend{ font-weight:800; margin-bottom:.15rem; }
+  .pill{ display:flex; align-items:center; justify-content:center; min-height:40px; padding:.5rem .65rem; border:2px solid var(--border); border-radius:12px; background:var(--pill-bg); color:var(--pill-text); cursor:pointer; user-select:none; transition: transform .06s ease, background .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease; }
+  .pill:hover{ box-shadow:0 0 0 3px color-mix(in oklab, var(--choice-green) 25%, transparent); }
+  .pill:active{ transform:scale(.992); }
+  .pill input{ position:absolute; opacity:0; pointer-events:none; }
+  .pill span{ font-weight:800; letter-spacing:-.01em; }
+  .pill.selected{ background:var(--pill-green); color:var(--pill-green-ink); border-color:var(--pill-green); box-shadow:0 6px 18px rgba(0,200,81,.25); }
+
+  .wizard-nav{ display:flex; gap:.55rem; align-items:center; margin-top:.1rem; padding-top:.25rem; }
+  .nav-btn{ background:var(--surface-elev); color:var(--text); border:1px solid var(--border); padding:.7rem .9rem; border-radius:12px; font-weight:800; cursor:pointer; transition:none; }
+  .nav-btn[disabled]{ opacity:.55; cursor:not-allowed; }
+  .nav-btn.next{ background: var(--choice-green); color: var(--choice-ink); border: none; box-shadow: 0 6px 18px color-mix(in oklab, var(--choice-green) 40%, transparent); }
+
+  /* Success Step */
+  .form-step[data-step="6"]{ display:none; }
+  .form-step.active[data-step="6"]{ display:block; }
+  .success-card{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.6rem; min-height: var(--step6-minh, 320px); padding: 1rem; border: 2px solid var(--choice-green); border-radius: 14px; background: color-mix(in oklab, var(--choice-green) 8%, var(--surface) 92%); text-align:center; }
+  .success-title{ font-weight:900; letter-spacing:-.01em; font-size: clamp(1.4rem,1.1rem + 1vw,1.9rem); }
+  .success-copy{ font-weight:700; letter-spacing:-.002em; font-size: clamp(1.02rem,.98rem + .35vw,1.16rem); opacity:.95; }
+  .success-sub{ color: var(--muted); }
+  .success-btn{ margin-top:.2rem; padding:.8rem 1rem; border-radius:12px; border:none; background:var(--choice-green); color:var(--choice-ink); font-weight:850; box-shadow:0 6px 18px rgba(0,200,81,.25); }
+  form.is-success .wizard-nav, form.is-success .stepper{ display:none !important; }
+  .success-card.fade-out { animation: successFade 3s ease forwards; }
+  @keyframes successFade { to { opacity: 0; transform: translateY(6px); } }
+
+  /* Responsive */
+  @media (max-width:1024px){
+    .kontakt-testimonial-wrapper{ flex-direction:column; align-items:center; gap:2rem; }
+    .kontakt-area, .video-area, .testimonial-area{ max-width:100%; }
+    .kontakt-btn{ margin:0 auto; }
+  }
+  @media (max-width:540px){
+    .kontakt-area, .testimonial-area, .video-area{ padding:0 .6rem; }
+    .section-title{ font-size:clamp(1.7rem,4.6vw,2.1rem); margin:0 auto .6rem; }
+    .kontakt-form{ padding:0 .1rem; gap:.6rem; }
+    .stepper{ position:sticky; bottom:0; background: color-mix(in oklab, var(--surface) 95%, transparent); padding:.3rem .2rem .2rem; margin:.25rem -.2rem 0; }
+    .wizard-nav{ position:sticky; bottom:0; background: color-mix(in oklab, var(--surface) 95%, transparent); padding:.25rem .2rem .3rem; margin:.05rem -.2rem 0; }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .kontakt-btn{ animation:none !important; transition:none !important; }
+    .stepper-fill{ transition:none !important; }
+  }
+/* Karten-Wrapper: gleiche Höhe */
+.kontakt-testimonial-wrapper{
+  max-width:1440px; margin:0 auto; display:flex;
+  gap:clamp(1.5rem,3.5vw,3rem); flex-wrap:wrap;
+  justify-content:space-between; align-items:stretch; /* wichtig: gleiche Höhe */
+}
+
+/* Kontakt- und Videokarte teilen sich die Zeile */
+.kontakt-area,
+.video-area { flex:1 1 480px; max-width:640px; min-width:300px; }
+
+/* Texte zentriert */
+.section-title,
+.kontakt-subline { text-align:center; }
+
+/* Videokarte ohne Headline – Video füllt Karte */
+.video-area{ display:flex; }
+.video-card{
+  position:relative; height:100%; width:100%;
+  background:color-mix(in oklab,var(--surface-elev) 85%,transparent);
+  border:1px solid var(--border); border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.06); backdrop-filter:blur(8px) saturate(1.02);
+  overflow:hidden; /* runde Ecken fürs Video */
+  padding:0;       /* randlos */
+}
+.video-media{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block; border:0;
+}
+
+/* Testimonials weiterhin darunter in voller Breite */
+.testimonial-area{ flex:1 1 100%; max-width:100%; }
+
+/* ===== Kontaktkarte (Step 5) – responsives Innen-Layout ===== */
+.form-step[data-step="5"] .contact-grid{
+  display:grid;
+  grid-template-columns: repeat(12, minmax(0,1fr));
+  gap:.65rem;
+}
+
+/* generische Feld-Box */
+.form-step[data-step="5"] .field{
+  grid-column: span 12;
+  display:flex; flex-direction:column; gap:.35rem;
+}
+
+/* Label etwas ruhiger, aber eindeutig */
+.form-step[data-step="5"] .field label{
+  font-weight:800; letter-spacing:-.01em;
+}
+
+/* Inputs / Textareas füllen die Spalte (nutzen schon deine Basis-Input-Styles) */
+.form-step[data-step="5"] .field input,
+.form-step[data-step="5"] .field textarea,
+.form-step[data-step="5"] .field select{
+  width:100%;
+}
+
+/* Textarea angenehm groß, aber nicht riesig */
+.form-step[data-step="5"] .field textarea{
+  min-height: clamp(120px, 16vh, 220px);
+  resize: vertical;
+}
+
+/* Fehlertexte brechen sauber um */
+.form-step[data-step="5"] .field .field-error{
+  line-height:1.25;
+}
+
+/* Grid-Spans (12er System) */
+.form-step[data-step="5"] .span-12{ grid-column: span 12; }
+.form-step[data-step="5"] .span-6 { grid-column: span 12; } /* default: full width */
+.form-step[data-step="5"] .span-4 { grid-column: span 12; }
+.form-step[data-step="5"] .span-8 { grid-column: span 12; }
+
+/* ab ~700px zweispaltig */
+@media (min-width:700px){
+  .form-step[data-step="5"] .span-6 { grid-column: span 6; }
+  .form-step[data-step="5"] .span-4 { grid-column: span 4; }
+  .form-step[data-step="5"] .span-8 { grid-column: span 8; }
+}
+
+/* ab ~1024px etwas luftiger – optional */
+@media (min-width:1024px){
+  .form-step[data-step="5"] .contact-grid{ gap:.75rem; }
+}
+
+/* Buttons in der Kontaktkarte über die volle Breite andocken */
+.form-step[data-step="5"] + .wizard-nav{
+  margin-top:.5rem;
+}
+/* Handy: Videokarte bewusst flacher + nicht mehr gestreckt */
+@media (max-width:600px){
+  .video-area{
+    flex: 0 0 auto;               /* nicht mehr mitwachsen */
+    align-self: stretch;           /* volle Breite behalten */
+  }
+  .video-area .video-card{
+    height: 180px !important;      /* flach erzwingen */
+    min-height: 180px !important;
+    aspect-ratio: auto !important; /* falls ein aspect-ratio greift, neutralisieren */
+  }
+  .video-area .video-media{
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+/* Step-1 Auswahlkarten strikt innerhalb der Kontaktkarte halten */
+.kontakt-area{
+  position: relative;
+  isolation: isolate;     /* eigener Stacking-Context */
+  overflow: clip;         /* nichts ragt aus der Karte heraus */
+  min-width: 0;           /* Flex-Overflow verhindern */
+}
+
+.kontakt-form{ max-width: 100%; overflow: clip; }
+.form-step[data-step="1"]{ max-width: 100%; }
+
+.grid-choices{ max-width: 100%; overflow: clip; }
+.grid-choices .choice{
+  transform-origin: center;     /* Hover/Active bleibt innen */
+  will-change: transform;
+}
+
+/* Kontaktkarte darf breiter werden, Videokarte etwas schmaler */
+.kontakt-area{ flex:1.2 1 640px; max-width:780px; }
+.video-area{ flex:0.8 1 420px; max-width:540px; }
+
+/* trotzdem gleich hohe Karten */
+.kontakt-testimonial-wrapper{
+  align-items:stretch;
+}
+
+/* Falls nötig: Hover-Effekte der Choices nicht abschneiden */
+.kontakt-area{ overflow:visible; }
+
+/* Wenn Karten untereinander: zentriert & breiter darstellen */
+@media (max-width:1024px){
+  .kontakt-testimonial-wrapper{
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    gap:2rem;
+  }
+
+  .kontakt-area,
+  .video-area{
+    width:90%;
+    max-width:1000px;      /* deutlich breiter */
+    margin-inline:auto;
+  }
+} 
+/* 1024px–1148px: Kontaktkarte mittig, Videokarte darunter */
+@media (min-width:1024px) and (max-width:1148px){
+  .kontakt-testimonial-wrapper{
+    /* Spalten-Stack statt Reihe */
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.75rem;
+  }
+
+  /* Side-by-side Vorgaben überstimmen */
+  .kontakt-area,
+  .video-area{
+    flex: 0 0 auto;              /* nicht strecken/schrumpfen */
+    width: min(92vw, 780px);     /* schön breit, aber begrenzt */
+    max-width: 100%;
+    margin-inline: auto;         /* perfekt mittig */
+  }
+
+  /* Reihenfolge explizit festlegen */
+  .kontakt-area{ order: 1; }
+  .video-area{   order: 2; }
+  .testimonial-area{ order: 3; width: 100%; }
+
+  /* Falls die Videokarte zuvor höhengleich gezogen wurde: hier auto */
+  .video-area .video-card{
+    height: auto;
+    min-height: 260px;
+  }
+}
+
+/* === 1) Hover oben nicht mehr abgeschnitten (Step 1) === */
+/* Alles, was Step-1 umgibt, darf Überstand durch Hover-Shadow zeigen */
+.kontakt-area,
+.kontakt-form,
+.form-step[data-step="1"],
+.grid-choices{
+  overflow: visible !important;
+}
+
+/* Falls ein Parent irgendwo noch clip/hidden setzt: neutralisieren */
+.kontakt-area{ isolation:auto !important; }
+
+/* Optional: minimaler Innenabstand oben, damit große Shadows Platz haben */
+.form-step[data-step="1"]{
+  padding-top: .1rem;
+}
+
+/* === 2) Kontaktkarte (Step 5) – alles untereinander + responsive === */
+.form-step[data-step="5"] .contact-grid{
+  display:grid;
+  grid-template-columns: 1fr; /* nur 1 Spalte */
+  gap: .7rem;
+}
+
+/* Alle Spans auf volle Breite erzwingen */
+.form-step[data-step="5"] .span-12,
+.form-step[data-step="5"] .span-8,
+.form-step[data-step="5"] .span-6,
+.form-step[data-step="5"] .span-4{
+  grid-column: 1 / -1 !important;
+}
+
+/* Typo & Abstände wie vorher – übernehmen/inherit */
+.form-step[data-step="5"] .field{
+  display:flex; flex-direction:column; gap:.35rem;
+  font: inherit; color: inherit;
+}
+.form-step[data-step="5"] .field label{
+  font-weight:800; letter-spacing:-.01em;
+}
+.form-step[data-step="5"] .field input,
+.form-step[data-step="5"] .field textarea,
+.form-step[data-step="5"] .field select{
+  width:100%;
+  font: inherit; color: inherit;
+}
+
+/* Textarea angenehm, aber nicht riesig – passt sich Viewport an */
+.form-step[data-step="5"] .field textarea{
+  min-height: clamp(120px, 18vh, 220px);
+  resize: vertical;
+}
+
+/* Mobile Feinschliff */
+@media (max-width:700px){
+  .form-step[data-step="5"] .contact-grid{ gap:.6rem; }
+  .form-step[data-step="5"] .field label{ font-weight:800; }
+  .form-step[data-step="5"] .field textarea{ min-height: clamp(110px, 22vh, 200px); }
+}
+
+/* === "Senden"-Button wie "Zurück", aber Orange === */
+#submitBtn,
+.kontakt-btn.submit {
+  background: var(--choice-orange, #f97316); /* Orange Basisfarbe */
+  color: #fff;
+  border: 1px solid color-mix(in oklab, #f97316 80%, #000 10%);
+  padding: .7rem .9rem;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color .2s ease, transform .06s ease, box-shadow .15s ease;
+  box-shadow: 0 2px 6px rgba(249,115,22,.25);
+}
+
+/* Hover-Effekt wie beim Zurück-Button (leicht heller) */
+#submitBtn:hover,
+.kontakt-btn.submit:hover {
+  background: color-mix(in oklab, #f97316 90%, white 10%);
+}
+
+/* Active-State: leichter Klick-Eindruck */
+#submitBtn:active,
+.kontakt-btn.submit:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px rgba(249,115,22,.3);
+}
+
+/* Disabled-State: gleiches Verhalten wie Zurück-Button */
+#submitBtn[disabled],
+.kontakt-btn.submit[disabled] {
+  opacity: .6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Damit der Button im letzten Step (Step 5) schön sitzt */
+.form-step[data-step="5"] .wizard-nav #submitBtn,
+.form-step[data-step="5"] .wizard-nav .kontakt-btn.submit {
+  width: 100%;
+  margin-top: .4rem;
+}
+
+/* === Typo-Konsistenz für alle Formular-Controls (alle Steps) === */
+.kontakt-form,
+.kontakt-form input,
+.kontakt-form textarea,
+.kontakt-form select,
+.kontakt-form button {
+  font-family: inherit;                 /* gleiche Schriftfamilie wie außen */
+  color: var(--input-text);
+  letter-spacing: .004em;
+  -webkit-font-smoothing: antialiased;  /* gleiche Glättung */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Placeholder-Optik angleichen */
+.kontakt-form ::placeholder {
+  color: var(--placeholder);
+  opacity: 1;
+}
+
+/* Browser-Autofill angleichen (hell) */
+.kontakt-form input:-webkit-autofill,
+.kontakt-form textarea:-webkit-autofill,
+.kontakt-form select:-webkit-autofill {
+  -webkit-text-fill-color: var(--input-text);
+  transition: background-color 9999s ease-out, color 9999s ease-out;
+  box-shadow: 0 0 0 1000px var(--input-bg) inset !important; /* gleiche Input-Fläche */
+}
+
+/* Dark-Theme: Autofill leicht abdunkeln */
+:root[data-theme="dark"] .kontakt-form input:-webkit-autofill,
+:root[data-theme="dark"] .kontakt-form textarea:-webkit-autofill,
+:root[data-theme="dark"] .kontakt-form select:-webkit-autofill {
+  -webkit-text-fill-color: var(--input-text);
+  box-shadow: 0 0 0 1000px color-mix(in oklab, var(--input-bg) 92%, black 8%) inset !important;
+}
+
+/* === Step 5 gezielt an die gleiche Typo wie die restlichen Copy-Texte binden === */
+.form-step[data-step="5"] {
+  color: var(--text);
+  line-height: 1.55;                 /* wie .kontakt-area .copy */
+  letter-spacing: .004em;
+  font-size: clamp(1rem,.96rem + .35vw,1.12rem);
+}
+
+/* Labels in Step 5 wie überall: kräftig, aber sauber */
+.form-step[data-step="5"] .field label{
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--aur-ink);
+}
+
+/* Inputs in Step 5: die Basis-Input-Styles behalten + gleiche Typo */
+.form-step[data-step="5"] .field input,
+.form-step[data-step="5"] .field textarea,
+.form-step[data-step="5"] .field select{
+  font-family: inherit;
+  font-size: 1rem;     /* konsistent zu deiner globalen Input-Regel */
+  line-height: 1.4;
+  color: var(--input-text);
+}
+
+/* Optional: Headline/Intro in Step 5 optisch angleichen (falls vorhanden) */
+.form-step[data-step="5"] .copy {
+  color: rgba(0,0,0,.92);
+  font-weight: 690;
+  letter-spacing: -0.002em;
+  font-size: clamp(1rem,.96rem + .35vw,1.12rem);
+}
+:root[data-theme="dark"] .form-step[data-step="5"] .copy {
+  color: rgba(255,255,255,.96);
+}
+/* =========================
+   MOBILE POLISH (≤ 600px)
+   ========================= */
+@media (max-width:1024px){
+
+  /* 1) Sektion: saubere Abstände + Safe-Area */
+  .kontakt-testimonial-section{
+    padding:
+      max(16px, calc(env(safe-area-inset-top,0) + 12px))
+      max(16px, calc(env(safe-area-inset-right,0) + 12px))
+      max(20px, calc(env(safe-area-inset-bottom,0) + 12px))
+      max(16px, calc(env(safe-area-inset-left,0) + 12px));
+  }
+
+  /* 2) Wrapper enger, damit die Karte visuell breiter wirkt */
+  .kontakt-testimonial-wrapper{
+    gap: clamp(12px, 4vw, 18px);
+  }
+
+  /* 3) Kontaktkarte: wieder "innen" gepolstert & volle Breite
+        (überschreibt dein früheres padding: 0 .6rem auf mobile) */
+  .kontakt-area{
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    border-radius: 16px;
+    padding: clamp(14px, 4.5vw, 18px) !important;   /* mehr Innenabstand */
+    overflow: visible;                               /* nichts abschneiden */
+  }
+
+  /* 4) Überschrift/Subline: nie abgeschnitten, genug Luft oben */
+  .kontakt-area .section-title{
+    margin-top: .2rem;
+    padding-top: .15rem;
+    line-height: 1.2;
+    overflow: visible;
+    word-break: normal;
+    hyphens: auto;
+    text-wrap: balance;
+  }
+  .kontakt-area .kontakt-subline{
+    margin-top: .35rem;
+  }
+
+  /* 5) Choice-Karten: größere Touch-Ziele, kein Clipping */
+  .form-step[data-step="1"] .grid-choices{
+    gap: .6rem;
+  }
+  .form-step[data-step="1"] .grid-choices .choice{
+    padding: 1rem .95rem;
+    border-radius: 16px;
+    min-height: 64px;
+    /* eigener stacking-context, damit Shadow oben/unten sichtbar bleibt */
+    position: relative;
+    z-index: 0;
+  }
+  .form-step[data-step="1"]{
+    padding-top: .25rem; /* extra Luft damit Schatten nicht "oben" anstößt */
+  }
+
+  /* 6) Sticky-Elemente: vermeiden visuelles „Drücken“ */
+  .stepper,
+  .wizard-nav{
+    margin-left: -2px;
+    margin-right: -2px;
+    border-radius: 12px;
+  }
+
+  /* 7) Formularfelder: Fingerfreundlich */
+  .kontakt-form input,
+  .kontakt-form select,
+  .kontakt-form textarea{
+    padding: 0.95rem 1rem;
+    font-size: 1.02rem; /* minimal größer für Lesbarkeit */
+  }
+
+  /* 8) Video-Karte: darunter, vollbreit, flacher */
+  .video-area{
+    width: 100%;
+    max-width: none;
+  }
+  .video-area .video-card{
+    height: 200px !important;
+    min-height: 200px !important;
+    border-radius: 16px;
+  }
+  .video-area .video-media{
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* 9) Step-5: einspaltig + gleiche Typo (falls noch überstimmt) */
+  .form-step[data-step="5"] .contact-grid{
+    grid-template-columns: 1fr;
+    gap: .65rem;
+  }
+  .form-step[data-step="5"]{
+    font-size: clamp(1rem, 1.5vw + .96rem, 1.1rem);
+    line-height: 1.55;
+  }
+  .form-step[data-step="5"] .field label{
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  /* 10) Buttons: full-width, klare Hierarchie */
+  .wizard-nav .nav-btn{
+    flex: 1 1 auto;
+  }
+  #submitBtn,
+  .kontakt-btn.submit{
+    width: 100%;
+  }
+}
+
+/* Optional (≤ 380px, sehr kleine Phones): noch etwas mehr Luft oben */
+@media (max-width:380px){
+  .kontakt-area{
+    padding: 16px !important;
+  }
+  .kontakt-area .section-title{
+    font-size: clamp(1.5rem, 7vw, 1.9rem);
+  }
+}
+/* Step 5: immer linksbündig, egal ob die Karte mittig steht */
+.kontakt-area .form-step[data-step="5"]{
+  text-align: left !important;            /* überschreibt zentrierte Eltern */
+}
+
+.kontakt-area .form-step[data-step="5"] .contact-grid{
+  justify-items: stretch;
+  align-items: start;
+}
+
+.kontakt-area .form-step[data-step="5"] .field,
+.kontakt-area .form-step[data-step="5"] .field label{
+  text-align: left !important;
+}
+
+.kontakt-area .form-step[data-step="5"] .field input,
+.kontakt-area .form-step[data-step="5"] .field select,
+.kontakt-area .form-step[data-step="5"] .field textarea{
+  text-align: left;                        /* auch Inhalt/Placeholder links */
+}
+
+/* falls du irgendwo text-centring auf .wizard-nav hast: nur Buttons mittig lassen */
+.kontakt-area .form-step[data-step="5"] + .wizard-nav{
+  text-align: left;                        /* Navigation linksbündig (optional) */
+}
+/* === Step 5: "Senden"-Button immer linksbündig, auch wenn Karte mittig steht === */
+
+/* sorgt dafür, dass das Nav-Element selbst links ausgerichtet ist */
+.kontakt-area .form-step[data-step="5"] + .wizard-nav {
+  display: flex !important;
+  justify-content: flex-start !important;  /* Button-Leiste links ausrichten */
+  text-align: left !important;
+  width: 100%;
+}
+
+/* "Senden"-Button linksbündig halten, nicht zentrieren */
+.kontakt-area .form-step[data-step="5"] + .wizard-nav #submitBtn,
+.kontakt-area .form-step[data-step="5"] + .wizard-nav .kontakt-btn.submit {
+  justify-content: flex-start !important;
+  align-self: flex-start !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  width: auto !important;          /* verhindert full-width */
+  min-width: 160px;
+}
+
+/* Falls du den Zurück-Button daneben hast → schöner Abstand */
+.kontakt-area .form-step[data-step="5"] + .wizard-nav .nav-btn:not(#submitBtn) {
+  margin-right: .6rem;
+}
+
+.legal-hint{
+  font-size:.85rem; line-height:1.45;
+  color:#666; margin:.4rem 0 .2rem;
+}
+.legal-hint a{ color:inherit; text-decoration:underline; }
+:root[data-theme="dark"] .legal-hint{ color:#c6cad1; }
+
+/* Pflichtfeld-Kennzeichnung */
+label.req::after{
+  content:" *";
+  color:#b00020;
+  font-weight:900;
+}
+.req-note{
+  font-size:.85rem; color:#666; margin:.2rem 0 .4rem;
+}
+:root[data-theme="dark"] .req-note{ color:#c6cad1; }
+
+/* =======================================
+   Ganze Pill grün, wenn angeklickt
+   ======================================= */
+.pill input[type="checkbox"]:checked ~ span,
+.pill input[type="checkbox"]:checked ~ * {
+  background: var(--pill-green);
+  color: var(--pill-green-ink);
+  border-color: var(--pill-green);
+  box-shadow: 0 6px 18px rgba(0,200,81,.25);
+}
+
+/* ===== Fix: 680px–1024px -> Karten nicht mehr vertikal strecken ===== */
+@media (max-width:1024px) and (min-width:680px){
+  .kontakt-testimonial-wrapper{
+    flex-direction: column;      /* wie bei dir vorgesehen */
+    align-items: center;
+  }
+
+  /* wichtig: kein flex:1 im Spaltenlayout -> sonst wird Höhe aufgeblasen */
+  .kontakt-area,
+  .video-area{
+    flex: 0 0 auto !important;   /* nicht strecken */
+    width: min(92vw, 780px);     /* hübsche Breite */
+    height: auto !important;
+    margin-inline: auto;
+  }
+
+  /* Videokarte nicht künstlich hochziehen */
+  .video-area .video-card{
+    height: auto !important;
+    min-height: 280px;           /* angenehme Untergrenze */
+    aspect-ratio: 16 / 9;        /* hält das Video kompakt */
+  }
+
+  /* Optional: innen etwas kompakter, damit die Kontaktkarte nicht „luftig“ wirkt */
+  .kontakt-area{
+    padding: clamp(14px, 2.2vw, 20px) !important;
+  }
+}
+/* --- A) SOLO: Kontaktkarte alleine & breiter -------------------- */
+/* <section id="kontakt" class="kontakt-testimonial-section variant-solo"> */
+@media (min-width:840px) and (max-width:1148px){
+  #kontakt.variant-solo .kontakt-testimonial-wrapper{
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(16px, 2.5vw, 24px);
+  }
+  #kontakt.variant-solo .kontakt-area{
+    flex: 0 0 auto !important;
+    width: min(96vw, 980px);
+    max-width: 100%;
+    margin-inline: auto;
+  }
+  /* Video bewusst ausblenden (oder nach unten verlagern) */
+  #kontakt.variant-solo .video-area{
+    display: none;               /* oder: display:block;width:min(92vw,720px) */
+  }
+}
+
+/* === HOTFIX: Video unter 680px kompakt halten === */
+@media (max-width:680px){
+  /* Karte nicht strecken lassen */
+  .video-area{
+    flex: 0 0 auto !important;
+    align-self: stretch !important;
+    width: 100% !important;
+  }
+
+  /* Höhe aus Breite ableiten (16:9), kein fixes min-height */
+  .video-area .video-card{
+    position: relative !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 16 / 9 !important;  /* gibt die Höhe vor */
+    border-radius: 16px !important;
+  }
+
+  /* Alte Mindesthöhen aushebeln, falls .video-wrapper existiert */
+  .video-wrapper{
+    min-height: 0 !important;
+    height: 100% !important;
+  }
+
+  /* Media füllt die Karte */
+  .video-media,
+  .video-embed{
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border: 0;
+    display: block;
+  }
+}
+
+/* 1) .form-step selbst soll nie einen sichtbaren UA-Outline zeigen */
+.form-step { 
+  /* verschluckt Rendering-Seams ohne sichtbaren Rand */
+  border: 1px solid transparent;
+  outline: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+/* falls der Container jemals Fokus bekommt (z.B. via JS/scrollIntoView) */
+.form-step:focus { outline: none; }
+
+/* 2) die aktive Stufe zusätzlich „stabilisieren“ (GPU-Layer) */
+.form-step.active {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0); /* erzeugt eigenen Compositing-Layer */
+}
+
+/* 3) Inputs behalten weiterhin eine gut sichtbare, zugängliche Outline */
+.kontakt-form input:focus-visible,
+.kontakt-form select:focus-visible,
+.kontakt-form textarea:focus-visible,
+.kontakt-form button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--choice-green) 60%, transparent);
+  outline-offset: 2px;
+}
+
+/* 4) Vermeide Clipping am Formular/Step (du hast teils schon :)) */
+.kontakt-form,
+.form-step,
+.grid-choices { overflow: visible; }
+/* === Angleichen: Spans wie Checkbox-Legends === */
+span.website-label,
+.tags span.label-like-legend,
+.form-step span.website-label,
+.form-step .block-title span,
+.form-step .field > span {
+  display: block;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-size: 1.04rem; /* identisch zu .block-title / .checkbox-legend */
+  margin-bottom: .15rem;
+  color: var(--aur-ink);
+  text-shadow: var(--aur-shadow-light);
+}
+
+/* Dark Mode Angleichen */
+:root[data-theme="dark"] span.website-label,
+:root[data-theme="dark"] .tags span.label-like-legend,
+:root[data-theme="dark"] .form-step span.website-label,
+:root[data-theme="dark"] .form-step .block-title span,
+:root[data-theme="dark"] .form-step .field > span {
+  color: #f5f7fa;
+  text-shadow: none;
+}
+/* Reset für native <legend>, damit beide identisch wirken */
+legend.checkbox-legend {
+  display: block;
+  padding: 0;
+  border: 0;
+}
+
+/* 1:1 Angleichen: alles mit .checkbox-legend (egal ob legend oder span) */
+legend.checkbox-legend,
+span.checkbox-legend {
+  display: block;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-size: clamp(1rem, .96rem + .35vw, 1.12rem);
+  line-height: 1.3;
+  margin: .1rem 0 .35rem;
+  color: var(--aur-ink);
+  text-shadow: var(--aur-shadow-light);
+}
+
+/* Dark Mode */
+:root[data-theme="dark"] legend.checkbox-legend,
+:root[data-theme="dark"] span.checkbox-legend {
+  color: #f5f7fa;
+  text-shadow: none;
+}
+/* ====== FIX: Checkbox-Groups (Tags) ohne schwarze Outline ====== */
+.checkbox-group,
+fieldset.checkbox-group.tags {
+  border: none !important;         /* entfernt schwarze Linie */
+  padding: 0 !important;           /* kein extra Innenabstand */
+  margin: 0 !important;            /* bündig mit restlichem Layout */
+  min-inline-size: 0;              /* verhindert Chrome-Mindestbreite */
+}
+
+/* sorgt für sauberen vertikalen Rhythmus */
+.checkbox-group .checkbox-legend,
+fieldset.checkbox-group.tags .checkbox-legend {
+  margin-bottom: .35rem !important;
+}
+
+/* optional: leichte visuelle Trennung nach oben */
+fieldset.checkbox-group.tags:not(:first-child) {
+  margin-top: .4rem !important;
+}
+
+/* ====== Website-Label & Checkbox-Legend – einheitlich typografisch + Abstand ====== */
+span.website-label,
+legend.checkbox-legend,
+span.checkbox-legend {
+  display: block;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-size: clamp(1rem, .96rem + .35vw, 1.12rem);
+  line-height: 1.3;
+  color: var(--aur-ink);
+  text-shadow: var(--aur-shadow-light);
+
+  /* Luft über jedem Label / Abschnitt */
+  margin-top: clamp(0.9rem, 1.4vw, 1.4rem) !important;
+  margin-bottom: .35rem !important;
+}
+
+/* ====== Dark Mode ====== */
+:root[data-theme="dark"] span.website-label,
+:root[data-theme="dark"] legend.checkbox-legend,
+:root[data-theme="dark"] span.checkbox-legend {
+  color: #f5f7fa;
+  text-shadow: none;
+}
+/* Mehr Abstand nach oben – überschreibt margin:0 !important */
+.service-block > fieldset.checkbox-group.tags,
+.service-block[data-service] > fieldset.checkbox-group.tags {
+  margin-top: clamp(1rem, 1.8vw, 1.6rem) !important;
+}
+/* === Solo-Layout-Fokus: Kontaktkarte mittig + breit =================== */
+#kontakt .kontakt-testimonial-wrapper{
+  flex-direction: column;              /* Karten untereinander stapeln */
+  align-items: center;                  /* mittig ausrichten */
+  justify-content: flex-start;
+  gap: clamp(16px, 2.5vw, 24px);
+}
+
+/* Kontaktkarte schön breit, aber begrenzt */
+#kontakt .kontakt-area{
+  flex: 0 0 auto !important;
+  width: min(96vw, 980px);             /* Breite: responsiv bis ~980px */
+  max-width: 980px;
+  margin-inline: auto;
+}
+
+/* Video-Karte bleibt sichtbar, aber etwas kompakter darunter */
+#kontakt .video-area{
+  flex: 0 0 auto !important;
+  width: min(92vw, 720px);
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+/* Step-1: Einzelauswahl-Karte zentriert und breit innerhalb der Kontaktkarte */
+#kontakt .form-step[data-step="1"] .grid-choices{
+  display: grid;
+  grid-template-columns: 1fr;          /* nur eine Spalte */
+  justify-items: center;                /* Karte zentrieren */
+  gap: .6rem;
+}
+#kontakt .form-step[data-step="1"] .grid-choices .choice{
+  width: min(680px, 92%);              /* groß & fingerfreundlich */
+}
+
+/* Mobile: alles ohnehin vollbreit, also nur sanfte Anpassungen */
+@media (max-width:700px){
+  #kontakt .kontakt-area{ width: 100%; }
+  #kontakt .video-area{ width: 100%; max-width: none; }
+}
+/* STEP 1: Wenn es nur EINE Choice gibt → volle Breite + zentrierter Inhalt */
+#kontakt .form-step[data-step="1"] .grid-choices {
+  display: grid;
+  grid-template-columns: 1fr;          /* eine Spalte = volle Formularbreite */
+  gap: .6rem;
+}
+
+/* Karte soll wirklich die gesamte Breite einnehmen */
+#kontakt .form-step[data-step="1"] .grid-choices .choice:only-child {
+  grid-column: 1 / -1;                 /* über gesamte Grid-Breite spannen */
+  width: 100% !important;              /* frühere Breitenbegrenzungen aushebeln */
+  max-width: none !important;
+  text-align: center;                   /* Text mittig */
+  display: flex;                        /* Inhalt sauber mittig setzen */
+  flex-direction: column;
+  align-items: center;                  /* horizontal mittig */
+  justify-content: center;              /* vertikal schön zentriert */
+  padding: 1.1rem 1rem;                 /* angenehmer Innenabstand */
+}
+
+/* Titel/Unterzeile ebenfalls mittig ausrichten */
+#kontakt .form-step[data-step="1"] .grid-choices .choice:only-child .title,
+#kontakt .form-step[data-step="1"] .grid-choices .choice:only-child small {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Mobile bleibt es ohnehin vollbreit – keine Extra-Regeln nötig,
+   aber falls frühere Regeln greifen, hier sicherheitshalber noch mal: */
+@media (max-width: 680px){
+  #kontakt .form-step[data-step="1"] .grid-choices {
+    grid-template-columns: 1fr;
+  }
+  #kontakt .form-step[data-step="1"] .grid-choices .choice:only-child {
+    grid-column: 1 / -1;
+    width: 100% !important;
+    max-width: none !important;
+  }
+}
