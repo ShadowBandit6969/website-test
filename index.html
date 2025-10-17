@@ -256,15 +256,16 @@
 <link rel="stylesheet" href="css/lyraV.css" type="text/css">
 <link rel="stylesheet" href="css/footer.css" type="text/css">
 <link rel="stylesheet" href="css/angledimg.css" type="text/css">
-<link rel="stylesheet" href="css/arbeitsproben.css" type="text/css">
-<link rel="stylesheet" href="css/contact.css" type="text/css">
 <link rel="stylesheet" href="css/ablauf.css" type="text/css">
 <link rel="stylesheet" href="css/cosmosSuite.css" type="text/css">
-<link rel="stylesheet" href="css/aurora.css" type="text/css">
+
 <link rel="stylesheet" href="css/herolast.css" type="text/css">
 <link rel="stylesheet" href="css/navbar.css" type="text/css">
 <link rel="stylesheet" href="css/darkmodeLast.css" type="text/css">
 <link rel="stylesheet" href="css/reviews.css" type="text/css">
+<link rel="stylesheet" href="css/contact.css" type="text/css">
+<link rel="stylesheet" href="css/aurora.css" type="text/css">
+<link rel="stylesheet" href="css/arbeitsproben.css" type="text/css">
 <style>
 /* --------------------------
    Lokale Bild-Overrides nur für titlepage.html
@@ -3108,16 +3109,15 @@ document.addEventListener('DOMContentLoaded', () => {
      ============================================= -->
 <section class="kontakt-testimonial-section" id="kontakt">
   <div class="kontakt-testimonial-wrapper">
-    <!-- Kontaktbereich -->
+
+    <!-- === Kontaktkarte === -->
     <div class="kontakt-area">
       <h2 class="section-title">Lass uns loslegen!</h2>
       <p class="kontakt-subline">
         Eine starke Idee verdient ein starkes digitales Erlebnis.
       </p>
 
-      <!-- =====================
-           Wizard Formular
-           ===================== -->
+      <!-- === Formular (Wizard) === -->
       <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm" novalidate>
 
         <!-- STEP 1: Leistungswahl -->
@@ -3144,15 +3144,14 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </fieldset>
 
-        <!-- STEP 2: Material & Styleguides -->
+        <!-- STEP 2: Material & Styleguide -->
         <fieldset class="form-step" data-step="2" aria-labelledby="step2Title">
           <legend id="step2Title" class="sr-only">Material & Styleguide</legend>
 
           <!-- Web -->
           <div class="service-block" data-service="web">
-            <h3 class="block-title">Webdesign – Material & Branding</h3>
             <label class="select-row">
-              <span>Material (Texte/Bilder/Logo)</span>
+              <span class="website-label">Material (Texte / Bilder / Logo)</span>
               <select name="web_material">
                 <option value="">Bitte wählen</option>
                 <option value="alles">Alles vorhanden</option>
@@ -3160,8 +3159,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <option value="nichts">Bitte komplett erstellen</option>
               </select>
             </label>
+
             <label class="select-row">
-              <span>Styleguide / CI vorhanden?</span>
+              <span class="website-label">Styleguide / CI vorhanden?</span>
               <select name="web_styleguide">
                 <option value="">Bitte wählen</option>
                 <option value="ja">Ja</option>
@@ -3172,9 +3172,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <!-- 3D -->
           <div class="service-block" data-service="d3">
-            <h3 class="block-title">3D-Design – Ausgangsmaterial</h3>
-            <label class="select-row">
-              <span>3D-Daten / Modelle vorhanden?</span>
+       <label class="select-row">
+              <span class="website-label">3D-Daten / Modelle vorhanden?</span>
               <select name="d3_daten">
                 <option value="">Bitte wählen</option>
                 <option value="vorhanden">Ja, vorhanden</option>
@@ -3185,17 +3184,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <!-- Grafik -->
           <div class="service-block" data-service="gfx">
-            <h3 class="block-title">Grafikdesign – Material & Branding</h3>
             <label class="select-row">
-              <span>Branding / Styleguide vorhanden?</span>
+              <span class="website-label">Branding / Styleguide vorhanden?</span>
               <select name="gfx_styleguide">
                 <option value="">Bitte wählen</option>
                 <option value="ja">Ja</option>
                 <option value="nein">Nein</option>
               </select>
             </label>
+
             <label class="select-row">
-              <span>Text-/Bildmaterial</span>
+              <span class="website-label">Text- / Bildmaterial</span>
               <select name="gfx_material">
                 <option value="">Bitte wählen</option>
                 <option value="alles">Alles vorhanden</option>
@@ -3206,15 +3205,14 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </fieldset>
 
-        <!-- STEP 3: Spezifische Ziele/Typen -->
+        <!-- STEP 3: Projektspezifikationen -->
         <fieldset class="form-step" data-step="3" aria-labelledby="step3Title">
           <legend id="step3Title" class="sr-only">Projektspezifikationen</legend>
 
           <!-- Web -->
           <div class="service-block" data-service="web">
-            <h3 class="block-title">Webdesign – Typ & Prioritäten</h3>
             <label class="select-row">
-              <span>Website-Typ</span>
+              <span class="website-label">Website-Typ</span>
               <select name="web_typ">
                 <option value="">Bitte wählen</option>
                 <option value="unternehmensseite">Unternehmensseite</option>
@@ -3227,19 +3225,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             <fieldset class="checkbox-group tags" aria-label="Besondere Schwerpunkte">
               <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Ladegeschwindigkeit" data-pills /><span>Ladegeschwindigkeit</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Responsiveness" data-pills /><span>Responsiveness</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="SEO" data-pills /><span>SEO</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Benutzerfreundlichkeit" data-pills /><span>Benutzerfreundlichkeit</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Designqualität" data-pills /><span>Designqualität</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Ladegeschwindigkeit" /><span>Ladegeschwindigkeit</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Responsiveness" /><span>Responsiveness</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="SEO" /><span>SEO</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Benutzerfreundlichkeit" /><span>Benutzerfreundlichkeit</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Designqualität" /><span>Designqualität</span></label>
             </fieldset>
           </div>
 
           <!-- 3D -->
           <div class="service-block" data-service="d3">
-            <h3 class="block-title">3D-Design – Ziel & Anwendung</h3>
             <label class="select-row">
-              <span>Was soll entstehen?</span>
+              <span class="website-label">Was soll entstehen?</span>
               <select name="d3_typ">
                 <option value="">Bitte wählen</option>
                 <option value="rendering">Rendering</option>
@@ -3249,8 +3246,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <option value="sonstiges">Sonstiges</option>
               </select>
             </label>
+
             <label class="select-row">
-              <span>Verwendungszweck</span>
+              <span class="website-label">Verwendungszweck</span>
               <select name="d3_use">
                 <option value="">Bitte wählen</option>
                 <option value="marketing">Marketing / Werbung</option>
@@ -3263,9 +3261,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <!-- Grafik -->
           <div class="service-block" data-service="gfx">
-            <h3 class="block-title">Grafikdesign – Typ & Prioritäten</h3>
             <label class="select-row">
-              <span>Design-Typ</span>
+              <span class="website-label">Design-Typ</span>
               <select name="gfx_typ">
                 <option value="">Bitte wählen</option>
                 <option value="logo">Logo</option>
@@ -3275,13 +3272,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 <option value="sonstiges">Sonstiges</option>
               </select>
             </label>
+
             <fieldset class="checkbox-group tags" aria-label="Prioritäten Grafikdesign">
               <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Brand-Konsistenz" data-pills /><span>Brand-Konsistenz</span></label>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Typografie" data-pills /><span>Typografie</span></label>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Druckvorbereitung" data-pills /><span>Druckvorbereitung</span></label>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Illustration" data-pills /><span>Illustration</span></label>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Schnelle Umsetzung" data-pills /><span>Schnelle Umsetzung</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Brand-Konsistenz" /><span>Brand-Konsistenz</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Typografie" /><span>Typografie</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Druckvorbereitung" /><span>Druckvorbereitung</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Illustration" /><span>Illustration</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Schnelle Umsetzung" /><span>Schnelle Umsetzung</span></label>
             </fieldset>
           </div>
         </fieldset>
@@ -3289,13 +3287,15 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- STEP 4: Zeit & Budget -->
         <fieldset class="form-step" data-step="4" aria-labelledby="step4Title">
           <legend id="step4Title" class="sr-only">Zeit & Budget</legend>
+
           <label class="input-row">
-            <span>Deadline oder Zeitraum</span>
+            <span class="website-label">Deadline / Zeitraum</span>
             <input type="text" name="deadline" placeholder="z. B. bis 15. November oder Q4" />
           </label>
+
           <label class="input-row">
-            <span>Budgetrahmen (optional)</span>
-            <input type="text" name="budget" placeholder="z. B. 3.000–6.000 €" />
+            <span class="website-label">Budgetrahmen (optional)</span>
+            <input type="text" name="budget" placeholder="z. B. 3 000–6 000 €" />
           </label>
         </fieldset>
 
@@ -3303,65 +3303,58 @@ document.addEventListener('DOMContentLoaded', () => {
         <fieldset class="form-step" data-step="5" aria-labelledby="step5Title">
           <legend id="step5Title" class="sr-only">Kontaktdaten</legend>
 
-          <!-- Hidden (nur gewünschte Felder) -->
           <input type="hidden" name="_subject" id="autoSubject" />
           <textarea class="sr-only" name="summary_plain" id="summaryPlain" aria-hidden="true"></textarea>
           <input type="hidden" name="selected_service" id="selectedService" />
 
-          <!-- Responsive Kontakt-Grid -->
           <div class="contact-grid">
-           <div class="field span-6">
-  <label for="name" class="req">Name</label>
-  <input id="name" type="text" name="name" placeholder="Dein Name" autocomplete="name" required />
-</div>
+            <div class="field span-6">
+              <label for="name" class="req">Name</label>
+              <input id="name" type="text" name="name" placeholder="Dein Name" autocomplete="name" required />
+            </div>
 
-<div class="field span-6">
-  <label for="email" class="req">E-Mail</label>
-  <input id="email" type="email" name="email" placeholder="dein@mail.de" autocomplete="email" required />
-</div>
+            <div class="field span-6">
+              <label for="email" class="req">E-Mail</label>
+              <input id="email" type="email" name="email" placeholder="dein@mail.de" autocomplete="email" required />
+            </div>
 
-<div class="field span-6">
-  <label for="phone">Telefon (optional)</label>
-  <input id="phone" type="tel" name="phone" placeholder="z. B. +49 151 12345678" autocomplete="tel" />
-</div>
+            <div class="field span-6">
+              <label for="phone">Telefon (optional)</label>
+              <input id="phone" type="tel" name="phone" placeholder="z. B. +49 151 12345678" autocomplete="tel" />
+            </div>
 
-<div class="field span-12">
-  <label for="message" class="req">Nachricht</label>
-  <textarea id="message" name="message" rows="6" placeholder="Kurz dein Projekt / Ziel beschreiben…" minlength="5" required></textarea>
-</div>
+            <div class="field span-12">
+              <label for="message" class="req">Nachricht</label>
+              <textarea id="message" name="message" rows="6" placeholder="Kurz dein Projekt / Ziel beschreiben …" minlength="5" required></textarea>
+            </div>
 
-<p class="req-note">* Pflichtfelder</p>
-
+            <p class="req-note">* Pflichtfelder</p>
           </div>
-          <p class="legal-hint">
-  Deine Angaben werden über <strong>Formspree</strong> zur Beantwortung deiner Anfrage verarbeitet.
-  Mehr unter <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.
-</p>
 
+          <p class="legal-hint">
+            Deine Angaben werden über <strong>Formspree</strong> zur Beantwortung deiner Anfrage verarbeitet.
+            Mehr unter <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.
+          </p>
         </fieldset>
 
-        <!-- STEP 6: Abschluss / Erfolg -->
+        <!-- STEP 6: Erfolg -->
         <fieldset class="form-step" data-step="6" aria-labelledby="step6Title">
           <legend id="step6Title" class="sr-only">Abschluss</legend>
           <div class="success-card" role="status" aria-live="polite">
             <h3 class="success-title">Geschafft! 🎉</h3>
-            <p class="success-copy">Vielen Dank für deine Anfrage <br> Wir melden uns in Kürze bei dir.</p>
+            <p class="success-copy">Vielen Dank für deine Anfrage. <br>Wir melden uns in Kürze bei dir.</p>
             <p class="success-sub">Du wirst gleich automatisch zum Start zurückgeführt …</p>
             <button type="button" class="success-btn" disabled>✅ Anfrage gesendet</button>
           </div>
         </fieldset>
 
-        <!-- === Progressbar === -->
+        <!-- === Fortschritt === -->
         <div class="stepper" aria-label="Fortschritt" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1">
-          <div class="stepper-header">
-            <span id="stepLabel">Schritt 1/6</span>
-          </div>
-          <div class="stepper-track">
-            <div class="stepper-fill" id="stepperFill" style="width:0%"></div>
-          </div>
+          <div class="stepper-header"><span id="stepLabel">Schritt 1 / 6</span></div>
+          <div class="stepper-track"><div class="stepper-fill" id="stepperFill" style="width:0%"></div></div>
         </div>
 
-        <!-- Wizard Navigation -->
+        <!-- === Navigation === -->
         <div class="wizard-nav" id="wizardNav">
           <button type="button" class="nav-btn prev" id="prevBtn" disabled>Zurück</button>
           <button type="button" class="nav-btn next" id="nextBtn" disabled>Weiter</button>
@@ -3370,29 +3363,23 @@ document.addEventListener('DOMContentLoaded', () => {
       </form>
     </div>
 
-    <!-- Videokarte -->
+    <!-- === Video-Karte === -->
     <div class="video-area" aria-label="Einblick in Prozess, Tools & Zusammenarbeit">
       <div class="video-card">
-        <video 
-          class="video-media"
-          autoplay 
-          loop 
-          muted 
-          playsinline 
-          preload="auto"
-        >
-          <source src="./indexFotoSlideShow/kartenvideo.mp4" type="video/mp4" />
+        <video class="video-media" autoplay loop muted playsinline preload="auto">
+          <source src="./indexFotoSlideShow/kartenvideo.mp4" type="video/mp4">
           Dein Browser unterstützt das Video-Tag nicht.
         </video>
       </div>
     </div>
 
-    <!-- Testimonials (volle Breite darunter) -->
+    <!-- === Testimonials === -->
     <div class="testimonial-area">
       <testimonial-slider></testimonial-slider>
     </div>
   </div>
 </section>
+
 <script>
 (function () {
   const form = document.getElementById('kontaktForm');

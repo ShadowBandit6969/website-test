@@ -845,3 +845,102 @@ label.req::after{
 .kontakt-form,
 .form-step,
 .grid-choices { overflow: visible; }
+/* === Angleichen: Spans wie Checkbox-Legends === */
+span.website-label,
+.tags span.label-like-legend,
+.form-step span.website-label,
+.form-step .block-title span,
+.form-step .field > span {
+  display: block;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-size: 1.04rem; /* identisch zu .block-title / .checkbox-legend */
+  margin-bottom: .15rem;
+  color: var(--aur-ink);
+  text-shadow: var(--aur-shadow-light);
+}
+
+/* Dark Mode Angleichen */
+:root[data-theme="dark"] span.website-label,
+:root[data-theme="dark"] .tags span.label-like-legend,
+:root[data-theme="dark"] .form-step span.website-label,
+:root[data-theme="dark"] .form-step .block-title span,
+:root[data-theme="dark"] .form-step .field > span {
+  color: #f5f7fa;
+  text-shadow: none;
+}
+/* Reset für native <legend>, damit beide identisch wirken */
+legend.checkbox-legend {
+  display: block;
+  padding: 0;
+  border: 0;
+}
+
+/* 1:1 Angleichen: alles mit .checkbox-legend (egal ob legend oder span) */
+legend.checkbox-legend,
+span.checkbox-legend {
+  display: block;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-size: clamp(1rem, .96rem + .35vw, 1.12rem);
+  line-height: 1.3;
+  margin: .1rem 0 .35rem;
+  color: var(--aur-ink);
+  text-shadow: var(--aur-shadow-light);
+}
+
+/* Dark Mode */
+:root[data-theme="dark"] legend.checkbox-legend,
+:root[data-theme="dark"] span.checkbox-legend {
+  color: #f5f7fa;
+  text-shadow: none;
+}
+/* ====== FIX: Checkbox-Groups (Tags) ohne schwarze Outline ====== */
+.checkbox-group,
+fieldset.checkbox-group.tags {
+  border: none !important;         /* entfernt schwarze Linie */
+  padding: 0 !important;           /* kein extra Innenabstand */
+  margin: 0 !important;            /* bündig mit restlichem Layout */
+  min-inline-size: 0;              /* verhindert Chrome-Mindestbreite */
+}
+
+/* sorgt für sauberen vertikalen Rhythmus */
+.checkbox-group .checkbox-legend,
+fieldset.checkbox-group.tags .checkbox-legend {
+  margin-bottom: .35rem !important;
+}
+
+/* optional: leichte visuelle Trennung nach oben */
+fieldset.checkbox-group.tags:not(:first-child) {
+  margin-top: .4rem !important;
+}
+
+/* ====== Website-Label & Checkbox-Legend – einheitlich typografisch + Abstand ====== */
+span.website-label,
+legend.checkbox-legend,
+span.checkbox-legend {
+  display: block;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-size: clamp(1rem, .96rem + .35vw, 1.12rem);
+  line-height: 1.3;
+  color: var(--aur-ink);
+  text-shadow: var(--aur-shadow-light);
+
+  /* Luft über jedem Label / Abschnitt */
+  margin-top: clamp(0.9rem, 1.4vw, 1.4rem) !important;
+  margin-bottom: .35rem !important;
+}
+
+/* ====== Dark Mode ====== */
+:root[data-theme="dark"] span.website-label,
+:root[data-theme="dark"] legend.checkbox-legend,
+:root[data-theme="dark"] span.checkbox-legend {
+  color: #f5f7fa;
+  text-shadow: none;
+}
+/* Mehr Abstand nach oben – überschreibt margin:0 !important */
+.service-block > fieldset.checkbox-group.tags,
+.service-block[data-service] > fieldset.checkbox-group.tags {
+  margin-top: clamp(1rem, 1.8vw, 1.6rem) !important;
+}
