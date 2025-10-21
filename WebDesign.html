@@ -1008,7 +1008,7 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 <section id="aurora-sheet" class="aurora-sheet container" aria-labelledby="aurora-crown" aria-describedby="aurora-chant">
-  <h2 id="aurora-crown" class="aurora-title">Über Fusion3</h2>
+<h2 id="aurora-crown" class="aurora-title" data-anim-aurora>Über Fusion3</h2>
 
   <p id="aurora-chant" class="aurora-subtitle" aria-live="polite">
     <span class="subtitle-snippet">Design, 3D &amp; Web – prägnant kombiniert für maximale Markenwirkung.</span>
@@ -1377,7 +1377,263 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 })();
 </script>
+<script>
+(function () {
+  // Mini-Helper: DOM ready
+  function onReady(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
 
+  // Visually hidden Utility-Klasse für SR-Text (falls nicht vorhanden, fügen wir sie zur Not dynamisch ein)
+  function ensureSRStyleOnce() {
+    if (document.getElementById('sr-only-style')) return;
+    const style = document.createElement('style');
+    style.id = 'sr-only-style';
+    style.textContent =
+      '.visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;}';
+    document.head.appendChild(style);
+  }
+
+  // Split-Funktion für H3 – idempotent & a11y-freundlich
+  function splitTitle(h3) {
+    if (!h3 || h3.dataset.split === '1') {
+      // schon gesplittet
+      const words = h3 ? h3.querySelectorAll(':scope .word') : [];
+      const chars = h3 ? h3.querySelectorAll(':scope .char') : [];
+      return { words: Array.from(words), chars: Array.from(chars) };
+    }
+
+    ensureSRStyleOnce();
+
+    const plain = (h3.textContent || '').trim().replace(/\s+/g, ' ');
+    h3.textContent = '';
+
+    // SR-Clone mit Originaltext
+    const sr = document.createElement('span');
+    sr.className = 'visually-hidden';
+    sr.textContent = plain;
+    h3.appendChild(sr);
+
+    // Wrapper mit aria-hidden für animierte Glyphen
+    const aniWrap = document.createElement('span');
+    aniWrap.className = 'title-anim-wrap';
+    aniWrap.setAttribute('aria-hidden', 'true');
+    h3.appendChild(aniWrap);
+
+    const words = [];
+    const chars = [];
+
+    plain.split(' ').forEach((w, i) => {
+      const word = document.createElement('span');
+      word.className = 'word';
+      const wrap = document.createElement('span');
+      wrap.className = 'chars';
+
+      // einzelne Zeichen
+      for (const ch of w) {
+        const c = document.createElement('span');
+        c.className = 'char';
+        c.textContent = ch;
+        wrap.appendChild(c);
+        chars.push(c);
+      }
+
+      word.appendChild(wrap);
+      aniWrap.appendChild(word);
+      words.push(word);
+
+      if (i < plain.split(' ').length - 1) {
+        aniWrap.appendChild(document.createTextNode(' '));
+      }
+    });
+
+    h3.dataset.split = '1';
+    return { words, chars };
+  }
+
+  // Fallback-Reveal via IntersectionObserver (ohne GSAP)
+  function fallbackReveal(cards) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-revealed');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    cards.forEach((card) => obs.observe(card));
+  }
+
+  onReady(function () {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cards = Array.from(document.querySelectorAll('#aurora-sheet .aether-card'));
+    if (!cards.length) return;
+
+    // Wenn GSAP/ScrollTrigger fehlen, auf Fallback gehen
+    const hasGSAP = !!window.gsap;
+    const hasST = !!window.ScrollTrigger;
+
+    if (reduceMotion || !hasGSAP || !hasST) {
+      // Minimal bewegte oder gar keine Animationen, a11y bleibt
+      cards.forEach((card) => {
+        const h3 = card.querySelector('h3');
+        if (h3) splitTitle(h3); // für konsistente Darstellung (kein Jump), auch ohne Animation
+        card.style.transition = 'opacity 200ms ease-out, transform 200ms ease-out';
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(8px)';
+      });
+
+      // Reveal/Fade per IO
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+            el.classList.add('is-revealed');
+            io.unobserve(el);
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+
+      cards.forEach((c) => io.observe(c));
+      // Exit hier – kein GSAP
+      return;
+    }
+
+    // --- GSAP Pfad ---
+    const gsap = window.gsap;
+    const ScrollTrigger = window.ScrollTrigger;
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Cleanup bei Navigationswechsel/Hot-Reload
+    function killAll() {
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+      gsap.killTweensOf('*');
+    }
+    window.addEventListener('pagehide', killAll);
+    window.addEventListener('beforeunload', killAll);
+
+    const mm = gsap.matchMedia();
+
+    mm.add(
+      {
+        // einfache Breakpoints – anpassbar
+        isMobile: '(max-width: 699.98px)',
+        isTablet: '(min-width: 700px) and (max-width: 1023.98px)',
+        isDesktop: '(min-width: 1024px)',
+      },
+      (ctx) => {
+        const { isMobile } = ctx.conditions;
+
+        cards.forEach((card) => {
+          const h3 = card.querySelector('h3');
+          if (!h3) return;
+
+          // Split (idempotent & a11y)
+          const { words, chars } = splitTitle(h3);
+
+          const snippet = card.querySelector('.snippet');
+          const tsnippet = card.querySelector('.t-snippet');
+          const microtag = card.querySelector('.microtag');
+          const deltas = Array.from(card.querySelectorAll('.delta-list li'));
+
+          // Startposition je nach Viewport leicht anders
+          const startY = isMobile ? 14 : 16;
+          const charYMin = isMobile ? 14 : 18;
+          const charYMax = isMobile ? 36 : 50;
+
+          const tl = gsap.timeline({
+            defaults: { ease: 'power2.out' },
+            scrollTrigger: {
+              trigger: card,
+              start: isMobile ? 'top 78%' : 'top 72%',
+              once: true,
+              // kleine Performance-Verbesserungen
+              fastScrollEnd: true,
+            },
+          });
+
+          // Grundkarte
+          tl.from(card, { opacity: 0, y: startY, duration: 0.28 });
+
+          // Wörter rein sliden
+          if (words.length) {
+            tl.from(
+              words,
+              {
+                yPercent: 120,
+                duration: 0.44,
+                ease: 'power3.out',
+                stagger: { each: 0.06 },
+              },
+              '-=0.12'
+            );
+          }
+
+          // Buchstaben organisch floaten
+          if (chars.length) {
+            gsap.set(chars, {
+              y: () => gsap.utils.random(charYMin, charYMax),
+              x: () => gsap.utils.random(-10, 10),
+              rotation: () => gsap.utils.random(-18, 18),
+              opacity: 0,
+              willChange: 'transform, opacity',
+            });
+
+            tl.to(
+              chars,
+              {
+                y: 0,
+                x: 0,
+                rotation: 0,
+                opacity: 1,
+                duration: 0.55,
+                ease: 'back.out(1.7)',
+                stagger: { each: 0.013 },
+              },
+              '<0.03'
+            ).add(() => {
+              // will-change wieder zurücksetzen
+              gsap.set(chars, { clearProps: 'willChange' });
+            }, '>');
+          }
+
+          // Textblöcke
+          const blocks = [snippet, tsnippet, microtag].filter(Boolean);
+          blocks.forEach((el, i) => {
+            tl.from(el, { opacity: 0, y: 10, duration: 0.32 }, i === 0 ? '+=0.04' : '+=0.06');
+          });
+
+          // Bullet-Items
+          if (deltas.length) {
+            tl.from(
+              deltas,
+              {
+                opacity: 0,
+                y: 8,
+                duration: 0.26,
+                stagger: { each: 0.06 },
+              },
+              '+=0.02'
+            );
+          }
+        });
+
+        // Force refresh, falls Fonts/Images verspätet laden
+        const refresh = () => ScrollTrigger.refresh();
+        window.addEventListener('load', refresh, { once: true });
+        // kleine Verzögerung für FOIT/FOFT-Fälle
+        setTimeout(refresh, 400);
+      }
+    );
+
+    // Fallback (nur falls später GSAP entladen würde – sehr unwahrscheinlich)
+    // ansonsten nicht nötig
+  });
+})();
+</script>
 
 
 
@@ -1389,16 +1645,15 @@ body[data-page="webdesign"] .hero-image-foreground {
     Kreative, performante und nutzerorientierte Websites – von der Idee bis zum Launch.
   </p>
 
-  <!-- Als echte Liste mit aria-Verknüpfungen -->
   <ul class="orbit-grid" aria-labelledby="nebula-hub-h" aria-describedby="nebula-hub-sub">
 
     <!-- Konzept & Strategie -->
-    <li class="module-card" id="svc-strategy"
-        aria-labelledby="svc-strategy-h"
-        aria-describedby="svc-strategy-s">
+    <li class="module-card" id="svc-webdesign"
+        aria-labelledby="svc-webdesign-h"
+        aria-describedby="svc-webdesign-s">
       <div class="payload">
-        <h3 id="svc-strategy-h">Konzept &amp; Strategie</h3>
-        <p class="card-snippet" id="svc-strategy-s">
+        <h3 id="svc-webdesign-h">Konzept &amp; Strategie</h3>
+        <p class="card-snippet" id="svc-webdesign-s">
           Wir entwickeln eine klare Informationsarchitektur und ein passendes Nutzungserlebnis.
         </p>
         <ul>
@@ -1412,12 +1667,12 @@ body[data-page="webdesign"] .hero-image-foreground {
     </li>
 
     <!-- UI/UX Design -->
-    <li class="module-card stellar-3d" id="svc-uiux"
-        aria-labelledby="svc-uiux-h"
-        aria-describedby="svc-uiux-s">
+    <li class="module-card stellar-3d" id="svc-3d"
+        aria-labelledby="svc-3d-h"
+        aria-describedby="svc-3d-s">
       <div class="payload">
-        <h3 id="svc-uiux-h">UI / UX Design</h3>
-        <p class="card-snippet" id="svc-uiux-s">
+        <h3 id="svc-3d-h">UI / UX Design</h3>
+        <p class="card-snippet" id="svc-3d-s">
           Benutzerfreundliche Oberflächen mit klarer Ästhetik und intuitiver Bedienung.
         </p>
 
@@ -1456,12 +1711,12 @@ body[data-page="webdesign"] .hero-image-foreground {
     </li>
 
     <!-- Webentwicklung -->
-    <li class="module-card" id="svc-dev"
-        aria-labelledby="svc-dev-h"
-        aria-describedby="svc-dev-s">
+    <li class="module-card" id="svc-grafik"
+        aria-labelledby="svc-grafik-h"
+        aria-describedby="svc-grafik-s">
       <div class="payload">
-        <h3 id="svc-dev-h">Webentwicklung</h3>
-        <p class="card-snippet" id="svc-dev-s">
+        <h3 id="svc-grafik-h">Webentwicklung</h3>
+        <p class="card-snippet" id="svc-grafik-s">
           Sauberer Code, schnelle Ladezeiten und moderne Technologien für langlebige Websites.
         </p>
 
@@ -1488,30 +1743,152 @@ body[data-page="webdesign"] .hero-image-foreground {
       </div>
     </li>
 
-<!-- Performance / Technik & Wartung -->
-<li class="module-card" id="svc-hosting"
-    aria-labelledby="svc-hosting-h"
-    aria-describedby="svc-hosting-s">
-  <div class="payload">
-    <h3 id="svc-hosting-h">Performance &amp; Wartung</h3>
-    <p class="card-snippet" id="svc-hosting-s">
-      Wir sorgen dafür, dass deine Website schnell, sicher und technisch aktuell bleibt.
-    </p>
+    <!-- Performance / Technik & Wartung -->
+    <li class="module-card" id="svc-social"
+        aria-labelledby="svc-social-h"
+        aria-describedby="svc-social-s">
+      <div class="payload">
+        <h3 id="svc-social-h">Performance &amp; Wartung</h3>
+        <p class="card-snippet" id="svc-social-s">
+          Wir sorgen dafür, dass deine Website schnell, sicher und technisch aktuell bleibt.
+        </p>
 
-    <ul>
-      <li>Core Web Vitals &amp; Ladezeiten-Optimierung</li>
-      <li>Technisches SEO &amp; Monitoring</li>
-      <li>Wartung &amp; Updates</li>
-      <li>Server-Setup &amp; Hosting-Beratung</li>
-    </ul>
+        <ul>
+          <li>Core Web Vitals &amp; Ladezeiten-Optimierung</li>
+          <li>Technisches SEO &amp; Monitoring</li>
+          <li>Wartung &amp; Updates</li>
+          <li>Server-Setup &amp; Hosting-Beratung</li>
+        </ul>
 
-    <a href="./Wartung.html" class="warp-cta" aria-label="Mehr über Performance, Technik und Wartung erfahren">Mehr erfahren</a>
-  </div>
-</li>
-
+        <a href="./Wartung.html" class="warp-cta" aria-label="Mehr über Performance, Technik und Wartung erfahren">Mehr erfahren</a>
+      </div>
+    </li>
 
   </ul>
 </section>
+<!-- 1) GSAP laden (vor unseren Helfern) -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+
+<!-- 3) Unser Helfer (F3Animations) -->
+<script>
+(function(){
+  const hasGSAP = () => !!(window.gsap && window.ScrollTrigger);
+  const prefersReduce = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function splitText(el, {chars=true} = {}){
+    if(!el) return {words:[], chars:[]};
+    /* Guard: nicht doppelt splitten */
+    if (el.querySelector('.word')) {
+      return {
+        words: Array.from(el.querySelectorAll('.word')),
+        chars: chars ? Array.from(el.querySelectorAll('.char')) : []
+      };
+    }
+    const original = (el.textContent||'').trim().replace(/\s+/g,' ');
+    el.textContent = '';
+    const words = original.split(' ');
+    const charsArr = [];
+    words.forEach((w,i)=>{
+      const word = document.createElement('span'); word.className = 'word';
+      const wrap = document.createElement('span'); wrap.className = 'chars';
+      [...w].forEach(ch=>{
+        const c = document.createElement('span'); c.className = 'char'; c.textContent = ch;
+        wrap.appendChild(c); charsArr.push(c);
+      });
+      word.appendChild(wrap); el.appendChild(word);
+      if(i < words.length-1) el.appendChild(document.createTextNode(' '));
+    });
+    return { words: Array.from(el.querySelectorAll('.word')), chars: chars ? charsArr : [] };
+  }
+
+  const PRESETS = {
+    express:   { wordDur:.44, wordEase:'power3.out', wordStagger:.06, charDur:0,   start:"top 72%" },
+    signature: { wordDur:.48, wordEase:'power3.out', wordStagger:.06, charDur:.60, charEase:'back.out(1.8)', charStagger:.015, charRand:{y:[20,60], x:[-10,10], rot:[-20,20]}, start:"top 70%" },
+    ultraclean:{ wordDur:.38, wordEase:'power2.out', wordStagger:.05, charDur:0,   start:"top 70%" }
+  };
+
+  function setupHeadline(selector, preset='signature'){
+    if(!hasGSAP() || prefersReduce()) return;
+    const opts = {...PRESETS[preset]};
+    gsap.registerPlugin(ScrollTrigger);
+    const el = document.querySelector(selector);
+    if(!el) return;
+    const {words, chars} = splitText(el, {chars: opts.charDur>0});
+    const tl = gsap.timeline({ scrollTrigger:{ trigger: el, start: opts.start, once: true } });
+    tl.from(words, { yPercent:120, duration:opts.wordDur, ease:opts.wordEase, stagger:{ each:opts.wordStagger } });
+    if(opts.charDur>0 && chars.length){
+      const r = (a,b)=> gsap.utils.random(a,b);
+      gsap.set(chars, {
+        y:()=>r(opts.charRand.y[0],opts.charRand.y[1]),
+        x:()=>r(opts.charRand.x[0],opts.charRand.x[1]),
+        rotation:()=>r(opts.charRand.rot[0],opts.charRand.rot[1]),
+        opacity:0
+      });
+      tl.to(chars, {
+        y:0, x:0, rotation:0, opacity:1,
+        duration:opts.charDur, ease:opts.charEase, stagger:{ each:opts.charStagger }
+      }, "<0.05");
+    }
+    return tl;
+  }
+
+  function setupCards(sectionSelector, preset='express', contentStagger=.06){
+    if(!hasGSAP() || prefersReduce()) return;
+    const opts = {...PRESETS[preset]};
+    gsap.registerPlugin(ScrollTrigger);
+    const cards = document.querySelectorAll(`${sectionSelector} .aether-card, ${sectionSelector} .module-card`);
+    cards.forEach(card=>{
+      const h3 = card.querySelector('h3');
+      const tl = gsap.timeline({ scrollTrigger:{ trigger: card, start:"top 74%", once:true } });
+      tl.from(card, {opacity:0, y:16, duration:.26, ease:"power2.out"}).to(card, {scale:1, duration:.12, ease:"power2.out"}, "<");
+      if(h3){
+        const {words, chars} = splitText(h3, {chars: opts.charDur>0});
+        tl.from(words, {
+          yPercent:120, duration:Math.max(.36, opts.wordDur-.06),
+          ease:opts.wordEase, stagger:{ each:Math.min(.06, opts.wordStagger) }
+        }, "-=0.08");
+        if(opts.charDur>0 && chars.length){
+          gsap.set(chars, {
+            y:()=>gsap.utils.random(16,42),
+            x:()=>gsap.utils.random(-8,8),
+            rotation:()=>gsap.utils.random(-16,16),
+            opacity:0
+          });
+          tl.to(chars, {
+            y:0, x:0, rotation:0, opacity:1,
+            duration:Math.max(.48, opts.charDur-.1),
+            ease:'back.out(1.6)', stagger:{ each:Math.min(.013, (opts.charStagger||.013)) }
+          }, "<0.03");
+        }
+      }
+      const snippet  = card.querySelector('.snippet, .card-snippet');
+      const tsnippet = card.querySelector('.t-snippet');
+      const microtag = card.querySelector('.microtag');
+      const bullets  = card.querySelectorAll('.delta-list li, .payload > ul > li');
+      [snippet, tsnippet, microtag].forEach((el,i)=>{
+        if(!el) return;
+        tl.from(el, {opacity:0, y:10, duration:.32, ease:"power2.out"}, `+=${i?contentStagger:0.04}`);
+      });
+      if(bullets.length){
+        tl.from(bullets, {opacity:0, y:8, duration:.26, ease:"power2.out", stagger:{ each:Math.min(.07, contentStagger) }}, "+=0.02");
+      }
+    });
+  }
+
+  window.F3Animations = { setupHeadline, setupCards, PRESETS };
+})();
+</script>
+
+<!-- 4) Jetzt ERST aufrufen -->
+<script>
+  F3Animations.setupHeadline('#nebula-hub .headline', 'signature');
+  F3Animations.setupCards('#nebula-hub', 'express');
+</script>
+
+
+
 
 
 
@@ -2512,6 +2889,10 @@ body[data-page="webdesign"] .hero-image-foreground {
   }
 })();
 </script>
+
+
+
+
 
 
 
