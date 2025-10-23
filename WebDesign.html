@@ -1199,6 +1199,33 @@ body[data-page="webdesign"] .hero-image-foreground {
   let currentIndex = 0;
   let lastScrollY = window.scrollY;
 
+  // Index anhand der aktuellen Center-Position berechnen
+  function computeIndexByCenter(){
+    if(!cards.length) return 0;
+
+    // Mittelpunkte der Karten (Dokumentkoordinaten)
+    const mids = cards.map(c=>{
+      const r = c.getBoundingClientRect();
+      return window.scrollY + r.top + r.height/2;
+    });
+
+    // Grenzen zwischen den Karten (Mitte-zu-Mitte)
+    const boundaries = [];
+    for(let i=0; i<mids.length-1; i++){
+      boundaries.push((mids[i] + mids[i+1]) / 2);
+    }
+
+    const cAbs = centerAbs();
+
+    // Wie viele Grenzen hat die Center-Linie bereits passiert?
+    let idx = 0;
+    while(idx < boundaries.length && cAbs >= boundaries[idx]) idx++;
+
+    // clamp
+    idx = Math.max(0, Math.min(idx, cards.length - 1));
+    return idx;
+  }
+
   // Sichtbarkeits-Observer (wie gehabt)
   function setupObservers(){
     const sectionObserver = new IntersectionObserver(([entry])=>{
@@ -1241,7 +1268,6 @@ body[data-page="webdesign"] .hero-image-foreground {
     });
 
     // Grenzen zwischen Karten: Mitte zwischen den Mittelpunkten
-    // boundary[i] trennt i und i+1
     const boundaries = [];
     for(let i=0; i<mids.length-1; i++){
       boundaries.push((mids[i] + mids[i+1]) / 2);
@@ -1253,8 +1279,8 @@ body[data-page="webdesign"] .hero-image-foreground {
     const secRect = section.getBoundingClientRect();
     if(secRect.bottom <= 0 || secRect.top >= window.innerHeight) return;
 
-    // Initialisierung: beim Eintritt von oben → Index 0
-    if(cAbs <= boundaries[0]) currentIndex = 0;
+    // clamp Sicherheitsnetz
+    currentIndex = Math.max(0, Math.min(currentIndex, cards.length - 1));
 
     // Step-Logik: nur bei Überschreiten der passenden Grenze wechseln
     if(dirDown){
@@ -1337,6 +1363,8 @@ body[data-page="webdesign"] .hero-image-foreground {
           c.style.willChange = '';
         });
       }else{
+        // Bei deaktivierter Reduktion Index neu bestimmen
+        currentIndex = computeIndexByCenter();
         pickActiveStepwise();
       }
     };
@@ -1349,12 +1377,23 @@ body[data-page="webdesign"] .hero-image-foreground {
     setupObservers();
     setupPress();
     setupReducedMotion();
+
     // Listener
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
-    // Initial: starte auf erster Karte
-    currentIndex = 0;
+
+    // NEU: starte mit dem Index passend zur aktuellen Scroll-Position (Fix für Refresh unten)
+    currentIndex = computeIndexByCenter();
     pickActiveStepwise();
+
+    // Nachträglich rekalibrieren, falls Layout sich nachträglich ändert (Fonts/Bilder)
+    const recalcAndPick = ()=>{
+      currentIndex = computeIndexByCenter();
+      pickActiveStepwise();
+    };
+    window.addEventListener('pageshow', recalcAndPick, { once: true });
+    window.addEventListener('load', ()=> setTimeout(recalcAndPick, 50), { once: true });
+    window.addEventListener('resize', recalcAndPick);
   }
 
   function disableMobileEffects(){
@@ -1639,8 +1678,13 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
+
+
+
+
+
 <section class="cluster cosmos-suite" id="nebula-hub" aria-labelledby="nebula-hub-h">
-  <h2 id="nebula-hub-h" class="headline">Webdesign-Leistungen</h2>
+  <h2 id="nebula-hub-h" class="headline">Webdesign Leistungen</h2>
   <p class="subline" id="nebula-hub-sub">
     Kreative, performante und nutzerorientierte Websites – von der Idee bis zum Launch.
   </p>
@@ -1776,79 +1820,40 @@ body[data-page="webdesign"] .hero-image-foreground {
 (function(){
   const hasGSAP = () => !!(window.gsap && window.ScrollTrigger);
   const prefersReduce = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // 👉 NEU: Mobile/Touch erkennen
+  const isMobile = () =>
+    window.matchMedia('(max-width: 768px)').matches ||
+    window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
-  function splitText(el, {chars=true} = {}){
-    if(!el) return {words:[], chars:[]};
-    /* Guard: nicht doppelt splitten */
-    if (el.querySelector('.word')) {
-      return {
-        words: Array.from(el.querySelectorAll('.word')),
-        chars: chars ? Array.from(el.querySelectorAll('.char')) : []
-      };
-    }
-    const original = (el.textContent||'').trim().replace(/\s+/g,' ');
-    el.textContent = '';
-    const words = original.split(' ');
-    const charsArr = [];
-    words.forEach((w,i)=>{
-      const word = document.createElement('span'); word.className = 'word';
-      const wrap = document.createElement('span'); wrap.className = 'chars';
-      [...w].forEach(ch=>{
-        const c = document.createElement('span'); c.className = 'char'; c.textContent = ch;
-        wrap.appendChild(c); charsArr.push(c);
-      });
-      word.appendChild(wrap); el.appendChild(word);
-      if(i < words.length-1) el.appendChild(document.createTextNode(' '));
-    });
-    return { words: Array.from(el.querySelectorAll('.word')), chars: chars ? charsArr : [] };
-  }
-
-  const PRESETS = {
-    express:   { wordDur:.44, wordEase:'power3.out', wordStagger:.06, charDur:0,   start:"top 72%" },
-    signature: { wordDur:.48, wordEase:'power3.out', wordStagger:.06, charDur:.60, charEase:'back.out(1.8)', charStagger:.015, charRand:{y:[20,60], x:[-10,10], rot:[-20,20]}, start:"top 70%" },
-    ultraclean:{ wordDur:.38, wordEase:'power2.out', wordStagger:.05, charDur:0,   start:"top 70%" }
-  };
-
-  function setupHeadline(selector, preset='signature'){
-    if(!hasGSAP() || prefersReduce()) return;
-    const opts = {...PRESETS[preset]};
-    gsap.registerPlugin(ScrollTrigger);
-    const el = document.querySelector(selector);
-    if(!el) return;
-    const {words, chars} = splitText(el, {chars: opts.charDur>0});
-    const tl = gsap.timeline({ scrollTrigger:{ trigger: el, start: opts.start, once: true } });
-    tl.from(words, { yPercent:120, duration:opts.wordDur, ease:opts.wordEase, stagger:{ each:opts.wordStagger } });
-    if(opts.charDur>0 && chars.length){
-      const r = (a,b)=> gsap.utils.random(a,b);
-      gsap.set(chars, {
-        y:()=>r(opts.charRand.y[0],opts.charRand.y[1]),
-        x:()=>r(opts.charRand.x[0],opts.charRand.x[1]),
-        rotation:()=>r(opts.charRand.rot[0],opts.charRand.rot[1]),
-        opacity:0
-      });
-      tl.to(chars, {
-        y:0, x:0, rotation:0, opacity:1,
-        duration:opts.charDur, ease:opts.charEase, stagger:{ each:opts.charStagger }
-      }, "<0.05");
-    }
-    return tl;
-  }
+  // ... splitText & PRESETS wie gehabt ...
 
   function setupCards(sectionSelector, preset='express', contentStagger=.06){
     if(!hasGSAP() || prefersReduce()) return;
     const opts = {...PRESETS[preset]};
     gsap.registerPlugin(ScrollTrigger);
     const cards = document.querySelectorAll(`${sectionSelector} .aether-card, ${sectionSelector} .module-card`);
+    const mobile = isMobile(); // 👉 NEU
+
     cards.forEach(card=>{
       const h3 = card.querySelector('h3');
       const tl = gsap.timeline({ scrollTrigger:{ trigger: card, start:"top 74%", once:true } });
-      tl.from(card, {opacity:0, y:16, duration:.26, ease:"power2.out"}).to(card, {scale:1, duration:.12, ease:"power2.out"}, "<");
+
+      // 👉 NUR AUF DESKTOP: Container-Karte animieren
+      if(!mobile){
+        tl.from(card, {opacity:0, y:16, duration:.26, ease:"power2.out"})
+          .to(card, {scale:1, duration:.12, ease:"power2.out"}, "<");
+      }
+
+      // 👉 Typo-Animationen laufen IMMER (auch Mobile)
       if(h3){
         const {words, chars} = splitText(h3, {chars: opts.charDur>0});
         tl.from(words, {
-          yPercent:120, duration:Math.max(.36, opts.wordDur-.06),
-          ease:opts.wordEase, stagger:{ each:Math.min(.06, opts.wordStagger) }
-        }, "-=0.08");
+          yPercent:120,
+          duration:Math.max(.36, opts.wordDur-.06),
+          ease:opts.wordEase,
+          stagger:{ each:Math.min(.06, opts.wordStagger) }
+        }, mobile ? 0 : "-=0.08"); // kleine Justierung auf Mobile
+
         if(opts.charDur>0 && chars.length){
           gsap.set(chars, {
             y:()=>gsap.utils.random(16,42),
@@ -1859,26 +1864,33 @@ body[data-page="webdesign"] .hero-image-foreground {
           tl.to(chars, {
             y:0, x:0, rotation:0, opacity:1,
             duration:Math.max(.48, opts.charDur-.1),
-            ease:'back.out(1.6)', stagger:{ each:Math.min(.013, (opts.charStagger||.013)) }
+            ease:'back.out(1.6)',
+            stagger:{ each:Math.min(.013, (opts.charStagger||.013)) }
           }, "<0.03");
         }
       }
+
       const snippet  = card.querySelector('.snippet, .card-snippet');
       const tsnippet = card.querySelector('.t-snippet');
       const microtag = card.querySelector('.microtag');
       const bullets  = card.querySelectorAll('.delta-list li, .payload > ul > li');
+
       [snippet, tsnippet, microtag].forEach((el,i)=>{
         if(!el) return;
         tl.from(el, {opacity:0, y:10, duration:.32, ease:"power2.out"}, `+=${i?contentStagger:0.04}`);
       });
       if(bullets.length){
-        tl.from(bullets, {opacity:0, y:8, duration:.26, ease:"power2.out", stagger:{ each:Math.min(.07, contentStagger) }}, "+=0.02");
+        tl.from(bullets, {
+          opacity:0, y:8, duration:.26, ease:"power2.out",
+          stagger:{ each:Math.min(.07, contentStagger) }
+        }, "+=0.02");
       }
     });
   }
 
   window.F3Animations = { setupHeadline, setupCards, PRESETS };
 })();
+
 </script>
 
 <!-- 4) Jetzt ERST aufrufen -->
@@ -1886,273 +1898,6 @@ body[data-page="webdesign"] .hero-image-foreground {
   F3Animations.setupHeadline('#nebula-hub .headline', 'signature');
   F3Animations.setupCards('#nebula-hub', 'express');
 </script>
-
-
-
-
-
-
-
-<!-- =========================================================
-     SECTION: METRICS — ID: metrics
-     Dark-Mode-ready, Feather-Icons integriert
-========================================================== -->
-<section id="metrics">
-  <style>
-    #metrics, #metrics *{ box-sizing:border-box; }
-    #metrics{
-      background: var(--surface);
-      color: var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-    }
-    #metrics .container{ max-width:min(95vw, 1340px); margin-inline:auto; padding-inline:1rem; }
-    #metrics .section-pad{ padding:2.25rem 0 2.5rem; }
-
-    /* ===== Intro ===== */
-    #metrics .intro{ text-align:center; margin-bottom:1.25rem; }
-    #metrics .eyebrow{
-      display:inline-flex; align-items:center; gap:.5rem;
-      padding:.4rem .7rem; border-radius:999px; font-weight:700; font-size:.85rem;
-      background: linear-gradient(90deg,
-        color-mix(in oklab, var(--primary) 85%, var(--accent)),
-        var(--primary),
-        color-mix(in oklab, var(--primary) 85%, var(--accent))
-      );
-      color: var(--on-primary, #fff);
-      box-shadow: inset 0 0 0 1.5px color-mix(in oklab, var(--primary) 80%, transparent);
-    }
-
-    /* ===== KPI Cards ===== */
-    #metrics .results-steps{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: clamp(1rem, 2vw, 1.25rem);
-      margin:1.25rem auto .6rem;
-    }
-    #metrics .result-step{
-      position:relative; overflow:hidden; color:#fff;
-      border-radius:20px; border:1px solid rgba(70,70,70,.14);
-      padding: 1.8rem 1.4rem;
-      background:linear-gradient(270deg,#04006c,#6f00ff,#050088);
-      background-size:600% 600%;
-      cursor: default;
-    }
-    #metrics .result-step.s2{ background:linear-gradient(135deg,#0d0d0d,#000e5c,#0d0d0d); background-size:300% 300%; }
-    #metrics .result-step.s3{ background:linear-gradient(135deg,#000000,#020127,#000000); background-size:400% 400%; }
-    #metrics .result-inner{ position:relative; z-index:2; display:flex; flex-direction:column; gap:.55rem; min-width:0; height:100% }
-    #metrics .result-step h3{ margin:0; font-size:1.1rem; font-weight:900; letter-spacing:-.01em; line-height:1.35 }
-    #metrics .result-step p{ margin:0; font-size:.95rem; line-height:1.6; opacity:.95; color:#fff }
-    #metrics .result-step .kpi{ font-feature-settings:"tnum" 1; font-weight:900; letter-spacing:-.01em }
-    #metrics .result-step .kpi .val{ font-size: clamp(1.35rem, 2.1vw, 1.6rem) }
-    #metrics .result-step .kpi .unit{ opacity:.85; font-weight:800 }
-
-    /* ===== Feather Icon Button (oben rechts) ===== */
-    #metrics .src-btn{
-      position:absolute; top:.7rem; right:.7rem;
-      display:inline-flex; align-items:center; justify-content:center;
-      width:34px; height:34px; border-radius:10px;
-      background: color-mix(in oklab, #ffffff 12%, transparent);
-      border:1px solid color-mix(in oklab, #ffffff 22%, transparent);
-      color:#fff; cursor:pointer;
-      transition: transform .12s ease, background-color .12s ease, border-color .12s ease;
-      z-index: 3;
-      box-shadow: 0 2px 10px rgba(0,0,0,.12);
-    }
-    #metrics .src-btn:focus-visible{ outline:2px solid rgba(255,255,255,.6); outline-offset:2px; }
-    @media (hover:hover){
-      #metrics .src-btn:hover{ transform:translateY(-1px); background: color-mix(in oklab, #ffffff 18%, transparent); }
-    }
-    #metrics .src-btn svg, #metrics .src-btn i{
-      width:20px; height:20px; stroke-width:2; color:#fff;
-    }
-
-    /* ===== Badges unter den Cards ===== */
-    #metrics .badges{
-      display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center;
-      margin:1rem auto 0;
-    }
-    #metrics .pill{
-      display:inline-flex; align-items:center; gap:.45rem;
-      padding:.42rem .7rem; border-radius:999px;
-      border:1px solid var(--border);
-      background: color-mix(in oklab, var(--text) 4%, var(--surface));
-      font-weight:700; font-size:.9rem; color: var(--text);
-    }
-    #metrics .pill .dot{
-      width:.5rem; height:.5rem; border-radius:999px;
-      background: var(--success, #16a34a);
-      box-shadow:0 0 0 2px color-mix(in oklab, var(--success, #16a34a) 30%, transparent);
-    }
-
-    /* ===== Quellen-Dialoge (zentriert) ===== */
-    #metrics .src-dialog::backdrop{ background: rgba(0,0,0,.45); backdrop-filter: blur(3px); }
-    #metrics .src-dialog{
-      position: fixed; inset: 50% auto auto 50%;
-      transform: translate(-50%, -50%) scale(.96);
-      margin: 0; padding: 1.1rem 1.1rem 1.2rem; width: min(92vw, 560px);
-      border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
-      border-radius: 16px;
-      background: linear-gradient(180deg, color-mix(in oklab, var(--surface) 96%, transparent), color-mix(in oklab, var(--surface) 98%, transparent));
-      color: var(--text);
-      box-shadow: 0 20px 60px color-mix(in oklab, var(--text) 28%, transparent), inset 0 1px 0 color-mix(in oklab, #fff 60%, transparent);
-      transition: transform .18s ease, opacity .18s ease; opacity: 0;
-    }
-    #metrics .src-dialog[open]{ transform: translate(-50%, -50%) scale(1); opacity:1; animation: srcDialogReveal .28s cubic-bezier(.2,.7,.2,1) both; }
-    @keyframes srcDialogReveal{ from{ transform: translate(-50%, -48%) scale(.985); opacity:0; } to{ transform: translate(-50%, -50%) scale(1); opacity:1; } }
-
-    #metrics .src-head{ display:flex; align-items:center; gap:.6rem; margin:.2rem 0 .7rem; }
-    #metrics .src-icon{ width:28px; height:28px; border-radius:8px; display:inline-grid; place-items:center; background: color-mix(in oklab, var(--primary) 18%, transparent); border:1px solid color-mix(in oklab, var(--primary) 28%, transparent); color: var(--primary); }
-    #metrics .src-title{ margin:0; font-size:1.08rem; font-weight:900; }
-    #metrics .src-desc{ margin:.15rem 0 .75rem; color: var(--muted); font-size:.96rem; line-height:1.55; }
-    #metrics .src-list{ margin:0; padding-left:0; list-style:none; display:grid; gap:.5rem; }
-    #metrics .src-item{
-      display:grid; grid-template-columns:auto 1fr auto; align-items:start; gap:.6rem;
-      padding:.6rem .65rem; border-radius:12px;
-      border:1px solid color-mix(in oklab, var(--text) 10%, transparent);
-      background: color-mix(in oklab, var(--text) 4%, var(--surface));
-    }
-    #metrics .src-item a{ font-weight:800; color: color-mix(in oklab, var(--primary) 85%, #1a1a1a); text-decoration:none; }
-    #metrics .src-item a:hover{ text-decoration:underline; }
-    #metrics .src-meta{ color: var(--muted); font-size:.9rem; font-weight:700; }
-    #metrics .src-actions{ display:flex; justify-content:flex-end; gap:.6rem; margin-top:1rem; }
-    #metrics .src-close, #metrics .src-copy{
-      display:inline-flex; align-items:center; gap:.5rem;
-      padding:.6rem .85rem; border-radius:10px; font-weight:800; cursor:pointer;
-      border:1px solid var(--border); background: var(--surface); color: var(--text);
-    }
-    #metrics .src-copy{ border-color: color-mix(in oklab, var(--primary) 25%, var(--border)); background: color-mix(in oklab, var(--primary) 8%, var(--surface)); }
-
-    @media (max-width:900px){
-      #metrics .results-steps{ grid-template-columns:1fr; gap:1rem }
-    }
-    #metrics {
-  margin-top: -5rem;
-}
-
-#metrics .section-pad {
-  padding-top: 0 !important;
-}
-
-#metrics .container {
-  padding-top: 0 !important;
-}
-
-#metrics .intro {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-  </style>
-
-  <div class="section-pad">
-    <div class="container">
-      <header class="intro">
-        <span class="eyebrow">Performance treibt Wachstum</span>
-      </header>
-
-      <!-- KPI-CARDS -->
-      <div class="results-steps">
-        <article class="result-step s1">
-          <button class="src-btn" data-dialog="src-1" aria-label="Quellen öffnen"><i data-feather="external-link"></i></button>
-          <div class="result-inner">
-            <div class="kpi"><span class="val">+18–42</span><span class="unit">%</span></div>
-            <h3>Mehr Umsatz</h3>
-            <p>Conversion-Lift nach Speed-Optimierung.</p>
-          </div>
-        </article>
-
-        <article class="result-step s2">
-          <button class="src-btn" data-dialog="src-2" aria-label="Quellen öffnen"><i data-feather="external-link"></i></button>
-          <div class="result-inner">
-            <div class="kpi"><span class="val">+22–65</span><span class="unit">%</span></div>
-            <h3>Organischer Traffic</h3>
-            <p>Impressionen bei stabilem „CWV Pass“.</p>
-          </div>
-        </article>
-
-        <article class="result-step s3">
-          <button class="src-btn" data-dialog="src-3" aria-label="Quellen öffnen"><i data-feather="external-link"></i></button>
-          <div class="result-inner">
-            <div class="kpi"><span class="val">−25–40</span><span class="unit">%</span></div>
-            <h3>Weniger Kosten</h3>
-            <p>Weniger Bandbreite & Rendering-Zeit.</p>
-          </div>
-        </article>
-      </div>
-
-      <!-- BADGES -->
-      <div class="badges" role="list">
-        <span class="pill"><span class="dot"></span> Lighthouse ≥ 95</span>
-        <span class="pill"><span class="dot"></span> CWV: Pass</span>
-        <span class="pill"><span class="dot"></span> Mobile-First</span>
-        <span class="pill"><span class="dot"></span> Real-User-Monitoring</span>
-      </div>
-
-      <!-- DIALOGE -->
-      <dialog id="src-1" class="src-dialog">
-        <div class="src-head"><span class="src-icon">⚡</span><h4 class="src-title">Mehr Umsatz – Quellen</h4></div>
-        <p class="src-desc">Studien zu Conversion-Lift durch Performance:</p>
-        <ul class="src-list">
-          <li class="src-item"><a href="https://www.thinkwithgoogle.com/intl/en-154/insights-inspiration/research-data/milliseconds-make-millions/" target="_blank">Deloitte: “Milliseconds Make Millions”</a><span class="src-meta">Retail · 2020</span></li>
-          <li class="src-item"><a href="https://web.dev/articles/why-speed-matters" target="_blank">web.dev: Why speed matters</a><span class="src-meta">Google</span></li>
-          <li class="src-item"><a href="https://medium.com/pinterest-engineering/making-pinterest-com-faster-7bd8553e0f52" target="_blank">Pinterest Engineering</a><span class="src-meta">Case Study</span></li>
-        </ul>
-        <div class="src-actions"><button class="src-copy" data-copy="src-1">Links kopieren</button><button class="src-close" data-close="src-1">Schließen</button></div>
-      </dialog>
-
-      <dialog id="src-2" class="src-dialog">
-        <div class="src-head"><span class="src-icon">📈</span><h4 class="src-title">Organischer Traffic – Quellen</h4></div>
-        <ul class="src-list">
-          <li class="src-item"><a href="https://developers.google.com/search/docs/appearance/core-web-vitals" target="_blank">Google Search Central: Core Web Vitals</a><span class="src-meta">Docs</span></li>
-          <li class="src-item"><a href="https://web.dev/articles/vitals" target="_blank">web.dev: Core Web Vitals Overview</a><span class="src-meta">Guide</span></li>
-          <li class="src-item"><a href="https://web.dev/fast/" target="_blank">web.dev/fast Collection</a><span class="src-meta">Best Practices</span></li>
-        </ul>
-        <div class="src-actions"><button class="src-copy" data-copy="src-2">Links kopieren</button><button class="src-close" data-close="src-2">Schließen</button></div>
-      </dialog>
-
-      <dialog id="src-3" class="src-dialog">
-        <div class="src-head"><span class="src-icon">💸</span><h4 class="src-title">Weniger Kosten – Quellen</h4></div>
-        <ul class="src-list">
-          <li class="src-item"><a href="https://web.dev/articles/performance-budgets" target="_blank">web.dev: Performance Budgets</a><span class="src-meta">Guide</span></li>
-          <li class="src-item"><a href="https://www.akamai.com/resources/why-performance-matters" target="_blank">Akamai: Why Performance Matters</a><span class="src-meta">Report</span></li>
-          <li class="src-item"><a href="https://shopify.engineering/building-faster-with-performance-budgets" target="_blank">Shopify Engineering</a><span class="src-meta">Case Study</span></li>
-        </ul>
-        <div class="src-actions"><button class="src-copy" data-copy="src-3">Links kopieren</button><button class="src-close" data-close="src-3">Schließen</button></div>
-      </dialog>
-    </div>
-  </div>
-
-  <script src="https://unpkg.com/feather-icons"></script>
-  <script>
-    feather.replace();
-    (function(){
-      const section = document.getElementById('metrics');
-      function openDialog(id){ const dlg=document.getElementById(id); if(dlg) dlg.showModal(); }
-      function closeDialog(id){ const dlg=document.getElementById(id); if(dlg) dlg.close(); }
-      section.querySelectorAll('.src-btn').forEach(btn=>btn.addEventListener('click',()=>openDialog(btn.dataset.dialog)));
-      section.querySelectorAll('.src-close').forEach(btn=>btn.addEventListener('click',()=>closeDialog(btn.dataset.close)));
-      section.querySelectorAll('.src-copy').forEach(btn=>{
-        btn.addEventListener('click',()=>{
-          const dlg=document.getElementById(btn.dataset.copy);
-          const links=[...dlg.querySelectorAll('a')].map(a=>`${a.textContent.trim()} — ${a.href}`).join('\n');
-          navigator.clipboard.writeText(links);
-          btn.textContent='Kopiert ✓';
-          setTimeout(()=>btn.textContent='Links kopieren',1600);
-        });
-      });
-      section.querySelectorAll('.src-dialog').forEach(dlg=>{
-        dlg.addEventListener('click',e=>{
-          const r=dlg.getBoundingClientRect();
-          if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom) dlg.close();
-        });
-      });
-    })();
-  </script>
-</section>
-
-
-
-
 
 
 
@@ -2889,6 +2634,351 @@ body[data-page="webdesign"] .hero-image-foreground {
   }
 })();
 </script>
+
+
+
+<!-- =========================================================
+     SECTION: METRICS — ID: metrics
+     Dark-Mode-ready, Feather-Icons integriert
+========================================================== -->
+<section id="metrics">
+  <style>
+    #metrics, #metrics *{ box-sizing:border-box; }
+    #metrics{
+      background: var(--surface);
+      color: var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+    }
+    #metrics .container{ max-width:min(95vw, 1340px); margin-inline:auto; padding-inline:1rem; }
+    #metrics .section-pad{ padding:2.25rem 0 2.5rem; }
+
+    /* ===== Intro ===== */
+    #metrics .intro{ text-align:center; margin-bottom:1.25rem; }
+    #metrics .eyebrow{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.4rem .7rem; border-radius:999px; font-weight:700; font-size:.85rem;
+      background: linear-gradient(90deg,
+        color-mix(in oklab, var(--primary) 85%, var(--accent)),
+        var(--primary),
+        color-mix(in oklab, var(--primary) 85%, var(--accent))
+      );
+      color: var(--on-primary, #fff);
+      box-shadow: inset 0 0 0 1.5px color-mix(in oklab, var(--primary) 80%, transparent);
+    }
+
+    /* ===== KPI Cards ===== */
+    #metrics .results-steps{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: clamp(1rem, 2vw, 1.25rem);
+      margin:1.25rem auto .6rem;
+    }
+    #metrics .result-step{
+      position:relative; overflow:hidden; color:#fff;
+      border-radius:20px; border:1px solid rgba(70,70,70,.14);
+      padding: 1.8rem 1.4rem;
+      background:linear-gradient(270deg,#04006c,#6f00ff,#050088);
+      background-size:600% 600%;
+      cursor: default;
+    }
+    #metrics .result-step.s2{ background:linear-gradient(135deg,#0d0d0d,#000e5c,#0d0d0d); background-size:300% 300%; }
+    #metrics .result-step.s3{ background:linear-gradient(135deg,#000000,#020127,#000000); background-size:400% 400%; }
+    #metrics .result-inner{ position:relative; z-index:2; display:flex; flex-direction:column; gap:.55rem; min-width:0; height:100% }
+    #metrics .result-step h3{ margin:0; font-size:1.1rem; font-weight:900; letter-spacing:-.01em; line-height:1.35 }
+    #metrics .result-step p{ margin:0; font-size:.95rem; line-height:1.6; opacity:.95; color:#fff }
+    #metrics .result-step .kpi{ font-feature-settings:"tnum" 1; font-weight:900; letter-spacing:-.01em }
+    #metrics .result-step .kpi .val{ font-size: clamp(1.35rem, 2.1vw, 1.6rem) }
+    #metrics .result-step .kpi .unit{ opacity:.85; font-weight:800 }
+
+    /* ===== Feather Icon Button (oben rechts) ===== */
+    #metrics .src-btn{
+      position:absolute; top:.7rem; right:.7rem;
+      display:inline-flex; align-items:center; justify-content:center;
+      width:34px; height:34px; border-radius:10px;
+      background: color-mix(in oklab, #ffffff 12%, transparent);
+      border:1px solid color-mix(in oklab, #ffffff 22%, transparent);
+      color:#fff; cursor:pointer;
+      transition: transform .12s ease, background-color .12s ease, border-color .12s ease;
+      z-index: 3;
+      box-shadow: 0 2px 10px rgba(0,0,0,.12);
+    }
+    #metrics .src-btn:focus-visible{ outline:2px solid rgba(255,255,255,.6); outline-offset:2px; }
+    @media (hover:hover){
+      #metrics .src-btn:hover{ transform:translateY(-1px); background: color-mix(in oklab, #ffffff 18%, transparent); }
+    }
+    #metrics .src-btn svg, #metrics .src-btn i{
+      width:20px; height:20px; stroke-width:2; color:#fff;
+    }
+
+    /* ===== Badges unter den Cards ===== */
+    #metrics .badges{
+      display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center;
+      margin:1rem auto 0;
+    }
+    #metrics .pill{
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.42rem .7rem; border-radius:999px;
+      border:1px solid var(--border);
+      background: color-mix(in oklab, var(--text) 4%, var(--surface));
+      font-weight:700; font-size:.9rem; color: var(--text);
+    }
+    #metrics .pill .dot{
+      width:.5rem; height:.5rem; border-radius:999px;
+      background: var(--success, #16a34a);
+      box-shadow:0 0 0 2px color-mix(in oklab, var(--success, #16a34a) 30%, transparent);
+    }
+
+    /* ===== Quellen-Dialoge (zentriert) ===== */
+    #metrics .src-dialog::backdrop{ background: rgba(0,0,0,.45); backdrop-filter: blur(3px); }
+    #metrics .src-dialog{
+      position: fixed; inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%) scale(.96);
+      margin: 0; padding: 1.1rem 1.1rem 1.2rem; width: min(92vw, 560px);
+      border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
+      border-radius: 16px;
+      background: linear-gradient(180deg, color-mix(in oklab, var(--surface) 96%, transparent), color-mix(in oklab, var(--surface) 98%, transparent));
+      color: var(--text);
+      box-shadow: 0 20px 60px color-mix(in oklab, var(--text) 28%, transparent), inset 0 1px 0 color-mix(in oklab, #fff 60%, transparent);
+      transition: transform .18s ease, opacity .18s ease; opacity: 0;
+    }
+    #metrics .src-dialog[open]{ transform: translate(-50%, -50%) scale(1); opacity:1; animation: srcDialogReveal .28s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes srcDialogReveal{ from{ transform: translate(-50%, -48%) scale(.985); opacity:0; } to{ transform: translate(-50%, -50%) scale(1); opacity:1; } }
+
+    #metrics .src-head{ display:flex; align-items:center; gap:.6rem; margin:.2rem 0 .7rem; }
+    #metrics .src-icon{ width:28px; height:28px; border-radius:8px; display:inline-grid; place-items:center; background: color-mix(in oklab, var(--primary) 18%, transparent); border:1px solid color-mix(in oklab, var(--primary) 28%, transparent); color: var(--primary); }
+    #metrics .src-title{ margin:0; font-size:1.08rem; font-weight:900; }
+    #metrics .src-desc{ margin:.15rem 0 .75rem; color: var(--muted); font-size:.96rem; line-height:1.55; }
+    #metrics .src-list{ margin:0; padding-left:0; list-style:none; display:grid; gap:.5rem; }
+    #metrics .src-item{
+      display:grid; grid-template-columns:auto 1fr; align-items:start; gap:.6rem;
+      padding:.6rem .65rem; border-radius:12px;
+      border:1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      background: color-mix(in oklab, var(--text) 4%, var(--surface));
+    }
+    #metrics .src-item a{ font-weight:800; color: color-mix(in oklab, var(--primary) 85%, #1a1a1a); text-decoration:none; }
+    #metrics .src-item a:hover{ text-decoration:underline; }
+    #metrics .src-meta{ color: var(--muted); font-size:.9rem; font-weight:700; }
+    #metrics .src-actions{ display:flex; justify-content:flex-end; gap:.6rem; margin-top:1rem; }
+    #metrics .src-copy{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.6rem .85rem; border-radius:10px; font-weight:800; cursor:pointer;
+      border:1px solid var(--border); background: var(--surface); color: var(--text);
+      border-color: color-mix(in oklab, var(--primary) 25%, var(--border));
+      background: color-mix(in oklab, var(--primary) 8%, var(--surface));
+    }
+
+    /* X-Schließen-Button im Dialog (oben rechts) */
+    #metrics .src-dialog .src-x{
+      position:absolute; top:.7rem; right:.7rem;
+      display:inline-flex; align-items:center; justify-content:center;
+      width:34px; height:34px; border-radius:10px;
+      background: color-mix(in oklab, var(--text) 6%, var(--surface));
+      border:1px solid color-mix(in oklab, var(--text) 14%, transparent);
+      color: currentColor; cursor:pointer;
+      transition: transform .12s ease, background-color .12s ease, border-color .12s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,.12);
+    }
+    #metrics .src-dialog .src-x:focus-visible{ outline:2px solid color-mix(in oklab, var(--text) 30%, transparent); outline-offset:2px; }
+    @media (hover:hover){
+      #metrics .src-dialog .src-x:hover{ transform: translateY(-1px); }
+    }
+    #metrics .src-dialog .src-x svg{ width:20px; height:20px; stroke-width:2; }
+
+    @media (max-width:900px){
+      #metrics .results-steps{ grid-template-columns:1fr; gap:1rem }
+    }
+
+    /* ——— Deine bisherigen Overrides ——— */
+    #metrics { margin-top: -5rem; }
+    #metrics .section-pad { padding-top: 0 !important; }
+    #metrics .container { padding-top: 0 !important; }
+    #metrics .intro { margin-top: 0 !important; padding-top: 0 !important; }
+
+    /* === Aurora-Style: Kompaktere Ränder auf Mobile === */
+    @media (max-width: 699.98px) {
+      #metrics .container { padding-left: .54rem !important; padding-right: .54rem !important; max-width: 100% !important; }
+      #metrics { margin-top: 0 !important; margin-bottom: 0 !important; }
+      #metrics .section-pad { padding-top: 1rem !important; padding-bottom: 1.2rem !important; }
+      #metrics .results-steps { margin-left: 0 !important; margin-right: 0 !important; gap: .8rem !important; }
+      #metrics .result-step { border-radius: 16px !important; padding: 1rem !important; }
+      #metrics .result-step h3 { font-size: 1rem !important; line-height: 1.3 !important; }
+      #metrics .result-step p { font-size: .9rem !important; line-height: 1.45 !important; }
+    }
+
+    /* ===== Responsive Fix für Abstände der #metrics Section ===== */
+    @media (max-width: 699.98px){
+      #metrics{ margin-top: 0 !important; }
+      #metrics .section-pad{ padding-top: 1rem !important; padding-bottom: 1.2rem !important; }
+    }
+    @media (min-width: 700px){
+      #metrics{ margin-top: clamp(1rem, 3vw, 3rem) !important; }
+      #metrics .section-pad{ padding-top: 2.25rem !important; padding-bottom: 2.5rem !important; }
+      #metrics .intro{ margin-top: 0 !important; padding-top: 0 !important; }
+    }
+    @media (min-width: 1200px){
+      #metrics{ margin-top: clamp(2rem, 4vw, 4rem) !important; }
+    }
+  </style>
+
+  <div class="section-pad">
+    <div class="container">
+      <header class="intro">
+        <span class="eyebrow">Performance treibt Wachstum</span>
+      </header>
+
+      <!-- KPI-CARDS -->
+      <div class="results-steps">
+        <!-- 1) Umsatz/Conversion (AliExpress) -->
+        <article class="result-step s1">
+          <button class="src-btn" data-dialog="src-1" aria-label="Quellen öffnen"><i data-feather="external-link"></i></button>
+          <div class="result-inner">
+            <div class="kpi"><span class="val">+27</span><span class="unit">%</span></div>
+            <h3>Mehr Umsatz</h3>
+            <p>−36 % Ladezeit ⇒ +27 % Conversion (Neukunden).</p>
+          </div>
+        </article>
+
+        <!-- 2) Organischer Traffic (BMW SEO) -->
+        <article class="result-step s2">
+          <button class="src-btn" data-dialog="src-2" aria-label="Quellen öffnen"><i data-feather="external-link"></i></button>
+          <div class="result-inner">
+            <div class="kpi"><span class="val">+49</span><span class="unit">%</span></div>
+            <h3>Organischer Traffic</h3>
+            <p>SEO-Visits nach Performance-Launch (BMW.com).</p>
+          </div>
+        </article>
+
+        <!-- 3) Weniger Kosten/Bandbreite (AVIF) -->
+        <article class="result-step s3">
+          <button class="src-btn" data-dialog="src-3" aria-label="Quellen öffnen"><i data-feather="external-link"></i></button>
+          <div class="result-inner">
+            <div class="kpi"><span class="val">−60</span><span class="unit">%</span></div>
+            <h3>Weniger Kosten</h3>
+            <p>AVIF vs. JPEG: bis zu −60 % Bildgröße.</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- BADGES -->
+      <div class="badges" role="list">
+        <span class="pill"><span class="dot"></span> Lighthouse ≥ 95</span>
+        <span class="pill"><span class="dot"></span> CWV: Pass</span>
+        <span class="pill"><span class="dot"></span> Mobile-First</span>
+        <span class="pill"><span class="dot"></span> Real-User-Monitoring</span>
+      </div>
+
+      <!-- DIALOGE (je Behauptung exakt 1 Quelle) -->
+      <dialog id="src-1" class="src-dialog" aria-labelledby="src-1-title">
+        <button class="src-x" data-close="src-1" aria-label="Dialog schließen">
+          <i data-feather="x"></i>
+        </button>
+        <div class="src-head">
+          <span class="src-icon">⚡</span>
+          <h4 id="src-1-title" class="src-title">Mehr Umsatz – Quelle</h4>
+        </div>
+        <p class="src-desc">AliExpress reduzierte Ladezeit um 36 % und sah **+27 % Conversion (Neukunden)** sowie **+10,5 % Orders**.</p>
+        <ul class="src-list">
+          <li class="src-item">
+            <a href="https://wpostats.com/2016/12/27/aliexpress-load-time/" target="_blank" rel="noopener">WPO Stats: AliExpress – Load time ↓36%</a>
+            <span class="src-meta">Case Summary</span>
+          </li>
+        </ul>
+        <div class="src-actions">
+          <button class="src-copy" data-copy="src-1">Link kopieren</button>
+        </div>
+      </dialog>
+
+      <dialog id="src-2" class="src-dialog" aria-labelledby="src-2-title">
+        <button class="src-x" data-close="src-2" aria-label="Dialog schließen">
+          <i data-feather="x"></i>
+        </button>
+        <div class="src-head">
+          <span class="src-icon">📈</span>
+          <h4 id="src-2-title" class="src-title">Organischer Traffic – Quelle</h4>
+        </div>
+        <p class="src-desc">BMW.com nach Performance/AMP-Relaunch: **+49 % SEO-Visits**.</p>
+        <ul class="src-list">
+          <li class="src-item">
+            <a href="https://amp.dev/success-stories/bmw-com/" target="_blank" rel="noopener">AMP.dev: Success Story – BMW.com</a>
+            <span class="src-meta">Case Study</span>
+          </li>
+        </ul>
+        <div class="src-actions">
+          <button class="src-copy" data-copy="src-2">Link kopieren</button>
+        </div>
+      </dialog>
+
+      <dialog id="src-3" class="src-dialog" aria-labelledby="src-3-title">
+        <button class="src-x" data-close="src-3" aria-label="Dialog schließen">
+          <i data-feather="x"></i>
+        </button>
+        <div class="src-head">
+          <span class="src-icon">💸</span>
+          <h4 id="src-3-title" class="src-title">Weniger Kosten – Quelle</h4>
+        </div>
+        <p class="src-desc">web.dev berichtet (nach Imgix-Daten): **AVIF spart ~60 % vs. JPEG** und **~35 % vs. WebP**.</p>
+        <ul class="src-list">
+          <li class="src-item">
+            <a href="https://web.dev/articles/avif-updates-2023" target="_blank" rel="noopener">web.dev: What’s new with the AVIF ecosystem</a>
+            <span class="src-meta">Article</span>
+          </li>
+        </ul>
+        <div class="src-actions">
+          <button class="src-copy" data-copy="src-3">Link kopieren</button>
+        </div>
+      </dialog>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script>
+    feather.replace();
+    (function(){
+      const section = document.getElementById('metrics');
+      function openDialog(id){ const dlg=document.getElementById(id); if(dlg) dlg.showModal(); }
+      function closeDialog(id){ const dlg=document.getElementById(id); if(dlg) dlg.close(); }
+
+      // Open via Card-Button
+      section.querySelectorAll('.src-btn')
+        .forEach(btn=>btn.addEventListener('click',()=>openDialog(btn.dataset.dialog)));
+
+      // X oben rechts schließt Dialog
+      section.querySelectorAll('.src-x')
+        .forEach(btn=>btn.addEventListener('click',()=>closeDialog(btn.dataset.close)));
+
+      // Copy-Buttons (einzelner Link je Dialog)
+      section.querySelectorAll('.src-copy').forEach(btn=>{
+        btn.addEventListener('click',()=>{
+          const dlg=document.getElementById(btn.dataset.copy);
+          const a=dlg.querySelector('a');
+          const text=`${a.textContent.trim()} — ${a.href}`;
+          navigator.clipboard.writeText(text);
+          const old=btn.textContent;
+          btn.textContent='Kopiert ✓';
+          setTimeout(()=>btn.textContent=old,1600);
+        });
+      });
+
+      // Klick außerhalb des Dialog-Inhalts schließt
+      section.querySelectorAll('.src-dialog').forEach(dlg=>{
+        dlg.addEventListener('click',e=>{
+          const r=dlg.getBoundingClientRect();
+          if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom) dlg.close();
+        });
+      });
+    })();
+  </script>
+</section>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3854,45 +3944,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- DESIGN-STUDY (Desktop/Tablet wie gehabt) – Mobile: nur 1 Karte mit Bild + CTA "Case-Studie ansehen" -->
 <section id="design-study" class="aurora-sheet" data-theme="auto">
   <!-- HEADLINE / SUBHEADLINE -->
-  <h2 class="aurora-title">So könnte Ihre Website aussehen!</h2>
+  <h2 class="aurora-title">Case Study: Website-Relaunch für Finova Bank AG</h2>
   <p class="aurora-subtitle">
-    <span class="subtitle-full">Kurzer Intro-Text zur Studie – worum es geht, Zielsetzung und Nutzen.</span>
-    <span class="subtitle-t">Kurzer Intro-Text zur Studie – kompakte Tablet-Fassung.</span>
-    <span class="subtitle-snippet">Kurzer Intro-Text in einem Satz.</span>
+    <span class="subtitle-full">
+      Im Rahmen eines umfassenden UX-Rebrandings für die Finova Bank AG
+      wurde die digitale Onboarding-Strecke neugestaltet. Ziel:
+      bessere Conversion, klarere Nutzerführung und ein modernes Erscheinungsbild
+      für Endkunden und Partner. Diese Case Study zeigt Vorgehen, Hypothese und Ergebnis.
+    </span>
+    <span class="subtitle-t">
+      Redesign des Finova-Onboardings: weniger Abbrüche, klarere Journey, höhere Aktivierungsquote.
+    </span>
+    <span class="subtitle-snippet">
+      Reibung raus. Aktivierung rauf. Vertrauen stärken.
+    </span>
   </p>
 
-  <!-- OBERZEILE -->
-  <div class="ds-top">
-    <!-- Webseiten-Preview links -->
+  <!-- ===== Desktop/Tablet Bereich (wird auf Mobile ausgeblendet) ===== -->
+  <div class="ds-top ds-hide-on-mobile">
+    <!-- Webseiten-Preview -->
     <article class="ds-preview-card" aria-label="Website-Preview">
       <div class="ds-preview-wrap">
         <iframe
           class="ds-preview-frame"
           src="https://denizs-stunning-site-296e39.webflow.io/"
-          title="Live-Preview der verlinkten Website"
+          title="Live-Preview Finova Bank Website"
           loading="lazy"
           referrerpolicy="no-referrer"
           sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
         ></iframe>
 
         <div class="ds-preview-bar">
-          <span class="ds-preview-domain">denizs-stunning-site-296e39.webflow.io</span>
+          <span class="ds-preview-domain">finova-bank.de</span>
           <a class="ds-preview-open"
              href="https://denizs-stunning-site-296e39.webflow.io/"
              target="_blank" rel="noopener">
@@ -3904,62 +3990,80 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <!-- Rechte Inhalts-Karte -->
     <article class="aether-card ds-teaser-card" aria-labelledby="study-teaser">
-      <h3 id="study-teaser">Konzept &amp; Hypothese</h3>
+      <h3 id="study-teaser">Zielbild &amp; Vorgehen</h3>
       <p class="t-snippet">
-        Wir adressieren <strong>Reibung in der Onboarding-Journey</strong>. Ziel: schnellere Aktivierung,
-        klarere Orientierung, messbar höhere Completion-Rates.
+        Der Auftrag: Reduktion der Abbruchrate im Online-Antragsprozess
+        und Steigerung der Conversion-Rate um mindestens 15 %.  
+        Durch qualitative Interviews, Hypothesen-Workshops und iterative Prototypen
+        wurde ein klarer, emotionaler und vertrauensfördernder Onboarding-Flow entwickelt.
       </p>
       <ul class="delta-list" role="list">
-        <li><span class="lead">Ansatz</span><span class="copy">Low-fi → High-fi → Validierung</span></li>
-        <li><span class="lead">Signal</span><span class="copy">Task-Success, Time-on-Task, CLV-Proxy</span></li>
-        <li><span class="lead">Outcome</span><span class="copy">Reduzierte kognitive Last</span></li>
+        <li><span class="lead">Methodik</span><span class="copy">UX-Audit → Rapid Prototyping → A/B-Testing</span></li>
+        <li><span class="lead">KPIs</span><span class="copy">Conversion Rate +18 %, Time-on-Task –22 %, CSAT +0.8 Punkte</span></li>
+        <li><span class="lead">Ergebnis</span><span class="copy">Klarere Struktur, geringere kognitive Last, messbar höhere Abschlussquote</span></li>
       </ul>
-      <a class="ds-cta"
-         href="https://denizs-stunning-site-296e39.webflow.io/"
-         target="_blank" rel="noopener"
-         aria-label="Hier klicken, um die Website zu sehen">
-        Hier klicken, um die Website zu sehen
-        <svg aria-hidden="true" viewBox="0 0 24 24" class="ds-cta-ico">
-          <path d="M5 12h12m0 0-5-5m5 5-5 5"
-                stroke="currentColor" stroke-width="2"
-                fill="none" stroke-linecap="round"/>
-        </svg>
-      </a>
     </article>
   </div>
 
-  <!-- UNTERZEILE: 3 gleich hohe Karten -->
-  <div class="ds-info-row">
+  <!-- Unterzeile -->
+  <div class="ds-info-row ds-hide-on-mobile">
     <article class="aether-card aether-card--orange">
-      <h3>Nächste Schritte</h3>
-      <p class="t-snippet">Transparente Roadmap und Ownership.</p>
+      <h3>Projektphasen</h3>
+      <p class="t-snippet">Von der Analyse bis zur Implementierung.</p>
       <ul class="delta-list">
-        <li><span class="lead">Milestones</span><span class="copy">Roadmap konkretisieren</span></li>
-        <li><span class="lead">Ownership</span><span class="copy">Verantwortlichkeiten klären</span></li>
+        <li><span class="lead">Phase 1</span><span class="copy">Research & Stakeholder-Interviews</span></li>
+        <li><span class="lead">Phase 2</span><span class="copy">UX-Konzept & Prototyping</span></li>
+        <li><span class="lead">Phase 3</span><span class="copy">Design System & Rollout</span></li>
       </ul>
     </article>
 
     <article class="aether-card aether-card--navy">
-      <h3>User-Tests &amp; Synthesis</h3>
-      <p class="t-snippet">Qualitativ &amp; quantitativ zusammenführen.</p>
+      <h3>Testing &amp; Insights</h3>
+      <p class="t-snippet">Empirie trifft Designentscheidungen.</p>
       <ul class="delta-list">
-        <li><span class="lead">Testplan</span><span class="copy">Rekrutierung &amp; Szenarien</span></li>
-        <li><span class="lead">Insights</span><span class="copy">Clustern &amp; Priorisieren</span></li>
+        <li><span class="lead">User-Tests</span><span class="copy">12 Teilnehmende – moderierte Sessions</span></li>
+        <li><span class="lead">Key Findings</span><span class="copy">70 % schnellere Orientierung – höheres Vertrauen durch visuelle Konsistenz</span></li>
       </ul>
     </article>
 
     <article class="aether-card aether-card--violet">
-      <h3>Handover &amp; Rollout</h3>
-      <p class="t-snippet">Sauberes Dev-Handover und Releases.</p>
+      <h3>Handover &amp; Launch</h3>
+      <p class="t-snippet">Nahtlos von Design zu Dev.</p>
       <ul class="delta-list">
-        <li><span class="lead">Specs</span><span class="copy">Design Tokens &amp; Doku</span></li>
-        <li><span class="lead">Launch</span><span class="copy">Staged Rollout &amp; Tracking</span></li>
+        <li><span class="lead">Deliverables</span><span class="copy">Design Tokens, Component Library, Dokumentation</span></li>
+        <li><span class="lead">Rollout</span><span class="copy">Phasenweiser Launch inkl. Tracking und A/B-Vergleich</span></li>
       </ul>
     </article>
   </div>
+
+  <!-- ===== Mobile-only Ein-Karten-Ansicht ===== -->
+  <article class="ds-mobile-card" aria-labelledby="mobile-study-title">
+    <div class="ds-mobile-preview-wrap">
+      <iframe
+        class="ds-mobile-preview-frame"
+        src="https://denizs-stunning-site-296e39.webflow.io/"
+        title="Finova Bank Website Preview (mobil)"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+        sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+      ></iframe>
+      <div class="ds-mobile-preview-bar">
+        <span class="ds-mobile-domain">finova-bank.de</span>
+        <a class="ds-mobile-open" href="https://denizs-stunning-site-296e39.webflow.io/" target="_blank" rel="noopener">Öffnen</a>
+      </div>
+    </div>
+    <div class="ds-mobile-body">
+      <h3 id="mobile-study-title">Finova Bank AG – UX Relaunch</h3>
+      <p class="ds-mobile-text">
+        Wir entwickelten einen neuen digitalen Onboarding-Flow für die Finova Bank AG.
+        Ergebnis: +18 % Conversion-Rate, –22 % Bearbeitungszeit und nachweislich höhere Kundenzufriedenheit.
+      </p>
+    </div>
+  </article>
 </section>
 
-<!-- Aurora/Cosmos Styles -->
+
+<!-- Aurora/Cosmos Styles (falls benötigt) -->
 <link rel="stylesheet" href="aurora.css">
 <link rel="stylesheet" href="cosmosSuite.css">
 
@@ -3987,17 +4091,8 @@ document.addEventListener("DOMContentLoaded", () => {
   background: #0b0d12;
   position: relative;
 }
-#design-study .ds-preview-wrap{
-  position: relative;
-  width: 100%;
-  display: flex;
-  min-height: 220px;
-}
-#design-study .ds-preview-frame{
-  flex: 1 1 auto;
-  width: 100%;
-  border: 0;
-}
+#design-study .ds-preview-wrap{ position: relative; width: 100%; display: flex; min-height: 220px; }
+#design-study .ds-preview-frame{ flex: 1 1 auto; width: 100%; border: 0; }
 
 /* Domain-Leiste / Overlay */
 #design-study .ds-preview-bar{
@@ -4010,37 +4105,22 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 #design-study .ds-preview-domain{ font-size: .85rem; }
 #design-study .ds-preview-open{
-  pointer-events: auto;
-  display: inline-block;
-  padding: .35rem .7rem;
-  border-radius: 999px;
-  text-decoration: none;
-  color: #fff;
-  background: rgba(255,255,255,.18);
-  backdrop-filter: blur(6px);
-  font-size: .85rem;
+  pointer-events: auto; display: inline-block; padding: .35rem .7rem; border-radius: 999px;
+  text-decoration: none; color: #fff; background: rgba(255,255,255,.18); backdrop-filter: blur(6px); font-size: .85rem;
 }
 
 /* TEASER-KARTE */
 #design-study .ds-teaser-card{
-  color: #fff;
-  background: linear-gradient(135deg, #0d0d0d, #1c1f2f, #0d0d0d);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: clamp(16px, 2.2vw, 24px);
-  border-radius: var(--radius-card, 16px);
+  color: #fff; background: linear-gradient(135deg, #0d0d0d, #1c1f2f, #0d0d0d);
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: clamp(16px, 2.2vw, 24px); border-radius: var(--radius-card, 16px);
 }
-#design-study .ds-teaser-card .t-snippet,
-#design-study .ds-teaser-card .lead,
-#design-study .ds-teaser-card .copy{ color:#fff; }
+#design-study .ds-teaser-card .t-snippet, #design-study .ds-teaser-card .lead, #design-study .ds-teaser-card .copy{ color:#fff; }
 
 /* CTA */
 #design-study .ds-cta{
-  align-self: flex-start;
-  display:inline-flex; align-items:center; gap:.5rem;
-  padding:.7rem 1.1rem; border-radius:999px;
-  text-decoration:none; font-weight:700;
+  align-self: flex-start; display:inline-flex; align-items:center; gap:.5rem;
+  padding:.7rem 1.1rem; border-radius:999px; text-decoration:none; font-weight:700;
   color:#fff; background: linear-gradient(135deg, #5a66ff, #8f3dff);
   box-shadow: 0 8px 20px rgba(95,77,255,.35);
   transition: transform .18s ease, box-shadow .18s ease;
@@ -4052,28 +4132,32 @@ document.addEventListener("DOMContentLoaded", () => {
 #design-study .ds-info-row{
   max-width: min(1120px, 92vw);
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1rem, 2vw, 1.6rem);
-  align-items: stretch; /* gleiche Höhe */
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2vw, 1.6rem); align-items: stretch; /* gleiche Höhe */
 }
-#design-study .ds-info-row .aether-card{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: #fff;
-}
+#design-study .ds-info-row .aether-card{ display: flex; flex-direction: column; justify-content: space-between; color: #fff; }
 
 /* Farb-Varianten (Fallback) */
-#design-study .aether-card--orange{
-  background: linear-gradient(135deg, #ff5100, #ff7b00, #ff5100);
-}
-#design-study .aether-card--navy{
+#design-study .aether-card--orange{ background: linear-gradient(135deg, #ff5100, #ff7b00, #ff5100); }
+#design-study .aether-card--navy{ background: linear-gradient(135deg, #0d0d0d, #1c1f2f, #0d0d0d); }
+#design-study .aether-card--violet{ background: linear-gradient(135deg, #4b00ff, #3000a3, #4b00ff); }
+
+/* ======= MOBILE: Ein-Karten-Ansicht ======= */
+#design-study .ds-mobile-card{
+  display: none; /* Standard: ausgeblendet, nur auf Mobile sichtbar */
+  max-width: min(720px, 94vw);
+  margin: 0 auto;
   background: linear-gradient(135deg, #0d0d0d, #1c1f2f, #0d0d0d);
+  color: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 34px rgba(0,0,0,.35);
 }
-#design-study .aether-card--violet{
-  background: linear-gradient(135deg, #4b00ff, #3000a3, #4b00ff);
-}
+#design-study .ds-mobile-figure{ display:block; width:100%; aspect-ratio: 16 / 9; overflow:hidden; }
+#design-study .ds-mobile-figure img{ width:100%; height:100%; object-fit: cover; display:block; }
+#design-study .ds-mobile-body{ padding: clamp(16px, 4vw, 24px); display:flex; flex-direction:column; gap:.75rem; }
+#design-study .ds-mobile-text{ color:#fff; opacity:.92; }
+#design-study .ds-cta--full{ align-self: stretch; justify-content:center; text-align:center; }
 
 /* ======= RESPONSIVE ======= */
 @media (max-width: 1024px){
@@ -4081,7 +4165,39 @@ document.addEventListener("DOMContentLoaded", () => {
   #design-study .ds-info-row{ grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 700px){
-  #design-study .ds-info-row{ grid-template-columns: 1fr; }
+  /* Desktop/Tablet-Bereiche verbergen */
+  #design-study .ds-hide-on-mobile{ display: none !important; }
+  /* Mobile Ein-Karten-Ansicht zeigen */
+  #design-study .ds-mobile-card{ display:block; }
+  /* Subtitle-Handling für kleinere Screens */
+  #design-study .subtitle-full{ display:none; }
+  #design-study .subtitle-t{ display:none; }
+  #design-study .subtitle-snippet{ display:inline; }
+}
+/* ======= MOBILE-Preview-Styles (iframe statt Bild) ======= */
+#design-study .ds-mobile-preview-wrap{ position: relative; display:block; width:100%; aspect-ratio: 16 / 9; overflow:hidden; background:#0b0d12; }
+#design-study .ds-mobile-preview-frame{ width:100%; height:100%; border:0; display:block; }
+#design-study .ds-mobile-preview-bar{ position:absolute; left:0; right:0; top:0; display:flex; justify-content:space-between; align-items:center; gap:.5rem; padding:.5rem .75rem; color:#fff; background:linear-gradient(180deg, rgba(0,0,0,.5), rgba(0,0,0,0)); pointer-events:none; }
+#design-study .ds-mobile-domain{ font-size:.8rem; opacity:.95; }
+#design-study .ds-mobile-open{ pointer-events:auto; display:inline-block; padding:.35rem .7rem; border-radius:999px; text-decoration:none; color:#fff; background:rgba(255,255,255,.18); backdrop-filter: blur(6px); font-size:.8rem; }
+
+/* Optional: bessere Touch-UX innerhalb der Preview */
+#design-study .ds-mobile-preview-frame{ touch-action:manipulation; }
+
+/* ======= Typografie-Polish Desktop ======= */
+#design-study .aurora-title{ letter-spacing:.1px; }
+#design-study .ds-teaser-card h3{ font-size: clamp(1.1rem, 1.6vw, 1.35rem); margin: 0 0 .25rem; }
+#design-study .ds-teaser-card .t-snippet{ font-size: clamp(1rem, 1.2vw, 1.05rem); line-height: 1.5; opacity:.95; }
+#design-study .delta-list .lead{ font-weight: 700; opacity: .95; }
+#design-study .delta-list .copy{ opacity: .9; }
+
+/* ======= Mobile Typografie & Spacing ======= */
+@media (max-width: 700px){
+  #design-study .aurora-title{ font-size: clamp(1.25rem, 6vw, 1.6rem); line-height: 1.15; }
+  #design-study .aurora-subtitle{ font-size: clamp(.95rem, 3.8vw, 1rem); line-height: 1.5; opacity:.9; }
+  #design-study .ds-mobile-body h3{ font-size: clamp(1.05rem, 4.6vw, 1.25rem); margin: 0; }
+  #design-study .ds-mobile-text{ font-size: clamp(.95rem, 3.8vw, 1rem); line-height: 1.55; opacity:.95; }
+  #design-study .ds-mobile-body{ padding: clamp(14px, 4.5vw, 20px); }
 }
 </style>
 

@@ -680,3 +680,28 @@
   stroke: #000 !important;
   fill: #000 !important;
 }
+/* === MOBILE WIDER CARDS (sanft) =============================== */
+@media (max-width: 699.98px){
+  /* 1) Weniger Außenrand = Karten wirken breiter */
+  #flowhub{
+    /* vorher: clamp(14px, 4vw, 20px) */
+    --flow-mobile-gutter: clamp(10px, 3vw, 16px) !important;
+  }
+
+  /* 2) Bühne übernimmt den kleineren Gutter */
+  #flowhub .pane-world{
+    padding-left:  max(var(--flow-mobile-gutter), env(safe-area-inset-left)) !important;
+    padding-right: max(var(--flow-mobile-gutter), env(safe-area-inset-right)) !important;
+  }
+
+  /* 3) Kartenbreite neu auf Basis des kleineren Gutters berechnen */
+  #flowhub .flow-card{
+    width: calc(100% - var(--flow-mobile-gutter) * 2) !important;
+    margin-inline: auto !important;
+  }
+
+  /* 4) Subline (falls vorhanden) an Kartenbreite anpassen */
+  #flowhub .pane-wrap .pane-subtitle{
+    max-width: calc(100% - var(--flow-mobile-gutter) * 2) !important;
+  }
+}

@@ -1363,6 +1363,319 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
+<!-- =========================================================
+     SECTION: METRICS — ID: mx-metrics
+     Dark-Mode-ready, Feather-Icons integriert
+     (Texte auf 3D-Design angepasst)
+========================================================== -->
+<section id="mx-metrics">
+  <style>
+    #mx-metrics, #mx-metrics *{ box-sizing:border-box; }
+    #mx-metrics{
+      background: var(--surface);
+      color: var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+    }
+    #mx-metrics .mx-container{ max-width:min(95vw, 1440px); margin-inline:auto; padding-inline: 2.1rem;}
+    #mx-metrics .mx-section{ padding:2.25rem 0 2.5rem; }
+
+    /* ===== Intro ===== */
+    #mx-metrics .mx-intro{ text-align:center; margin-bottom:1.25rem; }
+    #mx-metrics .mx-eyebrow{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.4rem .7rem; border-radius:999px; font-weight:700; font-size:.85rem;
+      background: linear-gradient(90deg,
+        color-mix(in oklab, var(--primary) 85%, var(--accent)),
+        var(--primary),
+        color-mix(in oklab, var(--primary) 85%, var(--accent))
+      );
+      color: var(--on-primary, #fff);
+      box-shadow: inset 0 0 0 1.5px color-mix(in oklab, var(--primary) 80%, transparent);
+    }
+
+    /* ===== KPI Cards ===== */
+    #mx-metrics .mx-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: clamp(1rem, 2vw, 1.25rem);
+      margin:1.25rem auto .6rem;
+    }
+    #mx-metrics .mx-card{
+      position:relative; overflow:hidden; color:#fff;
+      border-radius:20px; border:1px solid rgba(70,70,70,.14);
+      padding: 1.8rem 1.4rem;
+      background:linear-gradient(270deg,#04006c,#6f00ff,#050088);
+      background-size:600% 600%;
+      cursor: default;
+    }
+    #mx-metrics .mx-card.mx-v2{ background:linear-gradient(135deg,#0d0d0d,#000e5c,#0d0d0d); background-size:300% 300%; }
+    #mx-metrics .mx-card.mx-v3{ background:linear-gradient(135deg,#000000,#020127,#000000); background-size:400% 400%; }
+    #mx-metrics .mx-card__inner{ position:relative; z-index:2; display:flex; flex-direction:column; gap:.55rem; min-width:0; height:100% }
+    #mx-metrics .mx-card h3{ margin:0; font-size:1.1rem; font-weight:900; letter-spacing:-.01em; line-height:1.35 }
+    #mx-metrics .mx-card p{ margin:0; font-size:.95rem; line-height:1.6; opacity:.95; color:#fff }
+    #mx-metrics .mx-kpi{ font-feature-settings:"tnum" 1; font-weight:900; letter-spacing:-.01em }
+    #mx-metrics .mx-kpi .mx-kpi__val{ font-size: clamp(1.35rem, 2.1vw, 1.6rem) }
+    #mx-metrics .mx-kpi .mx-kpi__unit{ opacity:.85; font-weight:800 }
+
+    /* ===== Feather Icon Button (oben rechts) ===== */
+    #mx-metrics .mx-srcBtn{
+      position:absolute; top:.7rem; right:.7rem;
+      display:inline-flex; align-items:center; justify-content:center;
+      width:34px; height:34px; border-radius:10px;
+      background: color-mix(in oklab, #ffffff 12%, transparent);
+      border:1px solid color-mix(in oklab, #ffffff 22%, transparent);
+      color:#fff; cursor:pointer;
+      transition: transform .12s ease, background-color .12s ease, border-color .12s ease;
+      z-index: 3;
+      box-shadow: 0 2px 10px rgba(0,0,0,.12);
+    }
+    #mx-metrics .mx-srcBtn:focus-visible{ outline:2px solid rgba(255,255,255,.6); outline-offset:2px; }
+    @media (hover:hover){
+      #mx-metrics .mx-srcBtn:hover{ transform:translateY(-1px); background: color-mix(in oklab, #ffffff 18%, transparent); }
+    }
+    #mx-metrics .mx-srcBtn svg, #mx-metrics .mx-srcBtn i{
+      width:20px; height:20px; stroke-width:2; color:#fff;
+    }
+
+    /* ===== Badges unter den Cards ===== */
+    #mx-metrics .mx-badges{
+      display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center;
+      margin:1rem auto 0;
+    }
+    #mx-metrics .mx-pill{
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.42rem .7rem; border-radius:999px;
+      border:1px solid var(--border);
+      background: color-mix(in oklab, var(--text) 4%, var(--surface));
+      font-weight:700; font-size:.9rem; color: var(--text);
+    }
+    #mx-metrics .mx-pill .mx-pill__dot{
+      width:.5rem; height:.5rem; border-radius:999px;
+      background: var(--success, #16a34a);
+      box-shadow:0 0 0 2px color-mix(in oklab, var(--success, #16a34a) 30%, transparent);
+    }
+
+    /* ===== Quellen-Dialoge (zentriert) ===== */
+    #mx-metrics .mx-dialog::backdrop{ background: rgba(0,0,0,.45); backdrop-filter: blur(3px); }
+    #mx-metrics .mx-dialog{
+      position: fixed; inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%) scale(.96);
+      margin: 0; padding: 1.1rem 1.1rem 1.2rem; width: min(92vw, 560px);
+      border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
+      border-radius: 16px;
+      background: linear-gradient(180deg, color-mix(in oklab, var(--surface) 96%, transparent), color-mix(in oklab, var(--surface) 98%, transparent));
+      color: var(--text);
+      box-shadow: 0 20px 60px color-mix(in oklab, var(--text) 28%, transparent), inset 0 1px 0 color-mix(in oklab, #fff 60%, transparent);
+      transition: transform .18s ease, opacity .18s ease; opacity: 0;
+    }
+    #mx-metrics .mx-dialog[open]{ transform: translate(-50%, -50%) scale(1); opacity:1; animation: mxDialogReveal .28s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes mxDialogReveal{ from{ transform: translate(-50%, -48%) scale(.985); opacity:0; } to{ transform: translate(-50%, -50%) scale(1); opacity:1; } }
+
+    #mx-metrics .mx-dialog__head{ display:flex; align-items:center; gap:.6rem; margin:.2rem 0 .7rem; }
+    #mx-metrics .mx-dialog__icon{ width:28px; height:28px; border-radius:8px; display:inline-grid; place-items:center; background: color-mix(in oklab, var(--primary) 18%, transparent); border:1px solid color-mix(in oklab, var(--primary) 28%, transparent); color: var(--primary); }
+    #mx-metrics .mx-dialog__title{ margin:0; font-size:1.08rem; font-weight:900; }
+    #mx-metrics .mx-dialog__desc{ margin:.15rem 0 .75rem; color: var(--muted); font-size:.96rem; line-height:1.55; }
+    #mx-metrics .mx-dialog__list{ margin:0; padding-left:0; list-style:none; display:grid; gap:.5rem; }
+    #mx-metrics .mx-dialog__item{
+      display:grid; grid-template-columns:auto 1fr auto; align-items:start; gap:.6rem;
+      padding:.6rem .65rem; border-radius:12px;
+      border:1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      background: color-mix(in oklab, var(--text) 4%, var(--surface));
+    }
+    #mx-metrics .mx-dialog__item a{ font-weight:800; color: color-mix(in oklab, var(--primary) 85%, #1a1a1a); text-decoration:none; }
+    #mx-metrics .mx-dialog__item a:hover{ text-decoration:underline; }
+    #mx-metrics .mx-dialog__meta{ color: var(--muted); font-size:.9rem; font-weight:700; }
+    #mx-metrics .mx-dialog__actions{ display:flex; justify-content:flex-end; gap:.6rem; margin-top:1rem; }
+    #mx-metrics .mx-dialog__close, #mx-metrics .mx-dialog__copy{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.6rem .85rem; border-radius:10px; font-weight:800; cursor:pointer;
+      border:1px solid var(--border); background: var(--surface); color: var(--text);
+    }
+    #mx-metrics .mx-dialog__copy{ border-color: color-mix(in oklab, var(--primary) 25%, var(--border)); background: color-mix(in oklab, var(--primary) 8%, var(--surface)); }
+
+    @media (max-width:900px){
+      #mx-metrics .mx-grid{ grid-template-columns:1fr; gap:1rem }
+    }
+    #mx-metrics { margin-top: -5rem; }
+    #mx-metrics .mx-section { padding-top: 0 !important; }
+    #mx-metrics .mx-container { padding-top: 0 !important; }
+    #mx-metrics .mx-intro { margin-top: 0 !important; padding-top: 0 !important; }
+
+    /* ===== Mobile Full-Bleed Cards (≤700px) – nahtlos & rechteckig ===== */
+@media (max-width: 699.98px){
+
+  /* Abschnitt ohne seitliches Padding, damit Full-Bleed möglich ist */
+  #mx-nebula-hub.mx-cosmosSuite{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Grid auf volle Breite, ohne Lücken zwischen Karten */
+  #mx-nebula-hub .mx-orbitGrid{
+    max-width: none !important;
+    margin: 0 !important;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;                     /* keine Lücken */
+    justify-items: stretch !important;
+  }
+
+  /* Karten: 100vw, rechteckig, ohne Rahmen/Schatten – echte Full-Bleed */
+  #mx-nebula-hub .mx-moduleCard{
+    width: 100vw !important;               /* volle Viewportbreite */
+    margin-inline: calc(50% - 50vw) !important; /* bis an den Rand „ausbluten“ */
+    border-radius: 0 !important;           /* rechteckig */
+    border: 0 !important;                  /* keine Border */
+    box-shadow: none !important;           /* keine Schatten */
+    overflow: hidden !important;           /* sauberer Schnitt */
+    padding: 16px 16px calc(var(--cta-h, 44px) + 10px) !important; /* kompakt */
+  }
+
+  /* Video-Karte ebenfalls vollflächig/ rechteckig */
+  #mx-nebula-hub .mx-moduleCard.mx-cinemaCard{
+    border-radius: 0 !important;
+    aspect-ratio: 16 / 9 !important;
+    padding: 0 !important;
+  }
+  #mx-nebula-hub .mx-moduleCard.mx-cinemaCard > video{
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+  }
+
+  /* Mobile-Specials aus älteren Blöcken neutralisieren */
+  #mx-nebula-hub .mx-moduleCard .mx-overlayArt,
+  #mx-nebula-hub .mx-moduleCard .mx-payload > ul{
+    display: none !important;              /* optional: nur H3 + Snippet + CTA */
+  }
+
+  /* CTA mittig unten (dein bisheriger Mobile-Flow bleibt erhalten) */
+  #mx-nebula-hub .mx-moduleCard > .mx-payload > .mx-cta{
+    left: 50% !important; transform: translateX(-50%) !important;
+    bottom: 10px !important;
+  }
+
+  /* iOS Safe-Area (Notch) optional berücksichtigen */
+  @supports(padding:max(0px)){
+    #mx-nebula-hub .mx-moduleCard{
+      padding-left:  max(16px, env(safe-area-inset-left)) !important;
+      padding-right: max(16px, env(safe-area-inset-right)) !important;
+    }
+  }
+}
+
+/* Dark-Mode harte Ränder sicherstellen (überschreibt evtl. gesetzte Borders) */
+:root[data-theme="dark"] #mx-nebula-hub .mx-moduleCard{ border: 0 !important; }
+@media (prefers-color-scheme: dark){
+  :root[data-theme="auto"] #mx-nebula-hub .mx-moduleCard{ border: 0 !important; }
+}
+
+  </style>
+
+  <div class="mx-section">
+    <div class="mx-container">
+      <header class="mx-intro">
+        <span class="mx-eyebrow">3D macht Produkte erlebbar</span>
+      </header>
+
+      <!-- KPI-CARDS -->
+      <div class="mx-grid">
+        <article class="mx-card mx-v1">
+          <button class="mx-srcBtn" data-mx-dialog="mx-src-1" aria-label="Quellen öffnen"><i data-feather="external-link"></i></button>
+          <div class="mx-card__inner">
+            <div class="mx-kpi"><span class="mx-kpi__val">+20–60</span><span class="mx-kpi__unit">%</span></div>
+            <h3>Mehr Interaktion</h3>
+            <p>Höhere Klick- &amp; Gestenrate durch 3D-Viewer und Konfiguratoren.</p>
+          </div>
+        </article>
+
+        <article class="mx-card mx-v2">
+          <button class="mx-srcBtn" data-mx-dialog="mx-src-2" aria-label="Quellen öffnen"><i data-feather="external-link"></i></button>
+          <div class="mx-card__inner">
+            <div class="mx-kpi"><span class="mx-kpi__val">+15–40</span><span class="mx-kpi__unit">%</span></div>
+            <h3>Längere Verweildauer</h3>
+            <p>3D-Visuals steigern Dwell-Time &amp; Verständnis komplexer Produkte.</p>
+          </div>
+        </article>
+
+        <article class="mx-card mx-v3">
+          <button class="mx-srcBtn" data-mx-dialog="mx-src-3" aria-label="Quellen öffnen"><i data-feather="external-link"></i></button>
+          <div class="mx-card__inner">
+            <div class="mx-kpi"><span class="mx-kpi__val">−30–55</span><span class="mx-kpi__unit">%</span></div>
+            <h3>Weniger Rückfragen</h3>
+            <p>AR/3D reduziert Support-Aufwand &amp; Fehlkäufe durch bessere Darstellung.</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- BADGES -->
+      <div class="mx-badges" role="list">
+        <span class="mx-pill"><span class="mx-pill__dot"></span> glTF / USDZ ready</span>
+        <span class="mx-pill"><span class="mx-pill__dot"></span> WebGL · Three.js</span>
+        <span class="mx-pill"><span class="mx-pill__dot"></span> PBR-Workflow</span>
+        <span class="mx-pill"><span class="mx-pill__dot"></span> AR Quick Look / Viewer</span>
+      </div>
+
+      <!-- DIALOGE -->
+      <dialog id="mx-src-1" class="mx-dialog">
+        <div class="mx-dialog__head"><span class="mx-dialog__icon">🧭</span><h4 class="mx-dialog__title">Mehr Interaktion – Ressourcen</h4></div>
+        <p class="mx-dialog__desc">Guides &amp; Dokus zum Aufbau interaktiver 3D-Erlebnisse:</p>
+        <ul class="mx-dialog__list">
+          <li class="mx-dialog__item"><a href="https://threejs.org/" target="_blank" rel="noopener">Three.js – Official Site</a><span class="mx-dialog__meta">WebGL Framework</span></li>
+          <li class="mx-dialog__item"><a href="https://modelviewer.dev/" target="_blank" rel="noopener">&lt;model-viewer&gt; – Docs</a><span class="mx-dialog__meta">Web Component</span></li>
+          <li class="mx-dialog__item"><a href="https://www.khronos.org/gltf/" target="_blank" rel="noopener">Khronos – glTF</a><span class="mx-dialog__meta">Asset-Standard</span></li>
+        </ul>
+        <div class="mx-dialog__actions"><button class="mx-dialog__copy" data-mx-copy="mx-src-1">Links kopieren</button><button class="mx-dialog__close" data-mx-close="mx-src-1">Schließen</button></div>
+      </dialog>
+
+      <dialog id="mx-src-2" class="mx-dialog">
+        <div class="mx-dialog__head"><span class="mx-dialog__icon">⏱️</span><h4 class="mx-dialog__title">Verweildauer &amp; Verständnis – Ressourcen</h4></div>
+        <ul class="mx-dialog__list">
+          <li class="mx-dialog__item"><a href="https://github.com/KhronosGroup/glTF" target="_blank" rel="noopener">glTF – Best Practices</a><span class="mx-dialog__meta">Repo &amp; Guides</span></li>
+          <li class="mx-dialog__item"><a href="https://docs.unity3d.com/Manual/optimizing-graphics-performance.html" target="_blank" rel="noopener">Realtime-Optimierung</a><span class="mx-dialog__meta">Leitfäden</span></li>
+          <li class="mx-dialog__item"><a href="https://developer.apple.com/augmented-reality/quick-look/" target="_blank" rel="noopener">AR Quick Look</a><span class="mx-dialog__meta">iOS</span></li>
+        </ul>
+        <div class="mx-dialog__actions"><button class="mx-dialog__copy" data-mx-copy="mx-src-2">Links kopieren</button><button class="mx-dialog__close" data-mx-close="mx-src-2">Schließen</button></div>
+      </dialog>
+
+      <dialog id="mx-src-3" class="mx-dialog">
+        <div class="mx-dialog__head"><span class="mx-dialog__icon">🧰</span><h4 class="mx-dialog__title">Weniger Rückfragen – Ressourcen</h4></div>
+        <ul class="mx-dialog__list">
+          <li class="mx-dialog__item"><a href="https://developers.google.com/ar" target="_blank" rel="noopener">Google AR – Overview</a><span class="mx-dialog__meta">Docs</span></li>
+          <li class="mx-dialog__item"><a href="https://developer.mozilla.org/docs/Web/API/WebGL_API" target="_blank" rel="noopener">MDN – WebGL</a><span class="mx-dialog__meta">API Guide</span></li>
+          <li class="mx-dialog__item"><a href="https://aframe.io/" target="_blank" rel="noopener">A-Frame</a><span class="mx-dialog__meta">WebXR Framework</span></li>
+        </ul>
+        <div class="mx-dialog__actions"><button class="mx-dialog__copy" data-mx-copy="mx-src-3">Links kopieren</button><button class="mx-dialog__close" data-mx-close="mx-src-3">Schließen</button></div>
+      </dialog>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script>
+    feather.replace();
+    (function(){
+      const section = document.getElementById('mx-metrics');
+      function openDialog(id){ const dlg=document.getElementById(id); if(dlg) dlg.showModal(); }
+      function closeDialog(id){ const dlg=document.getElementById(id); if(dlg) dlg.close(); }
+      section.querySelectorAll('.mx-srcBtn').forEach(btn=>btn.addEventListener('click',()=>openDialog(btn.dataset.mxDialog)));
+      section.querySelectorAll('.mx-dialog__close').forEach(btn=>btn.addEventListener('click',()=>closeDialog(btn.dataset.mxClose)));
+      section.querySelectorAll('.mx-dialog__copy').forEach(btn=>{
+        btn.addEventListener('click',()=>{
+          const dlg=document.getElementById(btn.dataset.mxCopy);
+          const links=[...dlg.querySelectorAll('a')].map(a=>`${a.textContent.trim()} — ${a.href}`).join('\n');
+          navigator.clipboard.writeText(links);
+          btn.textContent='Kopiert ✓';
+          setTimeout(()=>btn.textContent='Links kopieren',1600);
+        });
+      });
+      section.querySelectorAll('.mx-dialog').forEach(dlg=>{
+        dlg.addEventListener('click',e=>{
+          const r=dlg.getBoundingClientRect();
+          if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom) dlg.close();
+        });
+      });
+    })();
+  </script>
+</section>
 
 
 
@@ -1492,591 +1805,6 @@ body[data-page="webdesign"] .hero-image-foreground {
 
   </ul>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- =========================================================
-     SECTION: METRICS — ID: metrics
-     Dark-Mode-ready, Feather-Icons integriert
-     (Texte auf 3D-Design angepasst)
-========================================================== -->
-<section id="metrics">
-  <style>
-    #metrics, #metrics *{ box-sizing:border-box; }
-    #metrics{
-      background: var(--surface);
-      color: var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-    }
-    #metrics .container{ max-width:min(95vw, 1340px); margin-inline:auto; padding-inline:1rem; }
-    #metrics .section-pad{ padding:2.25rem 0 2.5rem; }
-
-    /* ===== Intro ===== */
-    #metrics .intro{ text-align:center; margin-bottom:1.25rem; }
-    #metrics .eyebrow{
-      display:inline-flex; align-items:center; gap:.5rem;
-      padding:.4rem .7rem; border-radius:999px; font-weight:700; font-size:.85rem;
-      background: linear-gradient(90deg,
-        color-mix(in oklab, var(--primary) 85%, var(--accent)),
-        var(--primary),
-        color-mix(in oklab, var(--primary) 85%, var(--accent))
-      );
-      color: var(--on-primary, #fff);
-      box-shadow: inset 0 0 0 1.5px color-mix(in oklab, var(--primary) 80%, transparent);
-    }
-
-    /* ===== KPI Cards ===== */
-    #metrics .results-steps{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: clamp(1rem, 2vw, 1.25rem);
-      margin:1.25rem auto .6rem;
-    }
-    #metrics .result-step{
-      position:relative; overflow:hidden; color:#fff;
-      border-radius:20px; border:1px solid rgba(70,70,70,.14);
-      padding: 1.8rem 1.4rem;
-      background:linear-gradient(270deg,#04006c,#6f00ff,#050088);
-      background-size:600% 600%;
-      cursor: default;
-    }
-    #metrics .result-step.s2{ background:linear-gradient(135deg,#0d0d0d,#000e5c,#0d0d0d); background-size:300% 300%; }
-    #metrics .result-step.s3{ background:linear-gradient(135deg,#000000,#020127,#000000); background-size:400% 400%; }
-    #metrics .result-inner{ position:relative; z-index:2; display:flex; flex-direction:column; gap:.55rem; min-width:0; height:100% }
-    #metrics .result-step h3{ margin:0; font-size:1.1rem; font-weight:900; letter-spacing:-.01em; line-height:1.35 }
-    #metrics .result-step p{ margin:0; font-size:.95rem; line-height:1.6; opacity:.95; color:#fff }
-    #metrics .result-step .kpi{ font-feature-settings:"tnum" 1; font-weight:900; letter-spacing:-.01em }
-    #metrics .result-step .kpi .val{ font-size: clamp(1.35rem, 2.1vw, 1.6rem) }
-    #metrics .result-step .kpi .unit{ opacity:.85; font-weight:800 }
-
-    /* ===== Feather Icon Button (oben rechts) ===== */
-    #metrics .src-btn{
-      position:absolute; top:.7rem; right:.7rem;
-      display:inline-flex; align-items:center; justify-content:center;
-      width:34px; height:34px; border-radius:10px;
-      background: color-mix(in oklab, #ffffff 12%, transparent);
-      border:1px solid color-mix(in oklab, #ffffff 22%, transparent);
-      color:#fff; cursor:pointer;
-      transition: transform .12s ease, background-color .12s ease, border-color .12s ease;
-      z-index: 3;
-      box-shadow: 0 2px 10px rgba(0,0,0,.12);
-    }
-    #metrics .src-btn:focus-visible{ outline:2px solid rgba(255,255,255,.6); outline-offset:2px; }
-    @media (hover:hover){
-      #metrics .src-btn:hover{ transform:translateY(-1px); background: color-mix(in oklab, #ffffff 18%, transparent); }
-    }
-    #metrics .src-btn svg, #metrics .src-btn i{
-      width:20px; height:20px; stroke-width:2; color:#fff;
-    }
-
-    /* ===== Badges unter den Cards ===== */
-    #metrics .badges{
-      display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center;
-      margin:1rem auto 0;
-    }
-    #metrics .pill{
-      display:inline-flex; align-items:center; gap:.45rem;
-      padding:.42rem .7rem; border-radius:999px;
-      border:1px solid var(--border);
-      background: color-mix(in oklab, var(--text) 4%, var(--surface));
-      font-weight:700; font-size:.9rem; color: var(--text);
-    }
-    #metrics .pill .dot{
-      width:.5rem; height:.5rem; border-radius:999px;
-      background: var(--success, #16a34a);
-      box-shadow:0 0 0 2px color-mix(in oklab, var(--success, #16a34a) 30%, transparent);
-    }
-
-    /* ===== Quellen-Dialoge (zentriert) ===== */
-    #metrics .src-dialog::backdrop{ background: rgba(0,0,0,.45); backdrop-filter: blur(3px); }
-    #metrics .src-dialog{
-      position: fixed; inset: 50% auto auto 50%;
-      transform: translate(-50%, -50%) scale(.96);
-      margin: 0; padding: 1.1rem 1.1rem 1.2rem; width: min(92vw, 560px);
-      border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
-      border-radius: 16px;
-      background: linear-gradient(180deg, color-mix(in oklab, var(--surface) 96%, transparent), color-mix(in oklab, var(--surface) 98%, transparent));
-      color: var(--text);
-      box-shadow: 0 20px 60px color-mix(in oklab, var(--text) 28%, transparent), inset 0 1px 0 color-mix(in oklab, #fff 60%, transparent);
-      transition: transform .18s ease, opacity .18s ease; opacity: 0;
-    }
-    #metrics .src-dialog[open]{ transform: translate(-50%, -50%) scale(1); opacity:1; animation: srcDialogReveal .28s cubic-bezier(.2,.7,.2,1) both; }
-    @keyframes srcDialogReveal{ from{ transform: translate(-50%, -48%) scale(.985); opacity:0; } to{ transform: translate(-50%, -50%) scale(1); opacity:1; } }
-
-    #metrics .src-head{ display:flex; align-items:center; gap:.6rem; margin:.2rem 0 .7rem; }
-    #metrics .src-icon{ width:28px; height:28px; border-radius:8px; display:inline-grid; place-items:center; background: color-mix(in oklab, var(--primary) 18%, transparent); border:1px solid color-mix(in oklab, var(--primary) 28%, transparent); color: var(--primary); }
-    #metrics .src-title{ margin:0; font-size:1.08rem; font-weight:900; }
-    #metrics .src-desc{ margin:.15rem 0 .75rem; color: var(--muted); font-size:.96rem; line-height:1.55; }
-    #metrics .src-list{ margin:0; padding-left:0; list-style:none; display:grid; gap:.5rem; }
-    #metrics .src-item{
-      display:grid; grid-template-columns:auto 1fr auto; align-items:start; gap:.6rem;
-      padding:.6rem .65rem; border-radius:12px;
-      border:1px solid color-mix(in oklab, var(--text) 10%, transparent);
-      background: color-mix(in oklab, var(--text) 4%, var(--surface));
-    }
-    #metrics .src-item a{ font-weight:800; color: color-mix(in oklab, var(--primary) 85%, #1a1a1a); text-decoration:none; }
-    #metrics .src-item a:hover{ text-decoration:underline; }
-    #metrics .src-meta{ color: var(--muted); font-size:.9rem; font-weight:700; }
-    #metrics .src-actions{ display:flex; justify-content:flex-end; gap:.6rem; margin-top:1rem; }
-    #metrics .src-close, #metrics .src-copy{
-      display:inline-flex; align-items:center; gap:.5rem;
-      padding:.6rem .85rem; border-radius:10px; font-weight:800; cursor:pointer;
-      border:1px solid var(--border); background: var(--surface); color: var(--text);
-    }
-    #metrics .src-copy{ border-color: color-mix(in oklab, var(--primary) 25%, var(--border)); background: color-mix(in oklab, var(--primary) 8%, var(--surface)); }
-
-    @media (max-width:900px){
-      #metrics .results-steps{ grid-template-columns:1fr; gap:1rem }
-    }
-    #metrics { margin-top: -5rem; }
-    #metrics .section-pad { padding-top: 0 !important; }
-    #metrics .container { padding-top: 0 !important; }
-    #metrics .intro { margin-top: 0 !important; padding-top: 0 !important; }
-  </style>
-
-  <div class="section-pad">
-    <div class="container">
-      <header class="intro">
-        <span class="eyebrow">3D macht Produkte erlebbar</span>
-      </header>
-
-      <!-- KPI-CARDS -->
-      <div class="results-steps">
-        <article class="result-step s1">
-          <button class="src-btn" data-dialog="src-1" aria-label="Quellen öffnen"><i data-feather="external-link"></i></button>
-          <div class="result-inner">
-            <div class="kpi"><span class="val">+20–60</span><span class="unit">%</span></div>
-            <h3>Mehr Interaktion</h3>
-            <p>Höhere Klick- &amp; Gestenrate durch 3D-Viewer und Konfiguratoren.</p>
-          </div>
-        </article>
-
-        <article class="result-step s2">
-          <button class="src-btn" data-dialog="src-2" aria-label="Quellen öffnen"><i data-feather="external-link"></i></button>
-          <div class="result-inner">
-            <div class="kpi"><span class="val">+15–40</span><span class="unit">%</span></div>
-            <h3>Längere Verweildauer</h3>
-            <p>3D-Visuals steigern Dwell-Time &amp; Verständnis komplexer Produkte.</p>
-          </div>
-        </article>
-
-        <article class="result-step s3">
-          <button class="src-btn" data-dialog="src-3" aria-label="Quellen öffnen"><i data-feather="external-link"></i></button>
-          <div class="result-inner">
-            <div class="kpi"><span class="val">−30–55</span><span class="unit">%</span></div>
-            <h3>Weniger Rückfragen</h3>
-            <p>AR/3D reduziert Support-Aufwand &amp; Fehlkäufe durch bessere Darstellung.</p>
-          </div>
-        </article>
-      </div>
-
-      <!-- BADGES -->
-      <div class="badges" role="list">
-        <span class="pill"><span class="dot"></span> glTF / USDZ ready</span>
-        <span class="pill"><span class="dot"></span> WebGL · Three.js</span>
-        <span class="pill"><span class="dot"></span> PBR-Workflow</span>
-        <span class="pill"><span class="dot"></span> AR Quick Look / Viewer</span>
-      </div>
-
-      <!-- DIALOGE -->
-      <dialog id="src-1" class="src-dialog">
-        <div class="src-head"><span class="src-icon">🧭</span><h4 class="src-title">Mehr Interaktion – Ressourcen</h4></div>
-        <p class="src-desc">Guides &amp; Dokus zum Aufbau interaktiver 3D-Erlebnisse:</p>
-        <ul class="src-list">
-          <li class="src-item"><a href="https://threejs.org/" target="_blank" rel="noopener">Three.js – Official Site</a><span class="src-meta">WebGL Framework</span></li>
-          <li class="src-item"><a href="https://modelviewer.dev/" target="_blank" rel="noopener">&lt;model-viewer&gt; – Docs</a><span class="src-meta">Web Component</span></li>
-          <li class="src-item"><a href="https://www.khronos.org/gltf/" target="_blank" rel="noopener">Khronos – glTF</a><span class="src-meta">Asset-Standard</span></li>
-        </ul>
-        <div class="src-actions"><button class="src-copy" data-copy="src-1">Links kopieren</button><button class="src-close" data-close="src-1">Schließen</button></div>
-      </dialog>
-
-      <dialog id="src-2" class="src-dialog">
-        <div class="src-head"><span class="src-icon">⏱️</span><h4 class="src-title">Verweildauer &amp; Verständnis – Ressourcen</h4></div>
-        <ul class="src-list">
-          <li class="src-item"><a href="https://github.com/KhronosGroup/glTF" target="_blank" rel="noopener">glTF – Best Practices</a><span class="src-meta">Repo &amp; Guides</span></li>
-          <li class="src-item"><a href="https://docs.unity3d.com/Manual/optimizing-graphics-performance.html" target="_blank" rel="noopener">Realtime-Optimierung</a><span class="src-meta">Leitfäden</span></li>
-          <li class="src-item"><a href="https://developer.apple.com/augmented-reality/quick-look/" target="_blank" rel="noopener">AR Quick Look</a><span class="src-meta">iOS</span></li>
-        </ul>
-        <div class="src-actions"><button class="src-copy" data-copy="src-2">Links kopieren</button><button class="src-close" data-close="src-2">Schließen</button></div>
-      </dialog>
-
-      <dialog id="src-3" class="src-dialog">
-        <div class="src-head"><span class="src-icon">🧰</span><h4 class="src-title">Weniger Rückfragen – Ressourcen</h4></div>
-        <ul class="src-list">
-          <li class="src-item"><a href="https://developers.google.com/ar" target="_blank" rel="noopener">Google AR – Overview</a><span class="src-meta">Docs</span></li>
-          <li class="src-item"><a href="https://developer.mozilla.org/docs/Web/API/WebGL_API" target="_blank" rel="noopener">MDN – WebGL</a><span class="src-meta">API Guide</span></li>
-          <li class="src-item"><a href="https://aframe.io/" target="_blank" rel="noopener">A-Frame</a><span class="src-meta">WebXR Framework</span></li>
-        </ul>
-        <div class="src-actions"><button class="src-copy" data-copy="src-3">Links kopieren</button><button class="src-close" data-close="src-3">Schließen</button></div>
-      </dialog>
-    </div>
-  </div>
-
-  <script src="https://unpkg.com/feather-icons"></script>
-  <script>
-    feather.replace();
-    (function(){
-      const section = document.getElementById('metrics');
-      function openDialog(id){ const dlg=document.getElementById(id); if(dlg) dlg.showModal(); }
-      function closeDialog(id){ const dlg=document.getElementById(id); if(dlg) dlg.close(); }
-      section.querySelectorAll('.src-btn').forEach(btn=>btn.addEventListener('click',()=>openDialog(btn.dataset.dialog)));
-      section.querySelectorAll('.src-close').forEach(btn=>btn.addEventListener('click',()=>closeDialog(btn.dataset.close)));
-      section.querySelectorAll('.src-copy').forEach(btn=>{
-        btn.addEventListener('click',()=>{
-          const dlg=document.getElementById(btn.dataset.copy);
-          const links=[...dlg.querySelectorAll('a')].map(a=>`${a.textContent.trim()} — ${a.href}`).join('\n');
-          navigator.clipboard.writeText(links);
-          btn.textContent='Kopiert ✓';
-          setTimeout(()=>btn.textContent='Links kopieren',1600);
-        });
-      });
-      section.querySelectorAll('.src-dialog').forEach(dlg=>{
-        dlg.addEventListener('click',e=>{
-          const r=dlg.getBoundingClientRect();
-          if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom) dlg.close();
-        });
-      });
-    })();
-  </script>
-</section>
-
-
-
-
-
-
-
-<section id="warumwir">
-  <style>
-    #warumwir, #warumwir *{ box-sizing:border-box; }
-    #warumwir{
-      background: var(--surface);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-      font-feature-settings: "liga","calt","ss01";
-    }
-    #warumwir .container{ max-width:min(95vw,1340px); margin-inline:auto; padding:2.25rem 1rem 2.6rem; }
-
-    /* Headline/Subline im Cosmos-Typo */
-    #warumwir .intro{ text-align:center; margin-bottom:1.1rem; }
-    #warumwir .eyebrow{
-      display:inline-flex; gap:.5rem; align-items:center;
-      padding:.4rem .7rem; border-radius:999px; font-weight:800; font-size:.85rem;
-      background: linear-gradient(90deg, color-mix(in oklab, var(--primary)85%, var(--accent)), var(--primary), color-mix(in oklab, var(--primary)85%, var(--accent)));
-      color:#fff; box-shadow: inset 0 0 0 1.5px color-mix(in oklab, var(--primary)80%, transparent);
-    }
-    #warumwir h2.title{
-      font-size: clamp(2rem,1.6rem + 2.2vw,3rem); font-weight:900; letter-spacing:-.02em;
-      line-height:1.12; margin:.2rem 0 .6rem; text-wrap:balance;
-    }
-    #warumwir p.sub{
-      max-width:62rem; margin:0 auto 2.2rem; padding:1.1rem 1.2rem;
-      font-size:clamp(1.06rem,1rem + .6vw,1.22rem); line-height:1.78; letter-spacing:.004em;
-      color:#0f1729; text-wrap:pretty; border-radius:14px;
-      background:linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05);
-    }
-
-    /* Grid + Karten (Gradient-Stil wie Metrics) */
-    #warumwir .grid{
-      display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
-      gap:clamp(1rem,2vw,1.25rem); margin:1.25rem auto .4rem;
-    }
-    #warumwir .card{
-      position:relative; overflow:hidden; color:#fff; border-radius:20px;
-      border:1px solid rgba(70,70,70,.14); padding:1.8rem 1.4rem;
-      background:linear-gradient(270deg,#04006c,#6f00ff,#050088); background-size:600% 600%;
-      transition:transform .25s ease, box-shadow .25s ease, background-position .25s ease;
-    }
-    #warumwir .card.s2{ background:linear-gradient(135deg,#0d0d0d,#000e5c,#0d0d0d); background-size:300% 300%; }
-    #warumwir .card.s3{ background:linear-gradient(135deg,#ff5100,#ff0044,#ff5100); background-size:400% 400%; }
-    #warumwir .card:hover{ transform:translateY(-4px); box-shadow:0 18px 46px rgba(0,0,0,.28); background-position:100% 50%; }
-
-    #warumwir .card-inner{ position:relative; z-index:2; display:flex; flex-direction:column; gap:.7rem; min-width:0; height:100%; }
-    #warumwir .card h3{
-      margin:0; font-size:clamp(1.3rem,1.1rem + .9vw,1.9rem); font-weight:870; letter-spacing:-.012em;
-      line-height:1.2; text-wrap:balance; text-shadow:0 1px 2px rgba(0,0,0,.25);
-    }
-    #warumwir .card .leadcopy{ margin:0; font-size:clamp(.98rem,.92rem + .25vw,1.06rem); font-weight:650; line-height:1.55; opacity:.98; }
-
-    /* Verbessertes Punkt-Raster: Icon + Lead + Copy in einer Linie */
-    #warumwir .points{ list-style:none; margin:.2rem 0 0; padding:0; display:grid; gap:.5rem; }
-    #warumwir .point{
-      display:grid; grid-template-columns: 28px 1fr; gap:.6rem; align-items:start;
-      padding:.45rem 0 .55rem; position:relative;
-    }
-    #warumwir .point + .point{
-      border-top:1px solid rgba(255,255,255,.22);
-    }
-    /* Icon-Badge (Feather) */
-    #warumwir .p-icon{
-      width:28px; height:28px; border-radius:9px; display:inline-grid; place-items:center;
-      background: color-mix(in oklab, #ffffff 16%, transparent); border:1px solid color-mix(in oklab, #ffffff 26%, transparent);
-      box-shadow:0 2px 8px rgba(0,0,0,.18);
-    }
-    #warumwir .p-icon svg{ width:16px; height:16px; stroke-width:2; color:#fff; }
-
-    /* Textspalte mit Lead + Copy (parallel & kurz) */
-    #warumwir .p-text{ display:block; }
-    #warumwir .p-text .lead{
-      display:block; font-weight:800; letter-spacing:-.005em; margin-bottom:.15rem;
-      font-size: clamp(1.02rem,.98rem + .35vw,1.12rem); text-shadow:0 1px 2px rgba(0,0,0,.18);
-    }
-    #warumwir .p-text .copy{
-      display:block; color:rgba(255,255,255,.96); font-weight:600;
-      font-size: clamp(.98rem,.92rem + .25vw,1.06rem); line-height:1.6; text-wrap:pretty;
-      text-shadow:0 1px 2px rgba(0,0,0,.15);
-    }
-
-    /* Soft-Trust Badges */
-    #warumwir .badges{ display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin:1rem auto 0; }
-    #warumwir .pill{
-      display:inline-flex; align-items:center; gap:.45rem; padding:.42rem .7rem; border-radius:999px;
-      font-weight:700; font-size:.9rem; border:1px solid var(--border, rgba(0,0,0,.08));
-      background: color-mix(in oklab, var(--text) 4%, var(--surface)); color: var(--text);
-    }
-    #warumwir .pill .ok{ width:.5rem; height:.5rem; border-radius:999px; background:#16a34a; box-shadow:0 0 0 2px color-mix(in oklab, #16a34a 30%, transparent); }
-
-    /* CTA-Zeile HART zentriert */
-    #warumwir .cta-wrap{ margin-top:1.4rem; text-align:center; }
-    #warumwir .cta-row{
-      display:inline-flex; gap:.7rem; align-items:center; justify-content:center; flex-wrap:wrap;
-    }
-    #warumwir .cta{
-      display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
-      padding:.95rem 1.25rem; border-radius:12px; font-weight:800; font-size:.98rem; text-decoration:none;
-      color:#fff;
-      background: linear-gradient(90deg, var(--primary), color-mix(in oklab, var(--primary)85%, var(--accent)));
-      border:1px solid color-mix(in oklab, var(--primary)60%, transparent);
-      box-shadow: 0 6px 22px color-mix(in oklab, var(--primary)32%, transparent), inset 0 1px 0 rgba(255,255,255,.35);
-      transition: transform .12s ease, box-shadow .2s ease, opacity .12s ease;
-    }
-    #warumwir .cta:hover{ transform: translateY(-1px); box-shadow: 0 12px 36px color-mix(in oklab, var(--primary)38%, transparent); }
-    #warumwir .cta.secondary{
-      color: var(--text);
-      background: color-mix(in oklab, var(--text) 4%, var(--surface));
-      border:1px solid var(--border, rgba(0,0,0,.08));
-      box-shadow: 0 2px 10px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.6);
-    }
-
-    /* Info-Buttons (Dialog) */
-    #warumwir .info-btn{
-      position:absolute; top:.7rem; right:.7rem; width:34px; height:34px; border-radius:10px;
-      display:inline-grid; place-items:center; background: color-mix(in oklab, #ffffff 12%, transparent);
-      border:1px solid color-mix(in oklab, #ffffff 22%, transparent); color:#fff; z-index:3;
-      box-shadow:0 2px 10px rgba(0,0,0,.12); transition: transform .12s ease, background-color .12s ease, border-color .12s ease;
-    }
-    #warumwir .info-btn:hover{ transform:translateY(-1px); background: color-mix(in oklab, #ffffff 18%, transparent); }
-    #warumwir .info-btn svg{ width:20px; height:20px; stroke-width:2; color:#fff; }
-
-    /* Dialog */
-    #warumwir .dlg::backdrop{ background: rgba(0,0,0,.45); backdrop-filter: blur(3px); }
-    #warumwir .dlg{
-      position: fixed; inset: 50% auto auto 50%; transform: translate(-50%, -50%) scale(.96);
-      width:min(92vw,560px); padding:1.1rem; margin:0;
-      border:1px solid color-mix(in oklab, var(--text)14%, transparent); border-radius:16px;
-      background:linear-gradient(180deg, color-mix(in oklab, var(--surface)96%, transparent), color-mix(in oklab, var(--surface)98%, transparent));
-      color:var(--text); box-shadow: 0 20px 60px color-mix(in oklab, var(--text)28%, transparent), inset 0 1px 0 color-mix(in oklab, #fff60%, transparent);
-      transition: transform .18s ease, opacity .18s ease; opacity:0;
-    }
-    #warumwir .dlg[open]{ transform: translate(-50%, -50%) scale(1); opacity:1; }
-    #warumwir .dlg h4{ margin:.1rem 0 .4rem; font-weight:900; letter-spacing:-.01em; }
-    #warumwir .dlg p{ margin:.25rem 0 .7rem; color: var(--muted, #666); }
-    #warumwir .dlg .actions{ display:flex; justify-content:flex-end; gap:.6rem; margin-top:.6rem; }
-    #warumwir .btn{ display:inline-flex; align-items:center; gap:.5rem; padding:.6rem .85rem; border-radius:10px; font-weight:800; cursor:pointer; border:1px solid var(--border, rgba(0,0,0,.08)); background: var(--surface); color: var(--text); }
-
-    /* Dark Mode */
-    :root[data-theme="dark"] #warumwir{ color:#f5f7fa; background:#000; }
-    :root[data-theme="dark"] #warumwir p.sub{
-      color:#e8eeff; background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035));
-      border:1px solid rgba(255,255,255,.08); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 2px 8px rgba(0,0,0,.45);
-    }
-    @media (prefers-color-scheme: dark){
-      :root[data-theme="auto"] #warumwir{ color:#f5f7fa; background:#000; }
-      :root[data-theme="auto"] #warumwir p.sub{
-        color:#e8eeff; background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035));
-        border:1px solid rgba(255,255,255,.08); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 2px 8px rgba(0,0,0,.45);
-      }
-    }
-
-    /* Mobile */
-    @media (max-width:900px){
-      #warumwir .grid{ grid-template-columns:1fr; gap:1rem; }
-      #warumwir .cta-row{ width:100%; }
-    }
-  </style>
-
-  <div class="container">
-    <header class="intro">
-      <span class="eyebrow">Warum wir</span>
-      <h2 class="title">Design mit Substanz, Technik mit Gefühl</h2>
-      <p class="sub">Wir verbinden <strong>Marke, 3D und Web</strong> zu Erlebnissen, die wirken – klar, schnell und ohne Renderlook.</p>
-    </header>
-
-    <div class="grid" aria-label="Unsere Stärken">
-      <!-- Card 1 -->
-      <article class="card s1">
-        <button class="info-btn" data-dialog="ww-1" aria-label="Details öffnen"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 8h.01M11 12h1v4h1"/></svg></button>
-        <div class="card-inner">
-          <h3>Markentreue statt Renderlook</h3>
-          <p class="leadcopy">Realistisch, aber CI-treu – ohne Preset-Glanz.</p>
-
-          <ul class="points" aria-label="Nutzen & Einwände">
-            <li class="point">
-              <span class="p-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M20 6 9 17l-5-5"/></svg></span>
-              <span class="p-text">
-                <span class="lead">Look-Development</span>
-                <span class="copy">PBR-Materialien, Licht-Tests, Styleframes für Farbsicherheit.</span>
-              </span>
-            </li>
-            <li class="point">
-              <span class="p-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 6h18M3 12h18M3 18h18"/></svg></span>
-              <span class="p-text">
-                <span class="lead">CI-Konsistenz</span>
-                <span class="copy">Markenfarben & Komposition werden präzise übertragen.</span>
-              </span>
-            </li>
-            <li class="point">
-              <span class="p-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="m9 18 6-6-6-6"/></svg></span>
-              <span class="p-text">
-                <span class="lead">Ready für Kanäle</span>
-                <span class="copy">Web, Social & Motion erhalten den gleichen Look.</span>
-              </span>
-            </li>
-          </ul>
-        </div>
-      </article>
-
-      <!-- Card 2 -->
-      <article class="card s2">
-        <button class="info-btn" data-dialog="ww-2" aria-label="Details öffnen"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg></button>
-        <div class="card-inner">
-          <h3>Prozessklarheit & Tempo</h3>
-          <p class="leadcopy">Planbar statt diffus – vom Briefing bis Launch.</p>
-
-          <ul class="points">
-            <li class="point">
-              <span class="p-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M8 7h13M8 12h13M8 17h13M3 7h.01M3 12h.01M3 17h.01"/></svg></span>
-              <span class="p-text">
-                <span class="lead">Milestones</span>
-                <span class="copy">Transparente Aufwandsschätzung & klare Übergaben.</span>
-              </span>
-            </li>
-            <li class="point">
-              <span class="p-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 12h18M3 6h18M3 18h18"/></svg></span>
-              <span class="p-text">
-                <span class="lead">Pipeline</span>
-                <span class="copy">Effiziente Abläufe für Render, Animation & Integration.</span>
-              </span>
-            </li>
-            <li class="point">
-              <span class="p-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 6v6l4 2"/></svg></span>
-              <span class="p-text">
-                <span class="lead">Time-to-Live</span>
-                <span class="copy">Schnell zu belastbaren Previews & Entscheidungen.</span>
-              </span>
-            </li>
-          </ul>
-        </div>
-      </article>
-
-      <!-- Card 3 -->
-      <article class="card s3">
-        <button class="info-btn" data-dialog="ww-3" aria-label="Details öffnen"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="8"/><path d="M22 12h-4M6 12H2M12 2v4M12 18v4M12 8v4l3 2"/></svg></button>
-        <div class="card-inner">
-          <h3>Wirkung mit Strategie</h3>
-          <p class="leadcopy">3D dort, wo es Story, Verständnis & Conversion hebt.</p>
-
-          <ul class="points">
-            <li class="point">
-              <span class="p-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3h18v4H3zM3 10h18v11H3z"/></svg></span>
-              <span class="p-text">
-                <span class="lead">Use-Cases</span>
-                <span class="copy">Produktviewer, Konfigurator, Motion – passend zum Ziel.</span>
-              </span>
-            </li>
-            <li class="point">
-              <span class="p-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 12h18M12 3v18"/></svg></span>
-              <span class="p-text">
-                <span class="lead">Realtime/AR</span>
-                <span class="copy">WebGL, glTF/USDZ – performante Assets für Interaktion.</span>
-              </span>
-            </li>
-            <li class="point">
-              <span class="p-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 17l6-6 4 4 8-8"/></svg></span>
-              <span class="p-text">
-                <span class="lead">Messbarer Mehrwert</span>
-                <span class="copy">Ziele, KPIs & Learnings von Beginn an definiert.</span>
-              </span>
-            </li>
-          </ul>
-        </div>
-      </article>
-    </div>
-
-    <!-- Soft Trust -->
-    <div class="badges" role="list">
-      <span class="pill"><span class="ok"></span> Markenkonsistenz</span>
-      <span class="pill"><span class="ok"></span> Transparente Milestones</span>
-      <span class="pill"><span class="ok"></span> Web & AR ready</span>
-    </div>
-
-    <!-- CTAs: HART zentriert -->
-    <div class="cta-wrap">
-      <div class="cta-row" role="group" aria-label="Nächste Schritte">
-        <a class="cta" href="#kontakt">Kostenlosen 3D-Check starten</a>
-        <a class="cta secondary" href="#portfolio">Arbeitsproben ansehen</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- optionale Dialoge -->
-  <dialog id="ww-1" class="dlg" aria-labelledby="ww-1-t">
-    <h4 id="ww-1-t">Markentreue statt Renderlook</h4>
-    <p>Styleframes, Licht-Tests, Materialguides & Farbproofs sichern CI-Treue.</p>
-    <div class="actions"><button class="btn" data-close="ww-1">Schließen</button></div>
-  </dialog>
-  <dialog id="ww-2" class="dlg" aria-labelledby="ww-2-t">
-    <h4 id="ww-2-t">Prozessklarheit & Tempo</h4>
-    <p>Milestones, Aufwandsschätzung vor Start, klare Übergaben – effizient bis Launch.</p>
-    <div class="actions"><button class="btn" data-close="ww-2">Schließen</button></div>
-  </dialog>
-  <dialog id="ww-3" class="dlg" aria-labelledby="ww-3-t">
-    <h4 id="ww-3-t">Wirkung mit Strategie</h4>
-    <p>Gezielter 3D-Einsatz für Verständnis, Emotion und Conversion – Realtime-optimiert.</p>
-    <div class="actions"><button class="btn" data-close="ww-3">Schließen</button></div>
-  </dialog>
-
-  <script>
-    (function(){
-      const root = document.getElementById('warumwir');
-      function openDialog(id){ const d=document.getElementById(id); if(d) d.showModal(); }
-      function closeDialog(id){ const d=document.getElementById(id); if(d) d.close(); }
-      root.querySelectorAll('.info-btn').forEach(b=> b.addEventListener('click', ()=> openDialog(b.dataset.dialog)));
-      root.querySelectorAll('.btn[data-close]').forEach(b=> b.addEventListener('click', ()=> closeDialog(b.dataset.close)));
-      root.querySelectorAll('.dlg').forEach(dlg=>{
-        dlg.addEventListener('click', e=>{
-          const r=dlg.getBoundingClientRect();
-          if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom) dlg.close();
-        });
-      });
-    })();
-  </script>
-</section>
-
-
-
-
 
 
 
@@ -2690,6 +2418,374 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
+<section id="output-grid">
+  <style>
+    /* ===== Base Theme (independent) ===== */
+    #output-grid, #output-grid *{ box-sizing:border-box; }
+    #output-grid{
+      --fg: #0b0c10;
+      --fg-inv: #fff;
+      --muted: #626b86;
+      --surface: #ffffff;
+      --surface-dark: #0f1124;
+      --border: rgba(0,0,0,.10);
+      --gA: linear-gradient(270deg,#04006c,#6f00ff,#050088);
+      --gB: linear-gradient(135deg,#0d0d0d,#000e5c,#0d0d0d);
+      --gC: linear-gradient(135deg,#ff5100,#ff0044,#ff5100); /* Orange */
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+      color:var(--fg);
+      padding: clamp(2.2rem, 1.8rem + 2vw, 3.2rem) 1rem;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      font-feature-settings: "liga","calt","ss01";
+    }
+    #output-grid .container{ max-width: 1280px; margin-inline:auto; }
+
+    /* ===== Head ===== (TYPO 1:1 aus Anhang, auf unsere Selektoren gemappt) */
+    #output-grid .headline{
+      font-size: clamp(2rem, 1.6rem + 2.2vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.12;
+      margin: .2rem 0 .6rem;
+      color: #0b0c10;
+      text-align: center;
+      text-wrap: balance;
+    }
+    #output-grid .subline{
+      position: relative;
+      color:#0f1729;
+      max-width: 62rem;
+      margin: 0 auto 2.6rem;
+      line-height: 1.78;
+      font-size: clamp(1.06rem, 1rem + .6vw, 1.22rem);
+      letter-spacing: .004em;
+      text-wrap: pretty;
+      padding: 1.1rem 1.2rem 1.1rem;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05);
+      text-align:center;
+    }
+
+    /* Geräte-spezifische Kurztexte */
+    .d-only,.t-only,.m-only{ display:none; }
+    @media (min-width:1200px){ .d-only{ display:inline; } }
+    @media (min-width:768px) and (max-width:1199.98px){ .t-only{ display:inline; } }
+    @media (max-width:767.98px){ .m-only{ display:inline; } }
+
+    /* ===== Layout-Pairs ===== */
+    .pairs{ display:grid; gap: clamp(1rem,1.4vw,1.8rem); }
+    @media (min-width:768px){
+      .pair{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(1rem,1.2vw,1.5rem);
+        align-items: stretch;
+        min-height: clamp(360px, 32vw, 460px);
+      }
+    }
+
+    /* ===== Card base (Desktop/Tablet) ===== */
+    .card{
+      position:relative; overflow:hidden; border-radius:18px;
+      border:1px solid var(--border); background: var(--surface);
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+      transition: transform .25s ease, box-shadow .25s ease, background-position .4s ease;
+      overflow-wrap:anywhere; word-break:break-word; hyphens:auto;
+    }
+    @media (hover:hover){
+      .card:hover{ transform: translateY(-6px); box-shadow: 0 18px 46px rgba(0,0,0,.18); }
+    }
+
+    /* ===== Image cards ===== */
+    .img-card{ background: var(--gA); background-size: 500% 500%; }
+    .img-card.altA{ background: var(--gB); background-size: 320% 320%; }
+    .img-card.altB{ background: var(--gC); background-size: 380% 380%; }
+    .img-card figure{ position:absolute; inset:0; margin:0; }
+    .img-card img{
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; object-position:center; transition: transform .6s ease;
+    }
+    @media (hover:hover){ .img-card:hover img{ transform: scale(1.035); } }
+
+    /* ===== Text cards (Desktop/Tablet) ===== */
+    .text-card{
+      color: var(--fg-inv);
+      background:
+        radial-gradient(1200px 420px at -10% -10%, rgba(255,255,255,.10), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),
+        var(--gB);
+      background-size: auto, auto, 360% 360%;
+      background-position: 0 0, 0 0, 0% 50%;
+      display:flex;
+    }
+    /* Zweite Textkarte wieder ORANGE */
+    .text-card.altC{
+      background:
+        radial-gradient(1200px 420px at 110% 0%, rgba(255,255,255,.10), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),
+        var(--gC);
+      background-size: auto, auto, 380% 380%;
+    }
+
+    .inner{
+      position:relative; z-index:1;
+      display:flex; flex-direction:column; gap:.8rem;
+      padding: clamp(1.3rem, 1rem + 1.4vw, 2.2rem);
+      width:100%; max-width: 62ch;
+      margin-inline: clamp(0rem, 2vw, 2.2rem);
+    }
+
+    /* ===== TYPO 1:1 (aus Anhang) für Card-H3 & Copy – auf unsere Klassen gemappt ===== */
+    .h3{
+      font-size: clamp(1.3rem, 1.1rem + .9vw, 1.9rem);
+      font-weight: 800;
+      margin: .1rem 0 .5rem;
+      color: #fff;
+      letter-spacing: -0.01em;
+      text-shadow: 0 1px 2px rgba(0,0,0,.25);
+      line-height: 1.2;
+      text-wrap: balance;
+    }
+    /* Copy/Liste wie die LI-Copy im Anhang */
+    .copy{
+      color: rgba(255,255,255,.96);
+      font-weight: 690;
+      letter-spacing: -.002em;
+      font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem);
+      line-height: 1.7;
+      text-wrap: pretty;
+      hyphens: auto;
+      max-width: 62ch;
+      text-shadow: 0 1px 2px rgba(0,0,0,.18);
+    }
+    .points{ list-style:none; margin:.2rem 0 0; padding:0; }
+    .points li{
+      margin:0; padding:.7rem 0 .9rem;
+      color: rgba(255,255,255,.96);
+      font-weight: 690;
+      letter-spacing: -.002em;
+      font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem);
+      line-height: 1.7;
+      text-wrap: pretty; hyphens:auto; max-width:62ch;
+      text-shadow:0 1px 2px rgba(0,0,0,.18);
+    }
+    .points li + li{ border-top:1px solid rgba(255,255,255,.22); }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.34rem .6rem; border-radius:999px;
+      font-weight:800; font-size:.84rem; color:#fff;
+      border:1px solid rgba(255,255,255,.32);
+      background: rgba(255,255,255,.16);
+      width:max-content;
+    }
+
+    .cta{
+      margin-top:.35rem; display:inline-flex; align-items:center; gap:.5rem;
+      background:#fff; color:#111; font-weight:800; text-decoration:none;
+      padding:.62rem .88rem; border-radius:12px; border:0; width:max-content;
+      box-shadow:0 6px 18px rgba(0,0,0,.22); transition: transform .15s ease, box-shadow .15s ease;
+    }
+    @media (hover:hover){ .cta:hover{ transform: translateY(-1px); box-shadow:0 10px 26px rgba(0,0,0,.28); } }
+
+    /* ===== Mobile: Foto oben, Text darunter (plain) + Spice ===== */
+    @media (max-width:767.98px){
+      .pair{ display:flex; flex-direction: column; gap:.75rem; }
+      .pair + .pair{ margin-top: 1rem; }
+      .pair .img-card{ order:1; }
+      .pair .text-card{ order:2; }
+
+      .card.img-card{ border-radius:16px; min-height: 240px; }
+      .card.img-card::after{
+        content:""; position:absolute; inset:0;
+        background: linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,0) 30%, rgba(0,0,0,.22) 100%);
+        pointer-events:none;
+      }
+      .card.img-card img{ transform: translateZ(0); }
+      .card.img-card.inview img{ transform: scale(1.03); transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+
+      /* Text ohne Kartenoptik – auch die orange Variante wird neutralisiert */
+      .text-card, .text-card.altC{
+        background:none !important; border:none !important; box-shadow:none !important;
+        color:var(--fg); padding:0; border-radius:0; display:block;
+      }
+      .text-card .inner{ margin-inline:0; padding:.88rem .2rem 0 .2rem; max-width: 48ch; }
+      .text-card .inner::before{
+        content:""; display:block; width:28px; height:3px; border-radius:3px;
+        background: linear-gradient(90deg,#6f00ff 0%, #4bd5ff 100%); margin-bottom:.5rem; opacity:.9;
+      }
+
+      /* TYPO Mobile (aus Anhang abgeleitet): H3 kräftiger, Copy ruhig */
+      .kicker{
+        font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; opacity:.75; color:#2a3350; padding:0; border:none; background:none;
+      }
+      .h3{
+        font-size: clamp(1.18rem, 1.02rem + 2.2vw, 1.38rem);
+        line-height: 1.22; font-weight: 900; letter-spacing:-.012em; margin:.22rem 0 .22rem; color:#0b0c10; text-shadow:none;
+      }
+      .copy{ font-size: clamp(1rem, .96rem + 1.1vw, 1.08rem); line-height:1.6; font-weight:600; color:#1b243b; }
+      .points{ display:none; }
+
+      .cta{ padding:.55rem .9rem; border-radius:11px; background:#111; color:#fff; font-size:.92rem; font-weight:850; }
+
+      /* Reveal */
+      .reveal{ opacity:0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
+      .inview.reveal{ opacity:1; transform: translateY(0); }
+
+      /* Kein Lift auf Touch */
+      .card:hover, .card:active{ transform:none; box-shadow:0 8px 24px rgba(0,0,0,.08); }
+    }
+
+    /* ===== Dark Mode (auto + .dark) ===== */
+    @media (prefers-color-scheme: dark){
+      #output-grid,
+      .dark #output-grid{
+        --fg: #e9edff; --fg-inv: #0b0c10; --muted: #b9c2e4; --surface: #0f1226; --border: rgba(255,255,255,.12);
+      }
+      #output-grid .headline, .dark #output-grid .headline{ color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.35); }
+      #output-grid .subline{
+        color:#e8eeff;
+        background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035));
+        border:1px solid rgba(255,255,255,.08);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 2px 8px rgba(0,0,0,.45);
+      }
+      #output-grid .card{ box-shadow: 0 10px 28px rgba(0,0,0,.45); border-color: var(--border); }
+      #output-grid .cta{ background:#fff; color:#111; }
+      @media (max-width:767.98px){
+        #output-grid .text-card .h3{ color:#e9edff; }
+        #output-grid .text-card .copy{ color:#cbd5ff; }
+        #output-grid .text-card .kicker{ color:#aab5e8; }
+        #output-grid .cta{ background:#e9edff; color:#0b0c10; }
+        .text-card .inner::before{ background: linear-gradient(90deg,#7f6bff 0%, #5be0ff 100%); }
+      }
+    }
+    .dark #output-grid .headline{ color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.35); }
+    .dark #output-grid .subline{
+      color:#e8eeff;
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 2px 8px rgba(0,0,0,.45);
+    }
+    .dark #output-grid .card{ box-shadow: 0 10px 28px rgba(0,0,0,.45); border-color: var(--border); }
+    .dark #output-grid .cta{ background:#fff; color:#111; }
+    @media (max-width:767.98px){
+      .dark #output-grid .text-card .h3{ color:#e9edff; }
+      .dark #output-grid .text-card .copy{ color:#cbd5ff; }
+      .dark #output-grid .text-card .kicker{ color:#aab5e8; }
+      .dark #output-grid .cta{ background:#e9edff; color:#0b0c10; }
+      .dark #output-grid .text-card .inner::before{ background: linear-gradient(90deg,#7f6bff 0%, #5be0ff 100%); }
+    }
+  </style>
+
+  <div class="container">
+    <h2 class="headline">Design mit Substanz, Technik mit Gefühl</h2>
+    <p class="subline">
+      <span class="d-only">Spezialisiert auf <strong>Produktrendering</strong> & <strong>Industrie-Animation</strong> – vom CAD-Datensatz bis Realtime/AR.</span>
+      <span class="t-only"><strong>Rendering & Animation</strong> für Produkte/Industrie – präzise, CI-treu, performant fürs Web.</span>
+      <span class="m-only"><strong>Rendering & Animation</strong> für Produkte/Industrie – klar, schnell, CI-treu.</span>
+    </p>
+
+    <div class="pairs" aria-label="Rendering & Animation – 2 Paare">
+
+      <!-- Pair 1: Bild links / Text rechts -->
+      <div class="pair">
+        <article class="card img-card reveal" aria-label="Produkt-Rendering – Bild">
+          <figure>
+            <img src="./images/renderexample.webp" alt="Fotorealistisches Produkt-Rendering mit Studiolicht">
+          </figure>
+        </article>
+
+        <article class="card text-card reveal" aria-labelledby="p1-h">
+          <div class="inner">
+            <span class="kicker">Produkt-Rendering</span>
+            <h3 id="p1-h" class="h3">
+              <span class="d-only">Fotoreal. CI-präzise. Variantenfähig.</span>
+              <span class="t-only">Fotoreal & CI-präzise.</span>
+              <span class="m-only">Fotoreal & CI-treu.</span>
+            </h3>
+            <p class="copy">
+              <span class="d-only">PBR-Materialien, kontrolliertes HDR-Licht und kameratreue Optik – ideal für Launch, Kampagne und E-Commerce.</span>
+              <span class="t-only">PBR-Materialien, HDR-Licht & Optik – ideal für Launch & Shop.</span>
+              <span class="m-only">PBR-Looks, sauberes Licht – ready für Shop & Social.</span>
+            </p>
+            <ul class="points d-only">
+              <li>CI-sichere Farben, konsistenter Look über alle Kanäle</li>
+              <li>Varianten/Lines: Farben, Materialien, Konfigurationen</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <!-- Pair 2: Text links / Bild rechts (gespiegelt) -->
+      <div class="pair">
+        <article class="card text-card altC reveal" aria-labelledby="p2-h">
+          <div class="inner">
+            <span class="kicker">Industrie-Animation</span>
+            <h3 id="p2-h" class="h3">
+              <span class="d-only">Funktion & Prozess sichtbar machen.</span>
+              <span class="t-only">Funktion klar erklärt.</span>
+              <span class="m-only">Funktion erklärt.</span>
+            </h3>
+            <p class="copy">
+              <span class="d-only">Explosionsdarstellungen, Montagefolgen und Prozess-Abläufe – präzise animiert für Vertrieb, Messe & Schulung.</span>
+              <span class="t-only">Explosionsansichten & Abläufe – präzise für Vertrieb & Schulung.</span>
+              <span class="m-only">Explosionsansicht & Ablauf – präzise.</span>
+            </p>
+            <ul class="points d-only">
+              <li>CAD-basiert: Retopo, UVs, saubere Hierarchien</li>
+              <li>Technische Richtigkeit: Toleranzen & Bewegungslogik</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card img-card altB reveal" aria-label="Industrie-Detail">
+          <figure>
+            <img src="./images/renderexample.webp" alt="Detail-Rendering einer industriellen Baugruppe">
+          </figure>
+        </article>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mini JS: Scroll-Reveal & sanftes Bild-Scaling auf Mobile (ohne Libs) -->
+  <script>
+    (function(){
+      const root = document.getElementById('output-grid');
+      const els = root.querySelectorAll('.reveal, .img-card');
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){ e.target.classList.add('inview'); }
+          else { e.target.classList.remove('inview'); }
+        });
+      }, {threshold: 0.25});
+      els.forEach(el=> io.observe(el));
+    })();
+  </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2987,177 +3083,6 @@ body[data-page="webdesign"] .hero-image-foreground {
     }
   });
 </script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const hasGSAP = !!window.gsap;
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!hasGSAP || prefersReduced) return;
-
-  const { gsap } = window;
-  gsap.registerPlugin(window.ScrollTrigger);
-
-  const mm = gsap.matchMedia();
-  mm.add("(min-width: 700px)", () => {
-    const hub   = document.querySelector('#flowhub');
-    const rail  = hub?.querySelector('.flow-rail');
-    const cards = gsap.utils.toArray('#flowhub .flow-card');
-    const title = hub?.querySelector('.pane-title');
-    const sub   = hub?.querySelector('.pane-subtitle');
-
-    // 0) Safety: will-change hints
-    gsap.set([title, sub, cards], { willChange: 'transform, opacity' });
-
-    // 1) Section-Intro (einmalig)
-    gsap.from([title, sub], {
-      y: 20, autoAlpha: 0, duration: 0.6, ease: 'power2.out', stagger: 0.08,
-      scrollTrigger: { trigger: hub, start: "top 75%", once: true }
-    });
-
-    // 2) Karten-Stagger beim ersten Eintritt
-    gsap.from(cards, {
-      y: 24, autoAlpha: 0, duration: 0.55, ease: 'power2.out', stagger: 0.12,
-      scrollTrigger: { trigger: rail || hub, start: "top 70%", once: true }
-    });
-
-    // 3) Parallax der großen Nummern (scrub)
-    gsap.to('#flowhub .card-num-giant', {
-      yPercent: -18, ease: 'none',
-      scrollTrigger: {
-        trigger: hub,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: 0.35
-      }
-    });
-
-    // 4) 3D-Tilt on hover (nur präziser Pointer, kein Touch)
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      const clamp = gsap.utils.clamp; // safety
-      const rX = 8, rY = 8; // max rotation
-
-      cards.forEach(card => {
-        // Perspektive nur einmal setzen
-        gsap.set(card, { transformStyle: 'preserve-3d' });
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const cx = rect.left + rect.width / 2;
-          const cy = rect.top + rect.height / 2;
-          const dx = (e.clientX - cx) / (rect.width  / 2);
-          const dy = (e.clientY - cy) / (rect.height / 2);
-          gsap.to(card, {
-            rotateY: clamp(-rY, rY, dx * rY),
-            rotateX: clamp(-rX, rX, -dy * rX),
-            translateZ: 0,
-            transformOrigin: 'center center',
-            duration: 0.25, ease: 'power2.out'
-          });
-        });
-        card.addEventListener('mouseleave', () => {
-          gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.35, ease: 'power3.out' });
-        });
-      });
-    }
-
-    // Cleanup bei Unmatch (optional)
-    return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
-      gsap.set([title, sub, cards, '#flowhub .card-num-giant'], { clearProps: 'all' });
-    };
-  });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  if (!window.gsap) return;
-  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
-
-  const { gsap } = window;
-  gsap.registerPlugin(window.ScrollTrigger);
-
-  const mm = gsap.matchMedia();
-
-  // ===== Mobile / Small Screens (≤ 699.98px) =====
-  mm.add("(max-width: 699.98px)", () => {
-    const hub   = document.querySelector('#flowhub');
-    const rail  = hub?.querySelector('.flow-rail');
-    const cards = gsap.utils.toArray('#flowhub .flow-card');
-    const title = hub?.querySelector('.pane-title');
-    const sub   = hub?.querySelector('.pane-subtitle');
-
-    // 0) will-change Hints
-    gsap.set([title, sub, cards], { willChange: 'transform, opacity' });
-
-    // 1) Section-Intro
-    gsap.from([title, sub], {
-      y: 16, autoAlpha: 0, duration: 0.5, ease: 'power2.out', stagger: 0.08,
-      scrollTrigger: { trigger: hub, start: "top 80%", once: true }
-    });
-
-    // 2) Jede Karte revealed sich beim Erreichen (Einmal-Animation)
-    cards.forEach((card, i) => {
-      gsap.from(card, {
-        y: 18, autoAlpha: 0, duration: 0.45, ease: 'power2.out',
-        delay: i === 0 ? 0.05 : 0, // erste Karte minimal verzögert – wirkt smoother
-        scrollTrigger: {
-          trigger: card,
-          start: "top 85%",
-          toggleActions: "play none none none", // einmalig
-        }
-      });
-    });
-
-    // 3) Dezente Parallax (Nummer & Inhalt bewegen sich leicht gegeneinander)
-    //    – nur wenn die große Nummer sichtbar ist (bei 600–699px)
-    const giants = gsap.utils.toArray('#flowhub .card-num-giant');
-    if (giants.length) {
-      gsap.to(giants, {
-        yPercent: -12, ease: 'none',
-        scrollTrigger: {
-          trigger: rail || hub,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 0.3,
-        }
-      });
-    }
-
-    // Inhalt (card-core) leicht entgegengesetzt für Tiefe
-    gsap.to('#flowhub .card-core', {
-      yPercent: 6, ease: 'none',
-      scrollTrigger: {
-        trigger: rail || hub,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 0.3,
-      }
-    });
-
-    // 4) Sanfter „Active“-Akzent, wenn eine Karte mittig steht (kein Springen)
-    cards.forEach((card) => {
-      const tl = gsap.timeline({ paused: true });
-      tl.to(card, { scale: 1.015, duration: 0.25, ease: 'power2.out' });
-
-      ScrollTrigger.create({
-        trigger: card,
-        start: "top 65%",
-        end: "bottom 35%",
-        onEnter: () => tl.play(),
-        onEnterBack: () => tl.play(),
-        onLeave: () => tl.reverse(),
-        onLeaveBack: () => tl.reverse()
-      });
-    });
-
-    // Cleanup, falls Breakpoint verlässt
-    return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
-      gsap.set([title, sub, cards, '#flowhub .card-core', '#flowhub .card-num-giant'], { clearProps: 'all' });
-    };
-  });
-});
-</script>
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -3655,19 +3580,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
-
 <section id="design-study" class="aurora-sheet" data-theme="auto">
   <!-- HEADLINE / SUBHEADLINE -->
-  <h2 class="aurora-title">3D-Case Study: Neolog</h2>
+  <h2 class="aurora-title">Case Study: Neolog</h2>
   <p class="aurora-subtitle">
     <span class="subtitle-full">
-      Für den Verpackungshersteller <strong>Neolog</strong> habe ich sämtliche 3D-Modelle gestaltet, texturiert und in Szene gesetzt. 
-      Die entstandenen Renderings und Videos wurden für <strong>Messen, Website und Marketingkampagnen</strong> genutzt – und steigerten Sichtbarkeit und Markenwirkung spürbar.
+      Für den Verpackungshersteller <strong>Neolog</strong> entwickelte ich sämtliche 3D-Assets – Modellierung, Texturen, Lighting und Animation. 
+      Die Renderings und Clips unterstützten <strong>Messeauftritte, Website und Kampagnen</strong> und steigerten Sichtbarkeit sowie Markenwirkung messbar.
     </span>
-    <span class="subtitle-t">3D-Design und Rendering für Neolog – vom Blockmodell bis zur Messekampagne.</span>
-    <span class="subtitle-snippet">3D-Visuals für Neolog – Design, Rendering &amp; Animation.</span>
+    <span class="subtitle-t">3D-Assets &amp; Renderings für Neolog – von der Modellierung bis zur Kampagne.</span>
+    <span class="subtitle-snippet">Neolog: 3D-Design, Rendering &amp; Animation.</span>
   </p>
 
   <!-- OBERZEILE -->
@@ -3680,8 +3602,9 @@ document.addEventListener("DOMContentLoaded", () => {
           id="ds-main-img"
           class="ds-preview-img"
           src="./3DSlideShow/post12.png"
-          alt="3D-Rendering für Neolog – Produktvisualisierung mit Licht-Setup"
+          alt="Neolog 3D-Rendering – Produktvisualisierung mit Studiolicht"
           loading="lazy"
+          decoding="async"
         />
 
         <!-- Overlay-Thumbnail-Slider -->
@@ -3692,14 +3615,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
           <div class="ds-thumbs-wrap">
             <ul class="ds-thumbs" id="ds-thumbs" role="listbox" aria-label="Bildauswahl">
-              <li><button class="ds-thumb is-active" data-src="./3DSlideShow/post12.png"><img src="./3DSlideShow/post12.png" alt=""></button></li>
-              <li><button class="ds-thumb" data-src="./3DSlideShow/post11.png"><img src="./3DSlideShow/post11.png" alt=""></button></li>
-              <li><button class="ds-thumb" data-src="./3DSlideShow/post10.png"><img src="./3DSlideShow/post10.png" alt=""></button></li>
-              <li><button class="ds-thumb" data-src="./3DSlideShow/post09.png"><img src="./3DSlideShow/post09.png" alt=""></button></li>
-              <li><button class="ds-thumb" data-src="./3DSlideShow/post08.png"><img src="./3DSlideShow/post08.png" alt=""></button></li>
-              <li><button class="ds-thumb" data-src="./3DSlideShow/post07.png"><img src="./3DSlideShow/post07.png" alt=""></button></li>
-              <li><button class="ds-thumb" data-src="./3DSlideShow/post06.png"><img src="./3DSlideShow/post06.png" alt=""></button></li>
-              <li><button class="ds-thumb" data-src="./3DSlideShow/post05.png"><img src="./3DSlideShow/post05.png" alt=""></button></li>
+              <li role="option" aria-selected="true">
+                <button class="ds-thumb is-active" data-src="./3DSlideShow/post12.png" aria-label="Bild 1 auswählen">
+                  <img src="./3DSlideShow/post12.png" alt="" loading="lazy" decoding="async">
+                </button>
+              </li>
+              <li role="option">
+                <button class="ds-thumb" data-src="./3DSlideShow/post11.png" aria-label="Bild 2 auswählen">
+                  <img src="./3DSlideShow/post11.png" alt="" loading="lazy" decoding="async">
+                </button>
+              </li>
+              <li role="option">
+                <button class="ds-thumb" data-src="./3DSlideShow/post10.png" aria-label="Bild 3 auswählen">
+                  <img src="./3DSlideShow/post10.png" alt="" loading="lazy" decoding="async">
+                </button>
+              </li>
+              <li role="option">
+                <button class="ds-thumb" data-src="./3DSlideShow/post09.png" aria-label="Bild 4 auswählen">
+                  <img src="./3DSlideShow/post09.png" alt="" loading="lazy" decoding="async">
+                </button>
+              </li>
+              <li role="option">
+                <button class="ds-thumb" data-src="./3DSlideShow/post08.png" aria-label="Bild 5 auswählen">
+                  <img src="./3DSlideShow/post08.png" alt="" loading="lazy" decoding="async">
+                </button>
+              </li>
+              <li role="option">
+                <button class="ds-thumb" data-src="./3DSlideShow/post07.png" aria-label="Bild 6 auswählen">
+                  <img src="./3DSlideShow/post07.png" alt="" loading="lazy" decoding="async">
+                </button>
+              </li>
+              <li role="option">
+                <button class="ds-thumb" data-src="./3DSlideShow/post06.png" aria-label="Bild 7 auswählen">
+                  <img src="./3DSlideShow/post06.png" alt="" loading="lazy" decoding="async">
+                </button>
+              </li>
+              <li role="option">
+                <button class="ds-thumb" data-src="./3DSlideShow/post05.png" aria-label="Bild 8 auswählen">
+                  <img src="./3DSlideShow/post05.png" alt="" loading="lazy" decoding="async">
+                </button>
+              </li>
             </ul>
             <span class="ds-fade-right" aria-hidden="true"></span>
           </div>
@@ -3713,15 +3668,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <!-- Rechte Inhalts-Karte -->
     <article class="aether-card ds-teaser-card" aria-labelledby="study-teaser">
-      <h3 id="study-teaser">Design, Setup &amp; Wirkung</h3>
+      <h3 id="study-teaser">Leistung &amp; Wirkung</h3>
       <p class="t-snippet">
-        Ich habe <strong>alle 3D-Assets für Neolog</strong> konzipiert, gestaltet und animiert – von technischen Blockmodellen bis zu stimmungsvoll ausgeleuchteten Produkt-Renderings.
-        Der Fokus lag auf Klarheit, Präzision und einer modernen Materialästhetik.
+        Konzeption, Modeling, Shading und Animation aller Produkt-Assets. Fokus: technische Präzision, konsistente Materialität und klares Licht.
       </p>
       <ul class="delta-list" role="list">
-        <li><span class="lead">Ergebnis</span><span class="copy">+38 % mehr Messe-Interaktionen</span></li>
-        <li><span class="lead">Impact</span><span class="copy">+62 % längere Verweildauer auf Produktseiten</span></li>
-        <li><span class="lead">Output</span><span class="copy">30 Renderings • 4 Animations-Clips</span></li>
+        <li><span class="lead">Ergebnis</span><span class="copy">+38&nbsp;% Messe-Interaktionen</span></li>
+        <li><span class="lead">Impact</span><span class="copy">+62&nbsp;% Verweildauer auf Produktseiten</span></li>
+        <li><span class="lead">Output</span><span class="copy">30 Renderings • 4 Motion-Clips</span></li>
       </ul>
       <a class="ds-cta" href="#kontakt" aria-label="Kontakt aufnehmen">
         Projekt anfragen
@@ -3733,29 +3687,29 @@ document.addEventListener("DOMContentLoaded", () => {
   <!-- UNTERZEILE (Karten) -->
   <div class="ds-info-row">
     <article class="aether-card aether-card--orange">
-      <h3>Setup &amp; Licht</h3>
-      <p class="t-snippet">Licht, Komposition und Kamerawinkel für maximale Wirkung.</p>
+      <h3>Setup &amp; Lichtführung</h3>
+      <p class="t-snippet">Komposition und Licht für eine prägnante Produktinszenierung.</p>
       <ul class="delta-list">
-        <li><span class="lead">Ziel</span><span class="copy">Technische Präzision emotional inszenieren</span></li>
-        <li><span class="lead">Umsetzung</span><span class="copy">Soft-Keylight, klarer Fokus, Farbkontrast</span></li>
+        <li><span class="lead">Ziel</span><span class="copy">Technik präzise, zugleich emotional vermitteln</span></li>
+        <li><span class="lead">Umsetzung</span><span class="copy">Soft-Keylight, klarer Fokus, gezielter Farbkontrast</span></li>
       </ul>
     </article>
 
     <article class="aether-card aether-card--navy">
       <h3>Rendering &amp; Animation</h3>
-      <p class="t-snippet">Fotorealistische Renderings und kurze Motion-Sequenzen.</p>
+      <p class="t-snippet">Fotorealistische Stills und kurze Motion-Sequenzen.</p>
       <ul class="delta-list">
         <li><span class="lead">Tools</span><span class="copy">Blender • Cycles • DaVinci Resolve</span></li>
-        <li><span class="lead">Verwendung</span><span class="copy">Website • Social • Messevideo</span></li>
+        <li><span class="lead">Einsatz</span><span class="copy">Website • Social • Messemedien</span></li>
       </ul>
     </article>
 
     <article class="aether-card aether-card--violet">
       <h3>Resultate</h3>
-      <p class="t-snippet">3D als Storytelling-Werkzeug mit messbarem Effekt.</p>
+      <p class="t-snippet">3D als Storytelling mit messbarem Effekt.</p>
       <ul class="delta-list">
-        <li><span class="lead">Marketing</span><span class="copy">+27 % Conversion-Rate bei Kampagnen</span></li>
-        <li><span class="lead">ROI</span><span class="copy">In 6 Monaten amortisiert</span></li>
+        <li><span class="lead">Marketing</span><span class="copy">+27&nbsp;% Conversion in Kampagnen</span></li>
+        <li><span class="lead">ROI</span><span class="copy">Amortisation in 6&nbsp;Monaten</span></li>
       </ul>
     </article>
   </div>
@@ -3764,48 +3718,66 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="https://unpkg.com/feather-icons"></script>
 
 <style>
+/* ============ Core / Reset ============ */
 #design-study, #design-study * { box-sizing: border-box; }
+#design-study { --maxw: 1120px; --pad: clamp(16px, 3vw, 28px); --radius: 16px; color: #0b0d12; }
+#design-study img { max-width: 100%; display: block; height: auto; }
+#design-study h2, #design-study h3, #design-study p { margin: 0 0 .65em; }
+#design-study .aurora-title { font-size: clamp(1.4rem, 2.6vw, 2rem); line-height: 1.2; color: #0b0d12; }
+#design-study .aurora-subtitle { font-size: clamp(.98rem, 1.6vw, 1.125rem); color: #2b2f3a; }
+#design-study .subtitle-t, #design-study .subtitle-snippet { display: none; }
 
-/* Dark Mode */
+/* Fluid container spacing */
+#design-study .ds-top,
+#design-study .ds-info-row { max-width: min(var(--maxw), 92vw); margin: 0 auto var(--pad); }
+
+/* ============ Dark Mode ============ */
 @media (prefers-color-scheme: dark){
-  #design-study[data-theme="auto"]{ background: #000; }
+  #design-study[data-theme="auto"]{ background: #000; color: #e9ecf2; }
+  #design-study .aurora-title { color: #fff; }
+  #design-study .aurora-subtitle { color: #c3ccdc; }
 }
 
-/* OBERZEILE */
+/* ============ Oberzeile Grid (fully responsive) ============ */
 #design-study .ds-top{
   display: grid;
-  grid-template-columns: 1.6fr 1fr;
-  gap: clamp(1rem, 2vw, 1.6rem);
+  grid-template-columns: minmax(0,1.6fr) minmax(0,1fr);
+  gap: clamp(12px, 2vw, 20px);
   align-items: stretch;
-  max-width: min(1120px, 92vw);
-  margin: 0 auto var(--space-4, 2rem);
 }
 
 /* Bildkarte */
 #design-study .ds-preview-card{
-  border-radius: 16px;
-  overflow: hidden;
+  border-radius: var(--radius);
+  overflow: clip;
   background: #0b0d12;
   display: flex;
 }
-#design-study .ds-preview-wrap{ position: relative; width: 100%; height: 100%; display: flex; }
-#design-study .ds-preview-img{ width: 100%; height: 100%; object-fit: cover; }
+#design-study .ds-preview-wrap{ position: relative; width: 100%; display: flex; }
+#design-study .ds-preview-img{
+  width: 100%;
+  aspect-ratio: 16/9;       /* verhindert CLS, passt sich an */
+  object-fit: cover;
+  background: #0b0d12;
+  border-radius: inherit;
+}
 
 /* Slider Overlay */
 #design-study .ds-thumb-bar{
-  position: absolute; left: 12px; right: 12px; bottom: 12px;
-  display: grid; grid-template-columns: auto 1fr auto;
-  align-items: center; gap: .6rem; padding: .6rem;
-  border-radius: 12px; background: rgba(0,0,0,0.45);
-  backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.1);
+  position: absolute; left: clamp(8px,1.2vw,12px); right: clamp(8px,1.2vw,12px); bottom: clamp(8px,1.2vw,12px);
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .6rem; padding: .5rem;
+  border-radius: 12px; background: color-mix(in oklab, #000 60%, transparent);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.1);
 }
 
 /* Thumbs */
 #design-study .ds-thumbs-wrap{ position: relative; overflow: hidden; }
 #design-study .ds-thumbs{
-  display: grid; grid-auto-flow: column; grid-auto-columns: 90px;
-  gap: .5rem; overflow-x: auto; padding: .1rem .25rem;
-  padding-right: 56px; margin: 0; list-style: none;
+  display: grid; grid-auto-flow: column;
+  grid-auto-columns: clamp(66px, 12vw, 110px);
+  gap: .5rem; overflow-x: auto; padding: .1rem .25rem; padding-right: 56px; margin: 0; list-style: none;
+  scroll-snap-type: x mandatory;
   scrollbar-width: none; -ms-overflow-style: none;
   -webkit-mask-image: linear-gradient(90deg,#000 0,#000 calc(100% - 36px),rgba(0,0,0,0) 100%);
           mask-image: linear-gradient(90deg,#000 0,#000 calc(100% - 36px),rgba(0,0,0,0) 100%);
@@ -3818,33 +3790,41 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 
 #design-study .ds-thumb{
-  width: 100%; aspect-ratio: 4/3; border-radius: 10px; overflow: hidden;
+  scroll-snap-align: start;
+  width: 100%; aspect-ratio: 4/3; border-radius: 10px; overflow: clip;
   border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.06);
-  cursor: pointer; transition: border-color .12s ease, transform .12s ease;
+  cursor: pointer; transition: border-color .12s ease, transform .12s ease, box-shadow .12s ease;
 }
-#design-study .ds-thumb:hover{ transform: translateY(-2px); border-color: rgba(255,255,255,.4); }
-#design-study .ds-thumb.is-active{ border-color: rgba(255,255,255,.7); }
+@media (hover:hover){
+  #design-study .ds-thumb:hover{ transform: translateY(-2px); border-color: rgba(255,255,255,.4); box-shadow: 0 6px 14px rgba(0,0,0,.25); }
+}
+#design-study .ds-thumb.is-active{ border-color: rgba(255,255,255,.75); }
+#design-study .ds-thumb:focus-visible{ outline: 2px solid #fff; outline-offset: 2px; }
 #design-study .ds-thumb img{ width: 100%; height: 100%; object-fit: cover; }
 
 /* Pfeile */
 #design-study .ds-thumb-nav{
-  position: relative; z-index: 2; width: 36px; height: 36px;
+  position: relative; z-index: 2; width: clamp(32px,3.4vw,36px); height: clamp(32px,3.4vw,36px);
   border-radius: 999px; border: 1px solid rgba(255,255,255,.2);
   background: rgba(255,255,255,.1); color: #fff;
   display: grid; place-items: center; cursor: pointer;
   transition: background-color .15s ease, transform .15s ease;
 }
-#design-study .ds-thumb-nav:hover{ background: rgba(255,255,255,.2); transform: translateY(-1px); }
+@media (hover:hover){
+  #design-study .ds-thumb-nav:hover{ background: rgba(255,255,255,.2); transform: translateY(-1px); }
+}
 #design-study .ds-thumb-nav svg{ width: 20px; height: 20px; stroke-width: 2.5; }
 
 /* Rechte Karte */
 #design-study .ds-teaser-card{
   color: #fff; background: linear-gradient(135deg,#0d0d0d,#1c1f2f);
-  display: flex; flex-direction: column; justify-content: space-between;
-  padding: clamp(16px,2.2vw,24px); border-radius: 16px;
+  display: flex; flex-direction: column; gap: clamp(10px,1.5vw,16px);
+  justify-content: space-between;
+  padding: clamp(14px,2.4vw,24px); border-radius: var(--radius);
 }
+#design-study .t-snippet{ opacity: .95; }
 
-/* CTA Orange */
+/* CTA */
 #design-study .ds-cta{
   display: inline-flex; align-items: center; gap: .6rem;
   padding: .8rem 1.4rem; border-radius: 999px;
@@ -3852,28 +3832,55 @@ document.addEventListener("DOMContentLoaded", () => {
   background: linear-gradient(135deg,#ff6a00,#ff9500);
   box-shadow: 0 6px 18px rgba(255,100,0,.35);
   transition: transform .2s ease, box-shadow .2s ease;
+  will-change: transform;
 }
-#design-study .ds-cta:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(255,120,0,.45); }
+@media (hover:hover){
+  #design-study .ds-cta:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(255,120,0,.45); }
+}
+#design-study .ds-cta:focus-visible{ outline: 3px solid #ff9500; outline-offset: 3px; }
 #design-study .ds-cta svg{ width: 20px; height: 20px; }
 
-/* Unterzeile (Karten wie vorher) */
+/* Unterzeile (Karten) */
 #design-study .ds-info-row{
-  max-width: min(1120px,92vw); margin: 0 auto;
-  display: grid; grid-template-columns: repeat(3,1fr);
-  gap: clamp(1rem,2vw,1.6rem); align-items: stretch;
+  display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: clamp(12px, 2vw, 20px); align-items: stretch;
 }
-#design-study .aether-card{ color: #fff; display:flex;flex-direction:column;justify-content:space-between; }
+#design-study .aether-card{ color: #fff; display:flex; flex-direction:column; justify-content:space-between; padding: var(--pad); border-radius: var(--radius); min-height: 100%; }
+#design-study .aether-card h3{ font-size: clamp(1.05rem, 1.8vw, 1.25rem); }
+#design-study .aether-card .delta-list{ list-style:none; padding:0; margin:.5rem 0 0; display:grid; gap:.45rem; }
+#design-study .aether-card .delta-list .lead{ display:block; opacity:.9; font-weight:600; }
+#design-study .aether-card .delta-list .copy{ opacity:.95; }
 #design-study .aether-card--orange{ background: linear-gradient(135deg,#ff5100,#ff7b00,#ff5100); }
 #design-study .aether-card--navy{ background: linear-gradient(135deg,#0d0d0d,#1c1f2f,#0d0d0d); }
 #design-study .aether-card--violet{ background: linear-gradient(135deg,#4b00ff,#3000a3,#4b00ff); }
 
-@media (max-width: 1024px){
+/* ============ Responsiveness ============ */
+@media (max-width: 1200px){
+  #design-study .subtitle-full{ display: none; }
+  #design-study .subtitle-t{ display: inline; }
+}
+@media (max-width: 900px){
   #design-study .ds-top{ grid-template-columns: 1fr; }
-  #design-study .ds-info-row{ grid-template-columns: repeat(2,1fr); }
+  #design-study .ds-info-row{ grid-template-columns: repeat(2, minmax(0,1fr)); }
 }
-@media (max-width: 700px){
+@media (max-width: 640px){
+  #design-study .subtitle-t{ display: none; }
+  #design-study .subtitle-snippet{ display: inline; }
   #design-study .ds-info-row{ grid-template-columns: 1fr; }
+  #design-study .ds-thumb-bar{ gap: .4rem; }
 }
+
+/* ============ Motion Preferences ============ */
+@media (prefers-reduced-motion: reduce){
+  #design-study *{ transition: none !important; animation: none !important; }
+  #design-study .ds-thumbs{ scroll-behavior: auto; }
+}
+
+/* ============ High Contrast tweak ============ */
+@media (prefers-contrast: more){
+  #design-study .ds-thumb{ border-color: rgba(255,255,255,.85); }
+}
+
 </style>
 
 <script>
@@ -3882,40 +3889,87 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const mainImg = document.getElementById('ds-main-img');
   const thumbs = Array.from(document.querySelectorAll('.ds-thumb'));
+  const thumbsItems = Array.from(document.querySelectorAll('#ds-thumbs > li'));
   const thumbsUl = document.getElementById('ds-thumbs');
   const prev = document.querySelector('.ds-thumb-prev');
   const next = document.querySelector('.ds-thumb-next');
-  const STEP = 180;
-  let index = 0;
+
+  // Dynamic step relative to viewport
+  const getStep = () => Math.max(140, Math.min(thumbsUl.clientWidth * 0.5, 280));
+  let index = thumbs.findIndex(b => b.classList.contains('is-active'));
+  index = index === -1 ? 0 : index;
   const total = thumbs.length;
 
-  // Thumbnail-Klick
-  thumbs.forEach((btn, i) => {
-    btn.addEventListener('click', () => {
-      thumbs.forEach(b => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
+  // Update selection helper
+  const selectIndex = (i, scroll = true) => {
+    index = (i + total) % total;
+    thumbs.forEach((b, k) => {
+      b.classList.toggle('is-active', k === index);
+      thumbsItems[k].setAttribute('aria-selected', k === index ? 'true' : 'false');
+    });
+    const btn = thumbs[index];
+    if (btn) {
       mainImg.src = btn.dataset.src;
-      index = i;
+      if (scroll) {
+        const rect = btn.getBoundingClientRect();
+        const wrapRect = thumbsUl.getBoundingClientRect();
+        const overRight = rect.right > wrapRect.right - 56;
+        const overLeft = rect.left < wrapRect.left;
+        if (overRight) thumbsUl.scrollBy({ left: rect.right - wrapRect.right + 56, behavior: 'smooth' });
+        if (overLeft) thumbsUl.scrollBy({ left: rect.left - wrapRect.left - 16, behavior: 'smooth' });
+      }
+      btn.focus({ preventScroll: true });
+    }
+  };
+
+  // Thumbnail Click + Keyboard
+  thumbs.forEach((btn, i) => {
+    btn.setAttribute('type','button');
+    btn.setAttribute('tabindex','0');
+    btn.addEventListener('click', () => selectIndex(i, false));
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectIndex(i, false); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); selectIndex(i + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); selectIndex(i - 1); }
     });
   });
 
-  // Infinite scroll logic
+  // Nav buttons
   next.addEventListener('click', () => {
-    index = (index + 1) % total;
-    thumbs[index].click();
-    thumbsUl.scrollBy({ left: STEP, behavior: 'smooth' });
-    if (index === total - 1) setTimeout(() => thumbsUl.scrollTo({ left: 0, behavior: 'smooth' }), 300);
+    selectIndex(index + 1);
+    thumbsUl.scrollBy({ left: getStep(), behavior: 'smooth' });
+    if (index === total - 1) setTimeout(() => thumbsUl.scrollTo({ left: 0, behavior: 'smooth' }), 250);
   });
 
   prev.addEventListener('click', () => {
-    index = (index - 1 + total) % total;
-    thumbs[index].click();
-    thumbsUl.scrollBy({ left: -STEP, behavior: 'smooth' });
-    if (index === 0) setTimeout(() => thumbsUl.scrollTo({ left: thumbsUl.scrollWidth, behavior: 'smooth' }), 300);
+    selectIndex(index - 1);
+    thumbsUl.scrollBy({ left: -getStep(), behavior: 'smooth' });
+    if (index === 0) setTimeout(() => thumbsUl.scrollTo({ left: thumbsUl.scrollWidth, behavior: 'smooth' }), 250);
   });
+
+  // Touch swipe (main image)
+  let touchStartX = null;
+  mainImg.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+  mainImg.addEventListener('touchend', (e) => {
+    if (touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 30) {
+      selectIndex(index + (dx < 0 ? 1 : -1));
+    }
+    touchStartX = null;
+  }, { passive: true });
+
+  // Resize: ensure active thumb remains in view
+  let ro = null;
+  if ('ResizeObserver' in window) {
+    ro = new ResizeObserver(() => selectIndex(index));
+    ro.observe(thumbsUl);
+  }
+
+  // Initial state
+  selectIndex(index, false);
 });
 </script>
-
 
 
 
@@ -4673,6 +4727,370 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
+
+<section id="warumwir">
+  <style>
+    #warumwir, #warumwir *{ box-sizing:border-box; }
+    #warumwir{
+      --container-pad-x: 1rem;
+      background: var(--surface);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      font-feature-settings: "liga","calt","ss01";
+    }
+    #warumwir .container{ max-width:min(95vw,1340px); margin-inline:auto; padding:2.25rem var(--container-pad-x) 2.6rem; }
+
+    /* Intro */
+    #warumwir .intro{ text-align:center; margin-bottom:1.1rem; }
+    #warumwir .eyebrow{
+      display:inline-flex; gap:.5rem; align-items:center;
+      padding:.4rem .7rem; border-radius:999px; font-weight:800; font-size:.85rem;
+      background: linear-gradient(90deg, color-mix(in oklab, var(--primary)85%, var(--accent)), var(--primary), color-mix(in oklab, var(--primary)85%, var(--accent)));
+      color:#fff; box-shadow: inset 0 0 0 1.5px color-mix(in oklab, var(--primary)80%, transparent);
+    }
+    #warumwir h2.title{
+      font-size: clamp(2rem,1.6rem + 2.2vw,3rem);
+      font-weight:900; letter-spacing:-.02em; line-height:1.12;
+      margin:.2rem 0 .6rem; text-wrap:balance;
+    }
+    #warumwir p.sub{
+      max-width:62rem; margin:0 auto 2.2rem; padding:1.1rem 1.2rem;
+      font-size:clamp(1.06rem,1rem + .6vw,1.22rem);
+      line-height:1.78; letter-spacing:.004em;
+      color:#0f1729; text-wrap:pretty; border-radius:14px;
+      background:linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05);
+    }
+
+    /* Grid + Karten (Desktop/Tablet) */
+    #warumwir .grid{
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
+      gap:clamp(1rem,2vw,1.25rem); margin:1.25rem auto .4rem;
+    }
+    #warumwir .card{
+      position:relative; overflow:hidden; color:#fff; border-radius:20px;
+      border:1px solid rgba(70,70,70,.14); padding:1.8rem 1.4rem;
+      background:linear-gradient(270deg,#04006c,#6f00ff,#050088);
+      background-size:600% 600%;
+      transition:transform .25s ease, box-shadow .25s ease, background-position .25s ease;
+      box-shadow:0 12px 32px rgba(0,0,0,.18);
+    }
+    #warumwir .card.s2{ background:linear-gradient(135deg,#0d0d0d,#000e5c,#0d0d0d); background-size:300% 300%; }
+    #warumwir .card.s3{ background:linear-gradient(135deg,#ff5100,#ff0044,#ff5100); background-size:400% 400%; }
+    #warumwir .card:hover{ transform:translateY(-4px); box-shadow:0 18px 46px rgba(0,0,0,.28); background-position:100% 50%; }
+
+    #warumwir .card-inner{ position:relative; z-index:2; display:flex; flex-direction:column; gap:.7rem; min-width:0; height:100%; }
+    /* Anti-Überlauf für alle Texte */
+    #warumwir .card h3,
+    #warumwir .card .leadcopy,
+    #warumwir .p-text .lead,
+    #warumwir .p-text .copy{
+      overflow-wrap:anywhere; word-break:break-word; hyphens:auto; max-width:100%;
+    }
+    #warumwir .card h3{
+      margin:0; font-size:clamp(1.3rem,1.1rem + .9vw,1.9rem);
+      font-weight:870; letter-spacing:-.012em; line-height:1.2;
+      text-shadow:0 1px 2px rgba(0,0,0,.25);
+    }
+    #warumwir .card .leadcopy{ margin:0; font-size:clamp(.98rem,.92rem + .25vw,1.06rem); font-weight:650; line-height:1.55; opacity:.98; }
+
+    /* Punkte */
+    #warumwir .points{ list-style:none; margin:.2rem 0 0; padding:0; display:grid; gap:.5rem; }
+    #warumwir .point{ display:block; padding:.6rem 0 .7rem; position:relative; }
+    #warumwir .point + .point{ border-top:1px solid rgba(255,255,255,.22); }
+    #warumwir .p-text .lead{
+      display:block; font-weight:800; letter-spacing:-.005em; margin-bottom:.15rem;
+      font-size: clamp(1.02rem,.98rem + .35vw,1.12rem);
+    }
+    #warumwir .p-text .copy{
+      display:block; color:rgba(255,255,255,.96); font-weight:600;
+      font-size: clamp(.98rem,.92rem + .25vw,1.06rem); line-height:1.6;
+    }
+
+    /* Badges */
+    #warumwir .badges{ display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin:1rem auto 0; }
+    #warumwir .pill{
+      display:inline-flex; align-items:center; gap:.45rem; padding:.42rem .7rem;
+      border-radius:999px; font-weight:700; font-size:.9rem;
+      border:1px solid var(--border, rgba(0,0,0,.08));
+      background: color-mix(in oklab, var(--text) 4%, var(--surface)); color: var(--text);
+    }
+    #warumwir .pill .ok{ width:.5rem; height:.5rem; border-radius:999px; background:#16a34a; box-shadow:0 0 0 2px color-mix(in oklab, #16a34a 30%, transparent); }
+
+    /* --- Textvarianten: Desktop/Tablet kurz, Mobile ultrakurz --- */
+    #warumwir .snippet{ display:none; }  /* Mobile */
+    #warumwir .full{ display:inline; }   /* Desktop/Tablet */
+
+    /* Tablet 1-Spalte */
+    @media (max-width:900px){
+      #warumwir .grid{ grid-template-columns:1fr; }
+    }
+
+    /* ===== MOBILE FULL-BLEED, NAHTLOS & HOVER-BEIM-SCROLL ===== */
+    @media (max-width:768px){
+      /* Inhalte: kurz, max. 2 Bullets */
+      #warumwir .full{ display:none; }
+      #warumwir .snippet{ display:inline; }
+      #warumwir .points .point:nth-child(n+3){ display:none; }
+
+      /* Container: keine seitlichen Ränder => Full-bleed */
+      #warumwir .container{ padding-left:0; padding-right:0; }
+
+      /* Grid ohne Lücken – Karten gehen nahtlos ineinander über */
+      #warumwir .grid{ display:block; margin:0; }
+
+      /* Karten als Rechtecke über volle Viewport-Breite */
+      #warumwir .card{
+        border:none; border-radius:0; box-shadow:none;
+        padding:1rem .95rem; margin:0; width:100vw;
+        margin-left:50%; transform:translateX(-50%);  /* zentriertes Full-bleed */
+        background-size:300% 300%;
+        transition:none;  /* keine Hover-Zuckler */
+      }
+      #warumwir .card + .card{ margin-top:0; }
+
+      /* Kein Icon/Popup auf Mobile */
+      #warumwir .info-btn{ display:none !important; }
+
+      /* "Hover per Scroll": wenn .is-hover (via JS), nur subtile BG-Animation */
+      #warumwir .card.is-hover{
+        transform: translateX(-50%);      /* nicht nach rechts wandern */
+        background-position: 100% 50%;    /* leichter Verlaufsshift */
+      }
+    }
+
+    /* Dark Mode */
+    :root[data-theme="dark"] #warumwir{ color:#f5f7fa; background:#000; }
+    :root[data-theme="dark"] #warumwir p.sub{
+      color:#e8eeff; background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035));
+      border:1px solid rgba(255,255,255,.08); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 2px 8px rgba(0,0,0,.45);
+    }
+    @media (prefers-color-scheme: dark){
+      :root[data-theme="auto"] #warumwir{ color:#f5f7fa; background:#000; }
+      :root[data-theme="auto"] #warumwir p.sub{
+        color:#e8eeff; background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035));
+        border:1px solid rgba(255,255,255,.08); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 2px 8px rgba(0,0,0,.45);
+      }
+    }
+    @media (max-width:768px){
+  /* Baseline: full-bleed zentriert */
+  #warumwir .card{
+    transform: translateX(-50%) !important;
+    transition: none; /* kein Zucken beim Tap */
+    -webkit-tap-highlight-color: transparent; /* iOS Highlight aus */
+  }
+
+  /* Kein Seitwärts-Shift bei :hover/:active/:focus */
+  #warumwir .card:hover,
+  #warumwir .card:active,
+  #warumwir .card:focus,
+  #warumwir .card:focus-visible{
+    transform: translateX(-50%) !important;  /* Zentrierung beibehalten */
+    background-position: 50% 50%;            /* kein zusätzliches Wegsliden */
+    box-shadow: none;
+  }
+
+  /* Scroll-Hover bleibt erlaubt (nur leichter Verlaufsshift) */
+  #warumwir .card.is-hover{
+    transform: translateX(-50%) !important;
+    background-position: 100% 50%;
+  }
+  /* Auch beim Gedrückt-Halten nicht verschieben */
+  #warumwir .card.is-hover:active,
+  #warumwir .card.is-hover:focus{
+    background-position: 100% 50%;
+  }
+}
+
+  </style>
+
+  <div class="container">
+    <header class="intro">
+      <span class="eyebrow">Warum wir</span>
+      <h2 class="title">Design mit Substanz, Technik mit Gefühl</h2>
+      <p class="sub" aria-live="polite">
+        <!-- Mobile ultrakurz -->
+        <span class="snippet"><strong>3D, das wirkt.</strong> CI-treu. Schnell.</span>
+        <!-- Desktop/Tablet kurz & vollständig -->
+        <span class="full">Wir verbinden <strong>Marke, 3D und Web</strong> zu wirkungsvollen Erlebnissen – klar, schnell, ohne Renderlook. Von Styleframes bis performanter Web/AR-Integration.</span>
+      </p>
+    </header>
+
+    <div class="grid" aria-label="Unsere Stärken">
+      <!-- Karte 1 -->
+      <article class="card s1">
+        <!-- (Icons & Popups entfernt) -->
+        <div class="card-inner">
+          <h3>Markentreue statt Renderlook</h3>
+          <p class="leadcopy">
+            <span class="snippet">CI-treue 3D-Visuals.</span>
+            <span class="full">Glaubwürdige 3D-Visuals, strikt CI-geführt – ohne Preset-Glanz.</span>
+          </p>
+          <ul class="points">
+            <li class="point">
+              <span class="p-text"><span class="lead">Look-Development</span>
+                <span class="copy">
+                  <span class="snippet">PBR. Licht. Proof.</span>
+                  <span class="full">PBR-Materialien, HDR-Licht und Styleframes sichern Farbsicherheit.</span>
+                </span>
+              </span>
+            </li>
+            <li class="point">
+              <span class="p-text"><span class="lead">CI-Konsistenz</span>
+                <span class="copy">
+                  <span class="snippet">Farben sitzen.</span>
+                  <span class="full">Markenfarben, Typo-Raster und Komposition kalibriert – mit Proofs.</span>
+                </span>
+              </span>
+            </li>
+            <li class="point">
+              <span class="p-text"><span class="lead">Ready für Kanäle</span>
+                <span class="copy">
+                  <span class="snippet">Ein Look überall.</span>
+                  <span class="full">Ein Look für Web, Social, Motion & Produkt – aus einer Library.</span>
+                </span>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Karte 2 -->
+      <article class="card s2">
+        <div class="card-inner">
+          <h3>Prozessklarheit & Tempo</h3>
+          <p class="leadcopy">
+            <span class="snippet">Planbar. Schnell.</span>
+            <span class="full">Planbar mit Milestones, Aufwandsschätzung & klaren Übergaben.</span>
+          </p>
+          <ul class="points">
+            <li class="point">
+              <span class="p-text"><span class="lead">Milestones</span>
+                <span class="copy">
+                  <span class="snippet">Transparente Steps.</span>
+                  <span class="full">Klare Phasen, definierte Übergaben, schnelle Review-Loops.</span>
+                </span>
+              </span>
+            </li>
+            <li class="point">
+              <span class="p-text"><span class="lead">Pipeline</span>
+                <span class="copy">
+                  <span class="snippet">Saubere Abläufe.</span>
+                  <span class="full">Durchgängige Pipeline für 3D, Render, Animation & Integration.</span>
+                </span>
+              </span>
+            </li>
+            <li class="point">
+              <span class="p-text"><span class="lead">Time-to-Live</span>
+                <span class="copy">
+                  <span class="snippet">Frühe Previews.</span>
+                  <span class="full">Frühe Previews beschleunigen Entscheidungen und Termine.</span>
+                </span>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Karte 3 -->
+      <article class="card s3">
+        <div class="card-inner">
+          <h3>Wirkung mit Strategie</h3>
+          <p class="leadcopy">
+            <span class="snippet">3D mit Ziel.</span>
+            <span class="full">3D dort einsetzen, wo Story & Conversion messbar steigen.</span>
+          </p>
+          <ul class="points">
+            <li class="point">
+              <span class="p-text"><span class="lead">Use-Cases</span>
+                <span class="copy">
+                  <span class="snippet">Viewer. Config.</span>
+                  <span class="full">Produktviewer, Konfigurator, Launch-Film oder Web – passend.</span>
+                </span>
+              </span>
+            </li>
+            <li class="point">
+              <span class="p-text"><span class="lead">Realtime/AR</span>
+                <span class="copy">
+                  <span class="snippet">WebGL. AR.</span>
+                  <span class="full">WebGL, glTF/USDZ – performante Assets für Interaktion & AR.</span>
+                </span>
+              </span>
+            </li>
+            <li class="point">
+              <span class="p-text"><span class="lead">Messbarer Mehrwert</span>
+                <span class="copy">
+                  <span class="snippet">KPIs klar.</span>
+                  <span class="full">Ziele & KPIs von Anfang an – 3D als skalierbares Investment.</span>
+                </span>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <!-- Soft Trust -->
+    <div class="badges">
+      <span class="pill"><span class="ok"></span> Markenkonsistenz</span>
+      <span class="pill"><span class="ok"></span> Transparente Milestones</span>
+      <span class="pill"><span class="ok"></span> Web & AR ready</span>
+    </div>
+  </div>
+
+  <!-- Popups & Icon-Buttons entfernt -->
+
+  <!-- GSAP (nur für Typo; nicht für Eyebrow/Titel/Subline/Karten) + Scroll-Hover auf Mobile -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script>
+    (function(){
+      const root = document.getElementById('warumwir');
+
+      /* === Hover per Scroll nur auf Mobile: toggelt .is-hover === */
+      const isMobile = matchMedia('(max-width:768px)').matches;
+      if(isMobile){
+        const cards = root.querySelectorAll('.card');
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e=>{
+            if(e.isIntersecting && e.intersectionRatio >= 0.4){
+              e.target.classList.add('is-hover');
+            }else{
+              e.target.classList.remove('is-hover');
+            }
+          });
+        }, { threshold:[0, .4, .6, 1] });
+        cards.forEach(c=> io.observe(c));
+      }
+
+      /* === GSAP Typo-Reveal (keine Kartenbewegung, keine Headings/Subline) === */
+      if (window.gsap){
+        gsap.registerPlugin(ScrollTrigger);
+
+        const typoEls = root.querySelectorAll(
+          '.card .leadcopy, .p-text .lead, .p-text .copy'
+        );
+
+        typoEls.forEach((el) => {
+          gsap.from(el, {
+            autoAlpha: 0,
+            y: 14,
+            duration: 0.6,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+              toggleActions: "play none none reverse"
+            }
+          });
+        });
+      }
+    })();
+  </script>
+</section>
 
 
 

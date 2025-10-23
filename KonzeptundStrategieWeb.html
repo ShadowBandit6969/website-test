@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Konzept & Strategie – Fusion³</title>
+  <meta name="description" content="Strategie, Informationsarchitektur und klare Roadmaps. Apple‑like UX für Marken, die Tempo und Präzision brauchen." />
+
+  <!-- Single‑file. Farben & Typo an deiner cosmosSuite.css orientiert (nur als Inspiration, keine Übernahme). -->
+  <style>
+    /* ===== Design Tokens ===== */
+    :root{
+      --bg: #ffffff; --bg-2: #f6f7fb; --ink: #0a0a0a; --muted: #6b7280; --line: rgba(0,0,0,.08);
+      --brand: #ff5a1f; --brand-2: #ff3b00;
+      --radius: 16px; --shadow-1: 0 10px 30px rgba(0,0,0,.08); --shadow-2: 0 30px 80px rgba(0,0,0,.14);
+      --content-max: 1200px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{ --bg:#0a0a0a; --bg-2:#0c0d10; --ink:#f5f6fa; --muted:#b9bfd1; --line: rgba(255,255,255,.08);
+        --shadow-1: 0 10px 30px rgba(0,0,0,.45); --shadow-2: 0 30px 80px rgba(0,0,0,.55);
+      }
+    }
+
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{ margin:0; color:var(--ink); background:var(--bg);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; letter-spacing:-.01em; }
+    .container{width:min(var(--content-max), 92vw); margin-inline:auto}
+    .section{padding:clamp(3.5rem,8vw,7rem) 0}
+    .eyebrow{display:inline-flex; gap:.5rem; align-items:center; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; font-weight:800; color:var(--muted)}
+    .title-xl{font-size:clamp(2.4rem, 1.6rem + 4vw, 4.8rem); line-height:1.02; font-weight:900; margin:0 0 .65rem}
+    .title-lg{font-size:clamp(1.6rem, 1.2rem + 2.2vw, 2.6rem); line-height:1.08; font-weight:900; margin:0 0 1rem}
+    .copy{font-size:clamp(1.05rem, .95rem + .4vw, 1.2rem); color:var(--muted); max-width:70ch}
+
+    /* ===== Header ===== */
+    header{position:sticky; top:0; z-index:20; backdrop-filter:saturate(160%) blur(14px);
+      background:linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.55)); border-bottom:1px solid var(--line)}
+    @media (prefers-color-scheme: dark){ header{background:linear-gradient(180deg, rgba(10,10,10,.65), rgba(10,10,10,.45))}}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{font-weight:900; letter-spacing:-.02em}
+    .nav a{color:inherit; text-decoration:none; font-weight:700}
+    .ghost{background:transparent; border:1px solid var(--line); border-radius:999px; padding:.7rem 1rem; font-weight:800}
+    .cta{display:inline-flex; align-items:center; gap:.6rem; border-radius:999px; border:0; cursor:pointer; font-weight:900; letter-spacing:.01em;
+      background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#fff; padding:.85rem 1.15rem; box-shadow:0 8px 24px rgba(255,90,31,.35)}
+    .cta:focus-visible{outline:3px solid color-mix(in oklab, var(--brand) 60%, #fff)}
+
+    /* ===== Hero ===== */
+    .hero{position:relative; isolation:isolate; padding:clamp(5rem, 12vh, 10rem) 0 3rem; text-align:center}
+    .hero::before{content:""; position:absolute; inset:-20vh -10vw -10vh; z-index:-1;
+      background: radial-gradient(1000px 500px at 50% -10%, color-mix(in oklab, var(--brand) 18%, transparent), transparent 60%)}
+    .hero .lead{margin-inline:auto}
+    .hero-cta{display:flex; gap:.8rem; flex-wrap:wrap; align-items:center; justify-content:center; margin-top:1.2rem}
+    .tickbar{display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:1.2rem; color:var(--muted); font-weight:700}
+    .tickbar i{width:7px; height:7px; border-radius:50%; background:var(--brand); display:inline-block}
+
+    /* ===== Grid & Cards ===== */
+    .grid{display:grid; grid-template-columns:repeat(12, 1fr); gap:clamp(1rem, 2vw, 1.6rem)}
+    .card{grid-column:span 4; border-radius:18px; padding:1.6rem; position:relative; overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow-1)}
+    .card h3{margin:.1rem 0 .35rem; font-size:1.3rem; letter-spacing:-.01em}
+    .card p{margin:0}
+
+    /* Apple‑like gradient cards (an Cosmos Suite angelehnt) */
+    .card--glow{ color:#fff; border:1px solid rgba(255,255,255,.28); background-size:400% 400%; background-position:0% 50%; }
+    .card--glow::before{content:""; position:absolute; inset:-50%; background:radial-gradient(circle at center, rgba(255,255,255,.16), transparent 70%); transform:scale(.6); opacity:0; transition:opacity .5s ease, transform .5s ease; pointer-events:none}
+    .card--glow .payload{ position:relative; z-index:2; transition:transform .4s ease }
+    .card--glow:hover{ transform:translateY(-6px); box-shadow:0 24px 60px rgba(0,0,0,.28); background-position:100% 50%; }
+    .card--glow:hover::before{ opacity:.22; transform:scale(1) }
+    .card--glow h3{ color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.25) }
+    .card--glow p{ color:rgba(255,255,255,.95) }
+
+    /* Themes (aus deiner cosmosSuite.css inspiriert) */
+    .theme-navy{ background-image:linear-gradient(270deg, #04006c, #6f00ff, #050088) }
+    .theme-ink{  background-image:linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d) }
+    .theme-sunset{background-image:linear-gradient(135deg, #ff5100, #ff0044, #ff5100) }
+
+    /* Services list */
+    .list{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; margin:1.2rem 0 0; padding:0}
+    .list li{list-style:none; display:flex; gap:.8rem; align-items:flex-start; padding:1rem; border-radius:14px; border:1px solid var(--line); background:linear-gradient(180deg, #fff, #f7f8fc)}
+    @media (prefers-color-scheme: dark){ .list li{background:linear-gradient(180deg, #0c0c10, #0b0b0f)} }
+    .check{margin-top:.25rem; width:1rem; height:1rem; border-radius:4px; background:conic-gradient(from 180deg at 50% 50%, #ff6600, #ff3d00); box-shadow:0 0 0 1px var(--line) inset}
+
+    /* Timeline */
+    .timeline{display:grid; gap:1rem}
+    .step{display:grid; grid-template-columns: 56px 1fr; gap:1rem; border:1px solid var(--line); border-radius:18px; padding:1rem 1.2rem; background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.76)); box-shadow:var(--shadow-1)}
+    @media (prefers-color-scheme: dark){ .step{background:linear-gradient(180deg, rgba(12,12,14,.9), rgba(12,12,14,.7))}}
+    .badge{display:grid; place-items:center; width:56px; height:56px; border-radius:14px; background:linear-gradient(135deg, #0b0b0d, #0f1340); color:#fff; font-weight:900}
+    .step strong{display:block; font-size:1.06rem; margin:.1rem 0 .2rem}
+    .step p{margin:0; color:var(--muted)}
+
+    /* Deliverables – getintet, leicht gläsern */
+    .deliver{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:1rem}
+    .deliver .item{border:1px solid var(--line); border-radius:14px; padding:1.1rem 1.2rem; background:linear-gradient(180deg,#fff,#f2f4fb)}
+    .item--navy{ background:linear-gradient(180deg, rgba(15,18,76,.08), rgba(15,18,76,.02)) }
+    .item--ink{ background:linear-gradient(180deg, rgba(5,10,50,.10), rgba(5,10,50,.03)) }
+    .item--sun{ background:linear-gradient(180deg, rgba(255,85,0,.10), rgba(255,85,0,.03)) }
+    .item h4{margin:.1rem 0 .35rem}
+    .item p{margin:0; color:var(--muted)}
+
+    /* Stats */
+    .stats{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem}
+    .stat{border:1px solid var(--line); border-radius:18px; padding:1.4rem; text-align:center; background:linear-gradient(180deg,#fff,#f8f9fe); box-shadow:var(--shadow-1)}
+    @media (prefers-color-scheme: dark){ .stat{background:linear-gradient(180deg,#0c0d10,#0a0b10)}}
+    .stat b{display:block; font-size:clamp(1.8rem,1.2rem + 2vw, 2.8rem); letter-spacing:-.02em}
+    .stat span{color:var(--muted)}
+
+    /* Case */
+    .case{display:grid; grid-template-columns: 1.25fr 1fr; gap:1.5rem; align-items:center; border-radius:18px; overflow:hidden; background:linear-gradient(135deg,#0a0a0a,#0d1150); color:#fff; box-shadow:var(--shadow-2)}
+    .case figure{margin:0; height:100%; display:grid; place-items:center; background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02))}
+    .case img{max-width:100%; height:auto}
+    .case .copy{padding:clamp(1rem,2.5vw,1.6rem)}
+
+    /* FAQ */
+    .faq{display:grid; gap:.8rem}
+    details{border:1px solid var(--line); border-radius:12px; padding:1rem 1.1rem; background:linear-gradient(180deg,#fff,#f7f8fc)}
+    @media (prefers-color-scheme: dark){ details{background:linear-gradient(180deg,#0c0d10,#0b0c12)}}
+    summary{cursor:pointer; font-weight:900}
+    details p{color:var(--muted)}
+
+    /* CTA Band */
+    .cta-band{border-radius:18px; background:linear-gradient(135deg,var(--brand), var(--brand-2)); color:#fff; box-shadow:0 36px 90px rgba(255,81,0,.38)}
+    .cta-band .inner{display:grid; grid-template-columns: 1.5fr auto; gap:1rem; align-items:center; padding:clamp(1.2rem, 2.5vw, 2rem)}
+    .btn{display:inline-flex; align-items:center; gap:.6rem; background:#fff; color:#0a0a0a; padding:.9rem 1.05rem; border-radius:999px; font-weight:900; border:1px solid var(--line)}
+
+    footer{padding:2rem 0 3rem; color:var(--muted); font-size:.95rem}
+
+    /* Motion */
+    @media (prefers-reduced-motion: no-preference){ .reveal{opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease}
+      .reveal.is-in{opacity:1; transform:translateY(0)} .cta:hover{transform:translateY(-1px)} .ghost:hover{transform:translateY(-1px)} }
+
+    /* Responsive */
+    @media (max-width: 1024px){ .grid .card{grid-column:span 6} .deliver{grid-template-columns:repeat(2,minmax(0,1fr))} .stats{grid-template-columns:repeat(2,minmax(0,1fr))} .case{grid-template-columns:1fr} }
+    @media (max-width: 640px){ .grid .card{grid-column:span 12} .list{grid-template-columns:1fr} .deliver{grid-template-columns:1fr} .stats{grid-template-columns:1fr}
+      .cta-band .inner{grid-template-columns:1fr; text-align:center} .cta-band .inner .btn{justify-content:center} }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav" role="navigation" aria-label="Hauptnavigation">
+      <div class="brand">Fusion³</div>
+      <nav class="links" aria-label="Sektionen">
+        <a href="#leistungen" class="ghost">Leistungen</a>
+        &nbsp;&nbsp;
+        <a href="#prozess" class="ghost">Prozess</a>
+        &nbsp;&nbsp;
+        <a href="#kontakt" class="cta">Kostenlosen Check starten</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero section">
+    <div class="container">
+      <p class="eyebrow"><span>Konzept & Strategie</span></p>
+      <h1 class="title-xl">Klarheit vor Design.<br>Präzise IA. Spürbare UX.</h1>
+      <p class="copy lead">Wir destillieren Ziele, Daten und Inhalte zu einer Strategie, die Gestaltung und Entwicklung beschleunigt. Apple‑like Fokus, ohne Ballast.</p>
+      <div class="hero-cta">
+        <a class="cta" href="#kontakt">Projekt anfragen</a>
+        <a class="ghost" href="#leistungen">Was ist enthalten?</a>
+      </div>
+      <div class="tickbar" aria-label="Kurzvorteile">
+        <span><i></i> Roadmap, die umgesetzt wird</span>
+        <span><i></i> Content erst – Pixel später</span>
+        <span><i></i> Messbare Ziele & KPIs</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro Cards (farbig wie Cosmos Suite) -->
+  <section class="section">
+    <div class="container">
+      <h2 class="title-lg">Strategie zuerst: weniger Schleifen, schneller live</h2>
+      <p class="copy">Ein gutes Konzept verhindert Feature‑Overload. Wir definieren Zielbilder, priorisieren Scope und liefern präzise Vorlagen für Design und Development – inklusive Erfolgsmessung.</p>
+
+      <div class="grid" style="margin-top:1.4rem">
+        <article class="card card--glow theme-navy reveal"><div class="payload"><h3>Fokus auf Business‑Ziele</h3><p>Wir übersetzen Ziele in Anforderungen und priorisieren nach Wirkung × Aufwand.</p></div></article>
+        <article class="card card--glow theme-ink reveal"><div class="payload"><h3>Tiefes Nutzerverständnis</h3><p>Personas, Use‑Cases, Jobs‑to‑be‑Done – damit Inhalte und Flows wirklich passen.</p></div></article>
+        <article class="card card--glow theme-sunset reveal"><div class="payload"><h3>System statt Einzelstück</h3><p>Skalierbare IA, wiederverwendbare Module, klare Regeln für Content & Navigation.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leistungen -->
+  <section id="leistungen" class="section">
+    <div class="container">
+      <p class="eyebrow">Leistungen</p>
+      <h2 class="title-lg">Was du bekommst</h2>
+      <p class="copy">Modular buchbar oder als Paket. Ergebnis: umsetzbare Dokumentation + klickbare Wireframes.</p>
+      <ul class="list" role="list">
+        <li class="reveal"><span class="check" aria-hidden="true"></span><div><strong>Analyse & Zielbild</strong><br/>Stakeholder‑Interviews, Wettbewerb, KPI‑Definition, Hypothesen.</div></li>
+        <li class="reveal"><span class="check" aria-hidden="true"></span><div><strong>Informationsarchitektur (IA)</strong><br/>Sitemaps, Navigationsmodell, Taxonomie & Naming.</div></li>
+        <li class="reveal"><span class="check" aria-hidden="true"></span><div><strong>Customer Journey & Flows</strong><br/>Hauptpfade, Micro‑Conversions, Tracking‑Punkte.</div></li>
+        <li class="reveal"><span class="check" aria-hidden="true"></span><div><strong>Content‑Strategie</strong><br/>Themen‑Cluster, Seitenstruktur, Textlängen, Mediatypen, Briefings.</div></li>
+        <li class="reveal"><span class="check" aria-hidden="true"></span><div><strong>Wireframes & Prototyp</strong><br/>Low/Medium‑Fidelity, klickbar für Tests & Feedback.</div></li>
+        <li class="reveal"><span class="check" aria-hidden="true"></span><div><strong>Roadmap & Aufwand</strong><br/>Milestones, Backlog, Abhängigkeiten, Go‑to‑Market.</div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Prozess -->
+  <section id="prozess" class="section">
+    <div class="container">
+      <p class="eyebrow">Prozess</p>
+      <h2 class="title-lg">So arbeiten wir</h2>
+      <div class="timeline" aria-label="Prozess Timeline" style="margin-top:1rem">
+        <div class="step reveal"><div class="badge">01</div><div><strong>Kickoff & Research</strong><p>Briefing, Ziele, Scope. Daten & Insights (Analytics, Interviews, Audit).</p></div></div>
+        <div class="step reveal"><div class="badge">02</div><div><strong>Struktur & Flows</strong><p>IA, User Flows – Navigation, Templates, Module.</p></div></div>
+        <div class="step reveal"><div class="badge">03</div><div><strong>Wireframes & Content</strong><p>Wichtige Screens + Content‑Hierarchie als klickbarer Prototyp.</p></div></div>
+        <div class="step reveal"><div class="badge">04</div><div><strong>Validierung</strong><p>Schnelle Tests, Iterationen, Abgleich mit KPIs & Accessibility.</p></div></div>
+        <div class="step reveal"><div class="badge">05</div><div><strong>Roadmap & Handover</strong><p>Plan, Backlog, Abhängigkeiten. Übergabe an Design & Dev.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deliverables (leicht getönt) -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Ergebnisse</p>
+      <h2 class="title-lg">Die greifbaren Deliverables</h2>
+      <div class="deliver" style="margin-top:1rem">
+        <div class="item item--navy reveal"><h4>Strategie‑Deck</h4><p>Slides mit Zielbild, Prioritäten und KPIs.</p></div>
+        <div class="item item--ink reveal"><h4>IA & Navigation</h4><p>Sitemap, Taxonomie, Routing‑Empfehlungen.</p></div>
+        <div class="item item--sun reveal"><h4>Flow‑Maps</h4><p>Core‑Journeys inkl. Ereignisse & Messpunkte.</p></div>
+        <div class="item item--navy reveal"><h4>Content‑Briefings</h4><p>Outline je Seitentyp inkl. SEO‑Grundlagen.</p></div>
+        <div class="item item--ink reveal"><h4>Wireframe‑Prototyp</h4><p>Klickbar für Tests & Stakeholder‑Alignment.</p></div>
+        <div class="item item--sun reveal"><h4>Roadmap</h4><p>Milestones, Aufwand, Abhängigkeiten.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics -->
+  <section class="section" aria-labelledby="outcomes">
+    <div class="container">
+      <h2 id="outcomes" class="title-lg">Woran wir Erfolg messen</h2>
+      <p class="copy">Gemeinsam definieren wir 3–5 Kennzahlen, die wirklich zählen. Beispiele:</p>
+      <div class="stats" role="list" style="margin-top:1rem">
+        <div class="stat reveal" role="listitem"><b>+35%</b><span>Conversion‑Rate auf Kernpfaden</span></div>
+        <div class="stat reveal" role="listitem"><b>-28%</b><span>Time‑to‑Content</span></div>
+        <div class="stat reveal" role="listitem"><b>-40%</b><span>Fehlklicks & Abbrüche</span></div>
+        <div class="stat reveal" role="listitem"><b>2×</b><span>Schneller zur Umsetzung</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case teaser -->
+  <section class="section">
+    <div class="container case" aria-label="Case Preview">
+      <figure aria-hidden="true">
+        <picture>
+          <source srcset="https://images.unsplash.com/photo-1551281044-8d8d0d8c9c19?q=80&w=1600&auto=format&fit=crop" media="(min-width:768px)">
+          <img src="https://images.unsplash.com/photo-1551281044-8d8d0d8c9c19?q=80&w=1200&auto=format&fit=crop" alt="Wireframe auf einem Schreibtisch" loading="lazy" />
+        </picture>
+      </figure>
+      <div class="copy">
+        <h3 class="title-sm" style="margin:.1rem 0 .5rem; font-size:1.4rem">Von 42 Seitentypen auf 12 – ohne Content‑Verlust</h3>
+        <p style="color:rgba(255,255,255,.9); margin:0 0 1rem">Klare IA, modulare Templates, bessere Flows. Ergebnis: schnelleres Publishing, weniger Streuverlust, höherer Impact.</p>
+        <a class="btn" href="#" aria-label="Zur Case Study">Zur Case Study →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">FAQ</p>
+      <h2 class="title-lg">Häufige Fragen</h2>
+      <div class="faq" style="margin-top:1rem">
+        <details class="reveal"><summary>Wie lange dauert das Konzept?</summary><p>Typisch 2–4 Wochen je nach Umfang. Iterativ – mit frühen, testbaren Zwischenständen.</p></details>
+        <details class="reveal"><summary>Welche Tools nutzt ihr?</summary><p>Tool‑agnostisch. Wireframes/Prototyping z. B. in Figma; Roadmaps in eurem Stack.</p></details>
+        <details class="reveal"><summary>Können wir nur einzelne Module buchen?</summary><p>Ja. Häufig starten Teams mit IA + Wireframes und ergänzen Roadmap & Content später.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Abschluss-CTA -->
+  <section id="kontakt" class="section" aria-label="Kontaktaufnahme">
+    <div class="container cta-band">
+      <div class="inner">
+        <div>
+          <h3 class="title-lg" style="margin:0 0 .4rem">Bereit für Klarheit im Projekt?</h3>
+          <p style="margin:0; opacity:.96">Buche einen 30‑min Kickoff: Wir prüfen Ziele, Scope und schlagen die ersten Schritte vor.</p>
+        </div>
+        <a class="btn" href="mailto:hallo@fusion3.example">Kickoff buchen →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="container">© 2025 Fusion³ · Konzept & Strategie</footer>
+
+  <script>
+    // Minimal IntersectionObserver-Reveal, a11y-aware
+    (function(){
+      const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(prefersReduced) return;
+      const els = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } });
+      }, {threshold:.12, rootMargin:'0px 0px -10% 0px'});
+      els.forEach(el=>io.observe(el));
+    })();
+  </script>
+</body>
+</html>
