@@ -274,25 +274,25 @@
 <link rel="stylesheet" href="css/footer.css" type="text/css">
 <style>
 /* --------------------------
-   Lokale Bild-Overrides nur für titlepage.html
+   Lokale Bild-Overrides nur für webdesign.html
 --------------------------- */
-body[data-page="titlepage"] .hero-image-background {
-  background-image: url("./images/hero-bg-sky_1hero-bg-sky.webp") !important;
+body[data-page="webdesign"] .hero-image-background {
+  background-image: url("./WebdesignPic/1.mp4") !important;
 }
 
-body[data-page="titlepage"] .hero-image-foreground {
-  background-image: url("./images/titlepage-fg.webp") !important;
+body[data-page="webdesign"] .hero-image-foreground {
+  background-image: url("./images/hintegrundweb.webp") !important;
 }
 
 /* Optional: Mobile- oder Tablet-Varianten */
 @media (max-width: 1024px) {
-  body[data-page="titlepage"] .hero-image-foreground {
-    background-image: url("./images/titlepage-fg-tablet.webp") !important;
+  body[data-page="webdesign"] .hero-image-foreground {
+    background-image: url("./images/webdesign-bg-tablet.webp") !important;
   }
 }
 @media (max-width: 480px) {
-  body[data-page="titlepage"] .hero-image-foreground {
-    background-image: url("./images/titlepage-fg-mobile.webp") !important;
+  body[data-page="webdesign"] .hero-image-foreground {
+    background-image: url("./images/webdesign-bg-mobile.webp") !important;
   }
 }
 
@@ -357,7 +357,30 @@ body[data-page="titlepage"] .hero-image-foreground {
         transform: translateY(17%);              /* dein bisheriger Versatz */
   }
 }
+/* Ergänzung am Ende deiner bestehenden CSS-Datei */
+.hero-image-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* blockiert keine Klicks */
+  z-index: 0;
+}
+
+
+
 </style>
+
 
 </head>
 
@@ -944,18 +967,656 @@ body[data-page="titlepage"] .hero-image-foreground {
 
 
 
-
-  <section class="hero-section">
-    <div class="hero-images-wrapper">
-      <div class="hero-image-background"></div>
-      <div class="page-title">
-        <div class="container">
-          <h1 class="large-title">Fusion3</h1>
-        </div>
-      </div>
-      <div class="hero-image-foreground"></div>
+<section class="hero-section" data-page="webdesign">
+  <div class="hero-images-wrapper">
+    <!-- HINTERGRUND-VIDEO -->
+    <div class="hero-image-background">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hintegrundweb.webp">
+        <source src="./WebdesignPic/1.mp4" type="video/mp4" />
+      </video>
     </div>
-  </section>
+
+    <div class="page-title">
+      <div class="container">
+        <h1 class="large-title">Fusion3</h1>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function () {
+  const section = document.querySelector('.hero-section[data-page="webdesign"]');
+  const h1 = document.querySelector('.page-title .large-title');
+  const pageTitle = document.querySelector('.page-title');
+  if (!section || !h1 || !pageTitle) return;
+
+  // --- Reload-Erkennung (unverändert) ---
+  function isReload() {
+    try {
+      const n = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+      if (n && (n.type === 'reload' || n.type === 'back_forward')) return true;
+      if (performance && performance.navigation && performance.navigation.type === 1) return true;
+    } catch(e){}
+    return false;
+  }
+  const RELOADED = isReload();
+
+  // ---------- Wrapper & Overlay ----------
+  const originalHTML = h1.innerHTML;
+  const parts = originalHTML.split(/(<br\s*\/?>)/i);
+
+  const wrapper = document.createElement('span');
+  wrapper.id = 'titleFloatWrapper';
+  wrapper.style.display = 'inline-block';
+  wrapper.style.willChange = 'transform';
+  h1.innerHTML = '';
+  h1.appendChild(wrapper);
+
+  const overlay = document.createElement('canvas');
+  overlay.id = 'titleOverlay';
+  overlay.style.position = 'absolute';
+  overlay.style.left = '0';
+  overlay.style.top = '0';
+  overlay.style.pointerEvents = 'none';
+  overlay.style.zIndex = '3';
+  if (getComputedStyle(pageTitle).position === 'static') {
+    pageTitle.style.position = 'relative';
+  }
+  pageTitle.appendChild(overlay);
+
+  // ---------- Canvas Sizing + Live-Tracking ----------
+  let ctx = null;
+  let last = { w:0, h:0, left:0, top:0, dpr:0 };
+
+  function sizeCanvas(force=false) {
+    const r = h1.getBoundingClientRect();
+    const pr = pageTitle.getBoundingClientRect();
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+
+    const left = r.left - pr.left;
+    const top  = r.top  - pr.top;
+    const w = Math.ceil(r.width);
+    const h = Math.ceil(r.height);
+
+    if (!force &&
+        w === last.w && h === last.h &&
+        left === last.left && top === last.top &&
+        dpr === last.dpr) return;
+
+    overlay.style.width = w + 'px';
+    overlay.style.height = h + 'px';
+    overlay.style.left = left + 'px';
+    overlay.style.top  = top  + 'px';
+
+    overlay.width = Math.max(1, Math.floor(w * dpr));
+    overlay.height = Math.max(1, Math.floor(h * dpr));
+
+    ctx = overlay.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    last = { w, h, left, top, dpr };
+  }
+
+  sizeCanvas(true);
+
+  const roH1 = new ResizeObserver(() => sizeCanvas(true));
+  const roTitle = new ResizeObserver(() => sizeCanvas(true));
+  roH1.observe(h1);
+  roTitle.observe(pageTitle);
+
+  window.addEventListener('resize', () => sizeCanvas(true), { passive:true });
+  window.addEventListener('scroll', () => sizeCanvas(false), { passive:true });
+  window.addEventListener('orientationchange', () => sizeCanvas(true));
+
+  // ---------- Text → Letters ----------
+  // großer, exotischer Glyph-Pool: Griechisch, Kyrillisch, Armenisch, Georgisch, IPA, Fraktur, Mathe-Alphanumerika, Ziffernvarianten …
+  const SIMILAR = {
+    // lower
+    'a':['ɑ','α','⍺','ª','ᵃ','ä','á','à','ȧ','ą','ɐ','@','ꭤ','𝖺','𝔞','ᶏ','ᴀ'],
+    'b':['Ь','ƅ','Ꮟ','Ƅ','ƀ','ẛ'.replace('ẛ','b'),'ɓ','ᵇ','ᶀ','𝖻','𝔟'],
+    'c':['ϲ','ᴄ','с','ᶜ','ƈ','ↄ','ς','ɔ','ꜿ','ç','č','ċ','𝖼','𝔠'],
+    'd':['ԁ','đ','ᑯ','ᵈ',')','ɗ','ᵭ','ḋ','ᶁ','𝖽','𝔡'],
+    'e':['℮','ɛ','є','ᵉ','ᵋ','ℯ','ɇ','ė','ë','é','è','ɘ','ε','𝖾','𝔢'],
+    'f':['ƒ','ſ','ϝ','ẝ','ʄ','ᶂ','𐊇','𝖿','𝔣'],
+    'g':['ɡ','ǥ','ᵍ','9','ĝ','ğ','ġ','ḡ','ɢ','ᶃ','𝓰','𝔤'],
+    'h':['һ','ℎ','ᵸ','ʰ','ɦ','ħ','ꜧ','ḫ','𝖍','𝔥'],
+    'i':['ɪ','ǐ','ı','¡','1','í','ì','ï','ỉ','ɨ','ⅰ','!', '𝖎','𝔦'],
+    'j':['ȷ','ϳ','ј','ʝ','ĵ','ɉ','ᶡ','𝖏','𝔧'],
+    'k':['κ','ᵏ','ꭆ','ḳ','ǩ','ꝁ','ќ','ᴋ','𝖐','𝔨'],
+    'l':['ɩ','ⅼ','ǀ','|','Ɩ','ĺ','ļ','ł','ᶅ','ʟ','𝖑','𝔩'],
+    'm':['ṃ','ᴍ','м','ᵐ','ɱ','ṁ','ᶆ','𝖒','𝔪'],
+    'n':['η','п','ɴ','∩','ɲ','ṅ','ņ','ń','ň','ң','𝖓','𝔫'],
+    'o':['ο','о','ɵ','°','0','ö','ó','ò','õ','ơ','ø','○','∘','𝖔','𝔬'],
+    'p':['ρ','р','ᵖ','ᵱ','ṕ','ṗ','ƥ','ῥ','𝖕','𝔭'],
+    'q':['զ','ʠ','ɋ','ȹ','գ','𝖖','𝔮'],
+    'r':['ɼ','г','ʳ','ř','ŗ','ꭇ','ʀ','ȑ','ȓ','ṙ','ᵲ','𝖗','𝔯'],
+    's':['ʂ','ѕ','$','§','ş','ś','ṡ','ș','ṥ','ʃ','ƨ','ß','𝖘','𝔰'],
+    't':['τ','ť','ŧ','†','ṭ','ṯ','ƫ','ʈ','₸','𝖙','𝔱'],
+    'u':['υ','ʋ','ս','ᵘ','ů','ü','ú','ù','ū','ư','µ','ꭎ','𝖚','𝔲'],
+    'v':['ν','ѵ','ᵛ','ṿ','ѷ','√','∨','ʋ','𝖛','𝔳'],
+    'w':['ᴡ','ѡ','ɯ','ŵ','ẇ','ɰ','ɯ','𝖜','𝔴'],
+    'x':['х','×','✕','χ','ẋ','ᶍ','ⅹ','𝖝','𝔵'],
+    'y':['γ','ʏ','у','ý','ỳ','ÿ','ŷ','ɣ','ʎ','¥','𝖞','𝔶'],
+    'z':['ʐ','ᴢ','ž','ż','ź','ƶ','ʑ','ẓ','ƻ','𝖟','𝔷'],
+    // upper
+    'A':['Α','Λ','Ꭺ','Ā','Ⱥ','∆','∀','𝘈','𝕬','𝔄'],
+    'B':['В','Ƀ','ß','Ɓ','ℬ','ʙ','ɮ','ᛒ','𝘉','𝕭','𝔅'],
+    'C':['Ϲ','С','Ⅽ','Ꮯ','℃'.slice(0,1),'☾','ℂ','𐐕','𝘊','𝕮','𝔇'.replace('D','C')],
+    'D':['Ꭰ','Ḏ','Ɗ','ⅅ','ᴅ','ↁ','𝘋','𝕯','𝔇'],
+    'E':['Ε','Є','ℰ','€','Ɇ','Ɛ','Σ','⋿','𝘌','𝕰','𝔈'],
+    'F':['Ғ','Ϝ','ℱ','ᖴ','𐊇','𝘍','𝕱','𝔉'],
+    'G':['ɢ','Ԍ','Ꮐ','Ĝ','Ğ','Ġ','Ḡ','Ɠ','𝘎','𝕲','𝔊'],
+    'H':['Η','Н','ℋ','Ħ','Ⱨ','♓','𝘏','𝕳','ℌ'],
+    'I':['Ι','Ӏ','ǀ','1','Ⅰ','∣','𝘐','𝕴','ℑ'],
+    'J':['Ј','Ɉ','Ĵ','ⅉ','𝘑','𝕵','𝔍'],
+    'K':['Κ','ᛕ','K','₭','Ҡ','Ƙ','Ǩ','𝘒','𝕶','𝔎'],
+    'L':['Ꮮ','Ⅼ','Ł','∟','⅃','ʟ','𝘓','𝕷','𝔏'],
+    'M':['Μ','М','Ṁ','Ϻ','Ⅿ','𝘔','𝕸','𝔐'],
+    'N':['Ν','Ｎ','∩','Ṅ','Ň','Ɲ','𝘕','𝕹','𝔑'],
+    'O':['Ο','О','0','°','Ø','Ө','○','⦿','𝘖','𝕺','𝔒'],
+    'P':['Ρ','Р','ℙ','₽','Ҏ','Ƿ','𐊕','𝘗','𝕻','𝔓'],
+    'Q':['Ⴓ','ℚ','Ǫ','Ɋ','Ҩ','Ⓠ','𝘘','𝕼','𝔔'],
+    'R':['Ꭱ','ℜ','Я','Ȑ','Ŕ','Ṙ','®','𝘙','𝕽','ℛ'],
+    'S':['Ѕ','§','$','Ś','Ş','Š','Ṣ','ẞ','𝘚','𝕾','𝔖'],
+    'T':['Τ','Т','Ŧ','Ͳ','₸','Ṫ','Ƭ','✝','𝘛','𝕿','𝔗'],
+    'U':['Ս','⋃','Ū','Ü','Ú','Ù','Ư','∪','𝘜','𝖀'.replace('𝖀','𝕌'),'𝔘'],
+    'V':['Ѵ','∨','Ṽ','Ʋ','✓','𝘝','𝕍','𝔙'],
+    'W':['Ԝ','Ѡ','Ш','Ŵ','Ẃ','Ẅ','𝘞','𝕎','𝔚'],
+    'X':['Χ','Х','✕','×','✖','Ⅹ','χ','𝘟','𝕏','𝔛'],
+    'Y':['Υ','Ү','¥','Ɏ','Ÿ','Ῡ','Ӳ','𝘠','𝕐','𝔜'],
+    'Z':['Ζ','ℤ','Ž','Ż','Ź','Ƶ','Ẕ','𝘡','𝕫'.toUpperCase(),'𝔃'.toUpperCase()],
+    // digits
+    '0':['O','О','Ο','○','°','⭕','⓪','𝟘'],
+    '1':['I','l','|','ǀ','Ⅰ','❶','𝟙'],
+    '2':['Ƨ'.toLowerCase(),'乙','٢','②','𝟚'],
+    '3':['Ʒ','З','Ɛ','ɜ','➂','𝟛'],
+    '4':['Ꮞ','٤','④','𝟜'],
+    '5':['Ƽ','Ѕ','⑤','𝟝'],
+    '6':['ბ','৬','⑥','𝟞'],
+    '7':['۷','⑦','𝟟'],
+    '8':['ȣ','੮','⑧','𝟠'],
+    '9':['ჽ','९','⑨','𝟡']
+  };
+// === Add Asian & "cool" glyphs (CJK, Kana, Hangul, Bopomofo, Fullwidth) ===
+const ASIAN_COOL = {
+  // lower
+  a: ['ａ','ぁ','ｧ','ァ','人'],
+  b: ['ｂ'],
+  c: ['ｃ','匚'],
+  d: ['ｄ','り'],
+  e: ['ｅ','ぇ','ェ'],
+  f: ['ｆ','ﾌ','ㄈ'],
+  g: ['ｇ'],
+  h: ['ｈ','卄','ん'],
+  i: ['ｉ','丨','｜','ㅣ'],
+  j: ['ｊ','亅'],
+  k: ['ｋ','ケ'],
+  l: ['ｌ','し','丨','ㅣ'],
+  m: ['ｍ','〽'],
+  n: ['ｎ','ん','ﾝ'],
+  o: ['ｏ','〇','ㅇ','○'],
+  p: ['ｐ','尸'],
+  q: ['ｑ'],
+  r: ['ｒ','尺'],
+  s: ['ｓ','ら'],
+  t: ['ｔ','丁','ﾃ'],
+  u: ['ｕ','凵','ㄩ'],
+  v: ['ｖ','レ'],
+  w: ['ｗ','山'],
+  x: ['ｘ','メ','叉'],
+  y: ['ｙ','丫','ㄚ'],
+  z: ['ｚ','乙','之'],
+
+  // upper
+  A: ['Ａ','人','八'],
+  B: ['Ｂ','日'],
+  C: ['Ｃ','匚'],
+  D: ['Ｄ','冂'],
+  E: ['Ｅ','三','ヨ','ミ'],
+  F: ['Ｆ','ﾌ','ㄈ'],
+  G: ['Ｇ'],
+  H: ['Ｈ','廾','井','卄'],
+  I: ['Ｉ','丨','工','｜'],
+  J: ['Ｊ'],
+  K: ['Ｋ','ケ'],
+  L: ['Ｌ'],
+  M: ['Ｍ','州','爪'],
+  N: ['Ｎ','几','ン'],
+  O: ['Ｏ','〇','囗','口'],
+  P: ['Ｐ','尸','戸'],
+  Q: ['Ｑ'],
+  R: ['Ｒ','尺'],
+  S: ['Ｓ','ら'],
+  T: ['Ｔ','丁','工','ﾃ'],
+  U: ['Ｕ','凵'],
+  V: ['Ｖ','レ'],
+  W: ['Ｗ','山'],
+  X: ['Ｘ','メ','叉'],
+  Y: ['Ｙ','丫','ㄚ'],
+  Z: ['Ｚ','乙','之'],
+
+  // digits (fullwidth + CJK numerals)
+  0: ['０','零','〇'],
+  1: ['１','一','丨','｜'],
+  2: ['２','二','乙'],
+  3: ['３','三'],
+  4: ['４','四'],
+  5: ['５','五'],
+  6: ['６','六'],
+  7: ['７','七'],
+  8: ['８','八'],
+  9: ['９','九'],
+};
+
+// merge into SIMILAR without duplicates (keep your originals first)
+for (const [key, vals] of Object.entries(ASIAN_COOL)) {
+  SIMILAR[key] = Array.from(new Set([...(SIMILAR[key] || []), ...vals]));
+}
+
+  const neon = ['#00fff5','#ff3df0','#39ff14','#ffd400','#7a5cff','#ff5e5b'];
+
+  // Kombinierende Akzente (für extra „Glitch“)
+  const COMBINERS = [
+    '\u0301','\u0300','\u0302','\u0308','\u0336','\u0332','\u035B','\u0342','\u032E'
+  ];
+
+  // --- schneller Glyph-Support mit Cache ---
+  const _glyphSupportCache = new Map();
+  function supportsGlyphCached(ch){
+    if (_glyphSupportCache.has(ch)) return _glyphSupportCache.get(ch);
+    const span = document.createElement('span');
+    span.textContent = ch;
+    span.style.position = 'absolute';
+    span.style.visibility = 'hidden';
+    span.style.font = getComputedStyle(document.body).font;
+    document.body.appendChild(span);
+    const ok = span.offsetWidth > 0 && span.textContent === ch;
+    span.remove();
+    _glyphSupportCache.set(ch, ok);
+    return ok;
+  }
+
+  function getAltsForChar(ch){
+    const base = SIMILAR[ch] || SIMILAR[ch.toLowerCase()] || [];
+    const filtered = base
+      .slice()
+      .sort(() => Math.random()-0.5)
+      .filter(s => supportsGlyphCached(s));
+    // ~30%: Kombinierende Akzente (1–2) dranhängen
+    if (filtered.length && Math.random() < 0.30){
+      const withAccents = [];
+      filtered.forEach(s => {
+        const nAcc = Math.random() < 0.5 ? 1 : 2;
+        let acc = s;
+        for (let i=0;i<nAcc;i++){
+          const c = COMBINERS[Math.floor(Math.random()*COMBINERS.length)];
+          const candidate = acc + c;
+          if (supportsGlyphCached(candidate)) acc = candidate;
+        }
+        withAccents.push(acc);
+      });
+      return withAccents.length ? withAccents : filtered;
+    }
+    return filtered;
+  }
+
+  const letterSpans = [];
+  parts.forEach(part => {
+    if (/^<br/i.test(part)) { wrapper.appendChild(document.createElement('br')); return; }
+    [...part].forEach(ch => {
+      const s = document.createElement('span');
+      s.textContent = ch;
+      s.style.display = 'inline-block';
+      s.style.willChange = 'transform, opacity, color, filter, text-shadow';
+      if (RELOADED) {
+        s.style.opacity = '1';
+        s.style.transform = 'translateY(0)';
+      } else {
+        s.style.opacity = '0';
+        s.style.transform = 'translateY(40px)';
+      }
+      s.dataset.original = ch;
+      wrapper.appendChild(s);
+      letterSpans.push(s);
+    });
+  });
+
+  // ---------- Entrance ----------
+  window.addEventListener('load', () => {
+    if (!RELOADED) {
+      letterSpans.forEach((s, i) => {
+        s.animate(
+          [{opacity:0, transform:'translateY(40px)'},
+           {opacity:1, transform:'translateY(0)'}],
+          { duration: 1400, easing:'ease-out', fill:'forwards', delay: 160 * i }
+        );
+      });
+    }
+    // Starten entscheidet der IO unten
+  });
+
+  // ---------- Float ----------
+  let floatAnim = wrapper.animate(
+    [{ transform:'translateY(0)' },{ transform:'translateY(-10px)' },{ transform:'translateY(0)' }],
+    { duration: 12000, easing:'ease-in-out', iterations: Infinity }
+  );
+  floatAnim.pause();
+
+  // ---------- Overlay Renderloop ----------
+  const effects = []; // {span, tEnd, antsPhase}
+  let raf = null;
+  let loopActive = false;
+
+  function localRect(el){
+    const r = el.getBoundingClientRect();
+    const pr = pageTitle.getBoundingClientRect();
+    return { x: r.left - pr.left, y: r.top - pr.top, w: r.width, h: r.height };
+  }
+
+  function drawGrid() {
+    const w = overlay.clientWidth, h = overlay.clientHeight;
+    const step = Math.max(18, Math.round(Math.min(w,h)/10));
+    ctx.save();
+    ctx.clearRect(0,0,overlay.width,overlay.height);
+    ctx.globalAlpha = 0.14; ctx.lineWidth = 1; ctx.strokeStyle = '#9aa0a6';
+    for (let x=0;x<=w;x+=step){ ctx.beginPath(); ctx.moveTo(x+0.5,0); ctx.lineTo(x+0.5,h); ctx.stroke(); }
+    for (let y=0;y<=h;y+=step){ ctx.beginPath(); ctx.moveTo(0,y+0.5); ctx.lineTo(w,y+0.5); ctx.stroke(); }
+    ctx.restore();
+  }
+
+  function drawEditorChrome(now){
+    effects.forEach((fx, idx) => {
+      const r = localRect(fx.span);
+      const pad = 6;
+      const x = r.x - pad, y = r.y - pad, w = r.w + pad*2, h = r.h + pad*2;
+
+      // 1) Marquee
+      ctx.save();
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([6, 4]);
+      ctx.lineDashOffset = -fx.antsPhase;
+      ctx.strokeStyle = '#000';
+      ctx.strokeRect(x, y, w, h);
+      ctx.lineDashOffset = -(fx.antsPhase+4);
+      ctx.strokeStyle = '#fff';
+      ctx.strokeRect(x, y, w, h);
+      ctx.restore();
+
+      // 2) Handles
+      ctx.save();
+      const anchors = [[x,y],[x+w,y],[x,y+h],[x+w,y+h]];
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      anchors.forEach(([ax,ay])=>{ ctx.beginPath(); ctx.arc(ax, ay, 2.75, 0, Math.PI*2); ctx.fill(); });
+      ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+      ctx.beginPath();
+      ctx.moveTo(x+w*0.25,y); ctx.lineTo(x+w*0.31,y-10);
+      ctx.moveTo(x+w, y+h*0.65); ctx.lineTo(x+w+10, y+h*0.75);
+      ctx.stroke();
+      ctx.restore();
+
+      // 3) Scanline
+      ctx.save();
+      ctx.globalAlpha = 0.045;
+      ctx.fillStyle = '#fff';
+      const barH = Math.max(3, Math.round(h*0.12));
+      const by = y + ((now*0.03 + idx*6) % Math.max(1,h)) - barH/2;
+      ctx.fillRect(x, by, w, barH);
+      ctx.restore();
+
+      fx.antsPhase += 0.25;
+    });
+
+    for (let i=effects.length-1;i>=0;i--) {
+      if (effects[i].tEnd <= now) effects.splice(i,1);
+    }
+  }
+
+  function frame(now=performance.now()){
+    sizeCanvas(false);
+    drawGrid();
+    drawEditorChrome(now);
+    raf = requestAnimationFrame(frame);
+  }
+
+  function startLoop(){
+    if (loopActive) return;
+    loopActive = true;
+    if (!raf) raf = requestAnimationFrame(frame);
+  }
+
+  function stopLoop(){
+    loopActive = false;
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+  }
+
+  // ---------- Morph / Glitch ----------
+  const MORPH = {
+    holdMin: 1600, holdMax: 2800,       // Gesamtdauer pro aktiver Glyphe
+    animDur: 240,                       // Dauer eines hektischen Sub-Ticks
+    tickMin: 60, tickMax: 140,          // „Hektik“: schneller
+    burstChance: 0.35,                  // Chance auf Mini-Burst (mehrere schnelle Ticks)
+    splitChance: 0.45,                  // Chromatic-Split-Effekt einschalten?
+    rotateMaxDeg: 6,                    // max. Rotation
+    scaleJitter: 0.08,                  // ±8% Scale
+    skewMaxDeg: 6                       // max. Skew
+  };
+
+  function isBusy(span){ return span.dataset.morphing === '1'; }
+  function setBusy(span,v){ span.dataset.morphing = v ? '1' : '0'; }
+
+  function makeEffectForSpan(span, durMs){
+    const now = performance.now();
+    effects.push({ span, tEnd: now + durMs, antsPhase: Math.random()*10 });
+    startLoop();
+  }
+
+  // Hektischer „Morph“ pro Buchstabe: Glyphenwechsel + visuelle Störungen
+  function morphTicker(span){
+    if (!span || isBusy(span)) return;
+
+    const original = span.dataset.original || span.textContent;
+    const prev = {
+      color: span.style.color,
+      filter: span.style.filter,
+      ts: span.style.textShadow,
+      tr: span.style.transform,
+      ls: span.style.letterSpacing
+    };
+
+    const alts = getAltsForChar(original);
+    if (!alts.length) return;
+
+    setBusy(span,true);
+
+    const hold = MORPH.holdMin + Math.random()*(MORPH.holdMax - MORPH.holdMin);
+    let running = true;
+
+    makeEffectForSpan(span, hold);
+
+    const applyChromaticSplit = () => {
+      if (Math.random() > MORPH.splitChance) return '';
+      // 3-kanaliger „Split“ als Afterimage
+      const dx = (Math.random()*2+0.5).toFixed(2);
+      const dy = (Math.random()*2+0.5).toFixed(2);
+      return `
+        rgb(255 0 80) ${dx}px ${dy}px 0,
+        rgb(0 255 200) ${-dx}px ${dy}px 0,
+        rgb(180 120 255) ${dx}px ${-dy}px 0
+      `;
+    };
+
+    // spontane Mini-Bursts: mehrere sehr schnelle Ticks hintereinander
+    const doBurst = () => {
+      const n = 2 + Math.floor(Math.random()*3); // 2–4 schnelle Wechsel
+      let i = 0;
+      const burst = () => {
+        if (!running || i>=n) return;
+        singleTick(true);
+        i++;
+        setTimeout(burst, 40 + Math.random()*60);
+      };
+      burst();
+    };
+
+    // Ein einzelner schneller Tick (Glyph + FX)
+    function singleTick(isBurst=false){
+      const next = alts[Math.floor(Math.random()*alts.length)];
+      const color = neon[Math.floor(Math.random()*neon.length)];
+
+      // Glyph tauschen
+      span.textContent = next;
+      span.style.color = color;
+
+      // leichte Layout-Störung
+      const rot = (Math.random()*2-1)*MORPH.rotateMaxDeg;
+      const sx  = 1 + (Math.random()*2-1)*MORPH.scaleJitter;
+      const sy  = 1 + (Math.random()*2-1)*MORPH.scaleJitter;
+      const skx = (Math.random()*2-1)*MORPH.skewMaxDeg;
+      const sky = (Math.random()*2-1)*MORPH.skewMaxDeg;
+
+      span.style.transform = `translateZ(0) rotate(${rot}deg) skew(${skx}deg, ${sky}deg) scale(${sx},${sy})`;
+
+      // Blur-Flicker
+      const blurPx = (isBurst ? 1.6 : 0.9) + Math.random()*0.8;
+      const contrast = 1.2 + Math.random()*0.5;
+      const bright = 1.05 + Math.random()*0.25;
+      span.style.filter = `blur(${blurPx}px) contrast(${contrast}) brightness(${bright})`;
+
+      // Chromatic Afterimage
+      span.style.textShadow = applyChromaticSplit();
+
+      // Mini „morphing“ Gefühl: Letter-Spacing pulsen lassen
+      if (Math.random() < 0.5) {
+        span.style.letterSpacing = (Math.random()<0.5 ? '-0.02em' : '0.04em');
+      }
+
+      // Rückanimation via Web Animations API (knackig, „hektisch“)
+      span.animate(
+        [
+          { filter:`${span.style.filter}`, transform: `${span.style.transform}` },
+          { filter:'none', transform:'translateZ(0) rotate(0deg) skew(0,0) scale(1,1)' }
+        ],
+        { duration: MORPH.animDur, easing:'steps(3,end)', fill:'forwards' }
+      );
+    }
+
+    const tick = () => {
+      if (!running) return;
+      singleTick(false);
+      if (Math.random() < MORPH.burstChance) doBurst();
+      const gap = MORPH.tickMin + Math.random()*(MORPH.tickMax - MORPH.tickMin);
+      tickTimer = setTimeout(tick, gap);
+    };
+
+    let tickTimer = null;
+    tick();
+
+    setTimeout(()=>{
+      running = false;
+      if (tickTimer) clearTimeout(tickTimer);
+      // Reset auf Original, sanft ausfaden
+      span.textContent = original;
+      span.style.color = prev.color;
+      span.style.filter = 'none';
+      span.style.textShadow = 'none';
+      span.style.letterSpacing = prev.ls || '';
+      span.animate(
+        [
+          { opacity: 0.85, filter:'none' },
+          { opacity: 1,    filter:'none' }
+        ],
+        { duration: 180, easing: 'ease-out', fill: 'forwards' }
+      );
+      setBusy(span,false);
+    }, hold);
+  }
+
+  function pick(){
+    const a=letterSpans.filter(s=>s.textContent.trim()!=='');
+    return a.length? a[Math.floor(Math.random()*a.length)]:null;
+  }
+
+  function snapSlide(span, dir='up') {
+    const dy = dir === 'up' ? -18 : 18;
+    span.animate(
+      [{ transform:`translateY(${dy}px)` }, { transform:'translateY(0)' }],
+      { duration: 420, easing:'steps(5, end)', fill:'both' }
+    );
+  }
+
+  function multiGlitchBurst() {
+    if (Math.random() < 0.45) { const s = pick(); if (s) snapSlide(s, Math.random()<0.5 ? 'up' : 'down'); }
+    const s = pick(); if (s) morphTicker(s);
+  }
+
+  // ---------- Start/Stop ----------
+  let glitchTimer=null;
+  function startGlitch(){
+    if(glitchTimer) return;
+    glitchTimer=setInterval(()=>multiGlitchBurst(), 2400 + Math.random()*1600);
+    setTimeout(()=>multiGlitchBurst(), 600);
+  }
+  function stopGlitch(){
+    if(glitchTimer){ clearInterval(glitchTimer); glitchTimer=null; }
+  }
+
+  // Sichtbarkeits-Controller
+  let visible = false;
+  function activate() {
+    if (visible) return;
+    visible = true;
+    floatAnim.play();
+    startGlitch();
+    startLoop();
+  }
+  function deactivate() {
+    if (!visible) return;
+    visible = false;
+    floatAnim.pause();
+    stopGlitch();
+    stopLoop();
+  }
+
+  // IntersectionObserver: „läuft, wenn sichtbar“
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.target !== section) return;
+      if (e.isIntersecting) activate();
+      else deactivate();
+    });
+  }, {
+    threshold: [0.05],
+    root: null,
+    rootMargin: '0px'
+  });
+  io.observe(section);
+
+  // Tab-Wechsel
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      deactivate();
+    } else {
+      const r = section.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const visiblePx = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+      const isVis = visiblePx / Math.min(vh, r.height) >= 0.05;
+      if (isVis) activate();
+    }
+  });
+
+  // Initial: prüfen
+  (function initVisibility(){
+    const r = section.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const visiblePx = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+    const isVis = visiblePx / Math.min(vh, r.height) >= 0.05;
+    if (isVis) activate();
+  })();
+})();
+</script>
+
 
 
 
@@ -2120,6 +2781,49 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 </section>
+<script>
+(function(){
+  const rail = document.querySelector('#flowhub .flow-rail');
+  if(!rail) return;
+  const firstCard = document.querySelector('#flowhub .flow-card');
+
+  function updateTracker(){
+    // nur Mobile
+    if(!window.matchMedia('(max-width: 699.98px)').matches) return;
+
+    const railRect = rail.getBoundingClientRect();
+    const vh = window.innerHeight;
+
+    // Referenzlinie im Viewport (wo "gemessen" wird)
+    const refY = vh * 0.15;
+
+    // Fortschritt: 0 wenn rail-top @ refY, 1 wenn rail-bottom @ refY
+    const progress = (refY - railRect.top) / railRect.height;
+    const p = Math.max(0, Math.min(1, progress));
+
+    // Mitte der ersten Karte relativ zur Rail
+    let firstCenter = 0;
+    if(firstCard){
+      const r = firstCard.getBoundingClientRect();
+      firstCenter = (r.top - railRect.top) + (r.height / 2);
+      // Sicherheitsnetz: falls erste Karte sehr klein/außerhalb ist
+      firstCenter = Math.max(0, Math.min(firstCenter, railRect.height));
+    }
+
+    // Mapping: bei p=0 -> firstCenter; bei p=1 -> railRect.height
+    const y = firstCenter + p * (railRect.height - firstCenter);
+
+    rail.style.setProperty('--tracker-y', y + 'px');
+  }
+
+  const ro = new ResizeObserver(updateTracker);
+  ro.observe(document.documentElement);
+  updateTracker();
+  window.addEventListener('scroll', updateTracker, { passive: true });
+  window.addEventListener('resize', updateTracker);
+  window.addEventListener('load', updateTracker);
+})();
+</script>
 
 <!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
@@ -2284,176 +2988,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 </script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const hasGSAP = !!window.gsap;
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!hasGSAP || prefersReduced) return;
 
-  const { gsap } = window;
-  gsap.registerPlugin(window.ScrollTrigger);
-
-  const mm = gsap.matchMedia();
-  mm.add("(min-width: 700px)", () => {
-    const hub   = document.querySelector('#flowhub');
-    const rail  = hub?.querySelector('.flow-rail');
-    const cards = gsap.utils.toArray('#flowhub .flow-card');
-    const title = hub?.querySelector('.pane-title');
-    const sub   = hub?.querySelector('.pane-subtitle');
-
-    // 0) Safety: will-change hints
-    gsap.set([title, sub, cards], { willChange: 'transform, opacity' });
-
-    // 1) Section-Intro (einmalig)
-    gsap.from([title, sub], {
-      y: 20, autoAlpha: 0, duration: 0.6, ease: 'power2.out', stagger: 0.08,
-      scrollTrigger: { trigger: hub, start: "top 75%", once: true }
-    });
-
-    // 2) Karten-Stagger beim ersten Eintritt
-    gsap.from(cards, {
-      y: 24, autoAlpha: 0, duration: 0.55, ease: 'power2.out', stagger: 0.12,
-      scrollTrigger: { trigger: rail || hub, start: "top 70%", once: true }
-    });
-
-    // 3) Parallax der großen Nummern (scrub)
-    gsap.to('#flowhub .card-num-giant', {
-      yPercent: -18, ease: 'none',
-      scrollTrigger: {
-        trigger: hub,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: 0.35
-      }
-    });
-
-    // 4) 3D-Tilt on hover (nur präziser Pointer, kein Touch)
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      const clamp = gsap.utils.clamp; // safety
-      const rX = 8, rY = 8; // max rotation
-
-      cards.forEach(card => {
-        // Perspektive nur einmal setzen
-        gsap.set(card, { transformStyle: 'preserve-3d' });
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const cx = rect.left + rect.width / 2;
-          const cy = rect.top + rect.height / 2;
-          const dx = (e.clientX - cx) / (rect.width  / 2);
-          const dy = (e.clientY - cy) / (rect.height / 2);
-          gsap.to(card, {
-            rotateY: clamp(-rY, rY, dx * rY),
-            rotateX: clamp(-rX, rX, -dy * rX),
-            translateZ: 0,
-            transformOrigin: 'center center',
-            duration: 0.25, ease: 'power2.out'
-          });
-        });
-        card.addEventListener('mouseleave', () => {
-          gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.35, ease: 'power3.out' });
-        });
-      });
-    }
-
-    // Cleanup bei Unmatch (optional)
-    return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
-      gsap.set([title, sub, cards, '#flowhub .card-num-giant'], { clearProps: 'all' });
-    };
-  });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  if (!window.gsap) return;
-  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
-
-  const { gsap } = window;
-  gsap.registerPlugin(window.ScrollTrigger);
-
-  const mm = gsap.matchMedia();
-
-  // ===== Mobile / Small Screens (≤ 699.98px) =====
-  mm.add("(max-width: 699.98px)", () => {
-    const hub   = document.querySelector('#flowhub');
-    const rail  = hub?.querySelector('.flow-rail');
-    const cards = gsap.utils.toArray('#flowhub .flow-card');
-    const title = hub?.querySelector('.pane-title');
-    const sub   = hub?.querySelector('.pane-subtitle');
-
-    // 0) will-change Hints
-    gsap.set([title, sub, cards], { willChange: 'transform, opacity' });
-
-    // 1) Section-Intro
-    gsap.from([title, sub], {
-      y: 16, autoAlpha: 0, duration: 0.5, ease: 'power2.out', stagger: 0.08,
-      scrollTrigger: { trigger: hub, start: "top 80%", once: true }
-    });
-
-    // 2) Jede Karte revealed sich beim Erreichen (Einmal-Animation)
-    cards.forEach((card, i) => {
-      gsap.from(card, {
-        y: 18, autoAlpha: 0, duration: 0.45, ease: 'power2.out',
-        delay: i === 0 ? 0.05 : 0, // erste Karte minimal verzögert – wirkt smoother
-        scrollTrigger: {
-          trigger: card,
-          start: "top 85%",
-          toggleActions: "play none none none", // einmalig
-        }
-      });
-    });
-
-    // 3) Dezente Parallax (Nummer & Inhalt bewegen sich leicht gegeneinander)
-    //    – nur wenn die große Nummer sichtbar ist (bei 600–699px)
-    const giants = gsap.utils.toArray('#flowhub .card-num-giant');
-    if (giants.length) {
-      gsap.to(giants, {
-        yPercent: -12, ease: 'none',
-        scrollTrigger: {
-          trigger: rail || hub,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 0.3,
-        }
-      });
-    }
-
-    // Inhalt (card-core) leicht entgegengesetzt für Tiefe
-    gsap.to('#flowhub .card-core', {
-      yPercent: 6, ease: 'none',
-      scrollTrigger: {
-        trigger: rail || hub,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 0.3,
-      }
-    });
-
-    // 4) Sanfter „Active“-Akzent, wenn eine Karte mittig steht (kein Springen)
-    cards.forEach((card) => {
-      const tl = gsap.timeline({ paused: true });
-      tl.to(card, { scale: 1.015, duration: 0.25, ease: 'power2.out' });
-
-      ScrollTrigger.create({
-        trigger: card,
-        start: "top 65%",
-        end: "bottom 35%",
-        onEnter: () => tl.play(),
-        onEnterBack: () => tl.play(),
-        onLeave: () => tl.reverse(),
-        onLeaveBack: () => tl.reverse()
-      });
-    });
-
-    // Cleanup, falls Breakpoint verlässt
-    return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
-      gsap.set([title, sub, cards, '#flowhub .card-core', '#flowhub .card-num-giant'], { clearProps: 'all' });
-    };
-  });
-});
-</script>
 
 <script type="application/ld+json">
 {

@@ -1149,3 +1149,26 @@
 .cosmos-suite .module-card h3 .chars { display:inline-block; }
 .aether-card h3 .char,
 .cosmos-suite .module-card h3 .char { display:inline-block; transform-origin:50% 80%; will-change: transform, opacity; }
+/* === FIX: Zwischen 1054px und 1152px -> nur 2 gleich große Karten nebeneinander === */
+@media (min-width: 1054px) and (max-width: 1152px) {
+  #nebula-hub .orbit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 2rem !important;
+    align-items: stretch !important;
+    justify-items: center !important;
+  }
+
+  /* Karten sollen keine manuell gesetzten Spalten-Spans übernehmen */
+  #nebula-hub .module-card {
+    grid-column: auto / auto !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Video-/Cinema-Karte bleibt full-width */
+  #nebula-hub .module-card.cinema-card {
+    grid-column: 1 / -1 !important;
+    aspect-ratio: 16 / 9 !important;
+    min-height: 360px !important;
+  }
+}

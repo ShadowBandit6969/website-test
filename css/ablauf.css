@@ -705,3 +705,97 @@
     max-width: calc(100% - var(--flow-mobile-gutter) * 2) !important;
   }
 }
+/* === FLOWHUB – Mobile Timeline (links neben den Karten) – hübsch + linearer Tracker === */
+@media (max-width: 699.98px){
+  /* Basis: Platz für Timeline links */
+  #flowhub .flow-rail{
+    position: relative;
+    padding-left: 64px;                 /* mehr Luft links */
+    --tl-x: 26px;                       /* X-Position der Timeline im Rail */
+    --tracker-y: 0px;                   /* wird via JS gesetzt */
+    --tl-line: rgba(0,0,0,.25);
+    --tl-tick: rgba(0,0,0,.4);
+    --tl-bg: #fff;
+    --tl-dot: #000;
+  }
+
+  /* Vertikale Linie mit weichem Verlauf (oben/unten leicht ausgeblendet) */
+  #flowhub .flow-rail::before{
+    content:"";
+    position: absolute;
+    left: var(--tl-x);
+    top: 0; bottom: 0;
+    width: 3px;
+    border-radius: 3px;
+    background:
+      linear-gradient(to bottom, transparent 0%, var(--tl-line) 10%, var(--tl-line) 90%, transparent 100%);
+    z-index: 1;
+  }
+
+  /* kleine Ticks zwischen den Karten (rein optisch) */
+  #flowhub .flow-card{
+    position: relative;
+  }
+  #flowhub .flow-card::before{
+    /* horizontaler Connector von Karte zur Timeline (mittig zur Karte) */
+    content:"";
+    position: absolute;
+    left: calc(var(--tl-x) + 3px);      /* direkt rechts neben der Linie */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 2px;
+    background: var(--tl-tick);
+    border-radius: 2px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  #flowhub .flow-card::after{
+    /* kleines statisches Knubbelchen am Ende des Connectors (optional) */
+    content:"";
+    position: absolute;
+    left: calc(var(--tl-x) - 7px);
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 8px; height: 8px;
+    border-radius: 999px;
+    background: var(--tl-dot);
+    outline: 2px solid var(--tl-bg);    /* Halo für Kontrast */
+    z-index: 2;
+    pointer-events: none;
+    opacity: .7;
+  }
+
+  /* Der bewegte Tracker-Punkt auf der Timeline */
+  #flowhub .flow-rail::after{
+    content:"";
+    position: absolute;
+    left: var(--tl-x);
+    top: var(--tracker-y);
+    transform: translate(-50%,-50%);
+    width: 16px; height: 16px;
+    border-radius: 999px;
+    background: var(--tl-dot);
+    outline: 4px solid var(--tl-bg);    /* sauberer Ring statt border (ausschnittsicher) */
+    box-shadow: 0 4px 10px rgba(0,0,0,.08);
+    z-index: 3;
+    transition: top .10s linear;        /* leicht geglättet; entferne für 1:1 scroll */
+    pointer-events: none;
+  }
+
+  /* Spacing zwischen Karten etwas großzügiger, damit die Mittellinie wirkt */
+  #flowhub .flow-card + .flow-card{ margin-top: 24px; }
+
+  /* Dark Mode */
+  :root[data-theme="dark"] #flowhub .flow-rail{
+    --tl-line: rgba(255,255,255,.35);
+    --tl-tick: rgba(255,255,255,.55);
+    --tl-bg: #0b0b0b;
+    --tl-dot: #fff;
+  }
+
+  /* Motion-Respect */
+  @media (prefers-reduced-motion: reduce){
+    #flowhub .flow-rail::after{ transition: none; }
+  }
+}

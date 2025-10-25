@@ -309,7 +309,7 @@ font-size: clamp(4rem, 22vw, 18rem);
    Lokale Bild-Overrides nur für webdesign.html
 --------------------------- */
 body[data-page="webdesign"] .hero-image-background {
-  background-image: url("./images/hero-bg-sky_1hero-bg-sky.webp") !important;
+  background-image: url("./WebdesignPic/1.mp4") !important;
 }
 
 body[data-page="webdesign"] .hero-image-foreground {
@@ -389,6 +389,28 @@ body[data-page="webdesign"] .hero-image-foreground {
         transform: translateY(17%);              /* dein bisheriger Versatz */
   }
 }
+/* Ergänzung am Ende deiner bestehenden CSS-Datei */
+.hero-image-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* blockiert keine Klicks */
+  z-index: 0;
+}
+
+
+
 </style>
 
 </head>
@@ -976,22 +998,655 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
-
-  <section class="hero-section">
-    <div class="hero-images-wrapper">
-      <div class="hero-image-background"></div>
-      <div class="page-title">
-        <div class="container">
-          <h1 class="large-title">Webdesign</h1>
-        </div>
-      </div>
-      <div class="hero-image-foreground"></div>
+<section class="hero-section" data-page="webdesign">
+  <div class="hero-images-wrapper">
+    <!-- HINTERGRUND-VIDEO -->
+    <div class="hero-image-background">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hintegrundweb.webp">
+        <source src="./WebdesignPic/1.mp4" type="video/mp4" />
+      </video>
     </div>
-  </section>
 
+    <div class="page-title">
+      <div class="container">
+        <h1 class="large-title">Web <br>Design</h1>
+      </div>
+    </div>
 
+  </div>
+</section>
 
+<script>
+(function () {
+  const section = document.querySelector('.hero-section[data-page="webdesign"]');
+  const h1 = document.querySelector('.page-title .large-title');
+  const pageTitle = document.querySelector('.page-title');
+  if (!section || !h1 || !pageTitle) return;
 
+  // --- Reload-Erkennung (unverändert) ---
+  function isReload() {
+    try {
+      const n = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+      if (n && (n.type === 'reload' || n.type === 'back_forward')) return true;
+      if (performance && performance.navigation && performance.navigation.type === 1) return true;
+    } catch(e){}
+    return false;
+  }
+  const RELOADED = isReload();
+
+  // ---------- Wrapper & Overlay ----------
+  const originalHTML = h1.innerHTML;
+  const parts = originalHTML.split(/(<br\s*\/?>)/i);
+
+  const wrapper = document.createElement('span');
+  wrapper.id = 'titleFloatWrapper';
+  wrapper.style.display = 'inline-block';
+  wrapper.style.willChange = 'transform';
+  h1.innerHTML = '';
+  h1.appendChild(wrapper);
+
+  const overlay = document.createElement('canvas');
+  overlay.id = 'titleOverlay';
+  overlay.style.position = 'absolute';
+  overlay.style.left = '0';
+  overlay.style.top = '0';
+  overlay.style.pointerEvents = 'none';
+  overlay.style.zIndex = '3';
+  if (getComputedStyle(pageTitle).position === 'static') {
+    pageTitle.style.position = 'relative';
+  }
+  pageTitle.appendChild(overlay);
+
+  // ---------- Canvas Sizing + Live-Tracking ----------
+  let ctx = null;
+  let last = { w:0, h:0, left:0, top:0, dpr:0 };
+
+  function sizeCanvas(force=false) {
+    const r = h1.getBoundingClientRect();
+    const pr = pageTitle.getBoundingClientRect();
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+
+    const left = r.left - pr.left;
+    const top  = r.top  - pr.top;
+    const w = Math.ceil(r.width);
+    const h = Math.ceil(r.height);
+
+    if (!force &&
+        w === last.w && h === last.h &&
+        left === last.left && top === last.top &&
+        dpr === last.dpr) return;
+
+    overlay.style.width = w + 'px';
+    overlay.style.height = h + 'px';
+    overlay.style.left = left + 'px';
+    overlay.style.top  = top  + 'px';
+
+    overlay.width = Math.max(1, Math.floor(w * dpr));
+    overlay.height = Math.max(1, Math.floor(h * dpr));
+
+    ctx = overlay.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    last = { w, h, left, top, dpr };
+  }
+
+  sizeCanvas(true);
+
+  const roH1 = new ResizeObserver(() => sizeCanvas(true));
+  const roTitle = new ResizeObserver(() => sizeCanvas(true));
+  roH1.observe(h1);
+  roTitle.observe(pageTitle);
+
+  window.addEventListener('resize', () => sizeCanvas(true), { passive:true });
+  window.addEventListener('scroll', () => sizeCanvas(false), { passive:true });
+  window.addEventListener('orientationchange', () => sizeCanvas(true));
+
+  // ---------- Text → Letters ----------
+  // großer, exotischer Glyph-Pool: Griechisch, Kyrillisch, Armenisch, Georgisch, IPA, Fraktur, Mathe-Alphanumerika, Ziffernvarianten …
+  const SIMILAR = {
+    // lower
+    'a':['ɑ','α','⍺','ª','ᵃ','ä','á','à','ȧ','ą','ɐ','@','ꭤ','𝖺','𝔞','ᶏ','ᴀ'],
+    'b':['Ь','ƅ','Ꮟ','Ƅ','ƀ','ẛ'.replace('ẛ','b'),'ɓ','ᵇ','ᶀ','𝖻','𝔟'],
+    'c':['ϲ','ᴄ','с','ᶜ','ƈ','ↄ','ς','ɔ','ꜿ','ç','č','ċ','𝖼','𝔠'],
+    'd':['ԁ','đ','ᑯ','ᵈ',')','ɗ','ᵭ','ḋ','ᶁ','𝖽','𝔡'],
+    'e':['℮','ɛ','є','ᵉ','ᵋ','ℯ','ɇ','ė','ë','é','è','ɘ','ε','𝖾','𝔢'],
+    'f':['ƒ','ſ','ϝ','ẝ','ʄ','ᶂ','𐊇','𝖿','𝔣'],
+    'g':['ɡ','ǥ','ᵍ','9','ĝ','ğ','ġ','ḡ','ɢ','ᶃ','𝓰','𝔤'],
+    'h':['һ','ℎ','ᵸ','ʰ','ɦ','ħ','ꜧ','ḫ','𝖍','𝔥'],
+    'i':['ɪ','ǐ','ı','¡','1','í','ì','ï','ỉ','ɨ','ⅰ','!', '𝖎','𝔦'],
+    'j':['ȷ','ϳ','ј','ʝ','ĵ','ɉ','ᶡ','𝖏','𝔧'],
+    'k':['κ','ᵏ','ꭆ','ḳ','ǩ','ꝁ','ќ','ᴋ','𝖐','𝔨'],
+    'l':['ɩ','ⅼ','ǀ','|','Ɩ','ĺ','ļ','ł','ᶅ','ʟ','𝖑','𝔩'],
+    'm':['ṃ','ᴍ','м','ᵐ','ɱ','ṁ','ᶆ','𝖒','𝔪'],
+    'n':['η','п','ɴ','∩','ɲ','ṅ','ņ','ń','ň','ң','𝖓','𝔫'],
+    'o':['ο','о','ɵ','°','0','ö','ó','ò','õ','ơ','ø','○','∘','𝖔','𝔬'],
+    'p':['ρ','р','ᵖ','ᵱ','ṕ','ṗ','ƥ','ῥ','𝖕','𝔭'],
+    'q':['զ','ʠ','ɋ','ȹ','գ','𝖖','𝔮'],
+    'r':['ɼ','г','ʳ','ř','ŗ','ꭇ','ʀ','ȑ','ȓ','ṙ','ᵲ','𝖗','𝔯'],
+    's':['ʂ','ѕ','$','§','ş','ś','ṡ','ș','ṥ','ʃ','ƨ','ß','𝖘','𝔰'],
+    't':['τ','ť','ŧ','†','ṭ','ṯ','ƫ','ʈ','₸','𝖙','𝔱'],
+    'u':['υ','ʋ','ս','ᵘ','ů','ü','ú','ù','ū','ư','µ','ꭎ','𝖚','𝔲'],
+    'v':['ν','ѵ','ᵛ','ṿ','ѷ','√','∨','ʋ','𝖛','𝔳'],
+    'w':['ᴡ','ѡ','ɯ','ŵ','ẇ','ɰ','ɯ','𝖜','𝔴'],
+    'x':['х','×','✕','χ','ẋ','ᶍ','ⅹ','𝖝','𝔵'],
+    'y':['γ','ʏ','у','ý','ỳ','ÿ','ŷ','ɣ','ʎ','¥','𝖞','𝔶'],
+    'z':['ʐ','ᴢ','ž','ż','ź','ƶ','ʑ','ẓ','ƻ','𝖟','𝔷'],
+    // upper
+    'A':['Α','Λ','Ꭺ','Ā','Ⱥ','∆','∀','𝘈','𝕬','𝔄'],
+    'B':['В','Ƀ','ß','Ɓ','ℬ','ʙ','ɮ','ᛒ','𝘉','𝕭','𝔅'],
+    'C':['Ϲ','С','Ⅽ','Ꮯ','℃'.slice(0,1),'☾','ℂ','𐐕','𝘊','𝕮','𝔇'.replace('D','C')],
+    'D':['Ꭰ','Ḏ','Ɗ','ⅅ','ᴅ','ↁ','𝘋','𝕯','𝔇'],
+    'E':['Ε','Є','ℰ','€','Ɇ','Ɛ','Σ','⋿','𝘌','𝕰','𝔈'],
+    'F':['Ғ','Ϝ','ℱ','ᖴ','𐊇','𝘍','𝕱','𝔉'],
+    'G':['ɢ','Ԍ','Ꮐ','Ĝ','Ğ','Ġ','Ḡ','Ɠ','𝘎','𝕲','𝔊'],
+    'H':['Η','Н','ℋ','Ħ','Ⱨ','♓','𝘏','𝕳','ℌ'],
+    'I':['Ι','Ӏ','ǀ','1','Ⅰ','∣','𝘐','𝕴','ℑ'],
+    'J':['Ј','Ɉ','Ĵ','ⅉ','𝘑','𝕵','𝔍'],
+    'K':['Κ','ᛕ','K','₭','Ҡ','Ƙ','Ǩ','𝘒','𝕶','𝔎'],
+    'L':['Ꮮ','Ⅼ','Ł','∟','⅃','ʟ','𝘓','𝕷','𝔏'],
+    'M':['Μ','М','Ṁ','Ϻ','Ⅿ','𝘔','𝕸','𝔐'],
+    'N':['Ν','Ｎ','∩','Ṅ','Ň','Ɲ','𝘕','𝕹','𝔑'],
+    'O':['Ο','О','0','°','Ø','Ө','○','⦿','𝘖','𝕺','𝔒'],
+    'P':['Ρ','Р','ℙ','₽','Ҏ','Ƿ','𐊕','𝘗','𝕻','𝔓'],
+    'Q':['Ⴓ','ℚ','Ǫ','Ɋ','Ҩ','Ⓠ','𝘘','𝕼','𝔔'],
+    'R':['Ꭱ','ℜ','Я','Ȑ','Ŕ','Ṙ','®','𝘙','𝕽','ℛ'],
+    'S':['Ѕ','§','$','Ś','Ş','Š','Ṣ','ẞ','𝘚','𝕾','𝔖'],
+    'T':['Τ','Т','Ŧ','Ͳ','₸','Ṫ','Ƭ','✝','𝘛','𝕿','𝔗'],
+    'U':['Ս','⋃','Ū','Ü','Ú','Ù','Ư','∪','𝘜','𝖀'.replace('𝖀','𝕌'),'𝔘'],
+    'V':['Ѵ','∨','Ṽ','Ʋ','✓','𝘝','𝕍','𝔙'],
+    'W':['Ԝ','Ѡ','Ш','Ŵ','Ẃ','Ẅ','𝘞','𝕎','𝔚'],
+    'X':['Χ','Х','✕','×','✖','Ⅹ','χ','𝘟','𝕏','𝔛'],
+    'Y':['Υ','Ү','¥','Ɏ','Ÿ','Ῡ','Ӳ','𝘠','𝕐','𝔜'],
+    'Z':['Ζ','ℤ','Ž','Ż','Ź','Ƶ','Ẕ','𝘡','𝕫'.toUpperCase(),'𝔃'.toUpperCase()],
+    // digits
+    '0':['O','О','Ο','○','°','⭕','⓪','𝟘'],
+    '1':['I','l','|','ǀ','Ⅰ','❶','𝟙'],
+    '2':['Ƨ'.toLowerCase(),'乙','٢','②','𝟚'],
+    '3':['Ʒ','З','Ɛ','ɜ','➂','𝟛'],
+    '4':['Ꮞ','٤','④','𝟜'],
+    '5':['Ƽ','Ѕ','⑤','𝟝'],
+    '6':['ბ','৬','⑥','𝟞'],
+    '7':['۷','⑦','𝟟'],
+    '8':['ȣ','੮','⑧','𝟠'],
+    '9':['ჽ','९','⑨','𝟡']
+  };
+// === Add Asian & "cool" glyphs (CJK, Kana, Hangul, Bopomofo, Fullwidth) ===
+const ASIAN_COOL = {
+  // lower
+  a: ['ａ','ぁ','ｧ','ァ','人'],
+  b: ['ｂ'],
+  c: ['ｃ','匚'],
+  d: ['ｄ','り'],
+  e: ['ｅ','ぇ','ェ'],
+  f: ['ｆ','ﾌ','ㄈ'],
+  g: ['ｇ'],
+  h: ['ｈ','卄','ん'],
+  i: ['ｉ','丨','｜','ㅣ'],
+  j: ['ｊ','亅'],
+  k: ['ｋ','ケ'],
+  l: ['ｌ','し','丨','ㅣ'],
+  m: ['ｍ','〽'],
+  n: ['ｎ','ん','ﾝ'],
+  o: ['ｏ','〇','ㅇ','○'],
+  p: ['ｐ','尸'],
+  q: ['ｑ'],
+  r: ['ｒ','尺'],
+  s: ['ｓ','ら'],
+  t: ['ｔ','丁','ﾃ'],
+  u: ['ｕ','凵','ㄩ'],
+  v: ['ｖ','レ'],
+  w: ['ｗ','山'],
+  x: ['ｘ','メ','叉'],
+  y: ['ｙ','丫','ㄚ'],
+  z: ['ｚ','乙','之'],
+
+  // upper
+  A: ['Ａ','人','八'],
+  B: ['Ｂ','日'],
+  C: ['Ｃ','匚'],
+  D: ['Ｄ','冂'],
+  E: ['Ｅ','三','ヨ','ミ'],
+  F: ['Ｆ','ﾌ','ㄈ'],
+  G: ['Ｇ'],
+  H: ['Ｈ','廾','井','卄'],
+  I: ['Ｉ','丨','工','｜'],
+  J: ['Ｊ'],
+  K: ['Ｋ','ケ'],
+  L: ['Ｌ'],
+  M: ['Ｍ','州','爪'],
+  N: ['Ｎ','几','ン'],
+  O: ['Ｏ','〇','囗','口'],
+  P: ['Ｐ','尸','戸'],
+  Q: ['Ｑ'],
+  R: ['Ｒ','尺'],
+  S: ['Ｓ','ら'],
+  T: ['Ｔ','丁','工','ﾃ'],
+  U: ['Ｕ','凵'],
+  V: ['Ｖ','レ'],
+  W: ['Ｗ','山'],
+  X: ['Ｘ','メ','叉'],
+  Y: ['Ｙ','丫','ㄚ'],
+  Z: ['Ｚ','乙','之'],
+
+  // digits (fullwidth + CJK numerals)
+  0: ['０','零','〇'],
+  1: ['１','一','丨','｜'],
+  2: ['２','二','乙'],
+  3: ['３','三'],
+  4: ['４','四'],
+  5: ['５','五'],
+  6: ['６','六'],
+  7: ['７','七'],
+  8: ['８','八'],
+  9: ['９','九'],
+};
+
+// merge into SIMILAR without duplicates (keep your originals first)
+for (const [key, vals] of Object.entries(ASIAN_COOL)) {
+  SIMILAR[key] = Array.from(new Set([...(SIMILAR[key] || []), ...vals]));
+}
+
+  const neon = ['#00fff5','#ff3df0','#39ff14','#ffd400','#7a5cff','#ff5e5b'];
+
+  // Kombinierende Akzente (für extra „Glitch“)
+  const COMBINERS = [
+    '\u0301','\u0300','\u0302','\u0308','\u0336','\u0332','\u035B','\u0342','\u032E'
+  ];
+
+  // --- schneller Glyph-Support mit Cache ---
+  const _glyphSupportCache = new Map();
+  function supportsGlyphCached(ch){
+    if (_glyphSupportCache.has(ch)) return _glyphSupportCache.get(ch);
+    const span = document.createElement('span');
+    span.textContent = ch;
+    span.style.position = 'absolute';
+    span.style.visibility = 'hidden';
+    span.style.font = getComputedStyle(document.body).font;
+    document.body.appendChild(span);
+    const ok = span.offsetWidth > 0 && span.textContent === ch;
+    span.remove();
+    _glyphSupportCache.set(ch, ok);
+    return ok;
+  }
+
+  function getAltsForChar(ch){
+    const base = SIMILAR[ch] || SIMILAR[ch.toLowerCase()] || [];
+    const filtered = base
+      .slice()
+      .sort(() => Math.random()-0.5)
+      .filter(s => supportsGlyphCached(s));
+    // ~30%: Kombinierende Akzente (1–2) dranhängen
+    if (filtered.length && Math.random() < 0.30){
+      const withAccents = [];
+      filtered.forEach(s => {
+        const nAcc = Math.random() < 0.5 ? 1 : 2;
+        let acc = s;
+        for (let i=0;i<nAcc;i++){
+          const c = COMBINERS[Math.floor(Math.random()*COMBINERS.length)];
+          const candidate = acc + c;
+          if (supportsGlyphCached(candidate)) acc = candidate;
+        }
+        withAccents.push(acc);
+      });
+      return withAccents.length ? withAccents : filtered;
+    }
+    return filtered;
+  }
+
+  const letterSpans = [];
+  parts.forEach(part => {
+    if (/^<br/i.test(part)) { wrapper.appendChild(document.createElement('br')); return; }
+    [...part].forEach(ch => {
+      const s = document.createElement('span');
+      s.textContent = ch;
+      s.style.display = 'inline-block';
+      s.style.willChange = 'transform, opacity, color, filter, text-shadow';
+      if (RELOADED) {
+        s.style.opacity = '1';
+        s.style.transform = 'translateY(0)';
+      } else {
+        s.style.opacity = '0';
+        s.style.transform = 'translateY(40px)';
+      }
+      s.dataset.original = ch;
+      wrapper.appendChild(s);
+      letterSpans.push(s);
+    });
+  });
+
+  // ---------- Entrance ----------
+  window.addEventListener('load', () => {
+    if (!RELOADED) {
+      letterSpans.forEach((s, i) => {
+        s.animate(
+          [{opacity:0, transform:'translateY(40px)'},
+           {opacity:1, transform:'translateY(0)'}],
+          { duration: 1400, easing:'ease-out', fill:'forwards', delay: 160 * i }
+        );
+      });
+    }
+    // Starten entscheidet der IO unten
+  });
+
+  // ---------- Float ----------
+  let floatAnim = wrapper.animate(
+    [{ transform:'translateY(0)' },{ transform:'translateY(-10px)' },{ transform:'translateY(0)' }],
+    { duration: 12000, easing:'ease-in-out', iterations: Infinity }
+  );
+  floatAnim.pause();
+
+  // ---------- Overlay Renderloop ----------
+  const effects = []; // {span, tEnd, antsPhase}
+  let raf = null;
+  let loopActive = false;
+
+  function localRect(el){
+    const r = el.getBoundingClientRect();
+    const pr = pageTitle.getBoundingClientRect();
+    return { x: r.left - pr.left, y: r.top - pr.top, w: r.width, h: r.height };
+  }
+
+  function drawGrid() {
+    const w = overlay.clientWidth, h = overlay.clientHeight;
+    const step = Math.max(18, Math.round(Math.min(w,h)/10));
+    ctx.save();
+    ctx.clearRect(0,0,overlay.width,overlay.height);
+    ctx.globalAlpha = 0.14; ctx.lineWidth = 1; ctx.strokeStyle = '#9aa0a6';
+    for (let x=0;x<=w;x+=step){ ctx.beginPath(); ctx.moveTo(x+0.5,0); ctx.lineTo(x+0.5,h); ctx.stroke(); }
+    for (let y=0;y<=h;y+=step){ ctx.beginPath(); ctx.moveTo(0,y+0.5); ctx.lineTo(w,y+0.5); ctx.stroke(); }
+    ctx.restore();
+  }
+
+  function drawEditorChrome(now){
+    effects.forEach((fx, idx) => {
+      const r = localRect(fx.span);
+      const pad = 6;
+      const x = r.x - pad, y = r.y - pad, w = r.w + pad*2, h = r.h + pad*2;
+
+      // 1) Marquee
+      ctx.save();
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([6, 4]);
+      ctx.lineDashOffset = -fx.antsPhase;
+      ctx.strokeStyle = '#000';
+      ctx.strokeRect(x, y, w, h);
+      ctx.lineDashOffset = -(fx.antsPhase+4);
+      ctx.strokeStyle = '#fff';
+      ctx.strokeRect(x, y, w, h);
+      ctx.restore();
+
+      // 2) Handles
+      ctx.save();
+      const anchors = [[x,y],[x+w,y],[x,y+h],[x+w,y+h]];
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      anchors.forEach(([ax,ay])=>{ ctx.beginPath(); ctx.arc(ax, ay, 2.75, 0, Math.PI*2); ctx.fill(); });
+      ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+      ctx.beginPath();
+      ctx.moveTo(x+w*0.25,y); ctx.lineTo(x+w*0.31,y-10);
+      ctx.moveTo(x+w, y+h*0.65); ctx.lineTo(x+w+10, y+h*0.75);
+      ctx.stroke();
+      ctx.restore();
+
+      // 3) Scanline
+      ctx.save();
+      ctx.globalAlpha = 0.045;
+      ctx.fillStyle = '#fff';
+      const barH = Math.max(3, Math.round(h*0.12));
+      const by = y + ((now*0.03 + idx*6) % Math.max(1,h)) - barH/2;
+      ctx.fillRect(x, by, w, barH);
+      ctx.restore();
+
+      fx.antsPhase += 0.25;
+    });
+
+    for (let i=effects.length-1;i>=0;i--) {
+      if (effects[i].tEnd <= now) effects.splice(i,1);
+    }
+  }
+
+  function frame(now=performance.now()){
+    sizeCanvas(false);
+    drawGrid();
+    drawEditorChrome(now);
+    raf = requestAnimationFrame(frame);
+  }
+
+  function startLoop(){
+    if (loopActive) return;
+    loopActive = true;
+    if (!raf) raf = requestAnimationFrame(frame);
+  }
+
+  function stopLoop(){
+    loopActive = false;
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+  }
+
+  // ---------- Morph / Glitch ----------
+  const MORPH = {
+    holdMin: 1600, holdMax: 2800,       // Gesamtdauer pro aktiver Glyphe
+    animDur: 240,                       // Dauer eines hektischen Sub-Ticks
+    tickMin: 60, tickMax: 140,          // „Hektik“: schneller
+    burstChance: 0.35,                  // Chance auf Mini-Burst (mehrere schnelle Ticks)
+    splitChance: 0.45,                  // Chromatic-Split-Effekt einschalten?
+    rotateMaxDeg: 6,                    // max. Rotation
+    scaleJitter: 0.08,                  // ±8% Scale
+    skewMaxDeg: 6                       // max. Skew
+  };
+
+  function isBusy(span){ return span.dataset.morphing === '1'; }
+  function setBusy(span,v){ span.dataset.morphing = v ? '1' : '0'; }
+
+  function makeEffectForSpan(span, durMs){
+    const now = performance.now();
+    effects.push({ span, tEnd: now + durMs, antsPhase: Math.random()*10 });
+    startLoop();
+  }
+
+  // Hektischer „Morph“ pro Buchstabe: Glyphenwechsel + visuelle Störungen
+  function morphTicker(span){
+    if (!span || isBusy(span)) return;
+
+    const original = span.dataset.original || span.textContent;
+    const prev = {
+      color: span.style.color,
+      filter: span.style.filter,
+      ts: span.style.textShadow,
+      tr: span.style.transform,
+      ls: span.style.letterSpacing
+    };
+
+    const alts = getAltsForChar(original);
+    if (!alts.length) return;
+
+    setBusy(span,true);
+
+    const hold = MORPH.holdMin + Math.random()*(MORPH.holdMax - MORPH.holdMin);
+    let running = true;
+
+    makeEffectForSpan(span, hold);
+
+    const applyChromaticSplit = () => {
+      if (Math.random() > MORPH.splitChance) return '';
+      // 3-kanaliger „Split“ als Afterimage
+      const dx = (Math.random()*2+0.5).toFixed(2);
+      const dy = (Math.random()*2+0.5).toFixed(2);
+      return `
+        rgb(255 0 80) ${dx}px ${dy}px 0,
+        rgb(0 255 200) ${-dx}px ${dy}px 0,
+        rgb(180 120 255) ${dx}px ${-dy}px 0
+      `;
+    };
+
+    // spontane Mini-Bursts: mehrere sehr schnelle Ticks hintereinander
+    const doBurst = () => {
+      const n = 2 + Math.floor(Math.random()*3); // 2–4 schnelle Wechsel
+      let i = 0;
+      const burst = () => {
+        if (!running || i>=n) return;
+        singleTick(true);
+        i++;
+        setTimeout(burst, 40 + Math.random()*60);
+      };
+      burst();
+    };
+
+    // Ein einzelner schneller Tick (Glyph + FX)
+    function singleTick(isBurst=false){
+      const next = alts[Math.floor(Math.random()*alts.length)];
+      const color = neon[Math.floor(Math.random()*neon.length)];
+
+      // Glyph tauschen
+      span.textContent = next;
+      span.style.color = color;
+
+      // leichte Layout-Störung
+      const rot = (Math.random()*2-1)*MORPH.rotateMaxDeg;
+      const sx  = 1 + (Math.random()*2-1)*MORPH.scaleJitter;
+      const sy  = 1 + (Math.random()*2-1)*MORPH.scaleJitter;
+      const skx = (Math.random()*2-1)*MORPH.skewMaxDeg;
+      const sky = (Math.random()*2-1)*MORPH.skewMaxDeg;
+
+      span.style.transform = `translateZ(0) rotate(${rot}deg) skew(${skx}deg, ${sky}deg) scale(${sx},${sy})`;
+
+      // Blur-Flicker
+      const blurPx = (isBurst ? 1.6 : 0.9) + Math.random()*0.8;
+      const contrast = 1.2 + Math.random()*0.5;
+      const bright = 1.05 + Math.random()*0.25;
+      span.style.filter = `blur(${blurPx}px) contrast(${contrast}) brightness(${bright})`;
+
+      // Chromatic Afterimage
+      span.style.textShadow = applyChromaticSplit();
+
+      // Mini „morphing“ Gefühl: Letter-Spacing pulsen lassen
+      if (Math.random() < 0.5) {
+        span.style.letterSpacing = (Math.random()<0.5 ? '-0.02em' : '0.04em');
+      }
+
+      // Rückanimation via Web Animations API (knackig, „hektisch“)
+      span.animate(
+        [
+          { filter:`${span.style.filter}`, transform: `${span.style.transform}` },
+          { filter:'none', transform:'translateZ(0) rotate(0deg) skew(0,0) scale(1,1)' }
+        ],
+        { duration: MORPH.animDur, easing:'steps(3,end)', fill:'forwards' }
+      );
+    }
+
+    const tick = () => {
+      if (!running) return;
+      singleTick(false);
+      if (Math.random() < MORPH.burstChance) doBurst();
+      const gap = MORPH.tickMin + Math.random()*(MORPH.tickMax - MORPH.tickMin);
+      tickTimer = setTimeout(tick, gap);
+    };
+
+    let tickTimer = null;
+    tick();
+
+    setTimeout(()=>{
+      running = false;
+      if (tickTimer) clearTimeout(tickTimer);
+      // Reset auf Original, sanft ausfaden
+      span.textContent = original;
+      span.style.color = prev.color;
+      span.style.filter = 'none';
+      span.style.textShadow = 'none';
+      span.style.letterSpacing = prev.ls || '';
+      span.animate(
+        [
+          { opacity: 0.85, filter:'none' },
+          { opacity: 1,    filter:'none' }
+        ],
+        { duration: 180, easing: 'ease-out', fill: 'forwards' }
+      );
+      setBusy(span,false);
+    }, hold);
+  }
+
+  function pick(){
+    const a=letterSpans.filter(s=>s.textContent.trim()!=='');
+    return a.length? a[Math.floor(Math.random()*a.length)]:null;
+  }
+
+  function snapSlide(span, dir='up') {
+    const dy = dir === 'up' ? -18 : 18;
+    span.animate(
+      [{ transform:`translateY(${dy}px)` }, { transform:'translateY(0)' }],
+      { duration: 420, easing:'steps(5, end)', fill:'both' }
+    );
+  }
+
+  function multiGlitchBurst() {
+    if (Math.random() < 0.45) { const s = pick(); if (s) snapSlide(s, Math.random()<0.5 ? 'up' : 'down'); }
+    const s = pick(); if (s) morphTicker(s);
+  }
+
+  // ---------- Start/Stop ----------
+  let glitchTimer=null;
+  function startGlitch(){
+    if(glitchTimer) return;
+    glitchTimer=setInterval(()=>multiGlitchBurst(), 2400 + Math.random()*1600);
+    setTimeout(()=>multiGlitchBurst(), 600);
+  }
+  function stopGlitch(){
+    if(glitchTimer){ clearInterval(glitchTimer); glitchTimer=null; }
+  }
+
+  // Sichtbarkeits-Controller
+  let visible = false;
+  function activate() {
+    if (visible) return;
+    visible = true;
+    floatAnim.play();
+    startGlitch();
+    startLoop();
+  }
+  function deactivate() {
+    if (!visible) return;
+    visible = false;
+    floatAnim.pause();
+    stopGlitch();
+    stopLoop();
+  }
+
+  // IntersectionObserver: „läuft, wenn sichtbar“
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.target !== section) return;
+      if (e.isIntersecting) activate();
+      else deactivate();
+    });
+  }, {
+    threshold: [0.05],
+    root: null,
+    rootMargin: '0px'
+  });
+  io.observe(section);
+
+  // Tab-Wechsel
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      deactivate();
+    } else {
+      const r = section.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const visiblePx = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+      const isVis = visiblePx / Math.min(vh, r.height) >= 0.05;
+      if (isVis) activate();
+    }
+  });
+
+  // Initial: prüfen
+  (function initVisibility(){
+    const r = section.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const visiblePx = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+    const isVis = visiblePx / Math.min(vh, r.height) >= 0.05;
+    if (isVis) activate();
+  })();
+})();
+</script>
 
 
 
@@ -1182,497 +1837,6 @@ body[data-page="webdesign"] .hero-image-foreground {
   ]
 }
 </script>
-<script>
-(function(){
-  const mqMobile = window.matchMedia('(max-width: 699.98px)');
-  const section = document.getElementById('aurora-sheet');
-  if(!section) return;
-
-  const cards = Array.from(section.querySelectorAll('.aether-card'));
-  if(!cards.length) return;
-
-  // ---- Hilfsfunktionen
-  const vhMid = () => window.innerHeight / 2;
-  const centerAbs = () => window.scrollY + vhMid();
-
-  // Zustand für richtungssensitives „Step“-Aktivieren
-  let currentIndex = 0;
-  let lastScrollY = window.scrollY;
-
-  // Index anhand der aktuellen Center-Position berechnen
-  function computeIndexByCenter(){
-    if(!cards.length) return 0;
-
-    // Mittelpunkte der Karten (Dokumentkoordinaten)
-    const mids = cards.map(c=>{
-      const r = c.getBoundingClientRect();
-      return window.scrollY + r.top + r.height/2;
-    });
-
-    // Grenzen zwischen den Karten (Mitte-zu-Mitte)
-    const boundaries = [];
-    for(let i=0; i<mids.length-1; i++){
-      boundaries.push((mids[i] + mids[i+1]) / 2);
-    }
-
-    const cAbs = centerAbs();
-
-    // Wie viele Grenzen hat die Center-Linie bereits passiert?
-    let idx = 0;
-    while(idx < boundaries.length && cAbs >= boundaries[idx]) idx++;
-
-    // clamp
-    idx = Math.max(0, Math.min(idx, cards.length - 1));
-    return idx;
-  }
-
-  // Sichtbarkeits-Observer (wie gehabt)
-  function setupObservers(){
-    const sectionObserver = new IntersectionObserver(([entry])=>{
-      if(entry.isIntersecting){
-        section.classList.add('section-enter');
-        section.classList.remove('section-exit');
-      }else{
-        section.classList.add('section-exit');
-        section.classList.remove('section-enter');
-      }
-    }, { root: null, threshold: 0.05 });
-    sectionObserver.observe(section);
-
-    const revealObserver = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        const el = entry.target;
-        if(entry.intersectionRatio >= 0.3){
-          el.classList.add('is-revealed');
-          el.classList.remove('is-fading');
-        }else if(entry.intersectionRatio > 0 && entry.intersectionRatio < 0.3){
-          el.classList.add('is-fading');
-        }else{
-          el.classList.remove('is-fading','is-revealed');
-        }
-      });
-    }, { root: null, threshold: [0, .15, .3], rootMargin: '-10% 0px -10% 0px' });
-
-    cards.forEach(c => revealObserver.observe(c));
-  }
-
-  // aktuelle Karte „stepweise“ bestimmen
-  function pickActiveStepwise(){
-    const dirDown = window.scrollY > lastScrollY;
-    lastScrollY = window.scrollY;
-
-    // Mittenpositionen (Dokumentkoordinaten) & dynamische Grenzen berechnen
-    const mids = cards.map(c=>{
-      const r = c.getBoundingClientRect();
-      return window.scrollY + r.top + r.height/2;
-    });
-
-    // Grenzen zwischen Karten: Mitte zwischen den Mittelpunkten
-    const boundaries = [];
-    for(let i=0; i<mids.length-1; i++){
-      boundaries.push((mids[i] + mids[i+1]) / 2);
-    }
-
-    const cAbs = centerAbs();
-
-    // Wenn wir uns außerhalb der Section befinden, nichts ändern
-    const secRect = section.getBoundingClientRect();
-    if(secRect.bottom <= 0 || secRect.top >= window.innerHeight) return;
-
-    // clamp Sicherheitsnetz
-    currentIndex = Math.max(0, Math.min(currentIndex, cards.length - 1));
-
-    // Step-Logik: nur bei Überschreiten der passenden Grenze wechseln
-    if(dirDown){
-      // nach unten: steigt max. um 1 pro Grenze
-      if(currentIndex < cards.length - 1 && cAbs >= boundaries[currentIndex]){
-        currentIndex += 1;
-      }
-    }else{
-      // nach oben: sinkt max. um 1 pro Grenze
-      if(currentIndex > 0 && cAbs <= boundaries[currentIndex - 1]){
-        currentIndex -= 1;
-      }
-    }
-
-    // Klassen anwenden
-    cards.forEach((c, i)=>{
-      if(i === currentIndex){
-        c.classList.add('is-active');
-        c.style.willChange = 'transform, opacity';
-      }else{
-        c.classList.remove('is-active','is-pressed');
-        c.style.willChange = '';
-      }
-    });
-  }
-
-  // rAF-Throttling
-  let ticking = false;
-  function onScroll(){
-    if(!ticking){
-      requestAnimationFrame(()=>{
-        pickActiveStepwise();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }
-
-  // Tap/Press & Click-Setzen
-  function setupPress(){
-    const pressMs = 160;
-    const vibrate = (ms)=>{ try{ navigator.vibrate && navigator.vibrate(ms); }catch(e){} };
-
-    cards.forEach((card, idx)=>{
-      let pressTO = null;
-
-      card.addEventListener('pointerdown', (e)=>{
-        if(e.pointerType && e.button !== 0) return;
-        card.classList.add('is-pressed');
-        vibrate(10);
-        clearTimeout(pressTO);
-        pressTO = setTimeout(()=> card.classList.remove('is-pressed'), pressMs);
-      });
-
-      ['pointerup','pointercancel','pointerleave'].forEach(type=>{
-        card.addEventListener(type, ()=> card.classList.remove('is-pressed'));
-      });
-
-      card.addEventListener('click', ()=>{
-        currentIndex = idx;               // Reihenfolge bleibt kohärent
-        cards.forEach((c,i)=> c.classList.toggle('is-active', i===currentIndex));
-        // sanft zur Mitte scrollen, falls stark off-center
-        const r = card.getBoundingClientRect();
-        const delta = (r.top + r.height/2) - vhMid();
-        if(Math.abs(delta) > 24){
-          window.scrollBy({ top: delta, left: 0, behavior: 'smooth' });
-        }
-      });
-    });
-  }
-
-  // Reduced Motion: Bewegung minimieren
-  function setupReducedMotion(){
-    const rdm = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const handle = (e)=>{
-      if(e.matches){
-        cards.forEach(c=>{
-          c.classList.remove('is-pressed','is-active','is-revealed','is-fading');
-          c.style.transform = '';
-          c.style.willChange = '';
-        });
-      }else{
-        // Bei deaktivierter Reduktion Index neu bestimmen
-        currentIndex = computeIndexByCenter();
-        pickActiveStepwise();
-      }
-    };
-    rdm.addEventListener?.('change', handle);
-    handle(rdm);
-  }
-
-  // aktivieren/deaktivieren für Mobile
-  function enableMobileEffects(){
-    setupObservers();
-    setupPress();
-    setupReducedMotion();
-
-    // Listener
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-
-    // NEU: starte mit dem Index passend zur aktuellen Scroll-Position (Fix für Refresh unten)
-    currentIndex = computeIndexByCenter();
-    pickActiveStepwise();
-
-    // Nachträglich rekalibrieren, falls Layout sich nachträglich ändert (Fonts/Bilder)
-    const recalcAndPick = ()=>{
-      currentIndex = computeIndexByCenter();
-      pickActiveStepwise();
-    };
-    window.addEventListener('pageshow', recalcAndPick, { once: true });
-    window.addEventListener('load', ()=> setTimeout(recalcAndPick, 50), { once: true });
-    window.addEventListener('resize', recalcAndPick);
-  }
-
-  function disableMobileEffects(){
-    section.classList.remove('section-enter','section-exit');
-    cards.forEach(c=>{
-      c.classList.remove('is-revealed','is-fading','is-active','is-pressed');
-      c.style.willChange = '';
-    });
-    window.removeEventListener('scroll', onScroll);
-    window.removeEventListener('resize', onScroll);
-  }
-
-  // Bootstrapping
-  if(mqMobile.matches){ enableMobileEffects(); }
-  (mqMobile.addEventListener ? mqMobile.addEventListener('change', e=>{
-    if(e.matches){ enableMobileEffects(); } else { disableMobileEffects(); }
-  }) : mqMobile.addListener && mqMobile.addListener(e=>{
-    if(e.matches){ enableMobileEffects(); } else { disableMobileEffects(); }
-  }));
-
-})();
-</script>
-<script>
-(function () {
-  // Mini-Helper: DOM ready
-  function onReady(fn) {
-    if (document.readyState !== 'loading') fn();
-    else document.addEventListener('DOMContentLoaded', fn);
-  }
-
-  // Visually hidden Utility-Klasse für SR-Text (falls nicht vorhanden, fügen wir sie zur Not dynamisch ein)
-  function ensureSRStyleOnce() {
-    if (document.getElementById('sr-only-style')) return;
-    const style = document.createElement('style');
-    style.id = 'sr-only-style';
-    style.textContent =
-      '.visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;}';
-    document.head.appendChild(style);
-  }
-
-  // Split-Funktion für H3 – idempotent & a11y-freundlich
-  function splitTitle(h3) {
-    if (!h3 || h3.dataset.split === '1') {
-      // schon gesplittet
-      const words = h3 ? h3.querySelectorAll(':scope .word') : [];
-      const chars = h3 ? h3.querySelectorAll(':scope .char') : [];
-      return { words: Array.from(words), chars: Array.from(chars) };
-    }
-
-    ensureSRStyleOnce();
-
-    const plain = (h3.textContent || '').trim().replace(/\s+/g, ' ');
-    h3.textContent = '';
-
-    // SR-Clone mit Originaltext
-    const sr = document.createElement('span');
-    sr.className = 'visually-hidden';
-    sr.textContent = plain;
-    h3.appendChild(sr);
-
-    // Wrapper mit aria-hidden für animierte Glyphen
-    const aniWrap = document.createElement('span');
-    aniWrap.className = 'title-anim-wrap';
-    aniWrap.setAttribute('aria-hidden', 'true');
-    h3.appendChild(aniWrap);
-
-    const words = [];
-    const chars = [];
-
-    plain.split(' ').forEach((w, i) => {
-      const word = document.createElement('span');
-      word.className = 'word';
-      const wrap = document.createElement('span');
-      wrap.className = 'chars';
-
-      // einzelne Zeichen
-      for (const ch of w) {
-        const c = document.createElement('span');
-        c.className = 'char';
-        c.textContent = ch;
-        wrap.appendChild(c);
-        chars.push(c);
-      }
-
-      word.appendChild(wrap);
-      aniWrap.appendChild(word);
-      words.push(word);
-
-      if (i < plain.split(' ').length - 1) {
-        aniWrap.appendChild(document.createTextNode(' '));
-      }
-    });
-
-    h3.dataset.split = '1';
-    return { words, chars };
-  }
-
-  // Fallback-Reveal via IntersectionObserver (ohne GSAP)
-  function fallbackReveal(cards) {
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('is-revealed');
-        }
-      });
-    }, { threshold: 0.15 });
-
-    cards.forEach((card) => obs.observe(card));
-  }
-
-  onReady(function () {
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const cards = Array.from(document.querySelectorAll('#aurora-sheet .aether-card'));
-    if (!cards.length) return;
-
-    // Wenn GSAP/ScrollTrigger fehlen, auf Fallback gehen
-    const hasGSAP = !!window.gsap;
-    const hasST = !!window.ScrollTrigger;
-
-    if (reduceMotion || !hasGSAP || !hasST) {
-      // Minimal bewegte oder gar keine Animationen, a11y bleibt
-      cards.forEach((card) => {
-        const h3 = card.querySelector('h3');
-        if (h3) splitTitle(h3); // für konsistente Darstellung (kein Jump), auch ohne Animation
-        card.style.transition = 'opacity 200ms ease-out, transform 200ms ease-out';
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(8px)';
-      });
-
-      // Reveal/Fade per IO
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const el = entry.target;
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-            el.classList.add('is-revealed');
-            io.unobserve(el);
-          }
-        });
-      }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
-
-      cards.forEach((c) => io.observe(c));
-      // Exit hier – kein GSAP
-      return;
-    }
-
-    // --- GSAP Pfad ---
-    const gsap = window.gsap;
-    const ScrollTrigger = window.ScrollTrigger;
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Cleanup bei Navigationswechsel/Hot-Reload
-    function killAll() {
-      ScrollTrigger.getAll().forEach((st) => st.kill());
-      gsap.killTweensOf('*');
-    }
-    window.addEventListener('pagehide', killAll);
-    window.addEventListener('beforeunload', killAll);
-
-    const mm = gsap.matchMedia();
-
-    mm.add(
-      {
-        // einfache Breakpoints – anpassbar
-        isMobile: '(max-width: 699.98px)',
-        isTablet: '(min-width: 700px) and (max-width: 1023.98px)',
-        isDesktop: '(min-width: 1024px)',
-      },
-      (ctx) => {
-        const { isMobile } = ctx.conditions;
-
-        cards.forEach((card) => {
-          const h3 = card.querySelector('h3');
-          if (!h3) return;
-
-          // Split (idempotent & a11y)
-          const { words, chars } = splitTitle(h3);
-
-          const snippet = card.querySelector('.snippet');
-          const tsnippet = card.querySelector('.t-snippet');
-          const microtag = card.querySelector('.microtag');
-          const deltas = Array.from(card.querySelectorAll('.delta-list li'));
-
-          // Startposition je nach Viewport leicht anders
-          const startY = isMobile ? 14 : 16;
-          const charYMin = isMobile ? 14 : 18;
-          const charYMax = isMobile ? 36 : 50;
-
-          const tl = gsap.timeline({
-            defaults: { ease: 'power2.out' },
-            scrollTrigger: {
-              trigger: card,
-              start: isMobile ? 'top 78%' : 'top 72%',
-              once: true,
-              // kleine Performance-Verbesserungen
-              fastScrollEnd: true,
-            },
-          });
-
-          // Grundkarte
-          tl.from(card, { opacity: 0, y: startY, duration: 0.28 });
-
-          // Wörter rein sliden
-          if (words.length) {
-            tl.from(
-              words,
-              {
-                yPercent: 120,
-                duration: 0.44,
-                ease: 'power3.out',
-                stagger: { each: 0.06 },
-              },
-              '-=0.12'
-            );
-          }
-
-          // Buchstaben organisch floaten
-          if (chars.length) {
-            gsap.set(chars, {
-              y: () => gsap.utils.random(charYMin, charYMax),
-              x: () => gsap.utils.random(-10, 10),
-              rotation: () => gsap.utils.random(-18, 18),
-              opacity: 0,
-              willChange: 'transform, opacity',
-            });
-
-            tl.to(
-              chars,
-              {
-                y: 0,
-                x: 0,
-                rotation: 0,
-                opacity: 1,
-                duration: 0.55,
-                ease: 'back.out(1.7)',
-                stagger: { each: 0.013 },
-              },
-              '<0.03'
-            ).add(() => {
-              // will-change wieder zurücksetzen
-              gsap.set(chars, { clearProps: 'willChange' });
-            }, '>');
-          }
-
-          // Textblöcke
-          const blocks = [snippet, tsnippet, microtag].filter(Boolean);
-          blocks.forEach((el, i) => {
-            tl.from(el, { opacity: 0, y: 10, duration: 0.32 }, i === 0 ? '+=0.04' : '+=0.06');
-          });
-
-          // Bullet-Items
-          if (deltas.length) {
-            tl.from(
-              deltas,
-              {
-                opacity: 0,
-                y: 8,
-                duration: 0.26,
-                stagger: { each: 0.06 },
-              },
-              '+=0.02'
-            );
-          }
-        });
-
-        // Force refresh, falls Fonts/Images verspätet laden
-        const refresh = () => ScrollTrigger.refresh();
-        window.addEventListener('load', refresh, { once: true });
-        // kleine Verzögerung für FOIT/FOFT-Fälle
-        setTimeout(refresh, 400);
-      }
-    );
-
-    // Fallback (nur falls später GSAP entladen würde – sehr unwahrscheinlich)
-    // ansonsten nicht nötig
-  });
-})();
-</script>
 
 
 
@@ -1813,8 +1977,6 @@ body[data-page="webdesign"] .hero-image-foreground {
 <!-- 1) GSAP laden (vor unseren Helfern) -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-
-
 <!-- 3) Unser Helfer (F3Animations) -->
 <script>
 (function(){
@@ -1892,7 +2054,6 @@ body[data-page="webdesign"] .hero-image-foreground {
 })();
 
 </script>
-
 <!-- 4) Jetzt ERST aufrufen -->
 <script>
   F3Animations.setupHeadline('#nebula-hub .headline', 'signature');
@@ -2310,7 +2471,131 @@ body[data-page="webdesign"] .hero-image-foreground {
   .wrf-hero{ height:auto; }
   .wrf-hero img{ height:auto; aspect-ratio:16/10; }
 }
+/* Buttons im gemeinsamen Bereich hübsch anordnen */
+.wrf-actions__inner{
+  display: grid;
+  grid-auto-flow: column;
+  gap: .9rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Wenn wenig Platz: untereinander */
+@media (max-width: 699.98px){
+  .wrf-actions__inner{
+    grid-auto-flow: row;
+    justify-content: stretch;
+  }
+  .wrf-actions__inner .wrf-btn{
+    width: 100%;
+  }
+}
+
+/* Optik angleichen, falls Ghost neben Primary steht */
+.wrf-btn--ghost{
+  min-height: 44px;
+  padding: .9rem 1.1rem;
+  backdrop-filter: blur(8px);
+}
+/* Sobald die Buttons untereinander stehen sollen: linksbündig ausrichten */
+@media (max-width: 699.98px){
+  /* Eltern-Grid der CTA-Zeile nicht mehr zentrieren */
+  .wrf-actions{
+    place-items: start;          /* statt center */
+  }
+
+  /* Inneres Grid stapelt bereits per row – jetzt links ausrichten */
+  .wrf-actions__inner{
+    grid-auto-flow: row;         /* (hast du schon) */
+    justify-content: start;      /* Tracks links */
+    justify-items: start;        /* Items links */
+  }
+
+  /* Buttons nicht auf 100% strecken, sonst ist Ausrichtung egal */
+  .wrf-actions__inner .wrf-btn{
+    width: auto;                 /* statt 100% */
+  }
+
+  /* Optional: Hinweistext links */
+  .wrf-cta__note{
+    text-align: left;
+  }
+}
+/* Wenn beide Buttons zusammenstehen (<980px): linksbündig */
+@media (max-width: 979.98px){
+  .wrf-actions{
+    place-items: start;              /* statt center */
+    justify-items: start;
+    text-align: left;                /* Note darunter auch links */
+  }
+  .wrf-actions__inner{
+    justify-content: start;          /* statt center */
+    justify-items: start;
+  }
+}
+/* Wenn beide Buttons nebeneinander stehen (<980px) */
+@media (max-width: 979.98px){
+  .wrf-actions {
+    margin-top: 0.6rem;        /* deutlich kompakter */
+    place-items: start;
+    justify-items: start;
+  }
+  .wrf-actions__inner {
+    justify-content: start;
+    gap: .7rem;                /* evtl. etwas enger */
+  }
+  .wrf-cta__note {
+    margin-top: 0rem;         /* enger an Buttons */
+  }
+}
+/* Weniger vertikaler Abstand, wenn Grid einspaltig (Buttons nebeneinander) */
+@media (max-width: 979.98px){
+  .wrf-grid {
+    gap: 1rem; /* oder 0.8rem für kompakteres Layout */
+  }
+
+  .wrf-actions {
+    margin-top: 0.4rem; /* zusammen mit kleinerem gap harmonisch */
+    place-items: start;
+    justify-items: start;
+  }
+
+  .wrf-actions__inner {
+    justify-content: start;
+    gap: .7rem;
+  }
+}
+
 </style>
+<script>
+  (function () {
+    const bp = 981; // Breakpoint
+    const infoBtn = document.getElementById('wrf-info-trigger');
+    const secondaryWrap = document.querySelector('.wrf-secondary-action');
+    const actionsInner = document.querySelector('.wrf-actions__inner');
+
+    if (!infoBtn || !secondaryWrap || !actionsInner) return;
+
+    let placedInActions = false;
+
+    function place() {
+      const isNarrow = window.innerWidth < bp;
+      if (isNarrow && !placedInActions) {
+        actionsInner.appendChild(infoBtn);
+        placedInActions = true;
+      } else if (!isNarrow && placedInActions) {
+        secondaryWrap.appendChild(infoBtn);
+        placedInActions = false;
+      }
+    }
+
+    // initial + on resize (leicht entprellt)
+    let rAF;
+    function onResize(){ cancelAnimationFrame(rAF); rAF = requestAnimationFrame(place); }
+    window.addEventListener('resize', onResize, { passive:true });
+    place();
+  })();
+</script>
 
 <!-- GSAP + Plugins -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
@@ -3112,6 +3397,49 @@ body[data-page="webdesign"] .hero-image-foreground {
     </div>
   </div>
 </section>
+<script>
+(function(){
+  const rail = document.querySelector('#flowhub .flow-rail');
+  if(!rail) return;
+  const firstCard = document.querySelector('#flowhub .flow-card');
+
+  function updateTracker(){
+    // nur Mobile
+    if(!window.matchMedia('(max-width: 699.98px)').matches) return;
+
+    const railRect = rail.getBoundingClientRect();
+    const vh = window.innerHeight;
+
+    // Referenzlinie im Viewport (wo "gemessen" wird)
+    const refY = vh * 0.15;
+
+    // Fortschritt: 0 wenn rail-top @ refY, 1 wenn rail-bottom @ refY
+    const progress = (refY - railRect.top) / railRect.height;
+    const p = Math.max(0, Math.min(1, progress));
+
+    // Mitte der ersten Karte relativ zur Rail
+    let firstCenter = 0;
+    if(firstCard){
+      const r = firstCard.getBoundingClientRect();
+      firstCenter = (r.top - railRect.top) + (r.height / 2);
+      // Sicherheitsnetz: falls erste Karte sehr klein/außerhalb ist
+      firstCenter = Math.max(0, Math.min(firstCenter, railRect.height));
+    }
+
+    // Mapping: bei p=0 -> firstCenter; bei p=1 -> railRect.height
+    const y = firstCenter + p * (railRect.height - firstCenter);
+
+    rail.style.setProperty('--tracker-y', y + 'px');
+  }
+
+  const ro = new ResizeObserver(updateTracker);
+  ro.observe(document.documentElement);
+  updateTracker();
+  window.addEventListener('scroll', updateTracker, { passive: true });
+  window.addEventListener('resize', updateTracker);
+  window.addEventListener('load', updateTracker);
+})();
+</script>
 
 <!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
@@ -3276,176 +3604,7 @@ body[data-page="webdesign"] .hero-image-foreground {
     }
   });
 </script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const hasGSAP = !!window.gsap;
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!hasGSAP || prefersReduced) return;
 
-  const { gsap } = window;
-  gsap.registerPlugin(window.ScrollTrigger);
-
-  const mm = gsap.matchMedia();
-  mm.add("(min-width: 700px)", () => {
-    const hub   = document.querySelector('#flowhub');
-    const rail  = hub?.querySelector('.flow-rail');
-    const cards = gsap.utils.toArray('#flowhub .flow-card');
-    const title = hub?.querySelector('.pane-title');
-    const sub   = hub?.querySelector('.pane-subtitle');
-
-    // 0) Safety: will-change hints
-    gsap.set([title, sub, cards], { willChange: 'transform, opacity' });
-
-    // 1) Section-Intro (einmalig)
-    gsap.from([title, sub], {
-      y: 20, autoAlpha: 0, duration: 0.6, ease: 'power2.out', stagger: 0.08,
-      scrollTrigger: { trigger: hub, start: "top 75%", once: true }
-    });
-
-    // 2) Karten-Stagger beim ersten Eintritt
-    gsap.from(cards, {
-      y: 24, autoAlpha: 0, duration: 0.55, ease: 'power2.out', stagger: 0.12,
-      scrollTrigger: { trigger: rail || hub, start: "top 70%", once: true }
-    });
-
-    // 3) Parallax der großen Nummern (scrub)
-    gsap.to('#flowhub .card-num-giant', {
-      yPercent: -18, ease: 'none',
-      scrollTrigger: {
-        trigger: hub,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: 0.35
-      }
-    });
-
-    // 4) 3D-Tilt on hover (nur präziser Pointer, kein Touch)
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      const clamp = gsap.utils.clamp; // safety
-      const rX = 8, rY = 8; // max rotation
-
-      cards.forEach(card => {
-        // Perspektive nur einmal setzen
-        gsap.set(card, { transformStyle: 'preserve-3d' });
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const cx = rect.left + rect.width / 2;
-          const cy = rect.top + rect.height / 2;
-          const dx = (e.clientX - cx) / (rect.width  / 2);
-          const dy = (e.clientY - cy) / (rect.height / 2);
-          gsap.to(card, {
-            rotateY: clamp(-rY, rY, dx * rY),
-            rotateX: clamp(-rX, rX, -dy * rX),
-            translateZ: 0,
-            transformOrigin: 'center center',
-            duration: 0.25, ease: 'power2.out'
-          });
-        });
-        card.addEventListener('mouseleave', () => {
-          gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.35, ease: 'power3.out' });
-        });
-      });
-    }
-
-    // Cleanup bei Unmatch (optional)
-    return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
-      gsap.set([title, sub, cards, '#flowhub .card-num-giant'], { clearProps: 'all' });
-    };
-  });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  if (!window.gsap) return;
-  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
-
-  const { gsap } = window;
-  gsap.registerPlugin(window.ScrollTrigger);
-
-  const mm = gsap.matchMedia();
-
-  // ===== Mobile / Small Screens (≤ 699.98px) =====
-  mm.add("(max-width: 699.98px)", () => {
-    const hub   = document.querySelector('#flowhub');
-    const rail  = hub?.querySelector('.flow-rail');
-    const cards = gsap.utils.toArray('#flowhub .flow-card');
-    const title = hub?.querySelector('.pane-title');
-    const sub   = hub?.querySelector('.pane-subtitle');
-
-    // 0) will-change Hints
-    gsap.set([title, sub, cards], { willChange: 'transform, opacity' });
-
-    // 1) Section-Intro
-    gsap.from([title, sub], {
-      y: 16, autoAlpha: 0, duration: 0.5, ease: 'power2.out', stagger: 0.08,
-      scrollTrigger: { trigger: hub, start: "top 80%", once: true }
-    });
-
-    // 2) Jede Karte revealed sich beim Erreichen (Einmal-Animation)
-    cards.forEach((card, i) => {
-      gsap.from(card, {
-        y: 18, autoAlpha: 0, duration: 0.45, ease: 'power2.out',
-        delay: i === 0 ? 0.05 : 0, // erste Karte minimal verzögert – wirkt smoother
-        scrollTrigger: {
-          trigger: card,
-          start: "top 85%",
-          toggleActions: "play none none none", // einmalig
-        }
-      });
-    });
-
-    // 3) Dezente Parallax (Nummer & Inhalt bewegen sich leicht gegeneinander)
-    //    – nur wenn die große Nummer sichtbar ist (bei 600–699px)
-    const giants = gsap.utils.toArray('#flowhub .card-num-giant');
-    if (giants.length) {
-      gsap.to(giants, {
-        yPercent: -12, ease: 'none',
-        scrollTrigger: {
-          trigger: rail || hub,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 0.3,
-        }
-      });
-    }
-
-    // Inhalt (card-core) leicht entgegengesetzt für Tiefe
-    gsap.to('#flowhub .card-core', {
-      yPercent: 6, ease: 'none',
-      scrollTrigger: {
-        trigger: rail || hub,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 0.3,
-      }
-    });
-
-    // 4) Sanfter „Active“-Akzent, wenn eine Karte mittig steht (kein Springen)
-    cards.forEach((card) => {
-      const tl = gsap.timeline({ paused: true });
-      tl.to(card, { scale: 1.015, duration: 0.25, ease: 'power2.out' });
-
-      ScrollTrigger.create({
-        trigger: card,
-        start: "top 65%",
-        end: "bottom 35%",
-        onEnter: () => tl.play(),
-        onEnterBack: () => tl.play(),
-        onLeave: () => tl.reverse(),
-        onLeaveBack: () => tl.reverse()
-      });
-    });
-
-    // Cleanup, falls Breakpoint verlässt
-    return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
-      gsap.set([title, sub, cards, '#flowhub .card-core', '#flowhub .card-num-giant'], { clearProps: 'all' });
-    };
-  });
-});
-</script>
 
 <script type="application/ld+json">
 {
@@ -3940,132 +4099,116 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
-
-
-<!-- DESIGN-STUDY (Desktop/Tablet wie gehabt) – Mobile: nur 1 Karte mit Bild + CTA "Case-Studie ansehen" -->
 <section id="design-study" class="aurora-sheet" data-theme="auto">
-  <!-- HEADLINE / SUBHEADLINE -->
-  <h2 class="aurora-title">Case Study: Website-Relaunch für Finova Bank AG</h2>
-  <p class="aurora-subtitle">
-    <span class="subtitle-full">
-      Im Rahmen eines umfassenden UX-Rebrandings für die Finova Bank AG
-      wurde die digitale Onboarding-Strecke neugestaltet. Ziel:
-      bessere Conversion, klarere Nutzerführung und ein modernes Erscheinungsbild
-      für Endkunden und Partner. Diese Case Study zeigt Vorgehen, Hypothese und Ergebnis.
-    </span>
-    <span class="subtitle-t">
-      Redesign des Finova-Onboardings: weniger Abbrüche, klarere Journey, höhere Aktivierungsquote.
-    </span>
+  <h2 class="aurora-title">Case Study: MM Toasties – heiß & knusprig auf Festivals</h2>
+
+  <p class="aurora-subtitle" id="design-study-sub" aria-live="polite">
+    <!-- Mobile -->
     <span class="subtitle-snippet">
-      Reibung raus. Aktivierung rauf. Vertrauen stärken.
+      Knusprige Toasties. Viel Käse. Für hungrige Festivalcrowds.
+    </span>
+
+    <!-- Tablet -->
+    <span class="subtitle-t">
+      MM Toasties versorgt Festivals mit frisch gegrillten Käsetoasties –
+      schnell, lecker, zuverlässig.
+    </span>
+
+    <!-- Desktop -->
+    <span class="subtitle-full">
+      Für <strong>MM Toasties</strong> steht alles auf Tempo, Qualität und Stimmung:
+      schlankes Menü, eingespielter Prep-Workflow und reibungslose Ausgabe am Stand.  
+      Ziel: <em>heiß & knusprig in unter 3&nbsp;Minuten</em>, klare Auswahl und glückliche Gäste – selbst zur Peak-Time.
     </span>
   </p>
 
-  <!-- ===== Desktop/Tablet Bereich (wird auf Mobile ausgeblendet) ===== -->
+  <!-- Desktop/Tablet -->
   <div class="ds-top ds-hide-on-mobile">
-    <!-- Webseiten-Preview -->
-    <article class="ds-preview-card" aria-label="Website-Preview">
-      <div class="ds-preview-wrap">
-        <iframe
-          class="ds-preview-frame"
-          src="https://denizs-stunning-site-296e39.webflow.io/"
-          title="Live-Preview Finova Bank Website"
-          loading="lazy"
-          referrerpolicy="no-referrer"
-          sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-        ></iframe>
-
+    <!-- Bild-Preview (statt Video) -->
+    <article class="ds-preview-card" aria-label="MM Toasties Festival-Preview">
+      <div class="ds-preview-wrap js-video"
+           data-image-src="assets/mm-toasties-hero.jpg"
+           data-image-alt="Frisch gegrillte Toasties am MM Toasties Festivalstand">
+        <img class="ds-preview-video"
+             src="assets/mm-toasties-hero.jpg"
+             alt="Frisch gegrillte Toasties am MM Toasties Festivalstand"
+             title="MM Toasties – Festivalstand" />
+        <!-- Top-Bar -->
         <div class="ds-preview-bar">
-          <span class="ds-preview-domain">finova-bank.de</span>
-          <a class="ds-preview-open"
-             href="https://denizs-stunning-site-296e39.webflow.io/"
-             target="_blank" rel="noopener">
-            Öffnen
-          </a>
+          <span class="ds-preview-domain">mm-toasties</span>
+          <a class="ds-preview-open" href="assets/mm-toasties-hero.jpg" target="_blank" rel="noopener">Bild öffnen</a>
         </div>
       </div>
     </article>
 
-    <!-- Rechte Inhalts-Karte -->
     <article class="aether-card ds-teaser-card" aria-labelledby="study-teaser">
-      <h3 id="study-teaser">Zielbild &amp; Vorgehen</h3>
+      <h3 id="study-teaser">Angebot &amp; Ablauf</h3>
       <p class="t-snippet">
-        Der Auftrag: Reduktion der Abbruchrate im Online-Antragsprozess
-        und Steigerung der Conversion-Rate um mindestens 15 %.  
-        Durch qualitative Interviews, Hypothesen-Workshops und iterative Prototypen
-        wurde ein klarer, emotionaler und vertrauensfördernder Onboarding-Flow entwickelt.
+        Knuspriges Brot, viel Käse, schnelle Ausgabe.  
+        Vom Prep bis zur letzten Bestellung – gleichbleibend heiß, frisch und freundlich.
       </p>
       <ul class="delta-list" role="list">
-        <li><span class="lead">Methodik</span><span class="copy">UX-Audit → Rapid Prototyping → A/B-Testing</span></li>
-        <li><span class="lead">KPIs</span><span class="copy">Conversion Rate +18 %, Time-on-Task –22 %, CSAT +0.8 Punkte</span></li>
-        <li><span class="lead">Ergebnis</span><span class="copy">Klarere Struktur, geringere kognitive Last, messbar höhere Abschlussquote</span></li>
+        <li><span class="lead">Ablauf</span><span class="copy">Einkauf → Prep → Grill → Finish → Ausgabe</span></li>
+        <li><span class="lead">Setup</span><span class="copy">Doppelkontaktgrills, Kühlung, Hygienekit</span></li>
+        <li><span class="lead">Menü</span><span class="copy">Classic Cheese, Spicy Jalapeño, Trüffel, Vegan</span></li>
       </ul>
     </article>
   </div>
 
-  <!-- Unterzeile -->
+  <!-- Info Row -->
   <div class="ds-info-row ds-hide-on-mobile">
     <article class="aether-card aether-card--orange">
-      <h3>Projektphasen</h3>
-      <p class="t-snippet">Von der Analyse bis zur Implementierung.</p>
+      <h3>Servicephasen</h3>
+      <p class="t-snippet">Von Mise en Place bis Cleanup.</p>
       <ul class="delta-list">
-        <li><span class="lead">Phase 1</span><span class="copy">Research & Stakeholder-Interviews</span></li>
-        <li><span class="lead">Phase 2</span><span class="copy">UX-Konzept & Prototyping</span></li>
-        <li><span class="lead">Phase 3</span><span class="copy">Design System & Rollout</span></li>
+        <li><span class="lead">Phase 1</span><span class="copy">Mise en Place & Prep</span></li>
+        <li><span class="lead">Phase 2</span><span class="copy">Live-Grillen & Peak-Handling</span></li>
+        <li><span class="lead">Phase 3</span><span class="copy">Cleanup & Nachproduktion</span></li>
       </ul>
     </article>
 
     <article class="aether-card aether-card--navy">
-      <h3>Testing &amp; Insights</h3>
-      <p class="t-snippet">Empirie trifft Designentscheidungen.</p>
+      <h3>Qualität &amp; Speed</h3>
+      <p class="t-snippet">Konstant gut – auch bei Andrang.</p>
       <ul class="delta-list">
-        <li><span class="lead">User-Tests</span><span class="copy">12 Teilnehmende – moderierte Sessions</span></li>
-        <li><span class="lead">Key Findings</span><span class="copy">70 % schnellere Orientierung – höheres Vertrauen durch visuelle Konsistenz</span></li>
+        <li><span class="lead">Durchlaufzeit</span><span class="copy">~ 2–3 Min. pro Toastie</span></li>
+        <li><span class="lead">Feinschliff</span><span class="copy">Knuspergrad, Käse-Pull, Schärfe-Level</span></li>
       </ul>
     </article>
 
     <article class="aether-card aether-card--violet">
-      <h3>Handover &amp; Launch</h3>
-      <p class="t-snippet">Nahtlos von Design zu Dev.</p>
+      <h3>Stand &amp; Planung</h3>
+      <p class="t-snippet">Sichtbar, schnell, sauber.</p>
       <ul class="delta-list">
-        <li><span class="lead">Deliverables</span><span class="copy">Design Tokens, Component Library, Dokumentation</span></li>
-        <li><span class="lead">Rollout</span><span class="copy">Phasenweiser Launch inkl. Tracking und A/B-Vergleich</span></li>
+        <li><span class="lead">Deliverables</span><span class="copy">Festival-Stand, Speisekarte, Allergene</span></li>
+        <li><span class="lead">Rollout</span><span class="copy">Sommer-Festivals & Street-Food-Events</span></li>
       </ul>
     </article>
   </div>
 
-  <!-- ===== Mobile-only Ein-Karten-Ansicht ===== -->
+  <!-- Mobile -->
   <article class="ds-mobile-card" aria-labelledby="mobile-study-title">
-    <div class="ds-mobile-preview-wrap">
-      <iframe
-        class="ds-mobile-preview-frame"
-        src="https://denizs-stunning-site-296e39.webflow.io/"
-        title="Finova Bank Website Preview (mobil)"
-        loading="lazy"
-        referrerpolicy="no-referrer"
-        sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-      ></iframe>
+    <div class="ds-mobile-preview-wrap js-video"
+         data-image-src="assets/mm-toasties-hero-mobile.jpg"
+         data-image-alt="MM Toasties Toasties – mobil">
+      <img class="ds-mobile-preview-video"
+           src="assets/mm-toasties-hero-mobile.jpg"
+           alt="MM Toasties – frisch gegrillte Toasties (mobil)"
+           title="MM Toasties – mobil" />
       <div class="ds-mobile-preview-bar">
-        <span class="ds-mobile-domain">finova-bank.de</span>
-        <a class="ds-mobile-open" href="https://denizs-stunning-site-296e39.webflow.io/" target="_blank" rel="noopener">Öffnen</a>
+        <span class="ds-mobile-domain">mm-toasties</span>
+        <a class="ds-mobile-open" href="assets/mm-toasties-hero-mobile.jpg" target="_blank" rel="noopener">Bild öffnen</a>
       </div>
     </div>
     <div class="ds-mobile-body">
-      <h3 id="mobile-study-title">Finova Bank AG – UX Relaunch</h3>
+      <h3 id="mobile-study-title">MM Toasties – heiß & knusprig</h3>
       <p class="ds-mobile-text">
-        Wir entwickelten einen neuen digitalen Onboarding-Flow für die Finova Bank AG.
-        Ergebnis: +18 % Conversion-Rate, –22 % Bearbeitungszeit und nachweislich höhere Kundenzufriedenheit.
+        Frisch gegrillte Käsetoasties für Festivals: schnell serviert, richtig käsig
+        und auf Wunsch auch vegan.
       </p>
     </div>
   </article>
 </section>
-
-
-<!-- Aurora/Cosmos Styles (falls benötigt) -->
-<link rel="stylesheet" href="aurora.css">
-<link rel="stylesheet" href="cosmosSuite.css">
 
 <style>
 /* =======================================
@@ -4078,12 +4221,12 @@ document.addEventListener("DOMContentLoaded", () => {
   display: grid;
   grid-template-columns: 1.6fr 1fr;
   gap: clamp(1rem, 2vw, 1.6rem);
-  align-items: stretch; /* gleiche Höhe für beide Spalten */
+  align-items: stretch;
   max-width: min(1120px, 92vw);
   margin: 0 auto var(--space-4, 2rem);
 }
 
-/* Webseiten-Preview */
+/* Preview Card / Bild */
 #design-study .ds-preview-card{
   border-radius: var(--radius-card, 16px);
   overflow: hidden;
@@ -4091,15 +4234,33 @@ document.addEventListener("DOMContentLoaded", () => {
   background: #0b0d12;
   position: relative;
 }
-#design-study .ds-preview-wrap{ position: relative; width: 100%; display: flex; min-height: 220px; }
-#design-study .ds-preview-frame{ flex: 1 1 auto; width: 100%; border: 0; }
+#design-study .ds-preview-wrap{ position: relative; width: 100%; display: block; aspect-ratio: 16/9; }
+#design-study .ds-preview-video{ width:100%; height:100%; object-fit: cover; display:block; background:#000; }
 
-/* Domain-Leiste / Overlay */
+/* Play Overlay (nicht genutzt bei Bild) */
+#design-study .ds-video-play{
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:.6rem; border:0; background: none; cursor: pointer; color:#fff;
+}
+#design-study .ds-video-play::before{
+  content:""; position:absolute; inset:0;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,.35), rgba(0,0,0,.55));
+  transition: opacity .2s ease;
+}
+#design-study .ds-video-play-ico{ width:72px; height:72px; display:block; }
+#design-study .ds-video-play-ico circle{ fill: rgba(255,255,255,.12); }
+#design-study .ds-video-play-ico polygon{ fill:#fff; }
+#design-study .ds-video-play-label{ position:relative; font-weight:700; letter-spacing:.2px; }
+
+/* Hide overlay when playing */
+#design-study .js-video.is-playing .ds-video-play{ opacity:0; pointer-events:none; transition: opacity .2s ease; }
+
+/* Bars */
 #design-study .ds-preview-bar{
   position: absolute; left: 0; right: 0; top: 0;
   display: flex; justify-content: space-between; align-items: center;
-  gap: .75rem; padding: .5rem .75rem;
-  color: #fff;
+  gap: .75rem; padding: .5rem .75rem; color: #fff;
   background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,0));
   pointer-events: none;
 }
@@ -4117,34 +4278,24 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 #design-study .ds-teaser-card .t-snippet, #design-study .ds-teaser-card .lead, #design-study .ds-teaser-card .copy{ color:#fff; }
 
-/* CTA */
-#design-study .ds-cta{
-  align-self: flex-start; display:inline-flex; align-items:center; gap:.5rem;
-  padding:.7rem 1.1rem; border-radius:999px; text-decoration:none; font-weight:700;
-  color:#fff; background: linear-gradient(135deg, #5a66ff, #8f3dff);
-  box-shadow: 0 8px 20px rgba(95,77,255,.35);
-  transition: transform .18s ease, box-shadow .18s ease;
-}
-#design-study .ds-cta:hover{ transform: translateY(-2px); box-shadow: 0 12px 24px rgba(95,77,255,.45); }
-#design-study .ds-cta-ico{ width:20px; height:20px; }
-
 /* ======= UNTERZEILE ======= */
 #design-study .ds-info-row{
   max-width: min(1120px, 92vw);
   margin: 0 auto;
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1rem, 2vw, 1.6rem); align-items: stretch; /* gleiche Höhe */
+  gap: clamp(1rem, 2vw, 1.6rem);
+  align-items: stretch;
 }
-#design-study .ds-info-row .aether-card{ display: flex; flex-direction: column; justify-content: space-between; color: #fff; }
+#design-study .ds-info-row .aether-card{ display:flex; flex-direction:column; justify-content:space-between; color:#fff; }
 
-/* Farb-Varianten (Fallback) */
+/* Farb-Varianten */
 #design-study .aether-card--orange{ background: linear-gradient(135deg, #ff5100, #ff7b00, #ff5100); }
 #design-study .aether-card--navy{ background: linear-gradient(135deg, #0d0d0d, #1c1f2f, #0d0d0d); }
 #design-study .aether-card--violet{ background: linear-gradient(135deg, #4b00ff, #3000a3, #4b00ff); }
 
 /* ======= MOBILE: Ein-Karten-Ansicht ======= */
 #design-study .ds-mobile-card{
-  display: none; /* Standard: ausgeblendet, nur auf Mobile sichtbar */
+  display: none;
   max-width: min(720px, 94vw);
   margin: 0 auto;
   background: linear-gradient(135deg, #0d0d0d, #1c1f2f, #0d0d0d);
@@ -4153,11 +4304,18 @@ document.addEventListener("DOMContentLoaded", () => {
   overflow: hidden;
   box-shadow: 0 12px 34px rgba(0,0,0,.35);
 }
-#design-study .ds-mobile-figure{ display:block; width:100%; aspect-ratio: 16 / 9; overflow:hidden; }
-#design-study .ds-mobile-figure img{ width:100%; height:100%; object-fit: cover; display:block; }
+#design-study .ds-mobile-preview-wrap{ position:relative; display:block; width:100%; aspect-ratio:16/9; background:#000; }
+#design-study .ds-mobile-preview-video{ width:100%; height:100%; object-fit:cover; display:block; background:#000; }
+#design-study .ds-mobile-preview-bar{
+  position:absolute; left:0; right:0; top:0; display:flex; justify-content:space-between; align-items:center;
+  gap:.5rem; padding:.5rem .75rem; color:#fff; background:linear-gradient(180deg, rgba(0,0,0,.5), rgba(0,0,0,0)); pointer-events:none;
+}
+#design-study .ds-mobile-domain{ font-size:.8rem; opacity:.95; }
+#design-study .ds-mobile-open{
+  pointer-events:auto; display:inline-block; padding:.35rem .7rem; border-radius:999px; text-decoration:none; color:#fff; background:rgba(255,255,255,.18); backdrop-filter: blur(6px); font-size:.8rem;
+}
 #design-study .ds-mobile-body{ padding: clamp(16px, 4vw, 24px); display:flex; flex-direction:column; gap:.75rem; }
 #design-study .ds-mobile-text{ color:#fff; opacity:.92; }
-#design-study .ds-cta--full{ align-self: stretch; justify-content:center; text-align:center; }
 
 /* ======= RESPONSIVE ======= */
 @media (max-width: 1024px){
@@ -4165,46 +4323,135 @@ document.addEventListener("DOMContentLoaded", () => {
   #design-study .ds-info-row{ grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 700px){
-  /* Desktop/Tablet-Bereiche verbergen */
   #design-study .ds-hide-on-mobile{ display: none !important; }
-  /* Mobile Ein-Karten-Ansicht zeigen */
   #design-study .ds-mobile-card{ display:block; }
-  /* Subtitle-Handling für kleinere Screens */
-  #design-study .subtitle-full{ display:none; }
-  #design-study .subtitle-t{ display:none; }
-  #design-study .subtitle-snippet{ display:inline; }
 }
-/* ======= MOBILE-Preview-Styles (iframe statt Bild) ======= */
-#design-study .ds-mobile-preview-wrap{ position: relative; display:block; width:100%; aspect-ratio: 16 / 9; overflow:hidden; background:#0b0d12; }
-#design-study .ds-mobile-preview-frame{ width:100%; height:100%; border:0; display:block; }
-#design-study .ds-mobile-preview-bar{ position:absolute; left:0; right:0; top:0; display:flex; justify-content:space-between; align-items:center; gap:.5rem; padding:.5rem .75rem; color:#fff; background:linear-gradient(180deg, rgba(0,0,0,.5), rgba(0,0,0,0)); pointer-events:none; }
-#design-study .ds-mobile-domain{ font-size:.8rem; opacity:.95; }
-#design-study .ds-mobile-open{ pointer-events:auto; display:inline-block; padding:.35rem .7rem; border-radius:999px; text-decoration:none; color:#fff; background:rgba(255,255,255,.18); backdrop-filter: blur(6px); font-size:.8rem; }
 
-/* Optional: bessere Touch-UX innerhalb der Preview */
-#design-study .ds-mobile-preview-frame{ touch-action:manipulation; }
-
-/* ======= Typografie-Polish Desktop ======= */
+/* ======= Typografie ======= */
 #design-study .aurora-title{ letter-spacing:.1px; }
-#design-study .ds-teaser-card h3{ font-size: clamp(1.1rem, 1.6vw, 1.35rem); margin: 0 0 .25rem; }
-#design-study .ds-teaser-card .t-snippet{ font-size: clamp(1rem, 1.2vw, 1.05rem); line-height: 1.5; opacity:.95; }
-#design-study .delta-list .lead{ font-weight: 700; opacity: .95; }
-#design-study .delta-list .copy{ opacity: .9; }
-
-/* ======= Mobile Typografie & Spacing ======= */
 @media (max-width: 700px){
   #design-study .aurora-title{ font-size: clamp(1.25rem, 6vw, 1.6rem); line-height: 1.15; }
   #design-study .aurora-subtitle{ font-size: clamp(.95rem, 3.8vw, 1rem); line-height: 1.5; opacity:.9; }
   #design-study .ds-mobile-body h3{ font-size: clamp(1.05rem, 4.6vw, 1.25rem); margin: 0; }
   #design-study .ds-mobile-text{ font-size: clamp(.95rem, 3.8vw, 1rem); line-height: 1.55; opacity:.95; }
-  #design-study .ds-mobile-body{ padding: clamp(14px, 4.5vw, 20px); }
 }
+
+/* ======= AURORA-STYLE FINAL OVERRIDES (sichtbar am Ende) ======= */
+/* Desktop (default): nur FULL sichtbar */
+#design-study .aurora-subtitle .subtitle-full { display: inline !important; }
+#design-study .aurora-subtitle .subtitle-t,
+#design-study .aurora-subtitle .subtitle-snippet { display: none !important; }
+
+/* Tablet (701–1024px): nur T sichtbar */
+@media (min-width:701px) and (max-width:1024px){
+  #design-study .aurora-subtitle .subtitle-full { display: none !important; }
+  #design-study .aurora-subtitle .subtitle-t { display: inline !important; }
+  #design-study .aurora-subtitle .subtitle-snippet { display: none !important; }
+}
+
+/* Mobile (≤700px): nur SNIPPET sichtbar */
+@media (max-width:700px){
+  #design-study .aurora-subtitle .subtitle-full,
+  #design-study .aurora-subtitle .subtitle-t { display: none !important; }
+  #design-study .aurora-subtitle .subtitle-snippet { display: inline !important; }
+}/* FIX: Inhalte immer oben beginnen, keine Mittelung bei wenig Content */
+#design-study .aether-card,
+#design-study .ds-teaser-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important; /* überschreibt space-between */
+  align-items: flex-start;
+  gap: clamp(.5rem, 1.2vw, .85rem);       /* konsistenter vertikaler Rhythmus */
+  padding-top: clamp(1rem, 2vw, 1.5rem);  /* einheitlicher Top-Abstand */
+  height: 100%;                           /* volle Kartenhöhe, aber kein Verteilen */
+}
+
+/* Überschrift & Texte: keine Extraabstände nach oben */
+#design-study .aether-card h3,
+#design-study .ds-teaser-card h3 { margin: 0 0 .35rem; }
+
+#design-study .aether-card .t-snippet,
+#design-study .ds-teaser-card .t-snippet { margin: 0; }
+
+/* Listen sauber anschließen, nicht nach oben oder unten drücken */
+#design-study .aether-card .delta-list,
+#design-study .ds-teaser-card .delta-list { margin: .25rem 0 0; }
+
+/* Grid sorgt dafür, dass alle Karten gleich hoch sind */
+#design-study .ds-info-row { align-items: stretch; }
+#design-study .ds-info-row > .aether-card { height: 100%; }
+/* Karten-Gitter: Basis bleibt 3-spaltig */
+#design-study .ds-info-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2vw, 1.6rem);
+  align-items: stretch;
+}
+
+/* Wenn nur eine Karte vorhanden ist → doppelte Breite */
+#design-study .ds-info-row:has(.aether-card:only-child) .aether-card {
+  grid-column: span 2;
+}
+
+/* Optional: auf Tablet nur 2 Spalten → dann volle Breite */
+@media (max-width: 1024px) {
+  #design-study .ds-info-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #design-study .ds-info-row:has(.aether-card:only-child) .aether-card {
+    grid-column: span 2;
+  }
+}
+
+/* Mobile = 1 Karte pro Zeile (Standard) */
+@media (max-width: 700px) {
+  #design-study .ds-info-row {
+    grid-template-columns: 1fr;
+  }
+}
+/* Basis: 3 Spalten auf Desktop */
+#design-study .ds-info-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2vw, 1.6rem);
+  align-items: stretch;
+}
+
+/* FALL A: 3-Spalten-Layout
+   Wenn die letzte Karte alleine in der letzten Reihe steht (Index ≡ 1 mod 3),
+   zentriere sie über 2 Spalten: */
+#design-study .ds-info-row > .aether-card:last-child:nth-child(3n + 1) {
+  grid-column: 2 / span 2; /* mittig (Spalten 2–3) */
+}
+
+/* Tablet: 2 Spalten */
+@media (max-width: 1024px) {
+  #design-study .ds-info-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  /* FALL B: 2-Spalten-Layout
+     Wenn die letzte Karte alleine in der letzten Reihe steht (Index ≡ 1 mod 2),
+     dann über volle Breite: */
+  #design-study .ds-info-row > .aether-card:last-child:nth-child(2n + 1) {
+    grid-column: 1 / -1; /* über beide Spalten */
+  }
+}
+
+/* Mobile bleibt 1 Spalte – kein Sonderfall nötig */
+
 </style>
 
-
-
-
-
+<script>
+/* Video-Handling bleibt ohne Funktion, da ausschließlich Bilder verwendet werden. */
+(function(){
+  const containers = document.querySelectorAll('#design-study .js-video');
+  containers.forEach((wrap) => {
+    const video = wrap.querySelector('video');
+    const btn = wrap.querySelector('.ds-video-play');
+    if (!video || !btn) return;
+  });
+})();
+</script>
 
 
 
