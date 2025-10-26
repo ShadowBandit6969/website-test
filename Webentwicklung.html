@@ -448,252 +448,1211 @@
     </div>
   </section>
 
-  <!-- =============================================
-       Angled Image – kann bleiben, Text angepasst
-       ============================================= -->
-  <section class="angled-image-section" aria-labelledby="angled-image-heading">
-    <h2 id="angled-image-heading" class="visually-hidden">Moderne Webentwicklung – Showcase</h2>
-    <figure class="angled-image-wrapper">
-      <picture>
-        <source srcset="./WebdesignPic/webgerade.webp" type="image/webp">
-        <img src="./WebdesignPic/webgerade.webp" alt="Ausschnitt einer performanten Web-App, leicht diagonal" width="1920" height="1080" loading="lazy" decoding="async" style="aspect-ratio:16/9">
-      </picture>
-    </figure>
-  </section>
 
-  <!-- =============================================
-       FAQ – Texte auf Entwicklung gedreht
-       ============================================= -->
-  <section class="lyra-v" id="faq" aria-labelledby="faq-title">
-    <div class="container">
-      <h2 id="faq-title" class="section-title">Häufige Fragen zur Webentwicklung</h2>
-      <p class="section-subtitle">Von Stack-Auswahl bis Betrieb – hier sind die wichtigsten Antworten.</p>
 
-      <div class="lyra-grid">
-        <div class="lyra-card">
-          <button class="lyra-toggle" aria-expanded="false">
-            <span>Projektstart &amp;<br> Ablauf</span>
-            <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
-          </button>
-          <div class="lyra-drop">
-            <p><strong>Wie startet ein Projekt?</strong><br>Mit einem strukturierten Kickoff (Ziele, Nutzer, Scope). Danach Architekturplan &amp; Roadmap.</p>
-            <p><strong>Wie arbeiten wir zusammen?</strong><br>Agil in Sprints mit Review/Retro, klaren Tickets und Preview-Deployments.</p>
-            <p><strong>Welche Rollen sind beteiligt?</strong><br>Product/PM, Design, Dev (FE/BE), QA – je nach Projektgröße.</p>
+
+
+<!-- =============================================
+     Kontakt + Video (gleich hohe Karten) + Testimonials
+     – 6-Step Wizard-Form (Formspree) + Success-Screen
+     ============================================= -->
+<section class="kontakt-testimonial-section" id="kontakt">
+  <div class="kontakt-testimonial-wrapper">
+
+    <!-- === Kontaktkarte === -->
+    <div class="kontakt-area">
+      <h2 class="section-title">Lass uns loslegen!</h2>
+      <p class="kontakt-subline">
+        Eine starke Idee verdient ein starkes digitales Erlebnis.
+      </p>
+
+      <!-- === Formular (Wizard) === -->
+      <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm" novalidate>
+
+        <!-- STEP 1: Leistungswahl -->
+        <fieldset class="form-step active" data-step="1" aria-labelledby="step1Title">
+          <legend id="step1Title" class="sr-only">Leistungswahl</legend>
+          <p class="copy step1-copy">Wofür interessierst du dich?</p>
+
+          <div class="grid-choices" role="radiogroup" aria-label="Leistung wählen">
+            <label class="choice" tabindex="0">
+              <input type="radio" name="service" value="Webdesign" data-toggle="web" />
+              <span class="title">Kostenloses Wireframe</span>
+              <small>0€, innerhalb von 24h!</small>
+            </label>
+
           </div>
+        </fieldset>
+
+        <!-- STEP 2: Material & Styleguide -->
+        <fieldset class="form-step" data-step="2" aria-labelledby="step2Title">
+          <legend id="step2Title" class="sr-only">Material & Styleguide</legend>
+
+          <!-- Web -->
+          <div class="service-block" data-service="web">
+            <label class="select-row">
+              <span class="website-label">Material (Texte / Bilder / Logo)</span>
+              <select name="web_material">
+                <option value="">Bitte wählen</option>
+                <option value="alles">Alles vorhanden</option>
+                <option value="teilweise">Teilweise vorhanden</option>
+                <option value="nichts">Bitte komplett erstellen</option>
+              </select>
+            </label>
+
+            <label class="select-row">
+              <span class="website-label">Styleguide / CI vorhanden?</span>
+              <select name="web_styleguide">
+                <option value="">Bitte wählen</option>
+                <option value="ja">Ja</option>
+                <option value="nein">Nein</option>
+              </select>
+            </label>
+          </div>
+
+          <!-- 3D -->
+          <div class="service-block" data-service="d3">
+       <label class="select-row">
+              <span class="website-label">3D-Daten / Modelle vorhanden?</span>
+              <select name="d3_daten">
+                <option value="">Bitte wählen</option>
+                <option value="vorhanden">Ja, vorhanden</option>
+                <option value="modellierung_noetig">Nein, bitte modellieren</option>
+              </select>
+            </label>
+          </div>
+
+          <!-- Grafik -->
+          <div class="service-block" data-service="gfx">
+            <label class="select-row">
+              <span class="website-label">Branding / Styleguide vorhanden?</span>
+              <select name="gfx_styleguide">
+                <option value="">Bitte wählen</option>
+                <option value="ja">Ja</option>
+                <option value="nein">Nein</option>
+              </select>
+            </label>
+
+            <label class="select-row">
+              <span class="website-label">Text- / Bildmaterial</span>
+              <select name="gfx_material">
+                <option value="">Bitte wählen</option>
+                <option value="alles">Alles vorhanden</option>
+                <option value="teilweise">Teilweise</option>
+                <option value="nichts">Bitte erstellen</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- STEP 3: Projektspezifikationen -->
+        <fieldset class="form-step" data-step="3" aria-labelledby="step3Title">
+          <legend id="step3Title" class="sr-only">Projektspezifikationen</legend>
+
+          <!-- Web -->
+          <div class="service-block" data-service="web">
+            <label class="select-row">
+              <span class="website-label">Website-Typ</span>
+              <select name="web_typ">
+                <option value="">Bitte wählen</option>
+                <option value="unternehmensseite">Unternehmensseite</option>
+                <option value="portfolio">Portfolio</option>
+                <option value="shop">Online-Shop</option>
+                <option value="landingpage">Landingpage</option>
+                <option value="sonstiges">Sonstiges</option>
+              </select>
+            </label>
+
+            <fieldset class="checkbox-group tags" aria-label="Besondere Schwerpunkte">
+              <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Ladegeschwindigkeit" /><span>Ladegeschwindigkeit</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Responsiveness" /><span>Responsiveness</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="SEO" /><span>SEO</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Benutzerfreundlichkeit" /><span>Benutzerfreundlichkeit</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Designqualität" /><span>Designqualität</span></label>
+            </fieldset>
+          </div>
+
+          <!-- 3D -->
+          <div class="service-block" data-service="d3">
+            <label class="select-row">
+              <span class="website-label">Was soll entstehen?</span>
+              <select name="d3_typ">
+                <option value="">Bitte wählen</option>
+                <option value="rendering">Rendering</option>
+                <option value="animation">Animation</option>
+                <option value="produktvisualisierung">Produktvisualisierung</option>
+                <option value="architekturvisualisierung">Architekturvisualisierung</option>
+                <option value="sonstiges">Sonstiges</option>
+              </select>
+            </label>
+
+            <label class="select-row">
+              <span class="website-label">Verwendungszweck</span>
+              <select name="d3_use">
+                <option value="">Bitte wählen</option>
+                <option value="marketing">Marketing / Werbung</option>
+                <option value="praesentation">Präsentation</option>
+                <option value="shop">Online-Shop</option>
+                <option value="print">Print</option>
+              </select>
+            </label>
+          </div>
+
+          <!-- Grafik -->
+          <div class="service-block" data-service="gfx">
+            <label class="select-row">
+              <span class="website-label">Design-Typ</span>
+              <select name="gfx_typ">
+                <option value="">Bitte wählen</option>
+                <option value="logo">Logo</option>
+                <option value="visitenkarte">Visitenkarte</option>
+                <option value="flyer_poster">Flyer / Poster</option>
+                <option value="styleguide">Styleguide</option>
+                <option value="sonstiges">Sonstiges</option>
+              </select>
+            </label>
+
+            <fieldset class="checkbox-group tags" aria-label="Prioritäten Grafikdesign">
+              <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Brand-Konsistenz" /><span>Brand-Konsistenz</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Typografie" /><span>Typografie</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Druckvorbereitung" /><span>Druckvorbereitung</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Illustration" /><span>Illustration</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Schnelle Umsetzung" /><span>Schnelle Umsetzung</span></label>
+            </fieldset>
+          </div>
+        </fieldset>
+
+        <!-- STEP 4: Zeit & Budget -->
+        <fieldset class="form-step" data-step="4" aria-labelledby="step4Title">
+          <legend id="step4Title" class="sr-only">Zeit & Budget</legend>
+
+          <label class="input-row">
+            <span class="website-label">Deadline / Zeitraum</span>
+            <input type="text" name="deadline" placeholder="z. B. bis 15. November oder Q4" />
+          </label>
+
+          <label class="input-row">
+            <span class="website-label">Budgetrahmen (optional)</span>
+            <input type="text" name="budget" placeholder="z. B. 3 000–6 000 €" />
+          </label>
+        </fieldset>
+
+        <!-- STEP 5: Kontaktdaten -->
+        <fieldset class="form-step" data-step="5" aria-labelledby="step5Title">
+          <legend id="step5Title" class="sr-only">Kontaktdaten</legend>
+
+          <input type="hidden" name="_subject" id="autoSubject" />
+          <textarea class="sr-only" name="summary_plain" id="summaryPlain" aria-hidden="true"></textarea>
+          <input type="hidden" name="selected_service" id="selectedService" />
+
+          <div class="contact-grid">
+            <div class="field span-6">
+              <label for="name" class="req">Name</label>
+              <input id="name" type="text" name="name" placeholder="Dein Name" autocomplete="name" required />
+            </div>
+
+            <div class="field span-6">
+              <label for="email" class="req">E-Mail</label>
+              <input id="email" type="email" name="email" placeholder="dein@mail.de" autocomplete="email" required />
+            </div>
+
+            <div class="field span-6">
+              <label for="phone">Telefon (optional)</label>
+              <input id="phone" type="tel" name="phone" placeholder="z. B. +49 151 12345678" autocomplete="tel" />
+            </div>
+
+            <div class="field span-12">
+              <label for="message" class="req">Nachricht</label>
+              <textarea id="message" name="message" rows="6" placeholder="Kurz dein Projekt / Ziel beschreiben …" minlength="5" required></textarea>
+            </div>
+
+            <p class="req-note">* Pflichtfelder</p>
+          </div>
+
+          <p class="legal-hint">
+            Deine Angaben werden über <strong>Formspree</strong> zur Beantwortung deiner Anfrage verarbeitet.
+            Mehr unter <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.
+          </p>
+        </fieldset>
+
+        <!-- STEP 6: Erfolg -->
+        <fieldset class="form-step" data-step="6" aria-labelledby="step6Title">
+          <legend id="step6Title" class="sr-only">Abschluss</legend>
+          <div class="success-card" role="status" aria-live="polite">
+            <h3 class="success-title">Geschafft! 🎉</h3>
+            <p class="success-copy">Vielen Dank für deine Anfrage. <br>Wir melden uns in Kürze bei dir.</p>
+            <p class="success-sub">Du wirst gleich automatisch zum Start zurückgeführt …</p>
+            <button type="button" class="success-btn" disabled>✅ Anfrage gesendet</button>
+          </div>
+        </fieldset>
+
+        <!-- === Fortschritt === -->
+        <div class="stepper" aria-label="Fortschritt" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1">
+          <div class="stepper-header"><span id="stepLabel">Schritt 1 / 6</span></div>
+          <div class="stepper-track"><div class="stepper-fill" id="stepperFill" style="width:0%"></div></div>
         </div>
 
-        <div class="lyra-card">
-          <button class="lyra-toggle" aria-expanded="false">
-            <span>Kosten &amp;<br> Angebote</span>
-            <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
-          </button>
-          <div class="lyra-drop">
-            <p><strong>Wie kalkuliert ihr?</strong><br>Transparente Pakete oder Sprint-basierte Angebote mit klaren Deliverables.</p>
-            <p><strong>Pauschalen möglich?</strong><br>Ja – z. B. MVP, Landingpage, Headless-Setup. Komplexe Vorhaben kalkulieren wir individuell.</p>
-            <p><strong>Zahlungsmodalitäten?</strong><br>In Etappen: Start/Meilensteine/Abschluss.</p>
-          </div>
+        <!-- === Navigation === -->
+        <div class="wizard-nav" id="wizardNav">
+          <button type="button" class="nav-btn prev" id="prevBtn" disabled>Zurück</button>
+          <button type="button" class="nav-btn next" id="nextBtn" disabled>Weiter</button>
+          <button type="submit" class="kontakt-btn submit" id="submitBtn" hidden>Senden!</button>
         </div>
+      </form>
+    </div>
 
-        <div class="lyra-card">
-          <button class="lyra-toggle" aria-expanded="false">
-            <span>Technik &amp;<br> Betrieb</span>
-            <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
-          </button>
-          <div class="lyra-drop">
-            <p><strong>Welche Tools/Stacks?</strong><br>Moderne Frameworks, Headless CMS, API-First – passend zum Use Case.</p>
-            <p><strong>Übernehmt ihr Hosting?</strong><br>Gern. Domain, SSL, CDN, Monitoring und Performance-Tuning inklusive.</p>
-            <p><strong>Wer pflegt Inhalte?</strong><br>Ihr via CMS – wir schulen euer Team.</p>
-          </div>
-        </div>
-
-        <div class="lyra-card">
-          <button class="lyra-toggle" aria-expanded="false">
-            <span>Nach Projekt &amp;<br> Betreuung</span>
-            <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
-          </button>
-          <div class="lyra-drop">
-            <p><strong>Gibt es Support?</strong><br>Ja – Wartung, Updates, Roadmap-Weiterentwicklung.</p>
-            <p><strong>Skalierung?</strong><br>Neue Features, Integrationen und Performance-Optimierungen jederzeit.</p>
-            <p><strong>Übergabe?</strong><br>Repo, Doku, CI/CD Pipelines und Zugänge werden sauber übergeben.</p>
-          </div>
-        </div>
+    <!-- === Video-Karte === -->
+    <div class="video-area" aria-label="Einblick in Prozess, Tools & Zusammenarbeit">
+      <div class="video-card">
+        <video class="video-media" autoplay loop muted playsinline preload="auto">
+          <source src="./indexFotoSlideShow/kartenvideo.mp4" type="video/mp4">
+          Dein Browser unterstützt das Video-Tag nicht.
+        </video>
       </div>
     </div>
-  </section>
 
-  <!-- =============================================
-       Kontakt + Wizard – auf WebENTWICKLUNG umgestellt
-       ============================================= -->
-  <section class="kontakt-testimonial-section" id="kontakt">
-    <div class="kontakt-testimonial-wrapper">
-      <div class="kontakt-area">
-        <h2 class="section-title">Lass uns bauen!</h2>
-        <p class="kontakt-subline">Sag uns kurz, was du vorhast – wir melden uns mit einem klaren Plan.</p>
-
-        <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm" novalidate>
-          <!-- STEP 1 -->
-          <fieldset class="form-step active" data-step="1" aria-labelledby="step1Title">
-            <legend id="step1Title" class="sr-only">Leistungswahl</legend>
-            <p class="copy step1-copy">Wofür interessierst du dich?</p>
-
-            <div class="grid-choices" role="radiogroup" aria-label="Leistung wählen">
-              <label class="choice" tabindex="0">
-                <input type="radio" name="service" value="Webentwicklung" data-toggle="webdev" />
-                <span class="title">Kostenloses Tech-Scoping</span>
-                <small>Kurz-Check &amp; Empfehlung</small>
-              </label>
-            </div>
-          </fieldset>
-
-          <!-- STEP 2 -->
-          <fieldset class="form-step" data-step="2" aria-labelledby="step2Title">
-            <legend id="step2Title" class="sr-only">Material & Stack</legend>
-
-            <div class="service-block" data-service="webdev">
-              <label class="select-row">
-                <span class="website-label">Material (Texte / Bilder / Logo)</span>
-                <select name="web_material">
-                  <option value="">Bitte wählen</option>
-                  <option value="alles">Alles vorhanden</option>
-                  <option value="teilweise">Teilweise vorhanden</option>
-                  <option value="nichts">Bitte komplett erstellen</option>
-                </select>
-              </label>
-
-              <label class="select-row">
-                <span class="website-label">Stack/Plattform</span>
-                <select name="stack_pref">
-                  <option value="">Egal / Vorschlag von uns</option>
-                  <option value="headless">Headless CMS</option>
-                  <option value="ecom">E-Commerce</option>
-                  <option value="custom">Custom App</option>
-                </select>
-              </label>
-            </div>
-          </fieldset>
-
-          <!-- STEP 3: Kontaktdaten (Placeholder – wie gehabt) -->
-          <fieldset class="form-step" data-step="3" aria-labelledby="step3Title">
-            <legend id="step3Title" class="sr-only">Kontakt</legend>
-            <label class="input-row">
-              <span>Name</span>
-              <input type="text" name="name" required>
-            </label>
-            <label class="input-row">
-              <span>E-Mail</span>
-              <input type="email" name="email" required>
-            </label>
-            <label class="input-row">
-              <span>Nachricht</span>
-              <textarea name="message" rows="4" placeholder="Kurz zu Ziel, Timing, Budget…"></textarea>
-            </label>
-            <button type="submit" class="cta-btn">Anfrage senden</button>
-          </fieldset>
-        </form>
-      </div>
+    <!-- === Testimonials === -->
+    <div class="testimonial-area">
+      <testimonial-slider></testimonial-slider>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ===== Footer (deine Struktur, Texte neutral) ===== -->
-  <footer itemscope itemtype="https://schema.org/Organization" class="footer-clean">
-    <meta itemprop="url" content="https://www.fusion3.de">
-    <div class="fc-container">
-      <section class="fc-head" aria-labelledby="fc-head-title">
-        <h2 id="fc-head-title" class="sr-only">Markenbereich</h2>
-        <div class="fc-brand">
-          <a class="fc-logo" href="/" itemprop="name">Fusion³</a>
-          <p class="fc-claim">Webentwicklung &amp; UX – schnell. sicher. skalierbar.</p>
-        </div>
-        <div class="fc-cta">
-          <a class="fc-btn" href="mailto:hello@fusion3.de" aria-label="Projekt anfragen per E-Mail">Projekt anfragen</a>
-        </div>
-      </section>
+<script>
+(function () {
+  const form = document.getElementById('kontaktForm');
+  if (!form) return;
 
-      <nav class="fc-grid" aria-labelledby="fc-nav-title">
-        <h2 id="fc-nav-title" class="sr-only">Footer-Navigation</h2>
+  /* =========================
+     Cache DOM
+  ========================== */
+  const allSteps  = Array.from(form.querySelectorAll('.form-step'));
+  const stepper   = form.querySelector('.stepper');
+  const stepLabel = document.getElementById('stepLabel');
+  const stepFill  = document.getElementById('stepperFill');
+  const prevBtn   = document.getElementById('prevBtn');
+  const nextBtn   = document.getElementById('nextBtn');
+  const submitBtn = document.getElementById('submitBtn');
 
-        <div class="fc-col">
-          <h3 class="fc-col-title" id="fc-services">Leistungen</h3>
-          <ul class="fc-links" aria-labelledby="fc-services">
-            <li><a href="/ux-audit.html">UX-Audit</a></li>
-            <li><a href="/webentwicklung.html" aria-current="page">Webentwicklung</a></li>
-            <li><a href="/prototyping.html">Prototyping</a></li>
-            <li><a href="/design-system.html">Design-Systeme</a></li>
-          </ul>
-        </div>
+  // Success-Card DOM
+  const successFieldset = allSteps.find(s => s.dataset.step === '6');
+  const successCard     = successFieldset?.querySelector('.success-card');
+  const successBtn      = successFieldset?.querySelector('.success-btn');
+  const successSub      = successFieldset?.querySelector('.success-sub');
 
-        <div class="fc-col">
-          <h3 class="fc-col-title" id="fc-resources">Ressourcen</h3>
-          <ul class="fc-links" aria-labelledby="fc-resources">
-            <li><a href="/cases.html">Case Studies</a></li>
-            <li><a href="/blog.html">Insights &amp; Blog</a></li>
-            <li><a href="/faq.html">FAQ</a></li>
-            <li><a href="/kontakt.html">Termin buchen</a></li>
-          </ul>
-        </div>
+  /* =========================
+     Live Status (a11y)
+  ========================== */
+  let statusBox = form.querySelector('[data-status]');
+  if (!statusBox) {
+    statusBox = document.createElement('div');
+    statusBox.setAttribute('data-status','');
+    statusBox.setAttribute('role','status');
+    statusBox.setAttribute('aria-live','polite');
+    statusBox.style.cssText = 'margin:.5rem 0 .25rem;font-weight:700;text-align:center;';
+    form.insertBefore(statusBox, form.firstChild);
+  }
+  const setStatus = (msg, tone='')=>{
+    statusBox.textContent = msg || '';
+    statusBox.style.color =
+      tone==='error' ? '#b00020' :
+      tone==='ok'    ? '#0a7f2e' :
+      tone==='warn'  ? '#a15c00' : 'inherit';
+  };
 
-        <div class="fc-col">
-          <h3 class="fc-col-title" id="fc-legal">Rechtliches</h3>
-          <ul class="fc-links" aria-labelledby="fc-legal">
-            <li><a href="/impressum.html">Impressum</a></li>
-            <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
-            <li><a href="/cookies.html">Cookie-Hinweis</a></li>
-          </ul>
-        </div>
+  /* =========================
+     Hidden Fields / Honeypot
+  ========================== */
+  ensureHidden({ id:'autoSubject',     name:'_subject',         tag:'input'    });
+  ensureHidden({ id:'summaryPlain',    name:'summary_plain',    tag:'textarea' });
+  ensureHidden({ id:'selectedService', name:'selected_service', tag:'input'    });
+  ensureHidden({ id:'honeypot',        name:'_gotcha',          tag:'input'    });
+  ensureHidden({ id:'metaRef',         name:'_referrer',        tag:'input'    }).value = location.href;
+  ensureHidden({ id:'metaUA',          name:'_userAgent',       tag:'input'    }).value = navigator.userAgent;
+  ensureHidden({ id:'metaOrigin',      name:'_origin',          tag:'input'    }).value = location.origin;
 
-        <div class="fc-col">
-          <h3 class="fc-col-title" id="fc-contact">Kontakt</h3>
-          <ul class="fc-links" aria-labelledby="fc-contact">
-            <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
-            <li><a href="tel:+491234567890" itemprop="telephone">+49&nbsp;123&nbsp;4567890</a></li>
-            <li>
-              <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" class="fc-address">
-                <span itemprop="addressLocality">Berlin</span>, <span itemprop="addressCountry">Deutschland</span>
-              </address>
-            </li>
-          </ul>
+  function ensureHidden({id,name,tag='input'}) {
+    let el = form.querySelector('#'+id);
+    if (!el) {
+      el = document.createElement(tag);
+      el.id = id; el.name = name;
+      if (tag==='input') el.type = 'hidden';
+      el.className = 'sr-only'; el.setAttribute('aria-hidden','true');
+      form.appendChild(el);
+    } else if (el.name !== name) {
+      el.name = name;
+    }
+    return el;
+  }
 
-          <h3 id="fc-socials-title" class="sr-only">Social Media</h3>
-          <ul class="fc-socials" aria-labelledby="fc-socials-title">
-            <li>
-              <a class="fc-social" href="mailto:hello@fusion3.de" aria-label="E-Mail" itemprop="sameAs">
-                <span class="sr-only">E-Mail</span>
-                <img src="./FooterIcons/Gmail.svg" alt="" width="24" height="24">
-              </a>
-            </li>
-            <!-- weitere Icons nach Bedarf -->
-          </ul>
-        </div>
-      </nav>
-    </div>
-  </footer>
+  /* =========================
+     Helpers
+  ========================== */
+  const q  = (sel,root=form)=>root.querySelector(sel);
+  const qa = (sel,root=form)=>Array.from(root.querySelectorAll(sel));
+  const trim = s => (s||'').toString().trim();
 
-  <!-- ===== JS (gekürzt & angepasst): Theme/Navigation + Form-Lock ===== -->
-  <script>
-    // Navigation, Theme-Toggle etc. – deine bestehenden Scripte können hier weiterhin genutzt werden
-    // (Struktur & IDs wurden beibehalten)
-  </script>
+  function collectStepData(stepEl) {
+    const data = {};
+    stepEl.querySelectorAll('input, select, textarea').forEach(el=>{
+      if (el.disabled || el.closest('[hidden]')) return;
+      if (el.type === 'checkbox') {
+        if (!data[el.name]) data[el.name] = [];
+        if (el.checked) data[el.name].push(el.value);
+      } else if (el.type === 'radio') {
+        if (el.checked) data[el.name] = el.value;
+      } else if (el.tagName === 'SELECT') {
+        if (el.value) data[el.name] = el.value;
+      } else {
+        const v = trim(el.value);
+        if (v) data[el.name] = v;
+      }
+    });
+    return data;
+  }
+  function hasVisibleControls(stepEl){
+    const controls = Array.from(stepEl.querySelectorAll('input,select,textarea'));
+    return controls.some(el => !el.disabled && !el.closest('[hidden]'));
+  }
+  function getApplicableSteps(){
+    const base = allSteps.filter(s => hasVisibleControls(s) && s.dataset.step !== '6');
+    const success = allSteps.find(s => s.dataset.step === '6');
+    return form.classList.contains('is-success') && success ? [...base, success] : base;
+  }
+  function getCurrentIndex(){ return Math.max(0, getApplicableSteps().indexOf(currentStepEl)); }
+  function clampIndex(i){ const st = getApplicableSteps(); return Math.min(Math.max(i,0), st.length-1); }
 
-  <script>
-    // Lock auf „Webentwicklung“ (statt „Webdesign“)
-    (function lockToWebentwicklung(){
-      const form = document.getElementById('kontaktForm');
-      if (!form) return;
+  function isContactStep(stepEl){
+    if (!stepEl) return false;
+    if (stepEl.dataset.step === '5') return true;
+    const hasName = stepEl.querySelector('input[name="name"]');
+    const hasMail = stepEl.querySelector('input[name="email"]');
+    const hasMsg  = stepEl.querySelector('textarea[name="message"]');
+    return !!(hasName || hasMail || hasMsg);
+  }
 
-      // Vorauswählen
-      const rb = form.querySelector('input[name="service"][value="Webentwicklung"]');
-      if (rb){ rb.checked = true; rb.setAttribute('aria-checked','true'); }
+  /* =========================
+     UI / Progress
+  ========================== */
+  function updateChoiceUI(){
+    form.querySelectorAll('.grid-choices .choice').forEach(label=>{
+      const rb = label.querySelector('input[type="radio"]');
+      label.classList.toggle('selected', !!(rb && rb.checked));
+    });
+    const any = form.querySelector('input[name="service"]:checked');
+    if(currentStepEl === allSteps[0]) nextBtn.disabled = !any;
+    setProgress(getCurrentIndex());
+  }
 
-      // Entferne ggf. andere Choices
-      Array.from(form.querySelectorAll('.grid-choices .choice')).forEach(ch=>{
-        const r = ch.querySelector('input[type="radio"][name="service"]');
-        if (r && r.value !== 'Webentwicklung') ch.remove();
+  function updatePillUI(){
+    form.querySelectorAll('.pill').forEach(lbl=>{
+      const cb = lbl.querySelector('input[type="checkbox"]');
+      lbl.classList.toggle('selected', !!(cb && cb.checked));
+    });
+  }
+
+  function syncServiceBlocks(){
+    const sel = form.querySelector('input[name="service"]:checked');
+    const key = sel ? sel.dataset.toggle : null;
+    ['web','d3','gfx'].forEach(k=>{
+      form.querySelectorAll(`.service-block[data-service="${k}"]`).forEach(block=>{
+        const vis = key === k;
+        block.hidden = !vis;
+        block.querySelectorAll('input,select,textarea').forEach(el=>{
+          el.disabled = !vis;
+          if(!vis){
+            if(el.type==='checkbox'||el.type==='radio') el.checked=false;
+            else if(el.tagName==='SELECT') el.selectedIndex=0;
+            else el.value='';
+          }
+        });
       });
+    });
+    // nach dem Umschalten neu bewerten (grün hinterlegen)
+    updatePillUI();
+  }
 
-      // Service-Block sichtbar schalten (falls dein Wizard das benötigt)
-      const block = form.querySelector('.service-block[data-service="webdev"]');
-      if (block){ block.style.display = 'block'; }
-    })();
-  </script>
+  function setProgress(idx){
+    const steps = getApplicableSteps();
+    let pct = 0;
+    if(idx === 0){
+      pct = form.querySelector('input[name="service"]:checked') ? 12 : 0;
+    } else {
+      pct = Math.min(100, Math.round((idx / (steps.length - 1)) * 100));
+    }
+    if (stepFill) stepFill.style.width = pct + '%';
+    stepper?.setAttribute('aria-valuenow', String(idx + 1));
+    if (stepLabel) stepLabel.textContent = `Schritt ${idx + 1}/${steps.length}`;
+  }
+
+  function enhanceSubmitBtn() {
+    if (!submitBtn || submitBtn.dataset.enhanced === '1') return;
+    submitBtn.dataset.enhanced = '1';
+    if (!submitBtn.textContent.trim()) submitBtn.textContent = 'Jetzt Anfrage senden';
+  }
+
+  /* =========================
+     Navigation
+  ========================== */
+  let currentStepEl = allSteps[0];
+
+  function showStepByIndex(idx){
+    const steps = getApplicableSteps();
+    if(!steps.length) return;
+    const targetIdx = clampIndex(idx);
+    const targetEl  = steps[targetIdx];
+
+    allSteps.forEach(s => s.classList.remove('active'));
+    targetEl.classList.add('active');
+    currentStepEl = targetEl;
+
+    const isSuccess = targetEl.dataset.step === '6';
+
+    if (isSuccess) {
+      form.classList.add('is-success');
+
+      prevBtn.hidden = true;
+      nextBtn.hidden = true;
+      submitBtn.hidden = true;
+
+      const step1 = allSteps.find(s => s.dataset.step === '1');
+      const h = step1 ? step1.scrollHeight : 320;
+      targetEl.style.setProperty('--step6-minh', h + 'px');
+
+      // 💡 Restart-Button immer neu, immer klickbar
+      const oldBtn = successFieldset.querySelector('.success-btn');
+      if (oldBtn) {
+        const freshBtn = oldBtn.cloneNode(true);
+        oldBtn.parentNode.replaceChild(freshBtn, oldBtn);
+        freshBtn.disabled = false;
+        freshBtn.textContent = 'Neu starten';
+        freshBtn.setAttribute('aria-label','Wizard neu starten');
+        freshBtn.style.color = '#fff';
+        freshBtn.addEventListener('click', handleRestart);
+      }
+
+      if (successSub) {
+        successSub.textContent = 'Du kannst jetzt neu starten und die Schritte erneut durchlaufen.';
+        successSub.style.color = '#fff';
+      }
+
+    } else {
+      form.classList.remove('is-success');
+      prevBtn.hidden = false;
+      const onContact = isContactStep(targetEl);
+      nextBtn.hidden   = onContact;
+      submitBtn.hidden = !onContact;
+      if (onContact) enhanceSubmitBtn();
+      prevBtn.disabled = targetIdx === 0;
+      nextBtn.disabled = targetEl === allSteps[0] && !form.querySelector('input[name="service"]:checked');
+    }
+
+    // sicherstellen, dass Pills korrekt eingefärbt bleiben
+    updatePillUI();
+
+    setProgress(targetIdx);
+    const first = targetEl.querySelector('input:not([disabled]),select:not([disabled]),textarea:not([disabled])');
+    first?.focus({preventScroll:true});
+  }
+
+  /* =========================
+     Restart / Success Handling
+  ========================== */
+  function resetToStep1(scrollToStart = true){
+    form.reset();
+    form.classList.remove('is-success');
+    allSteps.forEach(s => s.classList.remove('active'));
+    const step1 = allSteps.find(s => s.dataset.step === '1') || allSteps[0];
+    step1.classList.add('active');
+    currentStepEl = step1;
+    syncServiceBlocks();
+    updateChoiceUI();
+    updatePillUI();
+    setProgress(0);
+    toggleFormDisabled(false);
+    setStatus('', '');
+    if (scrollToStart) {
+      step1.scrollIntoView({ behavior:'smooth', block:'start' });
+      const first = step1.querySelector('input,select,textarea,button');
+      first?.focus({ preventScroll:true });
+    }
+  }
+
+  function handleRestart(e){
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    resetToStep1(true);
+  }
+
+  function showSuccessScreen(){
+    const steps = getApplicableSteps();
+    const successIdx = steps.findIndex(s => s.dataset.step === '6');
+    if (successIdx >= 0) showStepByIndex(successIdx);
+  }
+
+  /* =========================
+     Validierung / Markierung
+  ========================== */
+  function markInvalid(el, msg){
+    el.classList.add('is-invalid');
+    el.setAttribute('aria-invalid','true');
+    if (!el.nextElementSibling || !el.nextElementSibling.matches('.field-error')) {
+      const e = document.createElement('div');
+      e.className = 'field-error';
+      e.style.cssText = 'color:#b00020;font-weight:700;margin-top:.2rem;font-size:.9rem;';
+      e.textContent = msg;
+      el.insertAdjacentElement('afterend', e);
+    } else el.nextElementSibling.textContent = msg;
+  }
+  function clearInvalids(){
+    qa('.is-invalid', form).forEach(el=>{
+      el.classList.remove('is-invalid'); el.removeAttribute('aria-invalid');
+    });
+    qa('.field-error', form).forEach(el=> el.remove());
+  }
+  function validEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s); }
+  function validateRequired(){
+    clearInvalids();
+    const name  = q('input[name="name"]');
+    const email = q('input[name="email"]');
+    const msg   = q('textarea[name="message"]');
+    let ok = true;
+    if (!trim(name?.value))               { markInvalid(name,'Bitte Namen angeben.'); ok=false; }
+    if (!validEmail(trim(email?.value)))  { markInvalid(email,'Bitte gültige E-Mail angeben.'); ok=false; }
+    if (trim(msg?.value).length < 5)      { markInvalid(msg,'Bitte kurz dein Projekt beschreiben.'); ok=false; }
+    if (!ok) {
+      const first = q('.is-invalid');
+      first?.focus({preventScroll:true});
+      setStatus('Bitte fehlende Angaben ergänzen.', 'warn');
+    } else setStatus('', '');
+    return ok;
+  }
+
+  /* =========================
+     Submit Flow
+  ========================== */
+  let submitting = false;
+  function toggleFormDisabled(disabled){
+    qa('input,select,textarea,button', form).forEach(el=> el.disabled = disabled);
+  }
+
+  async function postWithTimeout(url, options={}, timeoutMs=12000) {
+    const controller = new AbortController();
+    const t = setTimeout(()=>controller.abort(), timeoutMs);
+    try { return await fetch(url, { ...options, signal: controller.signal }); }
+    finally { clearTimeout(t); }
+  }
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    if (submitting) return;
+
+    if (!validateRequired()) return;
+
+    const selectedServiceEl = q('input[name="service"]:checked');
+    const selectedService   = selectedServiceEl ? selectedServiceEl.value : '';
+
+    const summary = {};
+    getApplicableSteps().forEach((step, i) => { summary[`step_${i+1}`] = collectStepData(step); });
+
+    const lines = [];
+    lines.push(`[Service] ${selectedService}`);
+    lines.push(`[Kontakt]`);
+    lines.push(`- Name: ${summary.step_5?.name || '-'}`);
+    lines.push(`- E-Mail: ${summary.step_5?.email || '-'}`);
+    if (summary.step_5?.message) lines.push(`- Nachricht: ${summary.step_5.message}`);
+    const compiledPlain = lines.join('\n');
+
+    q('#autoSubject').value     = `Projektanfrage: ${selectedService}`;
+    q('#selectedService').value = selectedService;
+    q('#summaryPlain').value    = compiledPlain;
+    q('#honeypot').value        = '';
+
+    const fd = new FormData(form);
+    submitting = true;
+    toggleFormDisabled(true);
+    submitBtn.innerText = 'Senden …';
+    setStatus('Sende Anfrage …');
+
+    try {
+      const res = await postWithTimeout(form.action, {
+        method:'POST',
+        body:fd,
+        headers:{Accept:'application/json'}
+      }, 12000);
+      if (!res.ok) throw new Error(res.statusText);
+      submitBtn.innerText = '✅ Anfrage gesendet!';
+      setStatus('Danke! Wir melden uns in Kürze.', 'ok');
+      form.classList.add('is-success');
+      showSuccessScreen();
+    } catch (err) {
+      console.error(err);
+      setStatus('Fehler beim Senden – bitte später erneut versuchen.', 'error');
+      submitBtn.innerText = 'Fehler!';
+      toggleFormDisabled(false);
+    } finally {
+      submitting = false;
+    }
+  });
+
+  /* =========================
+     Buttons & Choices
+  ========================== */
+  prevBtn.addEventListener('click', (e)=>{
+    e.preventDefault();
+    showStepByIndex(getCurrentIndex()-1);
+  });
+  nextBtn.addEventListener('click', ()=>{
+    if (isContactStep(currentStepEl)) form.requestSubmit();
+    else showStepByIndex(getCurrentIndex()+1);
+  });
+
+  // Klick auf Step-1-Karten (Service)
+  form.addEventListener('click', (e)=>{
+    const choice = e.target.closest('.choice');
+    if(choice){
+      const rb = choice.querySelector('input[type="radio"]');
+      if(rb){
+        setTimeout(()=>{
+          form.classList.remove('is-success');
+          updateChoiceUI();
+          syncServiceBlocks();
+          showStepByIndex(getCurrentIndex());
+        },0);
+      }
+    }
+    // Klick auf Pill-Labels (Schwerpunkte)
+    const pill = e.target.closest('.pill');
+    if (pill) {
+      // Wait until checkbox toggled, then refresh UI
+      setTimeout(updatePillUI, 0);
+    }
+  });
+
+  // Änderungen an Service oder Pill-Checkboxen
+  form.addEventListener('change', (e)=>{
+    if(e.target && e.target.matches('input[name="service"]')){
+      form.classList.remove('is-success');
+      updateChoiceUI();
+      syncServiceBlocks();
+      showStepByIndex(getCurrentIndex());
+      return;
+    }
+    if (e.target && (e.target.matches('.pill input[type="checkbox"]') || e.target.matches('input[data-pills]'))) {
+      updatePillUI();
+    }
+  });
+
+  /* =========================
+     Init
+  ========================== */
+  function init(){
+    form.classList.remove('is-success');
+    syncServiceBlocks();
+    updateChoiceUI();
+    updatePillUI();
+    showStepByIndex(0);
+    setStatus('');
+  }
+  init();
+
+})();
+</script>
+<script>
+  // … dein bestehendes IIFE …
+
+  // === Patch: Step 1 auf "Webdesign" beschränken + vorauswählen ===
+  (function lockToWebdesign(){
+    const form = document.getElementById('kontaktForm');
+    if (!form) return;
+
+    // 1) Vorauswählen
+    const webRadio = form.querySelector('input[name="service"][value="Webdesign"]');
+    if (webRadio) {
+      webRadio.checked = true;
+      webRadio.setAttribute('aria-checked','true');
+    }
+
+    // 2) Falls doch weitere Choices vorhanden wären -> entfernen
+    const choices = Array.from(form.querySelectorAll('.grid-choices .choice'));
+    choices.forEach(ch => {
+      const rb = ch.querySelector('input[type="radio"][name="service"]');
+      if (rb && rb.value !== 'Webdesign') ch.remove();
+    });
+
+    // 3) UI & Service-Blöcke syncen + Next aktivieren
+    try {
+      // diese Funktionen existieren in deinem Script:
+      // updateChoiceUI(), syncServiceBlocks(), showStepByIndex()
+      updateChoiceUI();
+      syncServiceBlocks();
+      // Step 2 wird aktiv, sobald der User "Weiter" drückt
+      const nextBtn = form.querySelector('#nextBtn');
+      if (nextBtn) nextBtn.disabled = false;
+    } catch(e){}
+  })();
+</script>
+
+
+
+
+
+
+  
+
+
+
+<section class="lyra-vault" id="lyra-faq">
+  <h2 class="lyra-heading">Häufige Fragen</h2>
+
+  <div class="lyra-console" role="search">
+    <input
+      type="text"
+      id="lyraSearch"
+      placeholder="Nach Stichwort suchen …"
+      aria-label="FAQ durchsuchen"
+      enterkeyhint="search"
+      autocomplete="off"
+    >
+    <div class="lyra-nav">
+      <button id="lyraPrev" type="button" aria-label="Vorheriges Ergebnis">
+        <i data-feather="chevron-left" aria-hidden="true"></i>
+      </button>
+      <span id="lyraIndex" aria-live="polite">0 / 0</span>
+      <button id="lyraNext" type="button" aria-label="Nächstes Ergebnis">
+        <i data-feather="chevron-right" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="lyra-grid">
+
+    <!-- Card 1 -->
+    <div class="lyra-card">
+      <button class="lyra-toggle" aria-expanded="false">
+        <span>Ablauf &amp;<br> Projektdauer</span>
+        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
+      </button>
+      <div class="lyra-drop">
+        <p><strong>Wie läuft ein Projekt ab?</strong><br>Nach einem kurzen Kick-off folgen Konzept, Entwurf, Abstimmung und finale Umsetzung. Sie sehen alle Fortschritte live.</p>
+        <p><strong>Wie lange dauert das?</strong><br>Je nach Umfang: kleinere Projekte 2–3 Wochen, umfangreiche Websites oder 3D-Renderings 4–6 Wochen.</p>
+        <p><strong>Wie oft kann ich Feedback geben?</strong><br>Zwei feste Feedbackrunden sind eingeplant – spontane Rückmeldungen sind jederzeit möglich.</p>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="lyra-card">
+      <button class="lyra-toggle" aria-expanded="false">
+        <span>Kosten &amp;<br> Angebot</span>
+        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
+      </button>
+      <div class="lyra-drop">
+        <p><strong>Wie setzen sich die Kosten zusammen?</strong><br>Je nach Leistung – Design, Animation, SEO oder Hosting. Nach dem Briefing erhalten Sie ein transparentes Angebot mit klarer Aufschlüsselung.</p>
+        <p><strong>Gibt es Pauschalpreise?</strong><br>Für Standardleistungen ja, z. B. Landingpages, kleinere Renderings oder Logos. Komplexe Projekte kalkulieren wir individuell.</p>
+        <p><strong>Wie erfolgt die Bezahlung?</strong><br>In Etappen, meist zur Hälfte bei Start und zur Hälfte nach Abschluss.</p>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="lyra-card">
+      <button class="lyra-toggle" aria-expanded="false">
+        <span>Technik &amp;<br> Umsetzung</span>
+        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
+      </button>
+      <div class="lyra-drop">
+        <p><strong>Welche Tools nutzen Sie?</strong><br>Für Web: moderne Frameworks &amp; CMS. Für 3D: Blender, Cinema 4D, Unreal Engine. Für Grafik: Adobe CC.</p>
+        <p><strong>Bieten Sie Hosting oder Setup an?</strong><br>Ja – auf Wunsch übernehmen wir Domain, Hosting, SSL und Performance-Optimierung.</p>
+        <p><strong>Kann ich später selbst Inhalte ändern?</strong><br>Ja – wir integrieren CMS-Lösungen und zeigen Ihnen, wie das geht.</p>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="lyra-card">
+      <button class="lyra-toggle" aria-expanded="false">
+        <span>Design &amp;<br> Kreativprozess</span>
+        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
+      </button>
+      <div class="lyra-drop">
+        <p><strong>Wie werde ich eingebunden?</strong><br>Über Vorschauen, Live-Links oder Render-Previews. So können Sie Änderungen früh sehen und leicht abstimmen.</p>
+        <p><strong>Kann ich eigene Ideen einbringen?</strong><br>Natürlich – wir entwickeln das Design gemeinsam und beraten bei Stil, Struktur und Wirkung.</p>
+        <p><strong>Ist das Ergebnis markengerecht?</strong><br>Ja – wir achten auf Farbwelt, Typografie und Wiedererkennung über alle Medien hinweg.</p>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="lyra-card">
+      <button class="lyra-toggle" aria-expanded="false">
+        <span>Nach Projekt &amp;<br> Betreuung</span>
+        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
+      </button>
+      <div class="lyra-drop">
+        <p><strong>Gibt es Support nach dem Projekt?</strong><br>Ja – wir bieten Wartung, Updates oder weitere Anpassungen bei Bedarf.</p>
+        <p><strong>Kann das Projekt erweitert werden?</strong><br>Jederzeit – zusätzliche Seiten, Renderings oder Kampagnen sind problemlos möglich.</p>
+        <p><strong>Erhalte ich die Originaldateien?</strong><br>Ja – alle finalen Daten, Designs und Renderings werden nach Abschluss übergeben.</p>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="lyra-card">
+      <button class="lyra-toggle" aria-expanded="false">
+        <span>Rechtliches &amp;<br> Datenschutz</span>
+        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
+      </button>
+      <div class="lyra-drop">
+        <p><strong>Ist alles DSGVO-konform?</strong><br>Ja – inklusive SSL, Cookie-Management und datensicherem Hosting.</p>
+        <p><strong>Wie gehen Sie mit Daten um?</strong><br>Vertraulich und sicher. Auf Wunsch schließen wir eine NDA.</p>
+        <p><strong>Wem gehören die Rechte?</strong><br>Nach vollständiger Zahlung gehen alle Nutzungsrechte auf Sie über.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<script src="https://unpkg.com/feather-icons" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.feather) feather.replace();
+
+  const vault = document.getElementById("lyra-faq");
+  const cards = [...document.querySelectorAll(".lyra-card")];
+  const input = document.getElementById("lyraSearch");
+  const prev = document.getElementById("lyraPrev");
+  const next = document.getElementById("lyraNext");
+  const indexLbl = document.getElementById("lyraIndex");
+
+  const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const smoothOpts = prefersReduced ? {behavior:"auto"} : {behavior:"smooth"};
+
+  // ---- Utilities ------------------------------------------------------------
+  const normalize = (s) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
+
+  let matches = [], current = 0, debounceTo = null;
+
+  function setButtonsEnabled(enabled){
+    [prev, next].forEach(b=>{
+      b.disabled = !enabled;
+      b.setAttribute("aria-disabled", String(!enabled));
+      b.style.opacity = enabled ? "" : ".6";
+      b.style.cursor  = enabled ? "pointer" : "not-allowed";
+    });
+  }
+
+  function closeAll(){
+    cards.forEach(c=>{
+      const b = c.querySelector(".lyra-toggle");
+      const d = c.querySelector(".lyra-drop");
+      b.setAttribute("aria-expanded","false");
+      d.style.maxHeight = null;
+    });
+  }
+
+  function removeMarks(){
+    vault.querySelectorAll("mark").forEach(m=>{
+      const t = document.createTextNode(m.textContent);
+      m.replaceWith(t);
+    });
+  }
+
+  // Escape RegExp Sonderzeichen
+  const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  function highlight(node, keyword){
+    const terms = keyword.split(/\s+/).filter(Boolean).map(escapeRegExp);
+    if (!terms.length) return;
+    const rx = new RegExp("(" + terms.join("|") + ")", "gi");
+
+    if (node.nodeType === 3){
+      const span = document.createElement("span");
+      span.innerHTML = node.nodeValue.replace(rx, "<mark>$1</mark>");
+      node.parentNode.replaceChild(span, node);
+    } else if (node.nodeType === 1 && node.childNodes && !["SCRIPT","STYLE","INPUT","BUTTON"].includes(node.tagName)){
+      [...node.childNodes].forEach(child => highlight(child, keyword));
+    }
+  }
+
+  function scrollToCard(c){
+    const y = c.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top: y, ...smoothOpts });
+  }
+
+  function openCard(c){
+    const b = c.querySelector(".lyra-toggle");
+    const d = c.querySelector(".lyra-drop");
+    b.setAttribute("aria-expanded","true");
+    d.style.maxHeight = d.scrollHeight + "px";
+  }
+
+  function recalcOpenHeights(){
+    cards.forEach(c=>{
+      const b = c.querySelector(".lyra-toggle");
+      const d = c.querySelector(".lyra-drop");
+      if (b.getAttribute("aria-expanded")==="true"){
+        d.style.maxHeight = d.scrollHeight + "px";
+      }
+    });
+  }
+
+  function updateIndex(){
+    indexLbl.textContent = matches.length ? `${current+1} / ${matches.length}` : "0 / 0";
+    setButtonsEnabled(matches.length > 0);
+  }
+
+  // Precompute normalisierte Inhalte für schnelle Suche
+  const cardCache = cards.map(c => ({
+    el: c,
+    textNorm: normalize(c.innerText)
+  }));
+
+  function doSearch(keyword){
+    const qRaw = keyword.trim();
+    const q = normalize(qRaw);
+    removeMarks();
+    closeAll();
+    matches = [];
+    if (!q){ updateIndex(); return; }
+
+    cardCache.forEach(({el, textNorm})=>{
+      if (textNorm.includes(q)){
+        matches.push(el);
+        // Markiere realen DOM-Text (nicht den Cache)
+        highlight(el, qRaw);
+      }
+    });
+
+    current = 0;
+    if (matches.length){
+      openCard(matches[0]);
+      scrollToCard(matches[0]);
+    }
+    updateIndex();
+  }
+
+  // ---- Events ---------------------------------------------------------------
+  input.addEventListener("input", e=>{
+    clearTimeout(debounceTo);
+    debounceTo = setTimeout(()=>doSearch(e.target.value), 140);
+  });
+
+  prev.addEventListener("click", ()=>{
+    if (!matches.length) return;
+    current = (current - 1 + matches.length) % matches.length;
+    closeAll(); openCard(matches[current]); scrollToCard(matches[current]); updateIndex();
+  });
+
+  next.addEventListener("click", ()=>{
+    if (!matches.length) return;
+    current = (current + 1) % matches.length;
+    closeAll(); openCard(matches[current]); scrollToCard(matches[current]); updateIndex();
+  });
+
+  // Akkordeon: IDs + ARIA + Click
+  cards.forEach((c, i)=>{
+    const btn  = c.querySelector(".lyra-toggle");
+    const drop = c.querySelector(".lyra-drop");
+    const btnId  = `lyra-toggle-${i+1}`;
+    const dropId = `lyra-drop-${i+1}`;
+    btn.id = btnId;
+    drop.id = dropId;
+
+    // bessere Roles/Labels
+    drop.setAttribute("role","region");
+    drop.setAttribute("aria-labelledby", btnId);
+    btn.setAttribute("aria-controls", dropId);
+
+    btn.addEventListener("click", ()=>{
+      const isOpen = btn.getAttribute("aria-expanded")==="true";
+      btn.setAttribute("aria-expanded", isOpen ? "false" : "true");
+      drop.style.maxHeight = isOpen ? null : drop.scrollHeight + "px";
+    });
+
+    // ResizeObserver: offene Panels passen sich automatisch an
+    const ro = new ResizeObserver(()=>{
+      if (btn.getAttribute("aria-expanded")==="true"){
+        drop.style.maxHeight = drop.scrollHeight + "px";
+      }
+    });
+    ro.observe(drop);
+  });
+
+  // Tastatur-Navigation (Akkordeon-Header)
+  const toggles = cards.map(c=>c.querySelector(".lyra-toggle"));
+  function focusToggle(idx){
+    if (idx<0) idx = 0;
+    if (idx>=toggles.length) idx = toggles.length-1;
+    toggles[idx].focus();
+  }
+  toggles.forEach((btn, idx)=>{
+    btn.addEventListener("keydown", (e)=>{
+      switch(e.key){
+        case "ArrowDown": e.preventDefault(); focusToggle(idx+1); break;
+        case "ArrowUp":   e.preventDefault(); focusToggle(idx-1); break;
+        case "Home":      e.preventDefault(); focusToggle(0);     break;
+        case "End":       e.preventDefault(); focusToggle(toggles.length-1); break;
+        case "Enter":
+        case " ":
+          e.preventDefault();
+          btn.click();
+          break;
+      }
+    });
+  });
+
+  // Shortcut: "/" fokussiert Suche
+  document.addEventListener("keydown", (e)=>{
+    if (e.key === "/" && document.activeElement !== input){
+      e.preventDefault();
+      input.focus();
+    }
+  });
+
+  // Recalc on resize (responsive)
+  let resizeTo;
+  window.addEventListener("resize", ()=>{
+    clearTimeout(resizeTo);
+    resizeTo = setTimeout(recalcOpenHeights, 120);
+  });
+
+  // Initial
+  setButtonsEnabled(false);
+  updateIndex();
+});
+</script>
+
+
+
+<section class="angled-image-section" aria-labelledby="angled-image-heading">
+  <h2 id="angled-image-heading" class="visually-hidden">Modernes Webdesign – diagonale Bildsektion</h2>
+
+  <figure class="angled-image-wrapper">
+    <picture>
+      <source srcset="./WebdesignPic/webgerade.webp" type="image/webp">
+      <img
+        src="./WebdesignPic/webgerade.webp"
+        alt="Beispiel eines modernen Webdesign-Layouts, leicht diagonal ausgerichtet"
+        width="1920"
+        height="1080"
+        loading="lazy"
+        decoding="async"
+        style="aspect-ratio:16/9">
+    </picture>
+  </figure>
+</section>
+
+
+
+
+<footer itemscope itemtype="https://schema.org/Organization" class="footer-clean">
+  <!-- In Microdata ist <meta itemprop> im Body erlaubt und ersetzt hier das unzulässige <link>. -->
+  <meta itemprop="url" content="https://www.fusion3.de">
+
+  <div class="fc-container">
+
+    <!-- Head: Brand & Claim + CTA -->
+    <section class="fc-head" aria-labelledby="fc-head-title">
+      <h2 id="fc-head-title" class="sr-only">Markenbereich</h2>
+      <div class="fc-brand">
+        <!-- Optional: Logo als Link zur Startseite -->
+        <a class="fc-logo" href="/" itemprop="name">Fusion³</a>
+        <p class="fc-claim">UX &amp; Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
+      </div>
+      <div class="fc-cta">
+        <a class="fc-btn" href="mailto:hello@fusion3.de" aria-label="Projekt anfragen per E-Mail">Projekt anfragen</a>
+      </div>
+    </section>
+
+    <!-- Grid -->
+    <nav class="fc-grid" aria-labelledby="fc-nav-title">
+      <h2 id="fc-nav-title" class="sr-only">Footer-Navigation</h2>
+
+      <div class="fc-col">
+        <h3 class="fc-col-title" id="fc-services">Leistungen</h3>
+        <ul class="fc-links" aria-labelledby="fc-services">
+          <li><a href="/ux-audit.html">UX-Audit</a></li>
+          <li><a href="/webdesign.html">Webdesign</a></li>
+          <li><a href="/prototyping.html">Prototyping</a></li>
+          <li><a href="/design-system.html">Design-Systeme</a></li>
+        </ul>
+      </div>
+
+      <div class="fc-col">
+        <h3 class="fc-col-title" id="fc-resources">Ressourcen</h3>
+        <ul class="fc-links" aria-labelledby="fc-resources">
+          <li><a href="/cases.html">Case Studies</a></li>
+          <li><a href="/blog.html">Insights &amp; Blog</a></li>
+          <li><a href="/faq.html">FAQ</a></li>
+          <li><a href="/kontakt.html">Termin buchen</a></li>
+        </ul>
+      </div>
+
+      <div class="fc-col">
+        <h3 class="fc-col-title" id="fc-legal">Rechtliches</h3>
+        <ul class="fc-links" aria-labelledby="fc-legal">
+          <li><a href="/impressum.html">Impressum</a></li>
+          <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
+          <li><a href="/cookies.html">Cookie-Hinweis</a></li>
+        </ul>
+      </div>
+
+      <div class="fc-col">
+        <h3 class="fc-col-title" id="fc-contact">Kontakt</h3>
+        <ul class="fc-links" aria-labelledby="fc-contact">
+          <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
+          <li><a href="tel:+491234567890" itemprop="telephone">+49&nbsp;123&nbsp;4567890</a></li>
+          <li>
+            <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" class="fc-address">
+              <span itemprop="addressLocality">Berlin</span>, <span itemprop="addressCountry">Deutschland</span>
+            </address>
+          </li>
+        </ul>
+
+        <!-- Socials jetzt als echte Liste (keine role=list / role=listitem nötig) -->
+        <h3 id="fc-socials-title" class="sr-only">Social Media</h3>
+        <ul class="fc-socials" aria-labelledby="fc-socials-title">
+          <li>
+            <a class="fc-social" href="mailto:hello@fusion3.de" aria-label="E-Mail" itemprop="sameAs">
+              <span class="sr-only">E-Mail</span>
+              <img src="./FooterIcons/Gmail.png" alt="" loading="lazy" decoding="async" width="20" height="20">
+            </a>
+          </li>
+          <li>
+            <a class="fc-social fc-li" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" itemprop="sameAs">
+              <span class="sr-only">LinkedIn</span>
+              <img src="./FooterIcons/LinkedIn.png" alt="" loading="lazy" decoding="async" width="20" height="20">
+            </a>
+          </li>
+          <li>
+            <a class="fc-social fc-wa" href="https://wa.me/491234567890" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" itemprop="sameAs">
+              <span class="sr-only">WhatsApp</span>
+              <img src="./FooterIcons/Whatsapp.svg" alt="" loading="lazy" decoding="async" width="20" height="20">
+            </a>
+          </li>
+          <li>
+            <a class="fc-social fc-ig" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" itemprop="sameAs">
+              <span class="sr-only">Instagram</span>
+              <img src="./FooterIcons/instagram.jpg" alt="" loading="lazy" decoding="async" width="20" height="20">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Bottom -->
+    <div class="fc-legal" aria-labelledby="fc-legal-title">
+      <h3 id="fc-legal-title" class="sr-only">Rechtliches &amp; Hinweise</h3>
+      <p>© <time id="currentYear" datetime="2025">2025</time> <span class="nowrap">Fusion³</span> · DSGVO-konform &amp; barrierearm entwickelt.</p>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var el = document.getElementById('currentYear');
+    if (el) el.textContent = new Date().getFullYear();
+  })();
+</script>
+
 </body>
 </html>
+
+
