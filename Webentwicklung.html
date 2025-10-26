@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fusion³ – Webentwicklung & UX</title>
+  <meta name="description" content="Fusion³ ist dein Partner für performante Webentwicklung: moderne Stacks, skalierbare Architekturen und saubere UX. Von API bis Deployment.">
+
+  <!-- Google Fonts Optimierung -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" media="all" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+
+  <!-- Lokale Fonts -->
+  <link rel="preload" as="style" href="./fonts/fonts.css">
+  <link rel="stylesheet" href="./fonts/fonts.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="./fonts/fonts.css"></noscript>
+
+  <!-- Optional Scripts -->
+  <script type="module" src="https://unpkg.com/feather-icons"></script>
+  <script nomodule src="feather-icons.legacy.js"></script>
+  <script src="https://unpkg.com/scrollreveal" defer></script>
+
+  <!-- Analytics Beispiel -->
+  <script>
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "t1mbvlhldj");
+  </script>
+
+  <!-- ===============================
+       GLOBAL CSS – (aus deiner Datei übernommen)
+       =============================== -->
+  <style>
+    :root{
+      --accent:#0062ff;
+      --text:#111;
+      --muted:#555;
+      --border:rgba(0,0,0,.08);
+      --surface:#ffffff;
+      --container-width: min(95vw, 1340px);
+      --header-pad-y:.75rem;
+      --radius:12px;
+      --primary:#ff4d00;
+      --secondary:#ff9900;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --text:#f5f7fa;
+        --muted:#b7bec7;
+        --border:rgba(255,255,255,.12);
+        --surface:#000000;
+      }
+    }
+    :root[data-theme="dark"]{
+      --text:#f5f7fa;
+      --muted:#b7bec7;
+      --border:rgba(255,255,255,.12);
+      --surface:#000000;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,sans-serif;
+      background:#fff;color:var(--text);scroll-behavior:smooth;
+    }
+    :root[data-theme="dark"] body{ background:#000 }
+    a{color:inherit;text-decoration:none;transition:color .2s ease,opacity .2s ease}
+    h1,h2,h3,h4{font-weight:900;letter-spacing:-.02em}
+    .container{max-width:var(--container-width);margin:0 auto;padding:5rem 2rem}
+    .section-title{font-size:clamp(2rem,1.2rem + 2.4vw,2.8rem);text-align:center;margin-bottom:.5rem;color:var(--text);font-weight:700;letter-spacing:-.02em}
+
+    /* Headline Tokens */
+    :root{
+      --sec-title-fs: clamp(2rem, 1.5rem + 2vw, 3rem);
+      --sec-title-fw: 900;
+      --sec-title-ls: -0.02em;
+      --sec-title-mb: 0rem;
+      --sec-title-color: var(--text);
+      --sec-sub-fs: 1.1rem;
+      --sec-sub-color: #666;
+      --sec-sub-mb: 2rem;
+      --sec-sub-lh: 1.5;
+      --sec-sub-max: 65ch;
+    }
+    .section-subtitle{
+      font-size: var(--sec-sub-fs); color: var(--sec-sub-color);
+      margin:0 0 var(--sec-sub-mb); line-height: var(--sec-sub-lh);
+      max-width: var(--sec-sub-max); margin-inline:auto; text-align:center;
+    }
+    :root[data-theme="dark"] .section-title{ color:#fff; }
+    :root[data-theme="dark"] .section-subtitle{ color:#fff; }
+
+    /* HERO video/backdrop */
+    .hero-section{ position:relative; width:100%; padding:0; margin:0; }
+    .hero-images-wrapper{ position:relative; width:100%; min-height:100vh; height:100vh; overflow:hidden; }
+    .hero-image-background,.hero-image-foreground{ position:absolute; inset:0; width:100%; max-width:none; }
+    .hero-image-background{ z-index:0; overflow:hidden; }
+    .hero-video{ width:100%; height:100%; object-fit:cover; object-position:center; position:absolute; top:0; left:0; pointer-events:none; z-index:0; }
+    .large-title{
+      position:absolute; top:162%; left:50%; transform:translate(-50%,-50%);
+      text-align:center; width:100%;
+      font-size:clamp(4rem, 22vw, 18rem); line-height:1.05; font-weight:900; z-index:10; margin:0; color:inherit;
+    }
+    @media (max-width:767px){ .large-title{ top:58%; font-size:clamp(2.6rem,14vw,7rem);} }
+
+    /* Buttons (deine CTA-Optik) */
+    .cta-btn{
+      background:linear-gradient(to right,var(--primary),var(--secondary));
+      color:#fff; font-weight:700; padding:1rem 2.2rem; border-radius:12px; font-size:1rem; text-transform:uppercase; margin-top:2rem; border:none;
+      box-shadow:0 0 12px rgba(255,102,0,.3), 0 0 24px rgba(255,102,0,.25); display:inline-block;
+    }
+    .cta-btn:hover,.cta-btn:focus{ background:var(--secondary); color:#000; transform:scale(1.03); outline:2px solid var(--primary); outline-offset:4px; }
+  </style>
+
+  <!-- Deine bestehenden CSS-Dateien -->
+  <link rel="stylesheet" href="css/herolast.css" type="text/css">
+  <link rel="stylesheet" href="css/navbar.css" type="text/css">
+  <link rel="stylesheet" href="css/darkmodeLast.css" type="text/css">
+  <link rel="stylesheet" href="css/aurora.css" type="text/css">
+  <link rel="stylesheet" href="css/cosmosSuite.css" type="text/css">
+  <link rel="stylesheet" href="css/reviews.css" type="text/css">
+  <link rel="stylesheet" href="css/ablauf.css" type="text/css">
+  <link rel="stylesheet" href="css/contactWeb.css" type="text/css">
+  <link rel="stylesheet" href="css/arbeitsproben.css" type="text/css">
+  <link rel="stylesheet" href="css/lyraV.css" type="text/css">
+  <link rel="stylesheet" href="css/angledimg.css" type="text/css">
+  <link rel="stylesheet" href="css/footer.css" type="text/css">
+  <link rel="stylesheet" href="css/Casestudie.css" type="text/css">
+  <link rel="stylesheet" href="css/ctasection.css" type="text/css">
+  <link rel="stylesheet" href="css/metrics.css" type="text/css">
+  <link rel="stylesheet" href="css/warumwir.css" type="text/css">
+
+  <!-- Bild-Overrides für diese Unterseite -->
+  <style>
+    body[data-page="webentwicklung"] .hero-image-background { background-image: url("./WebdesignPic/1.mp4") !important; }
+    body[data-page="webentwicklung"] .hero-image-foreground { background-image: url("./images/hintegrundweb.webp") !important; }
+    @media (max-width:1024px){ body[data-page="webentwicklung"] .hero-image-foreground { background-image:url("./images/webdesign-bg-tablet.webp") !important; } }
+    @media (max-width:480px){ body[data-page="webentwicklung"] .hero-image-foreground { background-image:url("./images/webdesign-bg-mobile.webp") !important; } }
+  </style>
+</head>
+
+<body data-page="webentwicklung">
+  <!-- ===== Header / Navigation (unverändert, nur Texte bleiben neutral) ===== -->
+  <header class="aether-header" id="aetherGate">
+    <div class="aether-header__bar">
+      <a href="/" class="sigil-mark">Fusion³</a>
+
+      <nav class="astral-nav" id="astralWay" aria-label="Hauptnavigation">
+        <ul class="astral-nav__list">
+          <li class="astral-item">
+            <a class="astral-link" href="/leistungen">Leistungen</a>
+            <button class="gatelet" type="button" aria-expanded="false" aria-controls="grimoire-services" aria-haspopup="true" aria-label="Unterpunkte zu Leistungen ein- oder ausklappen">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <ul id="grimoire-services" class="underrealm" hidden>
+              <li><a class="astral-link astral-link--sub" href="/leistungen/webentwicklung">Webentwicklung</a></li>
+              <li><a class="astral-link astral-link--sub" href="/leistungen/branding-ci">Branding &amp; CI</a></li>
+              <li><a class="astral-link astral-link--sub" href="/leistungen/performance">Performance Marketing</a></li>
+              <li><a class="astral-link astral-link--sub" href="/leistungen/support">Wartung &amp; Support</a></li>
+            </ul>
+          </li>
+          <li class="astral-item">
+            <a class="astral-link" href="#ueber-uns">Blog</a>
+            <button class="gatelet" type="button" aria-expanded="false" aria-controls="codex-about" aria-haspopup="true" aria-label="Unterpunkte zu Blog ein- oder ausklappen">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <ul id="codex-about" class="underrealm" hidden>
+              <li><a class="astral-link astral-link--sub" href="#team">Team</a></li>
+              <li><a class="astral-link astral-link--sub" href="#werte">Werte</a></li>
+              <li><a class="astral-link astral-link--sub" href="/jobs">Jobs</a></li>
+              <li><a class="astral-link astral-link--sub" href="/presse">Presse</a></li>
+            </ul>
+          </li>
+          <li class="astral-item">
+            <a class="astral-link" href="#portfolio">Portfolio</a>
+            <button class="gatelet" type="button" aria-expanded="false" aria-controls="vault-portfolio" aria-haspopup="true" aria-label="Unterpunkte zu Portfolio ein- oder ausklappen">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <ul id="vault-portfolio" class="underrealm" hidden>
+              <li><a class="astral-link astral-link--sub" href="#web-projekte">Web-Projekte</a></li>
+              <li><a class="astral-link astral-link--sub" href="#markenauftritte">Markenauftritte</a></li>
+              <li><a class="astral-link astral-link--sub" href="/cases">Case Studies</a></li>
+              <li><a class="astral-link astral-link--sub" href="/referenzen">Referenzen</a></li>
+            </ul>
+          </li>
+          <li class="astral-item">
+            <a class="astral-link" href="#kontakt">Kontakt</a>
+            <button class="gatelet" type="button" aria-expanded="false" aria-controls="altar-contact" aria-haspopup="true" aria-label="Unterpunkte zu Kontakt ein- oder ausklappen">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <ul id="altar-contact" class="underrealm" hidden>
+              <li><a class="astral-link astral-link--sub" href="/anfrage">Anfrage stellen</a></li>
+              <li><a class="astral-link astral-link--sub" href="/beratung">Beratung buchen</a></li>
+              <li><a class="astral-link astral-link--sub" href="/standort">Standort</a></li>
+              <li><a class="astral-link astral-link--sub" href="/impressum">Impressum</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="astral-actions">
+        <button class="orb-toggle" id="eclipseStone" type="button" aria-pressed="true" aria-controls="omenWhisper" aria-label="Dunkelmodus aktiv">
+          <span class="sky day-sky" aria-hidden="true"></span>
+          <span class="sky night-sky" aria-hidden="true"></span>
+          <span class="stars" id="starField" aria-hidden="true"></span>
+          <span class="clouds" id="nebulaSea" aria-hidden="true">
+            <span class="leyline back" data-lane="back"></span>
+            <span class="leyline mid" data-lane="mid"></span>
+            <span class="leyline front" data-lane="front"></span>
+          </span>
+          <span class="thumb" id="moonShard" aria-hidden="true"></span>
+        </button>
+        <p id="omenWhisper" class="visually-hidden" aria-live="polite" aria-atomic="true">Dunkelmodus aktiv</p>
+        <a class="charm-cta charm-cta--prime" href="#kontakt" id="sigilOffer" data-cta data-cta-context="header"><span class="charm-cta__label">Projekt starten</span></a>
+      </div>
+
+      <button class="portal-toggle" id="runeSwitch" type="button" aria-expanded="false" aria-controls="astralWay" aria-label="Menü öffnen">
+        <svg class="icon icon-burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="icon icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="night-veil" id="voidVeil" hidden></div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero-section" data-page="webentwicklung">
+    <div class="hero-images-wrapper">
+      <div class="hero-image-background">
+        <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hintegrundweb.webp">
+          <source src="./WebdesignPic/1.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <div class="page-title">
+        <div class="container">
+          <h1 class="large-title">Web<br>Entwicklung</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       Case/Preview – an WebENTWICKLUNG angepasst
+       ============================================= -->
+  <section id="design-study" class="aurora-sheet" data-theme="auto">
+    <h2 class="aurora-title">
+      <span class="title-full">Webentwicklung für Growth – schnell, sicher, skalierbar</span>
+      <span class="title-t">Webentwicklung für Growth</span>
+      <span class="title-short">Growth-ready Web</span>
+    </h2>
+
+    <p class="aurora-subtitle" id="design-study-sub" aria-live="polite">
+      <span class="subtitle-snippet">Modernes Frontend. Stabile APIs. Saubere Deployments.</span>
+      <span class="subtitle-t">Headless CMS, performantes Frontend und Integrationen, die mit deinem Business mitwachsen.</span>
+      <span class="subtitle-full">Wir entwickeln <strong>skalierbare Webanwendungen</strong> mit sauberer Architektur: <em>Performance</em> (Core Web Vitals), <em>Accessibility</em> (WCAG), <em>Security</em> (OWASP) und <em>CI/CD</em> für schnelle Releases. Headless CMS, E-Commerce, Such- &amp; Payment-Integrationen inklusive.</span>
+    </p>
+
+    <div class="ds-top ds-hide-on-mobile">
+      <article class="ds-preview-card" aria-label="Preview Web-App">
+        <div class="ds-preview-wrap">
+          <video class="ds-preview-video" src="./3DSlideShow/vid2.mp4" autoplay muted loop playsinline preload="auto" title="Web-App Preview"></video>
+        </div>
+      </article>
+
+      <article class="aether-card ds-teaser-card" aria-labelledby="study-teaser">
+        <h3 id="study-teaser">
+          <span class="teaser-title-full">Clean Code. Messbare Performance.</span>
+          <span class="teaser-title-t">Sauber & schnell.</span>
+        </h3>
+        <ul class="delta-list" role="list">
+          <li><span class="lead">Stack</span><span class="copy">Moderne Frameworks, Headless CMS, API-first</span></li>
+          <li><span class="lead">DevOps</span><span class="copy">CI/CD, Preview-Deployments, Monitoring</span></li>
+          <li><span class="lead">Qualität</span><span class="copy">Testing, Code Reviews, Linting &amp; E2E</span></li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="ds-info-row ds-hide-on-mobile">
+      <article class="aether-card aether-card--orange">
+        <h3>Sichtbar & schnell</h3>
+        <ul class="delta-list">
+          <li><span class="lead">Core Web Vitals</span><span class="copy">LCP, INP, CLS im grünen Bereich</span></li>
+          <li><span class="lead">SEO-ready</span><span class="copy">saubere Semantik, strukturierte Daten</span></li>
+          <li><span class="lead">Caching &amp; CDN</span><span class="copy">Edge Delivery &amp; Bildoptimierung</span></li>
+        </ul>
+      </article>
+
+      <article class="aether-card aether-card--navy">
+        <h3>Stabile Architektur</h3>
+        <ul class="delta-list">
+          <li><span class="lead">Headless</span><span class="copy">CMS &amp; Commerce entkoppelt</span></li>
+          <li><span class="lead">Integrationen</span><span class="copy">Zahlung, Suche, CRM, Tracking</span></li>
+          <li><span class="lead">Security</span><span class="copy">OWASP, HTTPS/HTTP/2+, CSP</span></li>
+        </ul>
+      </article>
+
+      <article class="aether-card aether-card--violet">
+        <h3>Release ohne Drama</h3>
+        <ul class="delta-list">
+          <li><span class="lead">CI/CD</span><span class="copy">Git-Workflows &amp; Preview-URLs</span></li>
+          <li><span class="lead">Testing</span><span class="copy">Unit, Integration, E2E</span></li>
+          <li><span class="lead">Observability</span><span class="copy">Logs, Uptime, Error Tracking</span></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- =============================================
+       Leistungen – „cosmos-suite“
+       ============================================= -->
+  <section class="cluster cosmos-suite" id="nebula-hub" aria-labelledby="nebula-hub-h">
+    <h2 id="nebula-hub-h" class="headline">Webentwicklung Leistungen</h2>
+    <p class="subline" id="nebula-hub-sub">Von der API bis zum Frontend – wir entwickeln performante Weblösungen, die wachsen.</p>
+
+    <ul class="orbit-grid" aria-labelledby="nebula-hub-h" aria-describedby="nebula-hub-sub">
+
+      <li class="module-card" id="svc-webdev-strategy" aria-labelledby="svc-webdev-strategy-h" aria-describedby="svc-webdev-strategy-s">
+        <div class="payload">
+          <h3 id="svc-webdev-strategy-h">Architektur &amp; Planung</h3>
+          <p class="card-snippet" id="svc-webdev-strategy-s">Sauberes Fundament für Skalierung und Tempo.</p>
+          <ul>
+            <li>Requirements &amp; Tech-Konzept</li>
+            <li>Informationsarchitektur &amp; Datenmodelle</li>
+            <li>Security- &amp; Performance-Plan</li>
+            <li>Roadmap &amp; Milestones</li>
+          </ul>
+          <a href="./WebKonzept.html" class="warp-cta">Mehr erfahren</a>
+        </div>
+      </li>
+
+      <li class="module-card stellar-3d" id="svc-webdev-frontend" aria-labelledby="svc-webdev-frontend-h" aria-describedby="svc-webdev-frontend-s">
+        <div class="payload">
+          <h3 id="svc-webdev-frontend-h">Frontend-Entwicklung</h3>
+          <p class="card-snippet" id="svc-webdev-frontend-s">Schnelle, zugängliche UIs mit Komponenten-System.</p>
+          <ul>
+            <li>Designsysteme &amp; State-Management</li>
+            <li>SSR/SSG &amp; Bildoptimierung</li>
+            <li>Animationen &amp; Microinteractions</li>
+            <li>WCAG &amp; Semantik</li>
+          </ul>
+          <div class="overlay-art" aria-hidden="true">
+            <div class="orbit-shell">
+              <img class="planet-sprite" loading="lazy" decoding="async" src="./indexFotoSlideShow/planet.webp" alt="" width="512" height="512">
+            </div>
+            <img class="lazy-comet astronaut-sprite" src="./indexFotoSlideShow/2.webp" data-src="./indexFotoSlideShow/2.webp" alt="" aria-hidden="true">
+          </div>
+        </div>
+      </li>
+
+      <li class="module-card" id="svc-webdev-backend" aria-labelledby="svc-webdev-backend-h" aria-describedby="svc-webdev-backend-s">
+        <div class="payload">
+          <h3 id="svc-webdev-backend-h">Backend &amp; APIs</h3>
+          <p class="card-snippet" id="svc-webdev-backend-s">API-first: stabil, sicher, dokumentiert.</p>
+          <ul>
+            <li>REST/GraphQL Schnittstellen</li>
+            <li>Auth, Rollen &amp; Rechte</li>
+            <li>Integrationen (CRM, ERP, Payment)</li>
+            <li>Dokumentation &amp; Versionierung</li>
+          </ul>
+          <a href="./WebKonzept.html" class="warp-cta">Mehr erfahren</a>
+        </div>
+      </li>
+
+      <li class="module-card" id="svc-webdev-cicd" aria-labelledby="svc-webdev-cicd-h" aria-describedby="svc-webdev-cicd-s">
+        <div class="payload">
+          <h3 id="svc-webdev-cicd-h">DevOps &amp; Betrieb</h3>
+          <p class="card-snippet" id="svc-webdev-cicd-s">Verlässliche Deployments &amp; Monitoring.</p>
+          <ul>
+            <li>CI/CD, Branch-Previews, Rollbacks</li>
+            <li>Hosting, CDN &amp; Caching</li>
+            <li>Observability (APM, Uptime, Logs)</li>
+            <li>Backup &amp; Update-Strategien</li>
+          </ul>
+          <a href="./WebKonzept.html" class="warp-cta">Mehr erfahren</a>
+        </div>
+      </li>
+
+    </ul>
+  </section>
+
+  <!-- =============================================
+       Warum wir – Inhalte ersetzt, Struktur bleibt
+       ============================================= -->
+  <section id="warumwir">
+    <div class="container">
+      <header class="intro">
+        <h2 class="title">Webentwicklung, die skaliert</h2>
+        <p class="sub" aria-live="polite">
+          <span class="snippet"><strong>Stabil, schnell, sicher.</strong> Von MVP bis Enterprise.</span>
+          <span class="t-snippet">Wir verbinden UX, Architektur und DevOps – für Releases in Tagen statt Wochen.</span>
+          <span class="full">Wir bauen <strong>skalierbare Webplattformen</strong> mit klarer Code-Basis, reproduzierbaren Deployments und Metriken, die zählen: Performance, Konversion, Uptime.</span>
+        </p>
+      </header>
+
+      <div class="grid" aria-label="Unsere Stärken in der Entwicklung">
+        <article class="card s1">
+          <div class="card-inner">
+            <h3>Komponenten statt Chaos</h3>
+            <p class="leadcopy">
+              <span class="snippet">Designsystem &amp; Storybook.</span>
+              <span class="t-snippet">Wiederverwendbare UI-Bausteine mit Doku.</span>
+              <span class="full">Ein konsistentes Komponenten-System (Storybook, Tokens, States) beschleunigt Entwicklung und hält Qualität hoch.</span>
+            </p>
+            <ul class="points">
+              <li class="point"><span class="p-text"><span class="lead">Saubere Patterns</span><span class="copy">Atomic/Modular Architecture</span></span></li>
+              <li class="point"><span class="p-text"><span class="lead">Tests</span><span class="copy">Unit, Integration, E2E automatisiert</span></span></li>
+              <li class="point"><span class="p-text"><span class="lead">Docs</span><span class="copy">Autogenerierte Doku &amp; Guidelines</span></span></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card s2">
+          <div class="card-inner">
+            <h3>Performance by Design</h3>
+            <p class="leadcopy">
+              <span class="snippet">Schnelle Loads. Starke UX.</span>
+              <span class="t-snippet">Lighthouse &amp; CWV im Fokus.</span>
+              <span class="full">Code-Splitting, Edge-Cache, Bild-Pipelines und Preloading – damit CWV (LCP, INP, CLS) stabil im grünen Bereich bleiben.</span>
+            </p>
+            <ul class="points">
+              <li class="point"><span class="p-text"><span class="lead">SSR/SSG</span><span class="copy">Server Rendering &amp; Caching</span></span></li>
+              <li class="point"><span class="p-text"><span class="lead">Bildpipeline</span><span class="copy">Responsive, AVIF/WebP, Lazy</span></span></li>
+              <li class="point"><span class="p-text"><span class="lead">Monitoring</span><span class="copy">RUM &amp; Error Tracking</span></span></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card s3">
+          <div class="card-inner">
+            <h3>Security &amp; Compliance</h3>
+            <p class="leadcopy">
+              <span class="snippet">OWASP &amp; DSGVO.</span>
+              <span class="t-snippet">Rechte, Rollen, Audits.</span>
+              <span class="full">Von CSP bis Rate Limiting – Security ist Teil des Prozesses, nicht Add-on.</span>
+            </p>
+            <ul class="points">
+              <li class="point"><span class="p-text"><span class="lead">Auth</span><span class="copy">OAuth/OIDC, MFA</span></span></li>
+              <li class="point"><span class="p-text"><span class="lead">Privacy</span><span class="copy">Consent, Data Minimization</span></span></li>
+              <li class="point"><span class="p-text"><span class="lead">Audits</span><span class="copy">Pen-Tests &amp; Hardening</span></span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       Angled Image – kann bleiben, Text angepasst
+       ============================================= -->
+  <section class="angled-image-section" aria-labelledby="angled-image-heading">
+    <h2 id="angled-image-heading" class="visually-hidden">Moderne Webentwicklung – Showcase</h2>
+    <figure class="angled-image-wrapper">
+      <picture>
+        <source srcset="./WebdesignPic/webgerade.webp" type="image/webp">
+        <img src="./WebdesignPic/webgerade.webp" alt="Ausschnitt einer performanten Web-App, leicht diagonal" width="1920" height="1080" loading="lazy" decoding="async" style="aspect-ratio:16/9">
+      </picture>
+    </figure>
+  </section>
+
+  <!-- =============================================
+       FAQ – Texte auf Entwicklung gedreht
+       ============================================= -->
+  <section class="lyra-v" id="faq" aria-labelledby="faq-title">
+    <div class="container">
+      <h2 id="faq-title" class="section-title">Häufige Fragen zur Webentwicklung</h2>
+      <p class="section-subtitle">Von Stack-Auswahl bis Betrieb – hier sind die wichtigsten Antworten.</p>
+
+      <div class="lyra-grid">
+        <div class="lyra-card">
+          <button class="lyra-toggle" aria-expanded="false">
+            <span>Projektstart &amp;<br> Ablauf</span>
+            <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
+          </button>
+          <div class="lyra-drop">
+            <p><strong>Wie startet ein Projekt?</strong><br>Mit einem strukturierten Kickoff (Ziele, Nutzer, Scope). Danach Architekturplan &amp; Roadmap.</p>
+            <p><strong>Wie arbeiten wir zusammen?</strong><br>Agil in Sprints mit Review/Retro, klaren Tickets und Preview-Deployments.</p>
+            <p><strong>Welche Rollen sind beteiligt?</strong><br>Product/PM, Design, Dev (FE/BE), QA – je nach Projektgröße.</p>
+          </div>
+        </div>
+
+        <div class="lyra-card">
+          <button class="lyra-toggle" aria-expanded="false">
+            <span>Kosten &amp;<br> Angebote</span>
+            <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
+          </button>
+          <div class="lyra-drop">
+            <p><strong>Wie kalkuliert ihr?</strong><br>Transparente Pakete oder Sprint-basierte Angebote mit klaren Deliverables.</p>
+            <p><strong>Pauschalen möglich?</strong><br>Ja – z. B. MVP, Landingpage, Headless-Setup. Komplexe Vorhaben kalkulieren wir individuell.</p>
+            <p><strong>Zahlungsmodalitäten?</strong><br>In Etappen: Start/Meilensteine/Abschluss.</p>
+          </div>
+        </div>
+
+        <div class="lyra-card">
+          <button class="lyra-toggle" aria-expanded="false">
+            <span>Technik &amp;<br> Betrieb</span>
+            <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
+          </button>
+          <div class="lyra-drop">
+            <p><strong>Welche Tools/Stacks?</strong><br>Moderne Frameworks, Headless CMS, API-First – passend zum Use Case.</p>
+            <p><strong>Übernehmt ihr Hosting?</strong><br>Gern. Domain, SSL, CDN, Monitoring und Performance-Tuning inklusive.</p>
+            <p><strong>Wer pflegt Inhalte?</strong><br>Ihr via CMS – wir schulen euer Team.</p>
+          </div>
+        </div>
+
+        <div class="lyra-card">
+          <button class="lyra-toggle" aria-expanded="false">
+            <span>Nach Projekt &amp;<br> Betreuung</span>
+            <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
+          </button>
+          <div class="lyra-drop">
+            <p><strong>Gibt es Support?</strong><br>Ja – Wartung, Updates, Roadmap-Weiterentwicklung.</p>
+            <p><strong>Skalierung?</strong><br>Neue Features, Integrationen und Performance-Optimierungen jederzeit.</p>
+            <p><strong>Übergabe?</strong><br>Repo, Doku, CI/CD Pipelines und Zugänge werden sauber übergeben.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       Kontakt + Wizard – auf WebENTWICKLUNG umgestellt
+       ============================================= -->
+  <section class="kontakt-testimonial-section" id="kontakt">
+    <div class="kontakt-testimonial-wrapper">
+      <div class="kontakt-area">
+        <h2 class="section-title">Lass uns bauen!</h2>
+        <p class="kontakt-subline">Sag uns kurz, was du vorhast – wir melden uns mit einem klaren Plan.</p>
+
+        <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm" novalidate>
+          <!-- STEP 1 -->
+          <fieldset class="form-step active" data-step="1" aria-labelledby="step1Title">
+            <legend id="step1Title" class="sr-only">Leistungswahl</legend>
+            <p class="copy step1-copy">Wofür interessierst du dich?</p>
+
+            <div class="grid-choices" role="radiogroup" aria-label="Leistung wählen">
+              <label class="choice" tabindex="0">
+                <input type="radio" name="service" value="Webentwicklung" data-toggle="webdev" />
+                <span class="title">Kostenloses Tech-Scoping</span>
+                <small>Kurz-Check &amp; Empfehlung</small>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- STEP 2 -->
+          <fieldset class="form-step" data-step="2" aria-labelledby="step2Title">
+            <legend id="step2Title" class="sr-only">Material & Stack</legend>
+
+            <div class="service-block" data-service="webdev">
+              <label class="select-row">
+                <span class="website-label">Material (Texte / Bilder / Logo)</span>
+                <select name="web_material">
+                  <option value="">Bitte wählen</option>
+                  <option value="alles">Alles vorhanden</option>
+                  <option value="teilweise">Teilweise vorhanden</option>
+                  <option value="nichts">Bitte komplett erstellen</option>
+                </select>
+              </label>
+
+              <label class="select-row">
+                <span class="website-label">Stack/Plattform</span>
+                <select name="stack_pref">
+                  <option value="">Egal / Vorschlag von uns</option>
+                  <option value="headless">Headless CMS</option>
+                  <option value="ecom">E-Commerce</option>
+                  <option value="custom">Custom App</option>
+                </select>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- STEP 3: Kontaktdaten (Placeholder – wie gehabt) -->
+          <fieldset class="form-step" data-step="3" aria-labelledby="step3Title">
+            <legend id="step3Title" class="sr-only">Kontakt</legend>
+            <label class="input-row">
+              <span>Name</span>
+              <input type="text" name="name" required>
+            </label>
+            <label class="input-row">
+              <span>E-Mail</span>
+              <input type="email" name="email" required>
+            </label>
+            <label class="input-row">
+              <span>Nachricht</span>
+              <textarea name="message" rows="4" placeholder="Kurz zu Ziel, Timing, Budget…"></textarea>
+            </label>
+            <button type="submit" class="cta-btn">Anfrage senden</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer (deine Struktur, Texte neutral) ===== -->
+  <footer itemscope itemtype="https://schema.org/Organization" class="footer-clean">
+    <meta itemprop="url" content="https://www.fusion3.de">
+    <div class="fc-container">
+      <section class="fc-head" aria-labelledby="fc-head-title">
+        <h2 id="fc-head-title" class="sr-only">Markenbereich</h2>
+        <div class="fc-brand">
+          <a class="fc-logo" href="/" itemprop="name">Fusion³</a>
+          <p class="fc-claim">Webentwicklung &amp; UX – schnell. sicher. skalierbar.</p>
+        </div>
+        <div class="fc-cta">
+          <a class="fc-btn" href="mailto:hello@fusion3.de" aria-label="Projekt anfragen per E-Mail">Projekt anfragen</a>
+        </div>
+      </section>
+
+      <nav class="fc-grid" aria-labelledby="fc-nav-title">
+        <h2 id="fc-nav-title" class="sr-only">Footer-Navigation</h2>
+
+        <div class="fc-col">
+          <h3 class="fc-col-title" id="fc-services">Leistungen</h3>
+          <ul class="fc-links" aria-labelledby="fc-services">
+            <li><a href="/ux-audit.html">UX-Audit</a></li>
+            <li><a href="/webentwicklung.html" aria-current="page">Webentwicklung</a></li>
+            <li><a href="/prototyping.html">Prototyping</a></li>
+            <li><a href="/design-system.html">Design-Systeme</a></li>
+          </ul>
+        </div>
+
+        <div class="fc-col">
+          <h3 class="fc-col-title" id="fc-resources">Ressourcen</h3>
+          <ul class="fc-links" aria-labelledby="fc-resources">
+            <li><a href="/cases.html">Case Studies</a></li>
+            <li><a href="/blog.html">Insights &amp; Blog</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+            <li><a href="/kontakt.html">Termin buchen</a></li>
+          </ul>
+        </div>
+
+        <div class="fc-col">
+          <h3 class="fc-col-title" id="fc-legal">Rechtliches</h3>
+          <ul class="fc-links" aria-labelledby="fc-legal">
+            <li><a href="/impressum.html">Impressum</a></li>
+            <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
+            <li><a href="/cookies.html">Cookie-Hinweis</a></li>
+          </ul>
+        </div>
+
+        <div class="fc-col">
+          <h3 class="fc-col-title" id="fc-contact">Kontakt</h3>
+          <ul class="fc-links" aria-labelledby="fc-contact">
+            <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
+            <li><a href="tel:+491234567890" itemprop="telephone">+49&nbsp;123&nbsp;4567890</a></li>
+            <li>
+              <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" class="fc-address">
+                <span itemprop="addressLocality">Berlin</span>, <span itemprop="addressCountry">Deutschland</span>
+              </address>
+            </li>
+          </ul>
+
+          <h3 id="fc-socials-title" class="sr-only">Social Media</h3>
+          <ul class="fc-socials" aria-labelledby="fc-socials-title">
+            <li>
+              <a class="fc-social" href="mailto:hello@fusion3.de" aria-label="E-Mail" itemprop="sameAs">
+                <span class="sr-only">E-Mail</span>
+                <img src="./FooterIcons/Gmail.svg" alt="" width="24" height="24">
+              </a>
+            </li>
+            <!-- weitere Icons nach Bedarf -->
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ===== JS (gekürzt & angepasst): Theme/Navigation + Form-Lock ===== -->
+  <script>
+    // Navigation, Theme-Toggle etc. – deine bestehenden Scripte können hier weiterhin genutzt werden
+    // (Struktur & IDs wurden beibehalten)
+  </script>
+
+  <script>
+    // Lock auf „Webentwicklung“ (statt „Webdesign“)
+    (function lockToWebentwicklung(){
+      const form = document.getElementById('kontaktForm');
+      if (!form) return;
+
+      // Vorauswählen
+      const rb = form.querySelector('input[name="service"][value="Webentwicklung"]');
+      if (rb){ rb.checked = true; rb.setAttribute('aria-checked','true'); }
+
+      // Entferne ggf. andere Choices
+      Array.from(form.querySelectorAll('.grid-choices .choice')).forEach(ch=>{
+        const r = ch.querySelector('input[type="radio"][name="service"]');
+        if (r && r.value !== 'Webentwicklung') ch.remove();
+      });
+
+      // Service-Block sichtbar schalten (falls dein Wizard das benötigt)
+      const block = form.querySelector('.service-block[data-service="webdev"]');
+      if (block){ block.style.display = 'block'; }
+    })();
+  </script>
+</body>
+</html>

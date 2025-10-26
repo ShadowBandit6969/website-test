@@ -1,0 +1,360 @@
+
+    #metrics, #metrics *{ box-sizing:border-box; }
+    #metrics{
+      background: var(--surface);
+      color: var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+    }
+    #metrics .container{ max-width:min(95vw, 1440px); margin-inline:auto; padding-inline:1rem; }
+    #metrics .section-pad{ padding:2.25rem 0 2.5rem; }
+
+    /* ===== Intro ===== */
+    #metrics .intro{ text-align:center; margin-bottom:1.25rem; }
+    #metrics .eyebrow{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.4rem .7rem; border-radius:999px; font-weight:700; font-size:.85rem;
+      background: linear-gradient(90deg,
+        color-mix(in oklab, var(--primary) 85%, var(--accent)),
+        var(--primary),
+        color-mix(in oklab, var(--primary) 85%, var(--accent))
+      );
+      color: var(--on-primary, #fff);
+      box-shadow: inset 0 0 0 1.5px color-mix(in oklab, var(--primary) 80%, transparent);
+    }
+
+    /* ===== KPI Cards ===== */
+    #metrics .results-steps{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: clamp(1rem, 2vw, 1.25rem);
+      margin:1.25rem auto .6rem;
+    }
+    #metrics .result-step{
+      position:relative; overflow:hidden; color:#fff;
+      border-radius:20px; border:1px solid rgba(70,70,70,.14);
+      padding: 1.8rem 1.4rem;
+      background:linear-gradient(270deg,#04006c,#6f00ff,#050088);
+      background-size:600% 600%;
+      cursor: default;
+    }
+    #metrics .result-step.s2{ background:linear-gradient(135deg,#0d0d0d,#000e5c,#0d0d0d); background-size:300% 300%; }
+    #metrics .result-step.s3{ background:linear-gradient(135deg,#000000,#020127,#000000); background-size:400% 400%; }
+    #metrics .result-inner{ position:relative; z-index:2; display:flex; flex-direction:column; gap:.55rem; min-width:0; height:100% }
+    #metrics .result-step h3{ margin:0; font-size:1.1rem; font-weight:900; letter-spacing:-.01em; line-height:1.35 }
+    #metrics .result-step p{ margin:0; font-size:.95rem; line-height:1.6; opacity:.95; color:#fff }
+    #metrics .result-step .kpi{ font-feature-settings:"tnum" 1; font-weight:900; letter-spacing:-.01em }
+    #metrics .result-step .kpi .val{ font-size: clamp(1.35rem, 2.1vw, 1.6rem) }
+    #metrics .result-step .kpi .unit{ opacity:.85; font-weight:800 }
+
+    /* ===== Feather Icon Button (oben rechts) ===== */
+    #metrics .src-btn{
+      position:absolute; top:.7rem; right:.7rem;
+      display:inline-flex; align-items:center; justify-content:center;
+      width:34px; height:34px; border-radius:10px;
+      background: color-mix(in oklab, #ffffff 12%, transparent);
+      border:1px solid color-mix(in oklab, #ffffff 22%, transparent);
+      color:#fff; cursor:pointer;
+      transition: transform .12s ease, background-color .12s ease, border-color .12s ease;
+      z-index: 3;
+      box-shadow: 0 2px 10px rgba(0,0,0,.12);
+    }
+    #metrics .src-btn:focus-visible{ outline:2px solid rgba(255,255,255,.6); outline-offset:2px; }
+    @media (hover:hover){
+      #metrics .src-btn:hover{ transform:translateY(-1px); background: color-mix(in oklab, #ffffff 18%, transparent); }
+    }
+    #metrics .src-btn svg, #metrics .src-btn i{
+      width:20px; height:20px; stroke-width:2; color:#fff;
+    }
+
+    /* ===== Badges unter den Cards ===== */
+    #metrics .badges{
+      display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center;
+      margin:1rem auto 0;
+    }
+    #metrics .pill{
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.42rem .7rem; border-radius:999px;
+      border:1px solid var(--border);
+      background: color-mix(in oklab, var(--text) 4%, var(--surface));
+      font-weight:700; font-size:.9rem; color: var(--text);
+    }
+    #metrics .pill .dot{
+      width:.5rem; height:.5rem; border-radius:999px;
+      background: var(--success, #16a34a);
+      box-shadow:0 0 0 2px color-mix(in oklab, var(--success, #16a34a) 30%, transparent);
+    }
+
+    /* ===== Quellen-Dialoge (zentriert) ===== */
+    #metrics .src-dialog::backdrop{ background: rgba(0,0,0,.45); backdrop-filter: blur(3px); }
+    #metrics .src-dialog{
+      position: fixed; inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%) scale(.96);
+      margin: 0; padding: 1.1rem 1.1rem 1.2rem; width: min(92vw, 560px);
+      border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
+      border-radius: 16px;
+      background: linear-gradient(180deg, color-mix(in oklab, var(--surface) 96%, transparent), color-mix(in oklab, var(--surface) 98%, transparent));
+      color: var(--text);
+      box-shadow: 0 20px 60px color-mix(in oklab, var(--text) 28%, transparent), inset 0 1px 0 color-mix(in oklab, #fff 60%, transparent);
+      transition: transform .18s ease, opacity .18s ease; opacity: 0;
+    }
+    #metrics .src-dialog[open]{ transform: translate(-50%, -50%) scale(1); opacity:1; animation: srcDialogReveal .28s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes srcDialogReveal{ from{ transform: translate(-50%, -48%) scale(.985); opacity:0; } to{ transform: translate(-50%, -50%) scale(1); opacity:1; } }
+
+    #metrics .src-head{ display:flex; align-items:center; gap:.6rem; margin:.2rem 0 .7rem; }
+    #metrics .src-icon{ width:28px; height:28px; border-radius:8px; display:inline-grid; place-items:center; background: color-mix(in oklab, var(--primary) 18%, transparent); border:1px solid color-mix(in oklab, var(--primary) 28%, transparent); color: var(--primary); }
+    #metrics .src-title{ margin:0; font-size:1.08rem; font-weight:900; }
+    #metrics .src-desc{ margin:.15rem 0 .75rem; color: var(--muted); font-size:.96rem; line-height:1.55; }
+    #metrics .src-list{ margin:0; padding-left:0; list-style:none; display:grid; gap:.5rem; }
+    #metrics .src-item{
+      display:grid; grid-template-columns:auto 1fr; align-items:start; gap:.6rem;
+      padding:.6rem .65rem; border-radius:12px;
+      border:1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      background: color-mix(in oklab, var(--text) 4%, var(--surface));
+    }
+    #metrics .src-item a{ font-weight:800; color: color-mix(in oklab, var(--primary) 85%, #1a1a1a); text-decoration:none; }
+    #metrics .src-item a:hover{ text-decoration:underline; }
+    #metrics .src-meta{ color: var(--muted); font-size:.9rem; font-weight:700; }
+    #metrics .src-actions{ display:flex; justify-content:flex-end; gap:.6rem; margin-top:1rem; }
+    #metrics .src-copy{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.6rem .85rem; border-radius:10px; font-weight:800; cursor:pointer;
+      border:1px solid var(--border); background: var(--surface); color: var(--text);
+      border-color: color-mix(in oklab, var(--primary) 25%, var(--border));
+      background: color-mix(in oklab, var(--primary) 8%, var(--surface));
+    }
+
+    /* X-Schließen-Button im Dialog (oben rechts) */
+    #metrics .src-dialog .src-x{
+      position:absolute; top:.7rem; right:.7rem;
+      display:inline-flex; align-items:center; justify-content:center;
+      width:34px; height:34px; border-radius:10px;
+      background: color-mix(in oklab, var(--text) 6%, var(--surface));
+      border:1px solid color-mix(in oklab, var(--text) 14%, transparent);
+      color: currentColor; cursor:pointer;
+      transition: transform .12s ease, background-color .12s ease, border-color .12s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,.12);
+    }
+    #metrics .src-dialog .src-x:focus-visible{ outline:2px solid color-mix(in oklab, var(--text) 30%, transparent); outline-offset:2px; }
+    @media (hover:hover){
+      #metrics .src-dialog .src-x:hover{ transform: translateY(-1px); }
+    }
+    #metrics .src-dialog .src-x svg{ width:20px; height:20px; stroke-width:2; }
+
+    @media (max-width:900px){
+      #metrics .results-steps{ grid-template-columns:1fr; gap:1rem }
+    }
+
+    /* ——— Deine bisherigen Overrides ——— */
+    #metrics { margin-top: -5rem; }
+    #metrics .section-pad { padding-top: 0 !important; }
+    #metrics .container { padding-top: 0 !important; }
+    #metrics .intro { margin-top: 0 !important; padding-top: 0 !important; }
+
+    /* === Aurora-Style: Kompaktere Ränder auf Mobile === */
+    @media (max-width: 699.98px) {
+      #metrics .container { padding-left: .54rem !important; padding-right: .54rem !important; max-width: 100% !important; }
+      #metrics { margin-top: 0 !important; margin-bottom: 0 !important; }
+      #metrics .section-pad { padding-top: 1rem !important; padding-bottom: 1.2rem !important; }
+      #metrics .results-steps { margin-left: 0 !important; margin-right: 0 !important; gap: .8rem !important; }
+      #metrics .result-step { border-radius: 16px !important; padding: 1rem !important; }
+      #metrics .result-step h3 { font-size: 1rem !important; line-height: 1.3 !important; }
+      #metrics .result-step p { font-size: .9rem !important; line-height: 1.45 !important; }
+    }
+
+    /* ===== Responsive Fix für Abstände der #metrics Section ===== */
+    @media (max-width: 699.98px){
+      #metrics{ margin-top: 0 !important; }
+      #metrics .section-pad{ padding-top: 1rem !important; padding-bottom: 1.2rem !important; }
+    }
+    @media (min-width: 700px){
+      #metrics{ margin-top: clamp(1rem, 3vw, 3rem) !important; }
+      #metrics .section-pad{ padding-top: 2.25rem !important; padding-bottom: 2.5rem !important; }
+      #metrics .intro{ margin-top: 0 !important; padding-top: 0 !important; }
+    }
+    @media (min-width: 1200px){
+      #metrics{ margin-top: clamp(2rem, 4vw, 4rem) !important; }
+    }
+/* ==== HARD OVERRIDE: #metrics ==== */
+
+/* Standard (Desktop & größere Screens) */
+body #metrics {
+  margin-top: -5rem !important;
+  margin-block-start: -5rem !important;
+}
+
+/* Nur auf Handy (max-width: 700px): kein Abstand nach oben */
+@media (max-width: 700px) {
+  body #metrics {
+    margin-top: 0 !important;
+    margin-block-start: 0 !important;
+  }
+}
+
+/* Optional: obere Innenabstände ebenfalls nullen */
+body #metrics.section-pad,
+body #metrics .section-pad {
+  padding-top: 0 !important;
+}
+/* ===== Mobile: 3 Karten nebeneinander, nur KPI + Icon sichtbar ===== */
+@media (max-width: 700px){
+  #metrics .results-steps{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .6rem;
+    margin: .8rem auto .4rem;
+    margin-top: -3rem;
+  }
+
+  #metrics .result-step{
+    position: relative;
+    border-radius: 14px;
+    padding: .8rem .9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Nur KPI sichtbar */
+  #metrics .result-step h3,
+  #metrics .result-step p {
+    display: none !important;
+  }
+
+  /* KPI mittig & ohne Umbruch */
+  #metrics .result-inner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 90px;
+    width: 100%;
+  }
+
+  #metrics .result-step .kpi{
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  #metrics .result-step .kpi .val{
+    font-size: clamp(1.6rem, 7vw, 2rem);
+    display: inline-block;
+  }
+
+  #metrics .result-step .kpi .unit{
+    display: inline-block;
+    font-size: clamp(.9rem, 3.8vw, 1rem);
+    opacity: .9;
+    font-weight: 800;
+    margin-left: .2rem;
+  }
+
+  /* Icon-Button oben rechts */
+  #metrics .src-btn{
+    position: absolute;
+    top: .4rem;
+    right: .4rem;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #metrics .src-btn svg,
+  #metrics .src-btn i{
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* ===== Micro-Breakpoint: sehr kleine Phones (≤360px) ===== */
+@media (max-width: 360px){
+  #metrics .result-step{
+    padding: .6rem .7rem;
+  }
+  #metrics .result-step .kpi .val{
+    max-width: 68%;
+    font-size: clamp(1.45rem, 7.6vw, 1.8rem);
+    letter-spacing: -0.01em;
+  }
+  #metrics .result-step .kpi .unit{
+    font-size: clamp(.8rem, 3.8vw, .95rem);
+  }
+}
+
+/* ===== Tablet: 3 Karten, KPI + kurzer Text sichtbar ===== */
+@media (min-width: 701px) and (max-width: 1024px){
+  #metrics .results-steps{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: -2rem;
+  }
+
+  #metrics .result-step{
+    position: relative;
+    border-radius: 16px;
+    padding: 1.2rem 1.4rem 1.4rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* KPI bleibt zentriert & dominant */
+  #metrics .result-inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 120px;
+  }
+
+  #metrics .result-step .kpi .val{
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+  }
+
+  #metrics .result-step .kpi .unit{
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    opacity: .9;
+    font-weight: 800;
+    margin-left: .2rem;
+  }
+
+  /* Kurzer Titel & kompakter Text wieder sichtbar */
+  #metrics .result-step h3{
+    display: block !important;
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    font-weight: 800;
+    margin: .6rem 0 .25rem;
+    line-height: 1.3;
+  }
+
+  #metrics .result-step p{
+    display: block !important;
+    font-size: clamp(.85rem, 1.8vw, .95rem);
+    opacity: .85;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  /* Icon-Button leicht größer */
+  #metrics .src-btn{
+    top: .5rem;
+    right: .5rem;
+    width: 34px;
+    height: 34px;
+  }
+
+  #metrics .src-btn svg,
+  #metrics .src-btn i{
+    width: 20px;
+    height: 20px;
+  }
+}

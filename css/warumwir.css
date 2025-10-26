@@ -1,0 +1,161 @@
+
+    #warumwir, #warumwir *{ box-sizing:border-box; }
+    #warumwir{
+      --container-pad-x: 1rem;
+      --radius: 20px;
+      background: var(--surface, #fff);
+      color: var(--text, #0b0c0e);
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      font-feature-settings:"liga","calt","ss01";
+    }
+    #warumwir .container{
+      max-width:min(95vw,1440px);
+      margin-inline:auto;
+      padding:2.25rem var(--container-pad-x) 2.6rem;
+    }
+
+    /* Intro */
+    #warumwir .intro{ text-align:center; margin-bottom:1.1rem; }
+    #warumwir .eyebrow{
+      display:inline-flex; gap:.5rem; align-items:center;
+      padding:.4rem .7rem; border-radius:999px; font-weight:800; font-size:.85rem;
+      background: #ff6a00;
+    }
+    #warumwir h2.title{
+      font-size: clamp(2rem,1.6rem + 2.2vw,3rem);
+      font-weight:900; letter-spacing:-.02em; line-height:1.12;
+      margin:.2rem 0 .6rem; text-wrap:balance;
+    }
+    #warumwir p.sub{
+      max-width:62rem; margin:0 auto 2.2rem; padding:1.1rem 1.2rem;
+      font-size:clamp(1.06rem,1rem + .6vw,1.22rem);
+      line-height:1.78; letter-spacing:.004em;
+      color:#0f1729; text-wrap:pretty; border-radius:14px;
+      background:linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05);
+    }
+
+    /* Grid */
+    #warumwir .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:clamp(1rem,2vw,1.25rem);
+      margin:1.25rem auto .4rem;
+      align-items:stretch;
+    }
+
+    /* Karten */
+    #warumwir .card{
+      position:relative; overflow:hidden; color:#fff; border-radius:var(--radius);
+      border:1px solid rgba(70,70,70,.14);
+      padding:1.8rem 1.4rem;
+      background:linear-gradient(270deg,#04006c,#6f00ff,#050088);
+      background-size:600% 600%;
+      transition:transform .25s ease, box-shadow .25s ease, background-position .25s ease;
+      box-shadow:0 12px 32px rgba(0,0,0,.18);
+      display:flex; flex-direction:column;
+    }
+    #warumwir .card.s2{ background:linear-gradient(135deg,#0d0d0d,#000e5c,#0d0d0d); background-size:300% 300%; }
+    #warumwir .card.s3{ background:linear-gradient(135deg,#ff5100,#ff0044,#ff5100); background-size:400% 400%; }
+    #warumwir .card:hover{ transform:translateY(-4px); box-shadow:0 18px 46px rgba(0,0,0,.28); background-position:100% 50%; }
+
+    #warumwir .card-inner{ position:relative; z-index:2; display:flex; flex-direction:column; gap:.7rem; min-width:0; }
+    #warumwir .card h3,
+    #warumwir .card .leadcopy,
+    #warumwir .p-text .lead,
+    #warumwir .p-text .copy{
+      overflow-wrap:anywhere; word-break:break-word; hyphens:auto; max-width:100%;
+    }
+    #warumwir .card h3{
+      margin:0; font-size:clamp(1.3rem,1.1rem + .9vw,1.9rem);
+      font-weight:870; letter-spacing:-.012em; line-height:1.2;
+      text-shadow:0 1px 2px rgba(0,0,0,.25);
+    }
+    #warumwir .card .leadcopy{ margin:0; font-size:clamp(.98rem,.92rem + .25vw,1.06rem); font-weight:650; line-height:1.55; opacity:.98; }
+
+    #warumwir .points{ list-style:none; margin:.2rem 0 0; padding:0; display:grid; gap:.5rem; }
+    #warumwir .point{ display:block; padding:.6rem 0 .7rem; position:relative; }
+    #warumwir .point + .point{ border-top:1px solid rgba(255,255,255,.22); }
+    #warumwir .p-text .lead{ display:block; font-weight:800; letter-spacing:-.005em; margin-bottom:.15rem; font-size: clamp(1.02rem,.98rem + .35vw,1.12rem); }
+    #warumwir .p-text .copy{ display:block; color:rgba(255,255,255,.96); font-weight:600; font-size: clamp(.98rem,.92rem + .25vw,1.06rem); line-height:1.6; }
+
+    /* Badges */
+    #warumwir .badges{ display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin:1rem auto 0; }
+    #warumwir .pill{
+      display:inline-flex; align-items:center; gap:.45rem; padding:.42rem .7rem;
+      border-radius:999px; font-weight:700; font-size:.9rem;
+      border:1px solid var(--border, rgba(0,0,0,.08));
+      background: color-mix(in oklab, var(--text, #0b0c0e) 4%, var(--surface, #fff));
+      color: var(--text, #0b0c0e);
+    }
+    #warumwir .pill .ok{ width:.5rem; height:.5rem; border-radius:999px; background:#16a34a; box-shadow:0 0 0 2px color-mix(in oklab, #16a34a 30%, transparent); }
+
+    /* Varianten-Texte */
+    #warumwir .snippet{ display:none; }   /* Mobile */
+    #warumwir .t-snippet{ display:none; } /* Tablet */
+    #warumwir .full{ display:inline; }    /* Desktop */
+
+    /* ===== Desktop Basis (≥1201px): 3 Spalten, kein Sonderfall ===== */
+    @media (min-width:1201px){
+      #warumwir .grid{ grid-template-columns: repeat(3, 1fr); }
+      #warumwir .aurora-subtitle .subtitle-full{ display:inline; }
+    }
+
+    /* ===== Tablet (900–1200px): 2 Spalten + Sonderfall-Logik ===== */
+    @media (min-width:900px) and (max-width:1200px){
+      #warumwir .grid{ grid-template-columns: repeat(2, 1fr); }
+
+      /* Textumschaltung: Tablet-Text aktiv */
+      #warumwir .full{ display:none; }
+      #warumwir .t-snippet{ display:inline; }
+
+      /* Bild standardmäßig NICHT anzeigen */
+      #warumwir .card-media{ display:none; }
+
+      /* Sonderfall: genau 3 Karten (letzte alleine in Reihe) → Karte 2 doppelt so hoch + Bild sichtbar */
+      #warumwir .grid:has(> .card:nth-child(3):last-child) > .card:nth-child(2){
+        grid-row: span 2;
+        display:flex;
+      }
+      #warumwir .grid:has(> .card:nth-child(3):last-child) > .card:nth-child(2) .card-media{
+        display:block;
+      }
+    }
+
+    /* ===== Mobile (≤899px): 1 Spalte, normale Karten, Mobile-Texte ===== */
+    @media (max-width:899px){
+      #warumwir .grid{ grid-template-columns:1fr; }
+      #warumwir .full{ display:none; }
+      #warumwir .snippet{ display:inline; }
+
+      /* Bild auf Mobile generell nicht anzeigen */
+      #warumwir .card-media{ display:none !important; }
+    }
+
+    /* Medienbereich in Karte 2 (wird nur im Sonderfall sichtbar) */
+    #warumwir .card-media{
+      margin-top:auto;           /* klebt unten */
+      border-radius:12px;
+      overflow:hidden;
+      margin-top: 2rem;
+      background: transparent;        /* eleganter Fallback */
+      display:none;              /* default: unsichtbar (wird bedingt sichtbar) */
+    }
+    #warumwir .card-media img{
+      width:100%; height:100%; display:block; object-fit:cover; background:transparent;
+    }
+
+    /* Dark Mode */
+    :root[data-theme="dark"] #warumwir{ color:#f5f7fa; background:#000; }
+    :root[data-theme="dark"] #warumwir p.sub{
+      color:#e8eeff; background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035));
+      border:1px solid rgba(255,255,255,.08); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 2px 8px rgba(0,0,0,.45);
+    }
+    @media (prefers-color-scheme: dark){
+      :root[data-theme="auto"] #warumwir{ color:#f5f7fa; background:#000; }
+      :root[data-theme="auto"] #warumwir p.sub{
+        color:#e8eeff; background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035));
+        border:1px solid rgba(255,255,255,.08); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 2px 8px rgba(0,0,0,.45);
+      }
+    }

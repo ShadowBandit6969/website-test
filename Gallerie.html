@@ -1,0 +1,194 @@
+
+<!-- === SECTION: H1 mittig + Cards spawnen außenrum (ohne weiteren Text) === -->
+<section class="hero-draggable" aria-label="Portfolio Draggable Hero">
+  <div class="hero-home">
+    <div class="bg-asset" aria-hidden="true">
+      <div class="bg-noise"></div>
+      <div class="bg-grid"></div>
+    </div>
+
+    <!-- ZENTRIERTE H1 (einziger Text) -->
+    <div class="center-title" id="cta-core">
+      <h1 class="title-xxl">Entdecken Sie <br> was möglich ist</h1>
+    </div>
+
+    <!-- DRAGGABLE CARDS (Position kommt dynamisch) -->
+    <div class="draggable-card auto-orbit">
+      <img src="./3DSlideShow/post12.png" alt="Projekt 1" loading="lazy" draggable="false">
+    </div>
+    <div class="draggable-card auto-orbit">
+      <img src="./3DSlideShow/post2.png" alt="Projekt 2" loading="lazy" draggable="false">
+    </div>
+    <div class="draggable-card auto-orbit">
+      <img src="./3DSlideShow/post12.png" alt="Projekt 3" loading="lazy" draggable="false">
+    </div>
+    <div class="draggable-card auto-orbit">
+      <img src="./3DSlideShow/post18.png" alt="Projekt 4" loading="lazy" draggable="false">
+    </div>
+    <div class="draggable-card auto-orbit">
+      <video autoplay loop muted playsinline
+        poster="https://cdn.prod.website-files.com/67f91e694fd1ae2a1feced50%2F67ffd0d9b0117550eb6bf8e5_7710243-hd_1280_720_30fps-poster-00001.jpg">
+        <source src="https://cdn.prod.website-files.com/67f91e694fd1ae2a1feced50%2F67ffd0d9b0117550eb6bf8e5_7710243-hd_1280_720_30fps-transcode.mp4" type="video/mp4">
+        <source src="https://cdn.prod.website-files.com/67f91e694fd1ae2a1feced50%2F67ffd0d9b0117550eb6bf8e5_7710243-hd_1280_720_30fps-transcode.webm" type="video/webm">
+      </video>
+    </div>
+  </div>
+</section>
+<!-- === CSS: H1 mittig + Orbit-Layout (Primary-Orange bleibt als Variable verfügbar) === -->
+<style>
+:root{
+  --bg:#0f0f0f;
+  --fg:#efeeec;
+  --accent:#fc5b30;      /* Primary Orange */
+  --accent-2:#ff884d;
+  --maxw:1200px;
+}
+
+.hero-draggable{ position:relative; isolation:isolate; background:var(--bg); color:var(--fg); overflow:hidden; }
+.hero-home{ position:relative; min-height:min(100vh, 900px); max-width:var(--maxw); margin-inline:auto; padding:clamp(24px,4vw,48px); }
+
+/* Hintergrunddeko */
+.bg-asset{position:absolute; inset:0; z-index:0; pointer-events:none;}
+.bg-noise{ position:absolute; inset:-50%; background-image:radial-gradient(#ffffff10 1px,transparent 1px); background-size:10px 10px; opacity:.05; filter:contrast(120%); }
+.bg-grid{ position:absolute; inset:0; background:linear-gradient(transparent,transparent 80%,#ffffff10), repeating-linear-gradient(90deg,#ffffff08 0 1px,transparent 1px 60px); mask-image:radial-gradient(120% 60% at 50% 20%,#000 60%,transparent); opacity:.25; }
+
+/* === ZENTRIERTE H1 === */
+.center-title{
+  position:absolute; inset:0;
+  display:grid; place-items:center;
+  z-index:3; text-align:center; pointer-events:none;
+}
+.center-title > *{ pointer-events:auto; }
+
+.title-xxl{
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight:900; letter-spacing:-.02em;
+  font-size: clamp(40px, 9vw, 120px);
+  line-height: .9;
+  margin:0;
+  text-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+/* === Draggable Cards === */
+.draggable-card{
+  position:absolute; z-index:1;
+  width: clamp(220px, 36vw, 420px);
+  aspect-ratio: 4 / 3;
+  border-radius: 18px; overflow:hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  transform: translate3d(0,0,0);
+  will-change: transform;
+  cursor: grab; touch-action:none; user-select:none; backdrop-filter:saturate(1.1);
+  opacity:0; scale:.92; /* Spawn-Animation */
+}
+.draggable-card:active{ cursor:grabbing; }
+.draggable-card img, .draggable-card video{ width:100%; height:100%; object-fit:cover; display:block; }
+.draggable-card:focus{ outline:2px solid color-mix(in oklab, var(--accent) 70%, white 20%); outline-offset:2px; border-radius:20px; }
+
+/* Kein statisches .is-first... mehr – Positionen kommen aus JS */
+.is-first,.is-second,.is-third,.is-fourth,.is-fifth{ all:unset; }
+
+/* Responsive Tweaks */
+@media (max-width:900px){ .draggable-card{ width: clamp(200px, 58vw, 380px); } }
+@media (max-width:600px){
+  .hero-home{ min-height:110vh; }
+  .draggable-card{ width: min(88vw, 380px); }
+}
+</style>
+<!-- === JS: Orbit-Positionierung um die H1 + Drag (Maus & Touch) === -->
+<script>
+(function(){
+  const shell  = document.querySelector('.hero-home');
+  const core   = document.getElementById('cta-core'); // enthält die H1
+  const cards  = Array.from(document.querySelectorAll('.hero-draggable .draggable-card'));
+  let zTop = 10;
+
+  // Drag-Setup
+  cards.forEach((el) => {
+    el.dataset.tx = '0'; el.dataset.ty = '0';
+    const startTr = getComputedStyle(el).transform;
+    el.dataset.start = startTr === 'none' ? '' : startTr;
+    el.setAttribute('tabindex','0');
+    makeDraggable(el);
+  });
+
+  function makeDraggable(el){
+    let startX=0, startY=0, baseX=0, baseY=0, dragging=false;
+    const onDown = (ev) => {
+      dragging = true; el.style.zIndex = ++zTop;
+      const p = pointFromEvent(ev);
+      startX=p.x; startY=p.y;
+      baseX=parseFloat(el.dataset.tx||0); baseY=parseFloat(el.dataset.ty||0);
+      el.style.transition = 'transform 0s';
+      ev.preventDefault();
+    };
+    const onMove = (ev) => {
+      if(!dragging) return;
+      const p = pointFromEvent(ev);
+      const tx = baseX + (p.x - startX);
+      const ty = baseY + (p.y - startY);
+      el.dataset.tx = tx; el.dataset.ty = ty;
+      el.style.transform = composeTransform(el.dataset.start, tx, ty);
+    };
+    const onUp = () => {
+      if(!dragging) return;
+      dragging = false;
+      el.style.transition = 'transform .18s cubic-bezier(.2,.8,.2,1)';
+    };
+    el.addEventListener('pointerdown', onDown);
+    window.addEventListener('pointermove', onMove, {passive:false});
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onUp);
+  }
+  function pointFromEvent(ev){ return ev.touches?.[0] ? {x:ev.touches[0].clientX,y:ev.touches[0].clientY} : {x:ev.clientX,y:ev.clientY}; }
+  function composeTransform(base, tx, ty){ const t=` translate3d(${tx}px, ${ty}px, 0)`; return (base && base!=='none'? base : 'translate3d(0,0,0)') + t; }
+
+  // Orbit um die H1: Karten kreisförmig außen positionieren
+  function layoutOrbit(){
+    if(!shell || !core || cards.length === 0) return;
+
+    const ctaRect  = core.getBoundingClientRect();
+    const hostRect = shell.getBoundingClientRect();
+
+    const centerX = ctaRect.left + ctaRect.width/2 - hostRect.left;
+    const centerY = ctaRect.top  + ctaRect.height/2 - hostRect.top;
+
+    // Radius dynamisch: genug Abstand zur H1 + Ränder
+    const minRadius = Math.max(ctaRect.width, ctaRect.height) * 0.75;
+    const outerPad  = Math.min(hostRect.width, hostRect.height) * 0.08;
+    const radius = Math.min(
+      (Math.min(hostRect.width, hostRect.height)/2) - outerPad,
+      minRadius + 140
+    );
+
+    const N = cards.length;
+    cards.forEach((el, i) => {
+      const theta = (i * (2*Math.PI/N)) + (i*0.15) + (Math.random()*0.18 - 0.09);
+      const rJitter = radius * (0.92 + Math.random()*0.12);
+
+      const x = centerX + Math.cos(theta) * rJitter;
+      const y = centerY + Math.sin(theta) * rJitter;
+
+      const w = el.offsetWidth || 320;
+      const h = el.offsetHeight || (w*0.75);
+
+      el.style.left = (x - w/2) + 'px';
+      el.style.top  = (y - h/2) + 'px';
+
+      const baseRot = (Math.random()*8 - 4).toFixed(2);
+      el.dataset.start = `rotate(${baseRot}deg)`;
+      el.style.transform = `translate3d(0,0,0) rotate(${baseRot}deg)`;
+
+      const delay = 80*i;
+      el.animate(
+        [{opacity:0, scale:.92, filter:'blur(6px)'},{opacity:1, scale:1, filter:'blur(0)'}],
+        {duration:580, delay, easing:'cubic-bezier(.2,.8,.2,1)', fill:'forwards'}
+      );
+    });
+  }
+
+  // initial & on resize
+  window.addEventListener('load', layoutOrbit, {once:true});
+  let t; window.addEventListener('resize', () => { clearTimeout(t); t=setTimeout(layoutOrbit, 150); }, {passive:true});
+})();
+</script>
