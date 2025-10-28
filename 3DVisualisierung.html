@@ -235,22 +235,6 @@
   
   <!-- Titelpage-spezifische Bild-Overrides (in den Head verschoben) -->
   <style>
-    body[data-page="webdesign"] .hero-image-background {
-      background-image: url("./images/hero-bg-sky_1hero-bg-sky.webp") !important;
-    }
-    body[data-page="webdesign"] .hero-image-foreground {
-      background-image: url("./images/webdesign-fg.webp") !important;
-    }
-    @media (max-width: 1024px) {
-      body[data-page="webdesign"] .hero-image-foreground {
-        background-image: url("./images/webdesign-fg-tablet.webp") !important;
-      }
-    }
-    @media (max-width: 480px) {
-      body[data-page="webdesign"] .hero-image-foreground {
-        background-image: url("./images/webdesign-fg-mobile.webp") !important;
-      }
-    }
     /* === Large Title – groß, perfekt mittig, etwas weiter unten === */
 .large-title {
   position: absolute;
@@ -287,7 +271,7 @@ font-size: clamp(4rem, 22vw, 18rem);
   <link rel="stylesheet" href="css/herolast.css" type="text/css">
 <link rel="stylesheet" href="css/navbar.css" type="text/css">
 <link rel="stylesheet" href="css/darkmodeLast.css" type="text/css">
-<link rel="stylesheet" href="css/aurora3D.css" type="text/css">
+<link rel="stylesheet" href="css/aurora.css" type="text/css">
 <link rel="stylesheet" href="css/cosmosSuite3D.css" type="text/css">
 <link rel="stylesheet" href="css/reviews.css" type="text/css">
 
@@ -311,29 +295,6 @@ font-size: clamp(4rem, 22vw, 18rem);
 
 <link rel="stylesheet" href="css/warumwir.css" type="text/css">
 <style>
-/* --------------------------
-   Lokale Bild-Overrides nur für webdesign.html
---------------------------- */
-body[data-page="webdesign"] .hero-image-background {
-  background-image: url("./WebdesignPic/1.mp4") !important;
-}
-
-body[data-page="webdesign"] .hero-image-foreground {
-  background-image: url("./images/hintegrundweb.webp") !important;
-}
-
-/* Optional: Mobile- oder Tablet-Varianten */
-@media (max-width: 1024px) {
-  body[data-page="webdesign"] .hero-image-foreground {
-    background-image: url("./images/webdesign-bg-tablet.webp") !important;
-  }
-}
-@media (max-width: 480px) {
-  body[data-page="webdesign"] .hero-image-foreground {
-    background-image: url("./images/webdesign-bg-mobile.webp") !important;
-  }
-}
-
 @media (min-width: 768px) {
   .hero-image-foreground {
     transform: translateY(10%);              /* dein bisheriger Versatz */
@@ -418,7 +379,41 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 </style>
+<style>/* Webdesign-Hero: Weiß + kleiner + gut lesbar */
+.hero-section[data-page="3DKonzept"] .page-title {
+  mix-blend-mode: normal; /* Overlay aus, damit Weiß wirklich weiß ist */
+}
 
+.hero-section[data-page="3DKonzept"] .large-title {
+  /* kleiner als die aktuelle Basis (20vw) */
+  font-size: clamp(3rem, 12vw, 12vw);
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 4px 22px rgba(0,0,0,.45);
+}
+/* vorher: font-size: clamp(3rem, 12vw, 12vw); */
+.hero-section[data-page="webdesign"] .large-title {
+  font-size: clamp(2.75rem, 10.5vw, 10.5vw);
+}
+
+/* damit auch die per JS erzeugten Span-Buchstaben weiß bleiben */
+.hero-section[data-page="3DKonzept"] #titleFloatWrapper span {
+  color: #ffffffd8 !important;
+}
+
+/* Variante A: „screen“ – hell & knallig über dunklem Video */
+.hero-section[data-page="3DKonzept"] .page-title {
+  mix-blend-mode: screen;
+}
+
+
+
+/* Variante C: „difference“ – stark kontrastierend/arty */
+.hero-section[data-page="3DKonzept"] .page-title {
+  mix-blend-mode: difference;
+}
+
+</style>
 </head>
 
 <body data-page="3DKonzept">
@@ -1005,12 +1000,12 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
-<section class="hero-section" data-page="webdesign">
+<section class="hero-section" data-page="3DKonzept">
   <div class="hero-images-wrapper">
     <!-- HINTERGRUND-VIDEO -->
     <div class="hero-image-background">
       <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hintegrundweb.webp">
-        <source src="./WebdesignPic/1.mp4" type="video/mp4" />
+        <source src="./3DSlideShow/vid6.mp4" type="video/mp4" />
       </video>
     </div>
 
@@ -1024,7 +1019,7 @@ body[data-page="webdesign"] .hero-image-foreground {
 </section>
 <script>
 (function () {
-  const section = document.querySelector('.hero-section[data-page="webdesign"]');
+  const section = document.querySelector('.hero-section[data-page="3DKonzept"]');
   const h1 = document.querySelector('.page-title .large-title');
   const pageTitle = document.querySelector('.page-title');
   if (!section || !h1 || !pageTitle) return;
@@ -1657,467 +1652,6 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
 
 
 
-<!-- ===================================
-     VORHER / NACHHER — COMPACT COMPARE (MINIMAL)
-     clean • dezent • präziser Griff
-     =================================== -->
-<section id="vorher-nachher" class="aurora-sheet is-compact" data-force-light aria-labelledby="vn-title">
-  <div class="container compare-wrap">
-    <header class="compare-head">
-      <h2 id="vn-title" class="aurora-title">Vorher / Nachher</h2>
-      <p class="aurora-subtitle">
-        <span class="subtitle-full">
-          Rohmodell vs. finales Rendering – Material, Licht & Hintergrund im direkten Vergleich.
-        </span>
-      </p>
-    </header>
-
-    <figure class="compare" role="group" aria-labelledby="vn-title" aria-describedby="vn-desc">
-      <div id="vn-desc" class="visually-hidden">
-        Ziehe die Trennlinie oder den Griff, um den Vergleich anzupassen. Mit Tastatur: Pfeil links/rechts, Home/Ende, Bild auf/ab.
-      </div>
-
-      <!-- Bühne -->
-      <div class="compare-stage">
-        <!-- Nachher (unten) -->
-        <img class="img img-after"
-             src="./3DSlideShow/post20.png"
-             alt="Nachher: Finales Rendering"
-             loading="lazy" decoding="async" fetchpriority="low">
-
-        <!-- Vorher (oben, geclippt) -->
-        <img class="img img-before"
-             src="./3DSlideShow/post21.png"
-             alt="Vorher: Grau-Modell"
-             loading="lazy" decoding="async" fetchpriority="low"
-             style="--split:50%;">
-
-        <!-- zentrale Trennlinie (Hairline) -->
-        <span class="divider" aria-hidden="true"></span>
-
-        <!-- Griff (visuell minimal, große unsichtbare Hit-Zone) -->
-        <button class="handle"
-                type="button"
-                role="slider"
-                aria-label="Vergleichsregler"
-                aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
-                aria-orientation="horizontal">
-        </button>
-      </div>
-
-      <!-- Range (nur mobil sichtbar) -->
-      <div class="compare-ctrl">
-        <label class="visually-hidden" for="vn-range">Vergleichsregler</label>
-        <input id="vn-range" class="compare-range" type="range"
-               min="0" max="100" value="50" step="1"
-               aria-label="Vergleichsregler: 50 Prozent Vorher sichtbar">
-      </div>
-
-      <figcaption class="compare-cap">
-        Material, Lichtsetzung und Hintergrund transformieren das Modell vom Rohzustand zum finalen Look.
-      </figcaption>
-    </figure>
-  </div>
-</section>
-<style>
-/* ===== Compact shell ===== */
-#vorher-nachher.aurora-sheet{ background: transparent; }
-#vorher-nachher.is-compact{
-  padding: clamp(1.2rem, 1.2rem + 1vw, 2rem) clamp(.8rem, 1.2vw, 1.2rem);
-  border-radius: 14px;
-}
-.compare-wrap{ max-width: 1200px; margin-inline:auto; }
-.compare-head{
-  display:flex; flex-direction:column; align-items:center; text-align:center;
-  margin-bottom: var(--space-2, 1rem);
-}
-#vorher-nachher .aurora-title{ margin-bottom:.35rem !important; text-wrap:balance; }
-#vorher-nachher .aurora-subtitle{ line-height:1.6 !important; }
-
-/* ===== Compare (Minimal Look) ===== */
-.compare{
-  --radius: 16px;
-  --shadow: 0 1px 0 rgba(0,0,0,.04), 0 10px 24px rgba(0,0,0,.06);
-  --accent: #6b7cff;
-  --knob: #ffffff;
-  --hairline: color-mix(in oklab, #ffffff 90%, #cfd3da 10%);
-  margin:0; padding:0; border:0;
-}
-:root[data-theme="dark"] .compare{
-  --shadow: 0 1px 0 rgba(255,255,255,.06), 0 12px 28px rgba(0,0,0,.35);
-  --hairline: color-mix(in oklab, #e9ecf3 88%, #a7b0c4 12%);
-  --knob: #f6f8ff;
-}
-
-.compare-stage{
-  position: relative;
-  border-radius: var(--radius);
-  overflow: clip;
-  box-shadow: var(--shadow);
-  background: #0b0c10;
-  aspect-ratio: 16/9;
-  user-select: none;
-  touch-action: none;
-  cursor: ew-resize;
-  isolation: isolate;
-}
-
-/* Bilder */
-.compare .img{
-  position:absolute; inset:0;
-  width:100%; height:100%; object-fit:cover; display:block;
-  transition: opacity .3s ease;
-  opacity: 0; /* fade-in per JS */
-}
-.compare .img-after{ z-index: 1; }
-.compare .img-before{
-  z-index: 2;
-  --split: 50%;
-  clip-path: polygon(0 0, var(--split) 0, var(--split) 100%, 0 100%);
-}
-
-/* Hairline Divider – super dezent, aber sichtbar */
-.compare .divider{
-  position:absolute; top:0; bottom:0; width:1px; z-index: 3;
-  left: calc(var(--split, 50%));
-  background: linear-gradient(to bottom, var(--hairline), color-mix(in oklab, var(--hairline) 70%, transparent));
-  pointer-events:none;
-  transition: left .07s linear;
-}
-
-/* Griff – visuell klein, Hit-Zone groß */
-.compare .handle{
-  position:absolute; top:50%; left: var(--split, 50%); transform: translate(-50%, -50%);
-  z-index: 4;
-  /* sichtbarer Knopf */
-  width: 18px; height: 18px; border-radius:50%;
-  background: var(--knob);
-  box-shadow: 0 1px 0 rgba(0,0,0,.08), 0 6px 14px rgba(0,0,0,.12);
-  border: 1px solid color-mix(in oklab, #000 10%, #6b7cff 20%);
-  /* unsichtbare große Hit-Zone */
-  padding:0; border-width:1px;
-}
-.compare .handle::before{
-  /* unsichtbare Fläche (mind. 44x44) für bessere Greifbarkeit */
-  content:""; position:absolute; inset:-20px; border-radius:999px;
-}
-@media (hover:hover){
-  .compare .handle:hover{ box-shadow: 0 2px 0 rgba(0,0,0,.08), 0 10px 22px rgba(0,0,0,.16); }
-}
-.compare .handle:focus-visible{
-  outline: 3px solid color-mix(in oklab, var(--accent) 60%, transparent);
-  outline-offset: 3px;
-}
-:root[data-theme="dark"] .compare .handle{
-  border-color: color-mix(in oklab, #000 20%, var(--accent) 25%);
-}
-
-/* Range (nur mobil sichtbar) */
-.compare-ctrl{ display:flex; justify-content:center; }
-.compare-range{
-  appearance:none; width: min(720px, 92%); margin: .75rem auto 0;
-  background: transparent; outline: none;
-}
-@media (hover:hover){
-  .compare-ctrl{ display: none; } /* Desktop/Tablet: Range aus */
-}
-.compare-range:focus-visible{ outline: 3px solid var(--focus-ring-color, #6b7cff); outline-offset: 3px; border-radius: 8px; }
-/* Track */
-.compare-range::-webkit-slider-runnable-track{ height: 4px; border-radius: 999px; background: rgba(0,0,0,.12); }
-.compare-range::-moz-range-track{ height: 4px; border-radius: 999px; background: rgba(0,0,0,.12); }
-:root[data-theme="dark"] .compare-range::-webkit-slider-runnable-track,
-:root[data-theme="dark"] .compare-range::-moz-range-track{ background: rgba(255,255,255,.18); }
-/* Thumb */
-.compare-range::-webkit-slider-thumb{
-  -webkit-appearance:none; appearance:none;
-  width: 18px; height: 18px; margin-top: -7px;
-  border-radius: 50%; background: #fff; border: 1px solid rgba(0,0,0,.1);
-  box-shadow: 0 2px 10px rgba(0,0,0,.18);
-}
-.compare-range::-moz-range-thumb{
-  width: 18px; height: 18px; border-radius: 50%;
-  background: #fff; border: 1px solid rgba(0,0,0,.1);
-  box-shadow: 0 2px 10px rgba(0,0,0,.18);
-}
-
-/* Caption (optional) */
-.compare-cap{
-  margin: .6rem 0 0;
-  font-size: .98rem; line-height: 1.55; color:#333; text-align:center;
-}
-:root[data-theme="dark"] .compare-cap{ color:#e9ecf3; }
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .compare .img, .compare .divider{ transition: none !important; }
-}
-</style>
-<script>
-/* ===== Minimal Compare – clean handling, mobile auto-swipe once ===== */
-(function(){
-  const sec     = document.getElementById('vorher-nachher');
-  const stage   = sec.querySelector('.compare-stage');
-  const before  = stage.querySelector('.img-before');
-  const after   = stage.querySelector('.img-after');
-  const range   = sec.querySelector('#vn-range');
-  const divider = stage.querySelector('.divider');
-  const handle  = stage.querySelector('.handle');
-  const isTouch = matchMedia('(hover:none)').matches;
-
-  // Fade-in when loaded
-  [before, after].forEach(img=>{
-    const show = ()=> img.style.opacity = '1';
-    if (img.complete) show();
-    img.addEventListener('load', show, { once:true });
-  });
-
-  // Apply split (updates all UI)
-  function applySplit(val){
-    const pct = Math.max(0, Math.min(100, Number(val)));
-    before.style.setProperty('--split', pct + '%');
-    divider.style.left = `calc(${pct}% )`;
-    handle.style.left  = pct + '%';
-    range.value = String(pct);
-    range.setAttribute('aria-label', `Vergleichsregler: ${pct} Prozent Vorher sichtbar`);
-    handle.setAttribute('aria-valuenow', String(pct));
-  }
-  applySplit(range.value);
-
-  // % helper
-  const rectToPct = (clientX)=>{
-    const r = stage.getBoundingClientRect();
-    return ((clientX - r.left) / r.width) * 100;
-  };
-
-  // Range (mobile)
-  range.addEventListener('input', (e)=> applySplit(e.target.value));
-
-  // Drag anywhere on stage
-  let draggingStage = false;
-  stage.addEventListener('pointerdown', (e)=>{
-    draggingStage = true; stage.setPointerCapture(e.pointerId);
-    applySplit(rectToPct(e.clientX));
-  });
-  stage.addEventListener('pointermove', (e)=>{ if(draggingStage) applySplit(rectToPct(e.clientX)); });
-  stage.addEventListener('pointerup',   (e)=>{ draggingStage = false; stage.releasePointerCapture(e.pointerId); });
-  stage.addEventListener('pointercancel',()=> draggingStage = false);
-
-  // Drag on handle (preferred)
-  let draggingHandle = false;
-  handle.addEventListener('pointerdown', (e)=>{
-    e.stopPropagation(); draggingHandle = true; handle.setPointerCapture(e.pointerId);
-  });
-  handle.addEventListener('pointermove', (e)=>{ if(draggingHandle) applySplit(rectToPct(e.clientX)); });
-  handle.addEventListener('pointerup',   (e)=>{ draggingHandle = false; handle.releasePointerCapture(e.pointerId); });
-  handle.addEventListener('pointercancel',()=> draggingHandle = false);
-
-  // Keyboard on handle
-  handle.addEventListener('keydown', (e)=>{
-    const step = e.shiftKey ? 10 : 2;
-    const curr = Number(range.value)||50;
-    if (e.key === 'ArrowLeft')  { e.preventDefault(); applySplit(curr - step); }
-    if (e.key === 'ArrowRight') { e.preventDefault(); applySplit(curr + step); }
-    if (e.key === 'Home')       { e.preventDefault(); applySplit(0); }
-    if (e.key === 'End')        { e.preventDefault(); applySplit(100); }
-    if (e.key === 'PageDown')   { e.preventDefault(); applySplit(curr - 10); }
-    if (e.key === 'PageUp')     { e.preventDefault(); applySplit(curr + 10); }
-  });
-
-  // Mobile auto-swipe (once per session)
-  const AUTO_KEY = 'vnAutoSwipeDoneMinimal';
-  let autoDone = sessionStorage.getItem(AUTO_KEY) === '1';
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(!e.isIntersecting) return;
-      if (isTouch && !autoDone){
-        autoDone = true;
-        sessionStorage.setItem(AUTO_KEY, '1');
-        const start = Number(range.value)||50, end = 92, dur = 900;
-        const t0 = performance.now();
-        const ease = t => t<.5 ? 2*t*t : -1+(4-2*t)*t;
-        function tick(now){
-          const p = Math.min(1, (now - t0)/dur);
-          const val = Math.round(start + (end - start)*ease(p));
-          applySplit(val);
-          if(p < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-      }
-      io.unobserve(e.target);
-    });
-  }, { threshold: .35, rootMargin: '0px 0px -10% 0px' });
-  io.observe(stage);
-})();
-</script>
-
-
-
-<section id="mini-look-gallery" aria-labelledby="mini-look-h">
-  <h2 id="mini-look-h" class="mlg-headline"></h2>
-
-  <ul class="mlg-grid" role="list" aria-label="Materialbeispiele">
-    <!-- Karte 1 -->
-    <li class="mlg-item">
-      <div class="mlg-card" data-duration="2.5" data-fade="1" aria-label="Metall – Slideshow">
-        <img src="./assets/materials/metal_1.jpg" alt="">
-        <img src="./assets/materials/metal_2.jpg" alt="">
-        <img src="./assets/materials/metal_3.jpg" alt="">
-      </div>
-    </li>
-
-    <!-- Karte 2 -->
-    <li class="mlg-item">
-      <div class="mlg-card" data-duration="3" data-fade="1" aria-label="Glas – Slideshow">
-        <img src="./assets/materials/glass_1.jpg" alt="">
-        <img src="./assets/materials/glass_2.jpg" alt="">
-        <img src="./assets/materials/glass_3.jpg" alt="">
-      </div>
-    </li>
-
-    <!-- Karte 3 -->
-    <li class="mlg-item">
-      <div class="mlg-card" data-duration="2.8" data-fade="1" aria-label="Stoff – Slideshow">
-        <img src="./assets/materials/fabric_1.jpg" alt="">
-        <img src="./assets/materials/fabric_2.jpg" alt="">
-        <img src="./assets/materials/fabric_3.jpg" alt="">
-      </div>
-    </li>
-
-    <!-- Karte 4 -->
-    <li class="mlg-item">
-      <div class="mlg-card" data-duration="3.2" data-fade="1.1" aria-label="Lack – Slideshow">
-        <img src="./assets/materials/paint_1.jpg" alt="">
-        <img src="./assets/materials/paint_2.jpg" alt="">
-        <img src="./assets/materials/paint_3.jpg" alt="">
-      </div>
-    </li>
-  </ul>
-</section>
-<!-- GSAP -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-<style>
-/* ===== Mini Material & Look – kompakt, alle Karten exakt gleich groß ===== */
-:root {
-  --mlg-gap: clamp(0.8rem, 2vw, 1.4rem);
-}
-
-#mini-look-gallery {
-  padding: clamp(1.6rem, 3.5vw, 3rem) clamp(1rem, 3vw, 2rem);
-  text-align: center;
-  color: #fff;
-  background: transparent;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
-
-.mlg-headline {
-  font-weight: 850;
-  letter-spacing: -0.02em;
-  line-height: 1.12;
-  margin: 0 0 1rem;
-  font-size: clamp(1.6rem, 1rem + 1.6vw, 2.2rem);
-}
-
-.mlg-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--mlg-gap);
-  list-style: none;
-  padding: 2rem;
-  margin: 0 auto;
-  max-width: 1440px;
-  justify-items: stretch; /* Karten füllen Spalten */
-  align-items: start;
-}
-
-/* Handy: 2 nebeneinander */
-@media (max-width: 640px) {
-  .mlg-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Jede Karte bleibt quadratisch */
-.mlg-item {
-  display: block;
-}
-
-.mlg-card {
-  position: relative;
-  width: 100%;          /* füllt Spalte */
-  aspect-ratio: 1 / 1;  /* Quadrat */
-  height: auto;
-  border-radius: 14px;
-  overflow: hidden;
-  background: #11141a;
-  box-shadow: 0 6px 20px rgba(0,0,0,.25);
-  isolation: isolate;
-}
-
-/* Bilder im Stack (Crossfade) */
-.mlg-card img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transform: scale(1.03);
-  will-change: opacity, transform;
-}
-
-.mlg-card img:first-child {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Hover-Effekt dezent */
-@media (hover: hover) {
-  .mlg-card:hover img {
-    filter: brightness(1.03) contrast(1.05);
-  }
-}
-
-/* Bewegungsreduktion */
-@media (prefers-reduced-motion: reduce) {
-  .mlg-card img {
-    transform: none !important;
-  }
-}
-</style>
-<script>
-(() => {
-  if (!window.gsap) return;
-  const cards = document.querySelectorAll('.mlg-card');
-
-  cards.forEach((card, idx) => {
-    const imgs = Array.from(card.querySelectorAll('img'));
-    if (imgs.length <= 1) return;
-
-    const hold = parseFloat(card.dataset.duration || 2.5); // Standzeit pro Bild
-    const fade = parseFloat(card.dataset.fade || 1);       // Crossfade-Dauer
-
-    gsap.set(imgs, { opacity: 0, scale: 1.03 });
-    gsap.set(imgs[0], { opacity: 1, scale: 1 });
-
-    const tl = gsap.timeline({ repeat: -1, repeatDelay: 0, paused: true });
-
-    imgs.forEach((img, i) => {
-      const next = imgs[(i + 1) % imgs.length];
-      tl.to({}, { duration: hold }); // Haltephase
-      tl.to(img,  { opacity: 0, duration: fade, ease: "power2.out" }, "<");
-      tl.to(next, { opacity: 1, duration: fade, ease: "power2.out" }, "<");
-      tl.to(img,  { scale: 1.03, duration: fade, ease: "power1.out" }, "<");
-      tl.to(next, { scale: 1.00, duration: fade, ease: "power1.out" }, "<");
-    });
-
-    const offset = (idx * 0.45) % hold;
-    gsap.delayedCall(offset, () => tl.play());
-  });
-})();
-</script>
-
-
-
 <section id="aurora-sheet" class="aurora-sheet container" aria-labelledby="aurora-crown" aria-describedby="aurora-chant">
   <h2 id="aurora-crown" class="aurora-title">Nutzen auf einen Blick</h2>
   <p id="aurora-chant" class="aurora-subtitle" aria-live="polite">
@@ -2129,7 +1663,6 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
     <!-- Karte 1: Realistische Modelle -->
     <li>
       <article class="aether-card" id="benefit-realismus" aria-labelledby="benefit-realismus-h" aria-describedby="benefit-realismus-s">
-        <img class="card-fill" src="./3DSlideShow/post12.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
         <h3 id="benefit-realismus-h">Realistische Modelle</h3>
         <p class="snippet" id="benefit-realismus-s">3D zeigt Produkte so echt, als wären sie bereits gebaut.</p>
         <ul class="delta-list" aria-label="Details zu Realismus">
@@ -2142,7 +1675,6 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
     <!-- Karte 2: Markengerechter Look -->
     <li>
       <article class="aether-card" id="benefit-marke" aria-labelledby="benefit-marke-h" aria-describedby="benefit-marke-s">
-        <img class="card-fill" src="./3DSlideShow/post5.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
         <h3 id="benefit-marke-h">Markengerechter Look</h3>
         <p class="snippet" id="benefit-marke-s">Jedes 3D-Bild passt optisch perfekt zur Marke.</p>
         <ul class="delta-list" aria-label="Details zu Markenlook">
@@ -2155,7 +1687,6 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
     <!-- Karte 3: Schnelle Iterationen -->
     <li>
       <article class="aether-card" id="benefit-speed" aria-labelledby="benefit-speed-h" aria-describedby="benefit-speed-s">
-        <img class="card-fill" src="./3DSlideShow/post17.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
         <h3 id="benefit-speed-h">Schnelle Iterationen</h3>
         <p class="snippet" id="benefit-speed-s">3D spart Zeit – Anpassungen sind sofort sichtbar.</p>
         <ul class="delta-list" aria-label="Details zu Effizienz">
@@ -2431,6 +1962,469 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
 })();
 </script>
 
+
+
+
+
+<section id="mini-look-gallery" aria-labelledby="mini-look-h">
+  <h2 id="mini-look-h" class="mlg-headline"></h2>
+
+  <ul class="mlg-grid" role="list" aria-label="Materialbeispiele">
+    <!-- Karte 1 -->
+    <li class="mlg-item">
+      <div class="mlg-card" data-duration="2.5" data-fade="1" aria-label="Metall – Slideshow">
+        <img src="./assets/materials/metal_1.jpg" alt="">
+        <img src="./assets/materials/metal_2.jpg" alt="">
+        <img src="./assets/materials/metal_3.jpg" alt="">
+      </div>
+    </li>
+
+    <!-- Karte 2 -->
+    <li class="mlg-item">
+      <div class="mlg-card" data-duration="3" data-fade="1" aria-label="Glas – Slideshow">
+        <img src="./assets/materials/glass_1.jpg" alt="">
+        <img src="./assets/materials/glass_2.jpg" alt="">
+        <img src="./assets/materials/glass_3.jpg" alt="">
+      </div>
+    </li>
+
+    <!-- Karte 3 -->
+    <li class="mlg-item">
+      <div class="mlg-card" data-duration="2.8" data-fade="1" aria-label="Stoff – Slideshow">
+        <img src="./assets/materials/fabric_1.jpg" alt="">
+        <img src="./assets/materials/fabric_2.jpg" alt="">
+        <img src="./assets/materials/fabric_3.jpg" alt="">
+      </div>
+    </li>
+
+    <!-- Karte 4 -->
+    <li class="mlg-item">
+      <div class="mlg-card" data-duration="3.2" data-fade="1.1" aria-label="Lack – Slideshow">
+        <img src="./assets/materials/paint_1.jpg" alt="">
+        <img src="./assets/materials/paint_2.jpg" alt="">
+        <img src="./assets/materials/paint_3.jpg" alt="">
+      </div>
+    </li>
+  </ul>
+</section>
+<!-- GSAP -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<style>
+/* ===== Mini Material & Look – kompakt, alle Karten exakt gleich groß ===== */
+:root {
+  --mlg-gap: clamp(0.8rem, 2vw, 1.4rem);
+}
+
+#mini-look-gallery {
+  padding: clamp(1.6rem, 3.5vw, 3rem) clamp(1rem, 3vw, 2rem);
+  text-align: center;
+  color: #fff;
+  background: transparent;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.mlg-headline {
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  margin: 0 0 1rem;
+  font-size: clamp(1.6rem, 1rem + 1.6vw, 2.2rem);
+}
+
+.mlg-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--mlg-gap);
+  list-style: none;
+  padding: 2rem;
+  margin: 0 auto;
+  max-width: 1440px;
+  justify-items: stretch; /* Karten füllen Spalten */
+  align-items: start;
+}
+
+/* Handy: 2 nebeneinander */
+@media (max-width: 640px) {
+  .mlg-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Jede Karte bleibt quadratisch */
+.mlg-item {
+  display: block;
+}
+
+.mlg-card {
+  position: relative;
+  width: 100%;          /* füllt Spalte */
+  aspect-ratio: 1 / 1;  /* Quadrat */
+  height: auto;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #11141a;
+  box-shadow: 0 6px 20px rgba(0,0,0,.25);
+  isolation: isolate;
+}
+
+/* Bilder im Stack (Crossfade) */
+.mlg-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.03);
+  will-change: opacity, transform;
+}
+
+.mlg-card img:first-child {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Hover-Effekt dezent */
+@media (hover: hover) {
+  .mlg-card:hover img {
+    filter: brightness(1.03) contrast(1.05);
+  }
+}
+
+/* Bewegungsreduktion */
+@media (prefers-reduced-motion: reduce) {
+  .mlg-card img {
+    transform: none !important;
+  }
+}
+</style>
+<script>
+(() => {
+  if (!window.gsap) return;
+  const cards = document.querySelectorAll('.mlg-card');
+
+  cards.forEach((card, idx) => {
+    const imgs = Array.from(card.querySelectorAll('img'));
+    if (imgs.length <= 1) return;
+
+    const hold = parseFloat(card.dataset.duration || 2.5); // Standzeit pro Bild
+    const fade = parseFloat(card.dataset.fade || 1);       // Crossfade-Dauer
+
+    gsap.set(imgs, { opacity: 0, scale: 1.03 });
+    gsap.set(imgs[0], { opacity: 1, scale: 1 });
+
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 0, paused: true });
+
+    imgs.forEach((img, i) => {
+      const next = imgs[(i + 1) % imgs.length];
+      tl.to({}, { duration: hold }); // Haltephase
+      tl.to(img,  { opacity: 0, duration: fade, ease: "power2.out" }, "<");
+      tl.to(next, { opacity: 1, duration: fade, ease: "power2.out" }, "<");
+      tl.to(img,  { scale: 1.03, duration: fade, ease: "power1.out" }, "<");
+      tl.to(next, { scale: 1.00, duration: fade, ease: "power1.out" }, "<");
+    });
+
+    const offset = (idx * 0.45) % hold;
+    gsap.delayedCall(offset, () => tl.play());
+  });
+})();
+</script>
+
+
+
+
+<!-- ===================================
+     VORHER / NACHHER — COMPACT COMPARE (MINIMAL)
+     clean • dezent • präziser Griff
+     =================================== -->
+<section id="vorher-nachher" class="aurora-sheet is-compact" data-force-light aria-labelledby="vn-title">
+  <div class="container compare-wrap">
+    <header class="compare-head">
+      <h2 id="vn-title" class="aurora-title">Vorher / Nachher</h2>
+      <p class="aurora-subtitle">
+        <span class="subtitle-full">
+          Rohmodell vs. finales Rendering – Material, Licht & Hintergrund im direkten Vergleich.
+        </span>
+      </p>
+    </header>
+
+    <figure class="compare" role="group" aria-labelledby="vn-title" aria-describedby="vn-desc">
+      <div id="vn-desc" class="visually-hidden">
+        Ziehe die Trennlinie oder den Griff, um den Vergleich anzupassen. Mit Tastatur: Pfeil links/rechts, Home/Ende, Bild auf/ab.
+      </div>
+
+      <!-- Bühne -->
+      <div class="compare-stage">
+        <!-- Nachher (unten) -->
+        <img class="img img-after"
+             src="./3DSlideShow/post20.png"
+             alt="Nachher: Finales Rendering"
+             loading="lazy" decoding="async" fetchpriority="low">
+
+        <!-- Vorher (oben, geclippt) -->
+        <img class="img img-before"
+             src="./3DSlideShow/post21.png"
+             alt="Vorher: Grau-Modell"
+             loading="lazy" decoding="async" fetchpriority="low"
+             style="--split:50%;">
+
+        <!-- zentrale Trennlinie (Hairline) -->
+        <span class="divider" aria-hidden="true"></span>
+
+        <!-- Griff (visuell minimal, große unsichtbare Hit-Zone) -->
+        <button class="handle"
+                type="button"
+                role="slider"
+                aria-label="Vergleichsregler"
+                aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+                aria-orientation="horizontal">
+        </button>
+      </div>
+
+      <!-- Range (nur mobil sichtbar) -->
+      <div class="compare-ctrl">
+        <label class="visually-hidden" for="vn-range">Vergleichsregler</label>
+        <input id="vn-range" class="compare-range" type="range"
+               min="0" max="100" value="50" step="1"
+               aria-label="Vergleichsregler: 50 Prozent Vorher sichtbar">
+      </div>
+
+      <figcaption class="compare-cap">
+        Material, Lichtsetzung und Hintergrund transformieren das Modell vom Rohzustand zum finalen Look.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+<style>
+/* ===== Compact shell ===== */
+#vorher-nachher.aurora-sheet{ background: transparent; }
+#vorher-nachher.is-compact{
+  padding: clamp(1.2rem, 1.2rem + 1vw, 2rem) clamp(.8rem, 1.2vw, 1.2rem);
+  border-radius: 14px;
+}
+.compare-wrap{ max-width: 1600px; margin-inline:auto; }
+.compare-head{
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  margin-bottom: var(--space-2, 1rem);
+}
+#vorher-nachher .aurora-title{ margin-bottom:.35rem !important; text-wrap:balance; }
+#vorher-nachher .aurora-subtitle{ line-height:1.6 !important; }
+
+/* ===== Compare (Minimal Look) ===== */
+.compare{
+  --radius: 16px;
+  --shadow: 0 1px 0 rgba(0,0,0,.04), 0 10px 24px rgba(0,0,0,.06);
+  --accent: #6b7cff;
+  --knob: #ffffff;
+  --hairline: color-mix(in oklab, #ffffff 90%, #cfd3da 10%);
+  margin:0; padding:0; border:0;
+}
+:root[data-theme="dark"] .compare{
+  --shadow: 0 1px 0 rgba(255,255,255,.06), 0 12px 28px rgba(0,0,0,.35);
+  --hairline: color-mix(in oklab, #e9ecf3 88%, #a7b0c4 12%);
+  --knob: #f6f8ff;
+}
+
+.compare-stage{
+  position: relative;
+  border-radius: var(--radius);
+  overflow: clip;
+  box-shadow: var(--shadow);
+  background: #0b0c10;
+  aspect-ratio: 16/9;
+  user-select: none;
+  touch-action: none;
+  cursor: ew-resize;
+  isolation: isolate;
+}
+
+/* Bilder */
+.compare .img{
+  position:absolute; inset:0;
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition: opacity .3s ease;
+  opacity: 0; /* fade-in per JS */
+}
+.compare .img-after{ z-index: 1; }
+.compare .img-before{
+  z-index: 2;
+  --split: 50%;
+  clip-path: polygon(0 0, var(--split) 0, var(--split) 100%, 0 100%);
+}
+
+/* Hairline Divider – super dezent, aber sichtbar */
+.compare .divider{
+  position:absolute; top:0; bottom:0; width:1px; z-index: 3;
+  left: calc(var(--split, 50%));
+  background: linear-gradient(to bottom, var(--hairline), color-mix(in oklab, var(--hairline) 70%, transparent));
+  pointer-events:none;
+  transition: left .07s linear;
+}
+
+/* Griff – visuell klein, Hit-Zone groß */
+.compare .handle{
+  position:absolute; top:50%; left: var(--split, 50%); transform: translate(-50%, -50%);
+  z-index: 4;
+  /* sichtbarer Knopf */
+  width: 18px; height: 18px; border-radius:50%;
+  background: var(--knob);
+  box-shadow: 0 1px 0 rgba(0,0,0,.08), 0 6px 14px rgba(0,0,0,.12);
+  border: 1px solid color-mix(in oklab, #000 10%, #6b7cff 20%);
+  /* unsichtbare große Hit-Zone */
+  padding:0; border-width:1px;
+}
+.compare .handle::before{
+  /* unsichtbare Fläche (mind. 44x44) für bessere Greifbarkeit */
+  content:""; position:absolute; inset:-20px; border-radius:999px;
+}
+@media (hover:hover){
+  .compare .handle:hover{ box-shadow: 0 2px 0 rgba(0,0,0,.08), 0 10px 22px rgba(0,0,0,.16); }
+}
+.compare .handle:focus-visible{
+  outline: 3px solid color-mix(in oklab, var(--accent) 60%, transparent);
+  outline-offset: 3px;
+}
+:root[data-theme="dark"] .compare .handle{
+  border-color: color-mix(in oklab, #000 20%, var(--accent) 25%);
+}
+
+/* Range (nur mobil sichtbar) */
+.compare-ctrl{ display:flex; justify-content:center; }
+.compare-range{
+  appearance:none; width: min(720px, 92%); margin: .75rem auto 0;
+  background: transparent; outline: none;
+}
+@media (hover:hover){
+  .compare-ctrl{ display: none; } /* Desktop/Tablet: Range aus */
+}
+.compare-range:focus-visible{ outline: 3px solid var(--focus-ring-color, #6b7cff); outline-offset: 3px; border-radius: 8px; }
+/* Track */
+.compare-range::-webkit-slider-runnable-track{ height: 4px; border-radius: 999px; background: rgba(0,0,0,.12); }
+.compare-range::-moz-range-track{ height: 4px; border-radius: 999px; background: rgba(0,0,0,.12); }
+:root[data-theme="dark"] .compare-range::-webkit-slider-runnable-track,
+:root[data-theme="dark"] .compare-range::-moz-range-track{ background: rgba(255,255,255,.18); }
+/* Thumb */
+.compare-range::-webkit-slider-thumb{
+  -webkit-appearance:none; appearance:none;
+  width: 18px; height: 18px; margin-top: -7px;
+  border-radius: 50%; background: #fff; border: 1px solid rgba(0,0,0,.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,.18);
+}
+.compare-range::-moz-range-thumb{
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #fff; border: 1px solid rgba(0,0,0,.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,.18);
+}
+
+/* Caption (optional) */
+.compare-cap{
+  margin: .6rem 0 0;
+  font-size: .98rem; line-height: 1.55; color:#333; text-align:center;
+}
+:root[data-theme="dark"] .compare-cap{ color:#e9ecf3; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .compare .img, .compare .divider{ transition: none !important; }
+}
+</style>
+<script>
+/* ===== Minimal Compare – clean handling, mobile auto-swipe once ===== */
+(function(){
+  const sec     = document.getElementById('vorher-nachher');
+  const stage   = sec.querySelector('.compare-stage');
+  const before  = stage.querySelector('.img-before');
+  const after   = stage.querySelector('.img-after');
+  const range   = sec.querySelector('#vn-range');
+  const divider = stage.querySelector('.divider');
+  const handle  = stage.querySelector('.handle');
+  const isTouch = matchMedia('(hover:none)').matches;
+
+  // Fade-in when loaded
+  [before, after].forEach(img=>{
+    const show = ()=> img.style.opacity = '1';
+    if (img.complete) show();
+    img.addEventListener('load', show, { once:true });
+  });
+
+  // Apply split (updates all UI)
+  function applySplit(val){
+    const pct = Math.max(0, Math.min(100, Number(val)));
+    before.style.setProperty('--split', pct + '%');
+    divider.style.left = `calc(${pct}% )`;
+    handle.style.left  = pct + '%';
+    range.value = String(pct);
+    range.setAttribute('aria-label', `Vergleichsregler: ${pct} Prozent Vorher sichtbar`);
+    handle.setAttribute('aria-valuenow', String(pct));
+  }
+  applySplit(range.value);
+
+  // % helper
+  const rectToPct = (clientX)=>{
+    const r = stage.getBoundingClientRect();
+    return ((clientX - r.left) / r.width) * 100;
+  };
+
+  // Range (mobile)
+  range.addEventListener('input', (e)=> applySplit(e.target.value));
+
+  // Drag anywhere on stage
+  let draggingStage = false;
+  stage.addEventListener('pointerdown', (e)=>{
+    draggingStage = true; stage.setPointerCapture(e.pointerId);
+    applySplit(rectToPct(e.clientX));
+  });
+  stage.addEventListener('pointermove', (e)=>{ if(draggingStage) applySplit(rectToPct(e.clientX)); });
+  stage.addEventListener('pointerup',   (e)=>{ draggingStage = false; stage.releasePointerCapture(e.pointerId); });
+  stage.addEventListener('pointercancel',()=> draggingStage = false);
+
+  // Drag on handle (preferred)
+  let draggingHandle = false;
+  handle.addEventListener('pointerdown', (e)=>{
+    e.stopPropagation(); draggingHandle = true; handle.setPointerCapture(e.pointerId);
+  });
+  handle.addEventListener('pointermove', (e)=>{ if(draggingHandle) applySplit(rectToPct(e.clientX)); });
+  handle.addEventListener('pointerup',   (e)=>{ draggingHandle = false; handle.releasePointerCapture(e.pointerId); });
+  handle.addEventListener('pointercancel',()=> draggingHandle = false);
+
+  // Keyboard on handle
+  handle.addEventListener('keydown', (e)=>{
+    const step = e.shiftKey ? 10 : 2;
+    const curr = Number(range.value)||50;
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); applySplit(curr - step); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); applySplit(curr + step); }
+    if (e.key === 'Home')       { e.preventDefault(); applySplit(0); }
+    if (e.key === 'End')        { e.preventDefault(); applySplit(100); }
+    if (e.key === 'PageDown')   { e.preventDefault(); applySplit(curr - 10); }
+    if (e.key === 'PageUp')     { e.preventDefault(); applySplit(curr + 10); }
+  });
+
+  // Mobile auto-swipe (once per session)
+  const AUTO_KEY = 'vnAutoSwipeDoneMinimal';
+  let autoDone = sessionStorage.getItem(AUTO_KEY) === '1';
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      if (isTouch && !autoDone){
+        autoDone = true;
+        sessionStorage.setItem(AUTO_KEY, '1');
+        const start = Number(range.value)||50, end = 92, dur = 900;
+        const t0 = performance.now();
+        const ease = t => t<.5 ? 2*t*t : -1+(4-2*t)*t;
+        function tick(now){
+          const p = Math.min(1, (now - t0)/dur);
+          const val = Math.round(start + (end - start)*ease(p));
+          applySplit(val);
+          if(p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+      io.unobserve(e.target);
+    });
+  }, { threshold: .35, rootMargin: '0px 0px -10% 0px' });
+  io.observe(stage);
+})();
+</script>
 
 
 
