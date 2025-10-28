@@ -230,8 +230,6 @@
     }
   </style>
 
-  <!-- Webflow/Normalize -->
-  <meta name="generator" content="Webflow">
   <link href="css/denizs-dapper-site-2d192b.webflow.css" rel="stylesheet" type="text/css">
   
   
@@ -1659,6 +1657,467 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
 
 
 
+<!-- ===================================
+     VORHER / NACHHER — COMPACT COMPARE (MINIMAL)
+     clean • dezent • präziser Griff
+     =================================== -->
+<section id="vorher-nachher" class="aurora-sheet is-compact" data-force-light aria-labelledby="vn-title">
+  <div class="container compare-wrap">
+    <header class="compare-head">
+      <h2 id="vn-title" class="aurora-title">Vorher / Nachher</h2>
+      <p class="aurora-subtitle">
+        <span class="subtitle-full">
+          Rohmodell vs. finales Rendering – Material, Licht & Hintergrund im direkten Vergleich.
+        </span>
+      </p>
+    </header>
+
+    <figure class="compare" role="group" aria-labelledby="vn-title" aria-describedby="vn-desc">
+      <div id="vn-desc" class="visually-hidden">
+        Ziehe die Trennlinie oder den Griff, um den Vergleich anzupassen. Mit Tastatur: Pfeil links/rechts, Home/Ende, Bild auf/ab.
+      </div>
+
+      <!-- Bühne -->
+      <div class="compare-stage">
+        <!-- Nachher (unten) -->
+        <img class="img img-after"
+             src="./3DSlideShow/post20.png"
+             alt="Nachher: Finales Rendering"
+             loading="lazy" decoding="async" fetchpriority="low">
+
+        <!-- Vorher (oben, geclippt) -->
+        <img class="img img-before"
+             src="./3DSlideShow/post21.png"
+             alt="Vorher: Grau-Modell"
+             loading="lazy" decoding="async" fetchpriority="low"
+             style="--split:50%;">
+
+        <!-- zentrale Trennlinie (Hairline) -->
+        <span class="divider" aria-hidden="true"></span>
+
+        <!-- Griff (visuell minimal, große unsichtbare Hit-Zone) -->
+        <button class="handle"
+                type="button"
+                role="slider"
+                aria-label="Vergleichsregler"
+                aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+                aria-orientation="horizontal">
+        </button>
+      </div>
+
+      <!-- Range (nur mobil sichtbar) -->
+      <div class="compare-ctrl">
+        <label class="visually-hidden" for="vn-range">Vergleichsregler</label>
+        <input id="vn-range" class="compare-range" type="range"
+               min="0" max="100" value="50" step="1"
+               aria-label="Vergleichsregler: 50 Prozent Vorher sichtbar">
+      </div>
+
+      <figcaption class="compare-cap">
+        Material, Lichtsetzung und Hintergrund transformieren das Modell vom Rohzustand zum finalen Look.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+<style>
+/* ===== Compact shell ===== */
+#vorher-nachher.aurora-sheet{ background: transparent; }
+#vorher-nachher.is-compact{
+  padding: clamp(1.2rem, 1.2rem + 1vw, 2rem) clamp(.8rem, 1.2vw, 1.2rem);
+  border-radius: 14px;
+}
+.compare-wrap{ max-width: 1200px; margin-inline:auto; }
+.compare-head{
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  margin-bottom: var(--space-2, 1rem);
+}
+#vorher-nachher .aurora-title{ margin-bottom:.35rem !important; text-wrap:balance; }
+#vorher-nachher .aurora-subtitle{ line-height:1.6 !important; }
+
+/* ===== Compare (Minimal Look) ===== */
+.compare{
+  --radius: 16px;
+  --shadow: 0 1px 0 rgba(0,0,0,.04), 0 10px 24px rgba(0,0,0,.06);
+  --accent: #6b7cff;
+  --knob: #ffffff;
+  --hairline: color-mix(in oklab, #ffffff 90%, #cfd3da 10%);
+  margin:0; padding:0; border:0;
+}
+:root[data-theme="dark"] .compare{
+  --shadow: 0 1px 0 rgba(255,255,255,.06), 0 12px 28px rgba(0,0,0,.35);
+  --hairline: color-mix(in oklab, #e9ecf3 88%, #a7b0c4 12%);
+  --knob: #f6f8ff;
+}
+
+.compare-stage{
+  position: relative;
+  border-radius: var(--radius);
+  overflow: clip;
+  box-shadow: var(--shadow);
+  background: #0b0c10;
+  aspect-ratio: 16/9;
+  user-select: none;
+  touch-action: none;
+  cursor: ew-resize;
+  isolation: isolate;
+}
+
+/* Bilder */
+.compare .img{
+  position:absolute; inset:0;
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition: opacity .3s ease;
+  opacity: 0; /* fade-in per JS */
+}
+.compare .img-after{ z-index: 1; }
+.compare .img-before{
+  z-index: 2;
+  --split: 50%;
+  clip-path: polygon(0 0, var(--split) 0, var(--split) 100%, 0 100%);
+}
+
+/* Hairline Divider – super dezent, aber sichtbar */
+.compare .divider{
+  position:absolute; top:0; bottom:0; width:1px; z-index: 3;
+  left: calc(var(--split, 50%));
+  background: linear-gradient(to bottom, var(--hairline), color-mix(in oklab, var(--hairline) 70%, transparent));
+  pointer-events:none;
+  transition: left .07s linear;
+}
+
+/* Griff – visuell klein, Hit-Zone groß */
+.compare .handle{
+  position:absolute; top:50%; left: var(--split, 50%); transform: translate(-50%, -50%);
+  z-index: 4;
+  /* sichtbarer Knopf */
+  width: 18px; height: 18px; border-radius:50%;
+  background: var(--knob);
+  box-shadow: 0 1px 0 rgba(0,0,0,.08), 0 6px 14px rgba(0,0,0,.12);
+  border: 1px solid color-mix(in oklab, #000 10%, #6b7cff 20%);
+  /* unsichtbare große Hit-Zone */
+  padding:0; border-width:1px;
+}
+.compare .handle::before{
+  /* unsichtbare Fläche (mind. 44x44) für bessere Greifbarkeit */
+  content:""; position:absolute; inset:-20px; border-radius:999px;
+}
+@media (hover:hover){
+  .compare .handle:hover{ box-shadow: 0 2px 0 rgba(0,0,0,.08), 0 10px 22px rgba(0,0,0,.16); }
+}
+.compare .handle:focus-visible{
+  outline: 3px solid color-mix(in oklab, var(--accent) 60%, transparent);
+  outline-offset: 3px;
+}
+:root[data-theme="dark"] .compare .handle{
+  border-color: color-mix(in oklab, #000 20%, var(--accent) 25%);
+}
+
+/* Range (nur mobil sichtbar) */
+.compare-ctrl{ display:flex; justify-content:center; }
+.compare-range{
+  appearance:none; width: min(720px, 92%); margin: .75rem auto 0;
+  background: transparent; outline: none;
+}
+@media (hover:hover){
+  .compare-ctrl{ display: none; } /* Desktop/Tablet: Range aus */
+}
+.compare-range:focus-visible{ outline: 3px solid var(--focus-ring-color, #6b7cff); outline-offset: 3px; border-radius: 8px; }
+/* Track */
+.compare-range::-webkit-slider-runnable-track{ height: 4px; border-radius: 999px; background: rgba(0,0,0,.12); }
+.compare-range::-moz-range-track{ height: 4px; border-radius: 999px; background: rgba(0,0,0,.12); }
+:root[data-theme="dark"] .compare-range::-webkit-slider-runnable-track,
+:root[data-theme="dark"] .compare-range::-moz-range-track{ background: rgba(255,255,255,.18); }
+/* Thumb */
+.compare-range::-webkit-slider-thumb{
+  -webkit-appearance:none; appearance:none;
+  width: 18px; height: 18px; margin-top: -7px;
+  border-radius: 50%; background: #fff; border: 1px solid rgba(0,0,0,.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,.18);
+}
+.compare-range::-moz-range-thumb{
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #fff; border: 1px solid rgba(0,0,0,.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,.18);
+}
+
+/* Caption (optional) */
+.compare-cap{
+  margin: .6rem 0 0;
+  font-size: .98rem; line-height: 1.55; color:#333; text-align:center;
+}
+:root[data-theme="dark"] .compare-cap{ color:#e9ecf3; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .compare .img, .compare .divider{ transition: none !important; }
+}
+</style>
+<script>
+/* ===== Minimal Compare – clean handling, mobile auto-swipe once ===== */
+(function(){
+  const sec     = document.getElementById('vorher-nachher');
+  const stage   = sec.querySelector('.compare-stage');
+  const before  = stage.querySelector('.img-before');
+  const after   = stage.querySelector('.img-after');
+  const range   = sec.querySelector('#vn-range');
+  const divider = stage.querySelector('.divider');
+  const handle  = stage.querySelector('.handle');
+  const isTouch = matchMedia('(hover:none)').matches;
+
+  // Fade-in when loaded
+  [before, after].forEach(img=>{
+    const show = ()=> img.style.opacity = '1';
+    if (img.complete) show();
+    img.addEventListener('load', show, { once:true });
+  });
+
+  // Apply split (updates all UI)
+  function applySplit(val){
+    const pct = Math.max(0, Math.min(100, Number(val)));
+    before.style.setProperty('--split', pct + '%');
+    divider.style.left = `calc(${pct}% )`;
+    handle.style.left  = pct + '%';
+    range.value = String(pct);
+    range.setAttribute('aria-label', `Vergleichsregler: ${pct} Prozent Vorher sichtbar`);
+    handle.setAttribute('aria-valuenow', String(pct));
+  }
+  applySplit(range.value);
+
+  // % helper
+  const rectToPct = (clientX)=>{
+    const r = stage.getBoundingClientRect();
+    return ((clientX - r.left) / r.width) * 100;
+  };
+
+  // Range (mobile)
+  range.addEventListener('input', (e)=> applySplit(e.target.value));
+
+  // Drag anywhere on stage
+  let draggingStage = false;
+  stage.addEventListener('pointerdown', (e)=>{
+    draggingStage = true; stage.setPointerCapture(e.pointerId);
+    applySplit(rectToPct(e.clientX));
+  });
+  stage.addEventListener('pointermove', (e)=>{ if(draggingStage) applySplit(rectToPct(e.clientX)); });
+  stage.addEventListener('pointerup',   (e)=>{ draggingStage = false; stage.releasePointerCapture(e.pointerId); });
+  stage.addEventListener('pointercancel',()=> draggingStage = false);
+
+  // Drag on handle (preferred)
+  let draggingHandle = false;
+  handle.addEventListener('pointerdown', (e)=>{
+    e.stopPropagation(); draggingHandle = true; handle.setPointerCapture(e.pointerId);
+  });
+  handle.addEventListener('pointermove', (e)=>{ if(draggingHandle) applySplit(rectToPct(e.clientX)); });
+  handle.addEventListener('pointerup',   (e)=>{ draggingHandle = false; handle.releasePointerCapture(e.pointerId); });
+  handle.addEventListener('pointercancel',()=> draggingHandle = false);
+
+  // Keyboard on handle
+  handle.addEventListener('keydown', (e)=>{
+    const step = e.shiftKey ? 10 : 2;
+    const curr = Number(range.value)||50;
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); applySplit(curr - step); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); applySplit(curr + step); }
+    if (e.key === 'Home')       { e.preventDefault(); applySplit(0); }
+    if (e.key === 'End')        { e.preventDefault(); applySplit(100); }
+    if (e.key === 'PageDown')   { e.preventDefault(); applySplit(curr - 10); }
+    if (e.key === 'PageUp')     { e.preventDefault(); applySplit(curr + 10); }
+  });
+
+  // Mobile auto-swipe (once per session)
+  const AUTO_KEY = 'vnAutoSwipeDoneMinimal';
+  let autoDone = sessionStorage.getItem(AUTO_KEY) === '1';
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      if (isTouch && !autoDone){
+        autoDone = true;
+        sessionStorage.setItem(AUTO_KEY, '1');
+        const start = Number(range.value)||50, end = 92, dur = 900;
+        const t0 = performance.now();
+        const ease = t => t<.5 ? 2*t*t : -1+(4-2*t)*t;
+        function tick(now){
+          const p = Math.min(1, (now - t0)/dur);
+          const val = Math.round(start + (end - start)*ease(p));
+          applySplit(val);
+          if(p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+      io.unobserve(e.target);
+    });
+  }, { threshold: .35, rootMargin: '0px 0px -10% 0px' });
+  io.observe(stage);
+})();
+</script>
+
+
+
+<section id="mini-look-gallery" aria-labelledby="mini-look-h">
+  <h2 id="mini-look-h" class="mlg-headline"></h2>
+
+  <ul class="mlg-grid" role="list" aria-label="Materialbeispiele">
+    <!-- Karte 1 -->
+    <li class="mlg-item">
+      <div class="mlg-card" data-duration="2.5" data-fade="1" aria-label="Metall – Slideshow">
+        <img src="./assets/materials/metal_1.jpg" alt="">
+        <img src="./assets/materials/metal_2.jpg" alt="">
+        <img src="./assets/materials/metal_3.jpg" alt="">
+      </div>
+    </li>
+
+    <!-- Karte 2 -->
+    <li class="mlg-item">
+      <div class="mlg-card" data-duration="3" data-fade="1" aria-label="Glas – Slideshow">
+        <img src="./assets/materials/glass_1.jpg" alt="">
+        <img src="./assets/materials/glass_2.jpg" alt="">
+        <img src="./assets/materials/glass_3.jpg" alt="">
+      </div>
+    </li>
+
+    <!-- Karte 3 -->
+    <li class="mlg-item">
+      <div class="mlg-card" data-duration="2.8" data-fade="1" aria-label="Stoff – Slideshow">
+        <img src="./assets/materials/fabric_1.jpg" alt="">
+        <img src="./assets/materials/fabric_2.jpg" alt="">
+        <img src="./assets/materials/fabric_3.jpg" alt="">
+      </div>
+    </li>
+
+    <!-- Karte 4 -->
+    <li class="mlg-item">
+      <div class="mlg-card" data-duration="3.2" data-fade="1.1" aria-label="Lack – Slideshow">
+        <img src="./assets/materials/paint_1.jpg" alt="">
+        <img src="./assets/materials/paint_2.jpg" alt="">
+        <img src="./assets/materials/paint_3.jpg" alt="">
+      </div>
+    </li>
+  </ul>
+</section>
+<!-- GSAP -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<style>
+/* ===== Mini Material & Look – kompakt, alle Karten exakt gleich groß ===== */
+:root {
+  --mlg-gap: clamp(0.8rem, 2vw, 1.4rem);
+}
+
+#mini-look-gallery {
+  padding: clamp(1.6rem, 3.5vw, 3rem) clamp(1rem, 3vw, 2rem);
+  text-align: center;
+  color: #fff;
+  background: transparent;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.mlg-headline {
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  margin: 0 0 1rem;
+  font-size: clamp(1.6rem, 1rem + 1.6vw, 2.2rem);
+}
+
+.mlg-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--mlg-gap);
+  list-style: none;
+  padding: 2rem;
+  margin: 0 auto;
+  max-width: 1440px;
+  justify-items: stretch; /* Karten füllen Spalten */
+  align-items: start;
+}
+
+/* Handy: 2 nebeneinander */
+@media (max-width: 640px) {
+  .mlg-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Jede Karte bleibt quadratisch */
+.mlg-item {
+  display: block;
+}
+
+.mlg-card {
+  position: relative;
+  width: 100%;          /* füllt Spalte */
+  aspect-ratio: 1 / 1;  /* Quadrat */
+  height: auto;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #11141a;
+  box-shadow: 0 6px 20px rgba(0,0,0,.25);
+  isolation: isolate;
+}
+
+/* Bilder im Stack (Crossfade) */
+.mlg-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.03);
+  will-change: opacity, transform;
+}
+
+.mlg-card img:first-child {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Hover-Effekt dezent */
+@media (hover: hover) {
+  .mlg-card:hover img {
+    filter: brightness(1.03) contrast(1.05);
+  }
+}
+
+/* Bewegungsreduktion */
+@media (prefers-reduced-motion: reduce) {
+  .mlg-card img {
+    transform: none !important;
+  }
+}
+</style>
+<script>
+(() => {
+  if (!window.gsap) return;
+  const cards = document.querySelectorAll('.mlg-card');
+
+  cards.forEach((card, idx) => {
+    const imgs = Array.from(card.querySelectorAll('img'));
+    if (imgs.length <= 1) return;
+
+    const hold = parseFloat(card.dataset.duration || 2.5); // Standzeit pro Bild
+    const fade = parseFloat(card.dataset.fade || 1);       // Crossfade-Dauer
+
+    gsap.set(imgs, { opacity: 0, scale: 1.03 });
+    gsap.set(imgs[0], { opacity: 1, scale: 1 });
+
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 0, paused: true });
+
+    imgs.forEach((img, i) => {
+      const next = imgs[(i + 1) % imgs.length];
+      tl.to({}, { duration: hold }); // Haltephase
+      tl.to(img,  { opacity: 0, duration: fade, ease: "power2.out" }, "<");
+      tl.to(next, { opacity: 1, duration: fade, ease: "power2.out" }, "<");
+      tl.to(img,  { scale: 1.03, duration: fade, ease: "power1.out" }, "<");
+      tl.to(next, { scale: 1.00, duration: fade, ease: "power1.out" }, "<");
+    });
+
+    const offset = (idx * 0.45) % hold;
+    gsap.delayedCall(offset, () => tl.play());
+  });
+})();
+</script>
+
+
+
 <section id="aurora-sheet" class="aurora-sheet container" aria-labelledby="aurora-crown" aria-describedby="aurora-chant">
   <h2 id="aurora-crown" class="aurora-title">Nutzen auf einen Blick</h2>
   <p id="aurora-chant" class="aurora-subtitle" aria-live="polite">
@@ -1974,533 +2433,347 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
 
 
 
-<!--
-Arbeitsproben (Showcase)
-Ziel: Kompetenz zeigen.
-Inhalt: Grid aus 6–12 Thumbnails (Renderings/kurze Clips).
-Interaktion: Klick → Lightbox mit kurzer Erklärung („Was wurde gemacht?“).
 
-
-
-
-Vorher/Nachher
-Ziel: Wirkung verständlich machen.
-Inhalt: Slider: Rohmodell vs. finaler Look (Material + Licht + Hintergrund).
-Beschriftung: „Vorher: Grau-Modell“ / „Nachher: Finales Rendering“.
--->
-
-
-
-
-<section class="cluster cosmos-suite" id="nebula-hub" aria-labelledby="nebula-hub-h">
-  <h2 id="nebula-hub-h" class="headline">3D-Design-Leistungen</h2>
-  <p class="subline" id="nebula-hub-sub">
-    Von der Idee bis zum fertigen 3D-Erlebnis – klar, lebendig und markengerecht.
-  </p>
-
-  <ul class="orbit-grid" aria-labelledby="nebula-hub-h" aria-describedby="nebula-hub-sub">
-
-    <!-- Karte 1: 3D-Konzept & Planung -->
-    <li class="module-card" id="svc-webdesign">
-      <div class="payload card-content">
-        <h3>3D-Konzept &amp; Planung</h3>
-        <p class="card-snippet">Aus Ideen wird ein klares 3D-Konzept – verständlich und strukturiert.</p>
-        <ul>
-          <li>Modelle bauen: Produkte, Räume, Szenen</li>
-          <li>Oberflächen geben: Holz, Metall, Stoff – echt wirkend</li>
-          <li>Licht setzen: Stimmung und Highlights planen</li>
-          <li>Testbilder: schnelle Looks zur Freigabe</li>
-        </ul>
-        <a href="./3DKonzept.html" class="warp-cta">Mehr erfahren</a>
-      </div>
-    </li>
-
-    <!-- Karte 2: 3D-Design & Visualisierung -->
-    <li class="module-card stellar-3d" id="svc-3d">
-      <div class="payload card-content">
-        <h3>3D-Design &amp; Visualisierung</h3>
-        <p class="card-snippet">Wir gestalten realistische 3D-Modelle – mit Licht, Farbe und Tiefe.</p>
-        <ul>
-          <li>3D-Modelle erstellen: detailreich und maßgenau</li>
-          <li>Material &amp; Textur: Holz, Metall, Glas echt darstellen</li>
-          <li>Licht &amp; Reflexe: für Stimmung und Atmosphäre</li>
-          <li>Testbilder: Looks prüfen, bevor gerendert wird</li>
-          <li>Dateien: optimiert für Web, Social &amp; Print</li>
-        </ul>
-        <a href="./3DVisualisierung.html" class="warp-cta">Mehr erfahren</a>
-      </div>
-
-      <!-- Hintergrundbild / GIF unten rechts -->
-      <img class="corner-gif"
-           src="./3DSlideShow/test.png"
-           alt=""
-           aria-hidden="true"
-           decoding="async"
-           loading="lazy">
-    </li>
-
-  </ul>
-</section>
-
-
-
-
-<section class="pane-transition" id="flowhub" aria-labelledby="flowhub-h">
-  <div class="pane-world is-visible" id="paneWorld">
-    <div class="pane-wrap">
-      <h2 id="flowhub-h" class="pane-title">So läuft ein 3D-Projekt ab</h2>
-      <p class="pane-subtitle">
-        Schritt für Schritt zum Ergebnis – klar, transparent und ohne Überraschungen.
+<!-- ================================
+     ARBEITSPROBEN — COMPACT (ENHANCED)
+     Karten-Stil wie Next-Level, kompakt & poliert
+     ================================ -->
+<section id="arbeitsproben" class="aurora-sheet board-showcase is-compact" data-force-light aria-labelledby="board-title">
+  <div class="container board-wrap">
+    <header class="board-head">
+      <h2 id="board-title" class="aurora-title">Arbeitsproben</h2>
+      <p class="aurora-subtitle">
+        <span class="subtitle-full">
+          Ausgewählte Renderings & Stills. Ruhiges, reduziertes Grid mit Fokus auf Bildwirkung.
+        </span>
       </p>
+    </header>
 
-      <div class="flow-rail" role="list">
+    <ul class="board-grid" aria-label="Arbeitsproben – Galerie">
+      <!-- Hinweis: tabindex entfernt (rein visuell) -->
+      <li class="cell" data-span="xl">
+        <figure class="card" aria-label="Arbeitsprobe 10" data-theme="tech">
+          <img
+            src="./3DSlideShow/post10.png"
+            alt="Arbeitsprobe 10"
+            loading="lazy" decoding="async" fetchpriority="low"
+            sizes="(min-width:900px) 66vw, 100vw">
+          <figcaption aria-label="Hard Surface – Set">
+            <span class="visually-hidden">Kategorie:</span>
+            <span class="cap-tag">Hard Surface</span>
+            <span class="cap-title">Set</span>
+          </figcaption>
+        </figure>
+      </li>
 
-        <!-- 01: Kickoff -->
-        <div class="flow-card has-art" id="flow-step-01" role="button" tabindex="0"
-             data-stage="01" aria-expanded="false" aria-labelledby="flow-step-01-h" aria-controls="flow-step-01-details">
-          <span class="card-num-giant" aria-hidden="true">01</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">01</span>
-            <h3 id="flow-step-01-h">Kickoff</h3>
-            <p class="m-snippet">Wir besprechen Ziel, Stil und Beispielbilder.</p>
-            <p class="t-snippet">Gemeinsam legen wir fest, was gezeigt werden soll, wer die Zielgruppe ist und welche Wirkung das Ergebnis haben soll.</p>
-            <p>Ergebnis: ein klares Zielbild und ein kurzer Plan für den Ablauf.</p>
-            <div class="details" id="flow-step-01-details">
-              <p>Du erhältst ein kleines Summary mit Zielen und Referenzen als Startpunkt.</p>
-            </div>
-          </div>
-        </div>
+      <li class="cell" data-span="s">
+        <figure class="card" aria-label="Arbeitsprobe 11" data-theme="warm">
+          <img src="./3DSlideShow/post11.png" alt="Arbeitsprobe 11" loading="lazy" decoding="async" fetchpriority="low"
+               sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+          <figcaption aria-label="Automotive">
+            <span class="cap-tag">Automotive</span>
+            <span class="cap-title">Shot</span>
+          </figcaption>
+        </figure>
+      </li>
 
-        <!-- 02: Referenzen sammeln -->
-        <div class="flow-card" id="flow-step-02" role="button" tabindex="0"
-             data-stage="02" aria-expanded="false" aria-labelledby="flow-step-02-h" aria-controls="flow-step-02-details">
-          <span class="card-num-giant" aria-hidden="true">02</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">02</span>
-            <h3 id="flow-step-02-h">Referenzen sammeln</h3>
-            <p class="m-snippet">Wir sammeln Farben, Materialien und Stimmungen.</p>
-            <p class="t-snippet">Ob Holz, Metall oder Stoff – wir definieren den Look anhand realer Beispiele und Markenbilder.</p>
-            <p>So entsteht ein gemeinsames Verständnis für Stil und Atmosphäre.</p>
-            <div class="details" id="flow-step-02-details">
-              <p>Du bekommst Moodboards mit Farb- und Materialvorschlägen.</p>
-            </div>
-          </div>
-        </div>
+      <li class="cell" data-span="s">
+        <figure class="card" aria-label="Arbeitsprobe 12">
+          <img src="./3DSlideShow/post12.png" alt="Arbeitsprobe 12" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="Motion Still">
+            <span class="cap-tag">Motion</span>
+            <span class="cap-title">Still</span>
+          </figcaption>
+        </figure>
+      </li>
 
-        <!-- 03: Modell & Look -->
-        <div class="flow-card" id="flow-step-03" role="button" tabindex="0"
-             data-stage="03" aria-expanded="false" aria-labelledby="flow-step-03-h" aria-controls="flow-step-03-details">
-          <span class="card-num-giant" aria-hidden="true">03</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">03</span>
-            <h3 id="flow-step-03-h">Modell &amp; Look</h3>
-            <p class="m-snippet">Wir erstellen erste Modelle und testen Licht und Perspektive.</p>
-            <p class="t-snippet">Du siehst frühe Vorschauen (z. B. einfache Renderings), um den Stil abzustimmen, bevor Details gebaut werden.</p>
-            <p>Das spart Zeit und sorgt für schnelle Entscheidungen.</p>
-            <div class="details" id="flow-step-03-details">
-              <p>Du erhältst 1–2 Vorschau-Bilder („Look-Tests“) zur Abstimmung.</p>
-            </div>
-          </div>
-        </div>
+      <li class="cell" data-span="m">
+        <figure class="card" aria-label="Arbeitsprobe 13">
+          <img src="./3DSlideShow/post13.png" alt="Arbeitsprobe 13" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="Texturing — UDIM">
+            <span class="cap-tag">Texturing</span>
+            <span class="cap-title">UDIM</span>
+          </figcaption>
+        </figure>
+      </li>
 
-        <!-- 04: Feinschliff -->
-        <div class="flow-card" id="flow-step-04" role="button" tabindex="0"
-             data-stage="04" aria-expanded="false" aria-labelledby="flow-step-04-h" aria-controls="flow-step-04-details">
-          <span class="card-num-giant" aria-hidden="true">04</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">04</span>
-            <h3 id="flow-step-04-h">Feinschliff</h3>
-            <p class="m-snippet">Wir verfeinern Details, Licht und Blickwinkel.</p>
-            <p class="t-snippet">Materialien werden realistischer, Perspektiven präzisiert und Lichtstimmungen abgestimmt.</p>
-            <p>Alles wirkt jetzt so, wie es später aussehen soll.</p>
-            <div class="details" id="flow-step-04-details">
-              <p>Du bekommst eine finale Vorschau zur letzten Freigabe.</p>
-            </div>
-          </div>
-        </div>
+      <li class="cell" data-span="m">
+        <figure class="card" aria-label="Arbeitsprobe 14" data-theme="tech">
+          <img src="./3DSlideShow/post14.png" alt="Arbeitsprobe 14" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="Case Detail">
+            <span class="cap-tag">Product</span>
+            <span class="cap-title">Detail</span>
+          </figcaption>
+        </figure>
+      </li>
 
-        <!-- 05: Export -->
-        <div class="flow-card" id="flow-step-05" role="button" tabindex="0"
-             data-stage="05" aria-expanded="false" aria-labelledby="flow-step-05-h" aria-controls="flow-step-05-details">
-          <span class="card-num-giant" aria-hidden="true">05</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">05</span>
-            <h3 id="flow-step-05-h">Export</h3>
-            <p class="m-snippet">Wir liefern fertige Bilder oder Clips in deinen Wunschformaten.</p>
-            <p class="t-snippet">Alle Daten werden sauber aufbereitet – ob für Web, Social Media oder Druck.</p>
-            <p>Fertig zum Einsatz in Präsentation, Kampagne oder Website.</p>
-            <div class="details" id="flow-step-05-details">
-              <p>Formate: JPG, PNG, MP4 oder ProRes – je nach Verwendungszweck.</p>
-            </div>
-          </div>
-        </div>
+      <li class="cell" data-span="xs">
+        <figure class="card" aria-label="Arbeitsprobe 15">
+          <img src="./3DSlideShow/post15.png" alt="Arbeitsprobe 15" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="Stylized">
+            <span class="cap-tag">LookDev</span>
+            <span class="cap-title">Stylized</span>
+          </figcaption>
+        </figure>
+      </li>
 
-      </div><!-- /.flow-rail -->
-    </div>
+      <li class="cell" data-span="s">
+        <figure class="card" aria-label="Arbeitsprobe 16">
+          <img src="./3DSlideShow/post16.png" alt="Arbeitsprobe 16" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="FX — Passes">
+            <span class="cap-tag">FX</span>
+            <span class="cap-title">Passes</span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <li class="cell" data-span="s">
+        <figure class="card" aria-label="Arbeitsprobe 17">
+          <img src="./3DSlideShow/post17.png" alt="Arbeitsprobe 17" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="Realtime Material">
+            <span class="cap-tag">Realtime</span>
+            <span class="cap-title">Material</span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <li class="cell" data-span="m">
+        <figure class="card" aria-label="Arbeitsprobe 18" data-theme="warm">
+          <img src="./3DSlideShow/post18.png" alt="Arbeitsprobe 18" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="Renderpass">
+            <span class="cap-tag">Comp</span>
+            <span class="cap-title">Renderpass</span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <li class="cell" data-span="xs">
+        <figure class="card" aria-label="Arbeitsprobe 19">
+          <img src="./3DSlideShow/post19.png" alt="Arbeitsprobe 19" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="Macro">
+            <span class="cap-tag">Macro</span>
+            <span class="cap-title">Shot</span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <li class="cell" data-span="l">
+        <figure class="card" aria-label="Arbeitsprobe 20">
+          <img src="./3DSlideShow/post20.png" alt="Arbeitsprobe 20" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="Finish — Final">
+            <span class="cap-tag">Finish</span>
+            <span class="cap-title">Final</span>
+          </figcaption>
+        </figure>
+      </li>
+    </ul>
   </div>
 </section>
 
-<script>
-(function(){
-  const rail = document.querySelector('#flowhub .flow-rail');
-  if(!rail) return;
-  const firstCard = document.querySelector('#flowhub .flow-card');
-
-  function updateTracker(){
-    // nur Mobile
-    if(!window.matchMedia('(max-width: 699.98px)').matches) return;
-
-    const railRect = rail.getBoundingClientRect();
-    const vh = window.innerHeight;
-
-    // Referenzlinie im Viewport (wo "gemessen" wird)
-    const refY = vh * 0.15;
-
-    // Fortschritt: 0 wenn rail-top @ refY, 1 wenn rail-bottom @ refY
-    const progress = (refY - railRect.top) / railRect.height;
-    const p = Math.max(0, Math.min(1, progress));
-
-    // Mitte der ersten Karte relativ zur Rail
-    let firstCenter = 0;
-    if(firstCard){
-      const r = firstCard.getBoundingClientRect();
-      firstCenter = (r.top - railRect.top) + (r.height / 2);
-      // Sicherheitsnetz: falls erste Karte sehr klein/außerhalb ist
-      firstCenter = Math.max(0, Math.min(firstCenter, railRect.height));
-    }
-
-    // Mapping: bei p=0 -> firstCenter; bei p=1 -> railRect.height
-    const y = firstCenter + p * (railRect.height - firstCenter);
-
-    rail.style.setProperty('--tracker-y', y + 'px');
-  }
-
-  const ro = new ResizeObserver(updateTracker);
-  ro.observe(document.documentElement);
-  updateTracker();
-  window.addEventListener('scroll', updateTracker, { passive: true });
-  window.addEventListener('resize', updateTracker);
-  window.addEventListener('load', updateTracker);
-})();
-</script>
-<!-- GSAP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (window.gsap) {
-      // ScrollTrigger wird NICHT mehr verwendet (Scroll-Reveal entfernt),
-      // Registrierung ist aber unschädlich, falls du später wieder willst.
-      gsap.registerPlugin(window.ScrollTrigger || {});
-
-      const cardsList = Array.from(document.querySelectorAll('#flowhub .flow-card'));
-
-      // === Nummerierung 00-basiert (00, 01, 02, ...) ===
-      cardsList.forEach((card, i) => {
-        const nn = String(i).padStart(2, '0');
-        card.setAttribute('data-stage', nn); // für ::after
-        const small = card.querySelector('.card-num');
-        const giant = card.querySelector('.card-num-giant');
-        if (small) small.textContent = nn;
-        if (giant) giant.textContent = nn;
-      });
-
-      // === KEIN Scroll-Reveal mehr: Basiszustand sofort sichtbar/neutral ===
-      gsap.set(cardsList, { opacity: 1, y: 0 });
-
-      // === Nudge (Doppel-Stups) der zweiten Karte, zyklisch — bleibt erhalten ===
-      const isDesktop = () => window.matchMedia('(min-width: 1025px)').matches;
-      let nudgeInterval = null;
-      let nudgeTl = null;
-
-      function clearNudgeTl() {
-        if (nudgeTl) { nudgeTl.kill(); nudgeTl = null; }
-        if (cardsList[1]) gsap.set(cardsList[1], { y: 0 });
-      }
-
-      function stopNudge() {
-        if (nudgeInterval) {
-          clearInterval(nudgeInterval);
-          nudgeInterval = null;
-        }
-        clearNudgeTl();
-      }
-
-      function makeNudge(target, amp = 10) {
-        // zwei leichte Stupser
-        const tl = gsap.timeline({ defaults: { clearProps: false } });
-        tl.to(target, { y: -amp, duration: 0.16, ease: 'power1.out' })
-          .to(target, { y: 0, duration: 0.20, ease: 'power2.out' }, '+=0.02')
-          .to(target, { y: -(amp * 0.7), duration: 0.14, ease: 'power1.out' }, '+=0.18')
-          .to(target, { y: 0, duration: 0.18, ease: 'power2.out' });
-        return tl;
-      }
-
-      function startNudge() {
-        if (prefersReduced || nudgeInterval || !isDesktop() || !cardsList[1]) return;
-        nudgeInterval = setInterval(() => {
-          clearNudgeTl();
-          nudgeTl = makeNudge(cardsList[1], 10);
-        }, 7000);
-      }
-
-      // === Expand/Auto-Cycle nur auf Desktop — bleibt erhalten ===
-      (function(){
-        const rail = document.querySelector('#flowhub .flow-rail');
-        if(!rail) return;
-        const cards = Array.from(rail.querySelectorAll('.flow-card'));
-        const rootEl = document.documentElement;
-        const root = document.getElementById('flowhub');
-        let autoId=null,selectedIdx=-1,railInView=false,booted=false;
-
-        const mqDesktop = window.matchMedia('(min-width:1025px)');
-        let expandMode = mqDesktop.matches && !prefersReduced;
-
-        function syncHeightFromFirst(){
-          const first=cards[0];
-          if(!first) return;
-          const wasOpen=first.classList.contains('is-open');
-          if(!wasOpen) first.classList.add('is-open');
-          const h=first.getBoundingClientRect().height;
-          rootEl.style.setProperty('--tile-h', (h||0)+'px');
-          if(!wasOpen) first.classList.remove('is-open');
-        }
-
-        function openAt(idx){
-          if(!expandMode) return;
-          if(idx<0||idx>=cards.length) return;
-          selectedIdx=idx;
-          stopNudge();
-          cards.forEach((c,i)=>{
-            const open=i===idx;
-            c.classList.toggle('is-open',open);
-            c.setAttribute('aria-expanded',open?'true':'false');
-          });
-          if(idx===0) syncHeightFromFirst();
-        }
-
-        function clearAutoCycle(){ if(autoId){ clearTimeout(autoId); autoId=null; } }
-        function planNext(delayMs=18000){
-          if(!expandMode) return;
-          clearAutoCycle();
-          if(!railInView) return;
-          autoId=setTimeout(()=>{
-            if(!railInView) return;
-            const next=(selectedIdx+1)%cards.length;
-            openAt(next);
-            planNext(delayMs);
-          },delayMs);
-        }
-
-        cards.forEach((c,i)=>{
-          c.addEventListener('click',()=>{ if(!expandMode) return; stopNudge(); openAt(i); planNext(); });
-          c.addEventListener('keydown',e=>{
-            if(!expandMode) return;
-            if(e.key==='Enter'||e.key===' '){ e.preventDefault(); stopNudge(); openAt(i); planNext(); }
-          });
-        });
-
-        const io=new IntersectionObserver((entries)=>{
-          const entry=entries[0];
-          railInView=entry.isIntersecting && entry.intersectionRatio>=0.5;
-          if(!expandMode) return;
-          if(railInView){
-            if(!booted){ booted=true; openAt(0); planNext(); root.classList.add('booted'); }
-            else { planNext(); }
-            startNudge(); // Sichtbar + Desktop -> Nudge starten
-          } else {
-            stopNudge();  // nicht sichtbar -> pausieren
-          }
-        },{threshold:[0,0.5,1]});
-        io.observe(rail);
-
-        function applyMode(){
-          expandMode = mqDesktop.matches && !prefersReduced;
-          if (root){
-            root.classList.toggle('is-enhanced', expandMode);
-          }
-          if(!expandMode){
-            clearAutoCycle();
-            cards.forEach(c=>{ c.classList.add('is-open'); c.setAttribute('aria-expanded','true'); });
-            rootEl.style.setProperty('--tile-h','auto');
-            stopNudge();
-            root?.classList.remove('booted');
-          }else{
-            cards.forEach(c=>{ c.classList.remove('is-open'); c.setAttribute('aria-expanded','false'); });
-            openAt(Math.max(0,selectedIdx,0)); // sofort öffnen
-            root?.classList.add('booted');     // Boot-Modus aktivieren
-            if(railInView){ planNext(); startNudge(); }
-          }
-        }
-
-        mqDesktop.addEventListener('change', applyMode);
-        window.addEventListener('resize', () => { if(expandMode) syncHeightFromFirst(); });
-
-        applyMode();
-
-        // Doppelt absichern: beim Laden direkt öffnen falls Desktop
-        if (expandMode) { openAt(0); root?.classList.add('booted'); }
-      })();
-    }
-  });
-</script>
-
-
-
-<section id="mini-look-gallery" aria-labelledby="mini-look-h">
-  <h2 id="mini-look-h" class="mlg-headline">Material &amp; Look</h2>
-
-  <ul class="mlg-grid" role="list" aria-label="Materialbeispiele">
-    <!-- Karte 1 -->
-    <li class="mlg-item">
-      <div class="mlg-card" data-duration="2.5" data-fade="1" aria-label="Metall – Slideshow">
-        <img src="./assets/materials/metal_1.jpg" alt="">
-        <img src="./assets/materials/metal_2.jpg" alt="">
-        <img src="./assets/materials/metal_3.jpg" alt="">
-      </div>
-    </li>
-
-    <!-- Karte 2 -->
-    <li class="mlg-item">
-      <div class="mlg-card" data-duration="3" data-fade="1" aria-label="Glas – Slideshow">
-        <img src="./assets/materials/glass_1.jpg" alt="">
-        <img src="./assets/materials/glass_2.jpg" alt="">
-        <img src="./assets/materials/glass_3.jpg" alt="">
-      </div>
-    </li>
-
-    <!-- Karte 3 -->
-    <li class="mlg-item">
-      <div class="mlg-card" data-duration="2.8" data-fade="1" aria-label="Stoff – Slideshow">
-        <img src="./assets/materials/fabric_1.jpg" alt="">
-        <img src="./assets/materials/fabric_2.jpg" alt="">
-        <img src="./assets/materials/fabric_3.jpg" alt="">
-      </div>
-    </li>
-
-    <!-- Karte 4 -->
-    <li class="mlg-item">
-      <div class="mlg-card" data-duration="3.2" data-fade="1.1" aria-label="Lack – Slideshow">
-        <img src="./assets/materials/paint_1.jpg" alt="">
-        <img src="./assets/materials/paint_2.jpg" alt="">
-        <img src="./assets/materials/paint_3.jpg" alt="">
-      </div>
-    </li>
-  </ul>
-</section>
-<!-- Mobile und Tablet, grid nebeneinander!-->
-<!-- GSAP -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
 <style>
-/* ===== Mini Material & Look – kompakt, alle Karten exakt gleich groß ===== */
-:root{
-  --mlg-size: clamp(140px, 18vw, 220px); /* einheitliche Kartengröße */
-  --mlg-gap: clamp(0.8rem, 2vw, 1.4rem);
-}
-
-#mini-look-gallery{
-  padding: clamp(1.6rem, 3.5vw, 3rem) clamp(1rem, 3vw, 2rem);
-  text-align: center;
-  color: #fff;
-  background: transparent;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
-
-.mlg-headline{
-  font-weight: 850;
-  letter-spacing: -0.02em;
-  line-height: 1.12;
-  margin: 0 0 1rem;
-  font-size: clamp(1.6rem, 1rem + 1.6vw, 2.2rem);
-}
-
-.mlg-grid{
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--mlg-gap);
-  list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  max-width: 1100px;
-  justify-items: center;  /* Karten mittig in jeder Spalte */
-  align-items: start;
-}
-
-@media (max-width: 900px){
-  .mlg-grid{ grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 520px){
-  .mlg-grid{ grid-template-columns: 1fr; }
-}
-
-/* Jede Karte: exakt gleich groß & quadratisch */
-.mlg-item{ display: block; }
-.mlg-card{
-  position: relative;
-  width: var(--mlg-size);
-  height: var(--mlg-size);   /* garantiert Quadrat */
+/* ===== Always-Compact Section (ohne Glas-Hintergrund) ===== */
+#arbeitsproben.aurora-sheet{ background: transparent; }
+#arbeitsproben.is-compact.aurora-sheet{
+  padding: clamp(1.2rem, 1.2rem + 1vw, 2rem) clamp(.8rem, 1.2vw, 1.2rem);
   border-radius: 14px;
-  overflow: hidden;
-  background: #11141a;
-  box-shadow: 0 6px 20px rgba(0,0,0,.25);
-  isolation: isolate;
+  box-shadow: none;
+}
+.board-wrap{ position: relative; }
+.board-head{
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  margin-bottom: var(--space-2, 1rem);
+}
+/* Mikrotypografie Headline/Subline */
+#arbeitsproben .aurora-title{ margin-bottom:.35rem !important; text-wrap:balance; }
+#arbeitsproben .aurora-subtitle{ line-height:1.6 !important; }
+
+/* ===== Grid ===== */
+.board-grid{
+  --gap: clamp(10px, 1.4vw, 16px);
+  display:grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gap); list-style:none; padding:0; margin:0;
+  perspective: 900px; /* für Tilt */
+}
+.board-grid .cell{
+  grid-column: span 12;
+  content-visibility: auto;
+  contain-intrinsic-size: 260px 200px; /* CLS-Schutz */
+}
+/* Erste Reihe sofort sichtbar (kuratierter Flow) */
+.board-grid .cell:nth-child(-n+3){ opacity:1 !important; transform:none !important; }
+
+@media (min-width: 900px){
+  .board-grid .cell{ grid-column: span 4; }
+  .board-grid .cell[data-span="xs"]{ grid-column: span 3; }
+  .board-grid .cell[data-span="s"] { grid-column: span 4; }
+  .board-grid .cell[data-span="m"] { grid-column: span 6; }
+  .board-grid .cell[data-span="l"] { grid-column: span 8; }
+  .board-grid .cell[data-span="xl"]{ grid-column: span 12; }
+}
+@media (min-width: 600px) and (max-width: 899px){
+  .board-grid .cell{ grid-column: span 6; }
+  .board-grid .cell[data-span="xl"]{ grid-column: span 12; }
 }
 
-/* Bilder im Stack (Crossfade) */
-.mlg-card img{
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transform: scale(1.03);  /* minimaler Zoom für Tiefe */
-  will-change: opacity, transform;
+/* ===== Karten-Stil (wie Next-Level-Board) + Soft-Edge ===== */
+.card{
+  --accent: #7aa2ff; /* per data-theme änderbar */
+  position: relative; overflow: hidden; border-radius: 16px;
+  background: #f7f7f7;
+  box-shadow: 0 1px 0 rgba(0,0,0,.05), 0 12px 28px rgba(0,0,0,.06);
+  transform-style: preserve-3d;
+  transition: transform .6s cubic-bezier(.19,1,.22,1), box-shadow .6s ease;
+  cursor: default; outline: none;
+}
+/* Themenfarben (nur Tag) */
+.card[data-theme="warm"]{ --accent:#ff7a45; }
+.card[data-theme="tech"]{ --accent:#72e0ff; }
+
+/* Soft Edge */
+.card::after{
+  content:""; position:absolute; inset:0; pointer-events:none; border-radius: inherit;
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, #fff 35%, transparent);
+  opacity:.65;
+}
+/* Ambient Glow */
+.card::before{
+  content: ""; position: absolute; inset: -2px;
+  background: radial-gradient(circle at 50% 110%, rgba(255,255,255,.15), transparent 70%);
+  opacity: 0; transition: opacity .6s ease; z-index: 0;
+}
+.card:hover::before{ opacity: 1; }
+:root[data-theme="dark"] .card{ background:#0c0e13; box-shadow: 0 1px 0 rgba(255,255,255,.06), 0 12px 28px rgba(0,0,0,.35); }
+:root[data-theme="dark"] .card::after{ box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
+:root[data-theme="dark"] .card:hover::before{
+  background: radial-gradient(circle at 50% 110%, rgba(120,160,255,.22), transparent 70%);
 }
 
-.mlg-card img:first-child{ opacity: 1; transform: scale(1); }
+/* Image: Basis & span-aware Ratios */
+.card img{
+  width: 100%; height: 100%; display: block; object-fit: cover;
+  aspect-ratio: 16/10; /* default */
+  filter: grayscale(100%) contrast(1.08) brightness(1.04);
+  transition: transform .6s cubic-bezier(.19,1,.22,1), filter .6s ease, opacity .35s ease;
+  transform-origin: center; will-change: transform; z-index:1; opacity:0; /* Fade-in via JS */
+}
+.cell[data-span="l"]  .card img{ aspect-ratio: 21/9; }
+.cell[data-span="xl"] .card img{ aspect-ratio: 2/1; }
+.cell[data-span="xs"] .card img{ aspect-ratio: 4/3; }
 
-/* Hover optional dezent */
+/* Overlay Caption (Tag + Titel) mit adaptivem Kontrast */
+.card figcaption{
+  position: absolute; inset: 0; display: flex; flex-direction:column; gap:.25rem;
+  align-items: flex-start; justify-content: flex-end;
+  padding: 1rem 1.2rem;
+  font-size: 1rem; font-weight: 600; color: #fff;
+  background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0)); /* Fallback */
+  opacity: 0; transition: opacity .45s ease; z-index: 2;
+}
+/* Optional: wenn du serverseitig Luma bewertest */
+.card[data-on-light] figcaption{ background: linear-gradient(to top, rgba(0,0,0,.68), rgba(0,0,0,0)); }
+.card[data-on-dark]  figcaption{ background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0)); }
+/* Hover-Verstärkung, falls Bild sehr hell ist */
+.card:hover figcaption{ background: linear-gradient(to top, rgba(0,0,0,.62), rgba(0,0,0,.08)); }
+
+.cap-tag{
+  font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
+  color:#fff;
+  background: color-mix(in oklab, var(--accent) 45%, black 10%);
+  padding:.22rem .5rem; border-radius:6px;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 1px 2px rgba(0,0,0,.25);
+}
+.cap-title{ font-size:1.02rem; font-weight:700; text-shadow:0 1px 2px rgba(0,0,0,.35); }
+:root[data-theme="dark"] .cap-tag{ background: rgba(0,0,0,.28); }
+
 @media (hover:hover){
-  .mlg-card:hover img{ filter: brightness(1.03) contrast(1.05); }
+  .card:hover img{
+    transform: scale(1.05) translateY(-2px);
+    filter: grayscale(10%) contrast(1.05) brightness(1.05);
+  }
+  .card:hover{ box-shadow: 0 24px 48px rgba(0,0,0,.16); }
+  .card figcaption{ opacity:0; }      /* Desktop: Caption nur bei Hover */
+  .card:hover figcaption{ opacity:1; }
+}
+@media (hover:none){
+  .card figcaption{ opacity:1; }      /* Mobile: Caption sichtbar */
 }
 
-/* Bewegungsreduktion */
+/* Fokus/A11y – rein visuell, ohne Tab-Stops */
+.card:focus-visible figcaption{
+  opacity:1;
+  outline: 2px dashed rgba(255,255,255,.7);
+  outline-offset: 6px;
+}
+
+/* Scroll-Reveal (gestrafft) */
+.cell{ opacity:0; transform: translateY(16px) scale(.985); }
+.cell.is-in{
+  opacity:1; transform: translateY(0) scale(1);
+  transition: transform .6s cubic-bezier(.19,1,.22,1), opacity .6s ease;
+}
+
+/* Reduced Motion & Touch */
 @media (prefers-reduced-motion: reduce){
-  .mlg-card img{ transform: none !important; }
+  .card, .card img, .cell{ transition:none !important; transform:none !important; }
+}
+@media (pointer:coarse){
+  .card{ transform:none !important; } /* Tilt aus auf Touch */
 }
 </style>
+
 <script>
-(() => {
-  if (!window.gsap) return;
-  const cards = document.querySelectorAll('.mlg-card');
+/* ===== Interaktionen: Reveal + sanfter Tilt + Img Fade-In ===== */
+(function(){
+  const section = document.getElementById('arbeitsproben');
+  const grid = section.querySelector('.board-grid');
+  const cells = Array.from(grid.querySelectorAll('.cell'));
 
-  cards.forEach((card, idx) => {
-    const imgs = Array.from(card.querySelectorAll('img'));
-    if (imgs.length <= 1) return;
-
-    const hold = parseFloat(card.dataset.duration || 2.5); // Standzeit pro Bild
-    const fade = parseFloat(card.dataset.fade || 1);       // Crossfade-Dauer
-
-    // Startzustand
-    gsap.set(imgs, { opacity: 0, scale: 1.03 });
-    gsap.set(imgs[0], { opacity: 1, scale: 1 });
-
-    const tl = gsap.timeline({ repeat: -1, repeatDelay: 0, paused: true });
-
-    imgs.forEach((img, i) => {
-      const next = imgs[(i + 1) % imgs.length];
-      tl.to({}, { duration: hold }); // Haltephase
-      // Crossfade + sanfter Scale-Ausgleich (Ken-Burns mini)
-      tl.to(img,  { opacity: 0, duration: fade, ease: "power2.out" }, "<");
-      tl.to(next, { opacity: 1, duration: fade, ease: "power2.out" }, "<");
-      tl.to(img,  { scale: 1.03, duration: fade, ease: "power1.out" }, "<");
-      tl.to(next, { scale: 1.00, duration: fade, ease: "power1.out" }, "<");
+  // Scroll-Reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
+      }
     });
+  }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+  cells.forEach(c=> io.observe(c));
 
-    // leicht versetzter Start je Karte, wirkt natürlicher
-    const offset = (idx * 0.45) % hold;
-    gsap.delayedCall(offset, () => tl.play());
+  // Karten sind rein visuell: Klicks blocken
+  grid.addEventListener('click', (e)=>{
+    const card = e.target.closest('.card');
+    if(card){ e.preventDefault(); e.stopPropagation(); }
+  }, {capture:true});
+
+  // Tastatur: Enter/Space neutralisieren (falls Card doch fokusierbar wäre)
+  grid.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault(); e.stopPropagation();
+      }
+    });
+  });
+
+  // Ruhiger Tilt (nur Präzisions-Pointer)
+  const max = 4; // maximal ~4°
+  const coarse = matchMedia('(pointer:coarse)');
+  grid.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('mousemove', e=>{
+      if (coarse.matches) return;
+      const r = card.getBoundingClientRect();
+      const x = ((e.clientX - r.left)/r.width - .5) * -max;
+      const y = ((e.clientY - r.top )/r.height - .5) *  max;
+      card.style.transform = `rotateX(${y}deg) rotateY(${x}deg) translateY(-2px)`;
+    });
+    card.addEventListener('mouseleave', ()=> card.style.transform = '');
+  });
+
+  // Mini Fade-In Loader für Bilder (verhindert hartes Aufpoppen)
+  grid.querySelectorAll('img').forEach(img=>{
+    const markLoaded = () => img.setAttribute('data-loaded','true'), show = () => img.style.opacity = '1';
+    if (img.complete) { markLoaded(); show(); }
+    img.addEventListener('load', ()=> { markLoaded(); show(); }, { once:true });
   });
 })();
 </script>
@@ -2508,39 +2781,878 @@ Beschriftung: „Vorher: Grau-Modell“ / „Nachher: Finales Rendering“.
 
 
 
+<!-- =============================================
+     Kontakt + Video (gleich hohe Karten) + Testimonials
+     – 6-Step Wizard-Form (Formspree) + Success-Screen
+     ============================================= -->
+<section class="kontakt-testimonial-section" id="kontakt">
+  <div class="kontakt-testimonial-wrapper">
+
+    <!-- === Kontaktkarte === -->
+    <div class="kontakt-area">
+      <h2 class="section-title">Lass uns loslegen!</h2>
+      <p class="kontakt-subline">
+        Eine starke Idee verdient ein starkes digitales Erlebnis.
+      </p>
+
+      <!-- === Formular (Wizard) === -->
+      <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm" novalidate>
+
+        <!-- STEP 1: Leistungswahl -->
+        <fieldset class="form-step active" data-step="1" aria-labelledby="step1Title">
+          <legend id="step1Title" class="sr-only">Leistungswahl</legend>
+          <p class="copy step1-copy">Wofür interessierst du dich?</p>
+
+          <div class="grid-choices" role="radiogroup" aria-label="Leistung wählen">
+            <label class="choice" tabindex="0">
+              <input type="radio" name="service" value="Webdesign" data-toggle="web" />
+              <span class="title">Kostenlose 3D-Vorschau</span>
+              <small>0€, innerhalb von 48h!</small>
+            </label>
+
+          </div>
+        </fieldset>
+
+        <!-- STEP 2: Material & Styleguide -->
+        <fieldset class="form-step" data-step="2" aria-labelledby="step2Title">
+          <legend id="step2Title" class="sr-only">Material & Styleguide</legend>
+
+          <!-- Web -->
+          <div class="service-block" data-service="web">
+            <label class="select-row">
+              <span class="website-label">Material (Texte / Bilder / Logo)</span>
+              <select name="web_material">
+                <option value="">Bitte wählen</option>
+                <option value="alles">Alles vorhanden</option>
+                <option value="teilweise">Teilweise vorhanden</option>
+                <option value="nichts">Bitte komplett erstellen</option>
+              </select>
+            </label>
+
+            <label class="select-row">
+              <span class="website-label">Styleguide / CI vorhanden?</span>
+              <select name="web_styleguide">
+                <option value="">Bitte wählen</option>
+                <option value="ja">Ja</option>
+                <option value="nein">Nein</option>
+              </select>
+            </label>
+          </div>
+
+          <!-- 3D -->
+          <div class="service-block" data-service="d3">
+       <label class="select-row">
+              <span class="website-label">3D-Daten / Modelle vorhanden?</span>
+              <select name="d3_daten">
+                <option value="">Bitte wählen</option>
+                <option value="vorhanden">Ja, vorhanden</option>
+                <option value="modellierung_noetig">Nein, bitte modellieren</option>
+              </select>
+            </label>
+          </div>
+
+          <!-- Grafik -->
+          <div class="service-block" data-service="gfx">
+            <label class="select-row">
+              <span class="website-label">Branding / Styleguide vorhanden?</span>
+              <select name="gfx_styleguide">
+                <option value="">Bitte wählen</option>
+                <option value="ja">Ja</option>
+                <option value="nein">Nein</option>
+              </select>
+            </label>
+
+            <label class="select-row">
+              <span class="website-label">Text- / Bildmaterial</span>
+              <select name="gfx_material">
+                <option value="">Bitte wählen</option>
+                <option value="alles">Alles vorhanden</option>
+                <option value="teilweise">Teilweise</option>
+                <option value="nichts">Bitte erstellen</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- STEP 3: Projektspezifikationen -->
+        <fieldset class="form-step" data-step="3" aria-labelledby="step3Title">
+          <legend id="step3Title" class="sr-only">Projektspezifikationen</legend>
+
+          <!-- Web -->
+          <div class="service-block" data-service="web">
+            <label class="select-row">
+              <span class="website-label">Website-Typ</span>
+              <select name="web_typ">
+                <option value="">Bitte wählen</option>
+                <option value="unternehmensseite">Unternehmensseite</option>
+                <option value="portfolio">Portfolio</option>
+                <option value="shop">Online-Shop</option>
+                <option value="landingpage">Landingpage</option>
+                <option value="sonstiges">Sonstiges</option>
+              </select>
+            </label>
+
+            <fieldset class="checkbox-group tags" aria-label="Besondere Schwerpunkte">
+              <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Ladegeschwindigkeit" /><span>Ladegeschwindigkeit</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Responsiveness" /><span>Responsiveness</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="SEO" /><span>SEO</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Benutzerfreundlichkeit" /><span>Benutzerfreundlichkeit</span></label>
+              <label class="pill"><input type="checkbox" name="web_prios[]" value="Designqualität" /><span>Designqualität</span></label>
+            </fieldset>
+          </div>
+
+          <!-- 3D -->
+          <div class="service-block" data-service="d3">
+            <label class="select-row">
+              <span class="website-label">Was soll entstehen?</span>
+              <select name="d3_typ">
+                <option value="">Bitte wählen</option>
+                <option value="rendering">Rendering</option>
+                <option value="animation">Animation</option>
+                <option value="produktvisualisierung">Produktvisualisierung</option>
+                <option value="architekturvisualisierung">Architekturvisualisierung</option>
+                <option value="sonstiges">Sonstiges</option>
+              </select>
+            </label>
+
+            <label class="select-row">
+              <span class="website-label">Verwendungszweck</span>
+              <select name="d3_use">
+                <option value="">Bitte wählen</option>
+                <option value="marketing">Marketing / Werbung</option>
+                <option value="praesentation">Präsentation</option>
+                <option value="shop">Online-Shop</option>
+                <option value="print">Print</option>
+              </select>
+            </label>
+          </div>
+
+          <!-- Grafik -->
+          <div class="service-block" data-service="gfx">
+            <label class="select-row">
+              <span class="website-label">Design-Typ</span>
+              <select name="gfx_typ">
+                <option value="">Bitte wählen</option>
+                <option value="logo">Logo</option>
+                <option value="visitenkarte">Visitenkarte</option>
+                <option value="flyer_poster">Flyer / Poster</option>
+                <option value="styleguide">Styleguide</option>
+                <option value="sonstiges">Sonstiges</option>
+              </select>
+            </label>
+
+            <fieldset class="checkbox-group tags" aria-label="Prioritäten Grafikdesign">
+              <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Brand-Konsistenz" /><span>Brand-Konsistenz</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Typografie" /><span>Typografie</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Druckvorbereitung" /><span>Druckvorbereitung</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Illustration" /><span>Illustration</span></label>
+              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Schnelle Umsetzung" /><span>Schnelle Umsetzung</span></label>
+            </fieldset>
+          </div>
+        </fieldset>
+
+        <!-- STEP 4: Zeit & Budget -->
+        <fieldset class="form-step" data-step="4" aria-labelledby="step4Title">
+          <legend id="step4Title" class="sr-only">Zeit & Budget</legend>
+
+          <label class="input-row">
+            <span class="website-label">Deadline / Zeitraum</span>
+            <input type="text" name="deadline" placeholder="z. B. bis 15. November oder Q4" />
+          </label>
+
+          <label class="input-row">
+            <span class="website-label">Budgetrahmen (optional)</span>
+            <input type="text" name="budget" placeholder="z. B. 3 000–6 000 €" />
+          </label>
+        </fieldset>
+
+        <!-- STEP 5: Kontaktdaten -->
+        <fieldset class="form-step" data-step="5" aria-labelledby="step5Title">
+          <legend id="step5Title" class="sr-only">Kontaktdaten</legend>
+
+          <input type="hidden" name="_subject" id="autoSubject" />
+          <textarea class="sr-only" name="summary_plain" id="summaryPlain" aria-hidden="true"></textarea>
+          <input type="hidden" name="selected_service" id="selectedService" />
+
+          <div class="contact-grid">
+            <div class="field span-6">
+              <label for="name" class="req">Name</label>
+              <input id="name" type="text" name="name" placeholder="Dein Name" autocomplete="name" required />
+            </div>
+
+            <div class="field span-6">
+              <label for="email" class="req">E-Mail</label>
+              <input id="email" type="email" name="email" placeholder="dein@mail.de" autocomplete="email" required />
+            </div>
+
+            <div class="field span-6">
+              <label for="phone">Telefon (optional)</label>
+              <input id="phone" type="tel" name="phone" placeholder="z. B. +49 151 12345678" autocomplete="tel" />
+            </div>
+
+            <div class="field span-12">
+              <label for="message" class="req">Nachricht</label>
+              <textarea id="message" name="message" rows="6" placeholder="Kurz dein Projekt / Ziel beschreiben …" minlength="5" required></textarea>
+            </div>
+
+            <p class="req-note">* Pflichtfelder</p>
+          </div>
+
+          <p class="legal-hint">
+            Deine Angaben werden über <strong>Formspree</strong> zur Beantwortung deiner Anfrage verarbeitet.
+            Mehr unter <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.
+          </p>
+        </fieldset>
+
+        <!-- STEP 6: Erfolg -->
+        <fieldset class="form-step" data-step="6" aria-labelledby="step6Title">
+          <legend id="step6Title" class="sr-only">Abschluss</legend>
+          <div class="success-card" role="status" aria-live="polite">
+            <h3 class="success-title">Geschafft! 🎉</h3>
+            <p class="success-copy">Vielen Dank für deine Anfrage. <br>Wir melden uns in Kürze bei dir.</p>
+            <p class="success-sub">Du wirst gleich automatisch zum Start zurückgeführt …</p>
+            <button type="button" class="success-btn" disabled>✅ Anfrage gesendet</button>
+          </div>
+        </fieldset>
+
+        <!-- === Fortschritt === -->
+        <div class="stepper" aria-label="Fortschritt" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1">
+          <div class="stepper-header"><span id="stepLabel">Schritt 1 / 6</span></div>
+          <div class="stepper-track"><div class="stepper-fill" id="stepperFill" style="width:0%"></div></div>
+        </div>
+
+        <!-- === Navigation === -->
+        <div class="wizard-nav" id="wizardNav">
+          <button type="button" class="nav-btn prev" id="prevBtn" disabled>Zurück</button>
+          <button type="button" class="nav-btn next" id="nextBtn" disabled>Weiter</button>
+          <button type="submit" class="kontakt-btn submit" id="submitBtn" hidden>Senden!</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- === Video-Karte === -->
+    <div class="video-area" aria-label="Einblick in Prozess, Tools & Zusammenarbeit">
+      <div class="video-card">
+        <video class="video-media" autoplay loop muted playsinline preload="auto">
+          <source src="./indexFotoSlideShow/kartenvideo.mp4" type="video/mp4">
+          Dein Browser unterstützt das Video-Tag nicht.
+        </video>
+      </div>
+    </div>
+
+    <!-- === Testimonials === -->
+    <div class="testimonial-area">
+      <testimonial-slider></testimonial-slider>
+    </div>
+  </div>
+</section>
+<script>
+(function () {
+  const form = document.getElementById('kontaktForm');
+  if (!form) return;
+
+  /* =========================
+     Cache DOM
+  ========================== */
+  const allSteps  = Array.from(form.querySelectorAll('.form-step'));
+  const stepper   = form.querySelector('.stepper');
+  const stepLabel = document.getElementById('stepLabel');
+  const stepFill  = document.getElementById('stepperFill');
+  const prevBtn   = document.getElementById('prevBtn');
+  const nextBtn   = document.getElementById('nextBtn');
+  const submitBtn = document.getElementById('submitBtn');
+
+  // Success-Card DOM
+  const successFieldset = allSteps.find(s => s.dataset.step === '6');
+  const successCard     = successFieldset?.querySelector('.success-card');
+  const successBtn      = successFieldset?.querySelector('.success-btn');
+  const successSub      = successFieldset?.querySelector('.success-sub');
+
+  /* =========================
+     Live Status (a11y)
+  ========================== */
+  let statusBox = form.querySelector('[data-status]');
+  if (!statusBox) {
+    statusBox = document.createElement('div');
+    statusBox.setAttribute('data-status','');
+    statusBox.setAttribute('role','status');
+    statusBox.setAttribute('aria-live','polite');
+    statusBox.style.cssText = 'margin:.5rem 0 .25rem;font-weight:700;text-align:center;';
+    form.insertBefore(statusBox, form.firstChild);
+  }
+  const setStatus = (msg, tone='')=>{
+    statusBox.textContent = msg || '';
+    statusBox.style.color =
+      tone==='error' ? '#b00020' :
+      tone==='ok'    ? '#0a7f2e' :
+      tone==='warn'  ? '#a15c00' : 'inherit';
+  };
+
+  /* =========================
+     Hidden Fields / Honeypot
+  ========================== */
+  ensureHidden({ id:'autoSubject',     name:'_subject',         tag:'input'    });
+  ensureHidden({ id:'summaryPlain',    name:'summary_plain',    tag:'textarea' });
+  ensureHidden({ id:'selectedService', name:'selected_service', tag:'input'    });
+  ensureHidden({ id:'honeypot',        name:'_gotcha',          tag:'input'    });
+  ensureHidden({ id:'metaRef',         name:'_referrer',        tag:'input'    }).value = location.href;
+  ensureHidden({ id:'metaUA',          name:'_userAgent',       tag:'input'    }).value = navigator.userAgent;
+  ensureHidden({ id:'metaOrigin',      name:'_origin',          tag:'input'    }).value = location.origin;
+
+  function ensureHidden({id,name,tag='input'}) {
+    let el = form.querySelector('#'+id);
+    if (!el) {
+      el = document.createElement(tag);
+      el.id = id; el.name = name;
+      if (tag==='input') el.type = 'hidden';
+      el.className = 'sr-only'; el.setAttribute('aria-hidden','true');
+      form.appendChild(el);
+    } else if (el.name !== name) {
+      el.name = name;
+    }
+    return el;
+  }
+
+  /* =========================
+     Helpers
+  ========================== */
+  const q  = (sel,root=form)=>root.querySelector(sel);
+  const qa = (sel,root=form)=>Array.from(root.querySelectorAll(sel));
+  const trim = s => (s||'').toString().trim();
+
+  function collectStepData(stepEl) {
+    const data = {};
+    stepEl.querySelectorAll('input, select, textarea').forEach(el=>{
+      if (el.disabled || el.closest('[hidden]')) return;
+      if (el.type === 'checkbox') {
+        if (!data[el.name]) data[el.name] = [];
+        if (el.checked) data[el.name].push(el.value);
+      } else if (el.type === 'radio') {
+        if (el.checked) data[el.name] = el.value;
+      } else if (el.tagName === 'SELECT') {
+        if (el.value) data[el.name] = el.value;
+      } else {
+        const v = trim(el.value);
+        if (v) data[el.name] = v;
+      }
+    });
+    return data;
+  }
+  function hasVisibleControls(stepEl){
+    const controls = Array.from(stepEl.querySelectorAll('input,select,textarea'));
+    return controls.some(el => !el.disabled && !el.closest('[hidden]'));
+  }
+  function getApplicableSteps(){
+    const base = allSteps.filter(s => hasVisibleControls(s) && s.dataset.step !== '6');
+    const success = allSteps.find(s => s.dataset.step === '6');
+    return form.classList.contains('is-success') && success ? [...base, success] : base;
+  }
+  function getCurrentIndex(){ return Math.max(0, getApplicableSteps().indexOf(currentStepEl)); }
+  function clampIndex(i){ const st = getApplicableSteps(); return Math.min(Math.max(i,0), st.length-1); }
+
+  function isContactStep(stepEl){
+    if (!stepEl) return false;
+    if (stepEl.dataset.step === '5') return true;
+    const hasName = stepEl.querySelector('input[name="name"]');
+    const hasMail = stepEl.querySelector('input[name="email"]');
+    const hasMsg  = stepEl.querySelector('textarea[name="message"]');
+    return !!(hasName || hasMail || hasMsg);
+  }
+
+  /* =========================
+     UI / Progress
+  ========================== */
+  function updateChoiceUI(){
+    form.querySelectorAll('.grid-choices .choice').forEach(label=>{
+      const rb = label.querySelector('input[type="radio"]');
+      label.classList.toggle('selected', !!(rb && rb.checked));
+    });
+    const any = form.querySelector('input[name="service"]:checked');
+    if(currentStepEl === allSteps[0]) nextBtn.disabled = !any;
+    setProgress(getCurrentIndex());
+  }
+
+  function updatePillUI(){
+    form.querySelectorAll('.pill').forEach(lbl=>{
+      const cb = lbl.querySelector('input[type="checkbox"]');
+      lbl.classList.toggle('selected', !!(cb && cb.checked));
+    });
+  }
+
+  function syncServiceBlocks(){
+    const sel = form.querySelector('input[name="service"]:checked');
+    const key = sel ? sel.dataset.toggle : null;
+    ['web','d3','gfx'].forEach(k=>{
+      form.querySelectorAll(`.service-block[data-service="${k}"]`).forEach(block=>{
+        const vis = key === k;
+        block.hidden = !vis;
+        block.querySelectorAll('input,select,textarea').forEach(el=>{
+          el.disabled = !vis;
+          if(!vis){
+            if(el.type==='checkbox'||el.type==='radio') el.checked=false;
+            else if(el.tagName==='SELECT') el.selectedIndex=0;
+            else el.value='';
+          }
+        });
+      });
+    });
+    // nach dem Umschalten neu bewerten (grün hinterlegen)
+    updatePillUI();
+  }
+
+  function setProgress(idx){
+    const steps = getApplicableSteps();
+    let pct = 0;
+    if(idx === 0){
+      pct = form.querySelector('input[name="service"]:checked') ? 12 : 0;
+    } else {
+      pct = Math.min(100, Math.round((idx / (steps.length - 1)) * 100));
+    }
+    if (stepFill) stepFill.style.width = pct + '%';
+    stepper?.setAttribute('aria-valuenow', String(idx + 1));
+    if (stepLabel) stepLabel.textContent = `Schritt ${idx + 1}/${steps.length}`;
+  }
+
+  function enhanceSubmitBtn() {
+    if (!submitBtn || submitBtn.dataset.enhanced === '1') return;
+    submitBtn.dataset.enhanced = '1';
+    if (!submitBtn.textContent.trim()) submitBtn.textContent = 'Jetzt Anfrage senden';
+  }
+
+  /* =========================
+     Navigation
+  ========================== */
+  let currentStepEl = allSteps[0];
+
+  function showStepByIndex(idx){
+    const steps = getApplicableSteps();
+    if(!steps.length) return;
+    const targetIdx = clampIndex(idx);
+    const targetEl  = steps[targetIdx];
+
+    allSteps.forEach(s => s.classList.remove('active'));
+    targetEl.classList.add('active');
+    currentStepEl = targetEl;
+
+    const isSuccess = targetEl.dataset.step === '6';
+
+    if (isSuccess) {
+      form.classList.add('is-success');
+
+      prevBtn.hidden = true;
+      nextBtn.hidden = true;
+      submitBtn.hidden = true;
+
+      const step1 = allSteps.find(s => s.dataset.step === '1');
+      const h = step1 ? step1.scrollHeight : 320;
+      targetEl.style.setProperty('--step6-minh', h + 'px');
+
+      // 💡 Restart-Button immer neu, immer klickbar
+      const oldBtn = successFieldset.querySelector('.success-btn');
+      if (oldBtn) {
+        const freshBtn = oldBtn.cloneNode(true);
+        oldBtn.parentNode.replaceChild(freshBtn, oldBtn);
+        freshBtn.disabled = false;
+        freshBtn.textContent = 'Neu starten';
+        freshBtn.setAttribute('aria-label','Wizard neu starten');
+        freshBtn.style.color = '#fff';
+        freshBtn.addEventListener('click', handleRestart);
+      }
+
+      if (successSub) {
+        successSub.textContent = 'Du kannst jetzt neu starten und die Schritte erneut durchlaufen.';
+        successSub.style.color = '#fff';
+      }
+
+    } else {
+      form.classList.remove('is-success');
+      prevBtn.hidden = false;
+      const onContact = isContactStep(targetEl);
+      nextBtn.hidden   = onContact;
+      submitBtn.hidden = !onContact;
+      if (onContact) enhanceSubmitBtn();
+      prevBtn.disabled = targetIdx === 0;
+      nextBtn.disabled = targetEl === allSteps[0] && !form.querySelector('input[name="service"]:checked');
+    }
+
+    // sicherstellen, dass Pills korrekt eingefärbt bleiben
+    updatePillUI();
+
+    setProgress(targetIdx);
+    const first = targetEl.querySelector('input:not([disabled]),select:not([disabled]),textarea:not([disabled])');
+    first?.focus({preventScroll:true});
+  }
+
+  /* =========================
+     Restart / Success Handling
+  ========================== */
+  function resetToStep1(scrollToStart = true){
+    form.reset();
+    form.classList.remove('is-success');
+    allSteps.forEach(s => s.classList.remove('active'));
+    const step1 = allSteps.find(s => s.dataset.step === '1') || allSteps[0];
+    step1.classList.add('active');
+    currentStepEl = step1;
+    syncServiceBlocks();
+    updateChoiceUI();
+    updatePillUI();
+    setProgress(0);
+    toggleFormDisabled(false);
+    setStatus('', '');
+    if (scrollToStart) {
+      step1.scrollIntoView({ behavior:'smooth', block:'start' });
+      const first = step1.querySelector('input,select,textarea,button');
+      first?.focus({ preventScroll:true });
+    }
+  }
+
+  function handleRestart(e){
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    resetToStep1(true);
+  }
+
+  function showSuccessScreen(){
+    const steps = getApplicableSteps();
+    const successIdx = steps.findIndex(s => s.dataset.step === '6');
+    if (successIdx >= 0) showStepByIndex(successIdx);
+  }
+
+  /* =========================
+     Validierung / Markierung
+  ========================== */
+  function markInvalid(el, msg){
+    el.classList.add('is-invalid');
+    el.setAttribute('aria-invalid','true');
+    if (!el.nextElementSibling || !el.nextElementSibling.matches('.field-error')) {
+      const e = document.createElement('div');
+      e.className = 'field-error';
+      e.style.cssText = 'color:#b00020;font-weight:700;margin-top:.2rem;font-size:.9rem;';
+      e.textContent = msg;
+      el.insertAdjacentElement('afterend', e);
+    } else el.nextElementSibling.textContent = msg;
+  }
+  function clearInvalids(){
+    qa('.is-invalid', form).forEach(el=>{
+      el.classList.remove('is-invalid'); el.removeAttribute('aria-invalid');
+    });
+    qa('.field-error', form).forEach(el=> el.remove());
+  }
+  function validEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s); }
+  function validateRequired(){
+    clearInvalids();
+    const name  = q('input[name="name"]');
+    const email = q('input[name="email"]');
+    const msg   = q('textarea[name="message"]');
+    let ok = true;
+    if (!trim(name?.value))               { markInvalid(name,'Bitte Namen angeben.'); ok=false; }
+    if (!validEmail(trim(email?.value)))  { markInvalid(email,'Bitte gültige E-Mail angeben.'); ok=false; }
+    if (trim(msg?.value).length < 5)      { markInvalid(msg,'Bitte kurz dein Projekt beschreiben.'); ok=false; }
+    if (!ok) {
+      const first = q('.is-invalid');
+      first?.focus({preventScroll:true});
+      setStatus('Bitte fehlende Angaben ergänzen.', 'warn');
+    } else setStatus('', '');
+    return ok;
+  }
+
+  /* =========================
+     Submit Flow
+  ========================== */
+  let submitting = false;
+  function toggleFormDisabled(disabled){
+    qa('input,select,textarea,button', form).forEach(el=> el.disabled = disabled);
+  }
+
+  async function postWithTimeout(url, options={}, timeoutMs=12000) {
+    const controller = new AbortController();
+    const t = setTimeout(()=>controller.abort(), timeoutMs);
+    try { return await fetch(url, { ...options, signal: controller.signal }); }
+    finally { clearTimeout(t); }
+  }
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    if (submitting) return;
+
+    if (!validateRequired()) return;
+
+    const selectedServiceEl = q('input[name="service"]:checked');
+    const selectedService   = selectedServiceEl ? selectedServiceEl.value : '';
+
+    const summary = {};
+    getApplicableSteps().forEach((step, i) => { summary[`step_${i+1}`] = collectStepData(step); });
+
+    const lines = [];
+    lines.push(`[Service] ${selectedService}`);
+    lines.push(`[Kontakt]`);
+    lines.push(`- Name: ${summary.step_5?.name || '-'}`);
+    lines.push(`- E-Mail: ${summary.step_5?.email || '-'}`);
+    if (summary.step_5?.message) lines.push(`- Nachricht: ${summary.step_5.message}`);
+    const compiledPlain = lines.join('\n');
+
+    q('#autoSubject').value     = `Projektanfrage: ${selectedService}`;
+    q('#selectedService').value = selectedService;
+    q('#summaryPlain').value    = compiledPlain;
+    q('#honeypot').value        = '';
+
+    const fd = new FormData(form);
+    submitting = true;
+    toggleFormDisabled(true);
+    submitBtn.innerText = 'Senden …';
+    setStatus('Sende Anfrage …');
+
+    try {
+      const res = await postWithTimeout(form.action, {
+        method:'POST',
+        body:fd,
+        headers:{Accept:'application/json'}
+      }, 12000);
+      if (!res.ok) throw new Error(res.statusText);
+      submitBtn.innerText = '✅ Anfrage gesendet!';
+      setStatus('Danke! Wir melden uns in Kürze.', 'ok');
+      form.classList.add('is-success');
+      showSuccessScreen();
+    } catch (err) {
+      console.error(err);
+      setStatus('Fehler beim Senden – bitte später erneut versuchen.', 'error');
+      submitBtn.innerText = 'Fehler!';
+      toggleFormDisabled(false);
+    } finally {
+      submitting = false;
+    }
+  });
+
+  /* =========================
+     Buttons & Choices
+  ========================== */
+  prevBtn.addEventListener('click', (e)=>{
+    e.preventDefault();
+    showStepByIndex(getCurrentIndex()-1);
+  });
+  nextBtn.addEventListener('click', ()=>{
+    if (isContactStep(currentStepEl)) form.requestSubmit();
+    else showStepByIndex(getCurrentIndex()+1);
+  });
+
+  // Klick auf Step-1-Karten (Service)
+  form.addEventListener('click', (e)=>{
+    const choice = e.target.closest('.choice');
+    if(choice){
+      const rb = choice.querySelector('input[type="radio"]');
+      if(rb){
+        setTimeout(()=>{
+          form.classList.remove('is-success');
+          updateChoiceUI();
+          syncServiceBlocks();
+          showStepByIndex(getCurrentIndex());
+        },0);
+      }
+    }
+    // Klick auf Pill-Labels (Schwerpunkte)
+    const pill = e.target.closest('.pill');
+    if (pill) {
+      // Wait until checkbox toggled, then refresh UI
+      setTimeout(updatePillUI, 0);
+    }
+  });
+
+  // Änderungen an Service oder Pill-Checkboxen
+  form.addEventListener('change', (e)=>{
+    if(e.target && e.target.matches('input[name="service"]')){
+      form.classList.remove('is-success');
+      updateChoiceUI();
+      syncServiceBlocks();
+      showStepByIndex(getCurrentIndex());
+      return;
+    }
+    if (e.target && (e.target.matches('.pill input[type="checkbox"]') || e.target.matches('input[data-pills]'))) {
+      updatePillUI();
+    }
+  });
+
+  /* =========================
+     Init
+  ========================== */
+  function init(){
+    form.classList.remove('is-success');
+    syncServiceBlocks();
+    updateChoiceUI();
+    updatePillUI();
+    showStepByIndex(0);
+    setStatus('');
+  }
+  init();
+
+})();
+</script>
+<script>
+  // … dein bestehendes IIFE …
+
+  // === Patch: Step 1 auf "Webdesign" beschränken + vorauswählen ===
+  (function lockToWebdesign(){
+    const form = document.getElementById('kontaktForm');
+    if (!form) return;
+
+    // 1) Vorauswählen
+    const webRadio = form.querySelector('input[name="service"][value="Webdesign"]');
+    if (webRadio) {
+      webRadio.checked = true;
+      webRadio.setAttribute('aria-checked','true');
+    }
+
+    // 2) Falls doch weitere Choices vorhanden wären -> entfernen
+    const choices = Array.from(form.querySelectorAll('.grid-choices .choice'));
+    choices.forEach(ch => {
+      const rb = ch.querySelector('input[type="radio"][name="service"]');
+      if (rb && rb.value !== 'Webdesign') ch.remove();
+    });
+
+    // 3) UI & Service-Blöcke syncen + Next aktivieren
+    try {
+      // diese Funktionen existieren in deinem Script:
+      // updateChoiceUI(), syncServiceBlocks(), showStepByIndex()
+      updateChoiceUI();
+      syncServiceBlocks();
+      // Step 2 wird aktiv, sobald der User "Weiter" drückt
+      const nextBtn = form.querySelector('#nextBtn');
+      if (nextBtn) nextBtn.disabled = false;
+    } catch(e){}
+  })();
+</script>
+
+
+
+<section class="angled-image-section" aria-labelledby="angled-image-heading">
+  <h2 id="angled-image-heading" class="visually-hidden">Modernes Webdesign – diagonale Bildsektion</h2>
+
+  <figure class="angled-image-wrapper">
+    <picture>
+      <source srcset="./WebdesignPic/webgerade.webp" type="image/webp">
+      <img
+        src="./WebdesignPic/webgerade.webp"
+        alt="Beispiel eines modernen Webdesign-Layouts, leicht diagonal ausgerichtet"
+        width="1920"
+        height="1080"
+        loading="lazy"
+        decoding="async"
+        style="aspect-ratio:16/9">
+    </picture>
+  </figure>
+</section>
 
 
 
 
+<footer itemscope itemtype="https://schema.org/Organization" class="footer-clean">
+  <!-- In Microdata ist <meta itemprop> im Body erlaubt und ersetzt hier das unzulässige <link>. -->
+  <meta itemprop="url" content="https://www.fusion3.de">
 
+  <div class="fc-container">
 
-<!--
-Licht & Atmosphäre
-Ziel: zeigen, wie Licht alles verändert.
-Inhalt: Mini-Karussell: „Hell & clean“, „Warm & gemütlich“, „Dramatisch“.
-Darunter: 1–2 Sätze, wann welcher Look passt.
+    <!-- Head: Brand & Claim + CTA -->
+    <section class="fc-head" aria-labelledby="fc-head-title">
+      <h2 id="fc-head-title" class="sr-only">Markenbereich</h2>
+      <div class="fc-brand">
+        <!-- Optional: Logo als Link zur Startseite -->
+        <a class="fc-logo" href="/" itemprop="name">Fusion³</a>
+        <p class="fc-claim">UX &amp; Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
+      </div>
+      <div class="fc-cta">
+        <a class="fc-btn" href="mailto:hello@fusion3.de" aria-label="Projekt anfragen per E-Mail">Projekt anfragen</a>
+      </div>
+    </section>
 
+    <!-- Grid -->
+    <nav class="fc-grid" aria-labelledby="fc-nav-title">
+      <h2 id="fc-nav-title" class="sr-only">Footer-Navigation</h2>
 
-Formate & Übergaben
-Ziel: „Bekomme ich das, was ich brauche?“ beantworten.
-Inhalt (Icons + Stichpunkte):
-Bilder: PNG/JPG/WebP (HD–8K)
-Clips: MP4/WebM (für Web & Messe)
-Transparenter Hintergrund: falls gewünscht
-Social-Crop-Vorlagen: 1:1, 9:16, 16:9
+      <div class="fc-col">
+        <h3 class="fc-col-title" id="fc-services">Leistungen</h3>
+        <ul class="fc-links" aria-labelledby="fc-services">
+          <li><a href="/ux-audit.html">UX-Audit</a></li>
+          <li><a href="/webdesign.html">Webdesign</a></li>
+          <li><a href="/prototyping.html">Prototyping</a></li>
+          <li><a href="/design-system.html">Design-Systeme</a></li>
+        </ul>
+      </div>
 
+      <div class="fc-col">
+        <h3 class="fc-col-title" id="fc-resources">Ressourcen</h3>
+        <ul class="fc-links" aria-labelledby="fc-resources">
+          <li><a href="/cases.html">Case Studies</a></li>
+          <li><a href="/blog.html">Insights &amp; Blog</a></li>
+          <li><a href="/faq.html">FAQ</a></li>
+          <li><a href="/kontakt.html">Termin buchen</a></li>
+        </ul>
+      </div>
 
-Kundenstimmen (Trust)
-Ziel: Vertrauen.
-Inhalt: 2–3 Zitate mit Name/Logo (kurz, konkret: „schnell, hochwertig, auf den Punkt“).
+      <div class="fc-col">
+        <h3 class="fc-col-title" id="fc-legal">Rechtliches</h3>
+        <ul class="fc-links" aria-labelledby="fc-legal">
+          <li><a href="/impressum.html">Impressum</a></li>
+          <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
+          <li><a href="/cookies.html">Cookie-Hinweis</a></li>
+        </ul>
+      </div>
 
+      <div class="fc-col">
+        <h3 class="fc-col-title" id="fc-contact">Kontakt</h3>
+        <ul class="fc-links" aria-labelledby="fc-contact">
+          <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
+          <li><a href="tel:+491234567890" itemprop="telephone">+49&nbsp;123&nbsp;4567890</a></li>
+          <li>
+            <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" class="fc-address">
+              <span itemprop="addressLocality">Berlin</span>, <span itemprop="addressCountry">Deutschland</span>
+            </address>
+          </li>
+        </ul>
 
-FAQ (kurz & konkret)
-Beispiele:
-Wie lange dauert das? „Meist 1–2 Wochen je Produkt – abhängig von Umfang.“
-Braucht ihr CAD-Daten? „Hilft – Bilder/Skizzen reichen für Start.“
-Können Farben exakt matchen? „Ja, mit Referenz/CI-Werten.“
+        <!-- Socials jetzt als echte Liste (keine role=list / role=listitem nötig) -->
+        <h3 id="fc-socials-title" class="sr-only">Social Media</h3>
+        <ul class="fc-socials" aria-labelledby="fc-socials-title">
+          <li>
+            <a class="fc-social" href="mailto:hello@fusion3.de" aria-label="E-Mail" itemprop="sameAs">
+              <span class="sr-only">E-Mail</span>
+              <img src="./FooterIcons/Gmail.png" alt="" loading="lazy" decoding="async" width="20" height="20">
+            </a>
+          </li>
+          <li>
+            <a class="fc-social fc-li" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" itemprop="sameAs">
+              <span class="sr-only">LinkedIn</span>
+              <img src="./FooterIcons/LinkedIn.png" alt="" loading="lazy" decoding="async" width="20" height="20">
+            </a>
+          </li>
+          <li>
+            <a class="fc-social fc-wa" href="https://wa.me/491234567890" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" itemprop="sameAs">
+              <span class="sr-only">WhatsApp</span>
+              <img src="./FooterIcons/Whatsapp.svg" alt="" loading="lazy" decoding="async" width="20" height="20">
+            </a>
+          </li>
+          <li>
+            <a class="fc-social fc-ig" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" itemprop="sameAs">
+              <span class="sr-only">Instagram</span>
+              <img src="./FooterIcons/instagram.jpg" alt="" loading="lazy" decoding="async" width="20" height="20">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
--->
+    <!-- Bottom -->
+    <div class="fc-legal" aria-labelledby="fc-legal-title">
+      <h3 id="fc-legal-title" class="sr-only">Rechtliches &amp; Hinweise</h3>
+      <p>© <time id="currentYear" datetime="2025">2025</time> <span class="nowrap">Fusion³</span> · DSGVO-konform &amp; barrierearm entwickelt.</p>
+    </div>
 
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var el = document.getElementById('currentYear');
+    if (el) el.textContent = new Date().getFullYear();
+  })();
+</script>
 

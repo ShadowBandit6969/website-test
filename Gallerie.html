@@ -1,194 +1,414 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Open-World Galerie – Demo</title>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body { background: #0b0f16; color: #e8eefc; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; overflow: hidden; }
 
-<!-- === SECTION: H1 mittig + Cards spawnen außenrum (ohne weiteren Text) === -->
-<section class="hero-draggable" aria-label="Portfolio Draggable Hero">
-  <div class="hero-home">
-    <div class="bg-asset" aria-hidden="true">
-      <div class="bg-noise"></div>
-      <div class="bg-grid"></div>
-    </div>
+    /* Fullscreen stage */
+    #stage { position: fixed; inset: 0; display: block; width: 100vw; height: 100vh; }
 
-    <!-- ZENTRIERTE H1 (einziger Text) -->
-    <div class="center-title" id="cta-core">
-      <h1 class="title-xxl">Entdecken Sie <br> was möglich ist</h1>
-    </div>
+    /* UI overlay */
+    .hud { position: fixed; left: 16px; bottom: 16px; background: rgba(9,12,18,.7); border: 1px solid rgba(255,255,255,.08); padding: 10px 12px; border-radius: 10px; backdrop-filter: blur(6px); user-select: none; }
+    .hud h1 { margin: 0 0 6px; font-size: 14px; letter-spacing: .02em; color: #bcd3ff; }
+    .hud p { margin: 0; font-size: 12px; line-height: 1.35; color: #cbd5e1; }
 
-    <!-- DRAGGABLE CARDS (Position kommt dynamisch) -->
-    <div class="draggable-card auto-orbit">
-      <img src="./3DSlideShow/post12.png" alt="Projekt 1" loading="lazy" draggable="false">
-    </div>
-    <div class="draggable-card auto-orbit">
-      <img src="./3DSlideShow/post2.png" alt="Projekt 2" loading="lazy" draggable="false">
-    </div>
-    <div class="draggable-card auto-orbit">
-      <img src="./3DSlideShow/post12.png" alt="Projekt 3" loading="lazy" draggable="false">
-    </div>
-    <div class="draggable-card auto-orbit">
-      <img src="./3DSlideShow/post18.png" alt="Projekt 4" loading="lazy" draggable="false">
-    </div>
-    <div class="draggable-card auto-orbit">
-      <video autoplay loop muted playsinline
-        poster="https://cdn.prod.website-files.com/67f91e694fd1ae2a1feced50%2F67ffd0d9b0117550eb6bf8e5_7710243-hd_1280_720_30fps-poster-00001.jpg">
-        <source src="https://cdn.prod.website-files.com/67f91e694fd1ae2a1feced50%2F67ffd0d9b0117550eb6bf8e5_7710243-hd_1280_720_30fps-transcode.mp4" type="video/mp4">
-        <source src="https://cdn.prod.website-files.com/67f91e694fd1ae2a1feced50%2F67ffd0d9b0117550eb6bf8e5_7710243-hd_1280_720_30fps-transcode.webm" type="video/webm">
-      </video>
-    </div>
+    .badge { position: fixed; right: 16px; top: 16px; font-size: 12px; color: #9bb4ff; background: rgba(9,12,18,.6); border: 1px solid rgba(255,255,255,.08); padding: 8px 10px; border-radius: 999px; }
+
+    /* Minimap */
+    .minimap { position: fixed; right: 16px; bottom: 16px; width: 160px; height: 120px; border-radius: 12px; background: rgba(9,12,18,.7); border: 1px solid rgba(255,255,255,.08); overflow: hidden; }
+    .minimap canvas { width: 100%; height: 100%; display: block; }
+
+    @media (hover: none) { .hud p.kb { display: none; } }
+  </style>
+</head>
+<body>
+  <canvas id="stage" aria-label="Open-World Galerie" role="application"></canvas>
+
+  <div class="badge">Open-World Galerie · toroidal (nahtlos)</div>
+
+  <div class="hud" aria-live="polite">
+    <h1>Navigation</h1>
+    <p class="kb">WASD/↔↕ & Scroll/Trackpad bewegen · Maus/Touch ziehen · Klick auf Bild → Firmen-Unterseite</p>
+    <p>Am Rand geht’s nahtlos weiter – echte Open-World.</p>
   </div>
-</section>
-<!-- === CSS: H1 mittig + Orbit-Layout (Primary-Orange bleibt als Variable verfügbar) === -->
-<style>
-:root{
-  --bg:#0f0f0f;
-  --fg:#efeeec;
-  --accent:#fc5b30;      /* Primary Orange */
-  --accent-2:#ff884d;
-  --maxw:1200px;
-}
 
-.hero-draggable{ position:relative; isolation:isolate; background:var(--bg); color:var(--fg); overflow:hidden; }
-.hero-home{ position:relative; min-height:min(100vh, 900px); max-width:var(--maxw); margin-inline:auto; padding:clamp(24px,4vw,48px); }
+  <div class="minimap" aria-hidden="true"><canvas id="mini"></canvas></div>
 
-/* Hintergrunddeko */
-.bg-asset{position:absolute; inset:0; z-index:0; pointer-events:none;}
-.bg-noise{ position:absolute; inset:-50%; background-image:radial-gradient(#ffffff10 1px,transparent 1px); background-size:10px 10px; opacity:.05; filter:contrast(120%); }
-.bg-grid{ position:absolute; inset:0; background:linear-gradient(transparent,transparent 80%,#ffffff10), repeating-linear-gradient(90deg,#ffffff08 0 1px,transparent 1px 60px); mask-image:radial-gradient(120% 60% at 50% 20%,#000 60%,transparent); opacity:.25; }
+  <script>
+  // ============ CONFIG ============
+  const WORLD = { width: 6000, height: 4000 }; // wrap-around
+  const ITEM_COUNT = 25;
+  const ITEM_SIZE = [140, 320];
+  const MOVE_SPEED = 600; // px/s (Tastatur)
+  const WHEEL_SPEED = 1.0; // Multiplier für Wheel/Trackpad
 
-/* === ZENTRIERTE H1 === */
-.center-title{
-  position:absolute; inset:0;
-  display:grid; place-items:center;
-  z-index:3; text-align:center; pointer-events:none;
-}
-.center-title > *{ pointer-events:auto; }
+  // Spur/Trail
+  const TRAIL = {
+    maxPoints: 1600,
+    sampleEvery: 0.05,   // schnelleres Sampling
+    fadeSeconds: 14,
+    minMove: 0.5,        // sehr kleine Bewegung reicht bereits
+    points: [],
+    tSince: 0
+  };
 
-.title-xxl{
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  font-weight:900; letter-spacing:-.02em;
-  font-size: clamp(40px, 9vw, 120px);
-  line-height: .9;
-  margin:0;
-  text-shadow: 0 10px 30px rgba(0,0,0,.35);
-}
+  // ============ ITEMS ============
+  const items = Array.from({ length: ITEM_COUNT }).map((_, i) => ({
+    id: i,
+    src: `./GallerieItems/item${i + 1}.png`,
+    link: `https://example.com/unterseite/${i + 1}`, // anpassen
+    x: Math.random() * WORLD.width,
+    y: Math.random() * WORLD.height,
+    w: Math.round(ITEM_SIZE[0] + Math.random() * (ITEM_SIZE[1] - ITEM_SIZE[0])),
+    h: Math.round(ITEM_SIZE[0] + Math.random() * (ITEM_SIZE[1] - ITEM_SIZE[0])),
+    img: null,
+  }));
 
-/* === Draggable Cards === */
-.draggable-card{
-  position:absolute; z-index:1;
-  width: clamp(220px, 36vw, 420px);
-  aspect-ratio: 4 / 3;
-  border-radius: 18px; overflow:hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
-  transform: translate3d(0,0,0);
-  will-change: transform;
-  cursor: grab; touch-action:none; user-select:none; backdrop-filter:saturate(1.1);
-  opacity:0; scale:.92; /* Spawn-Animation */
-}
-.draggable-card:active{ cursor:grabbing; }
-.draggable-card img, .draggable-card video{ width:100%; height:100%; object-fit:cover; display:block; }
-.draggable-card:focus{ outline:2px solid color-mix(in oklab, var(--accent) 70%, white 20%); outline-offset:2px; border-radius:20px; }
+  // ============ CANVAS SETUP ============
+  const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+  const canvas = document.getElementById('stage');
+  const ctx = canvas.getContext('2d', { alpha: true });
 
-/* Kein statisches .is-first... mehr – Positionen kommen aus JS */
-.is-first,.is-second,.is-third,.is-fourth,.is-fifth{ all:unset; }
+  const miniCanvas = document.getElementById('mini');
+  const miniCtx = miniCanvas.getContext('2d');
 
-/* Responsive Tweaks */
-@media (max-width:900px){ .draggable-card{ width: clamp(200px, 58vw, 380px); } }
-@media (max-width:600px){
-  .hero-home{ min-height:110vh; }
-  .draggable-card{ width: min(88vw, 380px); }
-}
-</style>
-<!-- === JS: Orbit-Positionierung um die H1 + Drag (Maus & Touch) === -->
-<script>
-(function(){
-  const shell  = document.querySelector('.hero-home');
-  const core   = document.getElementById('cta-core'); // enthält die H1
-  const cards  = Array.from(document.querySelectorAll('.hero-draggable .draggable-card'));
-  let zTop = 10;
+  function resize() {
+    const { innerWidth: w, innerHeight: h } = window;
+    canvas.width = Math.floor(w * dpr);
+    canvas.height = Math.floor(h * dpr);
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-  // Drag-Setup
-  cards.forEach((el) => {
-    el.dataset.tx = '0'; el.dataset.ty = '0';
-    const startTr = getComputedStyle(el).transform;
-    el.dataset.start = startTr === 'none' ? '' : startTr;
-    el.setAttribute('tabindex','0');
-    makeDraggable(el);
+    miniCanvas.width = 160 * dpr;
+    miniCanvas.height = 120 * dpr;
+    miniCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // ============ LOAD IMAGES ============
+  function loadAll() {
+    return Promise.all(items.map(it => new Promise(res => {
+      const im = new Image();
+      im.decoding = 'async';
+      im.loading = 'lazy';
+      im.src = it.src;
+      im.onload = () => { it.img = im; res(); };
+      im.onerror = () => { it.img = null; res(); };
+    })));
+  }
+
+  // ============ INPUT ============
+  const keyMap = { ArrowUp:'up', ArrowDown:'down', ArrowLeft:'left', ArrowRight:'right', w:'up', a:'left', s:'down', d:'right' };
+  const keys = new Set();
+  window.addEventListener('keydown', (e) => { const k = keyMap[e.key]; if (k) { keys.add(k); e.preventDefault(); } });
+  window.addEventListener('keyup',   (e) => { const k = keyMap[e.key]; if (k) { keys.delete(k); e.preventDefault(); } });
+
+  let dragging = false; let lastPointer = null;
+  function pointerPos(ev){ if (ev.touches && ev.touches[0]) return { x: ev.touches[0].clientX, y: ev.touches[0].clientY }; return { x: ev.clientX, y: ev.clientY }; }
+  canvas.addEventListener('mousedown', (e)=>{ dragging = true; lastPointer = pointerPos(e); });
+  window.addEventListener('mouseup', ()=>{ dragging = false; lastPointer = null; });
+  window.addEventListener('mousemove', (e)=>{
+    if(!dragging) return; const p = pointerPos(e);
+    if(lastPointer){ camera.x -= (p.x - lastPointer.x); camera.y -= (p.y - lastPointer.y); registerTrailSample(true); wrapCamera(); }
+    lastPointer = p;
   });
 
-  function makeDraggable(el){
-    let startX=0, startY=0, baseX=0, baseY=0, dragging=false;
-    const onDown = (ev) => {
-      dragging = true; el.style.zIndex = ++zTop;
-      const p = pointFromEvent(ev);
-      startX=p.x; startY=p.y;
-      baseX=parseFloat(el.dataset.tx||0); baseY=parseFloat(el.dataset.ty||0);
-      el.style.transition = 'transform 0s';
-      ev.preventDefault();
-    };
-    const onMove = (ev) => {
-      if(!dragging) return;
-      const p = pointFromEvent(ev);
-      const tx = baseX + (p.x - startX);
-      const ty = baseY + (p.y - startY);
-      el.dataset.tx = tx; el.dataset.ty = ty;
-      el.style.transform = composeTransform(el.dataset.start, tx, ty);
-    };
-    const onUp = () => {
-      if(!dragging) return;
-      dragging = false;
-      el.style.transition = 'transform .18s cubic-bezier(.2,.8,.2,1)';
-    };
-    el.addEventListener('pointerdown', onDown);
-    window.addEventListener('pointermove', onMove, {passive:false});
-    window.addEventListener('pointerup', onUp);
-    window.addEventListener('pointercancel', onUp);
-  }
-  function pointFromEvent(ev){ return ev.touches?.[0] ? {x:ev.touches[0].clientX,y:ev.touches[0].clientY} : {x:ev.clientX,y:ev.clientY}; }
-  function composeTransform(base, tx, ty){ const t=` translate3d(${tx}px, ${ty}px, 0)`; return (base && base!=='none'? base : 'translate3d(0,0,0)') + t; }
+  canvas.addEventListener('touchstart', (e)=>{ dragging = true; lastPointer = pointerPos(e); }, {passive: true});
+  window.addEventListener('touchend', ()=>{ dragging = false; lastPointer = null; }, {passive: true});
+  window.addEventListener('touchmove', (e)=>{
+    if(!dragging) return; const p = pointerPos(e);
+    if(lastPointer){ camera.x -= (p.x - lastPointer.x); camera.y -= (p.y - lastPointer.y); registerTrailSample(true); wrapCamera(); }
+    lastPointer = p;
+  }, {passive: true});
 
-  // Orbit um die H1: Karten kreisförmig außen positionieren
-  function layoutOrbit(){
-    if(!shell || !core || cards.length === 0) return;
+  // Scroll/Trackpad zum Pannen
+  window.addEventListener('wheel', (e)=>{
+    // Standard: deltaY nach unten → nach unten bewegen; deltaX für horizontales Panning
+    camera.x += (e.deltaX) * WHEEL_SPEED;
+    camera.y += (e.deltaY) * WHEEL_SPEED;
+    registerTrailSample(true);
+    wrapCamera();
+    e.preventDefault();
+  }, { passive: false });
 
-    const ctaRect  = core.getBoundingClientRect();
-    const hostRect = shell.getBoundingClientRect();
+  // Klick → Link
+  canvas.addEventListener('click', (e)=>{
+    const rect = canvas.getBoundingClientRect();
+    const sx = e.clientX - rect.left; // CSS px
+    const sy = e.clientY - rect.top;
+    for (let i = drawnRects.length - 1; i >= 0; i--) {
+      const r = drawnRects[i];
+      if (sx >= r.x && sx <= r.x + r.w && sy >= r.y && sy <= r.y + r.h) {
+        if (r.item && r.item.link) { window.location.href = r.item.link; }
+        return;
+      }
+    }
+  });
 
-    const centerX = ctaRect.left + ctaRect.width/2 - hostRect.left;
-    const centerY = ctaRect.top  + ctaRect.height/2 - hostRect.top;
+  // ============ WORLD / CAMERA ============
+  function wrap(n, max){ return (n % max + max) % max; }
 
-    // Radius dynamisch: genug Abstand zur H1 + Ränder
-    const minRadius = Math.max(ctaRect.width, ctaRect.height) * 0.75;
-    const outerPad  = Math.min(hostRect.width, hostRect.height) * 0.08;
-    const radius = Math.min(
-      (Math.min(hostRect.width, hostRect.height)/2) - outerPad,
-      minRadius + 140
-    );
+  // Kamera wird nach Bild-Laden auf Item 1 gesetzt
+  const camera = { x: 0, y: 0 };
 
-    const N = cards.length;
-    cards.forEach((el, i) => {
-      const theta = (i * (2*Math.PI/N)) + (i*0.15) + (Math.random()*0.18 - 0.09);
-      const rJitter = radius * (0.92 + Math.random()*0.12);
-
-      const x = centerX + Math.cos(theta) * rJitter;
-      const y = centerY + Math.sin(theta) * rJitter;
-
-      const w = el.offsetWidth || 320;
-      const h = el.offsetHeight || (w*0.75);
-
-      el.style.left = (x - w/2) + 'px';
-      el.style.top  = (y - h/2) + 'px';
-
-      const baseRot = (Math.random()*8 - 4).toFixed(2);
-      el.dataset.start = `rotate(${baseRot}deg)`;
-      el.style.transform = `translate3d(0,0,0) rotate(${baseRot}deg)`;
-
-      const delay = 80*i;
-      el.animate(
-        [{opacity:0, scale:.92, filter:'blur(6px)'},{opacity:1, scale:1, filter:'blur(0)'}],
-        {duration:580, delay, easing:'cubic-bezier(.2,.8,.2,1)', fill:'forwards'}
-      );
-    });
+  function wrapCamera(){
+    const oldX = camera.x, oldY = camera.y;
+    camera.x = wrap(camera.x, WORLD.width);
+    camera.y = wrap(camera.y, WORLD.height);
+    // Bei Wrap Sprung → Trail-Segment brechen
+    const dx = Math.abs(camera.x - oldX), dy = Math.abs(camera.y - oldY);
+    if (dx > WORLD.width * 0.5 || dy > WORLD.height * 0.5) {
+      if (TRAIL.points.length) TRAIL.points[TRAIL.points.length - 1].break = true;
+    }
   }
 
-  // initial & on resize
-  window.addEventListener('load', layoutOrbit, {once:true});
-  let t; window.addEventListener('resize', () => { clearTimeout(t); t=setTimeout(layoutOrbit, 150); }, {passive:true});
-})();
-</script>
+  // ============ TRAIL ============
+  function registerTrailSample(force = false, dt = 0){
+    TRAIL.tSince += dt;
+    const last = TRAIL.points[TRAIL.points.length - 1];
+    const moved = !last || distWrapped(camera.x, camera.y, last.x, last.y) >= TRAIL.minMove;
+
+    if (force || (TRAIL.tSince >= TRAIL.sampleEvery && moved)) {
+      TRAIL.tSince = 0;
+      TRAIL.points.push({ x: camera.x, y: camera.y, t: performance.now()/1000, break: false });
+      if (TRAIL.points.length > TRAIL.maxPoints) TRAIL.points.shift();
+    }
+  }
+
+  function distWrapped(x1,y1,x2,y2){
+    let dx = Math.abs(x1 - x2), dy = Math.abs(y1 - y2);
+    dx = Math.min(dx, WORLD.width - dx);
+    dy = Math.min(dy, WORLD.height - dy);
+    return Math.hypot(dx, dy);
+  }
+
+  // ============ RENDER ============
+  let drawnRects = []; // wird pro Frame gefüllt (zur Klickprüfung)
+
+  function drawBackground(w, h){
+    const tile = 200;
+    const ox = - (camera.x % tile);
+    const oy = - (camera.y % tile);
+
+    // Hintergrund
+    ctx.fillStyle = '#0b0f16';
+    ctx.fillRect(0,0,w,h);
+
+    // Grid (etwas deutlicher)
+    ctx.globalAlpha = 0.7;
+    ctx.beginPath();
+    for (let x = ox; x < w; x += tile) { ctx.moveTo(x, 0); ctx.lineTo(x, h); }
+    for (let y = oy; y < h; y += tile) { ctx.moveTo(0, y); ctx.lineTo(w, y); }
+    ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+
+  function drawTrail(w, h, nowSec){
+    if (TRAIL.points.length === 1){
+      // Startpunkt als Punkt anzeigen
+      const p = toScreen(TRAIL.points[0].x, TRAIL.points[0].y, w, h);
+      ctx.save();
+      ctx.fillStyle = 'rgba(155,179,255,0.9)';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 3, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+      return;
+    }
+    if (TRAIL.points.length < 2) return;
+
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.save();
+    for (let i = 1; i < TRAIL.points.length; i++){
+      const a = TRAIL.points[i-1];
+      const b = TRAIL.points[i];
+
+      if (a.break || b.break) continue;
+
+      const pa = toScreen(a.x, a.y, w, h);
+      const pb = toScreen(b.x, b.y, w, h);
+
+      if (Math.abs(pb.x - pa.x) > Math.max(w, WORLD.width)/2 ||
+          Math.abs(pb.y - pa.y) > Math.max(h, WORLD.height)/2) {
+        continue;
+      }
+
+      const age = nowSec - b.t;
+      const alpha = Math.max(0, 1 - (age / TRAIL.fadeSeconds));
+      if (alpha <= 0) continue;
+
+      ctx.globalAlpha = alpha * 0.95;
+      ctx.strokeStyle = 'rgba(155,179,255,1)';
+      ctx.lineWidth = 2 + Math.max(0, 6 * (1 - age / TRAIL.fadeSeconds));
+
+      ctx.beginPath();
+      ctx.moveTo(pa.x, pa.y);
+      ctx.lineTo(pb.x, pb.y);
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    const cutoff = nowSec - TRAIL.fadeSeconds - 0.1;
+    while (TRAIL.points.length && TRAIL.points[0].t < cutoff) TRAIL.points.shift();
+  }
+
+  function toScreen(px, py, w, h){
+    let dx = px - camera.x;
+    let dy = py - camera.y;
+    if (dx >  WORLD.width/2)  dx -= WORLD.width;
+    if (dx < -WORLD.width/2)  dx += WORLD.width;
+    if (dy >  WORLD.height/2) dy -= WORLD.height;
+    if (dy < -WORLD.height/2) dy += WORLD.height;
+    return { x: w/2 + dx, y: h/2 + dy };
+  }
+
+  function drawItems(w, h){
+    drawnRects.length = 0;
+    for (const it of items){
+      if(!it.img) continue;
+      const vx = it.x - camera.x;
+      const vy = it.y - camera.y;
+
+      const candidates = [
+        { dx: 0, dy: 0 }, { dx: WORLD.width, dy: 0 }, { dx: -WORLD.width, dy: 0 },
+        { dx: 0, dy: WORLD.height }, { dx: 0, dy: -WORLD.height },
+        { dx: WORLD.width, dy: WORLD.height }, { dx: -WORLD.width, dy: -WORLD.height },
+        { dx: WORLD.width, dy: -WORLD.height }, { dx: -WORLD.width, dy: WORLD.height },
+      ];
+
+      for (const c of candidates){
+        const sx = vx + c.dx + w/2;
+        const sy = vy + c.dy + h/2;
+        if (sx + it.w < -50 || sx > w + 50 || sy + it.h < -50 || sy > h + 50) continue;
+
+        ctx.shadowColor = 'rgba(0,0,0,0.4)';
+        ctx.shadowBlur = 18; ctx.shadowOffsetX = 0; ctx.shadowOffsetY = 8;
+        const r = 12;
+        roundImage(ctx, it.img, sx, sy, it.w, it.h, r);
+        ctx.shadowBlur = 0; ctx.shadowOffsetX = 0; ctx.shadowOffsetY = 0;
+
+        ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+        ctx.lineWidth = 1;
+        roundRectStroke(ctx, sx, sy, it.w, it.h, r);
+
+        drawnRects.push({ x: sx, y: sy, w: it.w, h: it.h, item: it });
+      }
+    }
+  }
+
+  function roundImage(ctx, img, x, y, w, h, r){
+    ctx.save();
+    roundRectPath(ctx, x, y, w, h, r);
+    ctx.clip();
+    ctx.drawImage(img, x, y, w, h);
+    ctx.restore();
+  }
+  function roundRectStroke(ctx, x, y, w, h, r){ ctx.save(); roundRectPath(ctx, x, y, w, h, r); ctx.stroke(); ctx.restore(); }
+  function roundRectPath(ctx, x, y, w, h, r){
+    const rr = Math.min(r, w/2, h/2);
+    ctx.beginPath();
+    ctx.moveTo(x+rr, y);
+    ctx.arcTo(x+w, y,   x+w, y+h, rr);
+    ctx.arcTo(x+w, y+h, x,   y+h, rr);
+    ctx.arcTo(x,   y+h, x,   y,   rr);
+    ctx.arcTo(x,   y,   x+w, y,   rr);
+    ctx.closePath();
+  }
+
+  function drawMinimap(){
+    const w = miniCanvas.width / dpr, h = miniCanvas.height / dpr;
+    miniCtx.clearRect(0,0,w,h);
+    miniCtx.fillStyle = 'rgba(255,255,255,0.04)';
+    miniCtx.fillRect(0,0,w,h);
+    miniCtx.strokeStyle = 'rgba(255,255,255,0.12)';
+    miniCtx.strokeRect(0,0,w,h);
+
+    const scaleX = w / WORLD.width;
+    const scaleY = h / WORLD.height;
+
+    miniCtx.fillStyle = 'rgba(155,179,255,0.7)';
+    for (const it of items){
+      const px = it.x * scaleX; const py = it.y * scaleY;
+      miniCtx.fillRect(px-1, py-1, 2, 2);
+    }
+
+    // Trail grob
+    miniCtx.beginPath();
+    for (let i=0;i<TRAIL.points.length;i++){
+      const p = TRAIL.points[i];
+      const x = p.x * scaleX, y = p.y * scaleY;
+      if (i===0 || p.break) miniCtx.moveTo(x,y); else miniCtx.lineTo(x,y);
+    }
+    miniCtx.strokeStyle = 'rgba(255,214,102,0.6)';
+    miniCtx.lineWidth = 1;
+    miniCtx.stroke();
+
+    // Kamera
+    miniCtx.fillStyle = '#ffd166';
+    miniCtx.beginPath();
+    miniCtx.arc(camera.x * scaleX, camera.y * scaleY, 3, 0, Math.PI*2);
+    miniCtx.fill();
+  }
+
+  // ============ MAIN LOOP ============
+  let last = performance.now();
+
+  function tick(now){
+    const dt = (now - last) / 1000; last = now;
+    update(dt);
+    render();
+    requestAnimationFrame(tick);
+  }
+
+  function update(dt){
+    let vx = 0, vy = 0;
+    if (keys.has('left'))  vx -= MOVE_SPEED;
+    if (keys.has('right')) vx += MOVE_SPEED;
+    if (keys.has('up'))    vy -= MOVE_SPEED;
+    if (keys.has('down'))  vy += MOVE_SPEED;
+    if (vx || vy){
+      camera.x += vx * dt;
+      camera.y += vy * dt;
+      registerTrailSample(true, dt);
+      wrapCamera();
+    } else {
+      // auch ohne Tastatur: periodisch sampeln (für Dragging/Scroll)
+      registerTrailSample(false, dt);
+    }
+  }
+
+  function render(){
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    drawBackground(w, h);
+    drawTrail(w, h, performance.now()/1000);
+    drawItems(w, h);
+    drawMinimap();
+  }
+
+  // Start: Bilder laden, Kamera auf erstes Bild setzen, Startpunkt setzen
+  loadAll().then(()=>{
+    if (items.length){
+      camera.x = items[0].x;
+      camera.y = items[0].y;
+      // zwei Punkte für sofort sichtbare Spur
+      const t = performance.now()/1000;
+      TRAIL.points.push({ x: camera.x, y: camera.y, t, break: false });
+      TRAIL.points.push({ x: camera.x + 0.1, y: camera.y + 0.1, t, break: false });
+    } else {
+      camera.x = WORLD.width/2; camera.y = WORLD.height/2;
+      TRAIL.points.push({ x: camera.x, y: camera.y, t: performance.now()/1000, break: false });
+    }
+    requestAnimationFrame(tick);
+  });
+  </script>
+</body>
+</html>
