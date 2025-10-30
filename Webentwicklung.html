@@ -3,24 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fusion³ – Webentwicklung & UX</title>
-  <meta name="description" content="Fusion³ ist dein Partner für performante Webentwicklung: moderne Stacks, skalierbare Architekturen und saubere UX. Von API bis Deployment.">
+  <title>Fusion³ – UX & Webdesign Studio</title>
+  <meta name="description" content="Fusion³ ist dein Partner für UX-Design, Webdesign & Prototyping. Wir gestalten digitale Erlebnisse mit Substanz.">
 
   <!-- Google Fonts Optimierung -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" media="all" onload="this.media='all'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  </noscript>
 
-  <!-- Lokale Fonts -->
+  <!-- Lokale Fonts optimieren -->
   <link rel="preload" as="style" href="./fonts/fonts.css">
   <link rel="stylesheet" href="./fonts/fonts.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="./fonts/fonts.css"></noscript>
 
   <!-- Optional Scripts -->
+  <!-- Module: ohne defer (Module laden implizit deferred) -->
   <script type="module" src="https://unpkg.com/feather-icons"></script>
+  <!-- Legacy Fallback -->
   <script nomodule src="feather-icons.legacy.js"></script>
+  <!-- Normales Script kann defer tragen -->
   <script src="https://unpkg.com/scrollreveal" defer></script>
 
   <!-- Analytics Beispiel -->
@@ -33,7 +38,7 @@
   </script>
 
   <!-- ===============================
-       GLOBAL CSS – (aus deiner Datei übernommen)
+       GLOBAL CSS
        =============================== -->
   <style>
     :root{
@@ -43,10 +48,10 @@
       --border:rgba(0,0,0,.08);
       --surface:#ffffff;
       --container-width: min(95vw, 1340px);
-      --header-pad-y:.75rem;
-      --radius:12px;
-      --primary:#ff4d00;
-      --secondary:#ff9900;
+      --header-pad-y: .75rem;
+      --radius: 12px;
+      --primary: #ff4d00;
+      --secondary: #ff9900;
     }
     @media (prefers-color-scheme: dark){
       :root{
@@ -62,1597 +67,1917 @@
       --border:rgba(255,255,255,.12);
       --surface:#000000;
     }
+
     *{margin:0;padding:0;box-sizing:border-box}
     html,body{
       font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,sans-serif;
-      background:#fff;color:var(--text);scroll-behavior:smooth;
+      background:#fff;
+      color:var(--text);
+      scroll-behavior:smooth;
     }
     :root[data-theme="dark"] body{ background:#000 }
+
     a{color:inherit;text-decoration:none;transition:color .2s ease,opacity .2s ease}
     h1,h2,h3,h4{font-weight:900;letter-spacing:-.02em}
     .container{max-width:var(--container-width);margin:0 auto;padding:5rem 2rem}
-    .section-title{font-size:clamp(2rem,1.2rem + 2.4vw,2.8rem);text-align:center;margin-bottom:.5rem;color:var(--text);font-weight:700;letter-spacing:-.02em}
+    .section-title{font-size:clamp(2rem, 1.2rem + 2.4vw, 2.8rem);text-align:center;margin-bottom:.5rem;color:var(--text);font-weight:700;letter-spacing:-.02em}
 
-    /* Headline Tokens */
+    /* Skip-Link */
+    .skip-link{ position:absolute; left:-9999px; top:auto; z-index:1000; }
+    .skip-link:focus{
+      left:auto; top:.5rem; inset-inline-start:.5rem;
+      background:#000; color:#fff; padding:.5rem .75rem; border-radius:.5rem;
+    }
+
+    /* ===== HERO (Video) ===== */
+    main{ display:block; }
+
+    .hero-video-wrapper {
+      position: relative;
+      min-height: 100svh;
+      width: 100%;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      background: #000 url('./IndexM/PC.webp') center/cover no-repeat;
+    }
+    @media (max-width: 1024px) { .hero-video-wrapper { background-image: url('./IndexM/Tablet.webp'); } }
+    @media (max-width: 480px)  { .hero-video-wrapper { background-image: url('./IndexM/handy.webp'); } }
+
+    .hero-video-content{
+      position: relative; z-index: 2;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding: 3rem 2rem; max-width: 800px; width: 100%;
+      color:#fff; text-align:center; border-radius:12px;
+      background-color:#2a2a2a63; margin-top:-5rem;
+    }
+    .hero-video-content::before{ content:none !important; }
+
+    .video-background{
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; object-position:center; z-index:0; pointer-events:none;
+    }
+
+    .hero-video-content h1{ font-size:3.8rem; line-height:1.1; margin-bottom:1.2rem; color:#fff; }
+    .hero-video-content p { font-size:1.3rem; line-height:1.6; color:rgba(255,255,255,.85); }
+
+    .cta-btn{
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      color:#fff; font-weight:700; padding:1rem 2.2rem; border-radius:12px;
+      font-size:1rem; text-transform:uppercase; margin-top:2rem; border:none;
+      box-shadow:0 0 12px rgba(255,102,0,.3), 0 0 24px rgba(255,102,0,.25);
+      transition:all .3s ease; display:inline-block; text-decoration:none;
+    }
+    .cta-btn:hover,.cta-btn:focus{
+      background:var(--secondary); color:#000; transform:scale(1.03);
+      cursor:pointer; outline:2px solid var(--primary); outline-offset:4px;
+    }
+
+    .video-fallback-image{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; z-index:0; pointer-events:none; }
+
+    @media (max-width:1024px){
+      .hero-video-content{ padding:2rem; }
+      .hero-video-content h1{ font-size:3rem; }
+      .hero-video-content p { font-size:1.1rem; line-height:1.5; }
+    }
+    @media (max-width:768px){
+      .hero-video-content{ padding:1.5rem; margin-top:0; }
+      .hero-video-content h1{ font-size:2.2rem; line-height:1.2; }
+      .hero-video-content p { font-size:1rem; line-height:1.4; }
+      .cta-btn{ font-size:.95rem; padding:.75rem 1.5rem; width:auto; max-width:90%; margin:1.5rem auto 0; }
+    }
+    @media (max-width:480px){
+      .hero-video-content h1{ font-size:1.6rem; line-height:1.3; }
+      .hero-video-content p { font-size:.95rem; }
+    }
+    @media (max-width:425px){
+      .cta-btn{ width:100%; max-width:180px; font-size:.9rem; padding:.9rem 1.2rem; text-align:center; margin-inline:auto; }
+    }
+
+    @media (min-width:1025px){
+      .video-background{
+        top:50%; left:50%; width:auto; height:110%;
+        transform:translate(-50%,-50%); object-fit:contain;
+      }
+    }
+    @media (min-width:832px) and (max-width:1024px) and (max-height:832px){
+      .video-background{
+        top:50%; left:50%; width:auto; height:110%;
+        transform:translate(-50%,-50%); object-fit:contain;
+      }
+    }
+  </style>
+
+  <style>
+    /* ===== Section Headings – Root Tokens ===== */
     :root{
       --sec-title-fs: clamp(2rem, 1.5rem + 2vw, 3rem);
       --sec-title-fw: 900;
       --sec-title-ls: -0.02em;
       --sec-title-mb: 0rem;
-      --sec-title-color: var(--text);
+      --sec-title-color: var(--text-main, #1c1c1e);
       --sec-sub-fs: 1.1rem;
       --sec-sub-color: #666;
       --sec-sub-mb: 2rem;
       --sec-sub-lh: 1.5;
       --sec-sub-max: 65ch;
     }
+    .section-title{
+      font-size: var(--sec-title-fs);
+      font-weight: var(--sec-title-fw);
+      letter-spacing: var(--sec-title-ls);
+      margin: 0 0 var(--sec-title-mb);
+      color: var(--sec-title-color);
+      text-align: center;
+    }
     .section-subtitle{
-      font-size: var(--sec-sub-fs); color: var(--sec-sub-color);
-      margin:0 0 var(--sec-sub-mb); line-height: var(--sec-sub-lh);
-      max-width: var(--sec-sub-max); margin-inline:auto; text-align:center;
+      font-size: var(--sec-sub-fs);
+      color: var(--sec-sub-color);
+      margin: 0 0 var(--sec-sub-mb);
+      line-height: var(--sec-sub-lh);
+      max-width: var(--sec-sub-max);
+      margin-inline: auto;
+      text-align: center;
     }
-    :root[data-theme="dark"] .section-title{ color:#fff; }
-    :root[data-theme="dark"] .section-subtitle{ color:#fff; }
-
-    /* HERO video/backdrop */
-    .hero-section{ position:relative; width:100%; padding:0; margin:0; }
-    .hero-images-wrapper{ position:relative; width:100%; min-height:100vh; height:100vh; overflow:hidden; }
-    .hero-image-background,.hero-image-foreground{ position:absolute; inset:0; width:100%; max-width:none; }
-    .hero-image-background{ z-index:0; overflow:hidden; }
-    .hero-video{ width:100%; height:100%; object-fit:cover; object-position:center; position:absolute; top:0; left:0; pointer-events:none; z-index:0; }
-    .large-title{
-      position:absolute; top:162%; left:50%; transform:translate(-50%,-50%);
-      text-align:center; width:100%;
-      font-size:clamp(4rem, 22vw, 18rem); line-height:1.05; font-weight:900; z-index:10; margin:0; color:inherit;
+    :is(.persona-title){ all:unset; display:block; }
+    :is(.persona-subline){ all:unset; display:block; }
+    .persona-title{
+      font-size: var(--sec-title-fs);
+      font-weight: var(--sec-title-fw);
+      letter-spacing: var(--sec-title-ls);
+      margin: 0 0 var(--sec-title-mb);
+      color: var(--sec-title-color);
+      text-align: center;
     }
-    @media (max-width:767px){ .large-title{ top:58%; font-size:clamp(2.6rem,14vw,7rem);} }
-
-    /* Buttons (deine CTA-Optik) */
-    .cta-btn{
-      background:linear-gradient(to right,var(--primary),var(--secondary));
-      color:#fff; font-weight:700; padding:1rem 2.2rem; border-radius:12px; font-size:1rem; text-transform:uppercase; margin-top:2rem; border:none;
-      box-shadow:0 0 12px rgba(255,102,0,.3), 0 0 24px rgba(255,102,0,.25); display:inline-block;
+    .persona-subline{
+      font-size: var(--sec-sub-fs);
+      color: var(--sec-sub-color);
+      margin: 0 0 var(--sec-sub-mb);
+      line-height: var(--sec-sub-lh);
+      max-width: var(--sec-sub-max);
+      margin-inline: auto;
+      text-align: center;
     }
-    .cta-btn:hover,.cta-btn:focus{ background:var(--secondary); color:#000; transform:scale(1.03); outline:2px solid var(--primary); outline-offset:4px; }
+    :root[data-theme="dark"] .section-title,
+    :root[data-theme="dark"] .persona-title{ color:#fff; }
+    :root[data-theme="dark"] .section-subtitle,
+    :root[data-theme="dark"] .persona-subline{ color:#fff; }
+    @media (prefers-color-scheme: dark){
+      :root[data-theme="auto"] .section-title,
+      :root[data-theme="auto"] .persona-title{ color:#fff; }
+      :root[data-theme="auto"] .section-subtitle,
+      :root[data-theme="auto"] .persona-subline{ color:#fff; }
+    }
   </style>
 
-  <!-- Deine bestehenden CSS-Dateien -->
-  <link rel="stylesheet" href="css/herolast.css" type="text/css">
-  <link rel="stylesheet" href="css/navbar.css" type="text/css">
-  <link rel="stylesheet" href="css/darkmodeLast.css" type="text/css">
-  <link rel="stylesheet" href="css/aurora.css" type="text/css">
-  <link rel="stylesheet" href="css/cosmosSuite.css" type="text/css">
-  <link rel="stylesheet" href="css/reviews.css" type="text/css">
-  <link rel="stylesheet" href="css/ablauf.css" type="text/css">
-  <link rel="stylesheet" href="css/contactWeb.css" type="text/css">
-  <link rel="stylesheet" href="css/arbeitsproben.css" type="text/css">
-  <link rel="stylesheet" href="css/lyraV.css" type="text/css">
-  <link rel="stylesheet" href="css/angledimg.css" type="text/css">
-  <link rel="stylesheet" href="css/footer.css" type="text/css">
-  <link rel="stylesheet" href="css/Casestudie.css" type="text/css">
-  <link rel="stylesheet" href="css/ctasection.css" type="text/css">
-  <link rel="stylesheet" href="css/metrics.css" type="text/css">
-  <link rel="stylesheet" href="css/warumwir.css" type="text/css">
-
-  <!-- Bild-Overrides für diese Unterseite -->
+  <!-- Webflow/Normalize -->
+  <meta name="generator" content="Webflow">
+  <link href="css/denizs-dapper-site-2d192b.webflow.css" rel="stylesheet" type="text/css">
+  
+  
+  <!-- Titelpage-spezifische Bild-Overrides (in den Head verschoben) -->
   <style>
-    body[data-page="webentwicklung"] .hero-image-background { background-image: url("./WebdesignPic/1.mp4") !important; }
-    body[data-page="webentwicklung"] .hero-image-foreground { background-image: url("./images/hintegrundweb.webp") !important; }
-    @media (max-width:1024px){ body[data-page="webentwicklung"] .hero-image-foreground { background-image:url("./images/webdesign-bg-tablet.webp") !important; } }
-    @media (max-width:480px){ body[data-page="webentwicklung"] .hero-image-foreground { background-image:url("./images/webdesign-bg-mobile.webp") !important; } }
+    body[data-page="webdesign"] .hero-image-background {
+      background-image: url("./images/hero-bg-sky_1hero-bg-sky.webp") !important;
+    }
+    body[data-page="webdesign"] .hero-image-foreground {
+      background-image: url("./images/webdesign-fg.webp") !important;
+    }
+    @media (max-width: 1024px) {
+      body[data-page="webdesign"] .hero-image-foreground {
+        background-image: url("./images/webdesign-fg-tablet.webp") !important;
+      }
+    }
+    @media (max-width: 480px) {
+      body[data-page="webdesign"] .hero-image-foreground {
+        background-image: url("./images/webdesign-fg-mobile.webp") !important;
+      }
+    }
+    /* === Large Title – groß, perfekt mittig, etwas weiter unten === */
+.large-title {
+  position: absolute;
+  top: 162%;                          /* leicht nach unten versetzt */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+font-size: clamp(4rem, 22vw, 18rem);
+
+  line-height: 1.05;
+  font-weight: 900;
+  z-index: 10;
+  margin: 0;
+  color: inherit;
+}
+
+/* Elternbereich soll Bezugspunkt sein */
+.hero-section,
+.header-section,
+.page-header {
+  position: relative;
+}
+
+/* Mobile-Optimierung */
+@media (max-width: 767px) {
+  .large-title {
+    top: 58%; /* etwas höher auf kleinen Screens */
+    font-size: clamp(2.6rem, 14vw, 7rem);
+  }
+}
+
   </style>
+  <link rel="stylesheet" href="css/herolast.css" type="text/css">
+<link rel="stylesheet" href="css/navbar.css" type="text/css">
+<link rel="stylesheet" href="css/darkmodeLast.css" type="text/css">
+<link rel="stylesheet" href="css/aurora.css" type="text/css">
+<link rel="stylesheet" href="css/cosmosSuite.css" type="text/css">
+<link rel="stylesheet" href="css/reviews.css" type="text/css">
+
+<link rel="stylesheet" href="css/ablauf.css" type="text/css">
+
+<link rel="stylesheet" href="css/contactWeb.css" type="text/css">
+
+<link rel="stylesheet" href="css/arbeitsproben.css" type="text/css">
+
+<link rel="stylesheet" href="css/lyraV.css" type="text/css">
+
+<link rel="stylesheet" href="css/angledimg.css" type="text/css">
+
+<link rel="stylesheet" href="css/footer.css" type="text/css">
+
+<link rel="stylesheet" href="css/Casestudie.css" type="text/css">
+
+<link rel="stylesheet" href="css/ctasection.css" type="text/css">
+
+<link rel="stylesheet" href="css/metrics.css" type="text/css">
+
+<link rel="stylesheet" href="css/warumwir.css" type="text/css">
+<style>
+/* --------------------------
+   Lokale Bild-Overrides nur für webdesign.html
+--------------------------- */
+body[data-page="webdesign"] .hero-image-background {
+  background-image: url("./WebdesignPic/1.mp4") !important;
+}
+
+body[data-page="webdesign"] .hero-image-foreground {
+  background-image: url("./images/hintegrundweb.webp") !important;
+}
+
+/* Optional: Mobile- oder Tablet-Varianten */
+@media (max-width: 1024px) {
+  body[data-page="webdesign"] .hero-image-foreground {
+    background-image: url("./images/webdesign-bg-tablet.webp") !important;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page="webdesign"] .hero-image-foreground {
+    background-image: url("./images/webdesign-bg-mobile.webp") !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-image-foreground {
+    transform: translateY(10%);              /* dein bisheriger Versatz */
+  }
+}
+@media (min-width: 1400px) {
+  .hero-image-foreground {
+    transform: translateY(15%);              /* dein bisheriger Versatz */
+  }
+}
+@media (min-width: 1800px) {
+  .hero-image-foreground {
+    transform: translateY(15%);              /* dein bisheriger Versatz */
+  }
+}
+@media (min-width: 2200px) {
+  .hero-image-foreground {
+    transform: translateY(7%);              /* dein bisheriger Versatz */
+  }
+}
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .hero-section {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .hero-images-wrapper {
+    position: relative;
+    width: 100%;      /* statt 100vw, verhindert Scrollbar-Lücke links */
+    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden; /* falls Kinder minimal überstehen */
+  }
+
+  .hero-image-background,
+  .hero-image-foreground {
+    position: absolute;
+    inset: 0;         /* top/right/bottom/left = 0 */
+    width: 100%;
+    max-width: none;
+  }
+
+
+  /* Nur Handys: Hintergrund minimal „herauszoomen“ */
+@media (max-width: 767px) {
+  .hero-image-foreground {
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    margin: 0 !important;                  /* falls woanders Mobile-Margins gesetzt sind */
+        transform: translateY(17%);              /* dein bisheriger Versatz */
+  }
+}
+/* Ergänzung am Ende deiner bestehenden CSS-Datei */
+.hero-image-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* blockiert keine Klicks */
+  z-index: 0;
+}
+
+
+
+</style>
+
 </head>
 
-<body data-page="webentwicklung">
-  <!-- ===== Header / Navigation (unverändert, nur Texte bleiben neutral) ===== -->
-  <header class="aether-header" id="aetherGate">
-    <div class="aether-header__bar">
-      <a href="/" class="sigil-mark">Fusion³</a>
+<body data-page="webdesign">
+  <!-- dein Body-Inhalt hier -->
 
-      <nav class="astral-nav" id="astralWay" aria-label="Hauptnavigation">
-        <ul class="astral-nav__list">
-          <li class="astral-item">
-            <a class="astral-link" href="/leistungen">Leistungen</a>
-            <button class="gatelet" type="button" aria-expanded="false" aria-controls="grimoire-services" aria-haspopup="true" aria-label="Unterpunkte zu Leistungen ein- oder ausklappen">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <ul id="grimoire-services" class="underrealm" hidden>
-              <li><a class="astral-link astral-link--sub" href="/leistungen/webentwicklung">Webentwicklung</a></li>
-              <li><a class="astral-link astral-link--sub" href="/leistungen/branding-ci">Branding &amp; CI</a></li>
-              <li><a class="astral-link astral-link--sub" href="/leistungen/performance">Performance Marketing</a></li>
-              <li><a class="astral-link astral-link--sub" href="/leistungen/support">Wartung &amp; Support</a></li>
-            </ul>
-          </li>
-          <li class="astral-item">
-            <a class="astral-link" href="#ueber-uns">Blog</a>
-            <button class="gatelet" type="button" aria-expanded="false" aria-controls="codex-about" aria-haspopup="true" aria-label="Unterpunkte zu Blog ein- oder ausklappen">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <ul id="codex-about" class="underrealm" hidden>
-              <li><a class="astral-link astral-link--sub" href="#team">Team</a></li>
-              <li><a class="astral-link astral-link--sub" href="#werte">Werte</a></li>
-              <li><a class="astral-link astral-link--sub" href="/jobs">Jobs</a></li>
-              <li><a class="astral-link astral-link--sub" href="/presse">Presse</a></li>
-            </ul>
-          </li>
-          <li class="astral-item">
-            <a class="astral-link" href="#portfolio">Portfolio</a>
-            <button class="gatelet" type="button" aria-expanded="false" aria-controls="vault-portfolio" aria-haspopup="true" aria-label="Unterpunkte zu Portfolio ein- oder ausklappen">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <ul id="vault-portfolio" class="underrealm" hidden>
-              <li><a class="astral-link astral-link--sub" href="#web-projekte">Web-Projekte</a></li>
-              <li><a class="astral-link astral-link--sub" href="#markenauftritte">Markenauftritte</a></li>
-              <li><a class="astral-link astral-link--sub" href="/cases">Case Studies</a></li>
-              <li><a class="astral-link astral-link--sub" href="/referenzen">Referenzen</a></li>
-            </ul>
-          </li>
-          <li class="astral-item">
-            <a class="astral-link" href="#kontakt">Kontakt</a>
-            <button class="gatelet" type="button" aria-expanded="false" aria-controls="altar-contact" aria-haspopup="true" aria-label="Unterpunkte zu Kontakt ein- oder ausklappen">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <ul id="altar-contact" class="underrealm" hidden>
-              <li><a class="astral-link astral-link--sub" href="/anfrage">Anfrage stellen</a></li>
-              <li><a class="astral-link astral-link--sub" href="/beratung">Beratung buchen</a></li>
-              <li><a class="astral-link astral-link--sub" href="/standort">Standort</a></li>
-              <li><a class="astral-link astral-link--sub" href="/impressum">Impressum</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
+<header class="aether-header" id="aetherGate">
+  <div class="aether-header__bar">
+    <a href="/" class="sigil-mark">Fusion³</a>
 
-      <div class="astral-actions">
-        <button class="orb-toggle" id="eclipseStone" type="button" aria-pressed="true" aria-controls="omenWhisper" aria-label="Dunkelmodus aktiv">
-          <span class="sky day-sky" aria-hidden="true"></span>
-          <span class="sky night-sky" aria-hidden="true"></span>
-          <span class="stars" id="starField" aria-hidden="true"></span>
-          <span class="clouds" id="nebulaSea" aria-hidden="true">
-            <span class="leyline back" data-lane="back"></span>
-            <span class="leyline mid" data-lane="mid"></span>
-            <span class="leyline front" data-lane="front"></span>
-          </span>
-          <span class="thumb" id="moonShard" aria-hidden="true"></span>
-        </button>
-        <p id="omenWhisper" class="visually-hidden" aria-live="polite" aria-atomic="true">Dunkelmodus aktiv</p>
-        <a class="charm-cta charm-cta--prime" href="#kontakt" id="sigilOffer" data-cta data-cta-context="header"><span class="charm-cta__label">Projekt starten</span></a>
-      </div>
-
-      <button class="portal-toggle" id="runeSwitch" type="button" aria-expanded="false" aria-controls="astralWay" aria-label="Menü öffnen">
-        <svg class="icon icon-burger" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        <svg class="icon icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      </button>
-    </div>
-    <div class="night-veil" id="voidVeil" hidden></div>
-  </header>
-
-  <!-- ===== Hero ===== -->
-  <section class="hero-section" data-page="webentwicklung">
-    <div class="hero-images-wrapper">
-      <div class="hero-image-background">
-        <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hintegrundweb.webp">
-          <source src="./WebdesignPic/1.mp4" type="video/mp4" />
-        </video>
-      </div>
-
-      <div class="page-title">
-        <div class="container">
-          <h1 class="large-title">Web<br>Entwicklung</h1>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =============================================
-       Case/Preview – an WebENTWICKLUNG angepasst
-       ============================================= -->
-  <section id="design-study" class="aurora-sheet" data-theme="auto">
-    <h2 class="aurora-title">
-      <span class="title-full">Webentwicklung für Growth – schnell, sicher, skalierbar</span>
-      <span class="title-t">Webentwicklung für Growth</span>
-      <span class="title-short">Growth-ready Web</span>
-    </h2>
-
-    <p class="aurora-subtitle" id="design-study-sub" aria-live="polite">
-      <span class="subtitle-snippet">Modernes Frontend. Stabile APIs. Saubere Deployments.</span>
-      <span class="subtitle-t">Headless CMS, performantes Frontend und Integrationen, die mit deinem Business mitwachsen.</span>
-      <span class="subtitle-full">Wir entwickeln <strong>skalierbare Webanwendungen</strong> mit sauberer Architektur: <em>Performance</em> (Core Web Vitals), <em>Accessibility</em> (WCAG), <em>Security</em> (OWASP) und <em>CI/CD</em> für schnelle Releases. Headless CMS, E-Commerce, Such- &amp; Payment-Integrationen inklusive.</span>
-    </p>
-
-    <div class="ds-top ds-hide-on-mobile">
-      <article class="ds-preview-card" aria-label="Preview Web-App">
-        <div class="ds-preview-wrap">
-          <video class="ds-preview-video" src="./3DSlideShow/vid2.mp4" autoplay muted loop playsinline preload="auto" title="Web-App Preview"></video>
-        </div>
-      </article>
-
-      <article class="aether-card ds-teaser-card" aria-labelledby="study-teaser">
-        <h3 id="study-teaser">
-          <span class="teaser-title-full">Clean Code. Messbare Performance.</span>
-          <span class="teaser-title-t">Sauber & schnell.</span>
-        </h3>
-        <ul class="delta-list" role="list">
-          <li><span class="lead">Stack</span><span class="copy">Moderne Frameworks, Headless CMS, API-first</span></li>
-          <li><span class="lead">DevOps</span><span class="copy">CI/CD, Preview-Deployments, Monitoring</span></li>
-          <li><span class="lead">Qualität</span><span class="copy">Testing, Code Reviews, Linting &amp; E2E</span></li>
-        </ul>
-      </article>
-    </div>
-
-    <div class="ds-info-row ds-hide-on-mobile">
-      <article class="aether-card aether-card--orange">
-        <h3>Sichtbar & schnell</h3>
-        <ul class="delta-list">
-          <li><span class="lead">Core Web Vitals</span><span class="copy">LCP, INP, CLS im grünen Bereich</span></li>
-          <li><span class="lead">SEO-ready</span><span class="copy">saubere Semantik, strukturierte Daten</span></li>
-          <li><span class="lead">Caching &amp; CDN</span><span class="copy">Edge Delivery &amp; Bildoptimierung</span></li>
-        </ul>
-      </article>
-
-      <article class="aether-card aether-card--navy">
-        <h3>Stabile Architektur</h3>
-        <ul class="delta-list">
-          <li><span class="lead">Headless</span><span class="copy">CMS &amp; Commerce entkoppelt</span></li>
-          <li><span class="lead">Integrationen</span><span class="copy">Zahlung, Suche, CRM, Tracking</span></li>
-          <li><span class="lead">Security</span><span class="copy">OWASP, HTTPS/HTTP/2+, CSP</span></li>
-        </ul>
-      </article>
-
-      <article class="aether-card aether-card--violet">
-        <h3>Release ohne Drama</h3>
-        <ul class="delta-list">
-          <li><span class="lead">CI/CD</span><span class="copy">Git-Workflows &amp; Preview-URLs</span></li>
-          <li><span class="lead">Testing</span><span class="copy">Unit, Integration, E2E</span></li>
-          <li><span class="lead">Observability</span><span class="copy">Logs, Uptime, Error Tracking</span></li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <!-- =============================================
-       Leistungen – „cosmos-suite“
-       ============================================= -->
-  <section class="cluster cosmos-suite" id="nebula-hub" aria-labelledby="nebula-hub-h">
-    <h2 id="nebula-hub-h" class="headline">Webentwicklung Leistungen</h2>
-    <p class="subline" id="nebula-hub-sub">Von der API bis zum Frontend – wir entwickeln performante Weblösungen, die wachsen.</p>
-
-    <ul class="orbit-grid" aria-labelledby="nebula-hub-h" aria-describedby="nebula-hub-sub">
-
-      <li class="module-card" id="svc-webdev-strategy" aria-labelledby="svc-webdev-strategy-h" aria-describedby="svc-webdev-strategy-s">
-        <div class="payload">
-          <h3 id="svc-webdev-strategy-h">Architektur &amp; Planung</h3>
-          <p class="card-snippet" id="svc-webdev-strategy-s">Sauberes Fundament für Skalierung und Tempo.</p>
-          <ul>
-            <li>Requirements &amp; Tech-Konzept</li>
-            <li>Informationsarchitektur &amp; Datenmodelle</li>
-            <li>Security- &amp; Performance-Plan</li>
-            <li>Roadmap &amp; Milestones</li>
+    <!-- NAV mit Subnav-Accordions (mobil sichtbar) -->
+    <nav class="astral-nav" id="astralWay" aria-label="Hauptnavigation">
+      <ul class="astral-nav__list">
+        <!-- Leistungen -->
+        <li class="astral-item">
+          <a class="astral-link" href="/leistungen">Leistungen</a>
+          <button
+            class="gatelet"
+            type="button"
+            aria-expanded="false"
+            aria-controls="grimoire-services"
+            aria-haspopup="true"
+            aria-label="Unterpunkte zu Leistungen ein- oder ausklappen">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul id="grimoire-services" class="underrealm" hidden>
+            <li><a class="astral-link astral-link--sub" href="/leistungen/webdesign">Webdesign</a></li>
+            <li><a class="astral-link astral-link--sub" href="/leistungen/branding-ci">Branding &amp; CI</a></li>
+            <li><a class="astral-link astral-link--sub" href="/leistungen/performance">Performance Marketing</a></li>
+            <li><a class="astral-link astral-link--sub" href="/leistungen/support">Wartung &amp; Support</a></li>
           </ul>
-          <a href="./WebKonzept.html" class="warp-cta">Mehr erfahren</a>
-        </div>
-      </li>
+        </li>
 
-      <li class="module-card stellar-3d" id="svc-webdev-frontend" aria-labelledby="svc-webdev-frontend-h" aria-describedby="svc-webdev-frontend-s">
-        <div class="payload">
-          <h3 id="svc-webdev-frontend-h">Frontend-Entwicklung</h3>
-          <p class="card-snippet" id="svc-webdev-frontend-s">Schnelle, zugängliche UIs mit Komponenten-System.</p>
-          <ul>
-            <li>Designsysteme &amp; State-Management</li>
-            <li>SSR/SSG &amp; Bildoptimierung</li>
-            <li>Animationen &amp; Microinteractions</li>
-            <li>WCAG &amp; Semantik</li>
+        <!-- Blog (vorher "Über uns" im Kommentar) -->
+        <li class="astral-item">
+          <a class="astral-link" href="#ueber-uns">Blog</a>
+          <button
+            class="gatelet"
+            type="button"
+            aria-expanded="false"
+            aria-controls="codex-about"
+            aria-haspopup="true"
+            aria-label="Unterpunkte zu Blog ein- oder ausklappen">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul id="codex-about" class="underrealm" hidden>
+            <li><a class="astral-link astral-link--sub" href="#team">Team</a></li>
+            <li><a class="astral-link astral-link--sub" href="#werte">Werte</a></li>
+            <li><a class="astral-link astral-link--sub" href="/jobs">Jobs</a></li>
+            <li><a class="astral-link astral-link--sub" href="/presse">Presse</a></li>
           </ul>
-          <div class="overlay-art" aria-hidden="true">
-            <div class="orbit-shell">
-              <img class="planet-sprite" loading="lazy" decoding="async" src="./indexFotoSlideShow/planet.webp" alt="" width="512" height="512">
-            </div>
-            <img class="lazy-comet astronaut-sprite" src="./indexFotoSlideShow/2.webp" data-src="./indexFotoSlideShow/2.webp" alt="" aria-hidden="true">
-          </div>
-        </div>
-      </li>
+        </li>
 
-      <li class="module-card" id="svc-webdev-backend" aria-labelledby="svc-webdev-backend-h" aria-describedby="svc-webdev-backend-s">
-        <div class="payload">
-          <h3 id="svc-webdev-backend-h">Backend &amp; APIs</h3>
-          <p class="card-snippet" id="svc-webdev-backend-s">API-first: stabil, sicher, dokumentiert.</p>
-          <ul>
-            <li>REST/GraphQL Schnittstellen</li>
-            <li>Auth, Rollen &amp; Rechte</li>
-            <li>Integrationen (CRM, ERP, Payment)</li>
-            <li>Dokumentation &amp; Versionierung</li>
+        <!-- Portfolio -->
+        <li class="astral-item">
+          <a class="astral-link" href="#portfolio">Portfolio</a>
+          <button
+            class="gatelet"
+            type="button"
+            aria-expanded="false"
+            aria-controls="vault-portfolio"
+            aria-haspopup="true"
+            aria-label="Unterpunkte zu Portfolio ein- oder ausklappen">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul id="vault-portfolio" class="underrealm" hidden>
+            <li><a class="astral-link astral-link--sub" href="#web-projekte">Web-Projekte</a></li>
+            <li><a class="astral-link astral-link--sub" href="#markenauftritte">Markenauftritte</a></li>
+            <li><a class="astral-link astral-link--sub" href="/cases">Case Studies</a></li>
+            <li><a class="astral-link astral-link--sub" href="/referenzen">Referenzen</a></li>
           </ul>
-          <a href="./WebKonzept.html" class="warp-cta">Mehr erfahren</a>
-        </div>
-      </li>
+        </li>
 
-      <li class="module-card" id="svc-webdev-cicd" aria-labelledby="svc-webdev-cicd-h" aria-describedby="svc-webdev-cicd-s">
-        <div class="payload">
-          <h3 id="svc-webdev-cicd-h">DevOps &amp; Betrieb</h3>
-          <p class="card-snippet" id="svc-webdev-cicd-s">Verlässliche Deployments &amp; Monitoring.</p>
-          <ul>
-            <li>CI/CD, Branch-Previews, Rollbacks</li>
-            <li>Hosting, CDN &amp; Caching</li>
-            <li>Observability (APM, Uptime, Logs)</li>
-            <li>Backup &amp; Update-Strategien</li>
+        <!-- Kontakt -->
+        <li class="astral-item">
+          <a class="astral-link" href="#kontakt">Kontakt</a>
+          <button
+            class="gatelet"
+            type="button"
+            aria-expanded="false"
+            aria-controls="altar-contact"
+            aria-haspopup="true"
+            aria-label="Unterpunkte zu Kontakt ein- oder ausklappen">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul id="altar-contact" class="underrealm" hidden>
+            <li><a class="astral-link astral-link--sub" href="/anfrage">Anfrage stellen</a></li>
+            <li><a class="astral-link astral-link--sub" href="/beratung">Beratung buchen</a></li>
+            <li><a class="astral-link astral-link--sub" href="/standort">Standort</a></li>
+            <li><a class="astral-link astral-link--sub" href="/impressum">Impressum</a></li>
           </ul>
-          <a href="./WebKonzept.html" class="warp-cta">Mehr erfahren</a>
-        </div>
-      </li>
+        </li>
+      </ul>
+    </nav>
 
-    </ul>
-  </section>
+    <div class="astral-actions">
+      <!-- Theme Toggle -->
+      <button
+  class="orb-toggle"
+  id="eclipseStone"
+  type="button"
+  aria-pressed="true"
+  aria-controls="omenWhisper"
+  aria-label="Dunkelmodus aktiv">
 
-  <!-- =============================================
-       Warum wir – Inhalte ersetzt, Struktur bleibt
-       ============================================= -->
-  <section id="warumwir">
-    <div class="container">
-      <header class="intro">
-        <h2 class="title">Webentwicklung, die skaliert</h2>
-        <p class="sub" aria-live="polite">
-          <span class="snippet"><strong>Stabil, schnell, sicher.</strong> Von MVP bis Enterprise.</span>
-          <span class="t-snippet">Wir verbinden UX, Architektur und DevOps – für Releases in Tagen statt Wochen.</span>
-          <span class="full">Wir bauen <strong>skalierbare Webplattformen</strong> mit klarer Code-Basis, reproduzierbaren Deployments und Metriken, die zählen: Performance, Konversion, Uptime.</span>
-        </p>
-      </header>
+  <span class="sky day-sky" aria-hidden="true"></span>
+  <span class="sky night-sky" aria-hidden="true"></span>
+  <span class="stars" id="starField" aria-hidden="true"></span>
 
-      <div class="grid" aria-label="Unsere Stärken in der Entwicklung">
-        <article class="card s1">
-          <div class="card-inner">
-            <h3>Komponenten statt Chaos</h3>
-            <p class="leadcopy">
-              <span class="snippet">Designsystem &amp; Storybook.</span>
-              <span class="t-snippet">Wiederverwendbare UI-Bausteine mit Doku.</span>
-              <span class="full">Ein konsistentes Komponenten-System (Storybook, Tokens, States) beschleunigt Entwicklung und hält Qualität hoch.</span>
-            </p>
-            <ul class="points">
-              <li class="point"><span class="p-text"><span class="lead">Saubere Patterns</span><span class="copy">Atomic/Modular Architecture</span></span></li>
-              <li class="point"><span class="p-text"><span class="lead">Tests</span><span class="copy">Unit, Integration, E2E automatisiert</span></span></li>
-              <li class="point"><span class="p-text"><span class="lead">Docs</span><span class="copy">Autogenerierte Doku &amp; Guidelines</span></span></li>
-            </ul>
-          </div>
-        </article>
+  <span class="clouds" id="nebulaSea" aria-hidden="true">
+    <span class="leyline back" data-lane="back"></span>
+    <span class="leyline mid" data-lane="mid"></span>
+    <span class="leyline front" data-lane="front"></span>
+  </span>
 
-        <article class="card s2">
-          <div class="card-inner">
-            <h3>Performance by Design</h3>
-            <p class="leadcopy">
-              <span class="snippet">Schnelle Loads. Starke UX.</span>
-              <span class="t-snippet">Lighthouse &amp; CWV im Fokus.</span>
-              <span class="full">Code-Splitting, Edge-Cache, Bild-Pipelines und Preloading – damit CWV (LCP, INP, CLS) stabil im grünen Bereich bleiben.</span>
-            </p>
-            <ul class="points">
-              <li class="point"><span class="p-text"><span class="lead">SSR/SSG</span><span class="copy">Server Rendering &amp; Caching</span></span></li>
-              <li class="point"><span class="p-text"><span class="lead">Bildpipeline</span><span class="copy">Responsive, AVIF/WebP, Lazy</span></span></li>
-              <li class="point"><span class="p-text"><span class="lead">Monitoring</span><span class="copy">RUM &amp; Error Tracking</span></span></li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="card s3">
-          <div class="card-inner">
-            <h3>Security &amp; Compliance</h3>
-            <p class="leadcopy">
-              <span class="snippet">OWASP &amp; DSGVO.</span>
-              <span class="t-snippet">Rechte, Rollen, Audits.</span>
-              <span class="full">Von CSP bis Rate Limiting – Security ist Teil des Prozesses, nicht Add-on.</span>
-            </p>
-            <ul class="points">
-              <li class="point"><span class="p-text"><span class="lead">Auth</span><span class="copy">OAuth/OIDC, MFA</span></span></li>
-              <li class="point"><span class="p-text"><span class="lead">Privacy</span><span class="copy">Consent, Data Minimization</span></span></li>
-              <li class="point"><span class="p-text"><span class="lead">Audits</span><span class="copy">Pen-Tests &amp; Hardening</span></span></li>
-            </ul>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
+  <span class="thumb" id="moonShard" aria-hidden="true"></span>
+</button>
 
 
+      <!-- Live-Region für Modusansage -->
+      <p id="omenWhisper" class="visually-hidden" aria-live="polite" aria-atomic="true">Dunkelmodus aktiv</p>
 
-
-
-<!-- =============================================
-     Kontakt + Video (gleich hohe Karten) + Testimonials
-     – 6-Step Wizard-Form (Formspree) + Success-Screen
-     ============================================= -->
-<section class="kontakt-testimonial-section" id="kontakt">
-  <div class="kontakt-testimonial-wrapper">
-
-    <!-- === Kontaktkarte === -->
-    <div class="kontakt-area">
-      <h2 class="section-title">Lass uns loslegen!</h2>
-      <p class="kontakt-subline">
-        Eine starke Idee verdient ein starkes digitales Erlebnis.
-      </p>
-
-      <!-- === Formular (Wizard) === -->
-      <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm" novalidate>
-
-        <!-- STEP 1: Leistungswahl -->
-        <fieldset class="form-step active" data-step="1" aria-labelledby="step1Title">
-          <legend id="step1Title" class="sr-only">Leistungswahl</legend>
-          <p class="copy step1-copy">Wofür interessierst du dich?</p>
-
-          <div class="grid-choices" role="radiogroup" aria-label="Leistung wählen">
-            <label class="choice" tabindex="0">
-              <input type="radio" name="service" value="Webdesign" data-toggle="web" />
-              <span class="title">Kostenloses Wireframe</span>
-              <small>0€, innerhalb von 24h!</small>
-            </label>
-
-          </div>
-        </fieldset>
-
-        <!-- STEP 2: Material & Styleguide -->
-        <fieldset class="form-step" data-step="2" aria-labelledby="step2Title">
-          <legend id="step2Title" class="sr-only">Material & Styleguide</legend>
-
-          <!-- Web -->
-          <div class="service-block" data-service="web">
-            <label class="select-row">
-              <span class="website-label">Material (Texte / Bilder / Logo)</span>
-              <select name="web_material">
-                <option value="">Bitte wählen</option>
-                <option value="alles">Alles vorhanden</option>
-                <option value="teilweise">Teilweise vorhanden</option>
-                <option value="nichts">Bitte komplett erstellen</option>
-              </select>
-            </label>
-
-            <label class="select-row">
-              <span class="website-label">Styleguide / CI vorhanden?</span>
-              <select name="web_styleguide">
-                <option value="">Bitte wählen</option>
-                <option value="ja">Ja</option>
-                <option value="nein">Nein</option>
-              </select>
-            </label>
-          </div>
-
-          <!-- 3D -->
-          <div class="service-block" data-service="d3">
-       <label class="select-row">
-              <span class="website-label">3D-Daten / Modelle vorhanden?</span>
-              <select name="d3_daten">
-                <option value="">Bitte wählen</option>
-                <option value="vorhanden">Ja, vorhanden</option>
-                <option value="modellierung_noetig">Nein, bitte modellieren</option>
-              </select>
-            </label>
-          </div>
-
-          <!-- Grafik -->
-          <div class="service-block" data-service="gfx">
-            <label class="select-row">
-              <span class="website-label">Branding / Styleguide vorhanden?</span>
-              <select name="gfx_styleguide">
-                <option value="">Bitte wählen</option>
-                <option value="ja">Ja</option>
-                <option value="nein">Nein</option>
-              </select>
-            </label>
-
-            <label class="select-row">
-              <span class="website-label">Text- / Bildmaterial</span>
-              <select name="gfx_material">
-                <option value="">Bitte wählen</option>
-                <option value="alles">Alles vorhanden</option>
-                <option value="teilweise">Teilweise</option>
-                <option value="nichts">Bitte erstellen</option>
-              </select>
-            </label>
-          </div>
-        </fieldset>
-
-        <!-- STEP 3: Projektspezifikationen -->
-        <fieldset class="form-step" data-step="3" aria-labelledby="step3Title">
-          <legend id="step3Title" class="sr-only">Projektspezifikationen</legend>
-
-          <!-- Web -->
-          <div class="service-block" data-service="web">
-            <label class="select-row">
-              <span class="website-label">Website-Typ</span>
-              <select name="web_typ">
-                <option value="">Bitte wählen</option>
-                <option value="unternehmensseite">Unternehmensseite</option>
-                <option value="portfolio">Portfolio</option>
-                <option value="shop">Online-Shop</option>
-                <option value="landingpage">Landingpage</option>
-                <option value="sonstiges">Sonstiges</option>
-              </select>
-            </label>
-
-            <fieldset class="checkbox-group tags" aria-label="Besondere Schwerpunkte">
-              <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Ladegeschwindigkeit" /><span>Ladegeschwindigkeit</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Responsiveness" /><span>Responsiveness</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="SEO" /><span>SEO</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Benutzerfreundlichkeit" /><span>Benutzerfreundlichkeit</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Designqualität" /><span>Designqualität</span></label>
-            </fieldset>
-          </div>
-
-          <!-- 3D -->
-          <div class="service-block" data-service="d3">
-            <label class="select-row">
-              <span class="website-label">Was soll entstehen?</span>
-              <select name="d3_typ">
-                <option value="">Bitte wählen</option>
-                <option value="rendering">Rendering</option>
-                <option value="animation">Animation</option>
-                <option value="produktvisualisierung">Produktvisualisierung</option>
-                <option value="architekturvisualisierung">Architekturvisualisierung</option>
-                <option value="sonstiges">Sonstiges</option>
-              </select>
-            </label>
-
-            <label class="select-row">
-              <span class="website-label">Verwendungszweck</span>
-              <select name="d3_use">
-                <option value="">Bitte wählen</option>
-                <option value="marketing">Marketing / Werbung</option>
-                <option value="praesentation">Präsentation</option>
-                <option value="shop">Online-Shop</option>
-                <option value="print">Print</option>
-              </select>
-            </label>
-          </div>
-
-          <!-- Grafik -->
-          <div class="service-block" data-service="gfx">
-            <label class="select-row">
-              <span class="website-label">Design-Typ</span>
-              <select name="gfx_typ">
-                <option value="">Bitte wählen</option>
-                <option value="logo">Logo</option>
-                <option value="visitenkarte">Visitenkarte</option>
-                <option value="flyer_poster">Flyer / Poster</option>
-                <option value="styleguide">Styleguide</option>
-                <option value="sonstiges">Sonstiges</option>
-              </select>
-            </label>
-
-            <fieldset class="checkbox-group tags" aria-label="Prioritäten Grafikdesign">
-              <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Brand-Konsistenz" /><span>Brand-Konsistenz</span></label>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Typografie" /><span>Typografie</span></label>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Druckvorbereitung" /><span>Druckvorbereitung</span></label>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Illustration" /><span>Illustration</span></label>
-              <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Schnelle Umsetzung" /><span>Schnelle Umsetzung</span></label>
-            </fieldset>
-          </div>
-        </fieldset>
-
-        <!-- STEP 4: Zeit & Budget -->
-        <fieldset class="form-step" data-step="4" aria-labelledby="step4Title">
-          <legend id="step4Title" class="sr-only">Zeit & Budget</legend>
-
-          <label class="input-row">
-            <span class="website-label">Deadline / Zeitraum</span>
-            <input type="text" name="deadline" placeholder="z. B. bis 15. November oder Q4" />
-          </label>
-
-          <label class="input-row">
-            <span class="website-label">Budgetrahmen (optional)</span>
-            <input type="text" name="budget" placeholder="z. B. 3 000–6 000 €" />
-          </label>
-        </fieldset>
-
-        <!-- STEP 5: Kontaktdaten -->
-        <fieldset class="form-step" data-step="5" aria-labelledby="step5Title">
-          <legend id="step5Title" class="sr-only">Kontaktdaten</legend>
-
-          <input type="hidden" name="_subject" id="autoSubject" />
-          <textarea class="sr-only" name="summary_plain" id="summaryPlain" aria-hidden="true"></textarea>
-          <input type="hidden" name="selected_service" id="selectedService" />
-
-          <div class="contact-grid">
-            <div class="field span-6">
-              <label for="name" class="req">Name</label>
-              <input id="name" type="text" name="name" placeholder="Dein Name" autocomplete="name" required />
-            </div>
-
-            <div class="field span-6">
-              <label for="email" class="req">E-Mail</label>
-              <input id="email" type="email" name="email" placeholder="dein@mail.de" autocomplete="email" required />
-            </div>
-
-            <div class="field span-6">
-              <label for="phone">Telefon (optional)</label>
-              <input id="phone" type="tel" name="phone" placeholder="z. B. +49 151 12345678" autocomplete="tel" />
-            </div>
-
-            <div class="field span-12">
-              <label for="message" class="req">Nachricht</label>
-              <textarea id="message" name="message" rows="6" placeholder="Kurz dein Projekt / Ziel beschreiben …" minlength="5" required></textarea>
-            </div>
-
-            <p class="req-note">* Pflichtfelder</p>
-          </div>
-
-          <p class="legal-hint">
-            Deine Angaben werden über <strong>Formspree</strong> zur Beantwortung deiner Anfrage verarbeitet.
-            Mehr unter <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.
-          </p>
-        </fieldset>
-
-        <!-- STEP 6: Erfolg -->
-        <fieldset class="form-step" data-step="6" aria-labelledby="step6Title">
-          <legend id="step6Title" class="sr-only">Abschluss</legend>
-          <div class="success-card" role="status" aria-live="polite">
-            <h3 class="success-title">Geschafft! 🎉</h3>
-            <p class="success-copy">Vielen Dank für deine Anfrage. <br>Wir melden uns in Kürze bei dir.</p>
-            <p class="success-sub">Du wirst gleich automatisch zum Start zurückgeführt …</p>
-            <button type="button" class="success-btn" disabled>✅ Anfrage gesendet</button>
-          </div>
-        </fieldset>
-
-        <!-- === Fortschritt === -->
-        <div class="stepper" aria-label="Fortschritt" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1">
-          <div class="stepper-header"><span id="stepLabel">Schritt 1 / 6</span></div>
-          <div class="stepper-track"><div class="stepper-fill" id="stepperFill" style="width:0%"></div></div>
-        </div>
-
-        <!-- === Navigation === -->
-        <div class="wizard-nav" id="wizardNav">
-          <button type="button" class="nav-btn prev" id="prevBtn" disabled>Zurück</button>
-          <button type="button" class="nav-btn next" id="nextBtn" disabled>Weiter</button>
-          <button type="submit" class="kontakt-btn submit" id="submitBtn" hidden>Senden!</button>
-        </div>
-      </form>
+      <!-- CTA (Link bleibt Link; kein role="button" nötig) -->
+      <a
+        class="charm-cta charm-cta--prime"
+        href="#kontakt"
+        id="sigilOffer"
+        aria-label="Angebot anfordern"
+        data-cta
+        data-cta-context="header">
+        <span class="charm-cta__label">Check starten</span>
+      </a>
     </div>
 
-    <!-- === Video-Karte === -->
-    <div class="video-area" aria-label="Einblick in Prozess, Tools & Zusammenarbeit">
-      <div class="video-card">
-        <video class="video-media" autoplay loop muted playsinline preload="auto">
-          <source src="./indexFotoSlideShow/kartenvideo.mp4" type="video/mp4">
-          Dein Browser unterstützt das Video-Tag nicht.
-        </video>
-      </div>
-    </div>
-
-    <!-- === Testimonials === -->
-    <div class="testimonial-area">
-      <testimonial-slider></testimonial-slider>
-    </div>
+    <!-- Mobile Menü-Button -->
+    <button
+      class="portal-toggle"
+      id="runeSwitch"
+      type="button"
+      aria-expanded="false"
+      aria-controls="astralWay"
+      aria-label="Menü öffnen">
+      <svg class="icon icon-burger" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <svg class="icon icon-close" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
   </div>
-</section>
+<div class="night-veil" id="voidVeil" hidden></div>
+
+</header>
+
 
 <script>
-(function () {
-  const form = document.getElementById('kontaktForm');
-  if (!form) return;
+  /* ---------------------------
+     Aether / Astral Navigation
+     --------------------------- */
+  (function(){
+    const docEl   = document.documentElement;
+    const gate    = document.getElementById('aetherGate');
+    const switchRune = document.getElementById('runeSwitch');
+    const astral  = document.getElementById('astralWay');
+    const veil    = document.getElementById('voidVeil');
+    if(!switchRune || !astral) return;
 
-  /* =========================
-     Cache DOM
-  ========================== */
-  const allSteps  = Array.from(form.querySelectorAll('.form-step'));
-  const stepper   = form.querySelector('.stepper');
-  const stepLabel = document.getElementById('stepLabel');
-  const stepFill  = document.getElementById('stepperFill');
-  const prevBtn   = document.getElementById('prevBtn');
-  const nextBtn   = document.getElementById('nextBtn');
-  const submitBtn = document.getElementById('submitBtn');
-
-  // Success-Card DOM
-  const successFieldset = allSteps.find(s => s.dataset.step === '6');
-  const successCard     = successFieldset?.querySelector('.success-card');
-  const successBtn      = successFieldset?.querySelector('.success-btn');
-  const successSub      = successFieldset?.querySelector('.success-sub');
-
-  /* =========================
-     Live Status (a11y)
-  ========================== */
-  let statusBox = form.querySelector('[data-status]');
-  if (!statusBox) {
-    statusBox = document.createElement('div');
-    statusBox.setAttribute('data-status','');
-    statusBox.setAttribute('role','status');
-    statusBox.setAttribute('aria-live','polite');
-    statusBox.style.cssText = 'margin:.5rem 0 .25rem;font-weight:700;text-align:center;';
-    form.insertBefore(statusBox, form.firstChild);
-  }
-  const setStatus = (msg, tone='')=>{
-    statusBox.textContent = msg || '';
-    statusBox.style.color =
-      tone==='error' ? '#b00020' :
-      tone==='ok'    ? '#0a7f2e' :
-      tone==='warn'  ? '#a15c00' : 'inherit';
-  };
-
-  /* =========================
-     Hidden Fields / Honeypot
-  ========================== */
-  ensureHidden({ id:'autoSubject',     name:'_subject',         tag:'input'    });
-  ensureHidden({ id:'summaryPlain',    name:'summary_plain',    tag:'textarea' });
-  ensureHidden({ id:'selectedService', name:'selected_service', tag:'input'    });
-  ensureHidden({ id:'honeypot',        name:'_gotcha',          tag:'input'    });
-  ensureHidden({ id:'metaRef',         name:'_referrer',        tag:'input'    }).value = location.href;
-  ensureHidden({ id:'metaUA',          name:'_userAgent',       tag:'input'    }).value = navigator.userAgent;
-  ensureHidden({ id:'metaOrigin',      name:'_origin',          tag:'input'    }).value = location.origin;
-
-  function ensureHidden({id,name,tag='input'}) {
-    let el = form.querySelector('#'+id);
-    if (!el) {
-      el = document.createElement(tag);
-      el.id = id; el.name = name;
-      if (tag==='input') el.type = 'hidden';
-      el.className = 'sr-only'; el.setAttribute('aria-hidden','true');
-      form.appendChild(el);
-    } else if (el.name !== name) {
-      el.name = name;
+    // Headerhöhe -> CSS Var
+    function setGateHeight(){
+      const h = gate.getBoundingClientRect().height;
+      docEl.style.setProperty('--gate-height', h + 'px');
     }
-    return el;
-  }
+    setGateHeight();
+    addEventListener('resize', setGateHeight, {passive:true});
 
-  /* =========================
-     Helpers
-  ========================== */
-  const q  = (sel,root=form)=>root.querySelector(sel);
-  const qa = (sel,root=form)=>Array.from(root.querySelectorAll(sel));
-  const trim = s => (s||'').toString().trim();
+    // MQ Sync
+    const mq = window.matchMedia('(min-width: 768px)');
 
-  function collectStepData(stepEl) {
-    const data = {};
-    stepEl.querySelectorAll('input, select, textarea').forEach(el=>{
-      if (el.disabled || el.closest('[hidden]')) return;
-      if (el.type === 'checkbox') {
-        if (!data[el.name]) data[el.name] = [];
-        if (el.checked) data[el.name].push(el.value);
-      } else if (el.type === 'radio') {
-        if (el.checked) data[el.name] = el.value;
-      } else if (el.tagName === 'SELECT') {
-        if (el.value) data[el.name] = el.value;
-      } else {
-        const v = trim(el.value);
-        if (v) data[el.name] = v;
+    // Mobile Actions Container
+    const mobileSatchelId = 'mobileSatchel';
+    let mobileSatchel = null;
+    function ensureSatchel(){
+      if(!mobileSatchel){
+        mobileSatchel = document.createElement('div');
+        mobileSatchel.id = mobileSatchelId;
+        mobileSatchel.className = 'astral-nav__mobile-actions';
+        mobileSatchel.setAttribute('hidden','');
+        astral.appendChild(mobileSatchel);
+      }
+    }
+    function stowCharm(){
+      ensureSatchel();
+      const cta = document.querySelector('.charm-cta');
+      if(cta && cta.parentElement !== mobileSatchel){ mobileSatchel.appendChild(cta); }
+      mobileSatchel.removeAttribute('hidden');
+    }
+    function recallCharm(){
+      const actions = document.querySelector('.astral-actions');
+      if(!actions) return;
+      const cta = mobileSatchel?.querySelector('.charm-cta');
+      if(cta && actions !== cta.parentElement){
+        actions.appendChild(cta);
+      }
+      mobileSatchel?.setAttribute('hidden','');
+    }
+
+    // Focus Trap
+    const ward = (()=>{
+      let active = false;
+      function handle(e){
+        if(!active || e.key !== 'Tab') return;
+        const focusables = astral.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+        const list = Array.from(focusables).filter(el=>!el.hasAttribute('disabled'));
+        if(list.length === 0) return;
+        const first = list[0];
+        const last  = list[list.length-1];
+        if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+      return {
+        activate(){ if(!active){ active = true; document.addEventListener('keydown', handle); }},
+        deactivate(){ if(active){ active = false; document.removeEventListener('keydown', handle); }}
+      };
+    })();
+
+    function sealUnderrealms(){
+      astral.querySelectorAll('.gatelet[aria-expanded="true"]').forEach(btn=>{
+        btn.setAttribute('aria-expanded','false');
+      });
+      astral.querySelectorAll('.underrealm:not([hidden])').forEach(ul=>{
+        ul.setAttribute('hidden','');
+      });
+      astral.querySelectorAll('.astral-item.is-awakened').forEach(li=>{
+        li.classList.remove('is-awakened');
+      });
+    }
+
+    function closePortal(){
+      astral.classList.remove('is-awakened');
+      veil?.classList.remove('is-awakened');
+      veil?.setAttribute('hidden', '');
+      switchRune.setAttribute('aria-expanded','false');
+      switchRune.setAttribute('aria-label','Menü öffnen');
+      docEl.classList.remove('nav-lock');
+      ward.deactivate();
+      document.querySelector('main')?.removeAttribute('inert');
+      sealUnderrealms();
+      recallCharm();
+      gate.classList.remove('portal-open'); /* Balken/Shadow fix */
+      switchRune.focus();
+    }
+    function openPortal(){
+      astral.classList.add('is-awakened');
+      veil?.classList.add('is-awakened');
+      veil?.removeAttribute('hidden');
+      switchRune.setAttribute('aria-expanded','true');
+      switchRune.setAttribute('aria-label','Menü schließen');
+      docEl.classList.add('nav-lock');
+
+      const firstLink = astral.querySelector('a');
+      if(firstLink) firstLink.focus();
+
+      ward.activate();
+      document.querySelector('main')?.setAttribute('inert', '');
+      stowCharm();
+      gate.classList.add('portal-open'); /* Balken/Shadow fix */
+    }
+    function syncState(){ if(mq.matches){ closePortal(); } }
+    mq.addEventListener?.('change', syncState);
+    syncState();
+
+    // Toggle Button
+    switchRune.addEventListener('click', function(){
+      const isOpen = astral.classList.contains('is-awakened');
+      if(isOpen) closePortal(); else openPortal();
+    });
+
+    // Overlay / Outside click
+    veil?.addEventListener('click', () => closePortal());
+    document.addEventListener('click', (e) => {
+      if(!astral.classList.contains('is-awakened')) return;
+      if (e.target.closest('.orb-toggle')) return; // Theme-Toggle schließt nicht
+      if(!astral.contains(e.target) && !switchRune.contains(e.target)) closePortal();
+    });
+
+    // ESC
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && astral.classList.contains('is-awakened')){
+        e.preventDefault(); closePortal();
       }
     });
-    return data;
-  }
-  function hasVisibleControls(stepEl){
-    const controls = Array.from(stepEl.querySelectorAll('input,select,textarea'));
-    return controls.some(el => !el.disabled && !el.closest('[hidden]'));
-  }
-  function getApplicableSteps(){
-    const base = allSteps.filter(s => hasVisibleControls(s) && s.dataset.step !== '6');
-    const success = allSteps.find(s => s.dataset.step === '6');
-    return form.classList.contains('is-success') && success ? [...base, success] : base;
-  }
-  function getCurrentIndex(){ return Math.max(0, getApplicableSteps().indexOf(currentStepEl)); }
-  function clampIndex(i){ const st = getApplicableSteps(); return Math.min(Math.max(i,0), st.length-1); }
 
-  function isContactStep(stepEl){
-    if (!stepEl) return false;
-    if (stepEl.dataset.step === '5') return true;
-    const hasName = stepEl.querySelector('input[name="name"]');
-    const hasMail = stepEl.querySelector('input[name="email"]');
-    const hasMsg  = stepEl.querySelector('textarea[name="message"]');
-    return !!(hasName || hasMail || hasMsg);
-  }
+    // Scroll Shadow
+    addEventListener('scroll', () => {
+      const y = window.scrollY || 0;
+      gate.classList.toggle('is-ascended', y>4);
+    }, {passive:true});
 
-  /* =========================
-     UI / Progress
-  ========================== */
-  function updateChoiceUI(){
-    form.querySelectorAll('.grid-choices .choice').forEach(label=>{
-      const rb = label.querySelector('input[type="radio"]');
-      label.classList.toggle('selected', !!(rb && rb.checked));
-    });
-    const any = form.querySelector('input[name="service"]:checked');
-    if(currentStepEl === allSteps[0]) nextBtn.disabled = !any;
-    setProgress(getCurrentIndex());
-  }
+    // Scrollspy
+    const links = [...document.querySelectorAll('.astral-link')];
+    const linkMap = Object.fromEntries(links.map(a=>[a.getAttribute('href'), a]));
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const id = '#'+e.target.id;
+        if(e.isIntersecting){
+          links.forEach(l=>{ l.removeAttribute('data-active'); l.removeAttribute('aria-current'); });
+          const link = linkMap[id];
+          if(link){ link.setAttribute('data-active',''); link.setAttribute('aria-current','page'); }
+        }
+      });
+    }, {rootMargin:'-40% 0px -55% 0px', threshold:[0, 1]});
+    document.querySelectorAll('section[id]').forEach(s=>obs.observe(s));
 
-  function updatePillUI(){
-    form.querySelectorAll('.pill').forEach(lbl=>{
-      const cb = lbl.querySelector('input[type="checkbox"]');
-      lbl.classList.toggle('selected', !!(cb && cb.checked));
-    });
-  }
-
-  function syncServiceBlocks(){
-    const sel = form.querySelector('input[name="service"]:checked');
-    const key = sel ? sel.dataset.toggle : null;
-    ['web','d3','gfx'].forEach(k=>{
-      form.querySelectorAll(`.service-block[data-service="${k}"]`).forEach(block=>{
-        const vis = key === k;
-        block.hidden = !vis;
-        block.querySelectorAll('input,select,textarea').forEach(el=>{
-          el.disabled = !vis;
-          if(!vis){
-            if(el.type==='checkbox'||el.type==='radio') el.checked=false;
-            else if(el.tagName==='SELECT') el.selectedIndex=0;
-            else el.value='';
+    // Smooth scroll Offset
+    links.forEach(a=>{
+      a.addEventListener('click', (ev)=>{
+        const href = a.getAttribute('href')||'';
+        if(href.startsWith('#')){
+          const target = document.getElementById(href.slice(1));
+          if(target){
+            ev.preventDefault();
+            const y = target.getBoundingClientRect().top + window.scrollY - (gate.getBoundingClientRect().height + 8);
+            window.scrollTo({top:y, behavior:'smooth'});
+            closePortal();
           }
-        });
+        }
       });
     });
-    // nach dem Umschalten neu bewerten (grün hinterlegen)
-    updatePillUI();
+  })();
+</script>
+<script>
+/* CTA Ripple (Namen mystisch gelassen, Klassen bereits umbenannt) */
+(function(){
+  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function makeRipple(btn, x, y){
+    if (prefersReduced) return;
+    const r = document.createElement('span');
+    r.className = 'cta-ripple';
+    r.style.left = x + 'px';
+    r.style.top  = y + 'px';
+    btn.appendChild(r);
+    r.offsetWidth; r.classList.add('is-anim');
+    r.addEventListener('animationend', ()=> r.remove(), {once:true});
   }
 
-  function setProgress(idx){
-    const steps = getApplicableSteps();
-    let pct = 0;
-    if(idx === 0){
-      pct = form.querySelector('input[name="service"]:checked') ? 12 : 0;
-    } else {
-      pct = Math.min(100, Math.round((idx / (steps.length - 1)) * 100));
-    }
-    if (stepFill) stepFill.style.width = pct + '%';
-    stepper?.setAttribute('aria-valuenow', String(idx + 1));
-    if (stepLabel) stepLabel.textContent = `Schritt ${idx + 1}/${steps.length}`;
+  function keyRipple(e){
+    if(e.key !== ' ' && e.key !== 'Enter') return;
+    const btn = e.currentTarget;
+    const rect = btn.getBoundingClientRect();
+    makeRipple(btn, rect.width/2, rect.height/2);
   }
 
-  function enhanceSubmitBtn() {
-    if (!submitBtn || submitBtn.dataset.enhanced === '1') return;
-    submitBtn.dataset.enhanced = '1';
-    if (!submitBtn.textContent.trim()) submitBtn.textContent = 'Jetzt Anfrage senden';
+  function setBusy(btn, busy=true){
+    btn.setAttribute('aria-busy', String(!!busy));
+    const live = btn.querySelector('[aria-live]');
+    if(live){ live.textContent = busy ? 'Lädt…' : 'Bereit'; }
   }
 
-  /* =========================
-     Navigation
-  ========================== */
-  let currentStepEl = allSteps[0];
-
-  function showStepByIndex(idx){
-    const steps = getApplicableSteps();
-    if(!steps.length) return;
-    const targetIdx = clampIndex(idx);
-    const targetEl  = steps[targetIdx];
-
-    allSteps.forEach(s => s.classList.remove('active'));
-    targetEl.classList.add('active');
-    currentStepEl = targetEl;
-
-    const isSuccess = targetEl.dataset.step === '6';
-
-    if (isSuccess) {
-      form.classList.add('is-success');
-
-      prevBtn.hidden = true;
-      nextBtn.hidden = true;
-      submitBtn.hidden = true;
-
-      const step1 = allSteps.find(s => s.dataset.step === '1');
-      const h = step1 ? step1.scrollHeight : 320;
-      targetEl.style.setProperty('--step6-minh', h + 'px');
-
-      // 💡 Restart-Button immer neu, immer klickbar
-      const oldBtn = successFieldset.querySelector('.success-btn');
-      if (oldBtn) {
-        const freshBtn = oldBtn.cloneNode(true);
-        oldBtn.parentNode.replaceChild(freshBtn, oldBtn);
-        freshBtn.disabled = false;
-        freshBtn.textContent = 'Neu starten';
-        freshBtn.setAttribute('aria-label','Wizard neu starten');
-        freshBtn.style.color = '#fff';
-        freshBtn.addEventListener('click', handleRestart);
+  document.querySelectorAll('[data-cta]').forEach(btn=>{
+    btn.addEventListener('pointerdown', e=>{
+      if(e.pointerType === 'mouse' || e.pointerType === 'touch' || e.pointerType === 'pen'){
+        const rect = btn.getBoundingClientRect();
+        makeRipple(btn, e.clientX - rect.left, e.clientY - rect.top);
       }
-
-      if (successSub) {
-        successSub.textContent = 'Du kannst jetzt neu starten und die Schritte erneut durchlaufen.';
-        successSub.style.color = '#fff';
-      }
-
-    } else {
-      form.classList.remove('is-success');
-      prevBtn.hidden = false;
-      const onContact = isContactStep(targetEl);
-      nextBtn.hidden   = onContact;
-      submitBtn.hidden = !onContact;
-      if (onContact) enhanceSubmitBtn();
-      prevBtn.disabled = targetIdx === 0;
-      nextBtn.disabled = targetEl === allSteps[0] && !form.querySelector('input[name="service"]:checked');
-    }
-
-    // sicherstellen, dass Pills korrekt eingefärbt bleiben
-    updatePillUI();
-
-    setProgress(targetIdx);
-    const first = targetEl.querySelector('input:not([disabled]),select:not([disabled]),textarea:not([disabled])');
-    first?.focus({preventScroll:true});
-  }
-
-  /* =========================
-     Restart / Success Handling
-  ========================== */
-  function resetToStep1(scrollToStart = true){
-    form.reset();
-    form.classList.remove('is-success');
-    allSteps.forEach(s => s.classList.remove('active'));
-    const step1 = allSteps.find(s => s.dataset.step === '1') || allSteps[0];
-    step1.classList.add('active');
-    currentStepEl = step1;
-    syncServiceBlocks();
-    updateChoiceUI();
-    updatePillUI();
-    setProgress(0);
-    toggleFormDisabled(false);
-    setStatus('', '');
-    if (scrollToStart) {
-      step1.scrollIntoView({ behavior:'smooth', block:'start' });
-      const first = step1.querySelector('input,select,textarea,button');
-      first?.focus({ preventScroll:true });
-    }
-  }
-
-  function handleRestart(e){
-    if (e) { e.preventDefault(); e.stopPropagation(); }
-    resetToStep1(true);
-  }
-
-  function showSuccessScreen(){
-    const steps = getApplicableSteps();
-    const successIdx = steps.findIndex(s => s.dataset.step === '6');
-    if (successIdx >= 0) showStepByIndex(successIdx);
-  }
-
-  /* =========================
-     Validierung / Markierung
-  ========================== */
-  function markInvalid(el, msg){
-    el.classList.add('is-invalid');
-    el.setAttribute('aria-invalid','true');
-    if (!el.nextElementSibling || !el.nextElementSibling.matches('.field-error')) {
-      const e = document.createElement('div');
-      e.className = 'field-error';
-      e.style.cssText = 'color:#b00020;font-weight:700;margin-top:.2rem;font-size:.9rem;';
-      e.textContent = msg;
-      el.insertAdjacentElement('afterend', e);
-    } else el.nextElementSibling.textContent = msg;
-  }
-  function clearInvalids(){
-    qa('.is-invalid', form).forEach(el=>{
-      el.classList.remove('is-invalid'); el.removeAttribute('aria-invalid');
     });
-    qa('.field-error', form).forEach(el=> el.remove());
-  }
-  function validEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s); }
-  function validateRequired(){
-    clearInvalids();
-    const name  = q('input[name="name"]');
-    const email = q('input[name="email"]');
-    const msg   = q('textarea[name="message"]');
-    let ok = true;
-    if (!trim(name?.value))               { markInvalid(name,'Bitte Namen angeben.'); ok=false; }
-    if (!validEmail(trim(email?.value)))  { markInvalid(email,'Bitte gültige E-Mail angeben.'); ok=false; }
-    if (trim(msg?.value).length < 5)      { markInvalid(msg,'Bitte kurz dein Projekt beschreiben.'); ok=false; }
-    if (!ok) {
-      const first = q('.is-invalid');
-      first?.focus({preventScroll:true});
-      setStatus('Bitte fehlende Angaben ergänzen.', 'warn');
-    } else setStatus('', '');
-    return ok;
-  }
-
-  /* =========================
-     Submit Flow
-  ========================== */
-  let submitting = false;
-  function toggleFormDisabled(disabled){
-    qa('input,select,textarea,button', form).forEach(el=> el.disabled = disabled);
-  }
-
-  async function postWithTimeout(url, options={}, timeoutMs=12000) {
-    const controller = new AbortController();
-    const t = setTimeout(()=>controller.abort(), timeoutMs);
-    try { return await fetch(url, { ...options, signal: controller.signal }); }
-    finally { clearTimeout(t); }
-  }
-
-  form.addEventListener('submit', async function(e){
-    e.preventDefault();
-    if (submitting) return;
-
-    if (!validateRequired()) return;
-
-    const selectedServiceEl = q('input[name="service"]:checked');
-    const selectedService   = selectedServiceEl ? selectedServiceEl.value : '';
-
-    const summary = {};
-    getApplicableSteps().forEach((step, i) => { summary[`step_${i+1}`] = collectStepData(step); });
-
-    const lines = [];
-    lines.push(`[Service] ${selectedService}`);
-    lines.push(`[Kontakt]`);
-    lines.push(`- Name: ${summary.step_5?.name || '-'}`);
-    lines.push(`- E-Mail: ${summary.step_5?.email || '-'}`);
-    if (summary.step_5?.message) lines.push(`- Nachricht: ${summary.step_5.message}`);
-    const compiledPlain = lines.join('\n');
-
-    q('#autoSubject').value     = `Projektanfrage: ${selectedService}`;
-    q('#selectedService').value = selectedService;
-    q('#summaryPlain').value    = compiledPlain;
-    q('#honeypot').value        = '';
-
-    const fd = new FormData(form);
-    submitting = true;
-    toggleFormDisabled(true);
-    submitBtn.innerText = 'Senden …';
-    setStatus('Sende Anfrage …');
-
-    try {
-      const res = await postWithTimeout(form.action, {
-        method:'POST',
-        body:fd,
-        headers:{Accept:'application/json'}
-      }, 12000);
-      if (!res.ok) throw new Error(res.statusText);
-      submitBtn.innerText = '✅ Anfrage gesendet!';
-      setStatus('Danke! Wir melden uns in Kürze.', 'ok');
-      form.classList.add('is-success');
-      showSuccessScreen();
-    } catch (err) {
-      console.error(err);
-      setStatus('Fehler beim Senden – bitte später erneut versuchen.', 'error');
-      submitBtn.innerText = 'Fehler!';
-      toggleFormDisabled(false);
-    } finally {
-      submitting = false;
-    }
-  });
-
-  /* =========================
-     Buttons & Choices
-  ========================== */
-  prevBtn.addEventListener('click', (e)=>{
-    e.preventDefault();
-    showStepByIndex(getCurrentIndex()-1);
-  });
-  nextBtn.addEventListener('click', ()=>{
-    if (isContactStep(currentStepEl)) form.requestSubmit();
-    else showStepByIndex(getCurrentIndex()+1);
-  });
-
-  // Klick auf Step-1-Karten (Service)
-  form.addEventListener('click', (e)=>{
-    const choice = e.target.closest('.choice');
-    if(choice){
-      const rb = choice.querySelector('input[type="radio"]');
-      if(rb){
-        setTimeout(()=>{
-          form.classList.remove('is-success');
-          updateChoiceUI();
-          syncServiceBlocks();
-          showStepByIndex(getCurrentIndex());
-        },0);
+    btn.addEventListener('keydown', keyRipple);
+    btn.addEventListener('click', (e)=>{
+      const href = btn.getAttribute('href') || '';
+      const targetLocal = href.startsWith('#');
+      if(targetLocal){
+        setBusy(btn, true);
+        setTimeout(()=> setBusy(btn, false), 420);
       }
-    }
-    // Klick auf Pill-Labels (Schwerpunkte)
-    const pill = e.target.closest('.pill');
-    if (pill) {
-      // Wait until checkbox toggled, then refresh UI
-      setTimeout(updatePillUI, 0);
-    }
+    }, {passive:true});
   });
-
-  // Änderungen an Service oder Pill-Checkboxen
-  form.addEventListener('change', (e)=>{
-    if(e.target && e.target.matches('input[name="service"]')){
-      form.classList.remove('is-success');
-      updateChoiceUI();
-      syncServiceBlocks();
-      showStepByIndex(getCurrentIndex());
-      return;
-    }
-    if (e.target && (e.target.matches('.pill input[type="checkbox"]') || e.target.matches('input[data-pills]'))) {
-      updatePillUI();
-    }
-  });
-
-  /* =========================
-     Init
-  ========================== */
-  function init(){
-    form.classList.remove('is-success');
-    syncServiceBlocks();
-    updateChoiceUI();
-    updatePillUI();
-    showStepByIndex(0);
-    setStatus('');
-  }
-  init();
-
 })();
 </script>
 <script>
-  // … dein bestehendes IIFE …
+/* Underrealm Toggle (Subnav) */
+(function(){
+  const nav = document.getElementById('astralWay');
+  if(!nav) return;
 
-  // === Patch: Step 1 auf "Webdesign" beschränken + vorauswählen ===
-  (function lockToWebdesign(){
-    const form = document.getElementById('kontaktForm');
-    if (!form) return;
+  nav.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.gatelet');
+    if(!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
 
-    // 1) Vorauswählen
-    const webRadio = form.querySelector('input[name="service"][value="Webdesign"]');
-    if (webRadio) {
-      webRadio.checked = true;
-      webRadio.setAttribute('aria-checked','true');
-    }
+    const li  = btn.closest('.astral-item');
+    const id  = btn.getAttribute('aria-controls');
+    const sub = id ? document.getElementById(id) : li?.querySelector('.underrealm');
+    if(!li || !sub) return;
 
-    // 2) Falls doch weitere Choices vorhanden wären -> entfernen
-    const choices = Array.from(form.querySelectorAll('.grid-choices .choice'));
-    choices.forEach(ch => {
-      const rb = ch.querySelector('input[type="radio"][name="service"]');
-      if (rb && rb.value !== 'Webdesign') ch.remove();
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+    // andere schließen
+    nav.querySelectorAll('.astral-item.is-awakened').forEach(other=>{
+      if(other !== li){
+        other.classList.remove('is-awakened');
+        const otherBtn = other.querySelector('.gatelet[aria-expanded="true"]');
+        const otherSub = other.querySelector('.underrealm');
+        if(otherBtn) otherBtn.setAttribute('aria-expanded','false');
+        if(otherSub) otherSub.setAttribute('hidden','');
+      }
     });
 
-    // 3) UI & Service-Blöcke syncen + Next aktivieren
-    try {
-      // diese Funktionen existieren in deinem Script:
-      // updateChoiceUI(), syncServiceBlocks(), showStepByIndex()
-      updateChoiceUI();
-      syncServiceBlocks();
-      // Step 2 wird aktiv, sobald der User "Weiter" drückt
-      const nextBtn = form.querySelector('#nextBtn');
-      if (nextBtn) nextBtn.disabled = false;
-    } catch(e){}
-  })();
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    li.classList.toggle('is-awakened', !isOpen);
+    sub.toggleAttribute('hidden', isOpen);
+  });
+
+  // Outside-Click schließt alles
+  document.addEventListener('click', (e)=>{
+    if(!nav.contains(e.target)){
+      nav.querySelectorAll('.astral-item.is-awakened').forEach(li=>{
+        li.classList.remove('is-awakened');
+        const b = li.querySelector('.gatelet[aria-expanded="true"]');
+        const s = li.querySelector('.underrealm');
+        if(b) b.setAttribute('aria-expanded','false');
+        if(s) s.setAttribute('hidden','');
+      });
+    }
+  });
+
+  // ESC schließt alle
+  document.addEventListener('keydown', (e)=>{
+    if(e.key !== 'Escape') return;
+    nav.querySelectorAll('.astral-item.is-awakened').forEach(li=>{
+      li.classList.remove('is-awakened');
+      const b = li.querySelector('.gatelet[aria-expanded="true"]');
+      const s = li.querySelector('.underrealm');
+      if(b) b.setAttribute('aria-expanded','false');
+      if(s) s.setAttribute('hidden','');
+    });
+  });
+})();
 </script>
-
-
-
-
-
-
-  
-
-
-
-<section class="lyra-vault" id="lyra-faq">
-  <h2 class="lyra-heading">Häufige Fragen</h2>
-
-  <div class="lyra-console" role="search">
-    <input
-      type="text"
-      id="lyraSearch"
-      placeholder="Nach Stichwort suchen …"
-      aria-label="FAQ durchsuchen"
-      enterkeyhint="search"
-      autocomplete="off"
-    >
-    <div class="lyra-nav">
-      <button id="lyraPrev" type="button" aria-label="Vorheriges Ergebnis">
-        <i data-feather="chevron-left" aria-hidden="true"></i>
-      </button>
-      <span id="lyraIndex" aria-live="polite">0 / 0</span>
-      <button id="lyraNext" type="button" aria-label="Nächstes Ergebnis">
-        <i data-feather="chevron-right" aria-hidden="true"></i>
-      </button>
-    </div>
-  </div>
-
-  <div class="lyra-grid">
-
-    <!-- Card 1 -->
-    <div class="lyra-card">
-      <button class="lyra-toggle" aria-expanded="false">
-        <span>Ablauf &amp;<br> Projektdauer</span>
-        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
-      </button>
-      <div class="lyra-drop">
-        <p><strong>Wie läuft ein Projekt ab?</strong><br>Nach einem kurzen Kick-off folgen Konzept, Entwurf, Abstimmung und finale Umsetzung. Sie sehen alle Fortschritte live.</p>
-        <p><strong>Wie lange dauert das?</strong><br>Je nach Umfang: kleinere Projekte 2–3 Wochen, umfangreiche Websites oder 3D-Renderings 4–6 Wochen.</p>
-        <p><strong>Wie oft kann ich Feedback geben?</strong><br>Zwei feste Feedbackrunden sind eingeplant – spontane Rückmeldungen sind jederzeit möglich.</p>
-      </div>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="lyra-card">
-      <button class="lyra-toggle" aria-expanded="false">
-        <span>Kosten &amp;<br> Angebot</span>
-        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
-      </button>
-      <div class="lyra-drop">
-        <p><strong>Wie setzen sich die Kosten zusammen?</strong><br>Je nach Leistung – Design, Animation, SEO oder Hosting. Nach dem Briefing erhalten Sie ein transparentes Angebot mit klarer Aufschlüsselung.</p>
-        <p><strong>Gibt es Pauschalpreise?</strong><br>Für Standardleistungen ja, z. B. Landingpages, kleinere Renderings oder Logos. Komplexe Projekte kalkulieren wir individuell.</p>
-        <p><strong>Wie erfolgt die Bezahlung?</strong><br>In Etappen, meist zur Hälfte bei Start und zur Hälfte nach Abschluss.</p>
-      </div>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="lyra-card">
-      <button class="lyra-toggle" aria-expanded="false">
-        <span>Technik &amp;<br> Umsetzung</span>
-        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
-      </button>
-      <div class="lyra-drop">
-        <p><strong>Welche Tools nutzen Sie?</strong><br>Für Web: moderne Frameworks &amp; CMS. Für 3D: Blender, Cinema 4D, Unreal Engine. Für Grafik: Adobe CC.</p>
-        <p><strong>Bieten Sie Hosting oder Setup an?</strong><br>Ja – auf Wunsch übernehmen wir Domain, Hosting, SSL und Performance-Optimierung.</p>
-        <p><strong>Kann ich später selbst Inhalte ändern?</strong><br>Ja – wir integrieren CMS-Lösungen und zeigen Ihnen, wie das geht.</p>
-      </div>
-    </div>
-
-    <!-- Card 4 -->
-    <div class="lyra-card">
-      <button class="lyra-toggle" aria-expanded="false">
-        <span>Design &amp;<br> Kreativprozess</span>
-        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
-      </button>
-      <div class="lyra-drop">
-        <p><strong>Wie werde ich eingebunden?</strong><br>Über Vorschauen, Live-Links oder Render-Previews. So können Sie Änderungen früh sehen und leicht abstimmen.</p>
-        <p><strong>Kann ich eigene Ideen einbringen?</strong><br>Natürlich – wir entwickeln das Design gemeinsam und beraten bei Stil, Struktur und Wirkung.</p>
-        <p><strong>Ist das Ergebnis markengerecht?</strong><br>Ja – wir achten auf Farbwelt, Typografie und Wiedererkennung über alle Medien hinweg.</p>
-      </div>
-    </div>
-
-    <!-- Card 5 -->
-    <div class="lyra-card">
-      <button class="lyra-toggle" aria-expanded="false">
-        <span>Nach Projekt &amp;<br> Betreuung</span>
-        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
-      </button>
-      <div class="lyra-drop">
-        <p><strong>Gibt es Support nach dem Projekt?</strong><br>Ja – wir bieten Wartung, Updates oder weitere Anpassungen bei Bedarf.</p>
-        <p><strong>Kann das Projekt erweitert werden?</strong><br>Jederzeit – zusätzliche Seiten, Renderings oder Kampagnen sind problemlos möglich.</p>
-        <p><strong>Erhalte ich die Originaldateien?</strong><br>Ja – alle finalen Daten, Designs und Renderings werden nach Abschluss übergeben.</p>
-      </div>
-    </div>
-
-    <!-- Card 6 -->
-    <div class="lyra-card">
-      <button class="lyra-toggle" aria-expanded="false">
-        <span>Rechtliches &amp;<br> Datenschutz</span>
-        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
-      </button>
-      <div class="lyra-drop">
-        <p><strong>Ist alles DSGVO-konform?</strong><br>Ja – inklusive SSL, Cookie-Management und datensicherem Hosting.</p>
-        <p><strong>Wie gehen Sie mit Daten um?</strong><br>Vertraulich und sicher. Auf Wunsch schließen wir eine NDA.</p>
-        <p><strong>Wem gehören die Rechte?</strong><br>Nach vollständiger Zahlung gehen alle Nutzungsrechte auf Sie über.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-<script src="https://unpkg.com/feather-icons" defer></script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  if (window.feather) feather.replace();
-
-  const vault = document.getElementById("lyra-faq");
-  const cards = [...document.querySelectorAll(".lyra-card")];
-  const input = document.getElementById("lyraSearch");
-  const prev = document.getElementById("lyraPrev");
-  const next = document.getElementById("lyraNext");
-  const indexLbl = document.getElementById("lyraIndex");
-
-  const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const smoothOpts = prefersReduced ? {behavior:"auto"} : {behavior:"smooth"};
-
-  // ---- Utilities ------------------------------------------------------------
-  const normalize = (s) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
-
-  let matches = [], current = 0, debounceTo = null;
-
-  function setButtonsEnabled(enabled){
-    [prev, next].forEach(b=>{
-      b.disabled = !enabled;
-      b.setAttribute("aria-disabled", String(!enabled));
-      b.style.opacity = enabled ? "" : ".6";
-      b.style.cursor  = enabled ? "pointer" : "not-allowed";
-    });
-  }
-
-  function closeAll(){
-    cards.forEach(c=>{
-      const b = c.querySelector(".lyra-toggle");
-      const d = c.querySelector(".lyra-drop");
-      b.setAttribute("aria-expanded","false");
-      d.style.maxHeight = null;
-    });
-  }
-
-  function removeMarks(){
-    vault.querySelectorAll("mark").forEach(m=>{
-      const t = document.createTextNode(m.textContent);
-      m.replaceWith(t);
-    });
-  }
-
-  // Escape RegExp Sonderzeichen
-  const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-  function highlight(node, keyword){
-    const terms = keyword.split(/\s+/).filter(Boolean).map(escapeRegExp);
-    if (!terms.length) return;
-    const rx = new RegExp("(" + terms.join("|") + ")", "gi");
-
-    if (node.nodeType === 3){
-      const span = document.createElement("span");
-      span.innerHTML = node.nodeValue.replace(rx, "<mark>$1</mark>");
-      node.parentNode.replaceChild(span, node);
-    } else if (node.nodeType === 1 && node.childNodes && !["SCRIPT","STYLE","INPUT","BUTTON"].includes(node.tagName)){
-      [...node.childNodes].forEach(child => highlight(child, keyword));
-    }
-  }
-
-  function scrollToCard(c){
-    const y = c.getBoundingClientRect().top + window.scrollY - 80;
-    window.scrollTo({ top: y, ...smoothOpts });
-  }
-
-  function openCard(c){
-    const b = c.querySelector(".lyra-toggle");
-    const d = c.querySelector(".lyra-drop");
-    b.setAttribute("aria-expanded","true");
-    d.style.maxHeight = d.scrollHeight + "px";
-  }
-
-  function recalcOpenHeights(){
-    cards.forEach(c=>{
-      const b = c.querySelector(".lyra-toggle");
-      const d = c.querySelector(".lyra-drop");
-      if (b.getAttribute("aria-expanded")==="true"){
-        d.style.maxHeight = d.scrollHeight + "px";
-      }
-    });
-  }
-
-  function updateIndex(){
-    indexLbl.textContent = matches.length ? `${current+1} / ${matches.length}` : "0 / 0";
-    setButtonsEnabled(matches.length > 0);
-  }
-
-  // Precompute normalisierte Inhalte für schnelle Suche
-  const cardCache = cards.map(c => ({
-    el: c,
-    textNorm: normalize(c.innerText)
-  }));
-
-  function doSearch(keyword){
-    const qRaw = keyword.trim();
-    const q = normalize(qRaw);
-    removeMarks();
-    closeAll();
-    matches = [];
-    if (!q){ updateIndex(); return; }
-
-    cardCache.forEach(({el, textNorm})=>{
-      if (textNorm.includes(q)){
-        matches.push(el);
-        // Markiere realen DOM-Text (nicht den Cache)
-        highlight(el, qRaw);
-      }
-    });
-
-    current = 0;
-    if (matches.length){
-      openCard(matches[0]);
-      scrollToCard(matches[0]);
-    }
-    updateIndex();
-  }
-
-  // ---- Events ---------------------------------------------------------------
-  input.addEventListener("input", e=>{
-    clearTimeout(debounceTo);
-    debounceTo = setTimeout(()=>doSearch(e.target.value), 140);
-  });
-
-  prev.addEventListener("click", ()=>{
-    if (!matches.length) return;
-    current = (current - 1 + matches.length) % matches.length;
-    closeAll(); openCard(matches[current]); scrollToCard(matches[current]); updateIndex();
-  });
-
-  next.addEventListener("click", ()=>{
-    if (!matches.length) return;
-    current = (current + 1) % matches.length;
-    closeAll(); openCard(matches[current]); scrollToCard(matches[current]); updateIndex();
-  });
-
-  // Akkordeon: IDs + ARIA + Click
-  cards.forEach((c, i)=>{
-    const btn  = c.querySelector(".lyra-toggle");
-    const drop = c.querySelector(".lyra-drop");
-    const btnId  = `lyra-toggle-${i+1}`;
-    const dropId = `lyra-drop-${i+1}`;
-    btn.id = btnId;
-    drop.id = dropId;
-
-    // bessere Roles/Labels
-    drop.setAttribute("role","region");
-    drop.setAttribute("aria-labelledby", btnId);
-    btn.setAttribute("aria-controls", dropId);
-
-    btn.addEventListener("click", ()=>{
-      const isOpen = btn.getAttribute("aria-expanded")==="true";
-      btn.setAttribute("aria-expanded", isOpen ? "false" : "true");
-      drop.style.maxHeight = isOpen ? null : drop.scrollHeight + "px";
-    });
-
-    // ResizeObserver: offene Panels passen sich automatisch an
-    const ro = new ResizeObserver(()=>{
-      if (btn.getAttribute("aria-expanded")==="true"){
-        drop.style.maxHeight = drop.scrollHeight + "px";
-      }
-    });
-    ro.observe(drop);
-  });
-
-  // Tastatur-Navigation (Akkordeon-Header)
-  const toggles = cards.map(c=>c.querySelector(".lyra-toggle"));
-  function focusToggle(idx){
-    if (idx<0) idx = 0;
-    if (idx>=toggles.length) idx = toggles.length-1;
-    toggles[idx].focus();
-  }
-  toggles.forEach((btn, idx)=>{
-    btn.addEventListener("keydown", (e)=>{
-      switch(e.key){
-        case "ArrowDown": e.preventDefault(); focusToggle(idx+1); break;
-        case "ArrowUp":   e.preventDefault(); focusToggle(idx-1); break;
-        case "Home":      e.preventDefault(); focusToggle(0);     break;
-        case "End":       e.preventDefault(); focusToggle(toggles.length-1); break;
-        case "Enter":
-        case " ":
-          e.preventDefault();
-          btn.click();
-          break;
-      }
-    });
-  });
-
-  // Shortcut: "/" fokussiert Suche
-  document.addEventListener("keydown", (e)=>{
-    if (e.key === "/" && document.activeElement !== input){
-      e.preventDefault();
-      input.focus();
-    }
-  });
-
-  // Recalc on resize (responsive)
-  let resizeTo;
-  window.addEventListener("resize", ()=>{
-    clearTimeout(resizeTo);
-    resizeTo = setTimeout(recalcOpenHeights, 120);
-  });
-
-  // Initial
-  setButtonsEnabled(false);
-  updateIndex();
-});
-</script>
-
-
-
-<section class="angled-image-section" aria-labelledby="angled-image-heading">
-  <h2 id="angled-image-heading" class="visually-hidden">Modernes Webdesign – diagonale Bildsektion</h2>
-
-  <figure class="angled-image-wrapper">
-    <picture>
-      <source srcset="./WebdesignPic/webgerade.webp" type="image/webp">
-      <img
-        src="./WebdesignPic/webgerade.webp"
-        alt="Beispiel eines modernen Webdesign-Layouts, leicht diagonal ausgerichtet"
-        width="1920"
-        height="1080"
-        loading="lazy"
-        decoding="async"
-        style="aspect-ratio:16/9">
-    </picture>
-  </figure>
-</section>
-
-
-
-
-<footer itemscope itemtype="https://schema.org/Organization" class="footer-clean">
-  <!-- In Microdata ist <meta itemprop> im Body erlaubt und ersetzt hier das unzulässige <link>. -->
-  <meta itemprop="url" content="https://www.fusion3.de">
-
-  <div class="fc-container">
-
-    <!-- Head: Brand & Claim + CTA -->
-    <section class="fc-head" aria-labelledby="fc-head-title">
-      <h2 id="fc-head-title" class="sr-only">Markenbereich</h2>
-      <div class="fc-brand">
-        <!-- Optional: Logo als Link zur Startseite -->
-        <a class="fc-logo" href="/" itemprop="name">Fusion³</a>
-        <p class="fc-claim">UX &amp; Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
-      </div>
-      <div class="fc-cta">
-        <a class="fc-btn" href="mailto:hello@fusion3.de" aria-label="Projekt anfragen per E-Mail">Projekt anfragen</a>
-      </div>
-    </section>
-
-    <!-- Grid -->
-    <nav class="fc-grid" aria-labelledby="fc-nav-title">
-      <h2 id="fc-nav-title" class="sr-only">Footer-Navigation</h2>
-
-      <div class="fc-col">
-        <h3 class="fc-col-title" id="fc-services">Leistungen</h3>
-        <ul class="fc-links" aria-labelledby="fc-services">
-          <li><a href="/ux-audit.html">UX-Audit</a></li>
-          <li><a href="/webdesign.html">Webdesign</a></li>
-          <li><a href="/prototyping.html">Prototyping</a></li>
-          <li><a href="/design-system.html">Design-Systeme</a></li>
-        </ul>
-      </div>
-
-      <div class="fc-col">
-        <h3 class="fc-col-title" id="fc-resources">Ressourcen</h3>
-        <ul class="fc-links" aria-labelledby="fc-resources">
-          <li><a href="/cases.html">Case Studies</a></li>
-          <li><a href="/blog.html">Insights &amp; Blog</a></li>
-          <li><a href="/faq.html">FAQ</a></li>
-          <li><a href="/kontakt.html">Termin buchen</a></li>
-        </ul>
-      </div>
-
-      <div class="fc-col">
-        <h3 class="fc-col-title" id="fc-legal">Rechtliches</h3>
-        <ul class="fc-links" aria-labelledby="fc-legal">
-          <li><a href="/impressum.html">Impressum</a></li>
-          <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
-          <li><a href="/cookies.html">Cookie-Hinweis</a></li>
-        </ul>
-      </div>
-
-      <div class="fc-col">
-        <h3 class="fc-col-title" id="fc-contact">Kontakt</h3>
-        <ul class="fc-links" aria-labelledby="fc-contact">
-          <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
-          <li><a href="tel:+491234567890" itemprop="telephone">+49&nbsp;123&nbsp;4567890</a></li>
-          <li>
-            <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" class="fc-address">
-              <span itemprop="addressLocality">Berlin</span>, <span itemprop="addressCountry">Deutschland</span>
-            </address>
-          </li>
-        </ul>
-
-        <!-- Socials jetzt als echte Liste (keine role=list / role=listitem nötig) -->
-        <h3 id="fc-socials-title" class="sr-only">Social Media</h3>
-        <ul class="fc-socials" aria-labelledby="fc-socials-title">
-          <li>
-            <a class="fc-social" href="mailto:hello@fusion3.de" aria-label="E-Mail" itemprop="sameAs">
-              <span class="sr-only">E-Mail</span>
-              <img src="./FooterIcons/Gmail.png" alt="" loading="lazy" decoding="async" width="20" height="20">
-            </a>
-          </li>
-          <li>
-            <a class="fc-social fc-li" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" itemprop="sameAs">
-              <span class="sr-only">LinkedIn</span>
-              <img src="./FooterIcons/LinkedIn.png" alt="" loading="lazy" decoding="async" width="20" height="20">
-            </a>
-          </li>
-          <li>
-            <a class="fc-social fc-wa" href="https://wa.me/491234567890" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" itemprop="sameAs">
-              <span class="sr-only">WhatsApp</span>
-              <img src="./FooterIcons/Whatsapp.svg" alt="" loading="lazy" decoding="async" width="20" height="20">
-            </a>
-          </li>
-          <li>
-            <a class="fc-social fc-ig" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" itemprop="sameAs">
-              <span class="sr-only">Instagram</span>
-              <img src="./FooterIcons/instagram.jpg" alt="" loading="lazy" decoding="async" width="20" height="20">
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- Bottom -->
-    <div class="fc-legal" aria-labelledby="fc-legal-title">
-      <h3 id="fc-legal-title" class="sr-only">Rechtliches &amp; Hinweise</h3>
-      <p>© <time id="currentYear" datetime="2025">2025</time> <span class="nowrap">Fusion³</span> · DSGVO-konform &amp; barrierearm entwickelt.</p>
-    </div>
-
-  </div>
-</footer>
-
 <script>
   (function(){
-    var el = document.getElementById('currentYear');
-    if (el) el.textContent = new Date().getFullYear();
+    const rootEl   = document.documentElement;
+    const bodyEl   = document.body;
+    const toggleEl = document.getElementById('eclipseStone');
+    const shard    = document.getElementById('moonShard');
+    const stars    = document.getElementById('starField');
+    const statusEl = document.getElementById('omenWhisper');
+
+    /* Sterne */
+    (function seedStars(){
+      if(!stars) return;
+      const N = 26;
+      const frag = document.createDocumentFragment();
+      for(let i=0;i<N;i++){
+        const el = document.createElement('i');
+        el.style.top = (5 + Math.random()*90) + '%';
+        el.style.left = (5 + Math.random()*90) + '%';
+        el.style.animationDelay = (Math.random()*2.5).toFixed(2)+'s';
+        frag.appendChild(el);
+      }
+      stars.appendChild(frag);
+    })();
+
+    /* Wolken */
+    (function seedClouds(){
+      const lanes = Array.from(document.querySelectorAll('[data-lane]'));
+      if(!lanes.length || !toggleEl) return;
+
+      const presets = {
+        back:  { count: 3, speed:[80,120], scale:[0.60,0.90],  opacity:[0.25,0.40] },
+        mid:   { count: 3, speed:[60, 90], scale:[0.80,1.00],  opacity:[0.50,0.70] },
+        front: { count: 2, speed:[45, 70], scale:[1.00,1.15],  opacity:[0.85,0.95] }
+      };
+
+      function render(){
+        lanes.forEach(l=>l.innerHTML = '');
+        const rect = toggleEl.getBoundingClientRect();
+        const W = Math.max(60, Math.round(rect.width));
+        const H = Math.max(24, Math.round(rect.height));
+        lanes.forEach(lane=>{
+          const cfg = presets[lane.dataset.lane];
+          for(let i=0;i<cfg.count;i++){
+            const cloud = document.createElement('span');
+            cloud.className = 'cloud';
+
+            const minW = Math.max(0.28*W, 36);
+            const maxW = Math.max(0.46*W, 54);
+            const cw   = randf(minW, maxW);
+            const ch   = cw*0.5;
+
+            cloud.style.width  = cw+'px';
+            cloud.style.height = ch+'px';
+
+            const freeY = Math.max(0, H - ch);
+            cloud.style.top  = (freeY ? randf(0, freeY) : 0) + 'px';
+
+            cloud.style.left = (Math.max(0, W - cw) ? randf(0, W - cw) : 0) + 'px';
+
+            const dur = rand(cfg.speed[0], cfg.speed[1]);
+            cloud.style.animationDuration = dur+'s';
+            cloud.style.animationDelay = (-Math.random()*dur).toFixed(2)+'s';
+            cloud.style.opacity = randf(cfg.opacity[0], cfg.opacity[1]);
+            cloud.style.transform = `translateX(0) scale(${randf(cfg.scale[0], cfg.scale[1])})`;
+
+            ['b1','b2','b3','b4','b5'].forEach((b,idx)=>{
+              const s = document.createElement('span');
+              s.className = 'bubble '+b;
+              const w = [0.58,0.50,0.66,0.38,0.42][idx] * (0.92 + Math.random()*0.16);
+              const h = [0.78,0.70,0.88,0.58,0.62][idx] * (0.92 + Math.random()*0.16);
+              s.style.width  = (w*100)+'%';
+              s.style.height = (h*100)+'%';
+              const lefts = [10,38,46,-2,22];
+              const tops  = [12,-4,12,28,28];
+              s.style.left = (lefts[idx] + (Math.random()*4-2))+'%';
+              s.style.top  = (tops[idx]  + (Math.random()*4-2))+'%';
+              cloud.appendChild(s);
+            });
+
+            lane.appendChild(cloud);
+          }
+        });
+      }
+
+      function rand(min,max){ return Math.floor(min + Math.random()*(max-min+1)); }
+      function randf(min,max){ return +(min + Math.random()*(max-min)).toFixed(2); }
+
+      let t;
+      const onResize = () => { clearTimeout(t); t = setTimeout(render, 120); };
+      render();
+      addEventListener('resize', onResize, {passive:true});
+    })();
+
+    const KEY = 'theme-pref';
+    function apply(mode){ // 'dark' | 'light'
+      const isDark = (mode === 'dark');
+      bodyEl.classList.toggle('nocturne', isDark);
+      bodyEl.classList.toggle('dawn', !isDark);
+      rootEl.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      if(toggleEl) toggleEl.setAttribute('aria-pressed', String(isDark));
+      if(statusEl) statusEl.textContent = isDark ? 'Dunkelmodus aktiv' : 'Hellmodus aktiv';
+    }
+
+    (function init(){
+      const saved = localStorage.getItem(KEY);
+      if(saved === 'light' || saved === 'dark'){
+        apply(saved);
+      }else{
+        const sysDark = matchMedia('(prefers-color-scheme:dark)').matches;
+        apply(sysDark ? 'dark' : 'light');
+      }
+    })();
+
+    document.addEventListener('click', (e)=>{
+      const t = e.target.closest?.('.orb-toggle');
+      if(!t) return;
+      const nowDark = !bodyEl.classList.contains('nocturne');
+      apply(nowDark ? 'dark' : 'light');
+      localStorage.setItem(KEY, nowDark ? 'dark' : 'light');
+      if(shard){
+        shard.classList.remove('pulse'); void shard.offsetWidth; shard.classList.add('pulse');
+      }
+    });
+
+    matchMedia('(prefers-color-scheme:dark)').addEventListener('change', (e)=>{
+      if(localStorage.getItem(KEY)) return;
+      apply(e.matches ? 'dark' : 'light');
+    });
   })();
 </script>
 
-</body>
-</html>
 
+
+
+<section class="hero-section" data-page="webdesign">
+  <div class="hero-images-wrapper">
+    <!-- HINTERGRUND-VIDEO -->
+    <div class="hero-image-background">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hintegrundweb.webp">
+        <source src="./WebdesignPic/1.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <div class="page-title">
+      <div class="container">
+        <h1 class="large-title">Web <br>Entwicklung</h1>
+      </div>
+    </div>
+
+  </div>
+</section>
+<script>
+(function () {
+  const section = document.querySelector('.hero-section[data-page="webdesign"]');
+  const h1 = document.querySelector('.page-title .large-title');
+  const pageTitle = document.querySelector('.page-title');
+  if (!section || !h1 || !pageTitle) return;
+
+  // --- Reload-Erkennung (unverändert) ---
+  function isReload() {
+    try {
+      const n = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+      if (n && (n.type === 'reload' || n.type === 'back_forward')) return true;
+      if (performance && performance.navigation && performance.navigation.type === 1) return true;
+    } catch(e){}
+    return false;
+  }
+  const RELOADED = isReload();
+
+  // ---------- Wrapper & Overlay ----------
+  const originalHTML = h1.innerHTML;
+  const parts = originalHTML.split(/(<br\s*\/?>)/i);
+
+  const wrapper = document.createElement('span');
+  wrapper.id = 'titleFloatWrapper';
+  wrapper.style.display = 'inline-block';
+  wrapper.style.willChange = 'transform';
+  h1.innerHTML = '';
+  h1.appendChild(wrapper);
+
+  const overlay = document.createElement('canvas');
+  overlay.id = 'titleOverlay';
+  overlay.style.position = 'absolute';
+  overlay.style.left = '0';
+  overlay.style.top = '0';
+  overlay.style.pointerEvents = 'none';
+  overlay.style.zIndex = '3';
+  if (getComputedStyle(pageTitle).position === 'static') {
+    pageTitle.style.position = 'relative';
+  }
+  pageTitle.appendChild(overlay);
+
+  // ---------- Canvas Sizing + Live-Tracking ----------
+  let ctx = null;
+  let last = { w:0, h:0, left:0, top:0, dpr:0 };
+
+  function sizeCanvas(force=false) {
+    const r = h1.getBoundingClientRect();
+    const pr = pageTitle.getBoundingClientRect();
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+
+    const left = r.left - pr.left;
+    const top  = r.top  - pr.top;
+    const w = Math.ceil(r.width);
+    const h = Math.ceil(r.height);
+
+    if (!force &&
+        w === last.w && h === last.h &&
+        left === last.left && top === last.top &&
+        dpr === last.dpr) return;
+
+    overlay.style.width = w + 'px';
+    overlay.style.height = h + 'px';
+    overlay.style.left = left + 'px';
+    overlay.style.top  = top  + 'px';
+
+    overlay.width = Math.max(1, Math.floor(w * dpr));
+    overlay.height = Math.max(1, Math.floor(h * dpr));
+
+    ctx = overlay.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    last = { w, h, left, top, dpr };
+  }
+
+  sizeCanvas(true);
+
+  const roH1 = new ResizeObserver(() => sizeCanvas(true));
+  const roTitle = new ResizeObserver(() => sizeCanvas(true));
+  roH1.observe(h1);
+  roTitle.observe(pageTitle);
+
+  window.addEventListener('resize', () => sizeCanvas(true), { passive:true });
+  window.addEventListener('scroll', () => sizeCanvas(false), { passive:true });
+  window.addEventListener('orientationchange', () => sizeCanvas(true));
+
+  // ---------- Text → Letters ----------
+  // großer, exotischer Glyph-Pool: Griechisch, Kyrillisch, Armenisch, Georgisch, IPA, Fraktur, Mathe-Alphanumerika, Ziffernvarianten …
+  const SIMILAR = {
+    // lower
+    'a':['ɑ','α','⍺','ª','ᵃ','ä','á','à','ȧ','ą','ɐ','@','ꭤ','𝖺','𝔞','ᶏ','ᴀ'],
+    'b':['Ь','ƅ','Ꮟ','Ƅ','ƀ','ẛ'.replace('ẛ','b'),'ɓ','ᵇ','ᶀ','𝖻','𝔟'],
+    'c':['ϲ','ᴄ','с','ᶜ','ƈ','ↄ','ς','ɔ','ꜿ','ç','č','ċ','𝖼','𝔠'],
+    'd':['ԁ','đ','ᑯ','ᵈ',')','ɗ','ᵭ','ḋ','ᶁ','𝖽','𝔡'],
+    'e':['℮','ɛ','є','ᵉ','ᵋ','ℯ','ɇ','ė','ë','é','è','ɘ','ε','𝖾','𝔢'],
+    'f':['ƒ','ſ','ϝ','ẝ','ʄ','ᶂ','𐊇','𝖿','𝔣'],
+    'g':['ɡ','ǥ','ᵍ','9','ĝ','ğ','ġ','ḡ','ɢ','ᶃ','𝓰','𝔤'],
+    'h':['һ','ℎ','ᵸ','ʰ','ɦ','ħ','ꜧ','ḫ','𝖍','𝔥'],
+    'i':['ɪ','ǐ','ı','¡','1','í','ì','ï','ỉ','ɨ','ⅰ','!', '𝖎','𝔦'],
+    'j':['ȷ','ϳ','ј','ʝ','ĵ','ɉ','ᶡ','𝖏','𝔧'],
+    'k':['κ','ᵏ','ꭆ','ḳ','ǩ','ꝁ','ќ','ᴋ','𝖐','𝔨'],
+    'l':['ɩ','ⅼ','ǀ','|','Ɩ','ĺ','ļ','ł','ᶅ','ʟ','𝖑','𝔩'],
+    'm':['ṃ','ᴍ','м','ᵐ','ɱ','ṁ','ᶆ','𝖒','𝔪'],
+    'n':['η','п','ɴ','∩','ɲ','ṅ','ņ','ń','ň','ң','𝖓','𝔫'],
+    'o':['ο','о','ɵ','°','0','ö','ó','ò','õ','ơ','ø','○','∘','𝖔','𝔬'],
+    'p':['ρ','р','ᵖ','ᵱ','ṕ','ṗ','ƥ','ῥ','𝖕','𝔭'],
+    'q':['զ','ʠ','ɋ','ȹ','գ','𝖖','𝔮'],
+    'r':['ɼ','г','ʳ','ř','ŗ','ꭇ','ʀ','ȑ','ȓ','ṙ','ᵲ','𝖗','𝔯'],
+    's':['ʂ','ѕ','$','§','ş','ś','ṡ','ș','ṥ','ʃ','ƨ','ß','𝖘','𝔰'],
+    't':['τ','ť','ŧ','†','ṭ','ṯ','ƫ','ʈ','₸','𝖙','𝔱'],
+    'u':['υ','ʋ','ս','ᵘ','ů','ü','ú','ù','ū','ư','µ','ꭎ','𝖚','𝔲'],
+    'v':['ν','ѵ','ᵛ','ṿ','ѷ','√','∨','ʋ','𝖛','𝔳'],
+    'w':['ᴡ','ѡ','ɯ','ŵ','ẇ','ɰ','ɯ','𝖜','𝔴'],
+    'x':['х','×','✕','χ','ẋ','ᶍ','ⅹ','𝖝','𝔵'],
+    'y':['γ','ʏ','у','ý','ỳ','ÿ','ŷ','ɣ','ʎ','¥','𝖞','𝔶'],
+    'z':['ʐ','ᴢ','ž','ż','ź','ƶ','ʑ','ẓ','ƻ','𝖟','𝔷'],
+    // upper
+    'A':['Α','Λ','Ꭺ','Ā','Ⱥ','∆','∀','𝘈','𝕬','𝔄'],
+    'B':['В','Ƀ','ß','Ɓ','ℬ','ʙ','ɮ','ᛒ','𝘉','𝕭','𝔅'],
+    'C':['Ϲ','С','Ⅽ','Ꮯ','℃'.slice(0,1),'☾','ℂ','𐐕','𝘊','𝕮','𝔇'.replace('D','C')],
+    'D':['Ꭰ','Ḏ','Ɗ','ⅅ','ᴅ','ↁ','𝘋','𝕯','𝔇'],
+    'E':['Ε','Є','ℰ','€','Ɇ','Ɛ','Σ','⋿','𝘌','𝕰','𝔈'],
+    'F':['Ғ','Ϝ','ℱ','ᖴ','𐊇','𝘍','𝕱','𝔉'],
+    'G':['ɢ','Ԍ','Ꮐ','Ĝ','Ğ','Ġ','Ḡ','Ɠ','𝘎','𝕲','𝔊'],
+    'H':['Η','Н','ℋ','Ħ','Ⱨ','♓','𝘏','𝕳','ℌ'],
+    'I':['Ι','Ӏ','ǀ','1','Ⅰ','∣','𝘐','𝕴','ℑ'],
+    'J':['Ј','Ɉ','Ĵ','ⅉ','𝘑','𝕵','𝔍'],
+    'K':['Κ','ᛕ','K','₭','Ҡ','Ƙ','Ǩ','𝘒','𝕶','𝔎'],
+    'L':['Ꮮ','Ⅼ','Ł','∟','⅃','ʟ','𝘓','𝕷','𝔏'],
+    'M':['Μ','М','Ṁ','Ϻ','Ⅿ','𝘔','𝕸','𝔐'],
+    'N':['Ν','Ｎ','∩','Ṅ','Ň','Ɲ','𝘕','𝕹','𝔑'],
+    'O':['Ο','О','0','°','Ø','Ө','○','⦿','𝘖','𝕺','𝔒'],
+    'P':['Ρ','Р','ℙ','₽','Ҏ','Ƿ','𐊕','𝘗','𝕻','𝔓'],
+    'Q':['Ⴓ','ℚ','Ǫ','Ɋ','Ҩ','Ⓠ','𝘘','𝕼','𝔔'],
+    'R':['Ꭱ','ℜ','Я','Ȑ','Ŕ','Ṙ','®','𝘙','𝕽','ℛ'],
+    'S':['Ѕ','§','$','Ś','Ş','Š','Ṣ','ẞ','𝘚','𝕾','𝔖'],
+    'T':['Τ','Т','Ŧ','Ͳ','₸','Ṫ','Ƭ','✝','𝘛','𝕿','𝔗'],
+    'U':['Ս','⋃','Ū','Ü','Ú','Ù','Ư','∪','𝘜','𝖀'.replace('𝖀','𝕌'),'𝔘'],
+    'V':['Ѵ','∨','Ṽ','Ʋ','✓','𝘝','𝕍','𝔙'],
+    'W':['Ԝ','Ѡ','Ш','Ŵ','Ẃ','Ẅ','𝘞','𝕎','𝔚'],
+    'X':['Χ','Х','✕','×','✖','Ⅹ','χ','𝘟','𝕏','𝔛'],
+    'Y':['Υ','Ү','¥','Ɏ','Ÿ','Ῡ','Ӳ','𝘠','𝕐','𝔜'],
+    'Z':['Ζ','ℤ','Ž','Ż','Ź','Ƶ','Ẕ','𝘡','𝕫'.toUpperCase(),'𝔃'.toUpperCase()],
+    // digits
+    '0':['O','О','Ο','○','°','⭕','⓪','𝟘'],
+    '1':['I','l','|','ǀ','Ⅰ','❶','𝟙'],
+    '2':['Ƨ'.toLowerCase(),'乙','٢','②','𝟚'],
+    '3':['Ʒ','З','Ɛ','ɜ','➂','𝟛'],
+    '4':['Ꮞ','٤','④','𝟜'],
+    '5':['Ƽ','Ѕ','⑤','𝟝'],
+    '6':['ბ','৬','⑥','𝟞'],
+    '7':['۷','⑦','𝟟'],
+    '8':['ȣ','੮','⑧','𝟠'],
+    '9':['ჽ','९','⑨','𝟡']
+  };
+// === Add Asian & "cool" glyphs (CJK, Kana, Hangul, Bopomofo, Fullwidth) ===
+const ASIAN_COOL = {
+  // lower
+  a: ['ａ','ぁ','ｧ','ァ','人'],
+  b: ['ｂ'],
+  c: ['ｃ','匚'],
+  d: ['ｄ','り'],
+  e: ['ｅ','ぇ','ェ'],
+  f: ['ｆ','ﾌ','ㄈ'],
+  g: ['ｇ'],
+  h: ['ｈ','卄','ん'],
+  i: ['ｉ','丨','｜','ㅣ'],
+  j: ['ｊ','亅'],
+  k: ['ｋ','ケ'],
+  l: ['ｌ','し','丨','ㅣ'],
+  m: ['ｍ','〽'],
+  n: ['ｎ','ん','ﾝ'],
+  o: ['ｏ','〇','ㅇ','○'],
+  p: ['ｐ','尸'],
+  q: ['ｑ'],
+  r: ['ｒ','尺'],
+  s: ['ｓ','ら'],
+  t: ['ｔ','丁','ﾃ'],
+  u: ['ｕ','凵','ㄩ'],
+  v: ['ｖ','レ'],
+  w: ['ｗ','山'],
+  x: ['ｘ','メ','叉'],
+  y: ['ｙ','丫','ㄚ'],
+  z: ['ｚ','乙','之'],
+
+  // upper
+  A: ['Ａ','人','八'],
+  B: ['Ｂ','日'],
+  C: ['Ｃ','匚'],
+  D: ['Ｄ','冂'],
+  E: ['Ｅ','三','ヨ','ミ'],
+  F: ['Ｆ','ﾌ','ㄈ'],
+  G: ['Ｇ'],
+  H: ['Ｈ','廾','井','卄'],
+  I: ['Ｉ','丨','工','｜'],
+  J: ['Ｊ'],
+  K: ['Ｋ','ケ'],
+  L: ['Ｌ'],
+  M: ['Ｍ','州','爪'],
+  N: ['Ｎ','几','ン'],
+  O: ['Ｏ','〇','囗','口'],
+  P: ['Ｐ','尸','戸'],
+  Q: ['Ｑ'],
+  R: ['Ｒ','尺'],
+  S: ['Ｓ','ら'],
+  T: ['Ｔ','丁','工','ﾃ'],
+  U: ['Ｕ','凵'],
+  V: ['Ｖ','レ'],
+  W: ['Ｗ','山'],
+  X: ['Ｘ','メ','叉'],
+  Y: ['Ｙ','丫','ㄚ'],
+  Z: ['Ｚ','乙','之'],
+
+  // digits (fullwidth + CJK numerals)
+  0: ['０','零','〇'],
+  1: ['１','一','丨','｜'],
+  2: ['２','二','乙'],
+  3: ['３','三'],
+  4: ['４','四'],
+  5: ['５','五'],
+  6: ['６','六'],
+  7: ['７','七'],
+  8: ['８','八'],
+  9: ['９','九'],
+};
+
+// merge into SIMILAR without duplicates (keep your originals first)
+for (const [key, vals] of Object.entries(ASIAN_COOL)) {
+  SIMILAR[key] = Array.from(new Set([...(SIMILAR[key] || []), ...vals]));
+}
+
+  const neon = ['#00fff5','#ff3df0','#39ff14','#ffd400','#7a5cff','#ff5e5b'];
+
+  // Kombinierende Akzente (für extra „Glitch“)
+  const COMBINERS = [
+    '\u0301','\u0300','\u0302','\u0308','\u0336','\u0332','\u035B','\u0342','\u032E'
+  ];
+
+  // --- schneller Glyph-Support mit Cache ---
+  const _glyphSupportCache = new Map();
+  function supportsGlyphCached(ch){
+    if (_glyphSupportCache.has(ch)) return _glyphSupportCache.get(ch);
+    const span = document.createElement('span');
+    span.textContent = ch;
+    span.style.position = 'absolute';
+    span.style.visibility = 'hidden';
+    span.style.font = getComputedStyle(document.body).font;
+    document.body.appendChild(span);
+    const ok = span.offsetWidth > 0 && span.textContent === ch;
+    span.remove();
+    _glyphSupportCache.set(ch, ok);
+    return ok;
+  }
+
+  function getAltsForChar(ch){
+    const base = SIMILAR[ch] || SIMILAR[ch.toLowerCase()] || [];
+    const filtered = base
+      .slice()
+      .sort(() => Math.random()-0.5)
+      .filter(s => supportsGlyphCached(s));
+    // ~30%: Kombinierende Akzente (1–2) dranhängen
+    if (filtered.length && Math.random() < 0.30){
+      const withAccents = [];
+      filtered.forEach(s => {
+        const nAcc = Math.random() < 0.5 ? 1 : 2;
+        let acc = s;
+        for (let i=0;i<nAcc;i++){
+          const c = COMBINERS[Math.floor(Math.random()*COMBINERS.length)];
+          const candidate = acc + c;
+          if (supportsGlyphCached(candidate)) acc = candidate;
+        }
+        withAccents.push(acc);
+      });
+      return withAccents.length ? withAccents : filtered;
+    }
+    return filtered;
+  }
+
+  const letterSpans = [];
+  parts.forEach(part => {
+    if (/^<br/i.test(part)) { wrapper.appendChild(document.createElement('br')); return; }
+    [...part].forEach(ch => {
+      const s = document.createElement('span');
+      s.textContent = ch;
+      s.style.display = 'inline-block';
+      s.style.willChange = 'transform, opacity, color, filter, text-shadow';
+      if (RELOADED) {
+        s.style.opacity = '1';
+        s.style.transform = 'translateY(0)';
+      } else {
+        s.style.opacity = '0';
+        s.style.transform = 'translateY(40px)';
+      }
+      s.dataset.original = ch;
+      wrapper.appendChild(s);
+      letterSpans.push(s);
+    });
+  });
+
+  // ---------- Entrance ----------
+  window.addEventListener('load', () => {
+    if (!RELOADED) {
+      letterSpans.forEach((s, i) => {
+        s.animate(
+          [{opacity:0, transform:'translateY(40px)'},
+           {opacity:1, transform:'translateY(0)'}],
+          { duration: 1400, easing:'ease-out', fill:'forwards', delay: 160 * i }
+        );
+      });
+    }
+    // Starten entscheidet der IO unten
+  });
+
+  // ---------- Float ----------
+  let floatAnim = wrapper.animate(
+    [{ transform:'translateY(0)' },{ transform:'translateY(-10px)' },{ transform:'translateY(0)' }],
+    { duration: 12000, easing:'ease-in-out', iterations: Infinity }
+  );
+  floatAnim.pause();
+
+  // ---------- Overlay Renderloop ----------
+  const effects = []; // {span, tEnd, antsPhase}
+  let raf = null;
+  let loopActive = false;
+
+  function localRect(el){
+    const r = el.getBoundingClientRect();
+    const pr = pageTitle.getBoundingClientRect();
+    return { x: r.left - pr.left, y: r.top - pr.top, w: r.width, h: r.height };
+  }
+
+  function drawGrid() {
+    const w = overlay.clientWidth, h = overlay.clientHeight;
+    const step = Math.max(18, Math.round(Math.min(w,h)/10));
+    ctx.save();
+    ctx.clearRect(0,0,overlay.width,overlay.height);
+    ctx.globalAlpha = 0.14; ctx.lineWidth = 1; ctx.strokeStyle = '#9aa0a6';
+    for (let x=0;x<=w;x+=step){ ctx.beginPath(); ctx.moveTo(x+0.5,0); ctx.lineTo(x+0.5,h); ctx.stroke(); }
+    for (let y=0;y<=h;y+=step){ ctx.beginPath(); ctx.moveTo(0,y+0.5); ctx.lineTo(w,y+0.5); ctx.stroke(); }
+    ctx.restore();
+  }
+
+  function drawEditorChrome(now){
+    effects.forEach((fx, idx) => {
+      const r = localRect(fx.span);
+      const pad = 6;
+      const x = r.x - pad, y = r.y - pad, w = r.w + pad*2, h = r.h + pad*2;
+
+      // 1) Marquee
+      ctx.save();
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([6, 4]);
+      ctx.lineDashOffset = -fx.antsPhase;
+      ctx.strokeStyle = '#000';
+      ctx.strokeRect(x, y, w, h);
+      ctx.lineDashOffset = -(fx.antsPhase+4);
+      ctx.strokeStyle = '#fff';
+      ctx.strokeRect(x, y, w, h);
+      ctx.restore();
+
+      // 2) Handles
+      ctx.save();
+      const anchors = [[x,y],[x+w,y],[x,y+h],[x+w,y+h]];
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      anchors.forEach(([ax,ay])=>{ ctx.beginPath(); ctx.arc(ax, ay, 2.75, 0, Math.PI*2); ctx.fill(); });
+      ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+      ctx.beginPath();
+      ctx.moveTo(x+w*0.25,y); ctx.lineTo(x+w*0.31,y-10);
+      ctx.moveTo(x+w, y+h*0.65); ctx.lineTo(x+w+10, y+h*0.75);
+      ctx.stroke();
+      ctx.restore();
+
+      // 3) Scanline
+      ctx.save();
+      ctx.globalAlpha = 0.045;
+      ctx.fillStyle = '#fff';
+      const barH = Math.max(3, Math.round(h*0.12));
+      const by = y + ((now*0.03 + idx*6) % Math.max(1,h)) - barH/2;
+      ctx.fillRect(x, by, w, barH);
+      ctx.restore();
+
+      fx.antsPhase += 0.25;
+    });
+
+    for (let i=effects.length-1;i>=0;i--) {
+      if (effects[i].tEnd <= now) effects.splice(i,1);
+    }
+  }
+
+  function frame(now=performance.now()){
+    sizeCanvas(false);
+    drawGrid();
+    drawEditorChrome(now);
+    raf = requestAnimationFrame(frame);
+  }
+
+  function startLoop(){
+    if (loopActive) return;
+    loopActive = true;
+    if (!raf) raf = requestAnimationFrame(frame);
+  }
+
+  function stopLoop(){
+    loopActive = false;
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+  }
+
+  // ---------- Morph / Glitch ----------
+  const MORPH = {
+    holdMin: 1600, holdMax: 2800,       // Gesamtdauer pro aktiver Glyphe
+    animDur: 240,                       // Dauer eines hektischen Sub-Ticks
+    tickMin: 60, tickMax: 140,          // „Hektik“: schneller
+    burstChance: 0.35,                  // Chance auf Mini-Burst (mehrere schnelle Ticks)
+    splitChance: 0.45,                  // Chromatic-Split-Effekt einschalten?
+    rotateMaxDeg: 6,                    // max. Rotation
+    scaleJitter: 0.08,                  // ±8% Scale
+    skewMaxDeg: 6                       // max. Skew
+  };
+
+  function isBusy(span){ return span.dataset.morphing === '1'; }
+  function setBusy(span,v){ span.dataset.morphing = v ? '1' : '0'; }
+
+  function makeEffectForSpan(span, durMs){
+    const now = performance.now();
+    effects.push({ span, tEnd: now + durMs, antsPhase: Math.random()*10 });
+    startLoop();
+  }
+
+  // Hektischer „Morph“ pro Buchstabe: Glyphenwechsel + visuelle Störungen
+  function morphTicker(span){
+    if (!span || isBusy(span)) return;
+
+    const original = span.dataset.original || span.textContent;
+    const prev = {
+      color: span.style.color,
+      filter: span.style.filter,
+      ts: span.style.textShadow,
+      tr: span.style.transform,
+      ls: span.style.letterSpacing
+    };
+
+    const alts = getAltsForChar(original);
+    if (!alts.length) return;
+
+    setBusy(span,true);
+
+    const hold = MORPH.holdMin + Math.random()*(MORPH.holdMax - MORPH.holdMin);
+    let running = true;
+
+    makeEffectForSpan(span, hold);
+
+    const applyChromaticSplit = () => {
+      if (Math.random() > MORPH.splitChance) return '';
+      // 3-kanaliger „Split“ als Afterimage
+      const dx = (Math.random()*2+0.5).toFixed(2);
+      const dy = (Math.random()*2+0.5).toFixed(2);
+      return `
+        rgb(255 0 80) ${dx}px ${dy}px 0,
+        rgb(0 255 200) ${-dx}px ${dy}px 0,
+        rgb(180 120 255) ${dx}px ${-dy}px 0
+      `;
+    };
+
+    // spontane Mini-Bursts: mehrere sehr schnelle Ticks hintereinander
+    const doBurst = () => {
+      const n = 2 + Math.floor(Math.random()*3); // 2–4 schnelle Wechsel
+      let i = 0;
+      const burst = () => {
+        if (!running || i>=n) return;
+        singleTick(true);
+        i++;
+        setTimeout(burst, 40 + Math.random()*60);
+      };
+      burst();
+    };
+
+    // Ein einzelner schneller Tick (Glyph + FX)
+    function singleTick(isBurst=false){
+      const next = alts[Math.floor(Math.random()*alts.length)];
+      const color = neon[Math.floor(Math.random()*neon.length)];
+
+      // Glyph tauschen
+      span.textContent = next;
+      span.style.color = color;
+
+      // leichte Layout-Störung
+      const rot = (Math.random()*2-1)*MORPH.rotateMaxDeg;
+      const sx  = 1 + (Math.random()*2-1)*MORPH.scaleJitter;
+      const sy  = 1 + (Math.random()*2-1)*MORPH.scaleJitter;
+      const skx = (Math.random()*2-1)*MORPH.skewMaxDeg;
+      const sky = (Math.random()*2-1)*MORPH.skewMaxDeg;
+
+      span.style.transform = `translateZ(0) rotate(${rot}deg) skew(${skx}deg, ${sky}deg) scale(${sx},${sy})`;
+
+      // Blur-Flicker
+      const blurPx = (isBurst ? 1.6 : 0.9) + Math.random()*0.8;
+      const contrast = 1.2 + Math.random()*0.5;
+      const bright = 1.05 + Math.random()*0.25;
+      span.style.filter = `blur(${blurPx}px) contrast(${contrast}) brightness(${bright})`;
+
+      // Chromatic Afterimage
+      span.style.textShadow = applyChromaticSplit();
+
+      // Mini „morphing“ Gefühl: Letter-Spacing pulsen lassen
+      if (Math.random() < 0.5) {
+        span.style.letterSpacing = (Math.random()<0.5 ? '-0.02em' : '0.04em');
+      }
+
+      // Rückanimation via Web Animations API (knackig, „hektisch“)
+      span.animate(
+        [
+          { filter:`${span.style.filter}`, transform: `${span.style.transform}` },
+          { filter:'none', transform:'translateZ(0) rotate(0deg) skew(0,0) scale(1,1)' }
+        ],
+        { duration: MORPH.animDur, easing:'steps(3,end)', fill:'forwards' }
+      );
+    }
+
+    const tick = () => {
+      if (!running) return;
+      singleTick(false);
+      if (Math.random() < MORPH.burstChance) doBurst();
+      const gap = MORPH.tickMin + Math.random()*(MORPH.tickMax - MORPH.tickMin);
+      tickTimer = setTimeout(tick, gap);
+    };
+
+    let tickTimer = null;
+    tick();
+
+    setTimeout(()=>{
+      running = false;
+      if (tickTimer) clearTimeout(tickTimer);
+      // Reset auf Original, sanft ausfaden
+      span.textContent = original;
+      span.style.color = prev.color;
+      span.style.filter = 'none';
+      span.style.textShadow = 'none';
+      span.style.letterSpacing = prev.ls || '';
+      span.animate(
+        [
+          { opacity: 0.85, filter:'none' },
+          { opacity: 1,    filter:'none' }
+        ],
+        { duration: 180, easing: 'ease-out', fill: 'forwards' }
+      );
+      setBusy(span,false);
+    }, hold);
+  }
+
+  function pick(){
+    const a=letterSpans.filter(s=>s.textContent.trim()!=='');
+    return a.length? a[Math.floor(Math.random()*a.length)]:null;
+  }
+
+  function snapSlide(span, dir='up') {
+    const dy = dir === 'up' ? -18 : 18;
+    span.animate(
+      [{ transform:`translateY(${dy}px)` }, { transform:'translateY(0)' }],
+      { duration: 420, easing:'steps(5, end)', fill:'both' }
+    );
+  }
+
+  function multiGlitchBurst() {
+    if (Math.random() < 0.45) { const s = pick(); if (s) snapSlide(s, Math.random()<0.5 ? 'up' : 'down'); }
+    const s = pick(); if (s) morphTicker(s);
+  }
+
+  // ---------- Start/Stop ----------
+  let glitchTimer=null;
+  function startGlitch(){
+    if(glitchTimer) return;
+    glitchTimer=setInterval(()=>multiGlitchBurst(), 2400 + Math.random()*1600);
+    setTimeout(()=>multiGlitchBurst(), 600);
+  }
+  function stopGlitch(){
+    if(glitchTimer){ clearInterval(glitchTimer); glitchTimer=null; }
+  }
+
+  // Sichtbarkeits-Controller
+  let visible = false;
+  function activate() {
+    if (visible) return;
+    visible = true;
+    floatAnim.play();
+    startGlitch();
+    startLoop();
+  }
+  function deactivate() {
+    if (!visible) return;
+    visible = false;
+    floatAnim.pause();
+    stopGlitch();
+    stopLoop();
+  }
+
+  // IntersectionObserver: „läuft, wenn sichtbar“
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.target !== section) return;
+      if (e.isIntersecting) activate();
+      else deactivate();
+    });
+  }, {
+    threshold: [0.05],
+    root: null,
+    rootMargin: '0px'
+  });
+  io.observe(section);
+
+  // Tab-Wechsel
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      deactivate();
+    } else {
+      const r = section.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const visiblePx = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+      const isVis = visiblePx / Math.min(vh, r.height) >= 0.05;
+      if (isVis) activate();
+    }
+  });
+
+  // Initial: prüfen
+  (function initVisibility(){
+    const r = section.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const visiblePx = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+    const isVis = visiblePx / Math.min(vh, r.height) >= 0.05;
+    if (isVis) activate();
+  })();
+})();
+</script>
+
+
+<section id="aurora-sheet" class="aurora-sheet container" aria-labelledby="aurora-crown" aria-describedby="aurora-chant">
+  <h2 id="aurora-crown" class="aurora-title" data-anim-aurora>Webentwicklung</h2>
+
+  <p id="aurora-chant" class="aurora-subtitle" aria-live="polite">
+    <span class="subtitle-snippet">Schnell. Sauber. Messbar – Webentwicklung mit Substanz.</span>
+    <span class="subtitle-t">Gutes Webdesign endet nicht beim Look – wir liefern nachweisbar schnelle, saubere und messbare Websites.</span>
+    <span class="subtitle-full">
+      Jede Zeile Code ist so geschrieben, dass sie sich in Zahlen auszahlt: Lighthouse-Scores über 90,
+      Pagespeed Insights im grünen Bereich und Core Web Vitals, die deine Konkurrenz alt aussehen lassen.
+    </span>
+  </p>
+
+  <ul class="quasar-grid" aria-label="Bereiche: Performance, Tracking, Beweis">
+    <!-- Karte 1: Performance -->
+    <li>
+      <article class="aether-card" id="aether-performance"
+               aria-labelledby="aether-performance-h"
+               aria-describedby="aether-performance-k aether-performance-s">
+        <h3 id="aether-performance-h">Performance im Fokus</h3>
+        <p class="snippet" id="aether-performance-s">Schnell, effizient und messbar – jede Zeile Code zählt.</p>
+        <p class="t-snippet">Unsere Websites erreichen konstant Lighthouse-Scores über 90 Punkte. Pagespeed Insights liegen im grünen Bereich – weil Performance von Beginn an in jede Zeile Code integriert wird.</p>
+        <p class="microtag" id="aether-performance-k">Lighthouse 90+ / Core Web Vitals Top Tier</p>
+
+        <ul class="delta-list" aria-label="Performance-Vorteile">
+          <li><span class="lead">Optimiert</span><span class="copy">Sauberer Code, effiziente Ladezeiten, präzise Ressourcenverwaltung.</span></li>
+          <li><span class="lead">Stabil</span><span class="copy">Schnelle Reaktionen, flüssige Interaktionen – messbar über Core Web Vitals.</span></li>
+          <li><span class="lead">Transparent</span><span class="copy">Alle Ergebnisse belegbar mit Lighthouse & Speed-Reports.</span></li>
+        </ul>
+      </article>
+    </li>
+
+    <!-- Karte 2: Tracking -->
+    <li>
+      <article class="aether-card" id="aether-tracking"
+               aria-labelledby="aether-tracking-h"
+               aria-describedby="aether-tracking-k aether-tracking-s">
+        <h3 id="aether-tracking-h">Alles im Blick</h3>
+        <p class="snippet" id="aether-tracking-s">Wir tracken, was wirklich zählt – klar, DSGVO-konform und live.</p>
+        <p class="t-snippet">Wir erfassen Ladezeiten, Nutzerinteraktionen, Conversion-Raten und Nutzerfluss mit Tools wie Google Analytics und Microsoft Clarity. So wird jedes Projekt zur datengetriebenen Erfolgsgeschichte.</p>
+        <p class="microtag" id="aether-tracking-k">Analyse & Tracking in Echtzeit</p>
+
+        <ul class="delta-list" aria-label="Tracking-Aspekte">
+          <li><span class="lead">Ladezeiten</span><span class="copy">Messung in Echtzeit – jede Millisekunde zählt.</span></li>
+          <li><span class="lead">Nutzerfluss</span><span class="copy">Wir sehen, wie User sich bewegen – und optimieren gezielt.</span></li>
+          <li><span class="lead">Conversions</span><span class="copy">Messbare Erfolge statt Schätzwerte – datenbasierte Entscheidungen.</span></li>
+        </ul>
+      </article>
+    </li>
+
+    <!-- Karte 3: Nachweis -->
+    <li>
+      <article class="aether-card" id="aether-proof"
+               aria-labelledby="aether-proof-h"
+               aria-describedby="aether-proof-k aether-proof-s">
+        <h3 id="aether-proof-h">Leistung, die man beweisen kann</h3>
+        <p class="snippet" id="aether-proof-s">Leistung nicht versprechen, sondern belegen – mit echten Zahlen.</p>
+        <p class="t-snippet">Vor jedem Go-Live testen wir gründlich: Lighthouse-Audits, GTmetrix-Speed-Tests, Core Web Vitals und Browser-Checks. Ergebnisse werden dokumentiert – schwarz auf weiß.</p>
+        <p class="microtag" id="aether-proof-k">Belegbare Qualität / Technischer Nachweis</p>
+
+        <ul class="delta-list" aria-label="Nachweisbare Qualität">
+          <li><span class="lead">Audits</span><span class="copy">Umfassende Lighthouse- und Performance-Reports.</span></li>
+          <li><span class="lead">Browser-Tests</span><span class="copy">Realistische Messungen unter echten Bedingungen.</span></li>
+          <li><span class="lead">Dokumentation</span><span class="copy">Klare Zahlen – keine Marketing-Floskeln.</span></li>
+        </ul>
+      </article>
+    </li>
+  </ul>
+</section>
+
+
+
+<!--
+  PRE-FLIGHT AURORA PRO (v7)
+  – Übernommenes Look-&-Feel aus deinem Portfolio-„board-showcase“ als Inspiration
+  – Typo/Spacing/Farben: kommen 1:1 aus aurora.css (wir setzen nur Layout & Deko, kein Font-/Palette-Override)
+  – Eigenes, lokales Grid (kein Framework), wie zuvor gewünscht
+  – Voll responsive, sticky Metrics optional
+-->
+<section id="preflight-aurora-pro-v7" class="aurora-sheet board-showcase is-compact" aria-labelledby="pfap7-title" aria-describedby="pfap7-sub">
+  <div class="container board-wrap">
+    <header class="board-head">
+      <h2 id="pfap7-title" class="aurora-title">Preflight‑Checks</h2>
+      <p id="pfap7-sub" class="aurora-subtitle">Messbar besser: Performance, SEO, Accessibility & Best Practices – klar dokumentiert.</p>
+    </header>
+
+    <div class="pf-grid fx-flow" aria-label="Vor dem Go‑Live prüfen wir diese Bereiche">
+      <!-- „Firma“-Stil: HERO Audit – übernimmt Meta/CTA-Struktur aus dem Inspo-Code -->
+      <article class="firma audit">
+        <header class="head">
+          <div class="meta">
+            <span class="logo-wrap" aria-hidden="true">
+              <!-- Platzhalter-Icon (Gauge) – reines Deko-Icon, bleibt farbneutral -->
+              <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9h-2a7 7 0 1 1-7-7V3zM7 17l5-5 5 5H7z"/></svg>
+            </span>
+            <div class="titlebox">
+              <h3>Audit & Qualitätsmetriken</h3>
+              <p>Labor + Feld · reproduzierbar · priorisiert</p>
+            </div>
+          </div>
+          <a href="#report" class="icon-link" aria-label="Beispiel‑Report öffnen">
+            <i data-feather="arrow-up-right" aria-hidden="true"></i>
+          </a>
+        </header>
+
+        <!-- Bilder‑Grid als „Kachel‑KPIs“ (ersetzt frühere Ringe): 4 lineare Balken -->
+        <ul class="bilder kpi" aria-label="Kernmetriken">
+          <li>
+            <div class="kpi-card" role="group" aria-labelledby="kpi-perf-l" aria-describedby="kpi-perf-v">
+              <div class="kpi-head"><span id="kpi-perf-l" class="kpi-label">Performance</span><span id="kpi-perf-v" class="kpi-val">96/100</span></div>
+              <div class="kpi-bar" role="progressbar" aria-label="Performance" aria-valuemin="0" aria-valuemax="100" aria-valuenow="96"><span style="width:96%"></span></div>
+            </div>
+          </li>
+          <li>
+            <div class="kpi-card" role="group" aria-labelledby="kpi-seo-l" aria-describedby="kpi-seo-v">
+              <div class="kpi-head"><span id="kpi-seo-l" class="kpi-label">SEO</span><span id="kpi-seo-v" class="kpi-val">99/100</span></div>
+              <div class="kpi-bar" role="progressbar" aria-label="SEO" aria-valuemin="0" aria-valuemax="100" aria-valuenow="99"><span style="width:99%"></span></div>
+            </div>
+          </li>
+          <li>
+            <div class="kpi-card" role="group" aria-labelledby="kpi-a11y-l" aria-describedby="kpi-a11y-v">
+              <div class="kpi-head"><span id="kpi-a11y-l" class="kpi-label">Accessibility</span><span id="kpi-a11y-v" class="kpi-val">100/100</span></div>
+              <div class="kpi-bar" role="progressbar" aria-label="Accessibility" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><span style="width:100%"></span></div>
+            </div>
+          </li>
+          <li>
+            <div class="kpi-card" role="group" aria-labelledby="kpi-bp-l" aria-describedby="kpi-bp-v">
+              <div class="kpi-head"><span id="kpi-bp-l" class="kpi-label">Best Practices</span><span id="kpi-bp-v" class="kpi-val">97/100</span></div>
+              <div class="kpi-bar" role="progressbar" aria-label="Best Practices" aria-valuemin="0" aria-valuemax="100" aria-valuenow="97"><span style="width:97%"></span></div>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <!-- Lighthouse & Speed -->
+      <article class="firma">
+        <header class="head">
+          <div class="meta">
+            <span class="logo-wrap" aria-hidden="true">
+              <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2 7 22h10L12 2z"/></svg>
+            </span>
+            <div class="titlebox">
+              <h3>Geschwindigkeit & Stabilität</h3>
+              <p>TTFB · LCP · CLS · INP</p>
+            </div>
+          </div>
+        </header>
+        <ul class="delta-list" aria-label="Messverfahren">
+          <li><span class="lead">Lighthouse</span><span class="copy">Mobile & Desktop, versioniert und reproduzierbar.</span></li>
+          <li><span class="lead">WebPageTest & GTmetrix</span><span class="copy">Realistische Profile (4G/Kabel) inkl. TTFB & Filmstrips.</span></li>
+          <li><span class="lead">PageSpeed Insights (CrUX)</span><span class="copy">Feld‑Daten für echte Nutzer‑Erlebnisse.</span></li>
+        </ul>
+      </article>
+
+      <!-- Accessibility -->
+      <article class="firma">
+        <header class="head">
+          <div class="meta">
+            <span class="logo-wrap" aria-hidden="true">
+              <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm-7 8h3l2 10h2l1-6h2l1 6h2l2-10h3v-2H5v2z"/></svg>
+            </span>
+            <div class="titlebox">
+              <h3>Barrierefreiheit & Interaktion</h3>
+              <p>WCAG 2.2 · Fokus · Motion</p>
+            </div>
+          </div>
+        </header>
+        <ul class="delta-list" aria-label="A11y‑Checks">
+          <li><span class="lead">Kontrast & Semantik</span><span class="copy">Übersicht der Problemstellen inkl. Fix‑Vorschläge.</span></li>
+          <li><span class="lead">INP & Keyboard</span><span class="copy">Interaktion schnell, Fokus‑Ringe sichtbar, Reihenfolgen logisch.</span></li>
+          <li><span class="lead">Motion‑Preference</span><span class="copy">Respektiert reduzierte Bewegung, keine Überraschungen.</span></li>
+        </ul>
+      </article>
+
+      <!-- Technik & SEO -->
+      <article class="firma">
+        <header class="head">
+          <div class="meta">
+            <span class="logo-wrap" aria-hidden="true">
+              <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 4h16v4H4zM4 10h10v10H4zM16 10h4v10h-4z"/></svg>
+            </span>
+            <div class="titlebox">
+              <h3>Technik & SEO‑Grundlagen</h3>
+              <p>Struktur · Sicherheit · Skalierung</p>
+            </div>
+          </div>
+        </header>
+        <ul class="delta-list" aria-label="Technik">
+          <li><span class="lead">Meta & Struktur</span><span class="copy">Headings, Schema.org, Sitemap & Robots sauber.</span></li>
+          <li><span class="lead">Assets & Caching</span><span class="copy">Bild‑Pipelines, HTTP‑Caching, Security‑Header.</span></li>
+          <li><span class="lead">Saubere URLs</span><span class="copy">Klar, sprechend, ohne Duplicates.</span></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+
+  <!-- Scoped Styles: folgen deinem „Arbeitsproben“-Muster. Keine Font-/Palette-Overrides. -->
+  <style>
+    /* ===== Layout (eigenes Grid) ===== */
+    #preflight-aurora-pro-v7 .pf-grid{ display:grid; gap: clamp(1.4rem, 1.2vw + .8rem, 2.2rem); grid-template-columns: 1fr; }
+    @media (min-width: 1080px){
+      #preflight-aurora-pro-v7 .pf-grid{ grid-template-columns: repeat(12, minmax(0,1fr)); }
+      #preflight-aurora-pro-v7 .audit{ grid-column: 1 / 13; }
+      #preflight-aurora-pro-v7 .pf-grid > .firma:nth-of-type(2){ grid-column: 1 / 5; }
+      #preflight-aurora-pro-v7 .pf-grid > .firma:nth-of-type(3){ grid-column: 5 / 9; }
+      #preflight-aurora-pro-v7 .pf-grid > .firma:nth-of-type(4){ grid-column: 9 / 13; }
+    }
+
+    /* ===== Karte („Firma“) – inspiriert von deinem Code ===== */
+    #preflight-aurora-pro-v7 .firma{ position:relative; border-radius:16px; padding: clamp(1.1rem, 1.2vw + .6rem, 1.6rem); overflow:clip; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    #preflight-aurora-pro-v7 .firma::after{ content:""; position:absolute; inset:0; pointer-events:none; border-radius:inherit; box-shadow: inset 0 0 0 1px color-mix(in oklab, #fff 30%, transparent); opacity:.7; }
+    #preflight-aurora-pro-v7 .firma:hover{ transform: translateY(-2px); }
+
+    #preflight-aurora-pro-v7 .head{ display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:.9rem; }
+    #preflight-aurora-pro-v7 .meta{ display:flex; align-items:flex-start; gap:.9rem; min-width:0; }
+    #preflight-aurora-pro-v7 .logo-wrap{ display:grid; place-items:center; width:48px; height:48px; border-radius:12px; overflow:hidden; background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.35)); border:1px solid color-mix(in oklab, var(--border, rgba(0,0,0,.08)) 85%, transparent); box-shadow: inset 0 1px 0 rgba(255,255,255,.4); }
+    :root[data-theme="dark"] #preflight-aurora-pro-v7 .logo-wrap{ background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
+    #preflight-aurora-pro-v7 .logo{ width:70%; height:70%; object-fit:contain; }
+    #preflight-aurora-pro-v7 .titlebox h3{ margin:0; font-size:1.08rem; letter-spacing:-.01em; }
+    #preflight-aurora-pro-v7 .titlebox p{ margin:.15rem 0 0; font-size:.94rem; color: var(--muted, #667085); }
+
+    #preflight-aurora-pro-v7 .icon-link{ --ring: color-mix(in oklab, var(--accent,#0b66ff) 70%, transparent); display:inline-flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:12px; border:1px solid color-mix(in oklab, var(--border, rgba(0,0,0,.08)) 92%, transparent); background: color-mix(in oklab, var(--surface,#fff) 88%, transparent); transition: box-shadow .25s ease, transform .2s ease, background .25s ease; }
+    #preflight-aurora-pro-v7 .icon-link:hover{ transform: translateY(-1px); box-shadow: 0 0 0 6px color-mix(in oklab, var(--accent,#0b66ff) 14%, transparent); }
+    #preflight-aurora-pro-v7 .icon-link:focus-visible{ outline:none; box-shadow: 0 0 0 3px var(--ring); }
+    #preflight-aurora-pro-v7 .icon-link svg{ width:20px; height:20px; stroke: currentColor; stroke-width:2; }
+
+    /* ===== Bilder‑Grid – hier als KPI‑Kacheln benutzt ===== */
+    #preflight-aurora-pro-v7 .bilder{ --tile: 180px; display:grid; grid-template-columns: repeat(auto-fit, minmax(var(--tile), 1fr)); gap: clamp(.5rem, .5vw + .2rem, .8rem); }
+    #preflight-aurora-pro-v7 .bilder li{ list-style:none; }
+
+    /* KPI‑Cards (neutral, nutzen Weiss/Opacity – keine harten Markenfarben) */
+    #preflight-aurora-pro-v7 .kpi-card{ border-radius:12px; padding:.9rem; background: color-mix(in oklab, #fff 8%, transparent); border:1px solid color-mix(in oklab, var(--border, rgba(0,0,0,.08)) 85%, transparent); box-shadow: 0 1px 0 color-mix(in oklab, #000 8%, transparent), 0 10px 22px color-mix(in oklab, #000 10%, transparent); }
+    #preflight-aurora-pro-v7 .kpi-head{ display:grid; grid-template-columns: 1fr auto; align-items:end; gap:.4rem; margin-bottom:.55rem; }
+    #preflight-aurora-pro-v7 .kpi-label{ font-weight:700; letter-spacing:-.01em; }
+    #preflight-aurora-pro-v7 .kpi-val{ font-weight:800; font-variant-numeric: tabular-nums; }
+    #preflight-aurora-pro-v7 .kpi-bar{ height:10px; background: color-mix(in oklab, #000 6%, transparent); border-radius:999px; overflow:hidden; position:relative; }
+    #preflight-aurora-pro-v7 .kpi-bar > span{ position:absolute; inset:0 auto 0 0; width:0%; background:#fff; opacity:.95; border-radius:inherit; transition: width .9s cubic-bezier(.19,1,.22,1); }
+
+    /* Delta-Liste */
+    #preflight-aurora-pro-v7 .delta-list{ list-style:none; padding:0; margin:0; display:grid; gap:.6rem; }
+    #preflight-aurora-pro-v7 .delta-list .lead{ display:block; font-weight:700; }
+    #preflight-aurora-pro-v7 .delta-list .copy{ display:block; opacity:.9; }
+
+    /* Fine-Tuning / Dark */
+    :root[data-theme="dark"] #preflight-aurora-pro-v7 .firma{ background: linear-gradient(180deg, rgba(255,255,255,.04), transparent 120%), #0b0f17; border-color: rgba(255,255,255,.08); box-shadow: 0 1px 0 rgba(255,255,255,.06), 0 16px 40px rgba(0,0,0,.45); }
+    :root[data-theme="dark"] #preflight-aurora-pro-v7 .kpi-card{ background: rgba(255,255,255,.02); border-color: rgba(255,255,255,.08); box-shadow: 0 1px 0 rgba(255,255,255,.06), 0 10px 24px rgba(0,0,0,.6); }
+
+    /* Motion Preferences */
+    @media (prefers-reduced-motion: reduce){
+      #preflight-aurora-pro-v7 .firma, #preflight-aurora-pro-v7 .kpi-bar > span{ transition: none !important; }
+    }
+  /* === Cosmos-Farben für KPI-Balken (aus cosmosSuite.css) === */
+    /* Performance: Blau/Violett‑Gradient */
+    #preflight-aurora-pro-v7 .kpi-card:nth-child(1) .kpi-bar > span{
+      background: linear-gradient(270deg, #04006c, #6f00ff, #050088);
+      background-size: 300% 300%;
+      filter: drop-shadow(0 2px 6px rgba(111,0,255,.35));
+    }
+    /* SEO: Tiefes Navy */
+    #preflight-aurora-pro-v7 .kpi-card:nth-child(2) .kpi-bar > span{
+      background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
+      background-size: 220% 220%;
+      filter: drop-shadow(0 2px 6px rgba(0,14,92,.35));
+    }
+    /* Accessibility: Orange → Magenta */
+    #preflight-aurora-pro-v7 .kpi-card:nth-child(3) .kpi-bar > span{
+      background: linear-gradient(135deg, #ff5100, hwb(340 0% 0%), #ff5100);
+      background-size: 260% 260%;
+      filter: drop-shadow(0 2px 6px rgba(255,81,0,.35));
+    }
+    /* Best Practices: Navy Pulse */
+    #preflight-aurora-pro-v7 .kpi-card:nth-child(4) .kpi-bar > span{
+      background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
+      background-size: 220% 220%;
+      filter: drop-shadow(0 2px 6px rgba(0,14,92,.35));
+    }
+
+    /* Coole Lade‑Animationen: Shine + Background‑Drift + Easing */
+    #preflight-aurora-pro-v7 .kpi-bar{ position:relative; overflow:hidden; }
+    #preflight-aurora-pro-v7 .kpi-bar > span{
+      position:absolute; inset:0 auto 0 0; width:0%; border-radius:inherit;
+      transition: width 1.2s cubic-bezier(.2,.9,.16,1.02);
+      animation: kpiDrift 2.6s ease-in-out infinite;
+    }
+    #preflight-aurora-pro-v7 .kpi-bar > span::after{
+      content:""; position:absolute; inset:-20% -40%; transform: translateX(-120%);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent);
+      filter: blur(8px);
+      width: 40%;
+      animation: kpiShine 1.8s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes kpiDrift{ 0%{ background-position:0% 50%; } 50%{ background-position:100% 50%; } 100%{ background-position:0% 50%; } }
+    @keyframes kpiShine{ 0%{ transform: translateX(-120%); opacity:.0; } 40%{ opacity:.35; } 100%{ transform: translateX(120%); opacity:0; } }
+
+    /* Nach dem Füllen: Shine abblenden */
+    #preflight-aurora-pro-v7 .kpi-bar.done > span{ animation-play-state: paused; }
+    #preflight-aurora-pro-v7 .kpi-bar.done > span::after{ opacity:0; animation: none; }
+
+    /* Reduced Motion respektieren */
+    @media (prefers-reduced-motion: reduce){
+      #preflight-aurora-pro-v7 .kpi-bar > span{ animation:none; }
+      #preflight-aurora-pro-v7 .kpi-bar > span::after{ display:none; }
+    }
+  </style>
+
+  <!-- Minimal JS: KPI-Balken animieren (mit Shine/Drift); respektiert Reduced Motion -->
+  <script>
+    (() => {
+      const root = document.getElementById('preflight-aurora-pro-v7');
+      if (!root) return;
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const bars = [...root.querySelectorAll('.kpi-bar')];
+      const set = (el, pct) => {
+        const span = el.querySelector('span');
+        if(!span) return;
+        span.style.width = pct + '%';
+        el.setAttribute('aria-valuenow', String(pct));
+        // kurze Verzögerung, dann Shine ausblenden
+        setTimeout(()=> el.classList.add('done'), 1400);
+      };
+      if (reduce){ bars.forEach(b => set(b, +b.getAttribute('aria-valuenow') || 0)); return; }
+      let started=false;
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting && !started){ started=true; bars.forEach(b=>{ const v=+b.getAttribute('aria-valuenow')||0; requestAnimationFrame(()=> set(b, v)); }); io.disconnect(); } });
+      }, { threshold:.25 });
+      bars.forEach(b=>io.observe(b));
+    })();
+  </script>
+</section>
 

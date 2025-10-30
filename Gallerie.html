@@ -101,9 +101,6 @@
       text-align: center;
       background: #000 url('./IndexM/PC.webp') center/cover no-repeat;
     }
-    @media (max-width: 1024px) { .hero-video-wrapper { background-image: url('./IndexM/Tablet.webp'); } }
-    @media (max-width: 480px)  { .hero-video-wrapper { background-image: url('./IndexM/handy.webp'); } }
-
     .hero-video-content{
       position: relative; z-index: 2;
       display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -379,41 +376,6 @@ font-size: clamp(4rem, 22vw, 18rem);
 
 
 </style>
-<style>/* Webdesign-Hero: Weiß + kleiner + gut lesbar */
-.hero-section[data-page="3DKonzept"] .page-title {
-  mix-blend-mode: normal; /* Overlay aus, damit Weiß wirklich weiß ist */
-}
-
-.hero-section[data-page="3DKonzept"] .large-title {
-  /* kleiner als die aktuelle Basis (20vw) */
-  font-size: clamp(3rem, 12vw, 12vw);
-  color: #fff;
-  line-height: 1;
-  text-shadow: 0 4px 22px rgba(0,0,0,.45);
-}
-/* vorher: font-size: clamp(3rem, 12vw, 12vw); */
-.hero-section[data-page="webdesign"] .large-title {
-  font-size: clamp(2.75rem, 10.5vw, 10.5vw);
-}
-
-/* damit auch die per JS erzeugten Span-Buchstaben weiß bleiben */
-.hero-section[data-page="3DKonzept"] #titleFloatWrapper span {
-  color: #ffffffd8 !important;
-}
-
-/* Variante A: „screen“ – hell & knallig über dunklem Video */
-.hero-section[data-page="3DKonzept"] .page-title {
-  mix-blend-mode: screen;
-}
-
-
-
-/* Variante C: „difference“ – stark kontrastierend/arty */
-.hero-section[data-page="3DKonzept"] .page-title {
-  mix-blend-mode: difference;
-}
-
-</style>
 
 </head>
 
@@ -446,32 +408,9 @@ font-size: clamp(4rem, 22vw, 18rem);
             </svg>
           </button>
           <ul id="grimoire-services" class="underrealm" hidden>
-            <li><a class="astral-link astral-link--sub" href="/leistungen/webdesign">Webdesign</a></li>
-            <li><a class="astral-link astral-link--sub" href="/leistungen/branding-ci">Branding &amp; CI</a></li>
-            <li><a class="astral-link astral-link--sub" href="/leistungen/performance">Performance Marketing</a></li>
-            <li><a class="astral-link astral-link--sub" href="/leistungen/support">Wartung &amp; Support</a></li>
-          </ul>
-        </li>
-
-        <!-- Blog (vorher "Über uns" im Kommentar) -->
-        <li class="astral-item">
-          <a class="astral-link" href="#ueber-uns">Blog</a>
-          <button
-            class="gatelet"
-            type="button"
-            aria-expanded="false"
-            aria-controls="codex-about"
-            aria-haspopup="true"
-            aria-label="Unterpunkte zu Blog ein- oder ausklappen">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <ul id="codex-about" class="underrealm" hidden>
-            <li><a class="astral-link astral-link--sub" href="#team">Team</a></li>
-            <li><a class="astral-link astral-link--sub" href="#werte">Werte</a></li>
-            <li><a class="astral-link astral-link--sub" href="/jobs">Jobs</a></li>
-            <li><a class="astral-link astral-link--sub" href="/presse">Presse</a></li>
+            <li><a class="astral-link astral-link--sub" href="./WebDesign.html">Webdesign</a></li>
+            <li><a class="astral-link astral-link--sub" href="./3DDesign.html">3D Design</a></li>
+            <li><a class="astral-link astral-link--sub" href="./Grafikdesign.html">Grafikdesign</a></li>
           </ul>
         </li>
 
@@ -518,6 +457,33 @@ font-size: clamp(4rem, 22vw, 18rem);
             <li><a class="astral-link astral-link--sub" href="/impressum">Impressum</a></li>
           </ul>
         </li>
+
+
+
+                <!-- Blog (vorher "Über uns" im Kommentar) -->
+        <li class="astral-item">
+          <a class="astral-link" href="#ueber-uns">Blog</a>
+          <button
+            class="gatelet"
+            type="button"
+            aria-expanded="false"
+            aria-controls="codex-about"
+            aria-haspopup="true"
+            aria-label="Unterpunkte zu Blog ein- oder ausklappen">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul id="codex-about" class="underrealm" hidden>
+            <li><a class="astral-link astral-link--sub" href="#team">Team</a></li>
+            <li><a class="astral-link astral-link--sub" href="#werte">Werte</a></li>
+            <li><a class="astral-link astral-link--sub" href="/jobs">Jobs</a></li>
+            <li><a class="astral-link astral-link--sub" href="/presse">Presse</a></li>
+          </ul>
+        </li>
+
+
+        
       </ul>
     </nav>
 
@@ -999,494 +965,1259 @@ font-size: clamp(4rem, 22vw, 18rem);
 
 
 
-  <style>
-    html, body { height: 100%; margin: 0; }
-    body { background: #0b0f16; color: #e8eefc; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; overflow: hidden; }
 
-    /* Fullscreen stage */
-    #stage { position: fixed; inset: 0; display: block; width: 100vw; height: 100vh; }
-
-    /* UI overlay */
-    .hud { position: fixed; left: 16px; bottom: 16px; background: rgba(9,12,18,.7); border: 1px solid rgba(255,255,255,.08); padding: 10px 12px; border-radius: 10px; backdrop-filter: blur(6px); user-select: none; }
-    .hud h1 { margin: 0 0 6px; font-size: 14px; letter-spacing: .02em; color: #bcd3ff; }
-    .hud p { margin: 0; font-size: 12px; line-height: 1.35; color: #cbd5e1; }
-
-    .badge { position: fixed; right: 16px; top: 16px; font-size: 12px; color: #9bb4ff; background: rgba(9,12,18,.6); border: 1px solid rgba(255,255,255,.08); padding: 8px 10px; border-radius: 999px; }
-
-    /* Minimap */
-    .minimap { position: fixed; right: 16px; bottom: 16px; width: 160px; height: 120px; border-radius: 12px; background: rgba(9,12,18,.7); border: 1px solid rgba(255,255,255,.08); overflow: hidden; }
-    .minimap canvas { width: 100%; height: 100%; display: block; }
-
-    @media (hover: none) { .hud p.kb { display: none; } }
-  </style>
 
 <body>
-  <canvas id="stage" aria-label="Open-World Galerie" role="application"></canvas>
 
-  <div class="badge">Open-World Galerie · toroidal (nahtlos)</div>
 
-  <div class="hud" aria-live="polite">
-    <h1>Navigation</h1>
-    <p class="kb">WASD/↔↕ & Scroll/Trackpad bewegen · Maus/Touch ziehen · Klick auf Bild → Firmen-Unterseite</p>
-    <p>Am Rand geht’s nahtlos weiter – echte Open-World.</p>
+
+<section class="hero-section" data-page="webdesign">
+  <div class="hero-images-wrapper">
+    <!-- HINTERGRUND-VIDEO -->
+    <div class="hero-image-background">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hintegrundweb.webp">
+        <source src="./WebdesignPic/1.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <div class="page-title">
+      <div class="container">
+        <h1 class="large-title">3D <br> Design</h1>
+      </div>
+    </div>
+
   </div>
+</section>
+<script>
+(function () {
+  const section = document.querySelector('.hero-section[data-page="webdesign"]');
+  const h1 = document.querySelector('.page-title .large-title');
+  const pageTitle = document.querySelector('.page-title');
+  if (!section || !h1 || !pageTitle) return;
 
-  <div class="minimap" aria-hidden="true"><canvas id="mini"></canvas></div>
+  // --- Reload-Erkennung (unverändert) ---
+  function isReload() {
+    try {
+      const n = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+      if (n && (n.type === 'reload' || n.type === 'back_forward')) return true;
+      if (performance && performance.navigation && performance.navigation.type === 1) return true;
+    } catch(e){}
+    return false;
+  }
+  const RELOADED = isReload();
 
-  <script>
-  // ============ CONFIG ============
-  const WORLD = { width: 6000, height: 4000 }; // wrap-around
-  const ITEM_COUNT = 25;
-  const ITEM_SIZE = [140, 320];
-  const MOVE_SPEED = 600; // px/s (Tastatur)
-  const WHEEL_SPEED = 1.0; // Multiplier für Wheel/Trackpad
+  // ---------- Wrapper & Overlay ----------
+  const originalHTML = h1.innerHTML;
+  const parts = originalHTML.split(/(<br\s*\/?>)/i);
 
-  // Spur/Trail
-  const TRAIL = {
-    maxPoints: 1600,
-    sampleEvery: 0.05,   // schnelleres Sampling
-    fadeSeconds: 14,
-    minMove: 0.5,        // sehr kleine Bewegung reicht bereits
-    points: [],
-    tSince: 0
+  const wrapper = document.createElement('span');
+  wrapper.id = 'titleFloatWrapper';
+  wrapper.style.display = 'inline-block';
+  wrapper.style.willChange = 'transform';
+  h1.innerHTML = '';
+  h1.appendChild(wrapper);
+
+  const overlay = document.createElement('canvas');
+  overlay.id = 'titleOverlay';
+  overlay.style.position = 'absolute';
+  overlay.style.left = '0';
+  overlay.style.top = '0';
+  overlay.style.pointerEvents = 'none';
+  overlay.style.zIndex = '3';
+  if (getComputedStyle(pageTitle).position === 'static') {
+    pageTitle.style.position = 'relative';
+  }
+  pageTitle.appendChild(overlay);
+
+  // ---------- Canvas Sizing + Live-Tracking ----------
+  let ctx = null;
+  let last = { w:0, h:0, left:0, top:0, dpr:0 };
+
+  function sizeCanvas(force=false) {
+    const r = h1.getBoundingClientRect();
+    const pr = pageTitle.getBoundingClientRect();
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+
+    const left = r.left - pr.left;
+    const top  = r.top  - pr.top;
+    const w = Math.ceil(r.width);
+    const h = Math.ceil(r.height);
+
+    if (!force &&
+        w === last.w && h === last.h &&
+        left === last.left && top === last.top &&
+        dpr === last.dpr) return;
+
+    overlay.style.width = w + 'px';
+    overlay.style.height = h + 'px';
+    overlay.style.left = left + 'px';
+    overlay.style.top  = top  + 'px';
+
+    overlay.width = Math.max(1, Math.floor(w * dpr));
+    overlay.height = Math.max(1, Math.floor(h * dpr));
+
+    ctx = overlay.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    last = { w, h, left, top, dpr };
+  }
+
+  sizeCanvas(true);
+
+  const roH1 = new ResizeObserver(() => sizeCanvas(true));
+  const roTitle = new ResizeObserver(() => sizeCanvas(true));
+  roH1.observe(h1);
+  roTitle.observe(pageTitle);
+
+  window.addEventListener('resize', () => sizeCanvas(true), { passive:true });
+  window.addEventListener('scroll', () => sizeCanvas(false), { passive:true });
+  window.addEventListener('orientationchange', () => sizeCanvas(true));
+
+  // ---------- Text → Letters ----------
+  // großer, exotischer Glyph-Pool: Griechisch, Kyrillisch, Armenisch, Georgisch, IPA, Fraktur, Mathe-Alphanumerika, Ziffernvarianten …
+  const SIMILAR = {
+    // lower
+    'a':['ɑ','α','⍺','ª','ᵃ','ä','á','à','ȧ','ą','ɐ','@','ꭤ','𝖺','𝔞','ᶏ','ᴀ'],
+    'b':['Ь','ƅ','Ꮟ','Ƅ','ƀ','ẛ'.replace('ẛ','b'),'ɓ','ᵇ','ᶀ','𝖻','𝔟'],
+    'c':['ϲ','ᴄ','с','ᶜ','ƈ','ↄ','ς','ɔ','ꜿ','ç','č','ċ','𝖼','𝔠'],
+    'd':['ԁ','đ','ᑯ','ᵈ',')','ɗ','ᵭ','ḋ','ᶁ','𝖽','𝔡'],
+    'e':['℮','ɛ','є','ᵉ','ᵋ','ℯ','ɇ','ė','ë','é','è','ɘ','ε','𝖾','𝔢'],
+    'f':['ƒ','ſ','ϝ','ẝ','ʄ','ᶂ','𐊇','𝖿','𝔣'],
+    'g':['ɡ','ǥ','ᵍ','9','ĝ','ğ','ġ','ḡ','ɢ','ᶃ','𝓰','𝔤'],
+    'h':['һ','ℎ','ᵸ','ʰ','ɦ','ħ','ꜧ','ḫ','𝖍','𝔥'],
+    'i':['ɪ','ǐ','ı','¡','1','í','ì','ï','ỉ','ɨ','ⅰ','!', '𝖎','𝔦'],
+    'j':['ȷ','ϳ','ј','ʝ','ĵ','ɉ','ᶡ','𝖏','𝔧'],
+    'k':['κ','ᵏ','ꭆ','ḳ','ǩ','ꝁ','ќ','ᴋ','𝖐','𝔨'],
+    'l':['ɩ','ⅼ','ǀ','|','Ɩ','ĺ','ļ','ł','ᶅ','ʟ','𝖑','𝔩'],
+    'm':['ṃ','ᴍ','м','ᵐ','ɱ','ṁ','ᶆ','𝖒','𝔪'],
+    'n':['η','п','ɴ','∩','ɲ','ṅ','ņ','ń','ň','ң','𝖓','𝔫'],
+    'o':['ο','о','ɵ','°','0','ö','ó','ò','õ','ơ','ø','○','∘','𝖔','𝔬'],
+    'p':['ρ','р','ᵖ','ᵱ','ṕ','ṗ','ƥ','ῥ','𝖕','𝔭'],
+    'q':['զ','ʠ','ɋ','ȹ','գ','𝖖','𝔮'],
+    'r':['ɼ','г','ʳ','ř','ŗ','ꭇ','ʀ','ȑ','ȓ','ṙ','ᵲ','𝖗','𝔯'],
+    's':['ʂ','ѕ','$','§','ş','ś','ṡ','ș','ṥ','ʃ','ƨ','ß','𝖘','𝔰'],
+    't':['τ','ť','ŧ','†','ṭ','ṯ','ƫ','ʈ','₸','𝖙','𝔱'],
+    'u':['υ','ʋ','ս','ᵘ','ů','ü','ú','ù','ū','ư','µ','ꭎ','𝖚','𝔲'],
+    'v':['ν','ѵ','ᵛ','ṿ','ѷ','√','∨','ʋ','𝖛','𝔳'],
+    'w':['ᴡ','ѡ','ɯ','ŵ','ẇ','ɰ','ɯ','𝖜','𝔴'],
+    'x':['х','×','✕','χ','ẋ','ᶍ','ⅹ','𝖝','𝔵'],
+    'y':['γ','ʏ','у','ý','ỳ','ÿ','ŷ','ɣ','ʎ','¥','𝖞','𝔶'],
+    'z':['ʐ','ᴢ','ž','ż','ź','ƶ','ʑ','ẓ','ƻ','𝖟','𝔷'],
+    // upper
+    'A':['Α','Λ','Ꭺ','Ā','Ⱥ','∆','∀','𝘈','𝕬','𝔄'],
+    'B':['В','Ƀ','ß','Ɓ','ℬ','ʙ','ɮ','ᛒ','𝘉','𝕭','𝔅'],
+    'C':['Ϲ','С','Ⅽ','Ꮯ','℃'.slice(0,1),'☾','ℂ','𐐕','𝘊','𝕮','𝔇'.replace('D','C')],
+    'D':['Ꭰ','Ḏ','Ɗ','ⅅ','ᴅ','ↁ','𝘋','𝕯','𝔇'],
+    'E':['Ε','Є','ℰ','€','Ɇ','Ɛ','Σ','⋿','𝘌','𝕰','𝔈'],
+    'F':['Ғ','Ϝ','ℱ','ᖴ','𐊇','𝘍','𝕱','𝔉'],
+    'G':['ɢ','Ԍ','Ꮐ','Ĝ','Ğ','Ġ','Ḡ','Ɠ','𝘎','𝕲','𝔊'],
+    'H':['Η','Н','ℋ','Ħ','Ⱨ','♓','𝘏','𝕳','ℌ'],
+    'I':['Ι','Ӏ','ǀ','1','Ⅰ','∣','𝘐','𝕴','ℑ'],
+    'J':['Ј','Ɉ','Ĵ','ⅉ','𝘑','𝕵','𝔍'],
+    'K':['Κ','ᛕ','K','₭','Ҡ','Ƙ','Ǩ','𝘒','𝕶','𝔎'],
+    'L':['Ꮮ','Ⅼ','Ł','∟','⅃','ʟ','𝘓','𝕷','𝔏'],
+    'M':['Μ','М','Ṁ','Ϻ','Ⅿ','𝘔','𝕸','𝔐'],
+    'N':['Ν','Ｎ','∩','Ṅ','Ň','Ɲ','𝘕','𝕹','𝔑'],
+    'O':['Ο','О','0','°','Ø','Ө','○','⦿','𝘖','𝕺','𝔒'],
+    'P':['Ρ','Р','ℙ','₽','Ҏ','Ƿ','𐊕','𝘗','𝕻','𝔓'],
+    'Q':['Ⴓ','ℚ','Ǫ','Ɋ','Ҩ','Ⓠ','𝘘','𝕼','𝔔'],
+    'R':['Ꭱ','ℜ','Я','Ȑ','Ŕ','Ṙ','®','𝘙','𝕽','ℛ'],
+    'S':['Ѕ','§','$','Ś','Ş','Š','Ṣ','ẞ','𝘚','𝕾','𝔖'],
+    'T':['Τ','Т','Ŧ','Ͳ','₸','Ṫ','Ƭ','✝','𝘛','𝕿','𝔗'],
+    'U':['Ս','⋃','Ū','Ü','Ú','Ù','Ư','∪','𝘜','𝖀'.replace('𝖀','𝕌'),'𝔘'],
+    'V':['Ѵ','∨','Ṽ','Ʋ','✓','𝘝','𝕍','𝔙'],
+    'W':['Ԝ','Ѡ','Ш','Ŵ','Ẃ','Ẅ','𝘞','𝕎','𝔚'],
+    'X':['Χ','Х','✕','×','✖','Ⅹ','χ','𝘟','𝕏','𝔛'],
+    'Y':['Υ','Ү','¥','Ɏ','Ÿ','Ῡ','Ӳ','𝘠','𝕐','𝔜'],
+    'Z':['Ζ','ℤ','Ž','Ż','Ź','Ƶ','Ẕ','𝘡','𝕫'.toUpperCase(),'𝔃'.toUpperCase()],
+    // digits
+    '0':['O','О','Ο','○','°','⭕','⓪','𝟘'],
+    '1':['I','l','|','ǀ','Ⅰ','❶','𝟙'],
+    '2':['Ƨ'.toLowerCase(),'乙','٢','②','𝟚'],
+    '3':['Ʒ','З','Ɛ','ɜ','➂','𝟛'],
+    '4':['Ꮞ','٤','④','𝟜'],
+    '5':['Ƽ','Ѕ','⑤','𝟝'],
+    '6':['ბ','৬','⑥','𝟞'],
+    '7':['۷','⑦','𝟟'],
+    '8':['ȣ','੮','⑧','𝟠'],
+    '9':['ჽ','९','⑨','𝟡']
+  };
+// === Add Asian & "cool" glyphs (CJK, Kana, Hangul, Bopomofo, Fullwidth) ===
+const ASIAN_COOL = {
+  // lower
+  a: ['ａ','ぁ','ｧ','ァ','人'],
+  b: ['ｂ'],
+  c: ['ｃ','匚'],
+  d: ['ｄ','り'],
+  e: ['ｅ','ぇ','ェ'],
+  f: ['ｆ','ﾌ','ㄈ'],
+  g: ['ｇ'],
+  h: ['ｈ','卄','ん'],
+  i: ['ｉ','丨','｜','ㅣ'],
+  j: ['ｊ','亅'],
+  k: ['ｋ','ケ'],
+  l: ['ｌ','し','丨','ㅣ'],
+  m: ['ｍ','〽'],
+  n: ['ｎ','ん','ﾝ'],
+  o: ['ｏ','〇','ㅇ','○'],
+  p: ['ｐ','尸'],
+  q: ['ｑ'],
+  r: ['ｒ','尺'],
+  s: ['ｓ','ら'],
+  t: ['ｔ','丁','ﾃ'],
+  u: ['ｕ','凵','ㄩ'],
+  v: ['ｖ','レ'],
+  w: ['ｗ','山'],
+  x: ['ｘ','メ','叉'],
+  y: ['ｙ','丫','ㄚ'],
+  z: ['ｚ','乙','之'],
+
+  // upper
+  A: ['Ａ','人','八'],
+  B: ['Ｂ','日'],
+  C: ['Ｃ','匚'],
+  D: ['Ｄ','冂'],
+  E: ['Ｅ','三','ヨ','ミ'],
+  F: ['Ｆ','ﾌ','ㄈ'],
+  G: ['Ｇ'],
+  H: ['Ｈ','廾','井','卄'],
+  I: ['Ｉ','丨','工','｜'],
+  J: ['Ｊ'],
+  K: ['Ｋ','ケ'],
+  L: ['Ｌ'],
+  M: ['Ｍ','州','爪'],
+  N: ['Ｎ','几','ン'],
+  O: ['Ｏ','〇','囗','口'],
+  P: ['Ｐ','尸','戸'],
+  Q: ['Ｑ'],
+  R: ['Ｒ','尺'],
+  S: ['Ｓ','ら'],
+  T: ['Ｔ','丁','工','ﾃ'],
+  U: ['Ｕ','凵'],
+  V: ['Ｖ','レ'],
+  W: ['Ｗ','山'],
+  X: ['Ｘ','メ','叉'],
+  Y: ['Ｙ','丫','ㄚ'],
+  Z: ['Ｚ','乙','之'],
+
+  // digits (fullwidth + CJK numerals)
+  0: ['０','零','〇'],
+  1: ['１','一','丨','｜'],
+  2: ['２','二','乙'],
+  3: ['３','三'],
+  4: ['４','四'],
+  5: ['５','五'],
+  6: ['６','六'],
+  7: ['７','七'],
+  8: ['８','八'],
+  9: ['９','九'],
+};
+
+// merge into SIMILAR without duplicates (keep your originals first)
+for (const [key, vals] of Object.entries(ASIAN_COOL)) {
+  SIMILAR[key] = Array.from(new Set([...(SIMILAR[key] || []), ...vals]));
+}
+
+  const neon = ['#00fff5','#ff3df0','#39ff14','#ffd400','#7a5cff','#ff5e5b'];
+
+  // Kombinierende Akzente (für extra „Glitch“)
+  const COMBINERS = [
+    '\u0301','\u0300','\u0302','\u0308','\u0336','\u0332','\u035B','\u0342','\u032E'
+  ];
+
+  // --- schneller Glyph-Support mit Cache ---
+  const _glyphSupportCache = new Map();
+  function supportsGlyphCached(ch){
+    if (_glyphSupportCache.has(ch)) return _glyphSupportCache.get(ch);
+    const span = document.createElement('span');
+    span.textContent = ch;
+    span.style.position = 'absolute';
+    span.style.visibility = 'hidden';
+    span.style.font = getComputedStyle(document.body).font;
+    document.body.appendChild(span);
+    const ok = span.offsetWidth > 0 && span.textContent === ch;
+    span.remove();
+    _glyphSupportCache.set(ch, ok);
+    return ok;
+  }
+
+  function getAltsForChar(ch){
+    const base = SIMILAR[ch] || SIMILAR[ch.toLowerCase()] || [];
+    const filtered = base
+      .slice()
+      .sort(() => Math.random()-0.5)
+      .filter(s => supportsGlyphCached(s));
+    // ~30%: Kombinierende Akzente (1–2) dranhängen
+    if (filtered.length && Math.random() < 0.30){
+      const withAccents = [];
+      filtered.forEach(s => {
+        const nAcc = Math.random() < 0.5 ? 1 : 2;
+        let acc = s;
+        for (let i=0;i<nAcc;i++){
+          const c = COMBINERS[Math.floor(Math.random()*COMBINERS.length)];
+          const candidate = acc + c;
+          if (supportsGlyphCached(candidate)) acc = candidate;
+        }
+        withAccents.push(acc);
+      });
+      return withAccents.length ? withAccents : filtered;
+    }
+    return filtered;
+  }
+
+  const letterSpans = [];
+  parts.forEach(part => {
+    if (/^<br/i.test(part)) { wrapper.appendChild(document.createElement('br')); return; }
+    [...part].forEach(ch => {
+      const s = document.createElement('span');
+      s.textContent = ch;
+      s.style.display = 'inline-block';
+      s.style.willChange = 'transform, opacity, color, filter, text-shadow';
+      if (RELOADED) {
+        s.style.opacity = '1';
+        s.style.transform = 'translateY(0)';
+      } else {
+        s.style.opacity = '0';
+        s.style.transform = 'translateY(40px)';
+      }
+      s.dataset.original = ch;
+      wrapper.appendChild(s);
+      letterSpans.push(s);
+    });
+  });
+
+  // ---------- Entrance ----------
+  window.addEventListener('load', () => {
+    if (!RELOADED) {
+      letterSpans.forEach((s, i) => {
+        s.animate(
+          [{opacity:0, transform:'translateY(40px)'},
+           {opacity:1, transform:'translateY(0)'}],
+          { duration: 1400, easing:'ease-out', fill:'forwards', delay: 160 * i }
+        );
+      });
+    }
+    // Starten entscheidet der IO unten
+  });
+
+  // ---------- Float ----------
+  let floatAnim = wrapper.animate(
+    [{ transform:'translateY(0)' },{ transform:'translateY(-10px)' },{ transform:'translateY(0)' }],
+    { duration: 12000, easing:'ease-in-out', iterations: Infinity }
+  );
+  floatAnim.pause();
+
+  // ---------- Overlay Renderloop ----------
+  const effects = []; // {span, tEnd, antsPhase}
+  let raf = null;
+  let loopActive = false;
+
+  function localRect(el){
+    const r = el.getBoundingClientRect();
+    const pr = pageTitle.getBoundingClientRect();
+    return { x: r.left - pr.left, y: r.top - pr.top, w: r.width, h: r.height };
+  }
+
+  function drawGrid() {
+    const w = overlay.clientWidth, h = overlay.clientHeight;
+    const step = Math.max(18, Math.round(Math.min(w,h)/10));
+    ctx.save();
+    ctx.clearRect(0,0,overlay.width,overlay.height);
+    ctx.globalAlpha = 0.14; ctx.lineWidth = 1; ctx.strokeStyle = '#9aa0a6';
+    for (let x=0;x<=w;x+=step){ ctx.beginPath(); ctx.moveTo(x+0.5,0); ctx.lineTo(x+0.5,h); ctx.stroke(); }
+    for (let y=0;y<=h;y+=step){ ctx.beginPath(); ctx.moveTo(0,y+0.5); ctx.lineTo(w,y+0.5); ctx.stroke(); }
+    ctx.restore();
+  }
+
+  function drawEditorChrome(now){
+    effects.forEach((fx, idx) => {
+      const r = localRect(fx.span);
+      const pad = 6;
+      const x = r.x - pad, y = r.y - pad, w = r.w + pad*2, h = r.h + pad*2;
+
+      // 1) Marquee
+      ctx.save();
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([6, 4]);
+      ctx.lineDashOffset = -fx.antsPhase;
+      ctx.strokeStyle = '#000';
+      ctx.strokeRect(x, y, w, h);
+      ctx.lineDashOffset = -(fx.antsPhase+4);
+      ctx.strokeStyle = '#fff';
+      ctx.strokeRect(x, y, w, h);
+      ctx.restore();
+
+      // 2) Handles
+      ctx.save();
+      const anchors = [[x,y],[x+w,y],[x,y+h],[x+w,y+h]];
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      anchors.forEach(([ax,ay])=>{ ctx.beginPath(); ctx.arc(ax, ay, 2.75, 0, Math.PI*2); ctx.fill(); });
+      ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+      ctx.beginPath();
+      ctx.moveTo(x+w*0.25,y); ctx.lineTo(x+w*0.31,y-10);
+      ctx.moveTo(x+w, y+h*0.65); ctx.lineTo(x+w+10, y+h*0.75);
+      ctx.stroke();
+      ctx.restore();
+
+      // 3) Scanline
+      ctx.save();
+      ctx.globalAlpha = 0.045;
+      ctx.fillStyle = '#fff';
+      const barH = Math.max(3, Math.round(h*0.12));
+      const by = y + ((now*0.03 + idx*6) % Math.max(1,h)) - barH/2;
+      ctx.fillRect(x, by, w, barH);
+      ctx.restore();
+
+      fx.antsPhase += 0.25;
+    });
+
+    for (let i=effects.length-1;i>=0;i--) {
+      if (effects[i].tEnd <= now) effects.splice(i,1);
+    }
+  }
+
+  function frame(now=performance.now()){
+    sizeCanvas(false);
+    drawGrid();
+    drawEditorChrome(now);
+    raf = requestAnimationFrame(frame);
+  }
+
+  function startLoop(){
+    if (loopActive) return;
+    loopActive = true;
+    if (!raf) raf = requestAnimationFrame(frame);
+  }
+
+  function stopLoop(){
+    loopActive = false;
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+  }
+
+  // ---------- Morph / Glitch ----------
+  const MORPH = {
+    holdMin: 1600, holdMax: 2800,       // Gesamtdauer pro aktiver Glyphe
+    animDur: 240,                       // Dauer eines hektischen Sub-Ticks
+    tickMin: 60, tickMax: 140,          // „Hektik“: schneller
+    burstChance: 0.35,                  // Chance auf Mini-Burst (mehrere schnelle Ticks)
+    splitChance: 0.45,                  // Chromatic-Split-Effekt einschalten?
+    rotateMaxDeg: 6,                    // max. Rotation
+    scaleJitter: 0.08,                  // ±8% Scale
+    skewMaxDeg: 6                       // max. Skew
   };
 
-  // ============ ITEMS ============
-  const items = Array.from({ length: ITEM_COUNT }).map((_, i) => ({
-    id: i,
-    src: `./GallerieItems/item${i + 1}.png`, // Tipp: AVIF/WebP bevorzugen
-    link: `https://example.com/unterseite/${i + 1}`, // anpassen
-    x: Math.random() * WORLD.width,
-    y: Math.random() * WORLD.height,
-    w: Math.round(ITEM_SIZE[0] + Math.random() * (ITEM_SIZE[1] - ITEM_SIZE[0])),
-    h: Math.round(ITEM_SIZE[0] + Math.random() * (ITEM_SIZE[1] - ITEM_SIZE[0])),
-    img: null, // wird ein ImageBitmap
+  function isBusy(span){ return span.dataset.morphing === '1'; }
+  function setBusy(span,v){ span.dataset.morphing = v ? '1' : '0'; }
+
+  function makeEffectForSpan(span, durMs){
+    const now = performance.now();
+    effects.push({ span, tEnd: now + durMs, antsPhase: Math.random()*10 });
+    startLoop();
+  }
+
+  // Hektischer „Morph“ pro Buchstabe: Glyphenwechsel + visuelle Störungen
+  function morphTicker(span){
+    if (!span || isBusy(span)) return;
+
+    const original = span.dataset.original || span.textContent;
+    const prev = {
+      color: span.style.color,
+      filter: span.style.filter,
+      ts: span.style.textShadow,
+      tr: span.style.transform,
+      ls: span.style.letterSpacing
+    };
+
+    const alts = getAltsForChar(original);
+    if (!alts.length) return;
+
+    setBusy(span,true);
+
+    const hold = MORPH.holdMin + Math.random()*(MORPH.holdMax - MORPH.holdMin);
+    let running = true;
+
+    makeEffectForSpan(span, hold);
+
+    const applyChromaticSplit = () => {
+      if (Math.random() > MORPH.splitChance) return '';
+      // 3-kanaliger „Split“ als Afterimage
+      const dx = (Math.random()*2+0.5).toFixed(2);
+      const dy = (Math.random()*2+0.5).toFixed(2);
+      return `
+        rgb(255 0 80) ${dx}px ${dy}px 0,
+        rgb(0 255 200) ${-dx}px ${dy}px 0,
+        rgb(180 120 255) ${dx}px ${-dy}px 0
+      `;
+    };
+
+    // spontane Mini-Bursts: mehrere sehr schnelle Ticks hintereinander
+    const doBurst = () => {
+      const n = 2 + Math.floor(Math.random()*3); // 2–4 schnelle Wechsel
+      let i = 0;
+      const burst = () => {
+        if (!running || i>=n) return;
+        singleTick(true);
+        i++;
+        setTimeout(burst, 40 + Math.random()*60);
+      };
+      burst();
+    };
+
+    // Ein einzelner schneller Tick (Glyph + FX)
+    function singleTick(isBurst=false){
+      const next = alts[Math.floor(Math.random()*alts.length)];
+      const color = neon[Math.floor(Math.random()*neon.length)];
+
+      // Glyph tauschen
+      span.textContent = next;
+      span.style.color = color;
+
+      // leichte Layout-Störung
+      const rot = (Math.random()*2-1)*MORPH.rotateMaxDeg;
+      const sx  = 1 + (Math.random()*2-1)*MORPH.scaleJitter;
+      const sy  = 1 + (Math.random()*2-1)*MORPH.scaleJitter;
+      const skx = (Math.random()*2-1)*MORPH.skewMaxDeg;
+      const sky = (Math.random()*2-1)*MORPH.skewMaxDeg;
+
+      span.style.transform = `translateZ(0) rotate(${rot}deg) skew(${skx}deg, ${sky}deg) scale(${sx},${sy})`;
+
+      // Blur-Flicker
+      const blurPx = (isBurst ? 1.6 : 0.9) + Math.random()*0.8;
+      const contrast = 1.2 + Math.random()*0.5;
+      const bright = 1.05 + Math.random()*0.25;
+      span.style.filter = `blur(${blurPx}px) contrast(${contrast}) brightness(${bright})`;
+
+      // Chromatic Afterimage
+      span.style.textShadow = applyChromaticSplit();
+
+      // Mini „morphing“ Gefühl: Letter-Spacing pulsen lassen
+      if (Math.random() < 0.5) {
+        span.style.letterSpacing = (Math.random()<0.5 ? '-0.02em' : '0.04em');
+      }
+
+      // Rückanimation via Web Animations API (knackig, „hektisch“)
+      span.animate(
+        [
+          { filter:`${span.style.filter}`, transform: `${span.style.transform}` },
+          { filter:'none', transform:'translateZ(0) rotate(0deg) skew(0,0) scale(1,1)' }
+        ],
+        { duration: MORPH.animDur, easing:'steps(3,end)', fill:'forwards' }
+      );
+    }
+
+    const tick = () => {
+      if (!running) return;
+      singleTick(false);
+      if (Math.random() < MORPH.burstChance) doBurst();
+      const gap = MORPH.tickMin + Math.random()*(MORPH.tickMax - MORPH.tickMin);
+      tickTimer = setTimeout(tick, gap);
+    };
+
+    let tickTimer = null;
+    tick();
+
+    setTimeout(()=>{
+      running = false;
+      if (tickTimer) clearTimeout(tickTimer);
+      // Reset auf Original, sanft ausfaden
+      span.textContent = original;
+      span.style.color = prev.color;
+      span.style.filter = 'none';
+      span.style.textShadow = 'none';
+      span.style.letterSpacing = prev.ls || '';
+      span.animate(
+        [
+          { opacity: 0.85, filter:'none' },
+          { opacity: 1,    filter:'none' }
+        ],
+        { duration: 180, easing: 'ease-out', fill: 'forwards' }
+      );
+      setBusy(span,false);
+    }, hold);
+  }
+
+  function pick(){
+    const a=letterSpans.filter(s=>s.textContent.trim()!=='');
+    return a.length? a[Math.floor(Math.random()*a.length)]:null;
+  }
+
+  function snapSlide(span, dir='up') {
+    const dy = dir === 'up' ? -18 : 18;
+    span.animate(
+      [{ transform:`translateY(${dy}px)` }, { transform:'translateY(0)' }],
+      { duration: 420, easing:'steps(5, end)', fill:'both' }
+    );
+  }
+
+  function multiGlitchBurst() {
+    if (Math.random() < 0.45) { const s = pick(); if (s) snapSlide(s, Math.random()<0.5 ? 'up' : 'down'); }
+    const s = pick(); if (s) morphTicker(s);
+  }
+
+  // ---------- Start/Stop ----------
+  let glitchTimer=null;
+  function startGlitch(){
+    if(glitchTimer) return;
+    glitchTimer=setInterval(()=>multiGlitchBurst(), 2400 + Math.random()*1600);
+    setTimeout(()=>multiGlitchBurst(), 600);
+  }
+  function stopGlitch(){
+    if(glitchTimer){ clearInterval(glitchTimer); glitchTimer=null; }
+  }
+
+  // Sichtbarkeits-Controller
+  let visible = false;
+  function activate() {
+    if (visible) return;
+    visible = true;
+    floatAnim.play();
+    startGlitch();
+    startLoop();
+  }
+  function deactivate() {
+    if (!visible) return;
+    visible = false;
+    floatAnim.pause();
+    stopGlitch();
+    stopLoop();
+  }
+
+  // IntersectionObserver: „läuft, wenn sichtbar“
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.target !== section) return;
+      if (e.isIntersecting) activate();
+      else deactivate();
+    });
+  }, {
+    threshold: [0.05],
+    root: null,
+    rootMargin: '0px'
+  });
+  io.observe(section);
+
+  // Tab-Wechsel
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      deactivate();
+    } else {
+      const r = section.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const visiblePx = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+      const isVis = visiblePx / Math.min(vh, r.height) >= 0.05;
+      if (isVis) activate();
+    }
+  });
+
+  // Initial: prüfen
+  (function initVisibility(){
+    const r = section.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const visiblePx = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+    const isVis = visiblePx / Math.min(vh, r.height) >= 0.05;
+    if (isVis) activate();
+  })();
+})();
+</script>
+
+
+
+  
+
+<!-- === OVERLAY unten links: Grid/Globus === -->
+<style>
+  .view-switch{position:fixed;left:16px;bottom:16px;z-index:1200;display:flex;gap:10px;
+    background:rgba(9,12,18,.7);border:1px solid rgba(255,255,255,.08);padding:10px;border-radius:12px;backdrop-filter:blur(6px)}
+  .view-btn{appearance:none;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#e8eefc;
+    width:44px;height:44px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+  .view-btn[aria-pressed="true"]{background:rgba(155,179,255,.18);border-color:rgba(155,179,255,.5);color:#cfe0ff}
+  .view-btn svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2}
+
+  /* Sichtbarkeit steuern */
+  #stage,.hud,.badge,.minimap{display:none}                 /* Standard: Open-World aus */
+  body[data-view="world"] #stage,
+  body[data-view="world"] .hud,
+  body[data-view="world"] .badge,
+  body[data-view="world"] .minimap{display:block}           /* Nur in World sichtbar */
+
+  #gridView{display:block}                                   /* Standard: Grid an */
+  body[data-view="world"] #gridView{display:none}            /* In World: Grid aus */
+</style>
+
+<!-- Switcher -->
+<div class="view-switch" role="toolbar" aria-label="Ansicht wählen">
+  <button id="btnGrid"  class="view-btn" type="button" aria-pressed="true"  aria-label="Grid">
+    <!-- feather grid -->
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+  </button>
+  <button id="btnWorld" class="view-btn" type="button" aria-pressed="false" aria-label="Open-World">
+    <!-- feather globe -->
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20"/><path d="M12 2a15.3 15.3 0 0 0 0 20"/></svg>
+  </button>
+</div>
+
+<!-- DEIN GRID-INHALT -->
+<div id="gridView">
+
+<section id="arbeitsproben" class="aurora-sheet board-showcase is-compact" aria-labelledby="board-title">
+  <div class="container board-wrap">
+    <header class="board-head">
+      <h2 id="board-title" class="aurora-title">Portfolio</h2>
+      <p class="aurora-subtitle">Ausgewählte Projekte – damit Sie sehen was wir können!</p>
+    </header>
+
+    <div class="firmen-grid fx-flow">
+      <!-- Firma -->
+      <article class="firma">
+        <header class="head">
+          <div class="meta">
+            <span class="logo-wrap">
+              <img src="logos/NeoLog.svg" alt="" class="logo" loading="lazy" decoding="async">
+            </span>
+            <div class="titlebox">
+              <h3>NeoLog GmbH</h3>
+              <p>UX/UI · 3D Renderings · Automotive</p>
+            </div>
+          </div>
+          <a href="/cases/NeoLog" class="icon-link" aria-label="Case Study öffnen">
+            <i data-feather="arrow-up-right" aria-hidden="true"></i>
+          </a>
+        </header>
+        <ul class="bilder" aria-label="Bilder von NeoLog">
+          <li><img src="./3DSlideShow/post10.png" alt="NeoLog 1"></li>
+          <li><img src="./3DSlideShow/post11.png" alt="NeoLog 2"></li>
+          <li><img src="./3DSlideShow/post12.png" alt="NeoLog 3"></li>
+             <li><img src="./images/NeoLogImages/post1.jpg" alt="NeoLog 1"></li>
+       
+      </article>
+
+      <!-- Firma -->
+      <article class="firma">
+        <header class="head">
+          <div class="meta">
+            <span class="logo-wrap">
+              <img src="logos/globex.svg" alt="" class="logo" loading="lazy" decoding="async">
+            </span>
+            <div class="titlebox">
+              <h3>Konzeptarbeit</h3>
+              <p>Branding · Web · Motion</p>
+            </div>
+          </div>
+          <a href="/cases/globex" class="icon-link" aria-label="Case Study öffnen">
+            <i data-feather="arrow-up-right" aria-hidden="true"></i>
+          </a>
+        </header>
+        <ul class="bilder" aria-label="Bilder von Globex">
+          <li><img src="./3DSlideShow/post13.png" alt="Globex 1"></li>
+          <li><img src="./3DSlideShow/post14.png" alt="Globex 2"></li>
+          <li><img src="./3DSlideShow/post15.png" alt="Globex 3"></li>
+        </ul>
+      </article>
+
+      <!-- Firma -->
+      <article class="firma">
+        <header class="head">
+          <div class="meta">
+            <span class="logo-wrap">
+              <img src="logos/initech.svg" alt="" class="logo" loading="lazy" decoding="async">
+            </span>
+            <div class="titlebox">
+              <h3>Konzeptarbeit</h3>
+              <p>Produktdesign · Echtzeit · Materials</p>
+            </div>
+          </div>
+          <a href="/cases/initech" class="icon-link" aria-label="Case Study öffnen">
+            <i data-feather="arrow-up-right" aria-hidden="true"></i>
+          </a>
+        </header>
+        <ul class="bilder" aria-label="Bilder von Initech">
+          <li><img src="./3DSlideShow/post16.png" alt="Initech 1"></li>
+          <li><img src="./3DSlideShow/post17.png" alt="Initech 2"></li>
+          <li><img src="./3DSlideShow/post18.png" alt="Initech 3"></li>
+        </ul>
+      </article>
+
+      <!-- Firma -->
+      <article class="firma">
+        <header class="head">
+          <div class="meta">
+            <span class="logo-wrap">
+              <img src="logos/umbrella.svg" alt="" class="logo" loading="lazy" decoding="async">
+            </span>
+            <div class="titlebox">
+              <h3>Konzeptarbeit</h3>
+              <p>LookDev · Macro · Finishing</p>
+            </div>
+          </div>
+          <a href="/cases/umbrella" class="icon-link" aria-label="Case Study öffnen">
+            <i data-feather="arrow-up-right" aria-hidden="true"></i>
+          </a>
+        </header>
+        <ul class="bilder" aria-label="Bilder von Umbrella">
+          <li><img src="./3DSlideShow/post19.png" alt="Umbrella 1"></li>
+          <li><img src="./3DSlideShow/post20.png" alt="Umbrella 2"></li>
+          <li><img src="./3DSlideShow/post10.png" alt="Umbrella 3"></li>
+        </ul>
+      </article>
+
+      <!-- Firma -->
+      <article class="firma">
+        <header class="head">
+          <div class="meta">
+            <span class="logo-wrap">
+              <img src="logos/wayland.svg" alt="" class="logo" loading="lazy" decoding="async">
+            </span>
+            <div class="titlebox">
+              <h3>Konzeptarbeit</h3>
+              <p>Hard Surface · Sets · Details</p>
+            </div>
+          </div>
+          <a href="/cases/wayland" class="icon-link" aria-label="Case Study öffnen">
+            <i data-feather="arrow-up-right" aria-hidden="true"></i>
+          </a>
+        </header>
+        <ul class="bilder" aria-label="Bilder von Weyland">
+          <li><img src="./3DSlideShow/post11.png" alt="Weyland 1"></li>
+          <li><img src="./3DSlideShow/post12.png" alt="Weyland 2"></li>
+          <li><img src="./3DSlideShow/post13.png" alt="Weyland 3"></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== Layout ===== */
+.firmen-grid{
+  display:grid; gap: clamp(1.4rem, 1.2vw + .8rem, 2.2rem);
+}
+
+/* ===== Firma Card ===== */
+.firma{
+  position: relative;
+  border-radius: 16px;
+  padding: clamp(1.1rem, 1.2vw + .6rem, 1.6rem);
+ overflow: clip;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.firma::after{
+  /* zarter innerer Lichtsaum */
+  content:""; position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, #fff 30%, transparent);
+  opacity:.7;
+}
+.firma:hover{
+  transform: translateY(-2px);
+}
+
+/* ===== Header ===== */
+.head{ display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom: .9rem; }
+.meta{ display:flex; align-items:center; gap:.9rem; min-width:0; }
+.logo-wrap{
+  display:grid; place-items:center;
+  width:48px; height:48px; border-radius:12px; overflow:hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.35));
+  border:1px solid color-mix(in oklab, var(--border, rgba(0,0,0,.08)) 85%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
+}
+:root[data-theme="dark"] .logo-wrap{
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+}
+.logo{ width:70%; height:70%; object-fit:contain; }
+.titlebox h3{ margin:0; font-size:1.08rem; letter-spacing:-.01em; }
+.titlebox p{ margin:.15rem 0 0; font-size:.94rem; color:var(--muted,#667085); }
+
+/* CTA Icon-Button */
+.icon-link{
+  --ring: color-mix(in oklab, var(--accent,#0b66ff) 70%, transparent);
+  display:inline-flex; align-items:center; justify-content:center;
+  width:42px; height:42px; border-radius:12px;
+  border:1px solid color-mix(in oklab, var(--border, rgba(0,0,0,.08)) 92%, transparent);
+  background: color-mix(in oklab, var(--surface,#fff) 88%, transparent);
+  transition: box-shadow .25s ease, transform .2s ease, background .25s ease;
+}
+.icon-link:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 6px color-mix(in oklab, var(--accent,#0b66ff) 14%, transparent);
+}
+.icon-link:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ring);
+}
+.icon-link svg{ width:20px; height:20px; stroke: currentColor; stroke-width:2; }
+
+/* ===== Bild-Grid ===== */
+.bilder{
+  --tile: 150px; /* Kachel-Minbreite (skalierbar) */
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--tile), 1fr));
+  gap: clamp(.5rem, .5vw + .2rem, .8rem);
+}
+.bilder li{ list-style:none; }
+.bilder img{
+  width:100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  background: color-mix(in oklab, #000 4%, transparent);
+  box-shadow:
+    0 1px 0 color-mix(in oklab, #000 10%, transparent),
+    0 10px 22px color-mix(in oklab, #000 10%, transparent);
+  transition: transform .35s cubic-bezier(.19,1,.22,1), box-shadow .35s ease, filter .35s ease;
+}
+.bilder img:hover{
+  transform: translateY(-2px) scale(1.02);
+  filter: saturate(1.05) contrast(1.04);
+}
+
+/* ===== Fine-Tuning / Dark Mode ===== */
+:root[data-theme="dark"] .firma{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.04), transparent 120%),
+    #0b0f17;
+  border-color: rgba(255,255,255,.08);
+  box-shadow: 0 1px 0 rgba(255,255,255,.06), 0 16px 40px rgba(0,0,0,.45);
+}
+:root[data-theme="dark"] .bilder img{
+  background: rgba(255,255,255,.02);
+  box-shadow: 0 1px 0 rgba(255,255,255,.06), 0 10px 24px rgba(0,0,0,.6);
+}
+
+/* ===== Motion Preferences ===== */
+@media (prefers-reduced-motion: reduce){
+  .firma, .bilder img{ transition: none !important; }
+}
+
+.meta {
+  display: flex;
+  align-items: flex-start; /* <– statt center */
+  gap: .9rem;
+  min-width: 0;
+}
+
+.titlebox {
+  text-align: left; /* <– Überschrift & Text linksbündig */
+}
+
+.titlebox h3 {
+  margin: 0;
+  font-size: 1.08rem;
+  letter-spacing: -.01em;
+  text-align: left; /* optional redundant, sorgt für Klarheit */
+}
+
+.titlebox p {
+  margin: .15rem 0 0;
+  font-size: .94rem;
+  color: var(--muted, #667085);
+  text-align: left; /* <– explizit links */
+}
+
+</style>
+
+
+
+</div>
+
+<!-- OPEN-WORLD: wird nur bei Globus gezeigt -->
+<canvas id="stage" aria-label="Open-World Galerie" role="application"></canvas>
+<div class="hud" aria-live="polite">
+  <h1>Navigation</h1>
+  <p class="kb">WASD/↔↕ & Scroll/Trackpad · Maus/Touch ziehen · Klick auf Bild → Unterseite</p>
+  <p>Am Rand geht’s nahtlos weiter – echte Open-World.</p>
+</div>
+<div class="minimap" aria-hidden="true"><canvas id="mini"></canvas></div>
+
+<style>
+  #stage{
+  position:fixed; inset:0;
+  width:100vw; height:100vh;
+  display:none; /* wichtig */
+  touch-action:none; cursor:grab;
+}
+body[data-view="world"] #stage{ display:block; }
+</style>
+
+<script>
+/* === Open-World + Grid Toggle, theme-aware Background (toroidal) === */
+(function(){
+  const stage   = document.getElementById('stage');
+  const mini    = document.getElementById('mini');
+  const btnGrid = document.getElementById('btnGrid');
+  const btnWorld= document.getElementById('btnWorld');
+  if(!stage || !mini) return;
+
+  const ctx  = stage.getContext('2d');
+  const mctx = mini.getContext('2d');
+
+  // --- Params ---
+  const DPR = Math.min(2, window.devicePixelRatio || 1);
+  const WORLD_W = 4096, WORLD_H = 3072;   // Spielfeld
+  const IMG_SIZE = 420;                    // Bildgröße (anpassbar)
+  const SPACING_FACTOR = 1.8;              // Abstand in Vielfachen der Bildbreite
+  const MIN_DIST = IMG_SIZE * SPACING_FACTOR;
+  const FRICTION = 0.92;
+
+  // Theme helpers
+  function isDarkTheme(){
+    const t = document.documentElement.getAttribute('data-theme');
+    if (t === 'dark')  return true;
+    if (t === 'light') return false;
+    return matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function palette(){
+    const dark = isDarkTheme();
+    return {
+      bg: dark ? '#000000' : '#ffffff',
+      grid: dark ? 'rgba(255,255,255,.18)' : 'rgba(0,0,0,.12)',
+      miniBg: dark ? '#101827' : '#f5f5f7',
+      miniPoint: dark ? '#3b82f6' : '#1e3a8a',
+      miniRect: dark ? '#93c5fd' : '#1d4ed8',
+      capBg: 'rgba(0,0,0,.5)',
+      capText: '#ffffff',
+      shadow: 'rgba(0,0,0,.35)'
+    };
+  }
+
+const sources = Array.from({length: 20}, (_, i) => `3DSlideShow/post${10+i}.png`);
+
+
+  // Reproduzierbare Start-Positionen
+  function hash(i){ return (Math.sin(i*1337.5)*43758.5453)%1; }
+  const nodes = sources.map((src,i)=>({
+    src,
+    x: Math.floor(hash(i+1)*WORLD_W),
+    y: Math.floor(hash(i+2)*WORLD_H),
+    img: new Image(),
+    bmp: null
   }));
 
-  // ============ CANVAS SETUP ============
-  let dynamicDPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-  const canvas = document.getElementById('stage');
-  const ctx = canvas.getContext('2d', { alpha: true });
-
-  const miniCanvas = document.getElementById('mini');
-  const miniCtx = miniCanvas.getContext('2d');
-
-  function resizeWithDPR(dprOverride){
-    const d = dprOverride ?? dynamicDPR;
-    const w = innerWidth, h = innerHeight;
-
-    canvas.width = Math.floor(w * d);
-    canvas.height = Math.floor(h * d);
-    canvas.style.width = w + 'px';
-    canvas.style.height = h + 'px';
-    ctx.setTransform(d, 0, 0, d, 0, 0);
-
-    miniCanvas.width = Math.floor(160 * d);
-    miniCanvas.height = Math.floor(120 * d);
-    miniCtx.setTransform(d, 0, 0, d, 0, 0);
+  // --- Relaxation: Mindestabstand zwischen allen Bildern herstellen ---
+  function toroidalDelta(ax, ay, bx, by, W, H){
+    // kürzeste Differenz auf torus (wrap-around)
+    let dx = bx - ax, dy = by - ay;
+    if (dx >  W/2) dx -= W; else if (dx < -W/2) dx += W;
+    if (dy >  H/2) dy -= H; else if (dy < -H/2) dy += H;
+    return {dx, dy};
   }
-  function resize(){ resizeWithDPR(); }
-  window.addEventListener('resize', resize);
-  resize();
-
-  // ============ INPUT ============
-  const keyMap = { ArrowUp:'up', ArrowDown:'down', ArrowLeft:'left', ArrowRight:'right', w:'up', a:'left', s:'down', d:'right' };
-  const keys = new Set();
-  window.addEventListener('keydown', (e) => { const k = keyMap[e.key]; if (k) { keys.add(k); e.preventDefault(); } });
-  window.addEventListener('keyup',   (e) => { const k = keyMap[e.key]; if (k) { keys.delete(k); e.preventDefault(); } });
-
-  let dragging = false; let lastPointer = null;
-  function pointerPos(ev){ if (ev.touches && ev.touches[0]) return { x: ev.touches[0].clientX, y: ev.touches[0].clientY }; return { x: ev.clientX, y: ev.clientY }; }
-  canvas.addEventListener('mousedown', (e)=>{ dragging = true; lastPointer = pointerPos(e); });
-  window.addEventListener('mouseup', ()=>{ dragging = false; lastPointer = null; });
-  window.addEventListener('mousemove', (e)=>{
-    if(!dragging) return; const p = pointerPos(e);
-    if(lastPointer){ camera.x -= (p.x - lastPointer.x); camera.y -= (p.y - lastPointer.y); registerTrailSample(true); wrapCamera(); }
-    lastPointer = p;
-  });
-
-  canvas.addEventListener('touchstart', (e)=>{ dragging = true; lastPointer = pointerPos(e); }, {passive: true});
-  window.addEventListener('touchend', ()=>{ dragging = false; lastPointer = null; }, {passive: true});
-  window.addEventListener('touchmove', (e)=>{
-    if(!dragging) return; const p = pointerPos(e);
-    if(lastPointer){ camera.x -= (p.x - lastPointer.x); camera.y -= (p.y - lastPointer.y); registerTrailSample(true); wrapCamera(); }
-    lastPointer = p;
-  }, {passive: true});
-
-  // Scroll/Trackpad zum Pannen
-  window.addEventListener('wheel', (e)=>{
-    camera.x += (e.deltaX) * WHEEL_SPEED;
-    camera.y += (e.deltaY) * WHEEL_SPEED;
-    registerTrailSample(true);
-    wrapCamera();
-    e.preventDefault();
-  }, { passive: false });
-
-  // Klick → Link
-  canvas.addEventListener('click', (e)=>{
-    const rect = canvas.getBoundingClientRect();
-    const sx = e.clientX - rect.left; // CSS px
-    const sy = e.clientY - rect.top;
-    for (let i = drawnRects.length - 1; i >= 0; i--) {
-      const r = drawnRects[i];
-      if (sx >= r.x && sx <= r.x + r.w && sy >= r.y && sy <= r.y + r.h) {
-        if (r.item && r.item.link) { window.location.href = r.item.link; }
-        return;
-      }
-    }
-  });
-
-  // ============ WORLD / CAMERA ============
-  function wrap(n, max){ return (n % max + max) % max; }
-  const camera = { x: 0, y: 0 };
-
-  function wrapCamera(){
-    const oldX = camera.x, oldY = camera.y;
-    camera.x = wrap(camera.x, WORLD.width);
-    camera.y = wrap(camera.y, WORLD.height);
-    // Bei Wrap Sprung → Trail-Segment brechen
-    const dx = Math.abs(camera.x - oldX), dy = Math.abs(camera.y - oldY);
-    if (dx > WORLD.width * 0.5 || dy > WORLD.height * 0.5) {
-      if (TRAIL.points.length) TRAIL.points[TRAIL.points.length - 1].break = true;
-    }
-  }
-
-  // ============ TRAIL ============
-  function registerTrailSample(force = false, dt = 0){
-    TRAIL.tSince += dt;
-    const last = TRAIL.points[TRAIL.points.length - 1];
-    const moved = !last || distWrapped(camera.x, camera.y, last.x, last.y) >= TRAIL.minMove;
-
-    if (force || (TRAIL.tSince >= TRAIL.sampleEvery && moved)) {
-      TRAIL.tSince = 0;
-      TRAIL.points.push({ x: camera.x, y: camera.y, t: performance.now()/1000, break: false });
-      if (TRAIL.points.length > TRAIL.maxPoints) TRAIL.points.shift();
-    }
-  }
-
-  function distWrapped(x1,y1,x2,y2){
-    let dx = Math.abs(x1 - x2), dy = Math.abs(y1 - y2);
-    dx = Math.min(dx, WORLD.width - dx);
-    dy = Math.min(dy, WORLD.height - dy);
-    return Math.hypot(dx, dy);
-  }
-
-  // ============ IMAGE LOADER (progressiv + priorisiert) ============
-  function loadBitmapToSize(url, w, h) {
-    return fetch(url)
-      .then(r => r.blob())
-      .then(blob => createImageBitmap(blob, { resizeWidth: w, resizeHeight: h }));
-  }
-
-  let loadQueue = items.slice();
-  let loading = 0;
-  const MAX_CONCURRENT = 3;
-
-  function queueSort() {
-    loadQueue.sort((a, b) => distWrapped(a.x, a.y, camera.x, camera.y) - distWrapped(b.x, b.y, camera.x, camera.y));
-  }
-
-  function pumpLoader() {
-    while (loading < MAX_CONCURRENT && loadQueue.length) {
-      const it = loadQueue.shift();
-      loading++;
-      loadBitmapToSize(it.src, it.w, it.h)
-        .then(bmp => { it.img = bmp; })
-        .catch(() => { it.img = null; })
-        .finally(() => { loading--; pumpLoader(); });
-    }
-  }
-
-  let reprioritizeT = 0;
-  function reprioritize(dt) {
-    reprioritizeT += dt;
-    if (reprioritizeT > 0.25) { reprioritizeT = 0; queueSort(); }
-  }
-
-  // ============ RENDER HELPERS ============
-  let drawnRects = []; // wird pro Frame gefüllt (zur Klickprüfung)
-
-  // Grid als Pattern cachen
-  let gridPattern = null;
-  function makeGridPattern() {
-    const tile = 200;
-    const off = document.createElement('canvas');
-    off.width = tile; off.height = tile;
-    const g = off.getContext('2d');
-    g.fillStyle = '#0b0f16';
-    g.fillRect(0,0,tile,tile);
-    g.strokeStyle = 'rgba(255,255,255,0.07)';
-    g.lineWidth = 1;
-    g.beginPath();
-    g.moveTo(0, 0); g.lineTo(0, tile);
-    g.moveTo(0, 0); g.lineTo(tile, 0);
-    g.stroke();
-    gridPattern = ctx.createPattern(off, 'repeat');
-  }
-  function drawBackground(w, h){
-    if (!gridPattern) makeGridPattern();
-    const tile = 200;
-    const ox = - (camera.x % tile);
-    const oy = - (camera.y % tile);
-
-    ctx.save();
-    ctx.translate(ox, oy);
-    ctx.fillStyle = gridPattern;
-    ctx.fillRect(-ox, -oy, w, h);
-    ctx.restore();
-  }
-
-  // Offscreen-Cache für runde Kacheln inkl. Schatten & Border
-  const tileCache = new WeakMap(); // key: img (ImageBitmap) -> { canvas, w, h, r }
-  function roundRectPath(ctx2, x, y, w, h, r){
-    const rr = Math.min(r, w/2, h/2);
-    ctx2.beginPath();
-    ctx2.moveTo(x+rr, y);
-    ctx2.arcTo(x+w, y,   x+w, y+h, rr);
-    ctx2.arcTo(x+w, y+h, x,   y+h, rr);
-    ctx2.arcTo(x,   y+h, x,   y,   rr);
-    ctx2.arcTo(x,   y,   x+w, y,   rr);
-    ctx2.closePath();
-  }
-  function roundRectStroke(ctx2, x, y, w, h, r){ ctx2.save(); roundRectPath(ctx2, x, y, w, h, r); ctx2.stroke(); ctx2.restore(); }
-
-  function getCachedTile(img, w, h, r) {
-    const cached = tileCache.get(img);
-    if (cached && cached.w === w && cached.h === h && cached.r === r) return cached.canvas;
-
-    const off = document.createElement('canvas');
-    off.width = w; off.height = h;
-    const cctx = off.getContext('2d');
-
-    // 1) weiche Schattenfläche (ohne Clip, damit Schatten sichtbar bleibt – aber innerhalb der Canvas)
-    cctx.save();
-    cctx.shadowColor = 'rgba(0,0,0,0.4)';
-    cctx.shadowBlur = 18; cctx.shadowOffsetX = 0; cctx.shadowOffsetY = 8;
-    cctx.fillStyle = 'rgba(0,0,0,0.2)'; // Füllung ist egal; zählt nur für Shadow
-    roundRectPath(cctx, 0, 0, w, h, r);
-    cctx.fill();
-    cctx.restore();
-
-    // 2) Bild mit runden Ecken (geclippt, ohne Shadow)
-    cctx.save();
-    roundRectPath(cctx, 0, 0, w, h, r);
-    cctx.clip();
-    cctx.drawImage(img, 0, 0, w, h);
-    cctx.restore();
-
-    // 3) zarte Kontur
-    cctx.strokeStyle = 'rgba(255,255,255,0.15)';
-    cctx.lineWidth = 1;
-    roundRectStroke(cctx, 0, 0, w, h, r);
-
-    tileCache.set(img, { canvas: off, w, h, r });
-    return off;
-  }
-
-  function drawItems(w, h){
-    drawnRects.length = 0;
-    const pad = 50;
-    for (const it of items){
-      if(!it.img) continue;
-
-      const baseX = it.x - camera.x + w/2;
-      const baseY = it.y - camera.y + h/2;
-
-      // Nur nötige Wrap-Shifts wählen (0, ggf. ±WORLD)
-      const shiftsX = [0];
-      if (baseX + it.w < -pad) shiftsX.push(WORLD.width);
-      if (baseX > w + pad)      shiftsX.push(-WORLD.width);
-
-      const shiftsY = [0];
-      if (baseY + it.h < -pad) shiftsY.push(WORLD.height);
-      if (baseY > h + pad)     shiftsY.push(-WORLD.height);
-
-      const r = 12;
-      const tile = getCachedTile(it.img, it.w, it.h, r);
-
-      for (const dx of shiftsX) for (const dy of shiftsY) {
-        const sx = baseX + dx, sy = baseY + dy;
-        if (sx + it.w < -pad || sx > w + pad || sy + it.h < -pad || sy > h + pad) continue;
-
-        ctx.drawImage(tile, sx, sy);
-        drawnRects.push({ x: sx, y: sy, w: it.w, h: it.h, item: it });
+  function relaxPositions(iterations=200, strength=0.5){
+    for(let k=0;k<iterations;k++){
+      for(let i=0;i<nodes.length;i++){
+        for(let j=i+1;j<nodes.length;j++){
+          const a = nodes[i], b = nodes[j];
+          const {dx, dy} = toroidalDelta(a.x, a.y, b.x, b.y, WORLD_W, WORLD_H);
+          const dist = Math.hypot(dx, dy) || 0.0001;
+          if (dist < MIN_DIST){
+            const push = (MIN_DIST - dist) * strength / dist;
+            // gegensinnig schieben
+            a.x = (a.x - dx * push + WORLD_W) % WORLD_W;
+            a.y = (a.y - dy * push + WORLD_H) % WORLD_H;
+            b.x = (b.x + dx * push + WORLD_W) % WORLD_W;
+            b.y = (b.y + dy * push + WORLD_H) % WORLD_H;
+          }
+        }
       }
     }
   }
+  relaxPositions(180, 0.35); // leicht, schnell, ausreichend Abstand
 
-  function drawTrail(w, h, nowSec){
-    if (TRAIL.points.length === 1){
-      const p = toScreen(TRAIL.points[0].x, TRAIL.points[0].y, w, h);
-      ctx.save();
-      ctx.fillStyle = 'rgba(155,179,255,0.9)';
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 3, 0, Math.PI*2);
-      ctx.fill();
-      ctx.restore();
-      return;
-    }
-    if (TRAIL.points.length < 2) return;
-
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.save();
-    for (let i = 1; i < TRAIL.points.length; i++){
-      const a = TRAIL.points[i-1];
-      const b = TRAIL.points[i];
-
-      if (a.break || b.break) continue;
-
-      const pa = toScreen(a.x, a.y, w, h);
-      const pb = toScreen(b.x, b.y, w, h);
-
-      if (Math.abs(pb.x - pa.x) > Math.max(w, WORLD.width)/2 ||
-          Math.abs(pb.y - pa.y) > Math.max(h, WORLD.height)/2) {
-        continue;
-      }
-
-      const age = nowSec - b.t;
-      const alpha = Math.max(0, 1 - (age / TRAIL.fadeSeconds));
-      if (alpha <= 0) continue;
-
-      ctx.globalAlpha = alpha * 0.95;
-      ctx.strokeStyle = 'rgba(155,179,255,1)';
-      ctx.lineWidth = 2 + Math.max(0, 6 * (1 - age / TRAIL.fadeSeconds));
-
-      ctx.beginPath();
-      ctx.moveTo(pa.x, pa.y);
-      ctx.lineTo(pb.x, pb.y);
-      ctx.stroke();
-    }
-    ctx.restore();
-
-    const cutoff = nowSec - TRAIL.fadeSeconds - 0.1;
-    while (TRAIL.points.length && TRAIL.points[0].t < cutoff) TRAIL.points.shift();
-  }
-
-  function toScreen(px, py, w, h){
-    let dx = px - camera.x;
-    let dy = py - camera.y;
-    if (dx >  WORLD.width/2)  dx -= WORLD.width;
-    if (dx < -WORLD.width/2)  dx += WORLD.width;
-    if (dy >  WORLD.height/2) dy -= WORLD.height;
-    if (dy < -WORLD.height/2) dy += WORLD.height;
-    return { x: w/2 + dx, y: h/2 + dy };
-  }
-
-  function drawMinimap(){
-    const w = miniCanvas.width / dynamicDPR, h = miniCanvas.height / dynamicDPR;
-    miniCtx.clearRect(0,0,w,h);
-    miniCtx.fillStyle = 'rgba(255,255,255,0.04)';
-    miniCtx.fillRect(0,0,w,h);
-    miniCtx.strokeStyle = 'rgba(255,255,255,0.12)';
-    miniCtx.strokeRect(0,0,w,h);
-
-    const scaleX = w / WORLD.width;
-    const scaleY = h / WORLD.height;
-
-    miniCtx.fillStyle = 'rgba(155,179,255,0.7)';
-    for (const it of items){
-      const px = it.x * scaleX; const py = it.y * scaleY;
-      miniCtx.fillRect(px-1, py-1, 2, 2);
-    }
-
-    // Trail grob
-    miniCtx.beginPath();
-    for (let i=0;i<TRAIL.points.length;i++){
-      const p = TRAIL.points[i];
-      const x = p.x * scaleX, y = p.y * scaleY;
-      if (i===0 || p.break) miniCtx.moveTo(x,y); else miniCtx.lineTo(x,y);
-    }
-    miniCtx.strokeStyle = 'rgba(255,214,102,0.6)';
-    miniCtx.lineWidth = 1;
-    miniCtx.stroke();
-
-    // Kamera
-    miniCtx.fillStyle = '#ffd166';
-    miniCtx.beginPath();
-    miniCtx.arc(camera.x * scaleX, camera.y * scaleY, 3, 0, Math.PI*2);
-    miniCtx.fill();
-  }
-
-  // ============ MAIN LOOP ============
-  let last = performance.now();
-  let fpsSmoothed = 60;
-  let miniTimer = 0;
-
-  function update(dt){
-    let vx = 0, vy = 0;
-    if (keys.has('left'))  vx -= MOVE_SPEED;
-    if (keys.has('right')) vx += MOVE_SPEED;
-    if (keys.has('up'))    vy -= MOVE_SPEED;
-    if (keys.has('down'))  vy += MOVE_SPEED;
-    if (vx || vy){
-      camera.x += vx * dt;
-      camera.y += vy * dt;
-      registerTrailSample(true, dt);
-      wrapCamera();
-    } else {
-      // auch ohne Tastatur: periodisch sampeln (für Dragging/Scroll)
-      registerTrailSample(false, dt);
-    }
-
-    reprioritize(dt);
-    miniTimer += dt;
-  }
-
-  function render(){
-    const w = canvas.clientWidth, h = canvas.clientHeight;
-    drawBackground(w, h);
-    drawTrail(w, h, performance.now()/1000);
-    drawItems(w, h);
-
-    if (miniTimer >= 0.1) { // ~10 FPS für Minimap
-      drawMinimap();
-      miniTimer = 0;
-    }
-  }
-
-  function tick(now){
-    const dt = (now - last) / 1000; last = now;
-
-    // adaptive DPR
-    const fps = 1/dt;
-    fpsSmoothed = fpsSmoothed * 0.9 + fps * 0.1;
-    const targetDPR = Math.min(2, window.devicePixelRatio || 1);
-
-    if (fpsSmoothed < 40 && dynamicDPR > 1) {
-      dynamicDPR = Math.max(1, dynamicDPR - 0.1);
-      resizeWithDPR();
-    } else if (fpsSmoothed > 55 && dynamicDPR < targetDPR) {
-      dynamicDPR = Math.min(targetDPR, dynamicDPR + 0.1);
-      resizeWithDPR();
-    }
-
-    update(dt);
-    render();
-    requestAnimationFrame(tick);
-  }
-
-  // ============ STARTUP ============
-  (function start(){
-    if (items.length){
-      camera.x = items[0].x;
-      camera.y = items[0].y;
-      const t = performance.now()/1000;
-      TRAIL.points.push({ x: camera.x, y: camera.y, t, break: false });
-      TRAIL.points.push({ x: camera.x + 0.1, y: camera.y + 0.1, t, break: false });
-    } else {
-      camera.x = WORLD.width/2; camera.y = WORLD.height/2;
-      TRAIL.points.push({ x: camera.x, y: camera.y, t: performance.now()/1000, break: false });
-    }
-
-    // Bild-Ladequeue starten (ohne auf alles zu warten)
-    queueSort();
-    pumpLoader();
-
-    requestAnimationFrame(tick);
+  // --- Preload: Bilder decodieren & in Bitmaps umwandeln ---
+  let ready = false;
+  (async ()=>{
+    await Promise.all(nodes.map(async n=>{
+      n.img.src = n.src;
+      try { await n.img.decode?.(); } catch(_) {}
+      try { n.bmp = await createImageBitmap(n.img); } catch(_) { n.bmp = null; }
+    }));
+    ready = true;
+    draw(true);
   })();
-  </script>
+
+  // --- Camera/Panning ---
+  let camX = 0, camY = 0, vx = 0, vy = 0;
+  let dragging = false, lastX = 0, lastY = 0;
+
+  function wrap(v, max){ v%=max; if(v<0) v+=max; return v; }
+
+  stage.addEventListener('pointerdown', e=>{
+    dragging = true; lastX = e.clientX; lastY = e.clientY; stage.style.cursor='grabbing';
+  });
+  addEventListener('pointerup',  ()=>{ dragging=false; stage.style.cursor='grab'; });
+  addEventListener('pointercancel', ()=>{ dragging=false; stage.style.cursor='grab'; });
+  addEventListener('pointermove', e=>{
+    if(!dragging) return;
+    const dx = e.clientX - lastX, dy = e.clientY - lastY;
+    camX = wrap(camX - dx, WORLD_W);
+    camY = wrap(camY - dy, WORLD_H);
+    vx = -dx; vy = -dy;
+    lastX = e.clientX; lastY = e.clientY;
+    draw();
+  }, {passive:true});
+
+  // Wheel/Trackpad (Pan)
+  stage.addEventListener('wheel', e=>{
+    camX = wrap(camX + (e.deltaX||0), WORLD_W);
+    camY = wrap(camY + (e.deltaY||0), WORLD_H);
+    vx = (e.deltaX||0); vy = (e.deltaY||0);
+    draw();
+  }, {passive:true});
+
+  // WASD / Pfeile
+  const keys = new Set();
+  addEventListener('keydown', e=>{ keys.add(e.key.toLowerCase()); });
+  addEventListener('keyup',   e=>{ keys.delete(e.key.toLowerCase()); });
+
+  function tick(){
+    const s = 4;
+    if(keys.has('w')||keys.has('arrowup'))    camY = wrap(camY - s, WORLD_H);
+    if(keys.has('s')||keys.has('arrowdown'))  camY = wrap(camY + s, WORLD_H);
+    if(keys.has('a')||keys.has('arrowleft'))  camX = wrap(camX - s, WORLD_W);
+    if(keys.has('d')||keys.has('arrowright')) camX = wrap(camX + s, WORLD_W);
+
+    if(Math.abs(vx)>0.2 || Math.abs(vy)>0.2){
+      camX = wrap(camX + vx, WORLD_W);
+      camY = wrap(camY + vy, WORLD_H);
+      vx*=FRICTION; vy*=FRICTION;
+      draw();
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // --- Resize inkl. DPR ---
+  function resizeWithDPR(){
+    const r = stage.getBoundingClientRect();
+    stage.width  = Math.round(r.width*DPR);
+    stage.height = Math.round(r.height*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+
+    const mr = mini.getBoundingClientRect();
+    mini.width  = Math.max(1, Math.round(mr.width*DPR));
+    mini.height = Math.max(1, Math.round(mr.height*DPR));
+    mctx.setTransform(DPR,0,0,DPR,0,0);
+
+    draw(true);
+  }
+  window.resizeWithDPR = resizeWithDPR;
+  addEventListener('resize', resizeWithDPR, {passive:true});
+  resizeWithDPR();
+
+  // --- Draw (toroidal) ---
+  function draw(forceBg){
+    if(!ready) return;
+
+    const vw = stage.clientWidth, vh = stage.clientHeight;
+    const c = palette();
+
+    // Dynamischer Vorlade-Puffer -> verhindert "nur im Zentrum sichtbar"
+    const PRELOAD_MARGIN = Math.max(vw, vh) * 1.5;
+
+    // Hintergrund
+    ctx.clearRect(0,0,vw,vh);
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0,0,vw,vh);
+// Grid (dezent)
+ctx.save();                    // aktuellen Zustand merken
+ctx.strokeStyle = c.grid;
+ctx.lineWidth = 1;
+ctx.globalAlpha = 0.2;         // 20% Deckkraft
+
+const grid = 25;
+for (let x = (-camX % grid); x < vw; x += grid) {
+  ctx.beginPath();
+  ctx.moveTo(x, 0);
+  ctx.lineTo(x, vh);
+  ctx.stroke();
+}
+for (let y = (-camY % grid); y < vh; y += grid) {
+  ctx.beginPath();
+  ctx.moveTo(0, y);
+  ctx.lineTo(vw, y);
+  ctx.stroke();
+}
+
+ctx.restore();                 // ursprüngliche Einstellungen wiederherstellen
+
+    // Bilder (9 Wrap-Positionen) mit großzügigem Puffer
+    const M = PRELOAD_MARGIN;
+    nodes.forEach(n=>{
+      const baseX = n.x - camX, baseY = n.y - camY;
+      for(const ox of [-WORLD_W,0,WORLD_W]){
+        for(const oy of [-WORLD_H,0,WORLD_H]){
+          const x = baseX + ox, y = baseY + oy;
+          const w = IMG_SIZE, h = IMG_SIZE*0.625;
+
+          if (x > -w - M && x < vw + M && y > -h - M && y < vh + M){
+            ctx.save();
+            ctx.shadowColor=c.shadow; ctx.shadowBlur=16; ctx.shadowOffsetY=6;
+            const img = n.bmp || n.img;
+            ctx.drawImage(img, x, y, w, h);
+            ctx.restore();
+
+            // Caption
+            ctx.fillStyle=c.capBg;
+            ctx.fillRect(x+12, y+h-36, 84, 24);
+            ctx.fillStyle=c.capText;
+            ctx.font='600 12px system-ui, -apple-system, Segoe UI';
+            ctx.fillText('Open-World', x+18, y+h-20);
+          }
+        }
+      }
+    });
+
+    // Minimap
+    mctx.clearRect(0,0,mini.clientWidth,mini.clientHeight);
+    const sx = mini.clientWidth / WORLD_W;
+    const sy = mini.clientHeight / WORLD_H;
+    mctx.fillStyle = c.miniBg;
+    mctx.fillRect(0,0,mini.clientWidth,mini.clientHeight);
+    mctx.fillStyle = c.miniPoint;
+    nodes.forEach(n=>{ mctx.fillRect(n.x*sx-1, n.y*sy-1, 3, 3); });
+    mctx.strokeStyle = c.miniRect;
+    mctx.lineWidth = 2/DPR;
+    mctx.strokeRect(camX*sx, camY*sy, stage.clientWidth*sx, stage.clientHeight*sy);
+  }
+
+  // --- View Toggle ---
+  function setView(mode){
+    document.body.dataset.view = mode;
+    btnGrid?.setAttribute('aria-pressed', String(mode==='grid'));
+    btnWorld?.setAttribute('aria-pressed', String(mode==='world'));
+    window.resizeWithDPR?.();
+  }
+  btnGrid?.addEventListener('click',  ()=> setView('grid'));
+  btnWorld?.addEventListener('click', ()=> setView('world'));
+  if(!document.body.dataset.view){ setView('grid'); } else { setView(document.body.dataset.view); }
+
+  // Theme-Wechsel beachten
+  const mo = new MutationObserver(m=>{ if(m.some(x=>x.attributeName==='data-theme')) window.resizeWithDPR?.(); });
+  mo.observe(document.documentElement, { attributes:true });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', ()=> window.resizeWithDPR?.());
+
+  tick();
+})();
+
+stage.addEventListener('wheel', e => {
+  if (document.body.dataset.view === 'world') {
+    e.preventDefault();
+    camX = wrap(camX + (e.deltaX || 0), WORLD_W);
+    camY = wrap(camY + (e.deltaY || 0), WORLD_H);
+    vx = (e.deltaX || 0);
+    vy = (e.deltaY || 0);
+    draw();
+  }
+}, { passive: false });
+
+</script>
+
+
+
+
+
 
 
 </body>
 </html>
+
+
+
