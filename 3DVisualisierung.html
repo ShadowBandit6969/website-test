@@ -294,6 +294,10 @@ font-size: clamp(4rem, 22vw, 18rem);
 <link rel="stylesheet" href="css/metrics.css" type="text/css">
 
 <link rel="stylesheet" href="css/warumwir.css" type="text/css">
+
+<link rel="stylesheet" href="css/arbeitsprobenBilder.css" type="text/css">
+
+<link rel="stylesheet" href="css/VorherNachher.css" type="text/css">
 <style>
 @media (min-width: 768px) {
   .hero-image-foreground {
@@ -1965,178 +1969,9 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
 
 
 
-
-<section id="mini-look-gallery" aria-labelledby="mini-look-h">
-  <h2 id="mini-look-h" class="mlg-headline"></h2>
-
-  <ul class="mlg-grid" role="list" aria-label="Materialbeispiele">
-    <!-- Karte 1 -->
-    <li class="mlg-item">
-      <div class="mlg-card" data-duration="2.5" data-fade="1" aria-label="Metall – Slideshow">
-        <img src="./assets/materials/metal_1.jpg" alt="">
-        <img src="./assets/materials/metal_2.jpg" alt="">
-        <img src="./assets/materials/metal_3.jpg" alt="">
-      </div>
-    </li>
-
-    <!-- Karte 2 -->
-    <li class="mlg-item">
-      <div class="mlg-card" data-duration="3" data-fade="1" aria-label="Glas – Slideshow">
-        <img src="./assets/materials/glass_1.jpg" alt="">
-        <img src="./assets/materials/glass_2.jpg" alt="">
-        <img src="./assets/materials/glass_3.jpg" alt="">
-      </div>
-    </li>
-
-    <!-- Karte 3 -->
-    <li class="mlg-item">
-      <div class="mlg-card" data-duration="2.8" data-fade="1" aria-label="Stoff – Slideshow">
-        <img src="./assets/materials/fabric_1.jpg" alt="">
-        <img src="./assets/materials/fabric_2.jpg" alt="">
-        <img src="./assets/materials/fabric_3.jpg" alt="">
-      </div>
-    </li>
-
-    <!-- Karte 4 -->
-    <li class="mlg-item">
-      <div class="mlg-card" data-duration="3.2" data-fade="1.1" aria-label="Lack – Slideshow">
-        <img src="./assets/materials/paint_1.jpg" alt="">
-        <img src="./assets/materials/paint_2.jpg" alt="">
-        <img src="./assets/materials/paint_3.jpg" alt="">
-      </div>
-    </li>
-  </ul>
-</section>
-<!-- GSAP -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-<style>
-/* ===== Mini Material & Look – kompakt, alle Karten exakt gleich groß ===== */
-:root {
-  --mlg-gap: clamp(0.8rem, 2vw, 1.4rem);
-}
-
-#mini-look-gallery {
-  padding: clamp(1.6rem, 3.5vw, 3rem) clamp(1rem, 3vw, 2rem);
-  text-align: center;
-  color: #fff;
-  background: transparent;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
-
-.mlg-headline {
-  font-weight: 850;
-  letter-spacing: -0.02em;
-  line-height: 1.12;
-  margin: 0 0 1rem;
-  font-size: clamp(1.6rem, 1rem + 1.6vw, 2.2rem);
-}
-
-.mlg-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--mlg-gap);
-  list-style: none;
-  padding: 2rem;
-  margin: 0 auto;
-  max-width: 1440px;
-  justify-items: stretch; /* Karten füllen Spalten */
-  align-items: start;
-}
-
-/* Handy: 2 nebeneinander */
-@media (max-width: 640px) {
-  .mlg-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Jede Karte bleibt quadratisch */
-.mlg-item {
-  display: block;
-}
-
-.mlg-card {
-  position: relative;
-  width: 100%;          /* füllt Spalte */
-  aspect-ratio: 1 / 1;  /* Quadrat */
-  height: auto;
-  border-radius: 14px;
-  overflow: hidden;
-  background: #11141a;
-  box-shadow: 0 6px 20px rgba(0,0,0,.25);
-  isolation: isolate;
-}
-
-/* Bilder im Stack (Crossfade) */
-.mlg-card img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transform: scale(1.03);
-  will-change: opacity, transform;
-}
-
-.mlg-card img:first-child {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Hover-Effekt dezent */
-@media (hover: hover) {
-  .mlg-card:hover img {
-    filter: brightness(1.03) contrast(1.05);
-  }
-}
-
-/* Bewegungsreduktion */
-@media (prefers-reduced-motion: reduce) {
-  .mlg-card img {
-    transform: none !important;
-  }
-}
-</style>
-<script>
-(() => {
-  if (!window.gsap) return;
-  const cards = document.querySelectorAll('.mlg-card');
-
-  cards.forEach((card, idx) => {
-    const imgs = Array.from(card.querySelectorAll('img'));
-    if (imgs.length <= 1) return;
-
-    const hold = parseFloat(card.dataset.duration || 2.5); // Standzeit pro Bild
-    const fade = parseFloat(card.dataset.fade || 1);       // Crossfade-Dauer
-
-    gsap.set(imgs, { opacity: 0, scale: 1.03 });
-    gsap.set(imgs[0], { opacity: 1, scale: 1 });
-
-    const tl = gsap.timeline({ repeat: -1, repeatDelay: 0, paused: true });
-
-    imgs.forEach((img, i) => {
-      const next = imgs[(i + 1) % imgs.length];
-      tl.to({}, { duration: hold }); // Haltephase
-      tl.to(img,  { opacity: 0, duration: fade, ease: "power2.out" }, "<");
-      tl.to(next, { opacity: 1, duration: fade, ease: "power2.out" }, "<");
-      tl.to(img,  { scale: 1.03, duration: fade, ease: "power1.out" }, "<");
-      tl.to(next, { scale: 1.00, duration: fade, ease: "power1.out" }, "<");
-    });
-
-    const offset = (idx * 0.45) % hold;
-    gsap.delayedCall(offset, () => tl.play());
-  });
-})();
-</script>
-
-
-
-
-<!-- ===================================
-     VORHER / NACHHER — COMPACT COMPARE (MINIMAL)
-     clean • dezent • präziser Griff
-     =================================== -->
+<!-- =========================
+     VORHER / NACHHER — AGENCY CLEAN + RESPONSIVE TEXT
+     ========================= -->
 <section id="vorher-nachher" class="aurora-sheet is-compact" data-force-light aria-labelledby="vn-title">
   <div class="container compare-wrap">
     <header class="compare-head">
@@ -2145,286 +1980,129 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
         <span class="subtitle-full">
           Rohmodell vs. finales Rendering – Material, Licht & Hintergrund im direkten Vergleich.
         </span>
+        <span class="subtitle-short">
+          Rohmodell vs. Rendering
+        </span>
       </p>
     </header>
 
-    <figure class="compare" role="group" aria-labelledby="vn-title" aria-describedby="vn-desc">
+    <figure class="compare" role="group" aria-describedby="vn-desc">
       <div id="vn-desc" class="visually-hidden">
-        Ziehe die Trennlinie oder den Griff, um den Vergleich anzupassen. Mit Tastatur: Pfeil links/rechts, Home/Ende, Bild auf/ab.
+        Ziehe die Trennlinie oder den Griff, um den Vergleich anzupassen.
       </div>
 
-      <!-- Bühne -->
-      <div class="compare-stage">
-        <!-- Nachher (unten) -->
-        <img class="img img-after"
-             src="./3DSlideShow/post20.png"
-             alt="Nachher: Finales Rendering"
-             loading="lazy" decoding="async" fetchpriority="low">
-
-        <!-- Vorher (oben, geclippt) -->
-        <img class="img img-before"
-             src="./3DSlideShow/post21.png"
-             alt="Vorher: Grau-Modell"
-             loading="lazy" decoding="async" fetchpriority="low"
-             style="--split:50%;">
-
-        <!-- zentrale Trennlinie (Hairline) -->
+      <div class="compare-stage" data-split="50" style="--split:50%;">
+        <!-- Nachher -->
+        <img
+          class="img img-after"
+          src="./images/3Drenderpreview.png"
+          alt="Nachher: finales Rendering"
+          loading="lazy" decoding="async" fetchpriority="low"
+        />
+        <!-- Vorher -->
+        <img
+          class="img img-before"
+          src="./images/3Drenderpreview.png"
+          alt="Vorher: Grau-Modell"
+          loading="lazy" decoding="async" fetchpriority="low"
+          style="--split:50%;"
+        />
         <span class="divider" aria-hidden="true"></span>
-
-        <!-- Griff (visuell minimal, große unsichtbare Hit-Zone) -->
-        <button class="handle"
-                type="button"
-                role="slider"
-                aria-label="Vergleichsregler"
-                aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
-                aria-orientation="horizontal">
-        </button>
-      </div>
-
-      <!-- Range (nur mobil sichtbar) -->
-      <div class="compare-ctrl">
-        <label class="visually-hidden" for="vn-range">Vergleichsregler</label>
-        <input id="vn-range" class="compare-range" type="range"
-               min="0" max="100" value="50" step="1"
-               aria-label="Vergleichsregler: 50 Prozent Vorher sichtbar">
+        <button
+          class="handle"
+          type="button"
+          role="slider"
+          aria-label="Vergleichsregler"
+          aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+          aria-orientation="horizontal"
+        ></button>
       </div>
 
       <figcaption class="compare-cap">
-        Material, Lichtsetzung und Hintergrund transformieren das Modell vom Rohzustand zum finalen Look.
+        <span class="cap-full">
+          Material, Lichtsetzung und Hintergrund transformieren das Modell vom Rohzustand zum finalen Look.
+        </span>
+        <span class="cap-short">
+          Vom Rohmodell zum finalen Look.
+        </span>
       </figcaption>
     </figure>
   </div>
-</section>
-<style>
-/* ===== Compact shell ===== */
-#vorher-nachher.aurora-sheet{ background: transparent; }
-#vorher-nachher.is-compact{
-  padding: clamp(1.2rem, 1.2rem + 1vw, 2rem) clamp(.8rem, 1.2vw, 1.2rem);
-  border-radius: 14px;
-}
-.compare-wrap{ max-width: 1600px; margin-inline:auto; }
-.compare-head{
-  display:flex; flex-direction:column; align-items:center; text-align:center;
-  margin-bottom: var(--space-2, 1rem);
-}
-#vorher-nachher .aurora-title{ margin-bottom:.35rem !important; text-wrap:balance; }
-#vorher-nachher .aurora-subtitle{ line-height:1.6 !important; }
 
-/* ===== Compare (Minimal Look) ===== */
-.compare{
-  --radius: 16px;
-  --shadow: 0 1px 0 rgba(0,0,0,.04), 0 10px 24px rgba(0,0,0,.06);
-  --accent: #6b7cff;
-  --knob: #ffffff;
-  --hairline: color-mix(in oklab, #ffffff 90%, #cfd3da 10%);
-  margin:0; padding:0; border:0;
-}
-:root[data-theme="dark"] .compare{
-  --shadow: 0 1px 0 rgba(255,255,255,.06), 0 12px 28px rgba(0,0,0,.35);
-  --hairline: color-mix(in oklab, #e9ecf3 88%, #a7b0c4 12%);
-  --knob: #f6f8ff;
-}
+  <script>
+    (function(){
+      const sec=document.getElementById('vorher-nachher');
+      const stage=sec.querySelector('.compare-stage');
+      const before=stage.querySelector('.img-before');
+      const after=stage.querySelector('.img-after');
+      const divider=stage.querySelector('.divider');
+      const handle=stage.querySelector('.handle');
 
-.compare-stage{
-  position: relative;
-  border-radius: var(--radius);
-  overflow: clip;
-  box-shadow: var(--shadow);
-  background: #0b0c10;
-  aspect-ratio: 16/9;
-  user-select: none;
-  touch-action: none;
-  cursor: ew-resize;
-  isolation: isolate;
-}
+      [before,after].forEach(img=>{
+        const show=()=>img.style.opacity='1';
+        img.complete?show():img.addEventListener('load',show,{once:true});
+      });
 
-/* Bilder */
-.compare .img{
-  position:absolute; inset:0;
-  width:100%; height:100%; object-fit:cover; display:block;
-  transition: opacity .3s ease;
-  opacity: 0; /* fade-in per JS */
-}
-.compare .img-after{ z-index: 1; }
-.compare .img-before{
-  z-index: 2;
-  --split: 50%;
-  clip-path: polygon(0 0, var(--split) 0, var(--split) 100%, 0 100%);
-}
+      const clamp=v=>Math.max(0,Math.min(100,v));
+      const setSplit=p=>{
+        p=clamp(p);
+        before.style.setProperty('--split',p+'%');
+        divider.style.left=`calc(${p}% )`;
+        handle.style.left=p+'%';
+        handle.setAttribute('aria-valuenow',p);
+        stage.dataset.split=p;
+      };
+      setSplit(50);
 
-/* Hairline Divider – super dezent, aber sichtbar */
-.compare .divider{
-  position:absolute; top:0; bottom:0; width:1px; z-index: 3;
-  left: calc(var(--split, 50%));
-  background: linear-gradient(to bottom, var(--hairline), color-mix(in oklab, var(--hairline) 70%, transparent));
-  pointer-events:none;
-  transition: left .07s linear;
-}
+      const rectToPct=x=>{
+        const r=stage.getBoundingClientRect();
+        return ((x-r.left)/r.width)*100;
+      };
 
-/* Griff – visuell klein, Hit-Zone groß */
-.compare .handle{
-  position:absolute; top:50%; left: var(--split, 50%); transform: translate(-50%, -50%);
-  z-index: 4;
-  /* sichtbarer Knopf */
-  width: 18px; height: 18px; border-radius:50%;
-  background: var(--knob);
-  box-shadow: 0 1px 0 rgba(0,0,0,.08), 0 6px 14px rgba(0,0,0,.12);
-  border: 1px solid color-mix(in oklab, #000 10%, #6b7cff 20%);
-  /* unsichtbare große Hit-Zone */
-  padding:0; border-width:1px;
-}
-.compare .handle::before{
-  /* unsichtbare Fläche (mind. 44x44) für bessere Greifbarkeit */
-  content:""; position:absolute; inset:-20px; border-radius:999px;
-}
-@media (hover:hover){
-  .compare .handle:hover{ box-shadow: 0 2px 0 rgba(0,0,0,.08), 0 10px 22px rgba(0,0,0,.16); }
-}
-.compare .handle:focus-visible{
-  outline: 3px solid color-mix(in oklab, var(--accent) 60%, transparent);
-  outline-offset: 3px;
-}
-:root[data-theme="dark"] .compare .handle{
-  border-color: color-mix(in oklab, #000 20%, var(--accent) 25%);
-}
+      let dragging=false;
+      stage.addEventListener('pointerdown',e=>{
+        dragging=true; stage.setPointerCapture(e.pointerId);
+        setSplit(rectToPct(e.clientX));
+      });
+      stage.addEventListener('pointermove',e=>dragging&&setSplit(rectToPct(e.clientX)));
+      stage.addEventListener('pointerup',e=>{dragging=false; stage.releasePointerCapture(e.pointerId);});
+      stage.addEventListener('pointercancel',()=>dragging=false);
 
-/* Range (nur mobil sichtbar) */
-.compare-ctrl{ display:flex; justify-content:center; }
-.compare-range{
-  appearance:none; width: min(720px, 92%); margin: .75rem auto 0;
-  background: transparent; outline: none;
-}
-@media (hover:hover){
-  .compare-ctrl{ display: none; } /* Desktop/Tablet: Range aus */
-}
-.compare-range:focus-visible{ outline: 3px solid var(--focus-ring-color, #6b7cff); outline-offset: 3px; border-radius: 8px; }
-/* Track */
-.compare-range::-webkit-slider-runnable-track{ height: 4px; border-radius: 999px; background: rgba(0,0,0,.12); }
-.compare-range::-moz-range-track{ height: 4px; border-radius: 999px; background: rgba(0,0,0,.12); }
-:root[data-theme="dark"] .compare-range::-webkit-slider-runnable-track,
-:root[data-theme="dark"] .compare-range::-moz-range-track{ background: rgba(255,255,255,.18); }
-/* Thumb */
-.compare-range::-webkit-slider-thumb{
-  -webkit-appearance:none; appearance:none;
-  width: 18px; height: 18px; margin-top: -7px;
-  border-radius: 50%; background: #fff; border: 1px solid rgba(0,0,0,.1);
-  box-shadow: 0 2px 10px rgba(0,0,0,.18);
-}
-.compare-range::-moz-range-thumb{
-  width: 18px; height: 18px; border-radius: 50%;
-  background: #fff; border: 1px solid rgba(0,0,0,.1);
-  box-shadow: 0 2px 10px rgba(0,0,0,.18);
-}
+      handle.addEventListener('pointerdown',e=>e.stopPropagation());
+      handle.addEventListener('keydown',e=>{
+        const step=e.shiftKey?10:2;
+        const curr=Number(stage.dataset.split)||50;
+        if(e.key==='ArrowLeft'){e.preventDefault();setSplit(curr-step);}
+        if(e.key==='ArrowRight'){e.preventDefault();setSplit(curr+step);}
+        if(e.key==='Home'){e.preventDefault();setSplit(0);}
+        if(e.key==='End'){e.preventDefault();setSplit(100);}
+      });
 
-/* Caption (optional) */
-.compare-cap{
-  margin: .6rem 0 0;
-  font-size: .98rem; line-height: 1.55; color:#333; text-align:center;
-}
-:root[data-theme="dark"] .compare-cap{ color:#e9ecf3; }
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .compare .img, .compare .divider{ transition: none !important; }
-}
-</style>
-<script>
-/* ===== Minimal Compare – clean handling, mobile auto-swipe once ===== */
-(function(){
-  const sec     = document.getElementById('vorher-nachher');
-  const stage   = sec.querySelector('.compare-stage');
-  const before  = stage.querySelector('.img-before');
-  const after   = stage.querySelector('.img-after');
-  const range   = sec.querySelector('#vn-range');
-  const divider = stage.querySelector('.divider');
-  const handle  = stage.querySelector('.handle');
-  const isTouch = matchMedia('(hover:none)').matches;
-
-  // Fade-in when loaded
-  [before, after].forEach(img=>{
-    const show = ()=> img.style.opacity = '1';
-    if (img.complete) show();
-    img.addEventListener('load', show, { once:true });
-  });
-
-  // Apply split (updates all UI)
-  function applySplit(val){
-    const pct = Math.max(0, Math.min(100, Number(val)));
-    before.style.setProperty('--split', pct + '%');
-    divider.style.left = `calc(${pct}% )`;
-    handle.style.left  = pct + '%';
-    range.value = String(pct);
-    range.setAttribute('aria-label', `Vergleichsregler: ${pct} Prozent Vorher sichtbar`);
-    handle.setAttribute('aria-valuenow', String(pct));
-  }
-  applySplit(range.value);
-
-  // % helper
-  const rectToPct = (clientX)=>{
-    const r = stage.getBoundingClientRect();
-    return ((clientX - r.left) / r.width) * 100;
-  };
-
-  // Range (mobile)
-  range.addEventListener('input', (e)=> applySplit(e.target.value));
-
-  // Drag anywhere on stage
-  let draggingStage = false;
-  stage.addEventListener('pointerdown', (e)=>{
-    draggingStage = true; stage.setPointerCapture(e.pointerId);
-    applySplit(rectToPct(e.clientX));
-  });
-  stage.addEventListener('pointermove', (e)=>{ if(draggingStage) applySplit(rectToPct(e.clientX)); });
-  stage.addEventListener('pointerup',   (e)=>{ draggingStage = false; stage.releasePointerCapture(e.pointerId); });
-  stage.addEventListener('pointercancel',()=> draggingStage = false);
-
-  // Drag on handle (preferred)
-  let draggingHandle = false;
-  handle.addEventListener('pointerdown', (e)=>{
-    e.stopPropagation(); draggingHandle = true; handle.setPointerCapture(e.pointerId);
-  });
-  handle.addEventListener('pointermove', (e)=>{ if(draggingHandle) applySplit(rectToPct(e.clientX)); });
-  handle.addEventListener('pointerup',   (e)=>{ draggingHandle = false; handle.releasePointerCapture(e.pointerId); });
-  handle.addEventListener('pointercancel',()=> draggingHandle = false);
-
-  // Keyboard on handle
-  handle.addEventListener('keydown', (e)=>{
-    const step = e.shiftKey ? 10 : 2;
-    const curr = Number(range.value)||50;
-    if (e.key === 'ArrowLeft')  { e.preventDefault(); applySplit(curr - step); }
-    if (e.key === 'ArrowRight') { e.preventDefault(); applySplit(curr + step); }
-    if (e.key === 'Home')       { e.preventDefault(); applySplit(0); }
-    if (e.key === 'End')        { e.preventDefault(); applySplit(100); }
-    if (e.key === 'PageDown')   { e.preventDefault(); applySplit(curr - 10); }
-    if (e.key === 'PageUp')     { e.preventDefault(); applySplit(curr + 10); }
-  });
-
-  // Mobile auto-swipe (once per session)
-  const AUTO_KEY = 'vnAutoSwipeDoneMinimal';
-  let autoDone = sessionStorage.getItem(AUTO_KEY) === '1';
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(!e.isIntersecting) return;
-      if (isTouch && !autoDone){
-        autoDone = true;
-        sessionStorage.setItem(AUTO_KEY, '1');
-        const start = Number(range.value)||50, end = 92, dur = 900;
-        const t0 = performance.now();
-        const ease = t => t<.5 ? 2*t*t : -1+(4-2*t)*t;
-        function tick(now){
-          const p = Math.min(1, (now - t0)/dur);
-          const val = Math.round(start + (end - start)*ease(p));
-          applySplit(val);
-          if(p < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
+      const isTouch=matchMedia('(hover:none)').matches;
+      const KEY='vnSwipeOnce';
+      if(isTouch&&!sessionStorage.getItem(KEY)){
+        const io=new IntersectionObserver(entries=>{
+          entries.forEach(entry=>{
+            if(!entry.isIntersecting)return;
+            sessionStorage.setItem(KEY,'1');
+            const start=Number(stage.dataset.split)||50,end=88,dur=900;
+            const t0=performance.now();
+            const ease=t=>t<.5?2*t*t:-1+(4-2*t)*t;
+            const tick=now=>{
+              const p=Math.min(1,(now-t0)/dur);
+              setSplit(Math.round(start+(end-start)*ease(p)));
+              if(p<1)requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+            io.disconnect();
+          });
+        },{threshold:.4});
+        io.observe(stage);
       }
-      io.unobserve(e.target);
-    });
-  }, { threshold: .35, rootMargin: '0px 0px -10% 0px' });
-  io.observe(stage);
-})();
-</script>
+    })();
+  </script>
+</section>
+
 
 
 
@@ -2563,159 +2241,6 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
     </ul>
   </div>
 </section>
-
-<style>
-/* ===== Always-Compact Section (ohne Glas-Hintergrund) ===== */
-#arbeitsproben.aurora-sheet{ background: transparent; }
-#arbeitsproben.is-compact.aurora-sheet{
-  padding: clamp(1.2rem, 1.2rem + 1vw, 2rem) clamp(.8rem, 1.2vw, 1.2rem);
-  border-radius: 14px;
-  box-shadow: none;
-}
-.board-wrap{ position: relative; }
-.board-head{
-  display:flex; flex-direction:column; align-items:center; text-align:center;
-  margin-bottom: var(--space-2, 1rem);
-}
-/* Mikrotypografie Headline/Subline */
-#arbeitsproben .aurora-title{ margin-bottom:.35rem !important; text-wrap:balance; }
-#arbeitsproben .aurora-subtitle{ line-height:1.6 !important; }
-
-/* ===== Grid ===== */
-.board-grid{
-  --gap: clamp(10px, 1.4vw, 16px);
-  display:grid; grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: var(--gap); list-style:none; padding:0; margin:0;
-  perspective: 900px; /* für Tilt */
-}
-.board-grid .cell{
-  grid-column: span 12;
-  content-visibility: auto;
-  contain-intrinsic-size: 260px 200px; /* CLS-Schutz */
-}
-/* Erste Reihe sofort sichtbar (kuratierter Flow) */
-.board-grid .cell:nth-child(-n+3){ opacity:1 !important; transform:none !important; }
-
-@media (min-width: 900px){
-  .board-grid .cell{ grid-column: span 4; }
-  .board-grid .cell[data-span="xs"]{ grid-column: span 3; }
-  .board-grid .cell[data-span="s"] { grid-column: span 4; }
-  .board-grid .cell[data-span="m"] { grid-column: span 6; }
-  .board-grid .cell[data-span="l"] { grid-column: span 8; }
-  .board-grid .cell[data-span="xl"]{ grid-column: span 12; }
-}
-@media (min-width: 600px) and (max-width: 899px){
-  .board-grid .cell{ grid-column: span 6; }
-  .board-grid .cell[data-span="xl"]{ grid-column: span 12; }
-}
-
-/* ===== Karten-Stil (wie Next-Level-Board) + Soft-Edge ===== */
-.card{
-  --accent: #7aa2ff; /* per data-theme änderbar */
-  position: relative; overflow: hidden; border-radius: 16px;
-  background: #f7f7f7;
-  box-shadow: 0 1px 0 rgba(0,0,0,.05), 0 12px 28px rgba(0,0,0,.06);
-  transform-style: preserve-3d;
-  transition: transform .6s cubic-bezier(.19,1,.22,1), box-shadow .6s ease;
-  cursor: default; outline: none;
-}
-/* Themenfarben (nur Tag) */
-.card[data-theme="warm"]{ --accent:#ff7a45; }
-.card[data-theme="tech"]{ --accent:#72e0ff; }
-
-/* Soft Edge */
-.card::after{
-  content:""; position:absolute; inset:0; pointer-events:none; border-radius: inherit;
-  box-shadow: inset 0 0 0 1px color-mix(in oklab, #fff 35%, transparent);
-  opacity:.65;
-}
-/* Ambient Glow */
-.card::before{
-  content: ""; position: absolute; inset: -2px;
-  background: radial-gradient(circle at 50% 110%, rgba(255,255,255,.15), transparent 70%);
-  opacity: 0; transition: opacity .6s ease; z-index: 0;
-}
-.card:hover::before{ opacity: 1; }
-:root[data-theme="dark"] .card{ background:#0c0e13; box-shadow: 0 1px 0 rgba(255,255,255,.06), 0 12px 28px rgba(0,0,0,.35); }
-:root[data-theme="dark"] .card::after{ box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
-:root[data-theme="dark"] .card:hover::before{
-  background: radial-gradient(circle at 50% 110%, rgba(120,160,255,.22), transparent 70%);
-}
-
-/* Image: Basis & span-aware Ratios */
-.card img{
-  width: 100%; height: 100%; display: block; object-fit: cover;
-  aspect-ratio: 16/10; /* default */
-  filter: grayscale(100%) contrast(1.08) brightness(1.04);
-  transition: transform .6s cubic-bezier(.19,1,.22,1), filter .6s ease, opacity .35s ease;
-  transform-origin: center; will-change: transform; z-index:1; opacity:0; /* Fade-in via JS */
-}
-.cell[data-span="l"]  .card img{ aspect-ratio: 21/9; }
-.cell[data-span="xl"] .card img{ aspect-ratio: 2/1; }
-.cell[data-span="xs"] .card img{ aspect-ratio: 4/3; }
-
-/* Overlay Caption (Tag + Titel) mit adaptivem Kontrast */
-.card figcaption{
-  position: absolute; inset: 0; display: flex; flex-direction:column; gap:.25rem;
-  align-items: flex-start; justify-content: flex-end;
-  padding: 1rem 1.2rem;
-  font-size: 1rem; font-weight: 600; color: #fff;
-  background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0)); /* Fallback */
-  opacity: 0; transition: opacity .45s ease; z-index: 2;
-}
-/* Optional: wenn du serverseitig Luma bewertest */
-.card[data-on-light] figcaption{ background: linear-gradient(to top, rgba(0,0,0,.68), rgba(0,0,0,0)); }
-.card[data-on-dark]  figcaption{ background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0)); }
-/* Hover-Verstärkung, falls Bild sehr hell ist */
-.card:hover figcaption{ background: linear-gradient(to top, rgba(0,0,0,.62), rgba(0,0,0,.08)); }
-
-.cap-tag{
-  font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
-  color:#fff;
-  background: color-mix(in oklab, var(--accent) 45%, black 10%);
-  padding:.22rem .5rem; border-radius:6px;
-  backdrop-filter: blur(2px);
-  box-shadow: 0 1px 2px rgba(0,0,0,.25);
-}
-.cap-title{ font-size:1.02rem; font-weight:700; text-shadow:0 1px 2px rgba(0,0,0,.35); }
-:root[data-theme="dark"] .cap-tag{ background: rgba(0,0,0,.28); }
-
-@media (hover:hover){
-  .card:hover img{
-    transform: scale(1.05) translateY(-2px);
-    filter: grayscale(10%) contrast(1.05) brightness(1.05);
-  }
-  .card:hover{ box-shadow: 0 24px 48px rgba(0,0,0,.16); }
-  .card figcaption{ opacity:0; }      /* Desktop: Caption nur bei Hover */
-  .card:hover figcaption{ opacity:1; }
-}
-@media (hover:none){
-  .card figcaption{ opacity:1; }      /* Mobile: Caption sichtbar */
-}
-
-/* Fokus/A11y – rein visuell, ohne Tab-Stops */
-.card:focus-visible figcaption{
-  opacity:1;
-  outline: 2px dashed rgba(255,255,255,.7);
-  outline-offset: 6px;
-}
-
-/* Scroll-Reveal (gestrafft) */
-.cell{ opacity:0; transform: translateY(16px) scale(.985); }
-.cell.is-in{
-  opacity:1; transform: translateY(0) scale(1);
-  transition: transform .6s cubic-bezier(.19,1,.22,1), opacity .6s ease;
-}
-
-/* Reduced Motion & Touch */
-@media (prefers-reduced-motion: reduce){
-  .card, .card img, .cell{ transition:none !important; transform:none !important; }
-}
-@media (pointer:coarse){
-  .card{ transform:none !important; } /* Tilt aus auf Touch */
-}
-</style>
-
 <script>
 /* ===== Interaktionen: Reveal + sanfter Tilt + Img Fade-In ===== */
 (function(){

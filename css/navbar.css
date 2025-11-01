@@ -460,3 +460,126 @@ body{ padding-top: var(--gate-height) !important; }
     transition: opacity .12s ease, transform .12s ease;
   }
 }
+/* === MOBILE NAV: Freiraum oben komplett entfernen ====================== */
+@media (max-width: 767.98px) {
+
+  /* Menü bündig direkt unter dem Header */
+  .astral-nav {
+    position: fixed !important;
+    top: var(--gate-height) !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    inset: var(--gate-height) 0 0 0 !important;
+  }
+
+  /* UL bündig oben, kein Gap */
+  .astral-nav.is-awakened .astral-nav__list {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Sicherheitsnetz: Header darf keinen zusätzlichen Push geben */
+  body {
+    padding-top: var(--gate-height) !important;
+  }
+
+  /* Header selbst – kein zusätzliches Padding oben (Safe-Area abziehen) */
+  .aether-header {
+    padding-top: 0 !important;
+  }
+
+  /* CTA-Button oben weiterhin ausgeblendet */
+  .aether-header .astral-actions .charm-cta {
+    display: none !important;
+  }
+}
+/* === MOBILE NAV: letzter Spalt oben entfernen (finaler Fix) ============ */
+@media (max-width: 767.98px){
+
+  /* 1) Menü bündig direkt unter Header */
+  .astral-nav {
+    position: fixed !important;
+    top: var(--gate-height) !important;
+    inset: var(--gate-height) 0 0 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-top: 0 !important;
+    background-clip: content-box !important;
+  }
+
+  /* 2) UL – keine Luft, kein Puffer */
+  .astral-nav.is-awakened .astral-nav__list {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* 3) Body-Offset neutralisieren (damit kein doppelter Versatz entsteht) */
+  body {
+    padding-top: 0 !important;
+  }
+
+  /* 4) Header soll Safe-Area respektieren, aber keinen Extra-Gap erzeugen */
+  .aether-header {
+    padding-top: env(safe-area-inset-top, 0px) !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* 5) Overlay exakt bündig unter Header */
+  .night-veil {
+    top: var(--gate-height) !important;
+    inset: var(--gate-height) 0 0 0 !important;
+    margin: 0 !important;
+  }
+
+  /* 6) CTA oben ausgeblendet */
+  .aether-header .astral-actions .charm-cta {
+    display: none !important;
+  }
+}
+/* === MOBILE NAV — den allerletzten Spalt wirklich killen ================= */
+@media (max-width: 767.98px){
+
+  /* 0) CTA oben sicher weg */
+  .aether-header .astral-actions .charm-cta{ display:none !important; }
+
+  /* 1) Wenn Menü offen: Header ohne Border/Shadow & ohne Blur (Farben identisch) */
+  body:has(.astral-nav.is-awakened) .aether-header,
+  .aether-header.portal-open{
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+    background: var(--surface) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* 2) Menü exakt unter Header andocken und um 1px überlappen */
+  .astral-nav{
+    position: fixed !important;
+    inset: var(--gate-height) 0 0 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-top: 0 !important;
+  }
+  body:has(.astral-nav.is-awakened) .astral-nav{
+    top: calc(var(--gate-height) - 1px) !important;     /* 1px Overlap */
+    inset: calc(var(--gate-height) - 1px) 0 0 0 !important;
+  }
+
+  /* 3) Overlay bündig (gleiche 1px-Überlappung) */
+  .night-veil{
+    inset: var(--gate-height) 0 0 0 !important;
+  }
+  body:has(.astral-nav.is-awakened) .night-veil{
+    top: calc(var(--gate-height) - 1px) !important;
+    inset: calc(var(--gate-height) - 1px) 0 0 0 !important;
+  }
+
+  /* 4) Liste ohne jeden Top-Abstand */
+  .astral-nav.is-awakened .astral-nav__list{
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  /* 5) Sicherheitsnetz: Kein Body-Top-Padding doppelt addieren */
+  body{ padding-top: var(--gate-height) !important; }
+}

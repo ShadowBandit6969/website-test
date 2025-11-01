@@ -1,0 +1,115 @@
+
+
+    /* ===== Grundlayout ===== */
+    #vorher-nachher.is-compact{
+      padding: clamp(1.2rem, 1.2rem + 1vw, 2rem) clamp(.8rem, 1.2vw, 1.2rem);
+      border-radius: 14px;
+      background: transparent;
+    }
+    #vorher-nachher .compare-wrap{ max-width:1600px; margin-inline:auto; }
+    #vorher-nachher .compare-head{
+      display:flex; flex-direction:column; align-items:center; text-align:center;
+      margin-bottom: var(--space-2, 1rem);
+    }
+
+    /* ===== Texte: Aurora-Style beibehalten ===== */
+    #vorher-nachher .subtitle-short,
+    #vorher-nachher .cap-short { display:none; }
+    @media (max-width:600px){
+      #vorher-nachher .subtitle-full,
+      #vorher-nachher .cap-full { display:none !important; }
+      #vorher-nachher .subtitle-short,
+      #vorher-nachher .cap-short { display:inline !important; }
+    }
+
+    /* ===== Compare Core ===== */
+    #vorher-nachher .compare{
+      --radius:16px;
+      --shadow:0 1px 0 rgba(0,0,0,.04),0 10px 24px rgba(0,0,0,.06);
+      --accent:#6b7cff;
+      --knob:#fff;
+      --hairline:color-mix(in oklab,#fff 90%,#cfd3da 10%);
+    }
+    :root[data-theme="dark"] #vorher-nachher .compare{
+      --shadow:0 1px 0 rgba(255,255,255,.06),0 12px 28px rgba(0,0,0,.35);
+      --hairline:color-mix(in oklab,#e9ecf3 88%,#a7b0c4 12%);
+      --knob:#f6f8ff;
+    }
+
+    #vorher-nachher .compare-stage{
+      position:relative;
+      border-radius:var(--radius);
+      overflow:clip;
+      box-shadow:var(--shadow);
+      background:#0b0c10;
+      aspect-ratio:16/9;
+      user-select:none;
+      touch-action:none;
+      cursor:ew-resize;
+      isolation:isolate;
+    }
+
+    #vorher-nachher .compare .img{
+      position:absolute; inset:0;
+      width:100%; height:100%; object-fit:cover;
+      transition:opacity .3s ease;
+      opacity:0;
+    }
+    #vorher-nachher .compare .img-after{ z-index:1; }
+    #vorher-nachher .compare .img-before{
+      z-index:2;
+      --split:50%;
+      clip-path:polygon(0 0,var(--split) 0,var(--split) 100%,0 100%);
+    }
+
+    #vorher-nachher .compare .divider{
+      position:absolute; top:0; bottom:0; width:1px; z-index:3;
+      left:calc(var(--split,50%));
+      background:linear-gradient(to bottom,var(--hairline),color-mix(in oklab,var(--hairline) 70%,transparent));
+      pointer-events:none;
+      transition:left .07s linear;
+    }
+
+    #vorher-nachher .compare .handle{
+      position:absolute; top:50%; left:var(--split,50%); transform:translate(-50%,-50%);
+      z-index:4; width:18px; height:18px; border-radius:50%;
+      background:var(--knob);
+      box-shadow:0 1px 0 rgba(0,0,0,.08),0 6px 14px rgba(0,0,0,.12);
+      border:1px solid color-mix(in oklab,#000 10%,#6b7cff 20%);
+      padding:0;
+    }
+    #vorher-nachher .compare .handle::before{
+      content:""; position:absolute; inset:-20px; border-radius:999px;
+    }
+    @media (hover:hover){
+      #vorher-nachher .compare .handle:hover{
+        box-shadow:0 2px 0 rgba(0,0,0,.08),0 10px 22px rgba(0,0,0,.16);
+      }
+    }
+
+    #vorher-nachher .compare .handle:focus-visible{
+      outline:3px solid var(--focus-ring-color,#6b7cff);
+      outline-offset:3px;
+    }
+
+    #vorher-nachher .compare-cap{
+      margin:.6rem 0 0;
+      text-align:center;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      #vorher-nachher .compare .img,
+      #vorher-nachher .compare .divider{ transition:none !important; }
+    }
+
+    @media (max-width: 600px) {
+  #vorher-nachher.is-compact {
+    padding: 0 clamp(.8rem, 1.2vw, 1.2rem);
+  }
+}
+@media (max-width: 600px) {
+  #vorher-nachher .compare-wrap {
+    padding-bottom: 0;
+  }
+}

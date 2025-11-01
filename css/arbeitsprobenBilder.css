@@ -1,0 +1,397 @@
+
+/* ===== Always-Compact Section (ohne Glas-Hintergrund) ===== */
+#arbeitsproben.aurora-sheet{ background: transparent; }
+#arbeitsproben.is-compact.aurora-sheet{
+  padding: clamp(1.2rem, 1.2rem + 1vw, 2rem) clamp(.8rem, 1.2vw, 1.2rem);
+  border-radius: 14px;
+  box-shadow: none;
+}
+.board-wrap{ position: relative; }
+.board-head{
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  margin-bottom: var(--space-2, 1rem);
+}
+/* Mikrotypografie Headline/Subline */
+#arbeitsproben .aurora-title{ margin-bottom:.35rem !important; text-wrap:balance; }
+#arbeitsproben .aurora-subtitle{ line-height:1.6 !important; }
+
+/* ===== Grid ===== */
+.board-grid{
+  --gap: clamp(10px, 1.4vw, 16px);
+  display:grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gap); list-style:none; padding:0; margin:0;
+  perspective: 900px; /* für Tilt */
+}
+.board-grid .cell{
+  grid-column: span 12;
+  content-visibility: auto;
+  contain-intrinsic-size: 260px 200px; /* CLS-Schutz */
+}
+/* Erste Reihe sofort sichtbar (kuratierter Flow) */
+.board-grid .cell:nth-child(-n+3){ opacity:1 !important; transform:none !important; }
+
+@media (min-width: 900px){
+  .board-grid .cell{ grid-column: span 4; }
+  .board-grid .cell[data-span="xs"]{ grid-column: span 3; }
+  .board-grid .cell[data-span="s"] { grid-column: span 4; }
+  .board-grid .cell[data-span="m"] { grid-column: span 6; }
+  .board-grid .cell[data-span="l"] { grid-column: span 8; }
+  .board-grid .cell[data-span="xl"]{ grid-column: span 12; }
+}
+@media (min-width: 600px) and (max-width: 899px){
+  .board-grid .cell{ grid-column: span 6; }
+  .board-grid .cell[data-span="xl"]{ grid-column: span 12; }
+}
+
+/* ===== Karten-Stil (wie Next-Level-Board) + Soft-Edge ===== */
+.card{
+  --accent: #7aa2ff; /* per data-theme änderbar */
+  position: relative; overflow: hidden; border-radius: 16px;
+  background: #f7f7f7;
+  box-shadow: 0 1px 0 rgba(0,0,0,.05), 0 12px 28px rgba(0,0,0,.06);
+  transform-style: preserve-3d;
+  transition: transform .6s cubic-bezier(.19,1,.22,1), box-shadow .6s ease;
+  cursor: default; outline: none;
+}
+/* Themenfarben (nur Tag) */
+.card[data-theme="warm"]{ --accent:#ff7a45; }
+.card[data-theme="tech"]{ --accent:#000000; }
+
+/* Soft Edge */
+.card::after{
+  content:""; position:absolute; inset:0; pointer-events:none; border-radius: inherit;
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, #fff 35%, transparent);
+  opacity:.65;
+}
+/* Ambient Glow */
+.card::before{
+  content: ""; position: absolute; inset: -2px;
+  background: radial-gradient(circle at 50% 110%, rgba(255,255,255,.15), transparent 70%);
+  opacity: 0; transition: opacity .6s ease; z-index: 0;
+}
+.card:hover::before{ opacity: 1; }
+:root[data-theme="dark"] .card{ background:#0c0e13; box-shadow: 0 1px 0 rgba(255,255,255,.06), 0 12px 28px rgba(0,0,0,.35); }
+:root[data-theme="dark"] .card::after{ box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
+:root[data-theme="dark"] .card:hover::before{
+  background: radial-gradient(circle at 50% 110%, rgba(120,160,255,.22), transparent 70%);
+}
+
+/* Image: Basis & span-aware Ratios */
+.card img{
+  width: 100%; height: 100%; display: block; object-fit: cover;
+  aspect-ratio: 16/10; /* default */
+  filter: grayscale(100%) contrast(1.08) brightness(1.04);
+  transition: transform .6s cubic-bezier(.19,1,.22,1), filter .6s ease, opacity .35s ease;
+  transform-origin: center; will-change: transform; z-index:1; opacity:0; /* Fade-in via JS */
+}
+.cell[data-span="l"]  .card img{ aspect-ratio: 21/9; }
+.cell[data-span="xl"] .card img{ aspect-ratio: 2/1; }
+.cell[data-span="xs"] .card img{ aspect-ratio: 4/3; }
+
+/* Overlay Caption (Tag + Titel) mit adaptivem Kontrast */
+.card figcaption{
+  position: absolute; inset: 0; display: flex; flex-direction:column; gap:.25rem;
+  align-items: flex-start; justify-content: flex-end;
+  padding: 1rem 1.2rem;
+  font-size: 1rem; font-weight: 600; color: #fff;
+  background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0)); /* Fallback */
+  opacity: 0; transition: opacity .45s ease; z-index: 2;
+}
+/* Optional: wenn du serverseitig Luma bewertest */
+.card[data-on-light] figcaption{ background: linear-gradient(to top, rgba(0,0,0,.68), rgba(0,0,0,0)); }
+.card[data-on-dark]  figcaption{ background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,0)); }
+/* Hover-Verstärkung, falls Bild sehr hell ist */
+.card:hover figcaption{ background: linear-gradient(to top, rgba(0,0,0,.62), rgba(0,0,0,.08)); }
+
+.cap-tag{
+  font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
+  color:#fff;
+  background: color-mix(in oklab, var(--accent) 45%, black 10%);
+  padding:.22rem .5rem; border-radius:6px;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 1px 2px rgba(0,0,0,.25);
+}
+.cap-title{ font-size:1.02rem; font-weight:700; text-shadow:0 1px 2px rgba(0,0,0,.35); }
+:root[data-theme="dark"] .cap-tag{ background: rgba(0,0,0,.28); }
+
+@media (hover:hover){
+  .card:hover img{
+    transform: scale(1.05) translateY(-2px);
+    filter: grayscale(10%) contrast(1.05) brightness(1.05);
+  }
+  .card:hover{ box-shadow: 0 24px 48px rgba(0,0,0,.16); }
+  .card figcaption{ opacity:0; }      /* Desktop: Caption nur bei Hover */
+  .card:hover figcaption{ opacity:1; }
+}
+@media (hover:none){
+  .card figcaption{ opacity:1; }      /* Mobile: Caption sichtbar */
+}
+
+/* Fokus/A11y – rein visuell, ohne Tab-Stops */
+.card:focus-visible figcaption{
+  opacity:1;
+  outline: 2px dashed rgba(255,255,255,.7);
+  outline-offset: 6px;
+}
+
+/* Scroll-Reveal (gestrafft) */
+.cell{ opacity:0; transform: translateY(16px) scale(.985); }
+.cell.is-in{
+  opacity:1; transform: translateY(0) scale(1);
+  transition: transform .6s cubic-bezier(.19,1,.22,1), opacity .6s ease;
+}
+
+/* Reduced Motion & Touch */
+@media (prefers-reduced-motion: reduce){
+  .card, .card img, .cell{ transition:none !important; transform:none !important; }
+}
+@media (pointer:coarse){
+  .card{ transform:none !important; } /* Tilt aus auf Touch */
+}
+/* ===== Mobile Polish: sieht „deutlich besser“ auf dem Handy aus ===== */
+
+/* 1) Kompaktere Section + bessere Typo-Abstände */
+@media (max-width: 600px){
+  #arbeitsproben.is-compact.aurora-sheet{
+    padding: clamp(1rem, 3vw, 1.25rem) clamp(.8rem, 4vw, 1rem);
+    border-radius: 18px;
+  }
+  .board-head{ margin-bottom: .75rem; }
+  #arbeitsproben .aurora-title{ margin-bottom:.25rem !important; }
+  #arbeitsproben .aurora-subtitle{ line-height:1.55 !important; opacity:.95; }
+}
+
+/* 2) Grid: Luftiger, und auf größeren Phones (≥420px) hübsches 2-Spalten-Layout */
+@media (max-width: 600px){
+  .board-grid{ --gap: clamp(10px, 3.5vw, 14px); gap: var(--gap); }
+  .board-grid .cell{
+    grid-column: span 12;
+    contain-intrinsic-size: 220px 170px; /* reduzierte Platzhalterhöhe für Mobile */
+  }
+}
+@media (min-width: 420px) and (max-width: 599px){
+  .board-grid .cell{ grid-column: span 6; } /* 2 Spalten auf größeren Phones */
+}
+
+/* 3) Cards: mehr „Punch“, runder, bessere Lesbarkeit der Caption */
+@media (max-width: 600px){
+  .card{
+    border-radius: 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.12), 0 14px 30px rgba(0,0,0,.18);
+    transform: none !important; /* ruhiger auf Touch */
+  }
+  .card::after{ opacity:.85; } /* feiner Rand auf Mobile */
+  .card::before{ opacity:.35; } /* etwas mehr „Ambient Glow“ */
+  .card img{
+    aspect-ratio: 4/3;                /* harmonischer für Mobile */
+    filter: grayscale(0) contrast(1.02) brightness(1.03); /* lebendiger auf Phones */
+    transform: none !important;
+    opacity: 1;                        /* sofort sichtbar, kein FOUC-Eindruck */
+  }
+  .card figcaption{
+    padding: .9rem 1rem;
+    font-size: .98rem;
+    background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,.06));
+    opacity: 1;                        /* Mobil: immer sichtbar */
+  }
+  .cap-title{
+    font-size: 1.08rem;
+    line-height: 1.2;
+    letter-spacing: -.01em;
+    text-shadow: 0 1px 2px rgba(0,0,0,.35);
+  }
+  .cap-tag{
+    font-size: .7rem;
+    padding: .22rem .5rem;
+    border-radius: 6px;
+    backdrop-filter: blur(2px);
+    opacity:.96;
+  }
+}
+
+/* 4) Hover-Effekte auf Touch weiter entschärfen (zusätzlich zum bestehenden Pointer-Query) */
+@media (hover:none){
+  .card{ box-shadow: 0 2px 10px rgba(0,0,0,.10), 0 12px 24px rgba(0,0,0,.16); }
+  .card:hover img{ transform:none; }
+}
+
+/* 5) Smooth-In beim Scroll-Reveal etwas kürzer (snappier) */
+@media (max-width: 600px){
+  .cell.is-in{
+    transition: transform .42s cubic-bezier(.19,1,.22,1), opacity .42s ease;
+  }
+}
+/* ===== Mobile Redesign (no HTML changes) =====
+   Ziel: kein Slider, kein endloses „untereinander“.
+   Pattern: 2-Spalten-Masonry mit kuratierten Full-Width-„Feature“-Tiles. */
+@media (max-width: 600px){
+
+  /* Grid: dicht, rhythmisch, füllt Breite */
+  .board-grid{
+    display:grid;
+    grid-auto-flow:dense;
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:clamp(8px,3.2vw,12px);
+    perspective:none;
+  }
+
+  /* Basis: jede Zelle 1 Spalte, sofort sichtbar (ohne Fade-Flackern) */
+  .board-grid .cell{
+    grid-column:span 1;
+    opacity:1; transform:none;
+    contain-intrinsic-size: 180px 140px; /* ruhigerer CLS auf Mobile */
+  }
+
+  /* Feature-Tiles: erstes & jedes 7. Bild über volle Breite */
+  .board-grid .cell:nth-child(1),
+  .board-grid .cell:nth-child(7n){
+    grid-column:1 / -1;
+  }
+
+  /* Bild-Verhältnisse: mobilfreundlich; Feature breiter */
+  .card img{
+    aspect-ratio:3/2;
+    object-fit:cover;
+    object-position:50% 45%;
+    filter:grayscale(0) contrast(1.03) brightness(1.02);
+    transform:none !important; opacity:1;
+  }
+  .board-grid .cell:nth-child(1) .card img,
+  .board-grid .cell:nth-child(7n) .card img{
+    aspect-ratio:16/9;
+    object-position:50% 50%;
+  }
+
+  /* Karten-Stil: ruhiger, „agenturiger“ */
+  .card{
+    border-radius:16px;
+    box-shadow:0 6px 16px rgba(0,0,0,.16);
+    transform:none !important; cursor:default;
+    background:#0c0e13; /* Dark: edel; remove if light */
+  }
+  .card::before{ opacity:.22; }
+  .card::after{  opacity:.75; }
+
+  /* Caption immer sichtbar & gut lesbar */
+  .card figcaption{
+    opacity:1;
+    padding:.75rem .85rem;
+    font-size:.95rem; line-height:1.25;
+    background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.06));
+  }
+  .cap-title{ font-size:1.04rem; letter-spacing:-.005em; }
+  .cap-tag{ font-size:.68rem; padding:.16rem .42rem; border-radius:6px; }
+
+  /* Hover-Zeug auf Touch entschärfen */
+  .card:hover img{ transform:none; }
+  .card:hover{ box-shadow:0 6px 16px rgba(0,0,0,.16); }
+}
+/* ===== Mobile Cleanup: keine Beschriftung / pure Image Gallery ===== */
+@media (max-width: 600px){
+
+  /* Bilder kompakt in 2-Spalten-Masonry */
+  .board-grid{
+    display:grid;
+    grid-auto-flow:dense;
+    grid-template-columns:repeat(2, 1fr);
+    gap:clamp(8px,3vw,12px);
+  }
+
+  /* Jede Zelle sichtbar, kein Fade */
+  .board-grid .cell{
+    grid-column:span 1;
+    opacity:1; transform:none;
+  }
+
+  /* Größere Feature-Kacheln */
+  .board-grid .cell:nth-child(1),
+  .board-grid .cell:nth-child(7n){
+    grid-column:1 / -1;
+  }
+
+  /* Reines Bild – ohne Beschriftung */
+  .card figcaption,
+  .cap-tag,
+  .cap-title{
+    display:none !important;
+  }
+
+  /* Ruhige, saubere Bilddarstellung */
+  .card{
+    border-radius:14px;
+    box-shadow:0 4px 14px rgba(0,0,0,.18);
+    overflow:hidden;
+    background:#000;
+  }
+  .card img{
+    display:block;
+    width:100%;
+    aspect-ratio:3/2;
+    object-fit:cover;
+    filter:grayscale(0) contrast(1.05) brightness(1.05);
+    transform:none !important; opacity:1;
+  }
+}
+/* ===== MOBILE EDGE-TO-EDGE LOOK =====
+   Ziel: Bilder auf dem Handy näher an die Bildschirmränder bringen,
+   mit edlem, "agenturartigem" Layout – keine Schrift, kein Randrahmen. */
+
+@media (max-width: 600px){
+
+  /* Section: nahezu randlos, etwas "Atem" für den Header */
+  #arbeitsproben.is-compact.aurora-sheet{
+    padding: clamp(.6rem, 3vw, 1rem) 0; /* fast edge-to-edge */
+    border-radius: 0;
+  }
+
+  /* Grid: Rand fast bis zum Viewport-Rand, minimale Spaltenabstände */
+  .board-grid{
+    --gap: clamp(4px, 1.8vw, 8px);
+    display:grid;
+    grid-auto-flow:dense;
+    grid-template-columns:repeat(2, 1fr);
+    gap:var(--gap);
+    margin-inline:clamp(-2px, -1.5vw, -6px); /* leicht negativ für echtes Edge-Feeling */
+  }
+
+  /* Zellen & Bilder */
+  .board-grid .cell{
+    grid-column:span 1;
+    opacity:1; transform:none;
+  }
+  .board-grid .cell:nth-child(1),
+  .board-grid .cell:nth-child(7n){
+    grid-column:1 / -1;
+  }
+
+  /* Pure Image Cards */
+  .card{
+    border-radius:0;
+    box-shadow:none;
+    background:#000;
+    overflow:hidden;
+  }
+  .card img{
+    display:block;
+    width:100%;
+    aspect-ratio:3/2;
+    object-fit:cover;
+    object-position:center;
+    filter:contrast(1.05) brightness(1.08);
+    transform:none !important;
+    opacity:1;
+  }
+
+  /* Keine Beschriftungen */
+  .card figcaption,
+  .cap-tag,
+  .cap-title{
+    display:none !important;
+  }
+
+  /* Auf größeren Phones (ab 420px): sanfte Rundung wieder hinzufügen */
+  @media (min-width:420px){
+    .card{ border-radius:10px; }
+    .board-grid{ margin-inline:0; }
+  }
+}
