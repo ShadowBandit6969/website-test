@@ -423,6 +423,16 @@ body[data-page="3DKonzept"] .hero-image-foreground {
 
 </style>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script/aurora.js" defer></script>
+<script src="script/cosmos.js" defer></script>
+<script src="script/panetransition.js" defer></script>
+<script src="script/arbeitsproben.js" defer></script>
+<script src="script/freewireframe.js" defer></script>
+<script src="script/metrics.js" defer></script>
+<script src="script/ArbeitsprobenBilder.js" defer></script>
+<script src="script/kontaktformular.js" defer></script>
 </head>
 
 <body data-page="3DKonzept">
@@ -1714,270 +1724,6 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
   </ul>
 </section>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": "https://example.com/ueber-fusion3/#webpage",
-      "url": "https://example.com/ueber-fusion3/",
-      "name": "Über Fusion3 — Design, 3D & Web",
-      "inLanguage": "de",
-      "isPartOf": {
-        "@type": "WebSite",
-        "@id": "https://example.com/#website",
-        "url": "https://example.com/"
-      },
-      "description": "Wir verbinden Design, 3D und Web – für Marken, die in Erinnerung bleiben. Kreativität trifft Technologie. Wirkung trifft Tempo.",
-      "primaryImageOfPage": {
-        "@type": "ImageObject",
-        "url": "https://example.com/assets/og/ueber-fusion3.jpg"
-      },
-      "mainEntity": { "@id": "https://example.com/ueber-fusion3/#mission-team-vision" }
-    },
-    {
-      "@type": "ItemList",
-      "@id": "https://example.com/ueber-fusion3/#mission-team-vision",
-      "name": "Mission, Team & Vision",
-      "inLanguage": "de",
-      "itemListOrder": "http://schema.org/ItemListOrderAscending",
-      "numberOfItems": 3,
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "item": {
-            "@type": "WebPageElement",
-            "@id": "https://example.com/ueber-fusion3/#aether-mission",
-            "url": "https://example.com/ueber-fusion3/#aether-mission",
-            "name": "Unsere Mission",
-            "description": "Design, Code & 3D als Einheit — Balance, Erlebnis und skalierbare Systeme."
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "item": {
-            "@type": "WebPageElement",
-            "@id": "https://example.com/ueber-fusion3/#aether-crew",
-            "url": "https://example.com/ueber-fusion3/#aether-crew",
-            "name": "Unser Team",
-            "description": "Interdisziplinär, agil und erfahren — Designer, Entwickler & 3D-Artists als Produktteam."
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "item": {
-            "@type": "WebPageElement",
-            "@id": "https://example.com/ueber-fusion3/#aether-vision",
-            "url": "https://example.com/ueber-fusion3/#aether-vision",
-            "name": "Unsere Vision",
-            "description": "Zukunftsorientiertes Design mit Wirkung — Emotion, Technologie und Nachhaltigkeit."
-          }
-        }
-      ]
-    }
-  ]
-}
-</script>
-<script>
-(function(){
-  const mqMobile = window.matchMedia('(max-width: 699.98px)');
-  const section = document.getElementById('aurora-sheet');
-  if(!section) return;
-
-  const cards = Array.from(section.querySelectorAll('.aether-card'));
-  if(!cards.length) return;
-
-  // ---- Hilfsfunktionen
-  const vhMid = () => window.innerHeight / 2;
-  const centerAbs = () => window.scrollY + vhMid();
-
-  // Zustand für richtungssensitives „Step“-Aktivieren
-  let currentIndex = 0;
-  let lastScrollY = window.scrollY;
-
-  // Sichtbarkeits-Observer (wie gehabt)
-  function setupObservers(){
-    const sectionObserver = new IntersectionObserver(([entry])=>{
-      if(entry.isIntersecting){
-        section.classList.add('section-enter');
-        section.classList.remove('section-exit');
-      }else{
-        section.classList.add('section-exit');
-        section.classList.remove('section-enter');
-      }
-    }, { root: null, threshold: 0.05 });
-    sectionObserver.observe(section);
-
-    const revealObserver = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        const el = entry.target;
-        if(entry.intersectionRatio >= 0.3){
-          el.classList.add('is-revealed');
-          el.classList.remove('is-fading');
-        }else if(entry.intersectionRatio > 0 && entry.intersectionRatio < 0.3){
-          el.classList.add('is-fading');
-        }else{
-          el.classList.remove('is-fading','is-revealed');
-        }
-      });
-    }, { root: null, threshold: [0, .15, .3], rootMargin: '-10% 0px -10% 0px' });
-
-    cards.forEach(c => revealObserver.observe(c));
-  }
-
-  // aktuelle Karte „stepweise“ bestimmen
-  function pickActiveStepwise(){
-    const dirDown = window.scrollY > lastScrollY;
-    lastScrollY = window.scrollY;
-
-    // Mittenpositionen (Dokumentkoordinaten) & dynamische Grenzen berechnen
-    const mids = cards.map(c=>{
-      const r = c.getBoundingClientRect();
-      return window.scrollY + r.top + r.height/2;
-    });
-
-    // Grenzen zwischen Karten: Mitte zwischen den Mittelpunkten
-    // boundary[i] trennt i und i+1
-    const boundaries = [];
-    for(let i=0; i<mids.length-1; i++){
-      boundaries.push((mids[i] + mids[i+1]) / 2);
-    }
-
-    const cAbs = centerAbs();
-
-    // Wenn wir uns außerhalb der Section befinden, nichts ändern
-    const secRect = section.getBoundingClientRect();
-    if(secRect.bottom <= 0 || secRect.top >= window.innerHeight) return;
-
-    // Initialisierung: beim Eintritt von oben → Index 0
-    if(cAbs <= boundaries[0]) currentIndex = 0;
-
-    // Step-Logik: nur bei Überschreiten der passenden Grenze wechseln
-    if(dirDown){
-      // nach unten: steigt max. um 1 pro Grenze
-      if(currentIndex < cards.length - 1 && cAbs >= boundaries[currentIndex]){
-        currentIndex += 1;
-      }
-    }else{
-      // nach oben: sinkt max. um 1 pro Grenze
-      if(currentIndex > 0 && cAbs <= boundaries[currentIndex - 1]){
-        currentIndex -= 1;
-      }
-    }
-
-    // Klassen anwenden
-    cards.forEach((c, i)=>{
-      if(i === currentIndex){
-        c.classList.add('is-active');
-        c.style.willChange = 'transform, opacity';
-      }else{
-        c.classList.remove('is-active','is-pressed');
-        c.style.willChange = '';
-      }
-    });
-  }
-
-  // rAF-Throttling
-  let ticking = false;
-  function onScroll(){
-    if(!ticking){
-      requestAnimationFrame(()=>{
-        pickActiveStepwise();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }
-
-  // Tap/Press & Click-Setzen
-  function setupPress(){
-    const pressMs = 160;
-    const vibrate = (ms)=>{ try{ navigator.vibrate && navigator.vibrate(ms); }catch(e){} };
-
-    cards.forEach((card, idx)=>{
-      let pressTO = null;
-
-      card.addEventListener('pointerdown', (e)=>{
-        if(e.pointerType && e.button !== 0) return;
-        card.classList.add('is-pressed');
-        vibrate(10);
-        clearTimeout(pressTO);
-        pressTO = setTimeout(()=> card.classList.remove('is-pressed'), pressMs);
-      });
-
-      ['pointerup','pointercancel','pointerleave'].forEach(type=>{
-        card.addEventListener(type, ()=> card.classList.remove('is-pressed'));
-      });
-
-      card.addEventListener('click', ()=>{
-        currentIndex = idx;               // Reihenfolge bleibt kohärent
-        cards.forEach((c,i)=> c.classList.toggle('is-active', i===currentIndex));
-        // sanft zur Mitte scrollen, falls stark off-center
-        const r = card.getBoundingClientRect();
-        const delta = (r.top + r.height/2) - vhMid();
-        if(Math.abs(delta) > 24){
-          window.scrollBy({ top: delta, left: 0, behavior: 'smooth' });
-        }
-      });
-    });
-  }
-
-  // Reduced Motion: Bewegung minimieren
-  function setupReducedMotion(){
-    const rdm = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const handle = (e)=>{
-      if(e.matches){
-        cards.forEach(c=>{
-          c.classList.remove('is-pressed','is-active','is-revealed','is-fading');
-          c.style.transform = '';
-          c.style.willChange = '';
-        });
-      }else{
-        pickActiveStepwise();
-      }
-    };
-    rdm.addEventListener?.('change', handle);
-    handle(rdm);
-  }
-
-  // aktivieren/deaktivieren für Mobile
-  function enableMobileEffects(){
-    setupObservers();
-    setupPress();
-    setupReducedMotion();
-    // Listener
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    // Initial: starte auf erster Karte
-    currentIndex = 0;
-    pickActiveStepwise();
-  }
-
-  function disableMobileEffects(){
-    section.classList.remove('section-enter','section-exit');
-    cards.forEach(c=>{
-      c.classList.remove('is-revealed','is-fading','is-active','is-pressed');
-      c.style.willChange = '';
-    });
-    window.removeEventListener('scroll', onScroll);
-    window.removeEventListener('resize', onScroll);
-  }
-
-  // Bootstrapping
-  if(mqMobile.matches){ enableMobileEffects(); }
-  (mqMobile.addEventListener ? mqMobile.addEventListener('change', e=>{
-    if(e.matches){ enableMobileEffects(); } else { disableMobileEffects(); }
-  }) : mqMobile.addListener && mqMobile.addListener(e=>{
-    if(e.matches){ enableMobileEffects(); } else { disableMobileEffects(); }
-  }));
-
-})();
-</script>
-
 
 
 
@@ -3019,6 +2765,324 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
 
 
 
+<section class="lyra-vault" id="lyra-faq">
+  <h2 class="lyra-heading">Häufige Fragen zu 3D-Design &amp; Visualisierung</h2>
+
+  <div class="lyra-console" role="search">
+    <input
+      type="text"
+      id="lyraSearch"
+      placeholder="Nach Stichwort suchen …"
+      aria-label="FAQ durchsuchen"
+      enterkeyhint="search"
+      autocomplete="off"
+    >
+    <div class="lyra-nav">
+      <button id="lyraPrev" type="button" aria-label="Vorheriges Ergebnis">
+        <i data-feather="chevron-left" aria-hidden="true"></i>
+      </button>
+      <span id="lyraIndex" aria-live="polite">0 / 0</span>
+      <button id="lyraNext" type="button" aria-label="Nächstes Ergebnis">
+        <i data-feather="chevron-right" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="lyra-grid">
+
+    <!-- Card 1 -->
+    <div class="lyra-card">
+      <button class="lyra-toggle" aria-expanded="false">
+        <span>Ablauf &amp;<br> Projektdauer</span>
+        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
+      </button>
+      <div class="lyra-drop">
+        <p><strong>Wie läuft ein 3D-Projekt ab?</strong><br>Nach einem kurzen Briefing entsteht ein Konzept mit Licht, Kamera und Stilrichtung. Anschließend folgen Modellierung, Look-Dev, Rendering und finale Postproduktion.</p>
+        <p><strong>Wie lange dauert das?</strong><br>Je nach Komplexität: einfache Visuals oder Produkt-Renderings ca. 1–2 Wochen, größere Szenen oder Animationen 3–5 Wochen.</p>
+        <p><strong>Kann ich Zwischenergebnisse sehen?</strong><br>Ja – Sie erhalten laufend Vorschauen (Blockmodelle, Look-Proofs oder Test-Renderings), um alles früh abzustimmen.</p>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="lyra-card">
+      <button class="lyra-toggle" aria-expanded="false">
+        <span>Kosten &amp;<br> Angebot</span>
+        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
+      </button>
+      <div class="lyra-drop">
+        <p><strong>Wie werden die Kosten berechnet?</strong><br>Nach Aufwand – abhängig von Modellkomplexität, Rendering-Qualität, Animation und gewünschtem Output (Bild, Video, AR-Asset etc.).</p>
+        <p><strong>Gibt es Paketpreise?</strong><br>Ja, für Standard-Renderings oder kurze Produktclips. Für individuelle Szenen und Animationen erstellen wir ein detailliertes Angebot.</p>
+        <p><strong>Wie wird bezahlt?</strong><br>In zwei Schritten: 50 % bei Projektstart, 50 % nach Abnahme der finalen Renderings.</p>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="lyra-card">
+      <button class="lyra-toggle" aria-expanded="false">
+        <span>Technik &amp;<br> Umsetzung</span>
+        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
+      </button>
+      <div class="lyra-drop">
+        <p><strong>Mit welchen Tools arbeiten Sie?</strong><br>Hauptsächlich mit <strong>Blender / Cycles</strong> für Modeling und Rendering, <strong>Substance Painter</strong> für Texturen, <strong>DaVinci Resolve</strong> für Compositing &amp; Grading.</p>
+        <p><strong>Kann ich eigene CAD-Daten liefern?</strong><br>Ja – STEP, OBJ, FBX oder STL werden übernommen und sauber aufbereitet.</p>
+        <p><strong>Welche Auflösungen sind möglich?</strong><br>Von Web-optimierten Assets bis zu 8K-Renderings für Druck oder Messewände.</p>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="lyra-card">
+      <button class="lyra-toggle" aria-expanded="false">
+        <span>Design &amp;<br> Kreativprozess</span>
+        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
+      </button>
+      <div class="lyra-drop">
+        <p><strong>Wie läuft die kreative Abstimmung?</strong><br>Wir starten mit einem Look-Proof – Licht, Komposition und Stimmung werden als Vorschau gerendert, bevor es ins Detail geht.</p>
+        <p><strong>Kann ich Farben oder Perspektiven anpassen?</strong><br>Ja – Kamera-Setups, Materialien oder Licht können in der Abstimmungsphase beliebig variiert werden.</p>
+        <p><strong>Wird der Stil an meine Marke angepasst?</strong><br>Absolut. Farbwelt, Kontraste und Materialästhetik orientieren sich an Ihrer Corporate Identity.</p>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="lyra-card">
+      <button class="lyra-toggle" aria-expanded="false">
+        <span>Nach Projekt &amp;<br> Betreuung</span>
+        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
+      </button>
+      <div class="lyra-drop">
+        <p><strong>Erhalte ich die 3D-Daten?</strong><br>Ja – nach Abschluss bekommen Sie alle finalen Renderings sowie auf Wunsch auch die offenen 3D-Dateien (z. B. .blend oder .fbx).</p>
+        <p><strong>Können später weitere Varianten entstehen?</strong><br>Ja, Farben, Perspektiven oder Animationen lassen sich jederzeit ergänzen – ohne kompletten Neuaufbau.</p>
+        <p><strong>Bieten Sie langfristige Betreuung an?</strong><br>Auf Wunsch übernehmen wir Updates, Rendering-Erweiterungen oder Anpassungen für neue Produkte.</p>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="lyra-card">
+      <button class="lyra-toggle" aria-expanded="false">
+        <span>Rechtliches &amp;<br> Nutzung</span>
+        <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
+      </button>
+      <div class="lyra-drop">
+        <p><strong>Wem gehören die Renderings?</strong><br>Nach vollständiger Zahlung erhalten Sie die uneingeschränkten Nutzungsrechte an allen finalen Bildern und Animationen.</p>
+        <p><strong>Darf ich die Bilder kommerziell verwenden?</strong><br>Ja – z. B. für Website, Social Media, Print oder Messepräsentationen.</p>
+        <p><strong>Wie werden vertrauliche Daten behandelt?</strong><br>Vertraulich und DSGVO-konform. Auf Wunsch schließen wir eine NDA ab.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script src="https://unpkg.com/feather-icons" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.feather) feather.replace();
+
+  const vault = document.getElementById("lyra-faq");
+  const cards = [...document.querySelectorAll(".lyra-card")];
+  const input = document.getElementById("lyraSearch");
+  const prev = document.getElementById("lyraPrev");
+  const next = document.getElementById("lyraNext");
+  const indexLbl = document.getElementById("lyraIndex");
+
+  const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const smoothOpts = prefersReduced ? {behavior:"auto"} : {behavior:"smooth"};
+
+  // ---- Utilities ------------------------------------------------------------
+  const normalize = (s) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
+
+  let matches = [], current = 0, debounceTo = null;
+
+  function setButtonsEnabled(enabled){
+    [prev, next].forEach(b=>{
+      b.disabled = !enabled;
+      b.setAttribute("aria-disabled", String(!enabled));
+      b.style.opacity = enabled ? "" : ".6";
+      b.style.cursor  = enabled ? "pointer" : "not-allowed";
+    });
+  }
+
+  function closeAll(){
+    cards.forEach(c=>{
+      const b = c.querySelector(".lyra-toggle");
+      const d = c.querySelector(".lyra-drop");
+      b.setAttribute("aria-expanded","false");
+      d.style.maxHeight = null;
+    });
+  }
+
+  function removeMarks(){
+    vault.querySelectorAll("mark").forEach(m=>{
+      const t = document.createTextNode(m.textContent);
+      m.replaceWith(t);
+    });
+  }
+
+  // Escape RegExp Sonderzeichen
+  const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  function highlight(node, keyword){
+    const terms = keyword.split(/\s+/).filter(Boolean).map(escapeRegExp);
+    if (!terms.length) return;
+    const rx = new RegExp("(" + terms.join("|") + ")", "gi");
+
+    if (node.nodeType === 3){
+      const span = document.createElement("span");
+      span.innerHTML = node.nodeValue.replace(rx, "<mark>$1</mark>");
+      node.parentNode.replaceChild(span, node);
+    } else if (node.nodeType === 1 && node.childNodes && !["SCRIPT","STYLE","INPUT","BUTTON"].includes(node.tagName)){
+      [...node.childNodes].forEach(child => highlight(child, keyword));
+    }
+  }
+
+  function scrollToCard(c){
+    const y = c.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top: y, ...smoothOpts });
+  }
+
+  function openCard(c){
+    const b = c.querySelector(".lyra-toggle");
+    const d = c.querySelector(".lyra-drop");
+    b.setAttribute("aria-expanded","true");
+    d.style.maxHeight = d.scrollHeight + "px";
+  }
+
+  function recalcOpenHeights(){
+    cards.forEach(c=>{
+      const b = c.querySelector(".lyra-toggle");
+      const d = c.querySelector(".lyra-drop");
+      if (b.getAttribute("aria-expanded")==="true"){
+        d.style.maxHeight = d.scrollHeight + "px";
+      }
+    });
+  }
+
+  function updateIndex(){
+    indexLbl.textContent = matches.length ? `${current+1} / ${matches.length}` : "0 / 0";
+    setButtonsEnabled(matches.length > 0);
+  }
+
+  // Precompute normalisierte Inhalte für schnelle Suche
+  const cardCache = cards.map(c => ({
+    el: c,
+    textNorm: normalize(c.innerText)
+  }));
+
+  function doSearch(keyword){
+    const qRaw = keyword.trim();
+    const q = normalize(qRaw);
+    removeMarks();
+    closeAll();
+    matches = [];
+    if (!q){ updateIndex(); return; }
+
+    cardCache.forEach(({el, textNorm})=>{
+      if (textNorm.includes(q)){
+        matches.push(el);
+        // Markiere realen DOM-Text (nicht den Cache)
+        highlight(el, qRaw);
+      }
+    });
+
+    current = 0;
+    if (matches.length){
+      openCard(matches[0]);
+      scrollToCard(matches[0]);
+    }
+    updateIndex();
+  }
+
+  // ---- Events ---------------------------------------------------------------
+  input.addEventListener("input", e=>{
+    clearTimeout(debounceTo);
+    debounceTo = setTimeout(()=>doSearch(e.target.value), 140);
+  });
+
+  prev.addEventListener("click", ()=>{
+    if (!matches.length) return;
+    current = (current - 1 + matches.length) % matches.length;
+    closeAll(); openCard(matches[current]); scrollToCard(matches[current]); updateIndex();
+  });
+
+  next.addEventListener("click", ()=>{
+    if (!matches.length) return;
+    current = (current + 1) % matches.length;
+    closeAll(); openCard(matches[current]); scrollToCard(matches[current]); updateIndex();
+  });
+
+  // Akkordeon: IDs + ARIA + Click
+  cards.forEach((c, i)=>{
+    const btn  = c.querySelector(".lyra-toggle");
+    const drop = c.querySelector(".lyra-drop");
+    const btnId  = `lyra-toggle-${i+1}`;
+    const dropId = `lyra-drop-${i+1}`;
+    btn.id = btnId;
+    drop.id = dropId;
+
+    // bessere Roles/Labels
+    drop.setAttribute("role","region");
+    drop.setAttribute("aria-labelledby", btnId);
+    btn.setAttribute("aria-controls", dropId);
+
+    btn.addEventListener("click", ()=>{
+      const isOpen = btn.getAttribute("aria-expanded")==="true";
+      btn.setAttribute("aria-expanded", isOpen ? "false" : "true");
+      drop.style.maxHeight = isOpen ? null : drop.scrollHeight + "px";
+    });
+
+    // ResizeObserver: offene Panels passen sich automatisch an
+    const ro = new ResizeObserver(()=>{
+      if (btn.getAttribute("aria-expanded")==="true"){
+        drop.style.maxHeight = drop.scrollHeight + "px";
+      }
+    });
+    ro.observe(drop);
+  });
+
+  // Tastatur-Navigation (Akkordeon-Header)
+  const toggles = cards.map(c=>c.querySelector(".lyra-toggle"));
+  function focusToggle(idx){
+    if (idx<0) idx = 0;
+    if (idx>=toggles.length) idx = toggles.length-1;
+    toggles[idx].focus();
+  }
+  toggles.forEach((btn, idx)=>{
+    btn.addEventListener("keydown", (e)=>{
+      switch(e.key){
+        case "ArrowDown": e.preventDefault(); focusToggle(idx+1); break;
+        case "ArrowUp":   e.preventDefault(); focusToggle(idx-1); break;
+        case "Home":      e.preventDefault(); focusToggle(0);     break;
+        case "End":       e.preventDefault(); focusToggle(toggles.length-1); break;
+        case "Enter":
+        case " ":
+          e.preventDefault();
+          btn.click();
+          break;
+      }
+    });
+  });
+
+  // Shortcut: "/" fokussiert Suche
+  document.addEventListener("keydown", (e)=>{
+    if (e.key === "/" && document.activeElement !== input){
+      e.preventDefault();
+      input.focus();
+    }
+  });
+
+  // Recalc on resize (responsive)
+  let resizeTo;
+  window.addEventListener("resize", ()=>{
+    clearTimeout(resizeTo);
+    resizeTo = setTimeout(recalcOpenHeights, 120);
+  });
+
+  // Initial
+  setButtonsEnabled(false);
+  updateIndex();
+});
+</script>
+
+
+
 <section class="angled-image-section" aria-labelledby="angled-image-heading">
   <h2 id="angled-image-heading" class="visually-hidden">Modernes Webdesign – diagonale Bildsektion</h2>
 
@@ -3150,4 +3214,7 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
     if (el) el.textContent = new Date().getFullYear();
   })();
 </script>
+
+</body>
+</html>
 
