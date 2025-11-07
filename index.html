@@ -958,22 +958,34 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
-
-<section class="hero-section" data-page="webdesign">
+<section class="hero-section" data-page="webdesign" aria-labelledby="webdesign-title">
   <div class="hero-images-wrapper">
     <!-- HINTERGRUND-VIDEO -->
     <div class="hero-image-background">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hintegrundweb.webp">
-        <source src="./WebdesignPic/1.mp4" type="video/mp4" />
+      <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="./images/hintegrundweb.webp"
+        aria-hidden="true"
+      >
+        <source src="./WebdesignPic/1.mp4" type="video/mp4">
       </video>
+
+      <!-- Fallback ohne JS -->
+      <noscript>
+        <img src="./images/hintegrundweb.webp" alt="">
+      </noscript>
     </div>
 
     <div class="page-title">
       <div class="container">
-        <h1 class="large-title">Fusion3</h1>
+        <h1 class="large-title" id="webdesign-title">Fusion3</h1>
       </div>
     </div>
-
   </div>
 </section>
 <script>
@@ -983,13 +995,17 @@ body[data-page="webdesign"] .hero-image-foreground {
   const pageTitle = document.querySelector('.page-title');
   if (!section || !h1 || !pageTitle) return;
 
-  // --- Reload-Erkennung (unverändert) ---
+  // --- Motion Preferences ---
+  const REDUCED_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // --- Reload-Erkennung (kompatibel) ---
   function isReload() {
     try {
       const n = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
       if (n && (n.type === 'reload' || n.type === 'back_forward')) return true;
+      // älterer Fallback
       if (performance && performance.navigation && performance.navigation.type === 1) return true;
-    } catch(e){}
+    } catch (e) {}
     return false;
   }
   const RELOADED = isReload();
@@ -1019,22 +1035,24 @@ body[data-page="webdesign"] .hero-image-foreground {
 
   // ---------- Canvas Sizing + Live-Tracking ----------
   let ctx = null;
-  let last = { w:0, h:0, left:0, top:0, dpr:0 };
+  let last = { w: 0, h: 0, left: 0, top: 0, dpr: 0 };
 
-  function sizeCanvas(force=false) {
+  function sizeCanvas(force = false) {
     const r = h1.getBoundingClientRect();
     const pr = pageTitle.getBoundingClientRect();
     const dpr = Math.min(2, window.devicePixelRatio || 1);
 
-    const left = r.left - pr.left;
-    const top  = r.top  - pr.top;
+    const left = Math.round(r.left - pr.left);
+    const top  = Math.round(r.top  - pr.top);
     const w = Math.ceil(r.width);
     const h = Math.ceil(r.height);
 
-    if (!force &&
-        w === last.w && h === last.h &&
-        left === last.left && top === last.top &&
-        dpr === last.dpr) return;
+    if (
+      !force &&
+      w === last.w && h === last.h &&
+      left === last.left && top === last.top &&
+      dpr === last.dpr
+    ) return;
 
     overlay.style.width = w + 'px';
     overlay.style.height = h + 'px';
@@ -1044,7 +1062,7 @@ body[data-page="webdesign"] .hero-image-foreground {
     overlay.width = Math.max(1, Math.floor(w * dpr));
     overlay.height = Math.max(1, Math.floor(h * dpr));
 
-    ctx = overlay.getContext('2d');
+    ctx = overlay.getContext('2d', { alpha: true });
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     last = { w, h, left, top, dpr };
@@ -1052,170 +1070,49 @@ body[data-page="webdesign"] .hero-image-foreground {
 
   sizeCanvas(true);
 
-  const roH1 = new ResizeObserver(() => sizeCanvas(true));
-  const roTitle = new ResizeObserver(() => sizeCanvas(true));
-  roH1.observe(h1);
-  roTitle.observe(pageTitle);
+  const roH1 = 'ResizeObserver' in window ? new ResizeObserver(() => sizeCanvas(true)) : null;
+  const roTitle = 'ResizeObserver' in window ? new ResizeObserver(() => sizeCanvas(true)) : null;
+  roH1 && roH1.observe(h1);
+  roTitle && roTitle.observe(pageTitle);
 
-  window.addEventListener('resize', () => sizeCanvas(true), { passive:true });
-  window.addEventListener('scroll', () => sizeCanvas(false), { passive:true });
-  window.addEventListener('orientationchange', () => sizeCanvas(true));
+  const onResize = () => sizeCanvas(true);
+  const onScroll = () => sizeCanvas(false);
+  window.addEventListener('resize', onResize, { passive: true });
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('orientationchange', onResize);
 
-  // ---------- Text → Letters ----------
-  // großer, exotischer Glyph-Pool: Griechisch, Kyrillisch, Armenisch, Georgisch, IPA, Fraktur, Mathe-Alphanumerika, Ziffernvarianten …
+  // ---------- Unicode Helfer (NFC-sicher) ----------
+  // U("039A,16D5") -> "\u039A\u16D5", anschließend NFC
+  function U(csv) {
+    return csv.split(',').map(cp => String.fromCodePoint(parseInt(cp.trim(), 16))).join('').normalize('NFC');
+  }
+  // Kurzform: erzeugt Array aus einzelnen Codepoints
+  function UA(list) { return list.map(code => U(code)); }
+
+  // --- Minimaler, exemplarischer Glyph-Pool (erweiterbar, NFC-sicher) ---
+  // Hinweis: Hier nur kleine Auswahl. Bei Bedarf erweitern – immer via U/UA definieren.
   const SIMILAR = {
     // lower
-    'a':['ɑ','α','⍺','ª','ᵃ','ä','á','à','ȧ','ą','ɐ','@','ꭤ','𝖺','𝔞','ᶏ','ᴀ'],
-    'b':['Ь','ƅ','Ꮟ','Ƅ','ƀ','ẛ'.replace('ẛ','b'),'ɓ','ᵇ','ᶀ','𝖻','𝔟'],
-    'c':['ϲ','ᴄ','с','ᶜ','ƈ','ↄ','ς','ɔ','ꜿ','ç','č','ċ','𝖼','𝔠'],
-    'd':['ԁ','đ','ᑯ','ᵈ',')','ɗ','ᵭ','ḋ','ᶁ','𝖽','𝔡'],
-    'e':['℮','ɛ','є','ᵉ','ᵋ','ℯ','ɇ','ė','ë','é','è','ɘ','ε','𝖾','𝔢'],
-    'f':['ƒ','ſ','ϝ','ẝ','ʄ','ᶂ','𐊇','𝖿','𝔣'],
-    'g':['ɡ','ǥ','ᵍ','9','ĝ','ğ','ġ','ḡ','ɢ','ᶃ','𝓰','𝔤'],
-    'h':['һ','ℎ','ᵸ','ʰ','ɦ','ħ','ꜧ','ḫ','𝖍','𝔥'],
-    'i':['ɪ','ǐ','ı','¡','1','í','ì','ï','ỉ','ɨ','ⅰ','!', '𝖎','𝔦'],
-    'j':['ȷ','ϳ','ј','ʝ','ĵ','ɉ','ᶡ','𝖏','𝔧'],
-    'k':['κ','ᵏ','ꭆ','ḳ','ǩ','ꝁ','ќ','ᴋ','𝖐','𝔨'],
-    'l':['ɩ','ⅼ','ǀ','|','Ɩ','ĺ','ļ','ł','ᶅ','ʟ','𝖑','𝔩'],
-    'm':['ṃ','ᴍ','м','ᵐ','ɱ','ṁ','ᶆ','𝖒','𝔪'],
-    'n':['η','п','ɴ','∩','ɲ','ṅ','ņ','ń','ň','ң','𝖓','𝔫'],
-    'o':['ο','о','ɵ','°','0','ö','ó','ò','õ','ơ','ø','○','∘','𝖔','𝔬'],
-    'p':['ρ','р','ᵖ','ᵱ','ṕ','ṗ','ƥ','ῥ','𝖕','𝔭'],
-    'q':['զ','ʠ','ɋ','ȹ','գ','𝖖','𝔮'],
-    'r':['ɼ','г','ʳ','ř','ŗ','ꭇ','ʀ','ȑ','ȓ','ṙ','ᵲ','𝖗','𝔯'],
-    's':['ʂ','ѕ','$','§','ş','ś','ṡ','ș','ṥ','ʃ','ƨ','ß','𝖘','𝔰'],
-    't':['τ','ť','ŧ','†','ṭ','ṯ','ƫ','ʈ','₸','𝖙','𝔱'],
-    'u':['υ','ʋ','ս','ᵘ','ů','ü','ú','ù','ū','ư','µ','ꭎ','𝖚','𝔲'],
-    'v':['ν','ѵ','ᵛ','ṿ','ѷ','√','∨','ʋ','𝖛','𝔳'],
-    'w':['ᴡ','ѡ','ɯ','ŵ','ẇ','ɰ','ɯ','𝖜','𝔴'],
-    'x':['х','×','✕','χ','ẋ','ᶍ','ⅹ','𝖝','𝔵'],
-    'y':['γ','ʏ','у','ý','ỳ','ÿ','ŷ','ɣ','ʎ','¥','𝖞','𝔶'],
-    'z':['ʐ','ᴢ','ž','ż','ź','ƶ','ʑ','ẓ','ƻ','𝖟','𝔷'],
-    // upper
-    'A':['Α','Λ','Ꭺ','Ā','Ⱥ','∆','∀','𝘈','𝕬','𝔄'],
-    'B':['В','Ƀ','ß','Ɓ','ℬ','ʙ','ɮ','ᛒ','𝘉','𝕭','𝔅'],
-    'C':['Ϲ','С','Ⅽ','Ꮯ','℃'.slice(0,1),'☾','ℂ','𐐕','𝘊','𝕮','𝔇'.replace('D','C')],
-    'D':['Ꭰ','Ḏ','Ɗ','ⅅ','ᴅ','ↁ','𝘋','𝕯','𝔇'],
-    'E':['Ε','Є','ℰ','€','Ɇ','Ɛ','Σ','⋿','𝘌','𝕰','𝔈'],
-    'F':['Ғ','Ϝ','ℱ','ᖴ','𐊇','𝘍','𝕱','𝔉'],
-    'G':['ɢ','Ԍ','Ꮐ','Ĝ','Ğ','Ġ','Ḡ','Ɠ','𝘎','𝕲','𝔊'],
-    'H':['Η','Н','ℋ','Ħ','Ⱨ','♓','𝘏','𝕳','ℌ'],
-    'I':['Ι','Ӏ','ǀ','1','Ⅰ','∣','𝘐','𝕴','ℑ'],
-    'J':['Ј','Ɉ','Ĵ','ⅉ','𝘑','𝕵','𝔍'],
-    'K':['Κ','ᛕ','K','₭','Ҡ','Ƙ','Ǩ','𝘒','𝕶','𝔎'],
-    'L':['Ꮮ','Ⅼ','Ł','∟','⅃','ʟ','𝘓','𝕷','𝔏'],
-    'M':['Μ','М','Ṁ','Ϻ','Ⅿ','𝘔','𝕸','𝔐'],
-    'N':['Ν','Ｎ','∩','Ṅ','Ň','Ɲ','𝘕','𝕹','𝔑'],
-    'O':['Ο','О','0','°','Ø','Ө','○','⦿','𝘖','𝕺','𝔒'],
-    'P':['Ρ','Р','ℙ','₽','Ҏ','Ƿ','𐊕','𝘗','𝕻','𝔓'],
-    'Q':['Ⴓ','ℚ','Ǫ','Ɋ','Ҩ','Ⓠ','𝘘','𝕼','𝔔'],
-    'R':['Ꭱ','ℜ','Я','Ȑ','Ŕ','Ṙ','®','𝘙','𝕽','ℛ'],
-    'S':['Ѕ','§','$','Ś','Ş','Š','Ṣ','ẞ','𝘚','𝕾','𝔖'],
-    'T':['Τ','Т','Ŧ','Ͳ','₸','Ṫ','Ƭ','✝','𝘛','𝕿','𝔗'],
-    'U':['Ս','⋃','Ū','Ü','Ú','Ù','Ư','∪','𝘜','𝖀'.replace('𝖀','𝕌'),'𝔘'],
-    'V':['Ѵ','∨','Ṽ','Ʋ','✓','𝘝','𝕍','𝔙'],
-    'W':['Ԝ','Ѡ','Ш','Ŵ','Ẃ','Ẅ','𝘞','𝕎','𝔚'],
-    'X':['Χ','Х','✕','×','✖','Ⅹ','χ','𝘟','𝕏','𝔛'],
-    'Y':['Υ','Ү','¥','Ɏ','Ÿ','Ῡ','Ӳ','𝘠','𝕐','𝔜'],
-    'Z':['Ζ','ℤ','Ž','Ż','Ź','Ƶ','Ẕ','𝘡','𝕫'.toUpperCase(),'𝔃'.toUpperCase()],
+    a: UA(['00E4','00E1','00E0','00E5','0251']), // ä á à å ɑ
+    e: UA(['00EB','00E9','00E8','025B']),        // ë é è ɛ
+    i: UA(['00EF','00ED','00EC','0131']),        // ï í ì ı
+    o: UA(['00F6','00F3','00F2','00F8','03BF']), // ö ó ò ø ο
+    u: UA(['00FC','00FA','00F9','028A']),        // ü ú ù ʊ
+    s: UA(['00DF','015F','0161']),               // ß ş š
+    // upper (inkl. K – deine Problemstelle)
+    K: UA(['039A','212A','20A9','04A0','0198','01E8']), // Κ, Kelvin sign, ₩, Ҡ, Ƙ, Ǩ
+    O: UA(['00D6','00D3','00D2','00D8','039F']),        // Ö Ó Ò Ø Ο
+    A: UA(['00C4','00C1','00C0','0391']),               // Ä Á À Α
     // digits
-    '0':['O','О','Ο','○','°','⭕','⓪','𝟘'],
-    '1':['I','l','|','ǀ','Ⅰ','❶','𝟙'],
-    '2':['Ƨ'.toLowerCase(),'乙','٢','②','𝟚'],
-    '3':['Ʒ','З','Ɛ','ɜ','➂','𝟛'],
-    '4':['Ꮞ','٤','④','𝟜'],
-    '5':['Ƽ','Ѕ','⑤','𝟝'],
-    '6':['ბ','৬','⑥','𝟞'],
-    '7':['۷','⑦','𝟟'],
-    '8':['ȣ','੮','⑧','𝟠'],
-    '9':['ჽ','९','⑨','𝟡']
+    '0': UA(['2070','00B0','25CB']), // ⁰ ° ○
+    '1': UA(['00A1','2460']),        // ¡ ①
   };
-// === Add Asian & "cool" glyphs (CJK, Kana, Hangul, Bopomofo, Fullwidth) ===
-const ASIAN_COOL = {
-  // lower
-  a: ['ａ','ぁ','ｧ','ァ','人'],
-  b: ['ｂ'],
-  c: ['ｃ','匚'],
-  d: ['ｄ','り'],
-  e: ['ｅ','ぇ','ェ'],
-  f: ['ｆ','ﾌ','ㄈ'],
-  g: ['ｇ'],
-  h: ['ｈ','卄','ん'],
-  i: ['ｉ','丨','｜','ㅣ'],
-  j: ['ｊ','亅'],
-  k: ['ｋ','ケ'],
-  l: ['ｌ','し','丨','ㅣ'],
-  m: ['ｍ','〽'],
-  n: ['ｎ','ん','ﾝ'],
-  o: ['ｏ','〇','ㅇ','○'],
-  p: ['ｐ','尸'],
-  q: ['ｑ'],
-  r: ['ｒ','尺'],
-  s: ['ｓ','ら'],
-  t: ['ｔ','丁','ﾃ'],
-  u: ['ｕ','凵','ㄩ'],
-  v: ['ｖ','レ'],
-  w: ['ｗ','山'],
-  x: ['ｘ','メ','叉'],
-  y: ['ｙ','丫','ㄚ'],
-  z: ['ｚ','乙','之'],
 
-  // upper
-  A: ['Ａ','人','八'],
-  B: ['Ｂ','日'],
-  C: ['Ｃ','匚'],
-  D: ['Ｄ','冂'],
-  E: ['Ｅ','三','ヨ','ミ'],
-  F: ['Ｆ','ﾌ','ㄈ'],
-  G: ['Ｇ'],
-  H: ['Ｈ','廾','井','卄'],
-  I: ['Ｉ','丨','工','｜'],
-  J: ['Ｊ'],
-  K: ['Ｋ','ケ'],
-  L: ['Ｌ'],
-  M: ['Ｍ','州','爪'],
-  N: ['Ｎ','几','ン'],
-  O: ['Ｏ','〇','囗','口'],
-  P: ['Ｐ','尸','戸'],
-  Q: ['Ｑ'],
-  R: ['Ｒ','尺'],
-  S: ['Ｓ','ら'],
-  T: ['Ｔ','丁','工','ﾃ'],
-  U: ['Ｕ','凵'],
-  V: ['Ｖ','レ'],
-  W: ['Ｗ','山'],
-  X: ['Ｘ','メ','叉'],
-  Y: ['Ｙ','丫','ㄚ'],
-  Z: ['Ｚ','乙','之'],
-
-  // digits (fullwidth + CJK numerals)
-  0: ['０','零','〇'],
-  1: ['１','一','丨','｜'],
-  2: ['２','二','乙'],
-  3: ['３','三'],
-  4: ['４','四'],
-  5: ['５','五'],
-  6: ['６','六'],
-  7: ['７','七'],
-  8: ['８','八'],
-  9: ['９','九'],
-};
-
-// merge into SIMILAR without duplicates (keep your originals first)
-for (const [key, vals] of Object.entries(ASIAN_COOL)) {
-  SIMILAR[key] = Array.from(new Set([...(SIMILAR[key] || []), ...vals]));
-}
-
-  const neon = ['#00fff5','#ff3df0','#39ff14','#ffd400','#7a5cff','#ff5e5b'];
-
-  // Kombinierende Akzente (für extra „Glitch“)
-  const COMBINERS = [
-    '\u0301','\u0300','\u0302','\u0308','\u0336','\u0332','\u035B','\u0342','\u032E'
-  ];
+  const neon = ['#00fff5', '#ff3df0', '#39ff14', '#ffd400', '#7a5cff', '#ff5e5b'];
 
   // --- schneller Glyph-Support mit Cache ---
   const _glyphSupportCache = new Map();
-  function supportsGlyphCached(ch){
+  function supportsGlyphCached(ch) {
     if (_glyphSupportCache.has(ch)) return _glyphSupportCache.get(ch);
     const span = document.createElement('span');
     span.textContent = ch;
@@ -1229,46 +1126,36 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
     return ok;
   }
 
-  function getAltsForChar(ch){
-    const base = SIMILAR[ch] || SIMILAR[ch.toLowerCase()] || [];
+  function getAltsForChar(ch) {
+    const key = SIMILAR.hasOwnProperty(ch) ? ch : (SIMILAR.hasOwnProperty(ch.toLowerCase()) ? ch.toLowerCase() : null);
+    if (!key) return [];
+    const base = SIMILAR[key] || [];
     const filtered = base
       .slice()
-      .sort(() => Math.random()-0.5)
-      .filter(s => supportsGlyphCached(s));
-    // ~30%: Kombinierende Akzente (1–2) dranhängen
-    if (filtered.length && Math.random() < 0.30){
-      const withAccents = [];
-      filtered.forEach(s => {
-        const nAcc = Math.random() < 0.5 ? 1 : 2;
-        let acc = s;
-        for (let i=0;i<nAcc;i++){
-          const c = COMBINERS[Math.floor(Math.random()*COMBINERS.length)];
-          const candidate = acc + c;
-          if (supportsGlyphCached(candidate)) acc = candidate;
-        }
-        withAccents.push(acc);
-      });
-      return withAccents.length ? withAccents : filtered;
-    }
+      .filter(s => supportsGlyphCached(s))
+      .sort(() => Math.random() - 0.5);
     return filtered;
   }
 
+  // ---------- Text → Letters ----------
   const letterSpans = [];
   parts.forEach(part => {
     if (/^<br/i.test(part)) { wrapper.appendChild(document.createElement('br')); return; }
     [...part].forEach(ch => {
       const s = document.createElement('span');
-      s.textContent = ch;
+      // Quelltext → NFC, damit dynamisch erzeugte Inhalte immer normalisiert sind
+      const nfc = (ch + '').normalize('NFC');
+      s.textContent = nfc;
       s.style.display = 'inline-block';
       s.style.willChange = 'transform, opacity, color, filter, text-shadow';
-      if (RELOADED) {
+      if (RELOADED || REDUCED_MOTION) {
         s.style.opacity = '1';
         s.style.transform = 'translateY(0)';
       } else {
         s.style.opacity = '0';
         s.style.transform = 'translateY(40px)';
       }
-      s.dataset.original = ch;
+      s.dataset.original = nfc;
       wrapper.appendChild(s);
       letterSpans.push(s);
     });
@@ -1276,128 +1163,130 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
 
   // ---------- Entrance ----------
   window.addEventListener('load', () => {
-    if (!RELOADED) {
+    if (!RELOADED && !REDUCED_MOTION) {
       letterSpans.forEach((s, i) => {
-        s.animate(
-          [{opacity:0, transform:'translateY(40px)'},
-           {opacity:1, transform:'translateY(0)'}],
-          { duration: 1400, easing:'ease-out', fill:'forwards', delay: 160 * i }
-        );
+        (s.animate ? s.animate(
+          [
+            { opacity: 0, transform: 'translateY(40px)' },
+            { opacity: 1, transform: 'translateY(0)' }
+          ],
+          { duration: 1200, easing: 'ease-out', fill: 'forwards', delay: 120 * i }
+        ) : (s.style.opacity = '1'));
       });
+    } else {
+      letterSpans.forEach(s => { s.style.opacity = '1'; s.style.transform = 'translateY(0)'; });
     }
-    // Starten entscheidet der IO unten
   });
 
   // ---------- Float ----------
-  let floatAnim = wrapper.animate(
-    [{ transform:'translateY(0)' },{ transform:'translateY(-10px)' },{ transform:'translateY(0)' }],
-    { duration: 12000, easing:'ease-in-out', iterations: Infinity }
-  );
-  floatAnim.pause();
+  const floatAnim = (wrapper.animate && !REDUCED_MOTION)
+    ? wrapper.animate(
+        [{ transform: 'translateY(0)' }, { transform: 'translateY(-10px)' }, { transform: 'translateY(0)' }],
+        { duration: 12000, easing: 'ease-in-out', iterations: Infinity }
+      )
+    : null;
+  floatAnim && floatAnim.pause();
 
   // ---------- Overlay Renderloop ----------
-  const effects = []; // {span, tEnd, antsPhase}
+  const effects = []; // {span, tEnd}
   let raf = null;
   let loopActive = false;
 
-  function localRect(el){
+  function localRect(el) {
     const r = el.getBoundingClientRect();
     const pr = pageTitle.getBoundingClientRect();
     return { x: r.left - pr.left, y: r.top - pr.top, w: r.width, h: r.height };
   }
 
   function drawGrid() {
+    if (!ctx) return;
     const w = overlay.clientWidth, h = overlay.clientHeight;
-    const step = Math.max(18, Math.round(Math.min(w,h)/10));
+    if (!w || !h) return;
+    const step = Math.max(18, Math.round(Math.min(w, h) / 10));
     ctx.save();
-    ctx.clearRect(0,0,overlay.width,overlay.height);
+    ctx.clearRect(0, 0, overlay.width, overlay.height);
     ctx.globalAlpha = 0.14; ctx.lineWidth = 1; ctx.strokeStyle = '#9aa0a6';
-    for (let x=0;x<=w;x+=step){ ctx.beginPath(); ctx.moveTo(x+0.5,0); ctx.lineTo(x+0.5,h); ctx.stroke(); }
-    for (let y=0;y<=h;y+=step){ ctx.beginPath(); ctx.moveTo(0,y+0.5); ctx.lineTo(w,y+0.5); ctx.stroke(); }
+    for (let x = 0; x <= w; x += step) { ctx.beginPath(); ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, h); ctx.stroke(); }
+    for (let y = 0; y <= h; y += step) { ctx.beginPath(); ctx.moveTo(0, y + 0.5); ctx.lineTo(w, y + 0.5); ctx.stroke(); }
     ctx.restore();
   }
 
-function drawEditorChrome(now){
-  effects.forEach((fx, idx) => {
-    const r = localRect(fx.span);
-    const pad = 6;
-    const x = r.x - pad, y = r.y - pad, w = r.w + pad*2, h = r.h + pad*2;
+  function drawEditorChrome(now) {
+    if (!ctx) return;
+    for (let i = effects.length - 1; i >= 0; i--) {
+      if (effects[i].tEnd <= now) effects.splice(i, 1);
+    }
+    effects.forEach((fx, idx) => {
+      const r = localRect(fx.span);
+      const pad = 6;
+      const x = r.x - pad, y = r.y - pad, w = r.w + pad * 2, h = r.h + pad * 2;
 
-    // --- (Marquee entfernt) ---
+      // Handles
+      ctx.save();
+      const anchors = [[x, y], [x + w, y], [x, y + h], [x + w, y + h]];
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      anchors.forEach(([ax, ay]) => { ctx.beginPath(); ctx.arc(ax, ay, 2.75, 0, Math.PI * 2); ctx.fill(); });
+      ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+      ctx.beginPath();
+      ctx.moveTo(x + w * 0.25, y); ctx.lineTo(x + w * 0.31, y - 10);
+      ctx.moveTo(x + w, y + h * 0.65); ctx.lineTo(x + w + 10, y + h * 0.75);
+      ctx.stroke();
+      ctx.restore();
 
-    // 2) Handles (bleiben)
-    ctx.save();
-    const anchors = [[x,y],[x+w,y],[x,y+h],[x+w,y+h]];
-    ctx.fillStyle = 'rgba(255,255,255,0.9)';
-    anchors.forEach(([ax,ay])=>{ ctx.beginPath(); ctx.arc(ax, ay, 2.75, 0, Math.PI*2); ctx.fill(); });
-    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
-    ctx.beginPath();
-    ctx.moveTo(x+w*0.25,y); ctx.lineTo(x+w*0.31,y-10);
-    ctx.moveTo(x+w, y+h*0.65); ctx.lineTo(x+w+10, y+h*0.75);
-    ctx.stroke();
-    ctx.restore();
-
-    // 3) Scanline (bleibt)
-    ctx.save();
-    ctx.globalAlpha = 0.045;
-    ctx.fillStyle = '#fff';
-    const barH = Math.max(3, Math.round(h*0.12));
-    const by = y + ((now*0.03 + idx*6) % Math.max(1,h)) - barH/2;
-    ctx.fillRect(x, by, w, barH);
-    ctx.restore();
-
-    fx.antsPhase += 0.25;
-  });
-
-  for (let i=effects.length-1;i>=0;i--) {
-    if (effects[i].tEnd <= now) effects.splice(i,1);
+      // Scanline
+      ctx.save();
+      ctx.globalAlpha = 0.045;
+      ctx.fillStyle = '#fff';
+      const barH = Math.max(3, Math.round(h * 0.12));
+      const by = y + ((now * 0.03 + idx * 6) % Math.max(1, h)) - barH / 2;
+      ctx.fillRect(x, by, w, barH);
+      ctx.restore();
+    });
   }
-}
 
-  function frame(now=performance.now()){
+  function frame(now = performance.now()) {
     sizeCanvas(false);
     drawGrid();
     drawEditorChrome(now);
+    if (effects.length === 0 && !loopActive) { // failsafe
+      cancelAnimationFrame(raf); raf = null; return;
+    }
     raf = requestAnimationFrame(frame);
   }
 
-  function startLoop(){
-    if (loopActive) return;
-    loopActive = true;
-    if (!raf) raf = requestAnimationFrame(frame);
+  function startLoop() {
+    if (raf) return;
+    raf = requestAnimationFrame(frame);
   }
 
-  function stopLoop(){
-    loopActive = false;
+  function stopLoop() {
     if (raf) { cancelAnimationFrame(raf); raf = null; }
   }
 
   // ---------- Morph / Glitch ----------
   const MORPH = {
-    holdMin: 1600, holdMax: 2800,       // Gesamtdauer pro aktiver Glyphe
-    animDur: 240,                       // Dauer eines hektischen Sub-Ticks
-    tickMin: 60, tickMax: 140,          // „Hektik“: schneller
-    burstChance: 0.35,                  // Chance auf Mini-Burst (mehrere schnelle Ticks)
-    splitChance: 0.45,                  // Chromatic-Split-Effekt einschalten?
-    rotateMaxDeg: 6,                    // max. Rotation
-    scaleJitter: 0.08,                  // ±8% Scale
-    skewMaxDeg: 6                       // max. Skew
+    holdMin: 1600, holdMax: 2800,
+    animDur: 220,
+    tickMin: 80, tickMax: 160,
+    burstChance: 0.3,
+    rotateMaxDeg: 6,
+    scaleJitter: 0.08,
+    skewMaxDeg: 6
   };
 
-  function isBusy(span){ return span.dataset.morphing === '1'; }
-  function setBusy(span,v){ span.dataset.morphing = v ? '1' : '0'; }
+  function isBusy(span) { return span.dataset.morphing === '1'; }
+  function setBusy(span, v) { span.dataset.morphing = v ? '1' : '0'; }
 
-  function makeEffectForSpan(span, durMs){
+  function makeEffectForSpan(span, durMs) {
     const now = performance.now();
-    effects.push({ span, tEnd: now + durMs, antsPhase: Math.random()*10 });
+    effects.push({ span, tEnd: now + durMs });
     startLoop();
   }
 
-  // Hektischer „Morph“ pro Buchstabe: Glyphenwechsel + visuelle Störungen
-  function morphTicker(span){
-    if (!span || isBusy(span)) return;
+  function morphTicker(span) {
+    if (!span || isBusy(span) || REDUCED_MOTION) return;
 
-    const original = span.dataset.original || span.textContent;
+    const original = (span.dataset.original || span.textContent || '').normalize('NFC');
     const prev = {
       color: span.style.color,
       filter: span.style.filter,
@@ -1409,92 +1298,61 @@ function drawEditorChrome(now){
     const alts = getAltsForChar(original);
     if (!alts.length) return;
 
-    setBusy(span,true);
+    setBusy(span, true);
 
-    const hold = MORPH.holdMin + Math.random()*(MORPH.holdMax - MORPH.holdMin);
+    const hold = MORPH.holdMin + Math.random() * (MORPH.holdMax - MORPH.holdMin);
     let running = true;
 
     makeEffectForSpan(span, hold);
 
-    const applyChromaticSplit = () => {
-      if (Math.random() > MORPH.splitChance) return '';
-      // 3-kanaliger „Split“ als Afterimage
-      const dx = (Math.random()*2+0.5).toFixed(2);
-      const dy = (Math.random()*2+0.5).toFixed(2);
-      return `
-        rgb(255 0 80) ${dx}px ${dy}px 0,
-        rgb(0 255 200) ${-dx}px ${dy}px 0,
-        rgb(180 120 255) ${dx}px ${-dy}px 0
-      `;
-    };
-
-    // spontane Mini-Bursts: mehrere sehr schnelle Ticks hintereinander
-    const doBurst = () => {
-      const n = 2 + Math.floor(Math.random()*3); // 2–4 schnelle Wechsel
-      let i = 0;
-      const burst = () => {
-        if (!running || i>=n) return;
-        singleTick(true);
-        i++;
-        setTimeout(burst, 40 + Math.random()*60);
-      };
-      burst();
-    };
-
-    // Ein einzelner schneller Tick (Glyph + FX)
-    function singleTick(isBurst=false){
-      const next = alts[Math.floor(Math.random()*alts.length)];
-      const color = neon[Math.floor(Math.random()*neon.length)];
+    function singleTick() {
+      const next = (alts[Math.floor(Math.random() * alts.length)] || original).normalize('NFC');
+      const color = neon[Math.floor(Math.random() * neon.length)];
 
       // Glyph tauschen
       span.textContent = next;
       span.style.color = color;
 
       // leichte Layout-Störung
-      const rot = (Math.random()*2-1)*MORPH.rotateMaxDeg;
-      const sx  = 1 + (Math.random()*2-1)*MORPH.scaleJitter;
-      const sy  = 1 + (Math.random()*2-1)*MORPH.scaleJitter;
-      const skx = (Math.random()*2-1)*MORPH.skewMaxDeg;
-      const sky = (Math.random()*2-1)*MORPH.skewMaxDeg;
-
+      const rot = (Math.random() * 2 - 1) * MORPH.rotateMaxDeg;
+      const sx = 1 + (Math.random() * 2 - 1) * MORPH.scaleJitter;
+      const sy = 1 + (Math.random() * 2 - 1) * MORPH.scaleJitter;
+      const skx = (Math.random() * 2 - 1) * MORPH.skewMaxDeg;
+      const sky = (Math.random() * 2 - 1) * MORPH.skewMaxDeg;
       span.style.transform = `translateZ(0) rotate(${rot}deg) skew(${skx}deg, ${sky}deg) scale(${sx},${sy})`;
 
-      // Blur-Flicker
-      const blurPx = (isBurst ? 1.6 : 0.9) + Math.random()*0.8;
-      const contrast = 1.2 + Math.random()*0.5;
-      const bright = 1.05 + Math.random()*0.25;
+      // leichter Filter-Flicker
+      const blurPx = 0.9 + Math.random() * 0.8;
+      const contrast = 1.1 + Math.random() * 0.4;
+      const bright = 1.02 + Math.random() * 0.18;
       span.style.filter = `blur(${blurPx}px) contrast(${contrast}) brightness(${bright})`;
 
-      // Chromatic Afterimage
-      span.style.textShadow = applyChromaticSplit();
-
-      // Mini „morphing“ Gefühl: Letter-Spacing pulsen lassen
-      if (Math.random() < 0.5) {
-        span.style.letterSpacing = (Math.random()<0.5 ? '-0.02em' : '0.04em');
+      // sanfte Rückführung
+      if (span.animate) {
+        span.animate(
+          [
+            { filter: `${span.style.filter}`, transform: `${span.style.transform}` },
+            { filter: 'none', transform: 'translateZ(0) rotate(0deg) skew(0,0) scale(1,1)' }
+          ],
+          { duration: MORPH.animDur, easing: 'ease-out', fill: 'forwards' }
+        );
+      } else {
+        span.style.filter = 'none';
+        span.style.transform = 'translateZ(0)';
       }
-
-      // Rückanimation via Web Animations API (knackig, „hektisch“)
-      span.animate(
-        [
-          { filter:`${span.style.filter}`, transform: `${span.style.transform}` },
-          { filter:'none', transform:'translateZ(0) rotate(0deg) skew(0,0) scale(1,1)' }
-        ],
-        { duration: MORPH.animDur, easing:'steps(3,end)', fill:'forwards' }
-      );
     }
 
-    const tick = () => {
+    function tick() {
       if (!running) return;
-      singleTick(false);
-      if (Math.random() < MORPH.burstChance) doBurst();
-      const gap = MORPH.tickMin + Math.random()*(MORPH.tickMax - MORPH.tickMin);
+      singleTick();
+      const gap = MORPH.tickMin + Math.random() * (MORPH.tickMax - MORPH.tickMin);
       tickTimer = setTimeout(tick, gap);
-    };
+    }
 
     let tickTimer = null;
     tick();
 
-    setTimeout(()=>{
+    setTimeout(() => {
       running = false;
       if (tickTimer) clearTimeout(tickTimer);
       // Reset auf Original, sanft ausfaden
@@ -1503,59 +1361,59 @@ function drawEditorChrome(now){
       span.style.filter = 'none';
       span.style.textShadow = 'none';
       span.style.letterSpacing = prev.ls || '';
-      span.animate(
-        [
-          { opacity: 0.85, filter:'none' },
-          { opacity: 1,    filter:'none' }
-        ],
-        { duration: 180, easing: 'ease-out', fill: 'forwards' }
-      );
-      setBusy(span,false);
+      if (span.animate) {
+        span.animate(
+          [{ opacity: 0.85 }, { opacity: 1 }],
+          { duration: 180, easing: 'ease-out', fill: 'forwards' }
+        );
+      }
+      setBusy(span, false);
     }, hold);
   }
 
-  function pick(){
-    const a=letterSpans.filter(s=>s.textContent.trim()!=='');
-    return a.length? a[Math.floor(Math.random()*a.length)]:null;
+  function pick() {
+    const a = letterSpans.filter(s => s.textContent.trim() !== '');
+    return a.length ? a[Math.floor(Math.random() * a.length)] : null;
   }
 
-  function snapSlide(span, dir='up') {
+  function snapSlide(span, dir = 'up') {
+    if (REDUCED_MOTION || !span) return;
     const dy = dir === 'up' ? -18 : 18;
-    span.animate(
-      [{ transform:`translateY(${dy}px)` }, { transform:'translateY(0)' }],
-      { duration: 420, easing:'steps(5, end)', fill:'both' }
-    );
+    span.animate &&
+      span.animate(
+        [{ transform: `translateY(${dy}px)` }, { transform: 'translateY(0)' }],
+        { duration: 380, easing: 'ease-out', fill: 'both' }
+      );
   }
 
   function multiGlitchBurst() {
-    if (Math.random() < 0.45) { const s = pick(); if (s) snapSlide(s, Math.random()<0.5 ? 'up' : 'down'); }
+    if (Math.random() < 0.45) { const s = pick(); if (s) snapSlide(s, Math.random() < 0.5 ? 'up' : 'down'); }
     const s = pick(); if (s) morphTicker(s);
   }
 
   // ---------- Start/Stop ----------
-  let glitchTimer=null;
-  function startGlitch(){
-    if(glitchTimer) return;
-    glitchTimer=setInterval(()=>multiGlitchBurst(), 2400 + Math.random()*1600);
-    setTimeout(()=>multiGlitchBurst(), 600);
+  let glitchTimer = null;
+  function startGlitch() {
+    if (glitchTimer || REDUCED_MOTION) return;
+    glitchTimer = setInterval(() => multiGlitchBurst(), 2400 + Math.random() * 1600);
+    setTimeout(() => multiGlitchBurst(), 600);
   }
-  function stopGlitch(){
-    if(glitchTimer){ clearInterval(glitchTimer); glitchTimer=null; }
+  function stopGlitch() {
+    if (glitchTimer) { clearInterval(glitchTimer); glitchTimer = null; }
   }
 
-  // Sichtbarkeits-Controller
   let visible = false;
   function activate() {
     if (visible) return;
     visible = true;
-    floatAnim.play();
+    floatAnim && floatAnim.play();
     startGlitch();
     startLoop();
   }
   function deactivate() {
     if (!visible) return;
     visible = false;
-    floatAnim.pause();
+    floatAnim && floatAnim.pause();
     stopGlitch();
     stopLoop();
   }
@@ -1567,11 +1425,7 @@ function drawEditorChrome(now){
       if (e.isIntersecting) activate();
       else deactivate();
     });
-  }, {
-    threshold: [0.05],
-    root: null,
-    rootMargin: '0px'
-  });
+  }, { threshold: [0.05] });
   io.observe(section);
 
   // Tab-Wechsel
@@ -1588,13 +1442,25 @@ function drawEditorChrome(now){
   });
 
   // Initial: prüfen
-  (function initVisibility(){
+  (function initVisibility() {
     const r = section.getBoundingClientRect();
     const vh = window.innerHeight || document.documentElement.clientHeight;
     const visiblePx = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
     const isVis = visiblePx / Math.min(vh, r.height) >= 0.05;
     if (isVis) activate();
   })();
+
+  // ---------- Cleanup (wichtig gegen Leaks) ----------
+  window.addEventListener('beforeunload', () => {
+    stopGlitch();
+    stopLoop();
+    roH1 && roH1.disconnect();
+    roTitle && roTitle.disconnect();
+    window.removeEventListener('resize', onResize);
+    window.removeEventListener('scroll', onScroll);
+    window.removeEventListener('orientationchange', onResize);
+    io && io.disconnect();
+  });
 })();
 </script>
 
@@ -1613,8 +1479,7 @@ function drawEditorChrome(now){
     </span>
   </p>
 
-  <ul class="quasar-grid" aria-label="Bereiche: Mission, Arbeitsweise, Vision">
-
+  <ul class="quasar-grid">
     <li>
       <article class="aether-card" id="aether-mission"
                aria-labelledby="aether-mission-h"
@@ -1624,7 +1489,9 @@ function drawEditorChrome(now){
         <p class="t-snippet">Wir vereinen Design, Code und 3D zu klaren, skalierbaren Systemen.</p>
         <p class="microtag" id="aether-mission-k">Klar. Technisch. Durchdacht.</p>
 
-        <ul class="delta-list" aria-label="Was uns antreibt">
+        <!-- Semantische Unterüberschrift statt aria-label -->
+        <h4 id="aether-mission-list-h" class="sr-only">Was uns antreibt</h4>
+        <ul class="delta-list" aria-labelledby="aether-mission-list-h">
           <li>
             <span class="lead">Balance</span>
             <span class="copy">Form und Funktion im Gleichgewicht.</span>
@@ -1650,7 +1517,8 @@ function drawEditorChrome(now){
         <p class="t-snippet">Wir arbeiten agil und transparent – mit Fokus auf Wirkung statt Overhead.</p>
         <p class="microtag" id="aether-crew-k">Schnell. Klar. Zielgerichtet.</p>
 
-        <ul class="delta-list" aria-label="Prinzipien unserer Arbeitsweise">
+        <h4 id="aether-crew-list-h" class="sr-only">Prinzipien unserer Arbeitsweise</h4>
+        <ul class="delta-list" aria-labelledby="aether-crew-list-h">
           <li>
             <span class="lead">Flexibel</span>
             <span class="copy">Anpassbar an Ziel und Tempo.</span>
@@ -1676,7 +1544,8 @@ function drawEditorChrome(now){
         <p class="t-snippet">Wir gestalten emotional, technisch klar und nachhaltig gedacht.</p>
         <p class="microtag" id="aether-vision-k">Substanz statt Effekt.</p>
 
-        <ul class="delta-list" aria-label="Leitprinzipien unserer Vision">
+        <h4 id="aether-vision-list-h" class="sr-only">Leitprinzipien unserer Vision</h4>
+        <ul class="delta-list" aria-labelledby="aether-vision-list-h">
           <li>
             <span class="lead">Emotion</span>
             <span class="copy">Design, das bleibt.</span>
@@ -1692,10 +1561,8 @@ function drawEditorChrome(now){
         </ul>
       </article>
     </li>
-
   </ul>
 </section>
-
 
 
 
