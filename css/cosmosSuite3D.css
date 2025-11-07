@@ -1441,3 +1441,215 @@
   object-fit: cover;
   object-position: center;
 }
+
+
+
+
+
+/* GSAP */
+/* Saubere Rendering-Pipeline für Listen */
+/* Saubere Rendering-Pipeline für Listen */
+#nebula-hub .payload ul,
+#nebula-hub .payload ol {
+  padding-left: 1.25rem;
+}
+
+#nebula-hub .payload li {
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  /* Verhindert Layout-Jumps bei einzeiligen LIs */
+  contain: layout paint style;
+}
+/* 📵 Ab Tablet & Desktop: p, card-snippet & snippet ausblenden */
+@media (min-width: 700px) {
+  #nebula-hub .module-card .card-snippet,
+  #nebula-hub .module-card .snippet {
+    display: none !important;
+  }
+}
+/* === 1) Karten-Headline (h3) auf Tablet & Desktop größer machen === */
+@media (min-width: 700px) {
+  #nebula-hub .module-card h3 {
+    font-size: clamp(1.8rem, 1.4rem + 1.2vw, 2.4rem) !important;
+    line-height: 1.2 !important;
+    text-align: left !important; /* bleibt links auf großen Geräten */
+  }
+}
+
+/* === 2) Mobile: Texte & Überschriften in der Karte zentrieren === */
+@media (max-width: 699px) {
+  #nebula-hub .module-card h3,
+  #nebula-hub .module-card p,
+  #nebula-hub .module-card .card-snippet,
+  #nebula-hub .module-card ul,
+  #nebula-hub .module-card li {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Optional: CTA-Button auch mittig */
+  #nebula-hub .module-card .warp-cta {
+    display: inline-block;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+/* === 1) Größere Karten-Überschrift auf ALLEN Geräten === */
+#nebula-hub .module-card h3 {
+  font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.4rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* === 2) Ab Tablet & Desktop (≥700px) ruhig noch etwas größer === */
+@media (min-width: 700px) {
+  #nebula-hub .module-card h3 {
+    font-size: clamp(1.8rem, 1.4rem + 1.4vw, 2.6rem) !important;
+    text-align: left !important;
+  }
+}
+
+/* === 3) Handy (≤699px): alles mittig ausrichten – Überschrift & Texte === */
+@media (max-width: 699px) {
+  #nebula-hub .module-card h3,
+  #nebula-hub .module-card p,
+  #nebula-hub .module-card .card-snippet,
+  #nebula-hub .module-card ul,
+  #nebula-hub .module-card li {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* CTA/Button ebenfalls mittig */
+  #nebula-hub .module-card .warp-cta {
+    display: inline-block;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* ================================
+   COSMOS — MOBILE PRO CLEAN (≤699px)
+   ================================= */
+@media (max-width: 699.98px){
+
+  /* 0) Bühne & Grid */
+  #nebula-hub.cosmos-suite{ padding-top: 2rem !important; padding-bottom: 2rem !important; }
+  #nebula-hub .orbit-grid{
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    max-width: 620px !important;
+    margin-inline: auto !important;
+    justify-items: stretch !important;
+  }
+
+  /* 1) Card-Container – ruhig & präzise */
+  #nebula-hub .module-card{
+    /* Hintergrund bleibt wie definiert – wir ändern keine Farben */
+    padding: 16px 16px 18px !important;
+    border-radius: 14px !important;
+    border: 1px solid rgba(255,255,255,.18) !important;
+    box-shadow: 0 6px 16px rgba(0,0,0,.18) !important;
+    display: flex !important; flex-direction: column !important; align-items: center !important;
+    gap: 10px !important;
+    text-align: center !important;
+    overflow: hidden !important;
+  }
+
+  /* 1a) Deko/Glare/GIF/Corner-Videos auf Mobile neutralisieren */
+  #nebula-hub .module-card::before,
+  #nebula-hub .module-card::after{ content: none !important; }
+  #nebula-hub .module-card .overlay-art,
+  #nebula-hub .module-card .corner-video,
+  #nebula-hub .module-card .corner-gif{ display:none !important; }
+
+  /* 2) Headline – groß, clean, ohne Schatten */
+  #nebula-hub .module-card h3{
+    font-size: clamp(1.45rem, 1.15rem + 2.6vw, 1.75rem) !important;
+    line-height: 1.22 !important;
+    font-weight: 820 !important;
+    letter-spacing: -0.01em !important;
+    margin: 0 0 .35rem !important;
+    text-shadow: none !important;
+    max-width: 24ch !important;
+  }
+
+  /* 3) Teaser/Kurztext – max. 2 Zeilen, ruhige Lesbarkeit */
+  #nebula-hub .module-card .card-snippet,
+  #nebula-hub .module-card .snippet,
+  #nebula-hub .module-card p{
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+
+    font-size: 1.02rem !important;
+    line-height: 1.45 !important;
+    font-weight: 600 !important;
+    letter-spacing: .002em !important;
+    margin: 0 !important;
+    max-width: 34ch !important;
+  }
+
+  /* 4) Lange Listen mobil ausblenden (cleaner Hero-Card-Look) */
+  #nebula-hub .module-card .payload > ul,
+  #nebula-hub .module-card li{ display:none !important; }
+
+  /* 5) CTA – klarer Abstand, nicht absolut, volle Breite bis max */
+  #nebula-hub .module-card .warp-cta{
+    position: static !important;
+    align-self: center !important;
+    width: 100% !important; max-width: 420px !important;
+    min-height: 44px !important;
+    margin-top: 10px !important;
+
+    display: inline-flex !important; align-items: center; justify-content: center;
+    padding: 0 14px !important;
+    font-size: .98rem !important; font-weight: 700 !important; letter-spacing: .01em !important;
+
+    border-radius: 12px !important;
+    border: 1px solid rgba(255,255,255,.28) !important;
+    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,.18) !important;
+  }
+
+  /* 6) Video-Card – schlicht, mit Radius */
+  #nebula-hub .module-card.cinema-card{
+    padding: 0 !important; aspect-ratio: 16/9 !important;
+    border-radius: 14px !important; overflow: hidden !important;
+  }
+  #nebula-hub .module-card.cinema-card > video{ object-fit: cover !important; transform: none !important; }
+
+  /* 7) Keine Hover-Animationen auf Touch */
+  @media (hover:none), (pointer:coarse){
+    #nebula-hub .module-card:hover{ transform:none !important; box-shadow: 0 6px 16px rgba(0,0,0,.18) !important; }
+  }
+}
+/* ✅ FINAL OVERRIDE – Mobile: absoluter CTA mit Platz-Reserve */
+@media (max-width: 699.98px){
+  #nebula-hub .module-card{
+    /* Höhe des CTAs + Abstand als variable Reserve */
+    --cta-h: 44px;
+    --cta-gap: 16px;
+    padding-bottom: calc(var(--cta-h) + var(--cta-gap) + 10px) !important;
+  }
+
+  #nebula-hub .module-card .warp-cta{
+    position: absolute !important;
+    left: 50% !important;
+    bottom: 10px !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+    min-height: var(--cta-h) !important;
+  }
+}
+
+
+
+
+
+

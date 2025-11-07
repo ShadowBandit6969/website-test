@@ -274,6 +274,8 @@
 <link rel="stylesheet" href="css/footer.css" type="text/css">
 
 <link rel="stylesheet" href="css/Casestudie.css" type="text/css">
+
+<link rel="stylesheet" href="css/arbeitsprobenBilder.css" type="text/css">
 <style>
 /* --------------------------
    Lokale Bild-Overrides nur für webdesign.html
@@ -383,11 +385,18 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 </style>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script/aurora.js" defer></script>
+<script src="script/cosmos.js" defer></script>
+<script src="script/panetransition.js" defer></script>
+<script src="script/ArbeitsprobenBilder.js" defer></script>
+<script src="script/kontaktformular.js" defer></script>
 </head>
 
 <body data-page="titlepage">
   <!-- dein Body-Inhalt hier -->
+
 
 
 
@@ -400,9 +409,39 @@ body[data-page="webdesign"] .hero-image-foreground {
     <!-- NAV mit Subnav-Accordions (mobil sichtbar) -->
     <nav class="astral-nav" id="astralWay" aria-label="Hauptnavigation">
       <ul class="astral-nav__list">
+
+
+                        <!-- Blog (vorher "Über uns" im Kommentar) -->
+<li class="astral-item">
+  <a class="astral-link" href="index.html">Start</a>
+  <button
+    class="gatelet"
+    type="button"
+    aria-expanded="false"
+    aria-controls="codex-about"
+    aria-haspopup="true"
+    aria-label="Unterpunkte zu Blog ein- oder ausklappen">
+  </button>
+</li>
+
+
+
+        <!-- Portfolio -->
+        <li class="astral-item">
+          <a class="astral-link" href="#portfolio">Portfolio</a>
+          <button
+            class="gatelet"
+            type="button"
+            aria-expanded="false"
+            aria-controls="vault-portfolio"
+            aria-haspopup="true"
+            aria-label="Unterpunkte zu Portfolio ein- oder ausklappen">
+          </button>
+        </li>
+
         <!-- Leistungen -->
         <li class="astral-item">
-          <a class="astral-link" href="/leistungen">Leistungen</a>
+<a class="astral-link" href="index.html#nebula-hub">Leistungen</a>
           <button
             class="gatelet"
             type="button"
@@ -415,60 +454,16 @@ body[data-page="webdesign"] .hero-image-foreground {
             </svg>
           </button>
           <ul id="grimoire-services" class="underrealm" hidden>
-            <li><a class="astral-link astral-link--sub" href="/leistungen/webdesign">Webdesign</a></li>
-            <li><a class="astral-link astral-link--sub" href="/leistungen/branding-ci">Branding &amp; CI</a></li>
-            <li><a class="astral-link astral-link--sub" href="/leistungen/performance">Performance Marketing</a></li>
-            <li><a class="astral-link astral-link--sub" href="/leistungen/support">Wartung &amp; Support</a></li>
+            <li><a class="astral-link astral-link--sub" href="./WebDesign.html">Webdesign</a></li>
+            <li><a class="astral-link astral-link--sub" href="./3DDesign.html">3D Design</a></li>
+            <li><a class="astral-link astral-link--sub" href="./Grafikdesign.html">Grafikdesign</a></li>
           </ul>
         </li>
 
-        <!-- Blog (vorher "Über uns" im Kommentar) -->
-        <li class="astral-item">
-          <a class="astral-link" href="#ueber-uns">Blog</a>
-          <button
-            class="gatelet"
-            type="button"
-            aria-expanded="false"
-            aria-controls="codex-about"
-            aria-haspopup="true"
-            aria-label="Unterpunkte zu Blog ein- oder ausklappen">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <ul id="codex-about" class="underrealm" hidden>
-            <li><a class="astral-link astral-link--sub" href="#team">Team</a></li>
-            <li><a class="astral-link astral-link--sub" href="#werte">Werte</a></li>
-            <li><a class="astral-link astral-link--sub" href="/jobs">Jobs</a></li>
-            <li><a class="astral-link astral-link--sub" href="/presse">Presse</a></li>
-          </ul>
-        </li>
-
-        <!-- Portfolio -->
-        <li class="astral-item">
-          <a class="astral-link" href="#portfolio">Portfolio</a>
-          <button
-            class="gatelet"
-            type="button"
-            aria-expanded="false"
-            aria-controls="vault-portfolio"
-            aria-haspopup="true"
-            aria-label="Unterpunkte zu Portfolio ein- oder ausklappen">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <ul id="vault-portfolio" class="underrealm" hidden>
-            <li><a class="astral-link astral-link--sub" href="#web-projekte">Web-Projekte</a></li>
-            <li><a class="astral-link astral-link--sub" href="#markenauftritte">Markenauftritte</a></li>
-            <li><a class="astral-link astral-link--sub" href="/cases">Case Studies</a></li>
-            <li><a class="astral-link astral-link--sub" href="/referenzen">Referenzen</a></li>
-          </ul>
-        </li>
 
         <!-- Kontakt -->
         <li class="astral-item">
-          <a class="astral-link" href="#kontakt">Kontakt</a>
+<a class="astral-link" href="index.html#kontakt">Kontakt</a>
           <button
             class="gatelet"
             type="button"
@@ -483,8 +478,7 @@ body[data-page="webdesign"] .hero-image-foreground {
           <ul id="altar-contact" class="underrealm" hidden>
             <li><a class="astral-link astral-link--sub" href="/anfrage">Anfrage stellen</a></li>
             <li><a class="astral-link astral-link--sub" href="/beratung">Beratung buchen</a></li>
-            <li><a class="astral-link astral-link--sub" href="/standort">Standort</a></li>
-            <li><a class="astral-link astral-link--sub" href="/impressum">Impressum</a></li>
+           <li><a class="astral-link astral-link--sub" href="/impressum">Impressum</a></li>
           </ul>
         </li>
       </ul>
@@ -512,11 +506,6 @@ body[data-page="webdesign"] .hero-image-foreground {
 
   <span class="thumb" id="moonShard" aria-hidden="true"></span>
 </button>
-
-
-      <!-- Live-Region für Modusansage -->
-      <p id="omenWhisper" class="visually-hidden" aria-live="polite" aria-atomic="true">Dunkelmodus aktiv</p>
-
       <!-- CTA (Link bleibt Link; kein role="button" nötig) -->
       <a
         class="charm-cta charm-cta--prime"
@@ -548,6 +537,7 @@ body[data-page="webdesign"] .hero-image-foreground {
 <div class="night-veil" id="voidVeil" hidden></div>
 
 </header>
+
 
 
 <script>
@@ -1327,52 +1317,42 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
     ctx.restore();
   }
 
-  function drawEditorChrome(now){
-    effects.forEach((fx, idx) => {
-      const r = localRect(fx.span);
-      const pad = 6;
-      const x = r.x - pad, y = r.y - pad, w = r.w + pad*2, h = r.h + pad*2;
+function drawEditorChrome(now){
+  effects.forEach((fx, idx) => {
+    const r = localRect(fx.span);
+    const pad = 6;
+    const x = r.x - pad, y = r.y - pad, w = r.w + pad*2, h = r.h + pad*2;
 
-      // 1) Marquee
-      ctx.save();
-      ctx.lineWidth = 1.5;
-      ctx.setLineDash([6, 4]);
-      ctx.lineDashOffset = -fx.antsPhase;
-      ctx.strokeStyle = '#000';
-      ctx.strokeRect(x, y, w, h);
-      ctx.lineDashOffset = -(fx.antsPhase+4);
-      ctx.strokeStyle = '#fff';
-      ctx.strokeRect(x, y, w, h);
-      ctx.restore();
+    // --- (Marquee entfernt) ---
 
-      // 2) Handles
-      ctx.save();
-      const anchors = [[x,y],[x+w,y],[x,y+h],[x+w,y+h]];
-      ctx.fillStyle = 'rgba(255,255,255,0.9)';
-      anchors.forEach(([ax,ay])=>{ ctx.beginPath(); ctx.arc(ax, ay, 2.75, 0, Math.PI*2); ctx.fill(); });
-      ctx.strokeStyle = 'rgba(255,255,255,0.3)';
-      ctx.beginPath();
-      ctx.moveTo(x+w*0.25,y); ctx.lineTo(x+w*0.31,y-10);
-      ctx.moveTo(x+w, y+h*0.65); ctx.lineTo(x+w+10, y+h*0.75);
-      ctx.stroke();
-      ctx.restore();
+    // 2) Handles (bleiben)
+    ctx.save();
+    const anchors = [[x,y],[x+w,y],[x,y+h],[x+w,y+h]];
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+    anchors.forEach(([ax,ay])=>{ ctx.beginPath(); ctx.arc(ax, ay, 2.75, 0, Math.PI*2); ctx.fill(); });
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    ctx.beginPath();
+    ctx.moveTo(x+w*0.25,y); ctx.lineTo(x+w*0.31,y-10);
+    ctx.moveTo(x+w, y+h*0.65); ctx.lineTo(x+w+10, y+h*0.75);
+    ctx.stroke();
+    ctx.restore();
 
-      // 3) Scanline
-      ctx.save();
-      ctx.globalAlpha = 0.045;
-      ctx.fillStyle = '#fff';
-      const barH = Math.max(3, Math.round(h*0.12));
-      const by = y + ((now*0.03 + idx*6) % Math.max(1,h)) - barH/2;
-      ctx.fillRect(x, by, w, barH);
-      ctx.restore();
+    // 3) Scanline (bleibt)
+    ctx.save();
+    ctx.globalAlpha = 0.045;
+    ctx.fillStyle = '#fff';
+    const barH = Math.max(3, Math.round(h*0.12));
+    const by = y + ((now*0.03 + idx*6) % Math.max(1,h)) - barH/2;
+    ctx.fillRect(x, by, w, barH);
+    ctx.restore();
 
-      fx.antsPhase += 0.25;
-    });
+    fx.antsPhase += 0.25;
+  });
 
-    for (let i=effects.length-1;i>=0;i--) {
-      if (effects[i].tEnd <= now) effects.splice(i,1);
-    }
+  for (let i=effects.length-1;i>=0;i--) {
+    if (effects[i].tEnd <= now) effects.splice(i,1);
   }
+}
 
   function frame(now=performance.now()){
     sizeCanvas(false);
@@ -1620,6 +1600,7 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
 
 
 
+
 <section id="aurora-sheet" class="aurora-sheet container" aria-labelledby="aurora-crown" aria-describedby="aurora-chant">
   <h2 id="aurora-crown" class="aurora-title">Über Fusion3</h2>
 
@@ -1845,62 +1826,6 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
 
   </ul>
 </section>
-<!-- Optionales JS: Lazy-Images & Video Controls feinjustieren -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Lazy-Image Loading (data-src → src)
-    const lazyImgs = document.querySelectorAll('img[data-src]');
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const img = e.target;
-          img.src = img.dataset.src;
-          obs.unobserve(img);
-        }
-      });
-    });
-    lazyImgs.forEach(img => obs.observe(img));
-
-    // Optional: disable PiP / Download via JS (validator-freundlich)
-    const vid = document.querySelector('#svc-social video');
-    if (vid) {
-      if (vid.controlsList && vid.controlsList.add) {
-        try {
-          vid.controlsList.add('nodownload');
-          vid.controlsList.add('noplaybackrate');
-        } catch (e) {}
-      }
-      if ('disablePictureInPicture' in vid)
-        vid.disablePictureInPicture = true;
-      vid.addEventListener('contextmenu', e => e.preventDefault());
-    }
-  });
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const lazyImages = document.querySelectorAll("img.lazy-comet");
-
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src;
-          img.classList.remove("lazy-comet");
-          obs.unobserve(img);
-        }
-      });
-    }, {
-      rootMargin: "100px 0px",
-      threshold: 0.01
-    });
-
-    lazyImages.forEach(img => observer.observe(img));
-  });
-
-  function togglePlanet(card){ card.classList.toggle('clicked'); }
-</script>
-
-
 
 
 
@@ -2417,212 +2342,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 </section>
-<script>
-(function(){
-  const rail = document.querySelector('#flowhub .flow-rail');
-  if(!rail) return;
-  const firstCard = document.querySelector('#flowhub .flow-card');
 
-  function updateTracker(){
-    // nur Mobile
-    if(!window.matchMedia('(max-width: 699.98px)').matches) return;
-
-    const railRect = rail.getBoundingClientRect();
-    const vh = window.innerHeight;
-
-    // Referenzlinie im Viewport (wo "gemessen" wird)
-    const refY = vh * 0.15;
-
-    // Fortschritt: 0 wenn rail-top @ refY, 1 wenn rail-bottom @ refY
-    const progress = (refY - railRect.top) / railRect.height;
-    const p = Math.max(0, Math.min(1, progress));
-
-    // Mitte der ersten Karte relativ zur Rail
-    let firstCenter = 0;
-    if(firstCard){
-      const r = firstCard.getBoundingClientRect();
-      firstCenter = (r.top - railRect.top) + (r.height / 2);
-      // Sicherheitsnetz: falls erste Karte sehr klein/außerhalb ist
-      firstCenter = Math.max(0, Math.min(firstCenter, railRect.height));
-    }
-
-    // Mapping: bei p=0 -> firstCenter; bei p=1 -> railRect.height
-    const y = firstCenter + p * (railRect.height - firstCenter);
-
-    rail.style.setProperty('--tracker-y', y + 'px');
-  }
-
-  const ro = new ResizeObserver(updateTracker);
-  ro.observe(document.documentElement);
-  updateTracker();
-  window.addEventListener('scroll', updateTracker, { passive: true });
-  window.addEventListener('resize', updateTracker);
-  window.addEventListener('load', updateTracker);
-})();
-</script>
-<!-- GSAP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (window.gsap) {
-      // ScrollTrigger wird NICHT mehr verwendet (Scroll-Reveal entfernt),
-      // Registrierung ist aber unschädlich, falls du später wieder willst.
-      gsap.registerPlugin(window.ScrollTrigger || {});
-
-      const cardsList = Array.from(document.querySelectorAll('#flowhub .flow-card'));
-
-      // === Nummerierung 00-basiert (00, 01, 02, ...) ===
-      cardsList.forEach((card, i) => {
-        const nn = String(i).padStart(2, '0');
-        card.setAttribute('data-stage', nn); // für ::after
-        const small = card.querySelector('.card-num');
-        const giant = card.querySelector('.card-num-giant');
-        if (small) small.textContent = nn;
-        if (giant) giant.textContent = nn;
-      });
-
-      // === KEIN Scroll-Reveal mehr: Basiszustand sofort sichtbar/neutral ===
-      gsap.set(cardsList, { opacity: 1, y: 0 });
-
-      // === Nudge (Doppel-Stups) der zweiten Karte, zyklisch — bleibt erhalten ===
-      const isDesktop = () => window.matchMedia('(min-width: 1025px)').matches;
-      let nudgeInterval = null;
-      let nudgeTl = null;
-
-      function clearNudgeTl() {
-        if (nudgeTl) { nudgeTl.kill(); nudgeTl = null; }
-        if (cardsList[1]) gsap.set(cardsList[1], { y: 0 });
-      }
-
-      function stopNudge() {
-        if (nudgeInterval) {
-          clearInterval(nudgeInterval);
-          nudgeInterval = null;
-        }
-        clearNudgeTl();
-      }
-
-      function makeNudge(target, amp = 10) {
-        // zwei leichte Stupser
-        const tl = gsap.timeline({ defaults: { clearProps: false } });
-        tl.to(target, { y: -amp, duration: 0.16, ease: 'power1.out' })
-          .to(target, { y: 0, duration: 0.20, ease: 'power2.out' }, '+=0.02')
-          .to(target, { y: -(amp * 0.7), duration: 0.14, ease: 'power1.out' }, '+=0.18')
-          .to(target, { y: 0, duration: 0.18, ease: 'power2.out' });
-        return tl;
-      }
-
-      function startNudge() {
-        if (prefersReduced || nudgeInterval || !isDesktop() || !cardsList[1]) return;
-        nudgeInterval = setInterval(() => {
-          clearNudgeTl();
-          nudgeTl = makeNudge(cardsList[1], 10);
-        }, 7000);
-      }
-
-      // === Expand/Auto-Cycle nur auf Desktop — bleibt erhalten ===
-      (function(){
-        const rail = document.querySelector('#flowhub .flow-rail');
-        if(!rail) return;
-        const cards = Array.from(rail.querySelectorAll('.flow-card'));
-        const rootEl = document.documentElement;
-        const root = document.getElementById('flowhub');
-        let autoId=null,selectedIdx=-1,railInView=false,booted=false;
-
-        const mqDesktop = window.matchMedia('(min-width:1025px)');
-        let expandMode = mqDesktop.matches && !prefersReduced;
-
-        function syncHeightFromFirst(){
-          const first=cards[0];
-          if(!first) return;
-          const wasOpen=first.classList.contains('is-open');
-          if(!wasOpen) first.classList.add('is-open');
-          const h=first.getBoundingClientRect().height;
-          rootEl.style.setProperty('--tile-h', (h||0)+'px');
-          if(!wasOpen) first.classList.remove('is-open');
-        }
-
-        function openAt(idx){
-          if(!expandMode) return;
-          if(idx<0||idx>=cards.length) return;
-          selectedIdx=idx;
-          stopNudge();
-          cards.forEach((c,i)=>{
-            const open=i===idx;
-            c.classList.toggle('is-open',open);
-            c.setAttribute('aria-expanded',open?'true':'false');
-          });
-          if(idx===0) syncHeightFromFirst();
-        }
-
-        function clearAutoCycle(){ if(autoId){ clearTimeout(autoId); autoId=null; } }
-        function planNext(delayMs=18000){
-          if(!expandMode) return;
-          clearAutoCycle();
-          if(!railInView) return;
-          autoId=setTimeout(()=>{
-            if(!railInView) return;
-            const next=(selectedIdx+1)%cards.length;
-            openAt(next);
-            planNext(delayMs);
-          },delayMs);
-        }
-
-        cards.forEach((c,i)=>{
-          c.addEventListener('click',()=>{ if(!expandMode) return; stopNudge(); openAt(i); planNext(); });
-          c.addEventListener('keydown',e=>{
-            if(!expandMode) return;
-            if(e.key==='Enter'||e.key===' '){ e.preventDefault(); stopNudge(); openAt(i); planNext(); }
-          });
-        });
-
-        const io=new IntersectionObserver((entries)=>{
-          const entry=entries[0];
-          railInView=entry.isIntersecting && entry.intersectionRatio>=0.5;
-          if(!expandMode) return;
-          if(railInView){
-            if(!booted){ booted=true; openAt(0); planNext(); root.classList.add('booted'); }
-            else { planNext(); }
-            startNudge(); // Sichtbar + Desktop -> Nudge starten
-          } else {
-            stopNudge();  // nicht sichtbar -> pausieren
-          }
-        },{threshold:[0,0.5,1]});
-        io.observe(rail);
-
-        function applyMode(){
-          expandMode = mqDesktop.matches && !prefersReduced;
-          if (root){
-            root.classList.toggle('is-enhanced', expandMode);
-          }
-          if(!expandMode){
-            clearAutoCycle();
-            cards.forEach(c=>{ c.classList.add('is-open'); c.setAttribute('aria-expanded','true'); });
-            rootEl.style.setProperty('--tile-h','auto');
-            stopNudge();
-            root?.classList.remove('booted');
-          }else{
-            cards.forEach(c=>{ c.classList.remove('is-open'); c.setAttribute('aria-expanded','false'); });
-            openAt(Math.max(0,selectedIdx,0)); // sofort öffnen
-            root?.classList.add('booted');     // Boot-Modus aktivieren
-            if(railInView){ planNext(); startNudge(); }
-          }
-        }
-
-        mqDesktop.addEventListener('change', applyMode);
-        window.addEventListener('resize', () => { if(expandMode) syncHeightFromFirst(); });
-
-        applyMode();
-
-        // Doppelt absichern: beim Laden direkt öffnen falls Desktop
-        if (expandMode) { openAt(0); root?.classList.add('booted'); }
-      })();
-    }
-  });
-</script>
 
 
 
@@ -3350,101 +3070,141 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
-<section id="design-study" class="aurora-sheet" data-theme="auto">
-  <!-- Titel mit Varianten -->
-  <h2 class="aurora-title">
-    <span class="title-full">3D Renderings &amp; Animation für NeoLog</span>
-    <span class="title-t">Case Study: 3D Renderings für NeoLog</span>
-    <span class="title-short">Case Study: NeoLog</span>
-  </h2>
-
-  <p class="aurora-subtitle" id="design-study-sub" aria-live="polite">
-    <!-- Mobile -->
-    <span class="subtitle-snippet">
-      Fotoreale 3D-Visuals. Starke Motion. Für Marken mit Anspruch.
-    </span>
-
-    <!-- Tablet -->
-    <span class="subtitle-t">
-      NeoLog inszeniert Produkte und Räume mit 3D-Renderings und Animation –
-      präzise, atmosphärisch, markant.
-    </span>
-
-    <!-- Desktop -->
-    <span class="subtitle-full">
-      Für <strong>NeoLog</strong> entstand eine 3D-Pipeline für Renderings und Animation. <br>
-      Vom Styleframe bis zur finalen Ausspielung.
-    </span>
-  </p>
-
-  <!-- Desktop/Tablet -->
-  <div class="ds-top ds-hide-on-mobile">
-    <!-- Video Card -->
-    <article class="ds-preview-card" aria-label="neolog Showreel">
-      <div class="ds-preview-wrap">
-        <video class="ds-preview-video"
-               src="./3DSlideShow/vid3.mp4"
-               autoplay
-               muted
-               loop
-               playsinline
-               preload="auto"
-               title="neolog 3D Showreel"></video>
-      </div>
-    </article>
-
-    <!-- Teaser-Karte mit Tablet-Variante im Titel -->
-    <article class="aether-card ds-teaser-card" aria-labelledby="study-teaser">
-      <h3 id="study-teaser">
-        <span class="teaser-title-full">Starke Bilder. Klare Prozesse.</span>
-        <span class="teaser-title-t">Starke Bilder. Klare Prozesse – kompakt.</span>
-      </h3>
-      <ul class="delta-list" role="list">
-        <li><span class="lead">Fokus</span><span class="copy">Designklarheit &amp; Motion mit Wirkung</span></li>
-        <li><span class="lead">Effizienz</span><span class="copy">Schnelle Iterationen &amp; transparente Freigaben</span></li>
-        <li><span class="lead">Impact</span><span class="copy">3D, das deine Marke unverwechselbar macht</span></li>
-      </ul>
-    </article>
-  </div>
-
-  <!-- Mobile -->
-  <article class="ds-mobile-card" aria-labelledby="mobile-study-title">
-    <div class="ds-mobile-preview-wrap">
-      <video class="ds-mobile-preview-video"
-             src="./3DSlideShow/vid2.mp4"
-             autoplay
-             muted
-             loop
-             playsinline
-             preload="auto"
-             title="neolog Showreel (mobil)"></video>
-    </div>
-    <div class="ds-mobile-body">
-      <h3 id="mobile-study-title">neolog – 3D, das bewegt</h3>
-      <p class="t-snippet ds-mobile-text">
-        Renderings &amp; Animationen, die Marken lebendig machen –  
-        performantes Lighting, präzise Bewegung, starke Wirkung.
+<!-- ================================
+     ARBEITSPROBEN — COMPACT (ENHANCED)
+     Karten-Stil wie Next-Level, kompakt & poliert
+     ================================ -->
+<section id="arbeitsproben" class="aurora-sheet board-showcase is-compact" data-force-light aria-labelledby="board-title">
+  <div class="container board-wrap">
+    <header class="board-head">
+      <h2 id="board-title" class="aurora-title">Arbeitsproben</h2>
+      <p class="aurora-subtitle">
+        <span class="subtitle-full">
+          Ausgewählte Renderings & Stills. Ruhiges, reduziertes Grid mit Fokus auf Bildwirkung.
+        </span>
       </p>
-    </div>
-  </article>
+    </header>
 
-<!-- CTA direkt unter dem Inhalt -->
-<div class="ds-cta">
-  <a 
-    href="./Gallerie.html" 
-    class="btn-cta" 
-    aria-label="Mehr über die Case Study auf externer Seite erfahren"
-    target="_blank" 
-    rel="noopener noreferrer">
-    Mehr erfahren
-  </a>
-</div>
+    <ul class="board-grid" aria-label="Arbeitsproben – Galerie">
+      <!-- Hinweis: tabindex entfernt (rein visuell) -->
+      <li class="cell" data-span="xl">
+        <figure class="card" aria-label="Arbeitsprobe 10" data-theme="tech">
+          <img
+            src="./3DSlideShow/post10.png"
+            alt="Arbeitsprobe 10"
+            loading="lazy" decoding="async" fetchpriority="low"
+            sizes="(min-width:900px) 66vw, 100vw">
+          <figcaption aria-label="Hard Surface – Set">
+            <span class="visually-hidden">Kategorie:</span>
+            <span class="cap-tag">Hard Surface</span>
+            <span class="cap-title">Set</span>
+          </figcaption>
+        </figure>
+      </li>
 
+      <li class="cell" data-span="s">
+        <figure class="card" aria-label="Arbeitsprobe 11" data-theme="warm">
+          <img src="./3DSlideShow/post11.png" alt="Arbeitsprobe 11" loading="lazy" decoding="async" fetchpriority="low"
+               sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
+          <figcaption aria-label="Automotive">
+            <span class="cap-tag">Automotive</span>
+            <span class="cap-title">Shot</span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <li class="cell" data-span="s">
+        <figure class="card" aria-label="Arbeitsprobe 12">
+          <img src="./3DSlideShow/post12.png" alt="Arbeitsprobe 12" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="Motion Still">
+            <span class="cap-tag">Motion</span>
+            <span class="cap-title">Still</span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <li class="cell" data-span="m">
+        <figure class="card" aria-label="Arbeitsprobe 13">
+          <img src="./3DSlideShow/post13.png" alt="Arbeitsprobe 13" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="Texturing — UDIM">
+            <span class="cap-tag">Texturing</span>
+            <span class="cap-title">UDIM</span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <li class="cell" data-span="m">
+        <figure class="card" aria-label="Arbeitsprobe 14" data-theme="tech">
+          <img src="./3DSlideShow/post14.png" alt="Arbeitsprobe 14" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="Case Detail">
+            <span class="cap-tag">Product</span>
+            <span class="cap-title">Detail</span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <li class="cell" data-span="xs">
+        <figure class="card" aria-label="Arbeitsprobe 15">
+          <img src="./3DSlideShow/post15.png" alt="Arbeitsprobe 15" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="Stylized">
+            <span class="cap-tag">LookDev</span>
+            <span class="cap-title">Stylized</span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <li class="cell" data-span="s">
+        <figure class="card" aria-label="Arbeitsprobe 16">
+          <img src="./3DSlideShow/post16.png" alt="Arbeitsprobe 16" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="FX — Passes">
+            <span class="cap-tag">FX</span>
+            <span class="cap-title">Passes</span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <li class="cell" data-span="s">
+        <figure class="card" aria-label="Arbeitsprobe 17">
+          <img src="./3DSlideShow/post17.png" alt="Arbeitsprobe 17" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="Realtime Material">
+            <span class="cap-tag">Realtime</span>
+            <span class="cap-title">Material</span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <li class="cell" data-span="m">
+        <figure class="card" aria-label="Arbeitsprobe 18" data-theme="warm">
+          <img src="./3DSlideShow/post18.png" alt="Arbeitsprobe 18" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="Renderpass">
+            <span class="cap-tag">Comp</span>
+            <span class="cap-title">Renderpass</span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <li class="cell" data-span="xs">
+        <figure class="card" aria-label="Arbeitsprobe 19">
+          <img src="./3DSlideShow/post19.png" alt="Arbeitsprobe 19" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="Macro">
+            <span class="cap-tag">Macro</span>
+            <span class="cap-title">Shot</span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <li class="cell" data-span="l">
+        <figure class="card" aria-label="Arbeitsprobe 20">
+          <img src="./3DSlideShow/post20.png" alt="Arbeitsprobe 20" loading="lazy" decoding="async" fetchpriority="low">
+          <figcaption aria-label="Finish — Final">
+            <span class="cap-tag">Finish</span>
+            <span class="cap-title">Final</span>
+          </figcaption>
+        </figure>
+      </li>
+    </ul>
+  </div>
 </section>
-
-
 
 
 

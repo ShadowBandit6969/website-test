@@ -808,3 +808,273 @@
     height: 0 !important;
   }
 }
+
+
+/* ==== FLOWHUB – Mobile Card Polish (≤700px) ============================ */
+@media (max-width: 699.98px){
+  #flowhub{
+    /* feiner Gutter + Farben als Tokens */
+    --flow-mobile-gutter: clamp(12px, 3.6vw, 18px);
+    --card-radius: 16px;
+    --card-bg-glass-light: rgba(255,255,255,.08);
+    --card-bg-glass-dark:  rgba(255,255,255,.04);
+    --card-border: rgba(255,255,255,.22);
+    --card-shadow: 0 6px 16px rgba(0,0,0,.16), 0 1px 0 rgba(255,255,255,.15) inset;
+    --ink: rgba(255,255,255,.96);
+    --ink-dim: rgba(255,255,255,.82);
+  }
+  :root[data-theme="light"] #flowhub{
+    --card-bg-glass-light: rgba(15,23,41,.06);
+    --card-bg-glass-dark:  rgba(15,23,41,.03);
+    --card-border: rgba(15,23,41,.10);
+    --card-shadow: 0 8px 22px rgba(0,0,0,.10), 0 1px 0 rgba(255,255,255,.65) inset;
+    --ink: #10141f;
+    --ink-dim: rgba(16,20,31,.8);
+  }
+
+  /* Bühne: links Platz für Timeline, aber sanfter Außenrand */
+  #flowhub .pane-world{
+    padding-left:  max(var(--flow-mobile-gutter), env(safe-area-inset-left)) !important;
+    padding-right: max(var(--flow-mobile-gutter), env(safe-area-inset-right)) !important;
+  }
+
+  /* Rail: Timeline-Gasse links, engeres Grid */
+  #flowhub .flow-rail{
+    position: relative;
+    padding-left: 64px;             /* Platz für Timeline/Kreis */
+    gap: .85rem !important;
+  }
+
+  /* === Card Surface – Layered Glass + ruhiger Verlauf ================= */
+  #flowhub .flow-card{
+    box-sizing: border-box !important;
+    width: calc(100% - var(--flow-mobile-gutter) * 2) !important;
+    margin-inline: auto !important;
+
+    border-radius: var(--card-radius) !important;
+    padding: 14px 16px calc(16px + var(--card-bottom-safe, 2.25rem)) 16px !important;
+
+    /* ruhiger machen, Eigenverlauf bleibt als Basis */
+    background-size: 280% 280% !important;
+    background-position: 55% 52% !important;
+
+    /* dezenter Glas-Layer oben drauf */
+    position: relative;
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    isolation: isolate;
+    will-change: transform;
+    transform: translateZ(0); /* fix subtle blur on iOS */
+  }
+  /* Soft glass + grain overlay */
+  #flowhub .flow-card::before{
+    content:"";
+    position:absolute; inset:0;
+    border-radius: inherit;
+    background:
+      /* zarter Verlauffilm */
+      linear-gradient(180deg, var(--card-bg-glass-light), var(--card-bg-glass-dark)),
+      /* feine Körnung (Base64 1x1 noise oder system noise fallback) */
+      radial-gradient(100% 100% at 0% 0%, rgba(255,255,255,.08) 0, transparent 60%),
+      radial-gradient(120% 140% at 100% 0%, rgba(0,0,0,.08) 0, transparent 60%);
+    mix-blend-mode: soft-light;
+    pointer-events:none;
+    z-index:1;
+  }
+
+  /* Tap/Focus States – professionell & zurückhaltend */
+  #flowhub .flow-card[role="button"]{ touch-action: manipulation; }
+  #flowhub .flow-card:active{
+    transform: translateY(1px);
+    box-shadow: 0 3px 10px rgba(0,0,0,.12);
+  }
+  #flowhub .flow-card[role="button"]:focus-visible{
+    outline: 2px solid rgba(255,255,255,.6);
+    outline-offset: 3px;
+  }
+  :root[data-theme="light"] #flowhub .flow-card[role="button"]:focus-visible{
+    outline-color: rgba(0,0,0,.35);
+  }
+
+  /* === Typografie – kompakt, hochwertig =============================== */
+  #flowhub .flow-card .card-core{
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: .55rem;  /* enger, aber luftiger als vorher */
+  }
+
+  #flowhub .flow-card .card-num{
+    margin: 0 0 .35rem;
+    color: var(--ink-dim);
+    font-weight: 800;
+    font-size: .95rem;
+    letter-spacing: .02em;
+    opacity: .9;
+  }
+
+  #flowhub .flow-card h3{
+    margin: 0 0 .28rem !important;
+    font-size: clamp(1.08rem, 1rem + .9vw, 1.32rem) !important;
+    line-height: 1.18 !important;
+    letter-spacing: -.01em !important;
+    color: var(--ink) !important;
+    text-shadow: none !important;     /* cleaner Look */
+  }
+
+  /* kurze, kräftige Copy mobil */
+  #flowhub .flow-card .m-snippet{
+    display: block !important;
+    margin: 0 !important;
+    color: var(--ink) !important;
+    font-weight: 700 !important;
+    font-size: clamp(.98rem, .95rem + .35vw, 1.08rem) !important;
+    line-height: 1.5 !important;
+    letter-spacing: .003em !important;
+    text-wrap: pretty;
+  }
+  /* lange Texte & Details mobil ausblenden */
+  #flowhub .flow-card > .card-core > p:not(.m-snippet),
+  #flowhub .flow-card .details{
+    display: none !important;
+  }
+
+  /* große Zahl mobil aus: Platz sparen */
+  #flowhub .card-num-giant{ display:none !important; }
+
+  /* === Timeline-Optik links – ruhiger & kontrastklar =================== */
+  #flowhub .flow-rail{
+    --tl-x: 26px;
+    --tracker-y: 0px;
+    --tl-line: rgba(0,0,0,.2);
+    --tl-dot:  rgba(0,0,0,.9);
+    --tl-bg:   #fff;
+  }
+  :root[data-theme="dark"] #flowhub .flow-rail{
+    --tl-line: rgba(255,255,255,.28);
+    --tl-dot:  #fff;
+    --tl-bg:   #0b0b0b;
+  }
+  #flowhub .flow-rail::before{
+    content:"";
+    position:absolute; left: var(--tl-x); top:0; bottom:0;
+    width: 2px; border-radius: 2px;
+    background: linear-gradient(to bottom, transparent 0%, var(--tl-line) 12%, var(--tl-line) 88%, transparent 100%);
+    z-index:0;
+  }
+  #flowhub .flow-rail::after{
+    content:"";
+    position:absolute; left: var(--tl-x); top: var(--tracker-y);
+    transform: translate(-50%,-50%);
+    width: 14px; height: 14px; border-radius: 999px;
+    background: var(--tl-dot);
+    outline: 4px solid var(--tl-bg);
+    box-shadow: 0 4px 10px rgba(0,0,0,.08);
+    z-index: 2;
+  }
+
+  /* Karten optisch an Timeline anbinden (dezenter Tick) */
+  #flowhub .flow-card::after{
+    content:"";
+    position:absolute;
+    left: calc(var(--tl-x) + 3px);
+    top: 50%; transform: translateY(-50%);
+    width: 16px; height: 2px; border-radius: 2px;
+    background: color-mix(in oklab, var(--tl-dot) 50%, transparent);
+    opacity: .55;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Zwischenräume minimal größer, damit die Timeline atmen kann */
+  #flowhub .flow-card + .flow-card{ margin-top: 18px; }
+}
+
+/* ==== Dark-Mode Feinschliff für mobile Cards ========================= */
+@media (max-width: 699.98px){
+  :root[data-theme="dark"] #flowhub .flow-card{
+    border-color: rgba(255,255,255,.14);
+    box-shadow: 0 8px 22px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.12) inset;
+  }
+  :root[data-theme="dark"] #flowhub .flow-card::before{
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)),
+      radial-gradient(100% 100% at 0% 0%, rgba(255,255,255,.05) 0, transparent 60%),
+      radial-gradient(120% 140% at 100% 0%, rgba(0,0,0,.25) 0, transparent 60%);
+  }
+}
+
+/* Motion-Respect */
+@media (prefers-reduced-motion: reduce){
+  #flowhub .flow-card{ transition: none !important; }
+}
+
+/* === FLOWHUB – Cards: immer weiße Schrift + schöne Outline ================= */
+
+/* 1) Typo in Karten immer weiß (alle Breakpoints) */
+#flowhub .flow-card,
+#flowhub .flow-card h3,
+#flowhub .flow-card p,
+#flowhub .flow-card .m-snippet,
+#flowhub .flow-card .t-snippet,
+#flowhub .flow-card .card-num,
+#flowhub .flow-card .details,
+#flowhub .flow-card a,
+#flowhub .flow-card a:visited{
+  color: #fff !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.18); /* subtiler Kontrast auf hellen Gradients */
+}
+
+/* 2) Edle Border: innerer „Glass“-Stroke + äußere Kontur (ohne Extra-Markup) */
+#flowhub .flow-card{
+  border: 1px solid transparent !important;           /* echte Border übernimmt die Radius-Kontur */
+  box-shadow:
+    /* äußerer weicher Ring / Lift */
+    0 8px 22px rgba(0,0,0,.18),
+    /* dezente Außenkontur */
+    0 0 0 1px rgba(255,255,255,.08),
+    /* feiner Innen-Stroke (wirkt wie polierte Kante) */
+    inset 0 0 0 1px rgba(255,255,255,.22) !important;
+  backdrop-filter: saturate(1.05);                     /* minimal satter, wirkt „teurer“ */
+}
+
+/* 3) Overlay veredeln: dein ::before bleibt, bekommt aber eine präzisere Kante */
+#flowhub .flow-card::before{
+  /* bestehende Hintergründe aus deiner CSS bleiben,
+     wir ergänzen nur eine saubere Innenkante über outline */
+  outline: 1px solid rgba(255,255,255,.14);
+  outline-offset: -1px;                /* sitzt exakt auf der Innenkante */
+  border-radius: inherit;
+}
+
+/* 4) Interaktion – Border reagiert subtil auf Hover/Active/Focus */
+#flowhub .flow-card:hover{
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.20),
+    0 0 0 1px rgba(255,255,255,.10),
+    inset 0 0 0 1px rgba(255,255,255,.26) !important;
+}
+#flowhub .flow-card:active{
+  transform: translateY(1px);
+  box-shadow:
+    0 6px 18px rgba(0,0,0,.18),
+    0 0 0 1px rgba(255,255,255,.10),
+    inset 0 0 0 1px rgba(255,255,255,.30) !important;
+}
+
+/* Tastaturfokus — klare, aber elegante Kontur */
+#flowhub .flow-card[role="button"]:focus-visible{
+  outline: 2px solid rgba(255,255,255,.75) !important;
+  outline-offset: 3px !important;
+}
+
+/* 5) Dark/Auto: Border-Werte leicht anheben, Weiß bleibt erhalten */
+:root[data-theme="dark"] #flowhub .flow-card,
+@media (prefers-color-scheme: dark){
+  :root[data-theme="auto"] #flowhub .flow-card{
+    box-shadow:
+      0 10px 28px rgba(0,0,0,.35),
+      0 0 0 1px rgba(255,255,255,.10),
+      inset 0 0 0 1px rgba(255,255,255,.26) !important;
+  }
+}
