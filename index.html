@@ -230,7 +230,10 @@
     }
   </style>
 
-
+  <!-- Webflow/Normalize -->
+  <meta name="generator" content="Webflow">
+  <link href="css/denizs-dapper-site-2d192b.webflow.css" rel="stylesheet" type="text/css">
+  
   
   <!-- Titelpage-spezifische Bild-Overrides (in den Head verschoben) -->
   <style>
@@ -971,168 +974,21 @@ body[data-page="webdesign"] .hero-image-foreground {
       >
         <source src="./WebdesignPic/1.mp4" type="video/mp4">
       </video>
-      <noscript><img src="./images/hintegrundweb.webp" alt=""></noscript>
+
+      <!-- Fallback ohne JS -->
+      <noscript>
+        <img src="./images/hintegrundweb.webp" alt="">
+      </noscript>
     </div>
 
     <div class="page-title">
       <div class="container">
-        <!-- Dein originales Titel-Markup -->
         <h1 class="large-title" id="webdesign-title">Fusion3</h1>
-        <h2 class="small-title" id="webdesign-title">
-          Webdesign, UX &amp; 3D, das Kunden gewinnt – nicht nur beeindruckt.
-        </h2>
-
-        <!-- CTAs -->
-        <div class="hero-ctas" role="group" aria-label="Hauptaktionen">
-          <!-- Primary (ohne Pfeil) -->
-          <a href="#kontakt" class="btn btn--primary" aria-label="Kostenloses Erstgespräch vereinbaren">
-            Kostenloses Erstgespräch
-          </a>
-
-          <!-- Portfolio: Button + separater Kreis mit Arrow -->
-          <div class="cta-with-icon">
-            <a href="#referenzen" class="btn btn--ghost" aria-label="Portfolio ansehen">
-              Portfolio ansehen
-            </a>
-            <button class="icon-circle" aria-label="Portfolio öffnen">
-              <svg viewBox="0 0 24 24" class="icon-arrow" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M7 17L17 7M7 7h10v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-          </div>
-        </div>
+        <h2 class="large-title" id="webdesign-title">Webdesign, UX & 3D, das Kunden gewinnt – nicht nur beeindruckt.</h2>
       </div>
     </div>
   </div>
 </section>
-
-<style>
-/* ===== Tokens ===== */
-:root{
-  --text: #fff;
-  --muted: #dfe3e6;
-  --veil-top: rgba(0,0,0,.56);
-  --veil-mid: rgba(0,0,0,.36);
-  --veil-bot: rgba(0,0,0,.64);
-  --brand: #ff7b00;
-  --brand-acc: #ffb357;
-  --border-ghost: rgba(255,255,255,.55);
-  --btn-height: 52px;          /* einheitliche Button-Höhe */
-  --btn-radius: 999px;
-  --gap-btns: 12px;            /* Abstand zwischen Buttons */
-  --gap-icon: 8px;             /* feiner Abstand Button ↔ Kreis */
-  --shadow-btn: 0 8px 22px rgba(255,123,0,.35);
-  --shadow-btn-hover: 0 12px 28px rgba(255,123,0,.45);
-}
-
-/* ===== Base ===== */
-.hero-section{ position:relative; color:var(--text); overflow:hidden; isolation:isolate; }
-.hero-images-wrapper{ position:relative; min-height:min(78vh, 860px); }
-.hero-image-background{ position:absolute; inset:0; }
-.hero-video{ width:100%; height:100%; object-fit:cover; filter:brightness(.45) saturate(1.04); }
-.hero-image-background::after{
-  content:""; position:absolute; inset:0;
-  background:
-    radial-gradient(1200px 600px at 15% 15%, rgba(255,255,255,.12), transparent 60%),
-    linear-gradient(180deg, var(--veil-top) 0%, var(--veil-mid) 35%, var(--veil-bot) 100%);
-}
-
-/* ===== Title area (dein Markup bleibt) ===== */
-.page-title .container{
-  position:relative; z-index:2; max-width:1100px; margin-inline:auto;
-  padding: clamp(16px, 3vw, 32px);
-  padding-top: clamp(56px, 12vh, 140px);
-  text-align:center;
-}
-.large-title{
-  margin:0 0 .35em; font-weight:900; letter-spacing:-.02em;
-  line-height:1.05; font-size:clamp(44px, 7vw, 92px);
-  text-shadow:0 2px 30px rgba(0,0,0,.35);
-}
-.small-title{
-  margin:0 auto clamp(22px, 4vh, 40px); max-width:820px;
-  font-size:clamp(16px, 2.4vw, 24px); line-height:1.4; color:var(--muted);
-}
-
-/* ===== CTAs ===== */
-.hero-ctas{
-  display:flex; justify-content:center; align-items:center; flex-wrap:wrap;
-  gap: var(--gap-btns);
-}
-
-/* Button-Base: gleiche Höhe erzwingen */
-.btn{
-  display:inline-flex; align-items:center; justify-content:center; gap:.6rem;
-  height: var(--btn-height);          /* gleiche Höhe */
-  padding: 0 clamp(18px, 2.8vw, 24px);
-  border-radius: var(--btn-radius);
-  font-weight:800; letter-spacing:.2px;
-  text-decoration:none; line-height:1;
-  border:1px solid transparent;
-  transition: transform .18s ease, box-shadow .18s ease, background .28s ease, color .18s ease, border-color .18s ease;
-  white-space: nowrap;
-}
-
-/* Primary */
-.btn--primary{
-  background: linear-gradient(135deg, var(--brand), var(--brand-acc));
-  color:#111; box-shadow: var(--shadow-btn);
-}
-.btn--primary:hover{ transform: translateY(-1px); box-shadow: var(--shadow-btn-hover); }
-
-/* Ghost */
-.btn--ghost{
-  background:transparent; color:var(--text); border-color:var(--border-ghost);
-}
-.btn:focus-visible{ outline:2px solid rgba(255,255,255,.55); outline-offset:3px; }
-
-/* ===== Button + externer Kreis (Portfolio) ===== */
-.cta-with-icon{
-  display:flex; align-items:center; justify-content:center;
-  gap: var(--gap-icon);                 /* feiner Abstand */
-}
-
-/* Der Kreis ist ein eigenes Fokus-/Hover-Ziel */
-.icon-circle{
-  height: var(--btn-height);            /* selbe Höhe wie Buttons */
-  width: var(--btn-height);
-  display:grid; place-items:center;
-  border-radius:50%;
-  border:1px solid var(--border-ghost);
-  background: rgba(255,255,255,.06);
-  color: var(--text);
-  cursor:pointer;
-  transition: background .25s ease, transform .18s ease;
-}
-.icon-circle:hover{ background: rgba(255,255,255,.10); }
-.icon-circle:active{ transform: scale(.98); }
-.icon-circle:focus-visible{ outline:2px solid rgba(255,255,255,.55); outline-offset:3px; }
-
-/* Pfeil-Icon (Feather arrow-up-right) */
-.icon-arrow{
-  width: 1.2rem; height: 1.2rem;
-  transition: transform .28s ease;
-  will-change: transform;
-}
-
-/* Rotation auf Hover/Klick – sowohl beim Button als auch beim Kreis */
-.cta-with-icon:hover .icon-arrow,
-.cta-with-icon:focus-within .icon-arrow{ transform: rotate(45deg); }
-.icon-circle:active .icon-arrow{ transform: rotate(45deg) scale(.98); }
-
-/* ===== Mobile ===== */
-@media (max-width: 560px){
-  .hero-ctas{ flex-direction:column; }
-  .btn{ width:100%; max-width:320px; }
-  .cta-with-icon{ width:100%; justify-content:center; }
-}
-
-/* Reduced Motion */
-@media (prefers-reduced-motion: reduce){
-  *{ transition:none !important; }
-}
-</style>
-
 <script>
 (function () {
   const section = document.querySelector('.hero-section[data-page="webdesign"]');
@@ -1638,6 +1494,7 @@ CTA oben sichtbar:
 
 
 
+
 <section id="aurora-sheet" class="aurora-sheet container" aria-labelledby="aurora-crown" aria-describedby="aurora-chant">
   <h2 id="aurora-crown" class="aurora-title">Über Fusion³</h2>
 
@@ -1658,23 +1515,23 @@ CTA oben sichtbar:
                aria-labelledby="aether-mission-h"
                aria-describedby="aether-mission-s">
         <h3 id="aether-mission-h">Unsere Mission</h3>
-        <p class="snippet" id="aether-mission-s">Klarheit &amp; Professionalität.</p>
-        <p class="t-snippet">Wir wollen, dass jeder Besucher sofort versteht, was wir tun, wie wir arbeiten und warum wir die richtige Wahl für sein Projekt sind.</p>
-        <p class="microtag">Verständlich. Direkt. Vertrauensbildend.</p>
+        <p class="snippet" id="aether-mission-s">Ergebnisse statt nur Gestaltung.</p>
+        <p class="t-snippet">Wir vereinen Design, Code und 3D zu ganzheitlichen Systemen – technisch stark, emotional klar und messbar wirksam.</p>
+        <p class="microtag">Kreativ. Strategisch. Nutzbar.</p>
 
-        <h4 id="aether-mission-list-h" class="sr-only">Wie wir Klarheit schaffen</h4>
+        <h4 id="aether-mission-list-h" class="sr-only">Was uns antreibt</h4>
         <ul class="delta-list" aria-labelledby="aether-mission-list-h">
           <li>
-            <span class="lead">Klarheit</span>
-            <span class="copy">„Ich will sofort verstehen, was ihr macht, ob ihr gut seid und ob ihr zu meinem Projekt passt.“</span>
+            <span class="lead">Balance</span>
+            <span class="copy">Schön und funktional – kein Entweder-Oder.</span>
           </li>
           <li>
-            <span class="lead">Professionalität</span>
-            <span class="copy">Klare Kommunikation, nachvollziehbare Prozesse und sichtbare Ergebnisse.</span>
+            <span class="lead">Erlebnis</span>
+            <span class="copy">Geführt, verständlich, emotional – für echte Nutzer, nicht nur für Awards.</span>
           </li>
           <li>
-            <span class="lead">Vertrauen</span>
-            <span class="copy">Transparenz von der ersten Kontaktaufnahme bis zum finalen Launch.</span>
+            <span class="lead">Substanz</span>
+            <span class="copy">Skalierbar gedacht, sauber gebaut – langlebig statt kurzlebig.</span>
           </li>
         </ul>
       </article>
@@ -1686,23 +1543,23 @@ CTA oben sichtbar:
                aria-labelledby="aether-crew-h"
                aria-describedby="aether-crew-s">
         <h3 id="aether-crew-h">Unsere Arbeitsweise</h3>
-        <p class="snippet" id="aether-crew-s">Visuelle Qualität &amp; Zuverlässiger Prozess.</p>
-        <p class="t-snippet">Design ist bei uns kein Selbstzweck. Wir verbinden Kreativität mit Struktur – für Ergebnisse, die inspirieren und funktionieren.</p>
-        <p class="microtag">Ästhetisch. Präzise. Planbar.</p>
+        <p class="snippet" id="aether-crew-s">Agil, klar und partnerschaftlich.</p>
+        <p class="t-snippet">Wir arbeiten transparent und effizient – mit kurzen Feedback-Schleifen, greifbaren Zwischenergebnissen und direktem Austausch.</p>
+        <p class="microtag">Schnell. Verständlich. Verlässlich.</p>
 
-        <h4 id="aether-crew-list-h" class="sr-only">Wie wir Qualität und Verlässlichkeit sichern</h4>
+        <h4 id="aether-crew-list-h" class="sr-only">Prinzipien unserer Arbeitsweise</h4>
         <ul class="delta-list" aria-labelledby="aether-crew-list-h">
           <li>
-            <span class="lead">Visuelle Qualität</span>
-            <span class="copy">„Zeigt mir moderne, inspirierende Beispiele – ich will sehen, dass ihr Design könnt.“</span>
+            <span class="lead">Flexibel</span>
+            <span class="copy">Anpassbar an Ziel, Budget und Tempo – egal ob MVP oder kompletter Relaunch.</span>
           </li>
           <li>
-            <span class="lead">Zuverlässiger Prozess</span>
-            <span class="copy">„Ich möchte wissen, dass ihr strukturiert arbeitet, Termine haltet und kommuniziert.“</span>
+            <span class="lead">Transparent</span>
+            <span class="copy">Klare Phasen, offene Kommunikation, keine Überraschungen.</span>
           </li>
           <li>
-            <span class="lead">Planung &amp; Struktur</span>
-            <span class="copy">Agile Phasen, Feedback-Schleifen und nachvollziehbare Schritte vom Konzept bis zum Launch.</span>
+            <span class="lead">Effizient</span>
+            <span class="copy">Design, 3D und Entwicklung gleichzeitig – keine Zeitverluste durch Übergaben.</span>
           </li>
         </ul>
       </article>
@@ -1714,23 +1571,23 @@ CTA oben sichtbar:
                aria-labelledby="aether-vision-h"
                aria-describedby="aether-vision-s">
         <h3 id="aether-vision-h">Unsere Vision</h3>
-        <p class="snippet" id="aether-vision-s">Messbarer Nutzen &amp; Alles-in-einem-Lösung.</p>
-        <p class="t-snippet">Wir wollen Ergebnisse, die spürbar wirken – messbare Performance, stärkeres Branding und weniger Aufwand durch einheitliche Lösungen.</p>
-        <p class="microtag">Effizient. Ganzheitlich. Zukunftsorientiert.</p>
+        <p class="snippet" id="aether-vision-s">Digitale Erlebnisse mit Wirkung und Tiefe.</p>
+        <p class="t-snippet">Wir wollen Marken erschaffen, die bleiben – weil sie gut aussehen, verstanden werden und echten Mehrwert bieten.</p>
+        <p class="microtag">Relevanz vor Rauschen.</p>
 
-        <h4 id="aether-vision-list-h" class="sr-only">Wie wir echten Mehrwert schaffen</h4>
+        <h4 id="aether-vision-list-h" class="sr-only">Leitprinzipien unserer Vision</h4>
         <ul class="delta-list" aria-labelledby="aether-vision-list-h">
           <li>
-            <span class="lead">Messbarer Nutzen</span>
-            <span class="copy">„Wenn ich investiere, bekomme ich Resultate – schnellere Seite, mehr Leads, besseres Branding.“</span>
+            <span class="lead">Emotion</span>
+            <span class="copy">Design, das berührt – nicht nur beeindruckt.</span>
           </li>
           <li>
-            <span class="lead">Alles-in-einem-Lösung</span>
-            <span class="copy">„Ich will nicht drei Anbieter – einer für Web, einer für 3D, einer für Design. Alles aus einer Hand spart Stress.“</span>
+            <span class="lead">Technologie</span>
+            <span class="copy">Nur, was sinnvoll ist – sauber integriert und bereit für morgen.</span>
           </li>
           <li>
-            <span class="lead">Synergie</span>
-            <span class="copy">Design, Entwicklung und 3D greifen bei uns nahtlos ineinander – für Effizienz und maximale Wirkung.</span>
+            <span class="lead">Nachhaltigkeit</span>
+            <span class="copy">Langlebig in Code, Content und Wirkung – skalierbar statt schnell veraltet.</span>
           </li>
         </ul>
       </article>
@@ -1739,77 +1596,257 @@ CTA oben sichtbar:
   </ul>
 </section>
 
-<style>:root{
-  --page-bg: #0b0d12;      /* deine Seiten-Hintergrundfarbe */
-  --card-bg: #0f1218;      /* Hintergrund des aurora-sheet */
+
+
+
+
+<!---Warum Kunden mit uns arbeiten – und bleiben:
+✅ Design, Code & 3D in einem Team – keine Übergabeschleifen, kein Stilbruch.
+✅ Performance-Garantie – LCP < 2,5 s, SEO-Struktur & Core Web Vitals inklusive.
+✅ 3D, das verkauft (nicht nur schön aussieht) – Web-optimierte Assets, interaktive Modelle & Produktanimationen.
+✅ UX mit Proof statt Bauchgefühl – Prototyping + Nutzerfeedback vor der Programmierung.
+✅ 30 Tage Launch-Support – Fehlerfrei live gehen + Tracking & Optimierung nach Release.-->
+
+<section class="aurora-benefits-grid" aria-labelledby="aurora-benefits-title">
+  <div class="abg-container">
+    <header class="abg-head">
+      <!-- ➜ Füge hier die AURORA-Überschrift 1:1 ein -->
+      <h2 id="aurora-benefits-title" class="aurora-title">[AURORA: Überschrift hier 1:1 einfügen]</h2>
+      <!-- ➜ Füge hier die AURORA-Unterüberschrift 1:1 ein -->
+      <p class="aurora-subtitle">[AURORA: Unterüberschrift hier 1:1 einfügen]</p>
+    </header>
+
+    <ul class="abg-grid" role="list">
+      <li class="abg-item">
+        <span class="abg-icon" aria-hidden="true">✔</span>
+        <h3 class="abg-item-title">Design, Code &amp; 3D in einem Team</h3>
+        <p class="abg-item-text">Keine Übergabeschleifen, kein Stilbruch.</p>
+      </li>
+
+      <li class="abg-item">
+        <span class="abg-icon" aria-hidden="true">✔</span>
+        <h3 class="abg-item-title">Performance-Garantie</h3>
+        <p class="abg-item-text">LCP &lt; 2,5&nbsp;s, SEO-Struktur &amp; Core Web Vitals inklusive.</p>
+      </li>
+
+      <li class="abg-item">
+        <span class="abg-icon" aria-hidden="true">✔</span>
+        <h3 class="abg-item-title">3D, das verkauft</h3>
+        <p class="abg-item-text">Web-optimierte Assets, interaktive Modelle &amp; Produktanimationen.</p>
+      </li>
+
+      <li class="abg-item">
+        <span class="abg-icon" aria-hidden="true">✔</span>
+        <h3 class="abg-item-title">UX mit Proof statt Bauchgefühl</h3>
+        <p class="abg-item-text">Prototyping + Nutzerfeedback vor der Programmierung.</p>
+      </li>
+
+      <li class="abg-item">
+        <span class="abg-icon" aria-hidden="true">✔</span>
+        <h3 class="abg-item-title">30 Tage Launch-Support</h3>
+        <p class="abg-item-text">Fehlerfrei live gehen + Tracking &amp; Optimierung nach Release.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+<style>
+/* =========================
+   Aurora Benefits Grid (Agentur-Style)
+   - Light: weißer Hintergrund
+   - Dark: eleganter Dark-Look
+   - Auto-fit Grid: Items stehen nebeneinander, wenn Platz vorhanden ist
+   - Headline/Subheadline bitte 1:1 aus AURORA in .aurora-title / .aurora-subtitle einfügen
+========================= */
+
+/* Tokens mit Fallbacks */
+.aurora-benefits-grid{
+  --ink: #0b1220;                 /* Text (Light) */
+  --ink-sub: rgba(11, 18, 32, .82);
+  --muted: rgba(11, 18, 32, .60);
+  --bg: #ffffff;                  /* Light Background */
+  --border: rgba(11, 18, 32, .12);
+  --card-bg: #ffffff;
+  --card-bg-soft: rgba(11, 18, 32, .02);
+  --radius: 18px;
+  --radius-lg: 22px;
+  --shadow-sm: 0 6px 22px rgba(0,0,0,.06);
+  --shadow-md: 0 22px 60px rgba(0,0,0,.10);
+  --accent: #ff7a1a;
+  --accent-2: #ff6a00;
+  --lh-tight: 1.15;
+  --lh-relaxed: 1.75;
+  --focus: #0b1220;
+  --focus-ring: 2px;
+  --focus-gap: 2px;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
 }
 
-/* Hero unten weich ins Seiten-BG übergehen lassen */
-.hero-section{
+/* Dark Mode */
+@media (prefers-color-scheme: dark){
+  .aurora-benefits-grid{
+    --ink: #ffffff;
+    --ink-sub: rgba(255,255,255,.92);
+    --muted: rgba(255,255,255,.70);
+    --bg: #0b0b0f;
+    --border: rgba(255,255,255,.16);
+    --card-bg: rgba(255,255,255,.06);
+    --card-bg-soft: rgba(255,255,255,.04);
+    --shadow-sm: 0 8px 22px rgba(0,0,0,.30);
+    --shadow-md: 0 28px 80px rgba(0,0,0,.55);
+    --focus: #000;
+  }
+}
+
+/* Section */
+.aurora-benefits-grid{
+  background: var(--bg);
+  color: var(--ink);
+  border-block: 1px solid rgba(0,0,0,.04);
+  padding-block: clamp(56px, 8vw, 120px);
   position: relative;
-  min-height: 100svh;      /* Vollhöhe */
-  overflow: clip;          /* trennt Pseudo-Ebene sauber ab */
+  isolation: isolate;
 }
 
-/* Standard: farbiger Overlay-Gradient */
-.hero-section::after{
-  content:"";
-  position:absolute; inset:0;
-  pointer-events:none;
-  background: linear-gradient(to bottom,
-    transparent 65%,
-    color-mix(in oklab, var(--page-bg) 0%, black 0%) 85%,
-    var(--page-bg) 100%);
+/* Container */
+.abg-container{
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 3vw, 32px);
 }
 
-/* „richtig schön“ via Masking – wo unterstützt */
-@supports (-webkit-mask-image: linear-gradient(black, transparent)) or (mask-image: linear-gradient(black, transparent)) {
-  .hero-section::after{ background:none; }
-  .hero-section{
-    -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
-            mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+/* Header (zentriert, Agentur-like) */
+.abg-head{
+  text-align: center;
+  display: grid;
+  gap: clamp(10px, 1.4vw, 16px);
+  margin-bottom: clamp(24px, 3.2vw, 44px);
+  justify-items: center;
+}
+
+/* AURORA: Bitte Inhalte 1:1 einfügen */
+.aurora-title{
+  margin: .15rem 0 0;
+  font-weight: 900;
+  letter-spacing: -0.015em;
+  line-height: var(--lh-tight);
+  font-size: clamp(2rem, 1.25rem + 1.8vw, 3rem);
+  color: var(--ink);
+}
+.aurora-title .u-underline{ position:relative; }
+.aurora-title .u-underline::after{
+  content:""; position:absolute; left:0; bottom:-0.06em; height:2px; width:100%;
+  transform: scaleX(1); transform-origin: left center;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+.aurora-subtitle{
+  margin: 0;
+  max-width: 52rem;
+  color: var(--ink-sub);
+  font-size: clamp(1.06rem, 1rem + .5vw, 1.18rem);
+  line-height: var(--lh-relaxed);
+  letter-spacing: .004em;
+}
+
+/* GRID: auto-fit -> Elemente stehen nebeneinander, wenn Platz vorhanden ist */
+.abg-grid{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: clamp(12px, 2vw, 20px);
+  align-items: start;
+}
+
+/* Card */
+.abg-item{
+  background: linear-gradient(180deg, var(--card-bg), var(--card-bg-soft));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(16px, 1.8vw, 22px);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .9rem;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+}
+.abg-item:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: color-mix(in oklab, var(--border) 70%, var(--accent) 30%);
+  background: linear-gradient(180deg, var(--card-bg), color-mix(in oklab, var(--card-bg-soft) 70%, white 30%));
+}
+@media (prefers-color-scheme: dark){
+  .abg-item:hover{
+    background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+  }
+}
+.abg-item:focus-within{
+  outline: var(--focus-ring) solid var(--focus);
+  outline-offset: var(--focus-gap);
+  box-shadow: 0 0 0 4px rgba(142,200,255,.18);
+}
+
+/* Icon-Badge */
+.abg-icon{
+  display: grid; place-items: center;
+  width: 40px; height: 40px; min-width: 40px;
+  border-radius: 999px;
+  font-weight: 900; line-height: 1;
+  border: 1px solid var(--border);
+  color: var(--accent);
+  background:
+    radial-gradient(80% 80% at 30% 20%, rgba(0,0,0,.06), rgba(0,0,0,0)),
+    linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,0));
+}
+@media (prefers-color-scheme: dark){
+  .abg-icon{
+    background:
+      radial-gradient(80% 80% at 30% 20%, rgba(255,255,255,.20), rgba(255,255,255,0)),
+      linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
   }
 }
 
-/* Video bleibt vollflächig */
-.hero-image-background,
-.hero-video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-/* Für schmale Screens den Overlap reduzieren */
-@media (max-width: 780px){
-  #aurora-sheet{ margin-top:-4rem; border-radius:16px 16px 0 0; }
+/* Titel + Text pro Card */
+.abg-item-title{
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  font-size: clamp(1.02rem, .98rem + .35vw, 1.18rem);
+  line-height: 1.28;
 }
-@supports (animation-timeline: view()) {
-  #aurora-sheet{
-    view-timeline-name: --aurora;
-    animation: aurora-reveal both linear;
-    animation-timeline: --aurora;
-    animation-range: entry 10% cover 40%;
-  }
-  @keyframes aurora-reveal{
-    from{ opacity:.0; transform: translateY(24px); }
-    to  { opacity:1;  transform: translateY(0);     }
-  }
+.abg-item-text{
+  margin: .22rem 0 0;
+  color: var(--ink-sub);
+  line-height: var(--lh-relaxed);
+  font-size: clamp(1rem, .96rem + .3vw, 1.08rem);
+}
+
+/* Kleinere Verfeinerungen */
+.aurora-benefits-grid *, .abg-container, .abg-grid, .abg-item{ box-sizing: border-box; }
+@media (prefers-reduced-motion: reduce){
+  .abg-item, .abg-item:hover{ transition: none !important; transform: none !important; }
+}
+
+/* Optional: sanfter Appear (Stagger) – dezent und professionell */
+@keyframes abg-fade-up{
+  from{ opacity:0; transform: translateY(6px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+.abg-item{ opacity:0; animation: abg-fade-up .44s cubic-bezier(.2,.7,.2,1) forwards; }
+.abg-item:nth-child(1){ animation-delay: .02s; }
+.abg-item:nth-child(2){ animation-delay: .08s; }
+.abg-item:nth-child(3){ animation-delay: .14s; }
+.abg-item:nth-child(4){ animation-delay: .20s; }
+.abg-item:nth-child(5){ animation-delay: .26s; }
+@media (prefers-reduced-motion: reduce){
+  .abg-item{ animation: none !important; opacity:1 !important; }
 }
 </style>
-<script>
-  (function(){
-    const el = document.getElementById('aurora-sheet');
-    if (!el || CSS.supports('animation-timeline: view()')) return;
 
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
-    el.style.transition = 'opacity .6s ease-out, transform .6s ease-out';
-
-    const io = new IntersectionObserver(([e])=>{
-      if (e.isIntersecting){
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-        io.disconnect();
-      }
-    }, {threshold: .12});
-    io.observe(el);
-  })();
-</script>
 
 
 <!--Fehlt: klare USPs
