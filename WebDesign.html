@@ -424,70 +424,14 @@
     }
   </style>
 
-  <!-- Webflow/Normalize -->
-  <meta name="generator" content="Webflow">
-  <link href="css/denizs-dapper-site-2d192b.webflow.css" rel="stylesheet" type="text/css">
-
 
   <!-- Titelpage-spezifische Bild-Overrides (in den Head verschoben) -->
-  <style>
-    body[data-page="webdesign"] .hero-image-background {
-      background-image: url("./images/hero-bg-sky_1hero-bg-sky.webp") !important;
-    }
 
-    body[data-page="webdesign"] .hero-image-foreground {
-      background-image: url("./images/webdesign-fg.webp") !important;
-    }
-
-    @media (max-width: 1024px) {
-      body[data-page="webdesign"] .hero-image-foreground {
-        background-image: url("./images/webdesign-fg-tablet.webp") !important;
-      }
-    }
-
-    @media (max-width: 480px) {
-      body[data-page="webdesign"] .hero-image-foreground {
-        background-image: url("./images/webdesign-fg-mobile.webp") !important;
-      }
-    }
-
-    /* === Large Title – groß, perfekt mittig, etwas weiter unten === */
-    .large-title {
-      position: absolute;
-      top: 162%;
-      /* leicht nach unten versetzt */
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      width: 100%;
-      font-size: clamp(4rem, 22vw, 18rem);
-
-      line-height: 1.05;
-      font-weight: 900;
-      z-index: 10;
-      margin: 0;
-      color: inherit;
-    }
-
-    /* Elternbereich soll Bezugspunkt sein */
-    .hero-section,
-    .header-section,
-    .page-header {
-      position: relative;
-    }
-
-    /* Mobile-Optimierung */
-    @media (max-width: 767px) {
-      .large-title {
-        top: 58%;
-        /* etwas höher auf kleinen Screens */
-        font-size: clamp(2.6rem, 14vw, 7rem);
-      }
-    }
-  </style>
   <link rel="stylesheet" href="css/herolast.css" type="text/css">
   <link rel="stylesheet" href="css/navbar.css" type="text/css">
   <link rel="stylesheet" href="css/darkmodeLast.css" type="text/css">
+  
+<link rel="stylesheet" href="css/hero.css" type="text/css">
   <link rel="stylesheet" href="css/aurora.css" type="text/css">
   <link rel="stylesheet" href="css/cosmosSuite.css" type="text/css">
   <link rel="stylesheet" href="css/reviews.css" type="text/css">
@@ -1198,657 +1142,56 @@
 
 
 
+<section class="hero-section" data-page="titlepage">
+  <div class="hero-images-wrapper">
 
-  <section class="hero-section" data-page="webdesign">
-    <div class="hero-images-wrapper">
-      <!-- HINTERGRUND-VIDEO -->
-      <div class="hero-image-background">
-        <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hintegrundweb.webp">
-          <source src="./WebdesignPic/1.mp4" type="video/mp4" />
-        </video>
-      </div>
+    <!-- HINTERGRUND-VIDEO -->
+    <div class="hero-image-background">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hintegrundweb.webp">
+        <source src="./WebdesignPic/1.mp4" type="video/mp4" />
+      </video>
+    </div>
 
-      <div class="page-title">
-        <div class="container">
-          <h1 class="large-title">Web <br>Design</h1>
-          <h2 class="small-title">Websites, die nicht nur gut aussehen – sondern verkaufen.</h2>
+    <!-- TITLE + TEXT + CTAS -->
+    <div class="page-title">
+      <div class="container">
+        <h1 class="large-title" id="webdesign-title">
+          Websites, die Vertrauen schaffen und aus Klicks Kunden machen.
+        </h1>
+
+        <h2 class="small-title">
+          Strategisches Webdesign, das Performance liefert: schnell, sichtbar &amp; messbar. Für Marken, die digital wachsen wollen – mit echten Ergebnissen.
+        </h2>
+
+        <div class="hero-cta-buttons">
+          <a href="#kontakt" class="btn-primary">Jetzt unverbindlich anfragen</a>
+
+          <a href="#referenzen" class="btn-secondary">
+            Referenzen ansehen
+            <!-- Feather arrow-up-right Icon als SVG -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="icon-arrow"
+            >
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
         </div>
       </div>
-
     </div>
-  </section>
 
-  <script>
-    (function () {
-      const section = document.querySelector('.hero-section[data-page="webdesign"]');
-      const h1 = document.querySelector('.page-title .large-title');
-      const pageTitle = document.querySelector('.page-title');
-      if (!section || !h1 || !pageTitle) return;
+  </div>
+</section>
 
-      // --- Reload-Erkennung (unverändert) ---
-      function isReload() {
-        try {
-          const n = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
-          if (n && (n.type === 'reload' || n.type === 'back_forward')) return true;
-          if (performance && performance.navigation && performance.navigation.type === 1) return true;
-        } catch (e) { }
-        return false;
-      }
-      const RELOADED = isReload();
-
-      // ---------- Wrapper & Overlay ----------
-      const originalHTML = h1.innerHTML;
-      const parts = originalHTML.split(/(<br\s*\/?>)/i);
-
-      const wrapper = document.createElement('span');
-      wrapper.id = 'titleFloatWrapper';
-      wrapper.style.display = 'inline-block';
-      wrapper.style.willChange = 'transform';
-      h1.innerHTML = '';
-      h1.appendChild(wrapper);
-
-      const overlay = document.createElement('canvas');
-      overlay.id = 'titleOverlay';
-      overlay.style.position = 'absolute';
-      overlay.style.left = '0';
-      overlay.style.top = '0';
-      overlay.style.pointerEvents = 'none';
-      overlay.style.zIndex = '3';
-      if (getComputedStyle(pageTitle).position === 'static') {
-        pageTitle.style.position = 'relative';
-      }
-      pageTitle.appendChild(overlay);
-
-      // ---------- Canvas Sizing + Live-Tracking ----------
-      let ctx = null;
-      let last = { w: 0, h: 0, left: 0, top: 0, dpr: 0 };
-
-      function sizeCanvas(force = false) {
-        const r = h1.getBoundingClientRect();
-        const pr = pageTitle.getBoundingClientRect();
-        const dpr = Math.min(2, window.devicePixelRatio || 1);
-
-        const left = r.left - pr.left;
-        const top = r.top - pr.top;
-        const w = Math.ceil(r.width);
-        const h = Math.ceil(r.height);
-
-        if (!force &&
-          w === last.w && h === last.h &&
-          left === last.left && top === last.top &&
-          dpr === last.dpr) return;
-
-        overlay.style.width = w + 'px';
-        overlay.style.height = h + 'px';
-        overlay.style.left = left + 'px';
-        overlay.style.top = top + 'px';
-
-        overlay.width = Math.max(1, Math.floor(w * dpr));
-        overlay.height = Math.max(1, Math.floor(h * dpr));
-
-        ctx = overlay.getContext('2d');
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-        last = { w, h, left, top, dpr };
-      }
-
-      sizeCanvas(true);
-
-      const roH1 = new ResizeObserver(() => sizeCanvas(true));
-      const roTitle = new ResizeObserver(() => sizeCanvas(true));
-      roH1.observe(h1);
-      roTitle.observe(pageTitle);
-
-      window.addEventListener('resize', () => sizeCanvas(true), { passive: true });
-      window.addEventListener('scroll', () => sizeCanvas(false), { passive: true });
-      window.addEventListener('orientationchange', () => sizeCanvas(true));
-
-      // ---------- Text → Letters ----------
-      // großer, exotischer Glyph-Pool: Griechisch, Kyrillisch, Armenisch, Georgisch, IPA, Fraktur, Mathe-Alphanumerika, Ziffernvarianten …
-      const SIMILAR = {
-        // lower
-        'a': ['ɑ', 'α', '⍺', 'ª', 'ᵃ', 'ä', 'á', 'à', 'ȧ', 'ą', 'ɐ', '@', 'ꭤ', '𝖺', '𝔞', 'ᶏ', 'ᴀ'],
-        'b': ['Ь', 'ƅ', 'Ꮟ', 'Ƅ', 'ƀ', 'ẛ'.replace('ẛ', 'b'), 'ɓ', 'ᵇ', 'ᶀ', '𝖻', '𝔟'],
-        'c': ['ϲ', 'ᴄ', 'с', 'ᶜ', 'ƈ', 'ↄ', 'ς', 'ɔ', 'ꜿ', 'ç', 'č', 'ċ', '𝖼', '𝔠'],
-        'd': ['ԁ', 'đ', 'ᑯ', 'ᵈ', ')', 'ɗ', 'ᵭ', 'ḋ', 'ᶁ', '𝖽', '𝔡'],
-        'e': ['℮', 'ɛ', 'є', 'ᵉ', 'ᵋ', 'ℯ', 'ɇ', 'ė', 'ë', 'é', 'è', 'ɘ', 'ε', '𝖾', '𝔢'],
-        'f': ['ƒ', 'ſ', 'ϝ', 'ẝ', 'ʄ', 'ᶂ', '𐊇', '𝖿', '𝔣'],
-        'g': ['ɡ', 'ǥ', 'ᵍ', '9', 'ĝ', 'ğ', 'ġ', 'ḡ', 'ɢ', 'ᶃ', '𝓰', '𝔤'],
-        'h': ['һ', 'ℎ', 'ᵸ', 'ʰ', 'ɦ', 'ħ', 'ꜧ', 'ḫ', '𝖍', '𝔥'],
-        'i': ['ɪ', 'ǐ', 'ı', '¡', '1', 'í', 'ì', 'ï', 'ỉ', 'ɨ', 'ⅰ', '!', '𝖎', '𝔦'],
-        'j': ['ȷ', 'ϳ', 'ј', 'ʝ', 'ĵ', 'ɉ', 'ᶡ', '𝖏', '𝔧'],
-        'k': ['κ', 'ᵏ', 'ꭆ', 'ḳ', 'ǩ', 'ꝁ', 'ќ', 'ᴋ', '𝖐', '𝔨'],
-        'l': ['ɩ', 'ⅼ', 'ǀ', '|', 'Ɩ', 'ĺ', 'ļ', 'ł', 'ᶅ', 'ʟ', '𝖑', '𝔩'],
-        'm': ['ṃ', 'ᴍ', 'м', 'ᵐ', 'ɱ', 'ṁ', 'ᶆ', '𝖒', '𝔪'],
-        'n': ['η', 'п', 'ɴ', '∩', 'ɲ', 'ṅ', 'ņ', 'ń', 'ň', 'ң', '𝖓', '𝔫'],
-        'o': ['ο', 'о', 'ɵ', '°', '0', 'ö', 'ó', 'ò', 'õ', 'ơ', 'ø', '○', '∘', '𝖔', '𝔬'],
-        'p': ['ρ', 'р', 'ᵖ', 'ᵱ', 'ṕ', 'ṗ', 'ƥ', 'ῥ', '𝖕', '𝔭'],
-        'q': ['զ', 'ʠ', 'ɋ', 'ȹ', 'գ', '𝖖', '𝔮'],
-        'r': ['ɼ', 'г', 'ʳ', 'ř', 'ŗ', 'ꭇ', 'ʀ', 'ȑ', 'ȓ', 'ṙ', 'ᵲ', '𝖗', '𝔯'],
-        's': ['ʂ', 'ѕ', '$', '§', 'ş', 'ś', 'ṡ', 'ș', 'ṥ', 'ʃ', 'ƨ', 'ß', '𝖘', '𝔰'],
-        't': ['τ', 'ť', 'ŧ', '†', 'ṭ', 'ṯ', 'ƫ', 'ʈ', '₸', '𝖙', '𝔱'],
-        'u': ['υ', 'ʋ', 'ս', 'ᵘ', 'ů', 'ü', 'ú', 'ù', 'ū', 'ư', 'µ', 'ꭎ', '𝖚', '𝔲'],
-        'v': ['ν', 'ѵ', 'ᵛ', 'ṿ', 'ѷ', '√', '∨', 'ʋ', '𝖛', '𝔳'],
-        'w': ['ᴡ', 'ѡ', 'ɯ', 'ŵ', 'ẇ', 'ɰ', 'ɯ', '𝖜', '𝔴'],
-        'x': ['х', '×', '✕', 'χ', 'ẋ', 'ᶍ', 'ⅹ', '𝖝', '𝔵'],
-        'y': ['γ', 'ʏ', 'у', 'ý', 'ỳ', 'ÿ', 'ŷ', 'ɣ', 'ʎ', '¥', '𝖞', '𝔶'],
-        'z': ['ʐ', 'ᴢ', 'ž', 'ż', 'ź', 'ƶ', 'ʑ', 'ẓ', 'ƻ', '𝖟', '𝔷'],
-        // upper
-        'A': ['Α', 'Λ', 'Ꭺ', 'Ā', 'Ⱥ', '∆', '∀', '𝘈', '𝕬', '𝔄'],
-        'B': ['В', 'Ƀ', 'ß', 'Ɓ', 'ℬ', 'ʙ', 'ɮ', 'ᛒ', '𝘉', '𝕭', '𝔅'],
-        'C': ['Ϲ', 'С', 'Ⅽ', 'Ꮯ', '℃'.slice(0, 1), '☾', 'ℂ', '𐐕', '𝘊', '𝕮', '𝔇'.replace('D', 'C')],
-        'D': ['Ꭰ', 'Ḏ', 'Ɗ', 'ⅅ', 'ᴅ', 'ↁ', '𝘋', '𝕯', '𝔇'],
-        'E': ['Ε', 'Є', 'ℰ', '€', 'Ɇ', 'Ɛ', 'Σ', '⋿', '𝘌', '𝕰', '𝔈'],
-        'F': ['Ғ', 'Ϝ', 'ℱ', 'ᖴ', '𐊇', '𝘍', '𝕱', '𝔉'],
-        'G': ['ɢ', 'Ԍ', 'Ꮐ', 'Ĝ', 'Ğ', 'Ġ', 'Ḡ', 'Ɠ', '𝘎', '𝕲', '𝔊'],
-        'H': ['Η', 'Н', 'ℋ', 'Ħ', 'Ⱨ', '♓', '𝘏', '𝕳', 'ℌ'],
-        'I': ['Ι', 'Ӏ', 'ǀ', '1', 'Ⅰ', '∣', '𝘐', '𝕴', 'ℑ'],
-        'J': ['Ј', 'Ɉ', 'Ĵ', 'ⅉ', '𝘑', '𝕵', '𝔍'],
-        'K': ['Κ', 'ᛕ', 'K', '₭', 'Ҡ', 'Ƙ', 'Ǩ', '𝘒', '𝕶', '𝔎'],
-        'L': ['Ꮮ', 'Ⅼ', 'Ł', '∟', '⅃', 'ʟ', '𝘓', '𝕷', '𝔏'],
-        'M': ['Μ', 'М', 'Ṁ', 'Ϻ', 'Ⅿ', '𝘔', '𝕸', '𝔐'],
-        'N': ['Ν', 'Ｎ', '∩', 'Ṅ', 'Ň', 'Ɲ', '𝘕', '𝕹', '𝔑'],
-        'O': ['Ο', 'О', '0', '°', 'Ø', 'Ө', '○', '⦿', '𝘖', '𝕺', '𝔒'],
-        'P': ['Ρ', 'Р', 'ℙ', '₽', 'Ҏ', 'Ƿ', '𐊕', '𝘗', '𝕻', '𝔓'],
-        'Q': ['Ⴓ', 'ℚ', 'Ǫ', 'Ɋ', 'Ҩ', 'Ⓠ', '𝘘', '𝕼', '𝔔'],
-        'R': ['Ꭱ', 'ℜ', 'Я', 'Ȑ', 'Ŕ', 'Ṙ', '®', '𝘙', '𝕽', 'ℛ'],
-        'S': ['Ѕ', '§', '$', 'Ś', 'Ş', 'Š', 'Ṣ', 'ẞ', '𝘚', '𝕾', '𝔖'],
-        'T': ['Τ', 'Т', 'Ŧ', 'Ͳ', '₸', 'Ṫ', 'Ƭ', '✝', '𝘛', '𝕿', '𝔗'],
-        'U': ['Ս', '⋃', 'Ū', 'Ü', 'Ú', 'Ù', 'Ư', '∪', '𝘜', '𝖀'.replace('𝖀', '𝕌'), '𝔘'],
-        'V': ['Ѵ', '∨', 'Ṽ', 'Ʋ', '✓', '𝘝', '𝕍', '𝔙'],
-        'W': ['Ԝ', 'Ѡ', 'Ш', 'Ŵ', 'Ẃ', 'Ẅ', '𝘞', '𝕎', '𝔚'],
-        'X': ['Χ', 'Х', '✕', '×', '✖', 'Ⅹ', 'χ', '𝘟', '𝕏', '𝔛'],
-        'Y': ['Υ', 'Ү', '¥', 'Ɏ', 'Ÿ', 'Ῡ', 'Ӳ', '𝘠', '𝕐', '𝔜'],
-        'Z': ['Ζ', 'ℤ', 'Ž', 'Ż', 'Ź', 'Ƶ', 'Ẕ', '𝘡', '𝕫'.toUpperCase(), '𝔃'.toUpperCase()],
-        // digits
-        '0': ['O', 'О', 'Ο', '○', '°', '⭕', '⓪', '𝟘'],
-        '1': ['I', 'l', '|', 'ǀ', 'Ⅰ', '❶', '𝟙'],
-        '2': ['Ƨ'.toLowerCase(), '乙', '٢', '②', '𝟚'],
-        '3': ['Ʒ', 'З', 'Ɛ', 'ɜ', '➂', '𝟛'],
-        '4': ['Ꮞ', '٤', '④', '𝟜'],
-        '5': ['Ƽ', 'Ѕ', '⑤', '𝟝'],
-        '6': ['ბ', '৬', '⑥', '𝟞'],
-        '7': ['۷', '⑦', '𝟟'],
-        '8': ['ȣ', '੮', '⑧', '𝟠'],
-        '9': ['ჽ', '९', '⑨', '𝟡']
-      };
-      // === Add Asian & "cool" glyphs (CJK, Kana, Hangul, Bopomofo, Fullwidth) ===
-      const ASIAN_COOL = {
-        // lower
-        a: ['ａ', 'ぁ', 'ｧ', 'ァ', '人'],
-        b: ['ｂ'],
-        c: ['ｃ', '匚'],
-        d: ['ｄ', 'り'],
-        e: ['ｅ', 'ぇ', 'ェ'],
-        f: ['ｆ', 'ﾌ', 'ㄈ'],
-        g: ['ｇ'],
-        h: ['ｈ', '卄', 'ん'],
-        i: ['ｉ', '丨', '｜', 'ㅣ'],
-        j: ['ｊ', '亅'],
-        k: ['ｋ', 'ケ'],
-        l: ['ｌ', 'し', '丨', 'ㅣ'],
-        m: ['ｍ', '〽'],
-        n: ['ｎ', 'ん', 'ﾝ'],
-        o: ['ｏ', '〇', 'ㅇ', '○'],
-        p: ['ｐ', '尸'],
-        q: ['ｑ'],
-        r: ['ｒ', '尺'],
-        s: ['ｓ', 'ら'],
-        t: ['ｔ', '丁', 'ﾃ'],
-        u: ['ｕ', '凵', 'ㄩ'],
-        v: ['ｖ', 'レ'],
-        w: ['ｗ', '山'],
-        x: ['ｘ', 'メ', '叉'],
-        y: ['ｙ', '丫', 'ㄚ'],
-        z: ['ｚ', '乙', '之'],
-
-        // upper
-        A: ['Ａ', '人', '八'],
-        B: ['Ｂ', '日'],
-        C: ['Ｃ', '匚'],
-        D: ['Ｄ', '冂'],
-        E: ['Ｅ', '三', 'ヨ', 'ミ'],
-        F: ['Ｆ', 'ﾌ', 'ㄈ'],
-        G: ['Ｇ'],
-        H: ['Ｈ', '廾', '井', '卄'],
-        I: ['Ｉ', '丨', '工', '｜'],
-        J: ['Ｊ'],
-        K: ['Ｋ', 'ケ'],
-        L: ['Ｌ'],
-        M: ['Ｍ', '州', '爪'],
-        N: ['Ｎ', '几', 'ン'],
-        O: ['Ｏ', '〇', '囗', '口'],
-        P: ['Ｐ', '尸', '戸'],
-        Q: ['Ｑ'],
-        R: ['Ｒ', '尺'],
-        S: ['Ｓ', 'ら'],
-        T: ['Ｔ', '丁', '工', 'ﾃ'],
-        U: ['Ｕ', '凵'],
-        V: ['Ｖ', 'レ'],
-        W: ['Ｗ', '山'],
-        X: ['Ｘ', 'メ', '叉'],
-        Y: ['Ｙ', '丫', 'ㄚ'],
-        Z: ['Ｚ', '乙', '之'],
-
-        // digits (fullwidth + CJK numerals)
-        0: ['０', '零', '〇'],
-        1: ['１', '一', '丨', '｜'],
-        2: ['２', '二', '乙'],
-        3: ['３', '三'],
-        4: ['４', '四'],
-        5: ['５', '五'],
-        6: ['６', '六'],
-        7: ['７', '七'],
-        8: ['８', '八'],
-        9: ['９', '九'],
-      };
-
-      // merge into SIMILAR without duplicates (keep your originals first)
-      for (const [key, vals] of Object.entries(ASIAN_COOL)) {
-        SIMILAR[key] = Array.from(new Set([...(SIMILAR[key] || []), ...vals]));
-      }
-
-      const neon = ['#00fff5', '#ff3df0', '#39ff14', '#ffd400', '#7a5cff', '#ff5e5b'];
-
-      // Kombinierende Akzente (für extra „Glitch“)
-      const COMBINERS = [
-        '\u0301', '\u0300', '\u0302', '\u0308', '\u0336', '\u0332', '\u035B', '\u0342', '\u032E'
-      ];
-
-      // --- schneller Glyph-Support mit Cache ---
-      const _glyphSupportCache = new Map();
-      function supportsGlyphCached(ch) {
-        if (_glyphSupportCache.has(ch)) return _glyphSupportCache.get(ch);
-        const span = document.createElement('span');
-        span.textContent = ch;
-        span.style.position = 'absolute';
-        span.style.visibility = 'hidden';
-        span.style.font = getComputedStyle(document.body).font;
-        document.body.appendChild(span);
-        const ok = span.offsetWidth > 0 && span.textContent === ch;
-        span.remove();
-        _glyphSupportCache.set(ch, ok);
-        return ok;
-      }
-
-      function getAltsForChar(ch) {
-        const base = SIMILAR[ch] || SIMILAR[ch.toLowerCase()] || [];
-        const filtered = base
-          .slice()
-          .sort(() => Math.random() - 0.5)
-          .filter(s => supportsGlyphCached(s));
-        // ~30%: Kombinierende Akzente (1–2) dranhängen
-        if (filtered.length && Math.random() < 0.30) {
-          const withAccents = [];
-          filtered.forEach(s => {
-            const nAcc = Math.random() < 0.5 ? 1 : 2;
-            let acc = s;
-            for (let i = 0; i < nAcc; i++) {
-              const c = COMBINERS[Math.floor(Math.random() * COMBINERS.length)];
-              const candidate = acc + c;
-              if (supportsGlyphCached(candidate)) acc = candidate;
-            }
-            withAccents.push(acc);
-          });
-          return withAccents.length ? withAccents : filtered;
-        }
-        return filtered;
-      }
-
-      const letterSpans = [];
-      parts.forEach(part => {
-        if (/^<br/i.test(part)) { wrapper.appendChild(document.createElement('br')); return; }
-        [...part].forEach(ch => {
-          const s = document.createElement('span');
-          s.textContent = ch;
-          s.style.display = 'inline-block';
-          s.style.willChange = 'transform, opacity, color, filter, text-shadow';
-          if (RELOADED) {
-            s.style.opacity = '1';
-            s.style.transform = 'translateY(0)';
-          } else {
-            s.style.opacity = '0';
-            s.style.transform = 'translateY(40px)';
-          }
-          s.dataset.original = ch;
-          wrapper.appendChild(s);
-          letterSpans.push(s);
-        });
-      });
-
-      // ---------- Entrance ----------
-      window.addEventListener('load', () => {
-        if (!RELOADED) {
-          letterSpans.forEach((s, i) => {
-            s.animate(
-              [{ opacity: 0, transform: 'translateY(40px)' },
-              { opacity: 1, transform: 'translateY(0)' }],
-              { duration: 1400, easing: 'ease-out', fill: 'forwards', delay: 160 * i }
-            );
-          });
-        }
-        // Starten entscheidet der IO unten
-      });
-
-      // ---------- Float ----------
-      let floatAnim = wrapper.animate(
-        [{ transform: 'translateY(0)' }, { transform: 'translateY(-10px)' }, { transform: 'translateY(0)' }],
-        { duration: 12000, easing: 'ease-in-out', iterations: Infinity }
-      );
-      floatAnim.pause();
-
-      // ---------- Overlay Renderloop ----------
-      const effects = []; // {span, tEnd, antsPhase}
-      let raf = null;
-      let loopActive = false;
-
-      function localRect(el) {
-        const r = el.getBoundingClientRect();
-        const pr = pageTitle.getBoundingClientRect();
-        return { x: r.left - pr.left, y: r.top - pr.top, w: r.width, h: r.height };
-      }
-
-      function drawGrid() {
-        const w = overlay.clientWidth, h = overlay.clientHeight;
-        const step = Math.max(18, Math.round(Math.min(w, h) / 10));
-        ctx.save();
-        ctx.clearRect(0, 0, overlay.width, overlay.height);
-        ctx.globalAlpha = 0.14; ctx.lineWidth = 1; ctx.strokeStyle = '#9aa0a6';
-        for (let x = 0; x <= w; x += step) { ctx.beginPath(); ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, h); ctx.stroke(); }
-        for (let y = 0; y <= h; y += step) { ctx.beginPath(); ctx.moveTo(0, y + 0.5); ctx.lineTo(w, y + 0.5); ctx.stroke(); }
-        ctx.restore();
-      }
-
-      function drawEditorChrome(now) {
-        effects.forEach((fx, idx) => {
-          const r = localRect(fx.span);
-          const pad = 6;
-          const x = r.x - pad, y = r.y - pad, w = r.w + pad * 2, h = r.h + pad * 2;
-
-          // 1) Marquee
-          ctx.save();
-          ctx.lineWidth = 1.5;
-          ctx.setLineDash([6, 4]);
-          ctx.lineDashOffset = -fx.antsPhase;
-          ctx.strokeStyle = '#000';
-          ctx.strokeRect(x, y, w, h);
-          ctx.lineDashOffset = -(fx.antsPhase + 4);
-          ctx.strokeStyle = '#fff';
-          ctx.strokeRect(x, y, w, h);
-          ctx.restore();
-
-          // 2) Handles
-          ctx.save();
-          const anchors = [[x, y], [x + w, y], [x, y + h], [x + w, y + h]];
-          ctx.fillStyle = 'rgba(255,255,255,0.9)';
-          anchors.forEach(([ax, ay]) => { ctx.beginPath(); ctx.arc(ax, ay, 2.75, 0, Math.PI * 2); ctx.fill(); });
-          ctx.strokeStyle = 'rgba(255,255,255,0.3)';
-          ctx.beginPath();
-          ctx.moveTo(x + w * 0.25, y); ctx.lineTo(x + w * 0.31, y - 10);
-          ctx.moveTo(x + w, y + h * 0.65); ctx.lineTo(x + w + 10, y + h * 0.75);
-          ctx.stroke();
-          ctx.restore();
-
-          // 3) Scanline
-          ctx.save();
-          ctx.globalAlpha = 0.045;
-          ctx.fillStyle = '#fff';
-          const barH = Math.max(3, Math.round(h * 0.12));
-          const by = y + ((now * 0.03 + idx * 6) % Math.max(1, h)) - barH / 2;
-          ctx.fillRect(x, by, w, barH);
-          ctx.restore();
-
-          fx.antsPhase += 0.25;
-        });
-
-        for (let i = effects.length - 1; i >= 0; i--) {
-          if (effects[i].tEnd <= now) effects.splice(i, 1);
-        }
-      }
-
-      function frame(now = performance.now()) {
-        sizeCanvas(false);
-        drawGrid();
-        drawEditorChrome(now);
-        raf = requestAnimationFrame(frame);
-      }
-
-      function startLoop() {
-        if (loopActive) return;
-        loopActive = true;
-        if (!raf) raf = requestAnimationFrame(frame);
-      }
-
-      function stopLoop() {
-        loopActive = false;
-        if (raf) { cancelAnimationFrame(raf); raf = null; }
-      }
-
-      // ---------- Morph / Glitch ----------
-      const MORPH = {
-        holdMin: 1600, holdMax: 2800,       // Gesamtdauer pro aktiver Glyphe
-        animDur: 240,                       // Dauer eines hektischen Sub-Ticks
-        tickMin: 60, tickMax: 140,          // „Hektik“: schneller
-        burstChance: 0.35,                  // Chance auf Mini-Burst (mehrere schnelle Ticks)
-        splitChance: 0.45,                  // Chromatic-Split-Effekt einschalten?
-        rotateMaxDeg: 6,                    // max. Rotation
-        scaleJitter: 0.08,                  // ±8% Scale
-        skewMaxDeg: 6                       // max. Skew
-      };
-
-      function isBusy(span) { return span.dataset.morphing === '1'; }
-      function setBusy(span, v) { span.dataset.morphing = v ? '1' : '0'; }
-
-      function makeEffectForSpan(span, durMs) {
-        const now = performance.now();
-        effects.push({ span, tEnd: now + durMs, antsPhase: Math.random() * 10 });
-        startLoop();
-      }
-
-      // Hektischer „Morph“ pro Buchstabe: Glyphenwechsel + visuelle Störungen
-      function morphTicker(span) {
-        if (!span || isBusy(span)) return;
-
-        const original = span.dataset.original || span.textContent;
-        const prev = {
-          color: span.style.color,
-          filter: span.style.filter,
-          ts: span.style.textShadow,
-          tr: span.style.transform,
-          ls: span.style.letterSpacing
-        };
-
-        const alts = getAltsForChar(original);
-        if (!alts.length) return;
-
-        setBusy(span, true);
-
-        const hold = MORPH.holdMin + Math.random() * (MORPH.holdMax - MORPH.holdMin);
-        let running = true;
-
-        makeEffectForSpan(span, hold);
-
-        const applyChromaticSplit = () => {
-          if (Math.random() > MORPH.splitChance) return '';
-          // 3-kanaliger „Split“ als Afterimage
-          const dx = (Math.random() * 2 + 0.5).toFixed(2);
-          const dy = (Math.random() * 2 + 0.5).toFixed(2);
-          return `
-        rgb(255 0 80) ${dx}px ${dy}px 0,
-        rgb(0 255 200) ${-dx}px ${dy}px 0,
-        rgb(180 120 255) ${dx}px ${-dy}px 0
-      `;
-        };
-
-        // spontane Mini-Bursts: mehrere sehr schnelle Ticks hintereinander
-        const doBurst = () => {
-          const n = 2 + Math.floor(Math.random() * 3); // 2–4 schnelle Wechsel
-          let i = 0;
-          const burst = () => {
-            if (!running || i >= n) return;
-            singleTick(true);
-            i++;
-            setTimeout(burst, 40 + Math.random() * 60);
-          };
-          burst();
-        };
-
-        // Ein einzelner schneller Tick (Glyph + FX)
-        function singleTick(isBurst = false) {
-          const next = alts[Math.floor(Math.random() * alts.length)];
-          const color = neon[Math.floor(Math.random() * neon.length)];
-
-          // Glyph tauschen
-          span.textContent = next;
-          span.style.color = color;
-
-          // leichte Layout-Störung
-          const rot = (Math.random() * 2 - 1) * MORPH.rotateMaxDeg;
-          const sx = 1 + (Math.random() * 2 - 1) * MORPH.scaleJitter;
-          const sy = 1 + (Math.random() * 2 - 1) * MORPH.scaleJitter;
-          const skx = (Math.random() * 2 - 1) * MORPH.skewMaxDeg;
-          const sky = (Math.random() * 2 - 1) * MORPH.skewMaxDeg;
-
-          span.style.transform = `translateZ(0) rotate(${rot}deg) skew(${skx}deg, ${sky}deg) scale(${sx},${sy})`;
-
-          // Blur-Flicker
-          const blurPx = (isBurst ? 1.6 : 0.9) + Math.random() * 0.8;
-          const contrast = 1.2 + Math.random() * 0.5;
-          const bright = 1.05 + Math.random() * 0.25;
-          span.style.filter = `blur(${blurPx}px) contrast(${contrast}) brightness(${bright})`;
-
-          // Chromatic Afterimage
-          span.style.textShadow = applyChromaticSplit();
-
-          // Mini „morphing“ Gefühl: Letter-Spacing pulsen lassen
-          if (Math.random() < 0.5) {
-            span.style.letterSpacing = (Math.random() < 0.5 ? '-0.02em' : '0.04em');
-          }
-
-          // Rückanimation via Web Animations API (knackig, „hektisch“)
-          span.animate(
-            [
-              { filter: `${span.style.filter}`, transform: `${span.style.transform}` },
-              { filter: 'none', transform: 'translateZ(0) rotate(0deg) skew(0,0) scale(1,1)' }
-            ],
-            { duration: MORPH.animDur, easing: 'steps(3,end)', fill: 'forwards' }
-          );
-        }
-
-        const tick = () => {
-          if (!running) return;
-          singleTick(false);
-          if (Math.random() < MORPH.burstChance) doBurst();
-          const gap = MORPH.tickMin + Math.random() * (MORPH.tickMax - MORPH.tickMin);
-          tickTimer = setTimeout(tick, gap);
-        };
-
-        let tickTimer = null;
-        tick();
-
-        setTimeout(() => {
-          running = false;
-          if (tickTimer) clearTimeout(tickTimer);
-          // Reset auf Original, sanft ausfaden
-          span.textContent = original;
-          span.style.color = prev.color;
-          span.style.filter = 'none';
-          span.style.textShadow = 'none';
-          span.style.letterSpacing = prev.ls || '';
-          span.animate(
-            [
-              { opacity: 0.85, filter: 'none' },
-              { opacity: 1, filter: 'none' }
-            ],
-            { duration: 180, easing: 'ease-out', fill: 'forwards' }
-          );
-          setBusy(span, false);
-        }, hold);
-      }
-
-      function pick() {
-        const a = letterSpans.filter(s => s.textContent.trim() !== '');
-        return a.length ? a[Math.floor(Math.random() * a.length)] : null;
-      }
-
-      function snapSlide(span, dir = 'up') {
-        const dy = dir === 'up' ? -18 : 18;
-        span.animate(
-          [{ transform: `translateY(${dy}px)` }, { transform: 'translateY(0)' }],
-          { duration: 420, easing: 'steps(5, end)', fill: 'both' }
-        );
-      }
-
-      function multiGlitchBurst() {
-        if (Math.random() < 0.45) { const s = pick(); if (s) snapSlide(s, Math.random() < 0.5 ? 'up' : 'down'); }
-        const s = pick(); if (s) morphTicker(s);
-      }
-
-      // ---------- Start/Stop ----------
-      let glitchTimer = null;
-      function startGlitch() {
-        if (glitchTimer) return;
-        glitchTimer = setInterval(() => multiGlitchBurst(), 2400 + Math.random() * 1600);
-        setTimeout(() => multiGlitchBurst(), 600);
-      }
-      function stopGlitch() {
-        if (glitchTimer) { clearInterval(glitchTimer); glitchTimer = null; }
-      }
-
-      // Sichtbarkeits-Controller
-      let visible = false;
-      function activate() {
-        if (visible) return;
-        visible = true;
-        floatAnim.play();
-        startGlitch();
-        startLoop();
-      }
-      function deactivate() {
-        if (!visible) return;
-        visible = false;
-        floatAnim.pause();
-        stopGlitch();
-        stopLoop();
-      }
-
-      // IntersectionObserver: „läuft, wenn sichtbar“
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.target !== section) return;
-          if (e.isIntersecting) activate();
-          else deactivate();
-        });
-      }, {
-        threshold: [0.05],
-        root: null,
-        rootMargin: '0px'
-      });
-      io.observe(section);
-
-      // Tab-Wechsel
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-          deactivate();
-        } else {
-          const r = section.getBoundingClientRect();
-          const vh = window.innerHeight || document.documentElement.clientHeight;
-          const visiblePx = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
-          const isVis = visiblePx / Math.min(vh, r.height) >= 0.05;
-          if (isVis) activate();
-        }
-      });
-
-      // Initial: prüfen
-      (function initVisibility() {
-        const r = section.getBoundingClientRect();
-        const vh = window.innerHeight || document.documentElement.clientHeight;
-        const visiblePx = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
-        const isVis = visiblePx / Math.min(vh, r.height) >= 0.05;
-        if (isVis) activate();
-      })();
-    })();
-  </script>
 
 
 
@@ -1927,7 +1270,7 @@
       <article class="aether-card" id="aether-vision"
                aria-labelledby="aether-vision-h"
                aria-describedby="aether-vision-k aether-vision-s">
-        <h3 id="aether-vision-h">Entwicklung & Betrieb</h3>
+        <h3 id="aether-vision-h">Entwicklung</h3>
         <p class="snippet" id="aether-vision-s">Sauber gebaut, sichtbar gemacht.</p>
         <p class="t-snippet">Frontend oder Headless CMS, Performance, SEO-Basics, DSGVO & Sicherheit.</p>
         <p class="microtag" id="aether-vision-k">Nachhaltige Sichtbarkeit</p>
@@ -1958,111 +1301,121 @@
 
 
 
+<section class="cluster cosmos-suite" id="nebula-hub" aria-labelledby="nebula-hub-h">
+  <h2 id="nebula-hub-h" class="headline">Digitale Auftritte, die aus Besuchern Kunden machen</h2>
+  <p class="subline" id="nebula-hub-sub">
+    Klar positionierte Websites, die Vertrauen schaffen, Anfragen steigern und dein Business spürbar voranbringen.
+  </p>
 
-  <!---Mehr aus „Was machen wir“ ➝ „Welches Problem lösen wir?“ bzw. „Welchen Vorteil habe ich?“-->
-  <section class="cluster cosmos-suite" id="nebula-hub" aria-labelledby="nebula-hub-h">
-    <h2 id="nebula-hub-h" class="headline">Unsere Web-Leistungen</h2>
-    <p class="subline" id="nebula-hub-sub">
-      Nutzerzentriertes Design trifft moderne Technologie – für Websites, die wirken.
-    </p>
+  <ul class="orbit-grid" aria-labelledby="nebula-hub-h" aria-describedby="nebula-hub-sub">
 
-    <ul class="orbit-grid" aria-labelledby="nebula-hub-h" aria-describedby="nebula-hub-sub">
+    <!-- Research & Strategie -->
+    <li class="module-card" id="svc-webdesign" aria-labelledby="svc-webdesign-h" aria-describedby="svc-webdesign-s">
+      <div class="payload">
+        <h3 id="svc-webdesign-h">Research &amp; Strategie</h3>
+        <p class="card-snippet" id="svc-webdesign-s">
+          Du triffst eindeutige Entscheidungen, reduzierst Streuverlust – und machst deine Website zum klaren Vertriebshebel.
+        </p>
+        <ul>
+          <li>Nutzer-Insights statt Bauchgefühl</li>
+          <li>Wettbewerbsanalyse mit klarem Vorteil</li>
+          <li>Struktur & Navigation mit rotem Faden</li>
+          <li>Wireframes & Journeys als klare Roadmap</li>
+        </ul>
+        <a href="./WebKonzept.html" class="warp-cta">Mehr erfahren</a>
+      </div>
+    </li>
 
-      <!-- Research & Strategie -->
-      <li class="module-card" id="svc-webdesign" aria-labelledby="svc-webdesign-h" aria-describedby="svc-webdesign-s">
-        <div class="payload">
-          <h3 id="svc-webdesign-h">Research &amp; Strategie</h3>
-          <p class="card-snippet" id="svc-webdesign-s">
-            Wir verstehen deine Nutzer und entwickeln daraus klare Ziele und Strukturen.
-          </p>
-          <ul>
-            <li>Nutzerinterviews &amp; Analysen</li>
-            <li>Wettbewerbs-Check</li>
-            <li>Informationsarchitektur &amp; Navigation</li>
-            <li>Messbare UX-Ziele</li>
-            <li>UX-Konzept &amp; Seitenstruktur (Wireframes, Customer Journeys)</li>
-          </ul>
-          <a href="./WebKonzept.html" class="warp-cta" aria-label="Mehr über UX Research und Strategie erfahren">Mehr
-            erfahren</a>
-        </div>
-      </li>
+    <!-- UI/UX Design -->
+    <li class="module-card stellar-3d" id="svc-3d" aria-labelledby="svc-3d-h" aria-describedby="svc-3d-s">
+      <div class="payload">
+        <h3 id="svc-3d-h">UI / UX Design</h3>
+        <p class="card-snippet" id="svc-3d-s">
+          Ein Auftritt, der professionell wirkt, Vertrauen aufbaut und Nutzer gezielt zum Kontakt oder Kauf führt.
+        </p>
+        <ul>
+          <li>Intuitive Nutzerführung ohne Hürden</li>
+          <li>Markenkonsistentes Designsystem</li>
+          <li>Wertige Interaktionen & Animationen</li>
+          <li>Usability-Tests für weniger Absprünge</li>
+          <li>Responsive UI, das überall stark performt</li>
+        </ul>
 
-      <!-- UI/UX Design -->
-      <li class="module-card stellar-3d" id="svc-3d" aria-labelledby="svc-3d-h" aria-describedby="svc-3d-s">
-        <div class="payload">
-          <h3 id="svc-3d-h">UI / UX Design</h3>
-          <p class="card-snippet" id="svc-3d-s">
-            Wir gestalten Interfaces, die intuitiv, barrierefrei und markengerecht sind.
-          </p>
-          <ul>
-            <li>Wireframes &amp; Prototypen</li>
-            <li>Designsystem &amp; Styleguide</li>
-            <li>Interaktionen &amp; Animationen</li>
-            <li>Usability-Tests</li>
-            <li>Responsive UI Design in Figma (Dark/Light-Mode möglich)</li>
-          </ul>
-
-          <div class="overlay-art" aria-hidden="true">
-            <div class="orbit-shell">
-              <img class="planet-sprite" loading="lazy" decoding="async" src="./indexFotoSlideShow/planet.webp" alt=""
-                width="512" height="512">
-            </div>
-            <img class="lazy-comet astronaut-sprite" src="./indexFotoSlideShow/2.webp"
-              data-src="./indexFotoSlideShow/2.webp" alt="" decoding="async" loading="lazy" width="512" height="512">
+        <div class="overlay-art" aria-hidden="true">
+          <div class="orbit-shell">
+            <img
+              class="planet-sprite"
+              loading="lazy"
+              src="./indexFotoSlideShow/planet.webp"
+              alt=""
+              width="512"
+              height="512"
+            >
           </div>
-
-          <a href="./UIUXDesign.html" class="warp-cta" aria-label="Mehr über UI/UX Design erfahren">Mehr erfahren</a>
+          <img
+            class="lazy-comet astronaut-sprite"
+            src="./indexFotoSlideShow/2.webp"
+            data-src="./indexFotoSlideShow/2.webp"
+            alt=""
+            loading="lazy"
+            width="512"
+            height="512"
+          >
         </div>
-      </li>
 
-      <!-- Webentwicklung -->
-      <li class="module-card" id="svc-grafik" aria-labelledby="svc-grafik-h" aria-describedby="svc-grafik-s">
-        <div class="payload">
-          <h3 id="svc-grafik-h">Webentwicklung</h3>
-          <p class="card-snippet" id="svc-grafik-s">
-            Sauberer Code, starke Performance und beste Nutzererfahrung auf allen Geräten.
-          </p>
-          <ul>
-            <li>Schnelle Ladezeiten</li>
-            <li>Barrierefrei &amp; SEO-freundlich</li>
-            <li>Skalierbare Komponenten</li>
-            <li>Programmierung in HTML/CSS/JS oder Headless CMS (z. B. Webflow, WordPress)</li>
-            <li>SEO-Basis (Pagespeed, Semantik, Metadaten, OpenGraph)</li>
-            <li>DSGVO, Cookie-Banner &amp; Sicherheit (SSL, Backups)</li>
-          </ul>
+        <a href="./UIUXDesign.html" class="warp-cta">Mehr erfahren</a>
+      </div>
+    </li>
 
-          <div class="overlay-art" aria-hidden="true">
-            <img class="lazy-comet" src="./indexFotoSlideShow/astro sitzend.webp"
-              data-src="./indexFotoSlideShow/astro sitzend.webp" alt="" decoding="async" loading="lazy" width="512"
-              height="512">
-          </div>
+    <!-- Webentwicklung -->
+    <li class="module-card" id="svc-grafik" aria-labelledby="svc-grafik-h" aria-describedby="svc-grafik-s">
+      <div class="payload">
+        <h3 id="svc-grafik-h">Webentwicklung</h3>
+        <p class="card-snippet" id="svc-grafik-s">
+          Eine technische Basis, die schneller lädt, besser gefunden wird und mit deinem Wachstum Schritt hält.
+        </p>
+        <ul>
+          <li>Schnelle Ladezeiten für bessere Rankings</li>
+          <li>SEO-freundliche Struktur & Code</li>
+          <li>Skalierbare, zukunftssichere Technik</li>
+          <li>Saubere Entwicklung in HTML/CSS/JS oder CMS</li>
+          <li>Rechtssicherheit durch DSGVO & SSL</li>
+        </ul>
 
-          <a href="./Webentwicklung.html" class="warp-cta" aria-label="Mehr über Webentwicklung erfahren">Mehr
-            erfahren</a>
+        <div class="overlay-art" aria-hidden="true">
+          <img
+            class="lazy-comet"
+            src="./indexFotoSlideShow/astro sitzend.webp"
+            data-src="./indexFotoSlideShow/astro sitzend.webp"
+            alt=""
+            loading="lazy"
+            width="512"
+            height="512"
+          >
         </div>
-      </li>
+      </div>
+    </li>
 
-      <!-- Wartung & Betrieb -->
-      <li class="module-card" id="svc-social" aria-labelledby="svc-social-h" aria-describedby="svc-social-s">
-        <div class="payload">
-          <h3 id="svc-social-h">Wartung &amp; Betrieb</h3>
-          <p class="card-snippet" id="svc-social-s">
-            Wir halten deine Website sicher, schnell und immer aktuell.
-          </p>
-          <ul>
-            <li>Updates &amp; Sicherheitschecks</li>
-            <li>Monitoring &amp; Backups</li>
-            <li>Hosting &amp; Skalierung</li>
-            <li>Technischer Support</li>
-            <li>Launch + 30 Tage Betreuung + optional Wartung</li>
-          </ul>
-          <a href="./Wartung.html" class="warp-cta" aria-label="Mehr über Wartung und Betrieb erfahren">Mehr
-            erfahren</a>
-        </div>
-      </li>
+    <!-- Wartung & Betrieb -->
+    <li class="module-card" id="svc-social" aria-labelledby="svc-social-h" aria-describedby="svc-social-s">
+      <div class="payload">
+        <h3 id="svc-social-h">Wartung &amp; Tracking</h3>
+        <p class="card-snippet" id="svc-social-s">
+          Du gewinnst Zeit und Sicherheit – wir sorgen dafür, dass deine Website zuverlässig performt.
+        </p>
+        <ul>
+          <li>Kontinuierliche Updates & Sicherheitschecks</li>
+          <li>Schneller, persönlicher Support</li>
+          <li>Begleitung nach dem Launch & Wartungsoptionen</li>
+        </ul>
 
-    </ul>
-  </section>
+        <a href="./Wartung.html" class="warp-cta">Mehr erfahren</a>
+      </div>
+    </li>
+
+  </ul>
+</section>
+
 
 
 
@@ -2444,434 +1797,51 @@ Support & Wachstum – Inhalte, Updates, Tracking – gemeinsam weiterbauen.-->
 
 
 
-  <!--📌 CTA:
-neue section
-👉 „Jetzt Webprojekt anfragen“
-👉 „Beispiele ansehen“-->
 
 
+<section class="wrf-section" id="case-beautechful">
+  <div class="wrf-container">
 
-  <section class="zen-vault" id="zen-faq" aria-label="Kundenstimmen">
-    <div class="zen-slider">
-      <div class="zen-viewport">
-        <div class="zen-track">
-          <!-- Slides -->
-          <div class="zen-card">
-            <button class="zen-toggle" id="toggle-1" aria-expanded="true" aria-controls="panel-1">
-              <span class="zen-quote">„Transparente Kommunikation und schneller Go-Live.“</span>
-            </button>
-            <div class="zen-drop" id="panel-1" role="region" aria-labelledby="toggle-1">
-              <p class="zen-meta">
-                <span class="zen-author">– Laura M., Head of Marketing, AlpinaTech</span>
-              </p>
-              <p class="zen-text">„Unser Projektmanager hat uns mit kurzen, präzisen Updates geführt. Meilensteine
-                wurden eingehalten und der Launch lief reibungslos.“</p>
-            </div>
+    <div class="wrf-grid">
+      <!-- Linke Spalte: Visual / Prototyp -->
+      <div class="wrf-col">
+        <figure class="wrf-hero">
+          <img src="./3DSlideShow/post17.png" alt="UX Design für den Beautechful Prototyp">
+        </figure>
+      </div>
+
+      <!-- Rechte Spalte: Text zu Beautechful -->
+      <div class="wrf-col">
+
+        <header class="wrf-header">
+          <div class="wrf-eyebrow">
+            <span class="wrf-eyebrow__pill">Case Study · Beautechful</span>
           </div>
 
-          <div class="zen-card">
-            <button class="zen-toggle" id="toggle-2" aria-expanded="true" aria-controls="panel-2">
-              <span class="zen-quote">„Top Qualität &amp; verlässlicher Support.“</span>
-            </button>
-            <div class="zen-drop" id="panel-2" role="region" aria-labelledby="toggle-2">
-              <p class="zen-meta">
-                <span class="zen-author">– Denis M., CTO, Pixel &amp; Co.</span>
-              </p>
-              <p class="zen-text">„Die Testabdeckung ist hervorragend. Nach dem Launch haben wir einen klaren
-                Wartungsplan und schnelle Reaktionszeiten.“</p>
-            </div>
-          </div>
+          <h2 class="wrf-title">
+            <span class="word"><span class="chars">UX&nbsp;Design</span></span>
+            <span class="word"><span class="chars">für&nbsp;Prototyp-Bedienung</span></span>
+          </h2>
 
-          <div class="zen-card">
-            <button class="zen-toggle" id="toggle-3" aria-expanded="true" aria-controls="panel-3">
-              <span class="zen-quote">„UX, die unsere Conversion sichtbar gesteigert hat.“</span>
-            </button>
-            <div class="zen-drop" id="panel-3" role="region" aria-labelledby="toggle-3">
-              <p class="zen-meta">
-                <span class="zen-author">– Jana M., E-Commerce Lead, Naturwerk</span>
-              </p>
-              <p class="zen-text">„Wireframes, Prototypen und Tests mit echten Nutzer:innen – wir waren in jeder Phase
-                eingebunden. Die Conversion stieg nach dem Relaunch um 23%.“</p>
-            </div>
-          </div>
+          <p class="wrf-subtitle">
+            Für <span class="u-underline">Beautechful</span> entstand in Zusammenarbeit mit 
+            <span class="u-underline">TU Design</span> ein UX-Konzept für die Bedienung ihres Prototyps. 
+            Ziel war eine klare, intuitive Nutzerführung, die komplexe Abläufe verständlich macht 
+            und den Weg zur späteren Serienlösung vorbereitet.
+          </p>
+        </header>
 
-          <div class="zen-card">
-            <button class="zen-toggle" id="toggle-4" aria-expanded="true" aria-controls="panel-4">
-              <span class="zen-quote">„Transparente Kosten, messbarer Erfolg.“</span>
-            </button>
-            <div class="zen-drop" id="panel-4" role="region" aria-labelledby="toggle-4">
-              <p class="zen-meta">
-                <span class="zen-author">– Tim M., Geschäftsführer, UrbanKaffee</span>
-              </p>
-              <p class="zen-text">„Klare Angebotsstruktur ohne Überraschungen. Wir verfolgen KPIs wie Ladezeit, SEO und
-                Conversion – alles deutlich verbessert.“</p>
-            </div>
-          </div>
-
-          <div class="zen-card">
-            <button class="zen-toggle" id="toggle-5" aria-expanded="true" aria-controls="panel-5">
-              <span class="zen-quote">„Datenschutz ernst genommen – endlich sorgenfrei.“</span>
-            </button>
-            <div class="zen-drop" id="panel-5" role="region" aria-labelledby="toggle-5">
-              <p class="zen-meta">
-                <span class="zen-author">– Katharina M., Legal Counsel, Nordlicht GmbH</span>
-              </p>
-              <p class="zen-text">„DSGVO-Konzept, SSL, Backups und klare Rollen – wir haben sogar ein NDA erhalten.
-                Genau so wollen wir arbeiten.“</p>
-            </div>
-          </div>
-
-          <div class="zen-card">
-            <button class="zen-toggle" id="toggle-6" aria-expanded="true" aria-controls="panel-6">
-              <span class="zen-quote">„SEO &amp; Content aus einer Hand – international skalierbar.“</span>
-            </button>
-            <div class="zen-drop" id="panel-6" role="region" aria-labelledby="toggle-6">
-              <p class="zen-meta">
-                <span class="zen-author">– Rafael M., <br> Growth Lead, GlobeFit</span>
-              </p>
-              <p class="zen-text">„Content-Produktion, OnPage-SEO und Mehrsprachigkeit – unser Rollout in zwei Märkten
-                war unkompliziert und performant.“</p>
-            </div>
-          </div>
-          <!-- Ende Slides -->
+        <div class="wrf-secondary-action">
+          <button class="wrf-btn wrf-btn--primary" type="button">
+            <span class="wrf-btn__label">Projekt ansehen</span>
+          </button>
         </div>
+
       </div>
     </div>
-  </section>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const root = document.querySelector("#zen-faq");
-      if (!root) return;
 
-      const slider = root.querySelector(".zen-slider");
-      const viewport = slider?.querySelector(".zen-viewport");
-      const track = slider?.querySelector(".zen-track");
-      if (!slider || !viewport || !track) return;
-
-      const isMobile = () => window.matchMedia("(max-width:699.98px)").matches;
-
-      // NEU: Slides-per-View sauber aus CSS lesen (synced zu deinen Breakpoints)
-      const getSPV = () => {
-        const v = getComputedStyle(document.documentElement).getPropertyValue("--zen-slides").trim();
-        const n = Math.max(1, parseInt(v || "1", 10));
-        return n;
-      };
-
-      // ARIA (unverändert)
-      Array.from(track.querySelectorAll(".zen-card")).forEach((card, i) => {
-        const btn = card.querySelector(".zen-toggle");
-        const drop = card.querySelector(".zen-drop");
-        if (!btn || !drop) return;
-        const id = `zen-drop-${i + 1}`;
-        drop.id = id;
-        btn.setAttribute("aria-controls", id);
-        btn.setAttribute("aria-expanded", "true");
-        btn.addEventListener("click", (e) => e.preventDefault(), { passive: true });
-      });
-
-      // Reveal IO
-      const revealIO = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add("is-in"); e.target.classList.remove("is-out"); }
-          else { e.target.classList.remove("is-in"); e.target.classList.add("is-out"); }
-        });
-      }, { root: viewport, threshold: 0.25 });
-
-      let originals = [];
-      let index = 0;
-      let slideW = 0;
-      let animLock = false;
-
-      const AUTOPLAY_MS = 4000;
-      let autoplayTimer = null;
-
-      const cardsAll = () => Array.from(track.querySelectorAll(".zen-card"));
-      const gapPX = () => {
-        const g = getComputedStyle(track).gap || "0px";
-        return g.endsWith("px") ? parseFloat(g) : 0;
-      };
-
-      function measureSlideW() {
-        const spv = getSPV();
-        const vw = viewport.clientWidth;
-        const padL = parseFloat(getComputedStyle(viewport).paddingLeft) || 0;
-        const padR = parseFloat(getComputedStyle(viewport).paddingRight) || 0;
-        const inner = vw - padL - padR;
-        slideW = (inner - gapPX() * (spv - 1)) / spv;
-      }
-      const applyFixedWidths = () => cardsAll().forEach(c => {
-        c.style.flex = `0 0 ${slideW}px`;
-        c.style.width = `${slideW}px`;
-        c.style.maxWidth = `${slideW}px`;
-      });
-      const clearFixedWidths = () => cardsAll().forEach(c => {
-        c.style.flex = ""; c.style.width = ""; c.style.maxWidth = "";
-      });
-
-      // NEU: nicht mehr „3 erzwingen“, sondern dynamisch je nach SPV
-      function markActiveBySPV() {
-        if (isMobile()) {
-          cardsAll().forEach(c => { c.classList.remove('is-active', 'is-dim'); });
-          return;
-        }
-        const spv = getSPV();
-        const start = index;
-        const end = start + spv - 1;
-
-        cardsAll().forEach((c, i) => {
-          if (i >= start && i <= end) {
-            c.classList.add('is-active');
-            c.classList.remove('is-dim');
-          } else {
-            c.classList.add('is-dim');
-            c.classList.remove('is-active');
-          }
-        });
-      }
-
-      function setTransform(jump = false) {
-        if (isMobile()) {
-          track.style.transition = "none";
-          track.style.transform = "none";
-          requestAnimationFrame(markActiveBySPV);
-          return;
-        }
-        const translate = -(index * (slideW + gapPX()));
-        track.style.transition = jump ? "none" : `transform var(--zen-speed,420ms) ease`;
-        track.style.transform = `translate3d(${translate}px,0,0)`;
-        requestAnimationFrame(markActiveBySPV);
-      }
-
-      function buildFullClones() {
-        track.querySelectorAll("[data-clone]").forEach(n => n.remove());
-        if (!originals.length) return;
-        const pre = originals.map(n => { const c = n.cloneNode(true); c.dataset.clone = "true"; return c; });
-        pre.reverse().forEach(c => track.insertBefore(c, track.firstChild));
-        const post = originals.map(n => { const c = n.cloneNode(true); c.dataset.clone = "true"; return c; });
-        post.forEach(c => track.appendChild(c));
-        cardsAll().forEach(card => revealIO.observe(card));
-      }
-
-      function goToPageStart(page, jump = false) {
-        const spv = getSPV();
-        const base = originals.length;
-        index = base + page * spv;
-        setTransform(jump);
-      }
-
-      function normalizeAfterTransition() {
-        const base = originals.length;
-        const first = base;
-        const last = base + originals.length - 1;
-        if (index < first) {
-          index += originals.length;
-          setTransform(true);
-        } else if (index > last) {
-          index -= originals.length;
-          setTransform(true);
-        }
-        markActiveBySPV();
-      }
-
-      function next() {
-        if (animLock || isMobile()) return;
-        animLock = true;
-        index += getSPV();           // seitenweise passend zu SPV
-        setTransform(false);
-      }
-      function prev() {
-        if (animLock || isMobile()) return;
-        animLock = true;
-        index -= getSPV();           // seitenweise passend zu SPV
-        setTransform(false);
-      }
-      track.addEventListener("transitionend", () => { normalizeAfterTransition(); animLock = false; });
-
-      function startAutoplay() {
-        if (autoplayTimer || isMobile()) return;
-        stopAutoplay();
-        autoplayTimer = setInterval(next, AUTOPLAY_MS);
-      }
-      function stopAutoplay() {
-        if (autoplayTimer) clearInterval(autoplayTimer);
-        autoplayTimer = null;
-      }
-
-      const visIO = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          const visible = entry.isIntersecting && !document.hidden;
-          if (visible) startAutoplay(); else stopAutoplay();
-        });
-      }, { threshold: 0.5 });
-      visIO.observe(root);
-
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) stopAutoplay(); else startAutoplay();
-      });
-
-      ["mouseenter", "focusin"].forEach(ev => slider.addEventListener(ev, stopAutoplay));
-      ["mouseleave", "focusout"].forEach(ev => slider.addEventListener(ev, startAutoplay));
-      root.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowRight") { e.preventDefault(); next(); }
-        if (e.key === "ArrowLeft") { e.preventDefault(); prev(); }
-      });
-      viewport.addEventListener("wheel", (e) => {
-        if (isMobile()) return;
-        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-          e.preventDefault();
-          if (e.deltaX > 0) next(); else prev();
-        }
-      }, { passive: false });
-
-      function initDesktop() {
-        originals = Array.from(track.querySelectorAll(".zen-card")).filter(n => !n.dataset.clone);
-        if (!originals.length) return;
-        originals.forEach(card => revealIO.observe(card));
-        buildFullClones();
-        measureSlideW();
-        applyFixedWidths();
-        goToPageStart(0, true);
-        startAutoplay();
-        markActiveBySPV();
-      }
-      function destroyDesktop() {
-        stopAutoplay();
-        track.querySelectorAll("[data-clone]").forEach(n => n.remove());
-        clearFixedWidths();
-        track.style.transition = "none";
-        track.style.transform = "none";
-        index = 0;
-      }
-
-      let rTo;
-      function onResize() {
-        clearTimeout(rTo);
-        rTo = setTimeout(() => {
-          if (!isMobile()) {
-            destroyDesktop();
-            initDesktop();
-            setTimeout(markActiveBySPV, 60);
-          } else {
-            destroyDesktop();
-            cardsAll().forEach(card => { revealIO.observe(card); card.classList.add("is-in"); });
-          }
-        }, 120);
-      }
-      window.addEventListener("resize", onResize);
-
-      if (!isMobile()) { initDesktop(); }
-      else { cardsAll().forEach(card => { revealIO.observe(card); card.classList.add("is-in"); }); }
-    });
-  </script>
-  <script>
-    (function () {
-      const root = document.querySelector("#zen-faq");
-      if (!root) return;
-
-      const viewport = root.querySelector(".zen-viewport");
-      const track = root.querySelector(".zen-track");
-      const cards = () => Array.from(track.querySelectorAll(".zen-card"));
-      const isMobile = () => matchMedia("(max-width: 699.98px)").matches;
-
-      const AUTOPLAY_MS = 3500;  // Zeit pro Slide
-      const RESUME_AFTER = 4000;  // nach User-Interaktion wieder starten
-      let timer = null, resumeTO = null;
-
-      // Hilfen
-      function closestIndexToCenter() {
-        const all = cards();
-        const vpRect = viewport.getBoundingClientRect();
-        const vpMid = viewport.scrollLeft + vpRect.width / 2;
-        let bestI = 0, bestD = Infinity;
-        all.forEach((c, i) => {
-          const r = c.getBoundingClientRect();
-          const left = r.left + viewport.scrollLeft - vpRect.left;
-          const mid = left + r.width / 2;
-          const d = Math.abs(mid - vpMid);
-          if (d < bestD) { bestD = d; bestI = i; }
-        });
-        return bestI;
-      }
-
-      function scrollToIndex(i) {
-        const all = cards();
-        if (!all.length) return;
-        const c = all[(i % all.length + all.length) % all.length];
-        const vpRect = viewport.getBoundingClientRect();
-        const r = c.getBoundingClientRect();
-        const left = r.left + viewport.scrollLeft - vpRect.left;
-        const targetLeft = left - (viewport.clientWidth - r.width) / 2;
-        viewport.scrollTo({ left: targetLeft, behavior: "smooth" });
-      }
-
-      function markActive() {
-        const idx = closestIndexToCenter();
-        cards().forEach((c, i) => c.classList.toggle("is-active", i === idx));
-      }
-
-      // Autoplay
-      function startAutoplay() {
-        if (timer || !isMobile()) return;
-        stopAutoplay();
-        timer = setInterval(() => {
-          const next = closestIndexToCenter() + 1;
-          scrollToIndex(next);
-        }, AUTOPLAY_MS);
-      }
-      function stopAutoplay() {
-        if (timer) clearInterval(timer);
-        timer = null;
-      }
-      function pauseAndResume() {
-        stopAutoplay();
-        clearTimeout(resumeTO);
-        resumeTO = setTimeout(() => startAutoplay(), RESUME_AFTER);
-      }
-
-      // Events
-      let ticking = false;
-      function onScroll() {
-        if (!isMobile()) return;
-        if (!ticking) {
-          requestAnimationFrame(() => { markActive(); ticking = false; });
-          ticking = true;
-        }
-      }
-
-      // User-Interaktion pausiert Autoplay
-      ["touchstart", "pointerdown", "mousedown", "wheel", "keydown"].forEach(ev => {
-        viewport.addEventListener(ev, pauseAndResume, { passive: true });
-      });
-
-      // Sichtbarkeit steuert Autoplay
-      const visIO = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting && !document.hidden) startAutoplay();
-          else stopAutoplay();
-        });
-      }, { threshold: 0.6 });
-      visIO.observe(root);
-
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) stopAutoplay(); else startAutoplay();
-      });
-
-      // Mode-Wechsel
-      function applyMode() {
-        if (isMobile()) {
-          viewport.addEventListener("scroll", onScroll, { passive: true });
-          setTimeout(() => { markActive(); startAutoplay(); }, 60);
-        } else {
-          viewport.removeEventListener("scroll", onScroll);
-          stopAutoplay();
-          cards().forEach(c => c.classList.remove("is-active"));
-        }
-      }
-      applyMode();
-      window.addEventListener("resize", applyMode);
-    })();
-  </script>
-
+  </div>
+</section>
 
 
 

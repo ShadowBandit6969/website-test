@@ -115,10 +115,7 @@
     });
 
     // Parallaxe (optional, beeinflusst Reihenfolge nicht)
-    gsap.to("#aurora-sheet", {
-      yPercent: -2, ease: "none",
-      scrollTrigger: { trigger:"#aurora-sheet", start:"top bottom", end:"bottom top", scrub:0.5 }
-    });
+
   });
 })();
 

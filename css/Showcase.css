@@ -1,5 +1,6 @@
 /* ========================================================================
    SHOWCASE-PRO — auf aurora.css abgestimmt (Light-first, feine Borders)
+   Layout: oben 1 breite Karte, darunter 2 kürzere
    ===================================================================== */
 
 /* Tokens an aurora.css angelehnt */
@@ -62,11 +63,16 @@
   display:grid; gap: var(--grid-gap);
   grid-template-columns: repeat(1, minmax(0,1fr));
 }
-@media (min-width:700px){
-  .showcase-pro .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+
+/* Layout: oben 1 Karte breit, unten 2 Karten */
+.showcase-pro .grid > li:first-child{
+  grid-column: 1 / -1;
 }
-@media (min-width:1100px){
-  .showcase-pro .grid{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+
+@media (min-width:700px){
+  .showcase-pro .grid{
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
 }
 
 /* Card – feine 1px-Border + zarter Glas-Look wie .aurora-subtitle */
@@ -245,6 +251,7 @@
 /* Optionales Cursor-Licht (setzt CSS-Variablen bei Mousemove) */
 .showcase-pro .card{ --mx: 50%; --my: 35%; }
 .showcase-pro .card:hover{ cursor: pointer; }
+
 /* === SHOWCASE-PRO ↔ AURORA: Stage & Gutter anpassen (große Screens) === */
 :root{
   --aurora-gutter: 2rem;        /* gleicher Außenabstand wie aurora */
@@ -257,12 +264,12 @@
   color: var(--text, #0b0c10);
   padding-left:  max(var(--aurora-gutter), env(safe-area-inset-left));
   padding-right: max(var(--aurora-gutter), env(safe-area-inset-right));
+  padding-top: clamp(3rem, 8vh, 4.5rem); /* etwas mehr Abstand nach oben */
 }
 
 /* Container: volle Breite erlauben, aber auf Stage klemmen */
 .showcase-pro .container{
   width: 100%;
-
   margin-inline: auto;
   padding-inline: 0; /* Außenabstand kommt von der Section */
 }
@@ -282,6 +289,7 @@
 @media (min-width: 1800px){
   :root{ --showcase-stage: 1680px; } /* dezent breiter, bleibt aber geerdet */
 }
+
 /* === SHOWCASE-PRO — Mobile Polishing (≤700px) ========================= */
 @media (max-width: 699.98px){
 
@@ -289,6 +297,7 @@
   .showcase-pro{
     padding-left:  max(14px, env(safe-area-inset-left));
     padding-right: max(14px, env(safe-area-inset-right));
+    padding-top: clamp(2.4rem, 7vh, 3.4rem); /* auch mobil etwas mehr Abstand oben */
   }
 
   /* Container: volle Breite nutzen, keine zusätzliche Klemme */

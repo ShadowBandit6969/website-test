@@ -254,6 +254,8 @@
 
 <link rel="stylesheet" href="css/navbar.css" type="text/css">
 <link rel="stylesheet" href="css/darkmodeLast.css" type="text/css">
+
+<link rel="stylesheet" href="css/hero.css" type="text/css">
 <link rel="stylesheet" href="css/aurora.css" type="text/css">
 <link rel="stylesheet" href="css/cosmosSuite.css" type="text/css">
 <link rel="stylesheet" href="css/reviews.css" type="text/css">
@@ -427,7 +429,7 @@ body[data-page="webdesign"] .hero-image-foreground {
 
         <!-- Portfolio -->
         <li class="astral-item">
-          <a class="astral-link" href="#portfolio">Portfolio</a>
+          <a class="astral-link" href="Gallerie.html">Portfolio</a>
           <button
             class="gatelet"
             type="button"
@@ -971,13 +973,15 @@ body[data-page="webdesign"] .hero-image-foreground {
     <!-- TITLE + TEXT + CTAS -->
     <div class="page-title">
       <div class="container">
-        <h1 class="large-title" id="webdesign-title">
-          Websites, die Vertrauen schaffen und aus Klicks Kunden machen.
-        </h1>
+<h1 class="large-title">
+  Digitale Experiences, die Ergebnisse liefern.
+</h1>
 
-        <h2 class="small-title">
-          Strategisches Webdesign, das Performance liefert: schnell, sichtbar &amp; messbar. Für Marken, die digital wachsen wollen – mit echten Ergebnissen.
-        </h2>
+<h2 class="small-title">
+  Webdesign, UX Design, 3D Animation, Rendering und Grafikdesign – vereint in
+  modernen Markenauftritten, die Vertrauen schaffen und messbar performen.
+</h2>
+
 
         <div class="hero-cta-buttons">
           <a href="#kontakt" class="btn-primary">Jetzt unverbindlich anfragen</a>
@@ -1007,337 +1011,6 @@ body[data-page="webdesign"] .hero-image-foreground {
 
   </div>
 </section>
-<style>
-:root {
-  --hero-text: #ffffff;
-  --hero-bg-fallback: #050816;
-}
-
-/* HERO-BEREICH --------------------------------------- */
-
-.hero-section[data-page="titlepage"] {
-  position: relative;
-  width: 100%;
-  height: 80vh; /* feste Höhe */
-  background: radial-gradient(circle at top, #020617 0%, #000 45%, #000 100%);
-  color: var(--hero-text);
-  overflow: hidden;
-  isolation: isolate;
-}
-
-/* Wrapper für Video + Overlay + Content */
-.hero-images-wrapper {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* Overlay über Video für Lesbarkeit + leichter Farbakzent */
-.hero-images-wrapper::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    radial-gradient(circle at top left, rgba(0, 0, 0, 0.85) 0%, transparent 55%),
-    linear-gradient(
-      120deg,
-      rgba(0, 0, 0, 0.9) 0%,
-      rgba(0, 0, 0, 0.65) 40%,
-      rgba(0, 0, 0, 0.25) 100%
-    );
-  pointer-events: none;
-}
-
-/* VIDEO-HINTERGRUND ---------------------------------- */
-
-.hero-image-background {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  background: #000;
-}
-
-.hero-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  background: url("./images/hintegrundweb.webp") center/cover no-repeat; /* Fallback-Bild */
-}
-
-/* TEXT / CONTENT ------------------------------------- */
-
-.page-title {
-  position: absolute;
-  inset-inline: 0;
-  top: 50%;
-  transform: translateY(calc(-50% - 10vh)); /* feine optische Mitte */
-  z-index: 2;
-  width: 100%;
-}
-
-
-/* Layout-Container */
-.page-title > .container {
-  width: 100%;
-  max-width: 1180px;
-  margin: 0 auto;
-  padding-inline: 2.2rem;
-  padding-block: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-  text-align: left;
-}
-
-/* TITEL & SUBTITLE ----------------------------------- */
-
-.large-title {
-  font-size: clamp(2.6rem, 5vw, 4.8rem); /* ~42–77px */
-  font-weight: 800;
-  line-height: 1.08;
-  letter-spacing: 0.01em;
-  text-shadow: 0 12px 32px rgba(0, 0, 0, 0.8);
-  margin-bottom: 0.1rem;
-  animation: hero-fade-up 0.7s ease-out forwards;
-  opacity: 0;
-  max-width: 34ch; /* sorgt für schöne 2 Zeilen auf größeren Screens */
-}
-
-.small-title {
-  font-size: clamp(1.08rem, 1.45vw, 1.35rem);
-  line-height: 1.52;
-  font-weight: 400;
-  max-width: 72ch; /* mehr Platz für Subline */
-  color: rgba(229, 231, 235, 0.96);
-  text-shadow: 0 10px 26px rgba(0, 0, 0, 0.75);
-  margin-bottom: 0.8rem;
-  animation: hero-fade-up 0.8s ease-out forwards;
-  animation-delay: 0.15s;
-  opacity: 0;
-}
-
-/* CTAs ------------------------------------------------ */
-
-.hero-cta-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  align-items: center;
-  margin-top: 0.2rem;
-  animation: hero-fade-up 0.9s ease-out forwards;
-  animation-delay: 0.25s;
-  opacity: 0;
-}
-
-.btn-primary,
-.btn-secondary {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  padding: 0.8rem 1.7rem;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.97rem;
-  text-decoration: none;
-  cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease;
-  will-change: transform, box-shadow;
-  white-space: nowrap;
-}
-
-/* Primary CTA */
-.btn-primary {
-  background:
-    radial-gradient(
-      circle at 0% 0%,
-      #ff3c00 0%,
-      var(--primary, #ff6b1a) 35%,
-      var(--secondary, #ffb347) 100%
-    );
-  color: #ffffff;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
-  border: none;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
-}
-
-.btn-primary:active {
-  transform: translateY(0) scale(0.99);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
-}
-
-/* Secondary CTA (mit Feather-Icon) */
-.btn-secondary {
-  background: rgba(10, 25, 60, 0.8);
-  border: 1px solid color-mix(in srgb, var(--primary, #64748b) 60%, #ffffff 40%);
-  color: #e5e7eb;
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(12px);
-}
-
-.btn-secondary:hover {
-  background: rgba(15, 23, 42, 0.95);
-  border-color: color-mix(in srgb, var(--accent, #e5e7eb) 70%, #ffffff 30%);
-  transform: translateY(-2px);
-}
-
-.btn-secondary:active {
-  transform: translateY(0);
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.9);
-}
-
-/* Icon im Secondary Button (Feather arrow-up-right) */
-.btn-secondary .icon-arrow {
-  transition: transform 0.2s ease;
-  margin-left: 0.4rem;
-}
-
-.btn-secondary:hover .icon-arrow {
-  transform: translate(2px, -2px) rotate(0.001deg);
-}
-
-/* ANIMATION ------------------------------------------ */
-
-@keyframes hero-fade-up {
-  0% {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* RESPONSIVE: TABLET / SMALL DESKTOP ----------------- */
-
-@media (max-width: 1100px) {
-  .page-title > .container {
-    max-width: 900px;
-    padding-inline: 2rem;
-    padding-block: 1.8rem;
-  }
-
-  .large-title {
-    font-size: clamp(2.3rem, 3.4vw, 3rem);
-    max-width: 32ch;
-  }
-}
-
-/* 900px – kleinere Laptops --------------------------- */
-
-@media (max-width: 900px) {
-  .page-title > .container {
-    text-align: left;
-    align-items: flex-start;
-    padding-inline: 1.7rem;
-    padding-block: 1.8rem;
-  }
-
-  .large-title {
-    max-width: 30ch;
-  }
-
-  .small-title {
-    max-width: 52ch;
-    line-height: 1.46;
-  }
-
-  .hero-cta-buttons {
-    justify-content: flex-start;
-    margin-top: 0.1rem;
-  }
-}
-
-/* RESPONSIVE: HANDY ---------------------------------- */
-
-@media (max-width: 600px) {
-  .page-title > .container {
-    padding-inline: 1.3rem;
-    padding-block: 1.4rem;
-    gap: 0.85rem;
-    text-align: center;
-    align-items: center;
-  }
-
-  .large-title {
-    font-size: clamp(2.05rem, 7.3vw, 2.5rem);
-    max-width: 24ch;
-    text-align: center;
-    line-height: 1.18;
-    margin-bottom: 0.1rem;
-  }
-
-  .small-title {
-    font-size: 1.02rem;
-    max-width: 34ch;
-    opacity: 0.97;
-    text-align: center;
-    margin-bottom: 0.5rem;
-    line-height: 1.44;
-  }
-
-  .hero-cta-buttons {
-    flex-direction: column;
-    width: 100%;
-    gap: 0.7rem;
-    justify-content: center;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    width: 100%;
-    justify-content: center;
-    padding: 0.9rem 1.3rem;
-    font-size: 0.96rem;
-  }
-
-  .hero-video {
-    object-position: center 30%;
-  }
-}
-
-/* SEHR KLEINE / LANDSCAPE-SCREENS -------------------- */
-
-@media (max-height: 600px) and (orientation: landscape) {
-  .page-title > .container {
-    gap: 0.7rem;
-    padding-block: 1.2rem;
-  }
-
-  .large-title {
-    font-size: clamp(1.7rem, 3.2vw, 2.1rem);
-    max-width: 30ch;
-  }
-
-  .small-title {
-    max-width: 42ch;
-    font-size: 0.95rem;
-    line-height: 1.42;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    padding: 0.7rem 1.4rem;
-  }
-}
-</style>
-
 
 
 
@@ -1624,421 +1297,52 @@ Noch keine direkte Liste mit Vorteilen vs. Konkurrenz
 
 
 
-<!-- zu generisch, lieber 2 testemonials mit Arbeit daneben!-->
-<section class="zen-vault" id="zen-faq" aria-label="Kundenstimmen">
-  <div class="zen-slider">
-    <div class="zen-viewport">
-      <div class="zen-track">
-        <!-- Slides -->
-        <div class="zen-card">
-          <button class="zen-toggle" id="toggle-1" aria-expanded="true" aria-controls="panel-1">
-            <span class="zen-quote">„Transparente Kommunikation und schneller Go-Live.“</span>
-          </button>
-          <div class="zen-drop" id="panel-1" role="region" aria-labelledby="toggle-1">
-            <p class="zen-meta">
-              <span class="zen-author">– Laura M., Head of Marketing, AlpinaTech</span>
-            </p>
-            <p class="zen-text">„Unser Projektmanager hat uns mit kurzen, präzisen Updates geführt. Meilensteine wurden eingehalten und der Launch lief reibungslos.“</p>
-          </div>
-        </div>
+<section class="wrf-section" id="case-neolog">
+  <div class="wrf-container">
 
-        <div class="zen-card">
-          <button class="zen-toggle" id="toggle-2" aria-expanded="true" aria-controls="panel-2">
-            <span class="zen-quote">„Top Qualität &amp; verlässlicher Support.“</span>
-          </button>
-          <div class="zen-drop" id="panel-2" role="region" aria-labelledby="toggle-2">
-            <p class="zen-meta">
-              <span class="zen-author">– Denis M., CTO, Pixel &amp; Co.</span>
-            </p>
-            <p class="zen-text">„Die Testabdeckung ist hervorragend. Nach dem Launch haben wir einen klaren Wartungsplan und schnelle Reaktionszeiten.“</p>
-          </div>
-        </div>
-
-        <div class="zen-card">
-          <button class="zen-toggle" id="toggle-3" aria-expanded="true" aria-controls="panel-3">
-            <span class="zen-quote">„UX, die unsere Conversion sichtbar gesteigert hat.“</span>
-          </button>
-          <div class="zen-drop" id="panel-3" role="region" aria-labelledby="toggle-3">
-            <p class="zen-meta">
-             <span class="zen-author">– Jana M., E-Commerce Lead, Naturwerk</span>
-            </p>
-            <p class="zen-text">„Wireframes, Prototypen und Tests mit echten Nutzer:innen – wir waren in jeder Phase eingebunden. Die Conversion stieg nach dem Relaunch um 23%.“</p>
-          </div>
-        </div>
-
-        <div class="zen-card">
-          <button class="zen-toggle" id="toggle-4" aria-expanded="true" aria-controls="panel-4">
-            <span class="zen-quote">„Transparente Kosten, messbarer Erfolg.“</span>
-          </button>
-          <div class="zen-drop" id="panel-4" role="region" aria-labelledby="toggle-4">
-            <p class="zen-meta">
-              <span class="zen-author">– Tim M., Geschäftsführer, UrbanKaffee</span>
-            </p>
-            <p class="zen-text">„Klare Angebotsstruktur ohne Überraschungen. Wir verfolgen KPIs wie Ladezeit, SEO und Conversion – alles deutlich verbessert.“</p>
-          </div>
-        </div>
-
-        <div class="zen-card">
-          <button class="zen-toggle" id="toggle-5" aria-expanded="true" aria-controls="panel-5">
-            <span class="zen-quote">„Datenschutz ernst genommen – endlich sorgenfrei.“</span>
-          </button>
-          <div class="zen-drop" id="panel-5" role="region" aria-labelledby="toggle-5">
-            <p class="zen-meta">
-              <span class="zen-author">– Katharina M., Legal Counsel, Nordlicht GmbH</span>
-            </p>
-            <p class="zen-text">„DSGVO-Konzept, SSL, Backups und klare Rollen – wir haben sogar ein NDA erhalten. Genau so wollen wir arbeiten.“</p>
-          </div>
-        </div>
-
-        <div class="zen-card">
-          <button class="zen-toggle" id="toggle-6" aria-expanded="true" aria-controls="panel-6">
-            <span class="zen-quote">„SEO &amp; Content aus einer Hand – international skalierbar.“</span>
-          </button>
-          <div class="zen-drop" id="panel-6" role="region" aria-labelledby="toggle-6">
-            <p class="zen-meta">
-              <span class="zen-author">– Rafael M., <br> Growth Lead, GlobeFit</span>
-            </p>
-            <p class="zen-text">„Content-Produktion, OnPage-SEO und Mehrsprachigkeit – unser Rollout in zwei Märkten war unkompliziert und performant.“</p>
-          </div>
-        </div>
-        <!-- Ende Slides -->
+    <div class="wrf-grid">
+      <!-- Linke Spalte: 3D-Arbeitsprobe -->
+      <div class="wrf-col">
+        <figure class="wrf-hero">
+          <!-- TODO: Dein Neolog-Rendering hier einfügen -->
+          <img src="./3DSlideShow/post17.png" alt="3D Rendering für Neolog">
+        </figure>
       </div>
+
+      <!-- Rechte Spalte: Text zu Neolog -->
+      <div class="wrf-col">
+
+       <header class="wrf-header">
+  <div class="wrf-eyebrow">
+    <span class="wrf-eyebrow__pill">Case Study · Neolog</span>
+  </div>
+
+  <h2 class="wrf-title">
+    <span class="word"><span class="chars">3D&nbsp;Renderings</span></span>
+    <span class="word"><span class="chars">&amp;&nbsp;Animationen</span></span>
+  </h2>
+
+<p class="wrf-subtitle">
+  Für <span class="u-underline">Neolog</span> entwickelte ich moderne 3D-Renderings 
+  und Animationen, die die Marke klar und futuristisch in Szene setzen.
+  Von Modellierung über Shading bis hin zu Animation und Compositing:  
+  Der Fokus lag auf präziser Materialität, sauberem Licht und einer ästhetischen, 
+  technisch innovativen Bildsprache.
+</p>
+</header>
+
+
+        <div class="wrf-secondary-action">
+          <button class="wrf-btn wrf-btn--primary" type="button">
+            <span class="wrf-btn__label">Projekt ansehen</span>
+          </button>
+        </div>
+      </div>
+
+
     </div>
   </div>
 </section>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const root     = document.querySelector("#zen-faq");
-  if (!root) return;
-
-  const slider   = root.querySelector(".zen-slider");
-  const viewport = slider?.querySelector(".zen-viewport");
-  const track    = slider?.querySelector(".zen-track");
-  if (!slider || !viewport || !track) return;
-
-  const isMobile = () => window.matchMedia("(max-width:699.98px)").matches;
-
-  // NEU: Slides-per-View sauber aus CSS lesen (synced zu deinen Breakpoints)
-  const getSPV = () => {
-    const v = getComputedStyle(document.documentElement).getPropertyValue("--zen-slides").trim();
-    const n = Math.max(1, parseInt(v || "1", 10));
-    return n;
-  };
-
-  // ARIA (unverändert)
-  Array.from(track.querySelectorAll(".zen-card")).forEach((card, i) => {
-    const btn  = card.querySelector(".zen-toggle");
-    const drop = card.querySelector(".zen-drop");
-    if (!btn || !drop) return;
-    const id = `zen-drop-${i+1}`;
-    drop.id = id;
-    btn.setAttribute("aria-controls", id);
-    btn.setAttribute("aria-expanded", "true");
-    btn.addEventListener("click", (e) => e.preventDefault(), { passive:true });
-  });
-
-  // Reveal IO
-  const revealIO = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting){ e.target.classList.add("is-in"); e.target.classList.remove("is-out"); }
-      else { e.target.classList.remove("is-in"); e.target.classList.add("is-out"); }
-    });
-  }, { root: viewport, threshold: 0.25 });
-
-  let originals = [];
-  let index     = 0;
-  let slideW    = 0;
-  let animLock  = false;
-
-  const AUTOPLAY_MS = 4000;
-  let autoplayTimer  = null;
-
-  const cardsAll = () => Array.from(track.querySelectorAll(".zen-card"));
-  const gapPX = () => {
-    const g = getComputedStyle(track).gap || "0px";
-    return g.endsWith("px") ? parseFloat(g) : 0;
-  };
-
-  function measureSlideW(){
-    const spv = getSPV();
-    const vw  = viewport.clientWidth;
-    const padL = parseFloat(getComputedStyle(viewport).paddingLeft)||0;
-    const padR = parseFloat(getComputedStyle(viewport).paddingRight)||0;
-    const inner = vw - padL - padR;
-    slideW = (inner - gapPX() * (spv - 1)) / spv;
-  }
-  const applyFixedWidths = () => cardsAll().forEach(c => {
-    c.style.flex = `0 0 ${slideW}px`;
-    c.style.width = `${slideW}px`;
-    c.style.maxWidth = `${slideW}px`;
-  });
-  const clearFixedWidths = () => cardsAll().forEach(c => {
-    c.style.flex = ""; c.style.width = ""; c.style.maxWidth = "";
-  });
-
-  // NEU: nicht mehr „3 erzwingen“, sondern dynamisch je nach SPV
-  function markActiveBySPV(){
-    if (isMobile()) {
-      cardsAll().forEach(c => { c.classList.remove('is-active','is-dim'); });
-      return;
-    }
-    const spv   = getSPV();
-    const start = index;
-    const end   = start + spv - 1;
-
-    cardsAll().forEach((c, i) => {
-      if (i >= start && i <= end) {
-        c.classList.add('is-active');
-        c.classList.remove('is-dim');
-      } else {
-        c.classList.add('is-dim');
-        c.classList.remove('is-active');
-      }
-    });
-  }
-
-  function setTransform(jump=false){
-    if (isMobile()){
-      track.style.transition = "none";
-      track.style.transform  = "none";
-      requestAnimationFrame(markActiveBySPV);
-      return;
-    }
-    const translate = -(index * (slideW + gapPX()));
-    track.style.transition = jump ? "none" : `transform var(--zen-speed,420ms) ease`;
-    track.style.transform  = `translate3d(${translate}px,0,0)`;
-    requestAnimationFrame(markActiveBySPV);
-  }
-
-  function buildFullClones(){
-    track.querySelectorAll("[data-clone]").forEach(n => n.remove());
-    if (!originals.length) return;
-    const pre = originals.map(n => { const c = n.cloneNode(true); c.dataset.clone = "true"; return c; });
-    pre.reverse().forEach(c => track.insertBefore(c, track.firstChild));
-    const post = originals.map(n => { const c = n.cloneNode(true); c.dataset.clone = "true"; return c; });
-    post.forEach(c => track.appendChild(c));
-    cardsAll().forEach(card => revealIO.observe(card));
-  }
-
-  function goToPageStart(page, jump=false){
-    const spv = getSPV();
-    const base = originals.length;
-    index = base + page * spv;
-    setTransform(jump);
-  }
-
-  function normalizeAfterTransition(){
-    const base = originals.length;
-    const first = base;
-    const last  = base + originals.length - 1;
-    if (index < first){
-      index += originals.length;
-      setTransform(true);
-    } else if (index > last){
-      index -= originals.length;
-      setTransform(true);
-    }
-    markActiveBySPV();
-  }
-
-  function next(){
-    if (animLock || isMobile()) return;
-    animLock = true;
-    index += getSPV();           // seitenweise passend zu SPV
-    setTransform(false);
-  }
-  function prev(){
-    if (animLock || isMobile()) return;
-    animLock = true;
-    index -= getSPV();           // seitenweise passend zu SPV
-    setTransform(false);
-  }
-  track.addEventListener("transitionend", () => { normalizeAfterTransition(); animLock = false; });
-
-  function startAutoplay(){
-    if (autoplayTimer || isMobile()) return;
-    stopAutoplay();
-    autoplayTimer = setInterval(next, AUTOPLAY_MS);
-  }
-  function stopAutoplay(){
-    if (autoplayTimer) clearInterval(autoplayTimer);
-    autoplayTimer = null;
-  }
-
-  const visIO = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const visible = entry.isIntersecting && !document.hidden;
-      if (visible) startAutoplay(); else stopAutoplay();
-    });
-  }, { threshold: 0.5 });
-  visIO.observe(root);
-
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) stopAutoplay(); else startAutoplay();
-  });
-
-  ["mouseenter","focusin"].forEach(ev => slider.addEventListener(ev, stopAutoplay));
-  ["mouseleave","focusout"].forEach(ev => slider.addEventListener(ev, startAutoplay));
-  root.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight") { e.preventDefault(); next(); }
-    if (e.key === "ArrowLeft")  { e.preventDefault(); prev(); }
-  });
-  viewport.addEventListener("wheel", (e) => {
-    if (isMobile()) return;
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-      e.preventDefault();
-      if (e.deltaX > 0) next(); else prev();
-    }
-  }, { passive:false });
-
-  function initDesktop(){
-    originals = Array.from(track.querySelectorAll(".zen-card")).filter(n => !n.dataset.clone);
-    if (!originals.length) return;
-    originals.forEach(card => revealIO.observe(card));
-    buildFullClones();
-    measureSlideW();
-    applyFixedWidths();
-    goToPageStart(0, true);
-    startAutoplay();
-    markActiveBySPV();
-  }
-  function destroyDesktop(){
-    stopAutoplay();
-    track.querySelectorAll("[data-clone]").forEach(n => n.remove());
-    clearFixedWidths();
-    track.style.transition = "none";
-    track.style.transform  = "none";
-    index = 0;
-  }
-
-  let rTo;
-  function onResize(){
-    clearTimeout(rTo);
-    rTo = setTimeout(() => {
-      if (!isMobile()){
-        destroyDesktop();
-        initDesktop();
-        setTimeout(markActiveBySPV, 60);
-      } else {
-        destroyDesktop();
-        cardsAll().forEach(card => { revealIO.observe(card); card.classList.add("is-in"); });
-      }
-    }, 120);
-  }
-  window.addEventListener("resize", onResize);
-
-  if (!isMobile()){ initDesktop(); }
-  else { cardsAll().forEach(card => { revealIO.observe(card); card.classList.add("is-in"); }); }
-});
-</script>
-<script>
-(function(){
-  const root = document.querySelector("#zen-faq");
-  if(!root) return;
-
-  const viewport = root.querySelector(".zen-viewport");
-  const track    = root.querySelector(".zen-track");
-  const cards    = () => Array.from(track.querySelectorAll(".zen-card"));
-  const isMobile = () => matchMedia("(max-width: 699.98px)").matches;
-
-  const AUTOPLAY_MS   = 3500;  // Zeit pro Slide
-  const RESUME_AFTER  = 4000;  // nach User-Interaktion wieder starten
-  let timer = null, resumeTO = null;
-
-  // Hilfen
-  function closestIndexToCenter(){
-    const all = cards();
-    const vpRect = viewport.getBoundingClientRect();
-    const vpMid  = viewport.scrollLeft + vpRect.width/2;
-    let bestI = 0, bestD = Infinity;
-    all.forEach((c,i)=>{
-      const r = c.getBoundingClientRect();
-      const left = r.left + viewport.scrollLeft - vpRect.left;
-      const mid  = left + r.width/2;
-      const d = Math.abs(mid - vpMid);
-      if(d < bestD){ bestD = d; bestI = i; }
-    });
-    return bestI;
-  }
-
-  function scrollToIndex(i){
-    const all = cards();
-    if(!all.length) return;
-    const c = all[(i % all.length + all.length) % all.length];
-    const vpRect = viewport.getBoundingClientRect();
-    const r = c.getBoundingClientRect();
-    const left = r.left + viewport.scrollLeft - vpRect.left;
-    const targetLeft = left - (viewport.clientWidth - r.width)/2;
-    viewport.scrollTo({ left: targetLeft, behavior: "smooth" });
-  }
-
-  function markActive(){
-    const idx = closestIndexToCenter();
-    cards().forEach((c,i)=> c.classList.toggle("is-active", i===idx));
-  }
-
-  // Autoplay
-  function startAutoplay(){
-    if(timer || !isMobile()) return;
-    stopAutoplay();
-    timer = setInterval(()=>{
-      const next = closestIndexToCenter() + 1;
-      scrollToIndex(next);
-    }, AUTOPLAY_MS);
-  }
-  function stopAutoplay(){
-    if(timer) clearInterval(timer);
-    timer = null;
-  }
-  function pauseAndResume(){
-    stopAutoplay();
-    clearTimeout(resumeTO);
-    resumeTO = setTimeout(()=> startAutoplay(), RESUME_AFTER);
-  }
-
-  // Events
-  let ticking = false;
-  function onScroll(){
-    if(!isMobile()) return;
-    if(!ticking){
-      requestAnimationFrame(()=>{ markActive(); ticking = false; });
-      ticking = true;
-    }
-  }
-
-  // User-Interaktion pausiert Autoplay
-  ["touchstart","pointerdown","mousedown","wheel","keydown"].forEach(ev=>{
-    viewport.addEventListener(ev, pauseAndResume, { passive: true });
-  });
-
-  // Sichtbarkeit steuert Autoplay
-  const visIO = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting && !document.hidden) startAutoplay();
-      else stopAutoplay();
-    });
-  }, { threshold: 0.6 });
-  visIO.observe(root);
-
-  document.addEventListener("visibilitychange", ()=>{
-    if(document.hidden) stopAutoplay(); else startAutoplay();
-  });
-
-  // Mode-Wechsel
-  function applyMode(){
-    if(isMobile()){
-      viewport.addEventListener("scroll", onScroll, { passive:true });
-      setTimeout(()=>{ markActive(); startAutoplay(); }, 60);
-    }else{
-      viewport.removeEventListener("scroll", onScroll);
-      stopAutoplay();
-      cards().forEach(c=>c.classList.remove("is-active"));
-    }
-  }
-  applyMode();
-  window.addEventListener("resize", applyMode);
-})();
-</script>
 
 
 
