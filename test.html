@@ -1,1491 +1,288 @@
 
 
+<div class="imago-section">
+  <div class="imago-side-label imago-left-top">home</div>
+  <div class="imago-side-label imago-left-mid">agentur</div>
+  <div class="imago-side-label imago-left-bottom">leistungen</div>
+  <div class="imago-side-label imago-right-top">cases</div>
+  <div class="imago-side-label imago-right-mid">kunden</div>
+  <div class="imago-side-label imago-right-bottom">kontakt</div>
 
+  <div class="imago-grid">
 
-<!-- =========================================================
-     SECTION: IMAGE MARQUEE — Scroll + sanfte Auto-Bewegung mobil
-========================================================== -->
-<section id="image-marquee" aria-label="3D Galerie">
-  <style>
-    #image-marquee {
-      --gap: clamp(12px, 1.6vw, 18px);
-      --h: clamp(110px, 20vw, 200px);
-      --dur-desktop: 28s;
-      --dur-mobile: 60s;
-      overflow: hidden;
-    }
-
-    #image-marquee .wrap {
-      max-width: min(95vw, 1340px);
-      margin: 0 auto;
-      padding: 24px 0;
-    }
-
-    #image-marquee .row {
-      overflow: hidden;
-      position: relative;
-      padding-block: 6px;
-      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
-              mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
-    }
-
-    #image-marquee .track {
-      display: flex;
-      gap: var(--gap);
-      width: max-content;
-      align-items: center;
-      will-change: transform;
-    }
-
-    #image-marquee .tile {
-      flex: 0 0 auto;
-      height: var(--h);
-      aspect-ratio: 16/10;
-      border-radius: 14px;
-      overflow: hidden;
-    }
-
-    #image-marquee .tile img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* ===== Standard: Endlosloop Desktop ===== */
-    @keyframes scroll-ltr { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-    @keyframes scroll-rtl { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-    #image-marquee .row.top .track {
-      animation: scroll-ltr var(--dur-desktop) linear infinite;
-    }
-    #image-marquee .row.bottom .track {
-      animation: scroll-rtl calc(var(--dur-desktop) * 1.1) linear infinite;
-    }
-
-    /* Hover = Pause */
-    @media (hover:hover) {
-      #image-marquee .row:hover .track { animation-play-state: paused; }
-    }
-
-    /* === Mobile: langsamere Bewegung + Scroll-Parallax === */
-    @media (max-width: 900px) {
-      #image-marquee .row.top .track {
-        animation: scroll-ltr var(--dur-mobile) linear infinite;
-      }
-      #image-marquee .row.bottom .track {
-        animation: scroll-rtl calc(var(--dur-mobile) * 1.1) linear infinite;
-      }
-    }
-     /* === Mobile: Scroll steuert die Tracks, keine CSS-Animation === */
-  @media (max-width: 900px) {
-    #image-marquee .row .track {
-      animation: none !important;          /* Auto-Animation aus */
-      transform: translateX(0);            /* Startwert */
-    }
-  }
-  </style>
-
-  <div class="wrap">
-    <!-- OBERERE REIHE – links → rechts -->
-    <div class="row top">
-      <div class="track">
-        <a class="tile"><img src="./3DSlideShow/post1.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post2.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post3.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post4.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post5.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post6.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post7.png" alt=""></a>
-        <!-- Duplikat -->
-        <a class="tile"><img src="./3DSlideShow/post1.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post2.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post3.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post4.png" alt=""></a>
+    <!-- Row 1: Hero -->
+    <div class="imago-tile imago-hero">
+      <img src="https://picsum.photos/id/1060/1200/700" alt="">
+      <div class="imago-badge">
+        <strong>UX</strong>
+        Design Award<br>Special Mention<br>2025
       </div>
     </div>
 
-    <!-- UNTERE REIHE – rechts → links -->
-    <div class="row bottom">
-      <div class="track">
-        <a class="tile"><img src="./3DSlideShow/post8.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post9.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post10.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post11.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post12.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post13.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post14.png" alt=""></a>
-        <!-- Duplikat -->
-        <a class="tile"><img src="./3DSlideShow/post8.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post9.png" alt=""></a>
-        <a class="tile"><img src="./3DSlideShow/post10.png" alt=""></a>
+    <!-- Rows 2–3: zwei hohe Bilder -->
+    <div class="imago-tile imago-coffee">
+      <img src="https://picsum.photos/id/1020/800/1200" alt="">
+    </div>
+
+    <div class="imago-tile imago-lamp">
+      <img src="https://picsum.photos/id/1011/800/1200" alt="">
+    </div>
+
+    <!-- Row 4: Orange links, Bild rechts -->
+    <div class="imago-tile imago-cta-top imago-link">
+      <div class="imago-orange-inner">
+        <p>
+          Wir sind unter den<br>
+          100 besten<br>
+          Agenturen weltweit!
+        </p>
+        <span class="imago-arrow">➝</span>
+      </div>
+    </div>
+
+    <div class="imago-tile imago-hob">
+      <img src="https://picsum.photos/id/1043/800/800" alt="">
+    </div>
+
+    <!-- Row 5: zwei quadratische Bilder -->
+    <div class="imago-tile imago-phones">
+      <img src="https://picsum.photos/id/1044/800/800" alt="">
+    </div>
+
+    <div class="imago-tile imago-device">
+      <img src="https://picsum.photos/id/1050/800/800" alt="">
+    </div>
+
+    <!-- Rows 6–7: zwei hohe Bilder -->
+    <div class="imago-tile imago-handle">
+      <img src="https://picsum.photos/id/1033/800/1200" alt="">
+    </div>
+
+    <div class="imago-tile imago-cylinder">
+      <img src="https://picsum.photos/id/1035/800/1200" alt="">
+    </div>
+
+    <!-- Rows 8–9: Orange links, hohes Bild rechts -->
+    <div class="imago-tile imago-cta-mid imago-link">
+      <div class="imago-orange-inner">
+        <p>
+          Starten Sie Ihren<br>
+          User Centered<br>
+          Design Process
+        </p>
+        <span class="imago-arrow">➝</span>
+      </div>
+    </div>
+
+    <div class="imago-tile imago-meter">
+      <img src="https://picsum.photos/id/1015/800/1200" alt="">
+    </div>
+
+    <!-- Row 9: Bild links (unter Orange), unterer Teil des hohen Bildes rechts ist schon da -->
+
+    <div class="imago-tile imago-med">
+      <img src="https://picsum.photos/id/1027/800/800" alt="">
+    </div>
+
+    <!-- Row 10: Bild links, Orange rechts -->
+    <div class="imago-tile imago-dashboard">
+      <img src="https://picsum.photos/id/1016/800/800" alt="">
+    </div>
+
+    <div class="imago-tile imago-cta-bottom imago-link">
+      <div class="imago-orange-inner">
+        <p>
+          Wir haben in über<br>
+          30 Jahren hunderte<br>
+          von Projekten<br>
+          erfolgreich realisiert
+        </p>
+        <span class="imago-arrow">➝</span>
       </div>
     </div>
   </div>
 
-  <script>
-    // Scroll-Parallax + sanfte Drift auf Mobil
-    (function(){
-      const marquee = document.getElementById('image-marquee');
-      const rows = marquee.querySelectorAll('.row');
-      const tracks = [...rows].map(r => r.querySelector('.track'));
-      const speeds = [0.4, -0.4]; // oben, unten
-
-      function onScroll(){
-        const rect = marquee.getBoundingClientRect();
-        const vh = window.innerHeight;
-        const progress = 1 - Math.min(Math.max((rect.top + rect.height) / (vh + rect.height), 0), 1);
-        tracks.forEach((t,i)=>{
-          const drift = progress * 25 * speeds[i]; // sanftes Mitschieben
-          t.style.transform = `translateX(${drift}%)`;
-        });
-      }
-
-      // Nur bei kleinen Viewports aktiv
-      const mq = window.matchMedia("(max-width: 900px)");
-      if(mq.matches){
-        window.addEventListener('scroll', onScroll, {passive:true});
-        onScroll();
-      }
-    })();
-  </script>
-  
-<script>
-  (function () {
-    const marquee = document.getElementById('image-marquee');
-    if (!marquee) return;
-
-    const mq = window.matchMedia('(max-width: 900px)');
-    const rows = marquee.querySelectorAll('.row');
-    const tracks = [...rows].map(r => r.querySelector('.track'));
-
-    // Richtung je Reihe (oben nach rechts bei Scroll runter, unten nach links)
-    const dir = [1, -1];        // top, bottom
-    const speed = 0.6;          // feinjustierbarer Faktor: px Horizontal pro 1px Vertical-Scroll
-    const damping = 0.06;       // "Sanftheit" (0–1), kleiner = weicher
-
-    // Zustände pro Track
-    const state = tracks.map(() => ({
-      x: 0,          // aktuelle X-Position in px (Render)
-      vx: 0,         // Zielgeschwindigkeit (aus Scroll abgeleitet)
-      loopW: 0       // halbe Track-Breite für Endlosloop
-    }));
-
-    // Breite messen (halbe Strecke, weil du die Items dupliziert hast)
-    function measure() {
-      tracks.forEach((t, i) => {
-        // halbe Breite = Track-Gesamtbreite / 2
-        state[i].loopW = t.scrollWidth / 2;
-      });
-    }
-    measure();
-    new ResizeObserver(measure).observe(marquee);
-
-    // Scroll-Delta erfassen
-    let lastY = window.scrollY;
-    function onScroll() {
-      const y = window.scrollY;
-      const dy = y - lastY;
-      lastY = y;
-      // Geschwindigkeit aktualisieren (zielwert)
-      state.forEach((s, i) => {
-        s.vx += dy * speed * dir[i];
-      });
-      kickRAF();
-    }
-
-    // Smooth-RAF Loop (trägt vx sanft auf x auf, dämpft vx)
-    let rafId = null;
-    function tick() {
-      rafId = null;
-      let needMore = false;
-
-      tracks.forEach((t, i) => {
-        const s = state[i];
-        // Sanfte Annäherung: ein Stück der vx addieren
-        s.x += s.vx;
-        s.vx *= (1 - damping);
-
-        // Endlos-Loop: in den Bereich [-loopW, 0) normalisieren
-        if (s.loopW > 0) {
-          // Wir bewegen nach links (negativ) für translateX
-          // Also modulo auf [-loopW, 0)
-          s.x = ((s.x % s.loopW) + s.loopW) % s.loopW; // in [0, loopW)
-          const xNeg = -s.x; // translate nach links
-          t.style.transform = `translateX(${xNeg}px)`;
-        }
-
-        if (Math.abs(s.vx) > 0.1) needMore = true;
-      });
-
-      if (needMore) kickRAF();
-    }
-    function kickRAF() {
-      if (rafId == null) rafId = requestAnimationFrame(tick);
-    }
-
-    // Nur auf Mobile aktivieren/deaktivieren
-    function enableMobileMode(on) {
-      if (on) {
-        window.addEventListener('scroll', onScroll, { passive: true });
-        // Initialen Scroll-Impulse berechnen (falls Seite nicht bei 0 beginnt)
-        lastY = window.scrollY;
-      } else {
-        window.removeEventListener('scroll', onScroll);
-        // transform zurücksetzen, damit Desktop-Animation greift
-        tracks.forEach(t => { t.style.transform = ''; });
-        // Zustände zurücksetzen
-        state.forEach(s => { s.x = 0; s.vx = 0; });
-      }
-    }
-
-    // Aktivieren je nach Viewport
-    function applyMode(e) { enableMobileMode(e.matches); }
-    mq.addEventListener ? mq.addEventListener('change', applyMode)
-                        : mq.addListener(applyMode);
-    applyMode(mq);
-
-    // Bonus: wenn der Bereich in den Viewport scrollt, kurz "anstoßen"
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && mq.matches) {
-          // leichter Drift beim Eintritt (optional)
-          state.forEach((s, i) => { s.vx += 2 * dir[i]; });
-          kickRAF();
-        }
-      });
-    }, { threshold: 0.1 });
-    io.observe(marquee);
-  })();
-</script>
-</section>
-
-
-
-
-<!-- =============================================
-     Kontakt + Video + Testimonials
-     Wizard (nur: Kostenloses Wireframe)
-     – klickbare Karte, CTA, Countdown, a11y, Formspree
-     ============================================= -->
-<section class="kontakt-testimonial-section" id="kontakt">
-  <div class="kontakt-testimonial-wrapper">
-    <!-- Kontaktbereich -->
-    <div class="kontakt-area">
-      <h2 class="section-title">
-        Sichere dir jetzt dein <span style="white-space:nowrap">kostenloses Wireframe
-      </h2>
-
-      <p class="kontakt-subline">
-        Unverbindlich. 0 €. Klickbares, webreifes Wireframe nach einem kurzen Erstgespräch innerhalb von 48h.
-        <span style="display:block;font-weight:800;margin-top:.25rem">Nur für kurze Zeit verfügbar.</span>
-      </p>
-
-      <!-- =====================
-           Wizard Formular
-           ===================== -->
-      <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm" novalidate>
-
-<!-- STEP 1: Einzige Leistungswahl (alles klickbar) -->
-<fieldset class="form-step active" data-step="1" aria-labelledby="step1Title">
-  <legend id="step1Title" class="sr-only">Leistung wählen</legend>
-
-  <!-- Countdown + Social proof -->
-  <div class="wf-urgency" role="status" aria-live="polite">
-    <div class="wf-countdown">
-      Angebot endet in <strong><span id="wfTimer">48:00:00</span></strong>
-    </div>
-    <div class="wf-slots" id="wfSlots">Diese Woche begrenzte Slots</div>
+  <div class="imago-more">
+    <span>mehr projekte</span>
   </div>
+</div>
 
-  <!-- Volle Breite, eine Option -->
-  <div class="grid-choices single" role="radiogroup" aria-label="Leistung wählen">
-    <!-- Entfernt: class="selected" -->
-<label class="choice wf-card hero" tabindex="0" id="choiceWire" aria-describedby="wireDesc">
-  <input type="radio" name="service" value="Kostenloses Wireframe" data-toggle="wire" />
-  <div class="wf-card-head">
-    <span class="title">Kostenloses Wireframe sichern</span>
-    <span class="wf-badge">0 €</span>
-  </div>
-  <small id="wireDesc">klickbar, webreif, Lieferung ≤ 2 Tage – 0 €</small>
-
-  <button type="button" class="cta-inline" id="ctaInline">Jetzt kostenlos sichern</button>
-</label>
-
-  </div>
-
-  <p class="legal-hint" style="text-align:center;margin-top:.6rem">
-    Wenn du <strong>keine Weiterarbeit wünschst</strong>, wird das Wireframe <strong>gelöscht</strong>.
-    <strong>Rechte</strong> an Wireframes & Konzepten verbleiben bis zur Beauftragung <strong>bei uns</strong>.
-  </p>
-</fieldset>
-
-<!-- Entfernt: Sticky Mobile CTA unter den Buttons -->
-<!-- <a href="#kontakt" class="wf-sticky-cta" id="wfStickyCta" aria-label="Kostenloses Wireframe sichern">Kostenloses Wireframe sichern</a> -->
-
-
-        <!-- STEP 2: Grundlage fürs Wireframe -->
-        <fieldset class="form-step" data-step="2" aria-labelledby="step2Title">
-          <legend id="step2Title" class="sr-only">Grundlagen</legend>
-          <div class="service-block" data-service="wire">
-            <h3 class="block-title">Kurz die Basis</h3>
-            <label class="select-row">
-              <span>CI/Branding vorhanden?</span>
-              <select name="wire_branding" required>
-                <option value="">Bitte wählen</option>
-                <option value="styleguide_vorhanden">Styleguide vorhanden</option>
-                <option value="nur_logo">Nur Logo/Grundfarben</option>
-                <option value="keins">Kein Branding – neutral</option>
-              </select>
-            </label>
-            <label class="select-row">
-              <span>Material (optional)</span>
-              <select name="wire_material">
-                <option value="">Bitte wählen</option>
-                <option value="content_vorhanden">Texte/Bilder grob vorhanden</option>
-                <option value="platzhalter_ok">Platzhalter / Lorem OK</option>
-              </select>
-            </label>
-          </div>
-        </fieldset>
-
-        <!-- STEP 3: Scope & Fokus -->
-        <fieldset class="form-step" data-step="3" aria-labelledby="step3Title">
-          <legend id="step3Title" class="sr-only">Wireframe-Scope</legend>
-          <div class="service-block" data-service="wire">
-            <h3 class="block-title">Scope & Fokus</h3>
-            <label class="select-row">
-              <span>Welche Seiten/Flows sollen enthalten sein?</span>
-              <select name="wire_scope" required>
-                <option value="">Bitte wählen</option>
-                <option value="landingpage">Landingpage</option>
-                <option value="homepage_plus_2">Homepage + 2 Unterseiten</option>
-                <option value="checkout_flow">Checkout/Lead-Flow</option>
-                <option value="custom_flow">Individuelle Auswahl (beschreiben)</option>
-              </select>
-            </label>
-            <fieldset class="checkbox-group tags" aria-label="Wireframe-Fokus">
-              <legend class="checkbox-legend">Fokus</legend>
-              <label class="pill"><input type="checkbox" name="wire_focus[]" value="Struktur" /><span>Struktur</span></label>
-              <label class="pill"><input type="checkbox" name="wire_focus[]" value="UX-Flow" /><span>UX-Flow</span></label>
-              <label class="pill"><input type="checkbox" name="wire_focus[]" value="Above-the-Fold" /><span>Above-the-Fold</span></label>
-              <label class="pill"><input type="checkbox" name="wire_focus[]" value="CTA-Hierarchie" /><span>CTA-Hierarchie</span></label>
-            </fieldset>
-          </div>
-        </fieldset>
-
-<!-- STEP 4: Timing -->
-<fieldset class="form-step" data-step="4" aria-labelledby="step4Title">
-  <legend id="step4Title" class="sr-only">Timing</legend>
-
-  <div class="input-row" id="deadlineRow">
-    <label for="deadlineDate" class="req">Wunschtermin Erstgespräch</label>
-
-    <div class="deadline-grid">
-      <input
-        type="date"
-        id="deadlineDate"
-        required
-        aria-describedby="deadlineHelp"
-      />
-      <input
-        type="time"
-        id="deadlineTime"
-        required
-        step="900"
-      />
-    </div>
-
-    <small id="deadlineHelp">Bitte Datum &amp; Uhrzeit wählen (15-Min-Takt).</small>
-
-    <!-- Wichtig: bleibt Name "deadline" für dein Backend/Formspree -->
-    <input type="hidden" name="deadline" id="deadlineISO" />
-  </div>
-</fieldset>
-
-        <!-- STEP 5: Kontaktdaten -->
-        <fieldset class="form-step" data-step="5" aria-labelledby="step5Title">
-          <legend id="step5Title" class="sr-only">Kontaktdaten</legend>
-
-          <!-- Hidden (nur gewünschte Felder) -->
-          <input type="hidden" name="_subject" id="autoSubject" />
-          <textarea class="sr-only" name="summary_plain" id="summaryPlain" aria-hidden="true"></textarea>
-          <input type="hidden" name="selected_service" id="selectedService" value="Kostenloses Wireframe" />
-
-          <!-- Responsive Kontakt-Grid -->
-          <div class="contact-grid">
-            <div class="field span-6">
-              <label for="name" class="req">Name</label>
-              <input id="name" type="text" name="name" placeholder="Dein Name" autocomplete="name" required />
-            </div>
-
-            <div class="field span-6">
-              <label for="email" class="req">E-Mail</label>
-              <input id="email" type="email" name="email" placeholder="dein@mail.de" autocomplete="email" required />
-            </div>
-
-            <div class="field span-12">
-              <label for="message" class="req">Kurz dein Ziel</label>
-              <textarea id="message" name="message" rows="6" placeholder="Was soll das Wireframe zeigen? Wichtigste Seiten/Flows…" minlength="5" required></textarea>
-            </div>
-
-            <p class="req-note">* Pflichtfelder</p>
-          </div>
-
-          <p class="legal-hint">
-            Deine Angaben werden über <strong>Formspree</strong> zur Beantwortung deiner Anfrage verarbeitet.
-            Mehr unter <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.
-          </p>
-
-          <p class="legal-hint">
-            Wenn du <strong>keine Weiterarbeit wünschst</strong>, löschen wir das Wireframe.
-            <strong>Rechte</strong> an Wireframes & Konzepten verbleiben bis zur Beauftragung <strong>bei uns</strong>.
-          </p>
-        </fieldset>
-
-        <!-- STEP 6: Abschluss / Erfolg -->
-        <fieldset class="form-step" data-step="6" aria-labelledby="step6Title">
-          <legend id="step6Title" class="sr-only">Abschluss</legend>
-          <div class="success-card" role="status" aria-live="polite">
-            <h3 class="success-title">Geschafft! 🎉</h3>
-            <p class="success-copy">Danke für deine Anfrage – wir melden uns in Kürze zur Terminbestätigung.</p>
-            <p class="success-sub">Du kannst jetzt neu starten oder diese Seite schließen.</p>
-            <button type="button" class="success-btn" disabled>✅ Anfrage gesendet</button>
-          </div>
-        </fieldset>
-
-        <!-- === Progressbar === -->
-        <div class="stepper" aria-label="Fortschritt" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1">
-          <div class="stepper-header">
-            <span id="stepLabel">Schritt 1/6</span>
-          </div>
-          <div class="stepper-track">
-            <div class="stepper-fill" id="stepperFill" style="width:12%"></div>
-          </div>
-        </div>
-
-        <!-- Wizard Navigation -->
-        <div class="wizard-nav" id="wizardNav">
-          <button type="button" class="nav-btn prev" id="prevBtn" disabled>Zurück</button>
-          <button type="button" class="nav-btn next" id="nextBtn">Weiter</button>
-          <button type="submit" class="kontakt-btn submit" id="submitBtn" hidden>Senden!</button>
-        </div>
-      </form>
-    </div>
-
-    <!-- Videokarte (klickbar pausieren/abspielen) -->
-    <div class="video-area" aria-label="Einblick in Prozess, Tools & Zusammenarbeit">
-      <div class="video-card" id="videoCard" role="button" tabindex="0" aria-label="Video abspielen/pausieren">
-        <video class="video-media" id="promoVideo" autoplay loop muted playsinline preload="auto">
-          <source src="./indexFotoSlideShow/kartenvideo.mp4" type="video/mp4" />
-          Dein Browser unterstützt das Video-Tag nicht.
-        </video>
-      </div>
-    </div>
-
-    <!-- Testimonials (volle Breite darunter) -->
-    <div class="testimonial-area">
-      <testimonial-slider></testimonial-slider>
-    </div>
-  </div>
-</section>
 <style>
-/* ==============================
-   THEME TOKENS
-   ============================== */
-:root{
-  /* surfaces & text */
-  --surface:#fff; --surface-elev:#f7f8fa; --text:#0b0c0e; --muted:#5d6066; --aur-ink:#0b0c10; --aur-ink-muted:#0f1729;
-  --border:#e6e8eb; --btn-text:#fff;
-  /* inputs */
-  --input-bg:#ffffffcc; --input-text:#0b0c0e; --placeholder:#8b9096;
-  /* accent */
-  --choice-green:#00c851; --choice-ink:#ffffff; --choice-orange:#f97316;
-  /* pills */
-  --pill-bg:#f3f5f7; --pill-text:#0b0c0e; --pill-green:#00c851; --pill-green-ink:#ffffff;
-  /* shadows */
-  --aur-shadow-light:0 1px 2px rgba(0,0,0,.06); --aur-shadow-strong:0 1px 2px rgba(0,0,0,.18);
-}
-:root[data-theme="dark"]{
-  --surface:#000; --surface-elev:#111216; --text:#f5f7fa; --muted:#c6cad1;
-  --border:#262a31; --input-bg:#111216cc; --input-text:#f5f7fa; --placeholder:#95a0ad;
-  --pill-bg:#1b1d22; --pill-text:#e8ecf2;
+/* Section */
+.imago-section {
+  width: 90vw;
+  margin: 20px auto 40px;
+  padding: 18px 10px 40px;
+  position: relative;
+  background: #fff;
+  border: 1px solid #eee;
+  box-sizing: border-box;
 }
 
-/* ==============================
-   GLOBAL RESETS
-   ============================== */
-html, body{ box-sizing:border-box; overflow-x:hidden; margin:0; padding:0; }
-*, *::before, *::after{ box-sizing:inherit; }
-.sr-only{ position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
-
-/* ==============================
-   SECTION & WRAPPER
-   ============================== */
-.kontakt-testimonial-section{
-  background:var(--surface); color:var(--text);
-  padding:clamp(2.5rem,5.5vw,5rem) 1.5rem;
-  margin-top:clamp(4rem,8vw,8rem);
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-}
-.kontakt-testimonial-wrapper{
-  max-width:1440px; margin:0 auto; display:flex; gap:clamp(1.5rem,3.5vw,3rem);
-  flex-wrap:wrap; justify-content:space-between; align-items:stretch;
+/* Grid – 2 Spalten, Masonry-artig */
+.imago-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Grundhöhe pro „Zeile“ – alle Kacheln sind Vielfache davon */
+  grid-auto-rows: 18vw;
+  grid-auto-flow: dense;
 }
 
-/* Karten (gleich hoch nebeneinander) */
-.kontakt-area, .video-area{ flex:1 1 480px; max-width:640px; min-width:300px; }
-.kontakt-area{
-  position:relative; isolation:auto; /* für Hover-Schatten */
-  background:color-mix(in oklab,var(--surface-elev) 85%,transparent);
-  border:1px solid var(--border); border-radius:18px;
-  padding:clamp(1.1rem,2vw,1.6rem);
-  box-shadow:0 10px 30px rgba(0,0,0,.06);
-  backdrop-filter:blur(8px) saturate(1.02);
-  overflow:visible; min-width:0;
+/* Grundstyling Tiles */
+.imago-tile {
+  position: relative;
+  overflow: hidden;
 }
 
-/* ==============================
-   VIDEO CARD
-   ============================== */
-.video-area{ display:flex; }
-.video-card{
-  position:relative; display:flex; flex-direction:column; gap:.8rem; width:100%;
-  background:color-mix(in oklab,var(--surface-elev) 85%,transparent);
-  border:1px solid var(--border); border-radius:18px;
-  padding:clamp(1.1rem,2vw,1.6rem);
-  box-shadow:0 10px 30px rgba(0,0,0,.06);
-  backdrop-filter:blur(8px) saturate(1.02);
-  overflow:hidden;
-}
-.video-header{ display:flex; flex-direction:column; gap:.15rem; text-align:center; }
-.video-title{ margin:0; font-size:clamp(1.2rem,1rem + .9vw,1.6rem); font-weight:900; letter-spacing:-.01em; color:var(--aur-ink); text-shadow:var(--aur-shadow-light); }
-.video-sub{ margin:0; color:var(--muted); font-weight:650; }
-.video-wrapper{ position:relative; flex:1 1 auto; min-height:260px; border-radius:14px; overflow:hidden; background:#000; }
-.video-media, .video-embed{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border:0; display:block; }
-
-/* Testimonials volle Breite unter den Karten */
-.testimonial-area{ flex:1 1 100%; max-width:100%; min-width:280px; }
-
-/* ==============================
-   TYPOGRAPHY
-   ============================== */
-.section-title{
-  font-size:clamp(1.9rem,1.5rem + 2.2vw,2.65rem); font-weight:900; letter-spacing:-.02em; line-height:1.12;
-  margin:.1rem 0 .45rem; text-wrap:balance; color:var(--aur-ink); text-shadow:var(--aur-shadow-light);
-  text-align:center; margin-inline:auto;
-}
-.kontakt-subline{
-  color:var(--aur-ink-muted); max-width:62rem; margin:0 auto 1.15rem; line-height:1.6;
-  font-size:clamp(1.02rem,1rem + .5vw,1.18rem); letter-spacing:.004em; text-wrap:pretty;
-  padding:.85rem .95rem; border-radius:14px;
-  background:linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05);
-  text-align:center;
-}
-:root[data-theme="dark"] .kontakt-subline{
-  color:#fff; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 2px 8px rgba(0,0,0,.35);
-}
-.kontakt-area .copy{ color:rgba(0,0,0,.92); font-weight:690; letter-spacing:-.002em; font-size:clamp(1rem,.96rem + .35vw,1.12rem); line-height:1.55; margin:0 0 .25rem; }
-.step1-copy{ margin-bottom:.25rem!important; }
-:root[data-theme="dark"] .kontakt-area .copy{ color:rgba(255,255,255,.96); }
-
-/* ==============================
-   FORM BASICS
-   ============================== */
-.kontakt-form{ display:flex; flex-direction:column; gap:.65rem; width:100%; max-width:100%; overflow:clip; }
-.kontakt-form input, .kontakt-form textarea, .kontakt-form select{
-  width:100%; padding:.85rem .95rem; font-size:1rem; border:1px solid var(--border); border-radius:12px;
-  background:var(--input-bg); color:var(--input-text);
-  box-shadow:0 2px 8px rgba(0,0,0,.04);
-  transition:border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
-  appearance:none;
-}
-/* Typo-Konsistenz */
-.kontakt-form, .kontakt-form input, .kontakt-form textarea, .kontakt-form select, .kontakt-form button{
-  font-family:inherit; color:var(--input-text); letter-spacing:.004em;
-  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-}
-.kontakt-form ::placeholder{ color:var(--placeholder); opacity:1; }
-
-/* Autofill */
-.kontakt-form input:-webkit-autofill,
-.kontakt-form textarea:-webkit-autofill,
-.kontakt-form select:-webkit-autofill{
-  -webkit-text-fill-color:var(--input-text);
-  transition:background-color 9999s ease-out, color 9999s ease-out;
-  box-shadow:0 0 0 1000px var(--input-bg) inset!important;
-}
-:root[data-theme="dark"] .kontakt-form input:-webkit-autofill,
-:root[data-theme="dark"] .kontakt-form textarea:-webkit-autofill,
-:root[data-theme="dark"] .kontakt-form select:-webkit-autofill{
-  -webkit-text-fill-color:var(--input-text);
-  box-shadow:0 0 0 1000px color-mix(in oklab,var(--input-bg) 92%, black 8%) inset!important;
+.imago-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* ==============================
-   STEPS / STEPPER
-   ============================== */
-.form-step{ display:none; max-width:100%; }
-.form-step.active{ display:block; }
-.form-step[data-step="1"]{ margin-bottom:.05rem; }
-.form-step[data-step="1"] .grid-choices{ margin-bottom:.05rem; }
+/* ---------- HÖHEN/ANORDNUNG WIE IM LAYOUT ---------- */
 
-/* Stepper */
-.stepper{ display:flex; flex-direction:column; gap:.2rem; margin:.25rem 0 .05rem; padding-top:.25rem; border-top:1px solid color-mix(in oklab,var(--border) 75%, transparent); }
-.stepper-header{ display:flex; justify-content:space-between; align-items:center; font-weight:800; font-size:.88rem; color:var(--muted); line-height:1; margin-bottom:.05rem; }
-.stepper-track{ position:relative; width:100%; height:6px; background:color-mix(in oklab,var(--choice-green) 12%, transparent); border-radius:999px; overflow:hidden; }
-.stepper-fill{
-  position:absolute; inset:0 auto 0 0; width:0%; height:100%;
-  background:linear-gradient(90deg, var(--choice-green), color-mix(in oklab,var(--choice-green) 82%, #007e33 18%));
-  border-radius:999px; transition:width .22s ease;
-  box-shadow:0 2px 10px color-mix(in oklab,var(--choice-green) 35%, transparent);
+/* Hero oben: über beide Spalten, schön hoch */
+.imago-hero {
+  grid-column: 1 / -1;
+  grid-row: span 3; /* Hero-Höhe */
 }
 
-/* ==============================
-   CHOICES (Step 1)
-   ============================== */
-.grid-choices{ display:grid; grid-template-columns:repeat(3,1fr); gap:.5rem; max-width:100%; overflow:visible; }
-@media (max-width:680px){ .grid-choices{ grid-template-columns:1fr; } }
-
-.choice{
-  position:relative; display:flex; flex-direction:column; gap:.12rem;
-  padding:.85rem; border:2px solid var(--border); border-radius:14px;
-  cursor:pointer; user-select:none; background:var(--surface);
-  transition:box-shadow .15s ease, border-color .15s ease, transform .06s ease, background .15s ease, color .15s ease;
-  outline:none; transform-origin:center; will-change:transform;
+/* Kaffeemühle links + Lampe rechts relativ hoch */
+.imago-coffee {
+  grid-row: span 3;
 }
-.choice:hover{ box-shadow:0 0 0 3px color-mix(in oklab,var(--choice-green) 25%, transparent); }
-.choice:active{ transform:scale(.995); }
-.choice .title{ display:block; font-weight:950; letter-spacing:-.01em; line-height:1.18; font-size:clamp(1.06rem, .96rem + .8vw, 1.5rem); text-shadow:var(--aur-shadow-light); }
-.choice small{ color:var(--muted); display:block; margin-top:.02rem; font-size:clamp(.9rem, .86rem + .25vw, 1rem); font-weight:650; text-shadow:var(--aur-shadow-light); }
-.choice input[type="radio"]{ position:absolute; opacity:0; pointer-events:none; inset:0; width:100%; height:100%; }
-.choice.selected{ border-color:var(--choice-green); background:var(--choice-green); color:var(--choice-ink); box-shadow:0 6px 18px rgba(0,200,81,.25); }
-.choice.selected .title, .choice.selected small{ color:var(--choice-ink)!important; text-shadow:0 1px 1px rgba(0,0,0,.12); }
-
-/* Fokus-States großflächig */
-.choice:focus-visible, .choice:focus-within{
-  outline:none; border-color:var(--choice-green)!important;
-  box-shadow:0 0 0 4px color-mix(in oklab,var(--choice-green) 45%, transparent), 0 8px 24px rgba(0,200,81,.15)!important;
-  background:color-mix(in oklab,var(--choice-green) 12%, var(--surface) 88%);
+.imago-lamp {
+  grid-row: span 4;   /* etwas höher → Spalten laufen auseinander */
 }
 
-/* ==============================
-   SERVICE BLOCKS, TAGS & PILLS
-   ============================== */
-.service-block{ margin:.55rem 0 .55rem; padding:.55rem .7rem .7rem; border:1px dashed var(--border); border-radius:12px; background:color-mix(in oklab,var(--surface) 85%, transparent); }
-.service-block[hidden]{ display:none!important; }
-.block-title{ margin:.12rem 0 .45rem; font-size:1.04rem; font-weight:900; letter-spacing:-.01em; }
-.select-row, .input-row{ display:flex; flex-direction:column; gap:.3rem; margin-bottom:.5rem; }
-
-.tags{ display:grid; gap:.45rem; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); margin-top:.05rem; }
-.checkbox-legend{ font-weight:800; margin-bottom:.15rem; }
-.pill{
-  position:relative; display:flex; align-items:center; justify-content:center;
-  min-height:40px; padding:.5rem .65rem; border:2px solid var(--border); border-radius:12px;
-  background:var(--pill-bg); color:var(--pill-text); cursor:pointer; user-select:none;
-  transition:transform .06s ease, background .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease;
-}
-.pill:hover{ box-shadow:0 0 0 3px color-mix(in oklab,var(--choice-green) 25%, transparent); }
-.pill:active{ transform:scale(.992); }
-.pill input{ position:absolute; opacity:0; pointer-events:none; }
-.pill span{ font-weight:800; letter-spacing:-.01em; }
-.pill.selected{ background:var(--pill-green); color:var(--pill-green-ink); border-color:var(--pill-green); box-shadow:0 6px 18px rgba(0,200,81,.25); }
-
-/* Pill: Fokus großflächig */
-.pill:focus-visible, .pill:focus-within{
-  outline:none; background:var(--pill-green)!important; color:var(--pill-green-ink)!important; border-color:var(--pill-green)!important;
-  box-shadow:0 0 0 4px color-mix(in oklab,var(--pill-green) 45%, transparent), 0 8px 22px rgba(0,200,81,.22)!important;
+/* Orange „100 besten Agenturen“ – etwas niedriger als ein hohes Bild */
+.imago-cta-top {
+  grid-row: span 2;
 }
 
-/* Checkbox → ganze Pill grün */
-.pill input[type="checkbox"]:checked ~ *{
-  background:var(--pill-green); color:var(--pill-green-ink); border-color:var(--pill-green);
-  box-shadow:0 6px 18px rgba(0,200,81,.25);
+/* Kochfeld daneben – höher → Versatz */
+.imago-hob {
+  grid-row: span 3;
 }
 
-/* ==============================
-   WIZARD NAVIGATION
-   ============================== */
-.wizard-nav{ display:flex; gap:.55rem; align-items:center; margin-top:.1rem; padding-top:.25rem; }
-.nav-btn{
-  background:var(--surface-elev); color:var(--text);
-  border:1px solid var(--border); padding:.7rem .9rem; border-radius:12px; font-weight:800; cursor:pointer; transition:none;
+/* Phones + Device – eher quadratisch / mittelhoch */
+.imago-phones {
+  grid-row: span 2;
 }
-.nav-btn[disabled]{ opacity:.55; cursor:not-allowed; }
-.nav-btn.next{ background:var(--choice-green); color:var(--choice-ink); border:none; box-shadow:0 6px 18px color-mix(in oklab,var(--choice-green) 40%, transparent); }
-
-/* Submit-Button (orange) */
-#submitBtn, .kontakt-btn.submit{
-  background:var(--choice-orange); color:#fff;
-  border:1px solid color-mix(in oklab,#f97316 80%, #000 10%);
-  padding:.7rem .9rem; border-radius:12px; font-weight:800; font-size:1rem; cursor:pointer;
-  transition:background-color .2s ease, transform .06s ease, box-shadow .15s ease;
-  box-shadow:0 2px 6px rgba(249,115,22,.25);
-}
-#submitBtn:hover, .kontakt-btn.submit:hover{ background:color-mix(in oklab,#f97316 90%, white 10%); }
-#submitBtn:active, .kontakt-btn.submit:active{ transform:translateY(1px); box-shadow:0 1px 3px rgba(249,115,22,.3); }
-#submitBtn[disabled], .kontakt-btn.submit[disabled]{ opacity:.6; cursor:not-allowed; box-shadow:none; }
-
-/* Step 5: Submit linksbündig */
-.kontakt-area .form-step[data-step="5"] + .wizard-nav{
-  display:flex!important; justify-content:flex-start!important; text-align:left!important; width:100%;
-}
-.kontakt-area .form-step[data-step="5"] + .wizard-nav #submitBtn,
-.kontakt-area .form-step[data-step="5"] + .wizard-nav .kontakt-btn.submit{
-  justify-content:flex-start!important; align-self:flex-start!important;
-  margin-left:0!important; margin-right:auto!important; width:auto!important; min-width:160px;
-}
-.kontakt-area .form-step[data-step="5"] + .wizard-nav .nav-btn:not(#submitBtn){ margin-right:.6rem; }
-
-/* ==============================
-   SUCCESS STEP (6)
-   ============================== */
-.form-step[data-step="6"]{ display:none; }
-.form-step.active[data-step="6"]{ display:block; }
-.success-card{
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.6rem;
-  min-height:var(--step6-minh,320px); padding:1rem; border:2px solid var(--choice-green); border-radius:14px;
-  background:color-mix(in oklab,var(--choice-green) 8%, var(--surface) 92%); text-align:center;
-}
-.success-title{ font-weight:900; letter-spacing:-.01em; font-size:clamp(1.4rem,1.1rem + 1vw,1.9rem); }
-.success-copy{ font-weight:700; letter-spacing:-.002em; font-size:clamp(1.02rem,.98rem + .35vw,1.16rem); opacity:.95; }
-.success-sub{ color:var(--muted); }
-.success-btn{ margin-top:.2rem; padding:.8rem 1rem; border-radius:12px; border:none; background:var(--choice-green); color:var(--choice-ink); font-weight:850; box-shadow:0 6px 18px rgba(0,200,81,.25); }
-form.is-success .wizard-nav, form.is-success .stepper{ display:none!important; }
-.success-card.fade-out{ animation:successFade 3s ease forwards; }
-@keyframes successFade{ to{ opacity:0; transform:translateY(6px); } }
-
-/* ==============================
-   STEP 5 – CONTACT GRID
-   ============================== */
-.form-step[data-step="5"]{
-  color:var(--text); line-height:1.55; letter-spacing:.004em;
-  font-size:clamp(1rem,.96rem + .35vw,1.12rem); text-align:left!important;
-}
-.form-step[data-step="5"] .contact-grid{
-  display:grid; grid-template-columns:repeat(12, minmax(0,1fr)); gap:.65rem; justify-items:stretch; align-items:start;
-}
-.form-step[data-step="5"] .field{ grid-column:span 12; display:flex; flex-direction:column; gap:.35rem; font:inherit; color:inherit; text-align:left!important; }
-.form-step[data-step="5"] .field label{ font-weight:800; letter-spacing:-.01em; color:var(--aur-ink); }
-.form-step[data-step="5"] .field input,
-.form-step[data-step="5"] .field textarea,
-.form-step[data-step="5"] .field select{ width:100%; font:inherit; color:inherit; line-height:1.4; }
-.form-step[data-step="5"] .field textarea{ min-height:clamp(120px,16vh,220px); resize:vertical; }
-.form-step[data-step="5"] .field .field-error{ line-height:1.25; }
-.form-step[data-step="5"] .span-12{ grid-column:span 12; }
-.form-step[data-step="5"] .span-6{ grid-column:span 12; }
-.form-step[data-step="5"] .span-4{ grid-column:span 12; }
-.form-step[data-step="5"] .span-8{ grid-column:span 12; }
-/* Dark overrides Step 5 */
-:root[data-theme="dark"] .form-step[data-step="5"] .field label{ color:#f5f7fa!important; }
-:root[data-theme="dark"] .form-step[data-step="5"] input,
-:root[data-theme="dark"] .form-step[data-step="5"] textarea,
-:root[data-theme="dark"] .form-step[data-step="5"] select{
-  color:#f5f7fa!important; background:var(--input-bg)!important; border-color:var(--border)!important; caret-color:#f5f7fa;
-}
-:root[data-theme="dark"] .form-step[data-step="5"] ::placeholder{ color:var(--placeholder)!important; opacity:1; }
-:root[data-theme="dark"] .form-step[data-step="5"] .field .field-error{ color:#ffb4c0!important; }
-:root[data-theme="dark"] .form-step[data-step="5"] .req-note,
-:root[data-theme="dark"] .form-step[data-step="5"] ~ .legal-hint{ color:#e6e9ee!important; }
-
-/* Step 5: linkslastige Navigation */
-.kontakt-area .form-step[data-step="5"] .field input,
-.kontakt-area .form-step[data-step="5"] .field select,
-.kontakt-area .form-step[data-step="5"] .field textarea{ text-align:left; }
-
-/* ==============================
-   DEADLINE PICKER & MISC
-   ============================== */
-.deadline-grid{ display:grid; grid-template-columns:1fr 1fr; gap:.5rem; }
-@media (max-width:540px){ .deadline-grid{ grid-template-columns:1fr; } }
-#deadlineRow .field-error{ margin-top:.25rem; }
-
-/* Auswahlkarte dauerhaft grün bei .selected */
-#choiceWire.selected{ background:var(--pill-green); color:#fff; border-color:var(--pill-green); box-shadow:0 6px 18px rgba(0,200,81,.25); }
-#choiceWire.selected h3, #choiceWire.selected p, #choiceWire.selected .btn{ color:#fff; }
-#choiceWire.selected .btn{ background:#fff; color:var(--pill-green-ink); border:none; }
-
-/* Rechtliches */
-.legal-hint{ font-size:.85rem; line-height:1.45; color:#666; margin:.4rem 0 .2rem; }
-.legal-hint a{ color:inherit; text-decoration:underline; }
-:root[data-theme="dark"] .legal-hint{ color:#c6cad1; }
-label.req::after{ content:" *"; color:#b00020; font-weight:900; }
-.req-note{ font-size:.85rem; color:#666; margin:.2rem 0 .4rem; }
-:root[data-theme="dark"] .req-note{ color:#c6cad1; }
-
-/* ==============================
-   HERO CARD (optional single choice)
-   ============================== */
-.grid-choices.single{ grid-template-columns:1fr; }
-.grid-choices.single .choice.hero{ width:100%; }
-
-.wf-card.hero{
-  position:relative; display:flex; flex-direction:column; align-items:center; text-align:center;
-  gap:.55rem; padding:clamp(1.1rem, 3.2vw, 2rem);
-  border-radius:16px; border:2px solid var(--border);
-  background:#fff!important; color:#0b0c0e!important;
-  box-shadow:0 10px 30px rgba(0,0,0,.06), inset 0 0 0 1px rgba(0,0,0,.06);
-  margin-top:1rem;
-}
-:root[data-theme="dark"] .wf-card.hero{
-  background:#000!important; color:#f5f7fa!important; border:2px solid var(--border);
-}
-.wf-card.hero .wf-badge{
-  position:absolute; top:clamp(8px,1vw,14px); right:clamp(8px,1vw,14px);
-  padding:0; border:none!important; background:none!important; box-shadow:none!important;
-  color:currentColor; font-weight:1000; letter-spacing:-.02em; line-height:1;
-  font-size:clamp(1.6rem, 1rem + 3vw, 3rem);
-}
-.wf-card.hero .wf-card-head{ display:flex; flex-direction:column; align-items:center; gap:.35rem; padding-right:clamp(56px,5.5vw,80px); }
-.wf-card.hero .title{
-  margin:.05rem 0 0; font-weight:1000; letter-spacing:-.022em; line-height:1.15;
-  font-size:clamp(1.1rem, .9rem + 1.1vw, 1.55rem);
-}
-.wf-card.hero small{ font-weight:760; opacity:.95; letter-spacing:.003em; line-height:1.24; font-size:clamp(.96rem,.9rem + .35vw,1.08rem); margin-top:.15rem; }
-.wf-card.hero .cta-inline{
-  margin-top:.4rem; padding:clamp(.9rem,.7rem + .6vw,1.05rem) clamp(1rem,.8rem + 1vw,1.35rem);
-  border-radius:14px; font-weight:950; font-size:clamp(1rem,.92rem + .4vw,1.15rem); letter-spacing:.004em;
-  border:none; cursor:pointer; display:inline-flex; align-items:center; justify-content:center;
-  background:var(--choice-green); color:var(--choice-ink);
-  box-shadow:0 10px 22px color-mix(in oklab,var(--choice-green) 35%, transparent), inset 0 1px 0 rgba(255,255,255,.25);
-  transition:transform .06s ease, box-shadow .15s ease, filter .15s ease;
-}
-.wf-card.hero:hover{ box-shadow:0 0 0 4px color-mix(in oklab,var(--choice-green) 22%, transparent), 0 10px 30px rgba(0,0,0,.18); }
-.wf-card.hero:focus-visible, .wf-card.hero:focus-within{
-  outline:none; border-color:var(--choice-green)!important;
-  box-shadow:0 0 0 4px color-mix(in oklab,var(--choice-green) 45%, transparent), 0 10px 28px rgba(0,200,81,.18)!important;
-  background:color-mix(in oklab,var(--choice-green) 10%, currentColor 0%, transparent)!important;
-}
-@media (max-width:560px){ .wf-card.hero .wf-card-head{ padding-right:60px; } }
-
-/* ==============================
-   RESPONSIVE
-   ============================== */
-/* Kartenbreiten-Gewichtung desktop */
-.kontakt-area{ flex:1.2 1 640px; max-width:780px; }
-.video-area{ flex:0.8 1 420px; max-width:540px; }
-
-/* 1024px–1148px: Kontakt oben, Video darunter, volle Breite */
-@media (min-width:1024px) and (max-width:1148px){
-  .kontakt-testimonial-wrapper{ flex-direction:column; align-items:center; justify-content:flex-start; gap:1.75rem; }
-  .kontakt-area, .video-area{
-    flex:0 0 auto; width:min(92vw,780px); max-width:100%; margin-inline:auto;
-  }
-  .kontakt-area{ order:1; } .video-area{ order:2; } .testimonial-area{ order:3; width:100%; }
-  .video-area .video-card{ height:auto; min-height:260px; }
+.imago-device {
+  grid-row: span 2;
 }
 
-/* 680px–1024px: stapeln, nicht strecken */
-@media (max-width:1024px) and (min-width:680px){
-  .kontakt-testimonial-wrapper{ flex-direction:column; align-items:center; }
-  .kontakt-area, .video-area{
-    flex:0 0 auto!important; width:min(92vw,780px); height:auto!important; margin-inline:auto;
-  }
-  .video-area .video-card{ height:auto!important; min-height:280px; aspect-ratio:16/9; }
-  .kontakt-area{ padding:clamp(14px,2.2vw,20px)!important; }
+/* Handle + Kühlrippen – beide hoch, aber leicht versetzt zur Umgebung */
+.imago-handle {
+  grid-row: span 3;
+}
+.imago-cylinder {
+  grid-row: span 3;
 }
 
-/* ≤1024px: mobiles Polish inkl. Safe Areas */
-@media (max-width:1024px){
-  .kontakt-testimonial-section{
-    padding:
-      max(16px, calc(env(safe-area-inset-top,0) + 12px))
-      max(16px, calc(env(safe-area-inset-right,0) + 12px))
-      max(20px, calc(env(safe-area-inset-bottom,0) + 12px))
-      max(16px, calc(env(safe-area-inset-left,0) + 12px));
-  }
-  .kontakt-testimonial-wrapper{ gap:clamp(12px,4vw,18px); flex-direction:column; align-items:center; justify-content:center; text-align:center; }
-  .kontakt-area, .video-area{ width:90%; max-width:1000px; margin-inline:auto; }
-  .kontakt-area{
-    width:100%; max-width:none; margin:0; border-radius:16px;
-    padding:clamp(14px,4.5vw,18px)!important; overflow:visible;
-  }
-  .section-title{ font-size:clamp(1.7rem,4.6vw,2.1rem); margin:0 auto .6rem; }
-  .kontakt-form{ padding:0 .1rem; gap:.6rem; }
-  .form-step[data-step="1"] .grid-choices{ gap:.6rem; }
-  .form-step[data-step="1"] .grid-choices .choice{ padding:1rem .95rem; border-radius:16px; min-height:64px; position:relative; z-index:0; }
-  .form-step[data-step="1"]{ padding-top:.25rem; }
-
-  .stepper{ position:sticky; bottom:0; background:color-mix(in oklab,var(--surface) 95%, transparent); padding:.3rem .2rem .2rem; margin:.25rem -.2rem 0; border-radius:12px; }
-  .wizard-nav{ position:sticky; bottom:0; background:color-mix(in oklab,var(--surface) 95%, transparent); padding:.25rem .2rem .3rem; margin:.05rem -.2rem 0; border-radius:12px; }
-  .wizard-nav .nav-btn{ flex:1 1 auto; }
-
-  .kontakt-form input, .kontakt-form select, .kontakt-form textarea{ padding:.95rem 1rem; font-size:1.02rem; }
-
-  .video-area{ width:100%; max-width:none; }
-  .video-area .video-card{ height:200px!important; min-height:200px!important; border-radius:16px; padding:0; }
-  .video-media{ object-fit:cover; object-position:center; }
-
-  .form-step[data-step="5"] .contact-grid{ grid-template-columns:1fr; gap:.65rem; }
-  .form-step[data-step="5"]{ font-size:clamp(1rem, 1.5vw + .96rem, 1.1rem); line-height:1.55; }
-  .form-step[data-step="5"] .field label{ font-weight:800; letter-spacing:-.01em; }
-  #submitBtn, .kontakt-btn.submit{ width:100%; }
+/* Orange „User Centered Design“ – mittelhoch */
+.imago-cta-mid {
+  grid-row: span 2;
 }
 
-/* ≤600px: Video flacher */
-@media (max-width:600px){
-  .video-area{ flex:0 0 auto; align-self:stretch; }
-  .video-area .video-card{ height:180px!important; min-height:180px!important; aspect-ratio:auto!important; }
-  .video-area .video-media{ object-fit:cover; object-position:center; }
+/* Messgerät – sehr hoch (zieht rechte Spalte nach unten) */
+.imago-meter {
+  grid-row: span 4;
 }
 
-/* ≤380px: enge Phones */
-@media (max-width:380px){
-  .kontakt-area{ padding:16px!important; }
-  .kontakt-area .section-title{ font-size:clamp(1.5rem,7vw,1.9rem); }
+/* Med-Bild – eher klein/mittel, ergibt Versatz zur hohen rechten Spalte */
+.imago-med {
+  grid-row: span 2;
 }
 
-/* ≥700px: Spalten für Step 5 aktivieren */
-@media (min-width:700px){
-  .form-step[data-step="5"] .span-6{ grid-column:span 6; }
-  .form-step[data-step="5"] .span-4{ grid-column:span 4; }
-  .form-step[data-step="5"] .span-8{ grid-column:span 8; }
+/* Dashboard + letzte Orange-Box */
+.imago-dashboard {
+  grid-row: span 3;
 }
-/* ≥1024px: etwas mehr Gap im Contact Grid */
-@media (min-width:1024px){
-  .form-step[data-step="5"] .contact-grid{ gap:.75rem; }
+.imago-cta-bottom {
+  grid-row: span 3;
 }
 
-/* ==============================
-   VARIANTEN
-   ============================== */
-/* Solo-Variante: Kontaktkarte breit, Video ausgeblendet */
-@media (min-width:840px) and (max-width:1148px){
-  #kontakt.variant-solo .kontakt-testimonial-wrapper{ flex-direction:column; align-items:center; gap:clamp(16px,2.5vw,24px); }
-  #kontakt.variant-solo .kontakt-area{ flex:0 0 auto!important; width:min(96vw,980px); max-width:100%; margin-inline:auto; }
-  #kontakt.variant-solo .video-area{ display:none; }
+/* Orange-Content */
+.imago-orange-inner {
+  position: relative;
+  width: 100%;
+  padding: 22px 24px;
+  font-size: 13px;
+  line-height: 1.35;
 }
 
-/* ==============================
-   PREFERENCES
-   ============================== */
-@media (prefers-reduced-motion:reduce){
-  .kontakt-btn, .stepper-fill{ animation:none!important; transition:none!important; }
-}
-/* Hero-Karte bleibt grün, sobald ausgewählt */
-#wfTimer{} /* nur damit der Block nicht ganz oben landet */
-
-/* 1) Weiß nur anwenden, wenn NICHT selected */
-.wf-card.hero:not(.selected){
-  background:#fff!important;
-  color:#0b0c0e!important;
-}
-:root[data-theme="dark"] .wf-card.hero:not(.selected){
-  background:#000!important;
-  color:#f5f7fa!important;
+.imago-arrow {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 18px;
+  transition: transform 0.2s;
 }
 
-/* 2) Selected gewinnt gegen alle Hover/Focus-States */
-#choiceWire.selected,
-#choiceWire.selected:hover,
-#choiceWire.selected:active,
-#choiceWire.selected:focus,
-#choiceWire.selected:focus-visible,
-#choiceWire.selected:focus-within{
-  background:var(--pill-green)!important;
-  color:#fff!important;
-  border-color:var(--pill-green)!important;
-  box-shadow:0 6px 18px rgba(0,200,81,.25)!important;
+/* Hover Animation */
+.imago-link:hover .imago-arrow {
+  transform: translateX(4px);
 }
 
-/* 3) Inhalte in der ausgewählten Karte auch weiß halten */
-#choiceWire.selected .title,
-#choiceWire.selected small,
-#choiceWire.selected .wf-badge{
-  color:#fff!important;
-  text-shadow:0 1px 1px rgba(0,0,0,.12);
+/* Badge */
+.imago-badge {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  background: rgba(255,255,255,0.9);
+  font-size: 9px;
+  padding: 8px 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.imago-badge strong {
+  display: block;
+  font-size: 11px;
 }
 
+/* Side Labels */
+.imago-side-label {
+  position: absolute;
+  font-size: 8px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #999;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  pointer-events: none;
+}
+.imago-left-top { left: -18px; top: 80px; }
+.imago-left-mid { left: -18px; top: 270px; }
+.imago-left-bottom { left: -18px; top: 500px; }
+.imago-right-top { right: -18px; top: 140px; }
+.imago-right-mid { right: -18px; top: 380px; }
+.imago-right-bottom { right: -18px; top: 640px; }
 
+/* Footer link */
+.imago-more {
+  margin-top: 26px;
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #ff5a00;
+}
+.imago-more span {
+  border-bottom: 1px solid transparent;
+  transition: 0.2s;
+}
+.imago-more:hover span {
+  border-color: #ff5a00;
+}
 </style>
+
+
 <script>
-(function () {
-  const form = document.getElementById('kontaktForm');
-  if (!form) return;
-
-  /* =========================
-     Cache DOM
-  ========================== */
-  const allSteps  = Array.from(form.querySelectorAll('.form-step'));
-  const stepper   = form.querySelector('.stepper');
-  const stepLabel = document.getElementById('stepLabel');
-  const stepFill  = document.getElementById('stepperFill');
-  const prevBtn   = document.getElementById('prevBtn');
-  const nextBtn   = document.getElementById('nextBtn');
-  const submitBtn = document.getElementById('submitBtn');
-
-  const choiceWire = document.getElementById('choiceWire');
-  const ctaInline  = document.getElementById('ctaInline');
-  const wfTimerEl  = document.getElementById('wfTimer');
-
-  // Video interaktion
-  const video = document.getElementById('promoVideo');
-  const videoCard = document.getElementById('videoCard');
-
-  /* =========================
-     Utility
-  ========================== */
-  const q  = (sel,root=form)=>root.querySelector(sel);
-  const qa = (sel,root=form)=>Array.from(root.querySelectorAll(sel));
-  const trim = s => (s||'').toString().trim();
-
-  function hasVisibleControls(stepEl){
-    const controls = Array.from(stepEl.querySelectorAll('input,select,textarea,button'));
-    return controls.some(el => !el.disabled && !el.closest('[hidden]'));
-  }
-  function getApplicableSteps(){
-    const base = allSteps.filter(s => hasVisibleControls(s) && s.dataset.step !== '6');
-    const success = allSteps.find(s => s.dataset.step === '6');
-    return form.classList.contains('is-success') && success ? [...base, success] : base;
-  }
-  function getCurrentIndex(){ return Math.max(0, getApplicableSteps().indexOf(currentStepEl)); }
-  function clampIndex(i){ const st = getApplicableSteps(); return Math.min(Math.max(i,0), st.length-1); }
-  function isContactStep(stepEl){ return stepEl?.dataset.step === '5'; }
-
-  function setProgress(idx){
-    const steps = getApplicableSteps();
-    const pct = Math.min(100, Math.round((idx / (steps.length - 1)) * 100));
-    stepFill.style.width = (idx === 0 ? 12 : pct) + '%';
-    stepper?.setAttribute('aria-valuenow', String(idx + 1));
-    stepLabel.textContent = `Schritt ${idx + 1}/${steps.length}`;
-  }
-
-  let currentStepEl = allSteps[0];
-
-  function showStepByIndex(idx){
-    const steps = getApplicableSteps();
-    if(!steps.length) return;
-    const targetIdx = clampIndex(idx);
-    const targetEl  = steps[targetIdx];
-
-    allSteps.forEach(s => s.classList.remove('active'));
-    targetEl.classList.add('active');
-    currentStepEl = targetEl;
-
-    const isSuccess = targetEl.dataset.step === '6';
-
-    if (isSuccess) {
-      form.classList.add('is-success');
-      prevBtn.hidden = true; nextBtn.hidden = true; submitBtn.hidden = true;
-
-      const step1 = allSteps.find(s => s.dataset.step === '1');
-      const h = step1 ? step1.scrollHeight : 320;
-      targetEl.style.setProperty('--step6-minh', h + 'px');
-      const btn = targetEl.querySelector('.success-btn');
-      if (btn) {
-        const freshBtn = btn.cloneNode(true);
-        btn.parentNode.replaceChild(freshBtn, btn);
-        freshBtn.disabled = false;
-        freshBtn.textContent = 'Neu starten';
-        freshBtn.addEventListener('click', ()=>resetToStep(0));
-      }
-    } else {
-      form.classList.remove('is-success');
-      prevBtn.hidden = false;
-      const onContact = isContactStep(targetEl);
-      nextBtn.hidden   = onContact;
-      submitBtn.hidden = !onContact;
-      prevBtn.disabled = targetIdx === 0;
-    }
-
-    setProgress(targetIdx);
-    const first = targetEl.querySelector('input:not([disabled]):not([type="hidden"]),select:not([disabled]),textarea:not([disabled]),button:not([disabled])');
-    first?.focus({preventScroll:true});
-  }
-
-  /* ======= JS-Patch: kein Auto-Checked im Reset ======= */
-  function resetToStep(i=0){
-    const form = document.getElementById('kontaktForm');
-    const allSteps = Array.from(form.querySelectorAll('.form-step'));
-    form.reset();
-    form.classList.remove('is-success');
-    allSteps.forEach(s => s.classList.remove('active'));
-    allSteps[0].classList.add('active');
-
-    // WICHTIG: kein automatisches Vorselektieren mehr
-    const rb = form.querySelector('input[name="service"][value="Kostenloses Wireframe"]');
-    if (rb) rb.checked = false;
-
-    // Fortschritt & Fokus wie gehabt
-    const stepLabel = document.getElementById('stepLabel');
-    const stepFill  = document.getElementById('stepperFill');
-    const prevBtn   = document.getElementById('prevBtn');
-    const nextBtn   = document.getElementById('nextBtn');
-    const submitBtn = document.getElementById('submitBtn');
-
-    stepFill.style.width = '12%';
-    stepLabel.textContent = 'Schritt 1/6';
-    prevBtn.disabled = true;
-    nextBtn.hidden   = false;
-    submitBtn.hidden = true;
-
-    // Fokus auf die Karte
-    const choiceWire = document.getElementById('choiceWire');
-    choiceWire?.focus({preventScroll:true});
-  }
-
-  /* =========================
-     Klickbarkeit & Auto-Advance
-  ========================== */
-  function goNext(){
-    if (isContactStep(currentStepEl)) {
-      form.requestSubmit();
-      return;
-    }
-    showStepByIndex(getCurrentIndex()+1);
-  }
-
-  // Debounce, damit kein Doppelsprung passieren kann
-  let advancing = false;
-  function safeNext(){
-    if (advancing) return;
-    advancing = true;
-    goNext();
-    setTimeout(()=> advancing = false, 250);
-  }
-
-  // Karte (Label) klicken -> weiter,
-  // aber NICHT, wenn der Klick vom inneren CTA-Button stammt
-  choiceWire?.addEventListener('click', (e)=>{
-    if (e.target && e.target.closest('#ctaInline')) return;
-    choiceWire.classList.add('selected');        // visuelles Feedback (grün)
-    setTimeout(()=>{ safeNext(); }, 120);        // sanfter Übergang
-  });
-
-  // CTA-Button in der Karte: eigenes Handling, Bubble stoppen
-  ctaInline?.addEventListener('click', (e)=>{
-    e.preventDefault();
-    e.stopPropagation();                         // verhindert 2. goNext() vom Label
-    choiceWire.classList.add('selected');
-    setTimeout(()=>{ safeNext(); }, 120);
-  });
-
-  // Enter/Space auf der Karte -> EINMAL weiter
-  choiceWire?.addEventListener('keydown', (e)=>{
-    if (e.key === 'Enter' || e.key === ' '){
-      e.preventDefault();
-      safeNext();
-    }
-  });
-
-  // Top/Sticky CTA (scrollt zur Section; Weiter passiert über Karte)
-  const sticky = document.getElementById('wfStickyCta');
-  sticky?.addEventListener('click', ()=> {
-    document.getElementById('kontakt').scrollIntoView({behavior:'smooth', block:'start'});
-  });
-
-  /* =========================
-     Countdown (48h ab Seitenaufruf)
-  ========================== */
-  const END_TS = Date.now() + 48*60*60*1000; // 48h
-  function pad(n){ return n.toString().padStart(2,'0'); }
-  function tick(){
-    const diff = Math.max(0, END_TS - Date.now());
-    const h = Math.floor(diff/3_600_000);
-    const m = Math.floor((diff%3_600_000)/60_000);
-    const s = Math.floor((diff%60_000)/1000);
-    if (wfTimerEl) wfTimerEl.textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
-    if (diff <= 0) clearInterval(intv);
-  }
-  const intv = setInterval(tick, 1000); tick();
-
-  /* =========================
-     Video: click/tap toggle
-  ========================== */
-  if (videoCard && video) {
-    const toggle = ()=> {
-      if (video.paused) video.play();
-      else video.pause();
-    };
-    videoCard.addEventListener('click', toggle);
-    videoCard.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); toggle(); }});
-  }
-
-  /* =========================
-     Submit & Validierung (Basis)
-  ========================== */
-  let statusBox = form.querySelector('[data-status]');
-  if (!statusBox) {
-    statusBox = document.createElement('div');
-    statusBox.setAttribute('data-status','');
-    statusBox.setAttribute('role','status');
-    statusBox.setAttribute('aria-live','polite');
-    statusBox.style.cssText = 'margin:.5rem 0 .25rem;font-weight:700;text-align:center;';
-    form.insertBefore(statusBox, form.firstChild);
-  }
-  const setStatus = (msg, tone='')=>{
-    statusBox.textContent = msg || '';
-    statusBox.style.color =
-      tone==='error' ? '#b00020' :
-      tone==='ok'    ? '#0a7f2e' :
-      tone==='warn'  ? '#a15c00' : 'inherit';
-  };
-
-  function collectStepData(stepEl) {
-    const data = {};
-    stepEl.querySelectorAll('input, select, textarea').forEach(el=>{
-      if (el.disabled || el.closest('[hidden]')) return;
-      if (el.type === 'checkbox') {
-        if (!data[el.name]) data[el.name] = [];
-        if (el.checked) data[el.name].push(el.value);
-      } else if (el.type === 'radio') {
-        if (el.checked) data[el.name] = el.value;
-      } else if (el.tagName === 'SELECT') {
-        if (el.value) data[el.name] = el.value;
-      } else {
-        const v = trim(el.value);
-        if (v) data[el.name] = v;
-      }
-    });
-    return data;
-  }
-
-  function markInvalid(el, msg){
-    el.classList.add('is-invalid');
-    el.setAttribute('aria-invalid','true');
-    if (!el.nextElementSibling || !el.nextElementSibling.matches('.field-error')) {
-      const e = document.createElement('div');
-      e.className = 'field-error';
-      e.style.cssText = 'color:#b00020;font-weight:700;margin-top:.2rem;font-size:.9rem;';
-      e.textContent = msg;
-      el.insertAdjacentElement('afterend', e);
-    } else el.nextElementSibling.textContent = msg;
-  }
-  function clearInvalids(){
-    qa('.is-invalid', form).forEach(el=>{
-      el.classList.remove('is-invalid'); el.removeAttribute('aria-invalid');
-    });
-    qa('.field-error', form).forEach(el=> el.remove());
-  }
-  function validEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s); }
-  function validateRequired(){
-    clearInvalids();
-    const name  = q('input[name="name"]');
-    const email = q('input[name="email"]');
-    const msg   = q('textarea[name="message"]');
-    let ok = true;
-    if (!trim(name?.value))               { markInvalid(name,'Bitte Namen angeben.'); ok=false; }
-    if (!validEmail(trim(email?.value)))  { markInvalid(email,'Bitte gültige E-Mail angeben.'); ok=false; }
-    if (trim(msg?.value).length < 5)      { markInvalid(msg,'Bitte kurz dein Ziel beschreiben.'); ok=false; }
-    if (!ok) {
-      const first = q('.is-invalid');
-      first?.focus({preventScroll:true});
-      setStatus('Bitte fehlende Angaben ergänzen.', 'warn');
-    } else setStatus('', '');
-    return ok;
-  }
-
-  let submitting = false;
-  function toggleFormDisabled(disabled){
-    qa('input,select,textarea,button', form).forEach(el=> el.disabled = disabled);
-  }
-
-  async function postWithTimeout(url, options={}, timeoutMs=12000) {
-    const controller = new AbortController();
-    const t = setTimeout(()=>controller.abort(), timeoutMs);
-    try { return await fetch(url, { ...options, signal: controller.signal }); }
-    finally { clearTimeout(t); }
-  }
-
-  form.addEventListener('submit', async function(e){
-    e.preventDefault();
-    if (submitting) return;
-
-    if (!validateRequired()) return;
-
-    const summary = {};
-    getApplicableSteps().forEach((step, i) => { summary[`step_${i+1}`] = collectStepData(step); });
-
-    const lines = [];
-    lines.push(`[Service] Kostenloses Wireframe`);
-    lines.push(`[Kontakt]`);
-    lines.push(`- Name: ${summary.step_5?.name || '-'}`);
-    lines.push(`- E-Mail: ${summary.step_5?.email || '-'}`);
-    if (summary.step_4?.deadline) lines.push(`- Wunschtermin: ${summary.step_4.deadline}`);
-    if (summary.step_5?.message) lines.push(`- Ziel: ${summary.step_5.message}`);
-    const compiledPlain = lines.join('\n');
-
-    document.getElementById('autoSubject').value  = `Anfrage: Kostenloses Wireframe`;
-    document.getElementById('summaryPlain').value = compiledPlain;
-
-    const fd = new FormData(form);
-    submitting = true;
-    toggleFormDisabled(true);
-    submitBtn.innerText = 'Senden …';
-    setStatus('Sende Anfrage …');
-
-    try {
-      const res = await postWithTimeout(form.action, {
-        method:'POST',
-        body:fd,
-        headers:{Accept:'application/json'}
-      }, 12000);
-      if (!res.ok) throw new Error(res.statusText);
-      submitBtn.innerText = '✅ Anfrage gesendet!';
-      setStatus('Danke! Wir melden uns in Kürze.', 'ok');
-      form.classList.add('is-success');
-      showStepByIndex(getApplicableSteps().findIndex(s => s.dataset.step === '6'));
-    } catch (err) {
-      console.error(err);
-      setStatus('Fehler beim Senden – bitte später erneut versuchen.', 'error');
-      submitBtn.innerText = 'Fehler!';
-      toggleFormDisabled(false);
-    } finally {
-      submitting = false;
-    }
-  });
-
-  // Navigation
-  prevBtn.addEventListener('click', (e)=>{ e.preventDefault(); showStepByIndex(getCurrentIndex()-1); });
-  nextBtn.addEventListener('click', ()=>{ safeNext(); });
-
-  // Init
-  function init(){
-    setProgress(0);
-    // First focus: Karte -> Enter/Space funktioniert
-    choiceWire?.focus({preventScroll:true});
-  }
-  init();
-
-  /* ============================================================
-     ERWEITERUNG 1: Wunschtermin (Datum + Uhrzeit → hidden "deadline")
-     - erwartet in Step 4: #deadlineDate, #deadlineTime, #deadlineISO
-     - 15-Minuten-Raster, Default = nächste sinnvolle Viertelstunde (≥ +30 Min)
-  ============================================================ */
-  (function(){
-    const dateEl   = form.querySelector('#deadlineDate');
-    const timeEl   = form.querySelector('#deadlineTime');
-    const hiddenEl = form.querySelector('#deadlineISO');
-    if (!dateEl || !timeEl || !hiddenEl) return;
-
-    const pad = n => String(n).padStart(2,'0');
-    const toLocalDateStr = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-    const toLocalTimeStr = d => `${pad(d.getHours())}:${pad(d.getMinutes())}`;
-    const roundToNextQuarter = (d)=>{
-      const ms = 15*60*1000;
-      return new Date(Math.ceil(d.getTime()/ms)*ms);
-    };
-
-    // Min & Default setzen
-    (function setMinAndDefault(){
-      const now = new Date();
-      // +30 Minuten, dann auf Viertelstunde runden
-      const nextQ = roundToNextQuarter(new Date(now.getTime() + 30*60*1000));
-      dateEl.min = toLocalDateStr(now);
-      dateEl.value = toLocalDateStr(nextQ);
-      // Zeit auf 15er-Takt
-      const minutes = Math.floor(nextQ.getMinutes()/15)*15;
-      timeEl.step = '900'; // 15 Minuten
-      timeEl.value = `${pad(nextQ.getHours())}:${pad(minutes)}`;
-      syncHidden();
-    })();
-
-    function syncHidden(){
-      const d = dateEl.value;
-      const t = timeEl.value;
-      if (!d || !t) { hiddenEl.value = ''; return; }
-      hiddenEl.value = `${d} ${t} (Europe/Berlin)`;
-    }
-
-    dateEl.addEventListener('change', syncHidden);
-    timeEl.addEventListener('change', syncHidden);
-
-    // Validierung: nicht in der Vergangenheit
-    function validateDeadline(){
-      if (!dateEl.value || !timeEl.value) return false;
-      const [y,m,day] = dateEl.value.split('-').map(Number);
-      const [hh,mm]   = timeEl.value.split(':').map(Number);
-      const chosen = new Date(y, m-1, day, hh, mm, 0, 0);
-      const now    = new Date();
-      if (chosen.getTime() < now.getTime()){
-        markInvalid(timeEl, 'Zeitpunkt liegt in der Vergangenheit.');
-        return false;
-      }
-      return true;
-    }
-
-    // Bestehende Validierung erweitern
-    const _validateRequired = validateRequired;
-    validateRequired = function(){
-      const okBase = _validateRequired();
-
-      // alte Termin-Fehler entfernen
-      [dateEl, timeEl].forEach(el=>{
-        el.classList.remove('is-invalid');
-        el.removeAttribute('aria-invalid');
-        const e = el.nextElementSibling;
-        if (e && e.classList && e.classList.contains('field-error')) e.remove();
-      });
-
-      let deadlineOK = true;
-      if (!dateEl.value){ markInvalid(dateEl, 'Bitte Datum wählen.'); deadlineOK = false; }
-      if (!timeEl.value){ markInvalid(timeEl, 'Bitte Uhrzeit wählen.'); deadlineOK = false; }
-      if (deadlineOK) deadlineOK = validateDeadline();
-
-      return okBase && deadlineOK;
-    };
-  })();
-
-  /* ============================================================
-     ERWEITERUNG 2: Fokus-Pills – vollflächige Auswahl + A11y + Fallback
-     - setzt .selected auf .pill abhängig vom Checkbox-Status
-     - Tastatur: Space/Enter toggeln
-     - ARIA: role="checkbox", aria-checked, aria-pressed
-  ============================================================ */
-  (function(){
-    const pills = Array.from(form.querySelectorAll('.checkbox-group.tags .pill'));
-    if (!pills.length) return;
-
-    pills.forEach(pill => {
-      const cb = pill.querySelector('input[type="checkbox"]');
-      if (!cb) return;
-
-      const sync = () => {
-        pill.classList.toggle('selected', cb.checked);
-        pill.setAttribute('aria-pressed', cb.checked ? 'true' : 'false');
-        pill.setAttribute('aria-checked', cb.checked ? 'true' : 'false');
-      };
-
-      // Semantik + Fokussierung
-      pill.setAttribute('role', 'checkbox');
-      pill.setAttribute('tabindex', '0');
-      pill.setAttribute('aria-checked', cb.checked ? 'true' : 'false');
-      pill.setAttribute('aria-pressed', cb.checked ? 'true' : 'false');
-
-      // Initial
-      sync();
-
-      // Änderungen spiegeln
-      cb.addEventListener('change', sync);
-
-      // Klick auf die ganze Pill (Label enthält Input – hier nur Sync-Fallback & A11y)
-      pill.addEventListener('click', (e) => {
-        if (e.target && (e.target.tagName === 'A' || e.target.tagName === 'BUTTON')) return;
-        // Der native Label-Klick toggelt bereits – wir syncen danach
-        setTimeout(sync, 0);
-      });
-
-      // Tastatursteuerung
-      pill.addEventListener('keydown', (e) => {
-        if (e.key === ' ' || e.key === 'Enter') {
-          e.preventDefault();
-          cb.checked = !cb.checked;
-          cb.dispatchEvent(new Event('change', { bubbles: true }));
-        }
-      });
-    });
-
-    // Gruppe semantisch kennzeichnen
-    const group = form.querySelector('.checkbox-group.tags');
-    if (group) {
-      group.setAttribute('role', 'group');
-      group.setAttribute('aria-label', 'Wireframe-Fokus (Mehrfachauswahl möglich)');
-      group.setAttribute('aria-multiselectable', 'true');
-    }
-  })();
-
-})();
+document.querySelectorAll(".imago-section .imago-link").forEach(tile => {
+  tile.addEventListener("mouseenter", () => tile.classList.add("hovered"));
+  tile.addEventListener("mouseleave", () => tile.classList.remove("hovered"));
+});
 </script>
-

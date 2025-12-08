@@ -101,8 +101,6 @@
       text-align: center;
       background: #000 url('./IndexM/PC.webp') center/cover no-repeat;
     }
-    @media (max-width: 1024px) { .hero-video-wrapper { background-image: url('./IndexM/Tablet.webp'); } }
-    @media (max-width: 480px)  { .hero-video-wrapper { background-image: url('./IndexM/handy.webp'); } }
 
     .hero-video-content{
       position: relative; z-index: 2;
@@ -232,25 +230,7 @@
 
 
   
-  <!-- Titelpage-spezifische Bild-Overrides (in den Head verschoben) -->
-  <style>
-    body[data-page="titlepage"] .hero-image-background {
-      background-image: url("./images/hero-bg-sky_1hero-bg-sky.webp") !important;
-    }
-    body[data-page="titlepage"] .hero-image-foreground {
-      background-image: url("./images/titlepage-fg.webp") !important;
-    }
-    @media (max-width: 1024px) {
-      body[data-page="titlepage"] .hero-image-foreground {
-        background-image: url("./images/titlepage-fg-tablet.webp") !important;
-      }
-    }
-    @media (max-width: 480px) {
-      body[data-page="titlepage"] .hero-image-foreground {
-        background-image: url("./images/titlepage-fg-mobile.webp") !important;
-      }
-    }
-  </style>
+
 
 <link rel="stylesheet" href="css/navbar.css" type="text/css">
 <link rel="stylesheet" href="css/darkmodeLast.css" type="text/css">
@@ -277,51 +257,8 @@
 <link rel="stylesheet" href="css/arbeitsprobenBilder.css" type="text/css">
 
   <link rel="stylesheet" href="css/ctasection.css" type="text/css">
+
 <style>
-/* --------------------------
-   Lokale Bild-Overrides nur für webdesign.html
---------------------------- */
-body[data-page="webdesign"] .hero-image-background {
-  background-image: url("./WebdesignPic/1.mp4") !important;
-}
-
-body[data-page="webdesign"] .hero-image-foreground {
-  background-image: url("./images/hintegrundweb.webp") !important;
-}
-
-/* Optional: Mobile- oder Tablet-Varianten */
-@media (max-width: 1024px) {
-  body[data-page="webdesign"] .hero-image-foreground {
-    background-image: url("./images/webdesign-bg-tablet.webp") !important;
-  }
-}
-@media (max-width: 480px) {
-  body[data-page="webdesign"] .hero-image-foreground {
-    background-image: url("./images/webdesign-bg-mobile.webp") !important;
-  }
-}
-
-@media (min-width: 768px) {
-  .hero-image-foreground {
-    transform: translateY(10%);              /* dein bisheriger Versatz */
-  }
-}
-@media (min-width: 1400px) {
-  .hero-image-foreground {
-    transform: translateY(15%);              /* dein bisheriger Versatz */
-  }
-}
-@media (min-width: 1800px) {
-  .hero-image-foreground {
-    transform: translateY(15%);              /* dein bisheriger Versatz */
-  }
-}
-@media (min-width: 2200px) {
-  .hero-image-foreground {
-    transform: translateY(7%);              /* dein bisheriger Versatz */
-  }
-}
-
   html, body {
     margin: 0;
     padding: 0;
@@ -342,48 +279,6 @@ body[data-page="webdesign"] .hero-image-foreground {
     height: 100vh;
     overflow: hidden; /* falls Kinder minimal überstehen */
   }
-
-  .hero-image-background,
-  .hero-image-foreground {
-    position: absolute;
-    inset: 0;         /* top/right/bottom/left = 0 */
-    width: 100%;
-    max-width: none;
-  }
-
-
-  /* Nur Handys: Hintergrund minimal „herauszoomen“ */
-@media (max-width: 767px) {
-  .hero-image-foreground {
-    background-position: center bottom;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    margin: 0 !important;                  /* falls woanders Mobile-Margins gesetzt sind */
-        transform: translateY(17%);              /* dein bisheriger Versatz */
-  }
-}
-/* Ergänzung am Ende deiner bestehenden CSS-Datei */
-.hero-image-background {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.hero-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none; /* blockiert keine Klicks */
-  z-index: 0;
-}
-
-
-
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -958,37 +853,43 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
-
-
 <section class="hero-section" data-page="titlepage">
   <div class="hero-images-wrapper">
 
-    <!-- HINTERGRUND-VIDEO -->
     <div class="hero-image-background">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hintegrundweb.webp">
-        <source src="./WebdesignPic/1.mp4" type="video/mp4" />
-      </video>
+      <!-- Light-Mode Bild -->
+      <img 
+        src="./Gallerie_Images/Makeup/Background white.png" 
+        alt="Hero Background" 
+        class="hero-image light-image"
+      />
+
+      <!-- Dark-Mode Bild -->
+      <img 
+        src="./Gallerie_Images/Makeup/Background dark.png" 
+        alt="Hero Background Dark" 
+        class="hero-image dark-image"
+      />
     </div>
 
     <!-- TITLE + TEXT + CTAS -->
     <div class="page-title">
       <div class="container">
-<h1 class="large-title">
-  Digitale Experiences, die Ergebnisse liefern.
-</h1>
 
-<h2 class="small-title">
-  Webdesign, UX Design, 3D Animation, Rendering und Grafikdesign – vereint in
-  modernen Markenauftritten, die Vertrauen schaffen und messbar performen.
-</h2>
+        <h1 class="large-title">
+          Digitale Experiences, die Ergebnisse liefern.
+        </h1>
 
+        <h2 class="small-title">
+          Webdesign, UX Design, 3D Animation, Rendering und Grafikdesign – vereint in
+          modernen Markenauftritten, die Vertrauen schaffen und messbar performen.
+        </h2>
 
         <div class="hero-cta-buttons">
           <a href="#kontakt" class="btn-primary">Jetzt unverbindlich anfragen</a>
 
           <a href="#referenzen" class="btn-secondary">
             Referenzen ansehen
-            <!-- Feather arrow-up-right Icon als SVG -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -1006,14 +907,59 @@ body[data-page="webdesign"] .hero-image-foreground {
             </svg>
           </a>
         </div>
+
       </div>
     </div>
 
   </div>
 </section>
 
+<style>
+/* Hintergrundbilder */
+.hero-image-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
 
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
 
+/* Standard: Light Mode */
+.light-image { opacity: 1; }
+.dark-image { opacity: 0; }
+
+/* Darkmode über body.nocturne */
+body.nocturne .light-image {
+  opacity: 0;
+}
+body.nocturne .dark-image {
+  opacity: 1;
+}
+
+/* Falls du auch data-theme="dark" unterstützt */
+[data-theme="dark"] .light-image {
+  opacity: 0;
+}
+[data-theme="dark"] .dark-image {
+  opacity: 1;
+}
+
+/* Small Title auf Handy ausblenden */
+@media (max-width: 768px) {
+  .small-title {
+    display: none;
+  }
+}
+</style>
 
 
 
@@ -1023,97 +969,51 @@ body[data-page="webdesign"] .hero-image-foreground {
   <h2 id="aurora-crown" class="aurora-title">Über Fusion³</h2>
 
   <p id="aurora-chant" class="aurora-subtitle" aria-live="polite">
-    <span class="subtitle-snippet">Design, Web & 3D – vereint für Wirkung und Wachstum.</span>
-    <span class="subtitle-t">Wir schaffen digitale Auftritte, die Nutzer verstehen, Marken stärken und Ergebnisse messbar machen.</span>
-    <span class="subtitle-full">
-      Unser Fokus liegt nicht nur auf Ästhetik, sondern auf Wirkung: Websites, Branding und 3D-Visuals, die Vertrauen wecken, erklären und verkaufen.<br>
-      Für Start-ups, Unternehmen und Kreative, die digital sichtbar, relevant und einzigartig sein wollen.
-    </span>
+    <span class="subtitle-snippet">Design, Web & 3D – klar und wirksam.</span>
+    <span class="subtitle-t">Digitale Auftritte, die Nutzer verstehen und Marken stärken.</span>
+    <span class="subtitle-full">Websites, Branding und 3D – fokussiert auf Wirkung.</span>
   </p>
 
   <ul class="quasar-grid">
 
     <!-- Mission -->
     <li>
-      <article class="aether-card" id="aether-mission"
-               aria-labelledby="aether-mission-h"
-               aria-describedby="aether-mission-s">
-        <h3 id="aether-mission-h">Unsere Mission</h3>
-                <p class="microtag">Kreativ. Strategisch. Nutzbar.</p>
-        <p class="snippet" id="aether-mission-s">Ergebnisse statt nur Gestaltung.</p>
-        <p class="t-snippet">Wir vereinen Design, Code und 3D zu ganzheitlichen Systemen – technisch stark, emotional klar und messbar wirksam.</p>
-
-
-        <h4 id="aether-mission-list-h" class="sr-only">Was uns antreibt</h4>
-        <ul class="delta-list" aria-labelledby="aether-mission-list-h">
-          <li>
-            <span class="lead">Balance</span>
-            <span class="copy">Schön und funktional – kein Entweder-Oder.</span>
-          </li>
-          <li>
-            <span class="lead">Erlebnis</span>
-            <span class="copy">Geführt, verständlich, emotional – für echte Nutzer, nicht nur für Awards.</span>
-          </li>
-          <li>
-            <span class="lead">Substanz</span>
-            <span class="copy">Skalierbar gedacht, sauber gebaut – langlebig statt kurzlebig.</span>
-          </li>
+      <article class="aether-card" id="aether-mission">
+        <h3>Unsere Mission</h3>
+        <p class="snippet">Ergebnisse statt Optik.</p>
+        <p class="t-snippet">Design, Code und 3D als wirksame Einheit.</p>
+        <ul class="delta-list">
+          <li><span class="lead">Balance</span><span class="copy">Schön & funktional.</span></li>
+          <li><span class="lead">Erlebnis</span><span class="copy">Klar und emotional.</span></li>
+          <li><span class="lead">Substanz</span><span class="copy">Sauber & skalierbar.</span></li>
         </ul>
       </article>
     </li>
 
     <!-- Arbeitsweise -->
     <li>
-      <article class="aether-card" id="aether-crew"
-               aria-labelledby="aether-crew-h"
-               aria-describedby="aether-crew-s">
-        <h3 id="aether-crew-h">Unsere Arbeitsweise</h3>
-        <p class="snippet" id="aether-crew-s">Agil, klar und partnerschaftlich.</p>
-        <p class="t-snippet">Wir arbeiten transparent und effizient – mit kurzen Feedback-Schleifen, greifbaren Zwischenergebnissen und direktem Austausch.</p>
-        <p class="microtag">Schnell. Verständlich. Verlässlich.</p>
-
-        <h4 id="aether-crew-list-h" class="sr-only">Prinzipien unserer Arbeitsweise</h4>
-        <ul class="delta-list" aria-labelledby="aether-crew-list-h">
-          <li>
-            <span class="lead">Flexibel</span>
-            <span class="copy">Anpassbar an Ziel, Budget und Tempo – egal ob MVP oder kompletter Relaunch.</span>
-          </li>
-          <li>
-            <span class="lead">Transparent</span>
-            <span class="copy">Klare Phasen, offene Kommunikation, keine Überraschungen.</span>
-          </li>
-          <li>
-            <span class="lead">Effizient</span>
-            <span class="copy">Design, 3D und Entwicklung gleichzeitig – keine Zeitverluste durch Übergaben.</span>
-          </li>
+      <article class="aether-card" id="aether-crew">
+        <h3>Unsere Arbeitsweise</h3>
+        <p class="snippet">Agil und transparent.</p>
+        <p class="t-snippet">Schnelle Loops, klare Schritte.</p>
+        <ul class="delta-list">
+          <li><span class="lead">Flexibel</span><span class="copy">Für jede Projektgröße.</span></li>
+          <li><span class="lead">Transparent</span><span class="copy">Offen & klar.</span></li>
+          <li><span class="lead">Effizient</span><span class="copy">Parallel statt nacheinander.</span></li>
         </ul>
       </article>
     </li>
 
     <!-- Vision -->
     <li>
-      <article class="aether-card" id="aether-vision"
-               aria-labelledby="aether-vision-h"
-               aria-describedby="aether-vision-s">
-        <h3 id="aether-vision-h">Unsere Vision</h3>
-        <p class="snippet" id="aether-vision-s">Digitale Erlebnisse mit Wirkung und Tiefe.</p>
-        <p class="t-snippet">Wir wollen Marken erschaffen, die bleiben – weil sie gut aussehen, verstanden werden und echten Mehrwert bieten.</p>
-        <p class="microtag">Relevanz vor Rauschen.</p>
-
-        <h4 id="aether-vision-list-h" class="sr-only">Leitprinzipien unserer Vision</h4>
-        <ul class="delta-list" aria-labelledby="aether-vision-list-h">
-          <li>
-            <span class="lead">Emotion</span>
-            <span class="copy">Design, das berührt – nicht nur beeindruckt.</span>
-          </li>
-          <li>
-            <span class="lead">Technologie</span>
-            <span class="copy">Nur, was sinnvoll ist – sauber integriert und bereit für morgen.</span>
-          </li>
-          <li>
-            <span class="lead">Nachhaltigkeit</span>
-            <span class="copy">Langlebig in Code, Content und Wirkung – skalierbar statt schnell veraltet.</span>
-          </li>
+      <article class="aether-card" id="aether-vision">
+        <h3>Unsere Vision</h3>
+        <p class="snippet">Digitale Erlebnisse mit Wirkung.</p>
+        <p class="t-snippet">Marken, die bleiben.</p>
+        <ul class="delta-list">
+          <li><span class="lead">Emotion</span><span class="copy">Design, das berührt.</span></li>
+          <li><span class="lead">Technologie</span><span class="copy">Sinnvoll & modern.</span></li>
+          <li><span class="lead">Nachhaltigkeit</span><span class="copy">Langlebig gedacht.</span></li>
         </ul>
       </article>
     </li>
@@ -1123,71 +1023,6 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
-
-<!---Mehr aus „Was machen wir“ ➝ „Welches Problem lösen wir?“ bzw. „Welchen Vorteil habe ich?“-->
-<section id="wrf-offer" class="wrf-section" role="region" aria-labelledby="wrf-offer-title"
-  aria-describedby="wrf-offer-sub">
-  <div class="wrf-container wrf-grid" aria-label="Angebot: Kostenloses Wireframe">
-
-    <!-- Left: Hero Image -->
-    <div class="wrf-col wrf-col--left">
-      <figure class="wrf-hero">
-        <img src="assets/wireframe-hero.jpg"
-          alt="Beispiel eines Website-Wireframes mit Navigation und Layout-Struktur" loading="lazy" width="1280"
-          height="800" />
-        <figcaption class="wrf-visually-hidden">Wireframe-Preview</figcaption>
-      </figure>
-    </div>
-
-    <!-- Right: Headline / Subline -->
-    <div class="wrf-col wrf-col--right">
-      <header class="wrf-header">
-        <div class="wrf-eyebrow" aria-hidden="true">
-          <span class="wrf-eyebrow__pill">Gratis • Schnelle Lieferung</span>
-        </div>
-
-        <h2 id="wrf-offer-title" class="wrf-title" data-anim-title>
-          Web, Grafik & 3D in einem starken Konzept
-        </h2>
-
-        <p class="wrf-subtitle" id="wrf-offer-sub">
-          Keine getrennten Dienstleister, kein Stilbruch: Wir verbinden Webdesign, Marken­gestaltung
-          und 3D-Visualisierung zu einem einheitlichen Erlebnis, das deine Marke auf jedem Kanal stark macht.
-          Jede Nutzerführung wird vorab getestet – damit deine Website nicht nur gut aussieht,
-          sondern nachweislich funktioniert. Und auch nach dem Launch stehen wir bereit, um weiter
-          zu optimieren, Design auszubauen und deine Produktpräsentation zu stärken.
-        </p>
-      </header>
-    </div>
-
-    <!-- CTA 
-    <div class="wrf-actions">
-      <div class="wrf-actions__inner">
-       
-        <button type="button" class="wrf-btn wrf-btn--primary wrf-btn--cta" data-wrf-cta
-          aria-describedby="wrf-cta-note">
-          <span class="wrf-btn__label">Kostenloses Wireframe sichern</span>
-        </button>
-      </div>
-
-      <p class="wrf-cta__note" id="wrf-cta-note">
-        Antwort innerhalb kurzer Zeit
-      </p>
-    </div>-->
-
-  </div>
-
-  <!-- Modal: Was ist ein Wireframe? -->
-  <!-- (bleibt identisch wie zuvor) -->
-</section>
-
-
-
-
-
-<!--Fehlt: klare USPs
-Noch keine direkte Liste mit Vorteilen vs. Konkurrenz
-„Alles aus einer Hand“, „In 2–4 Wochen live“, „3D integriert ohne Agentursalat“-->
 
 
 <section id="nebula-hub" class="cosmos-suite cluster" aria-labelledby="nebula-hub-h">
@@ -1263,7 +1098,7 @@ Noch keine direkte Liste mit Vorteilen vs. Konkurrenz
         <ul>
           <li>Logo & Corporate Design – inkl. Styleguide</li>
           <li>Grafiksysteme für Web, Social Media & Print</li>
-          <li>Packaging, Mockups & Markenvisualisierung (auf Wunsch mit 3D)</li>
+          <li>Packaging, Mockups & Markenvisualisierung</li>
         </ul>
 
         <div class="overlay-art" aria-hidden="true">
@@ -1294,152 +1129,6 @@ Noch keine direkte Liste mit Vorteilen vs. Konkurrenz
 </section>
 </section>
 
-
-
-
-<section class="wrf-section" id="case-neolog">
-  <div class="wrf-container">
-
-    <div class="wrf-grid">
-      <!-- Linke Spalte: 3D-Arbeitsprobe -->
-      <div class="wrf-col">
-        <figure class="wrf-hero">
-          <!-- TODO: Dein Neolog-Rendering hier einfügen -->
-          <img src="./3DSlideShow/post17.png" alt="3D Rendering für Neolog">
-        </figure>
-      </div>
-
-      <!-- Rechte Spalte: Text zu Neolog -->
-      <div class="wrf-col">
-
-       <header class="wrf-header">
-  <div class="wrf-eyebrow">
-    <span class="wrf-eyebrow__pill">Case Study · Neolog</span>
-  </div>
-
-  <h2 class="wrf-title">
-    <span class="word"><span class="chars">3D&nbsp;Renderings</span></span>
-    <span class="word"><span class="chars">&amp;&nbsp;Animationen</span></span>
-  </h2>
-
-<p class="wrf-subtitle">
-  Für <span class="u-underline">Neolog</span> entwickelte ich moderne 3D-Renderings 
-  und Animationen, die die Marke klar und futuristisch in Szene setzen.
-  Von Modellierung über Shading bis hin zu Animation und Compositing:  
-  Der Fokus lag auf präziser Materialität, sauberem Licht und einer ästhetischen, 
-  technisch innovativen Bildsprache.
-</p>
-</header>
-
-
-        <div class="wrf-secondary-action">
-          <button class="wrf-btn wrf-btn--primary" type="button">
-            <span class="wrf-btn__label">Projekt ansehen</span>
-          </button>
-        </div>
-      </div>
-
-
-    </div>
-  </div>
-</section>
-
-
-
-
-
-<section class="pane-transition" id="flowhub" aria-labelledby="flowhub-h">
-  <div class="pane-world is-visible" id="paneWorld">
-    <div class="pane-wrap">
-      <h2 id="flowhub-h" class="pane-title">So läuft ein Projekt mit Fusion³</h2>
-      <p class="pane-subtitle">Kreativ, präzise und partnerschaftlich – von der Idee bis zur Umsetzung.</p>
-
-      <div class="flow-rail" role="list">
-
-        <!-- 01: STRATEGIE & VISION -->
-        <div class="flow-card has-art" id="flow-step-01" role="button" tabindex="0"
-             data-stage="01" aria-expanded="false" aria-labelledby="flow-step-01-h" aria-controls="flow-step-01-details">
-          <span class="card-num-giant" aria-hidden="true">01</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">01</span>
-            <h3 id="flow-step-01-h">Strategie &amp; Vision</h3>
-            <p class="m-snippet">Ziele und Zielgruppen klären – kompakt, verständlich, priorisiert.</p>
-            <p class="t-snippet">Wir definieren Ziele, Zielgruppen und Wirkung – die Basis für eine klare Strategie und einen umsetzbaren Plan.</p>
-            <p>Jedes Projekt startet mit klaren Zielen und Prioritäten. Daraus entsteht ein Konzept mit Fokus und Richtung.</p>
-            <div class="details" id="flow-step-01-details">
-              <p>So entsteht ein Fundament, das strategisch und visuell überzeugt.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 02: KONZEPT & STRUKTUR -->
-        <div class="flow-card" id="flow-step-02" role="button" tabindex="0"
-             data-stage="02" aria-expanded="false" aria-labelledby="flow-step-02-h" aria-controls="flow-step-02-details">
-          <span class="card-num-giant" aria-hidden="true">02</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">02</span>
-            <h3 id="flow-step-02-h">Konzept &amp; Struktur</h3>
-            <p class="m-snippet">Ideen werden strukturiert – klar, testbar, visuell.</p>
-            <p class="t-snippet">Aus der Vision entsteht Struktur: Informationsarchitektur, Userflows und Storyboards machen Ideen greifbar.</p>
-            <p>Wir schaffen klare Strukturen und Abläufe – die Grundlage für ein stimmiges Nutzererlebnis.</p>
-            <div class="details" id="flow-step-02-details">
-              <p>Klarheit in Aufbau und Flow sorgt für intuitive Nutzung.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 03: DESIGN & ENTWICKLUNG -->
-        <div class="flow-card" id="flow-step-03" role="button" tabindex="0"
-             data-stage="03" aria-expanded="false" aria-labelledby="flow-step-03-h" aria-controls="flow-step-03-details">
-          <span class="card-num-giant" aria-hidden="true">03</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">03</span>
-            <h3 id="flow-step-03-h">Design &amp; Entwicklung</h3>
-            <p class="m-snippet">Design, 3D &amp; Code – parallel, agil, transparent.</p>
-            <p class="t-snippet">Design, 3D und Code entstehen parallel – mit schnellen Feedbacks und klaren Ergebnissen.</p>
-            <p>Wir kombinieren Kreativität und Technik für effiziente, präzise Ergebnisse.</p>
-            <div class="details" id="flow-step-03-details">
-              <p>Agil, direkt und transparent – für sichtbaren Fortschritt.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 04: FEINSCHLIFF & VERÖFFENTLICHUNG -->
-        <div class="flow-card" id="flow-step-04" role="button" tabindex="0"
-             data-stage="04" aria-expanded="false" aria-labelledby="flow-step-04-h" aria-controls="flow-step-04-details">
-          <span class="card-num-giant" aria-hidden="true">04</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">04</span>
-            <h3 id="flow-step-04-h">Feinschliff &amp; Veröffentlichung</h3>
-            <p class="m-snippet">Performance &amp; Details finalisieren – dann sauberer Launch.</p>
-            <p class="t-snippet">Wir polieren Design, Performance und Accessibility – danach folgt der stabile Launch mit Monitoring.</p>
-            <p>Zum Abschluss folgt Feinschliff und ein sauberer, stabiler Release.</p>
-            <div class="details" id="flow-step-04-details">
-              <p>Bereit für Wirkung – visuell, technisch, strategisch.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 05: WACHSTUM & SKALIERBARKEIT -->
-        <div class="flow-card" id="flow-step-05" role="button" tabindex="0"
-             data-stage="05" aria-expanded="false" aria-labelledby="flow-step-05-h" aria-controls="flow-step-05-details">
-          <span class="card-num-giant" aria-hidden="true">05</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">05</span>
-            <h3 id="flow-step-05-h">Wachstum &amp; Skalierbarkeit</h3>
-            <p class="m-snippet">Inhalte &amp; Systeme wachsen – stabil und messbar.</p>
-            <p class="t-snippet">Nach dem Launch skalieren wir Inhalte und Funktionen – flexibel, sicher und zukunftsfähig.</p>
-            <p>Das Projekt wächst mit – modular, messbar, effizient.</p>
-            <div class="details" id="flow-step-05-details">
-              <p>Skalierbare Systeme sichern nachhaltiges Wachstum.</p>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /.flow-rail -->
-    </div>
-  </div>
-</section>
 
 
 
@@ -1668,13 +1357,14 @@ Noch keine direkte Liste mit Vorteilen vs. Konkurrenz
               <textarea id="message" name="message" rows="6" placeholder="Kurz dein Projekt / Ziel beschreiben …" minlength="5" required></textarea>
             </div>
 
-            <p class="req-note">* Pflichtfelder</p>
+          
           </div>
 
           <p class="legal-hint">
             Deine Angaben werden über <strong>Formspree</strong> zur Beantwortung deiner Anfrage verarbeitet.
             Mehr unter <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.
           </p>
+            <p class="req-note">* Pflichtfelder</p>
         </fieldset>
 
         <!-- STEP 6: Erfolg -->
@@ -2621,24 +2311,6 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
-
-<section class="angled-image-section" aria-labelledby="angled-image-heading">
-  <h2 id="angled-image-heading" class="visually-hidden">Modernes Webdesign – diagonale Bildsektion</h2>
-
-  <figure class="angled-image-wrapper">
-    <picture>
-      <source srcset="./WebdesignPic/webgerade.webp" type="image/webp">
-      <img
-        src="./WebdesignPic/webgerade.webp"
-        alt="Beispiel eines modernen Webdesign-Layouts, leicht diagonal ausgerichtet"
-        width="1920"
-        height="1080"
-        loading="lazy"
-        decoding="async"
-        style="aspect-ratio:16/9">
-    </picture>
-  </figure>
-</section>
 
 
 

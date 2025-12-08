@@ -278,3 +278,245 @@
 /* Mini-Fades für Step-Wechsel (Fallback ohne GSAP) */
 .wrf-fade-out{ opacity:0; transform: translateY(4px); transition: opacity .14s ease, transform .14s ease; }
 .wrf-fade-in { opacity:1; transform: translateY(0);   transition: opacity .16s ease, transform .16s ease; }
+
+.wrf-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+
+  /* gleiche Form-Sprache wie Navbar-Button */
+  border-radius: var(--radius) !important;
+
+  /* subtileres Padding */
+  padding: .42rem .75rem !important;
+
+  /* leicht erhöht, aber nicht wie ein CTA */
+  min-height: 34px !important;
+
+  background: linear-gradient(90deg, var(--wrf-orange), var(--wrf-orange-2));
+  box-shadow: 0 8px 22px rgba(255,106,0,.20); /* halb so stark */
+}
+/* CTA-Button der Section wie Navbar-Button */
+.wrf-btn--primary{
+  position:relative;
+  border-radius: var(--radius) !important;
+  padding:.6rem 1.1rem !important;
+  min-height:44px !important;
+
+  font-weight:950 !important;
+  letter-spacing:-0.01em !important;
+  line-height:1.28;
+
+  /* gleiche Orange-Farbe wie Navbar-Button */
+  background: var(--primary-orange) !important;
+  color:#fff !important;
+  border:0 !important;
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.22),
+    0 4px 10px rgba(0,0,0,.10);
+  overflow:hidden;
+}
+
+/* Glanz-Layer wie bei .charm-cta */
+.wrf-btn--primary::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  z-index:0;
+  background: radial-gradient(
+    120% 140% at 0% 0%,
+    rgba(255,255,255,.22),
+    rgba(255,255,255,.08) 35%,
+    transparent 60%
+  );
+  mix-blend-mode: soft-light;
+  pointer-events:none;
+  opacity:.95;
+}
+.wrf-btn--primary > *{
+  position:relative;
+  z-index:1;
+}
+
+/* Hover/Active wie Navbar-Button */
+@media(hover:hover){
+  .wrf-btn--primary:hover{
+    transform: translateY(-1px);
+    box-shadow:
+      0 14px 34px rgba(0,0,0,.22),
+      0 4px 10px rgba(0,0,0,.10);
+  }
+  .wrf-btn--primary:active{
+    transform: translateY(0);
+    box-shadow:
+      0 8px 18px rgba(0,0,0,.16),
+      0 2px 6px rgba(0,0,0,.08);
+  }
+}
+
+/* Fokus-Ring wie Navbar-CTA */
+.wrf-btn--primary:focus-visible{
+  outline:none;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.9),
+    0 0 0 6px color-mix(in oklab, var(--primary-orange) 55%, transparent),
+    0 12px 28px rgba(0,0,0,.22) !important;
+}
+/* ================================
+   EYEBROW — wie Navbar CTA, aber subtiler
+   ================================ */
+.wrf-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+
+  /* gleiche Form wie Navbar CTA */
+  border-radius: var(--radius) !important;
+
+  /* subtil, aber größer als vorher */
+  padding: .48rem .9rem !important;
+  min-height: 40px !important;
+
+  /* Glassmorphism + Orange Outline */
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px) saturate(180%);
+  border: 2px solid var(--wrf-orange) !important;
+
+  box-shadow:
+    0 6px 16px rgba(255,106,0,.18),
+    inset 0 0 0 999px rgba(255,255,255,0.02);
+}
+
+.wrf-eyebrow__pill {
+  font-weight: 900;
+  font-size: 1.05rem;      /* größer */
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+
+
+/* ================================
+   TITEL TYPO — mehr Präsenz
+   ================================ */
+.wrf-title{
+  font-size:clamp(2.4rem, 1.4rem + 2.1vw, 3.4rem); /* größer */
+  font-weight:900;
+  letter-spacing:-0.018em;   /* ruhiger */
+  line-height:1.12;          /* dichter, hochwertiger */
+  margin:.4rem 0 .35rem;     /* mehr Whitespace */
+  max-width: 40rem;          /* bessere Zeilenlänge */
+  color:var(--wrf-ink);
+}
+
+/* ================================
+   SUBTITLE — lesbarer, ruhiger
+   ================================ */
+.wrf-subtitle{
+  font-size:clamp(1.18rem, 1.1rem + .55vw, 1.32rem);
+  line-height:1.65;
+  letter-spacing:.002em;
+  color:var(--wrf-ink-sub);
+  max-width: 46rem;
+  margin-bottom: .5rem;
+}
+
+/* ================================
+   CTA BUTTON — identisch mit Navbar
+   ================================ */
+.wrf-btn--primary{
+  position:relative;
+
+  /* gleiche Form wie .charm-cta */
+  border-radius: var(--radius) !important;
+  padding: 1rem 1.25rem !important;   /* größer, luftiger */
+  min-height: 48px !important;
+
+  font-weight:950 !important;
+  font-size:1.12rem !important;       /* größere Schrift */
+  letter-spacing:-0.01em;
+  line-height:1.25;
+
+  background: var(--primary-orange) !important;
+  color:#fff !important;
+  border:0 !important;
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.22),
+    0 4px 10px rgba(0,0,0,.10);
+
+  overflow:hidden;
+}
+
+/* Glanz wie Navbar */
+.wrf-btn--primary::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background: radial-gradient(
+    120% 140% at 0% 0%,
+    rgba(255,255,255,.22),
+    rgba(255,255,255,.08) 35%,
+    transparent 60%
+  );
+  mix-blend-mode:soft-light;
+  opacity:.95;
+  pointer-events:none;
+}
+
+.wrf-btn--primary > *{
+  position:relative;
+  z-index:1;
+}
+
+/* Hover & Active */
+@media(hover:hover){
+  .wrf-btn--primary:hover{
+    transform:translateY(-1px);
+    box-shadow:
+      0 14px 34px rgba(0,0,0,.22),
+      0 4px 10px rgba(0,0,0,.10);
+  }
+  .wrf-btn--primary:active{
+    transform:translateY(0);
+    box-shadow:
+      0 8px 18px rgba(0,0,0,.16),
+      0 2px 6px rgba(0,0,0,.08);
+  }
+}
+
+/* Fokus wie Navbar CTA */
+.wrf-btn--primary:focus-visible{
+  outline:none;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.9),
+    0 0 0 6px color-mix(in oklab, var(--primary-orange) 55%, transparent),
+    0 12px 28px rgba(0,0,0,.22) !important;
+}
+/* Im Darkmode: WRF-Section invertieren → weißer Hintergrund, schwarze Schrift */
+:root[data-theme="dark"] .wrf-section{
+  /* Lokale Farb-Variablen für diese Section überschreiben */
+  --wrf-ink: #000000;
+  --wrf-ink-sub: rgba(0,0,0,.85);
+  --wrf-muted: rgba(0,0,0,.65);
+  --wrf-border: rgba(0,0,0,.10);
+  --wrf-card-bg: rgba(0,0,0,.02);
+  --wrf-card-border: rgba(0,0,0,.08);
+
+  /* eigentlicher Background + Textfarbe */
+  background: #ffffff !important;
+  color: var(--wrf-ink) !important;
+  border-block: 1px solid rgba(0,0,0,.06);
+
+  /* Controls in dieser Section verhalten sich wie im Lightmode */
+  color-scheme: light;
+}
+
+@media (max-width: 768px) {
+  .wrf-section {
+    display: none !important;
+  }
+}

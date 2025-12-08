@@ -1,833 +1,1085 @@
+:root {
+  --primary: #ff6600;
+  --text-main: #1c1c1e;
+  --text-subtle: #555;
+  --bg-card: #ffffff;
+  --grain-url: url("https://grainy-gradients.vercel.app/noise.svg");
+}
 
-  :root {
-    --primary: #ff6600;
-    --text-main: #1c1c1e;
-    --text-subtle: #555;
-    --bg-card: #ffffff;
-    --grain-url: url("https://grainy-gradients.vercel.app/noise.svg");
+/* ===============================
+   Cosmos Suite – Basis (Light)
+   =============================== */
+.cosmos-suite {
+  padding: 6rem 2rem;
+  background: transparent;
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  transition: background-color .25s ease, color .25s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "liga", "calt", "ss01";
+}
+
+.cosmos-suite h2 {
+  font-size: clamp(2rem, 1.6rem + 2.2vw, 3rem);
+  text-align: center;
+  color: var(--text-main);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  text-wrap: balance;
+  transition: color .25s ease;
+  margin-bottom: 5rem;
+}
+
+.orbit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.module-card {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 20%, #9e9e9e80 100%);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.module-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain-url);
+  opacity: 0.05;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.module-card .payload {
+  position: relative;
+  z-index: 2;
+}
+
+.module-card h3 {
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.7rem);
+  margin-bottom: .6rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+/* Listen – Grundstil */
+.module-card ul {
+  list-style: none;
+  padding: 0;
+  margin: .25rem 0 0 0;
+  color: color-mix(in oklab, currentColor 78%, transparent);
+  font-size: clamp(.98rem, .92rem + .25vw, 1.06rem);
+  line-height: 1.8;
+  max-width: 62ch;
+}
+
+.module-card ul li {
+  margin-bottom: .8rem;
+}
+
+.module-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.module-card .payload {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+/* CTA (Originalstil beibehalten) */
+.warp-cta {
+  display: inline-block;
+  margin-top: 2rem;
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  border: 1px solid rgb(255, 255, 255);
+  background-color: hwb(0 87% 13% / 0);
+  padding: 0.6rem 1.3rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  margin-bottom: 1rem;
+}
+
+.warp-cta:hover {
+  background-color: hwb(0 0% 100% / 0.055);
+  box-shadow: 0 0 0 2px rgb(255, 255, 255);
+}
+
+@media (max-width: 375px) {
+  .orbit-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
+  .module-card {
+    padding: 2rem 1.2rem;
+    border-radius: 16px;
+  }
+  .module-card h3 {
+    font-size: 1.2rem;
+  }
+  .module-card ul {
+    font-size: 0.95rem;
+  }
+  .warp-cta {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 0.95rem;
+    padding: 0.8rem 1rem;
+  }
+}
 
-  /* ===============================
-     Cosmos Suite – Basis (Light)
-     =============================== */
+@media (max-width: 320px) {
+  .module-card {
+    padding: 1.5rem 1rem;
+  }
+  .warp-cta {
+    font-size: 0.9rem;
+    padding: 0.7rem 1rem;
+  }
+}
+
+@media (min-width: 1300px) {
+  .orbit-grid {
+    max-width: 1300px;
+    grid-template-columns: repeat(3, minmax(380px, 1fr));
+    gap: 4rem;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1600px) {
   .cosmos-suite {
     padding: 6rem 2rem;
-    background: transparent;
-    color: var(--text-main);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    transition: background-color .25s ease, color .25s ease;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: "liga","calt","ss01";
   }
-
   .cosmos-suite h2 {
-    font-size: clamp(2rem, 1.6rem + 2.2vw, 3rem);
-    text-align: center;
-    color: var(--text-main);
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    line-height: 1.12;
-    text-wrap: balance;
-    transition: color .25s ease;
+    font-size: 3rem;
     margin-bottom: 5rem;
   }
-
   .orbit-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 1800px;
+    grid-template-columns: repeat(3, minmax(460px, 1fr));
+    gap: 4rem;
+    justify-content: center;
   }
-
   .module-card {
-    position: relative;
-    background: linear-gradient(135deg, #ffffff 0%, #ffffff 20%, #9e9e9e80 100%);
-    border-radius: 16px;
-    padding: 2.5rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  }
-  .module-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: var(--grain-url);
-    opacity: 0.05;
-    z-index: 1;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-  .module-card .payload { position: relative; z-index: 2; }
-
-  .module-card h3{
-    font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.7rem);
-    margin-bottom: .6rem;
-    font-weight: 800;
-    color: var(--text-main);
-    letter-spacing: -0.015em;
-    line-height: 1.15;
-    text-wrap: balance;
-  }
-
-  /* Listen – Grundstil */
-  .module-card ul{
-    list-style: none;
-    padding: 0;
-    margin: .25rem 0 0 0;
-    color: color-mix(in oklab, currentColor 78%, transparent);
-    font-size: clamp(.98rem, .92rem + .25vw, 1.06rem);
-    line-height: 1.8;
-    max-width: 62ch;
-  }
-  .module-card ul li { margin-bottom: .8rem; }
-
-  .module-card { display: flex; flex-direction: column; }
-  .module-card .payload { display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
-
-  /* CTA (Originalstil beibehalten) */
-  .warp-cta {
-    display: inline-block;
-    margin-top: 2rem;
-    font-size: .95rem;
-    font-weight: 600;
-    letter-spacing: .01em;
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    border: 1px solid rgb(255, 255, 255);
-    background-color: hwb(0 87% 13% / 0);
-    padding: 0.6rem 1.3rem;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    align-self: flex-start;
-    margin-bottom: 1rem;
-  }
-  .warp-cta:hover {
-    background-color: hwb(0 0% 100% / 0.055);
-    box-shadow: 0 0 0 2px rgb(255, 255, 255);
-  }
-
-  @media (max-width: 375px) {
-    .orbit-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .module-card { padding: 2rem 1.2rem; border-radius: 16px; }
-    .module-card h3 { font-size: 1.2rem; }
-    .module-card ul { font-size: 0.95rem; }
-    .warp-cta { display: block; width: 100%; text-align: center; font-size: 0.95rem; padding: 0.8rem 1rem; }
-  }
-
-  @media (max-width: 320px) {
-    .module-card { padding: 1.5rem 1rem; }
-    .warp-cta { font-size: 0.9rem; padding: 0.7rem 1rem; }
-  }
-
-  /* Ab 1152px anzeigen und zweifache Breite */
-  @media (min-width: 1152px) {
-    .orbit-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      align-items: stretch;
-    }
-    .module-card { display: block; }
-    .cinema-card { display: block; grid-column: span 2; height: 100%; }
-  }
-
-  @media (min-width: 1300px) {
-    .orbit-grid {
-      max-width: 1300px;
-      grid-template-columns: repeat(3, minmax(380px, 1fr));
-      gap: 4rem;
-      justify-content: center;
-    }
-  }
-
-  @media (min-width: 1600px) {
-    .cosmos-suite { padding: 6rem 2rem; }
-    .cosmos-suite h2 { font-size: 3rem; margin-bottom: 5rem; }
-    .orbit-grid {
-      max-width: 1800px;
-      grid-template-columns: repeat(3, minmax(460px, 1fr));
-      gap: 4rem;
-      justify-content: center;
-    }
-    .module-card { padding: 2.5rem; border-radius: 18px; }
-    .module-card h3 { font-size: 1.6rem; margin-bottom: 1.2rem; }
-    .module-card ul { font-size: 1.05rem; line-height: 1.75; }
-    .module-card ul li { margin-bottom: 0.8rem; }
-    .warp-cta { font-size: 1rem; padding: 0.7rem 1.4rem; border-radius: 8px; color: #ffffff;}
-  }
-
-  /* Individuelle Farben je Modul (Gradients + weißer Text) */
-  .module-card:nth-child(1) {
-    background: linear-gradient(270deg, #04006c, #6f00ff, #050088);
-    background-size: 600% 600%;
-    color: #fff;
-  }
-  .module-card:nth-child(2) {
-    background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
-    background-size: 300% 300%;
-    color: #fff;
-  }
-  .module-card:nth-child(3) {
-    background: linear-gradient(135deg, #ff5100, hwb(340 0% 0%), #ff5100);
-    background-size: 400% 400%;
-    color: #fff;
-  }
-  .module-card:nth-child(4) {
-    background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
-    background-size: 300% 300%;
-    color: #fff;
-  }
-
-  /* Basisstil (zusammengeführt) */
-  .module-card {
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    background-position: 0% 50%;
-    will-change: transform, box-shadow, background-position;
     padding: 2.5rem;
     border-radius: 18px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
   }
-
-  /* Glanz-Overlay */
-  .module-card::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.18), transparent 70%);
-    transform: scale(0.5);
-    opacity: 0;
-    transition: all 0.6s ease;
-    pointer-events: none;
-    z-index: 1;
-  }
-  .module-card:hover::before { transform: scale(1); opacity: 0.25; }
-  .module-card:hover {
-    transform: translateY(-8px) scale(1.035);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-    animation: moduleGradientPulse 0.5s ease 1 forwards;
-    background-position: 100% 50%;
-    z-index: 10;
-  }
-  @keyframes moduleGradientPulse {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
-  }
-
-  /* Textfarben dynamisch über inherit halten */
-  .module-card .payload,
-  .module-card h3,
-  .module-card ul,
-  .module-card ul li{
-    position: relative;
-    z-index: 2;
-    color: inherit;
-  }
-
-  /* Titel-Optik (zweiter Block konsistent) */
   .module-card h3 {
-    font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.7rem);
-    margin-bottom: .6rem;
-    font-weight: 800;
-    letter-spacing: -0.015em;
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
   }
-
-  /* Listen (zweiter Block konsistent) – Basis */
-  .module-card ul { list-style: none; padding: 0; margin: .25rem 0 0 0; font-size: clamp(.98rem, .92rem + .25vw, 1.06rem); line-height: 1.8; }
-  .module-card ul li { margin-bottom: 0.8rem; }
-
-  @media (min-width: 1152px) {
-    .module-card:nth-child(2) { grid-column: span 2; }
-    .module-card:nth-child(3) { grid-column: span 2; }
+  .module-card ul {
+    font-size: 1.05rem;
+    line-height: 1.75;
   }
+  .module-card ul li {
+    margin-bottom: 0.8rem;
+  }
+  .warp-cta {
+    font-size: 1rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 8px;
+    color: #ffffff;
+  }
+}
+/* Individuelle Farben je Modul (Gradients + weißer Text) */
+.module-card:nth-child(1) {
+  background: linear-gradient(270deg, #04006c, #6f00ff, #050088);
+  background-size: 600% 600%;
+  color: #fff;
+}
 
-  .overlay-art { position: absolute; bottom: 0rem; right: 1rem; z-index: 0; }
-  .overlay-art img { width: 480px; height: auto; opacity: 1; transition: opacity 0.3s ease; }
-  .module-card:hover .overlay-art img { opacity: 1; }
-  .module-card:nth-child(2) .overlay-art { bottom: -0.5rem; }
-  .module-card:nth-child(3) .overlay-art { bottom: -2.3rem; }
+.module-card:nth-child(2) {
+  background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
+  background-size: 300% 300%;
+  color: #fff;
+}
 
-  /* Planet/3D-Deko */
-  .planet-sprite {
-    position: absolute;
-    bottom: -11.5rem;
-    right: -8rem;
-    width: 140px;
-    height: auto;
-    opacity: 0;
+.module-card:nth-child(3) {
+  background: linear-gradient(135deg, #ff5100, hwb(340 0% 0%), #ff5100);
+  background-size: 400% 400%;
+  color: #fff;
+}
+
+.module-card:nth-child(4) {
+  background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
+  background-size: 300% 300%;
+  color: #fff;
+}
+
+/* Basisstil (zusammengeführt) */
+.module-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  background-position: 0% 50%;
+  will-change: transform, box-shadow, background-position;
+  padding: 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Glanz-Overlay */
+.module-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.18), transparent 70%);
+  transform: scale(0.5);
+  opacity: 0;
+  transition: all 0.6s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.module-card:hover::before {
+  transform: scale(1);
+  opacity: 0.25;
+}
+
+.module-card:hover {
+  transform: translateY(-8px) scale(1.035);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+  animation: moduleGradientPulse 0.5s ease 1 forwards;
+  background-position: 100% 50%;
+  z-index: 10;
+}
+
+@keyframes moduleGradientPulse {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Textfarben dynamisch über inherit halten */
+.module-card .payload,
+.module-card h3,
+.module-card ul,
+.module-card ul li {
+  position: relative;
+  z-index: 2;
+  color: inherit;
+}
+
+/* Titel-Optik (zweiter Block konsistent) */
+.module-card h3 {
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.7rem);
+  margin-bottom: .6rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+}
+
+/* Listen (zweiter Block konsistent) – Basis */
+.module-card ul {
+  list-style: none;
+  padding: 0;
+  margin: .25rem 0 0 0;
+  font-size: clamp(.98rem, .92rem + .25vw, 1.06rem);
+  line-height: 1.8;
+}
+
+.module-card ul li {
+  margin-bottom: 0.8rem;
+}
+
+@media (min-width: 1152px) {
+  .module-card:nth-child(2) {
+    grid-column: span 2;
+  }
+  .module-card:nth-child(3) {
+    grid-column: span 2;
+  }
+}
+
+.overlay-art {
+  position: absolute;
+  bottom: 0rem;
+  right: 1rem;
+  z-index: 0;
+}
+
+.overlay-art img {
+  width: 480px;
+  height: auto;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.module-card:hover .overlay-art img {
+  opacity: 1;
+}
+
+.module-card:nth-child(2) .overlay-art {
+  bottom: -0.5rem;
+}
+
+.module-card:nth-child(3) .overlay-art {
+  bottom: -2.3rem;
+}
+
+/* Planet/3D-Deko */
+.planet-sprite {
+  position: absolute;
+  bottom: -11.5rem;
+  right: -8rem;
+  width: 140px;
+  height: auto;
+  opacity: 0;
+  transform: scale(1.25);
+  pointer-events: none;
+  z-index: 2;
+  transform-origin: center;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.stellar-3d:hover .planet-sprite,
+.stellar-3d.clicked .planet-sprite {
+  opacity: 1;
+  animation: planetGrow 1.2s ease-out forwards;
+}
+
+@keyframes planetGrow {
+  0% {
     transform: scale(1.25);
-    pointer-events: none;
-    z-index: 2;
-    transform-origin: center;
-    transition: opacity 0.6s ease, transform 0.6s ease;
   }
-  .stellar-3d:hover .planet-sprite,
-  .stellar-3d.clicked .planet-sprite { opacity: 1; animation: planetGrow 1.2s ease-out forwards; }
-  @keyframes planetGrow { 0% { transform: scale(1.25); } 100% { transform: scale(1.32); } }
+  100% {
+    transform: scale(1.32);
+  }
+}
 
-  .orbit-shell {
-    position: absolute;
-    bottom: 2.5rem;
-    right: 4rem;
-    width: 490px;
-    height: 490px;
-    z-index: 2;
-    pointer-events: none;
-    transform-origin: center;
-  }
-  .stellar-3d:hover .orbit-shell,
-  .stellar-3d.clicked .orbit-shell { animation: planetRotate 16s ease-in-out infinite; }
-  @keyframes planetRotate { 0% { transform: rotate(0deg); } 40% { transform: rotate(10deg); } 100% { transform: rotate(0deg); } }
+.orbit-shell {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 4rem;
+  width: 490px;
+  height: 490px;
+  z-index: 2;
+  pointer-events: none;
+  transform-origin: center;
+}
 
-  @media (max-width: 1151px) {
-    .overlay-art img:not(.planet-sprite) { display: none !important; }
-  }
-  @media (max-width: 1299px) and (min-width: 1151px) {
-    .module-card:nth-child(2) .overlay-art { right: -2rem; }
-    .module-card:nth-child(3) .overlay-art { right: -2rem; }
-  }
-  @media (max-width: 1299px) {
-    .orbit-shell, .planet-sprite { display: none !important; }
-  }
+.stellar-3d:hover .orbit-shell,
+.stellar-3d.clicked .orbit-shell {
+  animation: planetRotate 16s ease-in-out infinite;
+}
 
-  /* ===============================
-     Dark Mode scoped NUR für #nebula-hub.cosmos-suite
-     =============================== */
-  :root[data-theme="dark"] #nebula-hub.cosmos-suite { background: #000; color: #fff; }
-  :root[data-theme="dark"] #nebula-hub.cosmos-suite h2 { color: #fff; }
+@keyframes planetRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
 
-  /* Auto-Mode respektiert System-Dark */
-  @media (prefers-color-scheme: dark) {
-    :root[data-theme="auto"] #nebula-hub.cosmos-suite { background: #000; color: #fff; }
-    :root[data-theme="auto"] #nebula-hub.cosmos-suite h2 { color: #fff; }
+@media (max-width: 1151px) {
+  .overlay-art img:not(.planet-sprite) {
+    display: none !important;
   }
+}
 
-  .cosmos-suite .subline{
-    text-align:center;
-    margin:-4rem 0 3rem;
-    font-size:1.1rem;
-    color:#666;
+@media (max-width: 1299px) and (min-width: 1151px) {
+  .module-card:nth-child(2) .overlay-art {
+    right: -2rem;
   }
-  :root[data-theme="dark"] #nebula-hub.cosmos-suite .subline{ color:#bbb; }
-  @media (prefers-color-scheme: dark){
-    :root[data-theme="auto"] #nebula-hub.cosmos-suite .subline{ color:#bbb; }
+  .module-card:nth-child(3) .overlay-art {
+    right: -2rem;
   }
-  .cosmos-suite.cluster{ max-width:1400px; margin:0 auto; }
+}
 
-  @media (max-width: 600px){
-    .cosmos-suite{ padding:4rem 1rem; }
-    .orbit-grid{
-      grid-template-columns: 1fr;
-      max-width: 640px;
-      margin: 0 auto;
-      gap: 2rem;
-      justify-items: center; /* Karten mittig ausrichten */
-    }
-    .module-card{ margin-inline:auto; }
+@media (max-width: 1299px) {
+  .orbit-shell,
+  .planet-sprite {
+    display: none !important;
   }
-  :root[data-theme="dark"] #sectorscape .profile-tile{ border:1px solid rgba(255,255,255,.35); }
-  @media (prefers-color-scheme: dark){
-    :root[data-theme="auto"] #sectorscape .profile-tile{ border:1px solid rgba(255,255,255,.35); }
-  }
-  :root[data-theme="dark"] #nebula-hub .module-card{ border:1px solid rgba(255,255,255,.35); }
-  @media (prefers-color-scheme: dark){
-    :root[data-theme="auto"] #nebula-hub .module-card{ border:1px solid rgba(255,255,255,.35); }
-  }
+}
 
-  .cosmos-suite h2{
-    margin-bottom: .8rem;
-    font-weight: 900;
-    letter-spacing: -0.02em;
-  }
+/* ===============================
+   Dark Mode scoped NUR für #nebula-hub.cosmos-suite
+   =============================== */
+:root[data-theme="dark"] #nebula-hub.cosmos-suite {
+  background: #000;
+  color: #fff;
+}
 
-  /* Subline – Typo veredelt */
-  #nebula-hub .subline{
-    font-size: clamp(1.06rem, 1rem + .6vw, 1.22rem);
-    line-height: 1.78;
-    letter-spacing: .004em;
-    color: #666;
-    margin-bottom: 4rem;
+:root[data-theme="dark"] #nebula-hub.cosmos-suite h2 {
+  color: #fff;
+}
+
+/* Auto-Mode respektiert System-Dark */
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] #nebula-hub.cosmos-suite {
+    background: #000;
+    color: #fff;
+  }
+  :root[data-theme="auto"] #nebula-hub.cosmos-suite h2 {
+    color: #fff;
+  }
+}
+
+.cosmos-suite .subline {
+  text-align: center;
+  margin: -4rem 0 3rem;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+:root[data-theme="dark"] #nebula-hub.cosmos-suite .subline {
+  color: #bbb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] #nebula-hub.cosmos-suite .subline {
+    color: #bbb;
+  }
+}
+
+.cosmos-suite.cluster {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .cosmos-suite {
+    padding: 4rem 1rem;
+  }
+  .orbit-grid {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+    margin: 0 auto;
+    gap: 2rem;
+    justify-items: center;
+  }
+  .module-card {
+    margin-inline: auto;
+  }
+}
+
+:root[data-theme="dark"] #sectorscape .profile-tile {
+  border: 1px solid rgba(255, 255, 255, .35);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] #sectorscape .profile-tile {
+    border: 1px solid rgba(255, 255, 255, .35);
+  }
+}
+
+:root[data-theme="dark"] #nebula-hub .module-card {
+  border: 1px solid rgba(255, 255, 255, .35);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] #nebula-hub .module-card {
+    border: 1px solid rgba(255, 255, 255, .35);
+  }
+}
+
+.cosmos-suite h2 {
+  margin-bottom: .8rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+/* Subline – Typo veredelt */
+#nebula-hub .subline {
+  font-size: clamp(1.06rem, 1rem + .6vw, 1.22rem);
+  line-height: 1.78;
+  letter-spacing: .004em;
+  color: #666;
+  margin-bottom: 4rem;
+  text-align: center;
+  text-wrap: pretty;
+}
+
+:root[data-theme="dark"] #nebula-hub .subline,
+:root[data-theme="dark"] #nebula-hub h2 {
+  color: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] #nebula-hub .subline,
+  :root[data-theme="auto"] #nebula-hub h2 {
+    color: #fff;
+  }
+}
+
+/* Astronaut sicher über dem Planeten */
+.overlay-art {
+  position: absolute;
+  bottom: 0rem;
+  right: 1rem;
+  z-index: 3;
+}
+
+.overlay-art .astronaut-sprite {
+  position: relative;
+  z-index: 4;
+  display: block;
+}
+
+.orbit-shell {
+  z-index: 0;
+}
+
+.planet-sprite {
+  z-index: 0;
+}
+
+@media (min-width: 375px) and (max-width: 600px) {
+  .module-card {
+    width: 90%;
+    margin-inline: auto;
+    padding: 2rem 1.2rem;
+    border-radius: 16px;
+  }
+  .module-card h3 {
+    font-size: 1.4rem;
+  }
+  .module-card ul {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  .warp-cta {
+    display: block;
+    width: 100%;
     text-align: center;
-    text-wrap: pretty;
+    font-size: 0.95rem;
+    padding: 0.8rem 1rem;
   }
+}
 
-  :root[data-theme="dark"] #nebula-hub .subline,
-  :root[data-theme="dark"] #nebula-hub h2{ color:#fff; }
+#nebula-hub .orbit-grid {
+  perspective: 1000px;
+}
 
-  @media (prefers-color-scheme: dark){
-    :root[data-theme="auto"] #nebula-hub .subline,
-    :root[data-theme="auto"] #nebula-hub h2{ color:#fff; }
-  }
+#nebula-hub .module-card {
+  transform-style: flat;
+  backface-visibility: visible;
+}
 
-  /* Astronaut sicher über dem Planeten */
-  .overlay-art { position: absolute; bottom: 0rem; right: 1rem; z-index: 3; }
-  .overlay-art .astronaut-sprite{ position: relative; z-index: 4; display: block; }
-  .orbit-shell{ z-index: 0; }
-  .planet-sprite{ z-index: 0; }
+@media (hover:hover) {
+  #nebula-hub .module-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 46px rgba(0, 0, 0, .22);
+  }
+}
 
-  @media (min-width: 375px) and (max-width: 600px) {
-    .module-card {
-      width: 90%;
-      margin-inline: auto;
-      padding: 2rem 1.2rem;
-      border-radius: 16px;
-    }
-    .module-card h3 { font-size: 1.4rem; }
-    .module-card ul { font-size: 1rem; line-height: 1.7; }
-    .warp-cta {
-      display: block;
-      width: 100%;
-      text-align: center;
-      font-size: 0.95rem;
-      padding: 0.8rem 1rem;
-    }
+@media (prefers-reduced-motion: reduce) {
+  #nebula-hub .module-card,
+  #nebula-hub .orbit-grid {
+    transition: none !important;
+    animation: none !important;
   }
+}
 
-  #nebula-hub .orbit-grid{ perspective:1000px }
-  #nebula-hub .module-card{ transform-style: flat; backface-visibility: visible; }
-  @media (hover:hover){
-    #nebula-hub .module-card:hover{
-      transform: translateY(-6px);
-      box-shadow: 0 18px 46px rgba(0,0,0,.22);
-    }
-  }
-  @media (prefers-reduced-motion: reduce){
-    #nebula-hub .module-card, #nebula-hub .orbit-grid{ transition: none !important; animation: none !important }
-  }
+#nebula-hub .overlay-art {
+  background: transparent !important;
+  inset: auto !important;
+  bottom: 0rem !important;
+  right: 1rem !important;
+  left: auto !important;
+  top: auto !important;
+  z-index: 0;
+}
 
-  #nebula-hub .overlay-art{
-    background: transparent !important;
-    inset: auto !important;
-    bottom: 0rem !important;
-    right: 1rem !important;
-    left: auto !important;
-    top: auto !important;
-    z-index: 0;
-  }
-  
-  #nebula-hub .overlay-art img{ width:480px; height:auto; }
+#nebula-hub .overlay-art img {
+  width: 480px;
+  height: auto;
+}
 
-  #nebula-hub .module-card{
-    font-feature-settings: "liga","calt","ss01";
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  #nebula-hub .module-card h3{
-    font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.7rem);
-    letter-spacing: -0.015em;
-    line-height: 1.15;
-    margin-bottom: .4rem;
-    color: inherit;
-  }
+#nebula-hub .module-card {
+  font-feature-settings: "liga", "calt", "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  /* ===== Aurora-typography alignment for Cosmos Suite ===== */
-  .cosmos-suite .headline{
-    font-size: clamp(2rem, 1.6rem + 2.2vw, 3rem) !important;
-    font-weight: 900 !important;
-    letter-spacing: -0.02em !important;
-    line-height: 1.12 !important;
-    margin: .2rem 0 .6rem !important;
-    color: #0b0c10 !important;
-    text-wrap: balance !important;
-  }
-  .cosmos-suite .subline{
-    position: relative !important;
-    color:#0f1729 !important;
-    max-width: 62rem !important;
-    margin: 0 auto 2.6rem !important;
-    line-height: 1.78 !important;
-    font-size: clamp(1.06rem, 1rem + .6vw, 1.22rem) !important;
-    letter-spacing: .004em !important;
-    text-wrap: pretty !important;
-    padding: 1.1rem 1.2rem 1.1rem !important;
-    border-radius: 14px !important;
-    background: linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03)) !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05) !important;
-  }
-  /* Card headings + copy like Aurora cards */
-  #nebula-hub .module-card ul{
-    margin-top: .25rem;
-    font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem) !important;
-    line-height: 1.7 !important;
-    color: color-mix(in oklab, currentColor 92%, transparent) !important;
-    text-wrap: pretty;
-  }
-  #nebula-hub .module-card ul li{
-    position: relative;
-    display: block;
-    margin: 0;
-    padding: .7rem 0 .9rem !important;  /* Copy-Spacing */
-    background: none;
-    border: 0;
-    color: rgba(255,255,255,.96) !important;
-    font-weight: 690 !important;
-    letter-spacing: -.002em !important;
-    font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem) !important;
-    line-height: 1.7 !important;
-    text-wrap: pretty !important;
-    hyphens: auto !important;
-    max-width: 62ch !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,.18) !important;
-  }
-  /* Divider wie Aurora */
-  #nebula-hub .module-card ul li + li{
-    border-top: 1px solid rgba(255,255,255,.22) !important;
-    position: relative;
-  }
-  #nebula-hub .module-card ul li + li::after{
-    content: "";
-    position: absolute;
-    left: 0;
-    right: clamp(160px, 24vw, 360px);
-    top: -1px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.55) 35%, rgba(255,255,255,.18) 65%, transparent 100%);
-    opacity: .8;
-    pointer-events: none;
-  }
+#nebula-hub .module-card h3 {
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.7rem);
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  margin-bottom: .4rem;
+  color: inherit;
+}
 
-  /* ——— Video-Card: füllt die komplette Karte ——— */
-  #nebula-hub .module-card.cinema-card{ padding: 0; min-height: 280px; display: block; }
-  #nebula-hub .module-card.cinema-card::before{ display:none; }
-  #nebula-hub .module-card.cinema-card video{
-    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;
-  }
+/* ===== Aurora-typography alignment for Cosmos Suite ===== */
+.cosmos-suite .headline {
+  font-size: clamp(2rem, 1.6rem + 2.2vw, 3rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.12 !important;
+  margin: .2rem 0 .6rem !important;
+  color: #0b0c10 !important;
+  text-wrap: balance !important;
+}
 
-  @media (min-width: 1152px){
-    #nebula-hub .orbit-grid > .module-card:nth-child(4){ grid-column: 3 / span 1 !important; }
-    #nebula-hub .orbit-grid{ grid-auto-flow: row dense; }
-  }
-  @media (max-width: 1599px) {
-    #nebula-hub .module-card:nth-child(3) .overlay-art { right: -4rem !important; bottom: -3rem !important; }
-  }
-  @media (min-width: 1600px) {
-    #nebula-hub .module-card:nth-child(3) .overlay-art { right: -1rem !important; bottom: -2.5rem !important; }
-  }
+.cosmos-suite .subline {
+  position: relative !important;
+  color: #0f1729 !important;
+  max-width: 62rem !important;
+  margin: 0 auto 2.6rem !important;
+  line-height: 1.78 !important;
+  font-size: clamp(1.06rem, 1rem + .6vw, 1.22rem) !important;
+  letter-spacing: .004em !important;
+  text-wrap: pretty !important;
+  padding: 1.1rem 1.2rem 1.1rem !important;
+  border-radius: 14px !important;
+  background: linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.7),
+    0 2px 8px rgba(0,0,0,.05) !important;
+}
 
-  /* ===============================
-     h3 wie Aurora .aether-card h3
-     =============================== */
-  #nebula-hub .module-card h3 {
-    font-size: clamp(1.3rem, 1.1rem + .9vw, 1.9rem) !important;
-    font-weight: 800 !important;
-    margin: .1rem 0 .5rem !important;
-    color: #fff !important;
-    letter-spacing: -0.01em !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,.25) !important;
-    line-height: 1.2 !important;
-    text-wrap: balance !important;
+/* Card headings + copy like Aurora cards */
+#nebula-hub .module-card ul {
+  margin-top: .25rem;
+  font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem) !important;
+  line-height: 1.7 !important;
+  color: color-mix(in oklab, currentColor 92%, transparent) !important;
+  text-wrap: pretty;
+}
+
+#nebula-hub .module-card ul li {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: .7rem 0 .9rem !important;
+  background: none;
+  border: 0;
+  color: rgba(255,255,255,.96) !important;
+  font-weight: 690 !important;
+  letter-spacing: -.002em !important;
+  font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem) !important;
+  line-height: 1.7 !important;
+  text-wrap: pretty !important;
+  hyphens: auto !important;
+  max-width: 62ch !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.18) !important;
+}
+
+/* Divider wie Aurora */
+#nebula-hub .module-card ul li + li {
+  border-top: 1px solid rgba(255,255,255,.22) !important;
+  position: relative;
+}
+
+#nebula-hub .module-card ul li + li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: clamp(160px, 24vw, 360px);
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,.55) 35%,
+    rgba(255,255,255,.18) 65%,
+    transparent 100%
+  );
+  opacity: .8;
+  pointer-events: none;
+}
+
+/* ——— Video-Card: füllt die komplette Karte ——— */
+#nebula-hub .module-card.cinema-card {
+  padding: 0;
+  min-height: 280px;
+  display: block;
+}
+
+#nebula-hub .module-card.cinema-card::before {
+  display: none;
+}
+
+#nebula-hub .module-card.cinema-card video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Desktop-Handling */
+@media (min-width: 1152px) {
+  #nebula-hub .orbit-grid > .module-card:nth-child(4) {
+    grid-column: 3 / span 1 !important;
   }
-  /* ============== HARD NORMALIZE: identischer Start aller Listen ============== */
-  #nebula-hub .module-card .payload > h3{
-    /* fester Abstand unter H3 – überall gleich */
-    margin: .1rem 0 .6rem !important;
-    line-height: 1.2 !important;
+  #nebula-hub .orbit-grid {
+    grid-auto-flow: row dense;
   }
+}
 
-  /* Liste bekommt den Start-Offset – kein margin, nur padding */
-  #nebula-hub .module-card .payload > ul{
-    margin: 0 !important;
-    padding: .7rem 0 0 0 !important;  /* Startabstand definiert */
-    list-style: none !important;
+@media (max-width: 1599px) {
+  #nebula-hub .module-card:nth-child(3) .overlay-art {
+    right: -4rem !important;
+    bottom: -3rem !important;
   }
+}
 
-  /* Copy-Style für alle LI + konsistente Innenabstände */
-  #nebula-hub .module-card .payload > ul > li{
-    margin: 0 !important;
-    padding: .7rem 0 .9rem !important; /* Top/Bottom identisch in allen Karten */
-    display: block !important;
-    position: relative;
-
-    /* Typo wie Aurora .copy */
-    color: rgba(255,255,255,.96) !important;
-    font-weight: 690 !important;
-    letter-spacing: -.002em !important;
-    font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem) !important;
-    line-height: 1.7 !important;
-    text-wrap: pretty !important;
-    hyphens: auto !important;
-    max-width: 62ch !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,.18) !important;
-
-    /* keine Restbullets/Indents */
-    background: none !important;
-    border: 0 !important;
+@media (min-width: 1600px) {
+  #nebula-hub .module-card:nth-child(3) .overlay-art {
+    right: -1rem !important;
+    bottom: -2.5rem !important;
   }
+}
 
-  /* Divider ab dem 2. LI */
-  #nebula-hub .module-card .payload > ul > li + li{
-    border-top: 1px solid rgba(255,255,255,.22) !important;
+/* ===============================
+   h3 wie Aurora .aether-card h3
+   =============================== */
+#nebula-hub .module-card h3 {
+  font-size: clamp(1.3rem, 1.1rem + .9vw, 1.9rem) !important;
+  font-weight: 800 !important;
+  margin: .1rem 0 .5rem !important;
+  color: #fff !important;
+  letter-spacing: -0.01em !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.25) !important;
+  line-height: 1.2 !important;
+  text-wrap: balance !important;
+}
+
+/* ============== HARD NORMALIZE: identischer Start aller Listen ============== */
+#nebula-hub .module-card .payload > h3 {
+  margin: .1rem 0 .6rem !important;
+  line-height: 1.2 !important;
+}
+
+#nebula-hub .module-card .payload > ul {
+  margin: 0 !important;
+  padding: .7rem 0 0 0 !important;
+  list-style: none !important;
+}
+
+#nebula-hub .module-card .payload > ul > li {
+  margin: 0 !important;
+  padding: .7rem 0 .9rem !important;
+  display: block !important;
+  position: relative;
+  color: rgba(255,255,255,.96) !important;
+  font-weight: 690 !important;
+  letter-spacing: -.002em !important;
+  font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem) !important;
+  line-height: 1.7 !important;
+  text-wrap: pretty !important;
+  hyphens: auto !important;
+  max-width: 62ch !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.18) !important;
+  background: none !important;
+  border: 0 !important;
+}
+
+#nebula-hub .module-card .payload > ul > li + li {
+  border-top: 1px solid rgba(255,255,255,.22) !important;
+}
+
+#nebula-hub .module-card .payload > ul > li + li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: clamp(160px, 24vw, 360px);
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,.55) 35%,
+    rgba(255,255,255,.18) 65%,
+    transparent 100%
+  );
+  opacity: .8;
+  pointer-events: none;
+}
+/* SAFETY: Falls irgendwo ein extra margin im UL steckt (alte Regeln) */
+#nebula-hub .module-card ul {
+  margin: 0 !important;
+}
+
+/* ===== FINAL LOCK: Einheitlicher Listenstart in allen Cards ===== */
+#nebula-hub {
+  --list-start: .7rem;
+  --li-pt: .7rem;
+  --li-pb: .9rem;
+}
+
+/* H3 unten überall gleich – letzte Instanz gewinnt */
+#nebula-hub .module-card .payload > h3 {
+  margin: .1rem 0 .6rem !important;
+  line-height: 1.2 !important;
+}
+
+/* Liste: niemals margin, nur definierter Start via padding */
+#nebula-hub .module-card .payload > ul {
+  margin: 0 !important;
+  padding: var(--list-start) 0 0 0 !important;
+  list-style: none !important;
+  display: block !important;
+  box-sizing: border-box !important;
+}
+
+/* LI: deterministische Innenabstände + Copy-Typo */
+#nebula-hub .module-card .payload > ul > li {
+  margin: 0 !important;
+  padding: var(--li-pt) 0 var(--li-pb) !important;
+  display: block !important;
+  position: relative;
+
+  color: rgba(255,255,255,.96) !important;
+  font-weight: 690 !important;
+  letter-spacing: -.002em !important;
+  font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem) !important;
+  line-height: 1.7 !important;
+  text-wrap: pretty !important;
+  hyphens: auto !important;
+  max-width: 62ch !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.18) !important;
+
+  background: none !important;
+  border: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Divider ab dem 2. LI – bleibt gleich */
+#nebula-hub .module-card .payload > ul > li + li {
+  border-top: 1px solid rgba(255,255,255,.22) !important;
+}
+
+#nebula-hub .module-card .payload > ul > li + li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: clamp(160px, 24vw, 360px);
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,.55) 35%,
+    rgba(255,255,255,.18) 65%,
+    transparent 100%
+  );
+  opacity: .8;
+  pointer-events: none;
+}
+
+/* WICHTIG: alle älteren UL-Top-Margins in der Sektion neutralisieren */
+#nebula-hub :is(.module-card) :is(ul) {
+  margin-top: 0 !important;
+}
+
+/* === VIDEO-KARTE SICHTBAR MACHEN (Mobile) === */
+#nebula-hub .module-card.cinema-card {
+  position: relative;
+  padding: 0;
+  aspect-ratio: 16 / 9;
+  min-height: auto;
+  overflow: hidden;
+}
+
+#nebula-hub .module-card.cinema-card::before {
+  display: none;
+}
+
+#nebula-hub .module-card.cinema-card video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+/* Mobile: sicher 1 Spalte & zentriert */
+@media (max-width: 600px) {
+  #nebula-hub .orbit-grid {
+    grid-template-columns: 1fr !important;
+    justify-items: center;
   }
-  #nebula-hub .module-card .payload > ul > li + li::after{
-    content: "";
-    position: absolute;
-    left: 0;
-    right: clamp(160px, 24vw, 360px);
-    top: -1px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.55) 35%, rgba(255,255,255,.18) 65%, transparent 100%);
-    opacity: .8;
-    pointer-events: none;
+  #nebula-hub .module-card {
+    width: 100%;
+    max-width: 600px;
+    margin-inline: auto;
   }
+}
 
-  /* SAFETY: Falls irgendwo ein extra margin im UL steckt (alte Regeln) */
-  #nebula-hub .module-card ul{ margin: 0 !important; }
-
-  /* ===== FINAL LOCK: Einheitlicher Listenstart in allen Cards ===== */
-  #nebula-hub { 
-    --list-start: .7rem;      /* Abstand von h3 zur Liste */
-    --li-pt: .7rem;           /* Top-Padding je LI */
-    --li-pb: .9rem;           /* Bottom-Padding je LI */
+/* Desktop: Video optional wieder höher ziehen */
+@media (min-width: 1152px) {
+  #nebula-hub .module-card.cinema-card {
+    aspect-ratio: auto;
+    min-height: 360px;
   }
+}
 
-  /* H3 unten überall gleich – letzte Instanz gewinnt */
-  #nebula-hub .module-card .payload > h3 {
-    margin: .1rem 0 .6rem !important;
-    line-height: 1.2 !important;
-  }
+/* iOS/Safari Edge-Case */
+#nebula-hub .module-card.cinema-card video[paused] {
+  opacity: 1;
+}
 
-  /* Liste: niemals margin, nur definierter Start via padding */
-  #nebula-hub .module-card .payload > ul {
-    margin: 0 !important;
-    padding: var(--list-start) 0 0 0 !important;
-    list-style: none !important;
-    display: block !important;
-    box-sizing: border-box !important;
-  }
-
-  /* LI: deterministische Innenabstände + Copy-Typo */
-  #nebula-hub .module-card .payload > ul > li {
-    margin: 0 !important;
-    padding: var(--li-pt) 0 var(--li-pb) !important;
-    display: block !important;
-    position: relative;
-
-    color: rgba(255,255,255,.96) !important;
-    font-weight: 690 !important;
-    letter-spacing: -.002em !important;
-    font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem) !important;
-    line-height: 1.7 !important;
-    text-wrap: pretty !important;
-    hyphens: auto !important;
-    max-width: 62ch !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,.18) !important;
-
-    background: none !important;
-    border: 0 !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Divider ab dem 2. LI – bleibt gleich */
-  #nebula-hub .module-card .payload > ul > li + li {
-    border-top: 1px solid rgba(255,255,255,.22) !important;
-  }
-  #nebula-hub .module-card .payload > ul > li + li::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: clamp(160px, 24vw, 360px);
-    top: -1px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.55) 35%, rgba(255,255,255,.18) 65%, transparent 100%);
-    opacity: .8;
-    pointer-events: none;
-  }
-
-  /* WICHTIG: alle älteren UL-Top-Margins in der Sektion neutralisieren */
-  #nebula-hub :is(.module-card) :is(ul){
-    margin-top: 0 !important;
-  }
-
-  /* === VIDEO-KARTE SICHTBAR MACHEN (Mobile) === */
-  #nebula-hub .module-card.cinema-card{
-    position: relative;
-    padding: 0;
-    aspect-ratio: 16 / 9;   /* sorgt für echte Höhe auf Mobile */
-    min-height: auto;
-    overflow: hidden;
-  }
-  #nebula-hub .module-card.cinema-card::before{ display:none; }
-  #nebula-hub .module-card.cinema-card video{
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    display: block;
-    object-fit: cover; object-position: center;
-    z-index: 0;
-  }
-
-  /* Mobile: sicher 1 Spalte & zentriert */
-  @media (max-width: 600px){
-    #nebula-hub .orbit-grid{
-      grid-template-columns: 1fr !important;
-      justify-items: center; /* Karten mittig */
-    }
-    #nebula-hub .module-card{
-      width: 100%;
-      max-width: 600px;
-      margin-inline: auto;
-    }
-  }
-
-  /* Desktop: Video optional wieder höher ziehen */
-  @media (min-width: 1152px){
-    #nebula-hub .module-card.cinema-card{
-      aspect-ratio: auto;
-      min-height: 360px;
-    }
-  }
-
-  /* iOS/Safari Edge-Case */
-  #nebula-hub .module-card.cinema-card video[paused]{ opacity: 1; }
-
-  /* ===============================
+/* ===============================
    COSMOS SUITE — Dark Mode Fix
-   Hintergrund immer #000 + Headline/Subline anpassen
    =============================== */
 
 /* Expliziter Dark Mode via data-theme="dark" */
-:root[data-theme="dark"] #nebula-hub.cosmos-suite{
+:root[data-theme="dark"] #nebula-hub.cosmos-suite {
   background: #000 !important;
   color: #fff !important;
 }
 
 /* Headline (h2 oder .headline) auf Weiß */
 :root[data-theme="dark"] #nebula-hub.cosmos-suite h2,
-:root[data-theme="dark"] #nebula-hub .headline{
+:root[data-theme="dark"] #nebula-hub .headline {
   color: #fff !important;
   text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
 }
 
-/* Subline: helle Schrift + dezenter, dunkler Glas-Look auf Schwarz */
-:root[data-theme="dark"] #nebula-hub .subline{
+/* Subline */
+:root[data-theme="dark"] #nebula-hub .subline {
   color: #e8eeff !important;
-  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035)) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.07),
+    rgba(255,255,255,.035)
+  ) !important;
+
   border: 1px solid rgba(255,255,255,.08) !important;
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.22),
     0 2px 8px rgba(0,0,0,.45) !important;
+
   border-radius: 14px !important;
 }
 
-/* Optional: System-Dark respektieren, wenn du data-theme="auto" nutzt */
-@media (prefers-color-scheme: dark){
-  :root[data-theme="auto"] #nebula-hub.cosmos-suite{
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] #nebula-hub.cosmos-suite {
     background: #000 !important;
     color: #fff !important;
   }
   :root[data-theme="auto"] #nebula-hub.cosmos-suite h2,
-  :root[data-theme="auto"] #nebula-hub .headline{
+  :root[data-theme="auto"] #nebula-hub .headline {
     color: #fff !important;
     text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
   }
-  :root[data-theme="auto"] #nebula-hub .subline{
+  :root[data-theme="auto"] #nebula-hub .subline {
     color: #e8eeff !important;
-    background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035)) !important;
+    background: linear-gradient(
+      180deg,
+      rgba(255,255,255,.07),
+      rgba(255,255,255,.035)
+    ) !important;
+
     border: 1px solid rgba(255,255,255,.08) !important;
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,.22),
       0 2px 8px rgba(0,0,0,.45) !important;
+
     border-radius: 14px !important;
   }
 }
-/* 1) Drei Karten nebeneinander (≥1152px): Video über alle 3 Spalten */
-@media (min-width: 1152px){
-  #nebula-hub .orbit-grid{
-    grid-template-columns: repeat(3, 1fr) !important;
-    align-items: stretch; /* gleiche Zeilenhöhe */
+
+/* 2) Steht das Video neben einer Karte */
+@media (min-width: 700px) and (max-width: 1151px) {
+  #nebula-hub .orbit-grid {
+    align-items: stretch;
   }
-  #nebula-hub .module-card.cinema-card{
-    grid-column: 1 / -1 !important;  /* volle Breite über 3 Spalten */
-    aspect-ratio: auto !important;   /* keine fixe Höhe */
-    min-height: 360px;               /* optionaler Mindestwert */
+
+  #nebula-hub .module-card {
+    height: 100%;
+  }
+
+  #nebula-hub .module-card.cinema-card {
+    aspect-ratio: auto !important;
+    align-self: stretch;
     position: relative;
   }
-  #nebula-hub .module-card.cinema-card > video{
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; object-position: center;
+
+  #nebula-hub .module-card.cinema-card > video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 }
 
-/* 2) Steht das Video neben einer Karte (typisch 2 Spalten: 700–1151px),
-      dann gleiche Höhe wie die Nachbar-Karte */
-@media (min-width: 700px) and (max-width: 1151px){
-  #nebula-hub .orbit-grid{ align-items: stretch; }
-  #nebula-hub .module-card{ height: 100%; } /* Karten füllen die Zeilenhöhe */
-  #nebula-hub .module-card.cinema-card{
-    aspect-ratio: auto !important;  /* fixe Ratio aus Mobile deaktivieren */
-    align-self: stretch;             /* dehnt sich auf Zeilenhöhe */
-    position: relative;
-  }
-  #nebula-hub .module-card.cinema-card > video{
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; object-position: center;
-  }
-}
-/* === COSMOS SUITE – Stage bei 1600px deckeln + konstanter Außenabstand === */
-:root{
-  --cosmos-stage: 1600px;   /* maximale Bühnenbreite */
-  --cosmos-gutter: 2rem;    /* fester Außenabstand je Seite */
+/* === COSMOS SUITE – Stage bei 1600px deckeln === */
+:root {
+  --cosmos-stage: 1600px;
+  --cosmos-gutter: 2rem;
 }
 
-/* Fester Außenabstand (respektiert Notch/Safe-Area) */
-#nebula-hub.cosmos-suite{
-  padding-left:  max(var(--cosmos-gutter), env(safe-area-inset-left));
+#nebula-hub.cosmos-suite {
+  padding-left: max(var(--cosmos-gutter), env(safe-area-inset-left));
   padding-right: max(var(--cosmos-gutter), env(safe-area-inset-right));
 }
 
-/* Grid zentrieren und bei 1600px klemmen */
-#nebula-hub .orbit-grid{
+#nebula-hub .orbit-grid {
   max-width: var(--cosmos-stage) !important;
   margin-inline: auto !important;
 }
 
-/* Ab 1152px 3 Spalten (deine Logik bleibt), aber innerhalb der 1600px-Stage */
-@media (min-width: 1152px){
-  #nebula-hub .orbit-grid{
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 2rem !important; /* du kannst 4rem lassen, wenn du magst */
-  }
-}
-
-/* Alle größeren Breakpoints hart auf 1600px halten */
-@media (min-width: 1300px){
-  #nebula-hub .orbit-grid{
+@media (min-width: 1300px) {
+  #nebula-hub .orbit-grid {
     max-width: var(--cosmos-stage) !important;
-    /* optional: etwas größerer Gap, wenn gewünscht */
     gap: 3rem !important;
   }
 }
 
-@media (min-width: 1600px){
-  #nebula-hub .orbit-grid{
-    max-width: var(--cosmos-stage) !important; /* überschreibt dein 1800px */
-    /* Stell sicher, dass die Karten nicht weiter wachsen als die Stage */
-    grid-template-columns: repeat(3, minmax(460px, 1fr)) !important; /* passt zu deiner Typo */
-    gap: 3rem !important; /* oder 4rem, wenn der Platz reicht */
+@media (min-width: 1600px) {
+  #nebula-hub .orbit-grid {
+    max-width: var(--cosmos-stage) !important;
+    grid-template-columns: repeat(3, minmax(460px, 1fr)) !important;
+    gap: 3rem !important;
   }
 }
 
-/* Mobile bleibt wie definiert; optional: einheitlicher Außenabstand auch hier */
-@media (max-width: 600px){
-  #nebula-hub.cosmos-suite{
-    padding-left:  max(1.5rem, env(safe-area-inset-left));
+@media (max-width: 600px) {
+  #nebula-hub.cosmos-suite {
+    padding-left: max(1.5rem, env(safe-area-inset-left));
     padding-right: max(1.5rem, env(safe-area-inset-right));
   }
 }
-/* === COSMOS Mobile (≤700px): kurze Karten + pro Karte individuelle Gradients/Größen === */
-@media (max-width: 699.98px){
-  /* Grundlayout: 1 Spalte, kompakt */
-  #nebula-hub .orbit-grid{
+/* === COSMOS Mobile (≤700px): kurze Karten + individuelle Gradients === */
+@media (max-width: 699.98px) {
+
+  #nebula-hub .orbit-grid {
     grid-template-columns: 1fr !important;
     gap: 1rem !important;
     justify-items: stretch !important;
@@ -835,9 +1087,7 @@
     margin-inline: auto !important;
   }
 
-  /* Karte: kompakt + Platz für CTA; Hintergrund über Variablen steuerbar */
-  #nebula-hub .module-card{
-    /* Defaults (kannst du global anpassen) */
+  #nebula-hub .module-card {
     --card-bg: inherit;
     --card-bg-size: 400% 400%;
     --card-bg-pos: 58% 52%;
@@ -852,48 +1102,48 @@
     overflow: hidden !important;
     box-shadow: 0 2px 10px rgba(0,0,0,.12) !important;
 
-    /* HINTERGRUND per Variablen */
     background: var(--card-bg) !important;
     background-size: var(--card-bg-size) !important;
     background-position: var(--card-bg-pos) !important;
   }
 
-  /* ====== PRO KARTE: Werte individuell setzen (Beispiele) ====== */
   /* Webdesign */
-  #svc-webdesign.module-card{
+  #svc-webdesign.module-card {
     --card-bg: linear-gradient(270deg, #030053, #240066, #090087);
     --card-bg-size: 320% 320%;
     --card-bg-pos: 52% 8%;
   }
+
   /* 3D Design */
-  #svc-3d.module-card{
+  #svc-3d.module-card {
     --card-bg: linear-gradient(135deg, #101010, #000420, #101010);
     --card-bg-size: 360% 360%;
     --card-bg-pos: 44% 54%;
   }
+
   /* Grafikdesign */
-  #svc-grafik.module-card{
+  #svc-grafik.module-card {
     --card-bg: linear-gradient(135deg, #ff5100, #ff0044, #ff5100);
-    --card-bg-size: 400% 400%;   /* Wunschwert 400 beibehalten */
+    --card-bg-size: 400% 400%;
     --card-bg-pos: 60% 6%;
   }
-  /* Social (Video-Card) – Hintergrund optional; Video füllt die Karte */
-  #svc-social.module-card{
+
+  /* Social */
+  #svc-social.module-card {
     --card-bg: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d);
     --card-bg-size: 300% 300%;
     --card-bg-pos: 50% 50%;
   }
 
-  /* Headline kompakt */
-  #nebula-hub .module-card h3{
+  #nebula-hub .module-card h3 {
     margin: 0 0 .28rem !important;
     line-height: 1.18 !important;
     font-size: 1.22rem !important;
   }
 
-  /* Kurzsatz: frei umbrechen, KEINE Ellipsis */
+  /* Kurztext */
   #nebula-hub .module-card .card-snippet,
-  #nebula-hub .module-card .snippet{
+  #nebula-hub .module-card .snippet {
     display: block !important;
     -webkit-line-clamp: unset !important;
     overflow: visible !important;
@@ -907,108 +1157,120 @@
     text-wrap: pretty;
   }
 
-  /* Liste & Art auf Mobile ausblenden (nur H3 + Snippet + CTA) */
+  /* Listen + Overlay ausblenden */
   #nebula-hub .module-card .payload > ul,
-  #nebula-hub .module-card .overlay-art{
+  #nebula-hub .module-card .overlay-art {
     display: none !important;
   }
 
-  /* CTA: zentriert unten, kompakt, weniger rund */
-  #nebula-hub .module-card .payload{ position: static !important; }
-  #nebula-hub .module-card > .payload > .warp-cta{
+  /* CTA */
+  #nebula-hub .module-card .payload {
+    position: static !important;
+  }
+
+  #nebula-hub .module-card > .payload > .warp-cta {
     position: absolute !important;
     left: 50% !important;
     bottom: 10px !important;
     transform: translateX(-50%) !important;
     z-index: 3 !important;
-
     display: inline-flex !important;
-    align-items: center; justify-content: center;
+    align-items: center;
+    justify-content: center;
 
     height: var(--cta-h) !important;
     padding: 0 14px !important;
-    width: auto !important; min-width: auto !important;
-    max-width: calc(100% - 32px) !important; /* bricht um, aber nicht 100% */
-    white-space: normal !important; text-align: center !important;
+
+    width: auto !important;
+    min-width: auto !important;
+    max-width: calc(100% - 32px) !important;
+
+    white-space: normal !important;
+    text-align: center !important;
 
     font-size: .92rem !important;
     line-height: 1.1 !important;
-    border-radius: 10px !important;          /* weniger rund */
+    border-radius: 10px !important;
     box-shadow: 0 2px 6px rgba(0,0,0,.25) !important;
     margin: 0 !important;
   }
 
-  /* Video-Karte: flach, CTA dort ausblenden */
-  #nebula-hub .module-card.cinema-card{
+  /* Video-Card */
+  #nebula-hub .module-card.cinema-card {
     padding: 0 !important;
     aspect-ratio: 16 / 9 !important;
     min-height: auto !important;
     border-radius: 14px !important;
   }
-  #nebula-hub .module-card.cinema-card > .payload > .warp-cta{
+
+  #nebula-hub .module-card.cinema-card > .payload > .warp-cta {
     display: none !important;
   }
 }
 
-/* === Mobile-Trim für „cluster cosmos-suite“ (weniger Padding) === */
-@media (max-width: 699.98px){
-  /* Section enger – respektiert Safe-Area */
-  #nebula-hub.cluster.cosmos-suite{
+/* === Mobile-Trim für „cluster cosmos-suite“ === */
+@media (max-width: 699.98px) {
+
+  #nebula-hub.cluster.cosmos-suite {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
-    padding-left:  max(10px, env(safe-area-inset-left)) !important;
+    padding-left: max(10px, env(safe-area-inset-left)) !important;
     padding-right: max(10px, env(safe-area-inset-right)) !important;
   }
 
-  /* Headline/Subline: vertikale Abstände straffen (optional) */
-  #nebula-hub.cluster.cosmos-suite .headline{ margin-bottom: .6rem !important; }
-  #nebula-hub.cluster.cosmos-suite .subline{  margin-bottom: 1.5rem !important; }
-}
-/* Basis: Container bleibt fix, Inhalt darf „pulsieren“ */
-#nebula-hub .module-card { overflow: hidden; }
-#nebula-hub .module-card .payload { transition: transform .4s ease; }
+  #nebula-hub.cluster.cosmos-suite .headline {
+    margin-bottom: .6rem !important;
+  }
 
-/* Bestehenden Hover-Scale der Karte abschwächen/entkoppeln */
+  #nebula-hub.cluster.cosmos-suite .subline {
+    margin-bottom: 1.5rem !important;
+  }
+}
+
+/* Basis: Inhalt pulsiert, Container fix */
+#nebula-hub .module-card {
+  overflow: hidden;
+}
+
+#nebula-hub .module-card .payload {
+  transition: transform .4s ease;
+}
+
 #nebula-hub .module-card:hover {
-  transform: translateY(-4px);   /* leichtes Lift-Feeling */
-  /* KEIN scale() mehr auf der Karte selbst */
+  transform: translateY(-4px);
 }
 
-/* Stattdessen den Inhalt skalieren – bleibt im Container */
 #nebula-hub .module-card:hover .payload {
   transform: scale(1.035);
 }
-/* Alle Card-Snippets – etwas dezenter */
+
+/* Snippet-Optimierung */
 #nebula-hub .module-card .card-snippet {
-  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem) !important;
+  font-size: clamp(.95rem, .9rem + .25vw, 1.05rem) !important;
   line-height: 1.45 !important;
   font-weight: 650 !important;
-  margin: 0 0 0.6rem !important;
-  letter-spacing: 0em !important;
+  margin: 0 0 .6rem !important;
 }
 
-/* Mobile (≤700px) – leicht betont, aber dezent */
-@media (max-width: 699.98px){
+@media (max-width: 699.98px) {
   #nebula-hub .module-card .card-snippet {
     font-size: 1.02rem !important;
     line-height: 1.42 !important;
   }
 }
 
-
-/* Alle Leistungs-Headlines (Webdesign, 3D Design, Grafikdesign) */
+/* Leistungs-Headlines */
 #nebula-hub .module-card h3 {
   font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.3rem) !important;
   line-height: 1.18 !important;
   font-weight: 870 !important;
   letter-spacing: -0.012em !important;
-  margin: 0.25rem 0 0.65rem !important;
+  margin: .25rem 0 .65rem !important;
   text-wrap: balance !important;
-  text-shadow: 0 1px 2px rgba(0,0,0,.25) !important; /* für bessere Lesbarkeit */
+  text-shadow: 0 1px 2px rgba(0,0,0,.25) !important;
 }
 
-/* Mobile (≤700px) – deutlich, aber nicht überdimensioniert */
-@media (max-width: 699.98px){
+@media (max-width: 699.98px) {
   #nebula-hub .module-card h3 {
     font-size: 1.5rem !important;
     line-height: 1.22 !important;
@@ -1016,172 +1278,175 @@
   }
 }
 
-/* === TOP-LOCK: Inhalt startet oben, CTA nach unten === */
-#nebula-hub .module-card .payload{
+/* TOP-LOCK */
+#nebula-hub .module-card .payload {
   display: flex !important;
   flex-direction: column !important;
-  justify-content: flex-start !important;  /* statt space-between */
-  gap: .6rem; /* angenehmer Innenabstand */
+  justify-content: flex-start !important;
+  gap: .6rem;
   min-height: 100%;
 }
 
-/* CTA an den Kartenboden schieben, Text bleibt oben */
-#nebula-hub .module-card .warp-cta{
+#nebula-hub .module-card .warp-cta {
   margin-top: auto !important;
   align-self: flex-start;
 }
 
-/* Konsistenter Startabstand unter dem Titel */
-#nebula-hub .module-card .payload > h3{
+#nebula-hub .module-card .payload > h3 {
   margin-bottom: .5rem !important;
 }
 
-/* Listen beginnen ohne zusätzlichen Außenabstand */
-#nebula-hub .module-card .payload > ul{
+#nebula-hub .module-card .payload > ul {
   margin: 0 !important;
 }
 
-/* Etwas „Luft“ am Kartenboden – nur auf größeren Viewports,
-   Mobile regelt das bereits deine Mobile-Styles mit absoluter CTA */
-@media (min-width: 700px){
-  #nebula-hub .module-card{
-    padding-bottom: calc(2.5rem + 10px) !important; /* dezenter Zusatzfreiraum */
+@media (min-width: 700px) {
+  #nebula-hub .module-card {
+    padding-bottom: calc(2.5rem + 10px) !important;
   }
 }
 
-/* Safety: Art/Dekor bleibt rein dekorativ und beeinflusst Layout nicht */
-#nebula-hub .module-card .overlay-art{
+#nebula-hub .module-card .overlay-art {
   pointer-events: none;
 }
-/* Fix: 700–719px -> Video-Karte höher */
-@media (min-width: 700px) and (max-width: 719.98px){
-  #nebula-hub .module-card.cinema-card{
-    min-height: 360px !important;   /* 320–400px je nach Geschmack */
-    aspect-ratio: 16 / 9 !important;/* hält eine stimmige Höhe/Wirkung */
+
+/* Video-Karte 700–719px */
+@media (min-width: 700px) and (max-width: 719.98px) {
+  #nebula-hub .module-card.cinema-card {
+    min-height: 360px !important;
+    aspect-ratio: 16 / 9 !important;
   }
-  #nebula-hub .module-card.cinema-card > video{
-    height: 100% !important; width: 100% !important;
-    object-fit: cover; object-position: center;
+  #nebula-hub .module-card.cinema-card > video {
+    height: 100% !important;
+    width: 100% !important;
   }
 }
-/* FIX: 1055–1151px -> 3 Spalten + Video über volle Breite in richtiger Höhe */
-@media (min-width: 1055px) and (max-width: 1151.98px){
-  #nebula-hub .orbit-grid{
+/* FIX: 1055–1151px → 3 Spalten + Video über volle Breite */
+@media (min-width: 1055px) and (max-width: 1151.98px) {
+
+  #nebula-hub .orbit-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     gap: 2rem !important;
     align-items: stretch;
   }
 
-  /* Video-Karte über alle 3 Spalten + echte Höhe bereitstellen */
-  #nebula-hub .module-card.cinema-card{
+  #nebula-hub .module-card.cinema-card {
     grid-column: 1 / -1 !important;
     position: relative !important;
     padding: 0 !important;
-    aspect-ratio: 16 / 9 !important;   /* liefert Höhe, obwohl Video absolut ist */
-    min-height: 360px !important;      /* Sicherheitsnetz für schmalere Screens */
+    aspect-ratio: 16 / 9 !important;
+    min-height: 360px !important;
     display: block !important;
     overflow: hidden;
   }
 
-  #nebula-hub .module-card.cinema-card > video{
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center;
+  #nebula-hub .module-card.cinema-card > video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 }
 
-/* ⛔️ Kein Lift/Scale auf Touch-Geräten */
-@media (hover: none), (pointer: coarse){
+/* Kein Lift/Scale auf Touch-Geräten */
+@media (hover: none), (pointer: coarse) {
   #nebula-hub .module-card:hover,
-  #nebula-hub .module-card:active{
+  #nebula-hub .module-card:active {
     transform: none !important;
     box-shadow: 0 2px 10px rgba(0,0,0,.12) !important;
     animation: none !important;
     background-position: initial !important;
     z-index: auto !important;
   }
+
   #nebula-hub .module-card:hover .payload,
-  #nebula-hub .module-card:active .payload{
+  #nebula-hub .module-card:active .payload {
     transform: none !important;
   }
+
   #nebula-hub .module-card:hover::before,
-  #nebula-hub .module-card:active::before{
+  #nebula-hub .module-card:active::before {
     opacity: 0 !important;
     transform: none !important;
   }
 }
-/* Basis-Safety: Video füllt Karte, Karte schneidet sauber ab */
-#nebula-hub .module-card.cinema-card{
+
+/* Basis-Safety: Video füllt Karte */
+#nebula-hub .module-card.cinema-card {
   position: relative;
-  overflow: hidden;           /* verhindert Scrollbars */
+  overflow: hidden;
 }
-#nebula-hub .module-card.cinema-card > video{
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center;
+
+#nebula-hub .module-card.cinema-card > video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   transform: none;
   will-change: transform;
 }
 
-/* 320–719.98px: nur das Video optisch größer (Karte bleibt gleich) */
-@media (min-width:320px) and (max-width:719.98px){
-  #nebula-hub .module-card.cinema-card > video{
-    transform: scale(1.3);   /* leicht heranzoomen */
+/* Video-Zoom: 320–720px */
+@media (min-width: 320px) and (max-width: 719.98px) {
+  #nebula-hub .module-card.cinema-card > video {
+    transform: scale(1.3);
     transform-origin: center;
   }
 }
 
-/* 1055–1151.98px: ebenfalls nur das Video heranzoomen */
-@media (min-width:1055px) and (max-width:1151.98px){
-  #nebula-hub .module-card.cinema-card > video{
-    transform: scale(1.3);   /* etwas stärker, wirkt präsenter */
+/* Video-Zoom: 1055–1151px */
+@media (min-width: 1055px) and (max-width: 1151.98px) {
+  #nebula-hub .module-card.cinema-card > video {
+    transform: scale(1.3);
     transform-origin: center;
   }
 }
+
 /* Headline-Split */
-.headline .word, .aurora-title .word { display:inline-block; overflow:hidden; padding-inline:0.02em; }
-.headline .chars, .aurora-title .chars { display:inline-block; }
-.headline .char,  .aurora-title .char  { display:inline-block; transform-origin:50% 80%; will-change: transform, opacity; }
+.headline .word,
+.aurora-title .word {
+  display: inline-block;
+  overflow: hidden;
+  padding-inline: 0.02em;
+}
+
+.headline .chars,
+.aurora-title .chars {
+  display: inline-block;
+}
+
+.headline .char,
+.aurora-title .char {
+  display: inline-block;
+  transform-origin: 50% 80%;
+  will-change: transform, opacity;
+}
 
 /* Card-H3-Split */
 .aether-card h3 .word,
-.cosmos-suite .module-card h3 .word { display:inline-block; overflow:hidden; padding-inline:0.02em; }
-.aether-card h3 .chars,
-.cosmos-suite .module-card h3 .chars { display:inline-block; }
-.aether-card h3 .char,
-.cosmos-suite .module-card h3 .char { display:inline-block; transform-origin:50% 80%; will-change: transform, opacity; }
-/* === FIX: Zwischen 1054px und 1152px -> nur 2 gleich große Karten nebeneinander === */
-@media (min-width: 1054px) and (max-width: 1152px) {
-  #nebula-hub .orbit-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 2rem !important;
-    align-items: stretch !important;
-    justify-items: center !important;
-  }
-
-  /* Karten sollen keine manuell gesetzten Spalten-Spans übernehmen */
-  #nebula-hub .module-card {
-    grid-column: auto / auto !important;
-    width: 100% !important;
-    height: 100% !important;
-  }
-
-  /* Video-/Cinema-Karte bleibt full-width */
-  #nebula-hub .module-card.cinema-card {
-    grid-column: 1 / -1 !important;
-    aspect-ratio: 16 / 9 !important;
-    min-height: 360px !important;
-  }
+.cosmos-suite .module-card h3 .word {
+  display: inline-block;
+  overflow: hidden;
+  padding-inline: 0.02em;
 }
 
+.aether-card h3 .chars,
+.cosmos-suite .module-card h3 .chars {
+  display: inline-block;
+}
 
+.aether-card h3 .char,
+.cosmos-suite .module-card h3 .char {
+  display: inline-block;
+  transform-origin: 50% 80%;
+  will-change: transform, opacity;
+}
 
-
-
-
-/* GSAP */
-/* Saubere Rendering-Pipeline für Listen */
-/* Saubere Rendering-Pipeline für Listen */
+/* GSAP – Rendering Pipeline für Listen */
 #nebula-hub .payload ul,
 #nebula-hub .payload ol {
   padding-left: 1.25rem;
@@ -1191,26 +1456,27 @@
   will-change: transform, opacity, filter;
   backface-visibility: hidden;
   transform: translateZ(0);
-  /* Verhindert Layout-Jumps bei einzeiligen LIs */
   contain: layout paint style;
 }
-/* 📵 Ab Tablet & Desktop: p, card-snippet & snippet ausblenden */
+
+/* Tablet & Desktop: Snippets ausblenden */
 @media (min-width: 700px) {
   #nebula-hub .module-card .card-snippet,
   #nebula-hub .module-card .snippet {
     display: none !important;
   }
 }
-/* === 1) Karten-Headline (h3) auf Tablet & Desktop größer machen === */
+
+/* H3 größer ab Tablet */
 @media (min-width: 700px) {
   #nebula-hub .module-card h3 {
     font-size: clamp(1.8rem, 1.4rem + 1.2vw, 2.4rem) !important;
     line-height: 1.2 !important;
-    text-align: left !important; /* bleibt links auf großen Geräten */
+    text-align: left !important;
   }
 }
 
-/* === 2) Mobile: Texte & Überschriften in der Karte zentrieren === */
+/* Mobile: zentrierter Text */
 @media (max-width: 699px) {
   #nebula-hub .module-card h3,
   #nebula-hub .module-card p,
@@ -1222,14 +1488,14 @@
     margin-right: auto !important;
   }
 
-  /* Optional: CTA-Button auch mittig */
   #nebula-hub .module-card .warp-cta {
     display: inline-block;
     margin-left: auto !important;
     margin-right: auto !important;
   }
 }
-/* === 1) Größere Karten-Überschrift auf ALLEN Geräten === */
+
+/* Noch größere H3 global */
 #nebula-hub .module-card h3 {
   font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.4rem) !important;
   font-weight: 800 !important;
@@ -1237,7 +1503,6 @@
   letter-spacing: -0.01em !important;
 }
 
-/* === 2) Ab Tablet & Desktop (≥700px) ruhig noch etwas größer === */
 @media (min-width: 700px) {
   #nebula-hub .module-card h3 {
     font-size: clamp(1.8rem, 1.4rem + 1.4vw, 2.6rem) !important;
@@ -1245,7 +1510,6 @@
   }
 }
 
-/* === 3) Handy (≤699px): alles mittig ausrichten – Überschrift & Texte === */
 @media (max-width: 699px) {
   #nebula-hub .module-card h3,
   #nebula-hub .module-card p,
@@ -1257,7 +1521,6 @@
     margin-right: auto !important;
   }
 
-  /* CTA/Button ebenfalls mittig */
   #nebula-hub .module-card .warp-cta {
     display: inline-block;
     margin-left: auto !important;
@@ -1265,14 +1528,15 @@
   }
 }
 
-/* ================================
-   COSMOS — MOBILE PRO CLEAN (≤699px)
-   ================================= */
-@media (max-width: 699.98px){
+/* COSMOS — MOBILE PRO CLEAN */
+@media (max-width: 699.98px) {
 
-  /* 0) Bühne & Grid */
-  #nebula-hub.cosmos-suite{ padding-top: 2rem !important; padding-bottom: 2rem !important; }
-  #nebula-hub .orbit-grid{
+  #nebula-hub.cosmos-suite {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  #nebula-hub .orbit-grid {
     grid-template-columns: 1fr !important;
     gap: 1rem !important;
     max-width: 620px !important;
@@ -1280,28 +1544,31 @@
     justify-items: stretch !important;
   }
 
-  /* 1) Card-Container – ruhig & präzise */
-  #nebula-hub .module-card{
-    /* Hintergrund bleibt wie definiert – wir ändern keine Farben */
+  #nebula-hub .module-card {
     padding: 16px 16px 18px !important;
     border-radius: 14px !important;
     border: 1px solid rgba(255,255,255,.18) !important;
     box-shadow: 0 6px 16px rgba(0,0,0,.18) !important;
-    display: flex !important; flex-direction: column !important; align-items: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
     gap: 10px !important;
     text-align: center !important;
     overflow: hidden !important;
   }
 
-  /* 1a) Deko/Glare/GIF/Corner-Videos auf Mobile neutralisieren */
   #nebula-hub .module-card::before,
-  #nebula-hub .module-card::after{ content: none !important; }
+  #nebula-hub .module-card::after {
+    content: none !important;
+  }
+
   #nebula-hub .module-card .overlay-art,
   #nebula-hub .module-card .corner-video,
-  #nebula-hub .module-card .corner-gif{ display:none !important; }
+  #nebula-hub .module-card .corner-gif {
+    display: none !important;
+  }
 
-  /* 2) Headline – groß, clean, ohne Schatten */
-  #nebula-hub .module-card h3{
+  #nebula-hub .module-card h3 {
     font-size: clamp(1.45rem, 1.15rem + 2.6vw, 1.75rem) !important;
     line-height: 1.22 !important;
     font-weight: 820 !important;
@@ -1311,15 +1578,13 @@
     max-width: 24ch !important;
   }
 
-  /* 3) Teaser/Kurztext – max. 2 Zeilen, ruhige Lesbarkeit */
   #nebula-hub .module-card .card-snippet,
   #nebula-hub .module-card .snippet,
-  #nebula-hub .module-card p{
+  #nebula-hub .module-card p {
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
-
     font-size: 1.02rem !important;
     line-height: 1.45 !important;
     font-weight: 600 !important;
@@ -1328,21 +1593,27 @@
     max-width: 34ch !important;
   }
 
-  /* 4) Lange Listen mobil ausblenden (cleaner Hero-Card-Look) */
   #nebula-hub .module-card .payload > ul,
-  #nebula-hub .module-card li{ display:none !important; }
+  #nebula-hub .module-card li {
+    display: none !important;
+  }
 
-  /* 5) CTA – klarer Abstand, nicht absolut, volle Breite bis max */
-  #nebula-hub .module-card .warp-cta{
+  #nebula-hub .module-card .warp-cta {
     position: static !important;
     align-self: center !important;
-    width: 100% !important; max-width: 420px !important;
+    width: 100% !important;
+    max-width: 420px !important;
     min-height: 44px !important;
     margin-top: 10px !important;
 
-    display: inline-flex !important; align-items: center; justify-content: center;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
     padding: 0 14px !important;
-    font-size: .98rem !important; font-weight: 700 !important; letter-spacing: .01em !important;
+    font-size: .98rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .01em !important;
 
     border-radius: 12px !important;
     border: 1px solid rgba(255,255,255,.28) !important;
@@ -1350,29 +1621,36 @@
     box-shadow: 0 2px 8px rgba(0,0,0,.18) !important;
   }
 
-  /* 6) Video-Card – schlicht, mit Radius */
-  #nebula-hub .module-card.cinema-card{
-    padding: 0 !important; aspect-ratio: 16/9 !important;
-    border-radius: 14px !important; overflow: hidden !important;
+  #nebula-hub .module-card.cinema-card {
+    padding: 0 !important;
+    aspect-ratio: 16/9 !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
   }
-  #nebula-hub .module-card.cinema-card > video{ object-fit: cover !important; transform: none !important; }
 
-  /* 7) Keine Hover-Animationen auf Touch */
-  @media (hover:none), (pointer:coarse){
-    #nebula-hub .module-card:hover{ transform:none !important; box-shadow: 0 6px 16px rgba(0,0,0,.18) !important; }
+  #nebula-hub .module-card.cinema-card > video {
+    object-fit: cover !important;
+    transform: none !important;
   }
-}/* ✅ FINAL OVERRIDE – Mobile: nur anwenden, wenn ein Button existiert */
-@media (max-width: 699.98px){
 
-  /* Nur Module-Cards mit Button (.warp-cta) */
-  #nebula-hub .module-card:has(.warp-cta){
+  @media (hover:none), (pointer:coarse) {
+    #nebula-hub .module-card:hover {
+      transform: none !important;
+      box-shadow: 0 6px 16px rgba(0,0,0,.18) !important;
+    }
+  }
+}
+/* FINAL OVERRIDE – Mobile: nur anwenden, wenn ein Button existiert */
+@media (max-width: 699.98px) {
+
+  #nebula-hub .module-card:has(.warp-cta) {
     --cta-h: 44px;
     --cta-gap: 16px;
     padding-bottom: calc(var(--cta-h) + var(--cta-gap) + 10px) !important;
-    position: relative; /* wichtig für absolutes Positionieren des CTA */
+    position: relative;
   }
 
-  #nebula-hub .module-card:has(.warp-cta) .warp-cta{
+  #nebula-hub .module-card:has(.warp-cta) .warp-cta {
     position: absolute !important;
     left: 50% !important;
     bottom: 10px !important;
@@ -1380,6 +1658,315 @@
     margin: 0 !important;
     min-height: var(--cta-h) !important;
   }
+}
+
+/* COSMOS CTA – wie .charm-cta */
+#nebula-hub .warp-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem;
+
+  min-height: 44px;
+  padding: .6rem 1.2rem;
+  border-radius: var(--radius, 999px);
+
+  font-weight: 950;
+  letter-spacing: -0.01em;
+  font-size: clamp(1.02rem, .98rem + .35vw, 1.14rem);
+  line-height: 1.28;
+  text-decoration: none;
+  white-space: nowrap;
+
+  border: 1px solid color-mix(in oklab, #ffffff 78%, transparent);
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.18),
+    rgba(255,255,255,.06)
+  );
+  color: #ffffff;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.36),
+    0 2px 8px rgba(0,0,0,.26);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  overflow: hidden;
+}
+
+#nebula-hub .warp-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 0;
+
+  background: radial-gradient(
+    120% 140% at 0% 0%,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 35%,
+    transparent 60%
+  );
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  opacity: .95;
+}
+
+#nebula-hub .warp-cta > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (hover:hover) {
+  #nebula-hub .warp-cta:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 14px 34px rgba(0,0,0,.40),
+      0 4px 10px rgba(0,0,0,.26);
+  }
+  #nebula-hub .warp-cta:active {
+    transform: translateY(0);
+    box-shadow:
+      0 8px 18px rgba(0,0,0,.30),
+      0 2px 6px rgba(0,0,0,.18);
+  }
+}
+
+#nebula-hub .warp-cta:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.9),
+    0 0 0 6px color-mix(in oklab, var(--primary, #ff6600) 55%, transparent),
+    0 12px 28px rgba(0,0,0,.40);
+}
+
+/* Mobile – Korrekte Zentrierung */
+@media (max-width: 699.98px) {
+
+  #nebula-hub .orbit-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    max-width: 100% !important;
+    margin-inline: auto !important;
+    justify-items: center !important;
+  }
+
+  #nebula-hub .module-card {
+    width: 100% !important;
+    max-width: 450px !important;
+    margin-inline: auto !important;
+
+    --cta-h: 44px;
+    padding: 1.5rem 1.5rem calc(var(--cta-h) + 1.2rem) !important;
+    min-height: 160px !important;
+
+    border-radius: 14px !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,.12) !important;
+  }
+
+  #nebula-hub .module-card > .payload > .warp-cta {
+    bottom: 16px !important;
+    width: 90% !important;
+    max-width: 320px !important;
+    text-align: center !important;
+  }
+
+  #nebula-hub.cluster.cosmos-suite .subline {
+    margin: 0 auto 2.2rem !important;
+    max-width: 550px !important;
+  }
+}
+
+@media (max-width: 699.98px) {
+  #nebula-hub.cosmos-suite {
+    margin-top: 2rem !important;
+    margin-bottom: 4rem !important;
+  }
+}
+
+/* Headline Fix */
+#nebula-hub.cosmos-suite .headline .word {
+  overflow: visible !important;
+  padding-inline: 0.03em !important;
+}
+
+#nebula-hub.cosmos-suite .headline {
+  line-height: 1.14 !important;
+  padding-bottom: 0.08em !important;
+}
+
+/* Bildmaskierung Overlay */
+#nebula-hub .module-card .overlay-art img {
+  mask-image: linear-gradient(
+    to right,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0.45) 15%,
+    rgba(0,0,0,0.85) 35%,
+    rgba(0,0,0,1) 55%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to right,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0.45) 15%,
+    rgba(0,0,0,0.85) 35%,
+    rgba(0,0,0,1) 55%
+  );
+}
+
+/* ============================================================
+   COSMOS TYPO – AURORA IDENTISCH
+   ============================================================ */
+#nebula-hub.cosmos-suite .headline,
+#nebula-hub.cosmos-suite h2 {
+  font-family: var(--wrf-font, ui-sans-serif);
+  font-size: clamp(2.3rem, 1.4rem + 2.2vw, 3.2rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.018em !important;
+  line-height: 1.12 !important;
+
+  max-width: 38rem !important;
+  margin-inline: auto !important;
+  margin-bottom: 1rem !important;
+  text-wrap: balance !important;
+}
+
+#nebula-hub.cosmos-suite .subline {
+  font-family: var(--wrf-font, ui-sans-serif);
+  font-size: clamp(1.1rem, 1rem + .55vw, 1.25rem) !important;
+  font-weight: 500 !important;
+  letter-spacing: .003em !important;
+  line-height: 1.68 !important;
+
+  max-width: 50rem !important;
+  margin-inline: auto !important;
+  margin-bottom: 3rem !important;
+
+  text-wrap: pretty !important;
+}
+
+#nebula-hub .module-card h3 {
+  font-family: var(--wrf-font, ui-sans-serif);
+  font-size: clamp(1.3rem, 1.2rem + .8vw, 1.9rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.22 !important;
+  margin: .2rem 0 .6rem !important;
+  max-width: 28ch !important;
+  text-wrap: balance !important;
+}
+
+#nebula-hub .module-card ul li {
+  font-family: var(--wrf-font, ui-sans-serif);
+  font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem) !important;
+  font-weight: 690 !important;
+  letter-spacing: -.002em !important;
+  line-height: 1.7 !important;
+  text-wrap: pretty !important;
+  hyphens: auto !important;
+  max-width: 62ch !important;
+}
+
+#nebula-hub .warp-cta {
+  font-family: var(--wrf-font, ui-sans-serif);
+  font-weight: 950 !important;
+  font-size: clamp(1.02rem, .98rem + .35vw, 1.14rem) !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.25 !important;
+}
+/* ================================================
+   SERVICE–CARDS – INDIVIDUAL GRADIENTS (IDENTISCH)
+   ================================================ */
+
+/* Webdesign */
+#svc-webdesign.module-card {
+  background: linear-gradient(270deg, #030053, #240066, #090087) !important;
+  background-size: 320% 320% !important;
+  background-position: 52% 8% !important;
+}
+
+/* 3D Design */
+#svc-3d.module-card {
+  background: linear-gradient(135deg, #101010, #000420, #101010) !important;
+  background-size: 360% 360% !important;
+  background-position: 44% 54% !important;
+}
+
+/* Grafikdesign */
+#svc-grafik.module-card {
+  background: linear-gradient(135deg, #ff5100, #ff0044, #ff5100) !important;
+  background-size: 400% 400% !important;
+  background-position: 60% 6% !important;
+}
+
+/* Social Media */
+#svc-social.module-card {
+  background: linear-gradient(135deg, #0d0d0d, #000e5c, #0d0d0d) !important;
+  background-size: 300% 300% !important;
+  background-position: 50% 50% !important;
+}
+
+/* SAFETY — Bei Hover verschieben sich BGs */
+#nebula-hub .module-card:hover {
+  background-position: 80% 40% !important;
+}
+
+/* BG bei Touch fixieren */
+@media (hover:none), (pointer:coarse) {
+  #nebula-hub .module-card {
+    background-position: initial !important;
+  }
+
+  #nebula-hub .module-card:hover {
+    background-position: initial !important;
+  }
+}
+
+/* ================================================
+   ENDE DER DATEI — (CosmosSuite.css)
+   ================================================ */
+/* ===========================================
+   COSMOS – MOBILE TIGHT GUTTERS (FINAL OVERRIDE)
+   Weniger Außenabstand an den Bildschirmrändern
+   =========================================== */
+@media (max-width: 699.98px) {
+
+  /* Section insgesamt enger an den Rand */
+  #nebula-hub.cosmos-suite {
+    padding-top: 1.4rem !important;
+    padding-bottom: 2.2rem !important;
+    margin-top: 0.75rem !important;
+    margin-bottom: 1.75rem !important;
+  }
+
+  /* Grid füllt 90% der Breite – und zentriert */
+  #nebula-hub .orbit-grid {
+    max-width: 95% !important;
+    width: 95% !important;
+    margin-inline: auto !important; /* <<< zentriert */
+    gap: 1.1rem !important;
+    align-content: center !important;
+    justify-items: center !important; /* <<< sorgt dafür, dass Cards mittig stehen */
+  }
+
+  /* Karten zentrieren + Innenabstand enger */
+  #nebula-hub .module-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-inline: auto !important; /* <<< Card selbst zentriert */
+    border-radius: 12px !important;
+    padding-left: 1.1rem !important;
+    padding-right: 1.1rem !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .18) !important;
+  }
+
+  /* CTA-Buttons dürfen die volle Breite nutzen */
+  #nebula-hub .module-card > .payload > .warp-cta {
+    max-width: 100% !important;
+  }
+
 
 }
 

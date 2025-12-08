@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fusion³ – UX & Webdesign Studio</title>
+  <meta name="description" content="Fusion³ ist dein Partner für UX-Design, Webdesign & Prototyping. Wir gestalten digitale Erlebnisse mit Substanz.">
+
+  <!-- Google Fonts Optimierung -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" media="all" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  </noscript>
+
+  <!-- Lokale Fonts optimieren -->
+  <link rel="preload" as="style" href="./fonts/fonts.css">
+  <link rel="stylesheet" href="./fonts/fonts.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="./fonts/fonts.css"></noscript>
+
+  <!-- Optional Scripts -->
+  <!-- Module: ohne defer (Module laden implizit deferred) -->
+  <script type="module" src="https://unpkg.com/feather-icons"></script>
+  <!-- Legacy Fallback -->
+  <script nomodule src="feather-icons.legacy.js"></script>
+  <!-- Normales Script kann defer tragen -->
+  <script src="https://unpkg.com/scrollreveal" defer></script>
+
+  <!-- Analytics Beispiel -->
+  <script>
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "t1mbvlhldj");
+  </script>
+
+  <!-- ===============================
+       GLOBAL CSS
+       =============================== -->
+  <style>
+    :root{
+      --accent:#0062ff;
+      --text:#111;
+      --muted:#555;
+      --border:rgba(0,0,0,.08);
+      --surface:#ffffff;
+      --container-width: min(95vw, 1340px);
+      --header-pad-y: .75rem;
+      --radius: 12px;
+      --primary: #ff4d00;
+      --secondary: #ff9900;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --text:#f5f7fa;
+        --muted:#b7bec7;
+        --border:rgba(255,255,255,.12);
+        --surface:#000000;
+      }
+    }
+    :root[data-theme="dark"]{
+      --text:#f5f7fa;
+      --muted:#b7bec7;
+      --border:rgba(255,255,255,.12);
+      --surface:#000000;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,sans-serif;
+      background:#fff;
+      color:var(--text);
+      scroll-behavior:smooth;
+    }
+    :root[data-theme="dark"] body{ background:#000 }
+
+    a{color:inherit;text-decoration:none;transition:color .2s ease,opacity .2s ease}
+    h1,h2,h3,h4{font-weight:900;letter-spacing:-.02em}
+    .container{max-width:var(--container-width);margin:0 auto;padding:5rem 2rem}
+    .section-title{font-size:clamp(2rem, 1.2rem + 2.4vw, 2.8rem);text-align:center;margin-bottom:.5rem;color:var(--text);font-weight:700;letter-spacing:-.02em}
+
+    /* Skip-Link */
+    .skip-link{ position:absolute; left:-9999px; top:auto; z-index:1000; }
+    .skip-link:focus{
+      left:auto; top:.5rem; inset-inline-start:.5rem;
+      background:#000; color:#fff; padding:.5rem .75rem; border-radius:.5rem;
+    }
+
+    /* ===== HERO (Video) ===== */
+    main{ display:block; }
+
+    .hero-video-wrapper {
+      position: relative;
+      min-height: 100svh;
+      width: 100%;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      background: #000 url('./IndexM/PC.webp') center/cover no-repeat;
+    }
+    @media (max-width: 1024px) { .hero-video-wrapper { background-image: url('./IndexM/Tablet.webp'); } }
+    @media (max-width: 480px)  { .hero-video-wrapper { background-image: url('./IndexM/handy.webp'); } }
+
+    .hero-video-content{
+      position: relative; z-index: 2;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding: 3rem 2rem; max-width: 800px; width: 100%;
+      color:#fff; text-align:center; border-radius:12px;
+      background-color:#2a2a2a63; margin-top:-5rem;
+    }
+    .hero-video-content::before{ content:none !important; }
+
+    .video-background{
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; object-position:center; z-index:0; pointer-events:none;
+    }
+
+    .hero-video-content h1{ font-size:3.8rem; line-height:1.1; margin-bottom:1.2rem; color:#fff; }
+    .hero-video-content p { font-size:1.3rem; line-height:1.6; color:rgba(255,255,255,.85); }
+
+    .cta-btn{
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      color:#fff; font-weight:700; padding:1rem 2.2rem; border-radius:12px;
+      font-size:1rem; text-transform:uppercase; margin-top:2rem; border:none;
+      box-shadow:0 0 12px rgba(255,102,0,.3), 0 0 24px rgba(255,102,0,.25);
+      transition:all .3s ease; display:inline-block; text-decoration:none;
+    }
+    .cta-btn:hover,.cta-btn:focus{
+      background:var(--secondary); color:#000; transform:scale(1.03);
+      cursor:pointer; outline:2px solid var(--primary); outline-offset:4px;
+    }
+
+    .video-fallback-image{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; z-index:0; pointer-events:none; }
+
+    @media (max-width:1024px){
+      .hero-video-content{ padding:2rem; }
+      .hero-video-content h1{ font-size:3rem; }
+      .hero-video-content p { font-size:1.1rem; line-height:1.5; }
+    }
+    @media (max-width:768px){
+      .hero-video-content{ padding:1.5rem; margin-top:0; }
+      .hero-video-content h1{ font-size:2.2rem; line-height:1.2; }
+      .hero-video-content p { font-size:1rem; line-height:1.4; }
+      .cta-btn{ font-size:.95rem; padding:.75rem 1.5rem; width:auto; max-width:90%; margin:1.5rem auto 0; }
+    }
+    @media (max-width:480px){
+      .hero-video-content h1{ font-size:1.6rem; line-height:1.3; }
+      .hero-video-content p { font-size:.95rem; }
+    }
+    @media (max-width:425px){
+      .cta-btn{ width:100%; max-width:180px; font-size:.9rem; padding:.9rem 1.2rem; text-align:center; margin-inline:auto; }
+    }
+
+    @media (min-width:1025px){
+      .video-background{
+        top:50%; left:50%; width:auto; height:110%;
+        transform:translate(-50%,-50%); object-fit:contain;
+      }
+    }
+    @media (min-width:832px) and (max-width:1024px) and (max-height:832px){
+      .video-background{
+        top:50%; left:50%; width:auto; height:110%;
+        transform:translate(-50%,-50%); object-fit:contain;
+      }
+    }
+  </style>
+
+  <style>
+    /* ===== Section Headings – Root Tokens ===== */
+    :root{
+      --sec-title-fs: clamp(2rem, 1.5rem + 2vw, 3rem);
+      --sec-title-fw: 900;
+      --sec-title-ls: -0.02em;
+      --sec-title-mb: 0rem;
+      --sec-title-color: var(--text-main, #1c1c1e);
+      --sec-sub-fs: 1.1rem;
+      --sec-sub-color: #666;
+      --sec-sub-mb: 2rem;
+      --sec-sub-lh: 1.5;
+      --sec-sub-max: 65ch;
+    }
+    .section-title{
+      font-size: var(--sec-title-fs);
+      font-weight: var(--sec-title-fw);
+      letter-spacing: var(--sec-title-ls);
+      margin: 0 0 var(--sec-title-mb);
+      color: var(--sec-title-color);
+      text-align: center;
+    }
+    .section-subtitle{
+      font-size: var(--sec-sub-fs);
+      color: var(--sec-sub-color);
+      margin: 0 0 var(--sec-sub-mb);
+      line-height: var(--sec-sub-lh);
+      max-width: var(--sec-sub-max);
+      margin-inline: auto;
+      text-align: center;
+    }
+    :is(.persona-title){ all:unset; display:block; }
+    :is(.persona-subline){ all:unset; display:block; }
+    .persona-title{
+      font-size: var(--sec-title-fs);
+      font-weight: var(--sec-title-fw);
+      letter-spacing: var(--sec-title-ls);
+      margin: 0 0 var(--sec-title-mb);
+      color: var(--sec-title-color);
+      text-align: center;
+    }
+    .persona-subline{
+      font-size: var(--sec-sub-fs);
+      color: var(--sec-sub-color);
+      margin: 0 0 var(--sec-sub-mb);
+      line-height: var(--sec-sub-lh);
+      max-width: var(--sec-sub-max);
+      margin-inline: auto;
+      text-align: center;
+    }
+    :root[data-theme="dark"] .section-title,
+    :root[data-theme="dark"] .persona-title{ color:#fff; }
+    :root[data-theme="dark"] .section-subtitle,
+    :root[data-theme="dark"] .persona-subline{ color:#fff; }
+    @media (prefers-color-scheme: dark){
+      :root[data-theme="auto"] .section-title,
+      :root[data-theme="auto"] .persona-title{ color:#fff; }
+      :root[data-theme="auto"] .section-subtitle,
+      :root[data-theme="auto"] .persona-subline{ color:#fff; }
+    }
+  </style>
+
+
+  
+  <!-- Titelpage-spezifische Bild-Overrides (in den Head verschoben) -->
+  <style>
+    body[data-page="titlepage"] .hero-image-background {
+      background-image: url("./images/hero-bg-sky_1hero-bg-sky.webp") !important;
+    }
+    body[data-page="titlepage"] .hero-image-foreground {
+      background-image: url("./images/titlepage-fg.webp") !important;
+    }
+    @media (max-width: 1024px) {
+      body[data-page="titlepage"] .hero-image-foreground {
+        background-image: url("./images/titlepage-fg-tablet.webp") !important;
+      }
+    }
+    @media (max-width: 480px) {
+      body[data-page="titlepage"] .hero-image-foreground {
+        background-image: url("./images/titlepage-fg-mobile.webp") !important;
+      }
+    }
+  </style>
+
+<link rel="stylesheet" href="../css/navbar.css" type="text/css">
+<link rel="stylesheet" href="../css/darkmodeLast.css" type="text/css">
+<style>
+/* --------------------------
+   Lokale Bild-Overrides nur für webdesign.html
+--------------------------- */
+body[data-page="webdesign"] .hero-image-background {
+  background-image: url("./WebdesignPic/1.mp4") !important;
+}
+
+body[data-page="webdesign"] .hero-image-foreground {
+  background-image: url("./images/hintegrundweb.webp") !important;
+}
+
+/* Optional: Mobile- oder Tablet-Varianten */
+@media (max-width: 1024px) {
+  body[data-page="webdesign"] .hero-image-foreground {
+    background-image: url("./images/webdesign-bg-tablet.webp") !important;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page="webdesign"] .hero-image-foreground {
+    background-image: url("./images/webdesign-bg-mobile.webp") !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-image-foreground {
+    transform: translateY(10%);              /* dein bisheriger Versatz */
+  }
+}
+@media (min-width: 1400px) {
+  .hero-image-foreground {
+    transform: translateY(15%);              /* dein bisheriger Versatz */
+  }
+}
+@media (min-width: 1800px) {
+  .hero-image-foreground {
+    transform: translateY(15%);              /* dein bisheriger Versatz */
+  }
+}
+@media (min-width: 2200px) {
+  .hero-image-foreground {
+    transform: translateY(7%);              /* dein bisheriger Versatz */
+  }
+}
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .hero-section {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .hero-images-wrapper {
+    position: relative;
+    width: 100%;      /* statt 100vw, verhindert Scrollbar-Lücke links */
+    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden; /* falls Kinder minimal überstehen */
+  }
+
+  .hero-image-background,
+  .hero-image-foreground {
+    position: absolute;
+    inset: 0;         /* top/right/bottom/left = 0 */
+    width: 100%;
+    max-width: none;
+  }
+
+
+  /* Nur Handys: Hintergrund minimal „herauszoomen“ */
+@media (max-width: 767px) {
+  .hero-image-foreground {
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    margin: 0 !important;                  /* falls woanders Mobile-Margins gesetzt sind */
+        transform: translateY(17%);              /* dein bisheriger Versatz */
+  }
+}
+/* Ergänzung am Ende deiner bestehenden CSS-Datei */
+.hero-image-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* blockiert keine Klicks */
+  z-index: 0;
+}
+
+
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script/aurora.js" defer></script>
+<script src="script/cosmos.js" defer></script>
+<script src="script/panetransition.js" defer></script>
+<script src="script/ArbeitsprobenBilder.js" defer></script>
+  <script src="script/freewireframe.js" defer></script>
+</head>
+
+<body data-page="titlepage">
+  <!-- dein Body-Inhalt hier -->
+
+
+
+
+
+
+<header class="aether-header" id="aetherGate">
+  <div class="aether-header__bar">
+    <a href="/" class="sigil-mark">Fusion³</a>
+
+    <!-- NAV mit Subnav-Accordions (mobil sichtbar) -->
+    <nav class="astral-nav" id="astralWay" aria-label="Hauptnavigation">
+      <ul class="astral-nav__list">
+
+
+                        <!-- Blog (vorher "Über uns" im Kommentar) -->
+<li class="astral-item">
+  <a class="astral-link" href="../index.html">Start</a>
+  <button
+    class="gatelet"
+    type="button"
+    aria-expanded="false"
+    aria-controls="codex-about"
+    aria-haspopup="true"
+    aria-label="Unterpunkte zu Blog ein- oder ausklappen">
+  </button>
+</li>
+
+
+
+        <!-- Portfolio -->
+        <li class="astral-item">
+          <a class="astral-link" href="../Gallerie.html">Portfolio</a>
+          <button
+            class="gatelet"
+            type="button"
+            aria-expanded="false"
+            aria-controls="vault-portfolio"
+            aria-haspopup="true"
+            aria-label="Unterpunkte zu Portfolio ein- oder ausklappen">
+          </button>
+        </li>
+
+        <!-- Leistungen -->
+        <li class="astral-item">
+<a class="astral-link" href="../index.html#nebula-hub">Leistungen</a>
+          <button
+            class="gatelet"
+            type="button"
+            aria-expanded="false"
+            aria-controls="grimoire-services"
+            aria-haspopup="true"
+            aria-label="Unterpunkte zu Leistungen ein- oder ausklappen">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul id="grimoire-services" class="underrealm" hidden>
+            <li><a class="astral-link astral-link--sub" href="../WebDesign.html">Webdesign</a></li>
+            <li><a class="astral-link astral-link--sub" href="../3DDesign.html">3D Design</a></li>
+            <li><a class="astral-link astral-link--sub" href="../Grafikdesign.html">Grafikdesign</a></li>
+          </ul>
+        </li>
+
+
+        <!-- Kontakt -->
+        <li class="astral-item">
+<a class="astral-link" href="index.html#kontakt">Kontakt</a>
+          <button
+            class="gatelet"
+            type="button"
+            aria-expanded="false"
+            aria-controls="altar-contact"
+            aria-haspopup="true"
+            aria-label="Unterpunkte zu Kontakt ein- oder ausklappen">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul id="altar-contact" class="underrealm" hidden>
+            <li><a class="astral-link astral-link--sub" href="../anfrage">Anfrage stellen</a></li>
+            <li><a class="astral-link astral-link--sub" href="../beratung">Beratung buchen</a></li>
+           <li><a class="astral-link astral-link--sub" href="../impressum">Impressum</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="astral-actions">
+      <!-- Theme Toggle -->
+      <button
+  class="orb-toggle"
+  id="eclipseStone"
+  type="button"
+  aria-pressed="true"
+  aria-controls="omenWhisper"
+  aria-label="Dunkelmodus aktiv">
+
+  <span class="sky day-sky" aria-hidden="true"></span>
+  <span class="sky night-sky" aria-hidden="true"></span>
+  <span class="stars" id="starField" aria-hidden="true"></span>
+
+  <span class="clouds" id="nebulaSea" aria-hidden="true">
+    <span class="leyline back" data-lane="back"></span>
+    <span class="leyline mid" data-lane="mid"></span>
+    <span class="leyline front" data-lane="front"></span>
+  </span>
+
+  <span class="thumb" id="moonShard" aria-hidden="true"></span>
+</button>
+      <!-- CTA (Link bleibt Link; kein role="button" nötig) -->
+      <a
+        class="charm-cta charm-cta--prime"
+        href="#kontakt"
+        id="sigilOffer"
+        aria-label="Angebot anfordern"
+        data-cta
+        data-cta-context="header">
+        <span class="charm-cta__label">Check starten</span>
+      </a>
+    </div>
+
+    <!-- Mobile Menü-Button -->
+    <button
+      class="portal-toggle"
+      id="runeSwitch"
+      type="button"
+      aria-expanded="false"
+      aria-controls="astralWay"
+      aria-label="Menü öffnen">
+      <svg class="icon icon-burger" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <svg class="icon icon-close" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+<div class="night-veil" id="voidVeil" hidden></div>
+
+</header>
+
+
+
+<script>
+  /* ---------------------------
+     Aether / Astral Navigation
+     --------------------------- */
+  (function(){
+    const docEl   = document.documentElement;
+    const gate    = document.getElementById('aetherGate');
+    const switchRune = document.getElementById('runeSwitch');
+    const astral  = document.getElementById('astralWay');
+    const veil    = document.getElementById('voidVeil');
+    if(!switchRune || !astral) return;
+
+    // Headerhöhe -> CSS Var
+    function setGateHeight(){
+      const h = gate.getBoundingClientRect().height;
+      docEl.style.setProperty('--gate-height', h + 'px');
+    }
+    setGateHeight();
+    addEventListener('resize', setGateHeight, {passive:true});
+
+    // MQ Sync
+    const mq = window.matchMedia('(min-width: 768px)');
+
+    // Mobile Actions Container
+    const mobileSatchelId = 'mobileSatchel';
+    let mobileSatchel = null;
+    function ensureSatchel(){
+      if(!mobileSatchel){
+        mobileSatchel = document.createElement('div');
+        mobileSatchel.id = mobileSatchelId;
+        mobileSatchel.className = 'astral-nav__mobile-actions';
+        mobileSatchel.setAttribute('hidden','');
+        astral.appendChild(mobileSatchel);
+      }
+    }
+    function stowCharm(){
+      ensureSatchel();
+      const cta = document.querySelector('.charm-cta');
+      if(cta && cta.parentElement !== mobileSatchel){ mobileSatchel.appendChild(cta); }
+      mobileSatchel.removeAttribute('hidden');
+    }
+    function recallCharm(){
+      const actions = document.querySelector('.astral-actions');
+      if(!actions) return;
+      const cta = mobileSatchel?.querySelector('.charm-cta');
+      if(cta && actions !== cta.parentElement){
+        actions.appendChild(cta);
+      }
+      mobileSatchel?.setAttribute('hidden','');
+    }
+
+    // Focus Trap
+    const ward = (()=>{
+      let active = false;
+      function handle(e){
+        if(!active || e.key !== 'Tab') return;
+        const focusables = astral.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+        const list = Array.from(focusables).filter(el=>!el.hasAttribute('disabled'));
+        if(list.length === 0) return;
+        const first = list[0];
+        const last  = list[list.length-1];
+        if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+      return {
+        activate(){ if(!active){ active = true; document.addEventListener('keydown', handle); }},
+        deactivate(){ if(active){ active = false; document.removeEventListener('keydown', handle); }}
+      };
+    })();
+
+    function sealUnderrealms(){
+      astral.querySelectorAll('.gatelet[aria-expanded="true"]').forEach(btn=>{
+        btn.setAttribute('aria-expanded','false');
+      });
+      astral.querySelectorAll('.underrealm:not([hidden])').forEach(ul=>{
+        ul.setAttribute('hidden','');
+      });
+      astral.querySelectorAll('.astral-item.is-awakened').forEach(li=>{
+        li.classList.remove('is-awakened');
+      });
+    }
+
+    function closePortal(){
+      astral.classList.remove('is-awakened');
+      veil?.classList.remove('is-awakened');
+      veil?.setAttribute('hidden', '');
+      switchRune.setAttribute('aria-expanded','false');
+      switchRune.setAttribute('aria-label','Menü öffnen');
+      docEl.classList.remove('nav-lock');
+      ward.deactivate();
+      document.querySelector('main')?.removeAttribute('inert');
+      sealUnderrealms();
+      recallCharm();
+      gate.classList.remove('portal-open'); /* Balken/Shadow fix */
+      switchRune.focus();
+    }
+    function openPortal(){
+      astral.classList.add('is-awakened');
+      veil?.classList.add('is-awakened');
+      veil?.removeAttribute('hidden');
+      switchRune.setAttribute('aria-expanded','true');
+      switchRune.setAttribute('aria-label','Menü schließen');
+      docEl.classList.add('nav-lock');
+
+      const firstLink = astral.querySelector('a');
+      if(firstLink) firstLink.focus();
+
+      ward.activate();
+      document.querySelector('main')?.setAttribute('inert', '');
+      stowCharm();
+      gate.classList.add('portal-open'); /* Balken/Shadow fix */
+    }
+    function syncState(){ if(mq.matches){ closePortal(); } }
+    mq.addEventListener?.('change', syncState);
+    syncState();
+
+    // Toggle Button
+    switchRune.addEventListener('click', function(){
+      const isOpen = astral.classList.contains('is-awakened');
+      if(isOpen) closePortal(); else openPortal();
+    });
+
+    // Overlay / Outside click
+    veil?.addEventListener('click', () => closePortal());
+    document.addEventListener('click', (e) => {
+      if(!astral.classList.contains('is-awakened')) return;
+      if (e.target.closest('.orb-toggle')) return; // Theme-Toggle schließt nicht
+      if(!astral.contains(e.target) && !switchRune.contains(e.target)) closePortal();
+    });
+
+    // ESC
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && astral.classList.contains('is-awakened')){
+        e.preventDefault(); closePortal();
+      }
+    });
+
+    // Scroll Shadow
+    addEventListener('scroll', () => {
+      const y = window.scrollY || 0;
+      gate.classList.toggle('is-ascended', y>4);
+    }, {passive:true});
+
+    // Scrollspy
+    const links = [...document.querySelectorAll('.astral-link')];
+    const linkMap = Object.fromEntries(links.map(a=>[a.getAttribute('href'), a]));
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const id = '#'+e.target.id;
+        if(e.isIntersecting){
+          links.forEach(l=>{ l.removeAttribute('data-active'); l.removeAttribute('aria-current'); });
+          const link = linkMap[id];
+          if(link){ link.setAttribute('data-active',''); link.setAttribute('aria-current','page'); }
+        }
+      });
+    }, {rootMargin:'-40% 0px -55% 0px', threshold:[0, 1]});
+    document.querySelectorAll('section[id]').forEach(s=>obs.observe(s));
+
+    // Smooth scroll Offset
+    links.forEach(a=>{
+      a.addEventListener('click', (ev)=>{
+        const href = a.getAttribute('href')||'';
+        if(href.startsWith('#')){
+          const target = document.getElementById(href.slice(1));
+          if(target){
+            ev.preventDefault();
+            const y = target.getBoundingClientRect().top + window.scrollY - (gate.getBoundingClientRect().height + 8);
+            window.scrollTo({top:y, behavior:'smooth'});
+            closePortal();
+          }
+        }
+      });
+    });
+  })();
+</script>
+<script>
+/* CTA Ripple (Namen mystisch gelassen, Klassen bereits umbenannt) */
+(function(){
+  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function makeRipple(btn, x, y){
+    if (prefersReduced) return;
+    const r = document.createElement('span');
+    r.className = 'cta-ripple';
+    r.style.left = x + 'px';
+    r.style.top  = y + 'px';
+    btn.appendChild(r);
+    r.offsetWidth; r.classList.add('is-anim');
+    r.addEventListener('animationend', ()=> r.remove(), {once:true});
+  }
+
+  function keyRipple(e){
+    if(e.key !== ' ' && e.key !== 'Enter') return;
+    const btn = e.currentTarget;
+    const rect = btn.getBoundingClientRect();
+    makeRipple(btn, rect.width/2, rect.height/2);
+  }
+
+  function setBusy(btn, busy=true){
+    btn.setAttribute('aria-busy', String(!!busy));
+    const live = btn.querySelector('[aria-live]');
+    if(live){ live.textContent = busy ? 'Lädt…' : 'Bereit'; }
+  }
+
+  document.querySelectorAll('[data-cta]').forEach(btn=>{
+    btn.addEventListener('pointerdown', e=>{
+      if(e.pointerType === 'mouse' || e.pointerType === 'touch' || e.pointerType === 'pen'){
+        const rect = btn.getBoundingClientRect();
+        makeRipple(btn, e.clientX - rect.left, e.clientY - rect.top);
+      }
+    });
+    btn.addEventListener('keydown', keyRipple);
+    btn.addEventListener('click', (e)=>{
+      const href = btn.getAttribute('href') || '';
+      const targetLocal = href.startsWith('#');
+      if(targetLocal){
+        setBusy(btn, true);
+        setTimeout(()=> setBusy(btn, false), 420);
+      }
+    }, {passive:true});
+  });
+})();
+</script>
+<script>
+/* Underrealm Toggle (Subnav) */
+(function(){
+  const nav = document.getElementById('astralWay');
+  if(!nav) return;
+
+  nav.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.gatelet');
+    if(!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+
+    const li  = btn.closest('.astral-item');
+    const id  = btn.getAttribute('aria-controls');
+    const sub = id ? document.getElementById(id) : li?.querySelector('.underrealm');
+    if(!li || !sub) return;
+
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+    // andere schließen
+    nav.querySelectorAll('.astral-item.is-awakened').forEach(other=>{
+      if(other !== li){
+        other.classList.remove('is-awakened');
+        const otherBtn = other.querySelector('.gatelet[aria-expanded="true"]');
+        const otherSub = other.querySelector('.underrealm');
+        if(otherBtn) otherBtn.setAttribute('aria-expanded','false');
+        if(otherSub) otherSub.setAttribute('hidden','');
+      }
+    });
+
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    li.classList.toggle('is-awakened', !isOpen);
+    sub.toggleAttribute('hidden', isOpen);
+  });
+
+  // Outside-Click schließt alles
+  document.addEventListener('click', (e)=>{
+    if(!nav.contains(e.target)){
+      nav.querySelectorAll('.astral-item.is-awakened').forEach(li=>{
+        li.classList.remove('is-awakened');
+        const b = li.querySelector('.gatelet[aria-expanded="true"]');
+        const s = li.querySelector('.underrealm');
+        if(b) b.setAttribute('aria-expanded','false');
+        if(s) s.setAttribute('hidden','');
+      });
+    }
+  });
+
+  // ESC schließt alle
+  document.addEventListener('keydown', (e)=>{
+    if(e.key !== 'Escape') return;
+    nav.querySelectorAll('.astral-item.is-awakened').forEach(li=>{
+      li.classList.remove('is-awakened');
+      const b = li.querySelector('.gatelet[aria-expanded="true"]');
+      const s = li.querySelector('.underrealm');
+      if(b) b.setAttribute('aria-expanded','false');
+      if(s) s.setAttribute('hidden','');
+    });
+  });
+})();
+</script>
+<script>
+  (function(){
+    const rootEl   = document.documentElement;
+    const bodyEl   = document.body;
+    const toggleEl = document.getElementById('eclipseStone');
+    const shard    = document.getElementById('moonShard');
+    const stars    = document.getElementById('starField');
+    const statusEl = document.getElementById('omenWhisper');
+
+    /* Sterne */
+    (function seedStars(){
+      if(!stars) return;
+      const N = 26;
+      const frag = document.createDocumentFragment();
+      for(let i=0;i<N;i++){
+        const el = document.createElement('i');
+        el.style.top = (5 + Math.random()*90) + '%';
+        el.style.left = (5 + Math.random()*90) + '%';
+        el.style.animationDelay = (Math.random()*2.5).toFixed(2)+'s';
+        frag.appendChild(el);
+      }
+      stars.appendChild(frag);
+    })();
+
+    /* Wolken */
+    (function seedClouds(){
+      const lanes = Array.from(document.querySelectorAll('[data-lane]'));
+      if(!lanes.length || !toggleEl) return;
+
+      const presets = {
+        back:  { count: 3, speed:[80,120], scale:[0.60,0.90],  opacity:[0.25,0.40] },
+        mid:   { count: 3, speed:[60, 90], scale:[0.80,1.00],  opacity:[0.50,0.70] },
+        front: { count: 2, speed:[45, 70], scale:[1.00,1.15],  opacity:[0.85,0.95] }
+      };
+
+      function render(){
+        lanes.forEach(l=>l.innerHTML = '');
+        const rect = toggleEl.getBoundingClientRect();
+        const W = Math.max(60, Math.round(rect.width));
+        const H = Math.max(24, Math.round(rect.height));
+        lanes.forEach(lane=>{
+          const cfg = presets[lane.dataset.lane];
+          for(let i=0;i<cfg.count;i++){
+            const cloud = document.createElement('span');
+            cloud.className = 'cloud';
+
+            const minW = Math.max(0.28*W, 36);
+            const maxW = Math.max(0.46*W, 54);
+            const cw   = randf(minW, maxW);
+            const ch   = cw*0.5;
+
+            cloud.style.width  = cw+'px';
+            cloud.style.height = ch+'px';
+
+            const freeY = Math.max(0, H - ch);
+            cloud.style.top  = (freeY ? randf(0, freeY) : 0) + 'px';
+
+            cloud.style.left = (Math.max(0, W - cw) ? randf(0, W - cw) : 0) + 'px';
+
+            const dur = rand(cfg.speed[0], cfg.speed[1]);
+            cloud.style.animationDuration = dur+'s';
+            cloud.style.animationDelay = (-Math.random()*dur).toFixed(2)+'s';
+            cloud.style.opacity = randf(cfg.opacity[0], cfg.opacity[1]);
+            cloud.style.transform = `translateX(0) scale(${randf(cfg.scale[0], cfg.scale[1])})`;
+
+            ['b1','b2','b3','b4','b5'].forEach((b,idx)=>{
+              const s = document.createElement('span');
+              s.className = 'bubble '+b;
+              const w = [0.58,0.50,0.66,0.38,0.42][idx] * (0.92 + Math.random()*0.16);
+              const h = [0.78,0.70,0.88,0.58,0.62][idx] * (0.92 + Math.random()*0.16);
+              s.style.width  = (w*100)+'%';
+              s.style.height = (h*100)+'%';
+              const lefts = [10,38,46,-2,22];
+              const tops  = [12,-4,12,28,28];
+              s.style.left = (lefts[idx] + (Math.random()*4-2))+'%';
+              s.style.top  = (tops[idx]  + (Math.random()*4-2))+'%';
+              cloud.appendChild(s);
+            });
+
+            lane.appendChild(cloud);
+          }
+        });
+      }
+
+      function rand(min,max){ return Math.floor(min + Math.random()*(max-min+1)); }
+      function randf(min,max){ return +(min + Math.random()*(max-min)).toFixed(2); }
+
+      let t;
+      const onResize = () => { clearTimeout(t); t = setTimeout(render, 120); };
+      render();
+      addEventListener('resize', onResize, {passive:true});
+    })();
+
+    const KEY = 'theme-pref';
+    function apply(mode){ // 'dark' | 'light'
+      const isDark = (mode === 'dark');
+      bodyEl.classList.toggle('nocturne', isDark);
+      bodyEl.classList.toggle('dawn', !isDark);
+      rootEl.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      if(toggleEl) toggleEl.setAttribute('aria-pressed', String(isDark));
+      if(statusEl) statusEl.textContent = isDark ? 'Dunkelmodus aktiv' : 'Hellmodus aktiv';
+    }
+
+    (function init(){
+      const saved = localStorage.getItem(KEY);
+      if(saved === 'light' || saved === 'dark'){
+        apply(saved);
+      }else{
+        const sysDark = matchMedia('(prefers-color-scheme:dark)').matches;
+        apply(sysDark ? 'dark' : 'light');
+      }
+    })();
+
+    document.addEventListener('click', (e)=>{
+      const t = e.target.closest?.('.orb-toggle');
+      if(!t) return;
+      const nowDark = !bodyEl.classList.contains('nocturne');
+      apply(nowDark ? 'dark' : 'light');
+      localStorage.setItem(KEY, nowDark ? 'dark' : 'light');
+      if(shard){
+        shard.classList.remove('pulse'); void shard.offsetWidth; shard.classList.add('pulse');
+      }
+    });
+
+    matchMedia('(prefers-color-scheme:dark)').addEventListener('change', (e)=>{
+      if(localStorage.getItem(KEY)) return;
+      apply(e.matches ? 'dark' : 'light');
+    });
+  })();
+</script>
+
+
+
+
+
+
+<picture>
+  <source media="(max-width: 768px)" srcset="./MixerBilder/mobile-version1.png">
+  <img src="./MixerBilder/mixer produktvisualisierung.png" class="fullwidth-img" alt="Mixer Produktvisualisierung 1">
+</picture>
+
+<picture>
+  <source media="(max-width: 768px)" srcset="./MixerBilder/mobile-version2.png">
+  <img src="./MixerBilder/mixer produktvisualisierung2.png" class="fullwidth-img" alt="Mixer Produktvisualisierung 2">
+</picture>
+
+<picture>
+  <source media="(max-width: 768px)" srcset="./MixerBilder/mobile-version3.png">
+  <img src="./MixerBilder/mixer produktvisualisierung3.png" class="fullwidth-img" alt="Mixer Produktvisualisierung 3">
+</picture>
+
+<picture>
+  <source media="(max-width: 768px)" srcset="./MixerBilder/mobile-version4.png">
+  <img src="./MixerBilder/mixer produktvisualisierung4.png" class="fullwidth-img" alt="Mixer Produktvisualisierung 4">
+</picture>
+
+<picture>
+  <source media="(max-width: 768px)" srcset="./MixerBilder/mobile-version5.png">
+  <img src="./MixerBilder/mixer produktvisualisierung5.png" class="fullwidth-img" alt="Mixer Produktvisualisierung 5">
+</picture>
+
+<picture>
+  <source media="(max-width: 768px)" srcset="./MixerBilder/mobile-version6.png">
+  <img src="./MixerBilder/mixer produktvisualisierung6.png" class="fullwidth-img" alt="Mixer Produktvisualisierung 6">
+</picture>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .fullwidth-img {
+    width: 100vw;      /* volle Bildschirmbreite */
+    height: auto;      /* Höhe bleibt proportional */
+    display: block;    /* entfernt zusätzliche Abstände */
+  }
+
+
+</style>
+</body>
+</html>

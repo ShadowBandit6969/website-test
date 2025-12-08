@@ -1184,3 +1184,163 @@ html, body{
   order: 4;
   margin-top: auto; /* bleibt schön am Kartenende */
 }
+
+/* =======================================
+   AURORA – CTA-Button & Typo Alignment
+   zur neuen CTA-Section (wrf-Styles)
+   ======================================= */
+
+/* 1) CTA-/Action-Buttons in Aurora: größere, knackige Schrift
+   – orientiert an .charm-cta / .wrf-btn--primary */
+#aurora-sheet button,
+#aurora-sheet .wrf-btn,
+#aurora-sheet .wrf-btn--primary{
+  font-family: var(--font-base) !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.01em !important;
+  font-size: clamp(1.02rem, 0.98rem + 0.4vw, 1.18rem) !important;
+  line-height: 1.28 !important;
+  padding: .68rem 1.25rem !important;   /* etwas mehr Bühne für die Typo */
+  min-height: 46px !important;          /* gut klickbares Target */
+}
+
+/* 2) Section-Headline minimal kräftiger & etwas mehr Luft nach unten */
+#aurora-sheet .aurora-title{
+  font-size: clamp(2.05rem, 1.7rem + 2.1vw, 2.85rem) !important;
+  font-weight: 880 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.08 !important;
+  margin: 0 0 0.65rem !important;
+}
+
+/* 3) Subheadline / Copy-Block: ruhiger, besser lesbare Zeilenlänge */
+#aurora-sheet .aurora-subtitle{
+  font-size: clamp(1.02rem, 0.98rem + 0.5vw, 1.18rem) !important;
+  line-height: 1.7 !important;
+  max-width: 46rem !important;            /* etwas schmaler, besser scannbar */
+  margin: 0 auto 2.3rem !important;
+  padding: 0.95rem 1.8rem !important;
+}
+
+/* 4) Card-Headline: leicht größer, klarer Abstand nach unten */
+#aurora-sheet .aether-card h3{
+  font-size: clamp(1.3rem, 1.1rem + 0.75vw, 1.75rem) !important;
+  font-weight: 840 !important;
+  line-height: 1.22 !important;
+  margin: 0 0 0.45rem !important;
+}
+
+/* 5) Microtag: dezentes, aber klar lesbares Label */
+#aurora-sheet .aether-card .microtag{
+  font-size: .8rem !important;
+  font-weight: 680 !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  margin-top: 0 !important;
+  margin-bottom: .35rem !important;
+  line-height: 2 !important; /* <-- größerer Zeilenabstand */
+}
+
+/* 6) Delta-List: etwas engere, aber klare Typo-Hierarchie */
+#aurora-sheet .delta-list .lead{
+  font-size: clamp(1.04rem, 1rem + 0.35vw, 1.2rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.3 !important;
+}
+
+#aurora-sheet .delta-list .copy{
+  font-size: clamp(.98rem, .95rem + 0.3vw, 1.06rem) !important;
+  line-height: 1.65 !important;
+  font-weight: 540 !important;
+  margin-top: .18rem !important;
+}
+
+/* 7) Benefit-Line: leicht angehoben, wirkt wie „Mini-CTA“ am Kartenende */
+#aurora-sheet .aether-card .benefit-line{
+  font-size: clamp(1.04rem, 1rem + 0.4vw, 1.24rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.34 !important;
+  margin-top: 1.05rem !important;
+}
+
+/* 8) Mobile-Finetune: etwas kompakter, ohne die Hierarchie zu verlieren */
+@media (max-width: 599.98px){
+  #aurora-sheet .aurora-title{
+    font-size: 1.9rem !important;
+    margin-bottom: 0.45rem !important;
+  }
+  #aurora-sheet .aurora-subtitle{
+    max-width: 100% !important;
+    padding: 0.85rem 1.2rem !important;
+    margin-bottom: 2rem !important;
+  }
+  #aurora-sheet button,
+  #aurora-sheet .wrf-btn,
+  #aurora-sheet .wrf-btn--primary{
+    font-size: 1.02rem !important;
+    padding: .62rem 1.1rem !important;
+    min-height: 44px !important;
+  }
+}
+/* === FIX: keine abgeschnittenen Unterlängen in der Headline === */
+#aurora-sheet .aurora-title .word{
+  overflow: visible !important;          /* statt hidden */
+  padding-inline: 0.03em !important;     /* mini-Luft links/rechts */
+}
+
+#aurora-sheet .aurora-title{
+  line-height: 1.14 !important;          /* etwas mehr vertikale Luft */
+  padding-bottom: 0.08em !important;     /* Sicherheitsabstand nach unten */
+}
+/* =========================================
+   AURORA TYPO = WRF TYPO
+   (ganz unten in aurora.css einfügen)
+   ========================================= */
+
+/* 1) Gleiche Grundschrift wie in wrf */
+#aurora-sheet,
+#aurora-sheet *{
+  font-family: var(--wrf-font, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* 4) Card-Headline (.aether-card h3) → kleine wrf-Headline */
+#aurora-sheet .aether-card h3{
+  font-size: clamp(1.5rem, 1.1rem + 1vw, 2.1rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.015em !important;
+  line-height: var(--wrf-lh-tight, 1.15) !important;
+  text-wrap: balance !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.25) !important;
+}
+
+
+
+/* 6) Listen-Typo in Karten → an wrf-Body angelehnt */
+#aurora-sheet .delta-list .lead{
+  font-size: clamp(1.06rem, 1rem + .5vw, 1.18rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -.002em !important;
+  line-height: 1.28 !important;
+}
+
+#aurora-sheet .delta-list .copy{
+  font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem) !important;
+  font-weight: 600 !important;
+  letter-spacing: .002em !important;
+  line-height: var(--wrf-lh-relaxed, 1.75) !important;
+}
+
+/* 7) Buttons in Aurora → wie .wrf-btn / .wrf-btn--primary */
+#aurora-sheet button,
+#aurora-sheet .wrf-btn,
+#aurora-sheet .wrf-btn--primary{
+  font-weight: 950 !important;
+  font-size: 1.12rem !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.25 !important;
+}
+
+

@@ -328,3 +328,247 @@
   }
 }
 
+/* HERO BUTTON soll aussehen wie .charm-cta aus dem Header */
+.btn-primary{
+  /* Basis-Button */
+  position:relative;
+  background: var(--primary-orange, #ff7a00) !important;
+  color:#fff !important;
+  border:0 !important;
+
+  /* Größe + Form */
+  min-height:44px;
+  padding:.6rem .9rem !important;
+  border-radius: var(--radius, 12px) !important;
+
+  /* Typo */
+  font-weight:950 !important;
+  letter-spacing:-0.01em !important;
+  font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem) !important;
+  line-height:1.28;
+
+  /* Layout */
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  white-space:nowrap;
+
+  /* Hover/Active Transition */
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+/* Glanz-Layer wie im Header-CTA */
+.btn-primary::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  z-index:0;
+  background: radial-gradient(
+    120% 140% at 0% 0%,
+    rgba(255,255,255,.22),
+    rgba(255,255,255,.08) 35%,
+    transparent 60%
+  );
+  mix-blend-mode: soft-light;
+  pointer-events:none;
+  opacity:.95;
+}
+
+.btn-primary > *{
+  position:relative;
+  z-index:1;
+}
+
+/* Hover + Active */
+@media(hover:hover){
+  .btn-primary:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 14px 34px rgba(0,0,0,.22),
+                0 4px 10px rgba(0,0,0,.10);
+  }
+  .btn-primary:active{
+    transform: translateY(0);
+    box-shadow: 0 8px 18px rgba(0,0,0,.16),
+                0 2px 6px rgba(0,0,0,.08);
+  }
+}
+
+/* Focus-Ring */
+.btn-primary:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.9),
+    0 0 0 6px color-mix(in oklab, var(--primary-orange) 55%, transparent),
+    0 12px 28px rgba(0,0,0,.22);
+}
+/* Sekundärer Hero-Button: gleiche Form & Größe wie .charm-cta */
+.btn-secondary{
+  /* Größe & Form */
+  min-height:44px !important;
+  padding:.6rem .9rem !important;
+  border-radius: var(--radius, 12px) !important;
+
+  /* Typografie identisch mit charm-cta */
+  font-weight:950 !important;
+  letter-spacing:-0.01em !important;
+  font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem) !important;
+  line-height:1.28 !important;
+
+  /* Layout identisch */
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  white-space:nowrap !important;
+
+  /* Effekte */
+  transition: transform .2s ease, box-shadow .2s ease !important;
+  backdrop-filter: blur(12px);
+  position:relative;
+}
+
+/* Glanz-Layer wie beim Haupt-CTA */
+.btn-secondary::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  z-index:0;
+  background: radial-gradient(
+    120% 140% at 0% 0%,
+    rgba(255,255,255,.22),
+    rgba(255,255,255,.08) 35%,
+    transparent 60%
+  );
+  mix-blend-mode: soft-light;
+  pointer-events:none;
+  opacity:.95;
+}
+
+.btn-secondary > *{
+  position:relative;
+  z-index:1;
+}
+
+/* Hover / Active – gleiche Bewegungen wie charm-cta */
+@media(hover:hover){
+  .btn-secondary:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 14px 34px rgba(0,0,0,.55),
+                0 4px 10px rgba(0,0,0,.25);
+  }
+  .btn-secondary:active{
+    transform: translateY(0);
+    box-shadow: 0 8px 18px rgba(0,0,0,.45),
+                0 2px 6px rgba(0,0,0,.2);
+  }
+}
+
+/* Fokus */
+.btn-secondary:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.9),
+    0 0 0 6px color-mix(in oklab, var(--primary-orange, #ff7a00) 55%, transparent),
+    0 12px 28px rgba(0,0,0,.22);
+}
+
+/* RESPONSIVE: HANDY ---------------------------------- */
+@media (max-width: 600px) {
+  .page-title > .container {
+    padding-inline: 1.3rem;
+    padding-block: 1.4rem;
+    gap: 0.9rem;
+    text-align: left;           /* statt center */
+    align-items: flex-start;    /* statt center */
+  }
+
+  .large-title {
+    font-size: clamp(2.05rem, 7.3vw, 2.5rem);
+    max-width: 24ch;
+    text-align: left;           /* statt center */
+    line-height: 1.16;
+    margin-bottom: 0.15rem;
+  }
+
+  .small-title {
+    font-size: 1.02rem;
+    max-width: 34ch;
+    opacity: 0.97;
+    text-align: left;           /* statt center */
+    margin-bottom: 0.55rem;
+    line-height: 1.44;
+  }
+
+  .hero-cta-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.7rem;
+    justify-content: flex-start; /* statt center */
+    align-items: flex-start;     /* Buttons beginnen links */
+    margin-top: 0.2rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;                /* volle Breite, aber linksbeginn */
+    justify-content: center;
+    padding: 0.95rem 1.3rem;
+    font-size: 1rem;           /* etwas größer auf Mobile */
+  }
+
+  .hero-video {
+    object-position: center 30%;
+  }
+}
+
+/* =========================================
+   HERO – MAXIMALE PROMINENZ & SCHRIFTPOWER
+   ========================================= */
+
+/* Große Hero-Headline: deutlich bolder, klarer, heller */
+.hero-section[data-page="titlepage"] .large-title {
+  font-size: clamp(3rem, 6vw, 5.4rem) !important; /* größer als im ganzen System */
+  font-weight: 950 !important;                    /* maximale Wucht */
+  letter-spacing: -0.02em !important;             /* enger = kraftvoller */
+  line-height: 1.04 !important;                   /* typischer „Tech/Hero“-Look */
+  color: #ffffff !important;
+  text-shadow:
+    0 14px 38px rgba(0,0,0,0.85),
+    0 4px 14px rgba(0,0,0,0.55) !important;
+}
+
+/* Subline: etwas größer + hochwertiger */
+.hero-section[data-page="titlepage"] .small-title {
+  font-size: clamp(1.18rem, 1.8vw, 1.55rem) !important;
+  font-weight: 480 !important;
+  letter-spacing: 0.002em !important;
+  line-height: 1.6 !important;
+  max-width: 70ch;
+  color: rgba(235, 238, 255, 0.98) !important;
+  text-shadow: 0 10px 28px rgba(0,0,0,0.75) !important;
+}
+
+/* Mobile: trotzdem stark, aber gut lesbar */
+@media (max-width: 600px) {
+  .hero-section[data-page="titlepage"] .large-title {
+    font-size: clamp(2.4rem, 9vw, 3rem) !important;
+    line-height: 1.12 !important;
+  }
+
+  .hero-section[data-page="titlepage"] .small-title {
+    font-size: 1.1rem !important;
+    line-height: 1.45 !important;
+  }
+}
+/* =========================================
+   HERO TEXT exakt links mit Aurora-Cards bündig
+   ========================================= */
+@media (min-width: 600px){
+/* Hero-Container nutzt denselben linken Gutter wie Aurora */
+.hero-section[data-page="titlepage"] .page-title > .container {
+  max-width: 1440px; /* wie zuvor, bleibt bestehen */
+  padding-left: 5rem;
+}
+
+}

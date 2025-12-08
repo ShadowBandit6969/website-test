@@ -1,5 +1,5 @@
 /* WRF Offer — premium reveal (solid-white curtains)
-   - Zwei absolut weiße Paneele (links/rechts), decken die Section zu 100% ab (je 50%)
+   - Zwei Paneele (links/rechts), decken die Section zu 100% ab (je 50%)
    - Fahren smooth auseinander (links nach links, rechts nach rechts)
    - Eyebrow “48” zählt 0 → data-count, CTA-Note-Zahl ebenso
    - Untertitel Wort-für-Wort mit Blur
@@ -49,12 +49,20 @@
     if (ex) return ex;
     const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null);
     let n, node=null, idx=-1, len=0;
-    while ((n=walker.nextNode())) { const m=n.nodeValue.match(/(\d+)/); if (m){ node=n; idx=m.index; len=m[1].length; break; } }
+    while ((n=walker.nextNode())) {
+      const m=n.nodeValue.match(/(\d+)/);
+      if (m){ node=n; idx=m.index; len=m[1].length; break; }
+    }
     if (!node) return null;
-    const before=node.nodeValue.slice(0,idx), num=node.nodeValue.slice(idx,idx+len), after=node.nodeValue.slice(idx+len);
+    const before=node.nodeValue.slice(0,idx),
+          num=node.nodeValue.slice(idx,idx+len),
+          after=node.nodeValue.slice(idx+len);
     const frag=document.createDocumentFragment();
     if (before) frag.appendChild(document.createTextNode(before));
-    const span=document.createElement("span"); span.className="wrf-number"; span.textContent=num; frag.appendChild(span);
+    const span=document.createElement("span");
+    span.className="wrf-number";
+    span.textContent=num;
+    frag.appendChild(span);
     if (after) frag.appendChild(document.createTextNode(after));
     node.parentNode.replaceChild(frag,node);
     return span;
@@ -73,15 +81,29 @@
     requestAnimationFrame(tick);
   }
 
-  // SOLID-WHITE CURTAINS (je 50%, voll deckend)
+  // SOLID CURTAINS (je 50%, voll deckend) – Farbe abhängig vom Theme
   function buildCurtains(section){
     const L=document.createElement("div");
     const R=document.createElement("div");
+
+    // Klassen für CSS-Targeting
+    L.classList.add("wrf-curtain", "wrf-curtain--left");
+    R.classList.add("wrf-curtain", "wrf-curtain--right");
+
+    // Aktuelles Theme bestimmen
+    const rootEl = document.documentElement;
+    const isDarkTheme =
+      (rootEl && rootEl.dataset.theme === "dark") ||
+      rootEl.classList.contains("dark");
+
+    // Im Darkmode: schwarzer Vorhang, sonst weiß
+    const curtainBg = isDarkTheme ? "#000000" : "#ffffff";
+
     const base = {
       position:"absolute", top:"0", bottom:"0",
       width:"50%", height:"100%",
-      background:"#ffffff",                 // <-- komplett weiß
-      zIndex:"9999",                        // über allem in der Section
+      background: curtainBg,
+      zIndex:"9999",
       transform:"translateX(0%)", opacity:"1",
       willChange:"transform, opacity",
       pointerEvents:"none"
@@ -94,7 +116,8 @@
     if (cs.position==="static") section.style.position="relative";
     section.style.overflow="hidden"; // verhindert Überragen beim Slide
 
-    section.appendChild(L); section.appendChild(R);
+    section.appendChild(L);
+    section.appendChild(R);
     return { L, R };
   }
 
@@ -132,7 +155,7 @@
 
       const tl=gsap.timeline({ defaults:{ ease:"power3.out" } });
 
-      // 1) Weiße Vorhänge fahren auseinander (voll deckend → reveal)
+      // 1) Vorhänge fahren auseinander (voll deckend → reveal)
       tl.to(curtainL, { xPercent:-100, duration:0.78, ease:"expo.inOut" }, 0);
       tl.to(curtainR, { xPercent: 100, duration:0.78, ease:"expo.inOut" }, 0);
       tl.add(()=>{ curtainL.remove(); curtainR.remove(); }, "+=0.02");
@@ -140,7 +163,9 @@
       // 2) Eyebrow rein + CountUp 0→data-count
       tl.to(eyebrowPill, {
         y:0, autoAlpha:1, filter:"blur(0px)", scale:1, duration:0.48,
-        onComplete(){ if (eyebrowNum) countUp(eyebrowNum, eyebrowNum.dataset.count || 48, 1.0); }
+        onComplete(){
+          if (eyebrowNum) countUp(eyebrowNum, eyebrowNum.dataset.count || 48, 1.0);
+        }
       }, 0.10);
 
       // 3) Untertitel Wort-für-Wort (Blur → clean) mit curved stagger
@@ -155,7 +180,9 @@
       tl.to(cta, { y:0, autoAlpha:1, filter:"blur(0px)", duration:0.46 }, 0.38);
 
       // 5) CTA-Note: Zahl ebenfalls hochzählen (0→bestehender Wert, z.B. 48)
-      tl.add(()=>{ if (noteNum) countUp(noteNum, noteNum.textContent || 48, 0.9); }, 0.48);
+      tl.add(()=>{
+        if (noteNum) countUp(noteNum, noteNum.textContent || 48, 0.9);
+      }, 0.48);
 
       // Parallax soft aktivieren
       bindParallax();
@@ -170,14 +197,6 @@
     cta?.addEventListener("mousedown", ()=> gsap.to(cta,{ scale:0.985, duration:0.08 }));
     cta?.addEventListener("mouseup",   ()=> gsap.to(cta,{ scale:1.000, duration:0.10 }));
 
-    // Subtiles Parallax der gesamten Section
-    let raf=null, yTo=null, active=false;
-    function bindParallax(){
-      yTo = gsap.quickTo(root, "y", { duration:0.6, ease:"power3.out" });
-      active = true; onScroll();
-      window.addEventListener("scroll", onScroll, { passive:true });
-      window.addEventListener("resize", onScroll);
-    }
     function onScroll(){
       if(!active || raf) return;
       raf = requestAnimationFrame(()=>{
