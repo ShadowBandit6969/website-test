@@ -395,3 +395,49 @@
     .board-grid{ margin-inline:0; }
   }
 }
+
+/* === Overrides für Arbeitsproben-Galerie === */
+
+/* Bilder: nicht zuschneiden + keine Schwarzweißfilter */
+#arbeitsproben .card img{
+  width: 100%;
+  height: auto;              /* Höhe ergibt sich aus dem Bild – kein Crop */
+  display: block;
+  object-fit: contain;       /* Bild komplett zeigen */
+  aspect-ratio: auto;        /* feste Ratios überschreiben */
+  filter: none;              /* kein Schwarzweiß, keine Extra-Filter */
+  opacity: 1;                /* Basiszustand: sichtbar, GSAP kann trotzdem drüberanimieren */
+}
+
+/* Auf Hover ebenfalls keine Filter mehr */
+#arbeitsproben .card:hover img{
+  filter: none;
+}
+
+/* Mobile-Override: auch dort keine festen Ratios/Filter */
+@media (max-width: 600px){
+  #arbeitsproben .card img{
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    aspect-ratio: auto;
+    filter: none;
+  }
+}
+/* === Outline um jede Bildkarte – Light/Dark Mode === */
+
+/* Standard (Light Mode): schwarze Outline */
+#arbeitsproben .card{
+  border: 2px solid #000;        /* schwarze Outline */
+  box-sizing: border-box;
+}
+
+/* Dark Mode: weiße Outline */
+:root[data-theme="dark"] #arbeitsproben .card{
+  border: 2px solid #fff;        /* weiße Outline */
+}
+
+/* Hover soll die Outline NICHT entfernen */
+#arbeitsproben .card:hover{
+  border-color: inherit;
+}
