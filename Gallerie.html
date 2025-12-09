@@ -1016,6 +1016,9 @@ body[data-page="webdesign"] .hero-image-foreground {
 </section>
 
 
+
+
+
 <section class="gallery-section">
   <!-- ROW 1 – Groß links, 4 kleine rechts -->
   <div class="gallery-row">
@@ -1041,7 +1044,7 @@ body[data-page="webdesign"] .hero-image-foreground {
     </div>
   </div>
 
-  <!-- ROW 2 – 4 kleine links, Groß rechts (hochformatiger) -->
+  <!-- ROW 2 – 4 kleine links, Groß rechts (hochformatig) -->
   <div class="gallery-row">
     <div class="gallery-small-grid gallery-small-grid--tight">
       <img src="https://picsum.photos/600/900?random=16" alt="">
@@ -1093,6 +1096,54 @@ body[data-page="webdesign"] .hero-image-foreground {
       <img src="https://picsum.photos/600/600?random=15" alt="">
     </div>
   </div>
+
+  <!-- ROW 4 – Variante: Groß links, rechts 3 kleine oben + 1 langes unten -->
+  <div class="gallery-row">
+    <div class="gallery-large gallery-large--classic">
+      <img src="https://picsum.photos/1200/900?random=21" alt="Großes Bild">
+      <div class="gallery-large-content">
+        <div class="gallery-large-textwrap">
+          <span class="gallery-large-company">Helio Studio</span>
+          <span class="gallery-large-text">Editorial Webdesign</span>
+        </div>
+        <a href="projekt-4.html" class="gallery-btn">
+          Mehr ansehen
+          <i data-feather="arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="gallery-small-grid gallery-small-grid--3-top-1-bottom">
+      <img src="https://picsum.photos/600/600?random=22" alt="">
+      <img src="https://picsum.photos/600/600?random=23" alt="">
+      <img src="https://picsum.photos/600/600?random=24" alt="">
+      <!-- langes Bild über volle Breite unten -->
+      <img src="https://picsum.photos/1200/500?random=25" alt="">
+    </div>
+  </div>
+
+  <!-- ROW 5 – Variante: Großes Bild links (doppelt so breit), rechts 3 kleine untereinander -->
+  <div class="gallery-row gallery-row--big-left-wide">
+    <div class="gallery-large gallery-large--wide">
+      <img src="https://picsum.photos/1600/900?random=26" alt="Großes Bild">
+      <div class="gallery-large-content">
+        <div class="gallery-large-textwrap">
+          <span class="gallery-large-company">Northline Agency</span>
+          <span class="gallery-large-text">Digitale Kampagne</span>
+        </div>
+        <a href="projekt-5.html" class="gallery-btn">
+          Mehr ansehen
+          <i data-feather="arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="gallery-small-grid gallery-small-grid--column">
+      <img src="https://picsum.photos/600/600?random=27" alt="">
+      <img src="https://picsum.photos/600/600?random=28" alt="">
+      <img src="https://picsum.photos/600/600?random=29" alt="">
+    </div>
+  </div>
 </section>
 
 <script>
@@ -1102,341 +1153,12 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 <style>
-  .gallery-section {
-    width: 100%;
-    max-width: var(--container-width);
-    padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 2.5rem);
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(2.5rem, 4vw, 4rem);
-  }
 
-  /* Hauptlayout – Grid statt Flex, damit es stabiler skaliert */
-  .gallery-row {
-    display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1.1fr);
-    gap: clamp(1.5rem, 3vw, 2.5rem);
-    align-items: stretch;
-  }
 
-  /* Großes Bild links */
-  .gallery-large {
-    position: relative;
-    overflow: hidden;
-    border-radius: 14px;
-    /* Fixes, stabiles Verhältnis – egal wie die Bildquelle aussieht */
-    aspect-ratio: 4 / 3;
-    background: #111; /* Fallback, falls Bild kurz nicht lädt */
-  }
+  /* =========================================
+   GALLERY – BASIS
+========================================= */
 
-  .gallery-large img {
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    display: block;
-    object-fit: cover;     /* beschneidet sauber statt zu verzerren */
-  }
-
-  .gallery-large-content {
-    position: absolute;
-    left: 1.2rem;
-    right: 1.2rem;
-    bottom: 1.2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: .75rem;
-    flex-wrap: wrap; /* bei wenig Platz bricht Button in die nächste Zeile */
-  }
-
-  .gallery-large-text {
-    font-size: 1.1rem;
-    color: #fff;
-    font-weight: 600;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    flex: 1;
-    min-width: 0;
-  }
-
-  .gallery-btn {
-    background: rgba(0,0,0,0.55);
-    backdrop-filter: blur(4px);
-    padding: .6rem 1rem;
-    border-radius: 10px;
-    color: #fff;
-    font-weight: 600;
-    display: inline-flex;
-    gap: .4rem;
-    align-items: center;
-    transition: 0.2s ease;
-    border: none;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  .gallery-btn:hover {
-    background: var(--primary, #ff4d00);
-    transform: translateX(4px);
-  }
-
-  /* Grid für die kleinen Bilder rechts */
-  .gallery-small-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-  }
-
-  /* Variante mit vielen kleinen Bildern */
-  .gallery-small-grid.many {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .gallery-small-grid img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    border-radius: 10px;
-    aspect-ratio: 1 / 1;   /* alle Thumbnails immer quadratisch */
-    object-fit: cover;      /* egal wie das Originalformat ist */
-    background: #111;
-  }
-
-  /* RESPONSIVE BREAKPOINTS */
-
-  /* Tablet & kleiner */
-  @media (max-width: 1024px) {
-    .gallery-row {
-      grid-template-columns: 1fr; /* untereinander */
-    }
-
-    .gallery-large {
-      order: 1;
-    }
-
-    .gallery-small-grid {
-      order: 2;
-    }
-
-    .gallery-small-grid.many {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  /* Mobile */
-  @media (max-width: 600px) {
-    .gallery-section {
-      padding-inline: 1.25rem;
-      gap: 2.5rem;
-    }
-
-    .gallery-large {
-      aspect-ratio: 3 / 4; /* etwas vertikaler auf Handy */
-    }
-
-    .gallery-large-content {
-      left: .9rem;
-      right: .9rem;
-      bottom: .9rem;
-    }
-
-    .gallery-large-text {
-      font-size: 1rem;
-    }
-
-    .gallery-btn {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .gallery-small-grid,
-    .gallery-small-grid.many {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  /* Sehr große Screens – etwas mehr Luft */
-  @media (min-width: 1440px) {
-    .gallery-section {
-      padding-block: 5rem;
-      gap: 4.5rem;
-    }
-  }
-
-  .gallery-section {
-  width: 100%;
-  max-width: var(--container-width);
-  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 2.5rem);
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(2.5rem, 4vw, 4rem);
-}
-
-/* Hauptlayout – Grid statt Flex, damit es stabiler skaliert */
-.gallery-row {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1.1fr);
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-  align-items: stretch;
-}
-
-/* Großes Bild links */
-.gallery-large {
-  position: relative;
-  overflow: hidden;
-  border-radius: 14px;
-  aspect-ratio: 4 / 3;
-  background: #111;
-}
-
-.gallery-large img {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.gallery-large-content {
-  position: absolute;
-  left: 1.2rem;
-  right: 1.2rem;
-  bottom: 1.2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: .75rem;
-  flex-wrap: wrap;
-}
-
-/* NEU: Wrapper für Firmenname + Projekttext */
-.gallery-large-textwrap {
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-  flex: 1;
-  min-width: 0;
-}
-
-/* NEU: Firmenname */
-.gallery-large-company {
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.85);
-}
-
-/* bestehende Projekttitel-Zeile */
-.gallery-large-text {
-  font-size: 1.1rem;
-  color: #fff;
-  font-weight: 600;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
-}
-
-.gallery-btn {
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(4px);
-  padding: .6rem 1rem;
-  border-radius: 10px;
-  color: #fff;
-  font-weight: 600;
-  display: inline-flex;
-  gap: .4rem;
-  align-items: center;
-  transition: 0.2s ease;
-  border: none;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.gallery-btn:hover {
-  background: var(--primary, #ff4d00);
-  transform: translateX(4px);
-}
-
-/* Grid für die kleinen Bilder rechts */
-.gallery-small-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-/* Variante mit vielen kleinen Bildern */
-.gallery-small-grid.many {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.gallery-small-grid img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  border-radius: 10px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  background: #111;
-}
-
-/* Tablet & kleiner */
-@media (max-width: 1024px) {
-  .gallery-row {
-    grid-template-columns: 1fr;
-  }
-
-  .gallery-large {
-    order: 1;
-  }
-
-  .gallery-small-grid {
-    order: 2;
-  }
-
-  .gallery-small-grid.many {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-  .gallery-section {
-    padding-inline: 1.25rem;
-    gap: 2.5rem;
-  }
-
-  .gallery-large {
-    aspect-ratio: 3 / 4;
-  }
-
-  .gallery-large-content {
-    left: .9rem;
-    right: .9rem;
-    bottom: .9rem;
-  }
-
-  .gallery-large-text {
-    font-size: 1rem;
-  }
-
-  .gallery-btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .gallery-small-grid,
-  .gallery-small-grid.many {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* Sehr große Screens – etwas mehr Luft */
-@media (min-width: 1440px) {
-  .gallery-section {
-    padding-block: 5rem;
-    gap: 4.5rem;
-  }
-}
 .gallery-section {
   width: 100%;
   max-width: var(--container-width);
@@ -1445,25 +1167,50 @@ body[data-page="webdesign"] .hero-image-foreground {
   display: flex;
   flex-direction: column;
   gap: clamp(2.5rem, 4vw, 4rem);
+  overflow-x: hidden;          /* kein horizontales Scrollen */
+  box-sizing: border-box;
 }
 
-/* Grundlayout: 2 Spalten, links/rechts flexibel über HTML-Reihenfolge */
+.gallery-section * {
+  box-sizing: border-box;
+}
+
+/* =========================================
+   REIHEN / GRUNDGRID
+========================================= */
+
 .gallery-row {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1.1fr);
   gap: clamp(1.5rem, 3vw, 2.5rem);
   align-items: stretch;
+  width: 100%;
+  max-width: 100%;
 }
 
-/* Großes Bild – Basis */
+.gallery-row > * {
+  min-width: 0;                /* verhindert Aufsprengen des Grids */
+}
+
+/* Letzte Reihe – linke Spalte extra breit, rechte Spalte kompakter */
+.gallery-row--big-left-wide {
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+  align-items: flex-start;      /* rechte Spalte wird nicht hochgezogen */
+}
+
+/* =========================================
+   GROSSE BILDER
+========================================= */
+
 .gallery-large {
   position: relative;
   overflow: hidden;
   border-radius: 14px;
   background: #111;
+  width: 100%;
 }
 
-/* Varianten für Aspect Ratio */
+/* Aspect-Ratio Varianten */
 .gallery-large--classic {
   aspect-ratio: 4 / 3;
 }
@@ -1484,6 +1231,7 @@ body[data-page="webdesign"] .hero-image-foreground {
   object-fit: cover;
 }
 
+/* Overlay Content */
 .gallery-large-content {
   position: absolute;
   left: 1.2rem;
@@ -1496,7 +1244,6 @@ body[data-page="webdesign"] .hero-image-foreground {
   flex-wrap: wrap;
 }
 
-/* Wrapper für Firmenname + Projekttitel */
 .gallery-large-textwrap {
   display: flex;
   flex-direction: column;
@@ -1505,7 +1252,6 @@ body[data-page="webdesign"] .hero-image-foreground {
   min-width: 0;
 }
 
-/* Firmenname */
 .gallery-large-company {
   font-size: 0.8rem;
   font-weight: 600;
@@ -1514,7 +1260,6 @@ body[data-page="webdesign"] .hero-image-foreground {
   color: rgba(255,255,255,0.85);
 }
 
-/* Projekttitel-Zeile */
 .gallery-large-text {
   font-size: 1.1rem;
   color: #fff;
@@ -1522,6 +1267,7 @@ body[data-page="webdesign"] .hero-image-foreground {
   text-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
 
+/* Button */
 .gallery-btn {
   background: rgba(0,0,0,0.55);
   backdrop-filter: blur(4px);
@@ -1536,6 +1282,7 @@ body[data-page="webdesign"] .hero-image-foreground {
   border: none;
   text-decoration: none;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .gallery-btn:hover {
@@ -1543,42 +1290,95 @@ body[data-page="webdesign"] .hero-image-foreground {
   transform: translateX(4px);
 }
 
-/* Grid für die kleinen Bilder */
+/* =========================================
+   KLEINE BILDER – GRIDS
+========================================= */
+
 .gallery-small-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* z.B. 2×2 in Reihe 1 */
   gap: 1rem;
+  width: 100%;
 }
 
-/* engere Variante */
 .gallery-small-grid--tight {
-  gap: 0.75rem;
+  gap: 0.75rem;                /* dichteres Raster */
 }
 
-/* Variante mit vielen kleinen Bildern */
+/* Viele kleine – 3 Spalten (Reihe 3) */
 .gallery-small-grid.many {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+/* =========================================
+   VARIANTE: 3 oben, 1 unten breit (Reihe 4 rechts)
+========================================= */
+
+.gallery-small-grid--3-top-1-bottom {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gallery-small-grid--3-top-1-bottom img:nth-child(-n + 3) {
+  aspect-ratio: 1 / 1;         /* die oberen 3 als Quadrate */
+}
+
+.gallery-small-grid--3-top-1-bottom img:nth-child(4) {
+  grid-column: 1 / -1;
+  aspect-ratio: 3 / 1;         /* breites Banner unten */
+}
+
+/* =========================================
+   VARIANTE: LETZTE REIHE – 3 kleine rechts untereinander
+   → rechte Bilder deutlich flacher
+========================================= */
+
+.gallery-small-grid--column {
+  grid-template-columns: 1fr;
+  grid-auto-rows: auto;
+}
+
+/* Thumbnails – Standard */
 .gallery-small-grid img {
   width: 100%;
   height: 100%;
   display: block;
   border-radius: 10px;
-  aspect-ratio: 1 / 1;
   object-fit: cover;
   background: #111;
 }
 
+/* Standard-AR für kleine Bilder (außer Spezialvarianten) */
+.gallery-small-grid:not(.gallery-small-grid--3-top-1-bottom):not(.gallery-small-grid--column) img {
+  aspect-ratio: 1 / 1;         /* Quadrate in den normalen Grids */
+}
+
+/* LETZTE REIHE: rechte Spalte → flache Bilder, nicht so hoch */
+.gallery-small-grid--column img {
+  aspect-ratio: 16 / 9;        /* breit, deutlich flacher als Quadrat */
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
 /* Tablet & kleiner */
 @media (max-width: 1024px) {
-  .gallery-row {
+  .gallery-row,
+  .gallery-row--big-left-wide {
     grid-template-columns: 1fr;
   }
 
-  /* Reihenfolge bleibt so, wie im HTML – sorgt auch hier für Variation */
   .gallery-small-grid.many {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gallery-small-grid--3-top-1-bottom {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gallery-small-grid--3-top-1-bottom img:nth-child(4) {
+    grid-column: 1 / -1;
+    aspect-ratio: 2 / 1;       /* etwas weniger extrem auf Tablet */
   }
 }
 
@@ -1589,8 +1389,10 @@ body[data-page="webdesign"] .hero-image-foreground {
     gap: 2.5rem;
   }
 
-  .gallery-large--classic {
-    aspect-ratio: 3 / 4;
+  .gallery-large--classic,
+  .gallery-large--wide,
+  .gallery-large--tall {
+    aspect-ratio: 3 / 4;       /* große Bilder auf Handy höher */
   }
 
   .gallery-large-content {
@@ -1606,20 +1408,54 @@ body[data-page="webdesign"] .hero-image-foreground {
   .gallery-btn {
     width: 100%;
     justify-content: center;
+    white-space: normal;
   }
 
   .gallery-small-grid,
   .gallery-small-grid.many {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  /* Letzte Reihe: rechte Bilder auf Handy etwas höher, aber immer noch flach */
+  .gallery-small-grid--column img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .gallery-small-grid--3-top-1-bottom img:nth-child(4) {
+    aspect-ratio: 16 / 9;
+  }
 }
 
-/* Sehr große Screens – etwas mehr Luft */
+/* Sehr große Screens */
 @media (min-width: 1440px) {
   .gallery-section {
     padding-block: 5rem;
     gap: 4.5rem;
   }
+}
+/* Letzte Reihe – rechte Spalte exakt so hoch wie das große Bild links */
+.gallery-row--big-left-wide {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: stretch; /* Beide Spalten gleiche Höhe */
+}
+
+/* Container rechts passt sich der Höhe des großen Bildes an */
+.gallery-row--big-left-wide .gallery-small-grid--column {
+  height: 100%;              /* gleiche Höhe wie die linke Spalte */
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);  /* 3 Bilder = gleich hohe Reihen */
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* Die 3 Bilder rechts werden gleichmäßig verteilt und sprengen nichts */
+.gallery-row--big-left-wide .gallery-small-grid--column img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* füllt sauber ohne Verzerrung */
+  border-radius: 10px;
 }
 
 </style>
