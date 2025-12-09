@@ -1970,3 +1970,100 @@
 
 }
 
+/* === MOBILE: Nur H3 + Button sichtbar in der Karte === */
+@media (max-width: 699.98px) {
+
+  /* Alle direkten Kinder der Payload ausblenden … */
+  #nebula-hub .module-card .payload > * {
+    display: none !important;
+  }
+
+  /* … außer H3 */
+  #nebula-hub .module-card .payload > h3 {
+    display: block !important;
+    text-align: center !important;
+    margin: 0 0 1.1rem !important;
+  }
+
+  /* … und den Button */
+  #nebula-hub .module-card .payload > .warp-cta {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto !important;
+  }
+
+  /* Karte etwas kompakter */
+  #nebula-hub .module-card {
+    padding: 1.4rem 1.1rem 2rem !important;
+    min-height: auto !important;
+  }
+}
+
+/* === MOBILE: H3 moderat größer === */
+@media (max-width: 699.98px) {
+  #nebula-hub .module-card .payload > h3 {
+    font-size: clamp(1.45rem, 1.3rem + 1.4vw, 1.85rem) !important;
+    line-height: 1.22 !important;
+    font-weight: 820 !important;
+    margin-bottom: 0.9rem !important;
+    text-align: center !important;
+    letter-spacing: -0.01em !important;
+  }
+}
+/* === MOBILE FIX: Karten ohne Button nicht höher, H3 zentriert === */
+@media (max-width: 699.98px) {
+
+  /* 1. Frühere min-height-/Center-Regeln für buttonlose Karten neutralisieren */
+  #nebula-hub .module-card:not(:has(.warp-cta)),
+  #nebula-hub .module-card:not(:has(.warp-cta)) .payload {
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  #nebula-hub .module-card:not(:has(.warp-cta)) .payload {
+    justify-content: flex-start !important; /* nichts nach unten ziehen */
+  }
+
+  /* 2. Karte selbst nutzt Flex zum optischen Vertikal-Center */
+  #nebula-hub .module-card:not(:has(.warp-cta)) {
+    display: flex !important;
+    align-items: center !important;   /* Payload im vorhandenen Rahmen vertikal mittig */
+  }
+
+  /* 3. H3 in Karten ohne Button: horizontal mittig */
+  #nebula-hub .module-card:not(:has(.warp-cta)) .payload > h3 {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* 4. Karten MIT Button: H3 wie gewünscht links ausgerichtet */
+  #nebula-hub .module-card:has(.warp-cta) .payload > h3 {
+    text-align: left !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+  }
+}
+/* ============================================
+   COSMOS – Größeres H3 für normale & große Screens
+   ============================================ */
+
+/* Tablet + Desktop (ab 700px) */
+@media (min-width: 700px) {
+  #nebula-hub .module-card h3 {
+    font-size: clamp(1.85rem, 1.5rem + 1.4vw, 2.45rem) !important;
+    line-height: 1.22 !important;
+    font-weight: 850 !important;
+    letter-spacing: -0.01em !important;
+  }
+}
+
+/* Extra groß (1600px+) kann noch etwas mehr vertragen */
+@media (min-width: 1600px) {
+  #nebula-hub .module-card h3 {
+    font-size: clamp(2.1rem, 1.6rem + 1.8vw, 2.8rem) !important;
+  }
+}

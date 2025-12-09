@@ -581,3 +581,71 @@ body #metrics .section-pad {
     background: color-mix(in oklab, var(--surface) 18%, transparent);
   }
 }
+/* ============================
+   #metrics – Abstand nach oben FIX
+   ============================ */
+
+/* 1) Erst mal alle alten margin-top-Hacks neutralisieren */
+body #metrics {
+  margin-top: 0 !important;
+  margin-block-start: 0 !important;
+}
+
+/* Innenabstand wieder auf vernünftige Defaults setzen */
+body #metrics .section-pad {
+  padding-top: 0rem !important;
+  padding-bottom: 2.5rem !important;
+}
+
+/* 2) Mobile: kleiner, aber klarer Abstand nach oben */
+@media (max-width: 699.98px) {
+  body #metrics {
+    margin-top: 1.75rem !important;   /* Abstand zur Section darüber */
+  }
+
+  body #metrics .section-pad {
+    padding-top: 1.25rem !important;
+    padding-bottom: 2rem !important;
+  }
+}
+
+/* 3) Tablet: etwas mehr Luft */
+@media (min-width: 700px) and (max-width: 1199.98px) {
+  body #metrics {
+    margin-top: 2.5rem !important;
+  }
+}
+
+/* 4) Desktop: schön großzügig */
+@media (min-width: 1200px) {
+  body #metrics {
+    margin-top: 3.5rem !important;
+  }
+}
+/* ============================================
+   #metrics – gleiche Seitenabstände wie Cosmos
+   ============================================ */
+
+/* Mobile (≤ 699px) */
+@media (max-width: 699.98px) {
+  #metrics .container {
+    padding-left: max(1.5rem, env(safe-area-inset-left)) !important;
+    padding-right: max(1.5rem, env(safe-area-inset-right)) !important;
+  }
+}
+
+/* Tablet (700–1199px) – Cosmos nutzt typischerweise ~2rem Padding */
+@media (min-width: 700px) and (max-width: 1199.98px) {
+  #metrics .container {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+/* Desktop (≥ 1200px) – wie Cosmos: zentriert + großzügiger Rand */
+@media (min-width: 1200px) {
+  #metrics .container {
+    padding-left: max(2rem, env(safe-area-inset-left)) !important;
+    padding-right: max(2rem, env(safe-area-inset-right)) !important;
+  }
+}
