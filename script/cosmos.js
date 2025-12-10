@@ -1,5 +1,6 @@
 /* =========================================================
    Basis: Lazy Loading, Video-Härtefälle, GSAP on-view
+   (satzweise, extrem performante Opacity-Version)
    ========================================================= */
 document.addEventListener('DOMContentLoaded', () => {
   /* ---------------- Lazy Images (data-src & .lazy-comet) ---------------- */
@@ -54,29 +55,35 @@ document.addEventListener('DOMContentLoaded', () => {
   const section = document.querySelector('#nebula-hub');
   if (!section) return;
 
-  // ---------- A11y-sicherer Text-Splitter ----------
-  function splitText(el) {
+  // ---------- A11y-sicherer Satz-Splitter (statt Zeichen/Wort) ----------
+  function splitSentences(el) {
     if (!el) return [];
     // Wiederverwendung, falls bereits gesplittet
-    if (el.querySelector('.char')) return el.querySelectorAll('.char');
+    if (el.querySelector('.sentence')) return el.querySelectorAll('.sentence');
 
     const original = el.textContent ?? '';
+    if (!original.trim()) return [];
+
     el.setAttribute('aria-label', original);
     el.setAttribute('role', 'text');
 
-    const words = original.trim().split(/(\s+)/);
-    el.innerHTML = words.map(w => {
-      if (/^\s+$/.test(w)) return w; // echte Spaces behalten
-      const chars = [...w].map(c => `<span class="char">${c}</span>`).join('');
-      return `<span class="word">${chars}</span>`;
-    }).join('');
+    // Sätze grob über ., !, ? trennen – inkl. nachfolgender Leerzeichen
+    const parts = original.match(/[^.!?]+[.!?]*\s*/g) || [original];
 
-    return el.querySelectorAll('.char');
+    el.innerHTML = parts
+      .map(s => `<span class="sentence">${s}</span>`)
+      .join('');
+
+    const sentences = el.querySelectorAll('.sentence');
+    // Start: leicht ausgegraut (70% Sichtbarkeit)
+    gsap.set(sentences, { opacity: 0.7 });
+
+    return sentences;
   }
 
   // Kontext: sauberes Cleanup bei Single-Page-Navigation usw.
   const ctx = gsap.context(() => {
-    /* -------- Headline/Subline: Start erst beim Sichtkontakt -------- */
+    /* -------- Headline/Subline: Satz-für-Satz von 0.7 → 1 -------- */
     const headlineEl = section.querySelector('.headline');
     const sublineEl  = section.querySelector('.subline');
 
@@ -86,20 +93,40 @@ document.addEventListener('DOMContentLoaded', () => {
       once: true,
       onEnter: () => {
         if (REDUCE) {
-          // Ohne Bewegung, direkt sichtbar
           [headlineEl, sublineEl].forEach(el => el && gsap.set(el, { opacity: 1, clearProps: 'transform,filter' }));
           return;
         }
-        const headlineChars = splitText(headlineEl);
-        const sublineChars  = splitText(sublineEl);
 
-        gsap.timeline({ defaults: { ease: 'power4.out' } })
-          .from(headlineChars, { opacity: 0, yPercent: 100, stagger: 0.01, duration: 0.7 }, 0)
-          .from(sublineChars,  { opacity: 0, yPercent: 120, stagger: 0.01, duration: 0.6 }, '-=0.4');
+        const headlineSentences = splitSentences(headlineEl);
+        const sublineSentences  = splitSentences(sublineEl);
+
+        if (headlineSentences.length) {
+          gsap.to(headlineSentences, {
+            opacity: 1,
+            stagger: 0.25,     // Satz für Satz
+            duration: 0.5,
+            ease: 'power1.out'
+          });
+        } else if (headlineEl) {
+          // Fallback
+          gsap.to(headlineEl, { opacity: 1, duration: 0.3 });
+        }
+
+        if (sublineSentences.length) {
+          gsap.to(sublineSentences, {
+            opacity: 1,
+            stagger: 0.25,
+            duration: 0.5,
+            ease: 'power1.out',
+            delay: 0.1
+          });
+        } else if (sublineEl) {
+          gsap.to(sublineEl, { opacity: 1, duration: 0.3 });
+        }
       }
     });
 
-    /* -------- Karten: Nur Text (h3, .card-snippet, p, li) -------- */
+    /* -------- Karten: Titel, Snippet, Fließtext und Listen -------- */
     const cards = section.querySelectorAll('.module-card');
 
     cards.forEach(card => {
@@ -114,107 +141,81 @@ document.addEventListener('DOMContentLoaded', () => {
           const liEls     = card.querySelectorAll('.payload li');
 
           if (REDUCE) {
-            // Direkt sichtbar, keine Bewegungen
             [titleEl, snippetEl, ...pEls, ...liEls].forEach(el => el && gsap.set(el, { opacity: 1, clearProps: 'transform,filter' }));
             return;
           }
 
-          // Split erst wenn wirklich benötigt (Performance)
-          const titleChars   = splitText(titleEl);
-          const snippetChars = splitText(snippetEl);
-          const pCharsList   = [...pEls].map(splitText);
-          // Für LI setzen wir auf Container-Blur statt Zeichen-Splitting (ruhiger & performanter)
+          // Titel / Snippet / Paragraphen → satzweise
+          const titleSentences   = splitSentences(titleEl);
+          const snippetSentences = splitSentences(snippetEl);
+          const pSentencesList   = [...pEls].map(splitSentences);
 
-          const ease = 'power3.out';
+          if (titleSentences.length) {
+            gsap.to(titleSentences, {
+              opacity: 1,
+              stagger: 0.25,
+              duration: 0.45,
+              ease: 'power1.out'
+            });
+          } else if (titleEl) {
+            gsap.to(titleEl, { opacity: 1, duration: 0.3 });
+          }
 
-          if (titleChars.length) {
-            gsap.from(titleChars, { opacity: 0, yPercent: 120, stagger: 0.01, duration: 0.5, ease });
+          if (snippetSentences.length) {
+            gsap.to(snippetSentences, {
+              opacity: 1,
+              stagger: 0.25,
+              duration: 0.45,
+              ease: 'power1.out',
+              delay: 0.08
+            });
+          } else if (snippetEl) {
+            gsap.to(snippetEl, { opacity: 1, duration: 0.3 });
           }
-          if (snippetChars.length) {
-            gsap.from(snippetChars, { opacity: 0, yPercent: 120, stagger: 0.008, duration: 0.45, ease, delay: 0.05 });
-          }
-          pCharsList.forEach((chars, i) => {
-            if (!chars.length) return;
-            gsap.from(chars, { opacity: 0, yPercent: 110, stagger: 0.008, duration: 0.45, ease, delay: 0.08 + i * 0.06 });
+
+          pSentencesList.forEach((sentences, i) => {
+            if (!sentences.length) {
+              if (pEls[i]) gsap.to(pEls[i], { opacity: 1, duration: 0.3 });
+              return;
+            }
+            gsap.to(sentences, {
+              opacity: 1,
+              stagger: 0.2,
+              duration: 0.4,
+              ease: 'power1.out',
+              delay: 0.1 + i * 0.08
+            });
           });
 
-          /* -------- NEU: Blur-Animation für UL/LI --------
-             - sanfter Blur + leichtes Anheben
-             - kurzer Stagger, klare Lesbarkeit
-             - Filter wird danach aufgeräumt (clearProps)
-          ------------------------------------------------- */
-/* -------- MASTER: UL dann LI nacheinander (sehr smooth & elegant) ------
-   - Schritt A: UL-Container auftauchen (Opacity + y + leichter Blur)
-   - Schritt B: erst danach LI-Items einzeln, top→bottom, feiner Stagger
-   - Ruhige Eases, kurze Delays, Cleanup von filter/y & will-change
---------------------------------------------------------------------------- */
-if (liEls.length) {
-  const uls = card.querySelectorAll('.payload ul, .payload ol');
+          // Listen: jedes <li> als "Satz"
+          if (liEls.length) {
+            // Startzustand: leicht ausgegraut
+            gsap.set(liEls, { opacity: 0.7 });
 
-  uls.forEach((ul, ulIndex) => {
-    // nur direkte Kinder-LIs (verhindert Doppelanimation bei verschachtelten Listen)
-    const items = ul.querySelectorAll(':scope > li');
-    if (!items.length) return;
+            gsap.to(liEls, {
+              opacity: 1,
+              duration: 0.4,
+              stagger: 0.15,   // Ein Punkt nach dem anderen
+              ease: 'power1.out',
+              delay: 0.12
+            });
+          }
 
-    // Pre-State (Null-Jank) – UL und LIs vorbereiten
-    gsap.set(ul, {
-      opacity: 0,
-      y: 10,
-      filter: 'blur(10px)',
-      willChange: 'opacity,transform,filter',
-      transformOrigin: '0 60%'
-    });
-    gsap.set(items, {
-      opacity: 0,
-      y: 8,
-      filter: 'blur(12px)',
-      willChange: 'opacity,transform,filter',
-      transformOrigin: '0 60%'
-    });
+          // Ultimativer Fallback: falls irgendwas nicht erwischt wurde
+          const allTextBlocks = [
+            titleEl,
+            snippetEl,
+            ...pEls,
+            ...liEls
+          ].filter(Boolean);
 
-    // Eases & Parameter
-    const UL_EASE = 'power2.out';
-    const LI_EASE = 'power2.out';
-
-    // Dauer/Timing bewusst kurz & edel
-    const UL_DUR   = 0.38;
-    const AFTER_UL = 0.08;     // Pause zwischen UL und ersten LI
-    // Stagger je LI: ruhig, aber klar nacheinander
-    const LI_EACH  = Math.min(0.10, 0.06 + items.length * 0.005);
-    const LI_DUR   = 0.56;
-
-    // leichtes Card-Offset bei mehreren ULs
-    const BASE_DELAY = 0.08 + ulIndex * 0.08;
-
-    const tl = gsap.timeline({ delay: BASE_DELAY });
-
-    // A) UL-Container zuerst
-    tl.to(ul, {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      duration: UL_DUR,
-      ease: UL_EASE,
-      onComplete: () => gsap.set(ul, { clearProps: 'filter,y', willChange: 'auto' })
-    });
-
-    // B) Danach LI-Items nacheinander (top → bottom)
-    tl.to(items, {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      duration: LI_DUR,
-      ease: LI_EASE,
-      stagger: { each: LI_EACH, from: 'start' }
-    }, `+=${AFTER_UL}`);
-
-    // Micro-Polish & Cleanup
-    tl.call(() => {
-      gsap.set(items, { clearProps: 'filter,y', willChange: 'auto' });
-    });
-  });
-}
-
+          if (allTextBlocks.length) {
+            gsap.to(allTextBlocks, {
+              opacity: 1,
+              duration: 0.01,
+              delay: 1.0    // nach allen anderen Tweens
+            });
+          }
         }
       });
     });

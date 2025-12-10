@@ -1879,9 +1879,6 @@
 /* ================================================
    SERVICE–CARDS – INDIVIDUAL GRADIENTS (IDENTISCH)
    ================================================ */
-/* ================================================
-   SERVICE–CARDS – INDIVIDUAL GRADIENTS
-   ================================================ */
 
 /* Webdesign */
 #svc-webdesign.module-card {
@@ -1911,25 +1908,32 @@
   background-position: 50% 50% !important;
 }
 
-/* Hover: BG leicht verschieben */
+/* SAFETY — Bei Hover verschieben sich BGs */
 #nebula-hub .module-card:hover {
   background-position: 80% 40% !important;
 }
 
-/* Touch-Geräte: BG fixieren */
-@media (hover: none), (pointer: coarse) {
-  #nebula-hub .module-card,
+/* BG bei Touch fixieren */
+@media (hover:none), (pointer:coarse) {
+  #nebula-hub .module-card {
+    background-position: initial !important;
+  }
+
   #nebula-hub .module-card:hover {
     background-position: initial !important;
   }
 }
 
+/* ================================================
+   ENDE DER DATEI — (CosmosSuite.css)
+   ================================================ */
 /* ===========================================
-   COSMOS – MOBILE (≤ 699.98px)
+   COSMOS – MOBILE TIGHT GUTTERS (FINAL OVERRIDE)
+   Weniger Außenabstand an den Bildschirmrändern
    =========================================== */
 @media (max-width: 699.98px) {
 
-  /* Section etwas kompakter */
+  /* Section insgesamt enger an den Rand */
   #nebula-hub.cosmos-suite {
     padding-top: 1.4rem !important;
     padding-bottom: 2.2rem !important;
@@ -1937,88 +1941,114 @@
     margin-bottom: 1.75rem !important;
   }
 
-  /* Grid zentriert & nicht zu breit */
+  /* Grid füllt 90% der Breite – und zentriert */
   #nebula-hub .orbit-grid {
     max-width: 95% !important;
     width: 95% !important;
-    margin-inline: auto !important;
+    margin-inline: auto !important; /* <<< zentriert */
     gap: 1.1rem !important;
     align-content: center !important;
-    justify-items: center !important;
+    justify-items: center !important; /* <<< sorgt dafür, dass Cards mittig stehen */
   }
 
-  /* Kartenfüllung & Schatten */
+  /* Karten zentrieren + Innenabstand enger */
   #nebula-hub .module-card {
     width: 100% !important;
     max-width: 100% !important;
-    margin-inline: auto !important;
+    margin-inline: auto !important; /* <<< Card selbst zentriert */
     border-radius: 12px !important;
-    padding: 1.4rem 1.1rem 2rem !important;
+    padding-left: 1.1rem !important;
+    padding-right: 1.1rem !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, .18) !important;
-    min-height: auto !important;
   }
 
-  /* CTA darf volle Breite nutzen */
+  /* CTA-Buttons dürfen die volle Breite nutzen */
   #nebula-hub .module-card > .payload > .warp-cta {
     max-width: 100% !important;
   }
 
-  /* =========================
-     MOBILE TYPO – H3 & LISTEN
-     ========================= */
 
-  /* Kartenüberschrift: links, kompakter Abstand */
-  #nebula-hub .module-card .payload > h3,
-  #nebula-hub .module-card h3 {
-    text-align: left !important;
-    margin-top: 0 !important;
-    margin-bottom: 0.75rem !important;
-    margin-left: 0 !important;
-    margin-right: auto !important;
+}
 
-    font-size: clamp(1.45rem, 1.3rem + 1.4vw, 1.85rem) !important;
-    line-height: 1.22 !important;
-    font-weight: 820 !important;
-    letter-spacing: -0.01em !important;
+/* === MOBILE: Nur H3 + Button sichtbar in der Karte === */
+@media (max-width: 699.98px) {
+
+  /* Alle direkten Kinder der Payload ausblenden … */
+  #nebula-hub .module-card .payload > * {
+    display: none !important;
   }
 
-  /* UL sichtbar & linksbündig */
-  #nebula-hub .module-card .payload > ul {
+  /* … außer H3 */
+  #nebula-hub .module-card .payload > h3 {
     display: block !important;
-    text-align: left !important;
-    margin: 0 !important;
-    padding: 0.4rem 0 0 0 !important;
-    max-width: 30ch !important;
+    text-align: center !important;
+    margin: 0 0 1.1rem !important;
   }
 
-  /* LI–Typografie & Abstände */
-  #nebula-hub .module-card .payload > ul > li {
-    display: block !important;
-    text-align: left !important;
-    padding: 0.25rem 0 0.35rem !important;
-    font-size: 0.95rem !important;
-    line-height: 1.45 !important;
-    font-weight: 600 !important;
+  /* … und den Button */
+  #nebula-hub .module-card .payload > .warp-cta {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto !important;
   }
 
-  /* Divider zwischen Punkten */
-  #nebula-hub .module-card .payload > ul > li + li {
-    border-top: 1px solid rgba(255, 255, 255, .25) !important;
-  }
-
-  /* Grafikdesign-Karte etwas kompakter (optional) */
-  #svc-grafik.module-card .payload > h3 {
-    margin-bottom: 0.35rem !important;
-  }
-
-  #svc-grafik.module-card .payload > ul > li {
-    font-size: 0.94rem !important;
-    padding: 0.2rem 0 0.3rem !important;
+  /* Karte etwas kompakter */
+  #nebula-hub .module-card {
+    padding: 1.4rem 1.1rem 2rem !important;
+    min-height: auto !important;
   }
 }
 
+/* === MOBILE: H3 moderat größer === */
+@media (max-width: 699.98px) {
+  #nebula-hub .module-card .payload > h3 {
+    font-size: clamp(1.45rem, 1.3rem + 1.4vw, 1.85rem) !important;
+    line-height: 1.22 !important;
+    font-weight: 820 !important;
+    margin-bottom: 0.9rem !important;
+    text-align: center !important;
+    letter-spacing: -0.01em !important;
+  }
+}
+/* === MOBILE FIX: Karten ohne Button nicht höher, H3 zentriert === */
+@media (max-width: 699.98px) {
+
+  /* 1. Frühere min-height-/Center-Regeln für buttonlose Karten neutralisieren */
+  #nebula-hub .module-card:not(:has(.warp-cta)),
+  #nebula-hub .module-card:not(:has(.warp-cta)) .payload {
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  #nebula-hub .module-card:not(:has(.warp-cta)) .payload {
+    justify-content: flex-start !important; /* nichts nach unten ziehen */
+  }
+
+  /* 2. Karte selbst nutzt Flex zum optischen Vertikal-Center */
+  #nebula-hub .module-card:not(:has(.warp-cta)) {
+    display: flex !important;
+    align-items: center !important;   /* Payload im vorhandenen Rahmen vertikal mittig */
+  }
+
+  /* 3. H3 in Karten ohne Button: horizontal mittig */
+  #nebula-hub .module-card:not(:has(.warp-cta)) .payload > h3 {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* 4. Karten MIT Button: H3 wie gewünscht links ausgerichtet */
+  #nebula-hub .module-card:has(.warp-cta) .payload > h3 {
+    text-align: left !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+  }
+}
 /* ============================================
-   COSMOS – Größeres H3 für Tablet & Desktop
+   COSMOS – Größeres H3 für normale & große Screens
    ============================================ */
 
 /* Tablet + Desktop (ab 700px) */
@@ -2031,298 +2061,9 @@
   }
 }
 
-/* Extra groß (1600px+) */
+/* Extra groß (1600px+) kann noch etwas mehr vertragen */
 @media (min-width: 1600px) {
   #nebula-hub .module-card h3 {
     font-size: clamp(2.1rem, 1.6rem + 1.8vw, 2.8rem) !important;
-  }
-}
-/* === MOBILE FIX: Unterüberschriften in Karten ausblenden === */
-@media (max-width: 699.98px) {
-
-  #nebula-hub .module-card .card-snippet,
-  #nebula-hub .module-card .snippet,
-  #nebula-hub .module-card p:not(h3):not(.warp-cta) {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-}
-
-/* === MOBILE FINAL TIGHT SPACING FOR H3 → UL === */
-@media (max-width: 699.98px) {
-
-  /* H3: sehr kleiner Abstand zur Liste */
-  #nebula-hub .module-card .payload > h3 {
-    margin-bottom: 0.25rem !important;  /* vorher ~0.9rem / 0.75rem */
-  }
-
-  /* UL: kein extra Top-Padding */
-  #nebula-hub .module-card .payload > ul {
-    padding-top: 0 !important;          /* entfernt 0.4–0.7rem global */
-    margin-top: 0 !important;
-  }
-
-  /* LI: kompaktere Vertikalabstände */
-  #nebula-hub .module-card .payload > ul > li {
-    padding-top: 0.2rem !important;
-    padding-bottom: 0.35rem !important;
-  }
-}
-
-#nebula-hub .headline .word,
-#nebula-hub .subline .word,
-#nebula-hub .module-card .word,
-#nebula-hub .module-card .payload li {
-  opacity: 0.7;
-}
-
-@media (min-width: 375px) and (max-width: 700px) {
-
-  /* Textblock in jeder Karte weiter nach links (wie Desktop) */
-  #nebula-hub .module-card .payload {
-    padding-left: 2rem !important;     /* nach Wunsch anpassen */
-    padding-right: 2rem !important;
-    text-align: left !important;
-  }
-
-  /* Bilder in diesem Bereich wieder anzeigen */
-  #nebula-hub .module-card .image-wrapper,
-  #nebula-hub .module-card img {
-    display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-
-  /* Button nur so breit wie der Text */
-  #nebula-hub .module-card > .payload > .warp-cta {
-    position: static !important;
-    left: auto !important;
-    bottom: auto !important;
-    transform: none !important;
-
-    width: auto !important;
-    max-width: 100% !important;
-    align-self: flex-start !important;
-    white-space: normal !important;
-    text-align: left !important;
-  }
-
-  /* Karte braucht kein extra Bottom-Padding mehr */
-  #nebula-hub .module-card:has(.warp-cta) {
-    padding-bottom: 1.6rem !important;
-  }
-}
-
-/* =========================================================
-   FIX: 375px – 700px → Inhalt der Karten nach links rücken
-   und Bilder wieder anzeigen
-   ========================================================= */
-@media (min-width: 375px) and (max-width: 700px) {
-
-  /* Textinhalt linksbündig UND etwas eingerückt */
-  #nebula-hub .module-card .payload {
-    text-align: left !important;
-    padding-left: 1.6rem !important;
-    padding-right: 1.6rem !important;
-    margin-left: 0 !important;
-    margin-right: auto !important;
-  }
-
-  /* Überschrift nach links */
-  #nebula-hub .module-card h3 {
-    text-align: left !important;
-    margin-left: 0 !important;
-  }
-
-  /* LI-Elemente wieder sichtbar + linksbündig */
-  #nebula-hub .module-card .payload > ul,
-  #nebula-hub .module-card .payload > ul > li {
-    display: block !important;
-    text-align: left !important;
-    margin-left: 0 !important;
-    margin-right: auto !important;
-  }
-
-  /* Bilder wieder anzeigen */
-  #nebula-hub .module-card .overlay-art,
-  #nebula-hub .module-card .overlay-art img {
-    display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-
-  /* Bilder etwas verkleinern, damit sie nicht überlaufen */
-  #nebula-hub .module-card .overlay-art img {
-    max-width: 55% !important;
-    height: auto !important;
-    right: 0.5rem !important;
-    bottom: 0 !important;
-  }
-}
-/* =========================================================
-   1) Bilder unter 480px komplett ausblenden
-   ========================================================= */
-@media (max-width: 479.98px) {
-  #nebula-hub .module-card .overlay-art,
-  #nebula-hub .module-card .overlay-art img {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-  }
-}
-
-/* =========================================================
-   480px – 700px → Bilder sichtbar + links positioniert
-   ========================================================= */
-@media (min-width: 446px) and (max-width: 700px) {
-
-  /* Bilder wieder sichtbar */
-  #nebula-hub .module-card .overlay-art,
-  #nebula-hub .module-card .overlay-art img {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  /* Overlay allgemein: weiter links platzieren */
-  #nebula-hub .module-card .overlay-art {
-    right: auto !important;
-    left: 0.5rem !important;
-    bottom: 0.5rem !important;
-    z-index: 2 !important;
-  }
-
-  /* -------------------------
-     3D-Karte (Karte 2)
-     ------------------------- */
-  #svc-3d .overlay-art img {
-    min-width: 100%;
-    height: auto !important;
-transform: translate(40%, 20%);
-
-    mask-image: linear-gradient(
-  to right,
-  rgba(0,0,0,0) 0%,        /* komplett transparent */
-  rgba(0,0,0,0) 18%,       /* weiterhin komplett transparent bis 18% */
-  rgba(0,0,0,0.25) 38%,    /* sehr weicher Übergang beginnt spät */
-  rgba(0,0,0,0.65) 62%,    /* stärkerer Fade */
-  rgba(0,0,0,1) 82%        /* voll abgedunkelt weit rechts */
-) !important;
-
--webkit-mask-image: linear-gradient(
-  to right,
-  rgba(0,0,0,0) 0%,
-  rgba(0,0,0,0) 18%,
-  rgba(0,0,0,0.25) 38%,
-  rgba(0,0,0,0.65) 62%,
-  rgba(0,0,0,1) 82%
-) !important;
-
-  }
-
-  /* -------------------------
-     Grafik-Karte (Karte 3)
-     ------------------------- */
-  #svc-grafik .overlay-art img {
-    max-width: 60% !important;
-    height: auto !important;
-    transform: translate(80%, -20%) !important;   /* wie du es wolltest */
-
-/* Desktop-Maskierung – stärkere Verblassung links */
-mask-image: linear-gradient(
-  to right,
-  rgba(0,0,0,0) 0%,        /* komplett transparent */
-  rgba(0,0,0,0) 22%,       /* länger transparent – viel stärkerer Fade */
-  rgba(0,0,0,0.45) 42%,    /* weicher Übergang setzt später ein */
-  rgba(0,0,0,0.85) 65%,    /* dunkler Bereich ebenfalls verschoben */
-  rgba(0,0,0,1) 85%        /* voll abgedunkelt weiter rechts */
-) !important;
-
--webkit-mask-image: linear-gradient(
-  to right,
-  rgba(0,0,0,0) 0%,
-  rgba(0,0,0,0) 22%,
-  rgba(0,0,0,0.45) 42%,
-  rgba(0,0,0,0.85) 65%,
-  rgba(0,0,0,1) 85%
-) !important;
-
-  }
-}
-
-/* ================================================
-   Karte 3: Verlauf je nach Breite reduzieren
-   ================================================ */
-
-/* 480px – 520px: etwas weniger Verblassung links */
-@media (min-width: 480px) and (max-width: 519.98px) {
-  #svc-grafik .overlay-art img {
-    mask-image: linear-gradient(
-      to right,
-      rgba(0,0,0,0) 0%,
-      rgba(0,0,0,0) 18%,
-      rgba(0,0,0,0.35) 38%,
-      rgba(0,0,0,0.75) 60%,
-      rgba(0,0,0,1) 80%
-    ) !important;
-
-    -webkit-mask-image: linear-gradient(
-      to right,
-      rgba(0,0,0,0) 0%,
-      rgba(0,0,0,0) 18%,
-      rgba(0,0,0,0.35) 38%,
-      rgba(0,0,0,0.75) 60%,
-      rgba(0,0,0,1) 80%
-    ) !important;
-  }
-}
-
-/* 520px – 560px: noch weniger Verblassung links */
-@media (min-width: 520px) and (max-width: 559.98px) {
-  #svc-grafik .overlay-art img {
-    mask-image: linear-gradient(
-      to right,
-      rgba(0,0,0,0) 0%,
-      rgba(0,0,0,0) 12%,
-      rgba(0,0,0,0.25) 32%,
-      rgba(0,0,0,0.65) 56%,
-      rgba(0,0,0,1) 78%
-    ) !important;
-
-    -webkit-mask-image: linear-gradient(
-      to right,
-      rgba(0,0,0,0) 0%,
-      rgba(0,0,0,0) 12%,
-      rgba(0,0,0,0.25) 32%,
-      rgba(0,0,0,0.65) 56%,
-      rgba(0,0,0,1) 78%
-    ) !important;
-  }
-}
-
-/* 560px – 700px: kein Verlauf mehr für Karte 3 */
-@media (min-width: 560px) and (max-width: 700px) {
-  #svc-grafik .overlay-art img {
-    mask-image: none !important;
-    -webkit-mask-image: none !important;
-  }
-}
-/* Bugfix: springendes schwarzes Rechteck bei Masken-Bildern */
-@media (min-width: 446px) and (max-width: 700px) {
-  #svc-3d .overlay-art img,
-  #svc-grafik .overlay-art img {
-    mask-repeat: no-repeat !important;
-    -webkit-mask-repeat: no-repeat !important;
-
-    mask-size: 100% 100% !important;
-    -webkit-mask-size: 100% 100% !important;
-
-    mask-position: left center !important;
-    -webkit-mask-position: left center !important;
   }
 }
