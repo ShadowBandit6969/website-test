@@ -101,8 +101,6 @@
       text-align: center;
       background: #000 url('./IndexM/PC.webp') center/cover no-repeat;
     }
-    @media (max-width: 1024px) { .hero-video-wrapper { background-image: url('./IndexM/Tablet.webp'); } }
-    @media (max-width: 480px)  { .hero-video-wrapper { background-image: url('./IndexM/handy.webp'); } }
 
     .hero-video-content{
       position: relative; z-index: 2;
@@ -230,72 +228,21 @@
     }
   </style>
 
-  <!-- Webflow/Normalize -->
-  <meta name="generator" content="Webflow">
-  <link href="css/denizs-dapper-site-2d192b.webflow.css" rel="stylesheet" type="text/css">
+
   
-  
-  <!-- Titelpage-spezifische Bild-Overrides (in den Head verschoben) -->
-  <style>
-    body[data-page="webdesign"] .hero-image-background {
-      background-image: url("./images/hero-bg-sky_1hero-bg-sky.webp") !important;
-    }
-    body[data-page="webdesign"] .hero-image-foreground {
-      background-image: url("./images/webdesign-fg.webp") !important;
-    }
-    @media (max-width: 1024px) {
-      body[data-page="webdesign"] .hero-image-foreground {
-        background-image: url("./images/webdesign-fg-tablet.webp") !important;
-      }
-    }
-    @media (max-width: 480px) {
-      body[data-page="webdesign"] .hero-image-foreground {
-        background-image: url("./images/webdesign-fg-mobile.webp") !important;
-      }
-    }
-    /* === Large Title – groß, perfekt mittig, etwas weiter unten === */
-.large-title {
-  position: absolute;
-  top: 162%;                          /* leicht nach unten versetzt */
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  width: 100%;
-font-size: clamp(4rem, 22vw, 18rem);
 
-  line-height: 1.05;
-  font-weight: 900;
-  z-index: 10;
-  margin: 0;
-  color: inherit;
-}
 
-/* Elternbereich soll Bezugspunkt sein */
-.hero-section,
-.header-section,
-.page-header {
-  position: relative;
-}
-
-/* Mobile-Optimierung */
-@media (max-width: 767px) {
-  .large-title {
-    top: 58%; /* etwas höher auf kleinen Screens */
-    font-size: clamp(2.6rem, 14vw, 7rem);
-  }
-}
-
-  </style>
-  <link rel="stylesheet" href="css/herolast.css" type="text/css">
 <link rel="stylesheet" href="css/navbar.css" type="text/css">
 <link rel="stylesheet" href="css/darkmodeLast.css" type="text/css">
+
+<link rel="stylesheet" href="css/hero.css" type="text/css">
 <link rel="stylesheet" href="css/aurora.css" type="text/css">
-<link rel="stylesheet" href="css/cosmosSuite.css" type="text/css">
+<link rel="stylesheet" href="css/cosmosSuiteIndex.css" type="text/css">
 <link rel="stylesheet" href="css/reviews.css" type="text/css">
 
 <link rel="stylesheet" href="css/ablauf.css" type="text/css">
 
-<link rel="stylesheet" href="css/contactWeb.css" type="text/css">
+<link rel="stylesheet" href="css/contact.css" type="text/css">
 
 <link rel="stylesheet" href="css/arbeitsproben.css" type="text/css">
 
@@ -307,56 +254,11 @@ font-size: clamp(4rem, 22vw, 18rem);
 
 <link rel="stylesheet" href="css/Casestudie.css" type="text/css">
 
-<link rel="stylesheet" href="css/ctasection.css" type="text/css">
+<link rel="stylesheet" href="css/arbeitsprobenBilder.css" type="text/css">
 
-<link rel="stylesheet" href="css/metrics.css" type="text/css">
+  <link rel="stylesheet" href="css/ctasection.css" type="text/css">
 
-<link rel="stylesheet" href="css/warumwir.css" type="text/css">
 <style>
-/* --------------------------
-   Lokale Bild-Overrides nur für webdesign.html
---------------------------- */
-body[data-page="webdesign"] .hero-image-background {
-  background-image: url("./WebdesignPic/1.mp4") !important;
-}
-
-body[data-page="webdesign"] .hero-image-foreground {
-  background-image: url("./images/hintegrundweb.webp") !important;
-}
-
-/* Optional: Mobile- oder Tablet-Varianten */
-@media (max-width: 1024px) {
-  body[data-page="webdesign"] .hero-image-foreground {
-    background-image: url("./images/webdesign-bg-tablet.webp") !important;
-  }
-}
-@media (max-width: 480px) {
-  body[data-page="webdesign"] .hero-image-foreground {
-    background-image: url("./images/webdesign-bg-mobile.webp") !important;
-  }
-}
-
-@media (min-width: 768px) {
-  .hero-image-foreground {
-    transform: translateY(10%);              /* dein bisheriger Versatz */
-  }
-}
-@media (min-width: 1400px) {
-  .hero-image-foreground {
-    transform: translateY(15%);              /* dein bisheriger Versatz */
-  }
-}
-@media (min-width: 1800px) {
-  .hero-image-foreground {
-    transform: translateY(15%);              /* dein bisheriger Versatz */
-  }
-}
-@media (min-width: 2200px) {
-  .hero-image-foreground {
-    transform: translateY(7%);              /* dein bisheriger Versatz */
-  }
-}
-
   html, body {
     margin: 0;
     padding: 0;
@@ -377,84 +279,15 @@ body[data-page="webdesign"] .hero-image-foreground {
     height: 100vh;
     overflow: hidden; /* falls Kinder minimal überstehen */
   }
-
-  .hero-image-background,
-  .hero-image-foreground {
-    position: absolute;
-    inset: 0;         /* top/right/bottom/left = 0 */
-    width: 100%;
-    max-width: none;
-  }
-
-
-  /* Nur Handys: Hintergrund minimal „herauszoomen“ */
-@media (max-width: 767px) {
-  .hero-image-foreground {
-    background-position: center bottom;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    margin: 0 !important;                  /* falls woanders Mobile-Margins gesetzt sind */
-        transform: translateY(17%);              /* dein bisheriger Versatz */
-  }
-}
-/* Ergänzung am Ende deiner bestehenden CSS-Datei */
-.hero-image-background {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.hero-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none; /* blockiert keine Klicks */
-  z-index: 0;
-}
-
-
-/* Option A – sehr groß, hero-haft */
-.hero-section[data-page="webdesign"] .large-title{
-  font-size: clamp(3.2rem, 14vw, 12rem);
-  line-height: 0.95;
-}
-
-/* Option B – maximal bold (vorsichtiger auf kleinen Screens) */
-@media (max-width: 480px){
-  .hero-section[data-page="webdesign"] .large-title{
-    font-size: clamp(3rem, 12vw, 5.2rem);
-  }
-}
-@media (min-width: 481px){
-  .hero-section[data-page="webdesign"] .large-title{
-    font-size: clamp(4.5rem, 16vw, 14rem);
-    line-height: 0.92;
-  }
-}
-
-/* Option C – riesig + leichte Negativ-Kerning-Optik */
-.hero-section[data-page="webdesign"] .large-title{
-  font-size: clamp(3.8rem, 15vw, 13rem);
-  line-height: 0.9;
-  letter-spacing: -0.02em;
-}
-
 </style>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="script/aurora.js" defer></script>
 <script src="script/cosmos.js" defer></script>
 <script src="script/panetransition.js" defer></script>
-<script src="script/arbeitsproben.js" defer></script>
-<script src="script/freewireframe.js" defer></script>
-<script src="script/metrics.js" defer></script>
 <script src="script/ArbeitsprobenBilder.js" defer></script>
-<script src="script/kontaktformular.js" defer></script>
+  <script src="script/freewireframe.js" defer></script>
 </head>
 
 <body data-page="Konzept und Strategie">
@@ -1021,714 +854,175 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
-<section class="hero-section" data-page="webdesign">
+
+<section class="hero-section" data-page="titlepage">
   <div class="hero-images-wrapper">
-    <!-- HINTERGRUND-VIDEO -->
+
     <div class="hero-image-background">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hintegrundweb.webp">
-        <source src="./WebdesignPic/1.mp4" type="video/mp4" />
-      </video>
+      <!-- Light-Mode Bild -->
+      <img 
+        src="./titleimages/3D_title_white.webp" 
+        alt="Hero Background" 
+        class="hero-image light-image"
+      />
+
+      <!-- Dark-Mode Bild -->
+      <img 
+        src=".//titleimages/3D_title_dark.webp" 
+        alt="Hero Background Dark" 
+        class="hero-image dark-image"
+      />
     </div>
 
+    <!-- TITLE + TEXT + CTAS -->
     <div class="page-title">
       <div class="container">
-        <h1 class="large-title">Strategie <br>Konzept</h1>
+
+        <h1 class="large-title">
+          Konzept und Strategie <br> für Ihre Website
+        </h1>
+
+        <h2 class="small-title">
+          Ich entwickle mit Ihnen einen klaren Plan für Ihren digitalen Auftritt. 
+          Pitch Deck, Wireframes und Styleguide bilden die Grundlage für Design 
+          und Entwicklung von Websites, die Vertrauen aufbauen und spürbar wirken.
+        </h2>
+
+        <div class="hero-cta-buttons">
+          <a href="#kontakt" class="btn-primary">Jetzt unverbindlich anfragen</a>
+
+          <a href="#referenzen" class="btn-secondary">
+            Referenzen ansehen
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="icon-arrow"
+            >
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
+        </div>
+
       </div>
     </div>
 
   </div>
 </section>
 
-<script>
-(function () {
-  const section = document.querySelector('.hero-section[data-page="webdesign"]');
-  const h1 = document.querySelector('.page-title .large-title');
-  const pageTitle = document.querySelector('.page-title');
-  if (!section || !h1 || !pageTitle) return;
 
-  // --- Reload-Erkennung (unverändert) ---
-  function isReload() {
-    try {
-      const n = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
-      if (n && (n.type === 'reload' || n.type === 'back_forward')) return true;
-      if (performance && performance.navigation && performance.navigation.type === 1) return true;
-    } catch(e){}
-    return false;
-  }
-  const RELOADED = isReload();
-
-  // ---------- Wrapper & Overlay ----------
-  const originalHTML = h1.innerHTML;
-  const parts = originalHTML.split(/(<br\s*\/?>)/i);
-
-  const wrapper = document.createElement('span');
-  wrapper.id = 'titleFloatWrapper';
-  wrapper.style.display = 'inline-block';
-  wrapper.style.willChange = 'transform';
-  h1.innerHTML = '';
-  h1.appendChild(wrapper);
-
-  const overlay = document.createElement('canvas');
-  overlay.id = 'titleOverlay';
-  overlay.style.position = 'absolute';
-  overlay.style.left = '0';
-  overlay.style.top = '0';
-  overlay.style.pointerEvents = 'none';
-  overlay.style.zIndex = '3';
-  if (getComputedStyle(pageTitle).position === 'static') {
-    pageTitle.style.position = 'relative';
-  }
-  pageTitle.appendChild(overlay);
-
-  // ---------- Canvas Sizing + Live-Tracking ----------
-  let ctx = null;
-  let last = { w:0, h:0, left:0, top:0, dpr:0 };
-
-  function sizeCanvas(force=false) {
-    const r = h1.getBoundingClientRect();
-    const pr = pageTitle.getBoundingClientRect();
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
-
-    const left = r.left - pr.left;
-    const top  = r.top  - pr.top;
-    const w = Math.ceil(r.width);
-    const h = Math.ceil(r.height);
-
-    if (!force &&
-        w === last.w && h === last.h &&
-        left === last.left && top === last.top &&
-        dpr === last.dpr) return;
-
-    overlay.style.width = w + 'px';
-    overlay.style.height = h + 'px';
-    overlay.style.left = left + 'px';
-    overlay.style.top  = top  + 'px';
-
-    overlay.width = Math.max(1, Math.floor(w * dpr));
-    overlay.height = Math.max(1, Math.floor(h * dpr));
-
-    ctx = overlay.getContext('2d');
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    last = { w, h, left, top, dpr };
-  }
-
-  sizeCanvas(true);
-
-  const roH1 = new ResizeObserver(() => sizeCanvas(true));
-  const roTitle = new ResizeObserver(() => sizeCanvas(true));
-  roH1.observe(h1);
-  roTitle.observe(pageTitle);
-
-  window.addEventListener('resize', () => sizeCanvas(true), { passive:true });
-  window.addEventListener('scroll', () => sizeCanvas(false), { passive:true });
-  window.addEventListener('orientationchange', () => sizeCanvas(true));
-
-  // ---------- Text → Letters ----------
-  // großer, exotischer Glyph-Pool: Griechisch, Kyrillisch, Armenisch, Georgisch, IPA, Fraktur, Mathe-Alphanumerika, Ziffernvarianten …
-  const SIMILAR = {
-    // lower
-    'a':['ɑ','α','⍺','ª','ᵃ','ä','á','à','ȧ','ą','ɐ','@','ꭤ','𝖺','𝔞','ᶏ','ᴀ'],
-    'b':['Ь','ƅ','Ꮟ','Ƅ','ƀ','ẛ'.replace('ẛ','b'),'ɓ','ᵇ','ᶀ','𝖻','𝔟'],
-    'c':['ϲ','ᴄ','с','ᶜ','ƈ','ↄ','ς','ɔ','ꜿ','ç','č','ċ','𝖼','𝔠'],
-    'd':['ԁ','đ','ᑯ','ᵈ',')','ɗ','ᵭ','ḋ','ᶁ','𝖽','𝔡'],
-    'e':['℮','ɛ','є','ᵉ','ᵋ','ℯ','ɇ','ė','ë','é','è','ɘ','ε','𝖾','𝔢'],
-    'f':['ƒ','ſ','ϝ','ẝ','ʄ','ᶂ','𐊇','𝖿','𝔣'],
-    'g':['ɡ','ǥ','ᵍ','9','ĝ','ğ','ġ','ḡ','ɢ','ᶃ','𝓰','𝔤'],
-    'h':['һ','ℎ','ᵸ','ʰ','ɦ','ħ','ꜧ','ḫ','𝖍','𝔥'],
-    'i':['ɪ','ǐ','ı','¡','1','í','ì','ï','ỉ','ɨ','ⅰ','!', '𝖎','𝔦'],
-    'j':['ȷ','ϳ','ј','ʝ','ĵ','ɉ','ᶡ','𝖏','𝔧'],
-    'k':['κ','ᵏ','ꭆ','ḳ','ǩ','ꝁ','ќ','ᴋ','𝖐','𝔨'],
-    'l':['ɩ','ⅼ','ǀ','|','Ɩ','ĺ','ļ','ł','ᶅ','ʟ','𝖑','𝔩'],
-    'm':['ṃ','ᴍ','м','ᵐ','ɱ','ṁ','ᶆ','𝖒','𝔪'],
-    'n':['η','п','ɴ','∩','ɲ','ṅ','ņ','ń','ň','ң','𝖓','𝔫'],
-    'o':['ο','о','ɵ','°','0','ö','ó','ò','õ','ơ','ø','○','∘','𝖔','𝔬'],
-    'p':['ρ','р','ᵖ','ᵱ','ṕ','ṗ','ƥ','ῥ','𝖕','𝔭'],
-    'q':['զ','ʠ','ɋ','ȹ','գ','𝖖','𝔮'],
-    'r':['ɼ','г','ʳ','ř','ŗ','ꭇ','ʀ','ȑ','ȓ','ṙ','ᵲ','𝖗','𝔯'],
-    's':['ʂ','ѕ','$','§','ş','ś','ṡ','ș','ṥ','ʃ','ƨ','ß','𝖘','𝔰'],
-    't':['τ','ť','ŧ','†','ṭ','ṯ','ƫ','ʈ','₸','𝖙','𝔱'],
-    'u':['υ','ʋ','ս','ᵘ','ů','ü','ú','ù','ū','ư','µ','ꭎ','𝖚','𝔲'],
-    'v':['ν','ѵ','ᵛ','ṿ','ѷ','√','∨','ʋ','𝖛','𝔳'],
-    'w':['ᴡ','ѡ','ɯ','ŵ','ẇ','ɰ','ɯ','𝖜','𝔴'],
-    'x':['х','×','✕','χ','ẋ','ᶍ','ⅹ','𝖝','𝔵'],
-    'y':['γ','ʏ','у','ý','ỳ','ÿ','ŷ','ɣ','ʎ','¥','𝖞','𝔶'],
-    'z':['ʐ','ᴢ','ž','ż','ź','ƶ','ʑ','ẓ','ƻ','𝖟','𝔷'],
-    // upper
-    'A':['Α','Λ','Ꭺ','Ā','Ⱥ','∆','∀','𝘈','𝕬','𝔄'],
-    'B':['В','Ƀ','ß','Ɓ','ℬ','ʙ','ɮ','ᛒ','𝘉','𝕭','𝔅'],
-    'C':['Ϲ','С','Ⅽ','Ꮯ','℃'.slice(0,1),'☾','ℂ','𐐕','𝘊','𝕮','𝔇'.replace('D','C')],
-    'D':['Ꭰ','Ḏ','Ɗ','ⅅ','ᴅ','ↁ','𝘋','𝕯','𝔇'],
-    'E':['Ε','Є','ℰ','€','Ɇ','Ɛ','Σ','⋿','𝘌','𝕰','𝔈'],
-    'F':['Ғ','Ϝ','ℱ','ᖴ','𐊇','𝘍','𝕱','𝔉'],
-    'G':['ɢ','Ԍ','Ꮐ','Ĝ','Ğ','Ġ','Ḡ','Ɠ','𝘎','𝕲','𝔊'],
-    'H':['Η','Н','ℋ','Ħ','Ⱨ','♓','𝘏','𝕳','ℌ'],
-    'I':['Ι','Ӏ','ǀ','1','Ⅰ','∣','𝘐','𝕴','ℑ'],
-    'J':['Ј','Ɉ','Ĵ','ⅉ','𝘑','𝕵','𝔍'],
-    'K':['Κ','ᛕ','K','₭','Ҡ','Ƙ','Ǩ','𝘒','𝕶','𝔎'],
-    'L':['Ꮮ','Ⅼ','Ł','∟','⅃','ʟ','𝘓','𝕷','𝔏'],
-    'M':['Μ','М','Ṁ','Ϻ','Ⅿ','𝘔','𝕸','𝔐'],
-    'N':['Ν','Ｎ','∩','Ṅ','Ň','Ɲ','𝘕','𝕹','𝔑'],
-    'O':['Ο','О','0','°','Ø','Ө','○','⦿','𝘖','𝕺','𝔒'],
-    'P':['Ρ','Р','ℙ','₽','Ҏ','Ƿ','𐊕','𝘗','𝕻','𝔓'],
-    'Q':['Ⴓ','ℚ','Ǫ','Ɋ','Ҩ','Ⓠ','𝘘','𝕼','𝔔'],
-    'R':['Ꭱ','ℜ','Я','Ȑ','Ŕ','Ṙ','®','𝘙','𝕽','ℛ'],
-    'S':['Ѕ','§','$','Ś','Ş','Š','Ṣ','ẞ','𝘚','𝕾','𝔖'],
-    'T':['Τ','Т','Ŧ','Ͳ','₸','Ṫ','Ƭ','✝','𝘛','𝕿','𝔗'],
-    'U':['Ս','⋃','Ū','Ü','Ú','Ù','Ư','∪','𝘜','𝖀'.replace('𝖀','𝕌'),'𝔘'],
-    'V':['Ѵ','∨','Ṽ','Ʋ','✓','𝘝','𝕍','𝔙'],
-    'W':['Ԝ','Ѡ','Ш','Ŵ','Ẃ','Ẅ','𝘞','𝕎','𝔚'],
-    'X':['Χ','Х','✕','×','✖','Ⅹ','χ','𝘟','𝕏','𝔛'],
-    'Y':['Υ','Ү','¥','Ɏ','Ÿ','Ῡ','Ӳ','𝘠','𝕐','𝔜'],
-    'Z':['Ζ','ℤ','Ž','Ż','Ź','Ƶ','Ẕ','𝘡','𝕫'.toUpperCase(),'𝔃'.toUpperCase()],
-    // digits
-    '0':['O','О','Ο','○','°','⭕','⓪','𝟘'],
-    '1':['I','l','|','ǀ','Ⅰ','❶','𝟙'],
-    '2':['Ƨ'.toLowerCase(),'乙','٢','②','𝟚'],
-    '3':['Ʒ','З','Ɛ','ɜ','➂','𝟛'],
-    '4':['Ꮞ','٤','④','𝟜'],
-    '5':['Ƽ','Ѕ','⑤','𝟝'],
-    '6':['ბ','৬','⑥','𝟞'],
-    '7':['۷','⑦','𝟟'],
-    '8':['ȣ','੮','⑧','𝟠'],
-    '9':['ჽ','९','⑨','𝟡']
-  };
-// === Add Asian & "cool" glyphs (CJK, Kana, Hangul, Bopomofo, Fullwidth) ===
-const ASIAN_COOL = {
-  // lower
-  a: ['ａ','ぁ','ｧ','ァ','人'],
-  b: ['ｂ'],
-  c: ['ｃ','匚'],
-  d: ['ｄ','り'],
-  e: ['ｅ','ぇ','ェ'],
-  f: ['ｆ','ﾌ','ㄈ'],
-  g: ['ｇ'],
-  h: ['ｈ','卄','ん'],
-  i: ['ｉ','丨','｜','ㅣ'],
-  j: ['ｊ','亅'],
-  k: ['ｋ','ケ'],
-  l: ['ｌ','し','丨','ㅣ'],
-  m: ['ｍ','〽'],
-  n: ['ｎ','ん','ﾝ'],
-  o: ['ｏ','〇','ㅇ','○'],
-  p: ['ｐ','尸'],
-  q: ['ｑ'],
-  r: ['ｒ','尺'],
-  s: ['ｓ','ら'],
-  t: ['ｔ','丁','ﾃ'],
-  u: ['ｕ','凵','ㄩ'],
-  v: ['ｖ','レ'],
-  w: ['ｗ','山'],
-  x: ['ｘ','メ','叉'],
-  y: ['ｙ','丫','ㄚ'],
-  z: ['ｚ','乙','之'],
-
-  // upper
-  A: ['Ａ','人','八'],
-  B: ['Ｂ','日'],
-  C: ['Ｃ','匚'],
-  D: ['Ｄ','冂'],
-  E: ['Ｅ','三','ヨ','ミ'],
-  F: ['Ｆ','ﾌ','ㄈ'],
-  G: ['Ｇ'],
-  H: ['Ｈ','廾','井','卄'],
-  I: ['Ｉ','丨','工','｜'],
-  J: ['Ｊ'],
-  K: ['Ｋ','ケ'],
-  L: ['Ｌ'],
-  M: ['Ｍ','州','爪'],
-  N: ['Ｎ','几','ン'],
-  O: ['Ｏ','〇','囗','口'],
-  P: ['Ｐ','尸','戸'],
-  Q: ['Ｑ'],
-  R: ['Ｒ','尺'],
-  S: ['Ｓ','ら'],
-  T: ['Ｔ','丁','工','ﾃ'],
-  U: ['Ｕ','凵'],
-  V: ['Ｖ','レ'],
-  W: ['Ｗ','山'],
-  X: ['Ｘ','メ','叉'],
-  Y: ['Ｙ','丫','ㄚ'],
-  Z: ['Ｚ','乙','之'],
-
-  // digits (fullwidth + CJK numerals)
-  0: ['０','零','〇'],
-  1: ['１','一','丨','｜'],
-  2: ['２','二','乙'],
-  3: ['３','三'],
-  4: ['４','四'],
-  5: ['５','五'],
-  6: ['６','六'],
-  7: ['７','七'],
-  8: ['８','八'],
-  9: ['９','九'],
-};
-
-// merge into SIMILAR without duplicates (keep your originals first)
-for (const [key, vals] of Object.entries(ASIAN_COOL)) {
-  SIMILAR[key] = Array.from(new Set([...(SIMILAR[key] || []), ...vals]));
+<style>
+/* Hintergrundbilder */
+.hero-image-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
 }
 
-  const neon = ['#00fff5','#ff3df0','#39ff14','#ffd400','#7a5cff','#ff5e5b'];
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
 
-  // Kombinierende Akzente (für extra „Glitch“)
-  const COMBINERS = [
-    '\u0301','\u0300','\u0302','\u0308','\u0336','\u0332','\u035B','\u0342','\u032E'
-  ];
+/* Standard: Light Mode */
+.light-image { opacity: 1; }
+.dark-image { opacity: 0; }
 
-  // --- schneller Glyph-Support mit Cache ---
-  const _glyphSupportCache = new Map();
-  function supportsGlyphCached(ch){
-    if (_glyphSupportCache.has(ch)) return _glyphSupportCache.get(ch);
-    const span = document.createElement('span');
-    span.textContent = ch;
-    span.style.position = 'absolute';
-    span.style.visibility = 'hidden';
-    span.style.font = getComputedStyle(document.body).font;
-    document.body.appendChild(span);
-    const ok = span.offsetWidth > 0 && span.textContent === ch;
-    span.remove();
-    _glyphSupportCache.set(ch, ok);
-    return ok;
+/* Darkmode über body.nocturne */
+body.nocturne .light-image {
+  opacity: 0;
+}
+body.nocturne .dark-image {
+  opacity: 1;
+}
+
+/* Falls du auch data-theme="dark" unterstützt */
+[data-theme="dark"] .light-image {
+  opacity: 0;
+}
+[data-theme="dark"] .dark-image {
+  opacity: 1;
+}
+
+/* Small Title auf Handy ausblenden */
+@media (max-width: 768px) {
+  .small-title {
+    display: none;
   }
-
-  function getAltsForChar(ch){
-    const base = SIMILAR[ch] || SIMILAR[ch.toLowerCase()] || [];
-    const filtered = base
-      .slice()
-      .sort(() => Math.random()-0.5)
-      .filter(s => supportsGlyphCached(s));
-    // ~30%: Kombinierende Akzente (1–2) dranhängen
-    if (filtered.length && Math.random() < 0.30){
-      const withAccents = [];
-      filtered.forEach(s => {
-        const nAcc = Math.random() < 0.5 ? 1 : 2;
-        let acc = s;
-        for (let i=0;i<nAcc;i++){
-          const c = COMBINERS[Math.floor(Math.random()*COMBINERS.length)];
-          const candidate = acc + c;
-          if (supportsGlyphCached(candidate)) acc = candidate;
-        }
-        withAccents.push(acc);
-      });
-      return withAccents.length ? withAccents : filtered;
-    }
-    return filtered;
-  }
-
-  const letterSpans = [];
-  parts.forEach(part => {
-    if (/^<br/i.test(part)) { wrapper.appendChild(document.createElement('br')); return; }
-    [...part].forEach(ch => {
-      const s = document.createElement('span');
-      s.textContent = ch;
-      s.style.display = 'inline-block';
-      s.style.willChange = 'transform, opacity, color, filter, text-shadow';
-      if (RELOADED) {
-        s.style.opacity = '1';
-        s.style.transform = 'translateY(0)';
-      } else {
-        s.style.opacity = '0';
-        s.style.transform = 'translateY(40px)';
-      }
-      s.dataset.original = ch;
-      wrapper.appendChild(s);
-      letterSpans.push(s);
-    });
-  });
-
-  // ---------- Entrance ----------
-  window.addEventListener('load', () => {
-    if (!RELOADED) {
-      letterSpans.forEach((s, i) => {
-        s.animate(
-          [{opacity:0, transform:'translateY(40px)'},
-           {opacity:1, transform:'translateY(0)'}],
-          { duration: 1400, easing:'ease-out', fill:'forwards', delay: 160 * i }
-        );
-      });
-    }
-    // Starten entscheidet der IO unten
-  });
-
-  // ---------- Float ----------
-  let floatAnim = wrapper.animate(
-    [{ transform:'translateY(0)' },{ transform:'translateY(-10px)' },{ transform:'translateY(0)' }],
-    { duration: 12000, easing:'ease-in-out', iterations: Infinity }
-  );
-  floatAnim.pause();
-
-  // ---------- Overlay Renderloop ----------
-  const effects = []; // {span, tEnd, antsPhase}
-  let raf = null;
-  let loopActive = false;
-
-  function localRect(el){
-    const r = el.getBoundingClientRect();
-    const pr = pageTitle.getBoundingClientRect();
-    return { x: r.left - pr.left, y: r.top - pr.top, w: r.width, h: r.height };
-  }
-
-  function drawGrid() {
-    const w = overlay.clientWidth, h = overlay.clientHeight;
-    const step = Math.max(18, Math.round(Math.min(w,h)/10));
-    ctx.save();
-    ctx.clearRect(0,0,overlay.width,overlay.height);
-    ctx.globalAlpha = 0.14; ctx.lineWidth = 1; ctx.strokeStyle = '#9aa0a6';
-    for (let x=0;x<=w;x+=step){ ctx.beginPath(); ctx.moveTo(x+0.5,0); ctx.lineTo(x+0.5,h); ctx.stroke(); }
-    for (let y=0;y<=h;y+=step){ ctx.beginPath(); ctx.moveTo(0,y+0.5); ctx.lineTo(w,y+0.5); ctx.stroke(); }
-    ctx.restore();
-  }
-
-  function drawEditorChrome(now){
-    effects.forEach((fx, idx) => {
-      const r = localRect(fx.span);
-      const pad = 6;
-      const x = r.x - pad, y = r.y - pad, w = r.w + pad*2, h = r.h + pad*2;
-
-      // 1) Marquee
-      ctx.save();
-      ctx.lineWidth = 1.5;
-      ctx.setLineDash([6, 4]);
-      ctx.lineDashOffset = -fx.antsPhase;
-      ctx.strokeStyle = '#000';
-      ctx.strokeRect(x, y, w, h);
-      ctx.lineDashOffset = -(fx.antsPhase+4);
-      ctx.strokeStyle = '#fff';
-      ctx.strokeRect(x, y, w, h);
-      ctx.restore();
-
-      // 2) Handles
-      ctx.save();
-      const anchors = [[x,y],[x+w,y],[x,y+h],[x+w,y+h]];
-      ctx.fillStyle = 'rgba(255,255,255,0.9)';
-      anchors.forEach(([ax,ay])=>{ ctx.beginPath(); ctx.arc(ax, ay, 2.75, 0, Math.PI*2); ctx.fill(); });
-      ctx.strokeStyle = 'rgba(255,255,255,0.3)';
-      ctx.beginPath();
-      ctx.moveTo(x+w*0.25,y); ctx.lineTo(x+w*0.31,y-10);
-      ctx.moveTo(x+w, y+h*0.65); ctx.lineTo(x+w+10, y+h*0.75);
-      ctx.stroke();
-      ctx.restore();
-
-      // 3) Scanline
-      ctx.save();
-      ctx.globalAlpha = 0.045;
-      ctx.fillStyle = '#fff';
-      const barH = Math.max(3, Math.round(h*0.12));
-      const by = y + ((now*0.03 + idx*6) % Math.max(1,h)) - barH/2;
-      ctx.fillRect(x, by, w, barH);
-      ctx.restore();
-
-      fx.antsPhase += 0.25;
-    });
-
-    for (let i=effects.length-1;i>=0;i--) {
-      if (effects[i].tEnd <= now) effects.splice(i,1);
-    }
-  }
-
-  function frame(now=performance.now()){
-    sizeCanvas(false);
-    drawGrid();
-    drawEditorChrome(now);
-    raf = requestAnimationFrame(frame);
-  }
-
-  function startLoop(){
-    if (loopActive) return;
-    loopActive = true;
-    if (!raf) raf = requestAnimationFrame(frame);
-  }
-
-  function stopLoop(){
-    loopActive = false;
-    if (raf) { cancelAnimationFrame(raf); raf = null; }
-  }
-
-  // ---------- Morph / Glitch ----------
-  const MORPH = {
-    holdMin: 1600, holdMax: 2800,       // Gesamtdauer pro aktiver Glyphe
-    animDur: 240,                       // Dauer eines hektischen Sub-Ticks
-    tickMin: 60, tickMax: 140,          // „Hektik“: schneller
-    burstChance: 0.35,                  // Chance auf Mini-Burst (mehrere schnelle Ticks)
-    splitChance: 0.45,                  // Chromatic-Split-Effekt einschalten?
-    rotateMaxDeg: 6,                    // max. Rotation
-    scaleJitter: 0.08,                  // ±8% Scale
-    skewMaxDeg: 6                       // max. Skew
-  };
-
-  function isBusy(span){ return span.dataset.morphing === '1'; }
-  function setBusy(span,v){ span.dataset.morphing = v ? '1' : '0'; }
-
-  function makeEffectForSpan(span, durMs){
-    const now = performance.now();
-    effects.push({ span, tEnd: now + durMs, antsPhase: Math.random()*10 });
-    startLoop();
-  }
-
-  // Hektischer „Morph“ pro Buchstabe: Glyphenwechsel + visuelle Störungen
-  function morphTicker(span){
-    if (!span || isBusy(span)) return;
-
-    const original = span.dataset.original || span.textContent;
-    const prev = {
-      color: span.style.color,
-      filter: span.style.filter,
-      ts: span.style.textShadow,
-      tr: span.style.transform,
-      ls: span.style.letterSpacing
-    };
-
-    const alts = getAltsForChar(original);
-    if (!alts.length) return;
-
-    setBusy(span,true);
-
-    const hold = MORPH.holdMin + Math.random()*(MORPH.holdMax - MORPH.holdMin);
-    let running = true;
-
-    makeEffectForSpan(span, hold);
-
-    const applyChromaticSplit = () => {
-      if (Math.random() > MORPH.splitChance) return '';
-      // 3-kanaliger „Split“ als Afterimage
-      const dx = (Math.random()*2+0.5).toFixed(2);
-      const dy = (Math.random()*2+0.5).toFixed(2);
-      return `
-        rgb(255 0 80) ${dx}px ${dy}px 0,
-        rgb(0 255 200) ${-dx}px ${dy}px 0,
-        rgb(180 120 255) ${dx}px ${-dy}px 0
-      `;
-    };
-
-    // spontane Mini-Bursts: mehrere sehr schnelle Ticks hintereinander
-    const doBurst = () => {
-      const n = 2 + Math.floor(Math.random()*3); // 2–4 schnelle Wechsel
-      let i = 0;
-      const burst = () => {
-        if (!running || i>=n) return;
-        singleTick(true);
-        i++;
-        setTimeout(burst, 40 + Math.random()*60);
-      };
-      burst();
-    };
-
-    // Ein einzelner schneller Tick (Glyph + FX)
-    function singleTick(isBurst=false){
-      const next = alts[Math.floor(Math.random()*alts.length)];
-      const color = neon[Math.floor(Math.random()*neon.length)];
-
-      // Glyph tauschen
-      span.textContent = next;
-      span.style.color = color;
-
-      // leichte Layout-Störung
-      const rot = (Math.random()*2-1)*MORPH.rotateMaxDeg;
-      const sx  = 1 + (Math.random()*2-1)*MORPH.scaleJitter;
-      const sy  = 1 + (Math.random()*2-1)*MORPH.scaleJitter;
-      const skx = (Math.random()*2-1)*MORPH.skewMaxDeg;
-      const sky = (Math.random()*2-1)*MORPH.skewMaxDeg;
-
-      span.style.transform = `translateZ(0) rotate(${rot}deg) skew(${skx}deg, ${sky}deg) scale(${sx},${sy})`;
-
-      // Blur-Flicker
-      const blurPx = (isBurst ? 1.6 : 0.9) + Math.random()*0.8;
-      const contrast = 1.2 + Math.random()*0.5;
-      const bright = 1.05 + Math.random()*0.25;
-      span.style.filter = `blur(${blurPx}px) contrast(${contrast}) brightness(${bright})`;
-
-      // Chromatic Afterimage
-      span.style.textShadow = applyChromaticSplit();
-
-      // Mini „morphing“ Gefühl: Letter-Spacing pulsen lassen
-      if (Math.random() < 0.5) {
-        span.style.letterSpacing = (Math.random()<0.5 ? '-0.02em' : '0.04em');
-      }
-
-      // Rückanimation via Web Animations API (knackig, „hektisch“)
-      span.animate(
-        [
-          { filter:`${span.style.filter}`, transform: `${span.style.transform}` },
-          { filter:'none', transform:'translateZ(0) rotate(0deg) skew(0,0) scale(1,1)' }
-        ],
-        { duration: MORPH.animDur, easing:'steps(3,end)', fill:'forwards' }
-      );
-    }
-
-    const tick = () => {
-      if (!running) return;
-      singleTick(false);
-      if (Math.random() < MORPH.burstChance) doBurst();
-      const gap = MORPH.tickMin + Math.random()*(MORPH.tickMax - MORPH.tickMin);
-      tickTimer = setTimeout(tick, gap);
-    };
-
-    let tickTimer = null;
-    tick();
-
-    setTimeout(()=>{
-      running = false;
-      if (tickTimer) clearTimeout(tickTimer);
-      // Reset auf Original, sanft ausfaden
-      span.textContent = original;
-      span.style.color = prev.color;
-      span.style.filter = 'none';
-      span.style.textShadow = 'none';
-      span.style.letterSpacing = prev.ls || '';
-      span.animate(
-        [
-          { opacity: 0.85, filter:'none' },
-          { opacity: 1,    filter:'none' }
-        ],
-        { duration: 180, easing: 'ease-out', fill: 'forwards' }
-      );
-      setBusy(span,false);
-    }, hold);
-  }
-
-  function pick(){
-    const a=letterSpans.filter(s=>s.textContent.trim()!=='');
-    return a.length? a[Math.floor(Math.random()*a.length)]:null;
-  }
-
-  function snapSlide(span, dir='up') {
-    const dy = dir === 'up' ? -18 : 18;
-    span.animate(
-      [{ transform:`translateY(${dy}px)` }, { transform:'translateY(0)' }],
-      { duration: 420, easing:'steps(5, end)', fill:'both' }
-    );
-  }
-
-  function multiGlitchBurst() {
-    if (Math.random() < 0.45) { const s = pick(); if (s) snapSlide(s, Math.random()<0.5 ? 'up' : 'down'); }
-    const s = pick(); if (s) morphTicker(s);
-  }
-
-  // ---------- Start/Stop ----------
-  let glitchTimer=null;
-  function startGlitch(){
-    if(glitchTimer) return;
-    glitchTimer=setInterval(()=>multiGlitchBurst(), 2400 + Math.random()*1600);
-    setTimeout(()=>multiGlitchBurst(), 600);
-  }
-  function stopGlitch(){
-    if(glitchTimer){ clearInterval(glitchTimer); glitchTimer=null; }
-  }
-
-  // Sichtbarkeits-Controller
-  let visible = false;
-  function activate() {
-    if (visible) return;
-    visible = true;
-    floatAnim.play();
-    startGlitch();
-    startLoop();
-  }
-  function deactivate() {
-    if (!visible) return;
-    visible = false;
-    floatAnim.pause();
-    stopGlitch();
-    stopLoop();
-  }
-
-  // IntersectionObserver: „läuft, wenn sichtbar“
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.target !== section) return;
-      if (e.isIntersecting) activate();
-      else deactivate();
-    });
-  }, {
-    threshold: [0.05],
-    root: null,
-    rootMargin: '0px'
-  });
-  io.observe(section);
-
-  // Tab-Wechsel
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      deactivate();
-    } else {
-      const r = section.getBoundingClientRect();
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-      const visiblePx = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
-      const isVis = visiblePx / Math.min(vh, r.height) >= 0.05;
-      if (isVis) activate();
-    }
-  });
-
-  // Initial: prüfen
-  (function initVisibility(){
-    const r = section.getBoundingClientRect();
-    const vh = window.innerHeight || document.documentElement.clientHeight;
-    const visiblePx = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
-    const isVis = visiblePx / Math.min(vh, r.height) >= 0.05;
-    if (isVis) activate();
-  })();
-})();
-</script>
+}
+</style>
 
 
 
 
 <section id="aurora-sheet" class="aurora-sheet container" aria-labelledby="aurora-crown" aria-describedby="aurora-chant">
-<h2 id="aurora-crown" class="aurora-title" data-anim-aurora>
-  Klarer planen. Besser erreichen.
-</h2>
+  <h2 id="aurora-crown" class="aurora-title" data-anim-aurora>
+    Klar planen. Sicher entscheiden.
+  </h2>
 
   <p id="aurora-chant" class="aurora-subtitle" aria-live="polite">
-    Klare Grundlagen sorgen dafür, dass Design, Inhalte und Technik später schneller, sicherer und erfolgreicher funktionieren.
+    Eine durchdachte Grundlage sorgt dafür, dass Design, Inhalt und Technik später gezielt wirken und Ihre Website sicher, verständlich und erfolgreich aufgebaut werden kann.
   </p>
 
-  <ul class="quasar-grid" aria-label="Bereiche: Workshops, Planung, Wirkung">
+  <ul class="quasar-grid" aria-label="Bereiche: Analyse, Struktur, Wirkung">
 
-    <!-- Workshops -->
+    <!-- Strategische Workshops -->
     <li>
       <article class="aether-card" id="aether-workshops" aria-labelledby="aether-workshops-h" aria-describedby="aether-workshops-k aether-workshops-s">
         <h3 id="aether-workshops-h">Strategische Workshops</h3>
-        <p class="snippet" id="aether-workshops-s">Klarheit statt Bauchgefühl.</p>
-        <p class="t-snippet">Wir schaffen ein gemeinsames Verständnis – damit jede Entscheidung sitzen kann.</p>
-        <p class="microtag" id="aether-workshops-k">Ausrichtung, Fokus & Sicherheit</p>
+        <p class="snippet" id="aether-workshops-s">Klarheit statt Vermutungen.</p>
+        <p class="t-snippet">Wir schaffen ein gemeinsames Verständnis als Grundlage für fundierte Entscheidungen.</p>
+        <p class="microtag" id="aether-workshops-k">Ausrichtung, Fokus und Sicherheit</p>
 
-        <ul class="delta-list" aria-label="Inhalte unserer Workshops">
-          <li><span class="lead">Zielgruppen</span><span class="copy">Wer kauft wirklich – und warum?</span></li>
-          <li><span class="lead">Personas</span><span class="copy">Klare Nutzerbilder für bessere Entscheidungen.</span></li>
-          <li><span class="lead">Wettbewerb</span><span class="copy">Chancen erkennen, Lücken nutzen.</span></li>
+        <ul class="delta-list" aria-label="Inhalte der Analysephase">
+          <li><span class="lead">Zielgruppen</span><span class="copy">Wer nutzt Ihre Website und aus welchem Grund.</span></li>
+          <li><span class="lead">Personas</span><span class="copy">Greifbare Nutzerbilder, die Entscheidungen erleichtern.</span></li>
+          <li><span class="lead">Wettbewerb</span><span class="copy">Stärken erkennen, Chancen nutzen.</span></li>
         </ul>
       </article>
     </li>
 
-    <!-- Planung -->
+    <!-- Konzept und Wireframes -->
     <li>
       <article class="aether-card" id="aether-planning" aria-labelledby="aether-planning-h" aria-describedby="aether-planning-k aether-planning-s">
-        <h3 id="aether-planning-h">Konzept & Wireframes</h3>
-        <p class="snippet" id="aether-planning-s">Eine klare Struktur spart Zeit, Budget und Nerven.</p>
-        <p class="t-snippet">Wireframes zeigen früh, wie Seiten funktionieren – bevor teure Designs entstehen.</p>
-        <p class="microtag" id="aether-planning-k">Struktur & Orientierung</p>
+        <h3 id="aether-planning-h">Konzept und Wireframes</h3>
+        <p class="snippet" id="aether-planning-s">Struktur, die Orientierung schafft.</p>
+        <p class="t-snippet">Wireframes zeigen früh, wie Inhalte angeordnet sind und wie Ihre Nutzer geführt werden.</p>
+        <p class="microtag" id="aether-planning-k">Übersicht und Orientierung</p>
 
-        <ul class="delta-list" aria-label="Elemente unserer Planung">
-          <li><span class="lead">Seitenarchitektur</span><span class="copy">Klare Wege für deine Nutzer.</span></li>
-          <li><span class="lead">Interaktionen</span><span class="copy">Was passiert wo – und warum?</span></li>
-          <li><span class="lead">Entscheidungswege</span><span class="copy">Reduzierte Komplexität, klare Conversion-Pfade.</span></li>
+        <ul class="delta-list" aria-label="Elemente der Konzeption">
+          <li><span class="lead">Seitenarchitektur</span><span class="copy">Klare Wege für Besucher Ihrer Website.</span></li>
+          <li><span class="lead">Interaktionen</span><span class="copy">Wo Handlungen stattfinden und wie sie ausgelöst werden.</span></li>
+          <li><span class="lead">Entscheidungswege</span><span class="copy">Vereinfachte Abläufe für bessere Ergebnisse.</span></li>
         </ul>
       </article>
     </li>
 
-    <!-- Wirkung -->
+    <!-- Wirkung und Optimierung -->
     <li>
       <article class="aether-card" id="aether-impact" aria-labelledby="aether-impact-h" aria-describedby="aether-impact-k aether-impact-s">
-        <h3 id="aether-impact-h">Messbarer Fortschritt</h3>
-        <p class="snippet" id="aether-impact-s">Was wirkt, bleibt. Was nicht wirkt, wird verbessert.</p>
-        <p class="t-snippet">Datenbasierte Entscheidungen statt Rätselraten – für stetige Optimierung.</p>
-        <p class="microtag" id="aether-impact-k">Ziele, Daten & Optimierung</p>
+        <h3 id="aether-impact-h">Messbare Wirkung</h3>
+        <p class="snippet" id="aether-impact-s">Erkennen, was funktioniert.</p>
+        <p class="t-snippet">Daten helfen dabei, Entscheidungen nachvollziehbar zu machen und Ihre Website stetig zu verbessern.</p>
+        <p class="microtag" id="aether-impact-k">Ziele, Daten und Entwicklung</p>
 
         <ul class="delta-list" aria-label="Messbare Erfolgsfaktoren">
-          <li><span class="lead">KPIs</span><span class="copy">Erfolg klar definiert.</span></li>
-          <li><span class="lead">Tracking</span><span class="copy">Nutzerverhalten verstehen – DSGVO-konform.</span></li>
-          <li><span class="lead">Iterationen</span><span class="copy">Gezielte Tests für bessere Ergebnisse.</span></li>
+          <li><span class="lead">KPIs</span><span class="copy">Erfolg klar definiert und nachvollziehbar.</span></li>
+          <li><span class="lead">Tracking</span><span class="copy">Nutzerverhalten verstehen und daraus lernen.</span></li>
+          <li><span class="lead">Iterationen</span><span class="copy">Gezielte Optimierung für bessere Ergebnisse.</span></li>
         </ul>
       </article>
     </li>
@@ -1741,97 +1035,884 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
 
 
 
-<section class="cluster cosmos-suite" id="nebula-hub" aria-labelledby="nebula-hub-h">
-  <h2 id="nebula-hub-h" class="headline">Webdesign-Leistungen</h2>
-  <p class="subline" id="nebula-hub-sub">
-    Von der Idee bis zum Ergebnis: Wir planen, gestalten und bringen deine Website live – klar, schnell und verständlich.
-  </p>
+<section
+  id="concept-serum"
+  class="concept-section serum-section container"
+  aria-labelledby="concept-serum-h"
+  aria-describedby="concept-serum-desc"
+>
+  <header class="concept-header serum-header">
+    <p class="concept-kicker">Konzeptphase</p>
+    <h2 id="concept-serum-h" class="aurora-title">
+      So entsteht Ihr Konzept
+    </h2>
+    <p id="concept-serum-desc" class="aurora-subtitle">
+      In drei Schritten entsteht die Grundlage für Ihre Website – klar strukturiert
+      und konsequent auf Ihre Ziele und Zielgruppen ausgerichtet.
+    </p>
+  </header>
 
-  <ul class="orbit-grid" aria-labelledby="nebula-hub-h" aria-describedby="nebula-hub-sub">
+  <div
+    class="serum-grid"
+    role="list"
+    aria-label="Ablauf der Konzeptphase in drei Schritten"
+  >
+    <!-- Hauptkarte 1 -->
+    <article
+      class="serum-card serum-card-main aurora-card aurora-orange has-photo-bg"
+      role="listitem"
+      aria-labelledby="serum-main-title"
+    >
+      <div class="serum-card-inner">
+        <div class="serum-card-text">
+          <p class="concept-meta">Schritt eins</p>
+          <h3 id="serum-main-title" class="serum-card-title">
+            Analyse und Zielklärung
+          </h3>
+          <p class="serum-card-copy">
+            Wir schärfen gemeinsam, was Ihre Website leisten soll und für wen sie gedacht ist.
+          </p>
+          <ul class="concept-list">
+            <li><span>Ziele definieren</span></li>
+            <li><span>Zielgruppen und Nutzungskontexte verstehen</span></li>
+            <li><span>Rahmen und Anforderungen klären</span></li>
+          </ul>
+        </div>
 
-    <!-- 1 -->
-    <li class="module-card" id="svc-webdesign" aria-labelledby="svc-webdesign-h" aria-describedby="svc-webdesign-s">
-      <div class="payload">
-        <h3 id="svc-webdesign-h">1. Verstehen</h3>
-        <p class="card-snippet" id="svc-webdesign-s">
-          Wir lernen dich, dein Projekt und deine Zielgruppe kennen.
-        </p>
-        <ul>
-          <li>Kurz-Workshop & Fragenrunde</li>
-          <li>Analyse von Markt & Mitbewerbern</li>
-          <li>Einfaches Zielgruppenprofil</li>
-          <li>Chancen und Risiken erkennen</li>
-        </ul>
-      </div>
-    </li>
-
-    <!-- 2 -->
-    <li class="module-card stellar-3d" id="svc-3d" aria-labelledby="svc-3d-h" aria-describedby="svc-3d-s">
-      <div class="payload">
-        <h3 id="svc-3d-h">2. Struktur</h3>
-        <p class="card-snippet" id="svc-3d-s">
-          Wir ordnen Inhalte und planen eine klare Navigation.
-        </p>
-        <ul>
-          <li>Übersichtliche Sitemap</li>
-          <li>Skizzen & Klick-Demo</li>
-          <li>Texte sinnvoll sortieren</li>
-          <li>SEO-Grundlagen mitdenken</li>
-        </ul>
-
-        <div class="overlay-art" aria-hidden="true">
-          <div class="orbit-shell">
-            <img class="planet-sprite" loading="lazy" decoding="async" 
-            src="./cosmospictures/planet.webp" alt="" width="512" height="512">
-          </div>
-          <img class="lazy-comet astronaut-sprite" 
-          src="./cosmospictures/strategie.webp"
-          data-src="./cosmospictures/strategie.webp" alt="" decoding="async" loading="lazy" width="512" height="512">
+        <div class="serum-card-media" aria-hidden="true">
+          <img
+            src="./arbeitsproben/arbeitsproben_index/post11.webp"
+            alt=""
+            loading="lazy"
+          >
         </div>
       </div>
-    </li>
+    </article>
 
-    <!-- 3 -->
-    <li class="module-card" id="svc-grafik" aria-labelledby="svc-grafik-h" aria-describedby="svc-grafik-s">
-      <div class="payload">
-        <h3 id="svc-grafik-h">3. Planung & Umsetzung</h3>
-        <p class="card-snippet" id="svc-grafik-s">
-          Wir legen Aufgaben, Zeiten und Schritte fest – und setzen alles um.
-        </p>
-        <ul>
-          <li>Prioritäten & Meilensteine</li>
-          <li>Klarer Projektplan</li>
-          <li>Budget im Blick</li>
-          <li>Qualitätscheck vor dem Launch</li>
-        </ul>
+    <!-- Hauptkarte 2 -->
+<article
+  class="serum-card serum-card-side-top aurora-card aurora-dark has-photo-bg"
+  role="listitem"
+  aria-labelledby="serum-side-top-title"
+>
+  <div class="serum-card-inner">
+    <div class="serum-card-media serum-card-media-split" aria-hidden="true">
+      <picture>
+        <!-- Desktop ab 1125px: komplett anderes Bild -->
+        <source
+          srcset="./cosmospictures/astro-sitzend.webp"
+          media="(min-width: 1125px)"
+        >
+        <!-- Tablet 721–1124px: altes Desktop-Wireframe -->
+        <source
+          srcset="./images/Wireframes/wireframe1.webp"
+          media="(min-width: 721px)"
+        >
+        <!-- Standard / Mobile ≤ 720px -->
+        <img
+          src="./images/Wireframes/wireframe1-mobile.webp"
+          alt=""
+          loading="lazy"
+        >
+      </picture>
+    </div>
 
-        <div class="overlay-art" aria-hidden="true">
-          <img class="lazy-comet" src="./cosmospictures/planungundumsetzungweb.webp" 
-          data-src="./cosmospictures/planungundumsetzungweb.webp" 
-          alt="" decoding="async" loading="lazy" width="512" height="512">
+    <div class="serum-card-text">
+      <p class="concept-meta">Schritt zwei</p>
+      <h3 id="serum-side-top-title" class="serum-card-title">
+        Wireframes und Struktur
+      </h3>
+      <p class="serum-card-copy">
+        Auf Basis der Analyse entstehen mehrere Entwürfe für Aufbau und Nutzerführung.
+      </p>
+      <ul class="concept-list">
+        <li><span>Seitenarchitektur und Inhalte ordnen</span></li>
+        <li><span>Nutzerwege sichtbar machen</span></li>
+        <li><span>Feedback-Runde zur Abstimmung</span></li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+
+    <!-- Hauptkarte 3 -->
+    <article
+      class="serum-card serum-card-side-bottom aurora-card aurora-blue has-photo-bg"
+      role="listitem"
+      aria-labelledby="serum-side-bottom-title"
+    >
+      <div class="serum-card-inner">
+        <div class="serum-card-text">
+          <p class="concept-meta">Schritt drei</p>
+          <h3 id="serum-side-bottom-title" class="serum-card-title">
+            Visuelle Richtung
+          </h3>
+          <p class="serum-card-copy">
+            Aus Struktur und Inhalten entsteht eine erste visuelle Linie für Ihren Auftritt im Web.
+          </p>
+          <ul class="concept-list">
+            <li><span>Basis-Styleguide mit Farben und Typografie</span></li>
+            <li><span>Stimmung und Bildsprache festlegen</span></li>
+            <li><span>Vorbereitung für Design und Umsetzung</span></li>
+          </ul>
+          <div class="serum-link-row"></div>
+        </div>
+
+        <div class="serum-card-media" aria-hidden="true">
+          <img
+            src="./arbeitsproben/arbeitsproben_index/post11.webp"
+            alt=""
+            loading="lazy"
+          >
         </div>
       </div>
-    </li>
+    </article>
 
-    <!-- 4 -->
-    <li class="module-card" id="svc-social" aria-labelledby="svc-social-h" aria-describedby="svc-social-s">
-      <div class="payload">
-        <h3 id="svc-social-h">4. Erfolg & Optimierung</h3>
-        <p class="card-snippet" id="svc-social-s">
-          Wir messen Ergebnisse und verbessern deine Website laufend.
-        </p>
-        <ul>
-          <li>Ziele & Kennzahlen (KPIs)</li>
-          <li>Tracking mit Datenschutz</li>
-          <li>Übersichtliches Dashboard</li>
-          <li>Tests & laufende Verbesserungen</li>
-        </ul>
+
+    <!-- Video-Karte nur für Tablet -->
+    <article
+      class="serum-card serum-card-video aurora-card aurora-dark"
+      aria-hidden="true"
+    >
+      <div class="serum-card-inner">
+        <div class="serum-card-media">
+         <video
+  src="./cosmospictures/indexvid.webm"
+  autoplay
+  loop
+  muted
+  playsinline
+></video>
+
+        </div>
       </div>
-    </li>
+    </article>
 
-  </ul>
+  
+  </div>
 </section>
 
+<style>
+/* --------------------------------------------------
+   Basis: Section & Typografie
+-------------------------------------------------- */
+/* Serum-Section erhält exakt die Aurora-Abstände */
+.serum-section.concept-section{
+  background:#ffffff;
+  color:#0b0c10;
+
+  /* 1:1 Parität mit .aurora-sheet */
+  padding: clamp(3rem, 4vw, 6rem) clamp(1rem, 3vw, 2rem);
+}
+
+/* Safe-Area Parität wie Aurora */
+@supports (padding:max(0px)){
+  .serum-section.concept-section{
+    padding-left:  max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Genauso wie Aurora: fester Gutter */
+:root{
+  --serum-gutter: 2rem;
+}
+
+.serum-section.concept-section{
+  padding-left:  var(--serum-gutter);
+  padding-right: var(--serum-gutter);
+}
+
+
+.serum-section,
+.serum-section * {
+  font-family: var(--wrf-font, ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial) !important;
+}
+
+.serum-header {
+  max-width: 62rem;
+  margin:0 auto var(--space-4, 3rem);
+  text-align:center;
+}
+
+.concept-kicker {
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------
+   Grid Layout – mobile zuerst
+-------------------------------------------------- */
+
+.serum-grid {
+  display:grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas:
+    "main"
+    "side-top"
+    "side-bottom"
+    "support";
+  gap: var(--space-3, 1.8rem);
+}
+
+.serum-card-main { grid-area: main; }
+.serum-card-side-top { grid-area: side-top; }
+.serum-card-side-bottom { grid-area: side-bottom; }
+.serum-support-grid { grid-area: support; }
+
+/* --------------------------------------------------
+   Kartenbasis – Aurora-Look
+-------------------------------------------------- */
+
+.serum-card {
+  border-radius: var(--radius-card, 1.25rem);
+  overflow: hidden;
+  display:flex;
+  border:none;
+  align-self: stretch;
+}
+
+.aurora-card {
+  position:relative;
+  color:#ffffff;
+}
+
+.aurora-card .serum-card-text,
+.aurora-card .serum-card-text * {
+  color:#ffffff !important;
+}
+
+.aurora-card::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(
+    circle at 30% 0%,
+    rgba(255,255,255,.25),
+    transparent 60%
+  );
+  z-index:0;
+  pointer-events:none;
+}
+
+.aurora-card::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.18),
+    rgba(0,0,0,.26)
+  );
+  z-index:0;
+  pointer-events:none;
+}
+
+.aurora-card > * {
+  position:relative;
+  z-index:2;
+}
+
+.aurora-orange {
+  background: linear-gradient(135deg, #ff5100, #ff7b00, #ff5100);
+  background-size: 300% 300%;
+  box-shadow: 0 4px 18px rgba(255,123,0,.25);
+}
+
+.aurora-dark {
+  background: linear-gradient(135deg, #0d0d0d, #1c1f2f, #0d0d0d);
+  background-size: 300% 300%;
+  box-shadow: 0 4px 18px rgba(0,0,0,.45);
+}
+
+.aurora-blue {
+  background: linear-gradient(135deg, #4b00ff, #3000a3, #4b00ff);
+  background-size: 300% 300%;
+  box-shadow: 0 4px 18px rgba(75,0,255,.35);
+}
+
+/* --------------------------------------------------
+   Inneres Layout – mobile Basis
+-------------------------------------------------- */
+
+.serum-card-inner {
+  display:grid;
+  grid-template-columns:minmax(0, 1fr);
+  grid-template-rows:auto auto;
+  height:100%;
+}
+
+.serum-card-text {
+  padding: var(--space-3, 1.8rem);
+  display:flex;
+  flex-direction:column;
+  gap: var(--space-2, 1.1rem);
+}
+
+.serum-card-main .serum-card-text {
+  padding-bottom: 1.2rem;
+}
+
+/* Karte 1 – Text + Bild darunter (flacher unter 1125px) */
+.serum-card-main .serum-card-inner {
+  grid-template-rows:auto 180px;
+}
+
+/* Karte 2 – Bild oben, Text darunter (mobile) */
+.serum-card-side-top .serum-card-inner {
+  grid-template-rows:220px auto;
+}
+
+.serum-card-side-top .serum-card-media {
+  grid-row:1;
+}
+
+.serum-card-side-top .serum-card-text {
+  grid-row:2;
+}
+
+/* Karte 3 – nur Text, Bild ausgeblendet (mobile) */
+.serum-card-side-bottom .serum-card-inner {
+  grid-template-rows:auto;
+}
+
+.serum-card-side-bottom .serum-card-media {
+  display:none;
+}
+
+/* --------------------------------------------------
+   Medien
+-------------------------------------------------- */
+
+.serum-card-media {
+  position:relative;
+  overflow:hidden;
+}
+
+.serum-card-media img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.serum-card-media-split {
+  min-height:220px;
+}
+
+/* --------------------------------------------------
+   Typografie in Karten
+-------------------------------------------------- */
+
+.concept-meta {
+  margin:0;
+  font-size:0.8rem;
+  text-transform:uppercase;
+  letter-spacing:0.14em;
+  font-weight:680;
+}
+
+.serum-card-title {
+  margin:0;
+  font-size: clamp(1.5rem, 1.1rem + 1vw, 2.1rem);
+  font-weight:900;
+  letter-spacing:-0.015em;
+  line-height:1.15;
+  text-wrap:balance;
+}
+
+.serum-card-copy {
+  margin:0;
+  font-size: clamp(1.02rem, 0.98rem + 0.35vw, 1.16rem);
+  font-weight:600;
+  letter-spacing:.002em;
+  line-height:1.75;
+  text-wrap:pretty;
+}
+
+/* --------------------------------------------------
+   Listen – ohne Bullet-Icon
+-------------------------------------------------- */
+
+.concept-list {
+  list-style:none;
+  padding:0;
+  margin: 0.75rem 0 0;
+}
+
+.concept-list li {
+  position:relative;
+  margin:0;
+  padding:.7rem 0 .9rem;
+  font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem);
+  font-weight:680;
+  letter-spacing:-.002em;
+  line-height:1.7;
+  text-wrap: pretty;
+}
+
+.concept-list li + li {
+  border-top:1px solid rgba(255,255,255,.22);
+}
+
+.concept-list li + li::after {
+  content:"";
+  position:absolute;
+  left:0;
+  right: clamp(140px, 24vw, 320px);
+  top:-1px;
+  height:1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,.55) 35%,
+    rgba(255,255,255,.18) 65%,
+    transparent 100%
+  );
+  opacity:.9;
+  pointer-events:none;
+}
+
+.concept-list li::before {
+  content:none;
+}
+
+.concept-list li span {
+  display:inline-block;
+  padding-left:0;
+}
+
+/* --------------------------------------------------
+   Support-Karten
+-------------------------------------------------- */
+
+.serum-support-grid {
+  display:grid;
+  gap: var(--space-3, 1.8rem);
+}
+
+/* ab 640px: 2 Spalten */
+@media (min-width: 640px) {
+  .serum-support-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.serum-support-card {
+  position: relative;
+  border-radius: var(--radius-card, 1.25rem);
+  border:1px solid #e5e7eb;
+  padding: var(--space-3, 1.8rem);
+  background:#ffffff;
+  display:flex;
+  align-items:flex-start;
+  gap:1rem;
+  box-shadow:
+    0 10px 26px rgba(15,23,42,.06),
+    0 1px 0 rgba(255,255,255,.9);
+}
+
+.serum-support-icon-wrap {
+  flex:0 0 auto;
+}
+
+.serum-support-icon {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:2.4rem;
+  height:2.4rem;
+  border-radius:999px;
+  background: linear-gradient(135deg, #ff7b00, #ff5100);
+  box-shadow: 0 10px 20px rgba(15,23,42,.3);
+}
+
+.serum-support-icon-outline {
+  background:transparent;
+  border:2px solid #111827;
+}
+
+.feather-icon {
+  width:1.3rem;
+  height:1.3rem;
+  stroke:#ffffff;
+  stroke-width:2.1;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  fill:none;
+}
+
+.serum-support-content {
+  flex:1 1 auto;
+  display:flex;
+  flex-direction:column;
+  gap:0.3rem;
+}
+
+.serum-support-title {
+  margin:0;
+  font-size:1.05rem;
+  font-weight:700;
+  color:#0b0c10;
+}
+
+.serum-support-copy {
+  margin:0;
+  font-size:0.96rem;
+  line-height:1.7;
+  color:#111827;
+}
+
+/* --------------------------------------------------
+   Links / CTA
+-------------------------------------------------- */
+
+.serum-link-row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.6rem;
+}
+
+/* --------------------------------------------------
+   Video-Karte – Basis: überall versteckt
+-------------------------------------------------- */
+
+.serum-card-video {
+  display: none;
+}
+
+/* --------------------------------------------------
+   Bildkarten-Basis – standardmäßig ausgeblendet
+-------------------------------------------------- */
+
+.serum-image-grid {
+  display:none;
+}
+
+.serum-image-card {
+  position:relative;
+  border-radius: var(--radius-card, 1.25rem);
+  overflow:hidden;
+  background:#020617;
+  box-shadow: 0 12px 30px rgba(15,23,42,.4);
+}
+
+.serum-image-card img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* --------------------------------------------------
+   Dark Mode
+-------------------------------------------------- */
+
+:root[data-theme="dark"] .serum-section.concept-section {
+  background:#000000;
+  color:#ffffff;
+}
+
+:root[data-theme="dark"] .serum-section .concept-kicker {
+  color:#ffffff;
+}
+
+:root[data-theme="dark"] .serum-support-card {
+  background:#000000;
+  border-color:#111827;
+  box-shadow:
+    0 16px 36px rgba(0,0,0,.85),
+    0 0 0 1px rgba(15,23,42,.8);
+}
+
+:root[data-theme="dark"] .serum-support-title,
+:root[data-theme="dark"] .serum-support-copy {
+  color:#ffffff;
+}
+
+:root[data-theme="dark"] .feather-icon {
+  stroke:#ffffff;
+}
+
+/* --------------------------------------------------
+   Mobile-Optimierung ≤ 600px
+-------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+  .serum-grid {
+    gap: 1.4rem;
+  }
+
+  .serum-card-text,
+  .serum-support-card {
+    padding: var(--space-2, 1.25rem);
+  }
+
+  .serum-card-main .serum-card-inner {
+    grid-template-rows:auto 160px;
+  }
+
+  .serum-card-side-top .serum-card-inner {
+    grid-template-rows:180px auto;
+  }
+
+  .serum-card-title {
+    font-size: clamp(1.35rem, 1.2rem + 1vw, 1.8rem);
+  }
+
+  .serum-card-copy {
+    font-size: 0.98rem;
+    line-height:1.7;
+  }
+
+  .concept-list li {
+    padding:0.55rem 0 0.75rem;
+  }
+}
+
+/* --------------------------------------------------
+   Kleine Tablets / große Phones 601–720px
+-------------------------------------------------- */
+
+@media (min-width: 601px) and (max-width: 720px) {
+
+  .serum-grid {
+    gap: 1.6rem;
+  }
+
+  .serum-card-main .serum-card-inner {
+    grid-template-rows:auto 180px;
+  }
+
+  .serum-card-side-top .serum-card-inner {
+    grid-template-rows:200px auto;
+  }
+}
+
+/* --------------------------------------------------
+   Tablet 721–1124px
+   - links: Karte 1, darunter Video
+   - rechts: Karte 2 oben, Karte 3 unten
+   - Video & Karte 3 teilen sich eine Zeile → bündig
+-------------------------------------------------- */
+
+@media (min-width: 721px) and (max-width: 1124px) {
+
+  .serum-header {
+    text-align:center;
+  }
+
+  .serum-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.15fr);
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "main side-top"
+      "video side-bottom"
+      "support support";
+    max-width: 62rem;
+    margin-inline:auto;
+    align-items: stretch;
+  }
+
+  /* Hauptkarte links – Text + etwas kleinere Bildhöhe */
+  .serum-card-main .serum-card-inner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows:auto 180px;
+  }
+
+  /* Karte 2 – Bild links, Text rechts */
+  .serum-card-side-top .serum-card-inner {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr);
+    grid-template-rows:auto;
+  }
+
+  .serum-card-side-top .serum-card-media {
+    grid-column:1;
+    grid-row:1;
+  }
+
+  .serum-card-side-top .serum-card-text {
+    grid-column:2;
+    grid-row:1;
+  }
+
+  /* Karte 3 – Text + (optional) Bild unten */
+  .serum-card-side-bottom .serum-card-inner {
+    grid-template-columns:minmax(0, 1fr);
+    grid-template-rows:auto;
+  }
+
+  /* Support-Karten unten über zwei Spalten */
+  .serum-support-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Video-Karte sichtbar und in eigener Grid-Area */
+  .serum-card-video {
+    display:flex;
+    grid-area: video;
+    border-radius: var(--radius-card, 1.25rem);
+    overflow:hidden;
+  }
+
+  .serum-card-video .serum-card-inner {
+    grid-template-columns:minmax(0, 1fr);
+    grid-template-rows:auto;
+    height:100%;
+  }
+
+  .serum-card-video .serum-card-media {
+    height:100%;
+  }
+
+  .serum-card-video video {
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+  }
+}
+
+/* --------------------------------------------------
+   ≥ 1125px: Bild in jeder Karte
+   - Text oben, Bild direkt darunter
+   - Bild außerdem als Hintergrund hinter dem Text
+-------------------------------------------------- */
+@media (min-width: 1125px) {
+
+  .serum-header {
+    text-align: center;
+    margin-bottom: var(--space-4, 3rem);
+  }
+
+  .serum-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "main side-top side-bottom"
+      "support support support";
+    align-items: stretch;
+    gap: var(--space-3, 1.8rem);
+}
+
+.serum-card{
+      max-height: 80% !important;
+}
+
+.serum-card-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 220px; /* nur Mindesthöhe, kein Strecken mehr */
+}
+
+
+  .serum-card-text {
+    padding: var(--space-3, 1.8rem);
+  }
+
+  /* Bild-Bereich sichtbar, vollflächig ohne Padding */
+  .serum-card .serum-card-media {
+    display: block !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  .serum-card .serum-card-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0; /* kein zusätzlicher Radius im Inneren */
+  }
+
+  /* keine externe Bildreihe mehr */
+  .serum-image-grid {
+    display: none !important;
+  }
+
+  /* Video-Karte bleibt auf großen Screens ausgeblendet */
+  .serum-card-video {
+    display: none !important;
+  }
+
+  /* Bild auch als Hintergrund hinter dem Text nutzen */
+  .serum-card.has-photo-bg {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .serum-card.has-photo-bg.aurora-card::before {
+    /* überschreibt das bisherige ::before auf großen Screens */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.25)
+      ),
+      var(--card-bg-image);
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* dunkler Overlay aus ::after kannst du behalten,
+     er liegt einfach oben auf dem Bild-Hintergrund */
+
+  .serum-card.has-photo-bg .serum-card-inner,
+  .serum-card.has-photo-bg .serum-card-text {
+    position: relative;
+    z-index: 2; /* Text über dem Hintergrundbild */
+  }
+}
+
+@media (min-width: 1125px) {
+  .serum-card-main .serum-card-inner {
+    grid-template-rows: auto 300px; /* oder 280px, 320px – was dir gefällt */
+  }
+}
+
+.serum-card-media picture,
+.serum-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 720px) {
+  .serum-card-side-top .serum-card-inner {
+    grid-template-rows: auto 180px; /* oben Text, unten Bild */
+  }
+
+  .serum-card-side-top .serum-card-text {
+    grid-row: 1;
+  }
+
+  .serum-card-side-top .serum-card-media {
+    grid-row: 2;
+  }
+}
+/* Aurora-Padding für Serum-Cards */
+:root {
+  --serum-aurora-padding: clamp(1.2rem, 1rem + 1vw, 2rem);
+}
+
+.serum-card-text {
+  padding: var(--serum-aurora-padding) !important;
+}
+
+</style>
 
 
 
@@ -1839,152 +1920,1035 @@ for (const [key, vals] of Object.entries(ASIAN_COOL)) {
 
 
 
-<section class="pane-transition" id="flowhub" aria-labelledby="flowhub-h">
-  <div class="pane-world is-visible" id="paneWorld">
-    <div class="pane-wrap">
-      <h2 id="flowhub-h" class="pane-title">So entsteht deine digitale Strategie</h2>
-      <p class="pane-subtitle">
-        Strukturiert, evidenzbasiert und auf Umsetzung getrimmt.
+
+<section
+  id="flow-canvas-ui"
+  class="flow-canvas-section"
+  aria-labelledby="flow-canvas-ui-h"
+>
+  <div class="container">
+    <header class="flow-canvas-header">
+      <p class="flow-canvas-kicker">Wireframe & Oberfläche</p>
+
+      <h2 id="flow-canvas-ui-h" class="aurora-title">
+        Vom Entwurf zur Oberfläche
+      </h2>
+
+      <p class="aurora-subtitle flow-canvas-subtitle">
+        Wie aus einer einfachen Skizze eine klare, markengerechte Benutzeroberfläche wird.
       </p>
+    </header>
 
-      <div class="flow-rail" role="list">
+    <div class="flow-canvas-grid">
 
-        <!-- 01: ANALYSE & ZIELBILD -->
-        <div class="flow-card has-art" id="flow-step-01" role="button" tabindex="0"
-             data-stage="01" aria-expanded="false" aria-labelledby="flow-step-01-h" aria-controls="flow-step-01-details">
-          <span class="card-num-giant" aria-hidden="true">01</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">01</span>
-            <h3 id="flow-step-01-h">Analyse &amp; Zielbild</h3>
-            <p class="m-snippet">
-              Wir klären Ziele, Risiken und Erfolgsfaktoren – fokussiert auf Business-Impact.
-            </p>
-            <p class="t-snippet">
-              Interviews, Analytics-Review und Markt-Screens liefern ein klares Bild. Wir definieren Hypothesen,
-              Prioritäten und die Messgrößen für Erfolg.
-            </p>
-            <p>
-              Ergebnis: ein fundiertes Zielbild mit Scope, Risiken und Quick-Wins.
-            </p>
-            <div class="details" id="flow-step-01-details">
-              <p>Dokumentiert im Strategy-Briefing inkl. KPI-Tree, Annahmen &amp; Validierungsplan.</p>
-            </div>
-          </div>
+      <!-- ERGEBNIS (01) -->
+      <article class="flow-canvas-card flow-canvas-card-main flow-canvas-card-hero">
+        
+        <header class="flow-canvas-card-header">
+          <span class="card-num" aria-hidden="true">01</span>
+          <h3 class="flow-canvas-title aurora-h3">
+            Klarer Flow, weniger Reibung
+          </h3>
+        </header>
+
+        <ul class="delta-list flow-canvas-delta-list">
+          <li>
+            <span class="lead">Struktur zuerst</span>
+            <span class="copy">Seitenaufbau und Wege sind definiert, bevor gestaltet wird.</span>
+          </li>
+          <li>
+            <span class="lead">Marke im Interface</span>
+            <span class="copy">Oberfläche fühlt sich an wie Ihr Auftritt – nicht wie ein Template.</span>
+          </li>
+          <li>
+            <span class="lead">Fokus auf das Wesentliche</span>
+            <span class="copy">Nutzende finden schneller, was wichtig ist.</span>
+          </li>
+        </ul>
+
+        <div class="flow-canvas-hero-media">
+          <img src="./arbeitsproben/arbeitsproben_index/post14.webp" alt="Gestaltete Website Oberfläche">
         </div>
 
-        <!-- 02: KONZEPT & STRUKTUR -->
-        <div class="flow-card" id="flow-step-02" role="button" tabindex="0"
-             data-stage="02" aria-expanded="false" aria-labelledby="flow-step-02-h" aria-controls="flow-step-02-details">
-          <span class="card-num-giant" aria-hidden="true">02</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">02</span>
-            <h3 id="flow-step-02-h">Konzept &amp; Struktur</h3>
-            <p class="m-snippet">
-              Sitemap, Content-Modell und Flows machen die Strategie greifbar.
-            </p>
-            <p class="t-snippet">
-              Wireframes und klickbare Prototypen validieren Nutzenversprechen, Navigation und Conversion-Pfade frühzeitig.
-            </p>
-            <p>
-              Ergebnis: ein schlüssiger Aufbau, der Orientierung gibt und zur Aktion führt.
-            </p>
-            <div class="details" id="flow-step-02-details">
-              <p>Tree-Tests/Card-Sorting sichern die Informationsarchitektur ab.</p>
-            </div>
-          </div>
-        </div>
+      </article>
 
-        <!-- 03: ROADMAP & GOVERNANCE -->
-        <div class="flow-card" id="flow-step-03" role="button" tabindex="0"
-             data-stage="03" aria-expanded="false" aria-labelledby="flow-step-03-h" aria-controls="flow-step-03-details">
-          <span class="card-num-giant" aria-hidden="true">03</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">03</span>
-            <h3 id="flow-step-03-h">Roadmap &amp; Governance</h3>
-            <p class="m-snippet">
-              Wir übersetzen das Konzept in Milestones, Tickets und Verantwortlichkeiten.
-            </p>
-            <p class="t-snippet">
-              Impact/Effort-Sortierung, Kapazitäten, Budgetrahmen und Abnahmekriterien – alles transparent und planbar.
-            </p>
-            <p>
-              Ergebnis: ein priorisierter Fahrplan mit klaren Ownern und Deadlines.
-            </p>
-            <div class="details" id="flow-step-03-details">
-              <p>Optional: RACI-Matrix, Risiko-Register, Kommunikationsplan.</p>
-            </div>
-          </div>
-        </div>
+      <!-- SCHRITT 1 (02) -->
+      <article class="flow-canvas-card flow-canvas-card-side flow-canvas-card-side-top">
+        <header class="flow-canvas-card-header">
+          <span class="card-num" aria-hidden="true">02</span>
+          <h3 class="flow-canvas-title aurora-h3">
+             Wireframes klären Struktur
+          </h3>
+        </header>
 
-        <!-- 04: MESSUNG & ITERATION -->
-        <div class="flow-card" id="flow-step-04" role="button" tabindex="0"
-             data-stage="04" aria-expanded="false" aria-labelledby="flow-step-04-h" aria-controls="flow-step-04-details">
-          <span class="card-num-giant" aria-hidden="true">04</span>
-          <div class="card-core">
-            <span class="card-num" aria-hidden="true">04</span>
-            <h3 id="flow-step-04-h">Messung &amp; Iteration</h3>
-            <p class="m-snippet">
-              Launch ist der Start: Wir messen, lernen, justieren.
-            </p>
-            <p class="t-snippet">
-              Tracking-Konzept, Dashboards und Experiment-Backlog sorgen für stetige Optimierung entlang deiner KPIs.
-            </p>
-            <p>
-              Ergebnis: kontinuierliche Wirkung statt Einmal-Projekt.
-            </p>
-            <div class="details" id="flow-step-04-details">
-              <p>Monatliche Reviews mit Handlungsempfehlungen &amp; Prioritäten-Update.</p>
-            </div>
-          </div>
-        </div>
+        <ul class="delta-list flow-canvas-delta-list">
+          <li>
+            <span class="lead">Struktur sichtbar machen</span>
+            <span class="copy">
+              Seiten, Inhalte und Wege sind klar angelegt – bevor gestaltet wird.
+            </span>
+          </li>
+        </ul>
 
-      </div><!-- /.flow-rail -->
+        <div class="flow-canvas-thumb">
+          <img src="./arbeitsproben/arbeitsproben_index/post14.webp" alt="">
+        </div>
+      </article>
+
+      <!-- SCHRITT 2 (03) -->
+      <article class="flow-canvas-card flow-canvas-card-side flow-canvas-card-side-bottom">
+        <header class="flow-canvas-card-header">
+          <span class="card-num" aria-hidden="true">03</span>
+          <h3 class="flow-canvas-title aurora-h3">
+            Oberfläche gibt Charakter
+          </h3>
+        </header>
+
+        <ul class="delta-list flow-canvas-delta-list">
+          <li>
+            <span class="lead">Marke im Design</span>
+            <span class="copy">
+              Farben und Typografie machen Ihre Marke im Interface direkt erlebbar.
+            </span>
+          </li>
+        </ul>
+      </article>
+
     </div>
   </div>
 </section>
-<script>
-(function(){
-  const rail = document.querySelector('#flowhub .flow-rail');
-  if(!rail) return;
-  const firstCard = document.querySelector('#flowhub .flow-card');
 
-  function updateTracker(){
-    // nur Mobile
-    if(!window.matchMedia('(max-width: 699.98px)').matches) return;
+<style>
+/* SECTION – Aurora-kompatibel */
+.flow-canvas-section{
+  background:#ffffff;
+  color:#0b0c10;
+}
 
-    const railRect = rail.getBoundingClientRect();
-    const vh = window.innerHeight;
+.flow-canvas-header{
+  text-align:center;
+  max-width:62rem;
+  margin:0 auto var(--space-4);
+}
 
-    // Referenzlinie im Viewport (wo "gemessen" wird)
-    const refY = vh * 0.15;
+.flow-canvas-kicker{
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-weight:700;
+  margin:0 0 .6rem;
+  color:#6b7280;
+}
 
-    // Fortschritt: 0 wenn rail-top @ refY, 1 wenn rail-bottom @ refY
-    const progress = (refY - railRect.top) / railRect.height;
-    const p = Math.max(0, Math.min(1, progress));
+/* Gemeinsames Card-Padding (Aurora-kompatibel) */
+:root{
+  --flow-card-padding: clamp(1.4rem, 1.1rem + 0.7vw, 1.8rem);
+}
 
-    // Mitte der ersten Karte relativ zur Rail
-    let firstCenter = 0;
-    if(firstCard){
-      const r = firstCard.getBoundingClientRect();
-      firstCenter = (r.top - railRect.top) + (r.height / 2);
-      // Sicherheitsnetz: falls erste Karte sehr klein/außerhalb ist
-      firstCenter = Math.max(0, Math.min(firstCenter, railRect.height));
-    }
+/* GRID — Basis: mobile einspaltig */
+.flow-canvas-grid{
+  display:grid;
+  gap: var(--space-3);
+}
 
-    // Mapping: bei p=0 -> firstCenter; bei p=1 -> railRect.height
-    const y = firstCenter + p * (railRect.height - firstCenter);
-
-    rail.style.setProperty('--tracker-y', y + 'px');
+/* ===========================
+   TABLET-LAYOUT (NEU)
+   720px – 959px
+   =========================== */
+@media (min-width: 720px) and (max-width: 959px){
+  .flow-canvas-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "result result"
+      "top    bottom";
+    align-items:stretch;
   }
 
-  const ro = new ResizeObserver(updateTracker);
-  ro.observe(document.documentElement);
-  updateTracker();
-  window.addEventListener('scroll', updateTracker, { passive: true });
-  window.addEventListener('resize', updateTracker);
-  window.addEventListener('load', updateTracker);
-})();
-</script>
+  .flow-canvas-card-hero{
+    grid-area: result;
+    min-height: 260px;
+  }
+
+  .flow-canvas-card-side-top{
+    grid-area: top;
+  }
+
+  .flow-canvas-card-side-bottom{
+    grid-area: bottom;
+  }
+
+  /* Seitenkarten auf Tablet: Text links, Bild rechts */
+  .flow-canvas-card-side{
+    display:grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    column-gap: var(--space-2);
+    align-items:stretch;
+  }
+
+  .flow-canvas-card-side .flow-canvas-card-header,
+  .flow-canvas-card-side .flow-canvas-delta-list{
+    /* Inhaltsspalte links */
+    order:1;
+  }
+
+  .flow-canvas-card-side .flow-canvas-thumb{
+    order:2;
+    margin-top:0;
+    align-self:stretch;
+  }
+}
+
+/* DESKTOP-LAYOUT – unverändert zu vorher */
+@media (min-width: 960px){
+  .flow-canvas-grid{
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    grid-template-areas:
+      "result top"
+      "result bottom";
+  }
+  .flow-canvas-card-hero{ grid-area:result; }
+  .flow-canvas-card-side-top{ grid-area:top; }
+  .flow-canvas-card-side-bottom{ grid-area:bottom; }
+}
+
+/* --- KARTENBASIS --- */
+
+.flow-canvas-card{
+  position:relative;
+  border-radius: var(--radius-card, 18px);
+  padding: var(--flow-card-padding);
+  color:#fff;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  gap: var(--space-2);
+}
+
+/* Hauptkarte */
+.flow-canvas-card-hero{
+  background: linear-gradient(135deg, #0d0d0d, #1c1f2f);
+  display:flex;
+  flex-direction:column;
+}
+
+/* Right column cards */
+.flow-canvas-card-side-top{
+  background: linear-gradient(135deg, #ff5100, #ff7b00);
+}
+.flow-canvas-card-side-bottom{
+  background: linear-gradient(135deg, #4b00ff, #3000a3);
+}
+
+/* Titel in der Hero-Karte / Side-Karten */
+
+.flow-canvas-title{
+  font-weight:800;
+  font-size: clamp(1.4rem, 1.1rem + 0.9vw, 1.9rem);
+  letter-spacing:-0.02em;
+}
+
+.flow-canvas-title-sm{
+  font-weight:800;
+  font-size: clamp(1.15rem, 1.05rem + 0.5vw, 1.35rem);
+  letter-spacing:-0.015em;
+}
+
+/* --- HERO-BILD in der Ergebnis-KARTE ---
+   → Bild bündig zu den Außenkanten (kein Padding) */
+
+.flow-canvas-hero-media{
+  position:relative;
+  flex:1;
+  /* Abstand nach oben zum Text, aber bündig zu den Kartenrändern */
+  margin-top: var(--space-2);
+  margin-left: calc(-1 * var(--flow-card-padding));
+  margin-right: calc(-1 * var(--flow-card-padding));
+  margin-bottom: calc(-1 * var(--flow-card-padding));
+  border-radius:0;      /* Rundung kommt vom Card-Radius + overflow:hidden */
+  overflow:hidden;
+}
+
+.flow-canvas-hero-media img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* --- Kleine Bildcontainer ---
+   → ebenfalls bündig am Kartenrand (rechts/unten) */
+
+.flow-canvas-thumb{
+  position:relative;
+  overflow:hidden;
+  border-radius:0;
+  /* rechts & unten bündig mit der Karte, links bleibt der Text-Abstand */
+  margin-right: calc(-1 * var(--flow-card-padding));
+  margin-bottom: calc(-1 * var(--flow-card-padding));
+}
+
+.flow-canvas-thumb::before{
+  content:"";
+  display:block;
+  padding-top:60%;
+}
+
+.flow-canvas-thumb img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* Kleinere Copy-Blöcke rechts */
+
+.flow-canvas-text-sm{
+  display:flex;
+  flex-direction:column;
+  gap:.25rem;
+}
+
+/* Delta-Liste in der Hero-Karte */
+
+.flow-canvas-delta-list{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:.8rem;
+}
+
+/* --- Dark Mode --- */
+
+:root[data-theme="dark"] .flow-canvas-section{
+  background:#000;
+  color:#fff;
+}
+
+:root[data-theme="dark"] .flow-canvas-card-hero{
+  background: linear-gradient(135deg, #000, #0d0d0d);
+}
+.flow-canvas-hero-media img {
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Bild in Karte 2 bündig an den Kartenrand + vollflächig */
+.flow-canvas-card-side-top .flow-canvas-thumb {
+  margin-left:  calc(-1 * var(--flow-card-padding));
+  margin-right: calc(-1 * var(--flow-card-padding));
+  margin-bottom: calc(-1 * var(--flow-card-padding));
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.flow-canvas-card-side-top .flow-canvas-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* füllt von links nach rechts */
+  object-position: center top;/* oben ggf. zuschneiden */
+  display: block;
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="aurora-cards-section">
+  <style>
+    /* ================================
+       Aurora Cards – isolierte Section
+       mit Aurora-/Serum-Abständen & Dark-Mode-Logik
+       ================================ */
+
+    .aurora-cards-section{
+      background:#ffffff;
+      color:#0b0c10;
+
+      /* 1:1 Parität mit Serum/Aurora-Stage */
+      padding: clamp(3rem, 4vw, 6rem) clamp(1rem, 3vw, 2rem);
+      --aurora-cards-gutter: 2rem;
+      padding-left:  var(--aurora-cards-gutter);
+      padding-right: var(--aurora-cards-gutter);
+    }
+
+    /* Safe-Area wie Serum/Aurora */
+    @supports (padding:max(0px)){
+      .aurora-cards-section{
+        padding-left:  max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+      }
+    }
+
+    .aurora-cards-section,
+    .aurora-cards-section *{
+      font-family: var(--wrf-font, ui-sans-serif, system-ui, -apple-system,
+        "Segoe UI", Roboto, Helvetica, Arial) !important;
+      box-sizing: border-box;
+    }
+
+    .aurora-cards-section .serum-header{
+      max-width: 62rem;
+      margin:0 auto var(--space-4, 3rem);
+      text-align:center;
+    }
+
+    .aurora-cards-section .concept-kicker{
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 0 0 0.4rem;
+      color: #6b7280;
+      font-weight: 600;
+    }
+
+    /* ================================
+       Headline & Subline 1:1 Aurora-Style
+       ================================ */
+
+    .aurora-cards-section .aurora-title{
+      font-size: clamp(1.9rem, 1.55rem + 1.9vw, 2.7rem) !important;
+      font-weight: 850 !important;
+      letter-spacing: -0.018em !important;
+      line-height: 1.08 !important;
+      margin: 0 0 0.5rem !important;
+      text-wrap: balance !important;
+      text-align: center !important;
+      color: #0b0c10 !important;
+    }
+
+    .aurora-cards-section .aurora-subtitle{
+      font-size: clamp(1rem, 0.96rem + 0.55vw, 1.16rem) !important;
+      line-height: 1.7 !important;
+      font-weight: 500 !important;
+      letter-spacing: .004em !important;
+      text-wrap: pretty !important;
+
+      max-width: 48rem !important;
+      margin: 0 auto 2.2rem !important;
+
+      padding: 0.9rem 1.6rem !important;
+      border-radius: 14px !important;
+
+      background: linear-gradient(180deg, rgba(15,23,41,.06), rgba(15,23,41,.03)) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 2px 8px rgba(0,0,0,.05) !important;
+      color:#0f1729 !important;
+      text-align: center !important;
+    }
+
+    /* Subtitle-Varianten (Snippet / Tablet / Full) */
+    .aurora-cards-section .aurora-subtitle .subtitle-snippet,
+    .aurora-cards-section .aurora-subtitle .subtitle-t,
+    .aurora-cards-section .aurora-subtitle .subtitle-full{
+      display:none !important;
+    }
+
+    @media (max-width: 699.98px){
+      .aurora-cards-section .aurora-subtitle .subtitle-snippet{
+        display:inline !important;
+      }
+    }
+
+    @media (min-width: 700px) and (max-width: 1199.98px){
+      .aurora-cards-section .aurora-subtitle .subtitle-t{
+        display:inline !important;
+      }
+    }
+
+    @media (min-width: 1200px){
+      .aurora-cards-section .aurora-subtitle .subtitle-full{
+        display:inline !important;
+      }
+    }
+
+    @media (max-width: 599.98px){
+      .aurora-cards-section .aurora-title{
+        font-size: 1.9rem !important;
+        margin-bottom: 0.45rem !important;
+      }
+      .aurora-cards-section .aurora-subtitle{
+        max-width: 100% !important;
+        padding: 0.85rem 1.2rem !important;
+        margin-bottom: 2rem !important;
+      }
+    }
+
+    @media (min-width: 1200px){
+      .aurora-cards-section .aurora-title{
+        font-size: clamp(2.2rem, 1.9rem + 1.6vw, 2.9rem) !important;
+      }
+      .aurora-cards-section .aurora-subtitle{
+        max-width: 50rem !important;
+        margin-bottom: 2.4rem !important;
+      }
+    }
+
+    /* Dark-Mode Headline/Subline wie Aurora */
+    :root[data-theme="dark"] .aurora-cards-section .aurora-title{
+      color:#fff !important;
+      text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
+    }
+
+    :root[data-theme="dark"] .aurora-cards-section .aurora-subtitle{
+      color:#e8eeff !important;
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035)) !important;
+      border: 1px solid rgba(255,255,255,.08) !important;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.22),
+        0 2px 8px rgba(0,0,0,.45) !important;
+    }
+
+    /* =========================================
+       Typo-Helfer für Mobile vs. Desktop (Cards)
+       ========================================= */
+    .aurora-cards-section .is-mobile-only{
+      display:none;
+    }
+    .aurora-cards-section .is-desktop-only{
+      display:inline;
+    }
+
+    @media (max-width: 599.98px){
+      .aurora-cards-section .is-mobile-only{
+        display:inline;
+      }
+      .aurora-cards-section .is-desktop-only{
+        display:none;
+      }
+
+      .aurora-cards-section .card--primary .card-point:nth-of-type(3){
+        display:none;
+      }
+    }
+
+    /* =========================================
+       Lead / Copy – 1:1 an Aurora-Delta-List angelehnt
+       ========================================= */
+    .aurora-cards-section .lead{
+      display:block;
+      color:#fff;
+      font-weight:800;
+      letter-spacing:-0.01em;
+      font-size: clamp(1.06rem, 1rem + .5vw, 1.18rem);
+      line-height:1.28;
+      text-wrap:balance;
+    }
+
+    .aurora-cards-section .copy{
+      display:block;
+      margin-top:.18rem;
+      color: rgba(255,255,255,.96);
+      font-weight:600;
+      letter-spacing:.002em;
+      font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem);
+      line-height:1.7;
+      text-wrap:pretty;
+      hyphens:auto;
+      max-width: 62ch;
+      text-shadow: 0 1px 2px rgba(0,0,0,.18);
+    }
+
+    /* Support-Karten (helle Variante) – Lead/Copy dunkel */
+    .aurora-cards-section .card--support .lead{
+      color:#0b0c10;
+      text-shadow:none;
+    }
+    .aurora-cards-section .card--support .copy{
+      color:#111827;
+      text-shadow:none;
+    }
+    :root[data-theme="dark"] .aurora-cards-section .card--support .lead,
+    :root[data-theme="dark"] .aurora-cards-section .card--support .copy{
+      color:#ffffff;
+    }
+
+    /* Card-Wrapper & Grid bleiben wie zuvor */
+
+    .aurora-cards-section .aurora-card{
+      position:relative;
+      color:#ffffff;
+      border-radius: 1.25rem;
+      overflow:hidden;
+      border:none;
+    }
+
+    .aurora-cards-section .aurora-card .card-body,
+    .aurora-cards-section .aurora-card .card-body *{
+      color:#ffffff !important;
+    }
+
+    .aurora-cards-section .aurora-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(
+        circle at 30% 0%,
+        rgba(255,255,255,.25),
+        transparent 60%
+      );
+      z-index:0;
+      pointer-events:none;
+    }
+
+    .aurora-cards-section .aurora-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,.18),
+        rgba(0,0,0,.26)
+      );
+      z-index:0;
+      pointer-events:none;
+    }
+
+    .aurora-cards-section .aurora-card > *{
+      position:relative;
+      z-index:2;
+    }
+
+    .aurora-cards-section .aurora-orange{
+      background: linear-gradient(135deg, #ff5100, #ff7b00, #ff5100);
+      background-size: 300% 300%;
+      box-shadow: 0 4px 18px rgba(255,123,0,.25);
+    }
+
+    .aurora-cards-section .aurora-dark{
+      background: linear-gradient(135deg, #0d0d0d, #1c1f2f, #0d0d0d);
+      background-size: 300% 300%;
+      box-shadow: 0 4px 18px rgba(0,0,0,.45);
+    }
+
+    .aurora-cards-section .aurora-blue{
+      background: linear-gradient(135deg, #4b00ff, #3000a3, #4b00ff);
+      background-size: 300% 300%;
+      box-shadow: 0 4px 18px rgba(75,0,255,.35);
+    }
+
+    .aurora-cards-section .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.8rem;
+    }
+
+    @media (min-width: 768px) {
+      .aurora-cards-section .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .aurora-cards-section .card--primary {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (min-width: 1120px) {
+      .aurora-cards-section .cards-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .aurora-cards-section .card--primary {
+        grid-column: span 2;
+      }
+    }
+
+    .aurora-cards-section .card {
+      position:relative;
+      overflow:hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 1.8rem;
+      border-radius: 1.25rem;
+      background:#ffffff;
+      border:1px solid #e5e7eb;
+      box-shadow:
+        0 10px 26px rgba(15,23,42,.06),
+        0 1px 0 rgba(255,255,255,.9);
+      min-height: 100%;
+    }
+
+    .aurora-cards-section .card-header {
+      border-bottom: 1px solid rgba(148,163,184,.35);
+      padding-bottom: 10px;
+      display:flex;
+      flex-direction:column;
+      gap:0.4rem;
+    }
+
+    .aurora-cards-section .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight:680;
+      color: #e5e7eb;
+    }
+
+    .aurora-cards-section .card-meta span:first-child{
+      opacity: .9;
+    }
+
+    .aurora-cards-section .card-label {
+      border: 1px solid rgba(255,255,255,.7);
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size:0.72rem;
+    }
+
+    .aurora-cards-section .card--support .card-meta{
+      color:#6b7280;
+    }
+    .aurora-cards-section .card--support .card-label{
+      border-color:#d1d5db;
+    }
+
+    /* Card-Points behalten Padding/Borders, nutzen jetzt Lead/Copy */
+    .aurora-cards-section .card-point{
+      padding:.7rem 0 .9rem;
+      border-top:1px solid rgba(255,255,255,.22);
+    }
+    .aurora-cards-section .card-point:first-of-type{
+      border-top:none;
+      padding-top:0;
+    }
+    .aurora-cards-section .card--support .card-point{
+      border-top:1px solid rgba(15,23,42,.08);
+    }
+
+    /* Bildbereiche bündig unten */
+    .aurora-cards-section .card-image-wrapper {
+      position: relative;
+      height: 200px;
+      background: #020617;
+      margin: 1.2rem -1.8rem -1.8rem;
+      border-radius: 0 0 1.25rem 1.25rem;
+      overflow: hidden;
+    }
+
+    .aurora-cards-section .card-image-wrapper::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(circle at 20% 0%, rgba(148,163,253,.35), transparent 55%);
+      opacity:.9;
+    }
+
+    .aurora-cards-section .card-image-text-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15,23,42,0.78);
+      padding: 12px 14px;
+      font-size: 0.86rem;
+      line-height:1.5;
+      color: #e5e7eb;
+    }
+
+    .aurora-cards-section .card--support{
+      background:#ffffff;
+      border:1px solid #e5e7eb;
+      box-shadow:
+        0 10px 26px rgba(15,23,42,.06),
+        0 1px 0 rgba(255,255,255,.9);
+      color:#0b0c10;
+    }
+
+    .aurora-cards-section .card-footer {
+      margin-top: 8px;
+      border-top: 1px dashed #d1d5db;
+      padding-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.96rem;
+      line-height:1.7;
+      color:#111827;
+    }
+
+    .aurora-cards-section .card-footer-button {
+      align-self: flex-start;
+      padding: 0.65rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid #111827;
+      background: #ffffff;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight:680;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px){
+      .aurora-cards-section .card{
+        padding: 1.25rem;
+      }
+      .aurora-cards-section .card-image-wrapper{
+        margin: 1rem -1.25rem -1.25rem;
+        height: 180px;
+      }
+    }
+
+    /* Dark Mode für Section & Support-Cards */
+
+    :root[data-theme="dark"] .aurora-cards-section{
+      background:#000000;
+      color:#ffffff;
+    }
+
+    :root[data-theme="dark"] .aurora-cards-section .concept-kicker{
+      color:#ffffff;
+    }
+
+    :root[data-theme="dark"] .aurora-cards-section .card--support{
+      background:#000000;
+      border-color:#111827;
+      box-shadow:
+        0 16px 36px rgba(0,0,0,.85),
+        0 0 0 1px rgba(15,23,42,.8);
+    }
+  </style>
+
+  <header class="serum-header">
+    <p class="concept-kicker">Ansatz &amp; Zusammenarbeit</p>
+    <h2 class="aurora-title">Projektvorteile &amp; Zusammenarbeit</h2>
+    <p class="aurora-subtitle">
+      <span class="subtitle-snippet">Kompakte Übersicht, wie Konzept, Design und Entwicklung zusammenspielen – mit klar formulierten Vorteilen für Ihr Team.</span>
+      <span class="subtitle-t">Wie Konzept, Design und Entwicklung ineinandergreifen – plus konkrete Vorteile für Ihr Projekt und Ihr Team.</span>
+      <span class="subtitle-full">Strukturierte Kartenübersicht: Wie Konzept, Design und Entwicklung zusammenspielen – mit klaren, greifbaren Vorteilen für Ihr Projekt und Ihr Team.</span>
+    </p>
+  </header>
+
+  <div class="cards-grid">
+    <!-- Karte 1 – Ihr Vorteil (Aurora Orange, mit Bild unten) -->
+    <article class="card card--primary aurora-card aurora-orange">
+      <header class="card-header">
+        <div class="card-meta">
+          <span>⭐ Karte 1</span>
+          <span class="card-label">Ihr Vorteil</span>
+        </div>
+        <h3 class="card-title">Konzept, Design und Entwicklung aus einer Hand</h3>
+      </header>
+      <div class="card-body">
+        <div class="card-point">
+          <span class="lead">Ein direkter Ansprechpartner</span>
+          <span class="copy">
+            <span class="is-desktop-only">
+              Kurze Wege, klare Kommunikation und keine Reibungsverluste zwischen Konzept und Umsetzung.
+            </span>
+            <span class="is-mobile-only">
+              Ein Ansprechpartner, klare Kommunikation, keine Reibungsverluste.
+            </span>
+          </span>
+        </div>
+        <div class="card-point">
+          <span class="lead">Nahtloser Übergang</span>
+          <span class="copy">
+            <span class="is-desktop-only">
+              Strategie, Gestaltung und Technik greifen ineinander, statt in Silos zu entstehen.
+            </span>
+            <span class="is-mobile-only">
+              Strategie, Design und Technik greifen direkt ineinander.
+            </span>
+          </span>
+        </div>
+        <div class="card-point">
+          <span class="lead">Weniger Abstimmungsaufwand</span>
+          <span class="copy">
+            <span class="is-desktop-only">
+              Ihr Team spart Zeit – Entscheidungen bleiben konsistent und nachvollziehbar.
+            </span>
+            <span class="is-mobile-only">
+              Weniger Schleifen, mehr Tempo in Entscheidungen.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="card-image-wrapper">
+        <div class="card-image-text-overlay">
+          Platz für ein Bild: z.&nbsp;B. Teamwork, Konzeptskizzen oder ein Work-in-Progress-Screenshot.
+        </div>
+      </div>
+    </article>
+
+    <!-- Karte 2 – Prozess (Aurora Dark) -->
+    <article class="card aurora-card aurora-dark">
+      <header class="card-header">
+        <div class="card-meta">
+          <span>⭐ Karte 2</span>
+          <span class="card-label">Prozess</span>
+        </div>
+        <h3 class="card-title">Klarer Ablauf</h3>
+      </header>
+      <div class="card-body">
+        <div class="card-point">
+          <span class="lead">Planbare Schritte</span>
+          <span class="copy">
+            <span class="is-desktop-only">
+              Vom Kick-off bis zum Go-Live gibt es einen klaren Fahrplan mit definierten Meilensteinen.
+            </span>
+            <span class="is-mobile-only">
+              Klarer Fahrplan von Kick-off bis Go-Live.
+            </span>
+          </span>
+        </div>
+        <div class="card-point">
+          <span class="lead">Transparente Zusammenarbeit</span>
+          <span class="copy">
+            <span class="is-desktop-only">
+              Sie wissen jederzeit, wo das Projekt steht und welche Entscheidungen anstehen.
+            </span>
+            <span class="is-mobile-only">
+              Sie sehen jederzeit, wo das Projekt steht.
+            </span>
+          </span>
+        </div>
+        <div class="card-point">
+          <span class="lead">Verbindliche Ergebnisse</span>
+          <span class="copy">
+            <span class="is-desktop-only">
+              Jede Phase schließt mit greifbaren Ergebnissen ab – nicht nur mit Folien.
+            </span>
+            <span class="is-mobile-only">
+              Jede Phase liefert greifbare Ergebnisse.
+            </span>
+          </span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Karte 3 – Strategie (Aurora Blue, mit Bild unten) -->
+    <article class="card aurora-card aurora-blue">
+      <header class="card-header">
+        <div class="card-meta">
+          <span>⭐ Karte 3</span>
+          <span class="card-label">Strategie</span>
+        </div>
+        <h3 class="card-title">Nutzer und Ziele im Blick</h3>
+      </header>
+      <div class="card-body">
+        <div class="card-point">
+          <span class="lead">User-zentriert</span>
+          <span class="copy">
+            <span class="is-desktop-only">
+              Entscheidungen basieren auf echten Nutzerbedürfnissen statt auf Bauchgefühl.
+            </span>
+            <span class="is-mobile-only">
+              Entscheidungen orientieren sich an echten Nutzerbedürfnissen.
+            </span>
+          </span>
+        </div>
+        <div class="card-point">
+          <span class="lead">Geschäftsziele im Fokus</span>
+          <span class="copy">
+            <span class="is-desktop-only">
+              Die Website zahlt auf Sichtbarkeit, Leads oder Verkäufe ein – messbar und begründbar.
+            </span>
+            <span class="is-mobile-only">
+              Die Website zahlt klar auf Ihre Ziele ein – etwa Sichtbarkeit oder Leads.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="card-image-wrapper">
+        <div class="card-image-text-overlay">
+          Platz für ein Bild: z.&nbsp;B. Nutzer-Research, Personas oder KPI-Dashboards.
+        </div>
+      </div>
+    </article>
+
+    <!-- Karte 4 – Qualität -->
+    <article class="card card--support">
+      <header class="card-header">
+        <div class="card-meta">
+          <span>⭐ Karte 4</span>
+          <span class="card-label">Qualität</span>
+        </div>
+        <h3 class="card-title">Technisch sauber und zukunftsorientiert</h3>
+      </header>
+      <div class="card-body">
+        <div class="card-point">
+          <span class="lead">Saubere Basis</span>
+          <span class="copy">
+            Strukturierter Code, verständliche Komponenten und ein Setup, das andere übernehmen können.
+          </span>
+        </div>
+        <div class="card-point">
+          <span class="lead">Performance im Blick</span>
+          <span class="copy">
+            Auf schnelle Ladezeiten und gute Core Web Vitals ausgelegt.
+          </span>
+        </div>
+        <div class="card-point">
+          <span class="lead">Gut dokumentiert</span>
+          <span class="copy">
+            Klare Übergabe sorgt dafür, dass Ihr Team später ohne Reibungsverluste weiterarbeiten kann.
+          </span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Karte 5 – Zusammenarbeit -->
+    <article class="card card--support">
+      <header class="card-header">
+        <div class="card-meta">
+          <span>⭐ Karte 5</span>
+          <span class="card-label">Zusammenarbeit</span>
+        </div>
+        <h3 class="card-title">Persönlich, direkt und auf Augenhöhe</h3>
+      </header>
+      <div class="card-body">
+        <div class="card-point">
+          <span class="lead">Direkter Draht</span>
+          <span class="copy">
+            Sie sprechen mit der Person, die an Ihrer Website arbeitet – ohne Vermittlungsschichten.
+          </span>
+        </div>
+        <div class="card-point">
+          <span class="lead">Schnelles Feedback</span>
+          <span class="copy">
+            Entscheidungen treffen wir gemeinsam und pragmatisch, statt in endlosen Runden.
+          </span>
+        </div>
+      </div>
+      <footer class="card-footer">
+        <p>
+          Wenn Sie möchten, starten wir mit einem kurzen, unverbindlichen Kennenlern-Call.
+        </p>
+        <button class="card-footer-button" type="button">
+          Projekt anfragen
+        </button>
+      </footer>
+    </article>
+  </div>
+</section>
+
+
+
+
+
+
+
+
 
 
 
