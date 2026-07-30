@@ -947,12 +947,22 @@ body[data-page="webdesign"] .hero-image-foreground {
 <section class="hero-section" data-page="titlepage">
   <div class="hero-images-wrapper">
 
-    <!-- HINTERGRUND-VIDEO -->
     <div class="hero-image-background">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hintegrundweb.webp">
-        <source src="./WebdesignPic/1.mp4" type="video/mp4" />
-      </video>
+      <!-- Light-Mode Bild -->
+      <img 
+           src="./arbeitsproben/arbeitsproben_index/serum11.webp" 
+        alt="Hero Background" 
+        class="hero-image light-image"
+      />
+
+      <!-- Dark-Mode Bild -->
+      <img 
+           src="./arbeitsproben/arbeitsproben_index/grafik2.webp" 
+        alt="Hero Background Dark" 
+        class="hero-image dark-image"
+      />
     </div>
+
 
     <!-- TITLE + TEXT + CTAS -->
     <div class="page-title">
@@ -997,6 +1007,53 @@ body[data-page="webdesign"] .hero-image-foreground {
   </div>
 </section>
 
+
+<style>
+/* Hintergrundbilder */
+.hero-image-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Standard: Light Mode */
+.light-image { opacity: 1; }
+.dark-image { opacity: 0; }
+
+/* Darkmode über body.nocturne */
+body.nocturne .light-image {
+  opacity: 0;
+}
+body.nocturne .dark-image {
+  opacity: 1;
+}
+
+/* Falls du auch data-theme="dark" unterstützt */
+[data-theme="dark"] .light-image {
+  opacity: 0;
+}
+[data-theme="dark"] .dark-image {
+  opacity: 1;
+}
+
+/* Small Title auf Handy ausblenden */
+@media (max-width: 768px) {
+  .small-title {
+    display: none;
+  }
+}
+</style>
 
 
 
@@ -1488,196 +1545,6 @@ body[data-page="webdesign"] .hero-image-foreground {
     </li>
 
   </ul>
-</section>
-
-
-
-
-
-<!-- =========================================================
-     SECTION: METRICS — ID: metrics
-     UX/UI-Design Edition mit belegten Quellen
-========================================================== -->
-<section id="metrics">
-  <div class="section-pad">
-    <div class="container">
-      <header class="intro">
-        <span class="eyebrow">UX/UI-Design, das Wirkung belegt</span>
-      </header>
-
-      <!-- KPI-CARDS -->
-      <div class="results-steps">
-        <!-- 1) Business Value of Design -->
-        <article class="result-step s1">
-          <button class="src-btn" data-dialog="src-1" aria-label="Quellen öffnen">
-            <i data-feather="external-link"></i>
-          </button>
-          <div class="result-inner">
-            <div class="kpi"><span class="val">+32</span><span class="unit">%</span></div>
-            <h3>Höheres Umsatzwachstum durch hervorragendes Design</h3>
-            <p>Unternehmen mit Top-Design-Leistung wuchsen über fünf Jahre im Schnitt ~32 % schneller als ihre Wettbewerber. :contentReference[oaicite:0]{index=0}</p>
-          </div>
-        </article>
-
-        <!-- 2) First impression / Visual Aesthetics -->
-        <article class="result-step s2">
-          <button class="src-btn" data-dialog="src-2" aria-label="Quellen öffnen">
-            <i data-feather="external-link"></i>
-          </button>
-          <div class="result-inner">
-            <div class="kpi"><span class="val">50</span><span class="unit">ms</span></div>
-            <h3>Erster Eindruck in ~50 ms</h3>
-            <p>Nutzer:innen bewerten das visuelle Erscheinungsbild einer Website in rund <strong>50 Millisekunden</strong> – visuelle Klarheit zählt sofort. :contentReference[oaicite:1]{index=1}</p>
-          </div>
-        </article>
-
-        <!-- 3) Accessibility / Inclusive Design -->
-        <article class="result-step s3">
-          <button class="src-btn" data-dialog="src-3" aria-label="Quellen öffnen">
-            <i data-feather="external-link"></i>
-          </button>
-          <div class="result-inner">
-            <div class="kpi"><span class="val">16</span><span class="unit">%</span></div>
-            <h3>Reichweite durch inklusive Gestaltung</h3>
-            <p>Weltweit leben etwa <strong>16 %</strong> der Bevölkerung mit einer signifikanten Beeinträchtigung – barrierearmes Design erweitert den Nutzermarkt. :contentReference[oaicite:2]{index=2}</p>
-          </div>
-        </article>
-      </div>
-
-      <!-- BADGES -->
-      <div class="badges" role="list">
-        <span class="pill"><span class="dot"></span> Konsistentes Marken- & Systemdesign</span>
-        <span class="pill"><span class="dot"></span> Klare Informationsstruktur & Typografie</span>
-        <span class="pill"><span class="dot"></span> Nutzerfreundlichkeit & Performance</span>
-        <span class="pill"><span class="dot"></span> Barrierefreiheit & Zugänglichkeit (WCAG)</span>
-      </div>
-
-      <!-- DIALOGE (Quellen) -->
-      <dialog id="src-1" class="src-dialog" aria-labelledby="src-1-title">
-        <button class="src-x" data-close="src-1" aria-label="Dialog schließen">
-          <i data-feather="x"></i>
-        </button>
-        <div class="src-head">
-          <span class="src-icon">📈</span>
-          <h4 id="src-1-title" class="src-title">Höheres Wachstum durch Design – Quellen</h4>
-        </div>
-        <p class="src-desc">
-          Laut McKinsey & Company zeigt ihre Studie „The Business Value of Design“, dass Unternehmen im obersten Design-Quartil über fünf Jahre im Schnitt ~32 % höheres Umsatzwachstum und ~56 % höheren Return to Shareholders erzielten als Wettbewerber. :contentReference[oaicite:4]{index=4}
-        </p>
-        <ul class="src-list">
-          <li class="src-item">
-            <a href="https://www.mckinsey.com/~/media/mckinsey/business%20functions/mckinsey%20design/our%20insights/the%20business%20value%20of%20design/mckinsey-bvod-art-digital-rgb.pdf" target="_blank" rel="noopener">
-              McKinsey – The Business Value of Design (Vollstudie PDF)
-            </a>
-            <span class="src-meta">Studie / Methodik & Kennzahlen</span>
-          </li>
-          <li class="src-item">
-            <a href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/business-value-of-design/overview" target="_blank" rel="noopener">
-              McKinsey – Business Value of Design (Übersicht)
-            </a>
-            <span class="src-meta">Artikel Übersicht</span>
-          </li>
-        </ul>
-        <div class="src-actions">
-          <button class="src-copy" data-copy="src-1">Links kopieren</button>
-        </div>
-      </dialog>
-
-      <dialog id="src-2" class="src-dialog" aria-labelledby="src-2-title">
-        <button class="src-x" data-close="src-2" aria-label="Dialog schließen">
-          <i data-feather="x"></i>
-        </button>
-        <div class="src-head">
-          <span class="src-icon">👁️</span>
-          <h4 id="src-2-title" class="src-title">Erster Eindruck ~50 ms – Quellen</h4>
-        </div>
-        <p class="src-desc">
-          Studien zeigen, dass visuelle Ästhetik von Websites bereits nach etwa <strong>50 ms</strong> bewertet wird – Faktoren wie visuelle Komplexität und Prototypikalität beeinflussen das Urteil. :contentReference[oaicite:5]{index=5}
-        </p>
-        <ul class="src-list">
-          <li class="src-item">
-            <a href="https://research.google.com/pubs/archive/38315.pdf" target="_blank" rel="noopener">
-              Tuch et al. (2012) – The role of visual complexity & prototypicality (PDF)
-            </a>
-            <span class="src-meta">Peer-Reviewed Studie</span>
-          </li>
-          <li class="src-item">
-            <a href="https://www.sciencedirect.com/science/article/abs/pii/S1071581912001127" target="_blank" rel="noopener">
-              Tuch et al. (2012) – Abstract bei ScienceDirect
-            </a>
-            <span class="src-meta">Fachartikel</span>
-          </li>
-        </ul>
-        <div class="src-actions">
-          <button class="src-copy" data-copy="src-2">Links kopieren</button>
-        </div>
-      </dialog>
-
-      <dialog id="src-3" class="src-dialog" aria-labelledby="src-3-title">
-        <button class="src-x" data-close="src-3" aria-label="Dialog schließen">
-          <i data-feather="x"></i>
-        </button>
-        <div class="src-head">
-          <span class="src-icon">♿</span>
-          <h4 id="src-3-title" class="src-title">Inklusive Gestaltung – Quellen</h4>
-        </div>
-        <p class="src-desc">
-          Laut World Health Organization (WHO) leben weltweit etwa <strong>1,3 Milliarden Menschen (~16 %)</strong> mit einer wesentlichen Beeinträchtigung – barrierearmes Design erschließt relevante Nutzergruppen. :contentReference[oaicite:7]{index=7}
-        </p>
-        <ul class="src-list">
-          <li class="src-item">
-            <a href="https://www.who.int/health-topics/disability" target="_blank" rel="noopener">
-              WHO – Disability Overview
-            </a>
-            <span class="src-meta">Fakten zur Behinderung weltweit</span>
-          </li>
-          <li class="src-item">
-            <a href="https://www.worldbank.org/en/topic/disability" target="_blank" rel="noopener">
-              World Bank – Disability Inclusion Overview
-            </a>
-            <span class="src-meta">Statistiken & Inklusion</span>
-          </li>
-        </ul>
-        <div class="src-actions">
-          <button class="src-copy" data-copy="src-3">Links kopieren</button>
-        </div>
-      </dialog>
-    </div>
-  </div>
-
-  <script src="https://unpkg.com/feather-icons"></script>
-  <script>
-    feather.replace();
-    (function(){
-      const section = document.getElementById('metrics');
-      function openDialog(id){ const dlg=document.getElementById(id); if(dlg) dlg.showModal(); }
-      function closeDialog(id){ const dlg=document.getElementById(id); if(dlg) dlg.close(); }
-
-      section.querySelectorAll('.src-btn')
-        .forEach(btn=>btn.addEventListener('click',()=>openDialog(btn.dataset.dialog)));
-
-      section.querySelectorAll('.src-x')
-        .forEach(btn=>btn.addEventListener('click',()=>closeDialog(btn.dataset.close)));
-
-      section.querySelectorAll('.src-copy').forEach(btn=>{
-        btn.addEventListener('click',()=>{
-          const dlg=document.getElementById(btn.dataset.copy);
-          const links=[...dlg.querySelectorAll('a')].map(a=>`${a.textContent.trim()} — ${a.href}`).join('\n');
-          navigator.clipboard.writeText(links);
-          const old=btn.textContent;
-          btn.textContent='Kopiert ✓';
-          setTimeout(()=>btn.textContent=old,1600);
-        });
-      });
-
-      section.querySelectorAll('.src-dialog').forEach(dlg=>{
-        dlg.addEventListener('click',e=>{
-          const r=dlg.getBoundingClientRect();
-          if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom) dlg.close();
-        });
-      });
-    })();
-  </script>
 </section>
 
 
@@ -2210,190 +2077,6 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
-
-
-<!-- ================================
-     ARBEITSPROBEN — COMPACT (ENHANCED)
-     Karten-Stil wie Next-Level, kompakt & poliert
-     ================================ -->
-<section id="arbeitsproben" class="aurora-sheet board-showcase is-compact" data-force-light aria-labelledby="board-title">
-  <div class="container board-wrap">
-
-    <ul class="board-grid" aria-label="Arbeitsproben – Galerie">
-      <!-- Hinweis: tabindex entfernt (rein visuell) -->
-      <li class="cell" data-span="xl">
-        <figure class="card" aria-label="Arbeitsprobe 10" data-theme="tech">
-          <img
-            src="./3DSlideShow/post10.png"
-            alt="Arbeitsprobe 10"
-            loading="lazy" decoding="async" fetchpriority="low"
-            sizes="(min-width:900px) 66vw, 100vw">
-          <figcaption aria-label="Hard Surface – Set">
-            <span class="visually-hidden">Kategorie:</span>
-            <span class="cap-tag">Hard Surface</span>
-            <span class="cap-title">Set</span>
-          </figcaption>
-        </figure>
-      </li>
-
-      <li class="cell" data-span="s">
-        <figure class="card" aria-label="Arbeitsprobe 11" data-theme="warm">
-          <img src="./3DSlideShow/post11.png" alt="Arbeitsprobe 11" loading="lazy" decoding="async" fetchpriority="low"
-               sizes="(min-width:900px) 33vw, (min-width:600px) 50vw, 100vw">
-          <figcaption aria-label="Automotive">
-            <span class="cap-tag">Automotive</span>
-            <span class="cap-title">Shot</span>
-          </figcaption>
-        </figure>
-      </li>
-
-      <li class="cell" data-span="s">
-        <figure class="card" aria-label="Arbeitsprobe 12">
-          <img src="./3DSlideShow/post12.png" alt="Arbeitsprobe 12" loading="lazy" decoding="async" fetchpriority="low">
-          <figcaption aria-label="Motion Still">
-            <span class="cap-tag">Motion</span>
-            <span class="cap-title">Still</span>
-          </figcaption>
-        </figure>
-      </li>
-
-      <li class="cell" data-span="m">
-        <figure class="card" aria-label="Arbeitsprobe 13">
-          <img src="./3DSlideShow/post13.png" alt="Arbeitsprobe 13" loading="lazy" decoding="async" fetchpriority="low">
-          <figcaption aria-label="Texturing — UDIM">
-            <span class="cap-tag">Texturing</span>
-            <span class="cap-title">UDIM</span>
-          </figcaption>
-        </figure>
-      </li>
-
-      <li class="cell" data-span="m">
-        <figure class="card" aria-label="Arbeitsprobe 14" data-theme="tech">
-          <img src="./3DSlideShow/post14.png" alt="Arbeitsprobe 14" loading="lazy" decoding="async" fetchpriority="low">
-          <figcaption aria-label="Case Detail">
-            <span class="cap-tag">Product</span>
-            <span class="cap-title">Detail</span>
-          </figcaption>
-        </figure>
-      </li>
-
-      <li class="cell" data-span="xs">
-        <figure class="card" aria-label="Arbeitsprobe 15">
-          <img src="./3DSlideShow/post15.png" alt="Arbeitsprobe 15" loading="lazy" decoding="async" fetchpriority="low">
-          <figcaption aria-label="Stylized">
-            <span class="cap-tag">LookDev</span>
-            <span class="cap-title">Stylized</span>
-          </figcaption>
-        </figure>
-      </li>
-
-      <li class="cell" data-span="s">
-        <figure class="card" aria-label="Arbeitsprobe 16">
-          <img src="./3DSlideShow/post16.png" alt="Arbeitsprobe 16" loading="lazy" decoding="async" fetchpriority="low">
-          <figcaption aria-label="FX — Passes">
-            <span class="cap-tag">FX</span>
-            <span class="cap-title">Passes</span>
-          </figcaption>
-        </figure>
-      </li>
-
-      <li class="cell" data-span="s">
-        <figure class="card" aria-label="Arbeitsprobe 17">
-          <img src="./3DSlideShow/post17.png" alt="Arbeitsprobe 17" loading="lazy" decoding="async" fetchpriority="low">
-          <figcaption aria-label="Realtime Material">
-            <span class="cap-tag">Realtime</span>
-            <span class="cap-title">Material</span>
-          </figcaption>
-        </figure>
-      </li>
-
-      <li class="cell" data-span="m">
-        <figure class="card" aria-label="Arbeitsprobe 18" data-theme="warm">
-          <img src="./3DSlideShow/post18.png" alt="Arbeitsprobe 18" loading="lazy" decoding="async" fetchpriority="low">
-          <figcaption aria-label="Renderpass">
-            <span class="cap-tag">Comp</span>
-            <span class="cap-title">Renderpass</span>
-          </figcaption>
-        </figure>
-      </li>
-
-      <li class="cell" data-span="xs">
-        <figure class="card" aria-label="Arbeitsprobe 19">
-          <img src="./3DSlideShow/post19.png" alt="Arbeitsprobe 19" loading="lazy" decoding="async" fetchpriority="low">
-          <figcaption aria-label="Macro">
-            <span class="cap-tag">Macro</span>
-            <span class="cap-title">Shot</span>
-          </figcaption>
-        </figure>
-      </li>
-
-      <li class="cell" data-span="l">
-        <figure class="card" aria-label="Arbeitsprobe 20">
-          <img src="./3DSlideShow/post20.png" alt="Arbeitsprobe 20" loading="lazy" decoding="async" fetchpriority="low">
-          <figcaption aria-label="Finish — Final">
-            <span class="cap-tag">Finish</span>
-            <span class="cap-title">Final</span>
-          </figcaption>
-        </figure>
-      </li>
-    </ul>
-  </div>
-</section>
-<script>
-/* ===== Interaktionen: Reveal + sanfter Tilt + Img Fade-In ===== */
-(function(){
-  const section = document.getElementById('arbeitsproben');
-  const grid = section.querySelector('.board-grid');
-  const cells = Array.from(grid.querySelectorAll('.cell'));
-
-  // Scroll-Reveal
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add('is-in');
-        io.unobserve(e.target);
-      }
-    });
-  }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
-  cells.forEach(c=> io.observe(c));
-
-  // Karten sind rein visuell: Klicks blocken
-  grid.addEventListener('click', (e)=>{
-    const card = e.target.closest('.card');
-    if(card){ e.preventDefault(); e.stopPropagation(); }
-  }, {capture:true});
-
-  // Tastatur: Enter/Space neutralisieren (falls Card doch fokusierbar wäre)
-  grid.querySelectorAll('.card').forEach(card=>{
-    card.addEventListener('keydown', (e)=>{
-      if(e.key === 'Enter' || e.key === ' '){
-        e.preventDefault(); e.stopPropagation();
-      }
-    });
-  });
-
-  // Ruhiger Tilt (nur Präzisions-Pointer)
-  const max = 4; // maximal ~4°
-  const coarse = matchMedia('(pointer:coarse)');
-  grid.querySelectorAll('.card').forEach(card=>{
-    card.addEventListener('mousemove', e=>{
-      if (coarse.matches) return;
-      const r = card.getBoundingClientRect();
-      const x = ((e.clientX - r.left)/r.width - .5) * -max;
-      const y = ((e.clientY - r.top )/r.height - .5) *  max;
-      card.style.transform = `rotateX(${y}deg) rotateY(${x}deg) translateY(-2px)`;
-    });
-    card.addEventListener('mouseleave', ()=> card.style.transform = '');
-  });
-
-  // Mini Fade-In Loader für Bilder (verhindert hartes Aufpoppen)
-  grid.querySelectorAll('img').forEach(img=>{
-    const markLoaded = () => img.setAttribute('data-loaded','true'), show = () => img.style.opacity = '1';
-    if (img.complete) { markLoaded(); show(); }
-    img.addEventListener('load', ()=> { markLoaded(); show(); }, { once:true });
-  });
-})();
-</script>
 
 
 
@@ -3533,28 +3216,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateIndex();
 });
 </script>
-
-
-
-<section class="angled-image-section" aria-labelledby="angled-image-heading">
-  <h2 id="angled-image-heading" class="visually-hidden">Modernes Webdesign – diagonale Bildsektion</h2>
-
-  <figure class="angled-image-wrapper">
-    <picture>
-      <source srcset="./WebdesignPic/webgerade.webp" type="image/webp">
-      <img
-        src="./WebdesignPic/webgerade.webp"
-        alt="Beispiel eines modernen Webdesign-Layouts, leicht diagonal ausgerichtet"
-        width="1920"
-        height="1080"
-        loading="lazy"
-        decoding="async"
-        style="aspect-ratio:16/9">
-    </picture>
-  </figure>
-</section>
-
-
 
 
 <footer itemscope itemtype="https://schema.org/Organization" class="footer-clean">

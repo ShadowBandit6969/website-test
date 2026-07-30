@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="auto">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anfrage stellen – Fusion³</title>
+  <meta name="description" content="Beschreibe dein Projekt in fünf Schritten. Wir melden uns kurzfristig mit einer Einschätzung zurück.">
+  <meta name="robots" content="index,follow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" media="all" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+
+  <link rel="preload" as="style" href="./fonts/fonts.css">
+  <link rel="stylesheet" href="./fonts/fonts.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="./fonts/fonts.css"></noscript>
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "t1mbvlhldj");
+  </script>
+
+  <!-- ===== Globale Tokens – identisch zur Startseite ===== -->
+  <style>
+    :root{
+      --accent:#0062ff;
+      --text:#111;
+      --muted:#555;
+      --border:rgba(0,0,0,.08);
+      --surface:#ffffff;
+      --container-width: min(95vw, 1340px);
+      --radius: 12px;
+      --primary: #ff4d00;
+      --secondary: #ff9900;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{ --text:#f5f7fa; --muted:#b7bec7; --border:rgba(255,255,255,.12); --surface:#000; }
+    }
+    :root[data-theme="dark"]{
+      --text:#f5f7fa; --muted:#b7bec7; --border:rgba(255,255,255,.12); --surface:#000;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,sans-serif;
+      background:#fff; color:var(--text); scroll-behavior:smooth;
+      overflow-x:hidden; width:100%;
+    }
+    :root[data-theme="dark"] body{ background:#000 }
+    a{color:inherit;text-decoration:none;transition:color .2s ease,opacity .2s ease}
+    h1,h2,h3,h4{font-weight:900;letter-spacing:-.02em}
+    main{display:block}
+
+    .sr-only{
+      position:absolute!important; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+    }
+    .skip-link{ position:absolute; left:-9999px; top:auto; z-index:1000; }
+    .skip-link:focus{
+      left:auto; top:.5rem; inset-inline-start:.5rem;
+      background:#000; color:#fff; padding:.5rem .75rem; border-radius:.5rem;
+    }
+  </style>
+
+  <link rel="stylesheet" href="css/navbar.css" type="text/css">
+  <link rel="stylesheet" href="css/darkmodeLast.css" type="text/css">
+  <link rel="stylesheet" href="css/footer.css" type="text/css">
+  <!-- contact.css bewusst nicht geladen: diese Seite bringt ihr eigenes Formular-Design mit -->
+
+  <!-- ============================================================
+       ANFRAGE – geteiltes Layout
+       Ein Abstandsraster für alles, gleich hohe Spalten,
+       Orange = Aktion, Hellgrün = erledigt.
+       ============================================================ -->
+  <style>
+  .fx {
+    --fx-top: var(--gate-height, 72px);
+
+    /* Abstandsraster – überall nur diese Werte */
+    --s1: .375rem;
+    --s2: .625rem;
+    --s3: 1rem;
+    --s4: 1.5rem;
+    --s5: 2rem;
+    --s6: 2.75rem;
+    --s7: clamp(1.5rem, 1rem + 2.6vw, 3.25rem);   /* Innenabstand der Spalten */
+
+    --fx-ink: #0b0c10;
+    --fx-ink-2: #111827;
+    --fx-ink-3: #6b7280;
+    --fx-surface: #ffffff;
+    --fx-field: #f6f7f9;
+    --fx-hair: rgba(15,23,42,.13);
+    --fx-hair-soft: rgba(15,23,42,.08);
+
+    --fx-orange: #ff4d00;
+    --fx-amber: #ff9900;
+    --fx-violet: #4b00ff;
+    --fx-green: #7cecae;          /* Hellgrün – erledigt / bestätigt */
+    --fx-green-deep: #0f9d63;     /* dieselbe Farbe für hellen Grund */
+
+    --fx-radius: 16px;
+    position: relative;
+  }
+
+  :root[data-theme="dark"] .fx,
+  body.nocturne .fx {
+    --fx-ink: #ffffff;
+    --fx-ink-2: #e6ebf3;
+    --fx-ink-3: #9aa5b6;
+    --fx-surface: #06070a;
+    --fx-field: #0f1218;
+    --fx-hair: rgba(255,255,255,.14);
+    --fx-hair-soft: rgba(255,255,255,.09);
+    --fx-green-deep: #7cecae;
+  }
+
+  /* ---------- Zwei gleich hohe Spalten ---------- */
+  .fx-split {
+    display: grid;
+    grid-template-columns: minmax(0,1fr);
+    align-items: stretch;          /* beide Spalten gleich hoch */
+  }
+  @media (min-width: 1080px) {
+    .fx-split { grid-template-columns: minmax(0, 42%) minmax(0, 58%); }
+  }
+
+  /* ---------- Bildfläche ---------- */
+  .fx-visual {
+    position: relative;
+    background: #0a0c12;
+    color: #fff;
+  }
+
+  /* Bild + Verlauf füllen die ganze Spaltenhöhe */
+  .fx-visual-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+  .fx-layer {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    transform: scale(1.05);
+    opacity: 0; transition: opacity .7s ease;
+  }
+  .fx-layer.is-on { opacity: 1; }
+  .fx-visual-bg::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(8,10,18,.60) 0%, rgba(8,10,18,.80) 58%, rgba(8,10,18,.94) 100%),
+      linear-gradient(135deg, rgba(255,77,0,.18), rgba(75,0,255,.22));
+  }
+
+  /* Inhalt bleibt beim Scrollen im Blick */
+  .fx-visual-body {
+    position: relative; z-index: 2;
+    padding: var(--s7);
+    display: flex; flex-direction: column; gap: var(--s5);
+    min-height: 15rem;
+  }
+  @media (min-width: 1080px) {
+    .fx-visual-body {
+      position: sticky;
+      top: var(--fx-top);
+      min-height: calc(100svh - var(--fx-top));
+      padding-top: calc(var(--s7) + var(--s3));
+      justify-content: space-between;
+    }
+  }
+
+  .fx-eyebrow {
+    font-size: .8rem; text-transform: uppercase; letter-spacing: .18em;
+    font-weight: 680; color: rgba(255,255,255,.7);
+    margin-bottom: var(--s4);
+  }
+  .fx-head-row { display: flex; align-items: flex-start; gap: var(--s4); }
+
+  .fx-num {
+    flex: 0 0 auto;
+    font-size: clamp(2.75rem, 1.4rem + 5.4vw, 5.75rem);
+    font-weight: 900; line-height: .84; letter-spacing: -.05em;
+    font-variant-numeric: tabular-nums;
+    color: transparent;
+    -webkit-text-stroke: clamp(1px, .019em, 2.2px) rgba(255,255,255,.4);
+  }
+  .fx-num.is-done {
+    -webkit-text-stroke: 0;
+    color: var(--fx-green);
+  }
+
+  .fx-step-title {
+    font-size: clamp(1.5rem, 1.15rem + 1.5vw, 2.25rem);
+    font-weight: 900; letter-spacing: -.02em; line-height: 1.06;
+    margin-bottom: var(--s2);
+  }
+  .fx-step-note {
+    max-width: 24rem;
+    font-size: clamp(1rem, .96rem + .3vw, 1.08rem); line-height: 1.6;
+    font-weight: 500; color: rgba(255,255,255,.76);
+  }
+
+  /* Schrittliste */
+  .fx-steps { list-style: none; margin: 0; padding: 0; display: none; }
+  @media (min-width: 1080px) { .fx-steps { display: block; } }
+
+  .fx-steps li + li { border-top: 1px solid rgba(255,255,255,.1); }
+  .fx-steps button {
+    all: unset;
+    display: flex; align-items: center; gap: var(--s3);
+    width: 100%; padding: var(--s3) 0;
+    font-size: .94rem; font-weight: 680; letter-spacing: .01em;
+    color: rgba(255,255,255,.48);
+    cursor: default;
+    transition: color .2s ease;
+  }
+  .fx-steps button::before {
+    content: "";
+    flex: 0 0 auto;
+    width: 1.15rem; height: 1.15rem; border-radius: 999px;
+    display: grid; place-items: center;
+    font-size: .64rem; font-weight: 900; line-height: 1;
+    border: 1.5px solid rgba(255,255,255,.26);
+    color: transparent;
+    transition: border-color .22s ease, background .22s ease, box-shadow .22s ease, color .22s ease;
+  }
+  .fx-steps li.is-done button { color: rgba(255,255,255,.8); }
+  .fx-steps li.is-done button::before {
+    content: "✓";
+    border-color: var(--fx-green);
+    color: var(--fx-green);
+  }
+  .fx-steps li.is-current button { color: #fff; }
+  .fx-steps li.is-current button::before {
+    border-color: var(--fx-orange);
+    background: linear-gradient(135deg, var(--fx-amber), var(--fx-orange));
+    box-shadow: 0 0 0 4px rgba(255,77,0,.2);
+  }
+  .fx-steps li.is-reachable button { cursor: pointer; }
+  .fx-steps li.is-reachable button:hover { color: #fff; }
+  .fx-steps button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 8px; }
+
+  /* Fuß */
+  .fx-visual-foot { display: grid; gap: var(--s3); }
+  .fx-bar { height: 3px; background: rgba(255,255,255,.16); border-radius: 999px; overflow: hidden; }
+  @media (min-width: 1080px) { .fx-bar { display: none; } }
+  .fx-bar span {
+    display: block; height: 100%; width: 0;
+    background: linear-gradient(90deg, var(--fx-green), #4fd9a0);
+    transition: width .45s cubic-bezier(.4,0,.2,1);
+  }
+  .fx-meta {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3);
+    padding-top: var(--s3);
+    border-top: 1px solid rgba(255,255,255,.16);
+    font-size: .78rem; text-transform: uppercase; letter-spacing: .14em; font-weight: 680;
+    color: rgba(255,255,255,.6);
+  }
+  .fx-badge {
+    display: inline-flex; align-items: center; gap: .4rem;
+    padding: .38rem .8rem; border-radius: 999px;
+    background: rgba(124,236,174,.14);
+    border: 1px solid rgba(124,236,174,.45);
+    color: var(--fx-green);
+  }
+  .fx-badge[hidden] { display: none; }
+
+  /* ---------- Formularseite ---------- */
+  .fx-form-side {
+    background: var(--fx-surface);
+    padding: var(--s7);
+  }
+  @media (min-width: 1080px) {
+    .fx-form-side {
+      padding-top: calc(var(--fx-top) + var(--s6));
+      padding-bottom: var(--s6);
+      min-height: 100svh;
+    }
+  }
+  :root[data-theme="dark"] .fx-form-side,
+  body.nocturne .fx-form-side { border-left: 1px solid var(--fx-hair); }
+  @media (max-width: 1079.98px) {
+    :root[data-theme="dark"] .fx-form-side,
+    body.nocturne .fx-form-side { border-left: 0; border-top: 1px solid var(--fx-hair); }
+  }
+
+  .fx-form-inner { max-width: 34rem; margin-inline: auto; }
+
+  .fx-back {
+    display: inline-flex; align-items: center; gap: .45rem;
+    margin-bottom: var(--s5);
+    font-size: .8rem; text-transform: uppercase; letter-spacing: .14em; font-weight: 680;
+    color: var(--fx-ink-3);
+  }
+  .fx-back:hover { color: var(--fx-orange); }
+
+  /* Schritte */
+  .form-step { border: 0; padding: 0; margin: 0; display: none; }
+  .form-step.active { display: block; animation: fxIn .34s cubic-bezier(.2,.7,.3,1) both; }
+  @keyframes fxIn { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
+
+  .fx-q {
+    font-size: clamp(1.45rem, 1.15rem + 1.1vw, 1.95rem);
+    font-weight: 900; letter-spacing: -.02em; line-height: 1.12;
+    text-wrap: balance; color: var(--fx-ink);
+    margin-bottom: var(--s2);
+  }
+  .fx-hint {
+    font-size: clamp(1rem, .96rem + .3vw, 1.08rem); line-height: 1.65; font-weight: 500;
+    color: var(--fx-ink-3); text-wrap: pretty;
+    margin-bottom: var(--s5);
+  }
+
+  /* Leistungswahl */
+  .grid-choices { display: grid; gap: var(--s2); }
+  .fx-form .choice {
+    position: relative; display: grid;
+    grid-template-columns: auto minmax(0,1fr);
+    align-items: center;
+    column-gap: var(--s3); row-gap: .2rem;
+    padding: var(--s3) var(--s4);
+    border: 1px solid var(--fx-hair); border-radius: var(--fx-radius);
+    background: var(--fx-field); cursor: pointer;
+    transition: border-color .18s ease, background .18s ease, transform .18s ease;
+  }
+  .fx-form .choice:hover { border-color: rgba(255,77,0,.5); transform: translateY(-1px); }
+  .fx-form .choice input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .fx-form .choice::before {
+    content: ""; grid-row: 1 / span 2;
+    width: 1.25rem; height: 1.25rem; border-radius: 999px;
+    border: 2px solid var(--fx-hair);
+    transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .fx-form .choice .title {
+    grid-column: 2;
+    font-size: clamp(1.06rem, 1rem + .5vw, 1.18rem);
+    font-weight: 800; letter-spacing: -.01em; line-height: 1.28; color: var(--fx-ink);
+  }
+  .fx-form .choice small {
+    grid-column: 2;
+    font-size: .92rem; line-height: 1.5; font-weight: 500; color: var(--fx-ink-3);
+  }
+  .fx-form .choice.selected {
+    border-color: var(--fx-orange);
+    background: linear-gradient(180deg, rgba(255,77,0,.09), rgba(255,77,0,.03));
+  }
+  .fx-form .choice.selected::before {
+    border-color: var(--fx-orange);
+    background: linear-gradient(135deg, var(--fx-amber), var(--fx-orange));
+    box-shadow: inset 0 0 0 3px var(--fx-field);
+  }
+  .fx-form .choice:has(input:focus-visible) { outline: 2px solid var(--fx-orange); outline-offset: 3px; }
+
+  /* Felder */
+  .service-block { display: grid; gap: var(--s4); }
+  .service-block[hidden] { display: none; }
+  .select-row, .input-row, .field { display: flex; flex-direction: column; gap: var(--s1); }
+
+  .website-label, .fx-form .field label, .checkbox-legend {
+    font-size: .8rem; text-transform: uppercase; letter-spacing: .14em;
+    font-weight: 680; color: var(--fx-ink-3);
+  }
+  .fx-form .field label.req::after { content: " *"; color: var(--fx-orange); }
+
+  .fx-form select,
+  .fx-form input[type="text"],
+  .fx-form input[type="email"],
+  .fx-form input[type="tel"],
+  .fx-form textarea {
+    width: 100%; font: inherit; font-size: 1rem; font-weight: 500;
+    color: var(--fx-ink); background: var(--fx-field);
+    border: 1px solid var(--fx-hair); border-radius: 14px;
+    padding: .85rem var(--s3);
+    transition: border-color .18s ease, box-shadow .18s ease;
+  }
+  .fx-form textarea { resize: vertical; min-height: 9rem; line-height: 1.65; }
+  .fx-form select {
+    appearance: none; padding-right: 2.6rem;
+    background-image:
+      linear-gradient(45deg, transparent 50%, currentColor 50%),
+      linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position: calc(100% - 1.25rem) 55%, calc(100% - .9rem) 55%;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+  }
+  .fx-form ::placeholder { color: var(--fx-ink-3); opacity: .8; }
+  .fx-form select:focus, .fx-form input:focus, .fx-form textarea:focus {
+    outline: none; border-color: var(--fx-orange);
+    box-shadow: 0 0 0 4px rgba(255,77,0,.16);
+  }
+  .is-invalid { border-color: #e0243d !important; }
+  .field-error { color: #e0243d; font-weight: 700; font-size: .88rem; }
+
+  /* Schwerpunkte */
+  .checkbox-group { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .checkbox-group .checkbox-legend { width: 100%; margin-bottom: var(--s1); padding: 0; }
+  .fx-form .pill {
+    display: inline-flex; align-items: center; padding: .55rem var(--s3);
+    border: 1px solid var(--fx-hair); border-radius: 999px;
+    background: var(--fx-field); font-size: .94rem; font-weight: 600;
+    color: var(--fx-ink); cursor: pointer;
+    transition: border-color .16s ease, background .16s ease;
+  }
+  .fx-form .pill input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .fx-form .pill:hover { border-color: rgba(255,77,0,.5); }
+  .fx-form .pill.selected {
+    border-color: var(--fx-orange);
+    background: linear-gradient(180deg, rgba(255,77,0,.12), rgba(255,77,0,.05));
+  }
+  .fx-form .pill:has(input:focus-visible) { outline: 2px solid var(--fx-orange); outline-offset: 3px; }
+
+  /* Raster */
+  .contact-grid { display: grid; gap: var(--s4); }
+  @media (min-width: 640px) {
+    .contact-grid { grid-template-columns: repeat(12, minmax(0,1fr)); }
+    .span-6 { grid-column: span 6; }
+    .span-12 { grid-column: span 12; }
+  }
+
+  /* Hinweiskasten (Schritt 4) */
+  .fx-note {
+    margin-top: var(--s4);
+    padding: var(--s3) var(--s4);
+    border: 1px solid var(--fx-hair);
+    border-left: 3px solid var(--fx-green-deep);
+    border-radius: 12px;
+    background: var(--fx-field);
+    font-size: .94rem; line-height: 1.65; font-weight: 500;
+    color: var(--fx-ink-2);
+  }
+
+  .legal-hint, .req-note {
+    margin-top: var(--s4);
+    font-size: .88rem; line-height: 1.6; font-weight: 500; color: var(--fx-ink-3);
+  }
+  .req-note { margin-top: var(--s1); }
+  .legal-hint a { color: var(--fx-ink); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Navigation */
+  .fx-nav {
+    display: flex; gap: var(--s2); flex-wrap: wrap;
+    margin-top: var(--s6); padding-top: var(--s4);
+    border-top: 1px solid var(--fx-hair-soft);
+  }
+  .fx-nav button {
+    font: inherit; font-size: .8rem; text-transform: uppercase; letter-spacing: .14em; font-weight: 680;
+    padding: .9rem var(--s4); border-radius: 999px; cursor: pointer; border: 1px solid transparent;
+    transition: transform .16s ease, box-shadow .16s ease, opacity .16s ease;
+  }
+  .nav-btn.prev { background: transparent; color: var(--fx-ink); border-color: var(--fx-hair); }
+  .nav-btn.prev:hover:not(:disabled) { border-color: var(--fx-ink-3); }
+  .nav-btn.next, .kontakt-btn.submit {
+    margin-left: auto; color: #fff;
+    background: linear-gradient(135deg, var(--fx-amber), var(--fx-orange));
+    box-shadow: 0 10px 24px rgba(255,77,0,.3);
+  }
+  .nav-btn.next:hover:not(:disabled), .kontakt-btn.submit:hover:not(:disabled) {
+    transform: translateY(-1px); box-shadow: 0 14px 30px rgba(255,77,0,.38);
+  }
+  .fx-nav button:disabled { opacity: .42; cursor: not-allowed; box-shadow: none; }
+  .fx-nav button:focus-visible { outline: 2px solid var(--fx-orange); outline-offset: 3px; }
+  [hidden] { display: none !important; }
+
+  /* Erfolg */
+  .success-card { text-align: center; padding: var(--s5) 0; }
+  .success-mark {
+    width: 3.6rem; height: 3.6rem; margin: 0 auto var(--s4); border-radius: 999px;
+    display: grid; place-items: center; color: #052a1a; font-size: 1.6rem; font-weight: 900;
+    background: linear-gradient(135deg, var(--fx-green), #4fd9a0);
+    box-shadow: 0 12px 30px rgba(124,236,174,.35);
+  }
+  .success-title {
+    font-size: clamp(1.55rem, 1.2rem + 1.2vw, 2.15rem);
+    font-weight: 900; letter-spacing: -.02em; line-height: 1.12;
+    margin-bottom: var(--s2);
+  }
+  .success-copy {
+    font-size: clamp(1.02rem, .98rem + .35vw, 1.14rem); line-height: 1.7; font-weight: 500;
+    color: var(--fx-ink-2); max-width: 26rem; margin: 0 auto var(--s2);
+  }
+  .success-sub {
+    font-size: .94rem; line-height: 1.6; color: var(--fx-ink-3);
+    margin: 0 auto var(--s5);
+  }
+  .success-btn {
+    font: inherit; font-size: .8rem; text-transform: uppercase; letter-spacing: .14em; font-weight: 680;
+    padding: .9rem var(--s4); border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--fx-hair); background: transparent; color: var(--fx-ink);
+  }
+  .success-btn:hover { border-color: var(--fx-ink-3); }
+
+  /* Statusmeldung */
+  [data-status]:empty { display: none; }
+  [data-status] {
+    margin-bottom: var(--s4); padding: var(--s2) var(--s3); border-radius: 14px;
+    border: 1px solid var(--fx-hair); background: var(--fx-field);
+    font-size: .94rem; font-weight: 700; text-align: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .form-step.active { animation: none; }
+    .fx-layer { transition: none; }
+    * { transition-duration: .01ms !important; }
+  }
+  </style>
+</head>
+
+<body data-page="anfrage">
+<a class="skip-link" href="#kontaktForm">Zum Formular springen</a>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="aether-header" id="aetherGate">
+  <div class="aether-header__bar">
+    <a href="/" class="sigil-mark">Fusion³</a>
+
+    <!-- NAV mit Subnav-Accordions (mobil sichtbar) -->
+    <nav class="astral-nav" id="astralWay" aria-label="Hauptnavigation">
+      <ul class="astral-nav__list">
+
+
+                        <!-- Blog (vorher "Über uns" im Kommentar) -->
+<li class="astral-item">
+  <a class="astral-link" href="index.html">Start</a>
+  <button
+    class="gatelet"
+    type="button"
+    aria-expanded="false"
+    aria-controls="codex-about"
+    aria-haspopup="true"
+    aria-label="Unterpunkte zu Blog ein- oder ausklappen">
+  </button>
+</li>
+
+
+
+        <!-- Portfolio -->
+        <li class="astral-item">
+          <a class="astral-link" href="Gallerie.html">Portfolio</a>
+          <button
+            class="gatelet"
+            type="button"
+            aria-expanded="false"
+            aria-controls="vault-portfolio"
+            aria-haspopup="true"
+            aria-label="Unterpunkte zu Portfolio ein- oder ausklappen">
+          </button>
+        </li>
+
+        <!-- Leistungen -->
+        <li class="astral-item">
+<a class="astral-link" href="index.html#nebula-hub">Leistungen</a>
+          <button
+            class="gatelet"
+            type="button"
+            aria-expanded="false"
+            aria-controls="grimoire-services"
+            aria-haspopup="true"
+            aria-label="Unterpunkte zu Leistungen ein- oder ausklappen">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul id="grimoire-services" class="underrealm" hidden>
+            <li><a class="astral-link astral-link--sub" href="./WebDesign.html">Webdesign</a></li>
+            <li><a class="astral-link astral-link--sub" href="./3DDesign.html">3D Design</a></li>
+            <li><a class="astral-link astral-link--sub" href="./Grafikdesign.html">Grafikdesign</a></li>
+          </ul>
+        </li>
+
+
+        <!-- Kontakt -->
+        <li class="astral-item">
+<a class="astral-link" href="index.html#kontakt">Kontakt</a>
+          <button
+            class="gatelet"
+            type="button"
+            aria-expanded="false"
+            aria-controls="altar-contact"
+            aria-haspopup="true"
+            aria-label="Unterpunkte zu Kontakt ein- oder ausklappen">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul id="altar-contact" class="underrealm" hidden>
+            <li><a class="astral-link astral-link--sub" href="/anfrage.html">Anfrage stellen</a></li>
+          <li><a class="astral-link astral-link--sub" href="/impressum.html">Impressum</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="astral-actions">
+      <!-- Theme Toggle -->
+      <button
+  class="orb-toggle"
+  id="eclipseStone"
+  type="button"
+  aria-pressed="true"
+  aria-controls="omenWhisper"
+  aria-label="Dunkelmodus aktiv">
+
+  <span class="sky day-sky" aria-hidden="true"></span>
+  <span class="sky night-sky" aria-hidden="true"></span>
+  <span class="stars" id="starField" aria-hidden="true"></span>
+
+  <span class="clouds" id="nebulaSea" aria-hidden="true">
+    <span class="leyline back" data-lane="back"></span>
+    <span class="leyline mid" data-lane="mid"></span>
+    <span class="leyline front" data-lane="front"></span>
+  </span>
+
+  <span class="thumb" id="moonShard" aria-hidden="true"></span>
+</button>
+      <!-- CTA (Link bleibt Link; kein role="button" nötig) -->
+      <a
+        class="charm-cta charm-cta--prime"
+        href="#kontakt"
+        id="sigilOffer"
+        aria-label="Angebot anfordern"
+        data-cta
+        data-cta-context="header">
+        <span class="charm-cta__label">Check starten</span>
+      </a>
+    </div>
+
+    <!-- Mobile Menü-Button -->
+    <button
+      class="portal-toggle"
+      id="runeSwitch"
+      type="button"
+      aria-expanded="false"
+      aria-controls="astralWay"
+      aria-label="Menü öffnen">
+      <svg class="icon icon-burger" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <svg class="icon icon-close" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+<div class="night-veil" id="voidVeil" hidden></div>
+
+</header>
+
+
+<!-- ============================================================
+     ANFRAGE
+     ============================================================ -->
+<main class="fx">
+  <div class="fx-split">
+
+    <!-- ===== Bildfläche ===== -->
+    <aside class="fx-visual" aria-hidden="true">
+      <div class="fx-visual-bg">
+        <div class="fx-layer is-on" id="fxLayerA"></div>
+        <div class="fx-layer" id="fxLayerB"></div>
+      </div>
+
+      <div class="fx-visual-body">
+        <div>
+          <p class="fx-eyebrow">Anfrage</p>
+          <div class="fx-head-row">
+            <span class="fx-num" id="fxNum">01</span>
+            <div>
+              <p class="fx-step-title" id="fxTitle">Leistung</p>
+              <p class="fx-step-note" id="fxNote">Sag uns, worum es geht – den Rest klären wir Schritt für Schritt.</p>
+            </div>
+          </div>
+        </div>
+
+        <ol class="fx-steps" id="fxSteps">
+          <li><button type="button" data-goto="0">Leistung</button></li>
+          <li><button type="button" data-goto="1">Material</button></li>
+          <li><button type="button" data-goto="2">Umfang</button></li>
+          <li><button type="button" data-goto="3">Zeitplan</button></li>
+          <li><button type="button" data-goto="4">Kontakt</button></li>
+        </ol>
+
+      </div>
+    </aside>
+
+    <!-- ===== Formular ===== -->
+    <div class="fx-form-side">
+      <div class="fx-form-inner">
+
+ 
+
+        <h1 class="sr-only">Projektanfrage stellen</h1>
+
+        <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form fx-form" id="kontaktForm" novalidate>
+
+          <!-- STEP 1 -->
+          <fieldset class="form-step active" data-step="1"
+                    data-title="Leistung"
+                    data-note="Sag uns, worum es geht – den Rest klären wir Schritt für Schritt.">
+            <legend class="sr-only">Leistungswahl</legend>
+            <h2 class="fx-q">Womit können wir helfen?</h2>
+            <p class="fx-hint">Wähle den Bereich, der am besten passt. Ergänzen kannst du später alles.</p>
+
+            <div class="grid-choices" role="radiogroup" aria-label="Leistung wählen">
+              <label class="choice" tabindex="0">
+                <input type="radio" name="service" value="Webdesign" data-toggle="web"
+                       data-img="./arbeitsproben/arbeitsproben_index/post14.webp" />
+                <span class="title">Webdesign</span>
+                <small>Speed, Responsiveness, SEO, UX</small>
+              </label>
+              <label class="choice" tabindex="0">
+                <input type="radio" name="service" value="3D-Design" data-toggle="d3"
+                       data-img="./cosmospictures/astro-sitzend.webp" />
+                <span class="title">3D-Design</span>
+                <small>Renderings, Animationen, Produkt und Architektur</small>
+              </label>
+              <label class="choice" tabindex="0">
+                <input type="radio" name="service" value="Grafikdesign" data-toggle="gfx"
+                       data-img="./arbeitsproben/arbeitsproben_index/post11.webp" />
+                <span class="title">Grafikdesign</span>
+                <small>Logo, Visitenkarte, Poster, Styleguide</small>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- STEP 2 -->
+          <fieldset class="form-step" data-step="2"
+                    data-title="Material"
+                    data-note="Nichts vorhanden? Kein Problem – wir übernehmen das komplett.">
+            <legend class="sr-only">Material und Styleguide</legend>
+            <h2 class="fx-q">Was ist schon vorhanden?</h2>
+            <p class="fx-hint">Je klarer die Ausgangslage, desto genauer wird das Angebot.</p>
+
+            <div class="service-block" data-service="web">
+              <label class="select-row">
+                <span class="website-label">Material (Texte, Bilder, Logo)</span>
+                <select name="web_material">
+                  <option value="">Bitte wählen</option>
+                  <option value="alles">Alles vorhanden</option>
+                  <option value="teilweise">Teilweise vorhanden</option>
+                  <option value="nichts">Bitte komplett erstellen</option>
+                </select>
+              </label>
+              <label class="select-row">
+                <span class="website-label">Styleguide oder CI vorhanden?</span>
+                <select name="web_styleguide">
+                  <option value="">Bitte wählen</option>
+                  <option value="ja">Ja</option>
+                  <option value="nein">Nein</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="service-block" data-service="d3">
+              <label class="select-row">
+                <span class="website-label">3D-Daten oder Modelle vorhanden?</span>
+                <select name="d3_daten">
+                  <option value="">Bitte wählen</option>
+                  <option value="vorhanden">Ja, vorhanden</option>
+                  <option value="modellierung_noetig">Nein, bitte modellieren</option>
+                </select>
+              </label>
+              <label class="select-row">
+                <span class="website-label">Referenzen oder Vorbilder vorhanden?</span>
+                <select name="d3_refs">
+                  <option value="">Bitte wählen</option>
+                  <option value="ja">Ja, kann ich schicken</option>
+                  <option value="nein">Nein</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="service-block" data-service="gfx">
+              <label class="select-row">
+                <span class="website-label">Branding oder Styleguide vorhanden?</span>
+                <select name="gfx_styleguide">
+                  <option value="">Bitte wählen</option>
+                  <option value="ja">Ja</option>
+                  <option value="nein">Nein</option>
+                </select>
+              </label>
+              <label class="select-row">
+                <span class="website-label">Text- und Bildmaterial</span>
+                <select name="gfx_material">
+                  <option value="">Bitte wählen</option>
+                  <option value="alles">Alles vorhanden</option>
+                  <option value="teilweise">Teilweise</option>
+                  <option value="nichts">Bitte erstellen</option>
+                </select>
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- STEP 3 -->
+          <fieldset class="form-step" data-step="3"
+                    data-title="Umfang"
+                    data-note="Hier wird aus der Idee ein konkretes Ergebnis.">
+            <legend class="sr-only">Projektspezifikationen</legend>
+            <h2 class="fx-q">Was genau soll entstehen?</h2>
+            <p class="fx-hint">Bei den Schwerpunkten ist Mehrfachauswahl ausdrücklich erwünscht.</p>
+
+            <div class="service-block" data-service="web">
+              <label class="select-row">
+                <span class="website-label">Website-Typ</span>
+                <select name="web_typ">
+                  <option value="">Bitte wählen</option>
+                  <option value="unternehmensseite">Unternehmensseite</option>
+                  <option value="portfolio">Portfolio</option>
+                  <option value="shop">Online-Shop</option>
+                  <option value="landingpage">Landingpage</option>
+                  <option value="sonstiges">Sonstiges</option>
+                </select>
+              </label>
+              <fieldset class="checkbox-group tags" aria-label="Besondere Schwerpunkte">
+                <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
+                <label class="pill"><input type="checkbox" name="web_prios[]" value="Ladegeschwindigkeit" /><span>Ladegeschwindigkeit</span></label>
+                <label class="pill"><input type="checkbox" name="web_prios[]" value="Responsiveness" /><span>Responsiveness</span></label>
+                <label class="pill"><input type="checkbox" name="web_prios[]" value="SEO" /><span>SEO</span></label>
+                <label class="pill"><input type="checkbox" name="web_prios[]" value="Benutzerfreundlichkeit" /><span>Benutzerfreundlichkeit</span></label>
+                <label class="pill"><input type="checkbox" name="web_prios[]" value="Designqualität" /><span>Designqualität</span></label>
+              </fieldset>
+            </div>
+
+            <div class="service-block" data-service="d3">
+              <label class="select-row">
+                <span class="website-label">Was soll entstehen?</span>
+                <select name="d3_typ">
+                  <option value="">Bitte wählen</option>
+                  <option value="rendering">Rendering</option>
+                  <option value="animation">Animation</option>
+                  <option value="produktvisualisierung">Produktvisualisierung</option>
+                  <option value="architekturvisualisierung">Architekturvisualisierung</option>
+                  <option value="sonstiges">Sonstiges</option>
+                </select>
+              </label>
+              <label class="select-row">
+                <span class="website-label">Verwendungszweck</span>
+                <select name="d3_use">
+                  <option value="">Bitte wählen</option>
+                  <option value="marketing">Marketing und Werbung</option>
+                  <option value="praesentation">Präsentation</option>
+                  <option value="shop">Online-Shop</option>
+                  <option value="print">Print</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="service-block" data-service="gfx">
+              <label class="select-row">
+                <span class="website-label">Design-Typ</span>
+                <select name="gfx_typ">
+                  <option value="">Bitte wählen</option>
+                  <option value="logo">Logo</option>
+                  <option value="visitenkarte">Visitenkarte</option>
+                  <option value="flyer_poster">Flyer oder Poster</option>
+                  <option value="styleguide">Styleguide</option>
+                  <option value="sonstiges">Sonstiges</option>
+                </select>
+              </label>
+              <fieldset class="checkbox-group tags" aria-label="Schwerpunkte Grafikdesign">
+                <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
+                <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Brand-Konsistenz" /><span>Brand-Konsistenz</span></label>
+                <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Typografie" /><span>Typografie</span></label>
+                <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Druckvorbereitung" /><span>Druckvorbereitung</span></label>
+                <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Illustration" /><span>Illustration</span></label>
+                <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Schnelle Umsetzung" /><span>Schnelle Umsetzung</span></label>
+              </fieldset>
+            </div>
+          </fieldset>
+
+          <!-- STEP 4 -->
+          <fieldset class="form-step" data-step="4"
+                    data-title="Zeitplan"
+                    data-note="Alles freiwillig – hilft uns aber, realistisch zu bleiben.">
+            <legend class="sr-only">Zeitplan und Budget</legend>
+            <h2 class="fx-q">Wann und in welchem Rahmen?</h2>
+            <p class="fx-hint">Eine grobe Spanne genügt. Wir sagen dir ehrlich, was darin machbar ist.</p>
+
+            <div class="contact-grid">
+              <label class="input-row span-12">
+                <span class="website-label">Wann soll es losgehen?</span>
+                <select name="start">
+                  <option value="">Bitte wählen</option>
+                  <option value="sofort">So schnell wie möglich</option>
+                  <option value="1_3_monate">In den nächsten drei Monaten</option>
+                  <option value="spaeter">Später im Jahr</option>
+                  <option value="offen">Noch offen</option>
+                </select>
+              </label>
+              <label class="input-row span-6">
+                <span class="website-label">Fester Termin oder Deadline</span>
+                <input type="text" name="deadline" placeholder="z. B. bis 15. November" />
+              </label>
+              <label class="input-row span-6">
+                <span class="website-label">Budgetrahmen</span>
+                <input type="text" name="budget" placeholder="z. B. 3.000 bis 6.000 €" />
+              </label>
+            </div>
+
+            <p class="fx-note">
+              Das Budget verwenden wir nicht als Preisschild, sondern um den Umfang passend
+              zuzuschneiden. Wenn es nicht reicht, sagen wir das offen – statt am Ergebnis zu sparen.
+            </p>
+          </fieldset>
+
+          <!-- STEP 5 -->
+          <fieldset class="form-step" data-step="5"
+                    data-title="Kontakt"
+                    data-note="Fast geschafft. Danach schauen wir uns alles in Ruhe an.">
+            <legend class="sr-only">Kontaktdaten</legend>
+            <h2 class="fx-q">Wie erreichen wir dich?</h2>
+            <p class="fx-hint">Wir melden uns innerhalb von 24 Stunden mit einer ersten Einschätzung.</p>
+
+            <input type="hidden" name="_subject" id="autoSubject" />
+            <textarea class="sr-only" name="summary_plain" id="summaryPlain" aria-hidden="true" tabindex="-1"></textarea>
+            <input type="hidden" name="selected_service" id="selectedService" />
+
+            <div class="contact-grid">
+              <div class="field span-6">
+                <label for="name" class="req">Name</label>
+                <input id="name" type="text" name="name" placeholder="Vor- und Nachname" autocomplete="name" required />
+              </div>
+              <div class="field span-6">
+                <label for="email" class="req">E-Mail</label>
+                <input id="email" type="email" name="email" placeholder="name@firma.de" autocomplete="email" required />
+              </div>
+              <div class="field span-6">
+                <label for="company">Firma (optional)</label>
+                <input id="company" type="text" name="company" placeholder="Firmenname" autocomplete="organization" />
+              </div>
+              <div class="field span-6">
+                <label for="phone">Telefon (optional)</label>
+                <input id="phone" type="tel" name="phone" placeholder="+49 151 12345678" autocomplete="tel" />
+              </div>
+              <div class="field span-12">
+                <label for="message" class="req">Nachricht</label>
+                <textarea id="message" name="message" rows="6" minlength="5" required
+                  placeholder="Worum geht es, und was soll am Ende dabei herauskommen?"></textarea>
+              </div>
+            </div>
+
+            <p class="legal-hint">
+              Deine Angaben werden über <strong>Formspree</strong> zur Beantwortung deiner Anfrage
+              verarbeitet. Mehr unter <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.
+            </p>
+            <p class="req-note">* Pflichtfelder</p>
+          </fieldset>
+
+          <!-- STEP 6 -->
+          <fieldset class="form-step" data-step="6"
+                    data-title="Gesendet"
+                    data-note="Danke. Wir melden uns innerhalb von 24 Stunden bei dir.">
+            <legend class="sr-only">Abschluss</legend>
+            <div class="success-card" role="status" aria-live="polite">
+              <div class="success-mark" aria-hidden="true">✓</div>
+              <h2 class="success-title">Anfrage ist angekommen</h2>
+              <p class="success-copy">
+                Wir sehen uns deine Angaben an und melden uns innerhalb von 24 Stunden.
+              </p>
+              <p class="success-sub">Eine Bestätigung liegt in deinem Postfach.</p>
+              <button type="button" class="success-btn">Neue Anfrage starten</button>
+            </div>
+          </fieldset>
+
+          <!-- Navigation -->
+          <div class="fx-nav" id="wizardNav">
+            <button type="button" class="nav-btn prev" id="prevBtn" disabled>Zurück</button>
+            <button type="button" class="nav-btn next" id="nextBtn" disabled>Weiter</button>
+            <button type="submit" class="kontakt-btn submit" id="submitBtn" hidden>Anfrage senden</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Hier deinen üblichen Footer einsetzen -->
+
+
+<!-- ============================================================
+     SCRIPTS – Navigation, Untermenüs, Theme
+     ============================================================ -->
+<script>
+(function(){
+  const docEl = document.documentElement;
+  const gate  = document.getElementById('aetherGate');
+  const switchRune = document.getElementById('runeSwitch');
+  const astral = document.getElementById('astralWay');
+  const veil   = document.getElementById('voidVeil');
+  if(!switchRune || !astral) return;
+
+  function setGateHeight(){
+    docEl.style.setProperty('--gate-height', gate.getBoundingClientRect().height + 'px');
+  }
+  setGateHeight();
+  addEventListener('resize', setGateHeight, {passive:true});
+
+  const mq = window.matchMedia('(min-width: 768px)');
+  let mobileSatchel = null;
+
+  function ensureSatchel(){
+    if(!mobileSatchel){
+      mobileSatchel = document.createElement('div');
+      mobileSatchel.id = 'mobileSatchel';
+      mobileSatchel.className = 'astral-nav__mobile-actions';
+      mobileSatchel.setAttribute('hidden','');
+      astral.appendChild(mobileSatchel);
+    }
+  }
+  function stowCharm(){
+    ensureSatchel();
+    const cta = document.querySelector('.charm-cta');
+    if(cta && cta.parentElement !== mobileSatchel) mobileSatchel.appendChild(cta);
+    mobileSatchel.removeAttribute('hidden');
+  }
+  function recallCharm(){
+    const actions = document.querySelector('.astral-actions');
+    if(!actions) return;
+    const cta = mobileSatchel && mobileSatchel.querySelector('.charm-cta');
+    if(cta && actions !== cta.parentElement) actions.appendChild(cta);
+    mobileSatchel && mobileSatchel.setAttribute('hidden','');
+  }
+
+  const ward = (()=>{
+    let active = false;
+    function handle(e){
+      if(!active || e.key !== 'Tab') return;
+      const list = Array.from(astral.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])'))
+        .filter(el=>!el.hasAttribute('disabled'));
+      if(!list.length) return;
+      const first = list[0], last = list[list.length-1];
+      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    }
+    return {
+      activate(){ if(!active){ active = true; document.addEventListener('keydown', handle); }},
+      deactivate(){ if(active){ active = false; document.removeEventListener('keydown', handle); }}
+    };
+  })();
+
+  function sealUnderrealms(){
+    astral.querySelectorAll('.gatelet[aria-expanded="true"]').forEach(b=>b.setAttribute('aria-expanded','false'));
+    astral.querySelectorAll('.underrealm:not([hidden])').forEach(u=>u.setAttribute('hidden',''));
+    astral.querySelectorAll('.astral-item.is-awakened').forEach(li=>li.classList.remove('is-awakened'));
+  }
+  function closePortal(){
+    astral.classList.remove('is-awakened');
+    veil && (veil.classList.remove('is-awakened'), veil.setAttribute('hidden',''));
+    switchRune.setAttribute('aria-expanded','false');
+    switchRune.setAttribute('aria-label','Menü öffnen');
+    docEl.classList.remove('nav-lock');
+    ward.deactivate();
+    const m = document.querySelector('main'); m && m.removeAttribute('inert');
+    sealUnderrealms(); recallCharm();
+    gate.classList.remove('portal-open');
+  }
+  function openPortal(){
+    astral.classList.add('is-awakened');
+    veil && (veil.classList.add('is-awakened'), veil.removeAttribute('hidden'));
+    switchRune.setAttribute('aria-expanded','true');
+    switchRune.setAttribute('aria-label','Menü schließen');
+    docEl.classList.add('nav-lock');
+    const firstLink = astral.querySelector('a'); firstLink && firstLink.focus();
+    ward.activate();
+    const m = document.querySelector('main'); m && m.setAttribute('inert','');
+    stowCharm();
+    gate.classList.add('portal-open');
+  }
+
+  if(mq.matches) closePortal();
+  mq.addEventListener && mq.addEventListener('change', ()=>{ if(mq.matches) closePortal(); });
+
+  switchRune.addEventListener('click', ()=>{
+    astral.classList.contains('is-awakened') ? closePortal() : openPortal();
+  });
+  veil && veil.addEventListener('click', closePortal);
+  document.addEventListener('click', (e)=>{
+    if(!astral.classList.contains('is-awakened')) return;
+    if (e.target.closest('.orb-toggle')) return;
+    if(!astral.contains(e.target) && !switchRune.contains(e.target)) closePortal();
+  });
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && astral.classList.contains('is-awakened')){ e.preventDefault(); closePortal(); }
+  });
+  addEventListener('scroll', ()=>{
+    gate.classList.toggle('is-ascended', (window.scrollY || 0) > 4);
+  }, {passive:true});
+})();
+
+/* Untermenüs */
+(function(){
+  const nav = document.getElementById('astralWay');
+  if(!nav) return;
+  nav.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.gatelet');
+    if(!btn) return;
+    e.preventDefault(); e.stopPropagation();
+    const li  = btn.closest('.astral-item');
+    const id  = btn.getAttribute('aria-controls');
+    const sub = id ? document.getElementById(id) : (li && li.querySelector('.underrealm'));
+    if(!li || !sub) return;
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+    nav.querySelectorAll('.astral-item.is-awakened').forEach(other=>{
+      if(other !== li){
+        other.classList.remove('is-awakened');
+        const b = other.querySelector('.gatelet[aria-expanded="true"]');
+        const s = other.querySelector('.underrealm');
+        b && b.setAttribute('aria-expanded','false');
+        s && s.setAttribute('hidden','');
+      }
+    });
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    li.classList.toggle('is-awakened', !isOpen);
+    sub.toggleAttribute('hidden', isOpen);
+  });
+  function closeAll(){
+    nav.querySelectorAll('.astral-item.is-awakened').forEach(li=>{
+      li.classList.remove('is-awakened');
+      const b = li.querySelector('.gatelet[aria-expanded="true"]');
+      const s = li.querySelector('.underrealm');
+      b && b.setAttribute('aria-expanded','false');
+      s && s.setAttribute('hidden','');
+    });
+  }
+  document.addEventListener('click', (e)=>{ if(!nav.contains(e.target)) closeAll(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeAll(); });
+})();
+
+/* CTA Ripple */
+(function(){
+  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-cta]').forEach(btn=>{
+    btn.addEventListener('pointerdown', e=>{
+      if (prefersReduced) return;
+      const rect = btn.getBoundingClientRect();
+      const r = document.createElement('span');
+      r.className = 'cta-ripple';
+      r.style.left = (e.clientX - rect.left) + 'px';
+      r.style.top  = (e.clientY - rect.top) + 'px';
+      btn.appendChild(r); r.offsetWidth; r.classList.add('is-anim');
+      r.addEventListener('animationend', ()=> r.remove(), {once:true});
+    });
+  });
+})();
+
+/* Theme */
+(function(){
+  const rootEl = document.documentElement, bodyEl = document.body;
+  const toggleEl = document.getElementById('eclipseStone');
+  const shard = document.getElementById('moonShard');
+  const stars = document.getElementById('starField');
+  const statusEl = document.getElementById('omenWhisper');
+
+  (function seedStars(){
+    if(!stars) return;
+    const frag = document.createDocumentFragment();
+    for(let i=0;i<26;i++){
+      const el = document.createElement('i');
+      el.style.top = (5 + Math.random()*90) + '%';
+      el.style.left = (5 + Math.random()*90) + '%';
+      el.style.animationDelay = (Math.random()*2.5).toFixed(2)+'s';
+      frag.appendChild(el);
+    }
+    stars.appendChild(frag);
+  })();
+
+  (function seedClouds(){
+    const lanes = Array.from(document.querySelectorAll('[data-lane]'));
+    if(!lanes.length || !toggleEl) return;
+    const presets = {
+      back:  { count:3, speed:[80,120], scale:[0.60,0.90], opacity:[0.25,0.40] },
+      mid:   { count:3, speed:[60, 90], scale:[0.80,1.00], opacity:[0.50,0.70] },
+      front: { count:2, speed:[45, 70], scale:[1.00,1.15], opacity:[0.85,0.95] }
+    };
+    const rand  = (a,b)=> Math.floor(a + Math.random()*(b-a+1));
+    const randf = (a,b)=> +(a + Math.random()*(b-a)).toFixed(2);
+    function render(){
+      lanes.forEach(l=> l.innerHTML = '');
+      const rect = toggleEl.getBoundingClientRect();
+      const W = Math.max(60, Math.round(rect.width)), H = Math.max(24, Math.round(rect.height));
+      lanes.forEach(lane=>{
+        const cfg = presets[lane.dataset.lane];
+        for(let i=0;i<cfg.count;i++){
+          const cloud = document.createElement('span');
+          cloud.className = 'cloud';
+          const cw = randf(Math.max(0.28*W,36), Math.max(0.46*W,54)), ch = cw*0.5;
+          cloud.style.width = cw+'px'; cloud.style.height = ch+'px';
+          const freeY = Math.max(0, H - ch);
+          cloud.style.top  = (freeY ? randf(0, freeY) : 0) + 'px';
+          cloud.style.left = (Math.max(0, W - cw) ? randf(0, W - cw) : 0) + 'px';
+          const dur = rand(cfg.speed[0], cfg.speed[1]);
+          cloud.style.animationDuration = dur+'s';
+          cloud.style.animationDelay = (-Math.random()*dur).toFixed(2)+'s';
+          cloud.style.opacity = randf(cfg.opacity[0], cfg.opacity[1]);
+          cloud.style.transform = `translateX(0) scale(${randf(cfg.scale[0], cfg.scale[1])})`;
+          ['b1','b2','b3','b4','b5'].forEach((b,idx)=>{
+            const s = document.createElement('span');
+            s.className = 'bubble '+b;
+            const w = [0.58,0.50,0.66,0.38,0.42][idx] * (0.92 + Math.random()*0.16);
+            const h = [0.78,0.70,0.88,0.58,0.62][idx] * (0.92 + Math.random()*0.16);
+            s.style.width = (w*100)+'%'; s.style.height = (h*100)+'%';
+            s.style.left = ([10,38,46,-2,22][idx] + (Math.random()*4-2))+'%';
+            s.style.top  = ([12,-4,12,28,28][idx] + (Math.random()*4-2))+'%';
+            cloud.appendChild(s);
+          });
+          lane.appendChild(cloud);
+        }
+      });
+    }
+    let t; render();
+    addEventListener('resize', ()=>{ clearTimeout(t); t = setTimeout(render, 120); }, {passive:true});
+  })();
+
+  const KEY = 'theme-pref';
+  function apply(mode){
+    const isDark = (mode === 'dark');
+    bodyEl.classList.toggle('nocturne', isDark);
+    bodyEl.classList.toggle('dawn', !isDark);
+    rootEl.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    toggleEl && toggleEl.setAttribute('aria-pressed', String(isDark));
+    statusEl && (statusEl.textContent = isDark ? 'Dunkelmodus aktiv' : 'Hellmodus aktiv');
+  }
+  const saved = localStorage.getItem(KEY);
+  apply(saved === 'light' || saved === 'dark'
+    ? saved : (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'));
+
+  document.addEventListener('click', (e)=>{
+    if(!(e.target.closest && e.target.closest('.orb-toggle'))) return;
+    const nowDark = !bodyEl.classList.contains('nocturne');
+    apply(nowDark ? 'dark' : 'light');
+    localStorage.setItem(KEY, nowDark ? 'dark' : 'light');
+    if(shard){ shard.classList.remove('pulse'); void shard.offsetWidth; shard.classList.add('pulse'); }
+  });
+  matchMedia('(prefers-color-scheme:dark)').addEventListener('change', (e)=>{
+    if(localStorage.getItem(KEY)) return;
+    apply(e.matches ? 'dark' : 'light');
+  });
+})();
+</script>
+
+
+<script>
+/* ============================================================
+   ANFRAGE-WIZARD
+   Bildfläche links spiegelt den Zustand: Nummer, Titel,
+   Schrittliste, Fortschritt und das Bild der gewählten Leistung.
+   Orange = jetzt dran, Hellgrün = erledigt.
+   ============================================================ */
+(function () {
+  const form = document.getElementById('kontaktForm');
+  if (!form) return;
+
+  const DEFAULT_IMG = './IndexM/PC.webp';   // Bild vor der Auswahl
+
+  const allSteps  = Array.from(form.querySelectorAll('.form-step'));
+  const prevBtn   = document.getElementById('prevBtn');
+  const nextBtn   = document.getElementById('nextBtn');
+  const submitBtn = document.getElementById('submitBtn');
+  const successFieldset = allSteps.find(s => s.dataset.step === '6');
+
+  const fxNum   = document.getElementById('fxNum');
+  const fxTitle = document.getElementById('fxTitle');
+  const fxNote  = document.getElementById('fxNote');
+  const fxBar   = document.getElementById('fxBar');
+  const fxBadge = document.getElementById('fxBadge');
+  const fxSteps = document.getElementById('fxSteps');
+  const layers  = [document.getElementById('fxLayerA'), document.getElementById('fxLayerB')];
+  let activeLayer = 0;
+
+  const STEP_NAMES = { '1':'Leistung', '2':'Material', '3':'Umfang', '4':'Zeitplan', '5':'Kontakt' };
+  let maxReached = 0;
+
+  /* ---------- Bildwechsel ---------- */
+  function setImage(url){
+    const next = layers[1 - activeLayer], cur = layers[activeLayer];
+    if (!next || !cur || cur.dataset.src === url) return;
+    next.style.backgroundImage = `url("${url}")`;
+    next.dataset.src = url;
+    next.classList.add('is-on');
+    cur.classList.remove('is-on');
+    activeLayer = 1 - activeLayer;
+  }
+  setImage(DEFAULT_IMG);
+
+  /* ---------- Statuszeile ---------- */
+  let statusBox = form.querySelector('[data-status]');
+  if (!statusBox) {
+    statusBox = document.createElement('div');
+    statusBox.setAttribute('data-status','');
+    statusBox.setAttribute('role','status');
+    statusBox.setAttribute('aria-live','polite');
+    form.insertBefore(statusBox, form.firstChild);
+  }
+  const setStatus = (msg, tone='')=>{
+    statusBox.textContent = msg || '';
+    statusBox.style.color =
+      tone==='error' ? '#e0243d' :
+      tone==='ok'    ? '#0a7f2e' :
+      tone==='warn'  ? '#a15c00' : 'inherit';
+  };
+
+  /* ---------- versteckte Felder ---------- */
+  function ensureHidden({id, name, tag='input'}) {
+    let el = form.querySelector('#'+id);
+    if (!el) {
+      el = document.createElement(tag);
+      el.id = id; el.name = name;
+      if (tag==='input') el.type = 'hidden';
+      el.className = 'sr-only'; el.setAttribute('aria-hidden','true');
+      form.appendChild(el);
+    } else if (el.name !== name) { el.name = name; }
+    return el;
+  }
+  ensureHidden({ id:'autoSubject',     name:'_subject' });
+  ensureHidden({ id:'summaryPlain',    name:'summary_plain', tag:'textarea' });
+  ensureHidden({ id:'selectedService', name:'selected_service' });
+  ensureHidden({ id:'honeypot',        name:'_gotcha' });
+  ensureHidden({ id:'metaRef',  name:'_referrer' }).value = location.href;
+  ensureHidden({ id:'metaTime', name:'_zeitpunkt' }).value = new Date().toLocaleString('de-DE');
+
+  /* ---------- Helfer ---------- */
+  const q  = (sel, root=form) => root.querySelector(sel);
+  const qa = (sel, root=form) => Array.from(root.querySelectorAll(sel));
+  const trim = s => (s||'').toString().trim();
+
+  function hasVisibleControls(stepEl){
+    return qa('input,select,textarea', stepEl)
+      .some(el => !el.disabled && !el.closest('[hidden]') && !el.classList.contains('sr-only'));
+  }
+  function getApplicableSteps(){
+    const base = allSteps.filter(s => s.dataset.step !== '6' && hasVisibleControls(s));
+    return form.classList.contains('is-success') && successFieldset ? [...base, successFieldset] : base;
+  }
+  const getCurrentIndex = () => Math.max(0, getApplicableSteps().indexOf(currentStepEl));
+  const clampIndex = i => {
+    const st = getApplicableSteps();
+    return Math.min(Math.max(i,0), st.length-1);
+  };
+  const isContactStep = el => !!el && el.dataset.step === '5';
+
+  /* ---------- Auswahl ---------- */
+  function updateChoiceUI(){
+    qa('.grid-choices .choice').forEach(label=>{
+      const rb = label.querySelector('input[type="radio"]');
+      label.classList.toggle('selected', !!(rb && rb.checked));
+    });
+    const sel = q('input[name="service"]:checked');
+    if (currentStepEl === allSteps[0]) nextBtn.disabled = !sel;
+
+    if (fxBadge) {
+      if (sel) { fxBadge.textContent = sel.value; fxBadge.hidden = false; }
+      else fxBadge.hidden = true;
+    }
+    setImage(sel && sel.dataset.img ? sel.dataset.img : DEFAULT_IMG);
+  }
+  function updatePillUI(){
+    qa('.pill').forEach(lbl=>{
+      const cb = lbl.querySelector('input[type="checkbox"]');
+      lbl.classList.toggle('selected', !!(cb && cb.checked));
+    });
+  }
+
+  function syncServiceBlocks(){
+    const sel = q('input[name="service"]:checked');
+    const key = sel ? sel.dataset.toggle : null;
+    ['web','d3','gfx'].forEach(k=>{
+      qa(`.service-block[data-service="${k}"]`).forEach(block=>{
+        const vis = key === k;
+        block.hidden = !vis;
+        qa('input,select,textarea', block).forEach(el=>{
+          el.disabled = !vis;
+          if(!vis){
+            if(el.type==='checkbox'||el.type==='radio') el.checked=false;
+            else if(el.tagName==='SELECT') el.selectedIndex=0;
+            else el.value='';
+          }
+        });
+      });
+    });
+    updatePillUI();
+  }
+
+  /* ---------- Bildfläche ---------- */
+  function paintVisual(idx){
+    const steps = getApplicableSteps();
+    const el = steps[idx];
+    if (!el) return;
+    const isSuccess = el.dataset.step === '6';
+    const total = steps.filter(s => s.dataset.step !== '6').length;
+
+    if (fxNum) {
+      fxNum.textContent = isSuccess ? '✓' : String(idx + 1).padStart(2, '0');
+      fxNum.classList.toggle('is-done', isSuccess);
+    }
+    fxTitle && (fxTitle.textContent = el.dataset.title || '');
+    fxNote  && (fxNote.textContent  = el.dataset.note  || '');
+    fxBar   && (fxBar.style.width = (isSuccess ? 100 : Math.round((idx / Math.max(1, total-1)) * 100)) + '%');
+
+    if (fxSteps) {
+      Array.from(fxSteps.children).forEach((li, i) => {
+        const done      = isSuccess || i < idx;
+        const current   = !isSuccess && i === idx;
+        const reachable = !isSuccess && i <= maxReached && !current;
+        li.classList.toggle('is-done', done);
+        li.classList.toggle('is-current', current);
+        li.classList.toggle('is-reachable', reachable);
+        const b = li.querySelector('button');
+        if (b) b.disabled = !reachable;
+      });
+    }
+  }
+
+  /* ---------- Navigation ---------- */
+  let currentStepEl = allSteps[0];
+
+  function showStepByIndex(idx, scroll){
+    const steps = getApplicableSteps();
+    if(!steps.length) return;
+    const targetIdx = clampIndex(idx);
+    const targetEl  = steps[targetIdx];
+
+    allSteps.forEach(s => s.classList.remove('active'));
+    targetEl.classList.add('active');
+    currentStepEl = targetEl;
+    if (targetEl.dataset.step !== '6') maxReached = Math.max(maxReached, targetIdx);
+
+    if (targetEl.dataset.step === '6') {
+      form.classList.add('is-success');
+      prevBtn.hidden = nextBtn.hidden = submitBtn.hidden = true;
+    } else {
+      form.classList.remove('is-success');
+      prevBtn.hidden = false;
+      const onContact = isContactStep(targetEl);
+      nextBtn.hidden   = onContact;
+      submitBtn.hidden = !onContact;
+      prevBtn.disabled = targetIdx === 0;
+      nextBtn.disabled = targetEl === allSteps[0] && !q('input[name="service"]:checked');
+    }
+
+    updatePillUI();
+    paintVisual(targetIdx);
+
+    if (scroll) {
+      const head = document.getElementById('aetherGate');
+      const off  = (head ? head.getBoundingClientRect().height : 0) + 16;
+      const top  = form.getBoundingClientRect().top + window.scrollY - off;
+      if (window.scrollY > top) window.scrollTo({ top, behavior: 'smooth' });
+    }
+    const first = targetEl.querySelector(
+      'input:not([disabled]):not([type=hidden]):not(.sr-only), select:not([disabled]), textarea:not([disabled]):not(.sr-only), button'
+    );
+    first && first.focus({ preventScroll:true });
+  }
+
+  /* ---------- Neustart ---------- */
+  function resetToStep1(){
+    form.reset();
+    form.classList.remove('is-success');
+    toggleFormDisabled(false);
+    syncServiceBlocks();
+    maxReached = 0;
+    updateChoiceUI();
+    updatePillUI();
+    clearInvalids();
+    setStatus('');
+    submitBtn.textContent = 'Anfrage senden';
+    showStepByIndex(0, true);
+  }
+
+  /* ---------- Validierung ---------- */
+  function markInvalid(el, msg){
+    if (!el) return;
+    el.classList.add('is-invalid');
+    el.setAttribute('aria-invalid','true');
+    const next = el.nextElementSibling;
+    if (next && next.classList.contains('field-error')) next.textContent = msg;
+    else {
+      const e = document.createElement('div');
+      e.className = 'field-error';
+      e.textContent = msg;
+      el.insertAdjacentElement('afterend', e);
+    }
+  }
+  function clearInvalids(){
+    qa('.is-invalid').forEach(el=>{ el.classList.remove('is-invalid'); el.removeAttribute('aria-invalid'); });
+    qa('.field-error').forEach(el=> el.remove());
+  }
+  const validEmail = s => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s);
+
+  function validateRequired(){
+    clearInvalids();
+    const name  = q('input[name="name"]');
+    const email = q('input[name="email"]');
+    const msg   = q('textarea[name="message"]');
+    let ok = true;
+    if (!trim(name && name.value))                { markInvalid(name,'Bitte Namen angeben.'); ok=false; }
+    if (!validEmail(trim(email && email.value)))   { markInvalid(email,'Bitte gültige E-Mail angeben.'); ok=false; }
+    if (trim(msg && msg.value).length < 5)         { markInvalid(msg,'Bitte kurz dein Projekt beschreiben.'); ok=false; }
+    if (!ok) {
+      const first = q('.is-invalid');
+      first && first.focus();
+      setStatus('Bitte fehlende Angaben ergänzen.', 'warn');
+    } else setStatus('');
+    return ok;
+  }
+
+  /* ---------- Zusammenfassung ---------- */
+  const LABELS = {
+    web_material:'Material', web_styleguide:'Styleguide/CI', web_typ:'Website-Typ',
+    'web_prios[]':'Schwerpunkte', d3_daten:'3D-Daten', d3_refs:'Referenzen',
+    d3_typ:'Ergebnis', d3_use:'Verwendung',
+    gfx_styleguide:'Branding', gfx_material:'Material', gfx_typ:'Design-Typ',
+    'gfx_prios[]':'Schwerpunkte', start:'Startzeitpunkt', deadline:'Deadline', budget:'Budget',
+    name:'Name', email:'E-Mail', company:'Firma', phone:'Telefon', message:'Nachricht'
+  };
+  function buildSummary(service){
+    const lines = ['Neue Projektanfrage', '', 'Leistung: ' + (service || '—'), ''];
+    getApplicableSteps().forEach(step=>{
+      if (step.dataset.step === '6') return;
+      const rows = [], multi = {};
+      qa('input,select,textarea', step).forEach(el=>{
+        if (el.disabled || el.closest('[hidden]') || el.type === 'hidden' || el.name === 'service') return;
+        const label = LABELS[el.name] || el.name;
+        if (el.type === 'checkbox') {
+          if (el.checked) multi[label] = (multi[label] || []).concat(el.value);
+        } else {
+          const v = trim(el.value);
+          if (v) rows.push(`- ${label}: ${v}`);
+        }
+      });
+      Object.keys(multi).forEach(k => rows.push(`- ${k}: ${multi[k].join(', ')}`));
+      if (rows.length) lines.push(`[${STEP_NAMES[step.dataset.step] || 'Angaben'}]`, ...rows, '');
+    });
+    return lines.join('\n').trim();
+  }
+
+  /* ---------- Absenden ---------- */
+  let submitting = false;
+  function toggleFormDisabled(disabled){
+    qa('input,select,textarea,button').forEach(el=> el.disabled = disabled);
+  }
+  async function postWithTimeout(url, options={}, timeoutMs=12000) {
+    const controller = new AbortController();
+    const t = setTimeout(()=>controller.abort(), timeoutMs);
+    try { return await fetch(url, { ...options, signal: controller.signal }); }
+    finally { clearTimeout(t); }
+  }
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    if (submitting) return;
+    if (!validateRequired()) return;
+
+    const selEl = q('input[name="service"]:checked');
+    const service = selEl ? selEl.value : '';
+
+    q('#autoSubject').value     = `Projektanfrage: ${service || 'allgemein'}`;
+    q('#selectedService').value = service;
+    q('#summaryPlain').value    = buildSummary(service);
+    q('#honeypot').value        = '';
+
+    const fd = new FormData(form);
+    submitting = true;
+    toggleFormDisabled(true);
+    submitBtn.textContent = 'Wird gesendet …';
+    setStatus('Sende Anfrage …');
+
+    try {
+      const res = await postWithTimeout(form.action, {
+        method:'POST', body:fd, headers:{Accept:'application/json'}
+      }, 12000);
+      if (!res.ok) throw new Error(res.statusText || 'Fehler');
+
+      setStatus('');
+      form.classList.add('is-success');
+      const steps = getApplicableSteps();
+      showStepByIndex(steps.findIndex(s => s.dataset.step === '6'), true);
+    } catch (err) {
+      console.error(err);
+      toggleFormDisabled(false);
+      syncServiceBlocks();
+      submitBtn.textContent = 'Erneut senden';
+      setStatus('Fehler beim Senden – bitte später erneut versuchen.', 'error');
+    } finally {
+      submitting = false;
+    }
+  });
+
+  /* ---------- Bedienung ---------- */
+  prevBtn.addEventListener('click', () => showStepByIndex(getCurrentIndex()-1, true));
+  nextBtn.addEventListener('click', () => showStepByIndex(getCurrentIndex()+1, true));
+
+  fxSteps && fxSteps.addEventListener('click', e => {
+    const b = e.target.closest('button[data-goto]');
+    if (!b || b.disabled) return;
+    showStepByIndex(parseInt(b.dataset.goto, 10), true);
+  });
+
+  form.addEventListener('click', (e)=>{
+    if (e.target.closest('.choice')) setTimeout(()=>{ updateChoiceUI(); syncServiceBlocks(); }, 0);
+    if (e.target.closest('.pill'))   setTimeout(updatePillUI, 0);
+  });
+  form.addEventListener('change', (e)=>{
+    if (e.target.matches('input[name="service"]')) { updateChoiceUI(); syncServiceBlocks(); }
+    else if (e.target.matches('.pill input[type="checkbox"]')) updatePillUI();
+  });
+
+  form.addEventListener('keydown', (e)=>{
+    const choice = e.target.closest('.choice');
+    if (choice && (e.key === ' ' || e.key === 'Enter')) {
+      e.preventDefault();
+      const rb = choice.querySelector('input[type="radio"]');
+      if (rb) { rb.checked = true; updateChoiceUI(); syncServiceBlocks(); }
+      return;
+    }
+    if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA' && !isContactStep(currentStepEl)) {
+      e.preventDefault();
+      if (!nextBtn.disabled) showStepByIndex(getCurrentIndex()+1, true);
+    }
+  });
+
+  successFieldset.querySelector('.success-btn')
+    .addEventListener('click', e => { e.preventDefault(); resetToStep1(); });
+
+  /* ---------- Start ---------- */
+  form.classList.remove('is-success');
+  syncServiceBlocks();
+  updateChoiceUI();
+  updatePillUI();
+  showStepByIndex(0, false);
+  setStatus('');
+})();
+</script>
+
+
+
+
+<style>
+    /* ============================================================
+       PATCH – gleiche Spaltenhöhe + bündige Fußlinie
+       Die Meta-Zeile links schließt exakt mit der Buttonzeile
+       rechts ab: beide Spalten gleich hoch, beide Innenflächen mit
+       demselben Kopf-Abstand, beide Füße per margin-top:auto an
+       dieselbe untere Grundlinie gedrückt.
+       ============================================================ */
+
+    .fx-split { align-items: stretch; }
+
+    .fx-visual {
+      position: relative;
+      min-height: 0;
+    }
+    .fx-visual-bg { position: absolute; inset: 0; height: 100%; }
+
+    @media (min-width: 1080px) {
+
+      /* Linke Innenfläche: Sticky, feste Bezugshöhe, Fuß unten. */
+      .fx-visual-body {
+        position: sticky;
+        top: var(--fx-top);
+        height: calc(80svh - var(--fx-top));
+        min-height: calc(100svh - var(--fx-top));
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: var(--s5);
+        /* gleicher sichtbarer Kopf-Abstand wie rechts (dort --s6
+           zusätzlich zum Header) und gleicher Fuß-Abstand */
+        padding-top: var(--s6);
+        padding-bottom: var(--s6);
+      }
+
+      /* Rechte Spalte: als Flex-Spalte, damit die Buttonzeile
+         nach unten wandern kann. */
+      .fx-form-side { display: flex; flex-direction: column; }
+      .fx-form-inner {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      /* Beide Füße an die untere Kante drücken … */
+      .fx-visual-foot { margin-top: auto; }
+      .fx-form-inner .fx-nav { margin-top: auto; }
+
+      /* … und identisch aufbauen: gleiche Trennlinie oben, gleicher
+         Innenabstand, gleiche Ausrichtung. Dann liegt die Meta-Zeile
+         auf exakt derselben Grundlinie wie die Buttons. */
+      .fx-visual-foot {
+        display: flex;
+        align-items: center;
+        padding-top: var(--s4);
+        border-top: 1px solid rgba(255,255,255,.16);
+      }
+      .fx-form-inner .fx-nav {
+        align-items: center;
+      }
+      /* der obere Rand-Abstand steckt jetzt in der Trennlinie */
+      .fx-form-inner .fx-nav { margin-top: auto; }
+
+      /* Meta-Zeile: eigener oberer Abstand + Trennlinie raus,
+         die kommen jetzt vom Fuß-Container */
+      .fx-meta {
+        margin: 0;
+        padding-top: 0;
+        border-top: 0;
+      }
+
+      .fx-visual-body .fx-bar { display: none; }
+    }
+
+    /* ---------- Header im Light Mode: weißer Hintergrund ----------
+       Greift auch im gescrollten Zustand (.is-ascended) und schlägt
+       einen evtl. anderen Hintergrund aus navbar.css. */
+    html:not([data-theme="dark"]) body:not(.nocturne) .aether-header,
+    html:not([data-theme="dark"]) body:not(.nocturne) .aether-header__bar,
+    html:not([data-theme="dark"]) body:not(.nocturne) .aether-header.is-ascended,
+    html:not([data-theme="dark"]) body:not(.nocturne) .aether-header.is-ascended .aether-header__bar {
+      background: #ffffff !important;
+      backdrop-filter: none;
+    }
+    :root {
+  /* Ändere diesen Wert z. B. von 3.25rem auf einen kleineren Wert wie 1.75rem oder 2rem */
+  --s7: clamp(1.25rem, 1rem + 1.5vw, 2rem); 
+}.fx-visual-body {
+  position: relative; z-index: 2;
+  padding: var(--s7);
+  display: flex; flex-direction: column; 
+  gap: var(--s3); /* Vorher var(--s5), reduziert den Abstand zwischen den Elementen */
+  min-height: 12rem; /* Vorher 15rem */
+}
+</style>
+</body>
+</html>

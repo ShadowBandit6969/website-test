@@ -390,6 +390,7 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
+
 <header class="aether-header" id="aetherGate">
   <div class="aether-header__bar">
     <a href="/" class="sigil-mark">Fusion³</a>
@@ -464,9 +465,7 @@ body[data-page="webdesign"] .hero-image-foreground {
             </svg>
           </button>
           <ul id="altar-contact" class="underrealm" hidden>
-            <li><a class="astral-link astral-link--sub" href="/anfrage">Anfrage stellen</a></li>
-            <li><a class="astral-link astral-link--sub" href="/beratung">Beratung buchen</a></li>
-           <li><a class="astral-link astral-link--sub" href="/impressum">Impressum</a></li>
+     <li><a class="astral-link astral-link--sub" href="#kontakt">Anfrage stellen</a></li>   <li><a class="astral-link astral-link--sub" href="/impressum.html">Impressum</a></li>
           </ul>
         </li>
       </ul>
@@ -526,7 +525,11 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 </header>
 
-
+<style>html {
+  scroll-behavior: smooth;
+}.kontakt-testimonial-section {
+  scroll-margin-top: 100px; /* Passe den Wert (z. B. 100px) an die Höhe deines Headers an */
+}</style>
 
 <script>
   /* ---------------------------
@@ -946,15 +949,13 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
-
-
 <section class="hero-section" data-page="titlepage">
   <div class="hero-images-wrapper">
 
     <!-- HINTERGRUND-VIDEO -->
     <div class="hero-image-background">
       <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hintegrundweb.webp">
-        <source src="./WebdesignPic/1.mp4" type="video/mp4" />
+        <source src=".//contactvideo/1.webm" type="video/mp4" />
       </video>
     </div>
 
@@ -1080,7 +1081,7 @@ body[data-page="webdesign"] .hero-image-foreground {
       <video autoplay muted loop playsinline preload="metadata"
         poster="./indexFotoSlideShow/social-poster.jpg" aria-labelledby="svc-social-h">
         <source src="./videos/social-showreel.webm" type="video/webm">
-        <source src="./indexFotoSlideShow/kartenvideo.mp4" type="video/mp4">
+        <source src="./contactvideo/white.webm" type="video/mp4">
         Dein Browser unterstützt das Video-Tag nicht.
       </video>
     </li>
@@ -1106,7 +1107,7 @@ body[data-page="webdesign"] .hero-image-foreground {
       <!-- Left: Hero Image -->
       <div class="wrf-col wrf-col--left">
         <figure class="wrf-hero">
-          <img src="assets/wireframe-hero.jpg"
+          <img src="./arbeitsproben/arbeitsproben_index/wireframe.webp"
             alt="Beispiel eines Website-Wireframes mit Navigation und Layout-Struktur" loading="lazy" width="1280"
             height="800" />
           <figcaption class="wrf-visually-hidden">Wireframe-Preview</figcaption>
@@ -1526,15 +1527,19 @@ body[data-page="webdesign"] .hero-image-foreground {
       </form>
     </div>
 
-    <!-- === Video-Karte === -->
-    <div class="video-area" aria-label="Einblick in Prozess, Tools & Zusammenarbeit">
-      <div class="video-card">
-        <video class="video-media" autoplay loop muted playsinline preload="auto">
-          <source src="./indexFotoSlideShow/kartenvideo.mp4" type="video/mp4">
-          Dein Browser unterstützt das Video-Tag nicht.
-        </video>
-      </div>
-    </div>
+<div class="video-area" aria-label="Einblick in Prozess, Tools & Zusammenarbeit">
+  <div class="video-card has-wireframe">
+
+    <video class="video-media" autoplay loop muted playsinline preload="auto">
+      <source src="./indexFotoSlideShow/kartenvideo.mp4" type="video/mp4">
+      Dein Browser unterstützt das Video-Tag nicht.
+    </video>
+
+    <!-- NEU: Zeichenfläche für die Wireframe-Animation -->
+    <canvas class="video-wireframe-canvas" aria-hidden="true"></canvas>
+
+  </div>
+</div>
 
     <!-- === Testimonials === -->
     <div class="testimonial-area">
@@ -1982,6 +1987,1166 @@ body[data-page="webdesign"] .hero-image-foreground {
 })();
 </script>
 
+<!-- ============================================================
+     TEIL 2 – STYLES  (unverändert gegenüber v3 – nur hier zur
+     Vollständigkeit, falls du sie noch nicht drin hast)
+     ============================================================ -->
+<style>
+.video-card { position: relative; overflow: hidden; }
+.video-card .video-media { position: relative; z-index: 0; }
+
+.video-card.has-wireframe::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgb(10, 35, 99), rgb(1, 9, 27));
+}
+
+.video-card.no-video {
+  background: radial-gradient(120% 100% at 20% 0%, #101a2e 0%, #070b14 60%, #05070d 100%);
+  min-height: 320px;
+}
+.video-card.no-video::after { background: none; }
+
+.video-wireframe-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+
+  /* ---- Grundfarben (RGB ohne rgb()) ---- */
+  --wf-line:  226, 236, 255;
+  --wf-beam:  125, 205, 255;
+  --wf-alpha: 0.32;
+
+  /* ---- Farbakzente ---- */
+  --wf-accent-1: 106, 240, 196;   /* Mint    */
+  --wf-accent-2: 255, 190, 84;    /* Amber   */
+  --wf-accent-3: 166, 148, 255;   /* Violett */
+
+  /* ---- Typografie ---- */
+  --wf-font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --wf-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+body:not(.nocturne) .video-card:not(.has-wireframe) .video-wireframe-canvas {
+  --wf-line:  15, 23, 42;
+  --wf-beam:  37, 99, 235;
+  --wf-alpha: 0.30;
+  --wf-accent-1: 12, 150, 112;
+  --wf-accent-2: 206, 130, 16;
+  --wf-accent-3: 104, 78, 216;
+}
+</style>
+
+
+<!-- ============================================================
+     TEIL 3 – SCRIPT  (ersetzt den bisherigen Script-Block)
+     ============================================================ -->
+<script>
+/* ============================================================
+   WIREFRAME PEN – Video-Karte
+   Ablauf pro Set:
+     1. ZEICHNEN    – ein Lichtpunkt fährt die Konturen ab
+     2. AKZENTE     – Farbflächen setzen sich, Typo tippt sich ein
+     3. HALTEN      – am Ende zieht sich die Farbe zurück
+     4. ÜBERBLENDEN – neutrales Gerüst blendet aus, während das
+                      nächste Set schon anfängt zu entstehen
+   Alle Abstände werden aus Padding + zwei Abstandsstufen berechnet
+   und bei Enge gemeinsam herunterskaliert. Texte werden vor dem
+   Setzen gemessen und passen sich an die verfügbare Breite an.
+   ============================================================ */
+(function () {
+  const canvas = document.querySelector('.video-wireframe-canvas');
+  if (!canvas || !canvas.getContext) return;
+  const ctx = canvas.getContext('2d');
+  const card = canvas.closest('.video-card') || canvas.parentElement;
+
+  /* ---------- Konfiguration ---------- */
+  const CFG = {
+    drawTime:  9500,  // ms: Konturen zeichnen
+    accent:    2600,  // ms: Farbflächen + Typo
+    hold:      2600,  // ms: stehen lassen (Ende: Farbe zieht sich zurück)
+    drain:      700,  // ms: Dauer des Farbrückzugs
+    cross:     1300,  // ms: Überblendung ins nächste Set
+    moveBoost:  3.4,  // Tempo der Sprünge zwischen Elementen
+    hotZone:    150,  // px @ Referenz: nachglühende Spur
+    lineW:      1.3,  // px @ Referenz: Strichstärke
+    headR:        3,  // px @ Referenz: Zeichenpunkt
+    seeRatio:  0.55   // so viel der Karte muss sichtbar sein
+  };
+
+  let W = 0, H = 0, DPR = 1, S = 1;
+  let sets = [], setIndex = 0;
+  let route = [], routeLen = 0, speed = 1, accents = [], texts = [];
+  let dist = 0, phase = 'draw', phaseT = 0, last = 0;
+  let running = false, rafId = null, visible = false;
+  let g = ctx, snap = null, snapCtx = null, snapT = 0, inT = 0;
+  let FONT = { sans: 'sans-serif', mono: 'monospace' };
+
+  const clamp = (v, lo, hi) => v < lo ? lo : v > hi ? hi : v;
+  const clamp01 = v => clamp(v, 0, 1);
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+  const easeIO = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+
+  function cssVars() {
+    const s = getComputedStyle(canvas);
+    const v = (n, f) => (s.getPropertyValue(n) || f).trim();
+    return {
+      line: v('--wf-line', '226,236,255'),
+      beam: v('--wf-beam', '125,205,255'),
+      alpha: parseFloat(s.getPropertyValue('--wf-alpha')) || 0.32,
+      acc: [v('--wf-accent-1', '106,240,196'),
+            v('--wf-accent-2', '255,190,84'),
+            v('--wf-accent-3', '166,148,255')],
+      sans: v('--wf-font-sans', 'sans-serif'),
+      mono: v('--wf-font-mono', 'monospace')
+    };
+  }
+
+  /* ---------- Textbreite messen (fürs Einpassen) ---------- */
+  const mCtx = document.createElement('canvas').getContext('2d');
+  const MT = (s, size, font) => {
+    mCtx.font = `600 ${size}px ${font === 'mono' ? FONT.mono : FONT.sans}`;
+    return mCtx.measureText(s).width;
+  };
+
+
+  /* ---------- Pfad-Primitive ---------- */
+  function rectPath(x, y, w, h, r) {
+    r = Math.min(r || 0, w / 2, h / 2);
+    const p = [], SEG = 5;
+    const arc = (cx, cy, a0, a1) => {
+      for (let i = 0; i <= SEG; i++) {
+        const a = a0 + (a1 - a0) * (i / SEG);
+        p.push({ x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r });
+      }
+    };
+    p.push({ x, y: y + h / 2 });
+    p.push({ x, y: y + r });
+    if (r) arc(x + r, y + r, Math.PI, Math.PI * 1.5); else p.push({ x, y });
+    p.push({ x: x + w - r, y });
+    if (r) arc(x + w - r, y + r, Math.PI * 1.5, Math.PI * 2); else p.push({ x: x + w, y });
+    p.push({ x: x + w, y: y + h - r });
+    if (r) arc(x + w - r, y + h - r, 0, Math.PI * 0.5); else p.push({ x: x + w, y: y + h });
+    p.push({ x: x + r, y: y + h });
+    if (r) arc(x + r, y + h - r, Math.PI * 0.5, Math.PI); else p.push({ x, y: y + h });
+    p.push({ x, y: y + h / 2 });
+    return p;
+  }
+
+  const linePath = (x1, y1, x2, y2) => {
+    const p = [{ x: x1, y: y1 }, { x: x2, y: y2 }];
+    return p;
+  };
+
+  function arcPath(cx, cy, r, a0, a1) {
+    const p = [], SEG = 44;
+    for (let i = 0; i <= SEG; i++) {
+      const a = a0 + (a1 - a0) * (i / SEG);
+      p.push({ x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r });
+    }
+    p.noFill = true;                       // offener Bogen: nur Kontur
+    return p;
+  }
+  const circlePath = (cx, cy, r) => {
+    const p = arcPath(cx, cy, r, Math.PI, Math.PI * 3);
+    p.noFill = false;
+    return p;
+  };
+
+  const polyPath = pts => { const p = pts.slice(); p.noFill = true; return p; };
+
+  const acc = (path, i, str) => { path.accent = i; path.accStr = str || 1; return path; };
+  const solid = p => p;                    // Markierung aus der Layoutpruefung
+
+  /* ---------- Text ---------- */
+  const textW = (s, size, font, track) =>
+    MT(s, size, font) + (track || 0) * Math.max(0, s.length - 1);
+
+  function fitSize(text, maxW, size, font, track) {
+    let s = size;
+    while (s > 6.5 && textW(text, s, font, track * (s / size)) > maxW) s -= 0.5;
+    return s;
+  }
+
+  function txt(x, y, size, text, o = {}) {
+    const font = o.font || 'sans';
+    let track = o.track || 0;
+    if (o.maxW) {
+      const s2 = fitSize(text, o.maxW, size, font, track);
+      track *= s2 / size;
+      size = s2;
+    }
+    return {
+      x, y, size, text, font, track,
+      weight: o.weight || 600,
+      align: o.align || 'left',
+      color: o.color === undefined ? null : o.color,
+      dim: o.dim || 1
+    };
+  }
+
+  /* ============================================================
+     SET 1 – Leistungskarten
+     ============================================================ */
+  function setCards(W, H) {
+    const n = W < 520 ? 2 : 3;
+    const outer = Math.min(W * 0.88, 980);
+    const gap = clamp(outer * 0.05, 14, 48);
+    const cw = (outer - gap * (n - 1)) / n;
+    const ch = Math.min(cw * 1.42, H * 0.88);
+    const x0 = (W - (cw * n + gap * (n - 1))) / 2;
+    const y = (H - ch) / 2;
+
+    const pad = clamp(cw * 0.085, 10, 26);
+    const iw = cw - pad * 2;
+
+    // nominale Größen
+    let eyeS = clamp(cw * 0.068, 8, 12);
+    let headS = clamp(cw * 0.115, 12, 22);
+    let lineH = clamp(ch * 0.021, 3, 6);
+    let tagH = clamp(ch * 0.05, 14, 24);
+    let btnH = clamp(ch * 0.088, 22, 40);
+    let gS = clamp(ch * 0.026, 5, 13);
+    let gM = clamp(ch * 0.048, 9, 24);
+
+    const mediaMin = ch * 0.26;
+    const stack = () => eyeS + gS + headS + gM * 0.75 + lineH * 2 + gS * 0.7
+                      + gM * 0.7 + tagH + gM * 0.85 + btnH;
+    let showTags = true;
+    let avail = ch - pad * 2 - mediaMin;
+    if (stack() > avail) {
+      const k = clamp(avail / stack(), 0.6, 1);
+      eyeS *= k; headS *= k; lineH *= k; tagH *= k; btnH *= k; gS *= k; gM *= k;
+      if (k < 0.78) { showTags = false; tagH = 0; }
+    }
+    eyeS = Math.max(7.5, eyeS); headS = Math.max(11, headS); btnH = Math.max(20, btnH);
+
+    const eyebrows = ['WEBDESIGN', '3D-DESIGN', 'GRAFIKDESIGN'];
+    const heads = ['Klarer Aufbau', 'Echte Tiefe', 'Starke Marke'];
+    const tags = [['UX', 'SEO'], ['RENDER', 'ANIM'], ['LOGO', 'PRINT']];
+    const tone = [0, 2, 1];
+    const els = [], tx = [];
+
+    for (let i = 0; i < n; i++) {
+      const x = x0 + i * (cw + gap);
+      const ix = x + pad;
+      const ci = tone[i % 3];
+      const el = [rectPath(x, y, cw, ch, clamp(cw * 0.045, 8, 18))];
+
+      // Höhe der Medienfläche = Rest
+      const contentH = eyeS + gS + headS + gM * 0.75 + lineH * 2 + gS * 0.7
+                     + (showTags ? gM * 0.7 + tagH : 0) + gM * 0.85 + btnH;
+      const mediaH = ch - pad * 2 - contentH;
+      const mediaY = y + pad;
+
+      const media = solid(acc(rectPath(ix, mediaY, iw, mediaH, clamp(cw * 0.03, 4, 10)), ci));
+      el.push(media);
+      el.push(linePath(ix, mediaY, ix + iw, mediaY + mediaH));
+      el.push(linePath(ix, mediaY + mediaH, ix + iw, mediaY));
+      // Eckmarken
+      const tick = clamp(iw * 0.055, 5, 12);
+      [[0, 0, 1, 1], [1, 0, -1, 1], [0, 1, 1, -1], [1, 1, -1, -1]].forEach(([ax, ay, dx, dy]) => {
+        const px = ix + ax * iw, py = mediaY + ay * mediaH;
+        el.push(linePath(px, py, px + dx * tick, py));
+        el.push(linePath(px, py, px, py + dy * tick));
+      });
+
+      let cy = mediaY + mediaH + gM * 0.85;
+      tx.push(txt(ix, cy + eyeS, eyeS, eyebrows[i % 3],
+        { font: 'mono', weight: 500, color: ci, track: eyeS * 0.16, maxW: iw }));
+      cy += eyeS + gS;
+
+      tx.push(txt(ix, cy + headS * 0.8, headS, heads[i % 3], { weight: 700, maxW: iw }));
+      cy += headS + gM * 0.75;
+
+      el.push(solid(rectPath(ix, cy, iw, lineH, lineH / 2)));
+      cy += lineH + gS * 0.7;
+      el.push(solid(rectPath(ix, cy, iw * 0.64, lineH, lineH / 2)));
+      cy += lineH + gM * 0.7;
+
+      if (showTags) {
+        let tagX = ix;
+        tags[i % 3].forEach(label => {
+          const ts = clamp(tagH * 0.44, 7.5, 12);
+          const tw = MT(label, ts, 'mono') + tagH * 0.9;
+          el.push(rectPath(tagX, cy, tw, tagH, tagH / 2));
+          tx.push(txt(tagX + tw / 2, cy + tagH / 2 + ts * 0.35, ts, label,
+            { font: 'mono', weight: 500, align: 'center', dim: 0.62, on: 'tag' }));
+          tagX += tw + tagH * 0.35;
+        });
+        cy += tagH + gM * 0.85;
+      }
+
+// Button unten bündig (leicht nach unten verschoben, z. B. um 5 Pixel)
+      const bs = clamp(btnH * 0.4, 8, 14);
+      const bw = clamp(MT('Ansehen', bs, 'sans') + btnH * 1.5, 60, iw);
+      const by = y + ch - pad - btnH + 5; // Hier das '+ 5' (oder gewünschten Wert) anpassen
+      
+      el.push(solid(acc(rectPath(ix, by, bw, btnH, btnH / 2), ci, 1.9)));
+      tx.push(txt(ix + bw / 2, by + btnH / 2 + bs * 0.35, bs, 'Ansehen',
+        { align: 'center', weight: 650, color: ci, on: 'btn' }));
+      // Pfeil
+      const axx = ix + bw - btnH * 0.5;
+      el.push(linePath(axx - btnH * 0.13, by + btnH / 2, axx + btnH * 0.06, by + btnH / 2));
+
+      els.push(el);
+    }
+    return { els, texts: tx, bounds: { x: x0, y, w: outer, h: ch } };
+  }
+
+  /* ============================================================
+     SET 2 – Browser
+     ============================================================ */
+  function setBrowser(W, H) {
+    const bw = Math.min(W * 0.9, 900);
+    const bh = Math.min(bw * 0.62, H * 0.9);
+    const x = (W - bw) / 2, y = (H - bh) / 2;
+    const bar = clamp(bh * 0.1, 24, 46);
+    const pad = clamp(bw * 0.032, 11, 28);
+    const sw = clamp(bw * 0.235, 84, 200);
+
+    const cx = x + sw + pad, cw = bw - sw - pad * 2;
+    const els = [], tx = [];
+
+    /* --- Chrome --- */
+    const frame = [rectPath(x, y, bw, bh, clamp(bw * 0.016, 8, 16)),
+                   linePath(x, y + bar, x + bw, y + bar)];
+    const dot = clamp(bar * 0.11, 2.5, 5.5);
+    for (let i = 0; i < 3; i++) frame.push(circlePath(x + pad + i * dot * 3.6, y + bar * 0.42, dot));
+    // Tab
+    const tabW = clamp(bw * 0.2, 78, 190), tabH = bar * 0.52;
+    const tabX = x + pad + dot * 8.4;
+    frame.push(polyPath([
+      { x: tabX, y: y + bar }, { x: tabX + tabH * 0.35, y: y + bar - tabH + tabH * 0.18 },
+      { x: tabX + tabW - tabH * 0.35, y: y + bar - tabH + tabH * 0.18 },
+      { x: tabX + tabW, y: y + bar }
+    ]));
+    const tabS = clamp(tabH * 0.44, 7.5, 12);
+    tx.push(txt(tabX + tabW / 2, y + bar - tabH * 0.32, tabS, 'Startseite',
+      { font: 'mono', weight: 500, align: 'center', dim: 0.6, maxW: tabW * 0.78, on: 'tab' }));
+
+    /* --- Adresszeile --- */
+    const urlH = bar * 0.46, urlW = bw * 0.36;
+    const urlX = x + (bw - urlW) / 2, urlY = y + bar + pad * 0.75;
+    // Zweite Leiste unter dem Chrome
+    frame.push(linePath(x, urlY + urlH + pad * 0.75, x + bw, urlY + urlH + pad * 0.75));
+    frame.push(rectPath(urlX, urlY, urlW, urlH, urlH / 2));
+    frame.push(circlePath(urlX + urlH * 0.55, urlY + urlH / 2, urlH * 0.16));
+    tx.push(txt(urlX + urlW / 2 + urlH * 0.2, urlY + urlH / 2 + urlH * 0.16, clamp(urlH * 0.42, 7.5, 12),
+      'deinprojekt.de', { font: 'mono', weight: 400, align: 'center', dim: 0.6, maxW: urlW * 0.7, on: 'url' }));
+    // Zurück / Vor
+    const chev = urlH * 0.28, chy = urlY + urlH / 2;
+    [x + pad + chev, x + pad + chev * 4].forEach((px, k) => {
+      const s = k === 0 ? 1 : -1;
+      frame.push(polyPath([{ x: px + s * chev * 0.5, y: chy - chev }, { x: px - s * chev * 0.5, y: chy }, { x: px + s * chev * 0.5, y: chy + chev }]));
+    });
+
+    const topY = urlY + urlH + pad * 0.75;
+
+    /* --- Sidebar --- */
+    const side = [linePath(x + sw, topY, x + sw, y + bh)];
+    const logoS = clamp(sw * 0.17, 12, 26);
+    side.push(acc(rectPath(x + pad, topY + pad, logoS, logoS, logoS * 0.28), 2));
+    side.push(solid(rectPath(x + pad + logoS * 1.4, topY + pad + logoS * 0.34, sw - pad * 2 - logoS * 1.4, logoS * 0.3, logoS * 0.15)));
+
+    const avR = clamp(sw * 0.07, 6, 12);
+    const footTop = y + bh - pad * 2.4 - avR * 2;
+    const navTop = topY + pad + logoS + pad * 1.3;
+    const navRoom = footTop - pad * 0.6 - navTop;
+    let navN = 4;
+    while (navN > 1 && navRoom / (1 + (navN - 1) * 1.35) < 6.5) navN--;
+    if (navRoom < 9) navN = 0;
+    let icoS = Math.max(5.5, Math.min(clamp(sw * 0.1, 7, 15),
+                                      navRoom / (1 + Math.max(0, navN - 1) * 1.35)));
+    const navGap = Math.min(icoS * 1.35 + (navRoom - icoS * (1 + (navN - 1) * 1.35)) / Math.max(1, navN - 1), 44);
+    const navLbl = clamp(icoS * 0.9, 7, 12);
+    const navs = ['UEBERSICHT', 'PROJEKTE', 'TEAM', 'KONTAKT'];
+    for (let i = 0; i < navN; i++) {
+      const ny = navTop + i * navGap;
+      const ic = rectPath(x + pad, ny, icoS, icoS, icoS * 0.25);
+      if (i === 0) acc(ic, 0);
+      side.push(ic);
+      tx.push(txt(x + pad + icoS * 1.55, ny + icoS * 0.82, navLbl, navs[i],
+        { font: 'mono', weight: 500, color: i === 0 ? 0 : null, dim: 0.6, track: navLbl * 0.08,
+          maxW: sw - pad * 2 - icoS * 1.55 }));
+    }
+    // Fusszeile Sidebar
+    side.push(linePath(x + pad, footTop, x + sw - pad, footTop));
+    side.push(circlePath(x + pad + avR, y + bh - pad - avR * 1.1, avR));
+    side.push(solid(rectPath(x + pad + avR * 2.7, y + bh - pad - avR * 1.5, sw - pad * 2 - avR * 2.7, avR * 0.55, avR * 0.28)));
+    side.push(solid(rectPath(x + pad + avR * 2.7, y + bh - pad - avR * 0.55, (sw - pad * 2 - avR * 2.7) * 0.6, avR * 0.55, avR * 0.28)));
+
+    /* --- Inhalt --- */
+    const innerH = y + bh - topY - pad * 2;
+    const heroH = innerH * 0.55;
+    const heroY = topY + pad;
+    const hpad = clamp(cw * 0.05, 11, 28);
+    const hero = [acc(rectPath(cx, heroY, cw, heroH, clamp(cw * 0.022, 6, 14)), 2)];
+
+    let hEye = clamp(heroH * 0.075, 8, 12);
+    let hHead = clamp(cw * 0.072, 13, 26);
+    let hSub = clamp(heroH * 0.04, 3, 6);
+    let hBtnH = clamp(heroH * 0.17, 22, 38);
+    let gE = hpad * 0.55, gH = hpad * 0.6, gL = hpad * 0.45, gB = hpad * 0.85;
+    const hAvail = heroH - hpad * 2;
+    let hStack = hEye + gE + hHead + gH + hSub + gL + hSub + gB + hBtnH;
+    if (hStack > hAvail) {
+      const k = hAvail / hStack;
+      hEye *= k; hHead *= k; hSub *= k; hBtnH *= k;
+      gE *= k; gH *= k; gL *= k; gB *= k;
+      hStack = hAvail;
+    }
+
+    let hy = heroY + hpad;
+    tx.push(txt(cx + hpad, hy + hEye * 0.82, hEye, 'AGENTUR FUER DIGITALES',
+      { font: 'mono', weight: 500, color: 2, track: hEye * 0.14, maxW: cw - hpad * 2 }));
+    hy += hEye + gE;
+    tx.push(txt(cx + hpad, hy + hHead * 0.8, hHead, 'Websites, die wirken.',
+      { weight: 700, maxW: cw - hpad * 2 }));
+    hy += hHead + gH;
+    hero.push(solid(rectPath(cx + hpad, hy, (cw - hpad * 2) * 0.86, hSub, hSub / 2)));
+    hy += hSub + gL;
+    hero.push(solid(rectPath(cx + hpad, hy, (cw - hpad * 2) * 0.58, hSub, hSub / 2)));
+    hy += hSub + gB;
+
+    const hbs = clamp(hBtnH * 0.4, 7.5, 14);
+    const hbw = clamp(MT('Anfragen', hbs, 'sans') + hBtnH * 1.6, 60, cw * 0.42);
+    const hby = Math.max(hy, heroY + heroH - hpad - hBtnH);
+    hero.push(solid(acc(rectPath(cx + hpad, hby, hbw, hBtnH, hBtnH / 2), 1, 1.9)));
+    tx.push(txt(cx + hpad + hbw / 2, hby + hBtnH / 2 + hbs * 0.35, hbs, 'Anfragen',
+      { align: 'center', weight: 650, color: 1, on: 'btn' }));
+    tx.push(txt(cx + hpad + hbw + hpad * 0.7, hby + hBtnH / 2 + hbs * 0.35, hbs, 'Referenzen',
+      { weight: 500, dim: 0.6, maxW: Math.max(10, cw - hpad * 2 - hbw - hpad * 0.7) }));
+
+    /* --- Kartenreihe --- */
+    const cardsY = heroY + heroH + pad;
+    const cardsH = y + bh - pad - cardsY;
+    const gc = clamp(cw * 0.032, 8, 22);
+    const cwd = (cw - gc * 2) / 3;
+    const cards = [];
+    for (let i = 0; i < 3; i++) {
+      const px = cx + i * (cwd + gc);
+      const c = rectPath(px, cardsY, cwd, cardsH, clamp(cwd * 0.06, 5, 12));
+      if (i === 1) acc(c, 0);
+      cards.push(c);
+      const cp = clamp(cwd * 0.1, 6, 16);
+      const thH = cardsH * 0.42;
+      cards.push(solid(rectPath(px + cp, cardsY + cp, cwd - cp * 2, thH, clamp(cwd * 0.04, 3, 8))));
+      const lh = clamp(cardsH * 0.055, 3, 6);
+      let ly = cardsY + cp + thH + cp * 0.9;
+      cards.push(solid(rectPath(px + cp, ly, (cwd - cp * 2) * 0.82, lh, lh / 2)));
+      ly += lh + cp * 0.55;
+      cards.push(solid(rectPath(px + cp, ly, (cwd - cp * 2) * 0.5, lh, lh / 2)));
+    }
+
+    /* --- Scrollbar --- */
+    const sbw = clamp(bw * 0.006, 2, 5);
+    const scroll = [rectPath(x + bw - pad * 0.45 - sbw, topY + pad * 0.6, sbw, innerH + pad * 0.8, sbw / 2)];
+    scroll.push(solid(rectPath(x + bw - pad * 0.45 - sbw, topY + pad * 0.6, sbw, innerH * 0.34, sbw / 2)));
+
+    els.push(frame, side, hero, cards, scroll);
+    return { els, texts: tx, bounds: { x, y, w: bw, h: bh } };
+  }
+
+  /* ============================================================
+     SET 3 – Dashboard
+     ============================================================ */
+  function setDashboard(W, H) {
+    const bw = Math.min(W * 0.9, 920);
+    const bh = Math.min(bw * 0.56, H * 0.9);
+    const x = (W - bw) / 2, y = (H - bh) / 2;
+    const gut = clamp(bw * 0.03, 10, 26);
+    const els = [], tx = [];
+
+    /* --- KPI --- */
+    const kn = W < 520 ? 3 : 4;
+    const kh = clamp(bh * 0.24, 62, 108);
+    const kw = (bw - gut * (kn - 1)) / kn;
+    const kpad = clamp(kw * 0.1, 9, 20);
+    const capS = clamp(kw * 0.095, 7.5, 12);
+    const valS = clamp(kw * 0.185, 13, 26);
+    const vals = ['+38 %', '0,8 s', '98', '4,9'];
+    const caps = ['CONVERSION', 'LADEZEIT', 'SEO-SCORE', 'RATING'];
+    const dlt = ['+12', '-0,3', '+6', '+0,2'];
+    const tone = [0, 1, 2, 0];
+
+    const kpis = [];
+    for (let i = 0; i < kn; i++) {
+      const kx = x + i * (kw + gut);
+      kpis.push(acc(rectPath(kx, y, kw, kh, clamp(kw * 0.055, 6, 14)), tone[i]));
+
+      // Stapel: Label -> (Sparkline) -> Wert, bei Enge gleichmaessig verkleinern
+      let cS = capS, vS = valS, gv = capS * 0.6;
+      const need = () => cS * 0.98 + gv + vS * 0.98;
+      const availK = kh - kpad * 2;
+      if (need() > availK) {
+        const k = availK / need();
+        cS *= k; vS *= k; gv *= k;
+      }
+      const spare = availK - need();
+
+      const capY = y + kpad + cS * 0.8;
+      tx.push(txt(kx + kpad, capY, cS, caps[i],
+        { font: 'mono', weight: 500, dim: 0.6, track: cS * 0.12, maxW: kw - kpad * 2 }));
+
+      const valY = y + kh - kpad;
+
+      // Delta-Pille rechts neben dem Wert
+      const ds = clamp(cS * 0.88, 6.5, 11);
+      const dh = ds * 1.85;
+      const dwid = MT(dlt[i], ds, 'mono') + dh * 0.85;
+      const dy = valY - vS * 0.78 + (vS * 0.98 - dh) / 2;
+      kpis.push(rectPath(kx + kw - kpad - dwid, dy, dwid, dh, dh / 2));
+      tx.push(txt(kx + kw - kpad - dwid / 2, dy + dh / 2 + ds * 0.35, ds, dlt[i],
+        { font: 'mono', weight: 500, align: 'center', dim: 0.65, on: 'pill' }));
+
+      tx.push(txt(kx + kpad, valY, vS, vals[i],
+        { weight: 700, color: tone[i], maxW: Math.max(12, kw - kpad * 2 - dwid - kpad * 0.6) }));
+
+      // Sparkline nur, wenn wirklich Luft bleibt
+      if (spare > cS * 1.4) {
+        const spY = capY + cS * 0.5;
+        const spH = spare - cS * 0.5;
+        const pts = [0.4, 0.72, 0.45, 0.86, 0.6, 1].map((v, k, arr) => ({
+          x: kx + kpad + (kw - kpad * 2) * (k / (arr.length - 1)),
+          y: spY + spH * (1 - v)
+        }));
+        kpis.push(polyPath(pts));
+      }
+    }
+    els.push(kpis);
+
+    /* --- Chart --- */
+    const gy = y + kh + gut, gh = y + bh - gy;
+    const gw = bw * 0.64;
+    const cpad = clamp(gw * 0.05, 12, 30);
+    const labS = clamp(gw * 0.03, 7.5, 11);
+    const titS = clamp(gw * 0.04, 9, 13);
+    const chart = [rectPath(x, gy, gw, gh, clamp(gw * 0.02, 6, 14))];
+
+    const base = gy + gh - cpad - labS * 2.1;
+    const plotTop = Math.min(gy + cpad + titS * 1.1 + cpad * 0.8, base - labS * 1.2);
+    const axW = MT('100', labS, 'mono') + labS * 0.6;
+    const plotL = x + cpad + axW;
+    const plotR = x + gw - cpad;
+
+    chart.push(linePath(plotL, base, plotR, base));
+    // Y-Achse nur, wenn die Linien auseinanderliegen
+    if ((base - plotTop) > labS * 5.2) {
+      [0, 0.5, 1].forEach((f, k) => {
+        const yy = base - (base - plotTop) * f;
+        chart.push(linePath(plotL, yy, plotR, yy));
+        tx.push(txt(plotL - labS * 0.5, yy + labS * 0.35, labS, ['0', '50', '100'][k],
+          { font: 'mono', weight: 400, align: 'right', dim: 0.45 }));
+      });
+    }
+
+    const barsV = [0.38, 0.6, 0.34, 0.76, 0.52, 0.92, 0.46];
+    const days = ['MO', 'DI', 'MI', 'DO', 'FR', 'SA', 'SO'];
+    const slot = (plotR - plotL) / barsV.length;
+    const barW = slot * 0.46;
+    const plotH = Math.max(0, base - plotTop);
+    barsV.forEach((v, i) => {
+      const bx = plotL + i * slot + (slot - barW) / 2;
+      const hh = Math.max(1, plotH * v);
+      const b = solid(rectPath(bx, base - hh, barW, hh, clamp(barW * 0.18, 2, 5)));
+      if (i === 5) acc(b, 0, 1.5);
+      if (i === 3) acc(b, 1);
+      chart.push(b);
+      tx.push(txt(bx + barW / 2, base + labS * 1.75, labS, days[i],
+        { font: 'mono', weight: 500, align: 'center', dim: 0.5 }));
+    });
+    els.push(chart);
+
+    tx.push(txt(x + cpad, gy + cpad + titS * 0.85, titS, 'PERFORMANCE',
+      { font: 'mono', weight: 500, dim: 0.68, track: titS * 0.12, maxW: gw * 0.45 }));
+    // Legende
+    const lgS = clamp(titS * 0.8, 7, 11), lgB = lgS * 0.9;
+    let lgx = x + gw - cpad;
+    [['ORGANISCH', 1], ['DIREKT', 0]].forEach(([lab, ci]) => {
+      const wlab = MT(lab, lgS, 'mono');
+      lgx -= wlab;
+      tx.push(txt(lgx, gy + cpad + titS * 0.85, lgS, lab, { font: 'mono', weight: 500, dim: 0.5 }));
+      lgx -= lgB * 1.6;
+      chart.push(acc(rectPath(lgx, gy + cpad + titS * 0.85 - lgB, lgB, lgB, lgB * 0.25), ci, 1.6));
+      lgx -= lgB * 1.6;
+    });
+
+    /* --- Panel --- */
+    const px = x + gw + gut, pw = bw - gw - gut;
+    const ppad = clamp(pw * 0.11, 10, 24);
+    const ptit = clamp(pw * 0.085, 8, 12);
+    const rowH = clamp(gh * 0.055, 8, 16);
+    const rowsTop = gy + gh - ppad - rowH * 2.6;
+    const ringTop = gy + ppad + ptit * 1.6;
+    const rr = Math.min((pw - ppad * 2) * 0.42, (rowsTop - ringTop) * 0.42);
+    const rcy = ringTop + rr + (rowsTop - ringTop - rr * 2) * 0.35;
+
+    const side = [rectPath(px, gy, pw, gh, clamp(pw * 0.055, 6, 14))];
+    tx.push(txt(px + ppad, gy + ppad + ptit * 0.85, ptit, 'PAGESPEED',
+      { font: 'mono', weight: 500, dim: 0.62, track: ptit * 0.12, maxW: pw - ppad * 2 }));
+
+    const showRing = rr > 15 && (rcy - rr) > gy + ppad + ptit * 1.5;
+    if (showRing) {
+      side.push(arcPath(px + pw / 2, rcy, rr, Math.PI * 0.75, Math.PI * 2.25));
+      side.push(acc(arcPath(px + pw / 2, rcy, rr, Math.PI * 0.75, Math.PI * 0.75 + Math.PI * 1.5 * 0.82), 2, 1.4));
+      const rvS = clamp(rr * 0.7, 12, 30);
+      tx.push(txt(px + pw / 2, rcy + rvS * 0.36, rvS, '94',
+        { weight: 700, align: 'center', color: 2 }));
+      const subS = clamp(rr * 0.26, 6.5, 10);
+      const subY = rcy + rvS * 0.56 + subS * 1.15;   // Unterkante der 94 + Abstand
+      if (subY + subS * 0.2 < rowsTop - 2 && subY < rcy + rr) {
+        tx.push(txt(px + pw / 2, subY, subS, 'VON 100',
+          { font: 'mono', weight: 400, align: 'center', dim: 0.45 }));
+      }
+    }
+
+    ['MOBIL', 'DESKTOP'].forEach((lab, i) => {
+      const ry = rowsTop + i * rowH * 1.5;
+      const ds = clamp(rowH * 0.6, 7, 11);
+      tx.push(txt(px + ppad, ry + rowH * 0.72, ds, lab, { font: 'mono', weight: 500, dim: 0.5 }));
+      const trW = (pw - ppad * 2) * 0.42;
+      side.push(rectPath(px + pw - ppad - trW, ry + rowH * 0.28, trW, rowH * 0.32, rowH * 0.16));
+      side.push(solid(acc(rectPath(px + pw - ppad - trW, ry + rowH * 0.28, trW * (i ? 0.94 : 0.72), rowH * 0.32, rowH * 0.16), i ? 0 : 1, 1.7)));
+    });
+    els.push(side);
+
+    return { els, texts: tx, bounds: { x, y, w: bw, h: bh } };
+  }
+
+  /* ============================================================
+     SET 4 – Mobile
+     ============================================================ */
+  function setPhones(W, H) {
+    let n = W < 460 ? 2 : (W < 720 ? 3 : 4);
+    const capS = clamp(H * 0.03, 7.5, 12);
+    const capGap = clamp(H * 0.05, 16, 34);
+
+    // Hoehe zuerst, dann Breite gegenpruefen
+    let ph = Math.min(H * 0.86 - capGap, 420);
+    let pw = ph * 0.5;
+    const fitW = () => {
+      for (let it = 0; it < 5; it++) {
+        const gp = clamp(pw * 0.4, 14, 56);
+        const tot = pw * n + gp * (n - 1);
+        if (tot > W * 0.9) pw *= (W * 0.9) / tot; else break;
+      }
+    };
+    fitW();
+    while (n > 2 && pw < 74) { n--; pw = ph * 0.5; fitW(); }
+    ph = pw * 2;
+
+    const gap = clamp(pw * 0.4, 14, 56);
+    const x0 = (W - (pw * n + gap * (n - 1))) / 2;
+    const y = (H - (ph + capGap)) / 2;
+
+    const pad = clamp(pw * 0.095, 8, 20);
+    const iw = pw - pad * 2;
+    const statH = clamp(ph * 0.045, 12, 22);
+    const headH = clamp(ph * 0.07, 20, 34);
+    const tabH = clamp(ph * 0.085, 24, 40);
+    const btnH = clamp(ph * 0.058, 18, 30);
+    const lh = clamp(ph * 0.019, 3, 5.5);
+    const labels = ['START', 'LEISTUNGEN', 'REFERENZEN', 'KONTAKT'];
+    const titles = ['Start', 'Design', 'Arbeiten', 'Kontakt'];
+    const tone = [0, 2, 1, 0];
+    const els = [], tx = [];
+
+    for (let i = 0; i < n; i++) {
+      const x = x0 + i * (pw + gap);
+      const ci = tone[i % 3];
+      const el = [rectPath(x, y, pw, ph, pw * 0.15)];
+
+      /* Statusleiste */
+      const stS = clamp(statH * 0.42, 7, 10);
+      const clockW = pw * 0.34 - pad;
+      if (clockW > 18) {
+        tx.push(txt(x + pad, y + statH * 0.72, stS, '9:41',
+          { font: 'mono', weight: 500, dim: 0.55, maxW: clockW }));
+      }
+      el.push(solid(rectPath(x + pw * 0.36, y + statH * 0.26, pw * 0.28, statH * 0.34, statH * 0.17))); // Notch
+      for (let k = 0; k < 3; k++) {
+        const sh = statH * (0.16 + k * 0.07);
+        el.push(solid(rectPath(x + pw - pad - statH * 0.95 + k * statH * 0.19, y + statH * 0.58 - sh, statH * 0.11, sh, 1)));
+      }
+      el.push(rectPath(x + pw - pad - statH * 0.42, y + statH * 0.4, statH * 0.42, statH * 0.2, statH * 0.06));
+      el.push(linePath(x, y + statH, x + pw, y + statH));
+
+      /* Kopfzeile */
+      const hyy = y + statH;
+      const bs = clamp(headH * 0.3, 6, 10);
+      el.push(linePath(x + pad, hyy + headH / 2 - bs * 0.5, x + pad + bs * 1.5, hyy + headH / 2 - bs * 0.5));
+      el.push(linePath(x + pad, hyy + headH / 2, x + pad + bs * 1.5, hyy + headH / 2));
+      el.push(linePath(x + pad, hyy + headH / 2 + bs * 0.5, x + pad + bs * 1.5, hyy + headH / 2 + bs * 0.5));
+      const tS = clamp(headH * 0.36, 8, 13);
+      tx.push(txt(x + pw / 2, hyy + headH / 2 + tS * 0.35, tS, titles[i % 4],
+        { weight: 650, align: 'center', maxW: pw * 0.5 }));
+      el.push(circlePath(x + pw - pad - bs * 0.7, hyy + headH / 2, bs * 0.7));
+      el.push(linePath(x, hyy + headH, x + pw, hyy + headH));
+
+      /* Inhalt */
+      const cTop = hyy + headH + pad * 0.9;
+      const cBot = y + ph - tabH - pad * 0.9;
+      const mediaH = (cBot - cTop) * 0.34;
+      el.push(solid(acc(rectPath(x + pad, cTop, iw, mediaH, clamp(pw * 0.05, 4, 10)), ci)));
+
+      let cy = cTop + mediaH + pad * 0.85;
+      for (let k = 0; k < 3; k++) {
+        el.push(solid(rectPath(x + pad, cy, iw * (1 - k * 0.2), lh, lh / 2)));
+        cy += lh + pad * 0.5;
+      }
+      cy += pad * 0.25;
+
+      const cardH = cBot - btnH - pad * 0.9 - cy;
+      if (cardH > lh * 3) {
+        el.push(rectPath(x + pad, cy, iw, cardH, clamp(pw * 0.04, 4, 9)));
+        const thumb = Math.min(cardH - pad * 0.6, iw * 0.28);
+        el.push(solid(rectPath(x + pad + pad * 0.4, cy + (cardH - thumb) / 2, thumb, thumb, thumb * 0.22)));
+        const tx0 = x + pad + pad * 0.4 + thumb + pad * 0.5;
+        const twid = x + pw - pad - pad * 0.4 - tx0;
+        el.push(solid(rectPath(tx0, cy + cardH / 2 - lh * 1.4, twid, lh, lh / 2)));
+        el.push(solid(rectPath(tx0, cy + cardH / 2 + lh * 0.4, twid * 0.6, lh, lh / 2)));
+      }
+
+      /* Button */
+      const bY = cBot - btnH;
+      const bS = clamp(btnH * 0.42, 7.5, 13);
+      const bW = clamp(MT('Mehr', bS, 'sans') + btnH * 1.7, 52, iw);
+      el.push(solid(acc(rectPath(x + pad, bY, bW, btnH, btnH / 2), ci, 1.9)));
+      tx.push(txt(x + pad + bW / 2, bY + btnH / 2 + bS * 0.35, bS, 'Mehr',
+        { align: 'center', weight: 650, color: ci, on: 'btn' }));
+
+      /* Tab-Leiste */
+      el.push(linePath(x, y + ph - tabH, x + pw, y + ph - tabH));
+      const ts = clamp(tabH * 0.26, 5, 10);
+      for (let k = 0; k < 4; k++) {
+        const tcx = x + pw * (0.5 + k) / 4;
+        const ic = rectPath(tcx - ts / 2, y + ph - tabH * 0.68, ts, ts, ts * 0.25);
+        if (k === i % 4) acc(ic, ci, 1.6);
+        el.push(ic);
+        el.push(solid(rectPath(tcx - ts * 0.5, y + ph - tabH * 0.3, ts, ts * 0.2, ts * 0.1)));
+      }
+
+      els.push(el);
+      tx.push(txt(x + pw / 2, y + ph + capGap * 0.72, capS, labels[i % 4],
+        { font: 'mono', weight: 500, align: 'center', color: ci, track: capS * 0.16, maxW: pw * 1.3 }));
+    }
+    return { els, texts: tx, bounds: { x: x0, y, w: pw * n + gap * (n - 1), h: ph + capGap } };
+  }
+
+  const BUILDERS = [setCards, setBrowser, setDashboard, setPhones];
+
+  /* ============================================================
+     ROUTE
+     ============================================================ */
+  function measure(pts) {
+    const segs = [];
+    let len = 0;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const l = Math.hypot(pts[i + 1].x - pts[i].x, pts[i + 1].y - pts[i].y);
+      segs.push(l); len += l;
+    }
+    return { segs, len };
+  }
+
+  const minXof = pts => pts.reduce((m, p) => p.x < m ? p.x : m, Infinity);
+  const minXel = el => el.reduce((m, p) => Math.min(m, minXof(p)), Infinity);
+
+  function buildRoute(els) {
+    const sorted = els.slice().sort((a, b) => minXel(a) - minXel(b));
+    const items = [];
+    let cursor = { x: -60, y: H / 2 };
+    let total = 0, drawn = 0;
+
+    const push = (type, pts) => {
+      const m = measure(pts);
+      if (m.len < 0.5) return;
+      items.push({
+        type, pts, segs: m.segs, len: m.len, start: total,
+        accent: type === 'draw' && pts.accent !== undefined ? pts.accent : null,
+        str: pts.accStr || 1,
+        noFill: !!pts.noFill
+      });
+      total += m.len;
+      if (type === 'draw') drawn += m.len;
+      cursor = pts[pts.length - 1];
+    };
+
+    sorted.forEach(el => el.forEach(p => { push('move', [cursor, p[0]]); push('draw', p); }));
+    push('move', [cursor, { x: W + 80, y: cursor.y }]);
+    return { items, total, drawn };
+  }
+
+  /* ============================================================
+     ZEICHEN-PRIMITIVE (schreiben nach g)
+     ============================================================ */
+  function strokeRange(from, to, kind) {
+    if (to <= from) return;
+    g.beginPath();
+    for (const it of route) {
+      const s = it.start, e = it.start + it.len;
+      if (e <= from || s >= to) continue;
+      if (kind !== 'both' && it.type !== kind) continue;
+      let a2 = s, open = false;
+      for (let i = 0; i < it.segs.length; i++) {
+        const L = it.segs[i];
+        const a = a2; a2 += L;
+        if (!L || a2 <= from || a >= to) { open = false; continue; }
+        const t0 = Math.max(0, (from - a) / L);
+        const t1 = Math.min(1, (to - a) / L);
+        const p = it.pts[i], q = it.pts[i + 1];
+        const ax = p.x + (q.x - p.x) * t0, ay = p.y + (q.y - p.y) * t0;
+        const bx = p.x + (q.x - p.x) * t1, by = p.y + (q.y - p.y) * t1;
+        if (!open) { g.moveTo(ax, ay); open = true; }
+        g.lineTo(bx, by);
+        if (t1 < 1) open = false;
+      }
+    }
+    g.stroke();
+  }
+
+  function tracePath(pts, close) {
+    g.beginPath();
+    g.moveTo(pts[0].x, pts[0].y);
+    for (let i = 1; i < pts.length; i++) g.lineTo(pts[i].x, pts[i].y);
+    if (close) g.closePath();
+  }
+
+  function pointAt(d) {
+    for (const it of route) {
+      if (d > it.start + it.len) continue;
+      let a2 = it.start;
+      for (let i = 0; i < it.segs.length; i++) {
+        const L = it.segs[i];
+        if (d <= a2 + L && L) {
+          const t = (d - a2) / L;
+          const p = it.pts[i], q = it.pts[i + 1];
+          return { x: p.x + (q.x - p.x) * t, y: p.y + (q.y - p.y) * t };
+        }
+        a2 += L;
+      }
+      const lp = it.pts[it.pts.length - 1];
+      return { x: lp.x, y: lp.y };
+    }
+    return null;
+  }
+
+  const typeAt = d => {
+    for (const it of route) if (d <= it.start + it.len) return it.type;
+    return 'move';
+  };
+
+  function paintLines(c, mul) {
+    g.save();
+    g.lineCap = 'round'; g.lineJoin = 'round';
+    g.lineWidth = Math.max(1, CFG.lineW * S);
+    g.globalAlpha = c.alpha * mul;
+    g.strokeStyle = `rgba(${c.line},1)`;
+    strokeRange(0, routeLen, 'draw');
+    g.restore();
+  }
+
+  function paintAccents(c, reveal, mul) {
+    if (mul <= 0) return;
+    accents.forEach((it, i) => {
+      const t = clamp01((reveal - i * 0.055) / 0.38);
+      if (t <= 0) return;
+      const rgb = c.acc[it.accent % 3];
+      const e = easeOut(t);
+      const flash = Math.max(0, 1 - t * 2.4);
+
+      g.save();
+      if (!it.noFill) {
+        tracePath(it.pts, true);
+        g.globalAlpha = (0.12 * it.str * e + 0.28 * flash) * mul;
+        g.fillStyle = `rgba(${rgb},1)`;
+        g.fill();
+      }
+      tracePath(it.pts, !it.noFill);
+      g.globalAlpha = 0.92 * e * mul;
+      g.lineCap = 'round'; g.lineJoin = 'round';
+      g.lineWidth = Math.max(1, CFG.lineW * S) + (it.noFill ? 1.1 : 0.4);
+      g.strokeStyle = `rgba(${rgb},1)`;
+      g.shadowBlur = (9 + 20 * flash) * S;
+      g.shadowColor = `rgba(${rgb},.85)`;
+      g.stroke();
+      g.restore();
+    });
+  }
+
+  function paintTexts(c, reveal, mul, colorMul) {
+    if (mul <= 0) return;
+    texts.forEach((t, i) => {
+      const p = clamp01((reveal - i * 0.04) / 0.42);
+      if (p <= 0 || t.size < 6) return;
+      const shown = Math.max(1, Math.round(t.text.length * p));
+      const str = t.text.slice(0, shown);
+      const colored = t.color !== null;
+      const rgb = colored ? c.acc[t.color % 3] : c.line;
+
+      g.save();
+      g.font = `${t.weight} ${t.size}px ${t.font === 'mono' ? c.mono : c.sans}`;
+      g.textAlign = t.align;
+      g.textBaseline = 'alphabetic';
+      g.globalAlpha = (colored ? 0.95 * colorMul : 0.78 * t.dim) * mul;
+      g.fillStyle = `rgba(${rgb},1)`;
+      if (colored) { g.shadowBlur = 11 * S; g.shadowColor = `rgba(${rgb},.55)`; }
+
+      if (t.track) {
+        let x = t.x;
+        const wTot = g.measureText(str).width + t.track * (str.length - 1);
+        if (t.align === 'center') x = t.x - wTot / 2;
+        else if (t.align === 'right') x = t.x - wTot;
+        g.textAlign = 'left';
+        for (const ch of str) { g.fillText(ch, x, t.y); x += g.measureText(ch).width + t.track; }
+      } else {
+        g.fillText(str, t.x, t.y);
+      }
+
+      if (p < 1) {
+        const w2 = g.measureText(str).width + (t.track || 0) * (str.length - 1);
+        const cx = t.align === 'center' ? t.x + w2 / 2 : t.align === 'right' ? t.x : t.x + w2;
+        g.globalAlpha = 0.7 * mul;
+        g.fillRect(cx + t.size * 0.1, t.y - t.size * 0.74, Math.max(1, t.size * 0.07), t.size * 0.78);
+      }
+      g.restore();
+    });
+  }
+
+  function paintFull(c, reveal, mul, colorMul) {
+    paintLines(c, mul);
+    paintAccents(c, reveal, mul * colorMul);
+    paintTexts(c, reveal, mul, colorMul);
+  }
+
+  /* ---------- Schnappschuss fürs Überblenden: nur Linien ---------- */
+  function takeSnapshot(c) {
+    if (!snap) { snap = document.createElement('canvas'); snapCtx = snap.getContext('2d'); }
+    snap.width = canvas.width; snap.height = canvas.height;
+    snapCtx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    snapCtx.clearRect(0, 0, W, H);
+    const prev = g;
+    g = snapCtx;
+    paintLines(c, 1);
+    g = prev;
+    snapT = 0;
+  }
+
+  /* ============================================================
+     LOOP
+     ============================================================ */
+  function loadSet(i) {
+    const src = sets[i];
+    if (!src) return;
+    const r = buildRoute(src.els);
+    route = r.items;
+    routeLen = r.total;
+    speed = r.drawn / (CFG.drawTime / 1000);
+    accents = route.filter(it => it.type === 'draw' && it.accent !== null)
+                   .sort((a, b) => minXof(a.pts) - minXof(b.pts));
+    texts = src.texts.slice().sort((a, b) => a.x - b.x);
+    dist = 0; phase = 'draw'; phaseT = 0; inT = 0;
+  }
+
+  function frame(now) {
+    if (!running) return;
+    if (!route.length) { rafId = requestAnimationFrame(frame); return; }
+
+    const dt = Math.min((now - (last || now)) / 1000, 0.05);
+    last = now;
+    const c = cssVars();
+    const HOT = CFG.hotZone * S;
+    g = ctx;
+    ctx.clearRect(0, 0, W, H);
+
+    /* --- Zustand --- */
+    if (phase === 'draw') {
+      dist += dt * speed * (typeAt(dist) === 'move' ? CFG.moveBoost : 1);
+      if (dist >= routeLen) { dist = routeLen; phase = 'accent'; phaseT = 0; }
+    } else {
+      phaseT += dt * 1000;
+      if (phase === 'accent' && phaseT > CFG.accent) { phase = 'hold'; phaseT = 0; }
+      else if (phase === 'hold' && phaseT > CFG.hold) {
+        takeSnapshot(c);                        // neutrales Gerüst einfrieren
+        setIndex = (setIndex + 1) % sets.length;
+        loadSet(setIndex);                      // nächstes Set startet sofort
+      }
+    }
+
+    inT = Math.min(inT + dt * 1000, CFG.cross);
+    snapT = Math.min(snapT + dt * 1000, CFG.cross);
+
+    /* --- ausblendendes Gerüst des vorigen Sets --- */
+    const outA = snap ? 1 - easeIO(clamp01(snapT / CFG.cross)) : 0;
+    if (outA > 0.002) {
+      ctx.save();
+      ctx.globalAlpha = outA;
+      ctx.drawImage(snap, 0, 0, snap.width, snap.height, 0, 0, W, H);
+      ctx.restore();
+    }
+
+    /* --- aktuelles Set --- */
+    const mul = easeIO(clamp01(inT / CFG.cross));
+    let colorMul = 1;
+    if (phase === 'hold') colorMul = 1 - clamp01((phaseT - (CFG.hold - CFG.drain)) / CFG.drain);
+
+    if (phase === 'draw') {
+      ctx.save();
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.lineWidth = Math.max(1, CFG.lineW * S);
+      ctx.globalAlpha = c.alpha * mul;
+      ctx.strokeStyle = `rgba(${c.line},1)`;
+      strokeRange(0, dist, 'draw');
+      ctx.restore();
+
+      const hot = Math.max(0, dist - HOT);
+
+      ctx.save();
+      ctx.lineWidth = 1; ctx.globalAlpha = 0.14 * mul;
+      ctx.strokeStyle = `rgba(${c.beam},1)`;
+      strokeRange(hot, dist, 'move');
+      ctx.restore();
+
+      ctx.save();
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.lineWidth = Math.max(1, CFG.lineW * S) + 0.3;
+      ctx.globalAlpha = 0.95 * mul;
+      ctx.strokeStyle = `rgba(${c.beam},1)`;
+      ctx.shadowBlur = 14 * S;
+      ctx.shadowColor = `rgba(${c.beam},.9)`;
+      strokeRange(hot, dist, 'draw');
+      strokeRange(Math.max(0, dist - HOT * 0.3), dist, 'draw');
+      ctx.restore();
+
+      const head = pointAt(dist);
+      if (head) {
+        const hr = Math.max(2, CFG.headR * S);
+        ctx.save();
+        ctx.globalAlpha = mul;
+        const rg = ctx.createRadialGradient(head.x, head.y, 0, head.x, head.y, hr * 9);
+        rg.addColorStop(0, `rgba(${c.beam},.85)`);
+        rg.addColorStop(0.35, `rgba(${c.beam},.28)`);
+        rg.addColorStop(1, `rgba(${c.beam},0)`);
+        ctx.fillStyle = rg;
+        ctx.beginPath(); ctx.arc(head.x, head.y, hr * 9, 0, Math.PI * 2); ctx.fill();
+        ctx.shadowBlur = 16 * S;
+        ctx.shadowColor = `rgba(${c.beam},1)`;
+        ctx.fillStyle = 'rgba(255,255,255,.95)';
+        ctx.beginPath(); ctx.arc(head.x, head.y, hr, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
+      }
+    } else {
+      const rev = phase === 'accent' ? clamp01(phaseT / CFG.accent) : 1;
+      paintFull(c, rev, mul, colorMul);
+    }
+
+    rafId = requestAnimationFrame(frame);
+  }
+
+  /* ============================================================
+     SETUP / SICHTBARKEIT
+     ============================================================ */
+  function resize() {
+    const r = canvas.getBoundingClientRect();
+    if (r.width < 40 || r.height < 40) return false;
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = r.width; H = r.height;
+    S = Math.max(0.5, Math.min(1, Math.min(W / 820, H / 460)));
+    canvas.width = Math.round(W * DPR);
+    canvas.height = Math.round(H * DPR);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    const c = cssVars();
+    FONT.sans = c.sans; FONT.mono = c.mono;   // vor dem Bauen setzen, damit gemessen werden kann
+    sets = BUILDERS.map(fn => fn(W, H));
+    snap = null; snapCtx = null;
+    loadSet(setIndex);
+    return true;
+  }
+
+  function start() {
+    if (running || !route.length) return;
+    running = true; last = 0;
+    rafId = requestAnimationFrame(frame);
+  }
+  function stop() {
+    running = false;
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+  }
+
+  function staticFrame() {
+    if (!resize()) return;
+    g = ctx;
+    ctx.clearRect(0, 0, W, H);
+    paintFull(cssVars(), 1, 1, 1);
+  }
+
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function setVisible(v) {
+    if (v === visible) return;
+    visible = v;
+    if (mq.matches) return;
+    if (v) { snap = null; loadSet(setIndex); start(); }
+    else { stop(); ctx.clearRect(0, 0, W, H); }
+  }
+
+  function refresh() {
+    if (mq.matches) { staticFrame(); return; }
+    if (resize() && visible) { stop(); start(); }
+  }
+
+  let rt;
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(refresh, 140); }).observe(card);
+  } else {
+    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(refresh, 160); });
+  }
+
+  // Webfonts kommen oft später – dann neu messen und neu setzen
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => { clearTimeout(rt); rt = setTimeout(refresh, 60); });
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (mq.matches) return;
+    document.hidden ? stop() : (visible && start());
+  });
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      const e = entries[0];
+      const h = e.boundingClientRect.height || 1;
+      const need = Math.min(CFG.seeRatio, (window.innerHeight * 0.6) / h);
+      const r = e.intersectionRatio;
+      if (!visible && r >= need) setVisible(true);
+      else if (visible && r < need * 0.35) setVisible(false);
+    }, { threshold: [0, 0.1, 0.2, 0.35, 0.5, 0.55, 0.7, 0.9] }).observe(card);
+  } else {
+    visible = true;
+  }
+
+  function init() {
+    if (mq.matches) { staticFrame(); return; }
+    resize();
+    if (!('IntersectionObserver' in window)) start();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 
 
 
