@@ -1059,6 +1059,14 @@ body[data-page="3DKonzept"] .hero-image-foreground {
 
 
 
+<!-- ============================================================
+     SHOWCASE  ·  v3
+     Karte 1: Produkt mittig, Werkzeuge drehen / zoomen
+     Karte 2: begehbarer Raum (Popup + Onboarding)
+     Karte 3: Video
+     Über- und Unterüberschrift unverändert.
+     ============================================================ -->
+
 <section id="showcase" class="showcase-pro" aria-labelledby="showcase-title">
   <div class="container">
     <header class="head">
@@ -1072,83 +1080,111 @@ body[data-page="3DKonzept"] .hero-image-foreground {
 
     <ul class="grid" role="list" aria-label="3D-Webintegration Beispiele">
 
-      <!-- Karte 1: 3D-Produkt-Viewer -->
+      <!-- ============ Karte 1: 3D-Produkt-Viewer ============ -->
       <li class="cell" role="listitem">
         <article class="card" data-accent="tech" aria-labelledby="card-1-title">
-          <div class="media" aria-hidden="true">
+
+          <div class="media sc-stage" id="sc-product">
+
             <model-viewer
+              class="sc-mv"
               src="./models/product.glb"
               alt="Interaktiver 3D-Produkt-Viewer"
-              camera-controls
-              auto-rotate
-              rotation-per-second="30deg"
               exposure="1.1"
               shadow-intensity="0.6"
               interaction-prompt="none"
-              style="width:100%;height:100%;display:block;background:#000;"
-            ></model-viewer>
+              camera-orbit="0deg 90deg 100%"
+              camera-target="auto"
+              field-of-view="60deg"
+              min-camera-orbit="-Infinity auto 35%"
+              max-camera-orbit="Infinity auto 280%"
+              disable-pan
+              loading="lazy"
+              reveal="auto"></model-viewer>
+
+            <!-- Werkzeuge -->
+            <div class="sc-tools" role="group" aria-label="Werkzeuge">
+              <button type="button" class="sc-tool" data-tool="rotate" aria-pressed="false">
+                <span class="sc-tool-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                       stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3.5 12a8.5 8.5 0 0 1 14.5-6"/><path d="M20.5 12A8.5 8.5 0 0 1 6 18"/>
+                    <path d="M18 2.5V6h-3.5"/><path d="M6 21.5V18h3.5"/>
+                  </svg>
+                </span>
+                drehen
+              </button>
+
+              <button type="button" class="sc-tool" data-tool="zoom" aria-pressed="false">
+                <span class="sc-tool-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                       stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.4-4.4"/><path d="M8.5 11h5"/>
+                  </svg>
+                </span>
+                zoomen
+              </button>
+            </div>
+
+            <!-- Zoomregler, erscheint im Zoom-Modus -->
+            <div class="sc-zoom" hidden>
+              <button type="button" class="sc-zoom-btn" data-zoom="in"  aria-label="Näher heran">+</button>
+              <span class="sc-zoom-val" aria-live="polite">100%</span>
+              <button type="button" class="sc-zoom-btn" data-zoom="out" aria-label="Weiter weg">−</button>
+            </div>
+
+            <p class="sc-note" aria-live="polite"></p>
           </div>
 
-          <div class="card__body" aria-label="3D-Produkt-Viewer">
-            <div class="tags">
-              <span class="tag tag--eyebrow">Interaktiv</span>
-            </div>
+          <div class="card__body">
+            <div class="tags"><span class="tag tag--eyebrow">Interaktiv</span></div>
             <h3 id="card-1-title" class="card__title">3D-Produkt-Viewer</h3>
             <p class="card__desc">Drehe, zoome, entdecke Details – direkt im Browser.</p>
           </div>
         </article>
       </li>
 
-      <!-- Karte 2: Virtueller Showroom – Kamera im Raum -->
+      <!-- ============ Karte 2: Virtueller Showroom ============ -->
       <li class="cell" role="listitem">
         <article class="card" aria-labelledby="card-2-title">
-          <div class="media" aria-hidden="true">
-            <model-viewer
-              src="./models/room.glb"
-              alt="Virtueller Showroom von innen"
-              camera-controls
-              interaction-prompt="none"
-              exposure="1.05"
-              shadow-intensity="0.4"
-              camera-target="auto"
-              camera-orbit="0deg 90deg 0.001m"
-              field-of-view="85deg"
-              min-camera-orbit="auto auto 0m"
-              max-camera-orbit="auto auto 0m"
-              disable-zoom
-              disable-pan
-              style="width:100%;height:100%;display:block;background:#000;"
-            ></model-viewer>
+
+          <div class="media sc-stage sc-locked" id="sc-room">
+            <div class="sc-preview" aria-hidden="true">
+              <img class="sc-preview-img" src="./arbeitsproben/arbeitsproben_index/post19.webp" alt="" loading="lazy" decoding="async">
+            </div>
+
+            <button type="button" class="sc-enter" data-open="showroom">
+              <span class="sc-enter-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 20V6.5L13 3v18"/><path d="M13 12h7"/><path d="M17 8.5 20.5 12 17 15.5"/>
+                </svg>
+              </span>
+              Raum betreten
+            </button>
           </div>
 
-          <div class="card__body" aria-label="Virtueller Showroom">
-            <div class="tags">
-              <span class="tag">Erlebnis</span>
-            </div>
+          <div class="card__body">
+            <div class="tags"><span class="tag">Erlebnis</span></div>
             <h3 id="card-2-title" class="card__title">Virtueller Showroom</h3>
             <p class="card__desc">Mitten im Markenraum stehen und sich frei umsehen.</p>
           </div>
         </article>
       </li>
 
-      <!-- Karte 3: 3D-Animationen für Websites -->
+      <!-- ============ Karte 3: 3D-Animationen ============ -->
       <li class="cell" role="listitem">
         <article class="card" data-accent="warm" aria-labelledby="card-3-title">
-          <div class="media" aria-hidden="true">
-            <video
-              src="./media/animation.mp4"
-              autoplay
-              muted
-              loop
-              playsinline
-              style="width:100%;height:100%;display:block;object-fit:cover;background:#000;"
-            ></video>
+
+          <div class="media sc-stage" id="sc-video">
+            <video class="sc-video" src="./contactvideo/contact3D2.mp4" poster="./media/animation-poster.jpg"
+                   muted loop playsinline preload="metadata"></video>
+
+
           </div>
 
-          <div class="card__body" aria-label="3D-Animationen für Websites">
-            <div class="tags">
-              <span class="tag">Motion</span>
-            </div>
+          <div class="card__body">
+            <div class="tags"><span class="tag">Motion</span></div>
             <h3 id="card-3-title" class="card__title">3D-Animationen</h3>
             <p class="card__desc">Bewegte Interfaces und Stories, die Aufmerksamkeit halten.</p>
           </div>
@@ -1159,189 +1195,965 @@ body[data-page="3DKonzept"] .hero-image-foreground {
   </div>
 </section>
 
-<!-- Model-Viewer einmalig einbinden, falls noch nicht global -->
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<!-- ============ Popup ============ -->
+<div class="sc-modal" id="media-modal" hidden role="dialog" aria-modal="true" aria-labelledby="sc-modal-title">
+  <div class="sc-modal-box">
+    <header class="sc-modal-head">
+      <h2 class="sc-modal-title" id="sc-modal-title">Virtueller Showroom</h2>
+      <button type="button" class="sc-close" data-close-modal aria-label="Schließen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M6 6l12 12M18 6L6 18"/>
+        </svg>
+      </button>
+    </header>
+    <div class="sc-modal-content" id="media-modal-content"></div>
+  </div>
+</div>
+
+<style>
+/* ============================================================
+   SHOWCASE – nur die neuen Bausteine. Deine vorhandenen Regeln
+   für .showcase-pro, .card, .media, .card__body bleiben gültig.
+   ============================================================ */
+
+.sc-stage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #000;
+  min-height: clamp(280px, 36vw, 460px);
+  border-radius: inherit;
+}
+
+.sc-mv,
+.sc-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #000;
+  --poster-color: transparent;   /* verhindert die graue Platzhalterfläche */
+}
+
+.sc-video { object-fit: cover; }
+
+/* ---------- Werkzeugleiste ---------- */
+.sc-tools {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  gap: .4rem;
+  padding: .3rem;
+  border-radius: 999px;
+  background: rgba(8, 10, 16, .55);
+  border: 1px solid rgba(255, 255, 255, .16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.sc-tool {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 38px;
+  padding: 0 .9rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, .8);
+  font: inherit;
+  font-size: .86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .25s ease, color .25s ease;
+}
+
+.sc-tool-ico { display: block; width: 17px; height: 17px; }
+.sc-tool-ico svg { width: 100%; height: 100%; display: block; }
+
+.sc-tool:hover { color: #fff; background: rgba(255, 255, 255, .1); }
+
+.sc-tool[aria-pressed="true"] {
+  color: #0b0c10;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+}
+
+.sc-tool:focus-visible,
+.sc-zoom-btn:focus-visible,
+.sc-enter:focus-visible,
+.sc-close:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* ---------- Zoomregler ---------- */
+.sc-zoom {
+  position: absolute;
+  top: 62px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.sc-zoom[hidden] { display: none; }
+
+.sc-zoom-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .2);
+  background: rgba(8, 10, 16, .6);
+  color: #fff;
+  font: inherit;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background .2s ease, transform .2s ease;
+}
+
+.sc-zoom-btn:hover { background: rgba(255, 255, 255, .18); transform: translateY(-1px); }
+.sc-zoom-btn:disabled { opacity: .3; cursor: default; transform: none; }
+
+.sc-zoom-val {
+  min-width: 3.4em;
+  text-align: center;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: rgba(255, 255, 255, .75);
+}
+
+/* ---------- Hinweiszeile ---------- */
+.sc-note {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  z-index: 5;
+  margin: 0;
+  font-size: .76rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: rgba(255, 255, 255, .6);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.sc-note:not(:empty) { opacity: 1; }
+
+/* ---------- Karte 2: verschlossene Vorschau ---------- */
+.sc-locked .sc-preview {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1a1030, #05030f 60%, #24123f);
+}
+
+.sc-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(14px) saturate(.75) brightness(.55);
+  transform: scale(1.12);
+}
+
+.sc-locked::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 50% 40%, rgba(0, 0, 0, .1), rgba(0, 0, 0, .72));
+  pointer-events: none;
+}
+
+.sc-enter {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  min-height: 48px;
+  padding: 0 1.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .5);
+  background: rgba(10, 12, 20, .5);
+  color: #fff;
+  font: inherit;
+  font-size: .98rem;
+  font-weight: 800;
+  cursor: pointer;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .45);
+  transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+}
+
+.sc-enter:hover {
+  transform: translate(-50%, -50%) translateY(-2px);
+  background: rgba(255, 255, 255, .16);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, .55);
+}
+
+.sc-enter-ico { display: block; width: 19px; height: 19px; }
+.sc-enter-ico svg { width: 100%; height: 100%; display: block; }
+
+.sc-enter--sm {
+  left: auto;
+  top: auto;
+  right: 12px;
+  bottom: 12px;
+  transform: none;
+  min-height: 40px;
+  padding: 0 1rem;
+  font-size: .86rem;
+}
+
+.sc-enter--sm:hover { transform: translateY(-2px); }
+
+/* ---------- Popup ---------- */
+.sc-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: clamp(.75rem, 3vw, 2rem);
+  background: rgba(4, 5, 10, .82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.sc-modal[hidden] { display: none; }
+
+.sc-modal-box {
+  position: relative;
+  width: min(1200px, 100%);
+  max-height: min(88vh, 900px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  background: #07080d;
+  box-shadow: 0 40px 90px rgba(0, 0, 0, .7);
+}
+
+/* Desktop: deutlich größer und vor allem höher */
+@media (min-width: 900px) {
+  .sc-modal { padding: clamp(.75rem, 1.6vw, 1.25rem); }
+
+  .sc-modal-box {
+    width: min(1920px, 97vw);
+    height: 96vh;
+    max-height: 96vh;
+  }
+
+  .sc-modal-content { min-height: 0; }   /* Höhe kommt aus flex, nicht aus min-height */
+}
+
+.sc-modal-head {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .9rem 1rem .9rem 1.3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+
+.sc-modal-title {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  color: #fff;
+}
+
+.sc-close {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .18);
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+
+.sc-close svg { width: 18px; height: 18px; display: block; margin: auto; }
+.sc-close:hover { background: rgba(255, 255, 255, .12); }
+
+.sc-modal-content {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 340px;
+  display: grid;
+  place-items: stretch;
+  background: #000;
+  overflow: hidden;
+}
+
+/* Nur die Bühnen füllen den Rahmen – Overlays behalten ihre Eigengröße */
+.sc-modal-content > model-viewer,
+.sc-modal-content > video,
+.sc-modal-content > .sc-onb {
+  width: 100%;
+  height: 100%;
+}
+
+.sc-modal-content > .sc-loader,
+.sc-modal-content > .sc-fallback {
+  place-self: center;
+}
+
+/* Onboarding im Popup */
+.sc-onb {
+  display: grid;
+  place-content: center;
+  gap: 1.4rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  text-align: center;
+  color: #fff;
+  background: radial-gradient(120% 100% at 50% 0%, #1b1030, #05060c 70%);
+}
+
+.sc-onb h3 {
+  margin: 0;
+  font-size: clamp(1.3rem, 1.1rem + 1vw, 1.9rem);
+  font-weight: 850;
+  letter-spacing: -.015em;
+}
+
+.sc-onb p {
+  margin: 0 auto;
+  max-width: 44ch;
+  font-size: 1rem;
+  line-height: 1.65;
+  font-weight: 600;
+  color: rgba(255, 255, 255, .82);
+}
+
+.sc-keys {
+  display: grid;
+  grid-template-columns: repeat(3, 46px);
+  grid-template-rows: repeat(2, 46px);
+  gap: .4rem;
+  justify-content: center;
+}
+
+.sc-key {
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  border: 1px solid rgba(255, 255, 255, .28);
+  background: rgba(255, 255, 255, .07);
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.sc-key--up { grid-column: 2; grid-row: 1; }
+.sc-key--left { grid-column: 1; grid-row: 2; }
+.sc-key--down { grid-column: 2; grid-row: 2; }
+.sc-key--right { grid-column: 3; grid-row: 2; }
+
+.sc-taps {
+  display: grid;
+  place-items: center;
+  width: 132px;
+  height: 132px;
+  margin-inline: auto;
+  border-radius: 22px;
+  border: 1px dashed rgba(255, 255, 255, .3);
+  color: rgba(255, 255, 255, .8);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  animation: sc-tap 2.2s ease-in-out infinite;
+}
+
+@keyframes sc-tap {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, .18); }
+  50%      { box-shadow: 0 0 0 14px rgba(255, 255, 255, 0); }
+}
+
+.sc-onb-btn {
+  justify-self: center;
+  min-height: 48px;
+  padding: 0 1.6rem;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: #0b0c10;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.sc-onb-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0, 0, 0, .5); }
+
+.sc-loader {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, .18);
+  border-top-color: #fff;
+  animation: sc-spin .8s linear infinite;
+}
+
+@keyframes sc-spin { to { transform: rotate(360deg); } }
+
+.sc-fallback {
+  margin: 0;
+  padding: 2rem;
+  text-align: center;
+  color: rgba(255, 255, 255, .8);
+  font-size: .95rem;
+  font-weight: 650;
+  line-height: 1.6;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 640px) {
+  .sc-stage { min-height: 300px; }
+  .sc-tool { padding: 0 .7rem; font-size: .8rem; }
+  .sc-tool-ico { width: 15px; height: 15px; }
+  .sc-modal-content { min-height: 60vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-taps, .sc-loader { animation: none; }
+  .sc-enter, .sc-zoom-btn, .sc-onb-btn { transition: none; }
+}
+</style>
 
 <script>
-// Popups mit <model-viewer>, so dass das 3D-Modell in JEDEM Popup perfekt mittig steht.
-// Kernidee: Wir zwingen bei jedem Open (und nach dem Model-Load) die Kamera auf
-// camera-target="auto" und camera-orbit mit Radius "auto" (Produkt) bzw. ~0m (Showroom).
-(function(){
-  var modal = document.getElementById('media-modal');
-  var content = document.getElementById('media-modal-content');
-  var closeBtn = modal ? modal.querySelector('[data-close-modal]') : null;
+/* ============================================================
+   SHOWCASE-Logik v3
+   ============================================================ */
+(function () {
+  "use strict";
 
-  var lastActive = null, cleanup = null, mvReady = null;
+  var MV_SRC = "https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js";
 
-  function ensureModelViewer(){
-    if (window.customElements && customElements.get('model-viewer')) return Promise.resolve();
-    if (mvReady) return mvReady;
-    mvReady = new Promise(function(resolve, reject){
-      var s = document.createElement('script');
-      s.type = 'module';
-      s.src  = 'https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js';
-      s.onload = function(){
-        if (customElements && customElements.whenDefined){
-          customElements.whenDefined('model-viewer').then(resolve).catch(reject);
+  var PATHS = {
+    product: "./models/product.glb",
+    room:    "./models/room.glb",
+    video:   "./media/animation.mp4"
+  };
+
+  var ZOOM = { min: 40, max: 260, step: 22 };   // Prozent der Standarddistanz
+
+  var ROOM = {
+    eye: 1.6,       // Augenhöhe in Metern
+    step: 0.045,    // Strecke pro Frame
+    tapStep: 0.7,   // Strecke pro Doppeltipp
+    bound: 9        // maximale Entfernung vom Raummittelpunkt
+  };
+
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var coarse = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+
+  var $  = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
+
+  /* ---------- model-viewer bei Bedarf laden ---------- */
+  var mvPromise = null;
+
+  function ensureMV() {
+    if (window.customElements && customElements.get("model-viewer")) return Promise.resolve();
+    if (mvPromise) return mvPromise;
+
+    mvPromise = new Promise(function (resolve, reject) {
+      var s = document.createElement("script");
+      var to = setTimeout(function () { reject(new Error("timeout")); }, 12000);
+
+      s.type = "module";
+      s.src = MV_SRC;
+      s.onload = function () {
+        clearTimeout(to);
+        if (window.customElements && customElements.whenDefined) {
+          customElements.whenDefined("model-viewer").then(resolve, reject);
         } else resolve();
       };
-      s.onerror = reject;
+      s.onerror = function () { clearTimeout(to); reject(new Error("load error")); };
       document.head.appendChild(s);
     });
-    return mvReady;
+
+    return mvPromise;
   }
 
-  function trap(enable){
-    if(!enable){ document.removeEventListener('keydown', onKey); modal.removeEventListener('click', onOverlay); return; }
-    document.addEventListener('keydown', onKey);
-    modal.addEventListener('click', onOverlay);
-  }
-  function onKey(e){ if(e.key === 'Escape') close(); }
-  function onOverlay(e){ if(e.target === modal) close(); }
+  /* ============================================================
+     1) PRODUKT-VIEWER
+     ============================================================ */
+  (function product() {
+    var stage = $("#sc-product");
+    if (!stage) return;
 
-  function makeBox(w,h){
-    var box = document.createElement('div');
-    box.style.cssText = 'width:'+w+';height:'+h+';background:#000;display:grid;place-items:center;';
-    return box;
-  }
-  function mount(node){
-    while(content.firstChild) content.removeChild(content.firstChild);
-    content.appendChild(node);
-  }
-  function loader(){ content.innerHTML = '<div class="loader" aria-hidden="true"></div>'; }
+    var mv      = $(".sc-mv", stage);
+    var tools   = $$(".sc-tool", stage);
+    var zoomUI  = $(".sc-zoom", stage);
+    var zoomVal = $(".sc-zoom-val", stage);
+    var note    = $(".sc-note", stage);
+    if (!mv) return;
 
-  function open(kind){
-    lastActive = document.activeElement;
-    loader();
-    modal.hidden = false;
-    if (closeBtn) closeBtn.focus();
-    trap(true);
-    if (cleanup) try{ cleanup(); }catch(e){}
-    cleanup = null;
+    var PHI = 90;
+    var theta = 0;
+    var pct = 100;          // Zoom in Prozent der Standarddistanz
+    var baseRadius = 0;
+    var mode = null;
 
-    if (kind === 'animation') return openVideo();
+    function say(t) { if (note) note.textContent = t || ""; }
 
-    ensureModelViewer().then(function(){
-      if (kind === 'viewer') openProduct();
-      if (kind === 'showroom') openRoom();
-    }).catch(function(err){
-      console.error('model-viewer load error', err);
-      mount(errorNode('3D-Viewer konnte nicht geladen werden.'));
+    function updateZoomButtons() {
+      var inBtn  = $('[data-zoom="in"]', stage);
+      var outBtn = $('[data-zoom="out"]', stage);
+      if (inBtn)  inBtn.disabled  = pct <= ZOOM.min + 0.5;
+      if (outBtn) outBtn.disabled = pct >= ZOOM.max - 0.5;
+    }
+
+    function writeOrbit() {
+      mv.cameraOrbit = theta + "deg " + PHI + "deg " + pct + "%";
+      if (zoomVal) zoomVal.textContent = Math.round(pct) + "%";
+      updateZoomButtons();
+    }
+
+    function setZoom(next) {
+      pct = clamp(next, ZOOM.min, ZOOM.max);
+      writeOrbit();
+    }
+
+    /* Drehen und Zoomen schließen sich aus. Gesperrt wird über die
+       Orbit-Grenzen, dadurch greifen Rad, Pinch und die Tasten. */
+    function setMode(next) {
+      mode = mode === next ? null : next;
+
+      tools.forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b.dataset.tool === mode));
+      });
+
+      if (zoomUI) zoomUI.hidden = mode !== "zoom";
+
+      if (mode === "rotate") {
+        mv.setAttribute("camera-controls", "");
+        mv.removeAttribute("auto-rotate");
+        mv.setAttribute("min-camera-orbit", "-Infinity " + PHI + "deg " + pct + "%");
+        mv.setAttribute("max-camera-orbit", "Infinity " + PHI + "deg " + pct + "%");
+        say("Ziehen zum Drehen");
+
+      } else if (mode === "zoom") {
+        mv.setAttribute("camera-controls", "");
+        mv.removeAttribute("auto-rotate");
+        mv.setAttribute("min-camera-orbit", theta + "deg " + PHI + "deg " + ZOOM.min + "%");
+        mv.setAttribute("max-camera-orbit", theta + "deg " + PHI + "deg " + ZOOM.max + "%");
+        say("Mit + und −, Mausrad oder Pinch zoomen");
+
+      } else {
+        mv.removeAttribute("camera-controls");
+        mv.setAttribute("min-camera-orbit", "-Infinity auto " + ZOOM.min + "%");
+        mv.setAttribute("max-camera-orbit", "Infinity auto " + ZOOM.max + "%");
+        say("");
+        if (!reduce) mv.setAttribute("auto-rotate", "");
+      }
+
+      writeOrbit();
+    }
+
+    tools.forEach(function (b) {
+      b.addEventListener("click", function () { setMode(b.dataset.tool); });
     });
-  }
-  function close(){
-    modal.hidden = true;
-    trap(false);
-    if (cleanup) try{ cleanup(); }catch(e){}
-    cleanup = null;
-    if (lastActive && lastActive.focus) lastActive.focus();
-  }
-  function errorNode(msg){
-    var d = document.createElement('div');
-    d.style.cssText='color:#fff;display:grid;place-items:center;min-width:320px;min-height:200px;padding:12px;text-align:center';
-    d.textContent = msg; return d;
-  }
 
-  // --- ZENTRIERUNGSHILFE ---
-  // Erzwingt zentrierte, ideale Framing-Position nach Model-Load.
-  function enforceCentering(mv, mode){
-    // Für Produkt: auto-Radius -> model-viewer berechnet ideale Distanz, immer mittig.
-    if (mode === 'product'){
-      mv.setAttribute('camera-target', 'auto');
-      mv.setAttribute('camera-orbit',  '0deg 75deg auto'); // yaw, pitch, radius=auto
-      mv.setAttribute('field-of-view', '60deg');
+    if (zoomUI) {
+      zoomUI.addEventListener("click", function (e) {
+        var b = e.target.closest ? e.target.closest("[data-zoom]") : null;
+        if (!b) return;
+        setZoom(b.dataset.zoom === "in" ? pct - ZOOM.step : pct + ZOOM.step);
+      });
     }
-    // Für Showroom: Radius ≈ 0 -> „drin stehen“; auto Target = Szenenmittelpunkt
-    if (mode === 'room'){
-      mv.setAttribute('camera-target', 'auto');
-      // Falls gewünschte Augenhöhe: 'auto 1.6m auto'
-      mv.setAttribute('camera-orbit',  '0deg 90deg 0.001m');
-      mv.setAttribute('field-of-view', '85deg');
-      mv.setAttribute('min-camera-orbit', 'auto auto 0m');
-      mv.setAttribute('max-camera-orbit', 'auto auto 0m');
-      mv.setAttribute('disable-zoom','');
-      mv.setAttribute('disable-pan','');
-    }
-    // Nach dem Laden sicherstellen, dass Ziel/Orbit sofort angewandt werden
-    var onLoad = function(){
-      // Einige Browser übernehmen Ziele erst nach dem Load stabil;
-      // mit kurzer Microtask neu setzen.
-      setTimeout(function(){
-        if (mode === 'product'){
-          mv.setAttribute('camera-target', 'auto');
-          mv.setAttribute('camera-orbit',  '0deg 75deg auto');
-        } else {
-          mv.setAttribute('camera-target', 'auto');
-          mv.setAttribute('camera-orbit',  '0deg 90deg 0.001m');
+
+    /* Rad, Pinch und Ziehen ändern die Kamera selbst – Werte nachführen */
+    mv.addEventListener("camera-change", function (e) {
+      if (!e.detail || e.detail.source !== "user-interaction") return;
+      try {
+        var o = mv.getCameraOrbit();
+        theta = o.theta * 180 / Math.PI;
+        if (baseRadius) {
+          pct = clamp(o.radius / baseRadius * 100, ZOOM.min, ZOOM.max);
+          if (zoomVal) zoomVal.textContent = Math.round(pct) + "%";
+          updateZoomButtons();
         }
-      },0);
-      mv.removeEventListener('load', onLoad);
-    };
-    mv.addEventListener('load', onLoad);
-  }
+      } catch (err) {}
+    });
 
-  // Produkt-Viewer (mittig + sanfte Rotation)
-  function openProduct(){
-    var box = makeBox('min(1100px, 80vw)', 'min(760px, 70vh)');
-    var mv  = document.createElement('model-viewer');
-    mv.src = './models/product.glb';
-    mv.style.cssText='width:100%;height:100%;display:block;background:#000;touch-action:manipulation;';
-    mv.setAttribute('camera-controls','');
-    mv.setAttribute('reveal','auto');
-    mv.setAttribute('exposure','1.1');
-    mv.setAttribute('shadow-intensity','0.6');
-    mv.setAttribute('interaction-prompt','none');
-    // ZENTRIERUNG
-    enforceCentering(mv, 'product');
-    // sanfte Rotation
-    mv.setAttribute('auto-rotate','');
-    mv.setAttribute('rotation-per-second','30deg');
+    mv.addEventListener("load", function () {
+      try {
+        mv.cameraOrbit = "0deg " + PHI + "deg 100%";
+        mv.jumpCameraToGoal();
+        baseRadius = mv.getCameraOrbit().radius;
+      } catch (e) {}
+      writeOrbit();
+      if (!reduce) {
+        mv.setAttribute("auto-rotate", "");
+        mv.setAttribute("rotation-per-second", "18deg");
+      }
+    });
 
-    box.appendChild(mv);
-    mount(box);
-    cleanup = function(){ try{ mv.removeAttribute('auto-rotate'); }catch(e){} };
-  }
+    mv.addEventListener("error", function () {
+      stage.insertAdjacentHTML("beforeend",
+        '<p class="sc-fallback">Das 3D-Modell konnte nicht geladen werden.</p>');
+    });
 
-  // Showroom (Kamera im Raum, perfekt mittig um die eigene Achse)
-  function openRoom(){
-    var box = makeBox('min(1200px, 85vw)', 'min(800px, 75vh)');
-    var mv  = document.createElement('model-viewer');
-    mv.src = './models/room.glb';
-    mv.style.cssText='width:100%;height:100%;display:block;background:#000;touch-action:manipulation;';
-    mv.setAttribute('camera-controls','');
-    mv.setAttribute('reveal','auto');
-    mv.setAttribute('exposure','1.05');
-    mv.setAttribute('shadow-intensity','0.4');
-    mv.setAttribute('interaction-prompt','none');
-    // ZENTRIERUNG
-    enforceCentering(mv, 'room');
+    /* Ausgangszustand beim Wegscrollen */
+    function reset() {
+      mode = null;
+      theta = 0;
+      pct = 100;
+      tools.forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+      if (zoomUI) zoomUI.hidden = true;
+      mv.removeAttribute("camera-controls");
+      mv.setAttribute("min-camera-orbit", "-Infinity auto " + ZOOM.min + "%");
+      mv.setAttribute("max-camera-orbit", "Infinity auto " + ZOOM.max + "%");
+      mv.cameraTarget = "auto";
+      writeOrbit();
+      say("");
+      if (!reduce) mv.setAttribute("auto-rotate", "");
+    }
 
-    box.appendChild(mv);
-    mount(box);
-    cleanup = function(){ /* nichts */ };
-  }
+    if ("IntersectionObserver" in window) {
+      var seen = false;
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { seen = true; return; }
+          if (seen) reset();
+        });
+      }, { threshold: 0.15 }).observe(stage);
+    }
 
-  // Video (unverändert)
-  function openVideo(){
-    var box = makeBox('min(1100px, 80vw)', 'min(700px, 60vh)');
-    var vid = document.createElement('video');
-    vid.autoplay=true; vid.loop=true; vid.muted=true; vid.playsInline=true; vid.controls=true;
-    vid.style.cssText='width:100%;height:100%;display:block;object-fit:cover;';
-    vid.src='./media/animation.mp4';
-    box.appendChild(vid);
-    mount(box);
-    cleanup = function(){ try{ vid.pause(); }catch(e){} };
-    try{ vid.play().catch(function(){}); }catch(e){}
-  }
+    ensureMV().catch(function () {
+      stage.insertAdjacentHTML("beforeend",
+        '<p class="sc-fallback">3D-Ansicht derzeit nicht verfügbar.</p>');
+    });
+  })();
 
-  // Delegierte Clicks
-  document.addEventListener('click', function(e){
-    var t = e.target.closest('[data-open],[data-close-modal]');
-    if (!t) return;
-    if (t.hasAttribute('data-close-modal')){ e.preventDefault(); close(); return; }
-    var kind = t.getAttribute('data-open');
-    if (kind){ e.preventDefault(); open(kind); }
-  }, true);
+  /* ============================================================
+     2) POPUP: Showroom + Video
+     ============================================================ */
+  (function modal() {
+    var modalEl = $("#media-modal");
+    var content = $("#media-modal-content");
+    var titleEl = $("#sc-modal-title");
+    if (!modalEl || !content) return;
+
+    var lastActive = null;
+    var cleanup = null;
+
+    function clear() {
+      if (cleanup) { try { cleanup(); } catch (e) {} }
+      cleanup = null;
+      while (content.firstChild) content.removeChild(content.firstChild);
+    }
+
+    function loader() {
+      clear();
+      var d = document.createElement("div");
+      d.className = "sc-loader";
+      d.setAttribute("aria-label", "Wird geladen");
+      content.appendChild(d);
+    }
+
+    function fallback(msg) {
+      clear();
+      var p = document.createElement("p");
+      p.className = "sc-fallback";
+      p.textContent = msg;
+      content.appendChild(p);
+    }
+
+    function focusables() {
+      return $$('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', modalEl)
+        .filter(function (el) { return el.offsetParent !== null; });
+    }
+
+    function onKey(e) {
+      if (e.key === "Escape") { e.preventDefault(); close(); return; }
+      if (e.key !== "Tab") return;
+
+      var f = focusables();
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+
+    function onOverlay(e) { if (e.target === modalEl) close(); }
+
+    function open(kind) {
+      lastActive = document.activeElement;
+      modalEl.hidden = false;
+      document.documentElement.style.overflow = "hidden";
+      document.addEventListener("keydown", onKey);
+      modalEl.addEventListener("click", onOverlay);
+
+      if (titleEl) titleEl.textContent = kind === "animation" ? "3D-Animationen" : "Virtueller Showroom";
+
+      var closeBtn = $(".sc-close", modalEl);
+      if (closeBtn) closeBtn.focus();
+
+      if (kind === "animation") return openVideo();
+      if (kind === "showroom") return openOnboarding();
+    }
+
+    function close() {
+      clear();
+      modalEl.hidden = true;
+      document.documentElement.style.overflow = "";
+      document.removeEventListener("keydown", onKey);
+      modalEl.removeEventListener("click", onOverlay);
+      if (lastActive && lastActive.focus) lastActive.focus();
+    }
+
+    /* ---------- Video ---------- */
+    function openVideo() {
+      clear();
+      var v = document.createElement("video");
+      v.src = PATHS.video;
+      v.controls = true;
+      v.autoplay = true;
+      v.loop = true;
+      v.playsInline = true;
+      v.style.cssText = "width:100%;height:100%;display:block;object-fit:contain;background:#000";
+      content.appendChild(v);
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+      cleanup = function () { try { v.pause(); v.removeAttribute("src"); v.load(); } catch (e) {} };
+    }
+
+    /* ---------- Onboarding, je nach Gerät ---------- */
+    function openOnboarding() {
+      clear();
+
+      var wrap = document.createElement("div");
+      wrap.className = "sc-onb";
+
+      if (coarse) {
+        wrap.innerHTML =
+          '<h3>So bewegst du dich</h3>' +
+          '<div class="sc-taps" aria-hidden="true">Doppeltippen</div>' +
+          '<p>Tippe zweimal in die Richtung, in die du gehen möchtest – oben vorwärts, ' +
+          'unten zurück, links und rechts zur Seite. Zum Umsehen mit dem Finger ziehen.</p>';
+      } else {
+        wrap.innerHTML =
+          '<h3>So bewegst du dich</h3>' +
+          '<div class="sc-keys" aria-hidden="true">' +
+            '<span class="sc-key sc-key--up">↑</span>' +
+            '<span class="sc-key sc-key--left">←</span>' +
+            '<span class="sc-key sc-key--down">↓</span>' +
+            '<span class="sc-key sc-key--right">→</span>' +
+          '</div>' +
+          '<p>↑ und ↓ gehen vor und zurück, ← und → treten zur Seite. ' +
+          'Umsehen und drehen mit gedrückter Maustaste.</p>';
+      }
+
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "sc-onb-btn";
+      btn.textContent = "Raum öffnen";
+      btn.addEventListener("click", openRoom);
+      wrap.appendChild(btn);
+
+      content.appendChild(wrap);
+      btn.focus();
+    }
+
+    /* ---------- Der begehbare Raum ---------- */
+    function openRoom() {
+      loader();
+
+      ensureMV().then(function () {
+        clear();
+
+        var pos = { x: 0, z: 0 };
+        var yaw = 0;
+
+        var mv = document.createElement("model-viewer");
+        mv.className = "sc-mv";
+        mv.setAttribute("alt", "Begehbarer Showroom");
+        mv.setAttribute("camera-controls", "");
+        mv.setAttribute("interaction-prompt", "none");
+        mv.setAttribute("disable-zoom", "");
+        mv.setAttribute("disable-pan", "");
+        mv.setAttribute("disable-tap", "");
+        mv.setAttribute("exposure", "1.05");
+        mv.setAttribute("shadow-intensity", "0");
+        mv.setAttribute("field-of-view", "82deg");
+        mv.setAttribute("min-field-of-view", "82deg");
+        mv.setAttribute("max-field-of-view", "82deg");
+        mv.setAttribute("min-camera-orbit", "-Infinity 90deg 0.01m");
+        mv.setAttribute("max-camera-orbit", "Infinity 90deg 0.01m");
+        mv.setAttribute("interpolation-decay", "60");
+        mv.setAttribute("reveal", "auto");
+        // Standpunkt vor dem Laden setzen, damit nie die Außenansicht aufblitzt
+        mv.setAttribute("camera-target", "0m " + ROOM.eye + "m 0m");
+        mv.setAttribute("camera-orbit", "0deg 90deg 0.01m");
+        mv.style.cssText =
+          "width:100%;height:100%;display:block;background:#000;touch-action:none;--poster-color:transparent";
+        mv.src = PATHS.room;
+
+        content.appendChild(mv);
+
+        var keys = Object.create(null);
+        var raf = 0;
+        var glide = null;
+
+        function apply() {
+          mv.cameraTarget = pos.x.toFixed(3) + "m " + ROOM.eye + "m " + pos.z.toFixed(3) + "m";
+        }
+
+        function move(forward, strafe) {
+          var r = yaw * Math.PI / 180;
+          pos.x = clamp(pos.x - Math.sin(r) * forward + Math.cos(r) * strafe, -ROOM.bound, ROOM.bound);
+          pos.z = clamp(pos.z - Math.cos(r) * forward - Math.sin(r) * strafe, -ROOM.bound, ROOM.bound);
+        }
+
+        function loop() {
+          raf = requestAnimationFrame(loop);
+          var moved = false;
+
+          if (keys.ArrowUp    || keys.KeyW) { move(ROOM.step, 0);  moved = true; }
+          if (keys.ArrowDown  || keys.KeyS) { move(-ROOM.step, 0); moved = true; }
+          if (keys.ArrowLeft  || keys.KeyA) { move(0, -ROOM.step); moved = true; }
+          if (keys.ArrowRight || keys.KeyD) { move(0, ROOM.step);  moved = true; }
+
+          if (glide) {
+            var t = Math.min(1, (performance.now() - glide.t0) / glide.dur);
+            var e = 1 - Math.pow(1 - t, 3);
+            pos.x = clamp(glide.x0 + (glide.x1 - glide.x0) * e, -ROOM.bound, ROOM.bound);
+            pos.z = clamp(glide.z0 + (glide.z1 - glide.z0) * e, -ROOM.bound, ROOM.bound);
+            moved = true;
+            if (t >= 1) glide = null;
+          }
+
+          if (moved) apply();
+        }
+
+        function onDown(e) {
+          if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.key) > -1) e.preventDefault();
+          keys[e.code] = true;
+        }
+        function onUp(e) { keys[e.code] = false; }
+
+        /* Doppeltipp: Richtung aus der Tippposition */
+        var lastTap = 0, lastX = 0, lastY = 0;
+
+        function onPointerUp(e) {
+          if (e.pointerType === "mouse") return;
+
+          var now = performance.now();
+          var near = Math.abs(e.clientX - lastX) < 40 && Math.abs(e.clientY - lastY) < 40;
+
+          if (now - lastTap < 350 && near) {
+            var r = mv.getBoundingClientRect();
+            var dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+            var dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+            var len = Math.hypot(dx, dy) || 1;
+
+            var forward = (-dy / len) * ROOM.tapStep;
+            var strafe  = (dx / len) * ROOM.tapStep;
+            var rad = yaw * Math.PI / 180;
+
+            glide = {
+              t0: performance.now(), dur: 480,
+              x0: pos.x, z0: pos.z,
+              x1: pos.x - Math.sin(rad) * forward + Math.cos(rad) * strafe,
+              z1: pos.z - Math.cos(rad) * forward - Math.sin(rad) * strafe
+            };
+
+            lastTap = 0;
+          } else {
+            lastTap = now;
+            lastX = e.clientX;
+            lastY = e.clientY;
+          }
+        }
+
+        /* Gedreht wird ausschließlich per Maus bzw. Finger */
+        mv.addEventListener("camera-change", function (e) {
+          if (!e.detail || e.detail.source !== "user-interaction") return;
+          try { yaw = mv.getCameraOrbit().theta * 180 / Math.PI; } catch (err) {}
+        });
+
+        mv.addEventListener("load", function () {
+          apply();
+          try { mv.jumpCameraToGoal(); } catch (err) {}
+        });
+
+        mv.addEventListener("error", function () { fallback("Der Raum konnte nicht geladen werden."); });
+
+        window.addEventListener("keydown", onDown);
+        window.addEventListener("keyup", onUp);
+        mv.addEventListener("pointerup", onPointerUp);
+
+        apply();
+        raf = requestAnimationFrame(loop);
+
+        cleanup = function () {
+          cancelAnimationFrame(raf);
+          window.removeEventListener("keydown", onDown);
+          window.removeEventListener("keyup", onUp);
+          keys = Object.create(null);
+          glide = null;
+        };
+
+      }).catch(function () {
+        fallback("Der 3D-Viewer konnte nicht geladen werden.");
+      });
+    }
+
+    /* Delegierte Klicks */
+    document.addEventListener("click", function (e) {
+      var t = e.target.closest ? e.target.closest("[data-open],[data-close-modal]") : null;
+      if (!t) return;
+
+      if (t.hasAttribute("data-close-modal")) { e.preventDefault(); close(); return; }
+
+      var kind = t.getAttribute("data-open");
+      if (kind) { e.preventDefault(); open(kind); }
+    });
+  })();
+
+  /* ============================================================
+     3) Video in der Karte: nur abspielen, wenn sichtbar
+     ============================================================ */
+  (function inlineVideo() {
+    var v = $("#sc-video .sc-video");
+    if (!v) return;
+
+    if (!("IntersectionObserver" in window)) { v.play().catch(function () {}); return; }
+
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        else v.pause();
+      });
+    }, { threshold: 0.25 }).observe(v);
+  })();
+
 })();
 </script>
 

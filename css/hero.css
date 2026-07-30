@@ -572,3 +572,204 @@
 }
 
 }
+/* =========================================
+   HERO BUTTONS - MODERN & VERGRÖSSERT
+   ========================================= */
+
+.btn-primary {
+  /* Basis-Button */
+  position: relative;
+  background: var(--primary-orange, #ff7a00) !important;
+  color: #fff !important;
+  border: 0 !important;
+
+  /* GRÖSSER: Mehr Höhe und großzügigeres Padding */
+  min-height: 56px !important; 
+  padding: 0.9rem 2.4rem !important; 
+  border-radius: var(--radius, 16px) !important; /* Etwas weichere Ecken */
+
+  /* TYPO: Moderner, klarer und etwas größer */
+  font-weight: 800 !important; /* 800 wirkt oft etwas eleganter als 950 */
+  letter-spacing: -0.015em !important;
+  font-size: clamp(1.1rem, 1vw + 1rem, 1.25rem) !important;
+  line-height: 1.3 !important;
+
+  /* Layout */
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+
+  /* Sanftere, modernere Animation */
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  
+  /* Initialer, weicher Schatten & innerer Glanz */
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.3), /* Leichte obere Lichtkante */
+    0 8px 24px -6px color-mix(in srgb, var(--primary-orange, #ff7a00) 50%, transparent) !important;
+}
+
+/* Dezent-moderner Glanz-Layer */
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  opacity: 1;
+}
+
+.btn-primary > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover + Active: Fließende Bewegungen und tiefere Schatten */
+@media (hover: hover) {
+  .btn-primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 
+      inset 0 1px 1px rgba(255, 255, 255, 0.4),
+      0 20px 40px -8px color-mix(in srgb, var(--primary-orange, #ff7a00) 65%, transparent) !important;
+  }
+  .btn-primary:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 
+      inset 0 1px 1px rgba(255, 255, 255, 0.2),
+      0 4px 12px -4px color-mix(in srgb, var(--primary-orange, #ff7a00) 50%, transparent) !important;
+  }
+}
+
+/* Focus-Ring */
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255, 0.9),
+    0 0 0 6px color-mix(in oklab, var(--primary-orange) 55%, transparent),
+    0 12px 28px rgba(0,0,0, 0.22) !important;
+}
+
+/* =========================================
+   SEKUNDÄRER BUTTON (Glassmorphism-Style)
+   ========================================= */
+
+.btn-secondary {
+  /* Gleiche Proportionen wie Primary */
+  min-height: 56px !important;
+  padding: 0.9rem 2.4rem !important;
+  border-radius: var(--radius, 16px) !important;
+
+  /* Typografie identisch */
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+  font-size: clamp(1.1rem, 1vw + 1rem, 1.25rem) !important;
+  line-height: 1.3 !important;
+  color: #fff !important; /* Klares Weiß für besseren Kontrast */
+
+  /* Layout */
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+
+  /* Moderner Glass-Effekt */
+  background: rgba(0, 0, 0, 0.582) !important;
+  border: 1px solid rgb(100, 100, 100) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  
+  box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.979) !important;
+}
+
+.btn-secondary > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover / Active */
+@media (hover: hover) {
+  .btn-secondary:hover {
+    transform: translateY(-2px) scale(1.02);
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.5) !important;
+  }
+  .btn-secondary:active {
+    transform: translateY(1px) scale(0.98);
+    background: rgba(255, 255, 255, 0.801) !important;
+    box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.836) !important;
+  }
+}
+
+/* Fokus */
+.btn-secondary:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgb(255, 255, 255),
+    0 0 0 6px rgb(255, 255, 255),
+    0 12px 28px rgb(0, 0, 0) !important;
+}
+
+/* RESPONSIVE: HANDY (Größenanpassung für Mobile) */
+@media (max-width: 600px) {
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;                
+    padding: 1.1rem 1.4rem !important; /* Etwas höheres Padding auf Mobile für besseres Touch-Target */
+    font-size: 1.05rem !important; /* Skaliert leicht herunter, bleibt aber sehr gut lesbar */
+    /* TYPO für .btn-primary (Bitte im .btn-primary Block ersetzen) */
+  font-weight: 800 !important;
+  letter-spacing: -0.015em !important;
+  /* Font-size deutlich erhöht */
+  font-size: clamp(1.2rem, 1.2vw + 1rem, 1.45rem) !important; 
+  line-height: 1.3 !important;
+  /* TYPO für .btn-secondary (Bitte im .btn-secondary Block ersetzen) */
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+  /* Font-size identisch zum Primary-Button erhöht */
+  font-size: clamp(1.2rem, 1.2vw + 1rem, 1.45rem) !important; 
+  line-height: 1.3 !important;
+  color: #fff !important;
+  }
+}/* =========================================
+   HERO – MAXIMALE PROMINENZ & SCHRIFTPOWER
+   ========================================= */
+
+/* Große Hero-Headline: Deutlich größer auf Desktop */
+.hero-section[data-page="titlepage"] .large-title {
+  /* clamp(Minimum, Dynamisch, Maximum) - Maximum von 5.4rem auf 6.8rem erhöht */
+  font-size: clamp(3.2rem, 7.5vw, 6.8rem) !important; 
+  font-weight: 950 !important;                    
+  letter-spacing: -0.02em !important;             
+  line-height: 1.05 !important;                   
+  color: #ffffff !important;
+  text-shadow:
+    0 14px 38px rgba(0,0,0,0.85),
+    0 4px 14px rgba(0,0,0,0.55) !important;
+}
+
+/* RESPONSIVE: HANDY (Größenanpassung für Mobile) */
+@media (max-width: 600px) {
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;                
+    padding: 1.15rem 1.4rem !important; 
+    /* Text auf dem Smartphone ebenfalls vergrößert */
+    font-size: 1.18rem !important; 
+  }
+  
+  .hero-section[data-page="titlepage"] .large-title {
+    /* Hält die Überschrift auf Mobile stabil */
+    font-size: clamp(2.6rem, 10vw, 3.2rem) !important;
+    line-height: 1.12 !important;
+  }
+}
