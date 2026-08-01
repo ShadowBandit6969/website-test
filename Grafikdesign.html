@@ -377,7 +377,7 @@ body[data-page="webdesign"] .hero-image-foreground {
 <script src="script/freewireframe.js" defer></script>
 <script src="script/metrics.js" defer></script>
 <script src="script/ArbeitsprobenBilder.js" defer></script>
-<script src="script/kontaktformular.js" defer></script>
+
 </head>
 
 <body data-page="Grafikdesign">
@@ -1536,7 +1536,7 @@ body.nocturne .dark-image {
     <div class="wrf-col wrf-col--left">
       <figure class="wrf-hero">
         <img
-          src="./images/3Drenderpreview.png"
+          src="./cosmospictures/grafikdesign3.webp"
           alt="Beispielhafte Layout-Vorschau für Social Post, Flyer oder Web-Banner"
           loading="lazy"
           width="1280"
@@ -1570,21 +1570,19 @@ body.nocturne .dark-image {
       <!-- Secondary Action entfernt – Button wandert in die globale CTA-Gruppe -->
     </div>
 
-    <!-- Global CTA: unter Bild + rechtem Inhalt (spannt beide Spalten) -->
-    <div class="wrf-actions">
-      <div class="wrf-actions__inner">
-        <!-- Primary CTA -->
-        <button
-          type="button"
-          class="wrf-btn wrf-btn--primary wrf-btn--cta"
-          data-wrf-cta
-          aria-describedby="wrf-cta-note"
-        >
-          <span class="wrf-btn__label">Kostenloses Schnell-Design sichern</span>
-        </button>
+      <div class="wrf-actions">
+        <div class="wrf-actions__inner">
+          <!-- Button 1: Was ist ein Wireframe? -->
+          <a href="/anfrage.html" class="wrf-btn wrf-btn--primary wrf-btn--cta" data-wrf-cta
+            aria-describedby="wrf-cta-note">
+            <span class="wrf-btn__label">Kostenloses Schnell-Design sichern</span>
+          </a>
+        </div>
+
+        <p class="wrf-cta__note" id="wrf-cta-note">
+          Antwort innerhalb von <strong>48&nbsp;h</strong>
+        </p>
       </div>
-      <p class="wrf-cta__note" id="wrf-cta-note">Antwort innerhalb von <strong>24–48&nbsp;h</strong></p>
-    </div>
 
   </div>
 
@@ -2062,30 +2060,34 @@ body.nocturne .dark-image {
     <div class="kontakt-area">
       <h2 class="section-title">Lass uns loslegen!</h2>
       <p class="kontakt-subline">
-        Eine starke Idee verdient ein starkes digitales Erlebnis.
+        Eine starke Idee verdient ein starkes Grafikdesign.
       </p>
 
       <!-- === Formular (Wizard) === -->
-      <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form" id="kontaktForm" novalidate>
+      <form action="send.php"
+            method="POST"
+            class="kontakt-form"
+            id="kontaktForm"
+            novalidate>
 
         <!-- STEP 1: Leistungswahl -->
         <fieldset class="form-step active" data-step="1" aria-labelledby="step1Title">
           <legend id="step1Title" class="sr-only">Leistungswahl</legend>
           <div class="grid-choices" role="radiogroup" aria-label="Leistung wählen">
             <label class="choice" tabindex="0">
-              <input type="radio" name="service" value="Webdesign" data-toggle="web" />
-              <span class="title">Webdesign</span>
-              <small>Speed, Responsiveness, SEO, UX</small>
-            </label>
-            <label class="choice" tabindex="0">
-              <input type="radio" name="service" value="3D-Design" data-toggle="d3" />
-              <span class="title">3D-Design</span>
-              <small>Renderings, Animationen, Produkt/Architektur</small>
-            </label>
-            <label class="choice" tabindex="0">
               <input type="radio" name="service" value="Grafikdesign" data-toggle="gfx" />
               <span class="title">Grafikdesign</span>
               <small>Logo, Visitenkarte, Poster/Flyer, Styleguide</small>
+            </label>
+            <label class="choice" tabindex="0">
+              <input type="radio" name="service" value="Branding" data-toggle="brand" />
+              <span class="title">Branding</span>
+              <small>Corporate Identity, Brand-Konsistenz, Redesign</small>
+            </label>
+            <label class="choice" tabindex="0">
+              <input type="radio" name="service" value="Illustration" data-toggle="illu" />
+              <span class="title">Illustration</span>
+              <small>Custom Artworks, Vektoren, Key Visuals</small>
             </label>
           </div>
         </fieldset>
@@ -2093,40 +2095,6 @@ body.nocturne .dark-image {
         <!-- STEP 2: Material & Styleguide -->
         <fieldset class="form-step" data-step="2" aria-labelledby="step2Title">
           <legend id="step2Title" class="sr-only">Material & Styleguide</legend>
-
-          <!-- Web -->
-          <div class="service-block" data-service="web">
-            <label class="select-row">
-              <span class="website-label">Material (Texte / Bilder / Logo)</span>
-              <select name="web_material">
-                <option value="">Bitte wählen</option>
-                <option value="alles">Alles vorhanden</option>
-                <option value="teilweise">Teilweise vorhanden</option>
-                <option value="nichts">Bitte komplett erstellen</option>
-              </select>
-            </label>
-
-            <label class="select-row">
-              <span class="website-label">Styleguide / CI vorhanden?</span>
-              <select name="web_styleguide">
-                <option value="">Bitte wählen</option>
-                <option value="ja">Ja</option>
-                <option value="nein">Nein</option>
-              </select>
-            </label>
-          </div>
-
-          <!-- 3D -->
-          <div class="service-block" data-service="d3">
-       <label class="select-row">
-              <span class="website-label">3D-Daten / Modelle vorhanden?</span>
-              <select name="d3_daten">
-                <option value="">Bitte wählen</option>
-                <option value="vorhanden">Ja, vorhanden</option>
-                <option value="modellierung_noetig">Nein, bitte modellieren</option>
-              </select>
-            </label>
-          </div>
 
           <!-- Grafik -->
           <div class="service-block" data-service="gfx">
@@ -2149,61 +2117,37 @@ body.nocturne .dark-image {
               </select>
             </label>
           </div>
+
+          <!-- Branding -->
+          <div class="service-block" data-service="brand">
+            <label class="select-row">
+              <span class="website-label">Bestehender Markenauftritt</span>
+              <select name="brand_status">
+                <option value="">Bitte wählen</option>
+                <option value="rebranding">Komplettes Rebranding</option>
+                <option value="refresh">Marken-Refresh / Evolution</option>
+                <option value="neuaufbau">Komplett neu von Null</option>
+              </select>
+            </label>
+          </div>
+
+          <!-- Illustration -->
+          <div class="service-block" data-service="illu">
+            <label class="select-row">
+              <span class="website-label">Art des Artworks / Stil</span>
+              <select name="illu_style">
+                <option value="">Bitte wählen</option>
+                <option value="vektor">Vektor / Clean</option>
+                <option value="handgemacht">Handgemacht / Digital Painting</option>
+                <option value="iconografie">Iconografie & Key Visuals</option>
+              </select>
+            </label>
+          </div>
         </fieldset>
 
         <!-- STEP 3: Projektspezifikationen -->
         <fieldset class="form-step" data-step="3" aria-labelledby="step3Title">
           <legend id="step3Title" class="sr-only">Projektspezifikationen</legend>
-
-          <!-- Web -->
-          <div class="service-block" data-service="web">
-            <label class="select-row">
-              <span class="website-label">Website-Typ</span>
-              <select name="web_typ">
-                <option value="">Bitte wählen</option>
-                <option value="unternehmensseite">Unternehmensseite</option>
-                <option value="portfolio">Portfolio</option>
-                <option value="shop">Online-Shop</option>
-                <option value="landingpage">Landingpage</option>
-                <option value="sonstiges">Sonstiges</option>
-              </select>
-            </label>
-
-            <fieldset class="checkbox-group tags" aria-label="Besondere Schwerpunkte">
-              <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Ladegeschwindigkeit" /><span>Ladegeschwindigkeit</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Responsiveness" /><span>Responsiveness</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="SEO" /><span>SEO</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Benutzerfreundlichkeit" /><span>Benutzerfreundlichkeit</span></label>
-              <label class="pill"><input type="checkbox" name="web_prios[]" value="Designqualität" /><span>Designqualität</span></label>
-            </fieldset>
-          </div>
-
-          <!-- 3D -->
-          <div class="service-block" data-service="d3">
-            <label class="select-row">
-              <span class="website-label">Was soll entstehen?</span>
-              <select name="d3_typ">
-                <option value="">Bitte wählen</option>
-                <option value="rendering">Rendering</option>
-                <option value="animation">Animation</option>
-                <option value="produktvisualisierung">Produktvisualisierung</option>
-                <option value="architekturvisualisierung">Architekturvisualisierung</option>
-                <option value="sonstiges">Sonstiges</option>
-              </select>
-            </label>
-
-            <label class="select-row">
-              <span class="website-label">Verwendungszweck</span>
-              <select name="d3_use">
-                <option value="">Bitte wählen</option>
-                <option value="marketing">Marketing / Werbung</option>
-                <option value="praesentation">Präsentation</option>
-                <option value="shop">Online-Shop</option>
-                <option value="print">Print</option>
-              </select>
-            </label>
-          </div>
 
           <!-- Grafik -->
           <div class="service-block" data-service="gfx">
@@ -2228,6 +2172,40 @@ body.nocturne .dark-image {
               <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Schnelle Umsetzung" /><span>Schnelle Umsetzung</span></label>
             </fieldset>
           </div>
+
+          <!-- Branding -->
+          <div class="service-block" data-service="brand">
+            <label class="select-row">
+              <span class="website-label">Umfang des Brandings</span>
+              <select name="brand_scope">
+                <option value="">Bitte wählen</option>
+                <option value="corporate_identity">Corporate Identity (Logo, Farben, Fonts)</option>
+                <option value="stationery">Geschäftsausstattung (Briefpapier, Visitenkarten)</option>
+                <option value="komplettpaket">Komplettpaket inkl. Brand Book</option>
+              </select>
+            </label>
+
+            <fieldset class="checkbox-group tags" aria-label="Schwerpunkte Branding">
+              <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
+              <label class="pill"><input type="checkbox" name="brand_prios[]" value="Wiedererkennungswert" /><span>Wiedererkennungswert</span></label>
+              <label class="pill"><input type="checkbox" name="brand_prios[]" value="Zeitlosigkeit" /><span>Zeitlosigkeit</span></label>
+              <label class="pill"><input type="checkbox" name="brand_prios[]" value="Skalierbarkeit" /><span>Skalierbarkeit</span></label>
+              <label class="pill"><input type="checkbox" name="brand_prios[]" value="Emotionalität" /><span>Emotionalität</span></label>
+            </fieldset>
+          </div>
+
+          <!-- Illustration -->
+          <div class="service-block" data-service="illu">
+            <label class="select-row">
+              <span class="website-label">Einsatzbereich der Illustrationen</span>
+              <select name="illu_use">
+                <option value="">Bitte wählen</option>
+                <option value="web_social">Website & Social Media</option>
+                <option value="print_merch">Print & Merchandise</option>
+                <option value="editorial">Editorial / Buchillustration</option>
+              </select>
+            </label>
+          </div>
         </fieldset>
 
         <!-- STEP 4: Zeit & Budget -->
@@ -2241,7 +2219,7 @@ body.nocturne .dark-image {
 
           <label class="input-row">
             <span class="website-label">Budgetrahmen (optional)</span>
-            <input type="text" name="budget" placeholder="z. B. 3 000–6 000 €" />
+            <input type="text" name="budget" placeholder="z. B. 1 500–3 500 €" />
           </label>
         </fieldset>
 
@@ -2271,17 +2249,16 @@ body.nocturne .dark-image {
 
             <div class="field span-12">
               <label for="message" class="req">Nachricht</label>
-              <textarea id="message" name="message" rows="6" placeholder="Kurz dein Projekt / Ziel beschreiben …" minlength="5" required></textarea>
+              <textarea id="message" name="message" rows="6" placeholder="Kurz dein Design-Projekt / Ziel beschreiben …" minlength="5" required></textarea>
             </div>
-
-          
           </div>
 
           <p class="legal-hint">
-            Deine Angaben werden über <strong>Formspree</strong> zur Beantwortung deiner Anfrage verarbeitet.
-            Mehr unter <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.
+            Deine Angaben werden zur Beantwortung deiner Anfrage per E-Mail an uns übermittelt
+            und gemäß unserer <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> verarbeitet.
           </p>
-            <p class="req-note">* Pflichtfelder</p>
+
+          <p class="req-note">* Pflichtfelder</p>
         </fieldset>
 
         <!-- STEP 6: Erfolg -->
@@ -2314,7 +2291,7 @@ body.nocturne .dark-image {
     <div class="video-area" aria-label="Einblick in Prozess, Tools & Zusammenarbeit">
       <div class="video-card">
         <video class="video-media" autoplay loop muted playsinline preload="auto">
-          <source src="./indexFotoSlideShow/kartenvideo.mp4" type="video/mp4">
+          <source src="./contactvideo/white.webm" type="video/mp4">
           Dein Browser unterstützt das Video-Tag nicht.
         </video>
       </div>
@@ -2869,9 +2846,8 @@ body.nocturne .dark-image {
 
 
 
-
 <section class="lyra-vault" id="lyra-faq">
-  <h2 class="lyra-heading">Häufige Fragen zu Grafikdesign & Branding</h2>
+  <h2 class="lyra-heading">Häufige Fragen</h2>
 
   <div class="lyra-console" role="search">
     <input
@@ -2898,107 +2874,156 @@ body.nocturne .dark-image {
     <!-- Card 1 -->
     <div class="lyra-card">
       <button class="lyra-toggle" aria-expanded="false">
-        <span>Ablauf &<br> Projektdauer</span>
+        <span>Ablauf &amp;<br> Projektdauer</span>
         <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
       </button>
       <div class="lyra-drop">
-        <p><strong>Wie läuft ein Grafikdesign-Projekt ab?</strong><br>Kick-off & Briefing → Mood & Stilrichtungen → Entwürfe → Feedback-Schleifen → Reinzeichnung → finale Daten (Print/Digital).</p>
-        <p><strong>Wie lange dauert das?</strong><br>Logo/Keyvisual: ca. 1–2&nbsp;Wochen, kleinere Print-Medien: 3–7&nbsp;Tage, Markenauftritt/Guidelines: 3–5&nbsp;Wochen – je nach Umfang & Feedbacktempo.</p>
-        <p><strong>Gibt es Zwischenergebnisse?</strong><br>Ja, du erhältst regelmäßig **Previews/Mockups** zur Freigabe (z. B. Cover, Social-Slides, Plakat-Mockups).</p>
+        <p><strong>Wie läuft ein Projekt ab?</strong><br>Nach einem kurzen Kick-off folgen Konzept, Entwurf, Abstimmung und finale Umsetzung. Sie sehen alle Fortschritte live.</p>
+        <p><strong>Wie lange dauert das?</strong><br>Je nach Umfang: kleinere Projekte 2–3 Wochen, umfangreiche Websites oder 3D-Renderings 4–6 Wochen.</p>
+        <p><strong>Wie oft kann ich Feedback geben?</strong><br>Zwei feste Feedbackrunden sind eingeplant – spontane Rückmeldungen sind jederzeit möglich.</p>
       </div>
     </div>
 
     <!-- Card 2 -->
     <div class="lyra-card">
       <button class="lyra-toggle" aria-expanded="false">
-        <span>Kosten &<br> Angebot</span>
+        <span>Kosten &amp;<br> Angebot</span>
         <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
       </button>
       <div class="lyra-drop">
-        <p><strong>Wie werden die Kosten berechnet?</strong><br>Nach Aufwand & Nutzungsumfang – abhängig von Anzahl der Assets, Varianten, Adaptionen (Print/Digital) und Rechteumfang.</p>
-        <p><strong>Gibt es Paketpreise?</strong><br>Ja – z. B. **Logo-Starter**, **Brand-Basics** (Logo, Farbwelt, Typo), **Social-Kit** oder **Print-Bundle** (Flyer/Plakat/Anzeige).</p>
-        <p><strong>Wie wird bezahlt?</strong><br>50 % bei Projektstart, 50 % nach Abnahme der Finals; bei größeren Projekten in **Meilensteinen**.</p>
+        <p><strong>Wie setzen sich die Kosten zusammen?</strong><br>Je nach Leistung – Design, Animation, SEO oder Hosting. Nach dem Briefing erhalten Sie ein transparentes Angebot mit klarer Aufschlüsselung.</p>
+        <p><strong>Gibt es Pauschalpreise?</strong><br>Für Standardleistungen ja, z. B. Landingpages, kleinere Renderings oder Logos. Komplexe Projekte kalkulieren wir individuell.</p>
+        <p><strong>Wie erfolgt die Bezahlung?</strong><br>In Etappen, meist zur Hälfte bei Start und zur Hälfte nach Abschluss.</p>
       </div>
     </div>
 
     <!-- Card 3 -->
     <div class="lyra-card">
       <button class="lyra-toggle" aria-expanded="false">
-        <span>Tools &<br> Formate</span>
+        <span>Technik &amp;<br> Umsetzung</span>
         <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
       </button>
       <div class="lyra-drop">
-        <p><strong>Mit welchen Tools arbeitet ihr?</strong><br><strong>Adobe Illustrator, InDesign, Photoshop</strong> sowie <strong>Figma</strong> für Digital-Assets & Prototypen.</p>
-        <p><strong>Welche Formate bekomme ich?</strong><br>Logo/Illustration: **AI, EPS, SVG, PDF** – plus **PNG/JPG**. Print: **PDF/X** (CMYK, Beschnitt). Digital: **PNG/JPG, SVG, Web-PDF**.</p>
-        <p><strong>Farbmanagement?</strong><br>CMYK/Spot für Druck, RGB für Digital, auf Wunsch **Farbprofile** (z. B. ISO Coated v2) & Proof-Freigaben.</p>
+        <p><strong>Welche Tools nutzen Sie?</strong><br>Für Web: moderne Frameworks &amp; CMS. Für 3D: Blender, Cinema 4D, Unreal Engine. Für Grafik: Adobe CC.</p>
+        <p><strong>Bieten Sie Hosting oder Setup an?</strong><br>Ja – auf Wunsch übernehmen wir Domain, Hosting, SSL und Performance-Optimierung.</p>
+        <p><strong>Kann ich später selbst Inhalte ändern?</strong><br>Ja – wir integrieren CMS-Lösungen und zeigen Ihnen, wie das geht.</p>
       </div>
     </div>
 
     <!-- Card 4 -->
     <div class="lyra-card">
       <button class="lyra-toggle" aria-expanded="false">
-        <span>Kreativprozess &<br> Marke</span>
+        <span>Design &amp;<br> Kreativprozess</span>
         <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
       </button>
       <div class="lyra-drop">
-        <p><strong>Wie stellt ihr Markenkonsistenz sicher?</strong><br>Mit **Designsystemen** (Typo-Skalen, Raster, Komponenten) und **Brand-Guidelines** inkl. Do’s & Don’ts.</p>
-        <p><strong>Können wir Farben/Typo anpassen?</strong><br>Klar – Varianten werden in der Entwurfsphase abgestimmt (Farbwelt, Typo-Paare, Kontrast, Barrierefreiheit).</p>
-        <p><strong>Bekommt mein Team Vorlagen?</strong><br>Ja, auf Wunsch **Editier-Templates** (InDesign/Figma/Canva) für Social, Anzeigen oder Präsentationen.</p>
+        <p><strong>Wie werde ich eingebunden?</strong><br>Über Vorschauen, Live-Links oder Render-Previews. So können Sie Änderungen früh sehen und leicht abstimmen.</p>
+        <p><strong>Kann ich eigene Ideen einbringen?</strong><br>Natürlich – wir entwickeln das Design gemeinsam und beraten bei Stil, Struktur und Wirkung.</p>
+        <p><strong>Ist das Ergebnis markengerecht?</strong><br>Ja – wir achten auf Farbwelt, Typografie und Wiedererkennung über alle Medien hinweg.</p>
       </div>
     </div>
 
     <!-- Card 5 -->
     <div class="lyra-card">
       <button class="lyra-toggle" aria-expanded="false">
-        <span>Nach Projekt &<br> Betreuung</span>
+        <span>Nach Projekt &amp;<br> Betreuung</span>
         <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
       </button>
       <div class="lyra-drop">
-        <p><strong>Erhalte ich offene Dateien?</strong><br>Ja, je nach Paket: **AI/INDD/PSD/SVG** plus Exportdateien. Nutzungsrechte sind im Angebot definiert.</p>
-        <p><strong>Adaptionen & Roll-out?</strong><br>Wir übernehmen Adaptionen für Kampagnen, Formate, Sprachen und **Druckabstimmung** mit der Produktion.</p>
-        <p><strong>Langfristige Betreuung?</strong><br>Gerne: **Design-Support**, Template-Pflege, saisonale Kampagnen & Markenweiterentwicklung.</p>
+        <p><strong>Gibt es Support nach dem Projekt?</strong><br>Ja – wir bieten Wartung, Updates oder weitere Anpassungen bei Bedarf.</p>
+        <p><strong>Kann das Projekt erweitert werden?</strong><br>Jederzeit – zusätzliche Seiten, Renderings oder Kampagnen sind problemlos möglich.</p>
+        <p><strong>Erhalte ich die Originaldateien?</strong><br>Ja – alle finalen Daten, Designs und Renderings werden nach Abschluss übergeben.</p>
       </div>
     </div>
 
     <!-- Card 6 -->
     <div class="lyra-card">
       <button class="lyra-toggle" aria-expanded="false">
-        <span>Rechte &<br> Nutzung</span>
+        <span>Rechtliches &amp;<br> Datenschutz</span>
         <i class="lyra-icon" data-feather="arrow-down-circle" aria-hidden="true"></i>
       </button>
       <div class="lyra-drop">
-        <p><strong>Wem gehören die Designs?</strong><br>Nach vollständiger Zahlung erhältst du die **vereinbarten Nutzungsrechte** (z. B. unbegrenzt für Print & Digital). Details im Angebot.</p>
-        <p><strong>Kommerzielle Nutzung?</strong><br>Ja – Website, Social, Print, OOH, Ads etc. **Erweiterte Lizenzen** (z. B. Exklusivität) sind möglich.</p>
-        <p><strong>Datenschutz & NDA?</strong><br>Selbstverständlich **DSGVO-konform**; eine **NDA** schließen wir bei Bedarf ab.</p>
+        <p><strong>Ist alles DSGVO-konform?</strong><br>Ja – inklusive SSL, Cookie-Management und datensicherem Hosting.</p>
+        <p><strong>Wie gehen Sie mit Daten um?</strong><br>Vertraulich und sicher. Auf Wunsch schließen wir eine NDA.</p>
+        <p><strong>Wem gehören die Rechte?</strong><br>Nach vollständiger Zahlung gehen alle Nutzungsrechte auf Sie über.</p>
       </div>
     </div>
 
   </div>
 </section>
 
+<!-- ============================================================
+     LYRA FAQ – ersetzt den kompletten <script>-Block am Ende
+     der Section. Das Markup und die feather-Einbindung bleiben
+     unverändert.
+
+     Geändert:
+     · doSearch scrollt nicht mehr – nur Vor/Zurück scrollt,
+       und auch das nur, wenn die Karte außerhalb des Bildes ist
+     · Suchindex kommt aus textContent statt innerText, damit
+       auch geschlossene Antworten durchsucht werden
+     · Mehrwortsuche: alle Begriffe müssen vorkommen, Reihenfolge
+       egal ("hosting ssl" findet die Technik-Karte)
+     · Highlighting hinterlässt keine leeren <span> mehr
+     · Escape leert das Feld
+     ============================================================ -->
 
 <script src="https://unpkg.com/feather-icons" defer></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   if (window.feather) feather.replace();
 
-  const vault = document.getElementById("lyra-faq");
-  const cards = [...document.querySelectorAll(".lyra-card")];
-  const input = document.getElementById("lyraSearch");
-  const prev = document.getElementById("lyraPrev");
-  const next = document.getElementById("lyraNext");
+  const vault    = document.getElementById("lyra-faq");
+  if (!vault) return;
+
+  const grid     = vault.querySelector(".lyra-grid");
+  const cards    = [...vault.querySelectorAll(".lyra-card")];
+  const input    = document.getElementById("lyraSearch");
+  const prev     = document.getElementById("lyraPrev");
+  const next     = document.getElementById("lyraNext");
   const indexLbl = document.getElementById("lyraIndex");
 
   const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const smoothOpts = prefersReduced ? {behavior:"auto"} : {behavior:"smooth"};
-
-  // ---- Utilities ------------------------------------------------------------
-  const normalize = (s) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
+  const smoothOpts = prefersReduced ? { behavior: "auto" } : { behavior: "smooth" };
 
   let matches = [], current = 0, debounceTo = null;
 
+  /* ---- Masonry ---------------------------------------------------------- */
+  let ROW = 1, GAP = 24;
+
+  function readGridMetrics(){
+    const cs  = getComputedStyle(grid);
+    const row = parseFloat(cs.gridAutoRows);
+    const gap = parseFloat(cs.getPropertyValue("--lyra-gap"));
+    if (row > 0) ROW = row;
+    if (gap >= 0) GAP = gap;
+  }
+
+  function setSpan(card){
+    const h = card.getBoundingClientRect().height;
+    const span = Math.max(1, Math.ceil((h + GAP) / ROW));
+    if (card.dataset.span !== String(span)){
+      card.dataset.span = span;
+      card.style.gridRowEnd = "span " + span;
+    }
+  }
+
+  function setAllSpans(){
+    readGridMetrics();
+    cards.forEach(setSpan);
+  }
+
+  /* ---- Hilfsfunktionen -------------------------------------------------- */
+  const normalize = (s) => s
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/\s+/g, " ")
+    .toLowerCase();
+
+  const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
   function setButtonsEnabled(enabled){
-    [prev, next].forEach(b=>{
+    [prev, next].forEach(b => {
       b.disabled = !enabled;
       b.setAttribute("aria-disabled", String(!enabled));
       b.style.opacity = enabled ? "" : ".6";
@@ -3006,186 +3031,228 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function closeAll(){
-    cards.forEach(c=>{
-      const b = c.querySelector(".lyra-toggle");
-      const d = c.querySelector(".lyra-drop");
-      b.setAttribute("aria-expanded","false");
-      d.style.maxHeight = null;
-    });
-  }
-
-  function removeMarks(){
-    vault.querySelectorAll("mark").forEach(m=>{
-      const t = document.createTextNode(m.textContent);
-      m.replaceWith(t);
-    });
-  }
-
-  // Escape RegExp Sonderzeichen
-  const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-  function highlight(node, keyword){
-    const terms = keyword.split(/\s+/).filter(Boolean).map(escapeRegExp);
-    if (!terms.length) return;
-    const rx = new RegExp("(" + terms.join("|") + ")", "gi");
-
-    if (node.nodeType === 3){
-      const span = document.createElement("span");
-      span.innerHTML = node.nodeValue.replace(rx, "<mark>$1</mark>");
-      node.parentNode.replaceChild(span, node);
-    } else if (node.nodeType === 1 && node.childNodes && !["SCRIPT","STYLE","INPUT","BUTTON"].includes(node.tagName)){
-      [...node.childNodes].forEach(child => highlight(child, keyword));
-    }
-  }
-
-  function scrollToCard(c){
-    const y = c.getBoundingClientRect().top + window.scrollY - 80;
-    window.scrollTo({ top: y, ...smoothOpts });
+  function closeCard(c){
+    c.querySelector(".lyra-toggle").setAttribute("aria-expanded", "false");
+    c.querySelector(".lyra-drop").style.maxHeight = null;
   }
 
   function openCard(c){
-    const b = c.querySelector(".lyra-toggle");
     const d = c.querySelector(".lyra-drop");
-    b.setAttribute("aria-expanded","true");
+    c.querySelector(".lyra-toggle").setAttribute("aria-expanded", "true");
     d.style.maxHeight = d.scrollHeight + "px";
   }
 
-  function recalcOpenHeights(){
-    cards.forEach(c=>{
-      const b = c.querySelector(".lyra-toggle");
-      const d = c.querySelector(".lyra-drop");
-      if (b.getAttribute("aria-expanded")==="true"){
-        d.style.maxHeight = d.scrollHeight + "px";
+  function closeAll(){ cards.forEach(closeCard); }
+
+  /* ---- Treffer markieren ------------------------------------------------
+     Alte Markierungen werden vollständig entfernt, auch die
+     Hüllelemente. Sonst wächst der DOM mit jedem Tastendruck.
+  ------------------------------------------------------------------------ */
+  function removeMarks(){
+    vault.querySelectorAll("mark[data-lyra]").forEach(m => {
+      m.replaceWith(document.createTextNode(m.textContent));
+    });
+    cards.forEach(c => c.normalize());
+  }
+
+  function highlight(root, terms){
+    if (!terms.length) return;
+    const rx = new RegExp("(" + terms.map(escapeRegExp).join("|") + ")", "gi");
+
+    /* Erst alle Textknoten sammeln, dann ersetzen – sonst läuft
+       der Walker in die eigenen neuen Knoten hinein. */
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node){
+        const p = node.parentNode;
+        if (!p) return NodeFilter.FILTER_REJECT;
+        if (["SCRIPT","STYLE","INPUT","MARK"].includes(p.tagName)) return NodeFilter.FILTER_REJECT;
+        return node.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
       }
     });
+
+    const nodes = [];
+    let n;
+    while ((n = walker.nextNode())) nodes.push(n);
+
+    nodes.forEach(node => {
+      const text = node.nodeValue;
+      rx.lastIndex = 0;
+      if (!rx.test(text)) return;
+      rx.lastIndex = 0;
+
+      const frag = document.createDocumentFragment();
+      let last = 0, m;
+
+      while ((m = rx.exec(text)) !== null){
+        if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+        const mark = document.createElement("mark");
+        mark.setAttribute("data-lyra", "");
+        mark.textContent = m[0];
+        frag.appendChild(mark);
+        last = m.index + m[0].length;
+        if (m[0] === "") rx.lastIndex++;      // Endlosschleife verhindern
+      }
+
+      if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    });
+  }
+
+  /* ---- Scrollen nur wenn nötig ------------------------------------------ */
+  function scrollToCard(c){
+    const r = c.getBoundingClientRect();
+    const top = 90;                                  // Platz für den Header
+    const bottom = window.innerHeight - 40;
+    if (r.top >= top && r.bottom <= bottom) return;  // schon im Bild
+    window.scrollTo({ top: r.top + window.scrollY - top, ...smoothOpts });
+  }
+
+  function recalcOpenHeights(){
+    cards.forEach(c => {
+      const b = c.querySelector(".lyra-toggle");
+      const d = c.querySelector(".lyra-drop");
+      if (b.getAttribute("aria-expanded") === "true") d.style.maxHeight = d.scrollHeight + "px";
+    });
+    setAllSpans();
   }
 
   function updateIndex(){
-    indexLbl.textContent = matches.length ? `${current+1} / ${matches.length}` : "0 / 0";
+    indexLbl.textContent = matches.length ? `${current + 1} / ${matches.length}` : "0 / 0";
     setButtonsEnabled(matches.length > 0);
   }
 
-  // Precompute normalisierte Inhalte für schnelle Suche
-  const cardCache = cards.map(c => ({
-    el: c,
-    textNorm: normalize(c.innerText)
-  }));
+  /* ---- Suchindex --------------------------------------------------------
+     textContent statt innerText: liefert den Text auch dann, wenn
+     die Antwort gerade zugeklappt ist. Genau daran ist die Suche
+     bisher gescheitert.
+  ------------------------------------------------------------------------ */
+  const cardCache = cards.map(c => ({ el: c, textNorm: normalize(c.textContent) }));
 
   function doSearch(keyword){
-    const qRaw = keyword.trim();
-    const q = normalize(qRaw);
+    const raw = keyword.trim();
+    const terms = normalize(raw).split(" ").filter(Boolean);
+
     removeMarks();
     closeAll();
     matches = [];
-    if (!q){ updateIndex(); return; }
+    current = 0;
 
-    cardCache.forEach(({el, textNorm})=>{
-      if (textNorm.includes(q)){
+    if (!terms.length){
+      setAllSpans();
+      updateIndex();
+      return;
+    }
+
+    cardCache.forEach(({ el, textNorm }) => {
+      /* alle Begriffe müssen vorkommen, Reihenfolge egal */
+      if (terms.every(t => textNorm.includes(t))){
         matches.push(el);
-        // Markiere realen DOM-Text (nicht den Cache)
-        highlight(el, qRaw);
+        highlight(el, raw.split(/\s+/).filter(Boolean));
       }
     });
 
-    current = 0;
-    if (matches.length){
-      openCard(matches[0]);
-      scrollToCard(matches[0]);
-    }
+    if (matches.length) openCard(matches[0]);   /* aufklappen, aber NICHT scrollen */
+
+    setAllSpans();
     updateIndex();
   }
 
-  // ---- Events ---------------------------------------------------------------
-  input.addEventListener("input", e=>{
+  function goTo(step){
+    if (!matches.length) return;
+    current = (current + step + matches.length) % matches.length;
+    closeAll();
+    openCard(matches[current]);
+    setAllSpans();
+    scrollToCard(matches[current]);             /* nur hier wird gescrollt */
+    updateIndex();
+  }
+
+  /* ---- Events ----------------------------------------------------------- */
+  input.addEventListener("input", e => {
     clearTimeout(debounceTo);
-    debounceTo = setTimeout(()=>doSearch(e.target.value), 140);
+    const val = e.target.value;
+    debounceTo = setTimeout(() => doSearch(val), 140);
   });
 
-  prev.addEventListener("click", ()=>{
-    if (!matches.length) return;
-    current = (current - 1 + matches.length) % matches.length;
-    closeAll(); openCard(matches[current]); scrollToCard(matches[current]); updateIndex();
+  input.addEventListener("keydown", e => {
+    if (e.key === "Escape"){
+      input.value = "";
+      doSearch("");
+    }
+    if (e.key === "Enter"){
+      e.preventDefault();
+      goTo(e.shiftKey ? -1 : +1);
+    }
   });
 
-  next.addEventListener("click", ()=>{
-    if (!matches.length) return;
-    current = (current + 1) % matches.length;
-    closeAll(); openCard(matches[current]); scrollToCard(matches[current]); updateIndex();
-  });
+  prev.addEventListener("click", () => goTo(-1));
+  next.addEventListener("click", () => goTo(+1));
 
-  // Akkordeon: IDs + ARIA + Click
-  cards.forEach((c, i)=>{
+  cards.forEach((c, i) => {
     const btn  = c.querySelector(".lyra-toggle");
     const drop = c.querySelector(".lyra-drop");
-    const btnId  = `lyra-toggle-${i+1}`;
-    const dropId = `lyra-drop-${i+1}`;
-    btn.id = btnId;
+    const btnId  = `lyra-toggle-${i + 1}`;
+    const dropId = `lyra-drop-${i + 1}`;
+    btn.id  = btnId;
     drop.id = dropId;
 
-    // bessere Roles/Labels
-    drop.setAttribute("role","region");
+    drop.setAttribute("role", "region");
     drop.setAttribute("aria-labelledby", btnId);
     btn.setAttribute("aria-controls", dropId);
 
-    btn.addEventListener("click", ()=>{
-      const isOpen = btn.getAttribute("aria-expanded")==="true";
-      btn.setAttribute("aria-expanded", isOpen ? "false" : "true");
-      drop.style.maxHeight = isOpen ? null : drop.scrollHeight + "px";
+    btn.addEventListener("click", () => {
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
+      isOpen ? closeCard(c) : openCard(c);
+      setSpan(c);
     });
 
-    // ResizeObserver: offene Panels passen sich automatisch an
-    const ro = new ResizeObserver(()=>{
-      if (btn.getAttribute("aria-expanded")==="true"){
-        drop.style.maxHeight = drop.scrollHeight + "px";
-      }
+    new ResizeObserver(() => setSpan(c)).observe(c);
+
+    drop.addEventListener("transitionend", e => {
+      if (e.propertyName === "max-height") setSpan(c);
     });
-    ro.observe(drop);
   });
 
-  // Tastatur-Navigation (Akkordeon-Header)
-  const toggles = cards.map(c=>c.querySelector(".lyra-toggle"));
+  /* Tastatur-Navigation der Kartenköpfe */
+  const toggles = cards.map(c => c.querySelector(".lyra-toggle"));
   function focusToggle(idx){
-    if (idx<0) idx = 0;
-    if (idx>=toggles.length) idx = toggles.length-1;
-    toggles[idx].focus();
+    toggles[Math.min(Math.max(idx, 0), toggles.length - 1)].focus();
   }
-  toggles.forEach((btn, idx)=>{
-    btn.addEventListener("keydown", (e)=>{
-      switch(e.key){
-        case "ArrowDown": e.preventDefault(); focusToggle(idx+1); break;
-        case "ArrowUp":   e.preventDefault(); focusToggle(idx-1); break;
-        case "Home":      e.preventDefault(); focusToggle(0);     break;
-        case "End":       e.preventDefault(); focusToggle(toggles.length-1); break;
+  toggles.forEach((btn, idx) => {
+    btn.addEventListener("keydown", e => {
+      switch (e.key){
+        case "ArrowDown": e.preventDefault(); focusToggle(idx + 1); break;
+        case "ArrowUp":   e.preventDefault(); focusToggle(idx - 1); break;
+        case "Home":      e.preventDefault(); focusToggle(0); break;
+        case "End":       e.preventDefault(); focusToggle(toggles.length - 1); break;
         case "Enter":
-        case " ":
-          e.preventDefault();
-          btn.click();
-          break;
+        case " ":         e.preventDefault(); btn.click(); break;
       }
     });
   });
 
-  // Shortcut: "/" fokussiert Suche
-  document.addEventListener("keydown", (e)=>{
+  /* "/" fokussiert die Suche */
+  document.addEventListener("keydown", e => {
     if (e.key === "/" && document.activeElement !== input){
       e.preventDefault();
       input.focus();
     }
   });
 
-  // Recalc on resize (responsive)
   let resizeTo;
-  window.addEventListener("resize", ()=>{
+  window.addEventListener("resize", () => {
     clearTimeout(resizeTo);
     resizeTo = setTimeout(recalcOpenHeights, 120);
   });
 
-  // Initial
+  setAllSpans();
+  window.addEventListener("load", setAllSpans);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(setAllSpans);
   setButtonsEnabled(false);
   updateIndex();
 });
 </script>
+
 
 
 <footer itemscope itemtype="https://schema.org/Organization" class="footer-clean">
@@ -3199,11 +3266,11 @@ document.addEventListener("DOMContentLoaded", () => {
       <h2 id="fc-head-title" class="sr-only">Markenbereich</h2>
       <div class="fc-brand">
         <!-- Optional: Logo als Link zur Startseite -->
-        <a class="fc-logo" href="/" itemprop="name">Fusion³</a>
+        <a class="fc-logo" href="index.html" itemprop="name">Fusion³</a>
         <p class="fc-claim">UX &amp; Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
       </div>
       <div class="fc-cta">
-        <a class="fc-btn" href="mailto:hello@fusion3.de" aria-label="Projekt anfragen per E-Mail">Projekt anfragen</a>
+        <a class="fc-btn" href="/anfrage.html" aria-label="Projekt anfragen">Projekt anfragen</a>
       </div>
     </section>
 
@@ -3212,22 +3279,21 @@ document.addEventListener("DOMContentLoaded", () => {
       <h2 id="fc-nav-title" class="sr-only">Footer-Navigation</h2>
 
       <div class="fc-col">
-        <h3 class="fc-col-title" id="fc-services">Leistungen</h3>
-        <ul class="fc-links" aria-labelledby="fc-services">
-          <li><a href="/ux-audit.html">UX-Audit</a></li>
-          <li><a href="/webdesign.html">Webdesign</a></li>
-          <li><a href="/prototyping.html">Prototyping</a></li>
-          <li><a href="/design-system.html">Design-Systeme</a></li>
+        <h3 class="fc-col-title" id="fc-nav">Navigation</h3>
+        <ul class="fc-links" aria-labelledby="fc-nav">
+          <li><a href="index.html">Start</a></li>
+          <li><a href="Gallerie.html">Portfolio</a></li>
+          <li><a href="index.html#nebula-hub">Leistungen</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
         </ul>
       </div>
 
       <div class="fc-col">
-        <h3 class="fc-col-title" id="fc-resources">Ressourcen</h3>
-        <ul class="fc-links" aria-labelledby="fc-resources">
-          <li><a href="/cases.html">Case Studies</a></li>
-          <li><a href="/blog.html">Insights &amp; Blog</a></li>
-          <li><a href="/faq.html">FAQ</a></li>
-          <li><a href="/kontakt.html">Termin buchen</a></li>
+        <h3 class="fc-col-title" id="fc-services">Leistungen</h3>
+        <ul class="fc-links" aria-labelledby="fc-services">
+          <li><a href="./WebDesign.html">Webdesign</a></li>
+          <li><a href="./3DDesign.html">3D Design</a></li>
+          <li><a href="./Grafikdesign.html">Grafikdesign</a></li>
         </ul>
       </div>
 
@@ -3236,18 +3302,17 @@ document.addEventListener("DOMContentLoaded", () => {
         <ul class="fc-links" aria-labelledby="fc-legal">
           <li><a href="/impressum.html">Impressum</a></li>
           <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
-          <li><a href="/cookies.html">Cookie-Hinweis</a></li>
         </ul>
       </div>
 
       <div class="fc-col">
         <h3 class="fc-col-title" id="fc-contact">Kontakt</h3>
         <ul class="fc-links" aria-labelledby="fc-contact">
-          <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
-          <li><a href="tel:+491234567890" itemprop="telephone">+49&nbsp;123&nbsp;4567890</a></li>
+          <li><a href="mailto:hello@fusion3.de" itemprop="email">hi.dherrnreither@gmail.com</a></li>
+          <li><a href="tel:+491708933204" itemprop="telephone">+49&nbsp;170&nbsp;8933204</a></li>
           <li>
             <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" class="fc-address">
-              <span itemprop="addressLocality">Berlin</span>, <span itemprop="addressCountry">Deutschland</span>
+              <span itemprop="addressLocality">Landshut</span>, <span itemprop="addressCountry">Deutschland</span>
             </address>
           </li>
         </ul>
@@ -3273,12 +3338,6 @@ document.addEventListener("DOMContentLoaded", () => {
               <img src="./FooterIcons/Whatsapp.svg" alt="" loading="lazy" decoding="async" width="20" height="20">
             </a>
           </li>
-          <li>
-            <a class="fc-social fc-ig" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" itemprop="sameAs">
-              <span class="sr-only">Instagram</span>
-              <img src="./FooterIcons/instagram.jpg" alt="" loading="lazy" decoding="async" width="20" height="20">
-            </a>
-          </li>
         </ul>
       </div>
     </nav>
@@ -3291,7 +3350,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   </div>
 </footer>
-
 <script>
   (function(){
     var el = document.getElementById('currentYear');

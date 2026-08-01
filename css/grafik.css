@@ -1,0 +1,1046 @@
+/* ============================================================
+   UNTERSEITEN – Stylesheet
+   Neu aufgebaut auf der Basis von aurora.css, cosmosSuite.css
+   und contact.css. Ersetzt das bisherige Stylesheet komplett.
+   Das JavaScript bleibt unverändert.
+
+   Übernommen aus dem bestehenden System:
+   · Tokens --surface, --surface-elev, --text, --muted, --border
+   · color-mix(in oklab, …) statt fester Mischfarben
+   · backdrop-filter: blur(8px) saturate(1.02) auf Flächen
+   · die getönte Textbox mit Innen-Highlight aus Aurora
+   · Kornschicht und Verlaufs-Divider aus der Cosmos Suite
+   · Schriftgewichte bis 950, letter-spacing -.01 bis -.02
+   ============================================================ */
+
+/* ============================================================
+   TOKENS
+   Greift auf die globalen Werte zurück, falls vorhanden –
+   sonst greifen die Rückfallwerte.
+   ============================================================ */
+.us-sec {
+  --u-font: var(--wrf-font, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif);
+
+  --u-surface: var(--surface, #ffffff);
+  --u-elev: var(--surface-elev, #f7f8fa);
+  --u-text: var(--text, #0b0c0e);
+  --u-muted: var(--muted, #5d6066);
+  --u-border: var(--border, #e6e8eb);
+
+  --u-ink: var(--aur-ink, #0b0c10);
+  --u-ink-muted: var(--aur-ink-muted, #0f1729);
+
+  --u-primary: var(--primary, #ff4d00);
+  --u-secondary: var(--secondary, #ff9900);
+  --u-violet: #4b00ff;
+  --u-green: var(--choice-green, #00c851);
+
+  --u-sh-1: var(--aur-shadow-light, 0 1px 2px rgba(0, 0, 0, .06));
+  --u-sh-2: var(--aur-shadow-strong, 0 1px 2px rgba(0, 0, 0, .18));
+  --u-sh-card: 0 10px 30px rgba(0, 0, 0, .06);
+  --u-sh-card-h: 0 18px 46px rgba(0, 0, 0, .12);
+
+  --u-r: 18px;
+  --u-r-md: 14px;
+  --u-r-sm: 12px;
+
+  --u-glass: blur(8px) saturate(1.02);
+
+  --u-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  position: relative;
+  font-family: var(--u-font);
+  background: var(--u-surface);
+  color: var(--u-text);
+  padding: clamp(2.5rem, 5.5vw, 5rem) 1.5rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "liga", "calt", "ss01";
+}
+
+/* dunkle Sektion – Tokens werden umgeschrieben, nicht überschrieben */
+.us-sec--dark {
+  --u-surface: #000;
+  --u-elev: #111216;
+  --u-text: #f5f7fa;
+  --u-muted: #c6cad1;
+  --u-border: #262a31;
+  --u-ink: #ffffff;
+  --u-ink-muted: #e8eeff;
+  --u-sh-1: var(--aur-shadow-strong, 0 1px 2px rgba(0, 0, 0, .18));
+  --u-sh-card: 0 18px 40px rgba(0, 0, 0, .5);
+  --u-sh-card-h: 0 28px 64px rgba(0, 0, 0, .65);
+
+  overflow: hidden;
+  background:
+    radial-gradient(760px 340px at 12% -8%, color-mix(in oklab, var(--u-secondary) 12%, transparent), transparent 58%),
+    radial-gradient(700px 320px at 88% 108%, color-mix(in oklab, var(--u-violet) 12%, transparent), transparent 58%),
+    #000;
+  color: #fff;
+}
+
+.us-shell { position: relative; z-index: 1; max-width: 1440px; margin-inline: auto; }
+.us-shell--narrow { max-width: 62rem; }
+
+/* ============================================================
+   KOPFBEREICH
+   Titel und Subline exakt wie .aurora-title / .aurora-subtitle
+   ============================================================ */
+.us-head {
+  max-width: 62rem;
+  margin: 0 auto clamp(2rem, 4vw, 3.25rem);
+  text-align: center;
+}
+
+.us-head--left { margin-inline: 0; text-align: left; }
+
+.us-eyebrow {
+  margin: 0 0 .45rem;
+  font-size: .82rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--u-muted);
+}
+
+.us-title {
+  margin: 0 0 .5rem;
+  font-size: clamp(1.9rem, 1.55rem + 1.9vw, 2.7rem);
+  font-weight: 900;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  color: var(--u-ink);
+  text-shadow: var(--u-sh-1);
+  text-wrap: balance;
+}
+
+/* Die getönte Box aus Aurora – der stärkste Wiedererkennungswert
+   im bestehenden System. */
+.us-sub {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: .9rem 1.6rem;
+  border-radius: var(--u-r-md);
+  font-size: clamp(1rem, .96rem + .55vw, 1.16rem);
+  line-height: 1.7;
+  font-weight: 500;
+  letter-spacing: .004em;
+  color: var(--u-ink-muted);
+  text-wrap: pretty;
+  background: linear-gradient(180deg, rgba(15, 23, 41, .06), rgba(15, 23, 41, .03));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 2px 8px rgba(0, 0, 0, .05);
+}
+
+.us-sec--dark .us-sub,
+:root[data-theme="dark"] .us-sub,
+body.nocturne .us-sub {
+  color: #e8eeff;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .035));
+  border: 1px solid rgba(255, 255, 255, .08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 2px 8px rgba(0, 0, 0, .45);
+}
+
+.us-head--left .us-sub { margin-inline: 0; }
+
+.us-h3 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.2rem, 1.1rem + .6vw, 1.6rem);
+  font-weight: 900;
+  letter-spacing: -.01em;
+  line-height: 1.2;
+  color: var(--u-ink);
+  text-shadow: var(--u-sh-1);
+}
+
+.us-fine {
+  margin: clamp(1.5rem, 3vw, 2.4rem) auto 0;
+  max-width: 62rem;
+  text-align: center;
+  font-size: .9rem;
+  line-height: 1.7;
+  font-weight: 550;
+  color: var(--u-muted);
+}
+
+/* ============================================================
+   KARTEN
+   ============================================================ */
+.us-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+@media (min-width: 700px)  { .us-cards--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 760px)  { .us-cards--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1080px) { .us-cards--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 760px)  { .us-cards--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1200px) { .us-cards--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* ---------- Glaskarte, wie .kontakt-area und .video-card ---------- */
+.us-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  padding: clamp(1.1rem, 2vw, 1.6rem);
+  border-radius: var(--u-r);
+  border: 1px solid var(--u-border);
+  background: color-mix(in oklab, var(--u-elev) 85%, transparent);
+  box-shadow: var(--u-sh-card);
+  backdrop-filter: var(--u-glass);
+  -webkit-backdrop-filter: var(--u-glass);
+
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 340px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .us-card:hover {
+    transform: translateY(-6px);
+    border-color: color-mix(in oklab, var(--u-primary) 45%, var(--u-border));
+    box-shadow: var(--u-sh-card-h);
+  }
+  .us-card:hover .us-card-shot img { transform: scale(1.035); }
+  .us-card:hover .us-card-ico {
+    background: linear-gradient(135deg, var(--u-secondary), var(--u-primary));
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 6px 18px color-mix(in oklab, var(--u-primary) 40%, transparent);
+  }
+}
+
+/* ---------- Verlaufskarte, wie .module-card ---------- */
+.us-card--g1 { --g1: #8b8b8b; --g2: #1d1d1c; }
+.us-card--g2 { --g1: #5a5c68; --g2: #5c5f7c; }
+.us-card--g3 { --g1: #0d0d0d; --g2: #3d4577; }
+.us-card--g4 { --g1: #04006c; --g2: #7c8fca; }
+
+.us-card--grad {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .12);
+  background: linear-gradient(135deg, var(--g1), var(--g2), var(--g1));
+  background-size: 300% 300%;
+  background-position: 0% 50%;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .08);
+  will-change: transform, box-shadow, background-position;
+  transition: transform .4s ease, box-shadow .4s ease, background-position .5s ease;
+}
+
+/* Kornschicht wie in der Cosmos Suite */
+.us-card--grad::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: var(--u-grain);
+  background-size: 160px 160px;
+  opacity: .06;
+  pointer-events: none;
+}
+
+/* Glanz-Overlay, das beim Hover aufgeht */
+.us-card--grad::after {
+  content: "";
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  z-index: 1;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, .18), transparent 70%);
+  transform: scale(.5);
+  opacity: 0;
+  transition: transform .6s ease, opacity .6s ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .us-card--grad:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, .4);
+    background-position: 100% 50%;
+    z-index: 10;
+  }
+  .us-card--grad:hover::after { transform: scale(1); opacity: .25; }
+}
+
+/* Lichtkegel unter dem Cursor, vom Script gesetzt */
+.us-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.us-glow {
+  position: absolute;
+  top: 0; left: 0;
+  width: 360px; height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side,
+    rgba(255, 255, 255, .5), rgba(255, 255, 255, .12) 45%, transparent 72%);
+  filter: blur(26px);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translate3d(calc(var(--gx, 0px) - 50%), calc(var(--gy, 0px) - 50%), 0);
+  transition: opacity .45s ease;
+  will-change: transform, opacity;
+}
+
+.us-card > *:not(.us-fx) { position: relative; z-index: 2; }
+
+/* ---------- Symbol ---------- */
+.us-card-ico {
+  width: 46px; height: 46px;
+  display: grid;
+  place-items: center;
+  margin-bottom: .95rem;
+  border-radius: var(--u-r-sm);
+  border: 2px solid var(--u-border);
+  background: var(--u-surface);
+  color: var(--u-primary);
+  transition: background .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.us-card--grad .us-card-ico {
+  border-color: rgba(255, 255, 255, .32);
+  background: rgba(255, 255, 255, .12);
+  color: #fff;
+}
+
+.us-card-ico svg { width: 21px; height: 21px; }
+
+/* ---------- Typografie in der Karte ---------- */
+.us-card-kicker {
+  margin: 0 0 .45rem;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-weight: 680;
+  color: var(--u-primary);
+}
+
+.us-card--grad .us-card-kicker { color: rgba(255, 255, 255, .82); }
+
+/* wie .module-card h3 */
+.us-card-title {
+  margin: .1rem 0 .55rem;
+  font-size: clamp(1.3rem, 1.2rem + .8vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: -.01em;
+  line-height: 1.22;
+  max-width: 28ch;
+  text-wrap: balance;
+}
+
+.us-card--grad .us-card-title { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .25); }
+
+/* wie .copy */
+.us-card-copy {
+  margin: 0;
+  font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem);
+  line-height: 1.7;
+  font-weight: 600;
+  letter-spacing: .002em;
+  color: var(--u-muted);
+  text-wrap: pretty;
+  hyphens: auto;
+  max-width: 62ch;
+  flex: 1;
+}
+
+.us-card--grad .us-card-copy {
+  color: rgba(255, 255, 255, .96);
+  font-weight: 690;
+  letter-spacing: -.002em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .18);
+}
+
+.us-card-shot {
+  margin: calc(clamp(1.1rem, 2vw, 1.6rem) * -1) calc(clamp(1.1rem, 2vw, 1.6rem) * -1) 1.1rem;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: var(--u-elev);
+}
+
+.us-card-shot img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s ease;
+}
+
+/* ---------- Aufzählung mit dem Divider aus Cosmos ---------- */
+.us-list { list-style: none; margin: .9rem 0 0; padding: 0; }
+
+.us-list li {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: .7rem 0 .8rem;
+  font-size: clamp(1rem, .96rem + .3vw, 1.1rem);
+  line-height: 1.65;
+  font-weight: 600;
+  letter-spacing: -.002em;
+  color: var(--u-text);
+  text-wrap: pretty;
+  hyphens: auto;
+  max-width: 62ch;
+}
+
+.us-list li + li { border-top: 1px solid var(--u-border); }
+
+/* der nach rechts auslaufende Trennstrich */
+.us-list li + li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: clamp(60px, 20vw, 220px);
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in oklab, var(--u-primary) 55%, transparent) 35%,
+    color-mix(in oklab, var(--u-primary) 18%, transparent) 65%,
+    transparent 100%);
+  opacity: .8;
+  pointer-events: none;
+}
+
+.us-card--grad .us-list li {
+  color: rgba(255, 255, 255, .96);
+  font-weight: 690;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .18);
+}
+
+.us-card--grad .us-list li + li { border-top-color: rgba(255, 255, 255, .22); }
+
+.us-card--grad .us-list li + li::after {
+  background: linear-gradient(90deg,
+    transparent 0%, rgba(255, 255, 255, .55) 35%, rgba(255, 255, 255, .18) 65%, transparent 100%);
+}
+
+/* ---------- Schlagworte, wie .pill ---------- */
+.us-tags { list-style: none; display: flex; flex-wrap: wrap; gap: .45rem; margin: 1rem 0 0; padding: 0; }
+
+.us-tags li {
+  display: flex;
+  align-items: center;
+  padding: .35rem .7rem;
+  border-radius: var(--u-r-sm);
+  border: 2px solid var(--u-border);
+  background: var(--pill-bg, #f3f5f7);
+  color: var(--pill-text, var(--u-text));
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .us-card:hover .us-tags li {
+    border-color: color-mix(in oklab, var(--u-primary) 35%, var(--u-border));
+  }
+}
+
+.us-card--grad .us-tags li {
+  border-color: rgba(255, 255, 255, .3);
+  background: rgba(255, 255, 255, .12);
+  color: #fff;
+}
+
+/* ============================================================
+   TABELLE
+   ============================================================ */
+.us-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--u-r);
+  border: 1px solid var(--u-border);
+  background: color-mix(in oklab, var(--u-elev) 85%, transparent);
+  box-shadow: var(--u-sh-card);
+  backdrop-filter: var(--u-glass);
+  -webkit-backdrop-filter: var(--u-glass);
+}
+
+.us-table { width: 100%; border-collapse: collapse; font-size: 1rem; min-width: 680px; }
+
+.us-caption {
+  text-align: left;
+  padding: 1rem 1.3rem .2rem;
+  font-size: .84rem;
+  font-weight: 650;
+  color: var(--u-muted);
+}
+
+.us-table th, .us-table td {
+  padding: 1rem 1.3rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--u-border);
+}
+
+.us-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding-top: .9rem;
+  padding-bottom: .9rem;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-weight: 680;
+  color: var(--u-muted);
+  background: var(--u-elev);
+  border-bottom: 2px solid var(--u-border);
+}
+
+.us-table tbody tr { transition: background .2s ease; }
+.us-table tbody tr:last-child th,
+.us-table tbody tr:last-child td { border-bottom: 0; }
+
+@media (hover: hover) and (pointer: fine) {
+  .us-table tbody tr:hover { background: color-mix(in oklab, var(--u-primary) 5%, transparent); }
+}
+
+/* Erste Spalte betont – Markierung erscheint beim Überfahren */
+.us-table tbody th {
+  position: relative;
+  padding-left: 1.6rem;
+  font-size: 1.06rem;
+  font-weight: 900;
+  letter-spacing: -.01em;
+  color: var(--u-ink);
+}
+
+.us-table tbody th::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 1rem; bottom: 1rem;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--u-secondary), var(--u-primary));
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .us-table tbody tr:hover th::before { opacity: 1; }
+}
+
+.us-table td { color: var(--u-muted); font-weight: 550; line-height: 1.6; }
+
+.us-mono {
+  display: inline-block;
+  padding: .15rem .5rem;
+  border-radius: 8px;
+  border: 2px solid color-mix(in oklab, var(--u-primary) 22%, transparent);
+  background: color-mix(in oklab, var(--u-primary) 8%, transparent);
+  color: var(--u-ink);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  font-size: .92em;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+}
+
+.us-hint {
+  display: block;
+  margin-top: .35rem;
+  font-size: .88rem;
+  font-weight: 500;
+  color: var(--u-muted);
+  line-height: 1.55;
+}
+
+/* mobil als Karten */
+@media (max-width: 760px) {
+  .us-table-wrap {
+    overflow: visible;
+    border: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .us-caption { padding: 0 0 .9rem; }
+  .us-table { min-width: 0; display: block; font-size: .95rem; }
+  .us-table thead { display: none; }
+  .us-table tbody, .us-table tr { display: block; }
+
+  .us-table tr {
+    margin-bottom: .8rem;
+    padding: 1.1rem 1.2rem;
+    border-radius: var(--u-r-md);
+    border: 1px solid var(--u-border);
+    background: color-mix(in oklab, var(--u-elev) 85%, transparent) !important;
+    box-shadow: var(--u-sh-card);
+  }
+
+  .us-table th, .us-table td { display: block; padding: 0; border: 0; }
+
+  .us-table tbody th {
+    margin-bottom: .8rem;
+    padding-left: .8rem;
+    font-size: 1.1rem;
+  }
+
+  .us-table tbody th::before { opacity: 1; top: .1rem; bottom: .1rem; }
+
+  .us-table td { padding: .65rem 0; border-top: 1px solid var(--u-border); }
+
+  .us-table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: .2rem;
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-weight: 680;
+    color: var(--u-muted);
+  }
+}
+
+/* ============================================================
+   ABLAUF – Fortschrittsbalken wie .stepper-fill
+   ============================================================ */
+.us-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+
+@media (min-width: 900px) { .us-steps--row { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.us-step {
+  position: relative;
+  overflow: hidden;
+  padding: 1.4rem 1.4rem 1.3rem;
+  border-radius: var(--u-r);
+  border: 1px solid var(--u-border);
+  background: color-mix(in oklab, var(--u-elev) 85%, transparent);
+  box-shadow: var(--u-sh-card);
+  backdrop-filter: var(--u-glass);
+  -webkit-backdrop-filter: var(--u-glass);
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+
+/* Schiene oben */
+.us-step::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 6px;
+  background: color-mix(in oklab, var(--u-primary) 12%, transparent);
+}
+
+/* Füllung – wird je Position länger */
+.us-step::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: 1;
+  height: 6px;
+  width: 25%;
+  background: linear-gradient(90deg, var(--u-secondary), var(--u-primary));
+  box-shadow: 0 2px 10px color-mix(in oklab, var(--u-primary) 35%, transparent);
+  transition: width .45s cubic-bezier(.16, 1, .3, 1);
+}
+
+.us-steps li:nth-child(2) .us-step::before { width: 50%; }
+.us-steps li:nth-child(3) .us-step::before { width: 75%; }
+.us-steps li:nth-child(4) .us-step::before { width: 100%; }
+
+@media (hover: hover) and (pointer: fine) {
+  .us-step:hover {
+    transform: translateY(-5px);
+    border-color: color-mix(in oklab, var(--u-primary) 45%, var(--u-border));
+    box-shadow: var(--u-sh-card-h);
+  }
+  .us-step:hover::before { width: 100%; }
+}
+
+.us-step-no {
+  display: inline-grid;
+  place-items: center;
+  width: 40px; height: 40px;
+  margin-bottom: .9rem;
+  border-radius: var(--u-r-sm);
+  background: linear-gradient(135deg, var(--u-secondary), var(--u-primary));
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 950;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.01em;
+  box-shadow: 0 6px 18px color-mix(in oklab, var(--u-primary) 40%, transparent);
+}
+
+.us-step strong {
+  display: block;
+  margin-bottom: .3rem;
+  font-size: clamp(1.06rem, 1rem + .5vw, 1.24rem);
+  font-weight: 900;
+  letter-spacing: -.01em;
+  line-height: 1.25;
+  color: var(--u-ink);
+}
+
+.us-step span:not(.us-step-no):not(.us-step-out) {
+  font-size: 1rem;
+  line-height: 1.65;
+  font-weight: 550;
+  color: var(--u-muted);
+  text-wrap: pretty;
+}
+
+.us-step-out {
+  display: block;
+  margin-top: .9rem;
+  padding-top: .75rem;
+  border-top: 1px solid var(--u-border);
+  font-size: .82rem;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-weight: 680;
+  color: var(--u-primary);
+}
+
+/* ============================================================
+   AUSKLAPPBEREICH
+   ============================================================ */
+.us-faq { display: grid; gap: .7rem; }
+
+.us-q {
+  border-radius: var(--u-r-md);
+  border: 2px solid var(--u-border);
+  background: color-mix(in oklab, var(--u-elev) 85%, transparent);
+  box-shadow: var(--u-sh-card);
+  backdrop-filter: var(--u-glass);
+  -webkit-backdrop-filter: var(--u-glass);
+  overflow: hidden;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .us-q:hover { box-shadow: 0 0 0 3px color-mix(in oklab, var(--u-primary) 22%, transparent), var(--u-sh-card); }
+}
+
+.us-q[open] { border-color: color-mix(in oklab, var(--u-primary) 45%, var(--u-border)); }
+
+.us-q summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.05rem 1.3rem;
+  cursor: pointer;
+  user-select: none;
+  font-size: clamp(1.04rem, 1rem + .4vw, 1.18rem);
+  font-weight: 900;
+  letter-spacing: -.01em;
+  line-height: 1.35;
+  color: var(--u-ink);
+  list-style: none;
+  text-wrap: balance;
+  transition: color .15s ease;
+}
+
+.us-q summary::-webkit-details-marker { display: none; }
+.us-q summary:hover { color: var(--u-primary); }
+
+.us-q summary:focus-visible {
+  outline: 2px solid var(--u-primary);
+  outline-offset: -3px;
+  border-radius: var(--u-r-md);
+}
+
+/* Plus, das sich beim Öffnen dreht */
+.us-q-plus {
+  position: relative;
+  flex: 0 0 auto;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--u-border);
+  background: var(--u-surface);
+  transition: background .25s ease, border-color .25s ease, transform .3s cubic-bezier(.16, 1, .3, 1);
+}
+
+.us-q-plus::before,
+.us-q-plus::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 12px; height: 2px;
+  margin: -1px 0 0 -6px;
+  border-radius: 2px;
+  background: var(--u-primary);
+  transition: transform .3s cubic-bezier(.16, 1, .3, 1), opacity .25s ease, background .25s ease;
+}
+
+.us-q-plus::after { transform: rotate(90deg); }
+
+.us-q[open] .us-q-plus {
+  background: linear-gradient(135deg, var(--u-secondary), var(--u-primary));
+  border-color: transparent;
+  transform: rotate(180deg);
+  box-shadow: 0 6px 18px color-mix(in oklab, var(--u-primary) 40%, transparent);
+}
+
+.us-q[open] .us-q-plus::before,
+.us-q[open] .us-q-plus::after { background: #fff; }
+.us-q[open] .us-q-plus::after { transform: rotate(0deg); opacity: 0; }
+
+/* Rückfall ohne .us-q-plus im Markup */
+.us-q summary:not(:has(.us-q-plus))::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 9px; height: 9px;
+  border-right: 2px solid var(--u-primary);
+  border-bottom: 2px solid var(--u-primary);
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform .25s ease;
+}
+
+.us-q[open] summary:not(:has(.us-q-plus))::after { transform: rotate(225deg) translateY(-2px); }
+
+.us-q-body { padding: 0 1.3rem 1.3rem; }
+
+.us-q-body p {
+  margin: 0 0 .9rem;
+  font-size: 1rem;
+  line-height: 1.75;
+  font-weight: 550;
+  color: var(--u-muted);
+  text-wrap: pretty;
+}
+
+.us-q-body p:last-child { margin-bottom: 0; }
+.us-q-body strong { color: var(--u-ink); font-weight: 800; }
+
+/* weiches Aufklappen, wo der Browser es kann */
+@supports (interpolate-size: allow-keywords) {
+  .us-q { interpolate-size: allow-keywords; }
+  .us-q::details-content {
+    block-size: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: block-size .4s cubic-bezier(.16, 1, .3, 1), opacity .3s ease, content-visibility .4s allow-discrete;
+  }
+  .us-q[open]::details-content { block-size: auto; opacity: 1; }
+}
+
+/* ============================================================
+   MERKKASTEN – Aufbau wie .service-block, Rand wie .onb-ask
+   ============================================================ */
+.us-note {
+  position: relative;
+  overflow: hidden;
+  margin: 1.4rem 0 0;
+  padding: 1.15rem 1.4rem 1.15rem 3.5rem;
+  border-radius: var(--u-r-md);
+  border: 1px dashed var(--u-border);
+  background: color-mix(in oklab, var(--u-surface) 85%, transparent);
+  font-size: 1rem;
+  line-height: 1.72;
+  font-weight: 550;
+  color: var(--u-muted);
+  text-wrap: pretty;
+}
+
+.us-note::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--u-secondary), var(--u-primary), var(--u-violet));
+}
+
+.us-note::after {
+  content: "!";
+  position: absolute;
+  left: 1.2rem; top: 1.2rem;
+  width: 24px; height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--u-primary) 14%, transparent);
+  color: var(--u-primary);
+  font-size: .85rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.us-note strong { color: var(--u-ink); font-weight: 900; }
+
+/* ============================================================
+   KOPIERBARER WERT – Zustandslogik wie .pill
+   ============================================================ */
+.us-copy {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .3rem .65rem;
+  border-radius: 10px;
+  border: 2px solid var(--u-border);
+  background: var(--pill-bg, #f3f5f7);
+  color: var(--pill-text, var(--u-text));
+  font: inherit;
+  font-size: .9rem;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  user-select: none;
+  transition: transform .06s ease, background .15s ease, border-color .15s ease,
+              color .15s ease, box-shadow .15s ease;
+}
+
+/* kleines Kopiersymbol */
+.us-copy::before {
+  content: "";
+  width: 11px; height: 11px;
+  border: 1.8px solid currentColor;
+  border-radius: 2px;
+  opacity: .5;
+  box-shadow: 2px -2px 0 -.7px var(--pill-bg, #f3f5f7), 3px -3px 0 -.7px currentColor;
+  transition: opacity .15s ease;
+}
+
+.us-copy:hover {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--u-primary) 25%, transparent);
+  border-color: color-mix(in oklab, var(--u-primary) 45%, var(--u-border));
+}
+
+.us-copy:hover::before { opacity: .85; }
+.us-copy:active { transform: scale(.992); }
+.us-copy:focus-visible { outline: 2px solid var(--u-primary); outline-offset: 2px; }
+
+.us-copy.is-copied {
+  background: var(--u-green);
+  border-color: var(--u-green);
+  color: var(--choice-ink, #fff);
+  box-shadow: 0 6px 18px color-mix(in oklab, var(--u-green) 35%, transparent);
+}
+
+.us-copy.is-copied::before {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  width: 9px; height: 5px;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg) translateY(-1px);
+  opacity: 1;
+}
+
+.us-copy.is-copied::after {
+  content: "kopiert";
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .04em;
+}
+
+/* ============================================================
+   DARK MODE für die hellen Sektionen
+   ============================================================ */
+:root[data-theme="dark"] .us-sec:not(.us-sec--dark),
+body.nocturne .us-sec:not(.us-sec--dark) {
+  --u-surface: #000;
+  --u-elev: #111216;
+  --u-text: #f5f7fa;
+  --u-muted: #c6cad1;
+  --u-border: #262a31;
+  --u-ink: #ffffff;
+  --u-ink-muted: #e8eeff;
+  --u-sh-card: 0 18px 40px rgba(0, 0, 0, .5);
+  --u-sh-card-h: 0 28px 64px rgba(0, 0, 0, .65);
+
+  background: #000;
+  color: #fff;
+}
+
+:root[data-theme="dark"] .us-title,
+body.nocturne .us-title { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .35); }
+
+:root[data-theme="dark"] .us-card-shot,
+body.nocturne .us-card-shot { background: #14161d; }
+
+:root[data-theme="dark"] .us-tags li,
+:root[data-theme="dark"] .us-copy,
+body.nocturne .us-tags li,
+body.nocturne .us-copy {
+  background: var(--pill-bg, #1b1d22);
+  color: var(--pill-text, #e8ecf2);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] .us-sec:not(.us-sec--dark) {
+    --u-surface: #000;
+    --u-elev: #111216;
+    --u-text: #f5f7fa;
+    --u-muted: #c6cad1;
+    --u-border: #262a31;
+    --u-ink: #ffffff;
+    --u-ink-muted: #e8eeff;
+    --u-sh-card: 0 18px 40px rgba(0, 0, 0, .5);
+    --u-sh-card-h: 0 28px 64px rgba(0, 0, 0, .65);
+    background: #000;
+    color: #fff;
+  }
+
+  :root[data-theme="auto"] .us-title { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .35); }
+  :root[data-theme="auto"] .us-card-shot { background: #14161d; }
+  :root[data-theme="auto"] .us-tags li,
+  :root[data-theme="auto"] .us-copy { background: #1b1d22; color: #e8ecf2; }
+}
+
+/* ============================================================
+   MOBIL
+   ============================================================ */
+@media (max-width: 700px) {
+  .us-sec { padding: 2rem 1rem 2.5rem; }
+  .us-head { margin-bottom: 1.6rem; }
+  .us-sub { padding: .8rem 1rem; font-size: .98rem; line-height: 1.62; }
+  .us-card { padding: 1.2rem 1.1rem 1.3rem; border-radius: var(--u-r-md); }
+  .us-card-title { font-size: 1.4rem; }
+  .us-card-copy, .us-list li { font-size: 1rem; line-height: 1.6; }
+  .us-card-ico { width: 42px; height: 42px; margin-bottom: .8rem; }
+  .us-card-ico svg { width: 19px; height: 19px; }
+  .us-step { padding: 1.2rem 1.1rem 1.15rem; }
+  .us-q summary { padding: .95rem 1.1rem; font-size: 1rem; }
+  .us-q-body { padding: 0 1.1rem 1.1rem; }
+  .us-note { padding: 1rem 1.1rem 1rem 3.1rem; font-size: .95rem; }
+}
+
+/* Auf Touch-Geräten keine Hover-Zustände einfrieren */
+@media (hover: none), (pointer: coarse) {
+  .us-card:hover, .us-card:active,
+  .us-step:hover, .us-step:active {
+    transform: none !important;
+    box-shadow: var(--u-sh-card) !important;
+    background-position: initial !important;
+    z-index: auto !important;
+  }
+  .us-card--grad::after { opacity: 0 !important; transform: none !important; }
+}
+
+/* ============================================================
+   RUHIGE BEWEGUNG
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .us-card, .us-card--grad, .us-card--grad::after, .us-glow, .us-card-shot img,
+  .us-copy, .us-step, .us-step::before, .us-card-ico, .us-q, .us-q-plus,
+  .us-q-plus::before, .us-q-plus::after, .us-table tbody tr,
+  .us-table tbody th::before, .us-tags li {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .us-card:hover, .us-step:hover { transform: none; }
+  .us-q::details-content { transition: none !important; }
+}
