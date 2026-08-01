@@ -354,3 +354,93 @@
     box-shadow: inset 0 0 0 1px var(--fc-social-inset);
     transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Nur Hilfsklassen – das Layout bleibt unangetastet */
+.hero-section .hero-line {
+  display: block;
+  overflow: hidden;          /* wird nach der Animation aufgehoben */
+}
+
+.hero-section .hero-line > span {
+  display: inline-block;
+  will-change: transform;
+}
+
+.hero-image-background {
+  will-change: transform, clip-path;
+}
+
+/* Pfeil im zweiten Button bewegt sich beim Hover mit */
+.btn-secondary .icon-arrow {
+  transition: transform .35s cubic-bezier(.16, 1, .3, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-secondary:hover .icon-arrow { transform: translate(3px, -3px); }
+}
+
+/* Lichtstreifen über dem primären Button */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: 0;
+  width: 35%;
+  height: 220%;
+  z-index: 1;
+  background: linear-gradient(90deg,
+    transparent, rgba(255, 255, 255, .35) 50%, transparent);
+  transform: translate3d(-220%, 0, 0) rotate(14deg);
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover::after {
+    transition: transform .85s cubic-bezier(.4, 0, .2, 1);
+    transform: translate3d(420%, 0, 0) rotate(14deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-section .hero-line { overflow: visible; }
+  .btn-primary::after { display: none; }
+  .btn-secondary .icon-arrow { transition: none; }
+}

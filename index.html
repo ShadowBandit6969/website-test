@@ -372,7 +372,7 @@
             </svg>
           </button>
           <ul id="altar-contact" class="underrealm" hidden>
-     <li><a class="astral-link astral-link--sub" href="#kontakt">Anfrage stellen</a></li>   <li><a class="astral-link astral-link--sub" href="/impressum.html">Impressum</a></li>
+     <li><a class="astral-link astral-link--sub" href="/anfrage.html">Anfrage stellen</a></li>   <li><a class="astral-link astral-link--sub" href="/impressum.html">Impressum</a></li>
           </ul>
         </li>
       </ul>
@@ -403,7 +403,7 @@
       <!-- CTA (Link bleibt Link; kein role="button" nötig) -->
       <a
         class="charm-cta charm-cta--prime"
-        href="#kontakt"
+        href="./anfrage.html"
         id="sigilOffer"
         aria-label="Angebot anfordern"
         data-cta
@@ -890,7 +890,7 @@
         <div class="hero-cta-buttons">
           <a href="#kontakt" class="btn-primary">Jetzt unverbindlich anfragen</a>
 
-          <a href="#referenzen" class="btn-secondary">
+          <a href="/Gallerie.html" class="btn-secondary">
             Referenzen ansehen
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -2283,28 +2283,79 @@ body.nocturne .dark-image {
 
   </div>
 </section>
+
+<!-- ============================================================
+     LYRA FAQ – ersetzt den kompletten <script>-Block am Ende
+     der Section. Das Markup und die feather-Einbindung bleiben
+     unverändert.
+
+     Geändert:
+     · doSearch scrollt nicht mehr – nur Vor/Zurück scrollt,
+       und auch das nur, wenn die Karte außerhalb des Bildes ist
+     · Suchindex kommt aus textContent statt innerText, damit
+       auch geschlossene Antworten durchsucht werden
+     · Mehrwortsuche: alle Begriffe müssen vorkommen, Reihenfolge
+       egal ("hosting ssl" findet die Technik-Karte)
+     · Highlighting hinterlässt keine leeren <span> mehr
+     · Escape leert das Feld
+     ============================================================ -->
+
 <script src="https://unpkg.com/feather-icons" defer></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   if (window.feather) feather.replace();
 
-  const vault = document.getElementById("lyra-faq");
-  const cards = [...document.querySelectorAll(".lyra-card")];
-  const input = document.getElementById("lyraSearch");
-  const prev = document.getElementById("lyraPrev");
-  const next = document.getElementById("lyraNext");
+  const vault    = document.getElementById("lyra-faq");
+  if (!vault) return;
+
+  const grid     = vault.querySelector(".lyra-grid");
+  const cards    = [...vault.querySelectorAll(".lyra-card")];
+  const input    = document.getElementById("lyraSearch");
+  const prev     = document.getElementById("lyraPrev");
+  const next     = document.getElementById("lyraNext");
   const indexLbl = document.getElementById("lyraIndex");
 
   const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const smoothOpts = prefersReduced ? {behavior:"auto"} : {behavior:"smooth"};
-
-  // ---- Utilities ------------------------------------------------------------
-  const normalize = (s) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
+  const smoothOpts = prefersReduced ? { behavior: "auto" } : { behavior: "smooth" };
 
   let matches = [], current = 0, debounceTo = null;
 
+  /* ---- Masonry ---------------------------------------------------------- */
+  let ROW = 1, GAP = 24;
+
+  function readGridMetrics(){
+    const cs  = getComputedStyle(grid);
+    const row = parseFloat(cs.gridAutoRows);
+    const gap = parseFloat(cs.getPropertyValue("--lyra-gap"));
+    if (row > 0) ROW = row;
+    if (gap >= 0) GAP = gap;
+  }
+
+  function setSpan(card){
+    const h = card.getBoundingClientRect().height;
+    const span = Math.max(1, Math.ceil((h + GAP) / ROW));
+    if (card.dataset.span !== String(span)){
+      card.dataset.span = span;
+      card.style.gridRowEnd = "span " + span;
+    }
+  }
+
+  function setAllSpans(){
+    readGridMetrics();
+    cards.forEach(setSpan);
+  }
+
+  /* ---- Hilfsfunktionen -------------------------------------------------- */
+  const normalize = (s) => s
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/\s+/g, " ")
+    .toLowerCase();
+
+  const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
   function setButtonsEnabled(enabled){
-    [prev, next].forEach(b=>{
+    [prev, next].forEach(b => {
       b.disabled = !enabled;
       b.setAttribute("aria-disabled", String(!enabled));
       b.style.opacity = enabled ? "" : ".6";
@@ -2312,188 +2363,227 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function closeAll(){
-    cards.forEach(c=>{
-      const b = c.querySelector(".lyra-toggle");
-      const d = c.querySelector(".lyra-drop");
-      b.setAttribute("aria-expanded","false");
-      d.style.maxHeight = null;
-    });
-  }
-
-  function removeMarks(){
-    vault.querySelectorAll("mark").forEach(m=>{
-      const t = document.createTextNode(m.textContent);
-      m.replaceWith(t);
-    });
-  }
-
-  // Escape RegExp Sonderzeichen
-  const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-  function highlight(node, keyword){
-    const terms = keyword.split(/\s+/).filter(Boolean).map(escapeRegExp);
-    if (!terms.length) return;
-    const rx = new RegExp("(" + terms.join("|") + ")", "gi");
-
-    if (node.nodeType === 3){
-      const span = document.createElement("span");
-      span.innerHTML = node.nodeValue.replace(rx, "<mark>$1</mark>");
-      node.parentNode.replaceChild(span, node);
-    } else if (node.nodeType === 1 && node.childNodes && !["SCRIPT","STYLE","INPUT","BUTTON"].includes(node.tagName)){
-      [...node.childNodes].forEach(child => highlight(child, keyword));
-    }
-  }
-
-  function scrollToCard(c){
-    const y = c.getBoundingClientRect().top + window.scrollY - 80;
-    window.scrollTo({ top: y, ...smoothOpts });
+  function closeCard(c){
+    c.querySelector(".lyra-toggle").setAttribute("aria-expanded", "false");
+    c.querySelector(".lyra-drop").style.maxHeight = null;
   }
 
   function openCard(c){
-    const b = c.querySelector(".lyra-toggle");
     const d = c.querySelector(".lyra-drop");
-    b.setAttribute("aria-expanded","true");
+    c.querySelector(".lyra-toggle").setAttribute("aria-expanded", "true");
     d.style.maxHeight = d.scrollHeight + "px";
   }
 
-  function recalcOpenHeights(){
-    cards.forEach(c=>{
-      const b = c.querySelector(".lyra-toggle");
-      const d = c.querySelector(".lyra-drop");
-      if (b.getAttribute("aria-expanded")==="true"){
-        d.style.maxHeight = d.scrollHeight + "px";
+  function closeAll(){ cards.forEach(closeCard); }
+
+  /* ---- Treffer markieren ------------------------------------------------
+     Alte Markierungen werden vollständig entfernt, auch die
+     Hüllelemente. Sonst wächst der DOM mit jedem Tastendruck.
+  ------------------------------------------------------------------------ */
+  function removeMarks(){
+    vault.querySelectorAll("mark[data-lyra]").forEach(m => {
+      m.replaceWith(document.createTextNode(m.textContent));
+    });
+    cards.forEach(c => c.normalize());
+  }
+
+  function highlight(root, terms){
+    if (!terms.length) return;
+    const rx = new RegExp("(" + terms.map(escapeRegExp).join("|") + ")", "gi");
+
+    /* Erst alle Textknoten sammeln, dann ersetzen – sonst läuft
+       der Walker in die eigenen neuen Knoten hinein. */
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node){
+        const p = node.parentNode;
+        if (!p) return NodeFilter.FILTER_REJECT;
+        if (["SCRIPT","STYLE","INPUT","MARK"].includes(p.tagName)) return NodeFilter.FILTER_REJECT;
+        return node.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
       }
     });
+
+    const nodes = [];
+    let n;
+    while ((n = walker.nextNode())) nodes.push(n);
+
+    nodes.forEach(node => {
+      const text = node.nodeValue;
+      rx.lastIndex = 0;
+      if (!rx.test(text)) return;
+      rx.lastIndex = 0;
+
+      const frag = document.createDocumentFragment();
+      let last = 0, m;
+
+      while ((m = rx.exec(text)) !== null){
+        if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+        const mark = document.createElement("mark");
+        mark.setAttribute("data-lyra", "");
+        mark.textContent = m[0];
+        frag.appendChild(mark);
+        last = m.index + m[0].length;
+        if (m[0] === "") rx.lastIndex++;      // Endlosschleife verhindern
+      }
+
+      if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    });
+  }
+
+  /* ---- Scrollen nur wenn nötig ------------------------------------------ */
+  function scrollToCard(c){
+    const r = c.getBoundingClientRect();
+    const top = 90;                                  // Platz für den Header
+    const bottom = window.innerHeight - 40;
+    if (r.top >= top && r.bottom <= bottom) return;  // schon im Bild
+    window.scrollTo({ top: r.top + window.scrollY - top, ...smoothOpts });
+  }
+
+  function recalcOpenHeights(){
+    cards.forEach(c => {
+      const b = c.querySelector(".lyra-toggle");
+      const d = c.querySelector(".lyra-drop");
+      if (b.getAttribute("aria-expanded") === "true") d.style.maxHeight = d.scrollHeight + "px";
+    });
+    setAllSpans();
   }
 
   function updateIndex(){
-    indexLbl.textContent = matches.length ? `${current+1} / ${matches.length}` : "0 / 0";
+    indexLbl.textContent = matches.length ? `${current + 1} / ${matches.length}` : "0 / 0";
     setButtonsEnabled(matches.length > 0);
   }
 
-  // Precompute normalisierte Inhalte für schnelle Suche
-  const cardCache = cards.map(c => ({
-    el: c,
-    textNorm: normalize(c.innerText)
-  }));
+  /* ---- Suchindex --------------------------------------------------------
+     textContent statt innerText: liefert den Text auch dann, wenn
+     die Antwort gerade zugeklappt ist. Genau daran ist die Suche
+     bisher gescheitert.
+  ------------------------------------------------------------------------ */
+  const cardCache = cards.map(c => ({ el: c, textNorm: normalize(c.textContent) }));
 
   function doSearch(keyword){
-    const qRaw = keyword.trim();
-    const q = normalize(qRaw);
+    const raw = keyword.trim();
+    const terms = normalize(raw).split(" ").filter(Boolean);
+
     removeMarks();
     closeAll();
     matches = [];
-    if (!q){ updateIndex(); return; }
+    current = 0;
 
-    cardCache.forEach(({el, textNorm})=>{
-      if (textNorm.includes(q)){
+    if (!terms.length){
+      setAllSpans();
+      updateIndex();
+      return;
+    }
+
+    cardCache.forEach(({ el, textNorm }) => {
+      /* alle Begriffe müssen vorkommen, Reihenfolge egal */
+      if (terms.every(t => textNorm.includes(t))){
         matches.push(el);
-        // Markiere realen DOM-Text (nicht den Cache)
-        highlight(el, qRaw);
+        highlight(el, raw.split(/\s+/).filter(Boolean));
       }
     });
 
-    current = 0;
-    if (matches.length){
-      openCard(matches[0]);
-      scrollToCard(matches[0]);
-    }
+    if (matches.length) openCard(matches[0]);   /* aufklappen, aber NICHT scrollen */
+
+    setAllSpans();
     updateIndex();
   }
 
-  // ---- Events ---------------------------------------------------------------
-  input.addEventListener("input", e=>{
+  function goTo(step){
+    if (!matches.length) return;
+    current = (current + step + matches.length) % matches.length;
+    closeAll();
+    openCard(matches[current]);
+    setAllSpans();
+    scrollToCard(matches[current]);             /* nur hier wird gescrollt */
+    updateIndex();
+  }
+
+  /* ---- Events ----------------------------------------------------------- */
+  input.addEventListener("input", e => {
     clearTimeout(debounceTo);
-    debounceTo = setTimeout(()=>doSearch(e.target.value), 140);
+    const val = e.target.value;
+    debounceTo = setTimeout(() => doSearch(val), 140);
   });
 
-  prev.addEventListener("click", ()=>{
-    if (!matches.length) return;
-    current = (current - 1 + matches.length) % matches.length;
-    closeAll(); openCard(matches[current]); scrollToCard(matches[current]); updateIndex();
+  input.addEventListener("keydown", e => {
+    if (e.key === "Escape"){
+      input.value = "";
+      doSearch("");
+    }
+    if (e.key === "Enter"){
+      e.preventDefault();
+      goTo(e.shiftKey ? -1 : +1);
+    }
   });
 
-  next.addEventListener("click", ()=>{
-    if (!matches.length) return;
-    current = (current + 1) % matches.length;
-    closeAll(); openCard(matches[current]); scrollToCard(matches[current]); updateIndex();
-  });
+  prev.addEventListener("click", () => goTo(-1));
+  next.addEventListener("click", () => goTo(+1));
 
-  // Akkordeon: IDs + ARIA + Click
-  cards.forEach((c, i)=>{
+  cards.forEach((c, i) => {
     const btn  = c.querySelector(".lyra-toggle");
     const drop = c.querySelector(".lyra-drop");
-    const btnId  = `lyra-toggle-${i+1}`;
-    const dropId = `lyra-drop-${i+1}`;
-    btn.id = btnId;
+    const btnId  = `lyra-toggle-${i + 1}`;
+    const dropId = `lyra-drop-${i + 1}`;
+    btn.id  = btnId;
     drop.id = dropId;
 
-    // bessere Roles/Labels
-    drop.setAttribute("role","region");
+    drop.setAttribute("role", "region");
     drop.setAttribute("aria-labelledby", btnId);
     btn.setAttribute("aria-controls", dropId);
 
-    btn.addEventListener("click", ()=>{
-      const isOpen = btn.getAttribute("aria-expanded")==="true";
-      btn.setAttribute("aria-expanded", isOpen ? "false" : "true");
-      drop.style.maxHeight = isOpen ? null : drop.scrollHeight + "px";
+    btn.addEventListener("click", () => {
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
+      isOpen ? closeCard(c) : openCard(c);
+      setSpan(c);
     });
 
-    // ResizeObserver: offene Panels passen sich automatisch an
-    const ro = new ResizeObserver(()=>{
-      if (btn.getAttribute("aria-expanded")==="true"){
-        drop.style.maxHeight = drop.scrollHeight + "px";
-      }
+    new ResizeObserver(() => setSpan(c)).observe(c);
+
+    drop.addEventListener("transitionend", e => {
+      if (e.propertyName === "max-height") setSpan(c);
     });
-    ro.observe(drop);
   });
 
-  // Tastatur-Navigation (Akkordeon-Header)
-  const toggles = cards.map(c=>c.querySelector(".lyra-toggle"));
+  /* Tastatur-Navigation der Kartenköpfe */
+  const toggles = cards.map(c => c.querySelector(".lyra-toggle"));
   function focusToggle(idx){
-    if (idx<0) idx = 0;
-    if (idx>=toggles.length) idx = toggles.length-1;
-    toggles[idx].focus();
+    toggles[Math.min(Math.max(idx, 0), toggles.length - 1)].focus();
   }
-  toggles.forEach((btn, idx)=>{
-    btn.addEventListener("keydown", (e)=>{
-      switch(e.key){
-        case "ArrowDown": e.preventDefault(); focusToggle(idx+1); break;
-        case "ArrowUp":   e.preventDefault(); focusToggle(idx-1); break;
-        case "Home":      e.preventDefault(); focusToggle(0);     break;
-        case "End":       e.preventDefault(); focusToggle(toggles.length-1); break;
+  toggles.forEach((btn, idx) => {
+    btn.addEventListener("keydown", e => {
+      switch (e.key){
+        case "ArrowDown": e.preventDefault(); focusToggle(idx + 1); break;
+        case "ArrowUp":   e.preventDefault(); focusToggle(idx - 1); break;
+        case "Home":      e.preventDefault(); focusToggle(0); break;
+        case "End":       e.preventDefault(); focusToggle(toggles.length - 1); break;
         case "Enter":
-        case " ":
-          e.preventDefault();
-          btn.click();
-          break;
+        case " ":         e.preventDefault(); btn.click(); break;
       }
     });
   });
 
-  // Shortcut: "/" fokussiert Suche
-  document.addEventListener("keydown", (e)=>{
+  /* "/" fokussiert die Suche */
+  document.addEventListener("keydown", e => {
     if (e.key === "/" && document.activeElement !== input){
       e.preventDefault();
       input.focus();
     }
   });
 
-  // Recalc on resize (responsive)
   let resizeTo;
-  window.addEventListener("resize", ()=>{
+  window.addEventListener("resize", () => {
     clearTimeout(resizeTo);
     resizeTo = setTimeout(recalcOpenHeights, 120);
   });
 
-  // Initial
+  setAllSpans();
+  window.addEventListener("load", setAllSpans);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(setAllSpans);
   setButtonsEnabled(false);
   updateIndex();
 });
 </script>
-
-
 
 
 
@@ -2513,7 +2603,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <p class="fc-claim">UX &amp; Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
       </div>
       <div class="fc-cta">
-        <a class="fc-btn" href="#kontakt" aria-label="Projekt anfragen">Projekt anfragen</a>
+        <a class="fc-btn" href="/anfrage.html" aria-label="Projekt anfragen">Projekt anfragen</a>
       </div>
     </section>
 
@@ -2545,15 +2635,14 @@ document.addEventListener("DOMContentLoaded", () => {
         <ul class="fc-links" aria-labelledby="fc-legal">
           <li><a href="/impressum.html">Impressum</a></li>
           <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
-          <li><a href="/cookies.html">Cookie-Hinweis</a></li>
         </ul>
       </div>
 
       <div class="fc-col">
         <h3 class="fc-col-title" id="fc-contact">Kontakt</h3>
         <ul class="fc-links" aria-labelledby="fc-contact">
-          <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
-          <li><a href="tel:+491234567890" itemprop="telephone">+49&nbsp;123&nbsp;4567890</a></li>
+          <li><a href="mailto:hello@fusion3.de" itemprop="email">hi.dherrnreither@gmail.com</a></li>
+          <li><a href="tel:+491708933204" itemprop="telephone">+49&nbsp;170&nbsp;8933204</a></li>
           <li>
             <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" class="fc-address">
               <span itemprop="addressLocality">Landshut</span>, <span itemprop="addressCountry">Deutschland</span>

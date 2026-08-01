@@ -385,8 +385,8 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 </style>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="script/aurora.js" defer></script>
 <script src="script/cosmos.js" defer></script>
 <script src="script/panetransition.js" defer></script>
@@ -396,6 +396,7 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 <body data-page="3DKonzept">
   <!-- dein Body-Inhalt hier -->
+
 
 
 
@@ -475,7 +476,7 @@ body[data-page="webdesign"] .hero-image-foreground {
             </svg>
           </button>
           <ul id="altar-contact" class="underrealm" hidden>
-     <li><a class="astral-link astral-link--sub" href="#kontakt">Anfrage stellen</a></li>   <li><a class="astral-link astral-link--sub" href="/impressum.html">Impressum</a></li>
+     <li><a class="astral-link astral-link--sub" href="/anfrage.html">Anfrage stellen</a></li>   <li><a class="astral-link astral-link--sub" href="/impressum.html">Impressum</a></li>
           </ul>
         </li>
       </ul>
@@ -506,7 +507,7 @@ body[data-page="webdesign"] .hero-image-foreground {
       <!-- CTA (Link bleibt Link; kein role="button" nötig) -->
       <a
         class="charm-cta charm-cta--prime"
-        href="#kontakt"
+        href="/anfrage.html"
         id="sigilOffer"
         aria-label="Angebot anfordern"
         data-cta
@@ -960,112 +961,144 @@ body[data-page="webdesign"] .hero-image-foreground {
 
 
 
-
 <body>
-
 
 
 <section class="hero-section" data-page="titlepage">
   <div class="hero-images-wrapper">
 
-    <!-- HINTERGRUND-VIDEO -->
     <div class="hero-image-background">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hintegrundweb.webp">
-        <source src="./contactvideo/contact3D.mp4" type="video/mp4" />
-      </video>
+      <!-- Light-Mode Bild -->
+      <img 
+        src="./titleimages/3D_title_white.webp" 
+        alt="Hero Background" 
+        class="hero-image light-image"
+      />
+
+      <!-- Dark-Mode Bild -->
+      <img 
+        src=".//titleimages/3D_title_dark.webp" 
+        alt="Hero Background Dark" 
+        class="hero-image dark-image"
+      />
     </div>
 
     <!-- TITLE + TEXT + CTAS -->
     <div class="page-title">
       <div class="container">
-<h1 class="large-title">
-  Digitale Experiences, die Ergebnisse liefern.
-</h1>
 
-<h2 class="small-title">
-  Webdesign, UX Design, 3D Animation, Rendering und Grafikdesign – vereint in
-  modernen Markenauftritten, die Vertrauen schaffen und messbar performen.
-</h2>
+        <h1 class="large-title">
+          Digitale Experiences, die Ergebnisse liefern.
+        </h1>
 
+        <h2 class="small-title">
+          Webdesign, UX Design, 3D Animation, Rendering und Grafikdesign – vereint in
+          modernen Markenauftritten, die Vertrauen schaffen und messbar performen.
+        </h2>
 
-        <div class="hero-cta-buttons">
-          <a href="#kontakt" class="btn-primary">Jetzt unverbindlich anfragen</a>
+<div class="hero-cta-buttons">
+  <a href="#kontakt" class="btn-primary">
+    Jetzt unverbindlich anfragen
+  </a>
 
-          <a href="#referenzen" class="btn-secondary">
-            Kostenloser Audit
-            <!-- Feather arrow-up-right Icon als SVG -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon-arrow"
-            >
-              <line x1="7" y1="17" x2="17" y2="7"></line>
-              <polyline points="7 7 17 7 17 17"></polyline>
-            </svg>
-          </a>
-        </div>
+</div>
       </div>
     </div>
 
   </div>
 </section>
 
+<style>
+/* Hintergrundbilder */
+.hero-image-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Standard: Light Mode */
+.light-image { opacity: 1; }
+.dark-image { opacity: 0; }
+
+/* Darkmode über body.nocturne */
+body.nocturne .light-image {
+  opacity: 0;
+}
+body.nocturne .dark-image {
+  opacity: 1;
+}
+
+/* Falls du auch data-theme="dark" unterstützt */
+[data-theme="dark"] .light-image {
+  opacity: 0;
+}
+[data-theme="dark"] .dark-image {
+  opacity: 1;
+}
+
+/* Small Title auf Handy ausblenden */
+@media (max-width: 768px) {
+  .small-title {
+    display: none;
+  }
+}
+</style>
+
+
 
 
 
 
 <section class="gallery-section">
-  <!-- ROW 1 – Groß links, 4 kleine rechts -->
+  <!-- ROW 1 – Groß links, 4 kleine rechts (Initial im Viewport, kein Lazy Loading) -->
   <div class="gallery-row">
     <div class="gallery-large gallery-large--classic">
-      <img src="./Gallerie_Images/NeoLog/vid3.mp4" alt="Großes Bild">
-      <div class="gallery-large-content">
+      <!-- Korrigiert: video statt img für die mp4-Datei -->
+       <img src="./Gallerie_Images/NeoLog/post21.png" alt="">    <div class="gallery-large-content">
         <div class="gallery-large-textwrap">
-          <span class="gallery-large-company">Alpine Living GmbH</span>
-          <span class="gallery-large-text">Branding &amp; Webdesign</span>
+          <span class="gallery-large-company">NeoLog GmbH</span>
+          <span class="gallery-large-text">3D Design &amp; Grafikdesign</span>
         </div>
-        <a href="projekt-1.html" class="gallery-btn">
-          Mehr ansehen
-          <i data-feather="arrow-right"></i>
-        </a>
+
       </div>
     </div>
 
     <div class="gallery-small-grid">
       <img src="./Gallerie_Images/NeoLog/post13.png" alt="">
-      <img src="./Gallerie_Images/NeoLog/post14.png" alt="">
+      <img src="./Gallerie_Images/NeoLog/post12.png" alt="">
       <img src="./Gallerie_Images/NeoLog/post20.png" alt="">
-      <img src="./Gallerie_Images/NeoLog/post21.png" alt="">
+      <img src="./Gallerie_Images/NeoLog/post17.png" alt="">
     </div>
   </div>
 
-  <!-- ROW 2 – 4 kleine links, Groß rechts (hochformatig) -->
+  <!-- ROW 2 – 4 kleine links, Groß rechts (hochformatig) | Ab hier: Lazy Loading -->
   <div class="gallery-row">
     <div class="gallery-small-grid gallery-small-grid--tight">
-      <img src="./arbeitsproben/arbeitsproben_index/post9.webp" alt="">
-      <img src="./arbeitsproben/arbeitsproben_index/post11.webp" alt="">
-      <img src="./arbeitsproben/arbeitsproben_index/post15.webp" alt="">
-      <img src="./arbeitsproben/arbeitsproben_index/post12.webp" alt="">
+      <img src="./arbeitsproben/arbeitsproben_index/post9.webp" alt="" loading="lazy" decoding="async">
+      <img src="./arbeitsproben/arbeitsproben_index/post11.webp" alt="" loading="lazy" decoding="async">
+      <img src="./arbeitsproben/arbeitsproben_index/post15.webp" alt="" loading="lazy" decoding="async">
+      <img src="./arbeitsproben/arbeitsproben_index/post12.webp" alt="" loading="lazy" decoding="async">
     </div>
 
     <div class="gallery-large gallery-large--tall">
-      <img src="./arbeitsproben/arbeitsproben_index/post21.webp" alt="Großes Bild">
+      <img src="./arbeitsproben/arbeitsproben_index/post21.webp" alt="Großes Bild" loading="lazy" decoding="async">
       <div class="gallery-large-content">
         <div class="gallery-large-textwrap">
-          <span class="gallery-large-company">Nova Tech Solutions</span>
+          <span class="gallery-large-company">Konzeptarbeit</span>
           <span class="gallery-large-text">3D Konzept &amp; Rendering</span>
         </div>
-        <a href="projekt-2.html" class="gallery-btn">
-          Mehr ansehen
-          <i data-feather="arrow-right"></i>
-        </a>
+
       </div>
     </div>
   </div>
@@ -1073,80 +1106,52 @@ body[data-page="webdesign"] .hero-image-foreground {
   <!-- ROW 3 – Groß links (wide), rechts viele kleine (3-Spalten-Grid) -->
   <div class="gallery-row">
     <div class="gallery-large gallery-large--wide">
-      <img src="./arbeitsproben/arbeitsproben_index/serum8.webp" alt="Großes Bild">
+      <img src="./arbeitsproben/arbeitsproben_index/serum11.webp" alt="Großes Bild" loading="lazy" decoding="async">
       <div class="gallery-large-content">
         <div class="gallery-large-textwrap">
-          <span class="gallery-large-company">Urban Move Studios</span>
-          <span class="gallery-large-text">Kampagnen-Landingpage</span>
+          <span class="gallery-large-company">Konzeptarbeit</span>
+          <span class="gallery-large-text">3D Konzept &amp; Rendering</span>
         </div>
-        <a href="projekt-3.html" class="gallery-btn">
-          Mehr ansehen
-          <i data-feather="arrow-right"></i>
-        </a>
+
       </div>
     </div>
 
-<div class="gallery-small-grid many">
-      <img src="./arbeitsproben/arbeitsproben_index/serum2.webp" alt="">
-      <img src="./arbeitsproben/arbeitsproben_index/serum3.webp" alt="">
-      <img src="./arbeitsproben/arbeitsproben_index/serum4.webp" alt="">
-      <img src="./arbeitsproben/arbeitsproben_index/serum5.webp" alt="">
-      <img src="./arbeitsproben/arbeitsproben_index/serum6.webp" alt="">
-      <img src="./arbeitsproben/arbeitsproben_index/serum7.webp" alt="">
-      <img src="./arbeitsproben/arbeitsproben_index/serum12.webp" alt="">
-      <img src="./arbeitsproben/arbeitsproben_index/serum9.webp" alt="">
-      <img src="./arbeitsproben/arbeitsproben_index/serum11.webp" alt="">
+    <div class="gallery-small-grid many">
+      <img src="./arbeitsproben/arbeitsproben_index/serum1.webp" alt="" loading="lazy" decoding="async">
+      <img src="./arbeitsproben/arbeitsproben_index/serum3.webp" alt="" loading="lazy" decoding="async">
+      <img src="./arbeitsproben/arbeitsproben_index/serum4.webp" alt="" loading="lazy" decoding="async">
+      <img src="./arbeitsproben/arbeitsproben_index/serum5.webp" alt="" loading="lazy" decoding="async">
+      <img src="./arbeitsproben/arbeitsproben_index/serum6.webp" alt="" loading="lazy" decoding="async">
+      <img src="./arbeitsproben/arbeitsproben_index/serum7.webp" alt="" loading="lazy" decoding="async">
+      <img src="./arbeitsproben/arbeitsproben_index/serum12.webp" alt="" loading="lazy" decoding="async">
+      <img src="./arbeitsproben/arbeitsproben_index/serum9.webp" alt="" loading="lazy" decoding="async">
+      <img src="./arbeitsproben/arbeitsproben_index/serum8.webp" alt="" loading="lazy" decoding="async">
     </div>
   </div>
+
   <!-- ROW 4 – Variante: Groß links, rechts 3 kleine oben + 1 langes unten -->
   <div class="gallery-row">
     <div class="gallery-large gallery-large--classic">
-      <img src="./arbeitsproben/arbeitsproben_index/pizza1.webp" alt="Großes Bild">
+      <img src="./arbeitsproben/arbeitsproben_index/pizza1.webp" alt="Großes Bild" loading="lazy" decoding="async">
       <div class="gallery-large-content">
         <div class="gallery-large-textwrap">
-          <span class="gallery-large-company">Helio Studio</span>
-          <span class="gallery-large-text">Editorial Webdesign</span>
+          <span class="gallery-large-company">Konzeptarbeit</span>
+          <span class="gallery-large-text">Grafikdesign</span>
         </div>
-        <a href="projekt-4.html" class="gallery-btn">
-          Mehr ansehen
-          <i data-feather="arrow-right"></i>
-        </a>
+
       </div>
     </div>
 
     <div class="gallery-small-grid gallery-small-grid--3-top-1-bottom">
-      <img src="./arbeitsproben/arbeitsproben_index/pizza2.webp" alt="">
-      <img src="./arbeitsproben/arbeitsproben_index/pizza3.webp" alt="">
-      <img src="./arbeitsproben/arbeitsproben_index/pizza4.webp" alt="">
+      <img src="./arbeitsproben/arbeitsproben_index/pizza2.webp" alt="" loading="lazy" decoding="async">
+      <img src="./arbeitsproben/arbeitsproben_index/pizza3.webp" alt="" loading="lazy" decoding="async">
+      <img src="./arbeitsproben/arbeitsproben_index/pizza4.webp" alt="" loading="lazy" decoding="async">
       <!-- langes Bild über volle Breite unten -->
-      <img src="./arbeitsproben/arbeitsproben_index/pizza5.webp" alt="">
+      <img src="./arbeitsproben/arbeitsproben_index/pizza5.webp" alt="" loading="lazy" decoding="async">
     </div>
   </div>
 
 
-
-  <!-- ROW 5 – Variante: Großes Bild links (doppelt so breit), rechts 3 kleine untereinander -->
-  <div class="gallery-row gallery-row--big-left-wide">
-    <div class="gallery-large gallery-large--wide">
-      <img src="./arbeitsproben/arbeitsproben_index/vr2.webp" alt="Großes Bild">
-      <div class="gallery-large-content">
-        <div class="gallery-large-textwrap">
-          <span class="gallery-large-company">Northline Agency</span>
-          <span class="gallery-large-text">Digitale Kampagne</span>
-        </div>
-        <a href="projekt-5.html" class="gallery-btn">
-          Mehr ansehen
-          <i data-feather="arrow-right"></i>
-        </a>
-      </div>
-    </div>
-
-    <div class="gallery-small-grid gallery-small-grid--column">
-      <img src="./arbeitsproben/arbeitsproben_index/vr3.webp" alt="">
-      <img src="./arbeitsproben/arbeitsproben_index/vr4.webp" alt="">
-      <img src="./arbeitsproben/arbeitsproben_index/vr1.webp" alt="">
-    </div>
-  </div>
 </section>
 
 <script>

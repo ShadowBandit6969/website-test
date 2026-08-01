@@ -702,7 +702,7 @@
       <!-- CTA (Link bleibt Link; kein role="button" nötig) -->
       <a
         class="charm-cta charm-cta--prime"
-        href="#kontakt"
+        href="/anfrage.html"
         id="sigilOffer"
         aria-label="Angebot anfordern"
         data-cta
@@ -1189,9 +1189,9 @@
         </h2>
 
         <div class="hero-cta-buttons">
-          <a href="#kontakt" class="btn-primary">Jetzt unverbindlich anfragen</a>
+          <a href="/anfrage.html" class="btn-primary">Jetzt unverbindlich anfragen</a>
 
-          <a href="#referenzen" class="btn-secondary">
+          <a href="/Gallerie.html" class="btn-secondary">
             Referenzen ansehen
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -1380,21 +1380,20 @@ body.nocturne .dark-image {
         </header>
       </div>
 
-      <!-- CTA -->
+<!-- CTA -->
       <div class="wrf-actions">
         <div class="wrf-actions__inner">
           <!-- Button 1: Was ist ein Wireframe? -->
-          <button type="button" class="wrf-btn wrf-btn--primary wrf-btn--cta" data-wrf-cta
+          <a href="/anfrage.html" class="wrf-btn wrf-btn--primary wrf-btn--cta" data-wrf-cta
             aria-describedby="wrf-cta-note">
             <span class="wrf-btn__label">Kostenloses Wireframe sichern</span>
-          </button>
+          </a>
         </div>
 
         <p class="wrf-cta__note" id="wrf-cta-note">
           Antwort innerhalb von <strong>48&nbsp;h</strong>
         </p>
       </div>
-    </div>
 
     <!-- Modal: Was ist ein Wireframe? -->
     <!-- (bleibt identisch wie zuvor) -->
@@ -3325,20 +3324,44 @@ body:not(.nocturne) .video-card:not(.has-wireframe) .video-wireframe-canvas {
   /* ============================================================
      SETUP / SICHTBARKEIT
      ============================================================ */
-  function resize() {
+
+  let lastW = 0, lastH = 0;
+ 
+  function resize(keepState) {
     const r = canvas.getBoundingClientRect();
     if (r.width < 40 || r.height < 40) return false;
+ 
+    /* Fortschritt sichern, bevor die Sets neu gebaut werden.
+       Ohne das springt die Animation bei jeder Höhenänderung
+       der Karte an den Anfang zurück – und die Höhe ändert
+       sich, sobald im Formular ein Bereich ein- oder
+       ausgeblendet wird. */
+    const prog       = routeLen ? dist / routeLen : 0;
+    const keepPhase  = phase;
+    const keepPhaseT = phaseT;
+    const keepIn     = inT;
+ 
     DPR = Math.min(window.devicePixelRatio || 1, 2);
     W = r.width; H = r.height;
     S = Math.max(0.5, Math.min(1, Math.min(W / 820, H / 460)));
-    canvas.width = Math.round(W * DPR);
+    canvas.width  = Math.round(W * DPR);
     canvas.height = Math.round(H * DPR);
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+ 
     const c = cssVars();
-    FONT.sans = c.sans; FONT.mono = c.mono;   // vor dem Bauen setzen, damit gemessen werden kann
+    FONT.sans = c.sans; FONT.mono = c.mono;
     sets = BUILDERS.map(fn => fn(W, H));
     snap = null; snapCtx = null;
     loadSet(setIndex);
+ 
+    if (keepState) {
+      dist   = prog * routeLen;
+      phase  = keepPhase;
+      phaseT = keepPhaseT;
+      inT    = Math.max(keepIn, CFG.cross);   /* kein erneutes Einblenden */
+    }
+ 
+    lastW = W; lastH = H;
     return true;
   }
 
@@ -3370,16 +3393,26 @@ body:not(.nocturne) .video-card:not(.has-wireframe) .video-wireframe-canvas {
     else { stop(); ctx.clearRect(0, 0, W, H); }
   }
 
-  function refresh() {
+ function refresh(keepState) {
     if (mq.matches) { staticFrame(); return; }
-    if (resize() && visible) { stop(); start(); }
+    if (resize(keepState !== false) && visible) { stop(); start(); }
   }
-
+ 
   let rt;
   if ('ResizeObserver' in window) {
-    new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(refresh, 140); }).observe(card);
+    new ResizeObserver(entries => {
+      const b = entries[0].contentRect;
+      /* Winzige Schwankungen ignorieren – sonst wird bei jedem
+         Pixel neu gebaut. */
+      if (Math.abs(b.width - lastW) < 6 && Math.abs(b.height - lastH) < 6) return;
+      clearTimeout(rt);
+      rt = setTimeout(() => refresh(true), 140);
+    }).observe(card);
   } else {
-    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(refresh, 160); });
+    window.addEventListener('resize', () => {
+      clearTimeout(rt);
+      rt = setTimeout(() => refresh(true), 160);
+    });
   }
 
   // Webfonts kommen oft später – dann neu messen und neu setzen
@@ -3539,334 +3572,395 @@ body:not(.nocturne) .video-card:not(.has-wireframe) .video-wireframe-canvas {
 
     </div>
   </section>
-  <script src="https://unpkg.com/feather-icons" defer></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      if (window.feather) feather.replace();
+<script src="https://unpkg.com/feather-icons" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.feather) feather.replace();
 
-      const vault = document.getElementById("lyra-faq");
-      const cards = [...document.querySelectorAll(".lyra-card")];
-      const input = document.getElementById("lyraSearch");
-      const prev = document.getElementById("lyraPrev");
-      const next = document.getElementById("lyraNext");
-      const indexLbl = document.getElementById("lyraIndex");
+  const vault    = document.getElementById("lyra-faq");
+  if (!vault) return;
 
-      const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const smoothOpts = prefersReduced ? { behavior: "auto" } : { behavior: "smooth" };
+  const grid     = vault.querySelector(".lyra-grid");
+  const cards    = [...vault.querySelectorAll(".lyra-card")];
+  const input    = document.getElementById("lyraSearch");
+  const prev     = document.getElementById("lyraPrev");
+  const next     = document.getElementById("lyraNext");
+  const indexLbl = document.getElementById("lyraIndex");
 
-      // ---- Utilities ------------------------------------------------------------
-      const normalize = (s) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
+  const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const smoothOpts = prefersReduced ? { behavior: "auto" } : { behavior: "smooth" };
 
-      let matches = [], current = 0, debounceTo = null;
+  let matches = [], current = 0, debounceTo = null;
 
-      function setButtonsEnabled(enabled) {
-        [prev, next].forEach(b => {
-          b.disabled = !enabled;
-          b.setAttribute("aria-disabled", String(!enabled));
-          b.style.opacity = enabled ? "" : ".6";
-          b.style.cursor = enabled ? "pointer" : "not-allowed";
-        });
-      }
+  /* ---- Masonry ---------------------------------------------------------- */
+  let ROW = 1, GAP = 24;
 
-      function closeAll() {
-        cards.forEach(c => {
-          const b = c.querySelector(".lyra-toggle");
-          const d = c.querySelector(".lyra-drop");
-          b.setAttribute("aria-expanded", "false");
-          d.style.maxHeight = null;
-        });
-      }
+  function readGridMetrics(){
+    const cs  = getComputedStyle(grid);
+    const row = parseFloat(cs.gridAutoRows);
+    const gap = parseFloat(cs.getPropertyValue("--lyra-gap"));
+    if (row > 0) ROW = row;
+    if (gap >= 0) GAP = gap;
+  }
 
-      function removeMarks() {
-        vault.querySelectorAll("mark").forEach(m => {
-          const t = document.createTextNode(m.textContent);
-          m.replaceWith(t);
-        });
-      }
+  function setSpan(card){
+    const h = card.getBoundingClientRect().height;
+    const span = Math.max(1, Math.ceil((h + GAP) / ROW));
+    if (card.dataset.span !== String(span)){
+      card.dataset.span = span;
+      card.style.gridRowEnd = "span " + span;
+    }
+  }
 
-      // Escape RegExp Sonderzeichen
-      const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  function setAllSpans(){
+    readGridMetrics();
+    cards.forEach(setSpan);
+  }
 
-      function highlight(node, keyword) {
-        const terms = keyword.split(/\s+/).filter(Boolean).map(escapeRegExp);
-        if (!terms.length) return;
-        const rx = new RegExp("(" + terms.join("|") + ")", "gi");
+  /* ---- Hilfsfunktionen -------------------------------------------------- */
+  const normalize = (s) => s
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/\s+/g, " ")
+    .toLowerCase();
 
-        if (node.nodeType === 3) {
-          const span = document.createElement("span");
-          span.innerHTML = node.nodeValue.replace(rx, "<mark>$1</mark>");
-          node.parentNode.replaceChild(span, node);
-        } else if (node.nodeType === 1 && node.childNodes && !["SCRIPT", "STYLE", "INPUT", "BUTTON"].includes(node.tagName)) {
-          [...node.childNodes].forEach(child => highlight(child, keyword));
-        }
-      }
+  const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-      function scrollToCard(c) {
-        const y = c.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top: y, ...smoothOpts });
-      }
-
-      function openCard(c) {
-        const b = c.querySelector(".lyra-toggle");
-        const d = c.querySelector(".lyra-drop");
-        b.setAttribute("aria-expanded", "true");
-        d.style.maxHeight = d.scrollHeight + "px";
-      }
-
-      function recalcOpenHeights() {
-        cards.forEach(c => {
-          const b = c.querySelector(".lyra-toggle");
-          const d = c.querySelector(".lyra-drop");
-          if (b.getAttribute("aria-expanded") === "true") {
-            d.style.maxHeight = d.scrollHeight + "px";
-          }
-        });
-      }
-
-      function updateIndex() {
-        indexLbl.textContent = matches.length ? `${current + 1} / ${matches.length}` : "0 / 0";
-        setButtonsEnabled(matches.length > 0);
-      }
-
-      // Precompute normalisierte Inhalte für schnelle Suche
-      const cardCache = cards.map(c => ({
-        el: c,
-        textNorm: normalize(c.innerText)
-      }));
-
-      function doSearch(keyword) {
-        const qRaw = keyword.trim();
-        const q = normalize(qRaw);
-        removeMarks();
-        closeAll();
-        matches = [];
-        if (!q) { updateIndex(); return; }
-
-        cardCache.forEach(({ el, textNorm }) => {
-          if (textNorm.includes(q)) {
-            matches.push(el);
-            // Markiere realen DOM-Text (nicht den Cache)
-            highlight(el, qRaw);
-          }
-        });
-
-        current = 0;
-        if (matches.length) {
-          openCard(matches[0]);
-          scrollToCard(matches[0]);
-        }
-        updateIndex();
-      }
-
-      // ---- Events ---------------------------------------------------------------
-      input.addEventListener("input", e => {
-        clearTimeout(debounceTo);
-        debounceTo = setTimeout(() => doSearch(e.target.value), 140);
-      });
-
-      prev.addEventListener("click", () => {
-        if (!matches.length) return;
-        current = (current - 1 + matches.length) % matches.length;
-        closeAll(); openCard(matches[current]); scrollToCard(matches[current]); updateIndex();
-      });
-
-      next.addEventListener("click", () => {
-        if (!matches.length) return;
-        current = (current + 1) % matches.length;
-        closeAll(); openCard(matches[current]); scrollToCard(matches[current]); updateIndex();
-      });
-
-      // Akkordeon: IDs + ARIA + Click
-      cards.forEach((c, i) => {
-        const btn = c.querySelector(".lyra-toggle");
-        const drop = c.querySelector(".lyra-drop");
-        const btnId = `lyra-toggle-${i + 1}`;
-        const dropId = `lyra-drop-${i + 1}`;
-        btn.id = btnId;
-        drop.id = dropId;
-
-        // bessere Roles/Labels
-        drop.setAttribute("role", "region");
-        drop.setAttribute("aria-labelledby", btnId);
-        btn.setAttribute("aria-controls", dropId);
-
-        btn.addEventListener("click", () => {
-          const isOpen = btn.getAttribute("aria-expanded") === "true";
-          btn.setAttribute("aria-expanded", isOpen ? "false" : "true");
-          drop.style.maxHeight = isOpen ? null : drop.scrollHeight + "px";
-        });
-
-        // ResizeObserver: offene Panels passen sich automatisch an
-        const ro = new ResizeObserver(() => {
-          if (btn.getAttribute("aria-expanded") === "true") {
-            drop.style.maxHeight = drop.scrollHeight + "px";
-          }
-        });
-        ro.observe(drop);
-      });
-
-      // Tastatur-Navigation (Akkordeon-Header)
-      const toggles = cards.map(c => c.querySelector(".lyra-toggle"));
-      function focusToggle(idx) {
-        if (idx < 0) idx = 0;
-        if (idx >= toggles.length) idx = toggles.length - 1;
-        toggles[idx].focus();
-      }
-      toggles.forEach((btn, idx) => {
-        btn.addEventListener("keydown", (e) => {
-          switch (e.key) {
-            case "ArrowDown": e.preventDefault(); focusToggle(idx + 1); break;
-            case "ArrowUp": e.preventDefault(); focusToggle(idx - 1); break;
-            case "Home": e.preventDefault(); focusToggle(0); break;
-            case "End": e.preventDefault(); focusToggle(toggles.length - 1); break;
-            case "Enter":
-            case " ":
-              e.preventDefault();
-              btn.click();
-              break;
-          }
-        });
-      });
-
-      // Shortcut: "/" fokussiert Suche
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "/" && document.activeElement !== input) {
-          e.preventDefault();
-          input.focus();
-        }
-      });
-
-      // Recalc on resize (responsive)
-      let resizeTo;
-      window.addEventListener("resize", () => {
-        clearTimeout(resizeTo);
-        resizeTo = setTimeout(recalcOpenHeights, 120);
-      });
-
-      // Initial
-      setButtonsEnabled(false);
-      updateIndex();
+  function setButtonsEnabled(enabled){
+    [prev, next].forEach(b => {
+      b.disabled = !enabled;
+      b.setAttribute("aria-disabled", String(!enabled));
+      b.style.opacity = enabled ? "" : ".6";
+      b.style.cursor  = enabled ? "pointer" : "not-allowed";
     });
-  </script>
+  }
+
+  function closeCard(c){
+    c.querySelector(".lyra-toggle").setAttribute("aria-expanded", "false");
+    c.querySelector(".lyra-drop").style.maxHeight = null;
+  }
+
+  function openCard(c){
+    const d = c.querySelector(".lyra-drop");
+    c.querySelector(".lyra-toggle").setAttribute("aria-expanded", "true");
+    d.style.maxHeight = d.scrollHeight + "px";
+  }
+
+  function closeAll(){ cards.forEach(closeCard); }
+
+  /* ---- Treffer markieren ------------------------------------------------
+     Alte Markierungen werden vollständig entfernt, auch die
+     Hüllelemente. Sonst wächst der DOM mit jedem Tastendruck.
+  ------------------------------------------------------------------------ */
+  function removeMarks(){
+    vault.querySelectorAll("mark[data-lyra]").forEach(m => {
+      m.replaceWith(document.createTextNode(m.textContent));
+    });
+    cards.forEach(c => c.normalize());
+  }
+
+  function highlight(root, terms){
+    if (!terms.length) return;
+    const rx = new RegExp("(" + terms.map(escapeRegExp).join("|") + ")", "gi");
+
+    /* Erst alle Textknoten sammeln, dann ersetzen – sonst läuft
+       der Walker in die eigenen neuen Knoten hinein. */
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node){
+        const p = node.parentNode;
+        if (!p) return NodeFilter.FILTER_REJECT;
+        if (["SCRIPT","STYLE","INPUT","MARK"].includes(p.tagName)) return NodeFilter.FILTER_REJECT;
+        return node.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      }
+    });
+
+    const nodes = [];
+    let n;
+    while ((n = walker.nextNode())) nodes.push(n);
+
+    nodes.forEach(node => {
+      const text = node.nodeValue;
+      rx.lastIndex = 0;
+      if (!rx.test(text)) return;
+      rx.lastIndex = 0;
+
+      const frag = document.createDocumentFragment();
+      let last = 0, m;
+
+      while ((m = rx.exec(text)) !== null){
+        if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
+        const mark = document.createElement("mark");
+        mark.setAttribute("data-lyra", "");
+        mark.textContent = m[0];
+        frag.appendChild(mark);
+        last = m.index + m[0].length;
+        if (m[0] === "") rx.lastIndex++;      // Endlosschleife verhindern
+      }
+
+      if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    });
+  }
+
+  /* ---- Scrollen nur wenn nötig ------------------------------------------ */
+  function scrollToCard(c){
+    const r = c.getBoundingClientRect();
+    const top = 90;                                  // Platz für den Header
+    const bottom = window.innerHeight - 40;
+    if (r.top >= top && r.bottom <= bottom) return;  // schon im Bild
+    window.scrollTo({ top: r.top + window.scrollY - top, ...smoothOpts });
+  }
+
+  function recalcOpenHeights(){
+    cards.forEach(c => {
+      const b = c.querySelector(".lyra-toggle");
+      const d = c.querySelector(".lyra-drop");
+      if (b.getAttribute("aria-expanded") === "true") d.style.maxHeight = d.scrollHeight + "px";
+    });
+    setAllSpans();
+  }
+
+  function updateIndex(){
+    indexLbl.textContent = matches.length ? `${current + 1} / ${matches.length}` : "0 / 0";
+    setButtonsEnabled(matches.length > 0);
+  }
+
+  /* ---- Suchindex --------------------------------------------------------
+     textContent statt innerText: liefert den Text auch dann, wenn
+     die Antwort gerade zugeklappt ist. Genau daran ist die Suche
+     bisher gescheitert.
+  ------------------------------------------------------------------------ */
+  const cardCache = cards.map(c => ({ el: c, textNorm: normalize(c.textContent) }));
+
+  function doSearch(keyword){
+    const raw = keyword.trim();
+    const terms = normalize(raw).split(" ").filter(Boolean);
+
+    removeMarks();
+    closeAll();
+    matches = [];
+    current = 0;
+
+    if (!terms.length){
+      setAllSpans();
+      updateIndex();
+      return;
+    }
+
+    cardCache.forEach(({ el, textNorm }) => {
+      /* alle Begriffe müssen vorkommen, Reihenfolge egal */
+      if (terms.every(t => textNorm.includes(t))){
+        matches.push(el);
+        highlight(el, raw.split(/\s+/).filter(Boolean));
+      }
+    });
+
+    if (matches.length) openCard(matches[0]);   /* aufklappen, aber NICHT scrollen */
+
+    setAllSpans();
+    updateIndex();
+  }
+
+  function goTo(step){
+    if (!matches.length) return;
+    current = (current + step + matches.length) % matches.length;
+    closeAll();
+    openCard(matches[current]);
+    setAllSpans();
+    scrollToCard(matches[current]);             /* nur hier wird gescrollt */
+    updateIndex();
+  }
+
+  /* ---- Events ----------------------------------------------------------- */
+  input.addEventListener("input", e => {
+    clearTimeout(debounceTo);
+    const val = e.target.value;
+    debounceTo = setTimeout(() => doSearch(val), 140);
+  });
+
+  input.addEventListener("keydown", e => {
+    if (e.key === "Escape"){
+      input.value = "";
+      doSearch("");
+    }
+    if (e.key === "Enter"){
+      e.preventDefault();
+      goTo(e.shiftKey ? -1 : +1);
+    }
+  });
+
+  prev.addEventListener("click", () => goTo(-1));
+  next.addEventListener("click", () => goTo(+1));
+
+  cards.forEach((c, i) => {
+    const btn  = c.querySelector(".lyra-toggle");
+    const drop = c.querySelector(".lyra-drop");
+    const btnId  = `lyra-toggle-${i + 1}`;
+    const dropId = `lyra-drop-${i + 1}`;
+    btn.id  = btnId;
+    drop.id = dropId;
+
+    drop.setAttribute("role", "region");
+    drop.setAttribute("aria-labelledby", btnId);
+    btn.setAttribute("aria-controls", dropId);
+
+    btn.addEventListener("click", () => {
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
+      isOpen ? closeCard(c) : openCard(c);
+      setSpan(c);
+    });
+
+    new ResizeObserver(() => setSpan(c)).observe(c);
+
+    drop.addEventListener("transitionend", e => {
+      if (e.propertyName === "max-height") setSpan(c);
+    });
+  });
+
+  /* Tastatur-Navigation der Kartenköpfe */
+  const toggles = cards.map(c => c.querySelector(".lyra-toggle"));
+  function focusToggle(idx){
+    toggles[Math.min(Math.max(idx, 0), toggles.length - 1)].focus();
+  }
+  toggles.forEach((btn, idx) => {
+    btn.addEventListener("keydown", e => {
+      switch (e.key){
+        case "ArrowDown": e.preventDefault(); focusToggle(idx + 1); break;
+        case "ArrowUp":   e.preventDefault(); focusToggle(idx - 1); break;
+        case "Home":      e.preventDefault(); focusToggle(0); break;
+        case "End":       e.preventDefault(); focusToggle(toggles.length - 1); break;
+        case "Enter":
+        case " ":         e.preventDefault(); btn.click(); break;
+      }
+    });
+  });
+
+  /* "/" fokussiert die Suche */
+  document.addEventListener("keydown", e => {
+    if (e.key === "/" && document.activeElement !== input){
+      e.preventDefault();
+      input.focus();
+    }
+  });
+
+  let resizeTo;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTo);
+    resizeTo = setTimeout(recalcOpenHeights, 120);
+  });
+
+  setAllSpans();
+  window.addEventListener("load", setAllSpans);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(setAllSpans);
+  setButtonsEnabled(false);
+  updateIndex();
+});
+</script>
 
 
 
 
+<footer itemscope itemtype="https://schema.org/Organization" class="footer-clean">
+  <!-- In Microdata ist <meta itemprop> im Body erlaubt und ersetzt hier das unzulässige <link>. -->
+  <meta itemprop="url" content="https://www.fusion3.de">
 
-  <footer itemscope itemtype="https://schema.org/Organization" class="footer-clean">
-    <!-- In Microdata ist <meta itemprop> im Body erlaubt und ersetzt hier das unzulässige <link>. -->
-    <meta itemprop="url" content="https://www.fusion3.de">
+  <div class="fc-container">
 
-    <div class="fc-container">
+    <!-- Head: Brand & Claim + CTA -->
+    <section class="fc-head" aria-labelledby="fc-head-title">
+      <h2 id="fc-head-title" class="sr-only">Markenbereich</h2>
+      <div class="fc-brand">
+        <!-- Optional: Logo als Link zur Startseite -->
+        <a class="fc-logo" href="index.html" itemprop="name">Fusion³</a>
+        <p class="fc-claim">UX &amp; Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
+      </div>
+      <div class="fc-cta">
+        <a class="fc-btn" href="/anfrage.html" aria-label="Projekt anfragen">Projekt anfragen</a>
+      </div>
+    </section>
 
-      <!-- Head: Brand & Claim + CTA -->
-      <section class="fc-head" aria-labelledby="fc-head-title">
-        <h2 id="fc-head-title" class="sr-only">Markenbereich</h2>
-        <div class="fc-brand">
-          <!-- Optional: Logo als Link zur Startseite -->
-          <a class="fc-logo" href="/" itemprop="name">Fusion³</a>
-          <p class="fc-claim">UX &amp; Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
-        </div>
-        <div class="fc-cta">
-          <a class="fc-btn" href="mailto:hello@fusion3.de" aria-label="Projekt anfragen per E-Mail">Projekt anfragen</a>
-        </div>
-      </section>
+    <!-- Grid -->
+    <nav class="fc-grid" aria-labelledby="fc-nav-title">
+      <h2 id="fc-nav-title" class="sr-only">Footer-Navigation</h2>
 
-      <!-- Grid -->
-      <nav class="fc-grid" aria-labelledby="fc-nav-title">
-        <h2 id="fc-nav-title" class="sr-only">Footer-Navigation</h2>
-
-        <div class="fc-col">
-          <h3 class="fc-col-title" id="fc-services">Leistungen</h3>
-          <ul class="fc-links" aria-labelledby="fc-services">
-            <li><a href="/ux-audit.html">UX-Audit</a></li>
-            <li><a href="/webdesign.html">Webdesign</a></li>
-            <li><a href="/prototyping.html">Prototyping</a></li>
-            <li><a href="/design-system.html">Design-Systeme</a></li>
-          </ul>
-        </div>
-
-        <div class="fc-col">
-          <h3 class="fc-col-title" id="fc-resources">Ressourcen</h3>
-          <ul class="fc-links" aria-labelledby="fc-resources">
-            <li><a href="/cases.html">Case Studies</a></li>
-            <li><a href="/blog.html">Insights &amp; Blog</a></li>
-            <li><a href="/faq.html">FAQ</a></li>
-            <li><a href="/kontakt.html">Termin buchen</a></li>
-          </ul>
-        </div>
-
-        <div class="fc-col">
-          <h3 class="fc-col-title" id="fc-legal">Rechtliches</h3>
-          <ul class="fc-links" aria-labelledby="fc-legal">
-            <li><a href="/impressum.html">Impressum</a></li>
-            <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
-            <li><a href="/cookies.html">Cookie-Hinweis</a></li>
-          </ul>
-        </div>
-
-        <div class="fc-col">
-          <h3 class="fc-col-title" id="fc-contact">Kontakt</h3>
-          <ul class="fc-links" aria-labelledby="fc-contact">
-            <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
-            <li><a href="tel:+491234567890" itemprop="telephone">+49&nbsp;123&nbsp;4567890</a></li>
-            <li>
-              <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" class="fc-address">
-                <span itemprop="addressLocality">Berlin</span>, <span itemprop="addressCountry">Deutschland</span>
-              </address>
-            </li>
-          </ul>
-
-          <!-- Socials jetzt als echte Liste (keine role=list / role=listitem nötig) -->
-          <h3 id="fc-socials-title" class="sr-only">Social Media</h3>
-          <ul class="fc-socials" aria-labelledby="fc-socials-title">
-            <li>
-              <a class="fc-social" href="mailto:hello@fusion3.de" aria-label="E-Mail" itemprop="sameAs">
-                <span class="sr-only">E-Mail</span>
-                <img src="./FooterIcons/Gmail.png" alt="" loading="lazy" decoding="async" width="20" height="20">
-              </a>
-            </li>
-            <li>
-              <a class="fc-social fc-li" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"
-                aria-label="LinkedIn" itemprop="sameAs">
-                <span class="sr-only">LinkedIn</span>
-                <img src="./FooterIcons/LinkedIn.png" alt="" loading="lazy" decoding="async" width="20" height="20">
-              </a>
-            </li>
-            <li>
-              <a class="fc-social fc-wa" href="https://wa.me/491234567890" target="_blank" rel="noopener noreferrer"
-                aria-label="WhatsApp" itemprop="sameAs">
-                <span class="sr-only">WhatsApp</span>
-                <img src="./FooterIcons/Whatsapp.svg" alt="" loading="lazy" decoding="async" width="20" height="20">
-              </a>
-            </li>
-            <li>
-              <a class="fc-social fc-ig" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"
-                aria-label="Instagram" itemprop="sameAs">
-                <span class="sr-only">Instagram</span>
-                <img src="./FooterIcons/instagram.jpg" alt="" loading="lazy" decoding="async" width="20" height="20">
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      <!-- Bottom -->
-      <div class="fc-legal" aria-labelledby="fc-legal-title">
-        <h3 id="fc-legal-title" class="sr-only">Rechtliches &amp; Hinweise</h3>
-        <p>© <time id="currentYear" datetime="2025">2025</time> <span class="nowrap">Fusion³</span> · DSGVO-konform
-          &amp; barrierearm entwickelt.</p>
+      <div class="fc-col">
+        <h3 class="fc-col-title" id="fc-nav">Navigation</h3>
+        <ul class="fc-links" aria-labelledby="fc-nav">
+          <li><a href="index.html">Start</a></li>
+          <li><a href="Gallerie.html">Portfolio</a></li>
+          <li><a href="index.html#nebula-hub">Leistungen</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
       </div>
 
+      <div class="fc-col">
+        <h3 class="fc-col-title" id="fc-services">Leistungen</h3>
+        <ul class="fc-links" aria-labelledby="fc-services">
+          <li><a href="./WebDesign.html">Webdesign</a></li>
+          <li><a href="./3DDesign.html">3D Design</a></li>
+          <li><a href="./Grafikdesign.html">Grafikdesign</a></li>
+        </ul>
+      </div>
+
+      <div class="fc-col">
+        <h3 class="fc-col-title" id="fc-legal">Rechtliches</h3>
+        <ul class="fc-links" aria-labelledby="fc-legal">
+          <li><a href="/impressum.html">Impressum</a></li>
+          <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
+        </ul>
+      </div>
+
+      <div class="fc-col">
+        <h3 class="fc-col-title" id="fc-contact">Kontakt</h3>
+        <ul class="fc-links" aria-labelledby="fc-contact">
+          <li><a href="mailto:hello@fusion3.de" itemprop="email">hi.dherrnreither@gmail.com</a></li>
+          <li><a href="tel:+491708933204" itemprop="telephone">+49&nbsp;170&nbsp;8933204</a></li>
+          <li>
+            <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" class="fc-address">
+              <span itemprop="addressLocality">Landshut</span>, <span itemprop="addressCountry">Deutschland</span>
+            </address>
+          </li>
+        </ul>
+
+        <!-- Socials jetzt als echte Liste (keine role=list / role=listitem nötig) -->
+        <h3 id="fc-socials-title" class="sr-only">Social Media</h3>
+        <ul class="fc-socials" aria-labelledby="fc-socials-title">
+          <li>
+            <a class="fc-social" href="mailto:hello@fusion3.de" aria-label="E-Mail" itemprop="sameAs">
+              <span class="sr-only">E-Mail</span>
+              <img src="./FooterIcons/Gmail.png" alt="" loading="lazy" decoding="async" width="20" height="20">
+            </a>
+          </li>
+          <li>
+            <a class="fc-social fc-li" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" itemprop="sameAs">
+              <span class="sr-only">LinkedIn</span>
+              <img src="./FooterIcons/LinkedIn.png" alt="" loading="lazy" decoding="async" width="20" height="20">
+            </a>
+          </li>
+          <li>
+            <a class="fc-social fc-wa" href="https://wa.me/491234567890" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" itemprop="sameAs">
+              <span class="sr-only">WhatsApp</span>
+              <img src="./FooterIcons/Whatsapp.svg" alt="" loading="lazy" decoding="async" width="20" height="20">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Bottom -->
+    <div class="fc-legal" aria-labelledby="fc-legal-title">
+      <h3 id="fc-legal-title" class="sr-only">Rechtliches &amp; Hinweise</h3>
+      <p>© <time id="currentYear" datetime="2025">2025</time> <span class="nowrap">Fusion³</span> · DSGVO-konform &amp; barrierearm entwickelt.</p>
     </div>
-  </footer>
-  <script>
-    (function () {
-      var el = document.getElementById('currentYear');
-      if (el) el.textContent = new Date().getFullYear();
-    })();
-  </script>
+
+  </div>
+</footer>
+<script>
+  (function(){
+    var el = document.getElementById('currentYear');
+    if (el) el.textContent = new Date().getFullYear();
+  })();
+</script>
 
 </body>
-
 </html>

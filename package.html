@@ -101,6 +101,8 @@
       text-align: center;
       background: #000 url('./IndexM/PC.webp') center/cover no-repeat;
     }
+    @media (max-width: 1024px) { .hero-video-wrapper { background-image: url('./IndexM/Tablet.webp'); } }
+    @media (max-width: 480px)  { .hero-video-wrapper { background-image: url('./IndexM/handy.webp'); } }
 
     .hero-video-content{
       position: relative; z-index: 2;
@@ -228,21 +230,18 @@
     }
   </style>
 
-
-  
-
-
+ <link rel="stylesheet" href="css/herolast.css" type="text/css">
 <link rel="stylesheet" href="css/navbar.css" type="text/css">
 <link rel="stylesheet" href="css/darkmodeLast.css" type="text/css">
 
 <link rel="stylesheet" href="css/hero.css" type="text/css">
 <link rel="stylesheet" href="css/aurora.css" type="text/css">
-<link rel="stylesheet" href="css/cosmosSuiteIndex.css" type="text/css">
+<link rel="stylesheet" href="css/cosmosSuite.css" type="text/css">
 <link rel="stylesheet" href="css/reviews.css" type="text/css">
 
 <link rel="stylesheet" href="css/ablauf.css" type="text/css">
 
-<link rel="stylesheet" href="css/contact.css" type="text/css">
+<link rel="stylesheet" href="css/contactWeb.css" type="text/css">
 
 <link rel="stylesheet" href="css/arbeitsproben.css" type="text/css">
 
@@ -254,11 +253,58 @@
 
 <link rel="stylesheet" href="css/Casestudie.css" type="text/css">
 
+<link rel="stylesheet" href="css/ctasection.css" type="text/css">
+
+<link rel="stylesheet" href="css/metrics.css" type="text/css">
+
+<link rel="stylesheet" href="css/warumwir.css" type="text/css">
+
 <link rel="stylesheet" href="css/arbeitsprobenBilder.css" type="text/css">
-
-  <link rel="stylesheet" href="css/ctasection.css" type="text/css">
-
 <style>
+/* --------------------------
+   Lokale Bild-Overrides nur für webdesign.html
+--------------------------- */
+body[data-page="webdesign"] .hero-image-background {
+  background-image: url("./WebdesignPic/1.mp4") !important;
+}
+
+body[data-page="webdesign"] .hero-image-foreground {
+  background-image: url("./images/hintegrundweb.webp") !important;
+}
+
+/* Optional: Mobile- oder Tablet-Varianten */
+@media (max-width: 1024px) {
+  body[data-page="webdesign"] .hero-image-foreground {
+    background-image: url("./images/webdesign-bg-tablet.webp") !important;
+  }
+}
+@media (max-width: 480px) {
+  body[data-page="webdesign"] .hero-image-foreground {
+    background-image: url("./images/webdesign-bg-mobile.webp") !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-image-foreground {
+    transform: translateY(10%);              /* dein bisheriger Versatz */
+  }
+}
+@media (min-width: 1400px) {
+  .hero-image-foreground {
+    transform: translateY(15%);              /* dein bisheriger Versatz */
+  }
+}
+@media (min-width: 1800px) {
+  .hero-image-foreground {
+    transform: translateY(15%);              /* dein bisheriger Versatz */
+  }
+}
+@media (min-width: 2200px) {
+  .hero-image-foreground {
+    transform: translateY(7%);              /* dein bisheriger Versatz */
+  }
+}
+
   html, body {
     margin: 0;
     padding: 0;
@@ -279,21 +325,63 @@
     height: 100vh;
     overflow: hidden; /* falls Kinder minimal überstehen */
   }
-</style>
 
+  .hero-image-background,
+  .hero-image-foreground {
+    position: absolute;
+    inset: 0;         /* top/right/bottom/left = 0 */
+    width: 100%;
+    max-width: none;
+  }
+
+
+  /* Nur Handys: Hintergrund minimal „herauszoomen“ */
+@media (max-width: 767px) {
+  .hero-image-foreground {
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    margin: 0 !important;                  /* falls woanders Mobile-Margins gesetzt sind */
+        transform: translateY(17%);              /* dein bisheriger Versatz */
+  }
+}
+/* Ergänzung am Ende deiner bestehenden CSS-Datei */
+.hero-image-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* blockiert keine Klicks */
+  z-index: 0;
+}
+
+
+
+</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="script/aurora.js" defer></script>
 <script src="script/cosmos.js" defer></script>
 <script src="script/panetransition.js" defer></script>
+<script src="script/arbeitsproben.js" defer></script>
+<script src="script/freewireframe.js" defer></script>
+<script src="script/metrics.js" defer></script>
 <script src="script/ArbeitsprobenBilder.js" defer></script>
-  <script src="script/freewireframe.js" defer></script>
+<script src="script/kontaktformular.js" defer></script>
 </head>
 
-<body data-page="impressum">
+<body data-page="Grafikdesign">
   <!-- dein Body-Inhalt hier -->
-
-
 
 
 
@@ -372,7 +460,7 @@
             </svg>
           </button>
           <ul id="altar-contact" class="underrealm" hidden>
-     <li><a class="astral-link astral-link--sub" href="#kontakt">Anfrage stellen</a></li>   <li><a class="astral-link astral-link--sub" href="/impressum.html">Impressum</a></li>
+     <li><a class="astral-link astral-link--sub" href="/anfrage.html">Anfrage stellen</a></li>   <li><a class="astral-link astral-link--sub" href="/impressum.html">Impressum</a></li>
           </ul>
         </li>
       </ul>
@@ -403,7 +491,7 @@
       <!-- CTA (Link bleibt Link; kein role="button" nötig) -->
       <a
         class="charm-cta charm-cta--prime"
-        href="#kontakt"
+        href="./anfrage.html"
         id="sigilOffer"
         aria-label="Angebot anfordern"
         data-cta
@@ -857,271 +945,114 @@
 
 
 
-<section class="container imp" aria-labelledby="imp-h">
-  <h2 id="imp-h" class="imp-title">Anbieterkennzeichnung</h2>
-  <p class="imp-lead">
-    Pflichtangaben nach § 5 DDG sowie weitere Hinweise zu Haftung,
-    Urheberrecht und Streitbeilegung.
-  </p>
+<section class="hero-section" data-page="titlepage">
+  <div class="hero-images-wrapper">
 
-  <!-- ---------- Kerndaten ---------- -->
-  <div class="imp-card">
-    <dl class="imp-dl">
-      <div class="imp-row">
-        <dt>Anbieter</dt>
-        <dd>
-          <strong>Deniz Herrnreither</strong><br>
-          Fusion³ <span class="imp-note">(Geschäftsbezeichnung)</span><br>
-          Einzelunternehmen
-        </dd>
+    <div class="hero-image-background">
+      <!-- Light-Mode Bild -->
+      <img 
+           src="./arbeitsproben/arbeitsproben_index/serum11.webp" 
+        alt="Hero Background" 
+        class="hero-image light-image"
+      />
+
+      <!-- Dark-Mode Bild -->
+      <img 
+           src="./arbeitsproben/arbeitsproben_index/grafik2.webp" 
+        alt="Hero Background Dark" 
+        class="hero-image dark-image"
+      />
+    </div>
+
+
+    <!-- TITLE + TEXT + CTAS -->
+    <div class="page-title">
+      <div class="container">
+
+        <h1 class="large-title">
+          Grafikdesign, das deine Marke unverwechselbar macht.
+        </h1>
+
+        <h2 class="small-title">
+          Vom Logo über Brand Design bis zu Kampagnenmotiven und Social Media Assets – 
+          durchdachtes Grafikdesign sorgt für Wiedererkennung, Vertrauen und einen konsistenten Auftritt 
+          auf allen Kanälen.
+        </h2>
+
+        <div class="hero-cta-buttons">
+          <a href="#kontakt" class="btn-primary">Jetzt unverbindlich anfragen</a>
+
+          <a href="/Gallerie.html" class="btn-secondary">
+            Referenzen ansehen
+            <!-- Feather arrow-up-right Icon als SVG -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="icon-arrow"
+            >
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
+        </div>
       </div>
+    </div>
 
-      <div class="imp-row">
-        <dt>Anschrift</dt>
-        <dd>
-          [Straße und Hausnummer]<br>
-          84032 Landshut<br>
-          Deutschland
-        </dd>
-      </div>
-
-      <div class="imp-row">
-        <dt>Kontakt</dt>
-        <dd>
-          Telefon: <a href="tel:+49[Nummer ohne Leerzeichen]">+49 [Telefonnummer]</a><br>
-          E-Mail: <a href="mailto:hello@fusion3.de">hello@fusion3.de</a><br>
-          Web: <a href="index.html">www.fusion3.de</a>
-        </dd>
-      </div>
-
-      <div class="imp-row">
-        <dt>Tätigkeit</dt>
-        <dd>Grafikdesign, Webdesign und 3D-Design</dd>
-      </div>
-
-      <div class="imp-row">
-        <dt>Umsatzsteuer</dt>
-        <dd>
-          Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird keine
-          Umsatzsteuer berechnet und daher auch nicht ausgewiesen.
-        </dd>
-      </div>
-
-      <div class="imp-row">
-        <dt>Inhaltlich verantwortlich</dt>
-        <dd>Deniz Herrnreither, Anschrift wie oben</dd>
-      </div>
-    </dl>
-  </div>
-
-  <!-- ---------- Rechtliche Hinweise ---------- -->
-  <div class="imp-body">
-
-    <h3>Verbraucherstreitbeilegung</h3>
-    <p>
-      Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren
-      vor einer Verbraucherschlichtungsstelle teilzunehmen.
-    </p>
-
-    <h3>Haftung für Inhalte</h3>
-    <p>
-      Als Diensteanbieter bin ich nach § 7 Abs. 1 DDG für eigene Inhalte auf
-      diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach den
-      §§ 8 bis 10 DDG bin ich als Diensteanbieter jedoch nicht verpflichtet,
-      übermittelte oder gespeicherte fremde Informationen zu überwachen oder
-      nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit
-      hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von
-      Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.
-      Eine diesbezügliche Haftung ist erst ab dem Zeitpunkt der Kenntnis einer
-      konkreten Rechtsverletzung möglich. Bei Bekanntwerden entsprechender
-      Rechtsverletzungen entferne ich diese Inhalte umgehend.
-    </p>
-
-    <h3>Haftung für Links</h3>
-    <p>
-      Dieses Angebot enthält Links zu externen Websites Dritter, auf deren
-      Inhalte ich keinen Einfluss habe. Deshalb kann ich für diese fremden
-      Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten
-      Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich.
-      Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche
-      Rechtsverstöße überprüft; rechtswidrige Inhalte waren nicht erkennbar.
-      Eine permanente inhaltliche Kontrolle ohne konkrete Anhaltspunkte einer
-      Rechtsverletzung ist nicht zumutbar. Bei Bekanntwerden von
-      Rechtsverletzungen entferne ich derartige Links umgehend.
-    </p>
-
-    <h3>Urheberrecht</h3>
-    <p>
-      Die auf diesen Seiten gezeigten Entwürfe, Illustrationen, 3D-Modelle,
-      Renderings, Texte und der Quellcode unterliegen dem deutschen
-      Urheberrecht. Vervielfältigung, Bearbeitung, Verbreitung und jede Art
-      der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen meiner
-      schriftlichen Zustimmung. Downloads und Kopien dieser Seite sind nur für
-      den privaten, nicht kommerziellen Gebrauch gestattet.
-    </p>
-    <p>
-      Soweit Inhalte auf dieser Seite nicht von mir erstellt wurden, werden
-      die Urheberrechte Dritter beachtet und entsprechend gekennzeichnet.
-      Sollte Ihnen dennoch eine Urheberrechtsverletzung auffallen, bitte ich
-      um einen kurzen Hinweis – bei Kenntnis entferne ich betroffene Inhalte
-      umgehend.
-    </p>
-
-    <h3>Kundenprojekte und Referenzen</h3>
-    <p>
-      Gezeigte Arbeiten wurden im Auftrag der jeweiligen Kundinnen und Kunden
-      erstellt. Marken-, Namens- und Bildrechte liegen bei den jeweiligen
-      Rechteinhabern. Die Darstellung dient ausschließlich der Dokumentation
-      eigener gestalterischer Leistungen.
-    </p>
-
-    <h3>Bild- und Softwarenachweise</h3>
-    <p>
-      [Falls verwendet: Quellen für Stockmaterial, Icons, Schriften oder
-      HDRIs auflisten, z. B. „Icons: Lucide (ISC-Lizenz)“, „Schrift: Space
-      Grotesk (SIL Open Font License)“. Nicht selbst erstelltes Material
-      gehört hierher – sonst diesen Block löschen.]
-    </p>
-
-    <p class="imp-links">
-      <a href="datenschutz.html">Datenschutzerklärung</a>
-      <span aria-hidden="true">·</span>
-      <a href="agb.html">AGB</a>
-      <span aria-hidden="true">·</span>
-      <a href="index.html">Zur Startseite</a>
-    </p>
-
-    <p class="imp-stand">Stand: [Monat Jahr]</p>
   </div>
 </section>
 
+
 <style>
-/* ============================================================
-   IMPRESSUM – nutzt deine globalen Tokens
-   (--text, --muted, --border, --surface, --primary)
-   ============================================================ */
-.imp {
-  padding-top: clamp(2.5rem, 2rem + 2vw, 4rem);
-  padding-bottom: clamp(3.5rem, 3rem + 3vw, 6rem);
-  max-width: 62rem;
-  color: var(--text);
+/* Hintergrundbilder */
+.hero-image-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
 }
 
-.imp-title {
-  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.4rem);
-  font-weight: 900;
-  letter-spacing: -.02em;
-  line-height: 1.15;
-  margin-bottom: .6rem;
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
-.imp-lead {
-  max-width: 46ch;
-  margin-bottom: clamp(2rem, 1.5rem + 1.5vw, 3rem);
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--muted);
+/* Standard: Light Mode */
+.light-image { opacity: 1; }
+.dark-image { opacity: 0; }
+
+/* Darkmode über body.nocturne */
+body.nocturne .light-image {
+  opacity: 0;
+}
+body.nocturne .dark-image {
+  opacity: 1;
 }
 
-/* ---------- Kerndaten als Karte ---------- */
-.imp-card {
-  border: 1px solid var(--border);
-  border-radius: var(--radius, 12px);
-  padding: clamp(1.25rem, 1rem + 1.2vw, 2rem);
-  margin-bottom: clamp(2.5rem, 2rem + 2vw, 3.5rem);
-  background: color-mix(in srgb, var(--text) 3%, transparent);
+/* Falls du auch data-theme="dark" unterstützt */
+[data-theme="dark"] .light-image {
+  opacity: 0;
+}
+[data-theme="dark"] .dark-image {
+  opacity: 1;
 }
 
-.imp-dl { margin: 0; }
-
-.imp-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: .25rem;
-  padding: 1rem 0;
-}
-
-.imp-row + .imp-row { border-top: 1px solid var(--border); }
-.imp-row:first-child { padding-top: 0; }
-.imp-row:last-child { padding-bottom: 0; }
-
-@media (min-width: 720px) {
-  .imp-row {
-    grid-template-columns: 14rem 1fr;
-    gap: 1.5rem;
-    align-items: start;
+/* Small Title auf Handy ausblenden */
+@media (max-width: 768px) {
+  .small-title {
+    display: none;
   }
-}
-
-.imp-row dt {
-  font-size: .82rem;
-  text-transform: uppercase;
-  letter-spacing: .12em;
-  font-weight: 700;
-  color: var(--muted);
-  padding-top: .15rem;
-}
-
-.imp-row dd {
-  margin: 0;
-  font-size: 1.02rem;
-  line-height: 1.7;
-}
-
-.imp-note {
-  font-size: .9em;
-  color: var(--muted);
-}
-
-/* ---------- Fließtext ---------- */
-.imp-body h3 {
-  font-size: clamp(1.15rem, 1.05rem + .4vw, 1.35rem);
-  font-weight: 800;
-  letter-spacing: -.01em;
-  margin: 2.25rem 0 .6rem;
-}
-
-.imp-body h3:first-child { margin-top: 0; }
-
-.imp-body p {
-  max-width: 68ch;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  line-height: 1.75;
-  color: var(--text);
-  text-wrap: pretty;
-}
-
-.imp a {
-  color: var(--primary);
-  text-decoration: underline;
-  text-underline-offset: .18em;
-  text-decoration-thickness: 1px;
-}
-
-.imp a:hover { text-decoration-thickness: 2px; }
-
-.imp a:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 3px;
-  border-radius: 3px;
-}
-
-.imp-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .6rem;
-  margin-top: 2.5rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--border);
-}
-
-.imp-links span { color: var(--muted); }
-
-.imp-stand {
-  margin-top: .75rem;
-  font-size: .86rem;
-  color: var(--muted);
 }
 </style>
 
@@ -1131,6 +1062,810 @@
 
 
 
+
+<!-- ============================================================
+     4. ERWEITERTE LEISTUNGEN
+     Hinweis: Klassen bewusst mit "xt" statt "ad" benannt –
+     Klassennamen mit "ad" werden von manchen Werbeblockern
+     ausgeblendet.
+     ============================================================ -->
+<section class="xt" id="gd-extras" aria-labelledby="xt-h">
+  <div class="xt-shell">
+
+    <header class="xt-head">
+      <p class="xt-eyebrow">Darüber hinaus</p>
+      <h2 id="xt-h" class="aurora-title">Wenn die Marke den Bildschirm verlässt</h2>
+      <p class="aurora-subtitle">
+        Ein Auftritt endet nicht beim Logo. Diese Leistungen kommen dazu,
+        sobald die Marke auf Papier, Karton, Blech oder einer Messewand
+        landet – und jedes Material hat eigene Regeln.
+      </p>
+    </header>
+
+    <div class="xt-grid">
+
+      <article class="xt-card">
+        <figure class="xt-shot"><img src="[./grafik/extra-packaging.webp]" alt="" loading="lazy" decoding="async"></figure>
+        <div class="xt-body">
+          <span class="xt-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+          </span>
+          <h3 class="xt-title">Verpackungsdesign</h3>
+          <p class="xt-copy">
+            Vom Stanzbogen bis zum Regalbild. Inklusive Druckdatenprüfung,
+            Materialempfehlung und Pflichtangaben.
+          </p>
+          <ul class="xt-tags" role="list"><li>Stanzkontur</li><li>Veredelung</li><li>Druckdaten</li></ul>
+        </div>
+      </article>
+
+      <article class="xt-card">
+        <figure class="xt-shot"><img src="[./grafik/extra-merch.webp]" alt="" loading="lazy" decoding="async"></figure>
+        <div class="xt-body">
+          <span class="xt-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.4 5.6 16 4l-4 3-4-3-4.4 1.6A1 1 0 0 0 3 6.9l1.6 3.2 2.4-.8V20h10V9.3l2.4.8L21 6.9a1 1 0 0 0-.6-1.3z"></path>
+            </svg>
+          </span>
+          <h3 class="xt-title">Merchandising</h3>
+          <p class="xt-copy">
+            Textil, Tasse, Notizbuch. Gestaltet für das jeweilige Verfahren –
+            Stick braucht andere Daten als Digitaldruck.
+          </p>
+          <ul class="xt-tags" role="list"><li>Stick</li><li>Siebdruck</li><li>Musterfreigabe</li></ul>
+        </div>
+      </article>
+
+      <article class="xt-card">
+        <figure class="xt-shot"><img src="[./grafik/extra-fahrzeug.webp]" alt="" loading="lazy" decoding="async"></figure>
+        <div class="xt-body">
+          <span class="xt-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 13l1.6-4.8A2 2 0 0 1 6.5 6.8h11a2 2 0 0 1 1.9 1.4L21 13v5h-3"></path>
+              <path d="M6 18H3v-5h18"></path>
+              <circle cx="7.5" cy="18" r="2"></circle><circle cx="17" cy="18" r="2"></circle>
+            </svg>
+          </span>
+          <h3 class="xt-title">Fahrzeugbeschriftung</h3>
+          <p class="xt-copy">
+            Auf Fahrzeugkontur gerechnet, nicht draufgelegt. Auf Wunsch mit
+            Montageplan für die Folienwerkstatt.
+          </p>
+          <ul class="xt-tags" role="list"><li>Konturvorlage</li><li>Fernwirkung</li><li>Montageplan</li></ul>
+        </div>
+      </article>
+
+      <article class="xt-card">
+        <figure class="xt-shot"><img src="[./grafik/extra-messe.webp]" alt="" loading="lazy" decoding="async"></figure>
+        <div class="xt-body">
+          <span class="xt-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3h18v11H3z"></path><path d="M12 14v7"></path>
+              <path d="M8 21h8"></path><path d="M3 8h18"></path>
+            </svg>
+          </span>
+          <h3 class="xt-title">Messe &amp; Event</h3>
+          <p class="xt-copy">
+            Rückwand, Theke, Roll-up, Leitsystem. Abgestimmt auf Standgröße
+            und Blickachsen – lesbar aus acht Metern.
+          </p>
+          <ul class="xt-tags" role="list"><li>Standgrafik</li><li>Leitsystem</li><li>Give-aways</li></ul>
+        </div>
+      </article>
+
+      <article class="xt-card">
+        <figure class="xt-shot"><img src="[./grafik/extra-schilder.webp]" alt="" loading="lazy" decoding="async"></figure>
+        <div class="xt-body">
+          <span class="xt-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h12l4 4-4 4H4z"></path><path d="M8 12v8"></path><path d="M5 20h6"></path>
+            </svg>
+          </span>
+          <h3 class="xt-title">Schilder &amp; Orientierung</h3>
+          <p class="xt-copy">
+            Firmenschild, Türschilder, Wegeleitung. Mit Rücksicht auf
+            Leseabstand, Kontrast und Barrierefreiheit.
+          </p>
+          <ul class="xt-tags" role="list"><li>Fassade</li><li>Innenbereich</li><li>Kontrastprüfung</li></ul>
+        </div>
+      </article>
+
+      <article class="xt-card">
+        <figure class="xt-shot"><img src="[./grafik/extra-editorial.webp]" alt="" loading="lazy" decoding="async"></figure>
+        <div class="xt-body">
+          <span class="xt-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16v16H4z"></path><path d="M8 8h8"></path>
+              <path d="M8 12h8"></path><path d="M8 16h5"></path>
+            </svg>
+          </span>
+          <h3 class="xt-title">Editorial &amp; Kataloge</h3>
+          <p class="xt-copy">
+            Broschüren, Geschäftsberichte, Produktkataloge. Mit Satzraster,
+            das auch bei 80 Seiten trägt.
+          </p>
+          <ul class="xt-tags" role="list"><li>Satzraster</li><li>Bildredaktion</li><li>Reinzeichnung</li></ul>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="xt-fine">
+      Nichts dabei? Dann fragen Sie trotzdem – vieles davon ist verwandt,
+      und was ich nicht selbst mache, gebe ich an jemanden weiter, der es kann.
+    </p>
+  </div>
+</section>
+
+
+<style>
+/* ============================================================
+   Gemeinsame Grundlage
+   ============================================================ */
+.ba, .bp, .sg, .xt {
+  --g-font: var(--wrf-font, ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial);
+  --g-orange: #ff5100;
+  --g-amber: #ff8a00;
+  --g-violet: #4b00ff;
+  --g-line-d: rgba(255, 255, 255, .14);
+  --g-line-l: rgba(15, 23, 42, .12);
+
+  font-family: var(--g-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ba, .sg {
+  background: radial-gradient(900px 380px at 15% -10%, rgba(255, 122, 26, .07), transparent 45%), #000;
+  color: #fff;
+  border-block: 1px solid rgba(255, 255, 255, .1);
+  padding: clamp(2.5rem, 5vw, 6rem) clamp(1rem, 3vw, 2rem);
+}
+
+.bp, .xt {
+  background: #fff;
+  color: #0b0c10;
+  padding: clamp(2.5rem, 4vw, 6rem) clamp(1rem, 3vw, 2rem);
+}
+
+.ba-shell, .bp-shell, .sg-shell, .xt-shell { max-width: 1280px; margin-inline: auto; }
+
+.ba-head, .sg-head { max-width: 52rem; margin: 0 auto clamp(1.6rem, 3vw, 2.6rem); text-align: center; }
+.bp-head, .xt-head { text-align: center; max-width: 62rem; margin: 0 auto clamp(2rem, 4vw, 3rem); }
+
+.ba-eyebrow, .bp-eyebrow, .sg-eyebrow, .xt-eyebrow {
+  margin: 0 0 .45rem;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-weight: 700;
+  color: var(--g-orange);
+}
+
+.ba-title, .sg-title {
+  margin: 0 0 .6rem;
+  font-size: clamp(1.8rem, 1.5rem + 2.2vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -.02em;
+  line-height: 1.13;
+  text-wrap: balance;
+}
+
+.ba-sub, .sg-sub {
+  margin: 0 auto;
+  max-width: 52ch;
+  font-size: clamp(1rem, .96rem + .4vw, 1.16rem);
+  line-height: 1.7;
+  font-weight: 500;
+  color: rgba(255, 255, 255, .78);
+  text-wrap: pretty;
+}
+
+/* ============================================================
+   1. VORHER / NACHHER
+   ============================================================ */
+.ba-tabs {
+  display: flex;
+  gap: .6rem;
+  overflow-x: auto;
+  padding-bottom: .6rem;
+  margin-bottom: 1rem;
+  scrollbar-width: thin;
+  scroll-snap-type: x mandatory;
+}
+
+.ba-tab {
+  flex: 0 0 auto;
+  display: grid;
+  gap: .4rem;
+  justify-items: center;
+  width: 108px;
+  padding: .45rem;
+  border-radius: 12px;
+  border: 1px solid var(--g-line-d);
+  background: rgba(255, 255, 255, .04);
+  color: rgba(255, 255, 255, .78);
+  font: inherit;
+  font-size: .78rem;
+  font-weight: 700;
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition: border-color .25s ease, background .25s ease, transform .25s ease;
+}
+
+.ba-tab img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #14161d;
+}
+
+.ba-tab:hover { transform: translateY(-2px); background: rgba(255, 255, 255, .09); color: #fff; }
+
+.ba-tab.is-active {
+  border-color: var(--g-orange);
+  background: rgba(255, 81, 0, .14);
+  color: #fff;
+}
+
+.ba-tab:focus-visible { outline: 2px solid var(--g-orange); outline-offset: 2px; }
+
+.ba-stage {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid var(--g-line-d);
+  background: #0a0c12;
+  aspect-ratio: 16 / 10;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, .55);
+  touch-action: pan-y;          /* vertikales Scrollen bleibt möglich */
+  user-select: none;
+}
+
+@media (max-width: 700px) { .ba-stage { aspect-ratio: 4 / 3; } }
+
+.ba-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  transition: opacity .35s ease;
+}
+
+/* Die Nachher-Seite wird beschnitten – dadurch bewegt sich nur
+   eine Kante, nicht das Bild. Das bleibt auch bei großen Dateien
+   flüssig, weil clip-path auf dem Compositor läuft. */
+.ba-clip {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+  will-change: clip-path;
+}
+
+.ba-chip {
+  position: absolute;
+  top: .9rem;
+  z-index: 3;
+  padding: .3rem .75rem;
+  border-radius: 999px;
+  background: rgba(8, 10, 16, .68);
+  border: 1px solid rgba(255, 255, 255, .2);
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.ba-chip--l { left: .9rem; }
+.ba-chip--r { right: .9rem; }
+
+.ba-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  z-index: 4;
+  width: 2px;
+  margin-left: -1px;
+  background: rgba(255, 255, 255, .9);
+  box-shadow: 0 0 18px rgba(0, 0, 0, .6);
+  pointer-events: none;
+}
+
+.ba-handle-grip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: -2px;
+  width: 54px;
+  height: 54px;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(10, 12, 18, .82);
+  border: 2px solid #fff;
+  color: #fff;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .55);
+}
+
+.ba-range {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+.ba-range::-webkit-slider-thumb { -webkit-appearance: none; width: 60px; height: 100%; cursor: ew-resize; }
+.ba-range::-moz-range-thumb { width: 60px; height: 100vh; border: 0; background: transparent; cursor: ew-resize; }
+.ba-range:focus-visible { outline: 3px solid var(--g-orange); outline-offset: 3px; border-radius: 20px; }
+
+.ba-caption {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 3;
+  padding: 2.4rem 1.1rem .9rem;
+  font-size: .88rem;
+  font-weight: 650;
+  color: rgba(255, 255, 255, .92);
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .75));
+  pointer-events: none;
+}
+
+.ba-hint { margin: .9rem 0 0; text-align: center; font-size: .84rem; color: rgba(255, 255, 255, .55); }
+
+/* ============================================================
+   2. PAKETE
+   ============================================================ */
+.bp-tiers { display: grid; grid-template-columns: 1fr; gap: clamp(1rem, 2vw, 1.6rem); align-items: stretch; }
+
+@media (min-width: 900px) { .bp-tiers { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+.bp-tier {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  border: 1px solid var(--g-line-l);
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .05);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bp-tier:hover { transform: translateY(-5px); box-shadow: 0 26px 60px rgba(0, 0, 0, .13); }
+  .bp-tier:hover .bp-shot img { transform: scale(1.05); }
+}
+
+.bp-tier--hero {
+  color: #fff;
+  border-color: rgba(255, 255, 255, .16);
+  background: linear-gradient(135deg, #ff8a00, #ff4d00, #ff8a00);
+  background-size: 300% 300%;
+  box-shadow: 0 20px 50px rgba(255, 81, 0, .28);
+}
+
+.bp-tier--dark {
+  color: #fff;
+  border-color: rgba(255, 255, 255, .14);
+  background: linear-gradient(135deg, #4b00ff, #1a0a6e, #4b00ff);
+  background-size: 300% 300%;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bp-tier--hero:hover, .bp-tier--dark:hover { background-position: 100% 50%; }
+}
+
+.bp-fx { position: absolute; inset: 0; z-index: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
+
+.bp-glow {
+  position: absolute;
+  top: 0; left: 0;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255,255,255,.5), rgba(255,255,255,.12) 45%, transparent 72%);
+  filter: blur(24px);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translate3d(calc(var(--gx,0px) - 50%), calc(var(--gy,0px) - 50%), 0);
+  transition: opacity .45s ease;
+  will-change: transform, opacity;
+}
+
+.bp-tier > *:not(.bp-fx) { position: relative; z-index: 2; }
+
+.bp-badge {
+  position: absolute;
+  top: .9rem; right: .9rem;
+  z-index: 3;
+  padding: .3rem .75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .22);
+  border: 1px solid rgba(255, 255, 255, .4);
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.bp-shot { margin: 0; overflow: hidden; aspect-ratio: 16 / 10; background: #f1f2f5; }
+
+.bp-shot img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .6s cubic-bezier(.16, 1, .3, 1);
+}
+
+.bp-body { display: flex; flex-direction: column; flex: 1; padding: clamp(1.2rem, 1rem + 1vw, 1.8rem); }
+
+.bp-name { margin: 0 0 .1rem; font-size: 1.45rem; font-weight: 900; letter-spacing: -.02em; }
+.bp-claim { margin: 0 0 1rem; font-size: .94rem; font-weight: 600; color: #6b7280; }
+.bp-tier--hero .bp-claim, .bp-tier--dark .bp-claim { color: rgba(255, 255, 255, .82); }
+
+.bp-price { display: flex; align-items: baseline; gap: .35rem; margin: 0 0 1.2rem; }
+.bp-amount { font-size: clamp(2rem, 1.7rem + 1.4vw, 2.8rem); font-weight: 900; letter-spacing: -.03em; line-height: 1; }
+.bp-amount--text { font-size: clamp(1.5rem, 1.3rem + 1vw, 2rem); }
+.bp-unit { font-size: .95rem; font-weight: 700; color: #6b7280; }
+.bp-tier--hero .bp-unit, .bp-tier--dark .bp-unit { color: rgba(255, 255, 255, .8); }
+
+.bp-feat { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: .55rem; flex: 1; }
+
+.bp-feat li { position: relative; padding-left: 1.6rem; font-size: .96rem; line-height: 1.55; font-weight: 550; }
+.bp-feat li em { font-style: normal; font-weight: 800; }
+
+.bp-feat li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: .42em;
+  width: 10px; height: 6px;
+  border-left: 2px solid var(--g-orange);
+  border-bottom: 2px solid var(--g-orange);
+  transform: rotate(-45deg);
+}
+
+.bp-tier--hero .bp-feat li::before, .bp-tier--dark .bp-feat li::before { border-color: #fff; }
+
+.bp-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0 1.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, .18);
+  color: inherit;
+  font-size: .98rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform .2s ease, background .25s ease;
+}
+
+.bp-cta:hover { transform: translateY(-2px); background: rgba(15, 23, 42, .05); }
+.bp-tier--hero .bp-cta, .bp-tier--dark .bp-cta { border-color: rgba(255, 255, 255, .5); }
+.bp-tier--hero .bp-cta:hover, .bp-tier--dark .bp-cta:hover { background: rgba(255, 255, 255, .16); }
+
+.bp-cta--solid { background: #fff; color: #ff4d00; border-color: #fff; box-shadow: 0 10px 26px rgba(0, 0, 0, .18); }
+.bp-cta--solid:hover { background: #fff; color: #ff3d00; }
+
+.bp-fine, .xt-fine {
+  margin: clamp(1.4rem, 3vw, 2.2rem) auto 0;
+  max-width: 54rem;
+  text-align: center;
+  font-size: .88rem;
+  line-height: 1.65;
+  color: #6b7280;
+}
+
+/* ============================================================
+   3. STYLEGUIDE
+   ============================================================ */
+.sg-sheet { display: grid; gap: clamp(1rem, 2vw, 1.6rem); }
+
+.sg-block {
+  padding: clamp(1.2rem, 1rem + 1.2vw, 2rem);
+  border-radius: 18px;
+  border: 1px solid var(--g-line-d);
+  background: rgba(255, 255, 255, .04);
+}
+
+.sg-block-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+  padding-bottom: .8rem;
+  border-bottom: 1px solid var(--g-line-d);
+}
+
+.sg-h3 { margin: 0; font-size: clamp(1.1rem, 1rem + .5vw, 1.4rem); font-weight: 850; letter-spacing: -.015em; }
+.sg-note { margin: 0; font-size: .8rem; font-weight: 650; color: rgba(255, 255, 255, .55); }
+
+/* Farben */
+.sg-colors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+
+@media (min-width: 860px) { .sg-colors { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.sg-color {
+  position: relative;
+  display: grid;
+  gap: .6rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.sg-swatch {
+  display: block;
+  height: clamp(72px, 12vw, 104px);
+  border-radius: 12px;
+  background: var(--c);
+  border: 1px solid rgba(255, 255, 255, .18);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.sg-color:hover .sg-swatch { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0, 0, 0, .5); }
+.sg-color:focus-visible .sg-swatch { outline: 2px solid var(--g-orange); outline-offset: 3px; }
+
+.sg-color-meta { display: grid; gap: .1rem; }
+.sg-color-meta strong { font-size: .95rem; font-weight: 800; }
+.sg-hex { font-size: .85rem; font-weight: 700; font-variant-numeric: tabular-nums; color: rgba(255, 255, 255, .85); }
+.sg-rgb { font-size: .78rem; color: rgba(255, 255, 255, .55); font-variant-numeric: tabular-nums; }
+.sg-role { font-size: .78rem; line-height: 1.45; color: rgba(255, 255, 255, .6); }
+
+.sg-color.is-copied .sg-swatch::after {
+  content: "Kopiert";
+  position: absolute;
+  top: .5rem; left: .5rem;
+  padding: .2rem .55rem;
+  border-radius: 999px;
+  background: rgba(10, 12, 18, .85);
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  color: #7cecae;
+}
+
+.sg-rule {
+  margin: 1.2rem 0 0;
+  padding: .8rem 1rem;
+  border-left: 3px solid var(--g-orange);
+  border-radius: 0 10px 10px 0;
+  background: rgba(255, 255, 255, .05);
+  font-size: .92rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, .82);
+}
+
+/* Typografie */
+.sg-type { display: grid; gap: 1.1rem; }
+
+.sg-type-row {
+  display: grid;
+  gap: .3rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, .14);
+}
+
+.sg-type-row:last-child { border-bottom: 0; padding-bottom: 0; }
+
+@media (min-width: 780px) {
+  .sg-type-row { grid-template-columns: 11rem 1fr; gap: 1.5rem; align-items: baseline; }
+}
+
+.sg-type-spec {
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .5);
+}
+
+.sg-type-demo { margin: 0; color: #fff; text-wrap: pretty; }
+
+/* Logo-Regeln */
+.sg-logos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+
+@media (min-width: 900px) { .sg-logos { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.sg-logo { margin: 0; display: grid; gap: .6rem; }
+
+.sg-logo img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--g-line-d);
+  background: #14161d;
+  transition: transform .4s cubic-bezier(.16, 1, .3, 1);
+}
+
+.sg-logo:hover img { transform: scale(1.03); }
+
+.sg-logo figcaption { font-size: .82rem; line-height: 1.5; color: rgba(255, 255, 255, .7); }
+
+.sg-mark {
+  display: inline-block;
+  margin-right: .35rem;
+  padding: .12rem .5rem;
+  border-radius: 999px;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.is-ok .sg-mark { background: rgba(124, 236, 174, .18); color: #7cecae; }
+.is-no .sg-mark { background: rgba(255, 106, 106, .18); color: #ff8a8a; }
+.is-no img { border-color: rgba(255, 106, 106, .35); }
+
+.sg-foot { margin: 1.4rem auto 0; max-width: 54rem; text-align: center; font-size: .88rem; color: rgba(255, 255, 255, .6); }
+
+/* ============================================================
+   4. EXTRAS
+   ============================================================ */
+.xt-grid { display: grid; grid-template-columns: 1fr; gap: clamp(1rem, 2vw, 1.5rem); }
+
+@media (min-width: 700px)  { .xt-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .xt-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+.xt-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  border: 1px solid var(--g-line-l);
+  background: #fff;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, .05);
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .xt-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 81, 0, .4);
+    box-shadow: 0 24px 56px rgba(0, 0, 0, .12);
+  }
+  .xt-card:hover .xt-shot img { transform: scale(1.06); }
+  .xt-card:hover .xt-ico { background: linear-gradient(135deg, #ff8a00, #ff4d00); color: #fff; border-color: transparent; }
+}
+
+.xt-shot { margin: 0; overflow: hidden; aspect-ratio: 16 / 10; background: #f1f2f5; }
+
+.xt-shot img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .6s cubic-bezier(.16, 1, .3, 1);
+}
+
+.xt-body { position: relative; padding: clamp(1.1rem, 1rem + .9vw, 1.6rem); display: flex; flex-direction: column; flex: 1; }
+
+.xt-ico {
+  position: absolute;
+  top: -22px;
+  left: clamp(1.1rem, 1rem + .9vw, 1.6rem);
+  width: 44px; height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  border: 1px solid var(--g-line-l);
+  background: #fff;
+  color: var(--g-orange);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
+  transition: background .3s ease, color .3s ease, border-color .3s ease;
+}
+
+.xt-ico svg { width: 21px; height: 21px; }
+
+.xt-title { margin: 1.1rem 0 .5rem; font-size: 1.2rem; font-weight: 850; letter-spacing: -.015em; }
+
+.xt-copy { margin: 0 0 1rem; font-size: .96rem; line-height: 1.6; color: #5a6472; text-wrap: pretty; flex: 1; }
+
+.xt-tags { list-style: none; display: flex; flex-wrap: wrap; gap: .35rem; margin: 0; padding: 0; }
+
+.xt-tags li {
+  padding: .25rem .6rem;
+  border-radius: 999px;
+  border: 1px solid var(--g-line-l);
+  background: rgba(15, 23, 42, .04);
+  font-size: .74rem;
+  font-weight: 700;
+  color: #4b5563;
+}
+
+/* ============================================================
+   Dark Mode für die hellen Sektionen
+   ============================================================ */
+:root[data-theme="dark"] .bp,
+:root[data-theme="dark"] .xt,
+body.nocturne .bp,
+body.nocturne .xt { background: #000; color: #fff; }
+
+:root[data-theme="dark"] .bp-tier,
+:root[data-theme="dark"] .xt-card,
+body.nocturne .bp-tier,
+body.nocturne .xt-card { background: #0a0c12; border-color: rgba(255, 255, 255, .14); color: #fff; }
+
+:root[data-theme="dark"] .bp-tier--hero,
+body.nocturne .bp-tier--hero { background: linear-gradient(135deg, #ff8a00, #ff4d00, #ff8a00); background-size: 300% 300%; }
+
+:root[data-theme="dark"] .bp-tier--dark,
+body.nocturne .bp-tier--dark { background: linear-gradient(135deg, #4b00ff, #1a0a6e, #4b00ff); background-size: 300% 300%; }
+
+:root[data-theme="dark"] .xt-copy,
+:root[data-theme="dark"] .bp-claim,
+:root[data-theme="dark"] .bp-unit,
+:root[data-theme="dark"] .bp-fine,
+:root[data-theme="dark"] .xt-fine,
+body.nocturne .xt-copy,
+body.nocturne .bp-claim,
+body.nocturne .bp-unit,
+body.nocturne .bp-fine,
+body.nocturne .xt-fine { color: rgba(255, 255, 255, .72); }
+
+:root[data-theme="dark"] .xt-ico,
+body.nocturne .xt-ico { background: #0a0c12; border-color: rgba(255, 255, 255, .16); }
+
+:root[data-theme="dark"] .xt-tags li,
+body.nocturne .xt-tags li { border-color: rgba(255, 255, 255, .16); background: rgba(255, 255, 255, .06); color: rgba(255, 255, 255, .8); }
+
+:root[data-theme="dark"] .bp-cta,
+body.nocturne .bp-cta { border-color: rgba(255, 255, 255, .3); }
+
+/* ============================================================
+   Mobil
+   ============================================================ */
+@media (max-width: 700px) {
+  .ba-tab { width: 92px; font-size: .72rem; }
+  .ba-handle-grip { width: 44px; height: 44px; }
+  .ba-chip { font-size: .66rem; padding: .25rem .6rem; }
+  .ba-caption { font-size: .8rem; padding-top: 2rem; }
+  .sg-block { padding: 1.1rem 1rem; }
+  .sg-rule { font-size: .88rem; }
+  .xt-title { font-size: 1.1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ba-img, .ba-tab, .bp-tier, .bp-shot img, .xt-card, .xt-shot img,
+  .sg-swatch, .sg-logo img, .bp-glow { transition: none; }
+}
+</style>
 
 
 
@@ -1151,7 +1886,7 @@
         <p class="fc-claim">UX &amp; Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
       </div>
       <div class="fc-cta">
-        <a class="fc-btn" href="#kontakt" aria-label="Projekt anfragen">Projekt anfragen</a>
+        <a class="fc-btn" href="/anfrage.html" aria-label="Projekt anfragen">Projekt anfragen</a>
       </div>
     </section>
 
@@ -1183,15 +1918,14 @@
         <ul class="fc-links" aria-labelledby="fc-legal">
           <li><a href="/impressum.html">Impressum</a></li>
           <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
-          <li><a href="/cookies.html">Cookie-Hinweis</a></li>
         </ul>
       </div>
 
       <div class="fc-col">
         <h3 class="fc-col-title" id="fc-contact">Kontakt</h3>
         <ul class="fc-links" aria-labelledby="fc-contact">
-          <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
-          <li><a href="tel:+491234567890" itemprop="telephone">+49&nbsp;123&nbsp;4567890</a></li>
+          <li><a href="mailto:hello@fusion3.de" itemprop="email">hi.dherrnreither@gmail.com</a></li>
+          <li><a href="tel:+491708933204" itemprop="telephone">+49&nbsp;170&nbsp;8933204</a></li>
           <li>
             <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" class="fc-address">
               <span itemprop="addressLocality">Landshut</span>, <span itemprop="addressCountry">Deutschland</span>

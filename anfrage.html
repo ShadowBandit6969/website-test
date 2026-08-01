@@ -26,46 +26,49 @@
   </script>
 
   <!-- ===== Globale Tokens – identisch zur Startseite ===== -->
-  <style>
-    :root{
-      --accent:#0062ff;
-      --text:#111;
-      --muted:#555;
-      --border:rgba(0,0,0,.08);
-      --surface:#ffffff;
-      --container-width: min(95vw, 1340px);
-      --radius: 12px;
-      --primary: #ff4d00;
-      --secondary: #ff9900;
-    }
-    @media (prefers-color-scheme: dark){
-      :root{ --text:#f5f7fa; --muted:#b7bec7; --border:rgba(255,255,255,.12); --surface:#000; }
-    }
-    :root[data-theme="dark"]{
-      --text:#f5f7fa; --muted:#b7bec7; --border:rgba(255,255,255,.12); --surface:#000;
-    }
+<style>
+  :root{
+    --accent:#0062ff;
+    --text:#111;
+    --muted:#555;
+    --border:rgba(0,0,0,.08);
+    --surface:#ffffff;
+    --container-width: min(95vw, 1340px);
+    --header-pad-y: .75rem;          /* NEU – wie im Index */
+    --radius: 12px;
+    --primary: #ff4d00;
+    --secondary: #ff9900;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --text:#f5f7fa; --muted:#b7bec7; --border:rgba(255,255,255,.12); --surface:#000; }
+  }
+  :root[data-theme="dark"]{
+    --text:#f5f7fa; --muted:#b7bec7; --border:rgba(255,255,255,.12); --surface:#000;
+  }
 
-    *{margin:0;padding:0;box-sizing:border-box}
-    html,body{
-      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,sans-serif;
-      background:#fff; color:var(--text); scroll-behavior:smooth;
-      overflow-x:hidden; width:100%;
-    }
-    :root[data-theme="dark"] body{ background:#000 }
-    a{color:inherit;text-decoration:none;transition:color .2s ease,opacity .2s ease}
-    h1,h2,h3,h4{font-weight:900;letter-spacing:-.02em}
-    main{display:block}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,sans-serif;
+    background:#fff; color:var(--text); scroll-behavior:smooth;
+    /* overflow-x:hidden und width:100% sind bewusst raus –
+       sie brechen das sticky-Verhalten des Headers */
+  }
+  :root[data-theme="dark"] body{ background:#000 }
 
-    .sr-only{
-      position:absolute!important; width:1px; height:1px; padding:0; margin:-1px;
-      overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
-    }
-    .skip-link{ position:absolute; left:-9999px; top:auto; z-index:1000; }
-    .skip-link:focus{
-      left:auto; top:.5rem; inset-inline-start:.5rem;
-      background:#000; color:#fff; padding:.5rem .75rem; border-radius:.5rem;
-    }
-  </style>
+  a{color:inherit;text-decoration:none;transition:color .2s ease,opacity .2s ease}
+  h1,h2,h3,h4{font-weight:900;letter-spacing:-.02em}
+  main{display:block}
+
+  .sr-only{
+    position:absolute!important; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+  }
+  .skip-link{ position:absolute; left:-9999px; top:auto; z-index:1000; }
+  .skip-link:focus{
+    left:auto; top:.5rem; inset-inline-start:.5rem;
+    background:#000; color:#fff; padding:.5rem .75rem; border-radius:.5rem;
+  }
+</style>
 
   <link rel="stylesheet" href="css/navbar.css" type="text/css">
   <link rel="stylesheet" href="css/darkmodeLast.css" type="text/css">
@@ -441,7 +444,7 @@
   .fx-nav {
     display: flex; gap: var(--s2); flex-wrap: wrap;
     margin-top: var(--s6); padding-top: var(--s4);
-    border-top: 1px solid var(--fx-hair-soft);
+
   }
   .fx-nav button {
     font: inherit; font-size: .8rem; text-transform: uppercase; letter-spacing: .14em; font-weight: 680;
@@ -656,10 +659,33 @@
 
     <!-- ===== Bildfläche ===== -->
     <aside class="fx-visual" aria-hidden="true">
-      <div class="fx-visual-bg">
-        <div class="fx-layer is-on" id="fxLayerA"></div>
-        <div class="fx-layer" id="fxLayerB"></div>
-      </div>
+<!-- ============================================================
+     TEIL 1
+     Ersetzt in anfrage.html die Zeilen 659 bis 662, also den
+     kompletten Block:
+
+         <div class="fx-visual-bg">
+           <div class="fx-layer is-on" id="fxLayerA"></div>
+           <div class="fx-layer" id="fxLayerB"></div>
+         </div>
+
+     Die beiden alten Layer bleiben absichtlich drin: das
+     vorhandene Script schreibt weiter auf sie, sie sind nur
+     unsichtbar. So muss in der bestehenden IIFE nichts geändert
+     werden.
+     ============================================================ -->
+
+<div class="fx-visual-bg">
+  <div class="fx-layer is-on" id="fxLayerA"></div>
+  <div class="fx-layer" id="fxLayerB"></div>
+
+  <video class="fx-vid is-on" id="fxVidA" muted loop playsinline preload="auto"
+         disableremoteplayback aria-hidden="true"></video>
+  <video class="fx-vid" id="fxVidB" muted loop playsinline preload="none"
+         disableremoteplayback aria-hidden="true"></video>
+
+  <span class="fx-glow" id="fxGlow" aria-hidden="true"></span>
+</div>
 
       <div class="fx-visual-body">
         <div>
@@ -959,7 +985,7 @@
                 Wir sehen uns deine Angaben an und melden uns innerhalb von 24 Stunden.
               </p>
               <p class="success-sub">Eine Bestätigung liegt in deinem Postfach.</p>
-              <button type="button" class="success-btn">Neue Anfrage starten</button>
+
             </div>
           </fieldset>
 
@@ -975,13 +1001,6 @@
 
   </div>
 </main>
-
-<!-- Hier deinen üblichen Footer einsetzen -->
-
-
-<!-- ============================================================
-     SCRIPTS – Navigation, Untermenüs, Theme
-     ============================================================ -->
 <script>
 (function(){
   const docEl = document.documentElement;
@@ -1239,8 +1258,6 @@
   });
 })();
 </script>
-
-
 <script>
 /* ============================================================
    ANFRAGE-WIZARD
@@ -1633,105 +1650,648 @@
   setStatus('');
 })();
 </script>
-
-
-
+<!-- ============================================================
+     TEIL 2
+     Ersetzt den kompletten letzten <style>-Block (aktuell
+     Zeile 1627 bis 1750, direkt vor dem <footer>).
+     ============================================================ -->
 
 <style>
-    /* ============================================================
-       PATCH – gleiche Spaltenhöhe + bündige Fußlinie
-       Die Meta-Zeile links schließt exakt mit der Buttonzeile
-       rechts ab: beide Spalten gleich hoch, beide Innenflächen mit
-       demselben Kopf-Abstand, beide Füße per margin-top:auto an
-       dieselbe untere Grundlinie gedrückt.
-       ============================================================ */
+/* ------------------------------------------------------------
+   1. Seitenhintergrund folgt dem Theme
+   Hell: weiß mit schwarzer Schrift. Dunkel: schwarz.
+------------------------------------------------------------ */
+html,
+body[data-page="anfrage"] {
+  background: #fff;
+  color: var(--text);
+}
 
-    .fx-split { align-items: stretch; }
+:root[data-theme="dark"] body[data-page="anfrage"],
+body.nocturne {
+  background: #000;
+}
 
-    .fx-visual {
-      position: relative;
-      min-height: 0;
-    }
-    .fx-visual-bg { position: absolute; inset: 0; height: 100%; }
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] body[data-page="anfrage"] { background: #000; }
 
-    @media (min-width: 1080px) {
+  /* Deine .fx-Tokens kennen nur data-theme="dark" – im
+     Automatikmodus fehlen sie sonst */
+  :root[data-theme="auto"] .fx {
+    --fx-ink: #ffffff;
+    --fx-ink-2: #e6ebf3;
+    --fx-ink-3: #9aa5b6;
+    --fx-surface: #06070a;
+    --fx-field: #0f1218;
+    --fx-hair: rgba(255,255,255,.14);
+    --fx-hair-soft: rgba(255,255,255,.09);
+    --fx-green-deep: #7cecae;
+  }
+}
 
-      /* Linke Innenfläche: Sticky, feste Bezugshöhe, Fuß unten. */
-      .fx-visual-body {
-        position: sticky;
-        top: var(--fx-top);
-        height: calc(80svh - var(--fx-top));
-        min-height: calc(100svh - var(--fx-top));
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        gap: var(--s5);
-        /* gleicher sichtbarer Kopf-Abstand wie rechts (dort --s6
-           zusätzlich zum Header) und gleicher Fuß-Abstand */
-        padding-top: var(--s6);
-        padding-bottom: var(--s6);
-      }
+/* Die Videospalte bleibt in beiden Modi dunkel – auf hellem
+   Grund wäre die weiße Schrift über dem Video nicht lesbar. */
+.fx-visual { background: #000; }
 
-      /* Rechte Spalte: als Flex-Spalte, damit die Buttonzeile
-         nach unten wandern kann. */
-      .fx-form-side { display: flex; flex-direction: column; }
-      .fx-form-inner {
-        flex: 1 1 auto;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-      }
+/* Kompakteres Abstandsraster */
+.fx { --s7: clamp(1.25rem, 1rem + 1.5vw, 2rem); }
 
-      /* Beide Füße an die untere Kante drücken … */
-      .fx-visual-foot { margin-top: auto; }
-      .fx-form-inner .fx-nav { margin-top: auto; }
+/* ------------------------------------------------------------
+   2. Gleiche Höhe, genau ein Bildschirm
+------------------------------------------------------------ */
+.fx-split {
+  align-items: stretch;
+  min-height: 100vh;
+  min-height: 100svh;
+}
 
-      /* … und identisch aufbauen: gleiche Trennlinie oben, gleicher
-         Innenabstand, gleiche Ausrichtung. Dann liegt die Meta-Zeile
-         auf exakt derselben Grundlinie wie die Buttons. */
-      .fx-visual-foot {
-        display: flex;
-        align-items: center;
-        padding-top: var(--s4);
-        border-top: 1px solid rgba(255,255,255,.16);
-      }
-      .fx-form-inner .fx-nav {
-        align-items: center;
-      }
-      /* der obere Rand-Abstand steckt jetzt in der Trennlinie */
-      .fx-form-inner .fx-nav { margin-top: auto; }
+.fx-visual {
+  position: relative;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
 
-      /* Meta-Zeile: eigener oberer Abstand + Trennlinie raus,
-         die kommen jetzt vom Fuß-Container */
-      .fx-meta {
-        margin: 0;
-        padding-top: 0;
-        border-top: 0;
-      }
+.fx-visual-bg { position: absolute; inset: 0; height: 100%; overflow: hidden; }
 
-      .fx-visual-body .fx-bar { display: none; }
-    }
-
-    /* ---------- Header im Light Mode: weißer Hintergrund ----------
-       Greift auch im gescrollten Zustand (.is-ascended) und schlägt
-       einen evtl. anderen Hintergrund aus navbar.css. */
-    html:not([data-theme="dark"]) body:not(.nocturne) .aether-header,
-    html:not([data-theme="dark"]) body:not(.nocturne) .aether-header__bar,
-    html:not([data-theme="dark"]) body:not(.nocturne) .aether-header.is-ascended,
-    html:not([data-theme="dark"]) body:not(.nocturne) .aether-header.is-ascended .aether-header__bar {
-      background: #ffffff !important;
-      backdrop-filter: none;
-    }
-    :root {
-  /* Ändere diesen Wert z. B. von 3.25rem auf einen kleineren Wert wie 1.75rem oder 2rem */
-  --s7: clamp(1.25rem, 1rem + 1.5vw, 2rem); 
-}.fx-visual-body {
-  position: relative; z-index: 2;
+.fx-visual-body {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--s3);
   padding: var(--s7);
-  display: flex; flex-direction: column; 
-  gap: var(--s3); /* Vorher var(--s5), reduziert den Abstand zwischen den Elementen */
-  min-height: 12rem; /* Vorher 15rem */
+  min-height: 12rem;
+}
+
+.fx-visual-body > *:first-child,
+.fx-form-inner > *:first-child { margin-top: 0; }
+
+/* ------------------------------------------------------------
+   3. Video statt Bild
+------------------------------------------------------------ */
+#fxLayerA, #fxLayerB { display: none !important; }
+
+.fx-vid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0;
+  background: #000;
+  transform: scale(1.06) translate3d(var(--tx, 0px), var(--ty, 0px), 0);
+  transition: opacity .85s cubic-bezier(.4, 0, .2, 1);
+  will-change: opacity, transform;
+  pointer-events: none;
+}
+
+.fx-vid.is-on { opacity: 1; }
+
+.fx-glow {
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 1;
+  width: 460px; height: 460px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side,
+    rgba(255,255,255,.16), rgba(255,255,255,.05) 45%, transparent 72%);
+  filter: blur(26px);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translate3d(calc(var(--gx, 0px) - 50%), calc(var(--gy, 0px) - 50%), 0);
+  transition: opacity .5s ease;
+  pointer-events: none;
+}
+
+.fx-visual-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.72) 55%, rgba(0,0,0,.92) 100%),
+    linear-gradient(135deg, rgba(255,77,0,.14), rgba(75,0,255,.18));
+}
+
+/* ------------------------------------------------------------
+   4. Die Schrittzahl
+------------------------------------------------------------ */
+.fx-num {
+  color: #ffffff;
+  -webkit-text-stroke: 0;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0);
+  display: inline-flex;
+  align-items: baseline;
+  overflow: hidden;
+}
+
+:root[data-theme="dark"] .fx-num,
+body.nocturne .fx-num {
+  color: #ffffff;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0);
+}
+
+.fx-num.is-done { color: var(--fx-green); }
+.fx-num .d { display: inline-block; will-change: transform, opacity, filter; }
+
+/* ------------------------------------------------------------
+   5. Auswahlkarten – Lichtkante folgt dem Cursor
+------------------------------------------------------------ */
+.choice { position: relative; isolation: isolate; }
+
+.choice::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(220px circle at var(--cx, 50%) var(--cy, 50%),
+    rgba(255,255,255,.85), rgba(255,255,255,.12) 45%, transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+
+/* Auf hellem Grund braucht die Kante eine dunkle Farbe */
+html:not([data-theme="dark"]) body:not(.nocturne) .choice::after {
+  background: radial-gradient(220px circle at var(--cx, 50%) var(--cy, 50%),
+    rgba(15,23,42,.55), rgba(15,23,42,.12) 45%, transparent 70%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .choice:hover::after { opacity: 1; }
+}
+
+.choice.is-pulse::after { opacity: 1; animation: fx-pulse .55s ease-out; }
+
+@keyframes fx-pulse {
+  from { transform: scale(.985); opacity: 1; }
+  to   { transform: scale(1);    opacity: .35; }
+}
+
+/* ------------------------------------------------------------
+   6. Desktop-Feinschliff – muss nach den Grundregeln stehen
+------------------------------------------------------------ */
+@media (min-width: 1080px) {
+  .fx-visual-body {
+    position: static;
+    height: auto;
+    min-height: 0;
+    padding-top: calc(var(--fx-top) + var(--s5));
+    padding-bottom: var(--s5);
+  }
+
+  .fx-form-side {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding-top: calc(var(--fx-top) + var(--s5));
+    padding-bottom: var(--s5);
+    border-left: 1px solid var(--fx-hair);
+  }
+
+  .fx-form-inner {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .fx-form-inner .fx-nav { margin-top: auto; }
+  .fx-visual-body .fx-bar { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-vid, .fx-glow, .choice::after { transition: none; }
+  .choice.is-pulse::after { animation: none; }
+}
+
+
+/* Header im White-Mode weiß und sticky machen */
+html:not([data-theme="dark"]) body:not(.nocturne) .aether-header,
+:root[data-theme="light"] .aether-header {
+  background: #ffffff !important;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}.sigil-mark {
+  color: #000000;
+}
+
+html[data-theme="dark"] .sigil-mark,
+body.nocturne .sigil-mark,
+:root[data-theme="dark"] .sigil-mark {
+  color: #ffffff;
 }
 </style>
+
+<script>
+/* ============================================================
+   ANFRAGE – Videohintergrund, Zahlwechsel, Zeigereffekte
+   Läuft unabhängig von der bestehenden Formular-IIFE.
+   ============================================================ */
+(function () {
+  "use strict";
+
+  /* ---------------- Hier die Dateien eintragen ----------------
+     Schlüssel = value des Radio-Buttons (siehe Markup).
+     Poster ist optional, wird als Standbild vor dem Start und
+     bei reduzierter Bewegung gezeigt.
+  ------------------------------------------------------------- */
+  const MEDIA = {
+    default:        { src: "./contactvideo/1.webm",   poster: "./arbeitsproben/arbeitsproben_index/grafik2.webp" },
+    "Webdesign":    { src: "./contactvideo/2.webm", poster: "./arbeitsproben/arbeitsproben_index/serum11.webp" },
+    "3D-Design":    { src: "./contactvideo/black.webm",        poster: "./arbeitsproben/arbeitsproben_index/post21.webp" },
+    "Grafikdesign": { src: "./contactvideo/3.webm",    poster: "./arbeitsproben/arbeitsproben_index/pizza3.webp" }
+  };
+
+  const PARALLAX = 10;      // px, Versatz des Videos unter dem Cursor
+  const FOLLOW   = 0.14;    // Trägheit von Licht und Parallaxe
+
+  const $  = (s, c) => (c || document).querySelector(s);
+  const $$ = (s, c) => Array.prototype.slice.call((c || document).querySelectorAll(s));
+  const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const fine   = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  const visual = $(".fx-visual");
+  const vids   = [$("#fxVidA"), $("#fxVidB")].filter(Boolean);
+  const glow   = $("#fxGlow");
+  if (!visual || vids.length < 2) return;
+
+  /* ============================================================
+     1. Videowechsel mit Überblendung
+     ============================================================ */
+  let active = 0;
+  let currentSrc = "";
+
+  function play(v) {
+    if (reduce) return;
+    const p = v.play();
+    if (p && p.catch) p.catch(function () {});
+  }
+
+  function setMedia(key) {
+    const m = MEDIA[key] || MEDIA.default;
+    if (!m || m.src === currentSrc) return;
+    currentSrc = m.src;
+
+    const next = vids[1 - active];
+    const cur  = vids[active];
+
+    if (m.poster) next.poster = m.poster;
+    next.src = m.src;
+    next.load();
+    play(next);
+
+    let done = false;
+    const swap = function () {
+      if (done) return;
+      done = true;
+      next.classList.add("is-on");
+      cur.classList.remove("is-on");
+      active = 1 - active;
+      setTimeout(function () { try { cur.pause(); } catch (e) {} }, 900);
+    };
+
+    if (next.readyState >= 2) swap();
+    else {
+      next.addEventListener("canplay", swap, { once: true });
+      setTimeout(swap, 1200);        // Notausgang, falls canplay ausbleibt
+    }
+  }
+
+  setMedia("default");
+
+  /* Auswahl beobachten – kein Eingriff in die bestehende IIFE */
+  $$('input[name="service"]').forEach(function (input) {
+    input.addEventListener("change", function () {
+      if (!input.checked) return;
+      setMedia(input.value);
+
+      const card = input.closest(".choice");
+      if (card) {
+        card.classList.remove("is-pulse");
+        void card.offsetWidth;
+        card.classList.add("is-pulse");
+        setTimeout(function () { card.classList.remove("is-pulse"); }, 700);
+      }
+      if (navigator.vibrate) navigator.vibrate(8);
+    });
+  });
+
+  /* Strom sparen: nur abspielen, wenn sichtbar */
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) play(vids[active]);
+        else vids.forEach(function (v) { try { v.pause(); } catch (err) {} });
+      });
+    }, { threshold: 0.05 }).observe(visual);
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) vids.forEach(function (v) { try { v.pause(); } catch (e) {} });
+    else play(vids[active]);
+  });
+
+  /* ============================================================
+     2. Zeigereffekte
+     Desktop: Licht und Parallaxe folgen dem Cursor.
+     Handy: das Video wandert beim Scrollen leicht mit.
+     Beides schreibt ausschließlich transform.
+     ============================================================ */
+  if (!reduce && fine) {
+    let raf = 0, inside = false, rect = null;
+    let tx = 0, ty = 0, cx = 0, cy = 0;   // Licht
+    let px = 0, py = 0, ax = 0, ay = 0;   // Parallaxe
+
+    function frame() {
+      raf = 0;
+      cx += (tx - cx) * FOLLOW;
+      cy += (ty - cy) * FOLLOW;
+      ax += (px - ax) * FOLLOW;
+      ay += (py - ay) * FOLLOW;
+
+      if (glow) {
+        glow.style.setProperty("--gx", cx.toFixed(1) + "px");
+        glow.style.setProperty("--gy", cy.toFixed(1) + "px");
+      }
+      visual.style.setProperty("--tx", ax.toFixed(2) + "px");
+      visual.style.setProperty("--ty", ay.toFixed(2) + "px");
+      vids.forEach(function (v) {
+        v.style.setProperty("--tx", ax.toFixed(2) + "px");
+        v.style.setProperty("--ty", ay.toFixed(2) + "px");
+      });
+
+      if (inside || Math.abs(px - ax) > .2 || Math.abs(py - ay) > .2) {
+        raf = requestAnimationFrame(frame);
+      }
+    }
+
+    visual.addEventListener("pointerenter", function (e) {
+      if (e.pointerType !== "mouse") return;
+      inside = true;
+      rect = visual.getBoundingClientRect();
+      tx = cx = e.clientX - rect.left;
+      ty = cy = e.clientY - rect.top;
+      if (glow) glow.style.opacity = "1";
+      if (!raf) raf = requestAnimationFrame(frame);
+    });
+
+    visual.addEventListener("pointermove", function (e) {
+      if (e.pointerType !== "mouse") return;
+      if (!rect) rect = visual.getBoundingClientRect();
+      tx = e.clientX - rect.left;
+      ty = e.clientY - rect.top;
+      px = ((tx / rect.width) * 2 - 1) * -PARALLAX;
+      py = ((ty / rect.height) * 2 - 1) * -PARALLAX;
+      if (!raf) raf = requestAnimationFrame(frame);
+    }, { passive: true });
+
+    visual.addEventListener("pointerleave", function () {
+      inside = false;
+      rect = null;
+      px = py = 0;
+      if (glow) glow.style.opacity = "0";
+      if (!raf) raf = requestAnimationFrame(frame);
+    });
+
+    window.addEventListener("scroll", function () { if (inside) rect = null; }, { passive: true });
+
+    /* Lichtkante der Auswahlkarten */
+    $$(".choice").forEach(function (card) {
+      card.addEventListener("pointermove", function (e) {
+        const b = card.getBoundingClientRect();
+        card.style.setProperty("--cx", (e.clientX - b.left) + "px");
+        card.style.setProperty("--cy", (e.clientY - b.top) + "px");
+      }, { passive: true });
+    });
+
+  } else if (!reduce) {
+    /* Handy: sanfte Scroll-Parallaxe */
+    let raf = 0;
+    const paint = function () {
+      raf = 0;
+      const b = visual.getBoundingClientRect();
+      const vh = window.innerHeight;
+      if (b.bottom < 0 || b.top > vh) return;
+      const p = clamp((vh - b.top) / (vh + b.height), 0, 1);
+      const y = (p - .5) * PARALLAX * 2;
+      vids.forEach(function (v) { v.style.setProperty("--ty", y.toFixed(2) + "px"); });
+    };
+    const sched = function () { if (!raf) raf = requestAnimationFrame(paint); };
+    window.addEventListener("scroll", sched, { passive: true });
+    window.addEventListener("resize", sched, { passive: true });
+    sched();
+  }
+
+  /* ============================================================
+     3. Zahlwechsel 01 → 02
+     Die bestehende IIFE schreibt textContent. Ein MutationObserver
+     fängt das ab und baut die Ziffern für die Animation neu auf.
+     ============================================================ */
+  const num = $("#fxNum");
+  if (!num) return;
+
+  const title = $("#fxTitle");
+  const note  = $("#fxNote");
+
+  let last = (num.textContent || "").trim();
+  let guard = false;
+
+  function digits(el) { return $$(".d", el); }
+
+  function render(value, from) {
+    guard = true;
+
+    const chars = String(value).split("");
+    const prev  = String(from || "").split("");
+    const old   = digits(num);
+
+    num.textContent = "";
+
+    chars.forEach(function (ch, i) {
+      const s = document.createElement("span");
+      s.className = "d";
+      s.textContent = ch;
+      num.appendChild(s);
+
+      const changed = prev[i] !== ch;
+      if (!changed || reduce) return;
+
+      const up = Number(value) >= Number(from || 0);
+
+      s.animate([
+        { transform: "translateY(" + (up ? 70 : -70) + "%)", opacity: 0, filter: "blur(6px)" },
+        { transform: "translateY(0)", opacity: 1, filter: "blur(0)" }
+      ], {
+        duration: 520,
+        delay: i * 70,
+        easing: "cubic-bezier(.22,.9,.24,1)",
+        fill: "backwards"
+      });
+
+      if (old[i]) {
+        const ghost = old[i];
+        ghost.style.position = "absolute";
+        num.appendChild(ghost);
+        ghost.animate([
+          { transform: "translateY(0)", opacity: 1, filter: "blur(0)" },
+          { transform: "translateY(" + (up ? -70 : 70) + "%)", opacity: 0, filter: "blur(6px)" }
+        ], {
+          duration: 420,
+          delay: i * 70,
+          easing: "cubic-bezier(.4,0,.6,1)"
+        }).onfinish = function () { ghost.remove(); };
+      }
+    });
+
+    guard = false;
+  }
+
+  /* Erstaufbau ohne Animation */
+  render(last, last);
+
+  new MutationObserver(function () {
+    if (guard) return;
+
+    const val = (num.textContent || "").trim();
+    if (!val || val === last) return;
+
+    const from = last;
+    last = val;
+    render(val, from);
+
+    /* Titel und Hinweis ziehen leise nach */
+    if (!reduce) {
+      [title, note].forEach(function (el, i) {
+        if (!el) return;
+        el.animate([
+          { opacity: 0, transform: "translateY(10px)" },
+          { opacity: 1, transform: "translateY(0)" }
+        ], { duration: 460, delay: 90 + i * 80, easing: "cubic-bezier(.22,.9,.24,1)", fill: "backwards" });
+      });
+    }
+  }).observe(num, { childList: true, characterData: true, subtree: true });
+
+})();
+</script>
+
+
+<footer itemscope itemtype="https://schema.org/Organization" class="footer-clean">
+  <!-- In Microdata ist <meta itemprop> im Body erlaubt und ersetzt hier das unzulässige <link>. -->
+  <meta itemprop="url" content="https://www.fusion3.de">
+
+  <div class="fc-container">
+
+    <!-- Head: Brand & Claim + CTA -->
+    <section class="fc-head" aria-labelledby="fc-head-title">
+      <h2 id="fc-head-title" class="sr-only">Markenbereich</h2>
+      <div class="fc-brand">
+        <!-- Optional: Logo als Link zur Startseite -->
+        <a class="fc-logo" href="index.html" itemprop="name">Fusion³</a>
+        <p class="fc-claim">UX &amp; Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
+      </div>
+      <div class="fc-cta">
+        <a class="fc-btn" href="/anfrage.html" aria-label="Projekt anfragen">Projekt anfragen</a>
+      </div>
+    </section>
+
+    <!-- Grid -->
+    <nav class="fc-grid" aria-labelledby="fc-nav-title">
+      <h2 id="fc-nav-title" class="sr-only">Footer-Navigation</h2>
+
+      <div class="fc-col">
+        <h3 class="fc-col-title" id="fc-nav">Navigation</h3>
+        <ul class="fc-links" aria-labelledby="fc-nav">
+          <li><a href="index.html">Start</a></li>
+          <li><a href="Gallerie.html">Portfolio</a></li>
+          <li><a href="index.html#nebula-hub">Leistungen</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+
+      <div class="fc-col">
+        <h3 class="fc-col-title" id="fc-services">Leistungen</h3>
+        <ul class="fc-links" aria-labelledby="fc-services">
+          <li><a href="./WebDesign.html">Webdesign</a></li>
+          <li><a href="./3DDesign.html">3D Design</a></li>
+          <li><a href="./Grafikdesign.html">Grafikdesign</a></li>
+        </ul>
+      </div>
+
+      <div class="fc-col">
+        <h3 class="fc-col-title" id="fc-legal">Rechtliches</h3>
+        <ul class="fc-links" aria-labelledby="fc-legal">
+          <li><a href="/impressum.html">Impressum</a></li>
+          <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
+        </ul>
+      </div>
+
+      <div class="fc-col">
+        <h3 class="fc-col-title" id="fc-contact">Kontakt</h3>
+        <ul class="fc-links" aria-labelledby="fc-contact">
+          <li><a href="mailto:hello@fusion3.de" itemprop="email">hi.dherrnreither@gmail.com</a></li>
+          <li><a href="tel:+491708933204" itemprop="telephone">+49&nbsp;170&nbsp;8933204</a></li>
+          <li>
+            <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" class="fc-address">
+              <span itemprop="addressLocality">Landshut</span>, <span itemprop="addressCountry">Deutschland</span>
+            </address>
+          </li>
+        </ul>
+
+        <!-- Socials jetzt als echte Liste (keine role=list / role=listitem nötig) -->
+        <h3 id="fc-socials-title" class="sr-only">Social Media</h3>
+        <ul class="fc-socials" aria-labelledby="fc-socials-title">
+          <li>
+            <a class="fc-social" href="mailto:hello@fusion3.de" aria-label="E-Mail" itemprop="sameAs">
+              <span class="sr-only">E-Mail</span>
+              <img src="./FooterIcons/Gmail.png" alt="" loading="lazy" decoding="async" width="20" height="20">
+            </a>
+          </li>
+          <li>
+            <a class="fc-social fc-li" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" itemprop="sameAs">
+              <span class="sr-only">LinkedIn</span>
+              <img src="./FooterIcons/LinkedIn.png" alt="" loading="lazy" decoding="async" width="20" height="20">
+            </a>
+          </li>
+          <li>
+            <a class="fc-social fc-wa" href="https://wa.me/491234567890" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" itemprop="sameAs">
+              <span class="sr-only">WhatsApp</span>
+              <img src="./FooterIcons/Whatsapp.svg" alt="" loading="lazy" decoding="async" width="20" height="20">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Bottom -->
+    <div class="fc-legal" aria-labelledby="fc-legal-title">
+      <h3 id="fc-legal-title" class="sr-only">Rechtliches &amp; Hinweise</h3>
+      <p>© <time id="currentYear" datetime="2025">2025</time> <span class="nowrap">Fusion³</span> · DSGVO-konform &amp; barrierearm entwickelt.</p>
+    </div>
+
+  </div>
+</footer>
+<script>
+  (function(){
+    var el = document.getElementById('currentYear');
+    if (el) el.textContent = new Date().getFullYear();
+  })();
+</script>
+
 </body>
 </html>
