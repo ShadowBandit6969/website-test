@@ -28,14 +28,7 @@
   <!-- Normales Script kann defer tragen -->
   <script src="https://unpkg.com/scrollreveal" defer></script>
 
-  <!-- Analytics Beispiel -->
-  <script>
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "t1mbvlhldj");
-  </script>
+
 
   <!-- ===============================
        GLOBAL CSS
@@ -859,21 +852,22 @@
 
 
 <!-- ============================================================
-     DATENSCHUTZERKLÄRUNG
-     Ersetzt die bisherige <section class="container"> auf
-     datenschutz.html. Hero und Footer bleiben unverändert.
+     DATENSCHUTZERKLÄRUNG – überarbeitete Fassung
+     Ersetzt in datenschutz.html den Block von
+     <section class="container dse" ...> bis </section>
+     (bisher Zeile 861 bis 1096). Hero, Header und Footer bleiben.
 
-     WICHTIG: Diese Erklärung beschreibt, was deine Seite laut
-     Quelltext tatsächlich tut. Nimmst du ein Werkzeug raus,
-     lösche den Abschnitt. Kommt eines dazu, muss es hier rein.
      Alle [eckigen Klammern] vor dem Livegang ersetzen.
+     Nimmst du ein Werkzeug aus der Seite raus, lösche den
+     Abschnitt hier. Kommt eines dazu, muss es hier rein.
      ============================================================ -->
 
 <section class="container dse" aria-labelledby="dse-h">
   <h2 id="dse-h" class="dse-title">Datenschutzerklärung</h2>
   <p class="dse-lead">
-    Diese Seite ist ein Portfolio – ich verarbeite so wenig Daten wie möglich.
-    Hier steht, welche das sind, warum sie anfallen und welche Rechte Sie haben.
+    Fusion³ ist ein kleines Designstudio, diese Seite ein Portfolio. Ich verarbeite
+    so wenig personenbezogene Daten wie möglich. Hier steht, welche das sind, warum
+    sie anfallen, an wen sie gehen und welche Rechte Sie haben.
   </p>
 
   <!-- ---------- Inhaltsverzeichnis ---------- -->
@@ -882,12 +876,20 @@
     <ol>
       <li><a href="#dse-1">Verantwortliche Stelle</a></li>
       <li><a href="#dse-2">Ihre Rechte</a></li>
-      <li><a href="#dse-3">Hosting und Server-Logs</a></li>
+      <li><a href="#dse-3">Hosting und Server-Log-Dateien</a></li>
       <li><a href="#dse-4">Verschlüsselung</a></li>
-      <li><a href="#dse-5">Kontaktaufnahme und Anfrageformular</a></li>
-      <li><a href="#dse-6">Schriften und externe Bibliotheken</a></li>
-      <li><a href="#dse-7">Reichweitenmessung mit Microsoft Clarity</a></li>
-      <li><a href="#dse-8">Speicherdauer</a></li>
+      <li><a href="#dse-5">Speicherung auf Ihrem Endgerät</a></li>
+      <li><a href="#dse-6">Kontaktaufnahme</a></li>
+      <li><a href="#dse-7">Anfrageformular</a></li>
+      <li><a href="#dse-8">Schriften</a></li>
+      <li><a href="#dse-9">Externe Bibliotheken und CDN</a></li>
+      <li><a href="#dse-10">Eingebettete Prototypen</a></li>
+      <li><a href="#dse-11">Rechner und interaktive Module</a></li>
+      <li><a href="#dse-12">Reichweitenmessung</a></li>
+      <li><a href="#dse-13">Links zu externen Plattformen</a></li>
+      <li><a href="#dse-14">Speicherdauer</a></li>
+      <li><a href="#dse-15">Automatisierte Entscheidungsfindung</a></li>
+      <li><a href="#dse-16">Änderungen dieser Erklärung</a></li>
     </ol>
   </nav>
 
@@ -897,7 +899,7 @@
     <h3 id="dse-1">1. Verantwortliche Stelle</h3>
     <p>
       Verantwortlich für die Datenverarbeitung auf dieser Website im Sinne
-      der DSGVO ist:
+      von Art. 4 Nr. 7 DSGVO ist:
     </p>
     <p class="dse-address">
       Deniz Herrnreither · Fusion³<br>
@@ -907,37 +909,40 @@
       E-Mail: <a href="mailto:hello@fusion3.de">hello@fusion3.de</a>
     </p>
     <p>
-      Einen Datenschutzbeauftragten muss ich nicht benennen, da die
-      Voraussetzungen des § 38 BDSG nicht vorliegen. Für alle Fragen zum
-      Datenschutz erreichen Sie mich direkt unter der oben genannten Adresse.
+      Verantwortliche Stelle ist die Person, die allein oder gemeinsam mit anderen
+      über die Zwecke und Mittel der Verarbeitung personenbezogener Daten entscheidet.
+      Einen Datenschutzbeauftragten muss ich nicht benennen, da die Voraussetzungen
+      des § 38 BDSG nicht vorliegen. Für alle Fragen zum Datenschutz erreichen Sie
+      mich direkt unter der oben genannten Adresse.
     </p>
 
     <!-- ============ 2 ============ -->
     <h3 id="dse-2">2. Ihre Rechte</h3>
     <p>
-      Sie haben jederzeit das Recht auf <strong>Auskunft</strong> über die zu
-      Ihnen gespeicherten Daten (Art. 15 DSGVO), auf <strong>Berichtigung</strong>
-      unrichtiger Daten (Art. 16), auf <strong>Löschung</strong> (Art. 17), auf
-      <strong>Einschränkung der Verarbeitung</strong> (Art. 18) und auf
-      <strong>Datenübertragbarkeit</strong> (Art. 20). Eine formlose Nachricht
+      Sie haben jederzeit das Recht auf <strong>Auskunft</strong> über die zu Ihnen
+      gespeicherten Daten (Art. 15 DSGVO), auf <strong>Berichtigung</strong>
+      unrichtiger Daten (Art. 16 DSGVO), auf <strong>Löschung</strong> (Art. 17 DSGVO),
+      auf <strong>Einschränkung der Verarbeitung</strong> (Art. 18 DSGVO) und auf
+      <strong>Datenübertragbarkeit</strong> (Art. 20 DSGVO). Eine formlose Nachricht
       an die oben genannte Adresse genügt.
     </p>
     <p>
-      <strong>Widerruf von Einwilligungen:</strong> Haben Sie in eine
-      Verarbeitung eingewilligt, können Sie diese Einwilligung jederzeit mit
-      Wirkung für die Zukunft widerrufen. Die Rechtmäßigkeit der bis zum
-      Widerruf erfolgten Verarbeitung bleibt davon unberührt.
+      <strong>Widerruf von Einwilligungen:</strong> Haben Sie in eine Verarbeitung
+      eingewilligt, können Sie diese Einwilligung jederzeit mit Wirkung für die
+      Zukunft widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten
+      Verarbeitung bleibt davon unberührt.
     </p>
     <p>
       <strong>Widerspruchsrecht nach Art. 21 DSGVO:</strong> Werden Daten auf
       Grundlage eines berechtigten Interesses nach Art. 6 Abs. 1 lit. f DSGVO
-      verarbeitet, können Sie dieser Verarbeitung aus Gründen widersprechen,
-      die sich aus Ihrer besonderen Situation ergeben. Ich verarbeite die
-      betroffenen Daten dann nicht mehr, es sei denn, ich kann zwingende
-      schutzwürdige Gründe nachweisen, die Ihre Interessen überwiegen.
+      verarbeitet, können Sie dieser Verarbeitung aus Gründen widersprechen, die
+      sich aus Ihrer besonderen Situation ergeben. Ich verarbeite die betroffenen
+      Daten dann nicht mehr, es sei denn, ich kann zwingende schutzwürdige Gründe
+      nachweisen, die Ihre Interessen, Rechte und Freiheiten überwiegen.
     </p>
     <p>
-      <strong>Beschwerderecht:</strong> Sie können sich jederzeit bei einer
+      <strong>Beschwerderecht nach Art. 77 DSGVO:</strong> Sie können sich
+      unbeschadet anderer Rechtsbehelfe jederzeit bei einer
       Datenschutz-Aufsichtsbehörde beschweren. Für mich zuständig ist das
       Bayerische Landesamt für Datenschutzaufsicht (BayLDA), Promenade 18,
       91522 Ansbach.
@@ -946,32 +951,39 @@
     <!-- ============ 3 ============ -->
     <h3 id="dse-3">3. Hosting und Server-Log-Dateien</h3>
     <p>
-      Diese Website wird gehostet bei:<br>
-      [Name, Anschrift und Land des Hosters]
+      Diese Website wird gehostet bei:
+    </p>
+    <p class="dse-address">
+      [Name des Hosters]<br>
+      [Straße und Hausnummer]<br>
+      [PLZ, Ort, Land]
     </p>
     <p>
-      Der Hoster verarbeitet die Daten in meinem Auftrag. Über die technische
-      Bereitstellung hinaus verwendet er sie nicht für eigene Zwecke. Mit ihm
-      besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO.
+      Der Hoster verarbeitet die Daten in meinem Auftrag und ausschließlich nach
+      meiner Weisung. Über die technische Bereitstellung hinaus nutzt er sie nicht
+      für eigene Zwecke. Mit ihm besteht ein Vertrag zur Auftragsverarbeitung nach
+      Art. 28 DSGVO.
     </p>
     <p>
-      Beim Aufruf einer Seite erhebt der Server automatisch Informationen, die
-      Ihr Browser übermittelt und die technisch notwendig sind, um die Seite
-      auszuliefern und sicher zu betreiben:
+      Beim Aufruf einer Seite erhebt der Server automatisch Informationen, die Ihr
+      Browser übermittelt und die technisch notwendig sind, um die Seite auszuliefern
+      und sicher zu betreiben:
     </p>
     <ul>
       <li>Browsertyp und Browserversion</li>
       <li>verwendetes Betriebssystem</li>
-      <li>Referrer-URL (die zuvor besuchte Seite)</li>
+      <li>Referrer-URL, also die zuvor besuchte Seite</li>
       <li>Hostname des zugreifenden Rechners</li>
       <li>Datum und Uhrzeit der Serveranfrage</li>
+      <li>übertragene Datenmenge und Statusmeldung des Abrufs</li>
       <li>IP-Adresse</li>
     </ul>
     <p>
-      Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Mein berechtigtes
-      Interesse liegt in der störungsfreien und sicheren Auslieferung der
-      Website. Eine Zusammenführung dieser Daten mit anderen Datenquellen
-      findet nicht statt. Die Logs werden nach [Anzahl] Tagen gelöscht.
+      Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Mein berechtigtes Interesse
+      liegt in der störungsfreien, stabilen und sicheren Auslieferung der Website.
+      Eine Zusammenführung dieser Daten mit anderen Datenquellen findet nicht statt,
+      eine Auswertung zu Marketingzwecken ebenfalls nicht. Die Logfiles werden nach
+      [Anzahl] Tagen automatisch gelöscht.
     </p>
 
     <!-- ============ 4 ============ -->
@@ -980,106 +992,241 @@
       Diese Seite nutzt aus Sicherheitsgründen eine SSL- beziehungsweise
       TLS-Verschlüsselung. Sie erkennen das an dem Schlosssymbol und dem
       „https://“ in der Adresszeile Ihres Browsers. Daten, die Sie an mich
-      übermitteln, können dadurch nicht von Dritten mitgelesen werden.
+      übermitteln, können dadurch nicht ohne Weiteres von Dritten mitgelesen werden.
     </p>
 
     <!-- ============ 5 ============ -->
-    <h3 id="dse-5">5. Kontaktaufnahme und Anfrageformular</h3>
+    <h3 id="dse-5">5. Speicherung auf Ihrem Endgerät</h3>
     <p>
-      <strong>E-Mail und Telefon:</strong> Wenn Sie mich kontaktieren, speichere
-      ich Ihre Anfrage samt aller daraus hervorgehenden Angaben, um Ihr Anliegen
-      zu bearbeiten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, sofern die
-      Anfrage der Anbahnung oder Erfüllung eines Vertrags dient, ansonsten
-      Art. 6 Abs. 1 lit. f DSGVO (Interesse an der Beantwortung von Anfragen).
-      Diese Daten gebe ich nicht ohne Ihre Einwilligung weiter.
+      <strong>Klassische Cookies setze ich selbst nicht.</strong> Die Seite speichert
+      lediglich eine einzige Information lokal in Ihrem Browser, im sogenannten
+      Local Storage:
+    </p>
+    <ul>
+      <li>
+        <strong>theme-pref</strong> – merkt sich, ob Sie die Seite im Hell- oder
+        Dunkelmodus ansehen möchten. Der Wert lautet „light“ oder „dark“, enthält
+        keine Kennung Ihrer Person und wird nicht an mich oder Dritte übertragen.
+      </li>
+    </ul>
+    <p>
+      Diese Speicherung ist unbedingt erforderlich, um Ihnen den von Ihnen
+      ausdrücklich gewünschten Dienst – die gewählte Darstellung – bereitzustellen.
+      Sie ist daher nach § 25 Abs. 2 Nr. 2 TDDDG einwilligungsfrei. Sie können den
+      Eintrag jederzeit über die Einstellungen Ihres Browsers löschen; die Seite
+      fällt dann auf die Systemeinstellung Ihres Geräts zurück.
     </p>
     <p>
-      <strong>Anfrageformular:</strong> Für das Formular auf der Seite
-      „Anfrage“ nutze ich den Dienst Formspree des Anbieters Formspree, Inc.,
-      [Anschrift laut Anbieter], USA. Ihre Eingaben – je nach Schritt etwa
-      Projektart, Umfang, Zeitrahmen, Name, E-Mail-Adresse und Ihre Nachricht –
-      werden über die Server von Formspree an mein Postfach weitergeleitet und
-      dort zwischengespeichert.
-    </p>
-    <p>
-      Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO beziehungsweise
-      Art. 6 Abs. 1 lit. f DSGVO. Da der Anbieter Daten in den USA verarbeitet,
-      findet eine Übermittlung in ein Drittland statt. Grundlage dafür ist
-      [Angemessenheitsbeschluss EU-US Data Privacy Framework – bitte prüfen,
-      ob Formspree, Inc. auf der aktuellen Zertifizierungsliste steht –
-      andernfalls: Standardvertragsklauseln nach Art. 46 Abs. 2 lit. c DSGVO].
-      Mit dem Anbieter besteht ein Vertrag zur Auftragsverarbeitung.
-      Näheres in der Datenschutzerklärung des Anbieters:
-      <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener noreferrer">formspree.io/legal/privacy-policy</a>.
-    </p>
-    <p>
-      Wenn Sie das vermeiden möchten, erreichen Sie mich jederzeit direkt per
-      E-Mail unter <a href="mailto:hello@fusion3.de">hello@fusion3.de</a>.
+      Darüber hinaus können Dritte, deren Inhalte diese Seite einbindet, Daten auf
+      Ihrem Endgerät speichern. Wo das der Fall ist, steht es in den folgenden
+      Abschnitten.
     </p>
 
     <!-- ============ 6 ============ -->
-    <h3 id="dse-6">6. Schriften und externe Bibliotheken</h3>
+    <h3 id="dse-6">6. Kontaktaufnahme</h3>
     <p>
-      <strong>Google Fonts:</strong> Diese Seite bindet die Schriftart
-      „Space Grotesk“ über die Server von Google ein (Google Ireland Limited,
-      Gordon House, Barrow Street, Dublin 4, Irland). Dabei wird eine Verbindung
-      zu Google hergestellt und Ihre IP-Adresse übermittelt; eine Übermittlung
-      in die USA ist nicht ausgeschlossen. Rechtsgrundlage ist Art. 6 Abs. 1
-      lit. f DSGVO – mein berechtigtes Interesse an einer einheitlichen
-      Darstellung der Seite.
+      <strong>E-Mail und Telefon:</strong> Wenn Sie mich per E-Mail oder telefonisch
+      kontaktieren, speichere ich Ihre Anfrage samt aller daraus hervorgehenden
+      Angaben, um Ihr Anliegen zu bearbeiten. Rechtsgrundlage ist Art. 6 Abs. 1
+      lit. b DSGVO, sofern die Anfrage der Anbahnung oder Erfüllung eines Vertrags
+      dient, ansonsten Art. 6 Abs. 1 lit. f DSGVO – mein berechtigtes Interesse an
+      der Beantwortung von Anfragen. Diese Daten gebe ich nicht ohne Ihre
+      Einwilligung weiter.
     </p>
     <p>
-      <strong>unpkg und cdnjs:</strong> Für die 3D-Ansichten und die
-      Bewegungsabläufe lade ich Programmbibliotheken über die
-      Auslieferungsnetze unpkg.com und cdnjs.cloudflare.com (Cloudflare, Inc.,
-      USA). Auch dabei wird Ihre IP-Adresse an den jeweiligen Anbieter
-      übermittelt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO
-      (funktionsfähige und schnelle Darstellung der Inhalte).   
-    
-    
-    Figma?!</p>
+      <strong>WhatsApp:</strong> Im Footer finden Sie einen Link zu WhatsApp. Ein
+      Klick darauf öffnet WhatsApp und stellt eine Verbindung zu WhatsApp Ireland
+      Limited, Merrion Road, Dublin 4, Irland her. Schreiben Sie mir dort, werden
+      Ihre Nachricht, Ihre Telefonnummer und weitere Metadaten von WhatsApp
+      verarbeitet – auf deren Verarbeitung habe ich keinen Einfluss. Eine
+      Übermittlung in die USA an Meta Platforms, Inc. ist dabei nicht auszuschließen.
+      Rechtsgrundlage für die Nutzung dieses Kanals ist Ihre Entscheidung, ihn zu
+      wählen, sowie Art. 6 Abs. 1 lit. b beziehungsweise lit. f DSGVO. Wenn Sie das
+      vermeiden möchten, nutzen Sie bitte E-Mail, Telefon oder das Anfrageformular.
+      Näheres in den Datenschutzhinweisen von WhatsApp:
+      <a href="https://www.whatsapp.com/legal/privacy-policy-eea" target="_blank" rel="noopener noreferrer">whatsapp.com/legal</a>.
+    </p>
 
     <!-- ============ 7 ============ -->
-    <h3 id="dse-7">7. Reichweitenmessung mit Microsoft Clarity</h3>
+    <h3 id="dse-7">7. Anfrageformular</h3>
     <p>
-      Diese Website nutzt Microsoft Clarity, einen Analysedienst der
-      Microsoft Ireland Operations Limited, One Microsoft Place, South County
-      Business Park, Leopardstown, Dublin 18, Irland. Clarity erfasst, wie
-      Besucherinnen und Besucher die Seite nutzen – etwa Mausbewegungen,
-      Scrollverhalten, Klicks und Seitenaufrufe – und setzt dafür Cookies
-      beziehungsweise speichert Informationen auf Ihrem Endgerät. Aus diesen
-      Daten werden Aufzeichnungen einzelner Sitzungen und Heatmaps erstellt.
+      Für das mehrstufige Formular auf der Seite „Anfrage“ und die Kontaktformulare
+      auf den Leistungsseiten nutze ich den Dienst <strong>Formspree</strong> des
+      Anbieters Formspree, Inc., 21750 Hardy Oak Blvd, Ste 104 #26968,
+      San Antonio, Texas 78258, USA.
     </p>
     <p>
-      Die Verarbeitung erfolgt ausschließlich auf Grundlage Ihrer Einwilligung
-      nach Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG. Ohne Ihre
-      Einwilligung wird der Dienst nicht geladen. Sie können Ihre Einwilligung
-      jederzeit über die Cookie-Einstellungen widerrufen. Eine Übermittlung von
-      Daten in die USA ist möglich. Weitere Informationen finden Sie in den
-      Datenschutzbestimmungen von Microsoft:
-      <a href="https://privacy.microsoft.com/de-de/privacystatement" target="_blank" rel="noopener noreferrer">privacy.microsoft.com</a>.
+      Verarbeitet werden dabei die Angaben, die Sie selbst eintragen:
+    </p>
+    <ul>
+      <li>gewählte Leistung sowie Art, Umfang und Schwerpunkte des Projekts</li>
+      <li>Angaben zu vorhandenem Material, Styleguide, Daten oder Referenzen</li>
+      <li>Budgetrahmen, gewünschter Start und eventuelle Deadline</li>
+      <li>Name, E-Mail-Adresse und – freiwillig – Telefonnummer und Firma</li>
+      <li>Ihre Nachricht sowie die automatisch erzeugte Zusammenfassung Ihrer Auswahl</li>
+      <li>technische Übertragungsdaten wie IP-Adresse und Zeitpunkt des Absendens</li>
+    </ul>
+    <p>
+      Ihre Eingaben werden über die Server von Formspree in den USA an mein Postfach
+      weitergeleitet und dort für die Zustellung zwischengespeichert. Rechtsgrundlage
+      ist Art. 6 Abs. 1 lit. b DSGVO, wenn Ihre Anfrage auf einen Vertrag zielt,
+      andernfalls Art. 6 Abs. 1 lit. f DSGVO.
+    </p>
+    <p>
+      Da der Anbieter Daten in den USA verarbeitet, findet eine Übermittlung in ein
+      Drittland statt. Formspree, Inc. ist derzeit nicht unter dem EU-US Data Privacy
+      Framework zertifiziert und stützt Übermittlungen nach eigenen Angaben auf die
+      Standardvertragsklauseln der EU-Kommission nach Art. 46 Abs. 2 lit. c DSGVO.
+      Mit dem Anbieter besteht ein Vertrag zur Auftragsverarbeitung. Trotz dieser
+      Garantien lässt sich nicht vollständig ausschließen, dass US-Behörden auf die
+      Daten zugreifen. Näheres in der Datenschutzerklärung des Anbieters:
+      <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener noreferrer">formspree.io/legal/privacy-policy</a>.
+    </p>
+    <p>
+      Wenn Sie das vermeiden möchten, erreichen Sie mich jederzeit direkt per E-Mail
+      unter <a href="mailto:hello@fusion3.de">hello@fusion3.de</a> oder telefonisch.
     </p>
 
     <!-- ============ 8 ============ -->
-    <h3 id="dse-8">8. Speicherdauer</h3>
+    <h3 id="dse-8">8. Schriften</h3>
     <p>
-      Soweit hier keine andere Frist genannt ist, bleiben Ihre Daten bei mir,
-      bis der Zweck der Verarbeitung entfällt. Bei Anfragen, die zu keinem
-      Auftrag führen, lösche ich die Korrespondenz spätestens nach
-      [z. B. sechs Monaten]. Machen Sie ein Löschersuchen geltend oder
-      widerrufen Sie eine Einwilligung, werden die Daten gelöscht, sofern
-      keine gesetzlichen Aufbewahrungspflichten entgegenstehen – etwa
-      handels- und steuerrechtliche Fristen von sechs beziehungsweise zehn
-      Jahren nach § 257 HGB und § 147 AO.
+      Ein Teil der verwendeten Schriften liegt lokal auf meinem Server und wird ohne
+      Verbindung zu Dritten ausgeliefert.
+    </p>
+    <p>
+      <strong>Google Fonts:</strong> Die Schriftart „Space Grotesk“ binde ich derzeit
+      über die Server von Google ein (Google Ireland Limited, Gordon House, Barrow
+      Street, Dublin 4, Irland). Beim Aufruf einer Seite stellt Ihr Browser dafür eine
+      Verbindung zu <em>fonts.googleapis.com</em> und <em>fonts.gstatic.com</em> her
+      und übermittelt dabei Ihre IP-Adresse sowie technische Angaben zu Browser und
+      Betriebssystem. Eine Übermittlung an Google LLC in die USA ist nicht
+      ausgeschlossen; Google LLC ist unter dem EU-US Data Privacy Framework
+      zertifiziert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO – mein berechtigtes
+      Interesse an einer einheitlichen und schnellen Darstellung der Seite. Weitere
+      Informationen:
+      <a href="https://policies.google.com/privacy?hl=de" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a>.
     </p>
 
-    <h3>9. Keine automatisierte Entscheidungsfindung</h3>
+    <!-- ============ 9 ============ -->
+    <h3 id="dse-9">9. Externe Bibliotheken und CDN</h3>
+    <p>
+      Für Symbole, Bewegungsabläufe und die 3D-Ansichten lade ich fertige
+      Programmbibliotheken über sogenannte Content Delivery Networks. Dabei stellt
+      Ihr Browser eine direkte Verbindung zum jeweiligen Anbieter her und übermittelt
+      Ihre IP-Adresse sowie technische Angaben zu Browser und Betriebssystem:
+    </p>
+    <ul>
+      <li>
+        <strong>unpkg.com</strong> – für die Symbolschrift Feather Icons, die
+        Scroll-Animationen ScrollReveal und den 3D-Betrachter Google Model Viewer.
+        Die Auslieferung erfolgt über die Infrastruktur der Cloudflare, Inc.,
+        101 Townsend St, San Francisco, CA 94107, USA.
+      </li>
+      <li>
+        <strong>cdnjs.cloudflare.com</strong> – für die Animationsbibliotheken
+        GSAP und ScrollTrigger, ebenfalls betrieben von Cloudflare, Inc., USA.
+      </li>
+    </ul>
+    <p>
+      Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO – mein berechtigtes Interesse an
+      einer funktionsfähigen, schnellen und wartbaren Darstellung der Inhalte. Eine
+      Übermittlung in die USA findet statt; Cloudflare, Inc. ist unter dem EU-US Data
+      Privacy Framework zertifiziert. Datenschutzhinweise von Cloudflare:
+      <a href="https://www.cloudflare.com/de-de/privacypolicy/" target="_blank" rel="noopener noreferrer">cloudflare.com/privacypolicy</a>.
+      Der 3D-Betrachter wird erst geladen, wenn Sie ihn durch einen Klick starten.
+    </p>
+
+    <!-- ============ 10 ============ -->
+    <h3 id="dse-10">10. Eingebettete Prototypen</h3>
+    <p>
+      Auf der Seite „UI/UX-Design“ zeige ich einen interaktiven Prototyp, der bei
+      Figma gehostet wird (Figma, Inc., 760 Market St, Floor 10, San Francisco,
+      CA 94102, USA). Auf der Seite „Wartung“ verlinke ich auf einen weiteren
+      Figma-Prototyp.
+    </p>
+    <p>
+      <strong>Der Prototyp lädt nicht automatisch.</strong> Sie sehen zunächst nur eine
+      Vorschau. Erst wenn Sie auf die Schaltfläche „Prototyp bedienen“ klicken, wird der
+      Inhalt nachgeladen und Ihr Browser stellt eine Verbindung zu Figma her. Dabei
+      werden Ihre IP-Adresse, technische Geräteinformationen und gegebenenfalls
+      Cookies beziehungsweise ähnliche Kennungen an Figma übertragen. Rechtsgrundlage
+      ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG, die
+      Sie mit dem Klick erteilen und für die Zukunft jederzeit widerrufen können, indem
+      Sie den Inhalt nicht erneut starten. Eine Übermittlung in die USA findet statt;
+      Figma, Inc. ist unter dem EU-US Data Privacy Framework zertifiziert.
+      Datenschutzhinweise:
+      <a href="https://www.figma.com/legal/privacy/" target="_blank" rel="noopener noreferrer">figma.com/legal/privacy</a>.
+    </p>
+
+    <!-- ============ 11 ============ -->
+    <h3 id="dse-11">11. Rechner und interaktive Module</h3>
+    <p>
+      Der Kostenrechner, die Preisübersicht der Wartungspakete, die Galerie und die
+      übrigen interaktiven Elemente laufen vollständig in Ihrem Browser. Ihre Eingaben
+      werden weder an mich noch an Dritte übertragen und nirgends gespeichert. Erst
+      wenn Sie ein Ergebnis bewusst über das Anfrageformular abschicken, gilt
+      Abschnitt 7.
+    </p>
+
+    <!-- ============ 12 ============ -->
+    <h3 id="dse-12">12. Reichweitenmessung mit Microsoft Clarity</h3>
+    <p>
+      Diese Website nutzt Microsoft Clarity, einen Analysedienst der Microsoft Ireland
+      Operations Limited, One Microsoft Place, South County Business Park,
+      Leopardstown, Dublin 18, Irland. Clarity erfasst, wie Besucherinnen und Besucher
+      die Seite nutzen – etwa Mausbewegungen, Scrollverhalten, Klicks, Seitenaufrufe,
+      Verweildauer, gekürzte IP-Adresse sowie Angaben zu Gerät, Browser und
+      Bildschirmgröße. Daraus werden Aufzeichnungen einzelner Sitzungen und Heatmaps
+      erstellt. Der Dienst speichert dafür Cookies beziehungsweise ähnliche Kennungen
+      auf Ihrem Endgerät. Zweck ist die Verbesserung von Aufbau und Bedienbarkeit
+      dieser Seite.
+    </p>
+    <p>
+      Rechtsgrundlage ist ausschließlich Ihre Einwilligung nach Art. 6 Abs. 1 lit. a
+      DSGVO und § 25 Abs. 1 TDDDG. Ohne Ihre Einwilligung wird der Dienst nicht
+      geladen. Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft über
+      die <a href="#" data-cookie-settings>Cookie-Einstellungen</a> widerrufen.
+    </p>
+    <p>
+      Eine Übermittlung an die Microsoft Corporation in die USA ist möglich; Microsoft
+      ist unter dem EU-US Data Privacy Framework zertifiziert und stützt Übermittlungen
+      ergänzend auf die Standardvertragsklauseln. Mit Microsoft besteht ein Vertrag zur
+      Auftragsverarbeitung. Weitere Informationen:
+      <a href="https://privacy.microsoft.com/de-de/privacystatement" target="_blank" rel="noopener noreferrer">privacy.microsoft.com</a>.
+    </p>
+
+    <!-- ============ 13 ============ -->
+    <h3 id="dse-13">13. Links zu externen Plattformen</h3>
+    <p>
+      Im Footer verlinke ich auf mein Profil bei LinkedIn (LinkedIn Ireland Unlimited
+      Company, Wilton Plaza, Wilton Place, Dublin 2, Irland) sowie auf WhatsApp. Es
+      handelt sich um einfache Verlinkungen, keine eingebetteten Inhalte. Solange Sie
+      nicht klicken, werden keine Daten an diese Anbieter übertragen. Klicken Sie,
+      gelten die Datenschutzbestimmungen des jeweiligen Anbieters; auf die dortige
+      Verarbeitung habe ich keinen Einfluss.
+    </p>
+
+    <!-- ============ 14 ============ -->
+    <h3 id="dse-14">14. Speicherdauer</h3>
+    <p>
+      Soweit hier keine andere Frist genannt ist, bleiben Ihre Daten bei mir, bis der
+      Zweck der Verarbeitung entfällt. Anfragen, die zu keinem Auftrag führen, lösche
+      ich spätestens nach [z. B. sechs Monaten]. Machen Sie ein Löschersuchen geltend
+      oder widerrufen Sie eine Einwilligung, werden die Daten gelöscht, sofern keine
+      gesetzlichen Aufbewahrungspflichten entgegenstehen – etwa handels- und
+      steuerrechtliche Fristen von sechs beziehungsweise zehn Jahren nach § 257 HGB
+      und § 147 AO.
+    </p>
+
+    <!-- ============ 15 ============ -->
+    <h3 id="dse-15">15. Keine automatisierte Entscheidungsfindung</h3>
     <p>
       Eine automatisierte Entscheidungsfindung einschließlich Profiling nach
       Art. 22 DSGVO findet nicht statt.
     </p>
 
-    <h3>10. Änderungen dieser Erklärung</h3>
+    <!-- ============ 16 ============ -->
+    <h3 id="dse-16">16. Änderungen dieser Erklärung</h3>
     <p>
       Ich passe diese Erklärung an, sobald sich die Technik der Seite oder die
       Rechtslage ändert. Es gilt jeweils die hier veröffentlichte Fassung.
@@ -1094,7 +1241,6 @@
     <p class="dse-stand">Stand: [Monat Jahr]</p>
   </div>
 </section>
-
 <style>
 /* ============================================================
    DATENSCHUTZ – gleiche Gestaltung wie das Impressum
@@ -1239,7 +1385,7 @@
         <p class="fc-claim">UX &amp; Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
       </div>
       <div class="fc-cta">
-        <a class="fc-btn" href="#kontakt" aria-label="Projekt anfragen">Projekt anfragen</a>
+        <a class="fc-btn" href="/anfrage.html" aria-label="Projekt anfragen">Projekt anfragen</a>
       </div>
     </section>
 
@@ -1271,15 +1417,14 @@
         <ul class="fc-links" aria-labelledby="fc-legal">
           <li><a href="/impressum.html">Impressum</a></li>
           <li><a href="/datenschutz.html">Datenschutzerklärung</a></li>
-          <li><a href="/cookies.html">Cookie-Hinweis</a></li>
         </ul>
       </div>
 
       <div class="fc-col">
         <h3 class="fc-col-title" id="fc-contact">Kontakt</h3>
         <ul class="fc-links" aria-labelledby="fc-contact">
-          <li><a href="mailto:hello@fusion3.de" itemprop="email">hello@fusion3.de</a></li>
-          <li><a href="tel:+491234567890" itemprop="telephone">+49&nbsp;123&nbsp;4567890</a></li>
+          <li><a href="mailto:hello@fusion3.de" itemprop="email">hi.dherrnreither@gmail.com</a></li>
+          <li><a href="tel:+491708933204" itemprop="telephone">+49&nbsp;170&nbsp;8933204</a></li>
           <li>
             <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" class="fc-address">
               <span itemprop="addressLocality">Landshut</span>, <span itemprop="addressCountry">Deutschland</span>

@@ -1,22 +1,20 @@
 /* ============================================================
    UNTERSEITEN – Stylesheet
-   Neu aufgebaut auf der Basis von aurora.css, cosmosSuite.css
-   und contact.css. Ersetzt das bisherige Stylesheet komplett.
+   Basis: aurora.css, cosmosSuite.css, contact.css
+   Ersetzt das bisherige Stylesheet komplett.
    Das JavaScript bleibt unverändert.
 
-   Übernommen aus dem bestehenden System:
-   · Tokens --surface, --surface-elev, --text, --muted, --border
-   · color-mix(in oklab, …) statt fester Mischfarben
-   · backdrop-filter: blur(8px) saturate(1.02) auf Flächen
-   · die getönte Textbox mit Innen-Highlight aus Aurora
-   · Kornschicht und Verlaufs-Divider aus der Cosmos Suite
-   · Schriftgewichte bis 950, letter-spacing -.01 bis -.02
+   Geändert gegenüber der letzten Fassung:
+   · .us-sec--dark kehrt sich im Dark Mode um und wird hell,
+     damit der Wechsel zwischen den Sektionen erhalten bleibt
+   · Ablaufkarten: Nummer sitzt mobil rechts neben dem Titel
+   · Farbbalken über den Ablaufkarten entfernt
+   · Farbbalken links am Merkkasten entfernt
+   · Mobile Darstellung durchgehend überarbeitet
    ============================================================ */
 
 /* ============================================================
    TOKENS
-   Greift auf die globalen Werte zurück, falls vorhanden –
-   sonst greifen die Rückfallwerte.
    ============================================================ */
 .us-sec {
   --u-font: var(--wrf-font, -apple-system, BlinkMacSystemFont, 'Segoe UI',
@@ -37,7 +35,6 @@
   --u-green: var(--choice-green, #00c851);
 
   --u-sh-1: var(--aur-shadow-light, 0 1px 2px rgba(0, 0, 0, .06));
-  --u-sh-2: var(--aur-shadow-strong, 0 1px 2px rgba(0, 0, 0, .18));
   --u-sh-card: 0 10px 30px rgba(0, 0, 0, .06);
   --u-sh-card-h: 0 18px 46px rgba(0, 0, 0, .12);
 
@@ -59,7 +56,11 @@
   font-feature-settings: "liga", "calt", "ss01";
 }
 
-/* dunkle Sektion – Tokens werden umgeschrieben, nicht überschrieben */
+/* ------------------------------------------------------------
+   Kontrastsektion
+   Im Hellmodus dunkel, im Dunkelmodus hell. Dadurch bleibt der
+   Wechsel zwischen den Sektionen in beiden Themes erhalten.
+------------------------------------------------------------ */
 .us-sec--dark {
   --u-surface: #000;
   --u-elev: #111216;
@@ -68,7 +69,6 @@
   --u-border: #262a31;
   --u-ink: #ffffff;
   --u-ink-muted: #e8eeff;
-  --u-sh-1: var(--aur-shadow-strong, 0 1px 2px rgba(0, 0, 0, .18));
   --u-sh-card: 0 18px 40px rgba(0, 0, 0, .5);
   --u-sh-card-h: 0 28px 64px rgba(0, 0, 0, .65);
 
@@ -85,7 +85,6 @@
 
 /* ============================================================
    KOPFBEREICH
-   Titel und Subline exakt wie .aurora-title / .aurora-subtitle
    ============================================================ */
 .us-head {
   max-width: 62rem;
@@ -115,8 +114,7 @@
   text-wrap: balance;
 }
 
-/* Die getönte Box aus Aurora – der stärkste Wiedererkennungswert
-   im bestehenden System. */
+/* getönte Box wie .aurora-subtitle */
 .us-sub {
   max-width: 48rem;
   margin: 0 auto;
@@ -132,9 +130,7 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 2px 8px rgba(0, 0, 0, .05);
 }
 
-.us-sec--dark .us-sub,
-:root[data-theme="dark"] .us-sub,
-body.nocturne .us-sub {
+.us-sec--dark .us-sub {
   color: #e8eeff;
   background: linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .035));
   border: 1px solid rgba(255, 255, 255, .08);
@@ -178,7 +174,6 @@ body.nocturne .us-sub {
 @media (min-width: 760px)  { .us-cards--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1200px) { .us-cards--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
-/* ---------- Glaskarte, wie .kontakt-area und .video-card ---------- */
 .us-card {
   position: relative;
   isolation: isolate;
@@ -189,6 +184,7 @@ body.nocturne .us-sub {
   padding: clamp(1.1rem, 2vw, 1.6rem);
   border-radius: var(--u-r);
   border: 1px solid var(--u-border);
+  border-color:rgb(0, 0, 0);
   background: color-mix(in oklab, var(--u-elev) 85%, transparent);
   box-shadow: var(--u-sh-card);
   backdrop-filter: var(--u-glass);
@@ -214,11 +210,11 @@ body.nocturne .us-sub {
   }
 }
 
-/* ---------- Verlaufskarte, wie .module-card ---------- */
-.us-card--g1 { --g1: #8b8b8b; --g2: #1d1d1c; }
-.us-card--g2 { --g1: #5a5c68; --g2: #5c5f7c; }
-.us-card--g3 { --g1: #0d0d0d; --g2: #3d4577; }
-.us-card--g4 { --g1: #04006c; --g2: #7c8fca; }
+/* ---------- Verlaufskarte ---------- */
+.us-card--g1 { --g1: #001aff; --g2: #090b2b; }
+.us-card--g4 { --g1: #000105; --g2: #363849; }
+.us-card--g2 { --g1: #0d0d0d; --g2: #0e1335; }
+.us-card--g3 { --g1: #04006c; --g2: #151e3b; }
 
 .us-card--grad {
   color: #fff;
@@ -233,7 +229,6 @@ body.nocturne .us-sub {
   transition: transform .4s ease, box-shadow .4s ease, background-position .5s ease;
 }
 
-/* Kornschicht wie in der Cosmos Suite */
 .us-card--grad::before {
   content: "";
   position: absolute;
@@ -245,7 +240,6 @@ body.nocturne .us-sub {
   pointer-events: none;
 }
 
-/* Glanz-Overlay, das beim Hover aufgeht */
 .us-card--grad::after {
   content: "";
   position: absolute;
@@ -269,7 +263,6 @@ body.nocturne .us-sub {
   .us-card--grad:hover::after { transform: scale(1); opacity: .25; }
 }
 
-/* Lichtkegel unter dem Cursor, vom Script gesetzt */
 .us-fx {
   position: absolute;
   inset: 0;
@@ -311,7 +304,7 @@ body.nocturne .us-sub {
 
 .us-card--grad .us-card-ico {
   border-color: rgba(255, 255, 255, .32);
-  background: rgba(255, 255, 255, .12);
+  background: rgb(0, 0, 0);
   color: #fff;
 }
 
@@ -329,7 +322,6 @@ body.nocturne .us-sub {
 
 .us-card--grad .us-card-kicker { color: rgba(255, 255, 255, .82); }
 
-/* wie .module-card h3 */
 .us-card-title {
   margin: .1rem 0 .55rem;
   font-size: clamp(1.3rem, 1.2rem + .8vw, 1.9rem);
@@ -342,7 +334,6 @@ body.nocturne .us-sub {
 
 .us-card--grad .us-card-title { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .25); }
 
-/* wie .copy */
 .us-card-copy {
   margin: 0;
   font-size: clamp(1.02rem, .98rem + .35vw, 1.16rem);
@@ -377,7 +368,7 @@ body.nocturne .us-sub {
   transition: transform .5s ease;
 }
 
-/* ---------- Aufzählung mit dem Divider aus Cosmos ---------- */
+/* ---------- Aufzählung mit Cosmos-Divider ---------- */
 .us-list { list-style: none; margin: .9rem 0 0; padding: 0; }
 
 .us-list li {
@@ -397,7 +388,6 @@ body.nocturne .us-sub {
 
 .us-list li + li { border-top: 1px solid var(--u-border); }
 
-/* der nach rechts auslaufende Trennstrich */
 .us-list li + li::after {
   content: "";
   position: absolute;
@@ -427,7 +417,7 @@ body.nocturne .us-sub {
     transparent 0%, rgba(255, 255, 255, .55) 35%, rgba(255, 255, 255, .18) 65%, transparent 100%);
 }
 
-/* ---------- Schlagworte, wie .pill ---------- */
+/* ---------- Schlagworte ---------- */
 .us-tags { list-style: none; display: flex; flex-wrap: wrap; gap: .45rem; margin: 1rem 0 0; padding: 0; }
 
 .us-tags li {
@@ -451,8 +441,8 @@ body.nocturne .us-sub {
 }
 
 .us-card--grad .us-tags li {
-  border-color: rgba(255, 255, 255, .3);
-  background: rgba(255, 255, 255, .12);
+  border-color: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.12);
   color: #fff;
 }
 
@@ -465,6 +455,7 @@ body.nocturne .us-sub {
   border: 1px solid var(--u-border);
   background: color-mix(in oklab, var(--u-elev) 85%, transparent);
   box-shadow: var(--u-sh-card);
+   border-color:rgb(32, 32, 32)
   backdrop-filter: var(--u-glass);
   -webkit-backdrop-filter: var(--u-glass);
 }
@@ -509,7 +500,6 @@ body.nocturne .us-sub {
   .us-table tbody tr:hover { background: color-mix(in oklab, var(--u-primary) 5%, transparent); }
 }
 
-/* Erste Spalte betont – Markierung erscheint beim Überfahren */
 .us-table tbody th {
   position: relative;
   padding-left: 1.6rem;
@@ -525,6 +515,7 @@ body.nocturne .us-sub {
   left: 0; top: 1rem; bottom: 1rem;
   width: 3px;
   border-radius: 0 3px 3px 0;
+  
   background: linear-gradient(180deg, var(--u-secondary), var(--u-primary));
   opacity: 0;
   transition: opacity .2s ease;
@@ -541,6 +532,7 @@ body.nocturne .us-sub {
   padding: .15rem .5rem;
   border-radius: 8px;
   border: 2px solid color-mix(in oklab, var(--u-primary) 22%, transparent);
+
   background: color-mix(in oklab, var(--u-primary) 8%, transparent);
   color: var(--u-ink);
   font-variant-numeric: tabular-nums;
@@ -559,58 +551,9 @@ body.nocturne .us-sub {
   line-height: 1.55;
 }
 
-/* mobil als Karten */
-@media (max-width: 760px) {
-  .us-table-wrap {
-    overflow: visible;
-    border: 0;
-    background: none;
-    box-shadow: none;
-    border-radius: 0;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
-  .us-caption { padding: 0 0 .9rem; }
-  .us-table { min-width: 0; display: block; font-size: .95rem; }
-  .us-table thead { display: none; }
-  .us-table tbody, .us-table tr { display: block; }
-
-  .us-table tr {
-    margin-bottom: .8rem;
-    padding: 1.1rem 1.2rem;
-    border-radius: var(--u-r-md);
-    border: 1px solid var(--u-border);
-    background: color-mix(in oklab, var(--u-elev) 85%, transparent) !important;
-    box-shadow: var(--u-sh-card);
-  }
-
-  .us-table th, .us-table td { display: block; padding: 0; border: 0; }
-
-  .us-table tbody th {
-    margin-bottom: .8rem;
-    padding-left: .8rem;
-    font-size: 1.1rem;
-  }
-
-  .us-table tbody th::before { opacity: 1; top: .1rem; bottom: .1rem; }
-
-  .us-table td { padding: .65rem 0; border-top: 1px solid var(--u-border); }
-
-  .us-table td::before {
-    content: attr(data-label);
-    display: block;
-    margin-bottom: .2rem;
-    font-size: .72rem;
-    text-transform: uppercase;
-    letter-spacing: .12em;
-    font-weight: 680;
-    color: var(--u-muted);
-  }
-}
-
 /* ============================================================
-   ABLAUF – Fortschrittsbalken wie .stepper-fill
+   ABLAUF
+   Ohne Farbbalken. Die Nummer trägt die Reihenfolge.
    ============================================================ */
 .us-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
 
@@ -619,9 +562,10 @@ body.nocturne .us-sub {
 .us-step {
   position: relative;
   overflow: hidden;
-  padding: 1.4rem 1.4rem 1.3rem;
+  padding: 1.4rem;
   border-radius: var(--u-r);
   border: 1px solid var(--u-border);
+  border-color:rgb(32, 32, 32);
   background: color-mix(in oklab, var(--u-elev) 85%, transparent);
   box-shadow: var(--u-sh-card);
   backdrop-filter: var(--u-glass);
@@ -629,31 +573,6 @@ body.nocturne .us-sub {
   transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
 }
 
-/* Schiene oben */
-.us-step::after {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 6px;
-  background: color-mix(in oklab, var(--u-primary) 12%, transparent);
-}
-
-/* Füllung – wird je Position länger */
-.us-step::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto auto 0;
-  z-index: 1;
-  height: 6px;
-  width: 25%;
-  background: linear-gradient(90deg, var(--u-secondary), var(--u-primary));
-  box-shadow: 0 2px 10px color-mix(in oklab, var(--u-primary) 35%, transparent);
-  transition: width .45s cubic-bezier(.16, 1, .3, 1);
-}
-
-.us-steps li:nth-child(2) .us-step::before { width: 50%; }
-.us-steps li:nth-child(3) .us-step::before { width: 75%; }
-.us-steps li:nth-child(4) .us-step::before { width: 100%; }
 
 @media (hover: hover) and (pointer: fine) {
   .us-step:hover {
@@ -661,22 +580,25 @@ body.nocturne .us-sub {
     border-color: color-mix(in oklab, var(--u-primary) 45%, var(--u-border));
     box-shadow: var(--u-sh-card-h);
   }
-  .us-step:hover::before { width: 100%; }
+  .us-step:hover .us-step-no {
+    box-shadow: 0 8px 22px color-mix(in oklab, var(--u-primary) 50%, transparent);
+  }
 }
 
 .us-step-no {
   display: inline-grid;
   place-items: center;
-  width: 40px; height: 40px;
+  width: 42px; height: 42px;
   margin-bottom: .9rem;
   border-radius: var(--u-r-sm);
   background: linear-gradient(135deg, var(--u-secondary), var(--u-primary));
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 950;
   font-variant-numeric: tabular-nums;
   letter-spacing: -.01em;
   box-shadow: 0 6px 18px color-mix(in oklab, var(--u-primary) 40%, transparent);
+  transition: box-shadow .3s ease;
 }
 
 .us-step strong {
@@ -687,9 +609,11 @@ body.nocturne .us-sub {
   letter-spacing: -.01em;
   line-height: 1.25;
   color: var(--u-ink);
+  text-wrap: balance;
 }
 
 .us-step span:not(.us-step-no):not(.us-step-out) {
+  display: block;
   font-size: 1rem;
   line-height: 1.65;
   font-weight: 550;
@@ -758,7 +682,6 @@ body.nocturne .us-sub {
   border-radius: var(--u-r-md);
 }
 
-/* Plus, das sich beim Öffnen dreht */
 .us-q-plus {
   position: relative;
   flex: 0 0 auto;
@@ -821,7 +744,6 @@ body.nocturne .us-sub {
 .us-q-body p:last-child { margin-bottom: 0; }
 .us-q-body strong { color: var(--u-ink); font-weight: 800; }
 
-/* weiches Aufklappen, wo der Browser es kann */
 @supports (interpolate-size: allow-keywords) {
   .us-q { interpolate-size: allow-keywords; }
   .us-q::details-content {
@@ -834,13 +756,14 @@ body.nocturne .us-sub {
 }
 
 /* ============================================================
-   MERKKASTEN – Aufbau wie .service-block, Rand wie .onb-ask
+   MERKKASTEN
+   Ohne Farbbalken links. Das Symbol trägt die Betonung.
    ============================================================ */
 .us-note {
   position: relative;
   overflow: hidden;
   margin: 1.4rem 0 0;
-  padding: 1.15rem 1.4rem 1.15rem 3.5rem;
+  padding: 1.2rem 1.4rem 1.2rem 3.6rem;
   border-radius: var(--u-r-md);
   border: 1px dashed var(--u-border);
   background: color-mix(in oklab, var(--u-surface) 85%, transparent);
@@ -852,24 +775,16 @@ body.nocturne .us-sub {
 }
 
 .us-note::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 4px;
-  background: linear-gradient(180deg, var(--u-secondary), var(--u-primary), var(--u-violet));
-}
-
-.us-note::after {
   content: "!";
   position: absolute;
-  left: 1.2rem; top: 1.2rem;
-  width: 24px; height: 24px;
+  left: 1.25rem; top: 1.2rem;
+  width: 25px; height: 25px;
   display: grid;
   place-items: center;
   border-radius: 50%;
   background: color-mix(in oklab, var(--u-primary) 14%, transparent);
   color: var(--u-primary);
-  font-size: .85rem;
+  font-size: .86rem;
   font-weight: 950;
   line-height: 1;
 }
@@ -877,7 +792,7 @@ body.nocturne .us-sub {
 .us-note strong { color: var(--u-ink); font-weight: 900; }
 
 /* ============================================================
-   KOPIERBARER WERT – Zustandslogik wie .pill
+   KOPIERBARER WERT
    ============================================================ */
 .us-copy {
   position: relative;
@@ -900,7 +815,6 @@ body.nocturne .us-sub {
               color .15s ease, box-shadow .15s ease;
 }
 
-/* kleines Kopiersymbol */
 .us-copy::before {
   content: "";
   width: 11px; height: 11px;
@@ -946,7 +860,8 @@ body.nocturne .us-sub {
 }
 
 /* ============================================================
-   DARK MODE für die hellen Sektionen
+   DARK MODE
+   Helle Sektionen werden dunkel, die Kontrastsektion wird hell.
    ============================================================ */
 :root[data-theme="dark"] .us-sec:not(.us-sec--dark),
 body.nocturne .us-sec:not(.us-sec--dark) {
@@ -964,18 +879,63 @@ body.nocturne .us-sec:not(.us-sec--dark) {
   color: #fff;
 }
 
-:root[data-theme="dark"] .us-title,
-body.nocturne .us-title { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .35); }
+:root[data-theme="dark"] .us-sec:not(.us-sec--dark) .us-sub,
+body.nocturne .us-sec:not(.us-sec--dark) .us-sub {
+  color: #e8eeff;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .035));
+  border: 1px solid rgba(255, 255, 255, .08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 2px 8px rgba(0, 0, 0, .45);
+}
+
+:root[data-theme="dark"] .us-sec:not(.us-sec--dark) .us-title,
+body.nocturne .us-sec:not(.us-sec--dark) .us-title {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+}
+
+/* ---- Kontrastsektion kehrt sich um: im Dunkelmodus hell ---- */
+:root[data-theme="dark"] .us-sec--dark,
+body.nocturne .us-sec--dark {
+  --u-surface: #ffffff;
+  --u-elev: #f7f8fa;
+  --u-text: #0b0c0e;
+  --u-muted: #5d6066;
+  --u-border: #e6e8eb;
+  --u-ink: #0b0c10;
+  --u-ink-muted: #0f1729;
+  --u-sh-card: 0 10px 30px rgba(0, 0, 0, .06);
+  --u-sh-card-h: 0 18px 46px rgba(0, 0, 0, .12);
+
+  background:
+    radial-gradient(760px 340px at 12% -8%, color-mix(in oklab, var(--u-secondary) 8%, transparent), transparent 58%),
+    radial-gradient(700px 320px at 88% 108%, color-mix(in oklab, var(--u-violet) 7%, transparent), transparent 58%),
+    #ffffff;
+  color: #0b0c0e;
+}
+
+:root[data-theme="dark"] .us-sec--dark .us-title,
+body.nocturne .us-sec--dark .us-title {
+  color: #0b0c10;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .06);
+}
+
+:root[data-theme="dark"] .us-sec--dark .us-sub,
+body.nocturne .us-sec--dark .us-sub {
+  color: #0f1729;
+  border: 0;
+  background: linear-gradient(180deg, rgba(15, 23, 41, .06), rgba(15, 23, 41, .03));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 2px 8px rgba(0, 0, 0, .05);
+}
 
 :root[data-theme="dark"] .us-card-shot,
-body.nocturne .us-card-shot { background: #14161d; }
+body.nocturne .us-card-shot { background: var(--u-elev); }
 
-:root[data-theme="dark"] .us-tags li,
-:root[data-theme="dark"] .us-copy,
-body.nocturne .us-tags li,
-body.nocturne .us-copy {
-  background: var(--pill-bg, #1b1d22);
-  color: var(--pill-text, #e8ecf2);
+:root[data-theme="dark"] .us-sec:not(.us-sec--dark) .us-tags li,
+:root[data-theme="dark"] .us-sec:not(.us-sec--dark) .us-copy,
+body.nocturne .us-sec:not(.us-sec--dark) .us-tags li,
+body.nocturne .us-sec:not(.us-sec--dark) .us-copy {
+  background: #1b1d22;
+  color: #e8ecf2;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -993,28 +953,245 @@ body.nocturne .us-copy {
     color: #fff;
   }
 
-  :root[data-theme="auto"] .us-title { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .35); }
-  :root[data-theme="auto"] .us-card-shot { background: #14161d; }
-  :root[data-theme="auto"] .us-tags li,
-  :root[data-theme="auto"] .us-copy { background: #1b1d22; color: #e8ecf2; }
+  :root[data-theme="auto"] .us-sec:not(.us-sec--dark) .us-title {
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+  }
+
+  :root[data-theme="auto"] .us-sec:not(.us-sec--dark) .us-sub {
+    color: #e8eeff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .035));
+    border: 1px solid rgba(255, 255, 255, .08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 2px 8px rgba(0, 0, 0, .45);
+  }
+
+  :root[data-theme="auto"] .us-sec--dark {
+    --u-surface: #ffffff;
+    --u-elev: #f7f8fa;
+    --u-text: #0b0c0e;
+    --u-muted: #5d6066;
+    --u-border: #e6e8eb;
+    --u-ink: #0b0c10;
+    --u-ink-muted: #0f1729;
+    --u-sh-card: 0 10px 30px rgba(0, 0, 0, .06);
+    --u-sh-card-h: 0 18px 46px rgba(0, 0, 0, .12);
+    background:
+      radial-gradient(760px 340px at 12% -8%, color-mix(in oklab, var(--u-secondary) 8%, transparent), transparent 58%),
+      radial-gradient(700px 320px at 88% 108%, color-mix(in oklab, var(--u-violet) 7%, transparent), transparent 58%),
+      #ffffff;
+    color: #0b0c0e;
+  }
+
+  :root[data-theme="auto"] .us-sec--dark .us-title { color: #0b0c10; text-shadow: 0 1px 2px rgba(0, 0, 0, .06); }
+
+  :root[data-theme="auto"] .us-sec--dark .us-sub {
+    color: #0f1729;
+    border: 0;
+    background: linear-gradient(180deg, rgba(15, 23, 41, .06), rgba(15, 23, 41, .03));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 2px 8px rgba(0, 0, 0, .05);
+  }
+
+  :root[data-theme="auto"] .us-card-shot { background: var(--u-elev); }
+
+  :root[data-theme="auto"] .us-sec:not(.us-sec--dark) .us-tags li,
+  :root[data-theme="auto"] .us-sec:not(.us-sec--dark) .us-copy {
+    background: #1b1d22;
+    color: #e8ecf2;
+  }
 }
 
 /* ============================================================
    MOBIL
+   Enger, ruhiger, größere Bedienflächen.
    ============================================================ */
+@media (max-width: 760px) {
+
+  /* ---- Tabelle als Karten ---- */
+  .us-table-wrap {
+    overflow: visible;
+    border: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .us-caption { padding: 0 0 .8rem; font-size: .8rem; }
+  .us-table { min-width: 0; display: block; font-size: .95rem; }
+  .us-table thead { display: none; }
+  .us-table tbody, .us-table tr { display: block; }
+
+  .us-table tr {
+    margin-bottom: .7rem;
+    padding: 1rem 1.1rem;
+    border-radius: var(--u-r-md);
+    border: 1px solid var(--u-border);
+    background: color-mix(in oklab, var(--u-elev) 85%, transparent) !important;
+    box-shadow: var(--u-sh-card);
+  }
+
+  .us-table th, .us-table td { display: block; padding: 0; border: 0; }
+
+  .us-table tbody th {
+    margin-bottom: .7rem;
+    padding-left: .75rem;
+    font-size: 1.08rem;
+    line-height: 1.3;
+  }
+
+  .us-table tbody th::before { opacity: 1; top: .15rem; bottom: .15rem; }
+
+  .us-table td { padding: .6rem 0; border-top: 1px solid var(--u-border); }
+
+  .us-table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: .25rem;
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-weight: 800;
+    color: var(--u-primary);
+    opacity: .85;
+  }
+
+  .us-hint { margin-top: .3rem; font-size: .85rem; }
+}
+
 @media (max-width: 700px) {
-  .us-sec { padding: 2rem 1rem 2.5rem; }
-  .us-head { margin-bottom: 1.6rem; }
-  .us-sub { padding: .8rem 1rem; font-size: .98rem; line-height: 1.62; }
-  .us-card { padding: 1.2rem 1.1rem 1.3rem; border-radius: var(--u-r-md); }
-  .us-card-title { font-size: 1.4rem; }
-  .us-card-copy, .us-list li { font-size: 1rem; line-height: 1.6; }
-  .us-card-ico { width: 42px; height: 42px; margin-bottom: .8rem; }
-  .us-card-ico svg { width: 19px; height: 19px; }
-  .us-step { padding: 1.2rem 1.1rem 1.15rem; }
-  .us-q summary { padding: .95rem 1.1rem; font-size: 1rem; }
-  .us-q-body { padding: 0 1.1rem 1.1rem; }
-  .us-note { padding: 1rem 1.1rem 1rem 3.1rem; font-size: .95rem; }
+
+  /* ---- Sektion und Kopf ---- */
+  .us-sec { padding: 2.25rem 1rem 2.75rem; }
+  .us-head { margin-bottom: 1.5rem; }
+  .us-eyebrow { font-size: .76rem; letter-spacing: .16em; margin-bottom: .35rem; }
+  .us-title { font-size: clamp(1.6rem, 1.35rem + 1.6vw, 2rem); line-height: 1.15; }
+
+  .us-sub {
+    padding: .85rem 1.05rem;
+    font-size: .98rem;
+    line-height: 1.6;
+    border-radius: var(--u-r-sm);
+  }
+
+  .us-fine { font-size: .86rem; line-height: 1.62; }
+
+  /* ---- Karten ---- */
+  .us-cards { gap: .8rem; }
+
+  .us-card {
+    padding: 1.15rem 1.15rem 1.25rem;
+    border-radius: var(--u-r-md);
+    border-color:rgb(32, 32, 32);
+  }
+
+  .us-card-ico { width: 40px; height: 40px; margin-bottom: .7rem; border-radius: 10px; }
+  .us-card-ico svg { width: 18px; height: 18px; }
+
+  .us-card-kicker { font-size: .72rem; letter-spacing: .12em; margin-bottom: .35rem; }
+  .us-card-title { font-size: 1.32rem; line-height: 1.24; margin-bottom: .45rem; max-width: none; }
+  .us-card-copy { font-size: .99rem; line-height: 1.62; }
+
+  .us-card-shot {
+    margin: -1.15rem -1.15rem .95rem;
+    aspect-ratio: 16 / 9;
+  }
+
+  .us-list { margin-top: .8rem; }
+  .us-list li { padding: .6rem 0 .65rem; font-size: .99rem; line-height: 1.58; }
+  .us-list li + li::after { right: 40px; }
+
+  .us-tags { gap: .35rem; margin-top: .85rem; }
+  .us-tags li { padding: .3rem .6rem; font-size: .74rem; border-width: 1px; }
+
+  /* ---- Ablauf: Nummer rechts neben dem Titel ---- */
+  .us-steps { gap: .8rem; }
+
+  .us-step {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    column-gap: .9rem;
+    row-gap: 0;
+    padding: 1.15rem 1.15rem 1.2rem;
+    border-radius: var(--u-r-md);
+  }
+
+  .us-step-no {
+    grid-column: 2;
+    grid-row: 1;
+    width: 36px; height: 36px;
+    margin: 0;
+    font-size: .95rem;
+    border-radius: 10px;
+  }
+
+  .us-step strong {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    font-size: 1.14rem;
+    line-height: 1.28;
+  }
+
+  .us-step span:not(.us-step-no):not(.us-step-out) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: .55rem;
+    font-size: .97rem;
+    line-height: 1.6;
+  }
+
+  .us-step-out {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    margin-top: .8rem;
+    padding-top: .65rem;
+    font-size: .76rem;
+    letter-spacing: .12em;
+  }
+
+  /* ---- Ausklappbereich: größere Bedienfläche ---- */
+  .us-faq { gap: .55rem; }
+
+  .us-q { border-width: 1px; border-radius: var(--u-r-sm); }
+
+  .us-q summary {
+    padding: 1rem 1.05rem;
+    gap: .8rem;
+    font-size: 1.02rem;
+    line-height: 1.32;
+    min-height: 56px;
+  }
+
+  .us-q-plus { width: 32px; height: 32px; border-width: 2px; }
+  .us-q-body { padding: 0 1.05rem 1.05rem; }
+  .us-q-body p { font-size: .97rem; line-height: 1.68; margin-bottom: .75rem; }
+
+  /* ---- Merkkasten ---- */
+  .us-note {
+    margin-top: 1.1rem;
+    padding: 1rem 1.05rem 1rem 3.15rem;
+    font-size: .95rem;
+    line-height: 1.65;
+    border-radius: var(--u-r-sm);
+  }
+
+  .us-note::before { left: 1.05rem; top: 1rem; width: 22px; height: 22px; font-size: .8rem; }
+
+  /* ---- Kopierfeld: bequem antippbar ---- */
+  .us-copy { min-height: 38px; padding: .35rem .7rem; font-size: .92rem; }
+}
+
+/* Sehr schmale Geräte */
+@media (max-width: 400px) {
+  .us-sec { padding-inline: .85rem; }
+  .us-card, .us-step { padding-inline: 1rem; }
+  .us-card-shot { margin-inline: -1rem; }
+  .us-card-title { font-size: 1.22rem; }
+  .us-step strong { font-size: 1.06rem; }
+  .us-step-no { width: 33px; height: 33px; font-size: .9rem; }
+  .us-note { padding-left: 2.9rem; }
 }
 
 /* Auf Touch-Geräten keine Hover-Zustände einfrieren */
@@ -1034,7 +1211,7 @@ body.nocturne .us-copy {
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   .us-card, .us-card--grad, .us-card--grad::after, .us-glow, .us-card-shot img,
-  .us-copy, .us-step, .us-step::before, .us-card-ico, .us-q, .us-q-plus,
+  .us-copy, .us-step, .us-step-no, .us-card-ico, .us-q, .us-q-plus,
   .us-q-plus::before, .us-q-plus::after, .us-table tbody tr,
   .us-table tbody th::before, .us-tags li {
     transition: none !important;
