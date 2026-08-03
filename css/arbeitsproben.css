@@ -388,3 +388,35 @@ html, body{
     -webkit-text-fill-color: #fff !important;
   }
 }
+#arbeitsproben .card img{ height:auto; aspect-ratio:auto; object-fit:contain; }
+/* ===== FIX: Overflow + Layout-Shift Arbeitsproben ===== */
+
+/* 1) Kein horizontaler Überhang mehr */
+@media (max-width: 600px){
+  #arbeitsproben .board-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    margin-inline: 0 !important;
+    padding-inline: clamp(6px, 2.5vw, 12px) !important;
+    max-width: 100% !important;
+  }
+  #arbeitsproben .board-grid .cell{ min-width: 0 !important; }
+  #arbeitsproben .card{ max-width: 100% !important; }
+  #arbeitsproben .card img{ max-width: 100% !important; }
+}
+
+/* 2) content-visibility raus – verursacht die Sprünge */
+#arbeitsproben .board-grid .cell{
+  content-visibility: visible !important;
+  contain-intrinsic-size: auto !important;
+}
+
+/* 3) Platzhalter-Ratio, bis das Bild geladen ist */
+#arbeitsproben .card img{
+  aspect-ratio: 3 / 2;          /* reserviert Höhe vorab */
+  height: auto;
+  object-fit: contain;
+  background: color-mix(in oklab, currentColor 6%, transparent);
+}
+#arbeitsproben .card.is-loaded img{
+  aspect-ratio: auto;           /* echte Bildmaße übernehmen */
+}

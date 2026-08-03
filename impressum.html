@@ -3,17 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fusion³ – UX & Webdesign Studio</title>
-  <meta name="description" content="Fusion³ ist dein Partner für UX-Design, Webdesign & Prototyping. Wir gestalten digitale Erlebnisse mit Substanz.">
+  <title>Deniz Herrnreither – UX & Webdesign Studio</title>
+  <meta name="description" content="Deniz Herrnreither ist dein Partner für UX-Design, Webdesign & Prototyping. Wir gestalten digitale Erlebnisse mit Substanz.">
 
   <!-- Google Fonts Optimierung -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" media="all" onload="this.media='all'">
-  <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  </noscript>
+
 
   <!-- Lokale Fonts optimieren -->
   <link rel="preload" as="style" href="./fonts/fonts.css">
@@ -28,14 +24,7 @@
   <!-- Normales Script kann defer tragen -->
   <script src="https://unpkg.com/scrollreveal" defer></script>
 
-  <!-- Analytics Beispiel -->
-  <script>
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "t1mbvlhldj");
-  </script>
+
 
   <!-- ===============================
        GLOBAL CSS
@@ -300,8 +289,14 @@
 
 <header class="aether-header" id="aetherGate">
   <div class="aether-header__bar">
-    <a href="/" class="sigil-mark">Fusion³</a>
-
+<a href="/" class="sigil-mark" aria-label="Deniz Herrnreither – Startseite">
+  <img class="sigil-mark__img sigil-mark__img--light"
+       src="./arbeitsproben/arbeitsproben_index/logo.webp" alt="Deniz Herrnreither"
+       width="120" height="32" decoding="async">
+  <img class="sigil-mark__img sigil-mark__img--dark"
+       src="./arbeitsproben/arbeitsproben_index/logow.webp" alt="" aria-hidden="true"
+       width="120" height="32" decoding="async">
+</a>
     <!-- NAV mit Subnav-Accordions (mobil sichtbar) -->
     <nav class="astral-nav" id="astralWay" aria-label="Hauptnavigation">
       <ul class="astral-nav__list">
@@ -372,7 +367,7 @@
             </svg>
           </button>
           <ul id="altar-contact" class="underrealm" hidden>
-     <li><a class="astral-link astral-link--sub" href="#kontakt">Anfrage stellen</a></li>   <li><a class="astral-link astral-link--sub" href="/impressum.html">Impressum</a></li>
+     <li><a class="astral-link astral-link--sub" href="/anfrage.html">Anfrage stellen</a></li>   <li><a class="astral-link astral-link--sub" href="/impressum.html">Impressum</a></li>
           </ul>
         </li>
       </ul>
@@ -403,7 +398,7 @@
       <!-- CTA (Link bleibt Link; kein role="button" nötig) -->
       <a
         class="charm-cta charm-cta--prime"
-        href="#kontakt"
+        href="./anfrage.html"
         id="sigilOffer"
         aria-label="Angebot anfordern"
         data-cta
@@ -436,7 +431,24 @@
   scroll-behavior: smooth;
 }.kontakt-testimonial-section {
   scroll-margin-top: 100px; /* Passe den Wert (z. B. 100px) an die Höhe deines Headers an */
-}</style>
+}
+.sigil-mark{
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+.sigil-mark__img{
+  height: 44px;        /* Anzeigehöhe zentral steuern */
+  width: auto;
+  display: block;
+}
+
+/* Standard: Light-Logo sichtbar */
+.sigil-mark__img--dark{ display: none; }
+
+/* Dark Mode: umschalten (dein Theme setzt data-theme auf <html>) */
+[data-theme="dark"] .sigil-mark__img--light{ display: none; }
+[data-theme="dark"] .sigil-mark__img--dark{ display: block; }</style>
 
 <script>
   /* ---------------------------
@@ -852,7 +864,13 @@
     });
   })();
 </script>
-
+<script>
+(function(){
+  var s = localStorage.getItem('theme-pref');
+  var dark = s ? s === 'dark' : matchMedia('(prefers-color-scheme:dark)').matches;
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+})();
+</script>
 
 
 
@@ -883,15 +901,14 @@
         <dt>Anbieter</dt>
         <dd>
           <strong>Deniz Herrnreither</strong><br>
-          Fusion³ <span class="imp-note">(Geschäftsbezeichnung)</span><br>
-          Einzelunternehmen
+          Kleinunternehmer nach § 19 UStG<br>
         </dd>
       </div>
 
       <div class="imp-row">
         <dt>Anschrift</dt>
         <dd>
-          [Straße und Hausnummer]<br>
+          Ringseisstr. 2<br>
           84032 Landshut<br>
           Deutschland
         </dd>
@@ -900,9 +917,9 @@
       <div class="imp-row">
         <dt>Kontakt</dt>
         <dd>
-          Telefon: <a href="tel:+49[NummerOhneLeerzeichen]">+49 [Telefonnummer]</a><br>
-          E-Mail: <a href="mailto:hello@fusion3.de">hello@fusion3.de</a><br>
-          Web: <a href="index.html">www.fusion3.de</a>
+          Telefon: <a href="tel:+491708933204">+49 170 8933204</a><br>
+          E-Mail: <a href="mailto:hi.dherrnreither@gmail.com">hi.dherrnreither@gmail.com</a><br>
+          Web: <a href="index.html">https://denizherrnreither.de/</a>
         </dd>
       </div>
 
@@ -1035,14 +1052,88 @@
       falle ich nicht unter die Pflichten des Barrierefreiheitsstärkungsgesetzes.
       Wenn Ihnen eine Barriere auffällt oder Sie einen Inhalt nicht nutzen können,
       schreiben Sie mir gerne an
-      <a href="mailto:hello@fusion3.de">hello@fusion3.de</a> – ich kümmere mich darum.
+      <a href="mailto:hi.dherrnreither@gmail.com">hi.dherrnreither@gmail.com</a> – ich kümmere mich darum.
     </p>
 
+<h3>Bildnachweise und Medienmaterial</h3>
+<p>
+  Die auf dieser Website gezeigten Renderings, 3D-Modelle, Animationen,
+  Illustrationen und Layouts sind, soweit nicht anders gekennzeichnet, von mir
+  selbst erstellt.
+</p>
+<p>
+  Ergänzend kommt lizenziertes Material zum Einsatz:
+</p>
+<ul>
+  <li>
+    <strong>Adobe Stock</strong> – einzelne Fotos und Grafiken stammen aus
+    Beständen von Adobe Stock und werden auf Grundlage einer erworbenen
+    Standardlizenz der Adobe Inc. genutzt.
+  </li>
+  <li>
+    <strong>Mockup-Vorlagen</strong> – zur Darstellung von Entwürfen auf
+    Geräten, Verpackungen und Drucksachen verwende ich lizenzierte
+    Mockup-Vorlagen. Die Rechte an den Vorlagen selbst verbleiben bei den
+    jeweiligen Urhebern; gezeigt werden darin ausschließlich eigene Entwürfe.
+  </li>
+</ul>
+<p>
+  Eine Weiterverwendung des auf dieser Website gezeigten Materials – auch
+  auszugsweise – ist ohne meine schriftliche Zustimmung nicht gestattet. Für
+  Bestandteile aus lizenzierten Beständen gelten zusätzlich die Bedingungen der
+  jeweiligen Anbieter; eine Weitergabe dieser Bestandteile ist mir nicht
+  gestattet und daher auch Dritten nicht möglich.
+</p>
+ 
+<h3>Schriften und Symbole</h3>
+<ul>
+  <li>
+    <strong>Space Grotesk</strong> – Schriftfamilie von Florian Karsten,
+    veröffentlicht unter der SIL Open Font License 1.1.
+  </li>
+  <li>
+    <strong>Feather Icons</strong> – Symbolbibliothek von Cole Bemis,
+    veröffentlicht unter der MIT-Lizenz.
+  </li>
+</ul>
+ 
+<h3>Verwendete Software und Bibliotheken</h3>
+<p>
+  Diese Website nutzt quelloffene Programmbibliotheken. Die Rechte verbleiben
+  bei den jeweiligen Urhebern; es gelten die Bedingungen der jeweiligen Lizenz.
+</p>
+<ul>
+  <li><strong>GSAP</strong> und <strong>ScrollTrigger</strong> – Webflow, Inc.,
+    genutzt im Rahmen der Standard-Lizenzbedingungen</li>
+  <li><strong>ScrollReveal</strong> – Julian Lloyd, MIT-Lizenz</li>
+  <li><strong>model-viewer</strong> – Google LLC, Apache-Lizenz 2.0</li>
+</ul>
+ 
+<h3>Technische Bereitstellung</h3>
+<p>
+  Diese Website wird als statische Seite über GitHub Pages bereitgestellt,
+  einen Dienst der GitHub, Inc., 88 Colin P. Kelly Jr. Street,
+  San Francisco, CA 94107, USA. Die Domain ist registriert bei der
+  IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, Deutschland.
+  Einzelheiten zur Datenverarbeitung finden Sie in der
+  <a href="/datenschutz.html">Datenschutzerklärung</a>.
+</p>
+ 
+<h3>Barrierefreiheit</h3>
+<p>
+  Ich bemühe mich, diese Website für alle Nutzerinnen und Nutzer zugänglich zu
+  gestalten, und orientiere mich dabei an den Web Content Accessibility
+  Guidelines. Sollte Ihnen eine Barriere auffallen, freue ich mich über einen
+  Hinweis an die oben genannte E-Mail-Adresse – ich bessere dann nach.
+</p>
+ 
+<h3>Stand</h3>
+<p>
+  Diese Anbieterkennzeichnung hat den Stand vom 3. August 2026.
+</p>
     <p class="imp-links">
       <a href="datenschutz.html">Datenschutzerklärung</a>
-      <span aria-hidden="true">·</span>
-      <a href="agb.html">AGB</a>
-      <span aria-hidden="true">·</span>
+
       <a href="index.html">Zur Startseite</a>
     </p>
 
@@ -1190,10 +1281,9 @@
 
 
 
-
 <footer itemscope itemtype="https://schema.org/Organization" class="footer-clean">
   <!-- In Microdata ist <meta itemprop> im Body erlaubt und ersetzt hier das unzulässige <link>. -->
-  <meta itemprop="url" content="https://www.fusion3.de">
+  <meta itemprop="url" content="https://denizherrnreither.de/">
 
   <div class="fc-container">
 
@@ -1202,9 +1292,16 @@
       <h2 id="fc-head-title" class="sr-only">Markenbereich</h2>
       <div class="fc-brand">
         <!-- Optional: Logo als Link zur Startseite -->
-        <a class="fc-logo" href="index.html" itemprop="name">Fusion³</a>
-        <p class="fc-claim">UX &amp; Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
-      </div>
+<a class="fc-logo" href="index.html" aria-label="Deniz Herrnreither – Startseite">
+  <span itemprop="name" class="sr-only">Deniz Herrnreither</span>
+  <img class="fc-logo__img fc-logo__img--light"
+       src="./arbeitsproben/arbeitsproben_index/logo.webp" alt=""
+       width="120" height="32" loading="lazy" decoding="async">
+  <img class="fc-logo__img fc-logo__img--dark"
+       src="./arbeitsproben/arbeitsproben_index/logow.webp" alt=""
+       width="120" height="32" loading="lazy" decoding="async">
+</a>
+     </div>
       <div class="fc-cta">
         <a class="fc-btn" href="/anfrage.html" aria-label="Projekt anfragen">Projekt anfragen</a>
       </div>
@@ -1244,7 +1341,7 @@
       <div class="fc-col">
         <h3 class="fc-col-title" id="fc-contact">Kontakt</h3>
         <ul class="fc-links" aria-labelledby="fc-contact">
-          <li><a href="mailto:hello@fusion3.de" itemprop="email">hi.dherrnreither@gmail.com</a></li>
+          <li><a href="mailto:hi.dherrnreither@gmail.com" itemprop="email">hi.dherrnreither@gmail.com</a></li>
           <li><a href="tel:+491708933204" itemprop="telephone">+49&nbsp;170&nbsp;8933204</a></li>
           <li>
             <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" class="fc-address">
@@ -1257,7 +1354,7 @@
         <h3 id="fc-socials-title" class="sr-only">Social Media</h3>
         <ul class="fc-socials" aria-labelledby="fc-socials-title">
           <li>
-            <a class="fc-social" href="mailto:hello@fusion3.de" aria-label="E-Mail" itemprop="sameAs">
+            <a class="fc-social" href="mailto:hi.dherrnreither@gmail.com" aria-label="E-Mail" itemprop="sameAs">
               <span class="sr-only">E-Mail</span>
               <img src="./FooterIcons/Gmail.png" alt="" loading="lazy" decoding="async" width="20" height="20">
             </a>
@@ -1281,7 +1378,7 @@
     <!-- Bottom -->
     <div class="fc-legal" aria-labelledby="fc-legal-title">
       <h3 id="fc-legal-title" class="sr-only">Rechtliches &amp; Hinweise</h3>
-      <p>© <time id="currentYear" datetime="2025">2025</time> <span class="nowrap">Fusion³</span> · DSGVO-konform &amp; barrierearm entwickelt.</p>
+      <p>© <time id="currentYear" datetime="2025">2025</time> <span class="nowrap">Deniz Herrnreither</span> · DSGVO-konform &amp; barrierearm entwickelt.</p>
     </div>
 
   </div>
@@ -1295,3 +1392,4 @@
 
 </body>
 </html>
+

@@ -3,27 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anfrage stellen – Fusion³</title>
+  <title>Anfrage stellen – Deniz Herrnreither</title>
   <meta name="description" content="Beschreibe dein Projekt in fünf Schritten. Wir melden uns kurzfristig mit einer Einschätzung zurück.">
   <meta name="robots" content="index,follow">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" media="all" onload="this.media='all'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
 
   <link rel="preload" as="style" href="./fonts/fonts.css">
   <link rel="stylesheet" href="./fonts/fonts.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="./fonts/fonts.css"></noscript>
 
-  <script>
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "t1mbvlhldj");
-  </script>
+
 
   <!-- ===== Globale Tokens – identisch zur Startseite ===== -->
 <style>
@@ -512,13 +503,18 @@
 <body data-page="anfrage">
 <a class="skip-link" href="#kontaktForm">Zum Formular springen</a>
 
-<!-- ============================================================
-     HEADER
-     ============================================================ -->
+
+
 <header class="aether-header" id="aetherGate">
   <div class="aether-header__bar">
-    <a href="/" class="sigil-mark">Fusion³</a>
-
+<a href="/" class="sigil-mark" aria-label="Deniz Herrnreither – Startseite">
+  <img class="sigil-mark__img sigil-mark__img--light"
+       src="./arbeitsproben/arbeitsproben_index/logo.webp" alt="Deniz Herrnreither"
+       width="120" height="32" decoding="async">
+  <img class="sigil-mark__img sigil-mark__img--dark"
+       src="./arbeitsproben/arbeitsproben_index/logow.webp" alt="" aria-hidden="true"
+       width="120" height="32" decoding="async">
+</a>
     <!-- NAV mit Subnav-Accordions (mobil sichtbar) -->
     <nav class="astral-nav" id="astralWay" aria-label="Hauptnavigation">
       <ul class="astral-nav__list">
@@ -589,8 +585,7 @@
             </svg>
           </button>
           <ul id="altar-contact" class="underrealm" hidden>
-            <li><a class="astral-link astral-link--sub" href="/anfrage.html">Anfrage stellen</a></li>
-          <li><a class="astral-link astral-link--sub" href="/impressum.html">Impressum</a></li>
+     <li><a class="astral-link astral-link--sub" href="/anfrage.html">Anfrage stellen</a></li>   <li><a class="astral-link astral-link--sub" href="/impressum.html">Impressum</a></li>
           </ul>
         </li>
       </ul>
@@ -621,7 +616,7 @@
       <!-- CTA (Link bleibt Link; kein role="button" nötig) -->
       <a
         class="charm-cta charm-cta--prime"
-        href="#kontakt"
+        href="./anfrage.html"
         id="sigilOffer"
         aria-label="Angebot anfordern"
         data-cta
@@ -650,6 +645,450 @@
 
 </header>
 
+<style>html {
+  scroll-behavior: smooth;
+}.kontakt-testimonial-section {
+  scroll-margin-top: 100px; /* Passe den Wert (z. B. 100px) an die Höhe deines Headers an */
+}
+.sigil-mark{
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+.sigil-mark__img{
+  height: 44px;        /* Anzeigehöhe zentral steuern */
+  width: auto;
+  display: block;
+}
+
+/* Standard: Light-Logo sichtbar */
+.sigil-mark__img--dark{ display: none; }
+
+/* Dark Mode: umschalten (dein Theme setzt data-theme auf <html>) */
+[data-theme="dark"] .sigil-mark__img--light{ display: none; }
+[data-theme="dark"] .sigil-mark__img--dark{ display: block; }</style>
+
+<script>
+  /* ---------------------------
+     Aether / Astral Navigation
+     --------------------------- */
+  (function(){
+    const docEl   = document.documentElement;
+    const gate    = document.getElementById('aetherGate');
+    const switchRune = document.getElementById('runeSwitch');
+    const astral  = document.getElementById('astralWay');
+    const veil    = document.getElementById('voidVeil');
+    if(!switchRune || !astral) return;
+
+    // Headerhöhe -> CSS Var
+    function setGateHeight(){
+      const h = gate.getBoundingClientRect().height;
+      docEl.style.setProperty('--gate-height', h + 'px');
+    }
+    setGateHeight();
+    addEventListener('resize', setGateHeight, {passive:true});
+
+    // MQ Sync
+    const mq = window.matchMedia('(min-width: 768px)');
+
+    // Mobile Actions Container
+    const mobileSatchelId = 'mobileSatchel';
+    let mobileSatchel = null;
+    function ensureSatchel(){
+      if(!mobileSatchel){
+        mobileSatchel = document.createElement('div');
+        mobileSatchel.id = mobileSatchelId;
+        mobileSatchel.className = 'astral-nav__mobile-actions';
+        mobileSatchel.setAttribute('hidden','');
+        astral.appendChild(mobileSatchel);
+      }
+    }
+    function stowCharm(){
+      ensureSatchel();
+      const cta = document.querySelector('.charm-cta');
+      if(cta && cta.parentElement !== mobileSatchel){ mobileSatchel.appendChild(cta); }
+      mobileSatchel.removeAttribute('hidden');
+    }
+    function recallCharm(){
+      const actions = document.querySelector('.astral-actions');
+      if(!actions) return;
+      const cta = mobileSatchel?.querySelector('.charm-cta');
+      if(cta && actions !== cta.parentElement){
+        actions.appendChild(cta);
+      }
+      mobileSatchel?.setAttribute('hidden','');
+    }
+
+    // Focus Trap
+    const ward = (()=>{
+      let active = false;
+      function handle(e){
+        if(!active || e.key !== 'Tab') return;
+        const focusables = astral.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+        const list = Array.from(focusables).filter(el=>!el.hasAttribute('disabled'));
+        if(list.length === 0) return;
+        const first = list[0];
+        const last  = list[list.length-1];
+        if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+      return {
+        activate(){ if(!active){ active = true; document.addEventListener('keydown', handle); }},
+        deactivate(){ if(active){ active = false; document.removeEventListener('keydown', handle); }}
+      };
+    })();
+
+    function sealUnderrealms(){
+      astral.querySelectorAll('.gatelet[aria-expanded="true"]').forEach(btn=>{
+        btn.setAttribute('aria-expanded','false');
+      });
+      astral.querySelectorAll('.underrealm:not([hidden])').forEach(ul=>{
+        ul.setAttribute('hidden','');
+      });
+      astral.querySelectorAll('.astral-item.is-awakened').forEach(li=>{
+        li.classList.remove('is-awakened');
+      });
+    }
+
+    function closePortal(){
+      astral.classList.remove('is-awakened');
+      veil?.classList.remove('is-awakened');
+      veil?.setAttribute('hidden', '');
+      switchRune.setAttribute('aria-expanded','false');
+      switchRune.setAttribute('aria-label','Menü öffnen');
+      docEl.classList.remove('nav-lock');
+      ward.deactivate();
+      document.querySelector('main')?.removeAttribute('inert');
+      sealUnderrealms();
+      recallCharm();
+      gate.classList.remove('portal-open'); /* Balken/Shadow fix */
+      switchRune.focus();
+    }
+    function openPortal(){
+      astral.classList.add('is-awakened');
+      veil?.classList.add('is-awakened');
+      veil?.removeAttribute('hidden');
+      switchRune.setAttribute('aria-expanded','true');
+      switchRune.setAttribute('aria-label','Menü schließen');
+      docEl.classList.add('nav-lock');
+
+      const firstLink = astral.querySelector('a');
+      if(firstLink) firstLink.focus();
+
+      ward.activate();
+      document.querySelector('main')?.setAttribute('inert', '');
+      stowCharm();
+      gate.classList.add('portal-open'); /* Balken/Shadow fix */
+    }
+    function syncState(){ if(mq.matches){ closePortal(); } }
+    mq.addEventListener?.('change', syncState);
+    syncState();
+
+    // Toggle Button
+    switchRune.addEventListener('click', function(){
+      const isOpen = astral.classList.contains('is-awakened');
+      if(isOpen) closePortal(); else openPortal();
+    });
+
+    // Overlay / Outside click
+    veil?.addEventListener('click', () => closePortal());
+    document.addEventListener('click', (e) => {
+      if(!astral.classList.contains('is-awakened')) return;
+      if (e.target.closest('.orb-toggle')) return; // Theme-Toggle schließt nicht
+      if(!astral.contains(e.target) && !switchRune.contains(e.target)) closePortal();
+    });
+
+    // ESC
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && astral.classList.contains('is-awakened')){
+        e.preventDefault(); closePortal();
+      }
+    });
+
+    // Scroll Shadow
+    addEventListener('scroll', () => {
+      const y = window.scrollY || 0;
+      gate.classList.toggle('is-ascended', y>4);
+    }, {passive:true});
+
+    // Scrollspy
+    const links = [...document.querySelectorAll('.astral-link')];
+    const linkMap = Object.fromEntries(links.map(a=>[a.getAttribute('href'), a]));
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const id = '#'+e.target.id;
+        if(e.isIntersecting){
+          links.forEach(l=>{ l.removeAttribute('data-active'); l.removeAttribute('aria-current'); });
+          const link = linkMap[id];
+          if(link){ link.setAttribute('data-active',''); link.setAttribute('aria-current','page'); }
+        }
+      });
+    }, {rootMargin:'-40% 0px -55% 0px', threshold:[0, 1]});
+    document.querySelectorAll('section[id]').forEach(s=>obs.observe(s));
+
+    // Smooth scroll Offset
+    links.forEach(a=>{
+      a.addEventListener('click', (ev)=>{
+        const href = a.getAttribute('href')||'';
+        if(href.startsWith('#')){
+          const target = document.getElementById(href.slice(1));
+          if(target){
+            ev.preventDefault();
+            const y = target.getBoundingClientRect().top + window.scrollY - (gate.getBoundingClientRect().height + 8);
+            window.scrollTo({top:y, behavior:'smooth'});
+            closePortal();
+          }
+        }
+      });
+    });
+  })();
+</script>
+<script>
+/* CTA Ripple (Namen mystisch gelassen, Klassen bereits umbenannt) */
+(function(){
+  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function makeRipple(btn, x, y){
+    if (prefersReduced) return;
+    const r = document.createElement('span');
+    r.className = 'cta-ripple';
+    r.style.left = x + 'px';
+    r.style.top  = y + 'px';
+    btn.appendChild(r);
+    r.offsetWidth; r.classList.add('is-anim');
+    r.addEventListener('animationend', ()=> r.remove(), {once:true});
+  }
+
+  function keyRipple(e){
+    if(e.key !== ' ' && e.key !== 'Enter') return;
+    const btn = e.currentTarget;
+    const rect = btn.getBoundingClientRect();
+    makeRipple(btn, rect.width/2, rect.height/2);
+  }
+
+  function setBusy(btn, busy=true){
+    btn.setAttribute('aria-busy', String(!!busy));
+    const live = btn.querySelector('[aria-live]');
+    if(live){ live.textContent = busy ? 'Lädt…' : 'Bereit'; }
+  }
+
+  document.querySelectorAll('[data-cta]').forEach(btn=>{
+    btn.addEventListener('pointerdown', e=>{
+      if(e.pointerType === 'mouse' || e.pointerType === 'touch' || e.pointerType === 'pen'){
+        const rect = btn.getBoundingClientRect();
+        makeRipple(btn, e.clientX - rect.left, e.clientY - rect.top);
+      }
+    });
+    btn.addEventListener('keydown', keyRipple);
+    btn.addEventListener('click', (e)=>{
+      const href = btn.getAttribute('href') || '';
+      const targetLocal = href.startsWith('#');
+      if(targetLocal){
+        setBusy(btn, true);
+        setTimeout(()=> setBusy(btn, false), 420);
+      }
+    }, {passive:true});
+  });
+})();
+</script>
+<script>
+/* Underrealm Toggle (Subnav) */
+(function(){
+  const nav = document.getElementById('astralWay');
+  if(!nav) return;
+
+  nav.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.gatelet');
+    if(!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+
+    const li  = btn.closest('.astral-item');
+    const id  = btn.getAttribute('aria-controls');
+    const sub = id ? document.getElementById(id) : li?.querySelector('.underrealm');
+    if(!li || !sub) return;
+
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+    // andere schließen
+    nav.querySelectorAll('.astral-item.is-awakened').forEach(other=>{
+      if(other !== li){
+        other.classList.remove('is-awakened');
+        const otherBtn = other.querySelector('.gatelet[aria-expanded="true"]');
+        const otherSub = other.querySelector('.underrealm');
+        if(otherBtn) otherBtn.setAttribute('aria-expanded','false');
+        if(otherSub) otherSub.setAttribute('hidden','');
+      }
+    });
+
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    li.classList.toggle('is-awakened', !isOpen);
+    sub.toggleAttribute('hidden', isOpen);
+  });
+
+  // Outside-Click schließt alles
+  document.addEventListener('click', (e)=>{
+    if(!nav.contains(e.target)){
+      nav.querySelectorAll('.astral-item.is-awakened').forEach(li=>{
+        li.classList.remove('is-awakened');
+        const b = li.querySelector('.gatelet[aria-expanded="true"]');
+        const s = li.querySelector('.underrealm');
+        if(b) b.setAttribute('aria-expanded','false');
+        if(s) s.setAttribute('hidden','');
+      });
+    }
+  });
+
+  // ESC schließt alle
+  document.addEventListener('keydown', (e)=>{
+    if(e.key !== 'Escape') return;
+    nav.querySelectorAll('.astral-item.is-awakened').forEach(li=>{
+      li.classList.remove('is-awakened');
+      const b = li.querySelector('.gatelet[aria-expanded="true"]');
+      const s = li.querySelector('.underrealm');
+      if(b) b.setAttribute('aria-expanded','false');
+      if(s) s.setAttribute('hidden','');
+    });
+  });
+})();
+</script>
+<script>
+  (function(){
+    const rootEl   = document.documentElement;
+    const bodyEl   = document.body;
+    const toggleEl = document.getElementById('eclipseStone');
+    const shard    = document.getElementById('moonShard');
+    const stars    = document.getElementById('starField');
+    const statusEl = document.getElementById('omenWhisper');
+
+    /* Sterne */
+    (function seedStars(){
+      if(!stars) return;
+      const N = 26;
+      const frag = document.createDocumentFragment();
+      for(let i=0;i<N;i++){
+        const el = document.createElement('i');
+        el.style.top = (5 + Math.random()*90) + '%';
+        el.style.left = (5 + Math.random()*90) + '%';
+        el.style.animationDelay = (Math.random()*2.5).toFixed(2)+'s';
+        frag.appendChild(el);
+      }
+      stars.appendChild(frag);
+    })();
+
+    /* Wolken */
+    (function seedClouds(){
+      const lanes = Array.from(document.querySelectorAll('[data-lane]'));
+      if(!lanes.length || !toggleEl) return;
+
+      const presets = {
+        back:  { count: 3, speed:[80,120], scale:[0.60,0.90],  opacity:[0.25,0.40] },
+        mid:   { count: 3, speed:[60, 90], scale:[0.80,1.00],  opacity:[0.50,0.70] },
+        front: { count: 2, speed:[45, 70], scale:[1.00,1.15],  opacity:[0.85,0.95] }
+      };
+
+      function render(){
+        lanes.forEach(l=>l.innerHTML = '');
+        const rect = toggleEl.getBoundingClientRect();
+        const W = Math.max(60, Math.round(rect.width));
+        const H = Math.max(24, Math.round(rect.height));
+        lanes.forEach(lane=>{
+          const cfg = presets[lane.dataset.lane];
+          for(let i=0;i<cfg.count;i++){
+            const cloud = document.createElement('span');
+            cloud.className = 'cloud';
+
+            const minW = Math.max(0.28*W, 36);
+            const maxW = Math.max(0.46*W, 54);
+            const cw   = randf(minW, maxW);
+            const ch   = cw*0.5;
+
+            cloud.style.width  = cw+'px';
+            cloud.style.height = ch+'px';
+
+            const freeY = Math.max(0, H - ch);
+            cloud.style.top  = (freeY ? randf(0, freeY) : 0) + 'px';
+
+            cloud.style.left = (Math.max(0, W - cw) ? randf(0, W - cw) : 0) + 'px';
+
+            const dur = rand(cfg.speed[0], cfg.speed[1]);
+            cloud.style.animationDuration = dur+'s';
+            cloud.style.animationDelay = (-Math.random()*dur).toFixed(2)+'s';
+            cloud.style.opacity = randf(cfg.opacity[0], cfg.opacity[1]);
+            cloud.style.transform = `translateX(0) scale(${randf(cfg.scale[0], cfg.scale[1])})`;
+
+            ['b1','b2','b3','b4','b5'].forEach((b,idx)=>{
+              const s = document.createElement('span');
+              s.className = 'bubble '+b;
+              const w = [0.58,0.50,0.66,0.38,0.42][idx] * (0.92 + Math.random()*0.16);
+              const h = [0.78,0.70,0.88,0.58,0.62][idx] * (0.92 + Math.random()*0.16);
+              s.style.width  = (w*100)+'%';
+              s.style.height = (h*100)+'%';
+              const lefts = [10,38,46,-2,22];
+              const tops  = [12,-4,12,28,28];
+              s.style.left = (lefts[idx] + (Math.random()*4-2))+'%';
+              s.style.top  = (tops[idx]  + (Math.random()*4-2))+'%';
+              cloud.appendChild(s);
+            });
+
+            lane.appendChild(cloud);
+          }
+        });
+      }
+
+      function rand(min,max){ return Math.floor(min + Math.random()*(max-min+1)); }
+      function randf(min,max){ return +(min + Math.random()*(max-min)).toFixed(2); }
+
+      let t;
+      const onResize = () => { clearTimeout(t); t = setTimeout(render, 120); };
+      render();
+      addEventListener('resize', onResize, {passive:true});
+    })();
+
+    const KEY = 'theme-pref';
+    function apply(mode){ // 'dark' | 'light'
+      const isDark = (mode === 'dark');
+      bodyEl.classList.toggle('nocturne', isDark);
+      bodyEl.classList.toggle('dawn', !isDark);
+      rootEl.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      if(toggleEl) toggleEl.setAttribute('aria-pressed', String(isDark));
+      if(statusEl) statusEl.textContent = isDark ? 'Dunkelmodus aktiv' : 'Hellmodus aktiv';
+    }
+
+    (function init(){
+      const saved = localStorage.getItem(KEY);
+      if(saved === 'light' || saved === 'dark'){
+        apply(saved);
+      }else{
+        const sysDark = matchMedia('(prefers-color-scheme:dark)').matches;
+        apply(sysDark ? 'dark' : 'light');
+      }
+    })();
+
+    document.addEventListener('click', (e)=>{
+      const t = e.target.closest?.('.orb-toggle');
+      if(!t) return;
+      const nowDark = !bodyEl.classList.contains('nocturne');
+      apply(nowDark ? 'dark' : 'light');
+      localStorage.setItem(KEY, nowDark ? 'dark' : 'light');
+      if(shard){
+        shard.classList.remove('pulse'); void shard.offsetWidth; shard.classList.add('pulse');
+      }
+    });
+
+    matchMedia('(prefers-color-scheme:dark)').addEventListener('change', (e)=>{
+      if(localStorage.getItem(KEY)) return;
+      apply(e.matches ? 'dark' : 'light');
+    });
+  })();
+</script>
+<script>
+(function(){
+  var s = localStorage.getItem('theme-pref');
+  var dark = s ? s === 'dark' : matchMedia('(prefers-color-scheme:dark)').matches;
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+})();
+</script>
 
 <!-- ============================================================
      ANFRAGE
@@ -659,33 +1098,21 @@
 
     <!-- ===== Bildfläche ===== -->
     <aside class="fx-visual" aria-hidden="true">
-<!-- ============================================================
-     TEIL 1
-     Ersetzt in anfrage.html die Zeilen 659 bis 662, also den
-     kompletten Block:
 
-         <div class="fx-visual-bg">
-           <div class="fx-layer is-on" id="fxLayerA"></div>
-           <div class="fx-layer" id="fxLayerB"></div>
-         </div>
+      <div class="fx-visual-bg">
+        <!-- Die beiden alten Layer bleiben absichtlich drin: das
+             Video-Script schreibt weiter auf sie, sie sind nur
+             per CSS unsichtbar. -->
+        <div class="fx-layer is-on" id="fxLayerA"></div>
+        <div class="fx-layer" id="fxLayerB"></div>
 
-     Die beiden alten Layer bleiben absichtlich drin: das
-     vorhandene Script schreibt weiter auf sie, sie sind nur
-     unsichtbar. So muss in der bestehenden IIFE nichts geändert
-     werden.
-     ============================================================ -->
+        <video class="fx-vid is-on" id="fxVidA" muted loop playsinline preload="auto"
+               disableremoteplayback aria-hidden="true"></video>
+        <video class="fx-vid" id="fxVidB" muted loop playsinline preload="none"
+               disableremoteplayback aria-hidden="true"></video>
 
-<div class="fx-visual-bg">
-  <div class="fx-layer is-on" id="fxLayerA"></div>
-  <div class="fx-layer" id="fxLayerB"></div>
-
-  <video class="fx-vid is-on" id="fxVidA" muted loop playsinline preload="auto"
-         disableremoteplayback aria-hidden="true"></video>
-  <video class="fx-vid" id="fxVidB" muted loop playsinline preload="none"
-         disableremoteplayback aria-hidden="true"></video>
-
-  <span class="fx-glow" id="fxGlow" aria-hidden="true"></span>
-</div>
+        <span class="fx-glow" id="fxGlow" aria-hidden="true"></span>
+      </div>
 
       <div class="fx-visual-body">
         <div>
@@ -714,11 +1141,19 @@
     <div class="fx-form-side">
       <div class="fx-form-inner">
 
- 
-
         <h1 class="sr-only">Projektanfrage stellen</h1>
 
-        <form action="https://formspree.io/f/xqapdvaq" method="POST" class="kontakt-form fx-form" id="kontaktForm" novalidate>
+        <form action="https://forminit.com/f/9ixvbgjr4ce"
+              method="POST"
+              class="kontakt-form fx-form"
+              id="kontaktForm"
+              accept-charset="UTF-8"
+              novalidate>
+
+          <!-- Honeypot gegen Spam (muss leer bleiben) -->
+          <input type="text" name="website_url" id="fxHp" tabindex="-1" autocomplete="off"
+                 aria-hidden="true"
+                 style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
 
           <!-- STEP 1 -->
           <fieldset class="form-step active" data-step="1"
@@ -840,11 +1275,11 @@
               </label>
               <fieldset class="checkbox-group tags" aria-label="Besondere Schwerpunkte">
                 <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
-                <label class="pill"><input type="checkbox" name="web_prios[]" value="Ladegeschwindigkeit" /><span>Ladegeschwindigkeit</span></label>
-                <label class="pill"><input type="checkbox" name="web_prios[]" value="Responsiveness" /><span>Responsiveness</span></label>
-                <label class="pill"><input type="checkbox" name="web_prios[]" value="SEO" /><span>SEO</span></label>
-                <label class="pill"><input type="checkbox" name="web_prios[]" value="Benutzerfreundlichkeit" /><span>Benutzerfreundlichkeit</span></label>
-                <label class="pill"><input type="checkbox" name="web_prios[]" value="Designqualität" /><span>Designqualität</span></label>
+                <label class="pill"><input type="checkbox" name="web_prios" value="Ladegeschwindigkeit" /><span>Ladegeschwindigkeit</span></label>
+                <label class="pill"><input type="checkbox" name="web_prios" value="Responsiveness" /><span>Responsiveness</span></label>
+                <label class="pill"><input type="checkbox" name="web_prios" value="SEO" /><span>SEO</span></label>
+                <label class="pill"><input type="checkbox" name="web_prios" value="Benutzerfreundlichkeit" /><span>Benutzerfreundlichkeit</span></label>
+                <label class="pill"><input type="checkbox" name="web_prios" value="Designqualität" /><span>Designqualität</span></label>
               </fieldset>
             </div>
 
@@ -886,11 +1321,11 @@
               </label>
               <fieldset class="checkbox-group tags" aria-label="Schwerpunkte Grafikdesign">
                 <legend class="checkbox-legend">Besondere Schwerpunkte</legend>
-                <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Brand-Konsistenz" /><span>Brand-Konsistenz</span></label>
-                <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Typografie" /><span>Typografie</span></label>
-                <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Druckvorbereitung" /><span>Druckvorbereitung</span></label>
-                <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Illustration" /><span>Illustration</span></label>
-                <label class="pill"><input type="checkbox" name="gfx_prios[]" value="Schnelle Umsetzung" /><span>Schnelle Umsetzung</span></label>
+                <label class="pill"><input type="checkbox" name="gfx_prios" value="Brand-Konsistenz" /><span>Brand-Konsistenz</span></label>
+                <label class="pill"><input type="checkbox" name="gfx_prios" value="Typografie" /><span>Typografie</span></label>
+                <label class="pill"><input type="checkbox" name="gfx_prios" value="Druckvorbereitung" /><span>Druckvorbereitung</span></label>
+                <label class="pill"><input type="checkbox" name="gfx_prios" value="Illustration" /><span>Illustration</span></label>
+                <label class="pill"><input type="checkbox" name="gfx_prios" value="Schnelle Umsetzung" /><span>Schnelle Umsetzung</span></label>
               </fieldset>
             </div>
           </fieldset>
@@ -938,10 +1373,6 @@
             <h2 class="fx-q">Wie erreichen wir dich?</h2>
             <p class="fx-hint">Wir melden uns innerhalb von 24 Stunden mit einer ersten Einschätzung.</p>
 
-            <input type="hidden" name="_subject" id="autoSubject" />
-            <textarea class="sr-only" name="summary_plain" id="summaryPlain" aria-hidden="true" tabindex="-1"></textarea>
-            <input type="hidden" name="selected_service" id="selectedService" />
-
             <div class="contact-grid">
               <div class="field span-6">
                 <label for="name" class="req">Name</label>
@@ -967,8 +1398,9 @@
             </div>
 
             <p class="legal-hint">
-              Deine Angaben werden über <strong>Formspree</strong> zur Beantwortung deiner Anfrage
-              verarbeitet. Mehr unter <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.
+              Deine Angaben werden über unseren Dienstleister Forminit (UXPLUS LTD)
+              verarbeitet, Speicherung in der EU. Mehr unter
+              <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>.
             </p>
             <p class="req-note">* Pflichtfelder</p>
           </fieldset>
@@ -985,7 +1417,7 @@
                 Wir sehen uns deine Angaben an und melden uns innerhalb von 24 Stunden.
               </p>
               <p class="success-sub">Eine Bestätigung liegt in deinem Postfach.</p>
-
+              <button type="button" class="success-btn">Neue Anfrage starten</button>
             </div>
           </fieldset>
 
@@ -1001,7 +1433,11 @@
 
   </div>
 </main>
+
 <script>
+/* ============================================================
+   HEADER, NAVIGATION, THEME
+   ============================================================ */
 (function(){
   const docEl = document.documentElement;
   const gate  = document.getElementById('aetherGate');
@@ -1258,12 +1694,16 @@
   });
 })();
 </script>
+
 <script>
 /* ============================================================
-   ANFRAGE-WIZARD
+   ANFRAGE-WIZARD  ·  Versand über Forminit
    Bildfläche links spiegelt den Zustand: Nummer, Titel,
    Schrittliste, Fortschritt und das Bild der gewählten Leistung.
-   Orange = jetzt dran, Hellgrün = erledigt.
+
+   Wichtig: Forminit erwartet typisierte Bloecke im JSON-Format,
+   keine freien Feldnamen. Siehe buildForminitPayload().
+   Doku: https://forminit.com/docs/submit-form-api/
    ============================================================ */
 (function () {
   const form = document.getElementById('kontaktForm');
@@ -1317,25 +1757,6 @@
       tone==='ok'    ? '#0a7f2e' :
       tone==='warn'  ? '#a15c00' : 'inherit';
   };
-
-  /* ---------- versteckte Felder ---------- */
-  function ensureHidden({id, name, tag='input'}) {
-    let el = form.querySelector('#'+id);
-    if (!el) {
-      el = document.createElement(tag);
-      el.id = id; el.name = name;
-      if (tag==='input') el.type = 'hidden';
-      el.className = 'sr-only'; el.setAttribute('aria-hidden','true');
-      form.appendChild(el);
-    } else if (el.name !== name) { el.name = name; }
-    return el;
-  }
-  ensureHidden({ id:'autoSubject',     name:'_subject' });
-  ensureHidden({ id:'summaryPlain',    name:'summary_plain', tag:'textarea' });
-  ensureHidden({ id:'selectedService', name:'selected_service' });
-  ensureHidden({ id:'honeypot',        name:'_gotcha' });
-  ensureHidden({ id:'metaRef',  name:'_referrer' }).value = location.href;
-  ensureHidden({ id:'metaTime', name:'_zeitpunkt' }).value = new Date().toLocaleString('de-DE');
 
   /* ---------- Helfer ---------- */
   const q  = (sel, root=form) => root.querySelector(sel);
@@ -1523,13 +1944,13 @@
     return ok;
   }
 
-  /* ---------- Zusammenfassung ---------- */
+  /* ---------- Zusammenfassung als Klartext ---------- */
   const LABELS = {
     web_material:'Material', web_styleguide:'Styleguide/CI', web_typ:'Website-Typ',
-    'web_prios[]':'Schwerpunkte', d3_daten:'3D-Daten', d3_refs:'Referenzen',
+    web_prios:'Schwerpunkte', d3_daten:'3D-Daten', d3_refs:'Referenzen',
     d3_typ:'Ergebnis', d3_use:'Verwendung',
     gfx_styleguide:'Branding', gfx_material:'Material', gfx_typ:'Design-Typ',
-    'gfx_prios[]':'Schwerpunkte', start:'Startzeitpunkt', deadline:'Deadline', budget:'Budget',
+    gfx_prios:'Schwerpunkte', start:'Startzeitpunkt', deadline:'Deadline', budget:'Budget',
     name:'Name', email:'E-Mail', company:'Firma', phone:'Telefon', message:'Nachricht'
   };
   function buildSummary(service){
@@ -1539,6 +1960,7 @@
       const rows = [], multi = {};
       qa('input,select,textarea', step).forEach(el=>{
         if (el.disabled || el.closest('[hidden]') || el.type === 'hidden' || el.name === 'service') return;
+        if (el.name === 'website_url') return;   // Honeypot
         const label = LABELS[el.name] || el.name;
         if (el.type === 'checkbox') {
           if (el.checked) multi[label] = (multi[label] || []).concat(el.value);
@@ -1551,6 +1973,67 @@
       if (rows.length) lines.push(`[${STEP_NAMES[step.dataset.step] || 'Angaben'}]`, ...rows, '');
     });
     return lines.join('\n').trim();
+  }
+
+  /* ---------- Forminit-Payload ---------- */
+  function buildForminitPayload(service){
+    const blocks = [];
+    const SKIP = ['name','email','company','service','website_url'];
+
+    /* 1) Absender – Objekt-Block, nur einmal erlaubt */
+    const sender = {
+      email:    trim(q('input[name="email"]') && q('input[name="email"]').value),
+      fullName: trim(q('input[name="name"]')  && q('input[name="name"]').value)
+    };
+    const firma = trim(q('input[name="company"]') && q('input[name="company"]').value);
+    if (firma) sender.company = firma;
+    /* Telefon bewusst NICHT in sender: dort gilt striktes E.164-Format,
+       "+49 151 12345678" mit Leerzeichen würde abgelehnt. */
+    blocks.push({ type: 'sender', properties: sender });
+
+    /* 2) Text- und URL-Felder */
+    qa('input, textarea').forEach(el => {
+      if (el.disabled || !el.name) return;
+      if (el.type === 'checkbox' || el.type === 'radio' || el.type === 'hidden') return;
+      if (SKIP.indexOf(el.name) > -1) return;
+      const v = trim(el.value);
+      if (!v) return;
+      if (el.type === 'url') {
+        const href = /^https?:\/\//i.test(v) ? v : 'https://' + v;
+        blocks.push({ type: 'url', name: el.name, value: href });
+      } else {
+        blocks.push({ type: 'text', name: el.name, value: v });
+      }
+    });
+
+    /* 3) Gewählte Leistung */
+    if (service) blocks.push({ type: 'radio', name: 'leistung', value: service });
+
+    /* 4) Aktive Dropdowns */
+    qa('select').forEach(sel => {
+      if (sel.disabled || !sel.value || !sel.name) return;
+      blocks.push({ type: 'select', name: sel.name, value: sel.value });
+    });
+
+    /* 5) Checkbox-Gruppen als Mehrfachauswahl */
+    const groups = {};
+    qa('input[type="checkbox"]').forEach(cb => {
+      if (cb.disabled || !cb.checked || !cb.name) return;
+      (groups[cb.name] = groups[cb.name] || []).push(cb.value);
+    });
+    Object.keys(groups).forEach(name => {
+      blocks.push({ type: 'checkbox', name: name, value: groups[name] });
+    });
+
+    /* 6) Betreff, Klartext-Zusammenfassung, Herkunft */
+    blocks.push({ type: 'text', name: 'betreff',
+                  value: 'Projektanfrage: ' + (service || 'allgemein') });
+    blocks.push({ type: 'text', name: 'zusammenfassung', value: buildSummary(service) });
+    blocks.push({ type: 'text', name: 'herkunft_seite',  value: location.href });
+    blocks.push({ type: 'text', name: 'zeitpunkt',
+                  value: new Date().toLocaleString('de-DE') });
+
+    return { blocks: blocks };
   }
 
   /* ---------- Absenden ---------- */
@@ -1570,15 +2053,19 @@
     if (submitting) return;
     if (!validateRequired()) return;
 
+    /* Honeypot: still in den Erfolgsbildschirm, ohne zu senden */
+    const hp = document.getElementById('fxHp');
+    if (hp && trim(hp.value) !== '') {
+      form.classList.add('is-success');
+      const st = getApplicableSteps();
+      showStepByIndex(st.findIndex(s => s.dataset.step === '6'), true);
+      return;
+    }
+
     const selEl = q('input[name="service"]:checked');
     const service = selEl ? selEl.value : '';
+    const payload = buildForminitPayload(service);
 
-    q('#autoSubject').value     = `Projektanfrage: ${service || 'allgemein'}`;
-    q('#selectedService').value = service;
-    q('#summaryPlain').value    = buildSummary(service);
-    q('#honeypot').value        = '';
-
-    const fd = new FormData(form);
     submitting = true;
     toggleFormDisabled(true);
     submitBtn.textContent = 'Wird gesendet …';
@@ -1586,9 +2073,26 @@
 
     try {
       const res = await postWithTimeout(form.action, {
-        method:'POST', body:fd, headers:{Accept:'application/json'}
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
       }, 12000);
-      if (!res.ok) throw new Error(res.statusText || 'Fehler');
+
+      const data = await res.json().catch(() => null);
+
+      if (res.status === 429) {
+        toggleFormDisabled(false);
+        syncServiceBlocks();
+        submitBtn.textContent = 'Erneut senden';
+        setStatus('Zu schnell hintereinander gesendet – bitte kurz warten.', 'warn');
+        submitting = false;
+        return;
+      }
+
+      if (!res.ok || !data || !data.success) {
+        console.error('Forminit-Antwort', res.status, data);
+        throw new Error(res.status + ' ' + ((data && data.error) || ''));
+      }
 
       setStatus('');
       form.classList.add('is-success');
@@ -1638,8 +2142,11 @@
     }
   });
 
-  successFieldset.querySelector('.success-btn')
-    .addEventListener('click', e => { e.preventDefault(); resetToStep1(); });
+  /* Neustart-Knopf – optional, bricht nicht mehr ab, wenn er fehlt */
+  const restartBtn = successFieldset && successFieldset.querySelector('.success-btn');
+  if (restartBtn) {
+    restartBtn.addEventListener('click', e => { e.preventDefault(); resetToStep1(); });
+  }
 
   /* ---------- Start ---------- */
   form.classList.remove('is-success');
@@ -1650,11 +2157,6 @@
   setStatus('');
 })();
 </script>
-<!-- ============================================================
-     TEIL 2
-     Ersetzt den kompletten letzten <style>-Block (aktuell
-     Zeile 1627 bis 1750, direkt vor dem <footer>).
-     ============================================================ -->
 
 <style>
 /* ------------------------------------------------------------
@@ -1876,6 +2378,38 @@ html:not([data-theme="dark"]) body:not(.nocturne) .choice::after {
   .choice.is-pulse::after { animation: none; }
 }
 
+/* ------------------------------------------------------------
+   7. Erfolgsbildschirm – Neustart-Knopf
+------------------------------------------------------------ */
+.success-card .success-btn {
+  margin-top: 1.2rem;
+  min-height: 48px;
+  padding: .75rem 1.5rem;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: #fff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(22,163,74,.28);
+  transition: transform .18s ease, box-shadow .22s ease, filter .18s ease;
+}
+
+@media (hover: hover) {
+  .success-card .success-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+    box-shadow: 0 14px 30px rgba(22,163,74,.4);
+  }
+}
+
+.success-card .success-btn:active { transform: translateY(0); }
+
+.success-card .success-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px #fff, 0 0 0 6px #16a34a;
+}
 
 /* Header im White-Mode weiß und sticky machen */
 html:not([data-theme="dark"]) body:not(.nocturne) .aether-header,
@@ -1885,9 +2419,9 @@ html:not([data-theme="dark"]) body:not(.nocturne) .aether-header,
   top: 0;
   z-index: 1000;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}.sigil-mark {
-  color: #000000;
 }
+
+.sigil-mark { color: #000000; }
 
 html[data-theme="dark"] .sigil-mark,
 body.nocturne .sigil-mark,
@@ -1899,7 +2433,7 @@ body.nocturne .sigil-mark,
 <script>
 /* ============================================================
    ANFRAGE – Videohintergrund, Zahlwechsel, Zeigereffekte
-   Läuft unabhängig von der bestehenden Formular-IIFE.
+   Läuft unabhängig von der Formular-IIFE.
    ============================================================ */
 (function () {
   "use strict";
@@ -1910,10 +2444,10 @@ body.nocturne .sigil-mark,
      bei reduzierter Bewegung gezeigt.
   ------------------------------------------------------------- */
   const MEDIA = {
-    default:        { src: "./contactvideo/1.webm",   poster: "./arbeitsproben/arbeitsproben_index/grafik2.webp" },
-    "Webdesign":    { src: "./contactvideo/2.webm", poster: "./arbeitsproben/arbeitsproben_index/serum11.webp" },
-    "3D-Design":    { src: "./contactvideo/black.webm",        poster: "./arbeitsproben/arbeitsproben_index/post21.webp" },
-    "Grafikdesign": { src: "./contactvideo/3.webm",    poster: "./arbeitsproben/arbeitsproben_index/pizza3.webp" }
+    default:        { src: "./contactvideo/1.webm",     poster: "./arbeitsproben/arbeitsproben_index/grafik2.webp" },
+    "Webdesign":    { src: "./contactvideo/2.webm",     poster: "./arbeitsproben/arbeitsproben_index/serum11.webp" },
+    "3D-Design":    { src: "./contactvideo/black.webm", poster: "./arbeitsproben/arbeitsproben_index/post21.webp" },
+    "Grafikdesign": { src: "./contactvideo/3.webm",     poster: "./arbeitsproben/arbeitsproben_index/pizza3.webp" }
   };
 
   const PARALLAX = 10;      // px, Versatz des Videos unter dem Cursor
@@ -1975,7 +2509,7 @@ body.nocturne .sigil-mark,
 
   setMedia("default");
 
-  /* Auswahl beobachten – kein Eingriff in die bestehende IIFE */
+  /* Auswahl beobachten – kein Eingriff in die Formular-IIFE */
   $$('input[name="service"]').forEach(function (input) {
     input.addEventListener("change", function () {
       if (!input.checked) return;
@@ -2100,7 +2634,7 @@ body.nocturne .sigil-mark,
 
   /* ============================================================
      3. Zahlwechsel 01 → 02
-     Die bestehende IIFE schreibt textContent. Ein MutationObserver
+     Die Formular-IIFE schreibt textContent. Ein MutationObserver
      fängt das ab und baut die Ziffern für die Animation neu auf.
      ============================================================ */
   const num = $("#fxNum");
@@ -2191,9 +2725,10 @@ body.nocturne .sigil-mark,
 </script>
 
 
+
 <footer itemscope itemtype="https://schema.org/Organization" class="footer-clean">
   <!-- In Microdata ist <meta itemprop> im Body erlaubt und ersetzt hier das unzulässige <link>. -->
-  <meta itemprop="url" content="https://www.fusion3.de">
+  <meta itemprop="url" content="https://denizherrnreither.de/">
 
   <div class="fc-container">
 
@@ -2202,9 +2737,16 @@ body.nocturne .sigil-mark,
       <h2 id="fc-head-title" class="sr-only">Markenbereich</h2>
       <div class="fc-brand">
         <!-- Optional: Logo als Link zur Startseite -->
-        <a class="fc-logo" href="index.html" itemprop="name">Fusion³</a>
-        <p class="fc-claim">UX &amp; Webdesign – Nutzerzentriert. Visuell stark. Technisch fundiert.</p>
-      </div>
+<a class="fc-logo" href="index.html" aria-label="Deniz Herrnreither – Startseite">
+  <span itemprop="name" class="sr-only">Deniz Herrnreither</span>
+  <img class="fc-logo__img fc-logo__img--light"
+       src="./arbeitsproben/arbeitsproben_index/logo.webp" alt=""
+       width="120" height="32" loading="lazy" decoding="async">
+  <img class="fc-logo__img fc-logo__img--dark"
+       src="./arbeitsproben/arbeitsproben_index/logow.webp" alt=""
+       width="120" height="32" loading="lazy" decoding="async">
+</a>
+     </div>
       <div class="fc-cta">
         <a class="fc-btn" href="/anfrage.html" aria-label="Projekt anfragen">Projekt anfragen</a>
       </div>
@@ -2244,7 +2786,7 @@ body.nocturne .sigil-mark,
       <div class="fc-col">
         <h3 class="fc-col-title" id="fc-contact">Kontakt</h3>
         <ul class="fc-links" aria-labelledby="fc-contact">
-          <li><a href="mailto:hello@fusion3.de" itemprop="email">hi.dherrnreither@gmail.com</a></li>
+          <li><a href="mailto:hi.dherrnreither@gmail.com" itemprop="email">hi.dherrnreither@gmail.com</a></li>
           <li><a href="tel:+491708933204" itemprop="telephone">+49&nbsp;170&nbsp;8933204</a></li>
           <li>
             <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" class="fc-address">
@@ -2257,7 +2799,7 @@ body.nocturne .sigil-mark,
         <h3 id="fc-socials-title" class="sr-only">Social Media</h3>
         <ul class="fc-socials" aria-labelledby="fc-socials-title">
           <li>
-            <a class="fc-social" href="mailto:hello@fusion3.de" aria-label="E-Mail" itemprop="sameAs">
+            <a class="fc-social" href="mailto:hi.dherrnreither@gmail.com" aria-label="E-Mail" itemprop="sameAs">
               <span class="sr-only">E-Mail</span>
               <img src="./FooterIcons/Gmail.png" alt="" loading="lazy" decoding="async" width="20" height="20">
             </a>
@@ -2281,7 +2823,7 @@ body.nocturne .sigil-mark,
     <!-- Bottom -->
     <div class="fc-legal" aria-labelledby="fc-legal-title">
       <h3 id="fc-legal-title" class="sr-only">Rechtliches &amp; Hinweise</h3>
-      <p>© <time id="currentYear" datetime="2025">2025</time> <span class="nowrap">Fusion³</span> · DSGVO-konform &amp; barrierearm entwickelt.</p>
+      <p>© <time id="currentYear" datetime="2025">2025</time> <span class="nowrap">Deniz Herrnreither</span> · DSGVO-konform &amp; barrierearm entwickelt.</p>
     </div>
 
   </div>

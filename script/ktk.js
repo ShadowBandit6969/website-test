@@ -378,49 +378,43 @@ document.addEventListener("DOMContentLoaded", () => {
      Wichtig: Forminit ignoriert freie Feldnamen. Es zaehlen
      nur typisierte Bloecke mit eindeutigem "name".
      ------------------------------------------------------- */
-function buildForminitPayload(){
+  function buildForminitPayload(){
     const blocks = [];
-    const SKIP = ['name','email','company','service','website_url'];
 
-    // --- 1) Absender ---
+    // --- 1) Absenderdaten (Objekt-Block, nur einmal erlaubt) ---
     const sender = {
       email:    trim(q('input[name="email"]')?.value),
       fullName: trim(q('input[name="name"]')?.value)
     };
-    const firma = trim(q('input[name="company"]')?.value);
-    if (firma) sender.company = firma;
+    // Telefon NICHT in sender: dort wird striktes E.164 erzwungen
+    // (+491511234 5678 mit Leerzeichen wuerde abgelehnt).
     blocks.push({ type: 'sender', properties: sender });
 
-    // --- 2) Alle übrigen Text-, URL- und Textarea-Felder ---
-    qa('input, textarea', form).forEach(el => {
-      if (el.disabled) return;
-      if (el.type === 'checkbox' || el.type === 'radio' || el.type === 'hidden') return;
-      if (SKIP.includes(el.name)) return;
-      const v = trim(el.value);
-      if (!v) return;
-      // URL-Felder als url-Block, aber nur mit Schema
-      if (el.type === 'url') {
-        const href = /^https?:\/\//i.test(v) ? v : 'https://' + v;
-        blocks.push({ type: 'url', name: el.name, value: href });
-      } else {
-        blocks.push({ type: 'text', name: el.name, value: v });
-      }
-    });
+    // --- 2) Freitextfelder ---
+    const addText = (name, value) => {
+      const v = trim(value);
+      if (v) blocks.push({ type: 'text', name, value: v });
+    };
 
-    // --- 3) Gewähltes Paket ---
+    addText('nachricht', q('textarea[name="message"]')?.value);
+    addText('telefon',   q('input[name="phone"]')?.value);
+    addText('deadline',  q('input[name="deadline"]')?.value);
+    addText('budget',    q('input[name="budget"]')?.value);
+
+    // --- 3) Gewaehlte Leistung ---
     const svcEl = q('input[name="service"]:checked');
     const selectedService = svcEl ? svcEl.value : '';
     if (selectedService) {
-      blocks.push({ type: 'radio', name: 'paket', value: selectedService });
+      blocks.push({ type: 'radio', name: 'leistung', value: selectedService });
     }
 
-    // --- 4) Dropdowns ---
+    // --- 4) Alle aktiven Dropdowns ---
     qa('select', form).forEach(sel => {
       if (sel.disabled || !sel.value) return;
       blocks.push({ type: 'select', name: sel.name, value: sel.value });
     });
 
-    // --- 5) Checkbox-Gruppen ---
+    // --- 5) Checkbox-Gruppen (Mehrfachauswahl) ---
     const groups = {};
     qa('input[type="checkbox"]', form).forEach(cb => {
       if (cb.disabled || !cb.checked) return;
@@ -430,23 +424,19 @@ function buildForminitPayload(){
       blocks.push({ type: 'checkbox', name, value: values });
     });
 
-    // --- 6) Klartext-Zusammenfassung ---
+    // --- 6) Zusammenfassung als Klartext fuer die Mail ---
     const lines = [];
-    lines.push(`Paket:   ${selectedService || '-'}`);
-    lines.push(`Name:    ${sender.fullName || '-'}`);
-    lines.push(`E-Mail:  ${sender.email || '-'}`);
-    if (firma) lines.push(`Firma:   ${firma}`);
-    qa('select', form).forEach(sel => {
-      if (!sel.disabled && sel.value) lines.push(`${sel.name}: ${sel.value}`);
-    });
+    lines.push(`Leistung: ${selectedService || '-'}`);
+    lines.push(`Name:     ${sender.fullName || '-'}`);
+    lines.push(`E-Mail:   ${sender.email || '-'}`);
+    const tel = trim(q('input[name="phone"]')?.value);
+    if (tel) lines.push(`Telefon:  ${tel}`);
     Object.entries(groups).forEach(([name, values]) => {
       lines.push(`${name}: ${values.join(', ')}`);
     });
-
-    blocks.push({ type: 'text', name: 'betreff',
-                  value: `Wartungsanfrage: ${selectedService || 'ohne Paket'}` });
-    blocks.push({ type: 'text', name: 'zusammenfassung', value: lines.join('\n') });
-    blocks.push({ type: 'text', name: 'herkunft_seite', value: location.href });
+    addText('betreff', `Projektanfrage: ${selectedService}`);
+    addText('zusammenfassung', lines.join('\n'));
+    addText('herkunft_seite', location.href);
 
     return { blocks };
   }
@@ -554,4 +544,26 @@ function buildForminitPayload(){
 })();
 
 
+/* ---------------------------------------------------------
+   3) OPTIONAL: Nur Webdesign anbieten
+   Dieser Block entfernt 3D-Design und Grafikdesign aus Step 1.
+   Aktuell DEAKTIVIERT: der Code unten steht in einem
+   Blockkommentar. Zum Aktivieren die Kommentarzeichen
+   in den beiden Zeilen darunter entfernen.
+   --------------------------------------------------------- */
+/*
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('kontaktForm');
+  if (!form) return;
 
+  const webRadio = form.querySelector('input[name="service"][value="Webdesign"]');
+  if (webRadio) webRadio.checked = true;
+
+  form.querySelectorAll('.grid-choices .choice').forEach(ch => {
+    const rb = ch.querySelector('input[type="radio"][name="service"]');
+    if (rb && rb.value !== 'Webdesign') ch.remove();
+  });
+
+  webRadio?.dispatchEvent(new Event('change', { bubbles: true }));
+});
+*/

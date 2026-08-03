@@ -595,3 +595,106 @@ body{ padding-top: var(--gate-height) !important; }
     justify-self: end !important;
   }
 }
+/* Unterstreichung der Nav-Links entfernen */
+.astral-link::after{
+  content: none !important;
+  display: none !important;
+}/* Unterstreichung exakt mittig & gerade */
+.astral-link::after{
+  left: 50% !important;
+  right: auto !important;
+  bottom: 7px !important;
+  width: calc(100% - 1.6rem) !important;
+  height: 2px !important;
+  border-radius: 2px;
+  transform-origin: center !important;
+  transform: translateX(-50%) scaleX(.5) !important;
+  opacity: 0;
+  transition: opacity .18s ease, transform .18s ease;
+}
+@media (hover:hover){
+  .astral-link:hover::after,
+  .astral-link:focus-visible::after,
+  .astral-link[aria-current="page"]::after,
+  .astral-link[data-active]::after{
+    opacity: .8;
+    transform: translateX(-50%) scaleX(1) !important;
+  }
+}/* ===== CTA Animation ===== */
+.charm-cta--prime{
+  overflow: hidden;
+  transition: transform .18s ease, box-shadow .22s ease, filter .18s ease;
+  animation: ctaBreathe 3.4s ease-in-out infinite;
+}
+
+/* Glanz-Sweep */
+.charm-cta--prime::after{
+  content: "";
+  position: absolute;
+  top: -60%; bottom: -60%;
+  left: -45%;
+  width: 30%;
+  background: linear-gradient(90deg,
+              transparent,
+              rgba(255,255,255,.55),
+              transparent);
+  transform: skewX(-18deg) translateX(0);
+  pointer-events: none;
+  z-index: 2;
+  animation: ctaShine 5s ease-in-out infinite;
+}
+
+@keyframes ctaShine{
+  0%, 60%  { transform: skewX(-18deg) translateX(0);    opacity: 0; }
+  63%      { opacity: 1; }
+  92%, 100%{ transform: skewX(-18deg) translateX(520%); opacity: 0; }
+}
+
+@keyframes ctaBreathe{
+  0%, 100% { box-shadow: 0 6px 18px rgba(255,122,0,.26); }
+  50%      { box-shadow: 0 12px 30px rgba(255,122,0,.46); }
+}
+
+/* Hover: Animation ruhen lassen, klarer State */
+@media (hover:hover){
+  .charm-cta--prime:hover{
+    animation-play-state: paused;
+    filter: brightness(1.05);
+  }
+  .charm-cta--prime:hover::after{
+    animation-duration: 1.6s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .charm-cta--prime,
+  .charm-cta--prime::after{ animation: none !important; }
+}/* ===== Theme-Toggle Breite Mobile ===== */
+@media (max-width: 767.98px){
+  .astral-actions .orb-toggle{
+    --w: clamp(84px, 24vw, 118px) !important;
+    --h: 32px !important;
+    --pad: 4px !important;
+    --thumb: calc(var(--h) - var(--pad) * 2) !important;
+    width: var(--w) !important;
+    height: var(--h) !important;
+  }
+}
+
+/* sehr kleine Phones */
+@media (max-width: 359.98px){
+  .astral-actions .orb-toggle{
+    --w: clamp(72px, 26vw, 86px) !important;
+    --h: 28px !important;
+    --pad: 4px !important;
+  }
+}
+
+/* große Phones / Phablets */
+@media (min-width: 480px) and (max-width: 767.98px){
+  .astral-actions .orb-toggle{
+    --w: clamp(104px, 26vw, 132px) !important;
+    --h: 34px !important;
+    --pad: 5px !important;
+  }
+}
