@@ -1339,18 +1339,27 @@ body[data-page="webdesign"] .hero-image-foreground {
     <div class="pv-stage" id="pvStage" data-view="desktop"
          data-embed-desktop="https://ibd.figma.site/"
          data-embed-mobile="https://ibd.figma.site/">
-
-      <div class="pv-veil" id="pvVeil">
+<div class="pv-veil" id="pvVeil">
         <span class="pv-pulse-wrap">
           <span class="pv-ring" aria-hidden="true"></span>
           <span class="pv-ring" aria-hidden="true"></span>
-          <button type="button" class="pv-pulse" id="pvPlay" aria-label="Prototyp bedienen">
+          <button type="button" class="pv-pulse" id="pvPlay"
+                  aria-describedby="pvHint"
+                  aria-label="Prototyp laden und bedienen">
             <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor"
                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"></path>
             </svg>
           </button>
         </span>
+
+        <p class="pv-consent" id="pvHint">
+          Mit dem Start wird der Prototyp von <strong>Figma, Inc.</strong> (USA)
+          geladen. Dabei werden Ihre IP-Adresse und technische Angaben zu Browser
+          und Gerät an Figma übertragen. Näheres in der
+          <a href="/datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.
+        </p>
+      </div>
 
       </div>
 
@@ -2289,6 +2298,38 @@ body.nocturne .ax-list span { color: rgba(255, 255, 255, .72); }
   .pv-pulse, .ax-item, .pv-stage iframe, .pv-veil { transition: none; }
 }
 </style>
+<style>/* ===== Mobil: nur Mobil-Ansicht ===== */
+@media (max-width: 700px){
+
+  /* Umschalter ausblenden – es gibt nichts zu wählen */
+  .pv-bar{ display: none; }
+
+  /* Bühne immer im Hochformat, mittig */
+  .pv-stage,
+  .pv-stage[data-view="desktop"]{
+    aspect-ratio: 9 / 16 !important;
+    max-width: min(420px, 88vw);
+    margin-inline: auto;
+  }
+
+  /* Startknopf etwas kleiner, damit er nicht die halbe Bühne füllt */
+  .pv-pulse{ width: 68px; height: 68px; }
+  .pv-pulse-wrap{ width: 76px; height: 76px; }
+}.pv-consent{
+  margin: 0;
+  max-width: 42ch;
+  font-size: .82rem;
+  line-height: 1.55;
+  text-align: center;
+  color: rgba(11, 12, 16, .68);
+}
+.pv-consent a{ color: inherit; text-decoration: underline; }
+
+[data-theme="dark"] .pv-consent{ color: rgba(255,255,255,.72); }
+
+@media (max-width: 700px){
+  .pv-consent{ font-size: .76rem; max-width: 34ch; }
+}</style>
 
 
 <script>
