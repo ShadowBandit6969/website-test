@@ -773,3 +773,96 @@
     line-height: 1.12 !important;
   }
 }
+/* =========================================
+   FIX: Breite, aber flache Bildschirme
+   (Laptops, externe Monitore, verkleinerte
+   Browserfenster – viel Breite, wenig Höhe)
+   ========================================= */
+
+/* Schrift an vmin statt vw koppeln. vmin = die kleinere
+   von Breite/Höhe – dadurch wächst der Titel nie größer,
+   als die Bildschirmhöhe erlaubt. */
+.hero-section[data-page="titlepage"] .large-title {
+  font-size: clamp(2.2rem, 6.5vmin, 5.2rem) !important;
+  line-height: 1.08 !important;
+}
+
+.hero-section[data-page="titlepage"] .small-title {
+  font-size: clamp(1rem, 2.3vmin, 1.35rem) !important;
+  line-height: 1.5 !important;
+}
+
+
+/* Buttons: fließend an die Bildschirmhöhe gekoppelt,
+   statt in Stufen zu springen. Bleibt auf normalen
+   Screens bei der bisherigen Größe (56px/1.25rem) und
+   schrumpft erst, wenn die Höhe eng wird. */
+.btn-primary,
+.btn-secondary {
+  min-height: clamp(40px, 5vmin + 20px, 56px) !important;
+  padding: clamp(.55rem, 1.6vmin, .9rem) clamp(1.1rem, 4vmin, 2.4rem) !important;
+  font-size: clamp(.92rem, 1.9vmin + .4rem, 1.25rem) !important;
+}
+
+/* Der eigentliche Fall: breit UND flach zugleich */
+@media (min-width: 900px) and (max-height: 760px) {
+
+  .hero-section[data-page="titlepage"] {
+    height: clamp(380px, 88vh, 620px);
+    height: clamp(380px, 88dvh, 620px);
+  }
+
+
+
+  .hero-section[data-page="titlepage"] .large-title {
+    font-size: clamp(2rem, 5.5vmin, 3.6rem) !important;
+    max-width: 26ch;
+  }
+
+  .hero-section[data-page="titlepage"] .small-title {
+    font-size: clamp(.95rem, 2vmin, 1.15rem) !important;
+    max-width: 58ch;
+  }
+
+
+  .hero-cta-buttons {
+    margin-top: 0.1rem;
+  }
+}
+
+/* Sehr flache Fenster (z. B. halbierter Bildschirm,
+   14"-Notebook mit Taskleiste) – noch kompakter */
+@media (min-width: 900px) and (max-height: 560px) {
+
+  .hero-section[data-page="titlepage"] {
+    height: clamp(340px, 92vh, 480px);
+    height: clamp(340px, 92dvh, 480px);
+  }
+
+  .page-title {
+    transform: translateY(calc(-50% - 3vh));
+  }
+
+  .hero-section[data-page="titlepage"] .large-title {
+    font-size: clamp(1.7rem, 4.8vmin, 2.6rem) !important;
+  }
+
+  .hero-section[data-page="titlepage"] .small-title {
+    font-size: clamp(.88rem, 1.8vmin, 1rem) !important;
+    max-width: 50ch;
+  }
+
+  .hero-cta-buttons {
+    flex-direction: row;
+  }
+}
+.hero-section[data-page="titlepage"] {
+  height: 100vh;
+  height: 100dvh; /* mobile Browser mit sichtbarer URL-Leiste */
+}.hero-section[data-page="titlepage"] {
+  height: 100vh;
+  height: 100dvh;
+}.hero-section[data-page="titlepage"] {
+  height: 100vh;
+  height: 100dvh;
+}

@@ -969,12 +969,22 @@ body[data-page="webdesign"] .hero-image-foreground {
 <section class="hero-section" data-page="titlepage">
   <div class="hero-images-wrapper">
 
-    <!-- HINTERGRUND-VIDEO -->
     <div class="hero-image-background">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="./images/hintegrundweb.webp">
-        <source src="./contactvideo/contact3D.mp4" type="video/mp4" />
-      </video>
+      <!-- Light-Mode Bild -->
+      <img 
+        src="./titleimages/3D_title_white.webp" 
+        alt="Hero Background" 
+        class="hero-image light-image"
+      />
+
+      <!-- Dark-Mode Bild -->
+      <img 
+        src=".//titleimages/3D_title_dark.webp" 
+        alt="Hero Background Dark" 
+        class="hero-image dark-image"
+      />
     </div>
+
 
     <!-- TITLE + TEXT + CTAS -->
     <div class="page-title">
@@ -1019,6 +1029,52 @@ body[data-page="webdesign"] .hero-image-foreground {
 
   </div>
 </section>
+<style>
+/* Hintergrundbilder */
+.hero-image-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Standard: Light Mode */
+.light-image { opacity: 1; }
+.dark-image { opacity: 0; }
+
+/* Darkmode über body.nocturne */
+body.nocturne .light-image {
+  opacity: 0;
+}
+body.nocturne .dark-image {
+  opacity: 1;
+}
+
+/* Falls du auch data-theme="dark" unterstützt */
+[data-theme="dark"] .light-image {
+  opacity: 0;
+}
+[data-theme="dark"] .dark-image {
+  opacity: 1;
+}
+
+/* Small Title auf Handy ausblenden */
+@media (max-width: 768px) {
+  .small-title {
+    display: none;
+  }
+}
+</style>
 
 
 
@@ -1233,7 +1289,7 @@ body[data-page="webdesign"] .hero-image-foreground {
     <div class="wrf-col wrf-col--left">
       <figure class="wrf-hero">
         <img
-          src="./arbeitsproben/arbeitsproben_index/vr1.webp"
+          src="./arbeitsproben/arbeitsproben_index/rednerblock.webp"
           alt="Beispielhaftes Render einer 3D-Szene mit Beleuchtung und Materialität"
           loading="lazy"
           width="1280"
