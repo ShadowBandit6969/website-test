@@ -1109,10 +1109,10 @@
         <div class="fx-layer is-on" id="fxLayerA"></div>
         <div class="fx-layer" id="fxLayerB"></div>
 
-        <video class="fx-vid is-on" id="fxVidA" muted loop playsinline preload="auto"
-               disableremoteplayback aria-hidden="true"></video>
-        <video class="fx-vid" id="fxVidB" muted loop playsinline preload="none"
-               disableremoteplayback aria-hidden="true"></video>
+        <img class="fx-vid is-on" id="fxVidA" muted loop playsinline preload="auto"
+               disableremoteplayback aria-hidden="true"></img>
+        <img class="fx-vid" id="fxVidB" muted loop playsinline preload="none"
+               disableremoteplayback aria-hidden="true"></img>
 
         <span class="fx-glow" id="fxGlow" aria-hidden="true"></span>
       </div>
@@ -1169,13 +1169,13 @@
             <div class="grid-choices" role="radiogroup" aria-label="Leistung wählen">
               <label class="choice" tabindex="0">
                 <input type="radio" name="service" value="Webdesign" data-toggle="web"
-                       data-img="./arbeitsproben/arbeitsproben_index/post14.webp" />
+                       data-img="./arbeitsproben/arbeitsproben_index/3DWeb.webp" />
                 <span class="title">Webdesign</span>
                 <small>Speed, Responsiveness, SEO, UX</small>
               </label>
               <label class="choice" tabindex="0">
                 <input type="radio" name="service" value="3D-Design" data-toggle="d3"
-                       data-img="./cosmospictures/astro-sitzend.webp" />
+                       data-img="./arbeitsproben/arbeitsproben_index/post21.webp" />
                 <span class="title">3D-Design</span>
                 <small>Renderings, Animationen, Produkt und Architektur</small>
               </label>
@@ -2435,7 +2435,7 @@ body.nocturne .sigil-mark,
 
 <script>
 /* ============================================================
-   ANFRAGE – Videohintergrund, Zahlwechsel, Zeigereffekte
+   ANFRAGE – Bildhintergrund, Zahlwechsel, Zeigereffekte
    Läuft unabhängig von der Formular-IIFE.
    ============================================================ */
 (function () {
@@ -2443,17 +2443,15 @@ body.nocturne .sigil-mark,
 
   /* ---------------- Hier die Dateien eintragen ----------------
      Schlüssel = value des Radio-Buttons (siehe Markup).
-     Poster ist optional, wird als Standbild vor dem Start und
-     bei reduzierter Bewegung gezeigt.
   ------------------------------------------------------------- */
   const MEDIA = {
-    default:        { src: "./contactvideo/1.webm",     poster: "./arbeitsproben/arbeitsproben_index/grafik2.webp" },
-    "Webdesign":    { src: "./contactvideo/2.webm",     poster: "./arbeitsproben/arbeitsproben_index/serum11.webp" },
-    "3D-Design":    { src: "./contactvideo/black.webm", poster: "./arbeitsproben/arbeitsproben_index/post21.webp" },
-    "Grafikdesign": { src: "./contactvideo/3.webm",     poster: "./arbeitsproben/arbeitsproben_index/pizza3.webp" }
+    default:        { src: "./arbeitsproben/arbeitsproben_index/post15.webp" },
+    "Webdesign":    { src: "./arbeitsproben/arbeitsproben_index/3DWeb.webp" },
+    "3D-Design":    { src: "./arbeitsproben/arbeitsproben_index/post21.webp" },
+    "Grafikdesign": { src: "./arbeitsproben/arbeitsproben_index/gd.webp" }
   };
 
-  const PARALLAX = 10;      // px, Versatz des Videos unter dem Cursor
+  const PARALLAX = 10;      // px, Versatz des Bildes unter dem Cursor
   const FOLLOW   = 0.14;    // Trägheit von Licht und Parallaxe
 
   const $  = (s, c) => (c || document).querySelector(s);
@@ -2464,34 +2462,23 @@ body.nocturne .sigil-mark,
   const fine   = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   const visual = $(".fx-visual");
-  const vids   = [$("#fxVidA"), $("#fxVidB")].filter(Boolean);
+  const imgs   = [$("#fxVidA"), $("#fxVidB")].filter(Boolean); // Behält IDs für CSS-Kompatibilität bei
   const glow   = $("#fxGlow");
-  if (!visual || vids.length < 2) return;
+  if (!visual || imgs.length < 2) return;
 
   /* ============================================================
-     1. Videowechsel mit Überblendung
+     1. Bildwechsel mit Überblendung
      ============================================================ */
   let active = 0;
   let currentSrc = "";
-
-  function play(v) {
-    if (reduce) return;
-    const p = v.play();
-    if (p && p.catch) p.catch(function () {});
-  }
 
   function setMedia(key) {
     const m = MEDIA[key] || MEDIA.default;
     if (!m || m.src === currentSrc) return;
     currentSrc = m.src;
 
-    const next = vids[1 - active];
-    const cur  = vids[active];
-
-    if (m.poster) next.poster = m.poster;
-    next.src = m.src;
-    next.load();
-    play(next);
+    const next = imgs[1 - active];
+    const cur  = imgs[active];
 
     let done = false;
     const swap = function () {
@@ -2500,13 +2487,16 @@ body.nocturne .sigil-mark,
       next.classList.add("is-on");
       cur.classList.remove("is-on");
       active = 1 - active;
-      setTimeout(function () { try { cur.pause(); } catch (e) {} }, 900);
     };
 
-    if (next.readyState >= 2) swap();
-    else {
-      next.addEventListener("canplay", swap, { once: true });
-      setTimeout(swap, 1200);        // Notausgang, falls canplay ausbleibt
+    // Prüfen, ob das Bild bereits im Cache ist, sonst onload nutzen
+    next.onload = swap;
+    next.src = m.src;
+
+    if (next.complete) {
+      swap();
+    } else {
+      setTimeout(swap, 800); // Notausgang
     }
   }
 
@@ -2529,25 +2519,10 @@ body.nocturne .sigil-mark,
     });
   });
 
-  /* Strom sparen: nur abspielen, wenn sichtbar */
-  if ("IntersectionObserver" in window) {
-    new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) play(vids[active]);
-        else vids.forEach(function (v) { try { v.pause(); } catch (err) {} });
-      });
-    }, { threshold: 0.05 }).observe(visual);
-  }
-
-  document.addEventListener("visibilitychange", function () {
-    if (document.hidden) vids.forEach(function (v) { try { v.pause(); } catch (e) {} });
-    else play(vids[active]);
-  });
-
   /* ============================================================
      2. Zeigereffekte
      Desktop: Licht und Parallaxe folgen dem Cursor.
-     Handy: das Video wandert beim Scrollen leicht mit.
+     Handy: das Bild wandert beim Scrollen leicht mit.
      Beides schreibt ausschließlich transform.
      ============================================================ */
   if (!reduce && fine) {
@@ -2568,7 +2543,7 @@ body.nocturne .sigil-mark,
       }
       visual.style.setProperty("--tx", ax.toFixed(2) + "px");
       visual.style.setProperty("--ty", ay.toFixed(2) + "px");
-      vids.forEach(function (v) {
+      imgs.forEach(function (v) {
         v.style.setProperty("--tx", ax.toFixed(2) + "px");
         v.style.setProperty("--ty", ay.toFixed(2) + "px");
       });
@@ -2627,7 +2602,7 @@ body.nocturne .sigil-mark,
       if (b.bottom < 0 || b.top > vh) return;
       const p = clamp((vh - b.top) / (vh + b.height), 0, 1);
       const y = (p - .5) * PARALLAX * 2;
-      vids.forEach(function (v) { v.style.setProperty("--ty", y.toFixed(2) + "px"); });
+      imgs.forEach(function (v) { v.style.setProperty("--ty", y.toFixed(2) + "px"); });
     };
     const sched = function () { if (!raf) raf = requestAnimationFrame(paint); };
     window.addEventListener("scroll", sched, { passive: true });
@@ -2726,7 +2701,6 @@ body.nocturne .sigil-mark,
 
 })();
 </script>
-
 
 
 <footer itemscope itemtype="https://schema.org/Organization" class="footer-clean">
