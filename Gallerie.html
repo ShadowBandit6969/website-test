@@ -1490,7 +1490,258 @@ body.nocturne .dark-image {
 }
 
 </style>
+<style>/* =========================================================
+   iPHONE / iOS SAFARI – STABILISIERUNG
+   Nur für iPhones:
+   - verhindert Überlappungen
+   - verhindert aufgeblähte Grid-Höhen
+   - stabilisiert Text und Buttons
+   - verändert Desktop/Tablet nicht
+   ========================================================= */
 
+@supports (-webkit-touch-callout: none) {
+  @media only screen and (max-width: 600px) {
+
+    .gallery-section {
+      width: 100%;
+      max-width: 100%;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      overflow-x: clip;
+      gap: 2rem;
+    }
+
+    /* =========================================
+       REIHEN
+       ========================================= */
+
+    .gallery-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      width: 100%;
+      max-width: 100%;
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    .gallery-row > * {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+
+    /* =========================================
+       GROSSES BILD
+       ========================================= */
+
+    .gallery-large,
+    .gallery-large--classic,
+    .gallery-large--wide,
+    .gallery-large--tall {
+      width: 100%;
+      min-width: 0;
+
+      /* iPhone: nicht mehr extrem hoch */
+      aspect-ratio: 4 / 3;
+    }
+
+    .gallery-large img {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+
+    /* =========================================
+       TEXT AUF GROSSEM BILD
+       ========================================= */
+
+    .gallery-large-content {
+      position: absolute;
+
+      left: .75rem;
+      right: .75rem;
+      bottom: .75rem;
+
+      width: auto;
+      max-width: calc(100% - 1.5rem);
+
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-end;
+
+      gap: .5rem;
+
+      min-width: 0;
+
+      z-index: 2;
+    }
+
+    .gallery-large-textwrap {
+      width: 100%;
+      min-width: 0;
+      flex: 0 1 auto;
+
+      overflow-wrap: anywhere;
+      word-break: normal;
+    }
+
+    .gallery-large-company,
+    .gallery-large-text {
+      display: block;
+      max-width: 100%;
+
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .gallery-large-company {
+      font-size: .72rem;
+      line-height: 1.25;
+      letter-spacing: .06em;
+    }
+
+    .gallery-large-text {
+      font-size: .95rem;
+      line-height: 1.25;
+    }
+
+
+    /* =========================================
+       BUTTON
+       ========================================= */
+
+    .gallery-btn {
+      width: fit-content;
+      max-width: 100%;
+
+      min-height: 42px;
+
+      padding: .65rem .9rem;
+
+      align-self: flex-start;
+
+      white-space: normal;
+      text-align: center;
+
+      line-height: 1.2;
+
+      overflow-wrap: anywhere;
+    }
+
+
+    /* =========================================
+       KLEINE BILDER
+       ========================================= */
+
+    .gallery-small-grid,
+    .gallery-small-grid.many,
+    .gallery-small-grid--3-top-1-bottom {
+      width: 100%;
+      min-width: 0;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: .65rem;
+    }
+
+    .gallery-small-grid img {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+
+      display: block;
+
+      object-fit: cover;
+    }
+
+
+    /* Normale kleinen Bilder → Quadrate */
+
+    .gallery-small-grid
+    :not(.gallery-small-grid--3-top-1-bottom)
+    :not(.gallery-small-grid--column)
+    img {
+      aspect-ratio: 1 / 1;
+    }
+
+
+    /* =========================================
+       3 OBEN + 1 BREIT UNTEN
+       ========================================= */
+
+    .gallery-small-grid--3-top-1-bottom
+    img:nth-child(-n + 3) {
+      aspect-ratio: 1 / 1;
+    }
+
+    .gallery-small-grid--3-top-1-bottom
+    img:nth-child(4) {
+      grid-column: 1 / -1;
+      aspect-ratio: 16 / 9;
+    }
+
+
+    /* =========================================
+       RECHTE SPALTE / COLUMN-VARIANTE
+       ========================================= */
+
+    .gallery-small-grid--column {
+      width: 100%;
+      min-width: 0;
+
+      height: auto;
+
+      display: grid;
+
+      grid-template-columns: 1fr;
+      grid-template-rows: none;
+
+      gap: .75rem;
+    }
+
+    .gallery-small-grid--column img,
+    .gallery-row--big-left-wide
+    .gallery-small-grid--column img {
+
+      width: 100%;
+      height: auto;
+
+      aspect-ratio: 16 / 9;
+
+      min-height: 0;
+
+      object-fit: cover;
+    }
+
+
+    /* =========================================
+       LETZTE REIHE
+       iPhone soll keine künstliche Desktop-Höhe
+       übernehmen.
+       ========================================= */
+
+    .gallery-row--big-left-wide,
+    .gallery-row--big-left-wide
+    .gallery-small-grid--column {
+
+      height: auto;
+
+      align-items: start;
+    }
+
+    .gallery-row--big-left-wide
+    .gallery-small-grid--column {
+      grid-template-rows: none;
+    }
+
+  }
+}</style>
 
 
 
